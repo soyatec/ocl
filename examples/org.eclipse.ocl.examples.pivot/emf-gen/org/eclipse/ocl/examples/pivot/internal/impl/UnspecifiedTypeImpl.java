@@ -236,6 +236,8 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 				return isAbstract();
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				return isInterface();
+			case PivotPackage.UNSPECIFIED_TYPE__NESTED_TYPE:
+				return getNestedType();
 			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
 				return getOwnedBehavior();
 			case PivotPackage.UNSPECIFIED_TYPE__LOWER_BOUND:
@@ -325,6 +327,10 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
+			case PivotPackage.UNSPECIFIED_TYPE__NESTED_TYPE:
+				getNestedType().clear();
+				getNestedType().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Class>)newValue);
+				return;
 			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
@@ -406,6 +412,9 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
+			case PivotPackage.UNSPECIFIED_TYPE__NESTED_TYPE:
+				getNestedType().clear();
+				return;
 			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				return;
@@ -467,6 +476,8 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
+			case PivotPackage.UNSPECIFIED_TYPE__NESTED_TYPE:
+				return nestedType != null && !nestedType.isEmpty();
 			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
 				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.UNSPECIFIED_TYPE__LOWER_BOUND:

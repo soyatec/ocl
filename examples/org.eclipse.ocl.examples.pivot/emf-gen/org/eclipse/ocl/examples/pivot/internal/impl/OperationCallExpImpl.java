@@ -147,17 +147,6 @@ public class OperationCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createArgument(EClass eClass) {
-		OCLExpression newArgument = (OCLExpression) create(eClass);
-		getArgument().add(newArgument);
-		return newArgument;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Operation getReferredOperation() {
 		if (referredOperation != null && ((EObject)referredOperation).eIsProxy())
 		{

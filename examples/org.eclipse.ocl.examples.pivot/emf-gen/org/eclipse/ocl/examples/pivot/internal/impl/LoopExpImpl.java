@@ -183,17 +183,6 @@ public abstract class LoopExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createBody(EClass eClass) {
-		OCLExpression newBody = (OCLExpression) create(eClass);
-		setBody(newBody);
-		return newBody;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("null")
 	public @NonNull List<Variable> getIterator()
 	{
@@ -202,17 +191,6 @@ public abstract class LoopExpImpl
 			iterator = new EObjectContainmentEList<Variable>(Variable.class, this, PivotPackage.LOOP_EXP__ITERATOR);
 		}
 		return iterator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Variable createIterator() {
-		Variable newIterator = (Variable) create(PivotPackage.Literals.VARIABLE);
-		getIterator().add(newIterator);
-		return newIterator;
 	}
 
 	/**

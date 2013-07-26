@@ -514,7 +514,26 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		public @Nullable List<Resource> getImportedResources() {
 			return importedResources;
 		}
-		
+
+		protected org.eclipse.uml2.uml.Property getOtherEnd(@NonNull org.eclipse.uml2.uml.Property umlProperty) {
+			org.eclipse.uml2.uml.Property otherEnd = umlProperty.getOtherEnd();
+			if (otherEnd != null) {
+				return otherEnd;
+			}
+			// Workaround problem whereby UML has three ends two of them duplicates with distinct Class/Association ownership.
+			org.eclipse.uml2.uml.Association association = umlProperty.getAssociation();
+			if (association != null) {
+				List<org.eclipse.uml2.uml.Property> memberEnds = new ArrayList<org.eclipse.uml2.uml.Property>(association.getMemberEnds());
+				memberEnds.remove(umlProperty);
+				for (org.eclipse.uml2.uml.Property aProperty : memberEnds) {
+					if (!aProperty.getName().equals(umlProperty)) {
+						return aProperty;
+					}
+				}
+			}
+			return otherEnd;
+		}
+
 		@Override
 		public @NonNull Root getPivotRoot() throws ParserException {
 			Root pivotRoot2 = pivotRoot;
@@ -655,7 +674,14 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				Type pivotType = null;
 				EObject umlOwner = DomainUtil.nonNullEMF(umlProperty.eContainer());
 				if (umlOwner instanceof org.eclipse.uml2.uml.Association) {
-					org.eclipse.uml2.uml.Property opposite = umlProperty.getOtherEnd();
+//					String name = ((org.eclipse.uml2.uml.NamedElement)umlProperty.eContainer()).getName();
+//					if (name != null) {
+//						System.out.println("Assoc Property " + name + "::" + umlProperty.getName());
+//					}
+//					else {
+//						System.out.println("Anon Assoc Property " + name + "::" + umlProperty.getName());
+//					}
+					org.eclipse.uml2.uml.Property opposite = getOtherEnd(umlProperty);
 					if (opposite != null) {
 						pivotType = getCreated(Type.class, DomainUtil.nonNullModel(opposite.getType()));
 					}
@@ -696,7 +722,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					}
 				}
 				else {
-					org.eclipse.uml2.uml.Property opposite = umlProperty.getOtherEnd();
+					org.eclipse.uml2.uml.Property opposite = getOtherEnd(umlProperty);
 					if (opposite != null) {
 						org.eclipse.uml2.uml.Type oppositeType = DomainUtil.nonNullEMF(opposite.getType());
 						pivotType = getCreated(Type.class, oppositeType);
@@ -823,12 +849,14 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				for (org.eclipse.uml2.uml.Element umlStereotypedElement : umlStereotypedElements) {
 					assert umlStereotypedElement != null;
 					Element pivotStereotypedElement = getCreated(Element.class, umlStereotypedElement);
-					List<EObject> umlElementExtensions = stereotypeApplications.get(pivotStereotypedElement);
-					if (umlElementExtensions == null) {
-						umlElementExtensions = new ArrayList<EObject>();
-						stereotypeApplications.put(pivotStereotypedElement, umlElementExtensions);
+					if (pivotStereotypedElement != null) {
+						List<EObject> umlElementExtensions = stereotypeApplications.get(pivotStereotypedElement);
+						if (umlElementExtensions == null) {
+							umlElementExtensions = new ArrayList<EObject>();
+							stereotypeApplications.put(pivotStereotypedElement, umlElementExtensions);
+						}
+						umlElementExtensions.add(umlStereotypeApplication);
 					}
-					umlElementExtensions.add(umlStereotypeApplication);
 				}
 			}	
 			return stereotypeApplications;

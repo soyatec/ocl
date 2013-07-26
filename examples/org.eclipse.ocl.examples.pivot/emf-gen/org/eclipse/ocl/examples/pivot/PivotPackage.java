@@ -1650,13 +1650,22 @@ public interface PivotPackage
 	int CLASS__IS_INTERFACE = TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__NESTED_TYPE = TYPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__OWNED_BEHAVIOR = TYPE_FEATURE_COUNT + 3;
+	int CLASS__OWNED_BEHAVIOR = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -1665,7 +1674,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = TYPE_FEATURE_COUNT + 4;
+	int CLASS_FEATURE_COUNT = TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1918,6 +1927,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANY_TYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_TYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -2188,6 +2206,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS__IS_INTERFACE = CLASS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS__NESTED_TYPE = CLASS__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -3207,6 +3234,15 @@ public interface PivotPackage
 	int DATA_TYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3493,6 +3529,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_TYPE__IS_INTERFACE = DATA_TYPE__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__NESTED_TYPE = DATA_TYPE__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -3808,6 +3853,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BAG_TYPE__IS_INTERFACE = COLLECTION_TYPE__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE__NESTED_TYPE = COLLECTION_TYPE__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -4133,6 +4187,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BEHAVIOR__IS_INTERFACE = CLASS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BEHAVIOR__NESTED_TYPE = CLASS__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -6936,6 +6999,15 @@ public interface PivotPackage
 	int ENUMERATION__IS_INTERFACE = DATA_TYPE__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__NESTED_TYPE = DATA_TYPE__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9356,6 +9428,15 @@ public interface PivotPackage
 	int INVALID_TYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_TYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11183,6 +11264,15 @@ public interface PivotPackage
 	int LAMBDA_TYPE__IS_INTERFACE = DATA_TYPE__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_TYPE__NESTED_TYPE = DATA_TYPE__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12506,6 +12596,15 @@ public interface PivotPackage
 	int METACLASS__IS_INTERFACE = CLASS__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS__NESTED_TYPE = CLASS__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13289,6 +13388,15 @@ public interface PivotPackage
 	int ORDERED_SET_TYPE__IS_INTERFACE = COLLECTION_TYPE__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE__NESTED_TYPE = COLLECTION_TYPE__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14025,6 +14133,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__IS_INTERFACE = DATA_TYPE__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__NESTED_TYPE = DATA_TYPE__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -15584,6 +15701,15 @@ public interface PivotPackage
 	int SELF_TYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_TYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15953,6 +16079,15 @@ public interface PivotPackage
 	int SEQUENCE_TYPE__IS_INTERFACE = COLLECTION_TYPE__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__NESTED_TYPE = COLLECTION_TYPE__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16266,6 +16401,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SET_TYPE__IS_INTERFACE = COLLECTION_TYPE__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__NESTED_TYPE = COLLECTION_TYPE__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -16782,6 +16926,15 @@ public interface PivotPackage
 	int STATE_MACHINE__IS_INTERFACE = BEHAVIOR__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_MACHINE__NESTED_TYPE = BEHAVIOR__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17096,6 +17249,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STEREOTYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -18639,6 +18801,15 @@ public interface PivotPackage
 	int TUPLE_TYPE__IS_INTERFACE = DATA_TYPE__IS_INTERFACE;
 
 	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE__NESTED_TYPE = DATA_TYPE__NESTED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19277,6 +19448,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNSPECIFIED_TYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_TYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -19953,6 +20133,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VOID_TYPE__IS_INTERFACE = CLASS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__NESTED_TYPE = CLASS__NESTED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -22795,6 +22984,17 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EAttribute getClass_IsInterface();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.Class#getNestedType <em>Nested Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nested Type</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Class#getNestedType()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EReference getClass_NestedType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Type <em>Type</em>}'.
@@ -26822,6 +27022,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute CLASS__IS_INTERFACE = eINSTANCE.getClass_IsInterface();
+
+		/**
+		 * The meta object literal for the '<em><b>Nested Type</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__NESTED_TYPE = eINSTANCE.getClass_NestedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeImpl <em>Type</em>}' class.

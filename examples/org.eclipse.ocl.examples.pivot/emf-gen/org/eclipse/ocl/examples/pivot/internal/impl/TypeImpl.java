@@ -254,17 +254,6 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateBinding createTemplateBinding() {
-		TemplateBinding newTemplateBinding = (TemplateBinding) create(PivotPackage.Literals.TEMPLATE_BINDING);
-		getTemplateBinding().add(newTemplateBinding);
-		return newTemplateBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TemplateSignature getOwnedTemplateSignature() {
 		return ownedTemplateSignature;
 	}
@@ -305,17 +294,6 @@ public class TypeImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPE__OWNED_TEMPLATE_SIGNATURE, newOwnedTemplateSignature, newOwnedTemplateSignature));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TemplateSignature createOwnedTemplateSignature() {
-		TemplateSignature newOwnedTemplateSignature = (TemplateSignature) create(PivotPackage.Literals.TEMPLATE_SIGNATURE);
-		setOwnedTemplateSignature(newOwnedTemplateSignature);
-		return newOwnedTemplateSignature;
 	}
 
 	/**
@@ -404,18 +382,6 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property createOwnedAttribute()
-	{
-		Property newOwnedAttribute = (Property) create(PivotPackage.Literals.PROPERTY);
-		getOwnedAttribute().add(newOwnedAttribute);
-		return newOwnedAttribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public @NonNull List<Operation> getOwnedOperation()
 	{
 		if (ownedOperation == null)
@@ -423,28 +389,6 @@ public class TypeImpl
 			ownedOperation = new EObjectContainmentWithInverseEList<Operation>(Operation.class, this, PivotPackage.TYPE__OWNED_OPERATION, PivotPackage.OPERATION__OWNING_TYPE);
 		}
 		return ownedOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Operation createOwnedOperation(EClass eClass)
-	{
-		Operation newOwnedOperation = (Operation) create(eClass);
-		getOwnedOperation().add(newOwnedOperation);
-		return newOwnedOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Operation createOwnedOperation()
-	{
-		return createOwnedOperation(PivotPackage.Literals.OPERATION);
 	}
 
 	/**
@@ -473,18 +417,6 @@ public class TypeImpl
 			ownedInvariant = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.TYPE__OWNED_INVARIANT);
 		}
 		return ownedInvariant;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Constraint createOwnedInvariant()
-	{
-		Constraint newOwnedInvariant = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getOwnedInvariant().add(newOwnedInvariant);
-		return newOwnedInvariant;
 	}
 
 	/**

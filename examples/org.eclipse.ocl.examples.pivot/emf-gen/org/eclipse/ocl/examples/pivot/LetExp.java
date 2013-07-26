@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,17 +65,6 @@ public interface LetExp
 	void setIn(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>In</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getIn()
-	 * @generated
-	 */
-	OCLExpression createIn(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -100,16 +88,6 @@ public interface LetExp
 	 * @generated
 	 */
 	void setVariable(Variable value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and sets the '<em><b>Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Variable}.
-	 * @see #getVariable()
-	 * @generated
-	 */
-	Variable createVariable();
 
 	/**
 	 * <!-- begin-user-doc -->

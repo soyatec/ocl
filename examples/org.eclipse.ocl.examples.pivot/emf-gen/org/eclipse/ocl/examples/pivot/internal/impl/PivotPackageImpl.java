@@ -3522,7 +3522,7 @@ public class PivotPackageImpl
 	 */
 	public EReference getClass_OwnedBehavior()
 	{
-		return (EReference)classEClass.getEStructuralFeatures().get(2);
+		return (EReference)classEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -3533,6 +3533,16 @@ public class PivotPackageImpl
 	public EAttribute getClass_IsInterface()
 	{
 		return (EAttribute)classEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClass_NestedType()
+	{
+		return (EReference)classEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -5234,6 +5244,7 @@ public class PivotPackageImpl
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__IS_ABSTRACT);
 		createEAttribute(classEClass, CLASS__IS_INTERFACE);
+		createEReference(classEClass, CLASS__NESTED_TYPE);
 		createEReference(classEClass, CLASS__OWNED_BEHAVIOR);
 
 		collectionItemEClass = createEClass(COLLECTION_ITEM);
@@ -5950,6 +5961,7 @@ public class PivotPackageImpl
 		initEClass(classEClass, org.eclipse.ocl.examples.pivot.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getClass_IsAbstract(), this.getBoolean(), "isAbstract", "false", 1, 1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEAttribute(getClass_IsInterface(), this.getBoolean(), "isInterface", "false", 1, 1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getClass_NestedType(), this.getClass_(), null, "nestedType", null, 0, -1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEReference(getClass_OwnedBehavior(), this.getBehavior(), null, "ownedBehavior", null, 0, -1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(collectionItemEClass, CollectionItem.class, "CollectionItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

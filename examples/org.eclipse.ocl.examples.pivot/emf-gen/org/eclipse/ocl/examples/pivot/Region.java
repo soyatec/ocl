@@ -16,8 +16,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Region</b></em>'.
@@ -60,17 +58,6 @@ public interface Region extends Namespace
 	List<Vertex> getSubvertex();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Vertex} and appends it to the '<em><b>Subvertex</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Vertex} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Vertex}.
-	 * @see #getSubvertex()
-	 * @generated
-	 */
-	Vertex createSubvertex(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Transition}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Transition#getContainer <em>Container</em>}'.
@@ -85,16 +72,6 @@ public interface Region extends Namespace
 	 * @generated
 	 */
 	List<Transition> getTransition();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Transition} and appends it to the '<em><b>Transition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Transition}.
-	 * @see #getTransition()
-	 * @generated
-	 */
-	Transition createTransition();
 
 	/**
 	 * Returns the value of the '<em><b>State Machine</b></em>' reference.

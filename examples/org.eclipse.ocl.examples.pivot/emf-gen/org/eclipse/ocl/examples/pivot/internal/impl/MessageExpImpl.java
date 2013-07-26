@@ -195,17 +195,6 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createTarget(EClass eClass) {
-		OCLExpression newTarget = (OCLExpression) create(eClass);
-		setTarget(newTarget);
-		return newTarget;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<OCLExpression> getArgument()
 	{
 		if (argument == null)
@@ -213,17 +202,6 @@ public class MessageExpImpl
 			argument = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, PivotPackage.MESSAGE_EXP__ARGUMENT);
 		}
 		return argument;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OCLExpression createArgument(EClass eClass) {
-		OCLExpression newArgument = (OCLExpression) create(eClass);
-		getArgument().add(newArgument);
-		return newArgument;
 	}
 
 	/**
@@ -277,17 +255,6 @@ public class MessageExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallOperationAction createCalledOperation() {
-		CallOperationAction newCalledOperation = (CallOperationAction) create(PivotPackage.Literals.CALL_OPERATION_ACTION);
-		setCalledOperation(newCalledOperation);
-		return newCalledOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public SendSignalAction getSentSignal() {
 		return sentSignal;
 	}
@@ -327,17 +294,6 @@ public class MessageExpImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.MESSAGE_EXP__SENT_SIGNAL, newSentSignal, newSentSignal));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SendSignalAction createSentSignal() {
-		SendSignalAction newSentSignal = (SendSignalAction) create(PivotPackage.Literals.SEND_SIGNAL_ACTION);
-		setSentSignal(newSentSignal);
-		return newSentSignal;
 	}
 
 	/**

@@ -122,17 +122,6 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Element createOwnedContent(EClass eClass) {
-		Element newOwnedContent = (Element) create(eClass);
-		getOwnedContent().add(newOwnedContent);
-		return newOwnedContent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<Detail> getOwnedDetail()
 	{
 		if (ownedDetail == null)
@@ -140,17 +129,6 @@ public class AnnotationImpl
 			ownedDetail = new EObjectContainmentEList<Detail>(Detail.class, this, PivotPackage.ANNOTATION__OWNED_DETAIL);
 		}
 		return ownedDetail;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Detail createOwnedDetail() {
-		Detail newOwnedDetail = (Detail) create(PivotPackage.Literals.DETAIL);
-		getOwnedDetail().add(newOwnedDetail);
-		return newOwnedDetail;
 	}
 
 	/**

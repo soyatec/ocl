@@ -51,14 +51,4 @@ public interface TupleLiteralExp
 	 */
 	List<TupleLiteralPart> getPart();
 
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TupleLiteralPart} and appends it to the '<em><b>Part</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.TupleLiteralPart}.
-	 * @see #getPart()
-	 * @generated
-	 */
-	TupleLiteralPart createPart();
-
 } // TupleLiteralExp

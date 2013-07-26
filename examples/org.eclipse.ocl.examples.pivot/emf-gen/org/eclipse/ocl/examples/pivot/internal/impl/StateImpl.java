@@ -258,18 +258,6 @@ public class StateImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Constraint createOwnedRule()
-	{
-		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getOwnedRule().add(newOwnedRule);
-		return newOwnedRule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean isComposite()
@@ -443,18 +431,6 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConnectionPointReference createConnection()
-	{
-		ConnectionPointReference newConnection = (ConnectionPointReference) create(PivotPackage.Literals.CONNECTION_POINT_REFERENCE);
-		getConnection().add(newConnection);
-		return newConnection;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public State getRedefinedState()
 	{
 		if (redefinedState != null && ((EObject)redefinedState).eIsProxy())
@@ -512,18 +488,6 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Region createRegion()
-	{
-		Region newRegion = (Region) create(PivotPackage.Literals.REGION);
-		getRegion().add(newRegion);
-		return newRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Constraint getStateInvariant()
 	{
 		return stateInvariant;
@@ -565,18 +529,6 @@ public class StateImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.STATE__STATE_INVARIANT, newStateInvariant, newStateInvariant));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Constraint createStateInvariant()
-	{
-		Constraint newStateInvariant = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		setStateInvariant(newStateInvariant);
-		return newStateInvariant;
 	}
 
 	/**
@@ -632,28 +584,6 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Behavior createEntry(EClass eClass)
-	{
-		Behavior newEntry = (Behavior) create(eClass);
-		setEntry(newEntry);
-		return newEntry;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createEntry()
-	{
-		return createEntry(PivotPackage.Literals.BEHAVIOR);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Behavior getExit()
 	{
 		return exit;
@@ -695,28 +625,6 @@ public class StateImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.STATE__EXIT, newExit, newExit));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createExit(EClass eClass)
-	{
-		Behavior newExit = (Behavior) create(eClass);
-		setExit(newExit);
-		return newExit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createExit()
-	{
-		return createExit(PivotPackage.Literals.BEHAVIOR);
 	}
 
 	/**
@@ -772,28 +680,6 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Behavior createDoActivity(EClass eClass)
-	{
-		Behavior newDoActivity = (Behavior) create(eClass);
-		setDoActivity(newDoActivity);
-		return newDoActivity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createDoActivity()
-	{
-		return createDoActivity(PivotPackage.Literals.BEHAVIOR);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<Pseudostate> getConnectionPoint()
 	{
 		if (connectionPoint == null)
@@ -808,18 +694,6 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Pseudostate createConnectionPoint()
-	{
-		Pseudostate newConnectionPoint = (Pseudostate) create(PivotPackage.Literals.PSEUDOSTATE);
-		getConnectionPoint().add(newConnectionPoint);
-		return newConnectionPoint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<Trigger> getDeferrableTrigger()
 	{
 		if (deferrableTrigger == null)
@@ -827,18 +701,6 @@ public class StateImpl
 			deferrableTrigger = new EObjectContainmentEList<Trigger>(Trigger.class, this, PivotPackage.STATE__DEFERRABLE_TRIGGER);
 		}
 		return deferrableTrigger;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Trigger createDeferrableTrigger()
-	{
-		Trigger newDeferrableTrigger = (Trigger) create(PivotPackage.Literals.TRIGGER);
-		getDeferrableTrigger().add(newDeferrableTrigger);
-		return newDeferrableTrigger;
 	}
 
 	/**

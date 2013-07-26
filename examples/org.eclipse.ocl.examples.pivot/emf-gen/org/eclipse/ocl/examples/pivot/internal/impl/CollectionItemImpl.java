@@ -146,17 +146,6 @@ public class CollectionItemImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createItem(EClass eClass) {
-		OCLExpression newItem = (OCLExpression) create(eClass);
-		setItem(newItem);
-		return newItem;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateTypeIsItemType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**

@@ -810,28 +810,6 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OpaqueExpression createDefaultExpression(EClass eClass)
-	{
-		OpaqueExpression newDefaultExpression = (OpaqueExpression) create(eClass);
-		setDefaultExpression(newDefaultExpression);
-		return newDefaultExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OpaqueExpression createDefaultExpression()
-	{
-		return createDefaultExpression(PivotPackage.Literals.OPAQUE_EXPRESSION);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isID()
 	{
 		return (eFlags & IS_ID_EFLAG) != 0;

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -128,16 +127,6 @@ public interface Operation
 	@NonNull List<Operation> getRedefinedOperation();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Parameter}.
-	 * @see #getOwnedParameter()
-	 * @generated
-	 */
-	Parameter createOwnedParameter();
-
-	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Type#getOwnedOperation <em>Owned Operation</em>}'.
 	 * <!-- begin-user-doc -->
@@ -180,16 +169,6 @@ public interface Operation
 	@NonNull List<Constraint> getPrecondition();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Precondition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getPrecondition()
-	 * @generated
-	 */
-	Constraint createPrecondition();
-
-	/**
 	 * Returns the value of the '<em><b>Postcondition</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Constraint}.
 	 * <!-- begin-user-doc -->
@@ -203,16 +182,6 @@ public interface Operation
 	 * @generated
 	 */
 	@NonNull List<Constraint> getPostcondition();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Postcondition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getPostcondition()
-	 * @generated
-	 */
-	Constraint createPostcondition();
 
 	/**
 	 * Returns the value of the '<em><b>Body Expression</b></em>' containment reference.
@@ -238,27 +207,6 @@ public interface Operation
 	 * @generated
 	 */
 	void setBodyExpression(OpaqueExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
-	 * @see #getBodyExpression()
-	 * @generated
-	 */
-	OpaqueExpression createBodyExpression(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
-	 * @see #getBodyExpression()
-	 * @generated
-	 */
-	OpaqueExpression createBodyExpression();
 
 	/**
 	 * Returns the value of the '<em><b>Is Invalidating</b></em>' attribute.

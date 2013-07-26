@@ -186,17 +186,6 @@ public class VariableImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createInitExpression(EClass eClass) {
-		OCLExpression newInitExpression = (OCLExpression) create(eClass);
-		setInitExpression(newInitExpression);
-		return newInitExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Parameter getRepresentedParameter() {
 		if (representedParameter != null && ((EObject)representedParameter).eIsProxy())
 		{

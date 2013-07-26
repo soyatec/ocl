@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,17 +66,6 @@ public interface IfExp
 	void setCondition(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getCondition()
-	 * @generated
-	 */
-	OCLExpression createCondition(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Then Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -103,17 +91,6 @@ public interface IfExp
 	void setThenExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Then Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getThenExpression()
-	 * @generated
-	 */
-	OCLExpression createThenExpression(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Else Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -137,17 +114,6 @@ public interface IfExp
 	 * @generated
 	 */
 	void setElseExpression(OCLExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Else Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getElseExpression()
-	 * @generated
-	 */
-	OCLExpression createElseExpression(EClass eClass);
 
 	/**
 	 * <!-- begin-user-doc -->

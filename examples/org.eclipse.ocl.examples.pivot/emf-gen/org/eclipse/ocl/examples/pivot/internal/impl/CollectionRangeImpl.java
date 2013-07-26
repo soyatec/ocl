@@ -143,17 +143,6 @@ public class CollectionRangeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createFirst(EClass eClass) {
-		OCLExpression newFirst = (OCLExpression) create(eClass);
-		setFirst(newFirst);
-		return newFirst;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public OCLExpression getLast() {
 		return last;
 	}
@@ -193,17 +182,6 @@ public class CollectionRangeImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.COLLECTION_RANGE__LAST, newLast, newLast));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OCLExpression createLast(EClass eClass) {
-		OCLExpression newLast = (OCLExpression) create(eClass);
-		setLast(newLast);
-		return newLast;
 	}
 
 	/**

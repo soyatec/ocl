@@ -158,17 +158,6 @@ public class LetExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createIn(EClass eClass) {
-		OCLExpression newIn = (OCLExpression) create(eClass);
-		setIn(newIn);
-		return newIn;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Variable getVariable() {
 		return variable;
 	}
@@ -208,17 +197,6 @@ public class LetExpImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.LET_EXP__VARIABLE, newVariable, newVariable));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Variable createVariable() {
-		Variable newVariable = (Variable) create(PivotPackage.Literals.VARIABLE);
-		setVariable(newVariable);
-		return newVariable;
 	}
 
 	/**

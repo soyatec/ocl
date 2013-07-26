@@ -173,17 +173,6 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createCondition(EClass eClass) {
-		OCLExpression newCondition = (OCLExpression) create(eClass);
-		setCondition(newCondition);
-		return newCondition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public OCLExpression getThenExpression() {
 		return thenExpression;
 	}
@@ -230,17 +219,6 @@ public class IfExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createThenExpression(EClass eClass) {
-		OCLExpression newThenExpression = (OCLExpression) create(eClass);
-		setThenExpression(newThenExpression);
-		return newThenExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public OCLExpression getElseExpression() {
 		return elseExpression;
 	}
@@ -280,17 +258,6 @@ public class IfExpImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.IF_EXP__ELSE_EXPRESSION, newElseExpression, newElseExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OCLExpression createElseExpression(EClass eClass) {
-		OCLExpression newElseExpression = (OCLExpression) create(eClass);
-		setElseExpression(newElseExpression);
-		return newElseExpression;
 	}
 
 	/**

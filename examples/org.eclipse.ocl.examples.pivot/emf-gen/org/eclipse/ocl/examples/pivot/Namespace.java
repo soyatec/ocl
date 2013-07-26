@@ -54,14 +54,4 @@ public interface Namespace
 	 * @generated
 	 */
 	@NonNull List<Constraint> getOwnedRule();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getOwnedRule()
-	 * @generated
-	 */
-	Constraint createOwnedRule();
 } // Namespace

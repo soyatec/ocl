@@ -62,16 +62,6 @@ public interface Element
 	List<Comment> getOwnedComment();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Comment} and appends it to the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Comment}.
-	 * @see #getOwnedComment()
-	 * @generated
-	 */
-	Comment createOwnedComment();
-	
-	/**
 	 * Returns the value of the '<em><b>Extension</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.ElementExtension}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.ElementExtension#getBase <em>Base</em>}'.
@@ -87,16 +77,6 @@ public interface Element
 	 * @generated
 	 */
 	List<ElementExtension> getExtension();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ElementExtension} and appends it to the '<em><b>Extension</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ElementExtension}.
-	 * @see #getExtension()
-	 * @generated
-	 */
-	ElementExtension createExtension();
 
 	/**
 	 * <!-- begin-user-doc -->

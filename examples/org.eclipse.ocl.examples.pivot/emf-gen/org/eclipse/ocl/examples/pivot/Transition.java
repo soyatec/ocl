@@ -16,8 +16,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Transition</b></em>'.
@@ -176,16 +174,6 @@ public interface Transition extends Namespace
 	void setGuard(Constraint value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and sets the '<em><b>Guard</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getGuard()
-	 * @generated
-	 */
-	Constraint createGuard();
-
-	/**
 	 * Returns the value of the '<em><b>Effect</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -210,27 +198,6 @@ public interface Transition extends Namespace
 	void setEffect(Behavior value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and sets the '<em><b>Effect</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Behavior} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Behavior}.
-	 * @see #getEffect()
-	 * @generated
-	 */
-	Behavior createEffect(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.StateMachine} and sets the '<em><b>Effect</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.StateMachine}.
-	 * @see #getEffect()
-	 * @generated
-	 */
-	Behavior createEffect();
-
-	/**
 	 * Returns the value of the '<em><b>Trigger</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Trigger}.
 	 * <!-- begin-user-doc -->
@@ -243,15 +210,5 @@ public interface Transition extends Namespace
 	 * @generated
 	 */
 	List<Trigger> getTrigger();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Trigger} and appends it to the '<em><b>Trigger</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Trigger}.
-	 * @see #getTrigger()
-	 * @generated
-	 */
-	Trigger createTrigger();
 
 } // Transition

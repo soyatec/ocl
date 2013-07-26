@@ -143,18 +143,6 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Region createRegion()
-	{
-		Region newRegion = (Region) create(PivotPackage.Literals.REGION);
-		getRegion().add(newRegion);
-		return newRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<Pseudostate> getConnectionPoint()
 	{
 		if (connectionPoint == null)
@@ -162,18 +150,6 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			connectionPoint = new EObjectContainmentEList<Pseudostate>(Pseudostate.class, this, PivotPackage.STATE_MACHINE__CONNECTION_POINT);
 		}
 		return connectionPoint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Pseudostate createConnectionPoint()
-	{
-		Pseudostate newConnectionPoint = (Pseudostate) create(PivotPackage.Literals.PSEUDOSTATE);
-		getConnectionPoint().add(newConnectionPoint);
-		return newConnectionPoint;
 	}
 
 	/**
@@ -279,6 +255,8 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 				return basicSetPackage(null, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__NESTED_TYPE:
+				return ((InternalEList<?>)getNestedType()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
@@ -340,6 +318,8 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 				return isAbstract();
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				return isInterface();
+			case PivotPackage.STATE_MACHINE__NESTED_TYPE:
+				return getNestedType();
 			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
 				return getOwnedBehavior();
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
@@ -430,6 +410,10 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 				return;
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
+				return;
+			case PivotPackage.STATE_MACHINE__NESTED_TYPE:
+				getNestedType().clear();
+				getNestedType().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Class>)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
@@ -522,6 +506,9 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
+			case PivotPackage.STATE_MACHINE__NESTED_TYPE:
+				getNestedType().clear();
+				return;
 			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				return;
@@ -589,6 +576,8 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
+			case PivotPackage.STATE_MACHINE__NESTED_TYPE:
+				return nestedType != null && !nestedType.isEmpty();
 			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
 				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:

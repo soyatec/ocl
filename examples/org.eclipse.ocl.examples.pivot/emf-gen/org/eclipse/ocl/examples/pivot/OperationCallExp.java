@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -56,17 +55,6 @@ public interface OperationCallExp
 	 * @generated
 	 */
 	@NonNull List<OCLExpression> getArgument();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getArgument()
-	 * @generated
-	 */
-	OCLExpression createArgument(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Referred Operation</b></em>' reference.

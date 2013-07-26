@@ -157,17 +157,6 @@ public class TemplateBindingImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateParameterSubstitution createParameterSubstitution() {
-		TemplateParameterSubstitution newParameterSubstitution = (TemplateParameterSubstitution) create(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION);
-		getParameterSubstitution().add(newParameterSubstitution);
-		return newParameterSubstitution;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TemplateableElement getBoundElement() {
 		if (eContainerFeatureID() != PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT) return null;
 		return (TemplateableElement)eInternalContainer();

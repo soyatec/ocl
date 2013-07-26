@@ -65,16 +65,6 @@ public interface IterateExp extends LoopExp, ReferringElement
 	void setResult(Variable value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and sets the '<em><b>Result</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Variable}.
-	 * @see #getResult()
-	 * @generated
-	 */
-	Variable createResult();
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

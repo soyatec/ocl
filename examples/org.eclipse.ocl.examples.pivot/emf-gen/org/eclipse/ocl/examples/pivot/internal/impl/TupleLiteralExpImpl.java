@@ -99,17 +99,6 @@ public class TupleLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TupleLiteralPart createPart() {
-		TupleLiteralPart newPart = (TupleLiteralPart) create(PivotPackage.Literals.TUPLE_LITERAL_PART);
-		getPart().add(newPart);
-		return newPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {

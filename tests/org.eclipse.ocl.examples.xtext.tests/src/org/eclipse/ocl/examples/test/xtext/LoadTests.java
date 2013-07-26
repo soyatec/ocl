@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -265,14 +267,17 @@ public class LoadTests extends XtextTestCase
 //		return xmiResource;
 	}
 	
-	public void doLoadUML(@NonNull URI inputURI) throws IOException, ParserException {
+	public void doLoadUML(@NonNull URI inputURI, boolean ignoreNonExistence, boolean validateEmbeddedOCL) throws IOException, ParserException {
 //		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
 		getProjectMap().initializeResourceSet(resourceSet);
 		if (!resourceSet.getURIConverter().exists(inputURI, null)) {
-			return;
+			if (ignoreNonExistence) {
+				return;
+			}
+			TestCase.fail("No such resource + '" + inputURI + "'");			
 		}			
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			
 			IProjectDescriptor projectDescriptor = getProjectMap().getProjectDescriptor("org.eclipse.uml2.uml");
@@ -337,52 +342,16 @@ public class LoadTests extends XtextTestCase
 //				pivotResource.setURI(savedURI);
 				for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
-					if (eObject instanceof Constraint) {
+					if (validateEmbeddedOCL && (eObject instanceof Constraint)) {
 						Constraint constraint = (Constraint)eObject;
-						ExpressionInOCL specification;
-						boolean donePrint = false;
+//						boolean donePrint = false;
 						try {
-//							long startParseTime = System.currentTimeMillis();
-//							parses++;
-							specification = ocl.getSpecification(constraint);
-							OpaqueExpression specification2 = constraint.getSpecification();
-							List<String> bodies = specification2.getBody();
-							if ((bodies != null) && (bodies.size() > 0)) {
-								List<String> languages = specification2.getLanguage();
-								if (languages == null) {
-//									System.out.println("******** No languages");
-								}
-								else if (languages.size() == 0) {
-//									System.out.println("******** Empty languages");
-								}
-								else if (!"OCL".equals(languages.get(0))) {
-//									System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
-									languages.set(0, "OCL");
-								}
-							}
-							if (specification != null) {
-								constraint.setSpecification(specification);
-/*								long endParseTime = System.currentTimeMillis();
-								int treeSize = 1;
-								for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); tit2.next()) {
-									treeSize++;
-								}
-								double parseTime = 0.001 * (endParseTime - startParseTime);
-								double timePerNode = parseTime/treeSize;
-								if (timePerNode > 0.02) {
-									if (!donePrint) {
-										System.out.println("\n" + constraint);
-										donePrint = true;
-									}
-									System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
-								} */
-								assertNoValidationErrors("Local validation", specification);
-							}
+							validateConstraint(ocl, constraint);
 						} catch (ParserException e) {
-							if (!donePrint) {
+//							if (!donePrint) {
 								System.out.println("\n" + constraint);
-								donePrint = true;
-							}
+//								donePrint = true;
+//							}
 							System.out.println(e);
 							exceptions++;
 							s.append("\n" + e + "\n");
@@ -427,6 +396,46 @@ public class LoadTests extends XtextTestCase
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 //		assertNoResourceErrors("Save failed", xmiResource);
 //		return xmiResource;
+	}
+
+	private void validateConstraint(@NonNull OCL ocl, @NonNull Constraint constraint) throws ParserException {
+		ExpressionInOCL specification;
+//			long startParseTime = System.currentTimeMillis();
+//			parses++;
+			specification = ocl.getSpecification(constraint);
+			OpaqueExpression specification2 = constraint.getSpecification();
+			List<String> bodies = specification2.getBody();
+			if ((bodies != null) && (bodies.size() > 0)) {
+				List<String> languages = specification2.getLanguage();
+				if (languages == null) {
+//					System.out.println("******** No languages");
+				}
+				else if (languages.size() == 0) {
+//					System.out.println("******** Empty languages");
+				}
+				else if (!"OCL".equals(languages.get(0))) {
+//					System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
+					languages.set(0, "OCL");
+				}
+			}
+			if (specification != null) {
+				constraint.setSpecification(specification);
+/*								long endParseTime = System.currentTimeMillis();
+				int treeSize = 1;
+				for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); tit2.next()) {
+					treeSize++;
+				}
+				double parseTime = 0.001 * (endParseTime - startParseTime);
+				double timePerNode = parseTime/treeSize;
+				if (timePerNode > 0.02) {
+					if (!donePrint) {
+						System.out.println("\n" + constraint);
+						donePrint = true;
+					}
+					System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
+				} */
+				assertNoValidationErrors("Local validation", specification);
+			}
 	}
 
 	public Resource doLoad_Concrete(String stem, String extension) throws IOException {
@@ -863,7 +872,7 @@ public class LoadTests extends XtextTestCase
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMLResourceFactoryImpl());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/PrimitiveTypes.xmi", true);
-		doLoadUML(uml_2_5);
+		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Beta_UML() throws IOException, InterruptedException, ParserException {
@@ -871,7 +880,7 @@ public class LoadTests extends XtextTestCase
 //		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
 //		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta-Edited/UML.uml", true);
-		doLoadUML(uml_2_5);
+		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Beta_XMI() throws IOException, InterruptedException, ParserException {
@@ -879,14 +888,22 @@ public class LoadTests extends XtextTestCase
 		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/UML.xmi", true);
-		doLoadUML(uml_2_5);
+		doLoadUML(uml_2_5, true, true);
+	}
+	
+	public void testLoad_Internationalized_profile_uml() throws IOException, InterruptedException, ParserException {
+//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/MOF/20110701", UMLPackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+		URI uri = URI.createPlatformResourceURI("org.eclipse.ocl.examples.xtext.tests/model/Internationalized.profile.uml", true);
+		doLoadUML(uri, false, false);
 	}
 
 	// DI.xmi is missing
 	public void zztestLoad_UML_2_5_Beta_UMLDI() throws IOException, InterruptedException, ParserException {
 		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/UMLDI.xmi", true);
-		doLoadUML(uml_2_5);
+		doLoadUML(uml_2_5, true, true);
 	}
 
 	public void testReload_AsReload() throws Exception {

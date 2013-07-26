@@ -255,17 +255,6 @@ public class TemplateParameterSubstitutionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterableElement createOwnedActual(EClass eClass) {
-		ParameterableElement newOwnedActual = (ParameterableElement) create(eClass);
-		setOwnedActual(newOwnedActual);
-		return newOwnedActual;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TemplateBinding getTemplateBinding() {
 		if (eContainerFeatureID() != PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING) return null;
 		return (TemplateBinding)eInternalContainer();

@@ -214,6 +214,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_AssociationClassCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_AssociationClassCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Behavior = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Behavior);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Class);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CollectionType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CollectionType);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Comment = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Comment);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ConnectionPointReference = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ConnectionPointReference);
@@ -1914,9 +1915,11 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _CallOperationAction__MessageExp = new ExecutorPropertyWithImplementation("MessageExp", Types._CallOperationAction, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__CALLED_OPERATION));
 		public static final @NonNull ExecutorProperty _CallOperationAction__operation = new EcoreExecutorProperty(PivotPackage.Literals.CALL_OPERATION_ACTION__OPERATION, Types._CallOperationAction, 1);
 
-		public static final @NonNull ExecutorProperty _Class__isAbstract = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_ABSTRACT, Types._Class, 0);
-		public static final @NonNull ExecutorProperty _Class__isInterface = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_INTERFACE, Types._Class, 1);
-		public static final @NonNull ExecutorProperty _Class__ownedBehavior = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__OWNED_BEHAVIOR, Types._Class, 2);
+		public static final @NonNull ExecutorProperty _Class__Class = new ExecutorPropertyWithImplementation("Class", Types._Class, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CLASS__NESTED_TYPE));
+		public static final @NonNull ExecutorProperty _Class__isAbstract = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_ABSTRACT, Types._Class, 1);
+		public static final @NonNull ExecutorProperty _Class__isInterface = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_INTERFACE, Types._Class, 2);
+		public static final @NonNull ExecutorProperty _Class__nestedType = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__NESTED_TYPE, Types._Class, 3);
+		public static final @NonNull ExecutorProperty _Class__ownedBehavior = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__OWNED_BEHAVIOR, Types._Class, 4);
 
 		public static final @NonNull ExecutorProperty _CollectionItem__item = new EcoreExecutorProperty(PivotPackage.Literals.COLLECTION_ITEM__ITEM, Types._CollectionItem, 0);
 
@@ -9854,6 +9857,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _AnyType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -9874,6 +9878,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -9892,6 +9897,7 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _AssociationClass = {
 			PivotTables.Properties._AssociationClass__AssociationClassCallExp,
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -9912,6 +9918,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -9957,6 +9964,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _AssociativityKind = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -9979,6 +9987,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -9997,6 +10006,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _BagType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10021,6 +10031,7 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10039,6 +10050,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Behavior = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Behavior__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
@@ -10061,6 +10073,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10135,6 +10148,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Class = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10155,6 +10169,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10186,6 +10201,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _CollectionKind = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10208,6 +10224,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10277,6 +10294,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _CollectionType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10301,6 +10319,7 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10402,6 +10421,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _DataType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10424,6 +10444,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10566,6 +10587,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Enumeration = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10588,6 +10610,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10796,6 +10819,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _InvalidType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10816,6 +10840,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -10926,6 +10951,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _LambdaType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -10949,6 +10975,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11123,6 +11150,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Metaclass = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11144,6 +11172,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11376,6 +11405,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _OrderedSetType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11400,6 +11430,7 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11512,6 +11543,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _PrimitiveType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11534,6 +11566,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11659,6 +11692,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _PseudostateKind = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11681,6 +11715,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11760,6 +11795,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _SelfType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11780,6 +11816,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11809,6 +11846,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _SequenceType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11833,6 +11871,7 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11851,6 +11890,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _SetType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -11875,6 +11915,7 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -11962,6 +12003,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _StateMachine = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Behavior__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
@@ -11989,6 +12031,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -12008,6 +12051,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Stereotype = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -12028,6 +12072,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -12177,6 +12222,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _TransitionKind = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -12199,6 +12245,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -12266,6 +12313,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _TupleType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -12288,6 +12336,7 @@ public class PivotTables
 			PivotTables.Properties._DataType__isSerializable,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -12420,6 +12469,7 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _UnspecifiedType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -12441,6 +12491,7 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._UnspecifiedType__lowerBound,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,
@@ -12566,6 +12617,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Visitor = {};
 
 		private static final @NonNull ExecutorProperty[] _VoidType = {
+			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
@@ -12586,6 +12638,7 @@ public class PivotTables
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._Class__nestedType,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
 			PivotTables.Properties._Class__ownedBehavior,

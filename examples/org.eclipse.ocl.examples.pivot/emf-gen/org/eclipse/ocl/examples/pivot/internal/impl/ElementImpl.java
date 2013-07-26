@@ -23,11 +23,9 @@ import java.util.List;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -121,17 +119,6 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Comment createOwnedComment() {
-		Comment newOwnedComment = (Comment) create(PivotPackage.Literals.COMMENT);
-		getOwnedComment().add(newOwnedComment);
-		return newOwnedComment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<ElementExtension> getExtension()
 	{
 		if (extension == null)
@@ -146,18 +133,7 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ElementExtension createExtension()
-	{
-		ElementExtension newExtension = (ElementExtension) create(PivotPackage.Literals.ELEMENT_EXTENSION);
-		getExtension().add(newExtension);
-		return newExtension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@SuppressWarnings("unchecked")
 	public List<Element> allOwnedElements()
 	{
 		/**
@@ -311,19 +287,6 @@ public abstract class ElementImpl
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
-	}
-
-	/**
-	 * Creates a new instance of the specified Ecore class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the instance to create.
-	 * @return The new instance.
-	 * @generated
-	 */
-	protected EObject create(EClass eClass)
-	{
-		return EcoreUtil.create(eClass);
 	}
 
 	public <R> R accept(@NonNull Visitor<R> visitor) {

@@ -55,16 +55,6 @@ public interface StateMachine extends Behavior
 	List<Region> getRegion();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Region} and appends it to the '<em><b>Region</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Region}.
-	 * @see #getRegion()
-	 * @generated
-	 */
-	Region createRegion();
-
-	/**
 	 * Returns the value of the '<em><b>Connection Point</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Pseudostate}.
 	 * <!-- begin-user-doc -->
@@ -77,16 +67,6 @@ public interface StateMachine extends Behavior
 	 * @generated
 	 */
 	List<Pseudostate> getConnectionPoint();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Pseudostate} and appends it to the '<em><b>Connection Point</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Pseudostate}.
-	 * @see #getConnectionPoint()
-	 * @generated
-	 */
-	Pseudostate createConnectionPoint();
 
 	/**
 	 * Returns the value of the '<em><b>Extended State Machine</b></em>' reference list.

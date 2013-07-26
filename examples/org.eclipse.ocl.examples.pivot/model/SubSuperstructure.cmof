@@ -499,7 +499,9 @@
         </ownedMember>
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_97IzMLB0Ed-sntd82PWy7Q" name="Namespaces">
-        <ownedMember xmi:type="cmof:Class" xmi:id="_97IzMbB0Ed-sntd82PWy7Q" name="Class" superClass="_97IzQrB0Ed-sntd82PWy7Q"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_97IzMbB0Ed-sntd82PWy7Q" name="Class" superClass="_97IzQrB0Ed-sntd82PWy7Q">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_ygH8IPVREeK4b-GfCh5JXA" name="nestedType" type="_97IzMbB0Ed-sntd82PWy7Q" lower="0" upper="*" isComposite="true"/>
+        </ownedMember>
         <ownedMember xmi:type="cmof:Class" xmi:id="_97JaTbB0Ed-sntd82PWy7Q" name="NamedElement" isAbstract="true"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="_97IzQrB0Ed-sntd82PWy7Q" name="Namespace" isAbstract="true" superClass="_97JaTbB0Ed-sntd82PWy7Q"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="_dupBELB1Ed-sntd82PWy7Q" name="Operation" superClass="_97IzQrB0Ed-sntd82PWy7Q"/>

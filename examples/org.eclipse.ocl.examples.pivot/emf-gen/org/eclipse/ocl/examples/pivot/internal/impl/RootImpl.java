@@ -130,28 +130,6 @@ public class RootImpl extends NamespaceImpl implements Root
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package createNestedPackage(EClass eClass)
-	{
-		org.eclipse.ocl.examples.pivot.Package newNestedPackage = (org.eclipse.ocl.examples.pivot.Package) create(eClass);
-		getNestedPackage().add(newNestedPackage);
-		return newNestedPackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.ocl.examples.pivot.Package createNestedPackage()
-	{
-		return createNestedPackage(PivotPackage.Literals.PACKAGE);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getExternalURI()
 	{
 		return externalURI;
@@ -183,18 +161,6 @@ public class RootImpl extends NamespaceImpl implements Root
 			imports = new EObjectContainmentEList<Import>(Import.class, this, PivotPackage.ROOT__IMPORTS);
 		}
 		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Import createImports()
-	{
-		Import newImports = (Import) create(PivotPackage.Literals.IMPORT);
-		getImports().add(newImports);
-		return newImports;
 	}
 
 	/**

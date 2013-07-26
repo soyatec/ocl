@@ -100,18 +100,6 @@ public abstract class NamespaceImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createOwnedRule()
-	{
-		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getOwnedRule().add(newOwnedRule);
-		return newOwnedRule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{

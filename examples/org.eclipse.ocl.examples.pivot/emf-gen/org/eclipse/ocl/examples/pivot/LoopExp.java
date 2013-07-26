@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -69,17 +68,6 @@ public interface LoopExp
 	void setBody(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getBody()
-	 * @generated
-	 */
-	OCLExpression createBody(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Iterator</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Variable}.
 	 * <!-- begin-user-doc -->
@@ -93,16 +81,6 @@ public interface LoopExp
 	 * @generated
 	 */
 	@NonNull List<Variable> getIterator();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and appends it to the '<em><b>Iterator</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Variable}.
-	 * @see #getIterator()
-	 * @generated
-	 */
-	Variable createIterator();
 
 	/**
 	 * Returns the value of the '<em><b>Referred Iteration</b></em>' reference.

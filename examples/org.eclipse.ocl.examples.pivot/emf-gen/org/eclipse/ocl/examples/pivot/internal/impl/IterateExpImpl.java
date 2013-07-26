@@ -161,18 +161,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable createResult()
-	{
-		Variable newResult = (Variable) create(PivotPackage.Literals.VARIABLE);
-		setResult(newResult);
-		return newResult;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{

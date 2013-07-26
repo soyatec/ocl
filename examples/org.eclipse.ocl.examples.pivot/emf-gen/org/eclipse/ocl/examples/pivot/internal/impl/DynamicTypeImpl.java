@@ -173,18 +173,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DynamicProperty createOwnedProperty()
-	{
-		DynamicProperty newOwnedProperty = (DynamicProperty) create(PivotPackage.Literals.DYNAMIC_PROPERTY);
-		getOwnedProperty().add(newOwnedProperty);
-		return newOwnedProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{

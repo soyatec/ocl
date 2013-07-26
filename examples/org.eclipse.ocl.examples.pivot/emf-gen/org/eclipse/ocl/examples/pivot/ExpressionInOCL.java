@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -67,17 +66,6 @@ public interface ExpressionInOCL
 	void setBodyExpression(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getBodyExpression()
-	 * @generated
-	 */
-	OCLExpression createBodyExpression(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Context Variable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -101,16 +89,6 @@ public interface ExpressionInOCL
 	 * @generated
 	 */
 	void setContextVariable(Variable value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and sets the '<em><b>Context Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Variable}.
-	 * @see #getContextVariable()
-	 * @generated
-	 */
-	Variable createContextVariable();
 
 	/**
 	 * Returns the value of the '<em><b>Result Variable</b></em>' containment reference.
@@ -138,16 +116,6 @@ public interface ExpressionInOCL
 	void setResultVariable(Variable value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and sets the '<em><b>Result Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Variable}.
-	 * @see #getResultVariable()
-	 * @generated
-	 */
-	Variable createResultVariable();
-
-	/**
 	 * Returns the value of the '<em><b>Parameter Variable</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Variable}.
 	 * <!-- begin-user-doc -->
@@ -161,16 +129,6 @@ public interface ExpressionInOCL
 	 * @generated
 	 */
 	@NonNull List<Variable> getParameterVariable();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and appends it to the '<em><b>Parameter Variable</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Variable}.
-	 * @see #getParameterVariable()
-	 * @generated
-	 */
-	Variable createParameterVariable();
 
 	/**
 	 * Returns the value of the '<em><b>Message Expression</b></em>' containment reference.
@@ -196,16 +154,5 @@ public interface ExpressionInOCL
 	 * @generated
 	 */
 	void setMessageExpression(OCLExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Message Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getMessageExpression()
-	 * @generated
-	 */
-	OCLExpression createMessageExpression(EClass eClass);
 
 } // ExpressionInOCL

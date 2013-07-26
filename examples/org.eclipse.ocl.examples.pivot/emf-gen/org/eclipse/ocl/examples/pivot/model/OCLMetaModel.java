@@ -288,6 +288,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull BagType _Bag_AssociationClassCallExp = createBagType("Bag"/*AssociationClassCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_Behavior = createBagType("Bag"/*Behavior*/, "0", "*");
 		protected final @NonNull BagType _Bag_CallOperationAction = createBagType("Bag"/*CallOperationAction*/, "0", "*");
+		protected final @NonNull BagType _Bag_Class = createBagType("Bag"/*Class*/, "0", "*");
 		protected final @NonNull BagType _Bag_CollectionType = createBagType("Bag"/*CollectionType*/, "0", "*");
 		protected final @NonNull BagType _Bag_Comment = createBagType("Bag"/*Comment*/, "0", "*");
 		protected final @NonNull BagType _Bag_ConnectionPointReference = createBagType("Bag"/*ConnectionPointReference*/, "0", "*");
@@ -425,6 +426,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull SetType _Set_AssociationClassCallExp = createSetType("Set"/*AssociationClassCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Behavior = createSetType("Set"/*Behavior*/, "0", "*");
 		protected final @NonNull SetType _Set_CallOperationAction = createSetType("Set"/*CallOperationAction*/, "0", "*");
+		protected final @NonNull SetType _Set_Class = createSetType("Set"/*Class*/, "0", "*");
 		protected final @NonNull SetType _Set_CollectionType = createSetType("Set"/*CollectionType*/, "0", "*");
 		protected final @NonNull SetType _Set_Comment = createSetType("Set"/*Comment*/, "0", "*");
 		protected final @NonNull SetType _Set_ConnectionPointReference = createSetType("Set"/*ConnectionPointReference*/, "0", "*");
@@ -971,6 +973,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_CallOperationAction);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_CallOperationAction);
+			orphanTypes.add(type = _Bag_Class);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Class);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Class);
 			orphanTypes.add(type = _Bag_CollectionType);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_CollectionType);
@@ -1679,6 +1686,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_CallOperationAction);
 			superClasses.add(_UniqueCollection_CallOperationAction);
+			orphanTypes.add(type = _Set_Class);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Class);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Class);
+			superClasses.add(_UniqueCollection_Class);
 			orphanTypes.add(type = _Set_CollectionType);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_CollectionType);
@@ -2299,8 +2312,10 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_CallExp_source = createProperty(PivotPackage.Literals.CALL_EXP__SOURCE, _OCLExpression);
 		protected final @NonNull Property pr_CallOperationAction_MessageExp = createProperty("MessageExp", _MessageExp);
 		protected final @NonNull Property pr_CallOperationAction_operation = createProperty(PivotPackage.Literals.CALL_OPERATION_ACTION__OPERATION, _Operation);
+		protected final @NonNull Property pr_Class_Class = createProperty("Class", _Class);
 		protected final @NonNull Property pr_Class_isAbstract = createProperty(PivotPackage.Literals.CLASS__IS_ABSTRACT, _Boolean);
 		protected final @NonNull Property pr_Class_isInterface = createProperty(PivotPackage.Literals.CLASS__IS_INTERFACE, _Boolean);
+		protected final @NonNull Property pr_Class_nestedType = createProperty(PivotPackage.Literals.CLASS__NESTED_TYPE, _Set_Class);
 		protected final @NonNull Property pr_Class_ownedBehavior = createProperty(PivotPackage.Literals.CLASS__OWNED_BEHAVIOR, _Set_Behavior);
 		protected final @NonNull Property pr_CollectionItem_item = createProperty(PivotPackage.Literals.COLLECTION_ITEM__ITEM, _OCLExpression);
 		protected final @NonNull Property pr_CollectionLiteralExp_kind = createProperty(PivotPackage.Literals.COLLECTION_LITERAL_EXP__KIND, _CollectionKind);
@@ -2650,10 +2665,19 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Operation_CallOperationAction);
 			ownedProperties = _Class.getOwnedAttribute();
+			ownedProperties.add(property = pr_Class_Class);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Class_nestedType);
 			ownedProperties.add(property = pr_Class_isAbstract);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Class_isInterface);
 			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Class_nestedType);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Class_Class);
 			ownedProperties.add(property = pr_Class_ownedBehavior);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -3790,6 +3814,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _Behavior)));
 			_Bag_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _CallOperationAction)));
+			_Bag_Class.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Class)));
 			_Bag_CollectionType.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _CollectionType)));
 			_Bag_Comment.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -4064,6 +4090,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Behavior)));
 			_Set_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _CallOperationAction)));
+			_Set_Class.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Class)));
 			_Set_CollectionType.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _CollectionType)));
 			_Set_Comment.getTemplateBinding().add(createTemplateBinding(_Set_,

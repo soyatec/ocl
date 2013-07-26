@@ -56,6 +56,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedRule <em>Owned Rule</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isInterface <em>Is Interface</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getNestedType <em>Nested Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedBehavior <em>Owned Behavior</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
@@ -121,6 +122,16 @@ public class ClassImpl
 	protected static final int IS_INTERFACE_EFLAG = 1 << 10;
 
 	/**
+	 * The cached value of the '{@link #getNestedType() <em>Nested Type</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNestedType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.eclipse.ocl.examples.pivot.Class> nestedType;
+
+	/**
 	 * The cached value of the '{@link #getOwnedBehavior() <em>Owned Behavior</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -169,18 +180,6 @@ public class ClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createOwnedRule()
-	{
-		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getOwnedRule().add(newOwnedRule);
-		return newOwnedRule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isAbstract() {
 		return (eFlags & IS_ABSTRACT_EFLAG) != 0;
 	}
@@ -209,28 +208,6 @@ public class ClassImpl
 			ownedBehavior = new EObjectContainmentEList<Behavior>(Behavior.class, this, PivotPackage.CLASS__OWNED_BEHAVIOR);
 		}
 		return ownedBehavior;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createOwnedBehavior(EClass eClass)
-	{
-		Behavior newOwnedBehavior = (Behavior) create(eClass);
-		getOwnedBehavior().add(newOwnedBehavior);
-		return newOwnedBehavior;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createOwnedBehavior()
-	{
-		return createOwnedBehavior(PivotPackage.Literals.BEHAVIOR);
 	}
 
 	/**
@@ -280,18 +257,6 @@ public class ClassImpl
 			ownedAttribute = new EObjectContainmentWithInverseEList<Property>(Property.class, this, PivotPackage.CLASS__OWNED_ATTRIBUTE, PivotPackage.PROPERTY__OWNING_TYPE);
 		}
 		return ownedAttribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Property createOwnedAttribute() {
-		Property newOwnedAttribute = (Property) create(PivotPackage.Literals.PROPERTY);
-		getOwnedAttribute().add(newOwnedAttribute);
-		return newOwnedAttribute;
 	}
 
 	/**
@@ -377,32 +342,12 @@ public class ClassImpl
 				return basicSetPackage(null, msgs);
 			case PivotPackage.CLASS__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__NESTED_TYPE:
+				return ((InternalEList<?>)getNestedType()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Operation createOwnedOperation(EClass eClass) {
-		Operation newOwnedOperation = (Operation) create(eClass);
-		getOwnedOperation().add(newOwnedOperation);
-		return newOwnedOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Operation createOwnedOperation() {
-		return createOwnedOperation(PivotPackage.Literals.OPERATION);
 	}
 
 	/**
@@ -469,6 +414,20 @@ public class ClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<org.eclipse.ocl.examples.pivot.Class> getNestedType()
+	{
+		if (nestedType == null)
+		{
+			nestedType = new EObjectContainmentEList<org.eclipse.ocl.examples.pivot.Class>(org.eclipse.ocl.examples.pivot.Class.class, this, PivotPackage.CLASS__NESTED_TYPE);
+		}
+		return nestedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("null")
 	@Override
 	public @NonNull List<Operation> getOwnedOperation()
@@ -528,6 +487,8 @@ public class ClassImpl
 				return isAbstract();
 			case PivotPackage.CLASS__IS_INTERFACE:
 				return isInterface();
+			case PivotPackage.CLASS__NESTED_TYPE:
+				return getNestedType();
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
 				return getOwnedBehavior();
 		}
@@ -610,6 +571,10 @@ public class ClassImpl
 			case PivotPackage.CLASS__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
+			case PivotPackage.CLASS__NESTED_TYPE:
+				getNestedType().clear();
+				getNestedType().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Class>)newValue);
+				return;
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
@@ -684,6 +649,9 @@ public class ClassImpl
 			case PivotPackage.CLASS__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
+			case PivotPackage.CLASS__NESTED_TYPE:
+				getNestedType().clear();
+				return;
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				return;
@@ -738,6 +706,8 @@ public class ClassImpl
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.CLASS__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
+			case PivotPackage.CLASS__NESTED_TYPE:
+				return nestedType != null && !nestedType.isEmpty();
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
 				return ownedBehavior != null && !ownedBehavior.isEmpty();
 		}

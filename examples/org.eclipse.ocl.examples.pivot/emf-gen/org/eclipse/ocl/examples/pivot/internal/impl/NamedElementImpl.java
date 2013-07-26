@@ -128,17 +128,6 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Annotation createOwnedAnnotation() {
-		Annotation newOwnedAnnotation = (Annotation) create(PivotPackage.Literals.ANNOTATION);
-		getOwnedAnnotation().add(newOwnedAnnotation);
-		return newOwnedAnnotation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getName() {
 		return name;
 	}

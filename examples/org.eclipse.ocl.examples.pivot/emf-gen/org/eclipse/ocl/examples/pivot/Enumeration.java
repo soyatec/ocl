@@ -57,14 +57,4 @@ public interface Enumeration
 	 */
 	List<EnumerationLiteral> getOwnedLiteral();
 
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.EnumerationLiteral} and appends it to the '<em><b>Owned Literal</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.EnumerationLiteral}.
-	 * @see #getOwnedLiteral()
-	 * @generated
-	 */
-	EnumerationLiteral createOwnedLiteral();
-
 } // Enumeration

@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -197,16 +195,6 @@ public interface State
 	List<ConnectionPointReference> getConnection();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ConnectionPointReference} and appends it to the '<em><b>Connection</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ConnectionPointReference}.
-	 * @see #getConnection()
-	 * @generated
-	 */
-	ConnectionPointReference createConnection();
-
-	/**
 	 * Returns the value of the '<em><b>Redefined State</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,16 +233,6 @@ public interface State
 	List<Region> getRegion();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Region} and appends it to the '<em><b>Region</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Region}.
-	 * @see #getRegion()
-	 * @generated
-	 */
-	Region createRegion();
-
-	/**
 	 * Returns the value of the '<em><b>State Invariant</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -278,16 +256,6 @@ public interface State
 	 * @generated
 	 */
 	void setStateInvariant(Constraint value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and sets the '<em><b>State Invariant</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getStateInvariant()
-	 * @generated
-	 */
-	Constraint createStateInvariant();
 
 	/**
 	 * Returns the value of the '<em><b>Entry</b></em>' containment reference.
@@ -315,27 +283,6 @@ public interface State
 	void setEntry(Behavior value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and sets the '<em><b>Entry</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Behavior} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Behavior}.
-	 * @see #getEntry()
-	 * @generated
-	 */
-	Behavior createEntry(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.StateMachine} and sets the '<em><b>Entry</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.StateMachine}.
-	 * @see #getEntry()
-	 * @generated
-	 */
-	Behavior createEntry();
-
-	/**
 	 * Returns the value of the '<em><b>Exit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -358,27 +305,6 @@ public interface State
 	 * @generated
 	 */
 	void setExit(Behavior value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and sets the '<em><b>Exit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Behavior} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Behavior}.
-	 * @see #getExit()
-	 * @generated
-	 */
-	Behavior createExit(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.StateMachine} and sets the '<em><b>Exit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.StateMachine}.
-	 * @see #getExit()
-	 * @generated
-	 */
-	Behavior createExit();
 
 	/**
 	 * Returns the value of the '<em><b>Do Activity</b></em>' containment reference.
@@ -405,27 +331,6 @@ public interface State
 	void setDoActivity(Behavior value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and sets the '<em><b>Do Activity</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Behavior} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Behavior}.
-	 * @see #getDoActivity()
-	 * @generated
-	 */
-	Behavior createDoActivity(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.StateMachine} and sets the '<em><b>Do Activity</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.StateMachine}.
-	 * @see #getDoActivity()
-	 * @generated
-	 */
-	Behavior createDoActivity();
-
-	/**
 	 * Returns the value of the '<em><b>Connection Point</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Pseudostate}.
 	 * <!-- begin-user-doc -->
@@ -438,16 +343,6 @@ public interface State
 	 * @generated
 	 */
 	List<Pseudostate> getConnectionPoint();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Pseudostate} and appends it to the '<em><b>Connection Point</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Pseudostate}.
-	 * @see #getConnectionPoint()
-	 * @generated
-	 */
-	Pseudostate createConnectionPoint();
 
 	/**
 	 * Returns the value of the '<em><b>Deferrable Trigger</b></em>' containment reference list.
@@ -463,14 +358,4 @@ public interface State
 	 * @generated
 	 */
 	List<Trigger> getDeferrableTrigger();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Trigger} and appends it to the '<em><b>Deferrable Trigger</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Trigger}.
-	 * @see #getDeferrableTrigger()
-	 * @generated
-	 */
-	Trigger createDeferrableTrigger();
 } // State

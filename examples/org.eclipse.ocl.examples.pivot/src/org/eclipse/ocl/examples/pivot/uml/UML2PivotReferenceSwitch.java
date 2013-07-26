@@ -18,8 +18,12 @@ package org.eclipse.ocl.examples.pivot.uml;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -58,9 +62,12 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
-{				
+{
+	private static final Logger logger = Logger.getLogger(UML2PivotReferenceSwitch.class);
+
 	protected final @NonNull UML2Pivot converter;
 	protected final @NonNull MetaModelManager metaModelManager;
+	private Set<EClass> doneWarnings = null;
 	
 	public UML2PivotReferenceSwitch(@NonNull UML2Pivot converter) {
 		this.converter = converter;
@@ -492,11 +499,23 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 						}
 					}
 				}
+				if (pivotElement == null) {
+					if (!(eObject instanceof org.eclipse.uml2.uml.Constraint)) {
+						System.out.println("Reference switching " + eObject);
+					}
+					pivotElement = (T) doSwitch(eObject);
+				}
 				if (pivotElement != null) {
 					pivotElements.add(pivotElement);
 				}
 				else {
-					// FIXME log me
+					if (doneWarnings == null) {
+						doneWarnings = new HashSet<EClass>();
+					}
+					EClass eClass = eObject.eClass();
+					if (doneWarnings.add(eClass)) {
+						logger.warn("Failed to create a pivot representation of a UML '" + eClass.getName() + "'");
+					}
 				}
 			}
 		}

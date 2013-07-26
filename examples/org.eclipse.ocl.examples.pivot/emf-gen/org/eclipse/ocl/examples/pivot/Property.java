@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 
@@ -266,27 +265,6 @@ public interface Property
 	 * @generated
 	 */
 	void setDefaultExpression(OpaqueExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Default Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
-	 * @see #getDefaultExpression()
-	 * @generated
-	 */
-	OpaqueExpression createDefaultExpression(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Default Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
-	 * @see #getDefaultExpression()
-	 * @generated
-	 */
-	OpaqueExpression createDefaultExpression();
 
 	/**
 	 * Returns the value of the '<em><b>Is ID</b></em>' attribute.

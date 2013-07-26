@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Package</b></em>'.
@@ -147,27 +145,6 @@ public interface Package
 	List<Type> getOwnedType();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Package} and appends it to the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Package} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Package}.
-	 * @see #getNestedPackage()
-	 * @generated
-	 */
-	Package createNestedPackage(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Package} and appends it to the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Package}.
-	 * @see #getNestedPackage()
-	 * @generated
-	 */
-	Package createNestedPackage();
-
-	/**
 	 * Returns the value of the '<em><b>Nesting Package</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Package#getNestedPackage <em>Nested Package</em>}'.
 	 * <!-- begin-user-doc -->
@@ -192,26 +169,5 @@ public interface Package
 	 * @generated
 	 */
 	void setNestingPackage(Package value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Type} and appends it to the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Type} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Type}.
-	 * @see #getOwnedType()
-	 * @generated
-	 */
-	Type createOwnedType(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Type} and appends it to the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Type}.
-	 * @see #getOwnedType()
-	 * @generated
-	 */
-	Type createOwnedType();
 
 } // Package

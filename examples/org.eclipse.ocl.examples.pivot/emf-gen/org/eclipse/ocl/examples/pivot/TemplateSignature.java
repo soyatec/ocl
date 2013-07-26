@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Template Signature</b></em>'.
@@ -105,26 +103,5 @@ public interface TemplateSignature
 	 * @generated
 	 */
 	void setTemplate(TemplateableElement value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TemplateParameter} and appends it to the '<em><b>Owned Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.TemplateParameter} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.TemplateParameter}.
-	 * @see #getOwnedParameter()
-	 * @generated
-	 */
-	TemplateParameter createOwnedParameter(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TemplateParameter} and appends it to the '<em><b>Owned Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.TemplateParameter}.
-	 * @see #getOwnedParameter()
-	 * @generated
-	 */
-	TemplateParameter createOwnedParameter();
 
 } // TemplateSignature

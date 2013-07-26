@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -83,17 +82,6 @@ public interface CollectionLiteralExp
 	 * @generated
 	 */
 	List<CollectionLiteralPart> getPart();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.CollectionLiteralPart} and appends it to the '<em><b>Part</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.CollectionLiteralPart} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.CollectionLiteralPart}.
-	 * @see #getPart()
-	 * @generated
-	 */
-	CollectionLiteralPart createPart(EClass eClass);
 
 	/**
 	 * <!-- begin-user-doc -->

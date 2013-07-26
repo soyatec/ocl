@@ -51,14 +51,4 @@ public interface Library extends org.eclipse.ocl.examples.pivot.Package
 	 * @generated
 	 */
 	List<Precedence> getOwnedPrecedence();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Precedence} and appends it to the '<em><b>Owned Precedence</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Precedence}.
-	 * @see #getOwnedPrecedence()
-	 * @generated
-	 */
-	Precedence createOwnedPrecedence();
 } // Library

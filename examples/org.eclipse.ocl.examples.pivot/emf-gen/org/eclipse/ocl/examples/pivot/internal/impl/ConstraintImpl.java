@@ -195,27 +195,6 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OpaqueExpression createSpecification(EClass eClass) {
-		OpaqueExpression newSpecification = (OpaqueExpression) create(eClass);
-		setSpecification(newSpecification);
-		return newSpecification;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OpaqueExpression createSpecification()
-	{
-		return createSpecification(PivotPackage.Literals.OPAQUE_EXPRESSION);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Namespace getContext() {
 		Namespace context = basicGetContext();
 		return context != null && ((EObject)context).eIsProxy() ? (Namespace)eResolveProxy((InternalEObject)context) : context;

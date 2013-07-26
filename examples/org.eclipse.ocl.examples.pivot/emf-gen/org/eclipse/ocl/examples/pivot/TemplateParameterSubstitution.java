@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Template Parameter Substitution</b></em>'.
@@ -120,17 +118,6 @@ public interface TemplateParameterSubstitution
 	 * @generated
 	 */
 	void setOwnedActual(ParameterableElement value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ParameterableElement} and sets the '<em><b>Owned Actual</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.ParameterableElement} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ParameterableElement}.
-	 * @see #getOwnedActual()
-	 * @generated
-	 */
-	ParameterableElement createOwnedActual(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Template Binding</b></em>' container reference.

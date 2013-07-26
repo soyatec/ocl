@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Template Parameter</b></em>'.
@@ -104,17 +102,6 @@ public interface TemplateParameter
 	void setOwnedParameteredElement(ParameterableElement value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ParameterableElement} and sets the '<em><b>Owned Parametered Element</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.ParameterableElement} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ParameterableElement}.
-	 * @see #getOwnedParameteredElement()
-	 * @generated
-	 */
-	ParameterableElement createOwnedParameteredElement(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Default</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -167,17 +154,6 @@ public interface TemplateParameter
 	 * @generated
 	 */
 	void setOwnedDefault(ParameterableElement value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ParameterableElement} and sets the '<em><b>Owned Default</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.ParameterableElement} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ParameterableElement}.
-	 * @see #getOwnedDefault()
-	 * @generated
-	 */
-	ParameterableElement createOwnedDefault(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Parametered Element</b></em>' reference.

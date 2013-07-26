@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -35,6 +33,7 @@ import org.eclipse.emf.ecore.EClass;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Class#isAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Class#isInterface <em>Is Interface</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Class#getNestedType <em>Nested Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Class#getOwnedBehavior <em>Owned Behavior</em>}</li>
  * </ul>
  * </p>
@@ -86,27 +85,6 @@ public interface Class
 	List<Behavior> getOwnedBehavior();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and appends it to the '<em><b>Owned Behavior</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Behavior} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Behavior}.
-	 * @see #getOwnedBehavior()
-	 * @generated
-	 */
-	Behavior createOwnedBehavior(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.StateMachine} and appends it to the '<em><b>Owned Behavior</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.StateMachine}.
-	 * @see #getOwnedBehavior()
-	 * @generated
-	 */
-	Behavior createOwnedBehavior();
-
-	/**
 	 * Returns the value of the '<em><b>Is Interface</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -131,5 +109,20 @@ public interface Class
 	 * @generated
 	 */
 	void setIsInterface(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Class}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nested Type</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nested Type</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_NestedType()
+	 * @generated
+	 */
+	List<Class> getNestedType();
 
 } // Class

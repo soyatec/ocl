@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 
 /**
@@ -61,17 +60,6 @@ public interface TupleLiteralPart
 	 * @generated
 	 */
 	void setInitExpression(OCLExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Init Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getInitExpression()
-	 * @generated
-	 */
-	OCLExpression createInitExpression(EClass eClass);
 
 	TuplePartId getPartId();
 } // TupleLiteralPart

@@ -46,16 +46,6 @@ public interface NamedElement
 		extends Element, Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Annotation} and appends it to the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Annotation}.
-	 * @see #getOwnedAnnotation()
-	 * @generated
-	 */
-	Annotation createOwnedAnnotation();
-
-	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

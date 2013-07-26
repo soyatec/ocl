@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,17 +62,6 @@ public interface CollectionItem
 	 * @generated
 	 */
 	void setItem(OCLExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Item</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getItem()
-	 * @generated
-	 */
-	OCLExpression createItem(EClass eClass);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -83,16 +83,6 @@ public interface TemplateBinding
 	List<TemplateParameterSubstitution> getParameterSubstitution();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution} and appends it to the '<em><b>Parameter Substitution</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution}.
-	 * @see #getParameterSubstitution()
-	 * @generated
-	 */
-	TemplateParameterSubstitution createParameterSubstitution();
-
-	/**
 	 * Returns the value of the '<em><b>Bound Element</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.TemplateableElement#getTemplateBinding <em>Template Binding</em>}'.
 	 * <!-- begin-user-doc -->

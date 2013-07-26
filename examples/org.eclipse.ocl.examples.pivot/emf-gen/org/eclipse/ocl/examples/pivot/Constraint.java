@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,27 +84,6 @@ public interface Constraint
 	 * @generated
 	 */
 	void setSpecification(OpaqueExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
-	 * @see #getSpecification()
-	 * @generated
-	 */
-	OpaqueExpression createSpecification(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
-	 * @see #getSpecification()
-	 * @generated
-	 */
-	OpaqueExpression createSpecification();
 
 	/**
 	 * Returns the value of the '<em><b>Context</b></em>' reference.

@@ -195,17 +195,6 @@ public class CollectionLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionLiteralPart createPart(EClass eClass) {
-		CollectionLiteralPart newPart = (CollectionLiteralPart) create(eClass);
-		getPart().add(newPart);
-		return newPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateCollectionKindIsConcrete(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**

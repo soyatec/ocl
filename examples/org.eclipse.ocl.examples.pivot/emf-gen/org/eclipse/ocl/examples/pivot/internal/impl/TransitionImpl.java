@@ -469,18 +469,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createGuard()
-	{
-		Constraint newGuard = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		setGuard(newGuard);
-		return newGuard;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Behavior getEffect()
 	{
 		return effect;
@@ -529,28 +517,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Behavior createEffect(EClass eClass)
-	{
-		Behavior newEffect = (Behavior) create(eClass);
-		setEffect(newEffect);
-		return newEffect;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Behavior createEffect()
-	{
-		return createEffect(PivotPackage.Literals.BEHAVIOR);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<Trigger> getTrigger()
 	{
 		if (trigger == null)
@@ -558,18 +524,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 			trigger = new EObjectContainmentEList<Trigger>(Trigger.class, this, PivotPackage.TRANSITION__TRIGGER);
 		}
 		return trigger;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Trigger createTrigger()
-	{
-		Trigger newTrigger = (Trigger) create(PivotPackage.Literals.TRIGGER);
-		getTrigger().add(newTrigger);
-		return newTrigger;
 	}
 
 	/**

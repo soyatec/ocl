@@ -148,18 +148,6 @@ public class RegionImpl extends NamespaceImpl implements Region
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Vertex createSubvertex(EClass eClass)
-	{
-		Vertex newSubvertex = (Vertex) create(eClass);
-		getSubvertex().add(newSubvertex);
-		return newSubvertex;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -188,18 +176,6 @@ public class RegionImpl extends NamespaceImpl implements Region
 			transition = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, PivotPackage.REGION__TRANSITION, PivotPackage.TRANSITION__CONTAINER);
 		}
 		return transition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Transition createTransition()
-	{
-		Transition newTransition = (Transition) create(PivotPackage.Literals.TRANSITION);
-		getTransition().add(newTransition);
-		return newTransition;
 	}
 
 	/**

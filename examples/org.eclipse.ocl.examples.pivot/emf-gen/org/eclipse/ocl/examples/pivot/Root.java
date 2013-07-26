@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -54,27 +53,6 @@ public interface Root extends Namespace, org.eclipse.ocl.examples.domain.element
 	 * @generated
 	 */
 	List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Package} and appends it to the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Package} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Package}.
-	 * @see #getNestedPackage()
-	 * @generated
-	 */
-	org.eclipse.ocl.examples.pivot.Package createNestedPackage(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Package} and appends it to the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Package}.
-	 * @see #getNestedPackage()
-	 * @generated
-	 */
-	org.eclipse.ocl.examples.pivot.Package createNestedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>External URI</b></em>' attribute.
@@ -115,15 +93,5 @@ public interface Root extends Namespace, org.eclipse.ocl.examples.domain.element
 	 * @generated
 	 */
 	@NonNull List<Import> getImports();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Import} and appends it to the '<em><b>Imports</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Import}.
-	 * @see #getImports()
-	 * @generated
-	 */
-	Import createImports();
 
 } // Root

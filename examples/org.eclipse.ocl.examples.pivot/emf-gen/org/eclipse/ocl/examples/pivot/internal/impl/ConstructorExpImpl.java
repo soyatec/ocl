@@ -118,18 +118,6 @@ public class ConstructorExpImpl extends OCLExpressionImpl implements Constructor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConstructorPart createPart()
-	{
-		ConstructorPart newPart = (ConstructorPart) create(PivotPackage.Literals.CONSTRUCTOR_PART);
-		getPart().add(newPart);
-		return newPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getValue()
 	{
 		return value;

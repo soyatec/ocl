@@ -136,18 +136,6 @@ public class TupleLiteralPartImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createInitExpression(EClass eClass)
-	{
-		OCLExpression newInitExpression = (OCLExpression) create(eClass);
-		setInitExpression(newInitExpression);
-		return newInitExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {

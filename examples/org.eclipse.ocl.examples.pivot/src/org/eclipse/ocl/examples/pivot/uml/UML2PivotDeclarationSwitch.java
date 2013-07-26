@@ -80,20 +80,33 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	@Override
 	public Object caseAssociation(org.eclipse.uml2.uml.Association umlAssociation) {
 		assert umlAssociation != null;
+//		System.out.println("Association " + umlAssociation.getName());
 		@SuppressWarnings("null") @NonNull List<org.eclipse.uml2.uml.Property> memberEnds = umlAssociation.getMemberEnds();
+//		boolean isSubsetted = false;
+		boolean isUnnamed = false;
+		for (org.eclipse.uml2.uml.Property memberEnd : memberEnds) {
+//			if (memberEnd.getSubsettedProperties().size() > 0) {
+//				isSubsetted = true;
+//			}
+			if (memberEnd.getName() == null) {
+				isUnnamed = true;
+			}
+		}
 		converter.addProperties(memberEnds, null);
 		Property firstPivotElement = null;
 		for (org.eclipse.uml2.uml.Property umlProperty : memberEnds) {
 			Property pivotElement = (Property) doSwitch(umlProperty);
-//			converter.copyProperty(pivotElement, umlProperty, null);
-//			pivotElement.setImplicit(umlProperty.getAssociation() != null);
-//			converter.queueReference(umlAssociation);				// For opposite installation
-			if (firstPivotElement == null) {
-				firstPivotElement = pivotElement;
-			}
-			else {
-				firstPivotElement.setOpposite(pivotElement);
-				pivotElement.setOpposite(firstPivotElement);
+			if (!isUnnamed) { //isSubsetted) {
+	//			converter.copyProperty(pivotElement, umlProperty, null);
+	//			pivotElement.setImplicit(umlProperty.getAssociation() != null);
+	//			converter.queueReference(umlAssociation);				// For opposite installation
+				if (firstPivotElement == null) {
+					firstPivotElement = pivotElement;
+				}
+				else {
+					firstPivotElement.setOpposite(pivotElement);
+					pivotElement.setOpposite(firstPivotElement);
+				}
 			}
 		}
 		return this;
@@ -103,6 +116,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public org.eclipse.ocl.examples.pivot.Class caseClass(org.eclipse.uml2.uml.Class umlClass) {
 		assert umlClass != null;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, umlClass);
+//		System.out.println("Class " + umlClass.getName() + " => " + DomainUtil.debugSimpleName(pivotElement));
 		copyClass(pivotElement, umlClass);
 		return pivotElement;
 	}
@@ -295,6 +309,9 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 			@SuppressWarnings("unused")TypeServer typeServer2 = metaModelManager.getTypeServer(pivotElement);
 			pivotElement.setBehavioralType(primaryElement);
 		}
+		else {
+//			System.out.println("unknown PrimitiveType " + umlPrimitiveType);
+		}
 		copyClassifier(pivotElement, umlPrimitiveType);
 		String instanceClassName = null;
 		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPrimitiveType.getAppliedStereotype("Ecore::EDataType");
@@ -320,6 +337,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public Property caseProperty(org.eclipse.uml2.uml.Property umlProperty) {
 		assert umlProperty != null;
 		Property pivotElement = converter.refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, umlProperty);
+//		System.out.println("Property " + ((org.eclipse.uml2.uml.NamedElement)umlProperty.eContainer()).getName() + "::" + umlProperty.getName() + " => " + DomainUtil.debugSimpleName(pivotElement));
 		copyProperty(pivotElement, umlProperty, null);
 		// NB MDT/UML2's base_XXX/extension_YYY are spurious composites
 		pivotElement.setIsComposite((umlProperty.getClass_() != null) && umlProperty.isComposite());			
@@ -425,14 +443,14 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	protected void copyClass(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull org.eclipse.uml2.uml.Class umlClass) {
 		pivotElement.setIsInterface(false);			
 		copyClassOrInterface(pivotElement, umlClass);
-		for (org.eclipse.uml2.uml.Classifier umlType : umlClass.getNestedClassifiers()) {
+/*		for (org.eclipse.uml2.uml.Classifier umlType : umlClass.getNestedClassifiers()) {
 //			doSwitch(umlType);
 			Type pivotObject = (Type) doSwitch(umlType);
 			if (pivotObject != null) {
-// WIP				metaModelManager.addOrphanClass(pivotObject);
+				metaModelManager.addOrphanClass(pivotObject);
 			}
-		}
-//		doSwitchAll(pivotElement.getOwnedType(), umlClassifier.getOwnedTypes(), null);
+		} */
+		doSwitchAll(pivotElement.getNestedType(), umlClass.getNestedClassifiers(), null);
 		doSwitchAll(pivotElement.getOwnedBehavior(), umlClass.getOwnedBehaviors(), null);
 	}
 

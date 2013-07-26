@@ -20,7 +20,6 @@ import java.util.List;
 
 import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -96,16 +95,6 @@ public interface Type
 	@NonNull List<Property> getOwnedAttribute();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Property} and appends it to the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Property}.
-	 * @see #getOwnedAttribute()
-	 * @generated
-	 */
-	Property createOwnedAttribute();
-
-	/**
 	 * Returns the value of the '<em><b>Owned Operation</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Operation}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Operation#getOwningType <em>Owning Type</em>}'.
@@ -121,27 +110,6 @@ public interface Type
 	 * @generated
 	 */
 	@NonNull List<Operation> getOwnedOperation();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Operation} and appends it to the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Operation} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Operation}.
-	 * @see #getOwnedOperation()
-	 * @generated
-	 */
-	Operation createOwnedOperation(EClass eClass);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Operation} and appends it to the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Operation}.
-	 * @see #getOwnedOperation()
-	 * @generated
-	 */
-	Operation createOwnedOperation();
 
 	/**
 	 * Returns the value of the '<em><b>Super Class</b></em>' reference list.
@@ -172,16 +140,6 @@ public interface Type
 	 * @generated
 	 */
 	@NonNull List<Constraint> getOwnedInvariant();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getOwnedInvariant()
-	 * @generated
-	 */
-	Constraint createOwnedInvariant();
 
 	/**
 	 * Returns the value of the '<em><b>Instance Class Name</b></em>' attribute.

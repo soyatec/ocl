@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,17 +68,6 @@ public interface MessageExp
 	void setTarget(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getTarget()
-	 * @generated
-	 */
-	OCLExpression createTarget(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
@@ -93,17 +81,6 @@ public interface MessageExp
 	 * @generated
 	 */
 	List<OCLExpression> getArgument();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getArgument()
-	 * @generated
-	 */
-	OCLExpression createArgument(EClass eClass);
 
 	/**
 	 * Returns the value of the '<em><b>Called Operation</b></em>' containment reference.
@@ -131,16 +108,6 @@ public interface MessageExp
 	void setCalledOperation(CallOperationAction value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.CallOperationAction} and sets the '<em><b>Called Operation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.CallOperationAction}.
-	 * @see #getCalledOperation()
-	 * @generated
-	 */
-	CallOperationAction createCalledOperation();
-
-	/**
 	 * Returns the value of the '<em><b>Sent Signal</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -164,16 +131,6 @@ public interface MessageExp
 	 * @generated
 	 */
 	void setSentSignal(SendSignalAction value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.SendSignalAction} and sets the '<em><b>Sent Signal</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.SendSignalAction}.
-	 * @see #getSentSignal()
-	 * @generated
-	 */
-	SendSignalAction createSentSignal();
 
 	/**
 	 * <!-- begin-user-doc -->

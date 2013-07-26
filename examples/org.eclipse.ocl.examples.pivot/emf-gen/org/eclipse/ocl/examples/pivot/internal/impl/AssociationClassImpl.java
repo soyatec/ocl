@@ -176,6 +176,8 @@ public class AssociationClassImpl
 				return basicSetPackage(null, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ASSOCIATION_CLASS__NESTED_TYPE:
+				return ((InternalEList<?>)getNestedType()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:
@@ -232,6 +234,8 @@ public class AssociationClassImpl
 				return isAbstract();
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				return isInterface();
+			case PivotPackage.ASSOCIATION_CLASS__NESTED_TYPE:
+				return getNestedType();
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
 				return getOwnedBehavior();
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:
@@ -316,6 +320,10 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__NESTED_TYPE:
+				getNestedType().clear();
+				getNestedType().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Class>)newValue);
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
@@ -394,6 +402,9 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__NESTED_TYPE:
+				getNestedType().clear();
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				return;
@@ -451,6 +462,8 @@ public class AssociationClassImpl
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
+			case PivotPackage.ASSOCIATION_CLASS__NESTED_TYPE:
+				return nestedType != null && !nestedType.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
 				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:

@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
@@ -85,11 +84,12 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 	}
 	
-	public static class PartialProperties implements Iterable<DomainProperty>
+	public class PartialProperties implements Iterable<DomainProperty>
 	{
 		//resolution = null, partials = null or empty => empty
 		// resolution = X, partials = null or empty or [X} => X
 		// resolution = null, partials not empty => lazy unresolved 'ambiguity'
+		private boolean isResolved = false;
 		private @Nullable DomainProperty resolution = null;
 		private @Nullable List<DomainProperty> partials = null;
 
@@ -98,32 +98,37 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			if (partials2 == null) {
 				if (resolution == null) {
 					resolution = pivotProperty;
+					isResolved = true;
 				}
 				else {
 					partials = partials2 = new ArrayList<DomainProperty>();
 					partials2.add(resolution);
 					partials2.add(pivotProperty);
 					resolution = null;
+					isResolved = false;
 				}
 			}
 			else if (partials2.isEmpty()) {
 				if (resolution == null) {
 					resolution = pivotProperty;
+					isResolved = true;
 				}
 				else {
 					partials2.add(resolution);
 					partials2.add(pivotProperty);
 					resolution = null;
+					isResolved = false;
 				}
 			}
 			else {
 				partials2.add(pivotProperty);
 				resolution = null;
+				isResolved = false;
 			}
 		}
 
 		public synchronized @Nullable DomainProperty get() {
-			if (resolution != null) {
+			if (isResolved) {
 				return resolution;
 			}
 			List<DomainProperty> partials2 = partials;
@@ -135,6 +140,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 				return null;
 			}
 			if (size == 1) {
+				isResolved = true;
 				resolution = partials2.get(0);
 				return resolution;
 			}
@@ -177,7 +183,31 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 					i++;
 				}
 			}
-			resolution = values.get(0);
+			if (values.size() == 1) {
+				resolution = values.get(0);
+				isResolved = true;
+				return resolution;
+			}
+			MetaModelManager metaModelManager = getStandardLibrary();
+			Map<DomainType, DomainProperty> primaryProperties = new HashMap<DomainType, DomainProperty>();
+			for (DomainProperty property : values) {
+				if (property != null) {
+					DomainType owningType = property.getOwningType();
+					if (owningType != null) {
+						DomainType domainType = metaModelManager.getPrimaryType(owningType);
+						if (!primaryProperties.containsKey(domainType)) {
+							primaryProperties.put(domainType, property);	// FIXME something more deterministic than first
+						}
+					}
+				}
+			}
+			if (primaryProperties.size() == 1) {
+				resolution = primaryProperties.values().iterator().next();
+				isResolved = true;
+				return resolution;
+			}
+			isResolved = true;
+			resolution = null;
 			return resolution;
 		}
 
@@ -704,7 +734,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return packageServer;
 	}
 
-	public final @NonNull DomainStandardLibrary getStandardLibrary() {
+	public final @NonNull MetaModelManager getStandardLibrary() {
 		return packageManager.getMetaModelManager();
 	}
 	

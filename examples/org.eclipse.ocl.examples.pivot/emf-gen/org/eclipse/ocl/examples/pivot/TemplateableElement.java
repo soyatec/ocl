@@ -59,16 +59,6 @@ public interface TemplateableElement
 	List<TemplateBinding> getTemplateBinding();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TemplateBinding} and appends it to the '<em><b>Template Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.TemplateBinding}.
-	 * @see #getTemplateBinding()
-	 * @generated
-	 */
-	TemplateBinding createTemplateBinding();
-
-	/**
 	 * Returns the value of the '<em><b>Owned Template Signature</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getTemplate <em>Template</em>}'.
 	 * <!-- begin-user-doc -->
@@ -93,16 +83,6 @@ public interface TemplateableElement
 	 * @generated
 	 */
 	void setOwnedTemplateSignature(TemplateSignature value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TemplateSignature} and sets the '<em><b>Owned Template Signature</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.TemplateSignature}.
-	 * @see #getOwnedTemplateSignature()
-	 * @generated
-	 */
-	TemplateSignature createOwnedTemplateSignature();
 
 	/**
 	 * Returns the value of the '<em><b>Unspecialized Element</b></em>' reference.

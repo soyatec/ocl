@@ -178,17 +178,6 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLExpression createBodyExpression(EClass eClass) {
-		OCLExpression newBodyExpression = (OCLExpression) create(eClass);
-		setBodyExpression(newBodyExpression);
-		return newBodyExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Variable getContextVariable() {
 		return contextVariable;
 	}
@@ -228,17 +217,6 @@ public class ExpressionInOCLImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, newContextVariable, newContextVariable));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Variable createContextVariable() {
-		Variable newContextVariable = (Variable) create(PivotPackage.Literals.VARIABLE);
-		setContextVariable(newContextVariable);
-		return newContextVariable;
 	}
 
 	/**
@@ -292,17 +270,6 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable createResultVariable() {
-		Variable newResultVariable = (Variable) create(PivotPackage.Literals.VARIABLE);
-		setResultVariable(newResultVariable);
-		return newResultVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("null")
 	public @NonNull List<Variable> getParameterVariable()
 	{
@@ -311,17 +278,6 @@ public class ExpressionInOCLImpl
 			parameterVariable = new EObjectContainmentEList<Variable>(Variable.class, this, PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE);
 		}
 		return parameterVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Variable createParameterVariable() {
-		Variable newParameterVariable = (Variable) create(PivotPackage.Literals.VARIABLE);
-		getParameterVariable().add(newParameterVariable);
-		return newParameterVariable;
 	}
 
 	/**
@@ -370,18 +326,6 @@ public class ExpressionInOCLImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, newMessageExpression, newMessageExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OCLExpression createMessageExpression(EClass eClass)
-	{
-		OCLExpression newMessageExpression = (OCLExpression) create(eClass);
-		setMessageExpression(newMessageExpression);
-		return newMessageExpression;
 	}
 
 	/**

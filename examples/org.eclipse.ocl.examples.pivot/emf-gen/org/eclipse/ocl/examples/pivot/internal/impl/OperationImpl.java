@@ -327,18 +327,6 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createOwnedRule()
-	{
-		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getOwnedRule().add(newOwnedRule);
-		return newOwnedRule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<TemplateBinding> getTemplateBinding()
 	{
 		if (templateBinding == null)
@@ -511,17 +499,6 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateBinding createTemplateBinding() {
-		TemplateBinding newTemplateBinding = (TemplateBinding) create(PivotPackage.Literals.TEMPLATE_BINDING);
-		getTemplateBinding().add(newTemplateBinding);
-		return newTemplateBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TemplateSignature getOwnedTemplateSignature() {
 		return ownedTemplateSignature;
 	}
@@ -562,17 +539,6 @@ public class OperationImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__OWNED_TEMPLATE_SIGNATURE, newOwnedTemplateSignature, newOwnedTemplateSignature));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TemplateSignature createOwnedTemplateSignature() {
-		TemplateSignature newOwnedTemplateSignature = (TemplateSignature) create(PivotPackage.Literals.TEMPLATE_SIGNATURE);
-		setOwnedTemplateSignature(newOwnedTemplateSignature);
-		return newOwnedTemplateSignature;
 	}
 
 	/**
@@ -656,17 +622,6 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter createOwnedParameter() {
-		Parameter newOwnedParameter = (Parameter) create(PivotPackage.Literals.PARAMETER);
-		getOwnedParameter().add(newOwnedParameter);
-		return newOwnedParameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Type getOwningType()
 	{
 		if (eContainerFeatureID() != PivotPackage.OPERATION__OWNING_TYPE) return null;
@@ -727,18 +682,6 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createPrecondition()
-	{
-		Constraint newPrecondition = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getPrecondition().add(newPrecondition);
-		return newPrecondition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("null")
 	public @NonNull List<Constraint> getPostcondition()
 	{
@@ -747,18 +690,6 @@ public class OperationImpl
 			postcondition = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.OPERATION__POSTCONDITION);
 		}
 		return postcondition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Constraint createPostcondition()
-	{
-		Constraint newPostcondition = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getPostcondition().add(newPostcondition);
-		return newPostcondition;
 	}
 
 	/**
@@ -807,28 +738,6 @@ public class OperationImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__BODY_EXPRESSION, newBodyExpression, newBodyExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OpaqueExpression createBodyExpression(EClass eClass)
-	{
-		OpaqueExpression newBodyExpression = (OpaqueExpression) create(eClass);
-		setBodyExpression(newBodyExpression);
-		return newBodyExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OpaqueExpression createBodyExpression()
-	{
-		return createBodyExpression(PivotPackage.Literals.OPAQUE_EXPRESSION);
 	}
 
 	/**

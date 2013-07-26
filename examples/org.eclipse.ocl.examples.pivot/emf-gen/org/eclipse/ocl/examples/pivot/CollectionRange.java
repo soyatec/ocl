@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Collection Range</b></em>'.
@@ -63,17 +61,6 @@ public interface CollectionRange
 	void setFirst(OCLExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>First</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getFirst()
-	 * @generated
-	 */
-	OCLExpression createFirst(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Last</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -97,16 +84,5 @@ public interface CollectionRange
 	 * @generated
 	 */
 	void setLast(OCLExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Last</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getLast()
-	 * @generated
-	 */
-	OCLExpression createLast(EClass eClass);
 
 } // CollectionRange

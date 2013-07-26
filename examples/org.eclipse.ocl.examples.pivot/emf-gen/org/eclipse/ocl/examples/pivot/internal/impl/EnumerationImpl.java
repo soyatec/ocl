@@ -111,17 +111,6 @@ public class EnumerationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumerationLiteral createOwnedLiteral() {
-		EnumerationLiteral newOwnedLiteral = (EnumerationLiteral) create(PivotPackage.Literals.ENUMERATION_LITERAL);
-		getOwnedLiteral().add(newOwnedLiteral);
-		return newOwnedLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
@@ -192,6 +181,8 @@ public class EnumerationImpl
 				return basicSetPackage(null, msgs);
 			case PivotPackage.ENUMERATION__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ENUMERATION__NESTED_TYPE:
+				return ((InternalEList<?>)getNestedType()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_LITERAL:
@@ -248,6 +239,8 @@ public class EnumerationImpl
 				return isAbstract();
 			case PivotPackage.ENUMERATION__IS_INTERFACE:
 				return isInterface();
+			case PivotPackage.ENUMERATION__NESTED_TYPE:
+				return getNestedType();
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
 				return getOwnedBehavior();
 			case PivotPackage.ENUMERATION__BEHAVIORAL_TYPE:
@@ -337,6 +330,10 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
+			case PivotPackage.ENUMERATION__NESTED_TYPE:
+				getNestedType().clear();
+				getNestedType().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Class>)newValue);
+				return;
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
@@ -421,6 +418,9 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
+			case PivotPackage.ENUMERATION__NESTED_TYPE:
+				getNestedType().clear();
+				return;
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
 				getOwnedBehavior().clear();
 				return;
@@ -484,6 +484,8 @@ public class EnumerationImpl
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.ENUMERATION__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
+			case PivotPackage.ENUMERATION__NESTED_TYPE:
+				return nestedType != null && !nestedType.isEmpty();
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
 				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.ENUMERATION__BEHAVIORAL_TYPE:

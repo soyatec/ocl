@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Annotation</b></em>'.
@@ -56,17 +54,6 @@ public interface Annotation
 	List<Element> getOwnedContent();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Element} and appends it to the '<em><b>Owned Content</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Element} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Element}.
-	 * @see #getOwnedContent()
-	 * @generated
-	 */
-	Element createOwnedContent(EClass eClass);
-
-	/**
 	 * Returns the value of the '<em><b>Owned Detail</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Detail}.
 	 * <!-- begin-user-doc -->
@@ -80,16 +67,6 @@ public interface Annotation
 	 * @generated
 	 */
 	List<Detail> getOwnedDetail();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Detail} and appends it to the '<em><b>Owned Detail</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Detail}.
-	 * @see #getOwnedDetail()
-	 * @generated
-	 */
-	Detail createOwnedDetail();
 
 	/**
 	 * Returns the value of the '<em><b>Reference</b></em>' reference list.

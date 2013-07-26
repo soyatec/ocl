@@ -348,17 +348,6 @@ public class TemplateParameterImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterableElement createOwnedParameteredElement(EClass eClass) {
-		ParameterableElement newOwnedParameteredElement = (ParameterableElement) create(eClass);
-		setOwnedParameteredElement(newOwnedParameteredElement);
-		return newOwnedParameteredElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ParameterableElement getOwnedDefault() {
 		return ownedDefault;
 	}
@@ -408,17 +397,6 @@ public class TemplateParameterImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TEMPLATE_PARAMETER__OWNED_DEFAULT, newOwnedDefault, newOwnedDefault));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ParameterableElement createOwnedDefault(EClass eClass) {
-		ParameterableElement newOwnedDefault = (ParameterableElement) create(eClass);
-		setOwnedDefault(newOwnedDefault);
-		return newOwnedDefault;
 	}
 
 	/**

@@ -48,14 +48,4 @@ public interface DynamicType extends Type, DynamicElement
 	 */
 	List<DynamicProperty> getOwnedProperty();
 
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.DynamicProperty} and appends it to the '<em><b>Owned Property</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.DynamicProperty}.
-	 * @see #getOwnedProperty()
-	 * @generated
-	 */
-	DynamicProperty createOwnedProperty();
-
 } // DynamicType

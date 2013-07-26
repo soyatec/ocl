@@ -50,16 +50,6 @@ public interface ConstructorExp extends OCLExpression
 	List<ConstructorPart> getPart();
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ConstructorPart} and appends it to the '<em><b>Part</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ConstructorPart}.
-	 * @see #getPart()
-	 * @generated
-	 */
-	ConstructorPart createPart();
-
-	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>

@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Constructor Part</b></em>'.
@@ -83,16 +81,5 @@ public interface ConstructorPart extends TypedElement
 	 * @generated
 	 */
 	void setInitExpression(OCLExpression value);
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and sets the '<em><b>Init Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OCLExpression} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
-	 * @see #getInitExpression()
-	 * @generated
-	 */
-	OCLExpression createInitExpression(EClass eClass);
 
 } // ConstructorPart

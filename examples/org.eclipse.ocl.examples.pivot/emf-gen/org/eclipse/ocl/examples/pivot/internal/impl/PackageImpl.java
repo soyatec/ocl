@@ -213,17 +213,6 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateBinding createTemplateBinding() {
-		TemplateBinding newTemplateBinding = (TemplateBinding) create(PivotPackage.Literals.TEMPLATE_BINDING);
-		getTemplateBinding().add(newTemplateBinding);
-		return newTemplateBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TemplateSignature getOwnedTemplateSignature() {
 		return ownedTemplateSignature;
 	}
@@ -264,17 +253,6 @@ public class PackageImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PACKAGE__OWNED_TEMPLATE_SIGNATURE, newOwnedTemplateSignature, newOwnedTemplateSignature));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TemplateSignature createOwnedTemplateSignature() {
-		TemplateSignature newOwnedTemplateSignature = (TemplateSignature) create(PivotPackage.Literals.TEMPLATE_SIGNATURE);
-		setOwnedTemplateSignature(newOwnedTemplateSignature);
-		return newOwnedTemplateSignature;
 	}
 
 	/**
@@ -389,27 +367,6 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Package createNestedPackage(
-			EClass eClass) {
-		org.eclipse.ocl.examples.pivot.Package newNestedPackage = (org.eclipse.ocl.examples.pivot.Package) create(eClass);
-		getNestedPackage().add(newNestedPackage);
-		return newNestedPackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.ocl.examples.pivot.Package createNestedPackage() {
-		return createNestedPackage(PivotPackage.Literals.PACKAGE);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public org.eclipse.ocl.examples.pivot.Package getNestingPackage() {
 		if (eContainerFeatureID() != PivotPackage.PACKAGE__NESTING_PACKAGE) return null;
 		return (org.eclipse.ocl.examples.pivot.Package)eInternalContainer();
@@ -448,27 +405,6 @@ public class PackageImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PACKAGE__NESTING_PACKAGE, newNestingPackage, newNestingPackage));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type createOwnedType(EClass eClass) {
-		Type newOwnedType = (Type) create(eClass);
-		getOwnedType().add(newOwnedType);
-		return newOwnedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type createOwnedType()
-	{
-		return createOwnedType(PivotPackage.Literals.TYPE);
 	}
 
 	/**

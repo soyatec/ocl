@@ -121,18 +121,6 @@ public class IterationImpl extends OperationImpl implements Iteration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter createOwnedIterator()
-	{
-		Parameter newOwnedIterator = (Parameter) create(PivotPackage.Literals.PARAMETER);
-		getOwnedIterator().add(newOwnedIterator);
-		return newOwnedIterator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("null")
 	public @NonNull List<Parameter> getOwnedAccumulator()
 	{
@@ -141,18 +129,6 @@ public class IterationImpl extends OperationImpl implements Iteration
 			ownedAccumulator = new EObjectContainmentEList<Parameter>(Parameter.class, this, PivotPackage.ITERATION__OWNED_ACCUMULATOR);
 		}
 		return ownedAccumulator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Parameter createOwnedAccumulator()
-	{
-		Parameter newOwnedAccumulator = (Parameter) create(PivotPackage.Literals.PARAMETER);
-		getOwnedAccumulator().add(newOwnedAccumulator);
-		return newOwnedAccumulator;
 	}
 
 	/**
