@@ -29,8 +29,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 public class InnerStackPlace extends StackPlace
 {
 	public static @NonNull LocalPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGIterationCallExp cgLoopExp) {
-		CGElement cgParent = cgLoopExp.getParent();
-		LocalPlace loopPlace = getLocalPlace(element2place, cgParent);
+		ControlPlace loopPlace = ControlPlace.createPlace(element2place, cgLoopExp);
 		StackPlace stackPlace = loopPlace.getStackPlace();
 		CGValuedElement cgBodyExp = cgLoopExp.getBody();
 		if (cgBodyExp != null) {

@@ -345,6 +345,15 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isConstant() {
 		return first.isConstant() && ((last == null) || last.isConstant());
 	}

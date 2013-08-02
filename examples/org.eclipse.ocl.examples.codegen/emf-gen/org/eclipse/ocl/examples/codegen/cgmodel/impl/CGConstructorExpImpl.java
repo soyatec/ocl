@@ -194,6 +194,15 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * @generated
 	 */
 	@Override
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isConstant() {
 		for (CGConstructorPart cgPart : getParts()) {
 			if (!cgPart.isConstant()) {

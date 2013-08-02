@@ -255,6 +255,15 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * @generated
 	 */
 	@Override
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isConstant() {
 		return false;
 	}

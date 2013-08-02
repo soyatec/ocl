@@ -172,9 +172,9 @@ public class SimpleAnalysis extends AbstractAnalysis
 							if (!thisAnalysis.isStructurallyEqualTo(thatAnalysis)) {
 								return false;
 							}
-							else {
-								logger.error("Missing analysis");
-							}
+//							else {
+//								logger.error("Missing analysis");
+//							}
 						}
 					}
 					else if (!thisObject.equals(thatObject)) {

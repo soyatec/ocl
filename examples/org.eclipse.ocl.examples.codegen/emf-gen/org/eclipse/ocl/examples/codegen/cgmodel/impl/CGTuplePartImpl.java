@@ -264,6 +264,15 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	 * @generated
 	 */
 	@Override
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
