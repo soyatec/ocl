@@ -54,28 +54,28 @@ public abstract class AbstractInheritance implements DomainInheritance
 	public static final class RejectStaticOperation implements Predicate<DomainOperation>
 	{
 		public boolean apply(DomainOperation operation) {
-			return !operation.isStatic();
+			return (operation != null) && !operation.isStatic();
 		}
 	}
 
 	public static final class RejectStaticProperty implements Predicate<DomainProperty>
 	{
 		public boolean apply(DomainProperty property) {
-			return !property.isStatic();
+			return (property != null) && !property.isStatic();
 		}
 	}
 	
 	public static final class SelectStaticOperation implements Predicate<DomainOperation>
 	{
 		public boolean apply(DomainOperation operation) {
-			return operation.isStatic();
+			return (operation != null) && operation.isStatic();
 		}
 	}
 
 	public static final class SelectStaticProperty implements Predicate<DomainProperty>
 	{
 		public boolean apply(DomainProperty property) {
-			return property.isStatic();
+			return (property != null) && property.isStatic();
 		}
 	}
 

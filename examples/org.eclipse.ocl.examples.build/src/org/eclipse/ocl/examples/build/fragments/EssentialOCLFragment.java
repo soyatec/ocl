@@ -101,6 +101,7 @@ public class EssentialOCLFragment extends DefaultGeneratorFragment
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		BindFactory bindFactory = new BindFactory();
+		bindFactory.addConfiguredBinding(String.class.getName(), "binder.bind(String.class).annotatedWith(com.google.inject.name.Names.named((org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS))).toInstance(\".,:>\");");
 		bindFactory.addTypeToType(AbstractAntlrTokenToAttributeIdMapper.class.getName(), BaseAntlrTokenToAttributeIdMapper.class.getName());
 		bindFactory.addTypeToType(AbstractEditStrategyProvider.class.getName(), BaseAutoEditStrategyProvider.class.getName());
 		bindFactory.addTypeToType(IHighlightingConfiguration.class.getName(), EssentialOCLHighlightingConfiguration.class.getName());
