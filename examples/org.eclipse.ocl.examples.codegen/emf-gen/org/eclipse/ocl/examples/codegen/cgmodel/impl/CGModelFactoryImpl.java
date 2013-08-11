@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.*;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -91,8 +90,8 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 
@@ -213,6 +212,8 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case CGModelPackage.ELEMENT:
+				return createElementFromString(eDataType, initialValue);
 			case CGModelPackage.ELEMENT_ID:
 				return createElementIdFromString(eDataType, initialValue);
 			case CGModelPackage.ENUMERATION_LITERAL_ID:
@@ -225,8 +226,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 				return createLibraryOperationFromString(eDataType, initialValue);
 			case CGModelPackage.LIBRARY_PROPERTY:
 				return createLibraryPropertyFromString(eDataType, initialValue);
-			case CGModelPackage.NAMED_ELEMENT:
-				return createNamedElementFromString(eDataType, initialValue);
 			case CGModelPackage.NUMBER:
 				return createNumberFromString(eDataType, initialValue);
 			case CGModelPackage.OBJECT:
@@ -252,6 +251,8 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case CGModelPackage.ELEMENT:
+				return convertElementToString(eDataType, instanceValue);
 			case CGModelPackage.ELEMENT_ID:
 				return convertElementIdToString(eDataType, instanceValue);
 			case CGModelPackage.ENUMERATION_LITERAL_ID:
@@ -264,8 +265,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 				return convertLibraryOperationToString(eDataType, instanceValue);
 			case CGModelPackage.LIBRARY_PROPERTY:
 				return convertLibraryPropertyToString(eDataType, instanceValue);
-			case CGModelPackage.NAMED_ELEMENT:
-				return convertNamedElementToString(eDataType, instanceValue);
 			case CGModelPackage.NUMBER:
 				return convertNumberToString(eDataType, instanceValue);
 			case CGModelPackage.OBJECT:
@@ -888,6 +887,24 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Element createElementFromString(EDataType eDataType, String initialValue) {
+		return (Element)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertElementToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ElementId createElementIdFromString(EDataType eDataType, String initialValue) {
 		return (ElementId)super.createFromString(eDataType, initialValue);
 	}
@@ -988,24 +1005,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * @generated
 	 */
 	public String convertLibraryPropertyToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedElement createNamedElementFromString(EDataType eDataType, String initialValue) {
-		return (NamedElement)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertNamedElementToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

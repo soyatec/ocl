@@ -338,7 +338,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGNamedElement" abstract="true" eSuperTypes="#//CGElement #//Nameable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pivot" lowerBound="1" eType="#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pivot" lowerBound="1" eType="#//Element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGNull" eSuperTypes="#//CGConstant">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -536,6 +536,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Element" instanceClassName="org.eclipse.ocl.examples.pivot.Element"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ElementId" instanceClassName="org.eclipse.ocl.examples.domain.ids.ElementId"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EnumerationLiteralId" instanceClassName="org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Iteration" instanceClassName="org.eclipse.ocl.examples.pivot.Iteration"/>
@@ -544,7 +545,6 @@
   <eClassifiers xsi:type="ecore:EDataType" name="LibraryProperty" instanceClassName="org.eclipse.ocl.examples.domain.library.LibraryProperty"/>
   <eClassifiers xsi:type="ecore:EClass" name="Nameable" instanceClassName="org.eclipse.ocl.examples.domain.elements.Nameable"
       abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="NamedElement" instanceClassName="org.eclipse.ocl.examples.pivot.NamedElement"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Number" instanceClassName="java.lang.Number"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Operation" instanceClassName="org.eclipse.ocl.examples.pivot.Operation"/>

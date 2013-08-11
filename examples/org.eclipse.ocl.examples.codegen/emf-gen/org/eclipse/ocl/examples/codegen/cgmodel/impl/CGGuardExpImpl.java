@@ -83,6 +83,15 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * @generated
 	 */
 	@Override
+	public boolean isBoxed() {
+		return (source != null) && source.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isNonNull() {
 		return true;
 	}
@@ -94,6 +103,15 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	@Override
 	public boolean isNull() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return (source != null) && source.isUnboxed();
 	}
 
 } //CGGuardExpImpl

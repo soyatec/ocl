@@ -213,7 +213,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * @generated
 	 */
 	public @Nullable TypeId getPivotTypeId() {
-		return pivot != null ? ((DomainTypedElement) pivot).getTypeId() : null;
+		return pivot instanceof DomainTypedElement ? ((DomainTypedElement) pivot).getTypeId() : null;
 	}
 
 } //CGTypedElementImpl

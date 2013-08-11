@@ -924,6 +924,6 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 
 	public Object visiting(@NonNull Visitable visitable) {
-		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for EvaluationVisitor");
+		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
 	}
 }

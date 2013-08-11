@@ -186,6 +186,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 //	protected final @NonNull Id2JavaInterfaceVisitor id2JavaInterfaceVisitor;
 	private /*@LazyNonNull*/ Id2UnboxedJavaClassVisitor id2UnboxedJavaClassVisitor = null;
 	private /*@LazyNonNull*/ JavaGlobalContext globalContext = null;
+	private /*@LazyNonNull*/ GlobalPlace globalPlace = null;
 	private @NonNull Map<ElementId, SimpleDescriptor> simpleDescriptors = new HashMap<ElementId, SimpleDescriptor>();
 	private @NonNull Map<ElementId, BoxedDescriptor> boxedDescriptors = new HashMap<ElementId, BoxedDescriptor>();
 	private @NonNull Map<ElementId, UnboxedDescriptor> unboxedDescriptors = new HashMap<ElementId, UnboxedDescriptor>();
@@ -203,11 +204,11 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	}
 
 	public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {
-		return new CG2JavaPreVisitor(globalContext);
+		return new CG2JavaPreVisitor(getGlobalContext());
 	}
 
-	public @NonNull DependencyVisitor createDependencyVisitor(@NonNull GlobalPlace globalPlace) {
-		return new JavaDependencyVisitor(getAnalyzer(), globalContext, globalPlace);
+	public @NonNull DependencyVisitor createDependencyVisitor() {
+		return new JavaDependencyVisitor(getAnalyzer(), getGlobalContext(), getGlobalPlace());
 	}
 
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
@@ -268,6 +269,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			globalContext = globalContext2 = createGlobalContext();
 		}
 		return globalContext2;
+	}
+
+	public @NonNull GlobalPlace getGlobalPlace() {
+		GlobalPlace globalPlace2 = globalPlace;
+		if (globalPlace2 == null) {
+			globalPlace = globalPlace2 = new GlobalPlace(getAnalyzer());
+		}
+		return globalPlace2;
 	}
 
 	public @NonNull Id2BoxedJavaClassVisitor getId2BoxedClassVisitor() {

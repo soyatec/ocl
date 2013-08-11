@@ -48,9 +48,8 @@ public class CommonSubexpressionEliminator
 	 * Optimize the cgRoot tree by eliminating common subexpressions.
 	 * @param globals 
 	 */
-	public @NonNull GlobalPlace optimize(@NonNull CGElement cgRoot) {
-		GlobalPlace globalPlace = new GlobalPlace(analyzer);
+	public void optimize(@NonNull CGElement cgRoot) {
+		GlobalPlace globalPlace = analyzer.getCodeGenerator().getGlobalPlace();
 		globalPlace.optimize(cgRoot);
-		return globalPlace;
 	}
 }

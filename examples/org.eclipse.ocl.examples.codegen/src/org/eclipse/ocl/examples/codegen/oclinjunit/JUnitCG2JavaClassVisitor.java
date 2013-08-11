@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
-import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -95,10 +94,10 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
 		cgPackage.accept(cg2PreVisitor);
 		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
-		GlobalPlace globalPlace = cseEliminator.optimize(cgPackage);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(globalPlace);
+		cseEliminator.optimize(cgPackage);
+		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
 		dependencyVisitor.visitAll(globalContext.getGlobals());
-		sortedGlobals = globalPlace.getSortedGlobals(dependencyVisitor);
+		sortedGlobals = context.getGlobalPlace().getSortedGlobals(dependencyVisitor);
 		safeVisit(cgPackage);
 	}
 

@@ -103,8 +103,8 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 
@@ -638,6 +638,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EDataType elementEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType elementIdEDataType = null;
 
 	/**
@@ -674,13 +681,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	private EDataType libraryPropertyEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType namedElementEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2212,6 +2212,15 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getElement() {
+		return elementEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getElementId() {
 		return elementIdEDataType;
 	}
@@ -2259,15 +2268,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 */
 	public EDataType getLibraryProperty() {
 		return libraryPropertyEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType getNamedElement() {
-		return namedElementEDataType;
 	}
 
 	/**
@@ -2585,13 +2585,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		nameableEClass = createEClass(NAMEABLE);
 
 		// Create data types
+		elementEDataType = createEDataType(ELEMENT);
 		elementIdEDataType = createEDataType(ELEMENT_ID);
 		enumerationLiteralIdEDataType = createEDataType(ENUMERATION_LITERAL_ID);
 		iterationEDataType = createEDataType(ITERATION);
 		libraryIterationEDataType = createEDataType(LIBRARY_ITERATION);
 		libraryOperationEDataType = createEDataType(LIBRARY_OPERATION);
 		libraryPropertyEDataType = createEDataType(LIBRARY_PROPERTY);
-		namedElementEDataType = createEDataType(NAMED_ELEMENT);
 		numberEDataType = createEDataType(NUMBER);
 		objectEDataType = createEDataType(OBJECT);
 		operationEDataType = createEDataType(OPERATION);
@@ -2854,7 +2854,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 
 		initEClass(cgNamedElementEClass, CGNamedElement.class, "CGNamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGNamedElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, CGNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGNamedElement_Pivot(), this.getNamedElement(), "pivot", null, 1, 1, CGNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCGNamedElement_Pivot(), this.getElement(), "pivot", null, 1, 1, CGNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgNullEClass, CGNull.class, "CGNull", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2936,13 +2936,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEClass(nameableEClass, Nameable.class, "Nameable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
+		initEDataType(elementEDataType, Element.class, "Element", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(elementIdEDataType, ElementId.class, "ElementId", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(enumerationLiteralIdEDataType, EnumerationLiteralId.class, "EnumerationLiteralId", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iterationEDataType, Iteration.class, "Iteration", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(libraryIterationEDataType, LibraryIteration.class, "LibraryIteration", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(libraryOperationEDataType, LibraryOperation.class, "LibraryOperation", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(libraryPropertyEDataType, LibraryProperty.class, "LibraryProperty", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(namedElementEDataType, NamedElement.class, "NamedElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(numberEDataType, Number.class, "Number", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(operationEDataType, Operation.class, "Operation", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

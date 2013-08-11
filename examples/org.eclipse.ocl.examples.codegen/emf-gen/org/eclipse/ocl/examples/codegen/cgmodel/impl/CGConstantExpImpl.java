@@ -169,6 +169,15 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * @generated
 	 */
 	@Override
+	public boolean isBoxed() {
+		return (referredConstant != null) && referredConstant.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isCommonable() {
 		return (referredConstant != null) && referredConstant.isCommonable();
 	}
@@ -180,6 +189,15 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	@Override
 	public boolean isGlobal() {
 		return (referredConstant != null) && referredConstant.isGlobal();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return (referredConstant != null) && referredConstant.isUnboxed();
 	}
 
 	/**

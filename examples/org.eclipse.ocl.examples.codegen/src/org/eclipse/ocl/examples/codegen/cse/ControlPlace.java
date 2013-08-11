@@ -210,10 +210,10 @@ public class ControlPlace extends LocalPlace
 					locals.put(analysis.getPrimaryElement(), analysis);
 //				}
 			}
-			DependencyVisitor dependencyVisitor = analyzer.getCodeGenerator().createDependencyVisitor(globalPlace);
+			DependencyVisitor dependencyVisitor = analyzer.getCodeGenerator().createDependencyVisitor();
 			HashSet<CGValuedElement> allElements = new HashSet<CGValuedElement>(locals.keySet());
 			dependencyVisitor.visitAll(allElements);
-			List<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
+			List<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies(false);
 			for (CGValuedElement primaryElement : sortedDependencies) {
 				AbstractAnalysis abstractAnalysis = locals.get(primaryElement);
 				if (abstractAnalysis instanceof CommonAnalysis) {

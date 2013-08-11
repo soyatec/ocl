@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Element;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,7 +64,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * @generated
 	 * @ordered
 	 */
-	protected static final NamedElement PIVOT_EDEFAULT = null;
+	protected static final Element PIVOT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getPivot() <em>Pivot</em>}' attribute.
@@ -74,7 +74,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * @generated
 	 * @ordered
 	 */
-	protected NamedElement pivot = PIVOT_EDEFAULT;
+	protected Element pivot = PIVOT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,7 +121,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElement getPivot() {
+	public Element getPivot() {
 		return pivot;
 	}
 
@@ -130,8 +130,8 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPivot(NamedElement newPivot) {
-		NamedElement oldPivot = pivot;
+	public void setPivot(Element newPivot) {
+		Element oldPivot = pivot;
 		pivot = newPivot;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_NAMED_ELEMENT__PIVOT, oldPivot, pivot));
@@ -175,7 +175,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 				setName((String)newValue);
 				return;
 			case CGModelPackage.CG_NAMED_ELEMENT__PIVOT:
-				setPivot((NamedElement)newValue);
+				setPivot((Element)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

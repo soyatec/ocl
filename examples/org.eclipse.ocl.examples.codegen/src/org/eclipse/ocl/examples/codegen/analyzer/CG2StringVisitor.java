@@ -19,8 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
@@ -82,7 +86,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 {	
 	private static final Logger logger = Logger.getLogger(CG2StringVisitor.class);
 
-	public static interface Factory {
+	public static interface Factory extends Adapter {
 		@NonNull CG2StringVisitor createToStringVisitor();
 		@NonNull EPackage getEPackage();
 	}
@@ -94,18 +98,51 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	}
 
 	public static String toString(@NonNull CGElement cgElement) {
-		EPackage ePackage = cgElement.eClass().getEPackage();
-		Factory factory = factoryMap.get(ePackage);
-		if (factory == null) {
-			logger.error("No CG2StringVisitor Factory registered for " + ePackage.getName());
-			return "null";
+		try {
+			Resource resource = cgElement.eResource();
+			if (resource != null) {
+				for (Adapter adapter : resource.eAdapters()) {
+					if (adapter.isAdapterForType(CG2StringVisitor.Factory.class)) {
+						CG2StringVisitor v = ((CG2StringVisitor.Factory) adapter).createToStringVisitor();
+						cgElement.accept(v);
+						return v.toString();
+					}
+				}
+				ResourceSet resourceSet = resource.getResourceSet();
+				if (resourceSet != null) {
+					for (Adapter adapter : resourceSet.eAdapters()) {
+						if (adapter.isAdapterForType(CG2StringVisitor.Factory.class)) {
+							CG2StringVisitor v = ((CG2StringVisitor.Factory) adapter).createToStringVisitor();
+							cgElement.accept(v);
+							return v.toString();
+						}
+					}
+				}
+			}
+			EPackage ePackage = cgElement.eClass().getEPackage();
+			Factory factory = factoryMap.get(ePackage);
+			if (factory == null) {
+				logger.error("No CG2StringVisitor Factory registered for " + ePackage.getName());
+				return "null";
+			}
+			CG2StringVisitor v = factory.createToStringVisitor();
+			cgElement.accept(v);
+			return v.toString();
 		}
-		CG2StringVisitor v = factory.createToStringVisitor();
-		cgElement.accept(v);
-		return v.toString();
+		catch (Throwable e) {
+			return e.toString();
+		}
 	}
 
-	private static final class MyFactory implements CG2StringVisitor.Factory
+	protected abstract static class AbstractFactory extends AdapterImpl implements CG2StringVisitor.Factory
+	{
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type == CG2StringVisitor.Factory.class;
+		}
+	}
+
+	private static final class MyFactory extends AbstractFactory
 	{
 		private MyFactory() {
 			CG2StringVisitor.addFactory(this);

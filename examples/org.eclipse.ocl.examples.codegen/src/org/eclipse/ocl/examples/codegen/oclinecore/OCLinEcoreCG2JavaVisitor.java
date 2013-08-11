@@ -51,7 +51,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -100,8 +99,8 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		for (CGClass cgClass : cgPackage.getClasses()) {
 			for (CGConstraint cgConstraint : cgClass.getInvariants()) {
 				CGValuedElement cgBody = cgConstraint.getBody();
-				NamedElement pivotClass = cgClass.getPivot();
-				NamedElement pivotElement = cgConstraint.getPivot();
+				Element pivotClass = cgClass.getPivot();
+				Element pivotElement = cgConstraint.getPivot();
 				if ((cgBody != null) && (pivotClass instanceof Type) && (pivotElement instanceof Constraint)) {
 					Constraint pivotConstraint = (Constraint) pivotElement;
 					localContext = globalContext.getLocalContext(cgConstraint);
@@ -112,7 +111,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			}
 			for (CGOperation cgOperation : cgClass.getOperations()) {
 				CGValuedElement cgBody = cgOperation.getBody();
-				NamedElement pivotOperation = cgOperation.getPivot();
+				Element pivotOperation = cgOperation.getPivot();
 				if ((cgBody != null) && (pivotOperation instanceof Operation)) {
 					String returnClassName = genModelHelper.getOperationReturnType((Operation)pivotOperation);
 					localContext = globalContext.getLocalContext(cgOperation);
@@ -123,7 +122,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			}
 			for (CGProperty cgProperty : cgClass.getProperties()) {
 				CGValuedElement cgBody = cgProperty.getBody();
-				NamedElement pivotProperty = cgProperty.getPivot();
+				Element pivotProperty = cgProperty.getPivot();
 				if ((cgBody != null) && (pivotProperty instanceof Property)) {
 					String returnClassName = genModelHelper.getPropertyResultType((Property)pivotProperty);
 					localContext = globalContext.getLocalContext(cgProperty);
@@ -171,7 +170,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		js.pushIndentation(null);
 //		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
 //		GlobalPlace globalPlace = cseEliminator.optimize(cgPackage);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(globalPlace);
+		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
 		dependencyVisitor.visitAll(globalContext.getGlobals());
 		List<CGValuedElement> sortedGlobals = globalPlace.getSortedGlobals(dependencyVisitor);
 		if (sortedGlobals != null) {

@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -237,6 +238,15 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * @generated
 	 */
 	@Override
+	public boolean isBoxed() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isCommonable() {
 		return false;
 	}
@@ -279,6 +289,15 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 */
 	@Override
 	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
 		return false;
 	}
 

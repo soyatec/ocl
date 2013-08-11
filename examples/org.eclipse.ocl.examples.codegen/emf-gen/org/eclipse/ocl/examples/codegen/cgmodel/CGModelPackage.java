@@ -6893,6 +6893,16 @@ public interface CGModelPackage extends EPackage {
 	int NAMEABLE_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '<em>Element</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.Element
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getElement()
+	 * @generated
+	 */
+	int ELEMENT = 74;
+
+	/**
 	 * The meta object id for the '<em>Element Id</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6900,7 +6910,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getElementId()
 	 * @generated
 	 */
-	int ELEMENT_ID = 74;
+	int ELEMENT_ID = 75;
 
 	/**
 	 * The meta object id for the '<em>Enumeration Literal Id</em>' data type.
@@ -6910,7 +6920,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getEnumerationLiteralId()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL_ID = 75;
+	int ENUMERATION_LITERAL_ID = 76;
 
 	/**
 	 * The meta object id for the '<em>Iteration</em>' data type.
@@ -6920,7 +6930,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getIteration()
 	 * @generated
 	 */
-	int ITERATION = 76;
+	int ITERATION = 77;
 
 	/**
 	 * The meta object id for the '<em>Library Iteration</em>' data type.
@@ -6930,7 +6940,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryIteration()
 	 * @generated
 	 */
-	int LIBRARY_ITERATION = 77;
+	int LIBRARY_ITERATION = 78;
 
 	/**
 	 * The meta object id for the '<em>Library Operation</em>' data type.
@@ -6940,7 +6950,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryOperation()
 	 * @generated
 	 */
-	int LIBRARY_OPERATION = 78;
+	int LIBRARY_OPERATION = 79;
 
 	/**
 	 * The meta object id for the '<em>Library Property</em>' data type.
@@ -6950,17 +6960,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryProperty()
 	 * @generated
 	 */
-	int LIBRARY_PROPERTY = 79;
-
-	/**
-	 * The meta object id for the '<em>Named Element</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.pivot.NamedElement
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNamedElement()
-	 * @generated
-	 */
-	int NAMED_ELEMENT = 80;
+	int LIBRARY_PROPERTY = 80;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -8687,6 +8687,16 @@ public interface CGModelPackage extends EPackage {
 	EClass getNameable();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.ocl.examples.pivot.Element <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Element</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Element
+	 * @generated
+	 */
+	EDataType getElement();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.ocl.examples.domain.ids.ElementId <em>Element Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8745,16 +8755,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getLibraryProperty();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.ocl.examples.pivot.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Named Element</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.NamedElement
-	 * @generated
-	 */
-	EDataType getNamedElement();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Number <em>Number</em>}'.
@@ -10252,6 +10252,16 @@ public interface CGModelPackage extends EPackage {
 		EClass NAMEABLE = eINSTANCE.getNameable();
 
 		/**
+		 * The meta object literal for the '<em>Element</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.Element
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getElement()
+		 * @generated
+		 */
+		EDataType ELEMENT = eINSTANCE.getElement();
+
+		/**
 		 * The meta object literal for the '<em>Element Id</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10310,16 +10320,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LIBRARY_PROPERTY = eINSTANCE.getLibraryProperty();
-
-		/**
-		 * The meta object literal for the '<em>Named Element</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.pivot.NamedElement
-		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNamedElement()
-		 * @generated
-		 */
-		EDataType NAMED_ELEMENT = eINSTANCE.getNamedElement();
 
 		/**
 		 * The meta object literal for the '<em>Number</em>' data type.

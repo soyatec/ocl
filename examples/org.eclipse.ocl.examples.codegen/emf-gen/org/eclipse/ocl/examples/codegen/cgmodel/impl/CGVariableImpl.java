@@ -196,6 +196,15 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * @generated
 	 */
 	@Override
+	public boolean isBoxed() {
+		return (init != null) && init.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isCommonable() {
 		return false;
 	}
@@ -234,6 +243,15 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	@Override
 	public boolean isNull() {
 		return !nonNull && super.isNull();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return (init != null) && init.isUnboxed();
 	}
 
 	/**

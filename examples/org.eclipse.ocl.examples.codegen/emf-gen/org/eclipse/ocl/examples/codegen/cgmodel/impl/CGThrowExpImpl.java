@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -96,8 +97,26 @@ public class CGThrowExpImpl extends CGCallExpImpl implements CGThrowExp {
 	 * @generated
 	 */
 	@Override
+	public boolean isBoxed() {
+		return (source != null) && source.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isCaught() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return (source != null) && source.isUnboxed();
 	}
 
 	/**

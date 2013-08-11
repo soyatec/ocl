@@ -176,7 +176,7 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 			String valueName3 = cgValue.getValueName();
 			assert false;
 		} */
-		assert cgValue == cgValue.getValue();
+//FIXME		assert cgValue == cgValue.getValue();
 		cgValue = cgValue.getValue();
 		valueName = cgValue.getValueName();
 		if (valueName == null) {

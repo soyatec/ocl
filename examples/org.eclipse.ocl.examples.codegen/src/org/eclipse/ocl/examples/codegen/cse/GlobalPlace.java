@@ -90,6 +90,9 @@ public class GlobalPlace extends AbstractPlace
 		if (element2place.get(cgElement) == null) {
 			element2place.put(cgElement, abstractPlace);
 		}
+		if (CommonSubexpressionEliminator.CSE_BUILD.isActive()) {
+			CommonSubexpressionEliminator.CSE_BUILD.println(DomainUtil.getIndentation(depth, "  ") + " ==> " + DomainUtil.debugSimpleName(abstractPlace));
+		}
 		//
 		//	Determine the local part of the structural hash code from referenced objects
 		//
@@ -186,10 +189,12 @@ public class GlobalPlace extends AbstractPlace
 		}
 		Set<CGValuedElement> sortedGlobals = new HashSet<CGValuedElement>();
 		for (AbstractAnalysis analysis : globalAnalyses) {
-			sortedGlobals.add(analysis.getPrimaryElement().getValue());
+			CGValuedElement value = analysis.getPrimaryElement().getValue();
+			assert value.isGlobal();
+			sortedGlobals.add(value);
 		}
 		dependencyVisitor.visitAll(sortedGlobals);
-		return dependencyVisitor.getSortedDependencies();
+		return dependencyVisitor.getSortedDependencies(true);
 	}
 
 	@Override

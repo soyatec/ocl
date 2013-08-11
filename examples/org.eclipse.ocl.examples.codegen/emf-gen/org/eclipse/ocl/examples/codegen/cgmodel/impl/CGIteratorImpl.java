@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;

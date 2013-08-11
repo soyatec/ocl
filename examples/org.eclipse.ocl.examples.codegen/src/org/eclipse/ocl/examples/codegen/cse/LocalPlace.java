@@ -96,6 +96,10 @@ public abstract class LocalPlace extends AbstractPlace
 		}
 	}
 	
+	/**
+	 * Eliminate CSE candidates that are not shared and do not need to be CSEs. For the retained CSEs
+	 * select the shallowest candidate as the actaul CSE.
+	 */
 	public void prune() {
 		if (controlPlaces != null) {
 			for (ControlPlace controlPlace : controlPlaces) {
@@ -104,6 +108,9 @@ public abstract class LocalPlace extends AbstractPlace
 		}
 	}
 	
+	/**
+	 * Pull up all redundant child analyses that are visible in a parent to the parent.
+	 */
 	public void pullUp() {
 		if (controlPlaces != null) {
 			for (ControlPlace controlPlace : controlPlaces) {
@@ -112,6 +119,9 @@ public abstract class LocalPlace extends AbstractPlace
 		}
 	}
 	
+	/**
+	 * Push shareable analyses up the place tree. e.g. something on both then and else arms of an if can be pushed up. 
+	 */
 	public void pushUp() {
 		if (controlPlaces != null) {
 			for (ControlPlace controlPlace : controlPlaces) {
@@ -120,6 +130,9 @@ public abstract class LocalPlace extends AbstractPlace
 		}
 	}
 	
+	/**
+	 * Rewrite the expression trees to exploit the CSEs.
+	 */
 	public void rewrite() {
 		if (controlPlaces != null) {
 			for (ControlPlace controlPlace : controlPlaces) {

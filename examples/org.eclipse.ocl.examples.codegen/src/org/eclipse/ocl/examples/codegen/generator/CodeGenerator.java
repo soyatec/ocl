@@ -39,13 +39,14 @@ public interface CodeGenerator
 	@NonNull AnalysisVisitor createAnalysisVisitor();
 	@NonNull BoxingAnalyzer createBoxingAnalyzer();
 	@NonNull CommonSubexpressionEliminator createCommonSubexpressionEliminator();
-	@NonNull DependencyVisitor createDependencyVisitor(@NonNull GlobalPlace globalPlace);
+	@NonNull DependencyVisitor createDependencyVisitor();
 	@NonNull FieldingAnalyzer createFieldingAnalyzer();
 	@NonNull CodeGenAnalyzer getAnalyzer();
 	@Nullable String getConstantsClass();
 	@NonNull String getDefaultIndent();
 	@NonNull GenModelHelper getGenModelHelper();
 	@NonNull GlobalContext getGlobalContext();
+	@NonNull GlobalPlace getGlobalPlace();
 	@Nullable IterationHelper getIterationHelper(@NonNull Iteration iteration);
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull NameManager getNameManager();

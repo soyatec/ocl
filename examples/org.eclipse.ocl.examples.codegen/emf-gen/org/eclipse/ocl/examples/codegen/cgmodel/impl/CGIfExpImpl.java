@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;

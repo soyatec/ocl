@@ -179,8 +179,26 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
+	public boolean isBoxed() {
+		return (referredVariable != null) && referredVariable.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isCommonable() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return (referredVariable != null) && referredVariable.isUnboxed();
 	}
 
 } //CGVariableExpImpl

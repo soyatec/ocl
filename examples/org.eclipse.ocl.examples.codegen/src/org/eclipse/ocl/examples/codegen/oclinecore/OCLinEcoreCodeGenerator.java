@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
-import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -91,7 +90,6 @@ public class OCLinEcoreCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull GenPackage genPackage;
 	protected final @NonNull OCLinEcoreCG2JavaVisitor generator;
 	protected final @NonNull CGPackage cgPackage;
-	private final @NonNull GlobalPlace globalPlace;
 	
 	public OCLinEcoreCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull GenPackage genPackage) {
 		super(metaModelManager);
@@ -103,7 +101,7 @@ public class OCLinEcoreCodeGenerator extends JavaCodeGenerator
 		this.generator = new OCLinEcoreCG2JavaVisitor(this, genPackage);
 		this.cgPackage = generator.generate();
 		CommonSubexpressionEliminator cseEliminator = createCommonSubexpressionEliminator();
-		globalPlace = cseEliminator.optimize(cgPackage);
+		cseEliminator.optimize(cgPackage);
 //		DependencyVisitor dependencyVisitor = createDependencyVisitor(globalPlace);
 //		dependencyVisitor.visitAll(getGlobalContext().getGlobals());
 //		sortedGlobals = globalPlace.getSortedGlobals(dependencyVisitor);
@@ -129,7 +127,7 @@ public class OCLinEcoreCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull String generateConstants() {
-		return generator.generateConstants(globalPlace);
+		return generator.generateConstants(getGlobalPlace());
 	}
 
 	public @NonNull CodeGenAnalyzer getAnalyzer() {

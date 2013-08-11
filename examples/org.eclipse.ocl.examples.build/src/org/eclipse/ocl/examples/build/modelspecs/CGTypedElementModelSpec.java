@@ -52,32 +52,38 @@ public class CGTypedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for getPivotTypeId()
 	 */
-	protected static enum Pti { ROOT, TEXT, TYPE, T_ID }
+	public interface Pti {
+		@NonNull String generate();
+	}
+	
+	public static final @NonNull Pti PTI_ROOT = new Pti() { public @NonNull String generate() {
+		return "return pivot instanceof " + classRef(DomainTypedElement.class) + " ? ((" + classRef(DomainTypedElement.class) + ") pivot).getTypeId() : null;";
+	}};
+	public static final @NonNull Pti PTI_TEXT = new Pti() { public @NonNull String generate() {
+		return "return (" + classRef(TypeId.class) + ") getTypeId().getElementId();		// FIXME Why irregular?";
+	}};
+	public static final @NonNull Pti PTI_TYPE = new Pti() { public @NonNull String generate() {
+		return "return pivot instanceof " + classRef(DomainType.class) + " ? ((" + classRef(DomainType.class) + ") pivot).getTypeId() : null;";
+	}};
+	public static final @NonNull Pti PTI_T_ID = new Pti() { public @NonNull String generate() {
+		return "return (" + classRef(TypeId.class) + ")elementId;";
+	}};
 		
 	protected static MethodSpec getPivotTypeId = new MyMethodSpec(CGTypedElement.class, "@Nullable " + classRef(TypeId.class) + " getPivotTypeId()", null,
 		"Return the TypeId of the pivot element.")
 		{
 			@Override
 			protected @Nullable String getBody(@NonNull CGTypedElementModelSpec modelSpec) {
-				Pti enumValue = modelSpec.pti;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case ROOT: return "return pivot != null ? ((" + classRef(DomainTypedElement.class) + ") pivot).getTypeId() : null;";
-					case TEXT: return "return (" + classRef(TypeId.class) + ") getTypeId().getElementId();		// FIXME Why irregular?";
-					case TYPE: return "return pivot != null ? ((" + classRef(DomainType.class) + ") pivot).getTypeId() : null;";
-					case T_ID: return "return (" + classRef(TypeId.class) + ")elementId;";
-					default: return "MISSING_CASE_for_" + enumValue + ";";
-				}
+				Pti pti = modelSpec.pti;
+				return pti != null ? pti.generate() : null;
 			}
 		};
 
 	public static void register() {
-		new CGTypedElementModelSpec(CGTypedElement.class, Pti.ROOT );
-		new CGTypedElementModelSpec(CGExecutorType.class, Pti.TYPE );
-		new CGTypedElementModelSpec(CGText.class, Pti.TEXT );
-		new CGTypedElementModelSpec(CGTypeId.class, Pti.T_ID );
+		new CGTypedElementModelSpec(CGTypedElement.class, PTI_ROOT );
+		new CGTypedElementModelSpec(CGExecutorType.class, PTI_TYPE );
+		new CGTypedElementModelSpec(CGText.class, PTI_TEXT );
+		new CGTypedElementModelSpec(CGTypeId.class, PTI_T_ID );
 	}
 
 	protected final @Nullable Pti pti;

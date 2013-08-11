@@ -24,20 +24,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 public class OuterStackPlace extends StackPlace
 {
 	public static @Nullable OuterStackPlace createOuterStackPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGElement cgStackElement) {
-//		if (eObject == null) {
-//			return null;
-//		}
-//		EReference eContainmentFeature = eObject.eContainmentFeature();
-//		if (eContainmentFeature == null) {
-//			throw new IllegalStateException("Null eContainmentFeature for " + cgStackElement);
-//		}
 		GlobalPlace globalPlace = getGlobalPlace(element2place);
-		OuterStackPlace stackPlace = new OuterStackPlace(globalPlace, cgStackElement); //, eContainmentFeature);
+		OuterStackPlace stackPlace = new OuterStackPlace(globalPlace, cgStackElement);
 		return stackPlace;
 	}
 	
-	protected OuterStackPlace(@NonNull GlobalPlace globalPlace, @NonNull CGElement stackElement) { //, @NonNull EReference eContainmentFeature) {
-		super(globalPlace, stackElement); //, eContainmentFeature);
+	protected OuterStackPlace(@NonNull GlobalPlace globalPlace, @NonNull CGElement stackElement) {
+		super(globalPlace, stackElement);
 		globalPlace.addStackPlace(this);
 	}
 	

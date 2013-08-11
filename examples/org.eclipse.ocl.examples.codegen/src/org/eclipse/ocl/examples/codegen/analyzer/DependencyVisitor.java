@@ -93,41 +93,43 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		cgElement = cgElement != null ? cgElement.getValue() : null;
 		dependsOn = dependsOn != null ? dependsOn.getValue() : null;
 		if ((cgElement != null) && (cgElement != dependsOn)) {
-			CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
-			Set<CGValuedElement> dependencies = directDependencies.get(cgPrimaryElement);
-			List<CGValuedElement> dependsOns = cgPrimaryElement.getDependsOn();
-			if (dependencies == null) {
-				dependencies = new HashSet<CGValuedElement>();
-				directDependencies.put(cgPrimaryElement, dependencies);
-				for (CGValuedElement cgDependent : new ArrayList<CGValuedElement>(dependsOns)) {
-					addDependency(cgPrimaryElement, cgDependent);
-				}
-				for (EStructuralFeature eFeature : cgPrimaryElement.eClass().getEAllStructuralFeatures()) {
-					if (eFeature instanceof EReference) {
-						EReference eReference = (EReference)eFeature;
-						if (!eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
-							Object childOrChildren = cgPrimaryElement.eGet(eReference);
-							if (eReference.isMany()) {
-								for (Object child : (List<?>)childOrChildren) {
-									if (child instanceof CGValuedElement) {
-										addDependency(cgPrimaryElement, (CGValuedElement)child);
+			if (!cgElement.isGlobal() || (dependsOn == null) || dependsOn.isGlobal()) {
+				CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
+				Set<CGValuedElement> dependencies = directDependencies.get(cgPrimaryElement);
+				List<CGValuedElement> dependsOns = cgPrimaryElement.getDependsOn();
+				if (dependencies == null) {
+					dependencies = new HashSet<CGValuedElement>();
+					directDependencies.put(cgPrimaryElement, dependencies);
+					for (CGValuedElement cgDependent : new ArrayList<CGValuedElement>(dependsOns)) {
+						addDependency(cgPrimaryElement, cgDependent);
+					}
+					for (EStructuralFeature eFeature : cgPrimaryElement.eClass().getEAllStructuralFeatures()) {
+						if (eFeature instanceof EReference) {
+							EReference eReference = (EReference)eFeature;
+							if (!eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
+								Object childOrChildren = cgPrimaryElement.eGet(eReference);
+								if (eReference.isMany()) {
+									for (Object child : (List<?>)childOrChildren) {
+										if (child instanceof CGValuedElement) {
+											addDependency(cgPrimaryElement, (CGValuedElement)child);
+										}
 									}
 								}
-							}
-							else {
-								if ((childOrChildren instanceof CGValuedElement) && (childOrChildren != cgPrimaryElement.eContainer())) {
-									addDependency(cgPrimaryElement, (CGValuedElement)childOrChildren);
+								else {
+									if ((childOrChildren instanceof CGValuedElement) && (childOrChildren != cgPrimaryElement.eContainer())) {
+										addDependency(cgPrimaryElement, (CGValuedElement)childOrChildren);
+									}
 								}
 							}
 						}
 					}
 				}
-			}
-			if (dependsOn != null) {
-				CGValuedElement cgPrimaryDependsOn = getPrimaryElement(dependsOn);
-				dependencies.add(cgPrimaryDependsOn);
-				if (!dependsOns.contains(cgPrimaryDependsOn)) {
-					dependsOns.add(cgPrimaryDependsOn);
+				if (dependsOn != null) {
+					CGValuedElement cgPrimaryDependsOn = getPrimaryElement(dependsOn);
+					dependencies.add(cgPrimaryDependsOn);
+					if (!dependsOns.contains(cgPrimaryDependsOn)) {
+						dependsOns.add(cgPrimaryDependsOn);
+					}
 				}
 			}
 		}
@@ -145,8 +147,10 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		addDependency(cgElementId, cgDependsOn);
 	}
 
-	private int computeDepths(@NonNull CGValuedElement cgElement, @NonNull Map<CGValuedElement, Integer> dependencyDepths) {
+	private int computeDepths(@NonNull CGValuedElement cgElement, @NonNull Map<CGValuedElement, Integer> dependencyDepths, boolean isGlobal) {
+		if (isGlobal) assert cgElement.isGlobal();
 		@NonNull CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
+		if (isGlobal) assert cgPrimaryElement.isGlobal();
 		Set<CGValuedElement> dependencies = directDependencies.get(cgPrimaryElement);
 		if (dependencies == null) {
 			int depth = getRootDepth(cgPrimaryElement);
@@ -173,7 +177,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		dependencyDepths.put(cgPrimaryElement, TOUCHED);			// Mark already here
 		int maxDepth = 0;
 		for (@SuppressWarnings("null")@NonNull CGValuedElement dependency : dependencies) {
-			int depth = computeDepths(dependency, dependencyDepths);
+			int depth = computeDepths(dependency, dependencyDepths, isGlobal);
 			if (depth > maxDepth) {
 				maxDepth = depth;
 			}
@@ -198,14 +202,15 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		return 0;
 	}
 
-	public @NonNull List<CGValuedElement> getSortedDependencies() {
+	public @NonNull List<CGValuedElement> getSortedDependencies(boolean isGlobal) {
 		final Map<CGValuedElement, Integer> dependencyDepths = new HashMap<CGValuedElement, Integer>();
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgElement : directDependencies.keySet()) {
-			computeDepths(cgElement, dependencyDepths);
+			computeDepths(cgElement, dependencyDepths, isGlobal);
 		}
 		List<CGValuedElement> sortedList = new ArrayList<CGValuedElement>();
 		for (CGValuedElement cgElement : dependencyDepths.keySet()) {
 			if (!cgElement.isInlined() && (cgElement.getValue() == cgElement)) {
+				if (isGlobal) assert cgElement.isGlobal();
 				sortedList.add(cgElement);
 			}
 		}
@@ -280,6 +285,9 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 	@Override
 	public @Nullable Object visitCGElement(@NonNull CGElement cgElement) {
 		for (CGElement cgChild : cgElement.getChildren()) {
+			if ((cgElement instanceof CGValuedElement) && (cgChild instanceof CGValuedElement)) {
+				addDependency((CGValuedElement)cgElement, (CGValuedElement) cgChild);
+			}
 			cgChild.accept(this);
 		}
 		return null;

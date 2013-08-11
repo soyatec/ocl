@@ -15,7 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Element;
 
 
 /**
@@ -69,11 +69,11 @@ public interface CGNamedElement extends CGElement, Nameable {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pivot</em>' attribute.
-	 * @see #setPivot(NamedElement)
+	 * @see #setPivot(Element)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement_Pivot()
 	 * @generated
 	 */
-	NamedElement getPivot();
+	Element getPivot();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getPivot <em>Pivot</em>}' attribute.
@@ -83,6 +83,6 @@ public interface CGNamedElement extends CGElement, Nameable {
 	 * @see #getPivot()
 	 * @generated
 	 */
-	void setPivot(NamedElement value);
+	void setPivot(Element value);
 
 } // CGNamedElement

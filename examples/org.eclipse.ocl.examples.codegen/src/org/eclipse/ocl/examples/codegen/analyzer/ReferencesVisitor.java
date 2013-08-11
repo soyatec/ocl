@@ -50,7 +50,7 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 		super(context);
 	}
 
-	private @Nullable List<Object> append(@Nullable List<Object> iterables, Object... objects) {
+	protected @Nullable List<Object> append(@Nullable List<Object> iterables, Object... objects) {
 		if (objects != null) {
 			if (iterables == null) {
 				iterables = new ArrayList<Object>();
