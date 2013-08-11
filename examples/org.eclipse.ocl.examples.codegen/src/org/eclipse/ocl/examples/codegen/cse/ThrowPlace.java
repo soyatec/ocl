@@ -26,8 +26,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  */
 public class ThrowPlace extends ControlPlace
 {
-	public static @NonNull LocalPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGThrowExp cgThrowExp) {
-		ControlPlace throwPlace = ControlPlace.createPlace(element2place, cgThrowExp);
+	public static @NonNull LocalPlace createThrowPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGThrowExp cgThrowExp) {
+		ControlPlace throwPlace = ControlPlace.getControlPlace(element2place, cgThrowExp);
 		CGValuedElement cgThrownExp = cgThrowExp.getSource();
 		if (cgThrownExp != null) {
 			ThrowPlace thrownPlace = new ThrowPlace(throwPlace, cgThrownExp);

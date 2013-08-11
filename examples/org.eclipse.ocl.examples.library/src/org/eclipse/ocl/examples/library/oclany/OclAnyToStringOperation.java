@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 public class OclAnyToStringOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull OclAnyToStringOperation INSTANCE = new OclAnyToStringOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull String evaluate(@Nullable Object sourceVal) {

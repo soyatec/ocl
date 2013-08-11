@@ -20,13 +20,24 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * A LocalPlace describes a forest of CG trees that cannot be resolved as global constants. 
  */
 public abstract class LocalPlace extends AbstractPlace
 {
+	public static @NonNull AbstractPlace createLocalPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGValuedElement cgElement) {
+		boolean isGlobal = cgElement.isGlobal();
+		if (isGlobal) {
+			return DomainUtil.nonNullState(element2place.get(null));
+		}
+		else {
+			return ControlPlace.createControlPlace(element2place, cgElement);
+		}
+	}
+
 	protected static @NonNull GlobalPlace getGlobalPlace(@NonNull Map<CGElement, AbstractPlace> element2place) {
 		AbstractPlace abstractPlace = element2place.get(null);
 		if (abstractPlace instanceof GlobalPlace) {
@@ -78,10 +89,9 @@ public abstract class LocalPlace extends AbstractPlace
 	
 	@Override
 	public void printHierarchy(@NonNull Appendable appendable, @NonNull String indentation) {
-		TracingOption.println(appendable, indentation + this);
 		if (controlPlaces != null) {
 			for (ControlPlace controlPlace : controlPlaces) {
-				controlPlace.printHierarchy(appendable, indentation + "  ");
+				controlPlace.printHierarchy(appendable, indentation);
 			}
 		}
 	}

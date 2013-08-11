@@ -75,8 +75,8 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
-		return (elementId != null) && CGUtils.isInlineableId(elementId);
+	public boolean isInlined() {
+		return (elementId != null) && CGUtils.isInlinedId(elementId);
 	}
 
 } //CGTypeIdImpl

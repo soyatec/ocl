@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstantExp()
- * @model
  * @generated
  */
 public interface CGConstantExp extends CGValuedElement {
@@ -50,7 +49,6 @@ public interface CGConstantExp extends CGValuedElement {
 	 * @return the value of the '<em>Referred Constant</em>' reference.
 	 * @see #setReferredConstant(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstantExp_ReferredConstant()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGValuedElement getReferredConstant();

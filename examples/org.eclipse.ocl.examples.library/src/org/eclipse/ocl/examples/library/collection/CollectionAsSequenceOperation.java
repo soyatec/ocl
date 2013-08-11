@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 public class CollectionAsSequenceOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionAsSequenceOperation INSTANCE = new CollectionAsSequenceOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull SequenceValue evaluate(@Nullable Object argument) {

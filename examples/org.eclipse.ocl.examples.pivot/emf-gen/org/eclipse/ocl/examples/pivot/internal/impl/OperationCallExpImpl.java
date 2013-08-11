@@ -465,12 +465,9 @@ public class OperationCallExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ OperationCallExp self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @Nullable /*@Thrown*/ DomainOperation operation = self.getReferredOperation();
+		    final @Nullable /*@Thrown*/ DomainOperation operation = this.getReferredOperation();
 		    if (operation == null) {
 		        throw new InvalidValueException("Null source");
 		    }
@@ -479,9 +476,11 @@ public class OperationCallExpImpl
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType selfType_1 = operation.getOwningType();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument = self.getArgument();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
-		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
+		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument_0 = this.getArgument();
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument_0);
+		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument_0);
 		    final @NonNull /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
 		    final @NonNull /*@Thrown*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
 		    @Nullable Iterator<?> ITERATOR_i = Sequence.iterator();
@@ -502,8 +501,6 @@ public class OperationCallExpImpl
 		         *     in
 		         *       argument.type.conformsTo(parameterType.specializeIn(self, selfType))
 		         */
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument_0 = self.getArgument();
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument_0);
 		        final @Nullable /*@Thrown*/ DomainExpression argument_1 = (DomainExpression)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_argument_0, i);
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_parameters = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
 		        final @Nullable /*@Thrown*/ DomainTypedElement parameter = (DomainTypedElement)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_parameters, i);
@@ -518,7 +515,7 @@ public class OperationCallExpImpl
 		        if (parameterType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(self, (Type)selfType_1);
+		        final @NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
 		        //
 		        if (conformsTo != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
@@ -554,15 +551,14 @@ public class OperationCallExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ OperationCallExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument = self.getArgument();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument = this.getArgument();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
-		    final @Nullable /*@Thrown*/ DomainOperation referredOperation = self.getReferredOperation();
+		    final @Nullable /*@Thrown*/ DomainOperation referredOperation = this.getReferredOperation();
 		    if (referredOperation == null) {
 		        throw new InvalidValueException("Null source");
 		    }

@@ -29,7 +29,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorPropertyCallExp()
- * @model
  * @generated
  */
 public interface CGExecutorPropertyCallExp extends CGPropertyCallExp {
@@ -45,7 +44,6 @@ public interface CGExecutorPropertyCallExp extends CGPropertyCallExp {
 	 * @return the value of the '<em>Executor Property</em>' reference.
 	 * @see #setExecutorProperty(CGExecutorProperty)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorPropertyCallExp_ExecutorProperty()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGExecutorProperty getExecutorProperty();

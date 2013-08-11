@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement()
- * @model abstract="true" superTypes="org.eclipse.ocl.examples.codegen.cgmodel.CGElement org.eclipse.ocl.examples.codegen.cgmodel.Nameable"
  * @generated
  */
 public interface CGNamedElement extends CGElement, Nameable {
@@ -47,7 +46,6 @@ public interface CGNamedElement extends CGElement, Nameable {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement_Name()
-	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
@@ -73,7 +71,6 @@ public interface CGNamedElement extends CGElement, Nameable {
 	 * @return the value of the '<em>Pivot</em>' attribute.
 	 * @see #setPivot(NamedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement_Pivot()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.NamedElement" required="true"
 	 * @generated
 	 */
 	NamedElement getPivot();

@@ -15,16 +15,18 @@
 package org.eclipse.ocl.examples.codegen.cse;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -35,14 +37,40 @@ import com.google.common.collect.Multimap;
  */
 public class ControlPlace extends LocalPlace
 {
-	public static @NonNull ControlPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGValuedElement cgElement) {
+	public static @NonNull AbstractPlace createControlPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGValuedElement cgElement) {
+		if (cgElement.isGlobal()) {
+			return DomainUtil.nonNullState(element2place.get(null));
+		}
 		CGElement cgParent = cgElement.getParent();
 		AbstractPlace parentPlace = element2place.get(cgParent);
 		if (parentPlace instanceof ControlPlace) {
-			return (ControlPlace) parentPlace;
+			return parentPlace;
 		}
 		else {
 			return new ControlPlace(getLocalPlace(element2place, cgParent), cgElement);
+		}
+	}
+
+	public static @NonNull ControlPlace getControlPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGValuedElement cgElement) {
+		AbstractPlace place = element2place.get(cgElement);
+		if (place instanceof ControlPlace) {
+			return (ControlPlace) place;
+		}
+		else if (place != null) {
+			throw new IllegalStateException("Non-ControlPlace " + place.getClass().getName() + " for " + cgElement);
+		}
+		else {
+			ControlPlace controlPlace;
+			CGElement cgParent = cgElement.getParent();
+			AbstractPlace parentPlace = element2place.get(cgParent);
+			if (parentPlace instanceof ControlPlace) {
+				controlPlace = (ControlPlace) parentPlace;
+			}
+			else {
+				controlPlace = new ControlPlace(getLocalPlace(element2place, cgParent), cgElement);
+			}
+			element2place.put(cgElement, controlPlace);
+			return controlPlace;
 		}
 	}
 
@@ -78,6 +106,7 @@ public class ControlPlace extends LocalPlace
 	public @NonNull SimpleAnalysis getSimpleAnalysis() {
 		SimpleAnalysis controlAnalysis2 = controlAnalysis;
 		if (controlAnalysis2 == null) {
+//			System.out.println(DomainUtil.debugSimpleName(placedElement));
 			controlAnalysis2 = globalPlace.getSimpleAnalysis(placedElement);
 			assert controlAnalysis2 != null;
 			controlAnalysis = controlAnalysis2;
@@ -92,15 +121,16 @@ public class ControlPlace extends LocalPlace
 	
 	@Override
 	public void printHierarchy(@NonNull Appendable appendable, @NonNull String indentation) {
-		super.printHierarchy(appendable, indentation);
+		TracingOption.println(appendable, indentation + this);
 		if (!hashedAnalyses.isEmpty()) {
 			for (AbstractAnalysis analysis : hashedAnalyses) {
-				TracingOption.println(appendable, indentation + "  " + analysis.getStructuralHashCode() + "," + analysis);
+				TracingOption.println(appendable, indentation + "    " + analysis.getStructuralHashCode() + "," + analysis);
 			}
 		}
 		else {
-			TracingOption.println(appendable, indentation + "  <empty>");
+			TracingOption.println(appendable, indentation + "    <empty>");
 		}
+		super.printHierarchy(appendable, indentation + "  ");
 	}
 
 	/**
@@ -136,18 +166,19 @@ public class ControlPlace extends LocalPlace
 	public void pullUp() {
 		List<AbstractAnalysis> removals = null;
 		for (@SuppressWarnings("null")@NonNull AbstractAnalysis analysis : hashedAnalyses) {
-			ControlPlace controlPlace = this;
-			for (LocalPlace localPlace; (localPlace = controlPlace.getParentPlace()) instanceof ControlPlace; ) {
-				controlPlace = (ControlPlace) localPlace;
-				HashedAnalyses controlAnalyses = controlPlace.getHashedAnalyses();
-				AbstractAnalysis parentAnalysis = controlAnalyses.get(analysis);
-				if (parentAnalysis != null) {
-					controlPlace.addAnalysis(analysis);
-					if (removals == null) {
-						removals = new ArrayList<AbstractAnalysis>();
+			for (AbstractPlace localPlace = this; !((localPlace = localPlace.getParentPlace()) instanceof GlobalPlace); ) {
+				if (localPlace instanceof ControlPlace) {
+					ControlPlace controlPlace = (ControlPlace) localPlace;
+					HashedAnalyses controlAnalyses = controlPlace.getHashedAnalyses();
+					AbstractAnalysis parentAnalysis = controlAnalyses.get(analysis);
+					if (parentAnalysis != null) {
+						controlPlace.addAnalysis(analysis);
+						if (removals == null) {
+							removals = new ArrayList<AbstractAnalysis>();
+						}
+						removals.add(analysis);
+						break;
 					}
-					removals.add(analysis);
-					break;
 				}
 			}
 		}
@@ -162,31 +193,31 @@ public class ControlPlace extends LocalPlace
 	@Override
 	public void rewrite() {
 		super.rewrite();
+		CodeGenAnalyzer analyzer = globalPlace.getAnalyzer();
 		if (!hashedAnalyses.isEmpty()) {
-			@SuppressWarnings("null")@NonNull Multimap<Integer, CommonAnalysis> depth2commonAnalyses = HashMultimap.create();
-			for (AbstractAnalysis analysis : hashedAnalyses) {
-				if (analysis instanceof CommonAnalysis) {
-					CommonAnalysis commonAnalysis = (CommonAnalysis)analysis;
-					int maxDepth = commonAnalysis.getMaxDepth();
-					depth2commonAnalyses.put(maxDepth, commonAnalysis);
-				}
-			}
-			CodeGenAnalyzer analyzer = getGlobalPlace().getAnalyzer();
-			List<Integer> sortedMaxDepths = new ArrayList<Integer>(depth2commonAnalyses.keySet());
-			Collections.sort(sortedMaxDepths);
-			Collections.reverse(sortedMaxDepths);
+/*			Multimap<Integer, CommonAnalysis> depth2commonAnalyses = getDepth2commonAnalyses();
+			List<Integer> sortedMaxDepths = getDeepestFirstDepths(depth2commonAnalyses);
 			for (int maxDepth : sortedMaxDepths) {
 				List<CommonAnalysis> commonAnalyses = new ArrayList<CommonAnalysis>(depth2commonAnalyses.get(maxDepth));
-				Collections.sort(commonAnalyses, new Comparator<CommonAnalysis>()
-				{
-					public int compare(CommonAnalysis o1, CommonAnalysis o2) {
-						int h1 = o1.getStructuralHashCode();
-						int h2 = o2.getStructuralHashCode();
-						return h1 - h2;
-					}
-				});
+				Collections.sort(commonAnalyses);
 				for (CommonAnalysis commonAnalysis : commonAnalyses) {
 					commonAnalysis.rewrite(analyzer, placedElement);
+				}
+			} */
+			Map<CGValuedElement, AbstractAnalysis> locals = new HashMap<CGValuedElement, AbstractAnalysis>();
+			for (AbstractAnalysis analysis : hashedAnalyses) {
+//				for (CGValuedElement primaryElement : analysis.getElements()) {
+					locals.put(analysis.getPrimaryElement(), analysis);
+//				}
+			}
+			DependencyVisitor dependencyVisitor = analyzer.getCodeGenerator().createDependencyVisitor(globalPlace);
+			HashSet<CGValuedElement> allElements = new HashSet<CGValuedElement>(locals.keySet());
+			dependencyVisitor.visitAll(allElements);
+			List<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
+			for (CGValuedElement primaryElement : sortedDependencies) {
+				AbstractAnalysis abstractAnalysis = locals.get(primaryElement);
+				if (abstractAnalysis instanceof CommonAnalysis) {
+					((CommonAnalysis)abstractAnalysis).rewrite(analyzer, placedElement);
 				}
 			}
  		}
@@ -194,6 +225,11 @@ public class ControlPlace extends LocalPlace
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + ": " + getSimpleAnalysis();
+		SimpleAnalysis controlAnalysis2 = controlAnalysis;
+		if (controlAnalysis2 == null) {
+//			System.out.println(DomainUtil.debugSimpleName(placedElement));
+			controlAnalysis2 = globalPlace.getSimpleAnalysis(placedElement);
+		}
+		return getClass().getSimpleName() + ": " + String.valueOf(controlAnalysis2);
 	}
 }

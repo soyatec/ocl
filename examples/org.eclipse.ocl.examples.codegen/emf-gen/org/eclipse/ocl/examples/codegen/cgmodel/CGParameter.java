@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>CG Parameter</b></em>'.
@@ -28,22 +29,21 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGParameter()
- * @model
  * @generated
  */
 public interface CGParameter extends CGVariable {
+
 	/**
 	 * Returns the value of the '<em><b>Operation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operation</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Operation</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operation</em>' reference.
 	 * @see #setOperation(CGOperation)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGParameter_Operation()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGOperation getOperation();

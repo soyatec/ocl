@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>CG Call Exp</b></em>'.
@@ -30,7 +31,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCallExp()
- * @model abstract="true"
  * @generated
  */
 public interface CGCallExp extends CGValuedElement {
@@ -50,7 +50,6 @@ public interface CGCallExp extends CGValuedElement {
 	 * @return the value of the '<em>Invalidating</em>' attribute.
 	 * @see #setInvalidating(boolean)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCallExp_Invalidating()
-	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isInvalidating();
@@ -80,7 +79,6 @@ public interface CGCallExp extends CGValuedElement {
 	 * @return the value of the '<em>Validating</em>' attribute.
 	 * @see #setValidating(boolean)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCallExp_Validating()
-	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isValidating();
@@ -106,7 +104,6 @@ public interface CGCallExp extends CGValuedElement {
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCallExp_Source()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGValuedElement getSource();

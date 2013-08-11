@@ -169,6 +169,8 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_PseudostateKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("PseudostateKind");
     public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_TransitionKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("TransitionKind");
     public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValuesUtil.integerValueOf("1");
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_0 = TypeId.METACLASS.getSpecializedId(TypeId.BOOLEAN);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_5 = TypeId.METACLASS.getSpecializedId(TypeId.INTEGER);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_PRIMid_String = TypeId.ORDERED_SET.getSpecializedId(TypeId.STRING);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_Integer = TypeId.SEQUENCE.getSpecializedId(TypeId.INTEGER);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
@@ -192,6 +194,13 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Sequence = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Sequence");
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Set = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Set");
     public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_1 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_BagType);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_2 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_OrderedSetType);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_3 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_SequenceType);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_4 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_SetType);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_6 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_CollectionType);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_7 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_ExpressionInOCL);
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass_8 = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_Type);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Annotation = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Annotation);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_CollectionLiteralPart = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_CollectionLiteralPart);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Constraint = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Constraint);

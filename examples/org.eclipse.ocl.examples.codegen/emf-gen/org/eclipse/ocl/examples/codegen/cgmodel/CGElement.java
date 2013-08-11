@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGElement()
- * @model abstract="true"
  * @generated
  */
 public interface CGElement extends EObject {
@@ -76,6 +75,14 @@ public interface CGElement extends EObject {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$9
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$10
 	boolean isContext();
+
+	/**
+	 * Rewrite the reference to oldValue by newValue.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$22
+	boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue);
 } // CGElement

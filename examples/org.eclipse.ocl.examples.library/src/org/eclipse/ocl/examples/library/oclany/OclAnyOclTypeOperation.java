@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUntypedUnaryOperation;
 
 /**
@@ -29,12 +28,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractUntypedUnaryOperation;
 public class OclAnyOclTypeOperation extends AbstractUntypedUnaryOperation
 {
 	public static final @NonNull OclAnyOclTypeOperation INSTANCE = new OclAnyOclTypeOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(evaluator, sourceValue);
-	}
 
 	@Override
 	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal) {

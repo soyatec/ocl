@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -33,12 +32,10 @@ import org.eclipse.jdt.annotation.Nullable;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getPostconditions <em>Postconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getContainingClass <em>Containing Class</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getEOperation <em>EOperation</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation()
- * @model
  * @generated
  */
 public interface CGOperation extends CGValuedElement {
@@ -56,7 +53,6 @@ public interface CGOperation extends CGValuedElement {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Body()
-	 * @model containment="true"
 	 * @generated
 	 */
 	@Nullable CGValuedElement getBody();
@@ -81,7 +77,6 @@ public interface CGOperation extends CGValuedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Preconditions</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Preconditions()
-	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGConstraint> getPreconditions();
@@ -96,7 +91,6 @@ public interface CGOperation extends CGValuedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Postconditions</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Postconditions()
-	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGConstraint> getPostconditions();
@@ -114,7 +108,6 @@ public interface CGOperation extends CGValuedElement {
 	 * @see #setContainingClass(CGClass)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_ContainingClass()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getOperations
-	 * @model opposite="operations" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
 	@Nullable CGClass getContainingClass();
@@ -130,32 +123,6 @@ public interface CGOperation extends CGValuedElement {
 	void setContainingClass(CGClass value);
 
 	/**
-	 * Returns the value of the '<em><b>EOperation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EOperation</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EOperation</em>' reference.
-	 * @see #setEOperation(EOperation)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_EOperation()
-	 * @model
-	 * @generated
-	 */
-	EOperation getEOperation();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getEOperation <em>EOperation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EOperation</em>' reference.
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	void setEOperation(EOperation value);
-
-	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter}.
 	 * <!-- begin-user-doc -->
@@ -169,7 +136,6 @@ public interface CGOperation extends CGValuedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Parameters()
-	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	@NonNull List<CGParameter> getParameters();

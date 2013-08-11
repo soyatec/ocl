@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeExpImpl#getReferredType <em>Referred Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeExpImpl#getExecutorType <em>Executor Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,15 +40,14 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  */
 public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	/**
-	 * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference.
+	 * The cached value of the '{@link #getExecutorType() <em>Executor Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredType()
+	 * @see #getExecutorType()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGExecutorType referredType;
-
+	protected CGExecutorType executorType;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,8 +72,8 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGExecutorType getReferredType() {
-		return referredType;
+	public CGExecutorType getExecutorType() {
+		return executorType;
 	}
 
 	/**
@@ -82,11 +81,11 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferredType(CGExecutorType newReferredType) {
-		CGExecutorType oldReferredType = referredType;
-		referredType = newReferredType;
+	public void setExecutorType(CGExecutorType newExecutorType) {
+		CGExecutorType oldExecutorType = executorType;
+		executorType = newExecutorType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TYPE_EXP__REFERRED_TYPE, oldReferredType, referredType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TYPE_EXP__EXECUTOR_TYPE, oldExecutorType, executorType));
 	}
 
 	/**
@@ -97,8 +96,8 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_TYPE_EXP__REFERRED_TYPE:
-				return getReferredType();
+			case CGModelPackage.CG_TYPE_EXP__EXECUTOR_TYPE:
+				return getExecutorType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -111,8 +110,8 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_TYPE_EXP__REFERRED_TYPE:
-				setReferredType((CGExecutorType)newValue);
+			case CGModelPackage.CG_TYPE_EXP__EXECUTOR_TYPE:
+				setExecutorType((CGExecutorType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,8 +125,8 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_TYPE_EXP__REFERRED_TYPE:
-				setReferredType((CGExecutorType)null);
+			case CGModelPackage.CG_TYPE_EXP__EXECUTOR_TYPE:
+				setExecutorType((CGExecutorType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -141,8 +140,8 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_TYPE_EXP__REFERRED_TYPE:
-				return referredType != null;
+			case CGModelPackage.CG_TYPE_EXP__EXECUTOR_TYPE:
+				return executorType != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -162,7 +161,7 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 */
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
-		return referredType != null ? referredType : this;
+		return executorType != null ? executorType : this;
 	}
 
 	/**
@@ -171,7 +170,7 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 */
 	@Override
 	public @NonNull CGValuedElement getValue() {
-		return referredType.getValue();
+		return executorType.getValue();
 	}
 
 	/**
@@ -189,6 +188,19 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 */
 	@Override
 	public boolean isUnboxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
+		if (oldValue == executorType) {
+			setExecutorType((CGExecutorType)newValue);
+			return true;
+		}
 		return false;
 	}
 

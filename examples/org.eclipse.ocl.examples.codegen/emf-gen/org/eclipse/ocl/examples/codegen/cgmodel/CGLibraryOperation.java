@@ -17,17 +17,16 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>CG Infinity</b></em>'.
+ * A representation of the model object '<em><b>CG Library Operation</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * CGInfinity represents the infinite or unlimited value.
+ * An operation that must be called using the LibraryOperation calling convention.
  * <!-- end-model-doc -->
  *
  *
- * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGInfinity()
- * @model
+ * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryOperation()
  * @generated
  */
-public interface CGInfinity extends CGConstant {
-} // CGInfinity
+public interface CGLibraryOperation extends CGOperation {
+} // CGLibraryOperation

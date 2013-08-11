@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -228,7 +227,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return true;
 	}
 

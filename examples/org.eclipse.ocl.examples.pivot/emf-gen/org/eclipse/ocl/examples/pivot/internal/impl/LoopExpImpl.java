@@ -248,18 +248,17 @@ public abstract class LoopExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ LoopExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
 		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		try {
-		    final @Nullable /*@Thrown*/ DomainExpression source = self.getSource();
+		    final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
+		    final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
 		    if (source == null) {
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
+		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
 		    CAUGHT_oclIsKindOf = oclIsKindOf;
 		}
 		catch (Exception e) {
@@ -288,12 +287,11 @@ public abstract class LoopExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ LoopExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = self.getIterator();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;

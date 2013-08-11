@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -35,8 +35,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGReal;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Type;
 
 /**
  * A CodeGenAnalyzer performs the analysis of a Pivot AST in preparation for code generation.
@@ -82,13 +83,11 @@ public class CodeGenAnalyzer
 	private @NonNull Map<ElementId, CGElementId> cgElementIds = new HashMap<ElementId, CGElementId>();
 	protected final @NonNull CGBoolean cgFalse;
 	protected final @NonNull CGBoolean cgTrue;
-	private /*@LazyNonNull*/ CGInfinity cgInfinity = null;
+	private /*@LazyNonNull*/ CGUnlimited cgUnlimited = null;
 	private /*@LazyNonNull*/ CGInvalid cgInvalid = null;
 	protected final @NonNull CGNull cgNull;
 	private final @NonNull Map<Number, CGInteger> cgIntegers = new HashMap<Number, CGInteger>();
-	private final @NonNull Map<OperationId, CGExecutorOperation> cgOperations = new HashMap<OperationId, CGExecutorOperation>();
-	private final @NonNull Map<PropertyId, CGExecutorProperty> cgProperties = new HashMap<PropertyId, CGExecutorProperty>();
-	private final @NonNull Map<PropertyId, CGExecutorConstructorPart> cgParts = new HashMap<PropertyId, CGExecutorConstructorPart>();
+//	private final @NonNull Map<PropertyId, CGExecutorConstructorPart> cgParts = new HashMap<PropertyId, CGExecutorConstructorPart>();
 	private final @NonNull Map<Number, CGReal> cgReals = new HashMap<Number, CGReal>();
 	private final @NonNull Map<String, CGString> cgStrings = new HashMap<String, CGString>();
 
@@ -110,8 +109,8 @@ public class CodeGenAnalyzer
 		FieldingAnalyzer fieldingAnalyzer = codeGenerator.createFieldingAnalyzer();
 		fieldingAnalyzer.analyze(cgRoot, false);
 		//
-		CommonSubexpressionEliminator cseEliminator = codeGenerator.createCommonSubexpressionEliminator();
-		cseEliminator.optimize(cgRoot);
+//		CommonSubexpressionEliminator cseEliminator = codeGenerator.createCommonSubexpressionEliminator();
+//		cseEliminator.optimize(cgRoot);
 	}
 
 	public @NonNull CGConstantExp createCGConstantExp(@NonNull OCLExpression element, @NonNull CGConstant constant) {
@@ -137,6 +136,66 @@ public class CodeGenAnalyzer
 		return cgNull;
 	}
 
+	public @NonNull CGExecutorConstructorPart createExecutorConstructorPart(@NonNull Property pivotProperty) {
+		PropertyId propertyId = pivotProperty.getPropertyId();
+		CGExecutorConstructorPart cgPart = CGModelFactory.eINSTANCE.createCGExecutorConstructorPart();					
+		CGElementId cgPropertyId = getElementId(propertyId);
+		cgPart.setUnderlyingPropertyId(cgPropertyId);
+		cgPart.setPivot(pivotProperty);
+		cgPart.setName("CTORid_" + pivotProperty.getName());
+		cgPart.getDependsOn().add(cgPropertyId);
+		return cgPart;
+	}
+
+	public @NonNull CGExecutorProperty createExecutorProperty(@NonNull Property pivotProperty) {
+		PropertyId propertyId = pivotProperty.getPropertyId();
+		CGExecutorProperty cgProperty = null;
+		CGElementId cgPropertyId = getElementId(propertyId);
+		Property pivotOppositeProperty = pivotProperty.getOpposite();
+		if (pivotOppositeProperty != null) {
+			if (pivotOppositeProperty.isComposite()) {
+				cgPropertyId = getElementId(propertyId);
+				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorCompositionProperty();					
+			}
+			else if (pivotProperty.isImplicit()){
+				cgPropertyId = getElementId(pivotOppositeProperty.getPropertyId());
+				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorOppositeProperty();					
+			}
+		}
+		if (cgProperty == null) {
+			cgProperty = CGModelFactory.eINSTANCE.createCGExecutorNavigationProperty();					
+		}
+		cgProperty.setUnderlyingPropertyId(cgPropertyId);
+		cgProperty.setPivot(pivotProperty);
+		cgProperty.setName("IMPPROPid_" + pivotProperty.getName());
+		cgProperty.getDependsOn().add(cgPropertyId);
+		return cgProperty;
+	}
+
+	public @NonNull CGExecutorOperation createExecutorOperation(@NonNull Operation pivotOperation) {
+		OperationId operationId = pivotOperation.getOperationId();
+		CGExecutorOperation cgOperation = CGModelFactory.eINSTANCE.createCGExecutorOperation();
+		CGElementId cgOperationId = getElementId(operationId);
+		cgOperation.setUnderlyingOperationId(cgOperationId);
+		cgOperation.setPivot(pivotOperation);
+		cgOperation.setName(nameManager.getGlobalSymbolName(pivotOperation));
+//		cgOperation.setValueName(cgOperation.getName());
+		cgOperation.getDependsOn().add(cgOperationId);
+		return cgOperation;
+	}
+
+	public @NonNull CGExecutorType createExecutorType(@NonNull Type pivotType) {
+		TypeId typeId = pivotType.getTypeId();
+		CGExecutorType cgType = CGModelFactory.eINSTANCE.createCGExecutorType();
+		CGTypeId cgTypeId = getTypeId(typeId);
+		cgType.setUnderlyingTypeId(cgTypeId);
+		cgType.setPivot(pivotType);
+		cgType.setName(getNameManager().getGlobalSymbolName(pivotType));
+//		cgType.setValueName(cgType.getName());
+		cgType.getDependsOn().add(cgTypeId);
+		return cgType;
+	}
+
 	public @NonNull CodeGenerator getCodeGenerator() {
 		return codeGenerator;
 	}
@@ -159,79 +218,6 @@ public class CodeGenAnalyzer
 		return cgElementId;
 	}
 
-	public @NonNull CGExecutorOperation getExecutorOperation(@NonNull Operation pivotOperation) {
-		OperationId operationId = pivotOperation.getOperationId();
-		CGExecutorOperation cgOperation = cgOperations.get(operationId);
-		if (cgOperation == null) {
-			cgOperation = CGModelFactory.eINSTANCE.createCGExecutorOperation();
-			CGElementId cgOperationId = getElementId(operationId);
-			cgOperation.setUnderlyingOperationId(cgOperationId);
-			cgOperation.setPivot(pivotOperation);
-			cgOperation.setName(nameManager.getGlobalSymbolName(pivotOperation));
-			cgOperation.setValueName(cgOperation.getName());
-			cgOperations.put(operationId, cgOperation);
-			cgOperation.getDependsOn().add(cgOperationId);
-		}
-		return cgOperation;
-	}
-
-	public @NonNull CGExecutorOperation getExecutorOperation(@NonNull OperationId operationId) {
-		return DomainUtil.nonNullState(cgOperations.get(operationId));
-	}
-
-	public @NonNull CGExecutorConstructorPart getExecutorConstructorPart(@NonNull Property pivotProperty) {
-		PropertyId propertyId = pivotProperty.getPropertyId();
-		CGExecutorConstructorPart cgPart = cgParts.get(propertyId);
-		if (cgPart == null) {
-			cgPart = CGModelFactory.eINSTANCE.createCGExecutorConstructorPart();					
-			CGElementId cgPropertyId = getElementId(propertyId);
-			cgPart.setUnderlyingPropertyId(cgPropertyId);
-			cgPart.setPivot(pivotProperty);
-			cgPart.setName(nameManager.getGlobalSymbolName(cgPart, "CTORid_" + pivotProperty.getName()));
-			cgPart.setValueName(cgPart.getName());
-			cgParts.put(propertyId, cgPart);
-			cgPart.getDependsOn().add(cgPropertyId);
-		}
-		return cgPart;
-	}
-
-	public @NonNull CGExecutorConstructorPart getExecutorConstructorPart(@NonNull PropertyId propertyId) {
-		return DomainUtil.nonNullState(cgParts.get(propertyId));
-	}
-
-	public @NonNull CGExecutorProperty getExecutorProperty(@NonNull Property pivotProperty) {
-		PropertyId propertyId = pivotProperty.getPropertyId();
-		CGExecutorProperty cgProperty = cgProperties.get(propertyId);
-		if (cgProperty == null) {
-			CGElementId cgPropertyId = getElementId(propertyId);
-			Property pivotOppositeProperty = pivotProperty.getOpposite();
-			if (pivotOppositeProperty != null) {
-				if (pivotOppositeProperty.isComposite()) {
-					cgPropertyId = getElementId(propertyId);
-					cgProperty = CGModelFactory.eINSTANCE.createCGExecutorCompositionProperty();					
-				}
-				else if (pivotProperty.isImplicit()){
-					cgPropertyId = getElementId(pivotOppositeProperty.getPropertyId());
-					cgProperty = CGModelFactory.eINSTANCE.createCGExecutorOppositeProperty();					
-				}
-			}
-			if (cgProperty == null) {
-				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorNavigationProperty();					
-			}
-			cgProperty.setUnderlyingPropertyId(cgPropertyId);
-			cgProperty.setPivot(pivotProperty);
-			cgProperty.setName(nameManager.getGlobalSymbolName(cgProperty, "IMPPROPid_" + pivotProperty.getName()));
-			cgProperty.setValueName(cgProperty.getName());
-			cgProperties.put(propertyId, cgProperty);
-			cgProperty.getDependsOn().add(cgPropertyId);
-		}
-		return cgProperty;
-	}
-
-	public @NonNull CGExecutorProperty getExecutorProperty(@NonNull PropertyId propertyId) {
-		return DomainUtil.nonNullState(cgProperties.get(propertyId));
-	}
-
 	public @NonNull CGValuedElement getExpression(@Nullable CGValuedElement cgExpression) {
 		if (cgExpression == null) {
 			CGConstantExp cgLiteralExp = CGModelFactory.eINSTANCE.createCGConstantExp();
@@ -241,16 +227,6 @@ public class CodeGenAnalyzer
 			cgExpression = cgLiteralExp;
 		};
 		return cgExpression;
-	}
-
-	public @NonNull CGInfinity getInfinity() {
-		CGInfinity cgInfinity2 = cgInfinity;
-		if (cgInfinity2 == null) {
-			cgInfinity = cgInfinity2 = CGModelFactory.eINSTANCE.createCGInfinity();
-			setNames(cgInfinity2, ValuesUtil.UNLIMITED_VALUE);
-			cgInfinity2.setTypeId(getTypeId(TypeId.UNLIMITED_NATURAL));
-		}
-		return cgInfinity2;
 	}
 
 	public @NonNull CGInteger getInteger(@NonNull Number aNumber) {
@@ -330,6 +306,16 @@ public class CodeGenAnalyzer
 			cgElementIds.put(typeId, cgTypeId);
 		}
 		return cgTypeId;
+	}
+
+	public @NonNull CGUnlimited getUnlimited() {
+		CGUnlimited cgUnlimited2 = cgUnlimited;
+		if (cgUnlimited2 == null) {
+			cgUnlimited = cgUnlimited2 = CGModelFactory.eINSTANCE.createCGUnlimited();
+			setNames(cgUnlimited2, ValuesUtil.UNLIMITED_VALUE);
+			cgUnlimited2.setTypeId(getTypeId(TypeId.UNLIMITED_NATURAL));
+		}
+		return cgUnlimited2;
 	}
 
 	public void setConstant(@NonNull CGValuedElement oldElement, @Nullable CGValuedElement aConstant) {

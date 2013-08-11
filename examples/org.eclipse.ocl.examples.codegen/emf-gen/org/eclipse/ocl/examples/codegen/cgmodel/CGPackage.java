@@ -31,7 +31,6 @@ import java.util.List;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPackage()
- * @model
  * @generated
  */
 public interface CGPackage extends CGNamedElement {
@@ -48,7 +47,6 @@ public interface CGPackage extends CGNamedElement {
 	 * @return the value of the '<em>Classes</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPackage_Classes()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getContainingPackage
-	 * @model opposite="containingPackage" containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGClass> getClasses();
@@ -66,7 +64,6 @@ public interface CGPackage extends CGNamedElement {
 	 * @return the value of the '<em>Packages</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPackage_Packages()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPackage#getContainingPackage
-	 * @model opposite="containingPackage" containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGPackage> getPackages();
@@ -84,7 +81,6 @@ public interface CGPackage extends CGNamedElement {
 	 * @see #setContainingPackage(CGPackage)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPackage_ContainingPackage()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPackage#getPackages
-	 * @model opposite="packages" resolveProxies="false" transient="false"
 	 * @generated
 	 */
 	CGPackage getContainingPackage();

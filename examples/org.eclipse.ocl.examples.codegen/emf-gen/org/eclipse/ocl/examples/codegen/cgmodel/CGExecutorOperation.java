@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorOperation()
- * @model
  * @generated
  */
 public interface CGExecutorOperation extends CGValuedElement {
@@ -47,7 +46,6 @@ public interface CGExecutorOperation extends CGValuedElement {
 	 * @return the value of the '<em>Underlying Operation Id</em>' reference.
 	 * @see #setUnderlyingOperationId(CGElementId)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorOperation_UnderlyingOperationId()
-	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	CGElementId getUnderlyingOperationId();

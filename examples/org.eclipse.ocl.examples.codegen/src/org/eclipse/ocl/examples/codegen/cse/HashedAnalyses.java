@@ -100,6 +100,23 @@ public class HashedAnalyses implements Iterable<AbstractAnalysis>
 		}
 	}
 
+	public @NonNull AbstractAnalysis addSimpleAnalysis(@NonNull SimpleAnalysis anAnalysis) {
+		int structuralHashCode = anAnalysis.getStructuralHashCode();
+		AbstractAnalysis oldAnalysis = get(anAnalysis);
+		if ((oldAnalysis == null) || !anAnalysis.getElement().isCommonable()) {
+			map.put(structuralHashCode, anAnalysis);
+			return anAnalysis;
+		}
+		else {
+			AbstractAnalysis newAnalysis = oldAnalysis.addAnalysis(anAnalysis);
+			if (newAnalysis != oldAnalysis) {
+				map.remove(structuralHashCode, oldAnalysis);
+				map.put(structuralHashCode, newAnalysis);
+			}
+			return newAnalysis;
+		}
+	}
+
 	public @Nullable AbstractAnalysis get(@NonNull AbstractAnalysis childAnalysis) {
 		Collection<AbstractAnalysis> theseAnalyses = map.get(childAnalysis.getStructuralHashCode());
 		if (theseAnalyses == null) {
@@ -112,7 +129,7 @@ public class HashedAnalyses implements Iterable<AbstractAnalysis>
 		}
 		return null;
 	}
-
+	
 	public boolean isEmpty() {
 		return map.size() <= 0;
 	}
@@ -121,10 +138,6 @@ public class HashedAnalyses implements Iterable<AbstractAnalysis>
 	public @NonNull Iterator<AbstractAnalysis> iterator() {
 		return map.values().iterator();
 	}
-
-//	public @NonNull Multimap<Integer, AbstractAnalysis> map() {
-//		return map;
-//	}
 	
 	public @Nullable AbstractAnalysis remove(@NonNull AbstractAnalysis thatAnalysis) {
 		int hash = thatAnalysis.getStructuralHashCode();
@@ -139,28 +152,6 @@ public class HashedAnalyses implements Iterable<AbstractAnalysis>
 		}
 		return null;
 	}
-	
-/*	public void removeAll(@NonNull HashedAnalyses thoseHashedAnalyses) {
-		for (int hash : thoseHashedAnalyses.map.keySet()) {
-			Collection<SimpleAnalysis> theseAnalyses = map.get(hash);
-			if (theseAnalyses != null) {
-				List<SimpleAnalysis> removeAnalyses = null;
-				for (@SuppressWarnings("null")@NonNull SimpleAnalysis thisAnalysis : map.get(hash)) {
-					for (@NonNull SimpleAnalysis thatAnalysis : thoseHashedAnalyses) {
-						if (thisAnalysis.isStructurallyEqualTo(thatAnalysis)) {
-							if (removeAnalyses == null) {
-								removeAnalyses = new ArrayList<SimpleAnalysis>();
-							}
-							removeAnalyses.add(thisAnalysis);
-						}
-					}
-				}
-				if (removeAnalyses != null) {
-					theseAnalyses.removeAll(removeAnalyses);
-				}
-			}
-		}
-	} */
 
 	@Override
 	public String toString() {

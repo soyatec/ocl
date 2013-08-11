@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
@@ -78,9 +79,9 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	@SuppressWarnings({"null", "unchecked"})
 	public @NonNull Iterable<? extends CGElement> getChildren() {
-		return (Iterable<? extends CGElement>) eContents();
+		@SuppressWarnings({"null", "unchecked"}) @NonNull Iterable<? extends CGElement> eContents = (Iterable<? extends CGElement>) eContents();
+		return eContents;
 	}
 
 	/**
@@ -96,7 +97,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return GlobalPlace.createPlace(element2place, this);
+		return GlobalPlace.createGlobalPlace(element2place, this);
 	}
 
 	/**
@@ -105,6 +106,14 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 */
 	public boolean isContext() {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
+		throw new UnsupportedOperationException(getClass().getName() + ".rewriteAs()");
 	}
 
 } //CGElementImpl

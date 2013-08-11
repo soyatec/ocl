@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryIteration;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryIterationCallExp()
- * @model
  * @generated
  */
 public interface CGLibraryIterationCallExp extends CGIterationCallExp {
@@ -44,7 +43,6 @@ public interface CGLibraryIterationCallExp extends CGIterationCallExp {
 	 * @return the value of the '<em>Library Iteration</em>' attribute.
 	 * @see #setLibraryIteration(LibraryIteration)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryIterationCallExp_LibraryIteration()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.LibraryIteration" required="true"
 	 * @generated
 	 */
 	LibraryIteration getLibraryIteration();

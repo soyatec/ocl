@@ -20,6 +20,8 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -34,9 +36,11 @@ public class CommonAnalysis extends AbstractAnalysis
 	private int maxDepth = Integer.MIN_VALUE;
 
 	public CommonAnalysis(@NonNull SimpleAnalysis firstAnalysis, @NonNull SimpleAnalysis secondAnalysis) {
-		this.primaryAnalysis = firstAnalysis;
+//		this.primaryAnalysis = firstAnalysis;
 		firstAnalysis.setCommonAnalysis(this);
-		secondAnalysis.setCommonAnalysis(this);
+		if (secondAnalysis != firstAnalysis) {
+			secondAnalysis.setCommonAnalysis(this);
+		}
 	}
 
 	@Override
@@ -46,7 +50,7 @@ public class CommonAnalysis extends AbstractAnalysis
 
 	@Override
 	public @NonNull CommonAnalysis addCommonAnalysis(@NonNull CommonAnalysis commonAnalysis) {
-		for (@SuppressWarnings("null")@NonNull SimpleAnalysis simpleAnalysis : commonAnalysis.simpleAnalyses) {
+		for (@SuppressWarnings("null")@NonNull SimpleAnalysis simpleAnalysis : new ArrayList<SimpleAnalysis>(commonAnalysis.simpleAnalyses)) {
 			addSimpleAnalysis(simpleAnalysis);
 		}
 		return this;
@@ -59,7 +63,7 @@ public class CommonAnalysis extends AbstractAnalysis
 	}
 
 	public @NonNull CommonAnalysis addedSimpleAnalysis(@NonNull SimpleAnalysis simpleAnalysis) {
-		assert isStructurallyEqualTo(simpleAnalysis);
+//		assert isStructurallyEqualTo(simpleAnalysis);
 		simpleAnalyses.add(simpleAnalysis);
 		int depth = simpleAnalysis.getDepth();
 		if (primaryAnalysis == null) {
@@ -74,22 +78,28 @@ public class CommonAnalysis extends AbstractAnalysis
 		else if (depth > this.maxDepth) {
 			this.maxDepth = depth;
 		}
-//		assert primaryAnalysis.isStructurallyEqualTo(simpleAnalysis);
+		assert primaryAnalysis.isStructurallyEqualTo(simpleAnalysis);
 		return this;
 	}
 
-	/**
-	 * Return the depth of the deepest shared analysis.
-	 */
+	@Override
 	public int getMaxDepth() {
 		return maxDepth;
 	}
 
-	/**
-	 * Return the depth of the shallowest shared analysis.
-	 */
+	@Override
 	public int getMinDepth() {
 		return minDepth;
+	}
+
+	@SuppressWarnings("null")
+	public @NonNull SimpleAnalysis getPrimaryAnalysis() {
+		return primaryAnalysis;
+	}
+
+	@Override
+	public @NonNull CGValuedElement getPrimaryElement() {
+		return primaryAnalysis.getElement();
 	}
 
 	@Override
@@ -112,16 +122,20 @@ public class CommonAnalysis extends AbstractAnalysis
 	}
 
 	public void rewrite(@NonNull CodeGenAnalyzer analyzer, @NonNull CGValuedElement controlElement) {
-		if (simpleAnalyses.size() > 1) {
-			CGValuedElement cgCSE = primaryAnalysis.getCGElement();
+		CGValuedElement cgCSE = primaryAnalysis.getElement();
+		if ((simpleAnalyses.size() > 1) || !cgCSE.isUncommonable()) {
 			CGVariable cgVariable = CGModelFactory.eINSTANCE.createCGLocalVariable();
 			cgVariable.setTypeId(cgCSE.getTypeId());
 			cgVariable.setRequired(cgCSE.isNonNull());
 			cgVariable.setPivot(cgCSE.getPivot());
 			cgVariable.setName(analyzer.getNameManager().getGlobalSymbolName(cgVariable, "_cse"));
 			for (SimpleAnalysis simpleAnalysis : simpleAnalyses) {
-				CGValuedElement commonElement = simpleAnalysis.getCGElement();
-				rewriteAsVariableExp(commonElement, cgVariable);				
+				CGValuedElement commonElement = simpleAnalysis.getElement();
+				CGElement cgParent = commonElement.getParent();
+				assert cgParent != null;
+				if (!cgParent.rewriteAs(commonElement, cgCSE)) {
+					rewriteAsVariableExp(commonElement, cgVariable);
+				}
 			}
 			rewriteAsLet(controlElement, cgVariable);
 			cgVariable.setInit(cgCSE);						// After all rewrites complete
@@ -149,6 +163,62 @@ public class CommonAnalysis extends AbstractAnalysis
 		CGUtils.replace(cgElement, cgVarExp);
 	}
 
+/*	protected void rewriteAsConstantExp(@NonNull CGValuedElement cgElement, @NonNull CGValuedElement cgConstant) {
+		CGConstantExp cgConstantExp = CGModelFactory.eINSTANCE.createCGConstantExp();
+		cgConstantExp.setTypeId(cgElement.getTypeId());
+		cgConstantExp.setPivot(cgElement.getPivot());
+		cgConstantExp.setReferredConstant(cgConstant);
+		CGUtils.replace(cgElement, cgConstantExp);
+	} */
+
+	public void rewriteGlobal(@NonNull CodeGenAnalyzer analyzer) {
+		if (simpleAnalyses.size() > 1) {
+			CGConstantExp primaryConstantExp;
+			CGValuedElement primaryElement = primaryAnalysis.getElement();
+			if (primaryElement instanceof CGConstantExp) {
+				primaryConstantExp = (CGConstantExp)primaryElement;
+			}
+			else {
+				CGElement primaryParent = primaryElement.getParent();
+				if (primaryParent instanceof CGConstantExp) {
+					primaryConstantExp = (CGConstantExp)primaryParent;
+				}
+				else {
+					primaryConstantExp = CGModelFactory.eINSTANCE.createCGConstantExp();
+					primaryConstantExp.setReferredConstant(primaryElement);
+					primaryConstantExp.setPivot(primaryElement.getPivot());
+					primaryConstantExp.setTypeId(primaryElement.getTypeId());
+					primaryConstantExp.setName(primaryElement.getName());
+					CGUtils.replace(primaryElement, primaryConstantExp);
+				}
+			}
+			for (SimpleAnalysis secondaryAnalysis : simpleAnalyses) {
+				if (secondaryAnalysis != primaryAnalysis) {
+					CGConstantExp secondaryConstantExp;
+					CGValuedElement secondaryElement = secondaryAnalysis.getElement();
+					if (secondaryElement instanceof CGConstantExp) {
+						secondaryConstantExp = (CGConstantExp)secondaryElement;
+					}
+					else {
+						CGElement secondaryParent = secondaryElement.getParent();
+						if (secondaryParent instanceof CGConstantExp) {
+							secondaryConstantExp = (CGConstantExp)secondaryParent;
+						}
+						else {
+							secondaryConstantExp = CGModelFactory.eINSTANCE.createCGConstantExp();
+							secondaryConstantExp.setReferredConstant(secondaryElement);
+							secondaryConstantExp.setPivot(secondaryElement.getPivot());
+							secondaryConstantExp.setTypeId(secondaryElement.getTypeId());
+							secondaryConstantExp.setName(secondaryElement.getName());
+							CGUtils.replace(secondaryElement, secondaryConstantExp);
+						}
+					}
+					secondaryConstantExp.setReferredConstant(primaryConstantExp.getReferredConstant());
+				}
+			}
+		}
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
@@ -156,7 +226,7 @@ public class CommonAnalysis extends AbstractAnalysis
 		s.append(primaryAnalysis);
 		for (SimpleAnalysis simpleAnalysis : simpleAnalyses) {
 			if (simpleAnalysis != primaryAnalysis) {
-				s.append(" => " + simpleAnalysis);
+				s.append(" ++ " + simpleAnalysis);
 			}
 		}
 		return s.toString();

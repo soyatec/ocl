@@ -29,7 +29,6 @@ import java.util.List;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTupleExp()
- * @model
  * @generated
  */
 public interface CGTupleExp extends CGValuedElement {
@@ -46,7 +45,6 @@ public interface CGTupleExp extends CGValuedElement {
 	 * @return the value of the '<em>Parts</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTupleExp_Parts()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart#getTupleExp
-	 * @model opposite="tupleExp" containment="true"
 	 * @generated
 	 */
 	List<CGTuplePart> getParts();

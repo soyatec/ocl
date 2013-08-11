@@ -336,6 +336,24 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getValue() {
+		return getReferredValuedElement();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable String getValueName() {
+		return (last == null) ? first.getValueName() : super.getValueName();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
 		return isRange() || first.isBoxed();
 	}
@@ -365,6 +383,15 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	@Override
 	public boolean isGlobal() {
 		return first.isGlobal() && ((last == null) || last.isGlobal());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isInlined() {
+		return (last == null) && first.isInlined();
 	}
 
 	/**

@@ -33,7 +33,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGReal()
- * @model
  * @generated
  */
 public interface CGReal extends CGConstant {
@@ -52,7 +51,6 @@ public interface CGReal extends CGConstant {
 	 * @return the value of the '<em>Real Value</em>' attribute.
 	 * @see #setRealValue(Number)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGReal_RealValue()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Number" required="true"
 	 * @generated
 	 */
 	Number getRealValue();

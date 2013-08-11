@@ -16,8 +16,6 @@ package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -28,12 +26,6 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 public class StringSubstituteFirstOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull StringSubstituteFirstOperation INSTANCE = new StringSubstituteFirstOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
-		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
-	}
 
 	@Override
 	public @NonNull String evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {

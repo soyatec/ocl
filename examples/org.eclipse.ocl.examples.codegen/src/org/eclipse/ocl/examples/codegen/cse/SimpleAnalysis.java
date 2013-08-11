@@ -29,7 +29,7 @@ public class SimpleAnalysis extends AbstractAnalysis
 
 	public static final @NonNull SimpleAnalysis[] EMPTY_LIST = new SimpleAnalysis[] {};
 
-	protected final @NonNull StackPlace stackPlace;
+	protected final @NonNull GlobalPlace globalPlace;
 	protected final @NonNull CGValuedElement cgElement;
 	protected final int depth;
 	protected final int structuralHashCode;
@@ -37,8 +37,8 @@ public class SimpleAnalysis extends AbstractAnalysis
 	private @Nullable SimpleAnalysis parent = null;
 	private @Nullable CommonAnalysis commonAnalysis = null;
 	
-	public SimpleAnalysis(@NonNull StackPlace stackPlace, @NonNull CGValuedElement cgElement, int depth, int structuralHashCode, @NonNull SimpleAnalysis[] children) {
-		this.stackPlace = stackPlace;
+	public SimpleAnalysis(@NonNull GlobalPlace globalPlace, @NonNull CGValuedElement cgElement, int depth, int structuralHashCode, @NonNull SimpleAnalysis[] children) {
+		this.globalPlace = globalPlace;
 		this.cgElement = cgElement;
 		this.depth = depth;
 		this.structuralHashCode = structuralHashCode;
@@ -51,10 +51,14 @@ public class SimpleAnalysis extends AbstractAnalysis
 		for (SimpleAnalysis child : children) {
 			child.parent = this;
 		}
-		GlobalPlace globalPlace = stackPlace.getGlobalPlace();
-		if (cgElement.isCommonable()) {
+		if (cgElement.isCommonable() && !cgElement.isGlobal()) {
 			ControlPlace controlPlace = globalPlace.getControlPlace(cgElement);
-			controlPlace.addAnalysis(this);
+			if (!cgElement.isUncommonable()) {
+				controlPlace.addAnalysis(this.addAnalysis(this));
+			}
+			else {
+				controlPlace.addAnalysis(this);
+			}
 		}
 		globalPlace.addSimpleAnalysis(this);
 	}
@@ -88,17 +92,37 @@ public class SimpleAnalysis extends AbstractAnalysis
 			simpleAnalysis.dispose();
 		}
 	}
+
+	public int getDepth() {
+		return depth;
+	}
 	
-	public @NonNull CGValuedElement getCGElement() {
+	public @NonNull CGValuedElement getElement() {
 		return cgElement;
 	}
 
-	public int getDepth() {
+	@Override
+	public int getMaxDepth() {
+		return depth;
+	}
+
+	@Override
+	public int getMinDepth() {
 		return depth;
 	}
 
 	public @Nullable SimpleAnalysis getParent() {
 		return parent;
+	}
+	
+	@Override
+	public @NonNull CGValuedElement getPrimaryElement() {
+		if (commonAnalysis != null) {
+			return commonAnalysis.getPrimaryElement();
+		}
+		else {
+			return cgElement;
+		}
 	}
 
 	@Override
@@ -137,7 +161,6 @@ public class SimpleAnalysis extends AbstractAnalysis
 				return false;
 			}
 		}
-		GlobalPlace globalPlace = stackPlace.getGlobalPlace();
 		ReferencesVisitor referencesVisitor = globalPlace.getReferencesVisitor();
 		List<Object> theseObjects = this.cgElement.accept(referencesVisitor);
 		List<Object> thoseObjects = that.cgElement.accept(referencesVisitor);
@@ -196,6 +219,12 @@ public class SimpleAnalysis extends AbstractAnalysis
 
 	@Override
 	public String toString() {
-		return depth + "," + String.valueOf(cgElement);
+		CGValuedElement cgValue = cgElement.getValue();
+		if (cgValue == cgElement) {
+			return depth + ",\"" + String.valueOf(cgElement) + "\":" + cgElement.eClass().getName();
+		}
+		else {
+			return depth + ",\"" + String.valueOf(cgElement) + "\":" + cgElement.eClass().getName() + "=>" + cgValue.eClass().getName();
+		}
 	}
 }

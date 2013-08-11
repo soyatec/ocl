@@ -29,7 +29,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePart()
- * @model
  * @generated
  */
 public interface CGTuplePart extends CGValuedElement {
@@ -44,7 +43,6 @@ public interface CGTuplePart extends CGValuedElement {
 	 * @return the value of the '<em>Init</em>' containment reference.
 	 * @see #setInit(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePart_Init()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getInit();
@@ -71,7 +69,6 @@ public interface CGTuplePart extends CGValuedElement {
 	 * @return the value of the '<em>Tuple Exp</em>' container reference.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePart_TupleExp()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp#getParts
-	 * @model opposite="parts" resolveProxies="false" required="true" transient="false" changeable="false"
 	 * @generated
 	 */
 	CGTupleExp getTupleExp();

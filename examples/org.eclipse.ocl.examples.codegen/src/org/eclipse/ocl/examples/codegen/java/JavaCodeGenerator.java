@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
+import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
@@ -205,12 +206,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new CG2JavaPreVisitor(globalContext);
 	}
 
-	public DependencyVisitor createDependencyVisitor() {
-		return new JavaDependencyVisitor(getAnalyzer(), globalContext);
-	}
-
-	public DependencyVisitor createDependencyVisitor(@NonNull JavaLocalContext localContext) {
-		return new JavaDependencyVisitor(localContext);
+	public @NonNull DependencyVisitor createDependencyVisitor(@NonNull GlobalPlace globalPlace) {
+		return new JavaDependencyVisitor(getAnalyzer(), globalContext, globalPlace);
 	}
 
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
@@ -222,7 +219,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new AbstractGenModelHelper(metaModelManager);
 	}
 
-	protected abstract @NonNull JavaGlobalContext createGlobalContext();
+	protected @NonNull JavaGlobalContext createGlobalContext() {
+		return new JavaGlobalContext(this);
+	}
 
 	protected @NonNull Id2BoxedJavaClassVisitor createId2BoxedJavaClassVisitor() {
 		return new Id2BoxedJavaClassVisitor(genModelHelper);

@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGString()
- * @model
  * @generated
  */
 public interface CGString extends CGConstant {
@@ -51,7 +50,6 @@ public interface CGString extends CGConstant {
 	 * @return the value of the '<em>String Value</em>' attribute.
 	 * @see #setStringValue(String)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGString_StringValue()
-	 * @model required="true"
 	 * @generated
 	 */
 	String getStringValue();

@@ -196,7 +196,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return true;
 	}
 

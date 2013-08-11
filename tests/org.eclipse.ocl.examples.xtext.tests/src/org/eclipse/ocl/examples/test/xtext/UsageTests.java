@@ -423,6 +423,98 @@ public class UsageTests
 		}
 	}
 
+	protected void doGenModel(@NonNull String testProjectName, @NonNull URI genmodelURI)
+			throws Exception {
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			suppressGitPrefixPopUp();
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			IProject project = workspace.getRoot().getProject(testProjectName);
+			if (!project.exists()) {
+				project.create(null);
+			}
+		}
+//		MetaModelManager metaModelManager2 = new MetaModelManager();
+//		metaModelManager = metaModelManager2;
+//		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor( org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		URI fileURI = genmodelURI; //getProjectFileURI(testFileStem + ".genmodel");
+		// System.out.println("Generating Ecore Model using '" + fileURI + "'");
+//		metaModelManager2.dispose();
+		metaModelManager = new MetaModelManager();
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
+		resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
+		//FIXME this is needed so long as Pivot.merged.genmodel is a UML genmodel
+		resourceSet.getPackageRegistry().put(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new EcoreResourceFactoryImpl());
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor( org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor( org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		if (resourceSet instanceof ResourceSetImpl) {
+			ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
+			Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();
+			if (uriResourceMap != null) {
+				uriResourceMap.clear();
+			}
+		}
+		resourceSet.getResources().clear();
+		Resource resource = resourceSet.getResource(fileURI, true);
+		// EcoreUtil.resolveAll(resourceSet); -- genModel can fail if
+		// proxies resolved here
+		// problem arises if genmodel has an obsolete feature for a feature
+		// moved up the inheritance hierarchy
+		// since the proxy seems to be successfully resolved giving a double
+		// feature
+		checkResourceSet(resourceSet);
+		EObject eObject = resource.getContents().get(0);
+		if (!(eObject instanceof GenModel)) {
+			throw new ConfigurationException("No GenModel found in '" + resource.getURI() + "'");
+		}
+		GenModel genModel = (GenModel) eObject;
+		genModel.reconcile();
+		checkResourceSet(resourceSet);
+		// genModel.setCanGenerate(true);
+		// validate();
+
+		genModel.setValidateModel(true); // The more checks the better
+		// genModel.setCodeFormatting(true); // Normalize layout
+		genModel.setForceOverwrite(false); // Don't overwrite read-only files
+		genModel.setCanGenerate(true);
+		// genModel.setFacadeHelperClass(null); // Non-null gives JDT
+		// default NPEs
+		// genModel.setFacadeHelperClass(StandaloneASTFacadeHelper.class.getName());
+		// // Bug 308069
+		// genModel.setValidateModel(true);
+		genModel.setBundleManifest(false); // New manifests should be generated manually
+		genModel.setUpdateClasspath(false); // New class-paths should be generated manually
+		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+		Diagnostic diagnostic = genModel.diagnose();
+		if (diagnostic.getSeverity() != Diagnostic.OK) {
+			fail(diagnostic.toString());
+		}
+
+		/*
+		 * JavaModelManager.getJavaModelManager().initializePreferences(); new
+		 * JavaCorePreferenceInitializer().initializeDefaultPreferences();
+		 * 
+		 * GenJDKLevel genSDKcomplianceLevel = genModel.getComplianceLevel();
+		 * String complianceLevel = JavaCore.VERSION_1_5; switch
+		 * (genSDKcomplianceLevel) { case JDK60_LITERAL: complianceLevel =
+		 * JavaCore.VERSION_1_6; case JDK14_LITERAL: complianceLevel =
+		 * JavaCore.VERSION_1_4; default: complianceLevel =
+		 * JavaCore.VERSION_1_5; } // Hashtable<?,?> defaultOptions =
+		 * JavaCore.getDefaultOptions(); //
+		 * JavaCore.setComplianceOptions(complianceLevel, defaultOptions); //
+		 * JavaCore.setOptions(defaultOptions);
+		 */
+
+		Generator generator = GenModelUtil.createGenerator(genModel);
+		Monitor monitor = new BasicMonitor();
+		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
+		if (diagnostic.getSeverity() != Diagnostic.OK) {
+			String s = PivotUtil.formatDiagnostics(diagnostic, "\n");
+			fail("Generation failure" + s);
+		}
+	}
+
 	public void testBug370824() throws Exception {
 		String testFileStem = "Bug370824";
 		String testProjectName = "bug370824";
@@ -646,6 +738,40 @@ public class UsageTests
 			assertEquals("Mismatching call count of " + calledOperation, expectedCount, calls.size());
 		}
 	} */
+
+	public void testSysML_QUDV() throws Exception {
+//		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
+//		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
+//		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
+//		CommonSubexpressionEliminator.CSE_PULL_UP.setState(true);
+//		CommonSubexpressionEliminator.CSE_PUSH_UP.setState(true);
+//		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
+//		String testFileStem = "SysML_QUDV";
+		String testProjectName = "QUDV";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		doDelete(testProjectName);
+		//		MetaModelManager metaModelManager2 = new MetaModelManager();
+//		createEcoreFile(metaModelManager2, "Dummy" + testFileStem, "");
+//		metaModelManager2.dispose();
+		@SuppressWarnings("null")@NonNull URI genModelURI = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.tests/model/SysML_ValueTypes_QUDV.genmodel", true);
+		if (!resourceSet.getURIConverter().exists(genModelURI, null)) {
+			return;
+		}			
+		doGenModel(testProjectPath, genModelURI);
+/*		doCompile(testProjectName, testFileStem);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
+			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
+			EPackage ePackage = doLoadPackage(qualifiedPackageName);
+			EClass eClass = (EClass) ePackage.getEClassifier("EnumTypes");
+			EFactory eFactory = ePackage.getEFactoryInstance();
+			//
+			EObject eObject = eFactory.create(eClass);
+			assertQueryTrue(eObject, "let aWhite : OclAny = opaqueColor(eWhite) in eColor = aWhite");
+			assertQueryTrue(eObject, "let aWhite : OclAny = eWhite.oclAsType(OclAny) in eColor = aWhite");
+			assertQueryTrue(eObject, "eColor = eWhite");
+			assertQueryTrue(eObject, "eColor = Color::WHITE");
+		} */
+	}
 
 	protected EPackage doLoadPackage(@NonNull String qualifiedPackageName) throws Exception {
 		Class<?> testClass = Class.forName(qualifiedPackageName);

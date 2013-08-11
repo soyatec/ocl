@@ -28,7 +28,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLocalVariable()
- * @model
  * @generated
  */
 public interface CGLocalVariable extends CGVariable {

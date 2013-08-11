@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 
 public interface LocalContext
 {
-	@NonNull CGExecutorType getExecutorType(@NonNull Type referredType);
+//	@NonNull CGExecutorType getExecutorType(@NonNull Type referredType);
 	
 	@NonNull NameManager.Context getNameManagerContext();
 

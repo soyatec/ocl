@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 public class CollectionExcludesAllOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull CollectionExcludesAllOperation INSTANCE = new CollectionExcludesAllOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		return evaluate(left, right);
-	}
 
 	@Override
 	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {

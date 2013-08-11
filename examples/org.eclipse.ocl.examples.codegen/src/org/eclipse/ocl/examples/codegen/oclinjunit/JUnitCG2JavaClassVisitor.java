@@ -27,6 +27,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
+import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -48,15 +50,15 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 	}
 
 	protected final @NonNull ExpressionInOCL expInOcl;
-	protected final @NonNull CGPackage cgPackage;
+	protected final @NonNull CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
+	protected final @NonNull CGClass cgClass = CGModelFactory.eINSTANCE.createCGClass();
+	private @Nullable List<CGValuedElement> sortedGlobals = null;
 	
 	public JUnitCG2JavaClassVisitor(@NonNull JavaCodeGenerator codeGenerator,
 			@NonNull ExpressionInOCL expInOcl, String packageName, String className) {
 		super(codeGenerator);
 		this.expInOcl = expInOcl;
-		this.cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		cgPackage.setName(packageName);
-		CGClass cgClass = CGModelFactory.eINSTANCE.createCGClass();
 		cgClass.setName(className);
 		cgPackage.getClasses().add(cgClass);
 		CGOperation cgOperation = createCGOperation(expInOcl);
@@ -71,7 +73,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		}
 		Pivot2CGVisitor pivot2CGVisitor = new Pivot2CGVisitor(analyzer);
 		CGValuedElement cgBody = (CGValuedElement)DomainUtil.nonNullState(expInOcl.accept(pivot2CGVisitor));
-		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGOperation();
+		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGLibraryOperation();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		if (contextVariable != null) {
 			CGParameter cgContext = pivot2CGVisitor.getParameter(contextVariable);
@@ -92,7 +94,11 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 	protected void generate() {
 		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
 		cgPackage.accept(cg2PreVisitor);
-//		cgClass.getGlobals().addAll(cg2PreVisitor.getCGGlobalConstants());
+		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
+		GlobalPlace globalPlace = cseEliminator.optimize(cgPackage);
+		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(globalPlace);
+		dependencyVisitor.visitAll(globalContext.getGlobals());
+		sortedGlobals = globalPlace.getSortedGlobals(dependencyVisitor);
 		safeVisit(cgPackage);
 	}
 
@@ -117,12 +123,9 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		js.append("public static final ");
 		js.appendIsRequired(true);
 		js.append(" " + className + " " + globalContext.getInstanceName() + " = new " + className + "();\n");
-		DependencyVisitor dependencyVisitor = new DependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
-		dependencyVisitor.visitAll(globalContext.getGlobals());
-		dependencyVisitor.visitAll(cgClass.getOperations());
-//		dependencyVisitor.visitAll(localContext.getLocalVariables());
-		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-		generateGlobals(sortedDependencies);
+		if (sortedGlobals != null) {
+			generateGlobals(sortedGlobals);
+		}
 		js.append("\n");
 		if (expInOcl.getContextVariable() != null) {
 			for (CGOperation cgOperation : cgClass.getOperations()) {

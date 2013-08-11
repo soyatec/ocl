@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGBoolean()
- * @model
  * @generated
  */
 public interface CGBoolean extends CGConstant {
@@ -51,7 +50,6 @@ public interface CGBoolean extends CGConstant {
 	 * @return the value of the '<em>Boolean Value</em>' attribute.
 	 * @see #setBooleanValue(boolean)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGBoolean_BooleanValue()
-	 * @model required="true"
 	 * @generated
 	 */
 	boolean isBooleanValue();

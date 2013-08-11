@@ -296,7 +296,6 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 		return super.eIsSet(featureID);
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 * @generated

@@ -15,13 +15,18 @@
 package org.eclipse.ocl.examples.codegen.oclinecore;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 
 public final class OCLinEcorePivot2CGVisitor extends Pivot2CGVisitor
 {
@@ -47,39 +52,17 @@ public final class OCLinEcorePivot2CGVisitor extends Pivot2CGVisitor
 	}
 
 	@Override
-	public @NonNull CGVariable getSelfParameter(@NonNull Variable aParameter) {
-		return super.getSelfParameter(aParameter);
-/*		CGVariable cgParameter = basicGetParameter(aParameter);
-		if (cgParameter == null) {
-			cgParameter = CGModelFactory.eINSTANCE.createCGFinalVariable();
-			context.setNames(cgParameter, aParameter);
-			setPivot(cgParameter, aParameter);
-//			cgParameter.setTypeId(context.getTypeId(TypeId.OCL_VOID));			// FIXME Java-specific
-//			addParameter(aParameter, cgParameter);
-//			cgParameter = CGModelFactory.eINSTANCE.createCGParameter();
-//			String selfName = globalContext.getSelfName();
-//			if (selfName.equals(aParameter.getName())) {
-//				cgParameter.setName(selfName);
-//				cgParameter.setValueName("this");
-				cgParameter.setNonInvalid();
-				cgParameter.setNonNull();
-//			}
-//			else {
-				context.setNames(cgParameter, aParameter);
-//			}
-//			setPivot(cgParameter, aParameter); * /
-//				cgParameter.setTypeId(context.getTypeId(TypeId.OCL_VOID));			// FIXME Java-specific
-			Type pivotType = PivotUtil.getContainingType(aParameter);
-			if (pivotType != null) {
-				Class<?> javaClass = globalContext.getCodeGenerator().getGenModelHelper().getEcoreInterfaceClass(pivotType);
-				cgParameter.setTypeId(context.getTypeId(JavaConstants.getJavaTypeId(javaClass)));
+	public @Nullable CGValuedElement visitVariableExp(@NonNull VariableExp pVariableExp) {
+		VariableDeclaration referredVariable = pVariableExp.getReferredVariable();
+		if (referredVariable != null) {
+			EObject eContainer = referredVariable.eContainer();
+			if (eContainer instanceof ExpressionInOCL) {
+				Variable contextVariable = ((ExpressionInOCL)eContainer).getContextVariable();
+				if (referredVariable == contextVariable) {
+					return globalContext.createSelfParameter(contextVariable);
+				}
 			}
-			addParameter(aParameter, cgParameter);
-			CGText thisText = CGModelFactory.eINSTANCE.createCGText();
-//			setNames(thisText, JavaConstants.EVALUATOR_NAME, JavaConstants.EVALUATOR_TYPE_ID);
-			thisText.setTextValue("this");
-			cgParameter.setInit(thisText);
 		}
-		return cgParameter; */
+		return super.visitVariableExp(pVariableExp);
 	}
 }

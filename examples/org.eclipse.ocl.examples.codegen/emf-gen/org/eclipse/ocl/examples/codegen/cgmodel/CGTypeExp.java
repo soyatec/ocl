@@ -27,39 +27,37 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp#getReferredType <em>Referred Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp#getExecutorType <em>Executor Type</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypeExp()
- * @model
  * @generated
  */
 public interface CGTypeExp extends CGValuedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Referred Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Executor Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The shared type.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Referred Type</em>' reference.
-	 * @see #setReferredType(CGExecutorType)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypeExp_ReferredType()
-	 * @model resolveProxies="false" required="true"
+	 * @return the value of the '<em>Executor Type</em>' reference.
+	 * @see #setExecutorType(CGExecutorType)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypeExp_ExecutorType()
 	 * @generated
 	 */
-	CGExecutorType getReferredType();
+	CGExecutorType getExecutorType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp#getReferredType <em>Referred Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp#getExecutorType <em>Executor Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Type</em>' reference.
-	 * @see #getReferredType()
+	 * @param value the new value of the '<em>Executor Type</em>' reference.
+	 * @see #getExecutorType()
 	 * @generated
 	 */
-	void setReferredType(CGExecutorType value);
+	void setExecutorType(CGExecutorType value);
 
 } // CGTypeExp

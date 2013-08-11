@@ -28,7 +28,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGBuiltInIterationCallExp()
- * @model
  * @generated
  */
 public interface CGBuiltInIterationCallExp extends CGIterationCallExp {
@@ -43,7 +42,6 @@ public interface CGBuiltInIterationCallExp extends CGIterationCallExp {
 	 * @return the value of the '<em>Accumulator</em>' containment reference.
 	 * @see #setAccumulator(CGIterator)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGBuiltInIterationCallExp_Accumulator()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGIterator getAccumulator();

@@ -825,9 +825,9 @@ public class OperationImpl
 		/**
 		 * p.oclIsKindOf(self.oclType())
 		 */
-		final @NonNull /*@NonInvalid*/ ParameterableElement self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, this);
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
 		return oclIsKindOf;
 	}
@@ -844,17 +844,15 @@ public class OperationImpl
 		 * inv CompatibleReturn: bodyExpression <> null and bodyExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression)
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ DomainOperation self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
 		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_and;
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = self.getBodyExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = this.getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -863,8 +861,9 @@ public class OperationImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = self.getBodyExpression();
-		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL);
+		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = this.getBodyExpression();
+		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
 		        catch (Exception e) {
@@ -878,8 +877,8 @@ public class OperationImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = self.getBodyExpression();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)bodyExpression_1);
+		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = this.getBodyExpression();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {
@@ -936,12 +935,11 @@ public class OperationImpl
 		 * inv UniquePreconditionName: precondition->isUnique(name)
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ DomainOperation self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = self.getPrecondition();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = this.getPrecondition();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_precondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, precondition);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_precondition.iterator();
@@ -996,12 +994,11 @@ public class OperationImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ DomainOperation self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = self.getPostcondition();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = this.getPostcondition();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_postcondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, postcondition);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_postcondition.iterator();

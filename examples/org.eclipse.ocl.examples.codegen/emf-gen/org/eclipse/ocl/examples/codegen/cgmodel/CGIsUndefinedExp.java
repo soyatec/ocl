@@ -26,7 +26,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIsUndefinedExp()
- * @model
  * @generated
  */
 public interface CGIsUndefinedExp extends CGCallExp {

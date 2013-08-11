@@ -24,7 +24,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
@@ -50,6 +51,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTextParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart;
@@ -59,9 +61,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -71,8 +73,6 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
-//import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-//import org.eclipse.ocl.examples.pivot.PivotPackage;
 
 /**
  * Converts an OCL expression to a string for debugging. This is not intended to
@@ -375,9 +375,11 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	} */
 	
 	@Override
-	public @Nullable String visitCGCastParameter(@NonNull CGCastParameter cgCastParameter) {
+	public @Nullable String visitCGCastExp(@NonNull CGCastExp cgCastExp) {
 		append("$CAST("); //$NON-NLS-1$
-		safeVisit(cgCastParameter.getReferredParameter());
+		safeVisit(cgCastExp.getExecutorType());
+		append(","); //$NON-NLS-1$
+		safeVisit(cgCastExp.getSource());
 		append(")"); //$NON-NLS-1$
 		return null;
 	}
@@ -417,7 +419,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 
 	@Override
 	public @Nullable String visitCGCollectionExp(@NonNull CGCollectionExp cgCollectionExp) {
-		append(cgCollectionExp.getName() + "{");//$NON-NLS-1$
+		append(((CollectionLiteralExp)cgCollectionExp.getPivot()).getKind() + "{");//$NON-NLS-1$
         boolean isFirst = true;
 		for (CGCollectionPart cgPart : cgCollectionExp.getParts()) {
 			if (!isFirst) {
@@ -815,6 +817,12 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	}
 	
 	@Override
+	public @Nullable String visitCGTextParameter(@NonNull CGTextParameter cgTextParameter) {
+		append(cgTextParameter.getTextValue());
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitCGThrowExp(@NonNull CGThrowExp cgThrowExp) {
 		append("$THROW("); //$NON-NLS-1$
 		safeVisit(cgThrowExp.getSource());
@@ -862,25 +870,26 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	@Override
 	public @Nullable String visitCGValuedElement(@NonNull CGValuedElement cgElement) {
 		appendName(cgElement);
-		CGTypeId type = cgElement.getTypeId();
-		append(" : ");
-		if (type != null) {
-			appendElementType(cgElement);
-		}
+//		CGTypeId type = cgElement.getTypeId();
+//		append(" : ");
+//		if (type != null) {
+//			appendElementType(cgElement);
+//		}
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitCGVariable(@NonNull CGVariable cgElement) {
+		appendName(cgElement);
 		CGValuedElement init = cgElement.getInit();
 		if (init != null) {
+			append(" = ");
 			init.accept(this);
 		}
 		else {
-			appendName(cgElement);
 			CGTypeId type = cgElement.getTypeId();
-			append(" : ");
 			if (type != null) {
+				append(" : ");
 				appendElementType(cgElement);
 			}
 		}

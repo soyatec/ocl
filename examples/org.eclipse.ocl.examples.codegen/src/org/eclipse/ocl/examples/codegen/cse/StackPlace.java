@@ -15,22 +15,32 @@
 package org.eclipse.ocl.examples.codegen.cse;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.common.utils.TracingOption;
 
 public abstract class StackPlace extends LocalPlace
 {
+	public static @NonNull StackPlace createStackPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGParameter cgParameter) {
+		AbstractPlace abstractPlace = element2place.get(cgParameter.getParent());
+		if (abstractPlace instanceof StackPlace) {
+			return (StackPlace) abstractPlace;
+		}
+		else {
+			throw new IllegalStateException("No StackPlace");
+		}
+	}
+
 	protected final @NonNull CGElement stackElement;
-	protected final @NonNull EReference eContainmentFeature;
 	private /*@LazyNonNull*/ Set<InnerStackPlace> stackPlaces = null;
 	
-	protected StackPlace(@NonNull GlobalPlace globalPlace, @NonNull CGElement stackElement, @NonNull EReference eContainmentFeature) {
+	protected StackPlace(@NonNull GlobalPlace globalPlace, @NonNull CGElement stackElement) {
 		super(globalPlace);
 		this.stackElement = stackElement;
-		this.eContainmentFeature = eContainmentFeature;
 	}
 
 	void addStackPlace(@NonNull InnerStackPlace stackPlace) {
@@ -51,7 +61,8 @@ public abstract class StackPlace extends LocalPlace
 	
 	@Override
 	public void printHierarchy(@NonNull Appendable appendable, @NonNull String indentation) {
-		super.printHierarchy(appendable, indentation);
+		TracingOption.println(appendable, indentation + this);
+		super.printHierarchy(appendable, indentation+ "  ");
 		if (stackPlaces != null) {
 			for (StackPlace stackPlace : stackPlaces) {
 				stackPlace.printHierarchy(appendable, indentation + "  ");

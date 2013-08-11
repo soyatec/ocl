@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -30,12 +28,6 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 public class CollectionSizeOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionSizeOperation INSTANCE = new CollectionSizeOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull IntegerValue evaluate(@Nullable Object argument) {

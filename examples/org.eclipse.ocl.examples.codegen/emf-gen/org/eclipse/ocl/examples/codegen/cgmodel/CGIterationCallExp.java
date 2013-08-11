@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.pivot.Iteration;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp()
- * @model abstract="true"
  * @generated
  */
 public interface CGIterationCallExp extends CGCallExp {
@@ -47,7 +46,6 @@ public interface CGIterationCallExp extends CGCallExp {
 	 * @return the value of the '<em>Referred Iteration</em>' attribute.
 	 * @see #setReferredIteration(Iteration)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_ReferredIteration()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Iteration" required="true"
 	 * @generated
 	 */
 	Iteration getReferredIteration();
@@ -73,7 +71,6 @@ public interface CGIterationCallExp extends CGCallExp {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Iterators</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_Iterators()
-	 * @model containment="true"
 	 * @generated
 	 */
 	List<CGIterator> getIterators();
@@ -89,7 +86,6 @@ public interface CGIterationCallExp extends CGCallExp {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_Body()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getBody();

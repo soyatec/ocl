@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.oclinecore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
@@ -39,10 +40,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -142,16 +143,15 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 //			System.out.println("generateBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
 //		}
 		js.appendCommentWithOCL(null, cgBody.getPivot());
-		js.appendCastParameters(localContext);
-		JavaDependencyVisitor dependencyVisitor = new JavaDependencyVisitor(localContext);
-		dependencyVisitor.visit(cgBody);
-		dependencyVisitor.visitAll(localContext.getLocalVariables());
-		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-		for (CGValuedElement cgElement : sortedDependencies) {
-			if (!cgElement.isInlineable() && cgElement.isConstant() && !cgElement.isGlobal()) {
-				cgElement.accept(this);
-			}
-		}
+//		JavaDependencyVisitor dependencyVisitor = new JavaDependencyVisitor(localContext, null);
+//		dependencyVisitor.visit(cgBody);
+//		dependencyVisitor.visitAll(localContext.getLocalVariables());
+//		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
+//		for (CGValuedElement cgElement : sortedDependencies) {
+//			if (!cgElement.isInlined() && cgElement.isConstant() && !cgElement.isGlobal()) {
+//				cgElement.accept(this);
+//			}
+//		}
 		// FIXME merge locals into AST as LetExps.
 		js.appendLocalStatements(cgBody);
 		if (cgBody.isInvalid()) {
@@ -166,13 +166,17 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		return toString();
 	}
 
-	public @NonNull String generateConstants() {
+	public @NonNull String generateConstants(@NonNull GlobalPlace globalPlace) {
 		js.resetStream();
 		js.pushIndentation(null);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
+//		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
+//		GlobalPlace globalPlace = cseEliminator.optimize(cgPackage);
+		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(globalPlace);
 		dependencyVisitor.visitAll(globalContext.getGlobals());
-		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-		generateGlobals(sortedDependencies);
+		List<CGValuedElement> sortedGlobals = globalPlace.getSortedGlobals(dependencyVisitor);
+		if (sortedGlobals != null) {
+			generateGlobals(sortedGlobals);
+		}
 		return toString();
 	}
 
@@ -191,16 +195,15 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		String validatorClass = genModelHelper.getQualifiedValidatorClassName(genPackage);
 
 		js.appendCommentWithOCL(null, pivotConstraint);
-		js.appendCastParameters(localContext);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(localContext);
-		dependencyVisitor.visit(cgBody);
-		dependencyVisitor.visitAll(localContext.getLocalVariables());
-		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-		for (CGValuedElement cgElement : sortedDependencies) {
-			if (!cgElement.isInlineable() && cgElement.isConstant() && !cgElement.isGlobal()) {
-				cgElement.accept(this);
-			}
-		}
+//		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(localContext, null);
+//		dependencyVisitor.visit(cgBody);
+//		dependencyVisitor.visitAll(localContext.getLocalVariables());
+//		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
+//		for (CGValuedElement cgElement : sortedDependencies) {
+//			if (!cgElement.isInlined() && cgElement.isConstant() && !cgElement.isGlobal()) {
+//				cgElement.accept(this);
+//			}
+//		}
 		// FIXME merge locals into AST as LetExps.
 		js.appendLocalStatements(cgBody);		// FieldingAnalyzer override ensures this is caught
 		js.append("if (");
@@ -270,7 +273,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	}
 
 	protected @NonNull OCLinEcoreLocalContext getLocalContext() {
-		return (OCLinEcoreLocalContext) localContext;
+		return DomainUtil.nonNullState((OCLinEcoreLocalContext) localContext);
 	}
 	
 	protected String getRuleName(@NonNull Constraint constraint) {
@@ -287,7 +290,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	public @Nullable Object visitCGConstantExp(@NonNull CGConstantExp cgConstantExp) {
 		CGValuedElement globalConstant = cgConstantExp.getReferredConstant();
 		if (globalConstant != null) {
-			appendGlobalPrefix();
+			if (!cgConstantExp.isInlined()) {
+				appendGlobalPrefix();
+			}
 			js.appendValueName(globalConstant);
 		}
 		return null;

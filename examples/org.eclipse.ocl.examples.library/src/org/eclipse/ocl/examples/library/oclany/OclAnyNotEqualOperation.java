@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -32,12 +31,6 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 {
 	public static final @NonNull OclAnyNotEqualOperation INSTANCE = new OclAnyNotEqualOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		return evaluate(left, right);
-	}
 
 	@Override
 	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {

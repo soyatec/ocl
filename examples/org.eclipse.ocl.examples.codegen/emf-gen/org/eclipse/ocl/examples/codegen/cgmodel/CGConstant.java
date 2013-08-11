@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 import org.eclipse.jdt.annotation.NonNull;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>CG Global Constant</b></em>'.
@@ -31,7 +32,6 @@ import org.eclipse.jdt.annotation.NonNull;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstant()
- * @model abstract="true"
  * @generated
  */
 public interface CGConstant extends CGValuedElement {
@@ -41,6 +41,6 @@ public interface CGConstant extends CGValuedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$1
 	@NonNull Object getConstantValue();
 } // CGGlobalConstant

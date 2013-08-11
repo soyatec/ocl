@@ -344,6 +344,14 @@ public class DomainUtil
 		return String.valueOf(eObject);
 	}
 
+	public static String getIndentation(int depth, @NonNull String string) {
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < depth; i++) {
+			s.append(string);
+		}
+		return s.toString();
+	}
+
 	/**
 	 * Return a simple readable description of object. If non-null eClassifier
 	 * identifoes the type of object. If non-null context may provide an ESubstitutionLabelProvider.

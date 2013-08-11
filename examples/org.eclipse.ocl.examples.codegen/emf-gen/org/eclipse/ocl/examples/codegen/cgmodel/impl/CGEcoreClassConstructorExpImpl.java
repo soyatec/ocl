@@ -177,15 +177,6 @@ public class CGEcoreClassConstructorExpImpl extends CGConstructorExpImpl impleme
 	 * @generated
 	 */
 	@Override
-	public boolean isGlobal() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isUnboxed() {
 		return true;
 	}

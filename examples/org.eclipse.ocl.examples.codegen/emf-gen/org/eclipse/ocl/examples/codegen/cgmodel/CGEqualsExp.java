@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEqualsExp()
- * @model
  * @generated
  */
 public interface CGEqualsExp extends CGCallExp {
@@ -48,7 +47,6 @@ public interface CGEqualsExp extends CGCallExp {
 	 * @return the value of the '<em>Argument</em>' containment reference.
 	 * @see #setArgument(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEqualsExp_Argument()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGValuedElement getArgument();

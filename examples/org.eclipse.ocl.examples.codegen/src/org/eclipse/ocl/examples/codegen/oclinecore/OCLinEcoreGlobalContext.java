@@ -17,8 +17,12 @@ package org.eclipse.ocl.examples.codegen.oclinecore;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTextParameter;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
+import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
  * A JavaGlobalContext maintains the Java-specific global context for generation of code.
@@ -35,6 +39,18 @@ public class OCLinEcoreGlobalContext extends JavaGlobalContext
 	@Override
 	public @NonNull OCLinEcoreLocalContext createNestedContext(@NonNull CGElement cgScope) {
 		return new OCLinEcoreLocalContext(this, cgScope);
+	}
+
+	public @NonNull CGParameter createSelfParameter(@NonNull Variable contextVariable) {
+		CGTextParameter cgTextParameter = CGModelFactory.eINSTANCE.createCGTextParameter();
+		cgTextParameter.setName(contextVariable.getName());
+		cgTextParameter.setValueName(getSelfName());
+		cgTextParameter.setPivot(contextVariable);
+		cgTextParameter.setTextValue("this");
+		cgTextParameter.setNonInvalid();
+		cgTextParameter.setNonNull();
+		cgTextParameter.setTypeId(analyzer.getTypeId(contextVariable.getTypeId()));
+		return cgTextParameter;
 	}
 
 	public @NonNull String getTablesClassName() {

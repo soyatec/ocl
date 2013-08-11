@@ -33,7 +33,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperationCallExp()
- * @model abstract="true"
  * @generated
  */
 public interface CGOperationCallExp extends CGCallExp {
@@ -48,7 +47,6 @@ public interface CGOperationCallExp extends CGCallExp {
 	 * @return the value of the '<em>Referred Operation</em>' attribute.
 	 * @see #setReferredOperation(Operation)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperationCallExp_ReferredOperation()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Operation" required="true"
 	 * @generated
 	 */
 	Operation getReferredOperation();
@@ -74,7 +72,6 @@ public interface CGOperationCallExp extends CGCallExp {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Arguments</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperationCallExp_Arguments()
-	 * @model containment="true"
 	 * @generated
 	 */
 	@NonNull List<CGValuedElement> getArguments();

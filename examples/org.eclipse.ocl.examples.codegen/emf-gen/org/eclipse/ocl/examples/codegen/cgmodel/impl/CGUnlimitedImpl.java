@@ -17,7 +17,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -31,13 +31,13 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
  *
  * @generated
  */
-public class CGInfinityImpl extends CGConstantImpl implements CGInfinity {
+public class CGUnlimitedImpl extends CGConstantImpl implements CGUnlimited {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGInfinityImpl() {
+	protected CGUnlimitedImpl() {
 		super();
 	}
 
@@ -48,7 +48,7 @@ public class CGInfinityImpl extends CGConstantImpl implements CGInfinity {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CGModelPackage.Literals.CG_INFINITY;
+		return CGModelPackage.Literals.CG_UNLIMITED;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class CGInfinityImpl extends CGConstantImpl implements CGInfinity {
 	 */
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGInfinity(this);
+		return visitor.visitCGUnlimited(this);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class CGInfinityImpl extends CGConstantImpl implements CGInfinity {
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return true;
 	}
 

@@ -47,11 +47,6 @@ public class JUnitCodeGenerator extends JavaCodeGenerator
 		return ImportUtils.resolveImports(generator.toString(), long2ShortImportNames);
 	}
 
-	@Override
-	protected @NonNull JUnitGlobalContext createGlobalContext() {
-		return new JUnitGlobalContext(this);
-	}
-
 	public @NonNull CodeGenAnalyzer getAnalyzer() {
 		return cgAnalyzer;
 	}

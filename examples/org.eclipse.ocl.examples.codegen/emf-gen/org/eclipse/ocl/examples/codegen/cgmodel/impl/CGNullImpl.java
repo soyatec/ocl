@@ -73,7 +73,7 @@ public class CGNullImpl extends CGConstantImpl implements CGNull {
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return true;
 	}
 

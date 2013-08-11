@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -71,7 +70,7 @@ public class CGCatchExpImpl extends CGCallExpImpl implements CGCatchExp {
 	 */
 	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return CatchPlace.createPlace(element2place, this);
+		return CatchPlace.createCatchPlace(element2place, this);
 	}
 
 	/**

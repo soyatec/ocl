@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.Property;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPropertyCallExp()
- * @model abstract="true"
  * @generated
  */
 public interface CGPropertyCallExp extends CGCallExp {
@@ -45,7 +44,6 @@ public interface CGPropertyCallExp extends CGCallExp {
 	 * @return the value of the '<em>Referred Property</em>' attribute.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPropertyCallExp_ReferredProperty()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Property" required="true"
 	 * @generated
 	 */
 	Property getReferredProperty();

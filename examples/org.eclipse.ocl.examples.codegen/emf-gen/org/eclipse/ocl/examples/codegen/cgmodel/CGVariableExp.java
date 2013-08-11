@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGVariableExp()
- * @model
  * @generated
  */
 public interface CGVariableExp extends CGValuedElement {
@@ -47,7 +46,6 @@ public interface CGVariableExp extends CGValuedElement {
 	 * @return the value of the '<em>Referred Variable</em>' reference.
 	 * @see #setReferredVariable(CGVariable)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGVariableExp_ReferredVariable()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGVariable getReferredVariable();

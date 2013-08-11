@@ -29,8 +29,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  */
 public class IfPlaces
 {
-	public static @NonNull LocalPlace createPlaces(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGIfExp cgIfExp) {
-		ControlPlace ifPlace = ControlPlace.createPlace(element2place, cgIfExp);
+	public static @NonNull LocalPlace createIfPlaces(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGIfExp cgIfExp) {
+		ControlPlace ifPlace = ControlPlace.getControlPlace(element2place, cgIfExp);
 		CGValuedElement cgThenExp = cgIfExp.getThenExpression();
 		CGValuedElement cgElseExp = cgIfExp.getElseExpression();
 		if ((cgThenExp != null) && (cgElseExp != null)) {

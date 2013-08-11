@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionPart()
- * @model
  * @generated
  */
 public interface CGCollectionPart extends CGValuedElement {
@@ -46,7 +45,6 @@ public interface CGCollectionPart extends CGValuedElement {
 	 * @return the value of the '<em>First</em>' containment reference.
 	 * @see #setFirst(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionPart_First()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getFirst();
@@ -72,7 +70,6 @@ public interface CGCollectionPart extends CGValuedElement {
 	 * @return the value of the '<em>Last</em>' containment reference.
 	 * @see #setLast(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionPart_Last()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getLast();
@@ -99,7 +96,6 @@ public interface CGCollectionPart extends CGValuedElement {
 	 * @return the value of the '<em>Collection Exp</em>' container reference.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionPart_CollectionExp()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp#getParts
-	 * @model opposite="parts" resolveProxies="false" required="true" transient="false" changeable="false"
 	 * @generated
 	 */
 	CGCollectionExp getCollectionExp();
@@ -109,7 +105,7 @@ public interface CGCollectionPart extends CGValuedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$16
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$18
 	boolean isRange();
 
 } // CGCollectionPart

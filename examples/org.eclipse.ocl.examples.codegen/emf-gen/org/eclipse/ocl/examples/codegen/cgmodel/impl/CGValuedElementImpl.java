@@ -17,10 +17,13 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
@@ -37,6 +40,7 @@ import org.eclipse.ocl.examples.codegen.cse.ControlPlace;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getDependsOn <em>Depends On</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getOwns <em>Owns</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,6 +56,16 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @ordered
 	 */
 	protected EList<CGValuedElement> dependsOn;
+
+	/**
+	 * The cached value of the '{@link #getOwns() <em>Owns</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwns()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGValuedElement> owns;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,11 +103,39 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<CGValuedElement> getOwns() {
+		if (owns == null) {
+			owns = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_VALUED_ELEMENT__OWNS);
+		}
+		return owns;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case CGModelPackage.CG_VALUED_ELEMENT__OWNS:
+				return ((InternalEList<?>)getOwns()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				return getDependsOn();
+			case CGModelPackage.CG_VALUED_ELEMENT__OWNS:
+				return getOwns();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -111,6 +153,10 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 				getDependsOn().clear();
 				getDependsOn().addAll((Collection<? extends CGValuedElement>)newValue);
 				return;
+			case CGModelPackage.CG_VALUED_ELEMENT__OWNS:
+				getOwns().clear();
+				getOwns().addAll((Collection<? extends CGValuedElement>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -126,6 +172,9 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				getDependsOn().clear();
 				return;
+			case CGModelPackage.CG_VALUED_ELEMENT__OWNS:
+				getOwns().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -140,10 +189,11 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				return dependsOn != null && !dependsOn.isEmpty();
+			case CGModelPackage.CG_VALUED_ELEMENT__OWNS:
+				return owns != null && !owns.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
-
 
 	/**
 	 * {@inheritDoc}
@@ -151,7 +201,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 */
 	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return ControlPlace.createPlace(element2place, this);
+		return ControlPlace.createControlPlace(element2place, this);
 	}
 
 	/**
@@ -263,9 +313,9 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isInlineable();
+		return (referredValue != this) && referredValue.isInlined();
 	}
 
 	/**
@@ -330,6 +380,23 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 //		CGValuedElement value = getValue();
 		assert referredValue != this : "isUnboxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
 		return referredValue.isUnboxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isUncommonable() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
+		return false;
 	}
 
 	/**

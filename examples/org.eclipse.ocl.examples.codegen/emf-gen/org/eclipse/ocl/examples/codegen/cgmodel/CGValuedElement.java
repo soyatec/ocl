@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -31,11 +30,11 @@ import org.eclipse.jdt.annotation.Nullable;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getDependsOn <em>Depends On</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getOwns <em>Owns</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGValuedElement()
- * @model abstract="true"
  * @generated
  */
 public interface CGValuedElement extends CGTypedElement {
@@ -50,10 +49,24 @@ public interface CGValuedElement extends CGTypedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Depends On</em>' reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGValuedElement_DependsOn()
-	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	List<CGValuedElement> getDependsOn();
+
+	/**
+	 * Returns the value of the '<em><b>Owns</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owns</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owns</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGValuedElement_Owns()
+	 * @generated
+	 */
+	List<CGValuedElement> getOwns();
 
 	/**
 	 * Return the value to which this valuedElement delegates to obtain its value.
@@ -61,7 +74,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$3
 	@NonNull CGValuedElement getReferredValuedElement();
 
 	/**
@@ -69,7 +82,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$4
 	@NonNull CGValuedElement getValue();
 
 	/**
@@ -78,7 +91,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$5
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$5
 	@Nullable String getValueName();
 
 	/**
@@ -86,7 +99,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$6
 	boolean isBoxed();
 
 	/**
@@ -95,7 +108,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$7
 	boolean isCaught();
 
 	/**
@@ -111,7 +124,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$9
 	boolean isConstant();
 
 	/**
@@ -119,7 +132,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$11
 	boolean isFalse();
 
 	/**
@@ -127,7 +140,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$12
 	boolean isGlobal();
 
 	/**
@@ -135,15 +148,15 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
-	boolean isInlineable();
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$13
+	boolean isInlined();
 
 	/**
 	 * Return true if this value is false.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$14
 	boolean isInvalid();
 
 	/**
@@ -151,7 +164,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$15
 	boolean isNonInvalid();
 
 	/**
@@ -159,7 +172,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$16
 	boolean isNonNull();
 
 	/**
@@ -167,7 +180,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$17
 	boolean isNull();
 
 	/**
@@ -175,7 +188,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$19
 	boolean isSettable();
 
 	/**
@@ -183,7 +196,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$20
 	boolean isTrue();
 
 	/**
@@ -191,15 +204,23 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$21
 	boolean isUnboxed();
+
+	/**
+	 * Return true if this value does not have to be shared as part of a Common Subexpression.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$22
+	boolean isUncommonable();
 
 	/**
 	 * Set the caught status.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$23
 	void setCaught(boolean isCaught);
 
 	/**
@@ -207,6 +228,6 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$23
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$26
 	void setValueName(@NonNull String valueName);
 } // CGValuedElement

@@ -16,40 +16,38 @@ package org.eclipse.ocl.examples.codegen.cse;
 
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 
 /**
  * An InnerStackPlace describes either the body forest of CG trees for a loop expression.
  */
 public class InnerStackPlace extends StackPlace
 {
-	public static @NonNull LocalPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGIterationCallExp cgLoopExp) {
-		ControlPlace loopPlace = ControlPlace.createPlace(element2place, cgLoopExp);
-		StackPlace stackPlace = loopPlace.getStackPlace();
+	public static @NonNull LocalPlace createInnerStackPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGIterationCallExp cgLoopExp) {
+		ControlPlace loopPlace = ControlPlace.getControlPlace(element2place, cgLoopExp);
 		CGValuedElement cgBodyExp = cgLoopExp.getBody();
 		if (cgBodyExp != null) {
-			@SuppressWarnings("null")@NonNull EReference loopExpBody = PivotPackage.Literals.LOOP_EXP__BODY;
-			InnerStackPlace bodyPlace = new InnerStackPlace(stackPlace, cgBodyExp, loopExpBody);
+//			@SuppressWarnings("null")@NonNull EReference loopExpBody = PivotPackage.Literals.LOOP_EXP__BODY;
+			InnerStackPlace innerPlace = new InnerStackPlace(loopPlace, cgBodyExp);
+			ControlPlace bodyPlace = new ControlPlace(innerPlace, cgBodyExp);
 			element2place.put(cgBodyExp, bodyPlace);
 		}
 		return loopPlace;
 	}
 	
-	protected final @NonNull StackPlace parentPlace;
+	protected final @NonNull ControlPlace parentPlace;
 	
-	private InnerStackPlace(@NonNull StackPlace parentPlace, @NonNull CGValuedElement cgBodyExp, @NonNull EReference eContainmentFeature) {
-		super(parentPlace.getGlobalPlace(), cgBodyExp, eContainmentFeature);
+	private InnerStackPlace(@NonNull ControlPlace parentPlace, @NonNull CGValuedElement cgBodyExp) {
+		super(parentPlace.getGlobalPlace(), cgBodyExp);
 		this.parentPlace = parentPlace;
-		parentPlace.addStackPlace(this);
+		parentPlace.getStackPlace().addStackPlace(this);
 	}
 	
 	@Override
-	public @NonNull StackPlace getParentPlace() {
+	public @NonNull ControlPlace getParentPlace() {
 		return parentPlace;
 	}
 }

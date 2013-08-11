@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EOperation;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreOperationCallExp()
- * @model
  * @generated
  */
 public interface CGEcoreOperationCallExp extends CGOperationCallExp {
@@ -44,7 +43,6 @@ public interface CGEcoreOperationCallExp extends CGOperationCallExp {
 	 * @return the value of the '<em>EOperation</em>' reference.
 	 * @see #setEOperation(EOperation)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreOperationCallExp_EOperation()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	EOperation getEOperation();

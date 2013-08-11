@@ -33,7 +33,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTextParameter()
- * @model
  * @generated
  */
 public interface CGTextParameter extends CGParameter {
@@ -47,7 +46,6 @@ public interface CGTextParameter extends CGParameter {
 	 * @return the value of the '<em>Text Value</em>' attribute.
 	 * @see #setTextValue(String)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTextParameter_TextValue()
-	 * @model required="true"
 	 * @generated
 	 */
 	String getTextValue();

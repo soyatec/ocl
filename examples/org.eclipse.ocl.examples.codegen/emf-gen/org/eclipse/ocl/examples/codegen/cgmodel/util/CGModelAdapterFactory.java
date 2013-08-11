@@ -97,8 +97,8 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGCallExpAdapter();
 			}
 			@Override
-			public Adapter caseCGCastParameter(CGCastParameter object) {
-				return createCGCastParameterAdapter();
+			public Adapter caseCGCastExp(CGCastExp object) {
+				return createCGCastExpAdapter();
 			}
 			@Override
 			public Adapter caseCGCatchExp(CGCatchExp object) {
@@ -143,6 +143,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGEcoreDataTypeConstructorExp(CGEcoreDataTypeConstructorExp object) {
 				return createCGEcoreDataTypeConstructorExpAdapter();
+			}
+			@Override
+			public Adapter caseCGEcoreOperation(CGEcoreOperation object) {
+				return createCGEcoreOperationAdapter();
 			}
 			@Override
 			public Adapter caseCGEcoreOperationCallExp(CGEcoreOperationCallExp object) {
@@ -213,10 +217,6 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGIfExpAdapter();
 			}
 			@Override
-			public Adapter caseCGInfinity(CGInfinity object) {
-				return createCGInfinityAdapter();
-			}
-			@Override
 			public Adapter caseCGInteger(CGInteger object) {
 				return createCGIntegerAdapter();
 			}
@@ -251,6 +251,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGLibraryIterationCallExp(CGLibraryIterationCallExp object) {
 				return createCGLibraryIterationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseCGLibraryOperation(CGLibraryOperation object) {
+				return createCGLibraryOperationAdapter();
 			}
 			@Override
 			public Adapter caseCGLibraryOperationCallExp(CGLibraryOperationCallExp object) {
@@ -351,6 +355,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGUnboxExp(CGUnboxExp object) {
 				return createCGUnboxExpAdapter();
+			}
+			@Override
+			public Adapter caseCGUnlimited(CGUnlimited object) {
+				return createCGUnlimitedAdapter();
 			}
 			@Override
 			public Adapter caseCGValuedElement(CGValuedElement object) {
@@ -459,16 +467,16 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter <em>CG Cast Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp <em>CG Cast Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp
 	 * @generated
 	 */
-	public Adapter createCGCastParameterAdapter() {
+	public Adapter createCGCastExpAdapter() {
 		return null;
 	}
 
@@ -581,20 +589,6 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGEcorePropertyCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity <em>CG Infinity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity
-	 * @generated
-	 */
-	public Adapter createCGInfinityAdapter() {
 		return null;
 	}
 
@@ -795,6 +789,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation <em>CG Ecore Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation
+	 * @generated
+	 */
+	public Adapter createCGEcoreOperationAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp <em>CG Let Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -833,6 +841,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGLibraryIterationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation <em>CG Library Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation
+	 * @generated
+	 */
+	public Adapter createCGLibraryOperationAdapter() {
 		return null;
 	}
 
@@ -1337,6 +1359,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGUnboxExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited <em>CG Unlimited</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited
+	 * @generated
+	 */
+	public Adapter createCGUnlimitedAdapter() {
 		return null;
 	}
 

@@ -139,14 +139,13 @@ public class IntegerLiteralExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ IntegerLiteralExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_Integer = idResolver.getType(TypeId.INTEGER, null);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Integer);
+		    final @NonNull /*@NonInvalid*/ DomainType TYP_Integer_0 = idResolver.getType(TypeId.INTEGER, null);
+		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Integer_0);
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {

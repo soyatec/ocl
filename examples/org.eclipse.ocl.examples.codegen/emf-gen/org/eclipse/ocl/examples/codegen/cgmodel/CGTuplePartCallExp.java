@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePartCallExp()
- * @model
  * @generated
  */
 public interface CGTuplePartCallExp extends CGPropertyCallExp {
@@ -45,7 +44,6 @@ public interface CGTuplePartCallExp extends CGPropertyCallExp {
 	 * @return the value of the '<em>Pivot Tuple Part Id</em>' attribute.
 	 * @see #setPivotTuplePartId(TuplePartId)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePartCallExp_PivotTuplePartId()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.TuplePartId" required="true"
 	 * @generated
 	 */
 	TuplePartId getPivotTuplePartId();

@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcorePropertyCallExp()
- * @model
  * @generated
  */
 public interface CGEcorePropertyCallExp extends CGPropertyCallExp {
@@ -48,7 +47,6 @@ public interface CGEcorePropertyCallExp extends CGPropertyCallExp {
 	 * @return the value of the '<em>EStructural Feature</em>' reference.
 	 * @see #setEStructuralFeature(EStructuralFeature)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcorePropertyCallExp_EStructuralFeature()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	EStructuralFeature getEStructuralFeature();

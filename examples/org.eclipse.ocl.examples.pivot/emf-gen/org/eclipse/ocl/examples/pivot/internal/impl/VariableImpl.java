@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
@@ -234,13 +235,13 @@ public class VariableImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Variable self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_ne;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression initExpression = self.getInitExpression();
+		        final @Nullable /*@Thrown*/ DomainExpression initExpression = this.getInitExpression();
 		        final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(initExpression, null);
 		        CAUGHT_ne = ne;
 		    }
@@ -249,12 +250,12 @@ public class VariableImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression initExpression_0 = self.getInitExpression();
+		        final @Nullable /*@Thrown*/ DomainExpression initExpression_0 = this.getInitExpression();
 		        if (initExpression_0 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = initExpression_0.getType();
-		        final @Nullable /*@Thrown*/ DomainType type_0 = self.getType();
+		        final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		        CAUGHT_conformsTo = conformsTo;
 		    }

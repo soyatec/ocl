@@ -24,6 +24,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * <!-- begin-user-doc -->
@@ -161,6 +163,15 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * @generated
 	 */
 	@Override
+	public @Nullable TypeId getPivotTypeId() {
+		return pivot != null ? ((DomainType) pivot).getTypeId() : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getValue() {
 		return this;
 	}
@@ -234,6 +245,15 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 */
 	@Override
 	public boolean isUnboxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
 		return false;
 	}
 

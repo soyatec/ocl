@@ -110,7 +110,7 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return isConstant();
 	}
 

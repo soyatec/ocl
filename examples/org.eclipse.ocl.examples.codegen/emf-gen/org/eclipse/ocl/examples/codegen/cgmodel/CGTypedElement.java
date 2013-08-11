@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>CG Typed Element</b></em>'.
@@ -31,7 +32,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypedElement()
- * @model abstract="true"
  * @generated
  */
 public interface CGTypedElement extends CGNamedElement {
@@ -47,7 +47,6 @@ public interface CGTypedElement extends CGNamedElement {
 	 * @return the value of the '<em>Type Id</em>' reference.
 	 * @see #setTypeId(CGTypeId)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypedElement_TypeId()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGTypeId getTypeId();
@@ -74,7 +73,6 @@ public interface CGTypedElement extends CGNamedElement {
 	 * @return the value of the '<em>Required</em>' attribute.
 	 * @see #setRequired(boolean)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypedElement_Required()
-	 * @model default="false" required="true"
 	 * @generated
 	 */
 	boolean isRequired();
@@ -94,6 +92,6 @@ public interface CGTypedElement extends CGNamedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGTypedElementModelSpec$1
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGTypedElementModelSpec$1
 	@Nullable TypeId getPivotTypeId();
 } // CGTypedElement

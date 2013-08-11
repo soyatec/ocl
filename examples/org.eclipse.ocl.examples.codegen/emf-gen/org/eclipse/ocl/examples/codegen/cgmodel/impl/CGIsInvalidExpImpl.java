@@ -110,7 +110,7 @@ public class CGIsInvalidExpImpl extends CGCallExpImpl implements CGIsInvalidExp 
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return isConstant();
 	}
 

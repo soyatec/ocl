@@ -273,6 +273,15 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	 * @generated
 	 */
 	@Override
+	public boolean isInlined() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return false;
 	}

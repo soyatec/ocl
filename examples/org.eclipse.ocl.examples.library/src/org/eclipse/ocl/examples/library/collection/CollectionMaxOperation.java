@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -32,12 +30,6 @@ import org.eclipse.ocl.examples.library.numeric.NumericMaxOperation;
 public class CollectionMaxOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionMaxOperation INSTANCE = new CollectionMaxOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull Object evaluate(@Nullable Object sourceVal) {

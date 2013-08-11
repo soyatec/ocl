@@ -58,8 +58,8 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 		return visitCGValuedElement(object);
 	}
 
-	public @Nullable R visitCGCastParameter(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter object) {
-		return visitCGParameter(object);
+	public @Nullable R visitCGCastExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp object) {
+		return visitCGCallExp(object);
 	}
 
 	public @Nullable R visitCGCatchExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp object) {
@@ -104,6 +104,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 
 	public @Nullable R visitCGEcoreDataTypeConstructorExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp object) {
 		return visitCGConstructorExp(object);
+	}
+
+	public @Nullable R visitCGEcoreOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation object) {
+		return visitCGOperation(object);
 	}
 
 	public @Nullable R visitCGEcoreOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp object) {
@@ -174,10 +178,6 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 		return visitCGValuedElement(object);
 	}
 
-	public @Nullable R visitCGInfinity(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity object) {
-		return visitCGConstant(object);
-	}
-
 	public @Nullable R visitCGInteger(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInteger object) {
 		return visitCGConstant(object);
 	}
@@ -212,6 +212,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 
 	public @Nullable R visitCGLibraryIterationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp object) {
 		return visitCGIterationCallExp(object);
+	}
+
+	public @Nullable R visitCGLibraryOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation object) {
+		return visitCGOperation(object);
 	}
 
 	public @Nullable R visitCGLibraryOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp object) {
@@ -312,6 +316,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 
 	public @Nullable R visitCGUnboxExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp object) {
 		return visitCGCallExp(object);
+	}
+
+	public @Nullable R visitCGUnlimited(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited object) {
+		return visitCGConstant(object);
 	}
 
 	public @Nullable R visitCGValuedElement(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement object) {

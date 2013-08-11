@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
@@ -35,11 +35,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreClassConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
@@ -48,7 +50,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
@@ -58,6 +59,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable;
@@ -79,6 +81,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
@@ -86,10 +89,12 @@ import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.CatchPlace;
 import org.eclipse.ocl.examples.codegen.cse.ControlPlace;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
+import org.eclipse.ocl.examples.codegen.cse.IfPlaces;
 import org.eclipse.ocl.examples.codegen.cse.InnerStackPlace;
 import org.eclipse.ocl.examples.codegen.cse.LetPlaces;
+import org.eclipse.ocl.examples.codegen.cse.LocalPlace;
 import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
-import org.eclipse.ocl.examples.codegen.cse.IfPlaces;
+import org.eclipse.ocl.examples.codegen.cse.StackPlace;
 import org.eclipse.ocl.examples.codegen.cse.ThrowPlace;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -124,12 +129,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for isBoxed()/isUnboxed()
 	 */
-	protected static enum Box { BIBOX, DELEG, FALSE, IF, OP, PARAM, RANGE, TRUE }
+	protected static enum Box { BIBOX, DELEG, FALSE, IF, PARAM, RANGE, TRUE }
 
 	/**
-	 * The algorithm options for isCommonable()
+	 * The algorithm options for isCommonable()/isUncommonable()
 	 */
-	protected static enum Com { FALSE, TRUE }
+	protected static enum Com { DELEG, FALSE, MAY, MUST }
 
 	/**
 	 * The algorithm options for isConstant()
@@ -139,7 +144,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for getPlace()
 	 */
-	protected static enum Ctl { BODY, CATCH, CNTRL, GLOBL, IF, INNER, LET, THROW, UNSUP }
+	protected static enum Ctl { BODY, CATCH, CNTRL, GLOBL, IF, INNER, LET, LORG, PARAM, THROW, UNSUP }
 
 	/**
 	 * The algorithm options for isContext()
@@ -162,9 +167,9 @@ public class CGValuedElementModelSpec extends ModelSpec
 	protected static enum Glo { CPART, DELEG, FALSE, PARTS, ROOT, TRUE }
 
 	/**
-	 * The algorithm options for isInlineable()
+	 * The algorithm options for isInlined()
 	 */
-	protected static enum Inl { FALSE, ISCON, ROOT, TRUE, T_ID }
+	protected static enum Inl { CPART, FALSE, ISCON, ROOT, TRUE, T_ID }
 
 	/**
 	 * The algorithm options for isInvalid()/isNonInvalid()/setNonInvalid()
@@ -187,6 +192,11 @@ public class CGValuedElementModelSpec extends ModelSpec
 	protected static enum Ref { CPART, DELEG, PARTS, THIS }
 
 	/**
+	 * The algorithm options for rewriteAs()
+	 */
+	protected static enum Rew { PART, PROP, TYPE, UNSUP, VAREX }
+
+	/**
 	 * The algorithm options for isSettable()
 	 */
 	protected static enum Set { FALSE, TRUE }
@@ -194,7 +204,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for getValue()
 	 */
-	protected static enum Val { DELEG, REF, ROOT, THIS, TYPEX }
+	protected static enum Val { CPART, DELEG, REF, ROOT, THIS, TYPEX }
 	
 	protected static MethodSpec getConstantValue = new MyMethodSpec(CGConstant.class, "@NonNull Object getConstantValue()", null,
 		"Return the constant (boxed) value of this element.")
@@ -231,14 +241,16 @@ public class CGValuedElementModelSpec extends ModelSpec
 					return null;
 				}
 				switch (enumValue) {
-					case BODY: 		return "return " + classRef(OuterStackPlace.class) + ".createPlace(element2place, this, body);";
-					case CATCH: 	return "return " + classRef(CatchPlace.class) + ".createPlace(element2place, this);";
-					case CNTRL: 	return "return " + classRef(ControlPlace.class) + ".createPlace(element2place, this);";
-					case GLOBL: 	return "return " + classRef(GlobalPlace.class) + ".createPlace(element2place, this);";
-					case IF: 		return "return " + classRef(IfPlaces.class) + ".createPlaces(element2place, this);";
-					case LET: 		return "return " + classRef(LetPlaces.class) + ".createPlaces(element2place, this);";
-					case INNER: 	return "return " + classRef(InnerStackPlace.class) + ".createPlace(element2place, this);";
-					case THROW: 	return "return " + classRef(ThrowPlace.class) + ".createPlace(element2place, this);";
+					case BODY: 		return "return " + classRef(OuterStackPlace.class) + ".createOuterStackPlace(element2place, this);";
+					case CATCH: 	return "return " + classRef(CatchPlace.class) + ".createCatchPlace(element2place, this);";
+					case CNTRL: 	return "return " + classRef(ControlPlace.class) + ".createControlPlace(element2place, this);";
+					case GLOBL: 	return "return " + classRef(GlobalPlace.class) + ".createGlobalPlace(element2place, this);";
+					case IF: 		return "return " + classRef(IfPlaces.class) + ".createIfPlaces(element2place, this);";
+					case INNER: 	return "return " + classRef(InnerStackPlace.class) + ".createInnerStackPlace(element2place, this);";
+					case LET: 		return "return " + classRef(LetPlaces.class) + ".createLetPlaces(element2place, this);";
+					case LORG: 		return "return " + classRef(LocalPlace.class) + ".createLocalPlace(element2place, this);";
+					case PARAM: 	return "return " + classRef(StackPlace.class) + ".createStackPlace(element2place, this);";
+					case THROW: 	return "return " + classRef(ThrowPlace.class) + ".createThrowPlace(element2place, this);";
 					case UNSUP: 	return "throw new UnsupportedOperationException();";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
@@ -296,6 +308,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					return null;
 				}
 				switch (enumValue) {
+					case CPART: return "return getReferredValuedElement();";
 					case DELEG: return null;
 					case REF: return "return getReferredValuedElement();";
 					case ROOT:
@@ -307,7 +320,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					"			return referredValue.getValue();\n" +
 					"		}";
 					case THIS: return "return this;";
-					case TYPEX: return "return referredType.getValue();";
+					case TYPEX: return "return executorType.getValue();";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}
@@ -323,6 +336,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					return null;
 				}
 				switch (enumValue) {
+					case CPART: return "return (last == null) ? first.getValueName() : super.getValueName();";
 					case DELEG: return "return " + modelSpec.delegate + " != null ? " + modelSpec.delegate + ".getValueName() : null;";
 					case REF: return null;
 					case ROOT:
@@ -358,7 +372,6 @@ public class CGValuedElementModelSpec extends ModelSpec
 									"		return referredValue.isBoxed();";
 					case FALSE: 	return "return false;";
 					case IF: 		return "return thenExpression.isBoxed() || elseExpression.isBoxed();";
-					case OP: 		return "return eOperation == null;";
 					case PARAM: 	return "return (init != null) ? init.isBoxed() : operation != null ? operation.isBoxed() : true;";
 					case RANGE: 	return "return isRange() || first.isBoxed();";
 					case TRUE: 		return "return true;";
@@ -384,23 +397,25 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 			}
 		};
-		
-		protected static MethodSpec isCommonable = new MyMethodSpec(CGValuedElement.class, "boolean isCommonable()", null,
-			"Return true if this value can be shared as part of a Common Subexpression.")
-			{
-				@Override
-				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
-					Com enumValue = modelSpec.com;
-					if (enumValue == null) {
-						return null;
-					}
-					switch (enumValue) {
-						case FALSE: return "return false;";
-						case TRUE: return "return true;";
-						default: 		return "MISSING_CASE_for_" + enumValue + ";";
-					}
+	
+	protected static MethodSpec isCommonable = new MyMethodSpec(CGValuedElement.class, "boolean isCommonable()", null,
+		"Return true if this value can be shared as part of a Common Subexpression.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
+				Com enumValue = modelSpec.com;
+				if (enumValue == null) {
+					return null;
 				}
-			};
+				switch (enumValue) {
+					case DELEG: return "return (" + modelSpec.delegate + " != null) && " + modelSpec.delegate + ".isCommonable();";
+					case FALSE: return "return false;";
+					case MAY: return "return true;";
+					case MUST: return "return true;";
+					default: 		return "MISSING_CASE_for_" + enumValue + ";";
+				}
+			}
+		};
 
 	protected static MethodSpec isConstant = new MyMethodSpec(CGValuedElement.class, "boolean isConstant()", null,
 		"Return true if this value is a local constant (dependent of the user type system).")
@@ -527,8 +542,8 @@ public class CGValuedElementModelSpec extends ModelSpec
 			}
 		};
 	
-	protected static MethodSpec isInlineable = new MyMethodSpec(CGValuedElement.class, "boolean isInlineable()", null,
-		"Return true if this value can be inlined as an expression term.")
+	protected static MethodSpec isInlined = new MyMethodSpec(CGValuedElement.class, "boolean isInlined()", null,
+		"Return true if this value is inlined and so has no local or global declaration.")
 		{
 			@Override
 			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
@@ -537,13 +552,14 @@ public class CGValuedElementModelSpec extends ModelSpec
 					return null;
 				}
 				switch (enumValue) {
+					case CPART: return "return (last == null) && first.isInlined();";
 					case FALSE: return "return false;";
 					case ISCON: return "return isConstant();";
 					case ROOT: 
 					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-					"		return (referredValue != this) && referredValue.isInlineable();";
+					"		return (referredValue != this) && referredValue.isInlined();";
 					case TRUE: return "return true;";
-					case T_ID: return "return (elementId != null) && " + classRef(CGUtils.class) + ".isInlineableId(elementId);";
+					case T_ID: return "return (elementId != null) && " + classRef(CGUtils.class) + ".isInlinedId(elementId);";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}
@@ -725,7 +741,6 @@ public class CGValuedElementModelSpec extends ModelSpec
 									"		return referredValue.isUnboxed();";
 					case FALSE: 	return "return true;";
 					case IF: 		return "return thenExpression.isUnboxed() && elseExpression.isUnboxed();";
-					case OP: 		return "return eOperation != null;";
 					case PARAM: 	return "return (init != null) ? init.isUnboxed() : operation != null ? operation.isUnboxed() : false;";
 					case RANGE: 	return "return isRange() || first.isUnboxed();";
 					case TRUE: 		return "return false;";
@@ -733,6 +748,60 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 			}
 		};
+		
+	protected static MethodSpec isUncommonable = new MyMethodSpec(CGValuedElement.class, "boolean isUncommonable()", null,
+		"Return true if this value does not have to be shared as part of a Common Subexpression.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
+				Com enumValue = modelSpec.com;
+				if (enumValue == null) {
+					return null;
+				}
+				switch (enumValue) {
+					case DELEG: return "return (" + modelSpec.delegate + " != null) && " + modelSpec.delegate + ".isUncommonable();";
+					case FALSE: return "return true;";
+					case MAY: return "return true;";
+					case MUST: return "return false;";
+					default: 		return "MISSING_CASE_for_" + enumValue + ";";
+				}
+			}
+		};
+		
+	protected static MethodSpec rewriteAs = new MyMethodSpec(CGElement.class, "boolean rewriteAs(@NonNull " + classRef(CGValuedElement.class) + " oldValue, @NonNull " + classRef(CGValuedElement.class) + " newValue)", null,
+		"Rewrite the reference to oldValue by newValue.")
+	{
+		@Override
+		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
+			Rew enumValue = modelSpec.rew;
+			if (enumValue == null) {
+				return null;
+			}
+			switch (enumValue) {
+				case PART:
+					return "if (oldValue == executorPart) {\n" +
+					"			setExecutorPart((" + classRef(CGExecutorConstructorPart.class) + ")newValue);\n" +
+					"			return true;\n" +
+					"		}\n" +
+					"		return false;";
+				case PROP:
+					return "if (oldValue == executorProperty) {\n" +
+					"			setExecutorProperty((" + classRef(CGExecutorProperty.class) + ")newValue);\n" +
+					"			return true;\n" +
+					"		}\n" +
+					"		return false;";
+				case TYPE:
+					return "if (oldValue == executorType) {\n" +
+					"			setExecutorType((" + classRef(CGExecutorType.class) + ")newValue);\n" +
+					"			return true;\n" +
+					"		}\n" +
+					"		return false;";
+				case UNSUP: 	return "throw new UnsupportedOperationException(getClass().getName() + \".rewriteAs()\");";
+				case VAREX: 	return "return false;";
+				default: 		return "MISSING_CASE_for_" + enumValue + ";";
+			}
+		}
+	};
 	
 	protected static MethodSpec setCaught = new MyMethodSpec(CGValuedElement.class, "void setCaught(boolean isCaught)", "boolean caught = false",
 		"Set the caught status.")
@@ -791,78 +860,82 @@ public class CGValuedElementModelSpec extends ModelSpec
 	// FIXME why is CGUnboxExpr CON.FALSE
 	// FIXME Why isNonNull FEAT isMany
 	public static void register() {
-		new CGValuedElementModelSpec(CGElement.class, null,							null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     );
+		new CGValuedElementModelSpec(CGElement.class, null,							null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     , Rew.UNSUP);
 
-		new CGValuedElementModelSpec(CGValuedElement.class, null,					Box.DELEG, Ref.THIS , Log.ROOT , Nul.ROOT , Inv.ROOT , Glo.ROOT , Inl.ROOT , Set.FALSE, Ct.ROOT , Con.ROOT , Val.ROOT , null     , Ctx.FALSE, Ctl.CNTRL, Com.TRUE );
+		new CGValuedElementModelSpec(CGValuedElement.class, null,					Box.DELEG, Ref.THIS , Log.ROOT , Nul.ROOT , Inv.ROOT , Glo.ROOT , Inl.ROOT , Set.FALSE, Ct.ROOT , Con.ROOT , Val.ROOT , null     , Ctx.FALSE, Ctl.CNTRL, Com.MAY  , Rew.VAREX);
 
-		new CGValuedElementModelSpec(CGConstant.class, null,						Box.BIBOX, Ref.THIS , Log.FALSE, Nul.FALSE, Inv.FALSE, Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , Val.THIS , Cvl.ROOT , null     , null     , Com.FALSE);
-		new CGValuedElementModelSpec(CGBoolean.class, "booleanValue",				null     , null     , Log.BOOL , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.BOOL , null     , null     , null     );
-		new CGValuedElementModelSpec(CGInfinity.class, null,						Box.TRUE , null     , null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.INFTY, null     , null     , null     );
-		new CGValuedElementModelSpec(CGInteger.class, null,							Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.INTGR, null     , null     , null     );
-		new CGValuedElementModelSpec(CGInvalid.class, null,							null     , null     , null     , null     , Inv.TRUE , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.INVLD, null     , null     , null     );
-		new CGValuedElementModelSpec(CGNull.class, null,							null     , null     , null     , Nul.TRUE , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.NULL , null     , null     , null     );
-		new CGValuedElementModelSpec(CGReal.class, null,							Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.REAL , null     , null     , null     );
-		new CGValuedElementModelSpec(CGString.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.STRNG, null     , null     , null     );
-		new CGValuedElementModelSpec(CGText.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , Cvl.TEXT , null     , null     , Com.TRUE );
-		new CGValuedElementModelSpec(CGElementId.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.EL_ID, null     , null     , null     );
-		new CGValuedElementModelSpec(CGTypeId.class, null,							null     , null     , null     , null     , null     , null     , Inl.T_ID , null     , null    , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGConstant.class, null,						Box.BIBOX, Ref.THIS , Log.FALSE, Nul.FALSE, Inv.FALSE, Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , Val.THIS , Cvl.ROOT , null     , null     , Com.FALSE, null     );
+		new CGValuedElementModelSpec(CGBoolean.class, "booleanValue",				null     , null     , Log.BOOL , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.BOOL , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGInteger.class, null,							Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.INTGR, null     , null     , Com.MUST , null     );
+		new CGValuedElementModelSpec(CGInvalid.class, null,							null     , null     , null     , null     , Inv.TRUE , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.INVLD, null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGNull.class, null,							null     , null     , null     , Nul.TRUE , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.NULL , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGReal.class, null,							Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.REAL , null     , null     , Com.MUST , null     );
+		new CGValuedElementModelSpec(CGString.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.STRNG, null     , null     , Com.MUST , null     );
+		new CGValuedElementModelSpec(CGText.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , Cvl.TEXT , null     , null     , Com.MUST , null     );
+		new CGValuedElementModelSpec(CGUnlimited.class, null,						Box.TRUE , null     , null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.INFTY, null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGElementId.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.EL_ID, null     , null     , Com.MUST , null     );
+		new CGValuedElementModelSpec(CGTypeId.class, null,							null     , null     , null     , null     , null     , null     , Inl.T_ID , null     , null    , null     , null     , null     , null     , null     , Com.MUST , null     );
 
-		new CGValuedElementModelSpec(CGCallExp.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGBoxExp.class, "source",						Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGCatchExp.class, "source",					null     , Ref.DELEG, null     , null     , null     , null     , null     , Set.TRUE , Ct.TRUE , null     , null     , null     , null     , Ctl.CATCH, null     );
-		new CGValuedElementModelSpec(CGEqualsExp.class, null,						Box.TRUE , null     , Log.EQUAL, Nul.FALSE, Inv.FALSE, null     , null     , null     , Ct.FALSE, null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGGuardExp.class, "source",					null     , Ref.DELEG, null     , Nul.FALSE, null,      null     , null     , null     , null    , null     , Val.REF  , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGIsInvalidExp.class, "source",				Box.BIBOX, Ref.DELEG, Log.ISINV, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGIsUndefinedExp.class, "source",				Box.BIBOX, Ref.DELEG, Log.ISUND, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGThrowExp.class, "source",					null     , Ref.DELEG, null     , null     , null     , null     , null     , null     , Ct.FALSE, null     , Val.REF  , null     , null     , Ctl.THROW, null     );
-		new CGValuedElementModelSpec(CGUnboxExp.class, "source",					Box.FALSE, Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGCallExp.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGCastExp.class, "source",	                    Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.CNTRL, null     , null     );
+		new CGValuedElementModelSpec(CGBoxExp.class, "source",						Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGCatchExp.class, "source",					null     , Ref.DELEG, null     , null     , null     , null     , null     , Set.TRUE , Ct.TRUE , null     , null     , null     , null     , Ctl.CATCH, null     , null     );
+		new CGValuedElementModelSpec(CGEqualsExp.class, null,						Box.TRUE , null     , Log.EQUAL, Nul.FALSE, Inv.FALSE, null     , null     , null     , Ct.FALSE, null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGGuardExp.class, "source",					null     , Ref.DELEG, null     , Nul.FALSE, null,      null     , null     , null     , null    , null     , Val.REF  , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGIsInvalidExp.class, "source",				Box.BIBOX, Ref.DELEG, Log.ISINV, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGIsUndefinedExp.class, "source",				Box.BIBOX, Ref.DELEG, Log.ISUND, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGThrowExp.class, "source",					null     , Ref.DELEG, null     , null     , null     , null     , null     , null     , Ct.FALSE, null     , Val.REF  , null     , null     , Ctl.THROW, null     , null     );
+		new CGValuedElementModelSpec(CGUnboxExp.class, "source",					Box.FALSE, Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     , null     );
 
-		new CGValuedElementModelSpec(CGIterationCallExp.class, "referredIteration",	null     , null     , null     , Nul.DELEG, null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.INNER, null     );
-		new CGValuedElementModelSpec(CGBuiltInIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , Set.TRUE , Ct.FALSE, null     , Val.THIS , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGLibraryIterateCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGLibraryIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGIterationCallExp.class, "referredIteration",	null     , null     , null     , Nul.DELEG, null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.INNER, null     , null     );
+		new CGValuedElementModelSpec(CGBuiltInIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , Set.TRUE , Ct.FALSE, null     , Val.THIS , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGLibraryIterateCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGLibraryIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 
-		new CGValuedElementModelSpec(CGOperationCallExp.class, "referredOperation",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGEcoreOperationCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGExecutorOperationCallExp.class, null,		Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGLibraryOperationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGOperationCallExp.class, "referredOperation",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGEcoreOperationCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGExecutorOperationCallExp.class, null,		Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGLibraryOperationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		
-		new CGValuedElementModelSpec(CGPropertyCallExp.class, "referredProperty",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGEcorePropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGExecutorPropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGLibraryPropertyCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGTuplePartCallExp.class, null,				Box.TRUE , null     , null     , null     , Inv.FALSE, null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGPropertyCallExp.class, "referredProperty",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGEcorePropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGExecutorPropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , Rew.PROP );
+		new CGValuedElementModelSpec(CGLibraryPropertyCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGTuplePartCallExp.class, null,				Box.TRUE , null     , null     , null     , Inv.FALSE, null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 
-		new CGValuedElementModelSpec(CGConstructorExp.class, "CGConstructorPart",	null     , Ref.PARTS, null     , Nul.FALSE, null     , Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , Com.FALSE);
-		new CGValuedElementModelSpec(CGEcoreClassConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGEcoreDataTypeConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGConstructorExp.class, "CGConstructorPart",	null     , Ref.PARTS, null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , Com.FALSE, Rew.TYPE );
+		new CGValuedElementModelSpec(CGEcoreClassConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGEcoreDataTypeConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 
-		new CGValuedElementModelSpec(CGVariable.class, "init",						null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE);
-		new CGValuedElementModelSpec(CGFinalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGLocalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGSettableVariable.class, null,				null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGVariable.class, "init",						null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     );
+		new CGValuedElementModelSpec(CGFinalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGLocalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGSettableVariable.class, null,				null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     , null     );
 
-		new CGValuedElementModelSpec(CGParameter.class, "init",						Box.PARAM, null     , null     , null     , Inv.FALSE, Glo.DELEG, null     , null     , null    , Con.DELEG, Val.THIS , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGCastParameter.class, "referredParameter",	null     , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGIterator.class, null,						null     , null     , null     , null     , null     , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGTextParameter.class, null,					Box.FALSE, Ref.THIS , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGParameter.class, "init",						Box.PARAM, null     , null     , null     , Inv.FALSE, Glo.DELEG, null     , null     , null    , Con.DELEG, Val.THIS , null     , null     , Ctl.PARAM, null     , null     );
+		new CGValuedElementModelSpec(CGIterator.class, null,						null     , null     , null     , null     , null     , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , Ctl.CNTRL, null     , null     );
+		new CGValuedElementModelSpec(CGTextParameter.class, null,					Box.FALSE, Ref.THIS , null     , null     , Inv.FALSE, Glo.FALSE, Inl.TRUE , null     , null    , null     , null     , null     , null     , Ctl.CNTRL, null     , null     );
 
-		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGCollectionPart.class, null,					Box.RANGE, Ref.CPART, null     , Nul.CPART, Inv.CPART, Glo.CPART, null     , null     , null    , Con.CPART, null     , null     , null     , null     , Com.FALSE);
-		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		null     , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGConstraint.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.BODY , null     );
-		new CGValuedElementModelSpec(CGConstructorPart.class, null,					Box.TRUE , Ref.THIS , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE);
-		new CGValuedElementModelSpec(CGExecutorOperation.class, null,				Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , Ctx.TRUE , Ctl.UNSUP, null     );
-		new CGValuedElementModelSpec(CGExecutorProperty.class, null,				Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , Ctx.TRUE , Ctl.UNSUP, null     );
-		new CGValuedElementModelSpec(CGExecutorType.class, null,					Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGIfExp.class, null,							Box.IF   , Ref.THIS , null     , Nul.IF   , Inv.IF   , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , Ctl.IF   , null     );
-		new CGValuedElementModelSpec(CGLetExp.class, "in",							null     , Ref.DELEG, null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , Ctl.LET  , null     );
-		new CGValuedElementModelSpec(CGOperation.class, null,						Box.OP   , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     );
-		new CGValuedElementModelSpec(CGProperty.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     );
-		new CGValuedElementModelSpec(CGTupleExp.class, "CGTuplePart",				Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.FALSE, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGTuplePart.class, "init",						Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE);
-		new CGValuedElementModelSpec(CGTypeExp.class, "referredType",				Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , Val.TYPEX, null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGVariableExp.class, "referredVariable",		null     , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE);
+		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , Ctl.LORG , null     , null     );
+		new CGValuedElementModelSpec(CGCollectionPart.class, null,					Box.RANGE, Ref.CPART, null     , Nul.CPART, Inv.CPART, Glo.CPART, Inl.CPART, null     , null    , Con.CPART, Val.CPART, null     , null     , null     , Com.FALSE, null     );
+		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		null     , Ref.DELEG, null     , null     , null     , Glo.DELEG, null     , null     , null    , null     , null     , null     , null     , null     , Com.DELEG, null     );
+		new CGValuedElementModelSpec(CGConstraint.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.BODY , null     , null     );
+		new CGValuedElementModelSpec(CGConstructorPart.class, null,					Box.TRUE , Ref.THIS , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, Rew.PART );
+		new CGValuedElementModelSpec(CGExecutorOperation.class, null,				Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , Ctx.TRUE , Ctl.UNSUP, Com.MUST , null     );
+		new CGValuedElementModelSpec(CGExecutorProperty.class, null,				Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, Inl.FALSE, null     , Ct.FALSE, Con.TRUE , Val.THIS , null     , Ctx.TRUE , Ctl.CNTRL, Com.MUST , null     );
+		new CGValuedElementModelSpec(CGExecutorType.class, null,					Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , null     , null     , Com.MUST , null     );
+		new CGValuedElementModelSpec(CGIfExp.class, null,							Box.IF   , Ref.THIS , null     , Nul.IF   , Inv.IF   , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , Ctl.IF   , null     , null     );
+		new CGValuedElementModelSpec(CGLetExp.class, "in",							null     , Ref.DELEG, null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , Ctl.LET  , null     , null     );
+
+		new CGValuedElementModelSpec(CGOperation.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     );
+		new CGValuedElementModelSpec(CGEcoreOperation.class, null,					Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGLibraryOperation.class, null,				Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+
+		new CGValuedElementModelSpec(CGProperty.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     );
+		new CGValuedElementModelSpec(CGTupleExp.class, "CGTuplePart",				Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.FALSE, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGTuplePart.class, "init",						Box.TRUE , Ref.DELEG, null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     );
+		new CGValuedElementModelSpec(CGTypeExp.class, "executorType",				Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , Val.TYPEX, null     , null     , null     , null     , Rew.TYPE );
+		new CGValuedElementModelSpec(CGVariableExp.class, "referredVariable",		null     , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE, null     );
 	}
 	
 	protected final @Nullable String delegate;
@@ -881,11 +954,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 	protected final @Nullable Ctx ctx;
 	protected final @Nullable Ctl ctl;
 	protected final @Nullable Com com;
+	protected final @Nullable Rew rew;
 	
 	protected CGValuedElementModelSpec(@NonNull Class<?> cgClass, @Nullable String delegate,
 			@Nullable Box box, @Nullable Ref ref, @Nullable Log log, @Nullable Nul nul, @Nullable Inv inv,
 			@Nullable Glo glo, @Nullable Inl inl, @Nullable Set set, @Nullable Ct ct, @Nullable Con con,
-			@Nullable Val val, @Nullable Cvl cvl, @Nullable Ctx ctx, @Nullable Ctl ctl, @Nullable Com com) {
+			@Nullable Val val, @Nullable Cvl cvl, @Nullable Ctx ctx, @Nullable Ctl ctl, @Nullable Com com, @Nullable Rew rew) {
 		super(cgClass);
 		this.delegate = delegate;
 		this.box = box;
@@ -903,6 +977,10 @@ public class CGValuedElementModelSpec extends ModelSpec
 		this.ctx = ctx;
 		this.ctl = ctl;
 		this.com = com;
+		this.rew = rew;
+		assert (inl != Inl.TRUE) || (glo != Glo.TRUE);
+		if (glo == Glo.TRUE) assert con == Con.TRUE; 
+		if (glo == Glo.TRUE) assert inl == Inl.FALSE; 
 	}
 	
 	@Override
@@ -919,7 +997,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 		isContext.generate(s, this, genModel, isImplementation);
 		isFalse.generate(s, this, genModel, isImplementation);
 		isGlobal.generate(s, this, genModel, isImplementation);
-		isInlineable.generate(s, this, genModel, isImplementation);
+		isInlined.generate(s, this, genModel, isImplementation);
 		isInvalid.generate(s, this, genModel, isImplementation);
 		isNonInvalid.generate(s, this, genModel, isImplementation);
 		isNonNull.generate(s, this, genModel, isImplementation);
@@ -928,6 +1006,8 @@ public class CGValuedElementModelSpec extends ModelSpec
 		isSettable.generate(s, this, genModel, isImplementation);
 		isTrue.generate(s, this, genModel, isImplementation);
 		isUnboxed.generate(s, this, genModel, isImplementation);
+		isUncommonable.generate(s, this, genModel, isImplementation);
+		rewriteAs.generate(s, this, genModel, isImplementation);
 		setCaught.generate(s, this, genModel, isImplementation);
 		setNonInvalid.generate(s, this, genModel, isImplementation);
 		setNonNull.generate(s, this, genModel, isImplementation);

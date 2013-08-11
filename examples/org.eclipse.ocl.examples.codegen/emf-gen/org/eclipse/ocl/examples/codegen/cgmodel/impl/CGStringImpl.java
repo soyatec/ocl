@@ -183,4 +183,22 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 		return DomainUtil.nonNullState(stringValue);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isCommonable() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
+		return false;
+	}
+
 } //CGStringImpl

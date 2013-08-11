@@ -234,5 +234,4 @@ public class CGEcoreDataTypeConstructorExpImpl extends CGConstructorExpImpl impl
 	public boolean isUnboxed() {
 		return true;
 	}
-
 } //CGEcoreDataTypeConstructorExpImpl

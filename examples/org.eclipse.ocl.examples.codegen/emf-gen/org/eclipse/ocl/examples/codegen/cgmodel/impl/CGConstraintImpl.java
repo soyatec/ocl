@@ -269,7 +269,7 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 */
 	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return OuterStackPlace.createPlace(element2place, this, body);
+		return OuterStackPlace.createOuterStackPlace(element2place, this);
 	}
 
 } //CGConstraintImpl

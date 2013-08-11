@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -454,11 +455,12 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ IterateExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
-		    final @Nullable /*@Thrown*/ Variable result = self.getResult();
+		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
 		        throw new InvalidValueException("Null source");
 		    }
@@ -492,13 +494,13 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ IterateExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		try {
-		    final @NonNull /*@Thrown*/ DomainExpression body = self.getBody();
+		    final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
 		    final @Nullable /*@Thrown*/ DomainType type = body.getType();
-		    final @Nullable /*@Thrown*/ Variable result = self.getResult();
+		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
 		        throw new InvalidValueException("Null source");
 		    }
@@ -532,11 +534,11 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ IterateExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Variable result = self.getResult();
+		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
 		        throw new InvalidValueException("Null source");
 		    }

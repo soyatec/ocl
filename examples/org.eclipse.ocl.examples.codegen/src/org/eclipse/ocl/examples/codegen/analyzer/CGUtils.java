@@ -1,5 +1,6 @@
 package org.eclipse.ocl.examples.codegen.analyzer;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -59,7 +60,7 @@ public class CGUtils
 		return null;
 	} */
 
-	public static boolean isInlineableId(@NonNull ElementId elementId) {
+	public static boolean isInlinedId(@NonNull ElementId elementId) {
 		return (elementId instanceof PrimitiveTypeId)
 			|| (elementId instanceof OclVoidTypeId)
 			|| (elementId instanceof TemplateParameterId);
@@ -69,7 +70,12 @@ public class CGUtils
 	 * Replace oldElement by newElement and return oldElement which is orphaned by the replacement.
 	 */
 	public static @NonNull CGValuedElement replace(@NonNull CGValuedElement oldElement, @NonNull CGValuedElement newElement) {
+		EObject oldContainer = oldElement.eContainer();
+//		EObject newContainer = newElement.eContainer();
+//		assert (oldContainer != null) && (newContainer == null);
 		EcoreUtil.replace(oldElement, newElement);
+		assert oldElement.eContainer() == null;
+		assert newElement.eContainer() == oldContainer;
 		return oldElement;
 	}
 

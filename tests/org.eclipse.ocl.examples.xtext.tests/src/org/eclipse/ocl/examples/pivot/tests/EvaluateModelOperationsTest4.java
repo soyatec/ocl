@@ -408,6 +408,8 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		assertQueryEquals(children2, parentType, "Parent");
 		assertQueryEquals(children2, parent, "self.parent");
 		assertSemanticErrorQuery2(children2Type, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", children2Type);
+		//
+		assertQueryTrue(parent, "child1 = child1");
 	}
 
 	/**

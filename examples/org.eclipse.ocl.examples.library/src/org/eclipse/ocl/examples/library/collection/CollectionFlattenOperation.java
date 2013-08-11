@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 public class CollectionFlattenOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionFlattenOperation INSTANCE = new CollectionFlattenOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull CollectionValue evaluate(@Nullable Object argument) {

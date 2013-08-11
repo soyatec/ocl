@@ -33,7 +33,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGInteger()
- * @model
  * @generated
  */
 public interface CGInteger extends CGConstant {
@@ -52,7 +51,6 @@ public interface CGInteger extends CGConstant {
 	 * @return the value of the '<em>Integer Value</em>' attribute.
 	 * @see #setIntegerValue(Number)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGInteger_IntegerValue()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Number" required="true"
 	 * @generated
 	 */
 	Number getIntegerValue();

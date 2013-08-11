@@ -14,11 +14,14 @@
  */
 package org.eclipse.ocl.examples.codegen.cse;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
@@ -26,8 +29,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  */
 public class CatchPlace extends ControlPlace
 {
-	public static @NonNull LocalPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGCatchExp cgCatchExp) {
-		ControlPlace catchPlace = ControlPlace.createPlace(element2place, cgCatchExp);
+	public static @NonNull LocalPlace createCatchPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGCatchExp cgCatchExp) {
+		ControlPlace catchPlace = ControlPlace.getControlPlace(element2place, cgCatchExp);
 		CGValuedElement cgCaughtExp = cgCatchExp.getSource();
 		if (cgCaughtExp != null) {
 			CatchPlace caughtPlace = new CatchPlace(catchPlace, cgCaughtExp);
@@ -38,5 +41,27 @@ public class CatchPlace extends ControlPlace
 	
 	private CatchPlace(@NonNull LocalPlace catchPlace, @NonNull CGValuedElement cgCaughtExp) {
 		super(catchPlace, cgCaughtExp);
+	}
+	
+	@Override
+	public void pushUp() {
+		super.pushUp();
+		HashedAnalyses mySet = getHashedAnalyses();
+		ControlPlace parentPlace = getControlPlace(getParentPlace());
+		List<AbstractAnalysis> pushUps = null;
+		for (@SuppressWarnings("null")@NonNull AbstractAnalysis commonAnalysis : mySet) {
+			if (commonAnalysis.getPrimaryElement() instanceof CGText) {
+				if (pushUps == null) {
+					pushUps = new ArrayList<AbstractAnalysis>();
+				}
+				pushUps.add(commonAnalysis);
+			}
+		}
+		if (pushUps != null) {
+			for (@SuppressWarnings("null")@NonNull AbstractAnalysis commonAnalysis : pushUps) {
+				mySet.remove(commonAnalysis);
+				parentPlace.addAnalysis(commonAnalysis);
+			}
+		}
 	}
 }

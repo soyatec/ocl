@@ -49,7 +49,6 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 		return CGModelPackage.Literals.CG_CONSTANT;
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 * @generated
@@ -109,7 +108,7 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 	 * @generated
 	 */
 	@Override
-	public boolean isInlineable() {
+	public boolean isInlined() {
 		return false;
 	}
 

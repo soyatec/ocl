@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import java.lang.reflect.TypeVariable;
-import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -30,7 +29,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
@@ -207,21 +205,6 @@ public class JavaStream
 			}
 			else {
 				appendValueName(cgValue);
-			}
-		}
-	}
-
-	public void appendCastParameters(@NonNull JavaLocalContext localContext) {
-		for (@SuppressWarnings("null")@NonNull CGVariable castParameter : localContext.getCastParameters()) {
-			castParameter.accept(cg2java);
-		}
-	}
-
-	public void appendCastParameters(@NonNull JavaLocalContext localContext, @NonNull List<? extends CGParameter> cgParameters) {
-		for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-			CGParameter castParameter = localContext.basicGetCastParameter(cgParameter);
-			if (castParameter != null) {
-				castParameter.accept(cg2java);
 			}
 		}
 	}
@@ -545,7 +528,7 @@ public class JavaStream
 		if (elementId == null) {
 			append("<<null-appendIdReference>>");
 		}
-		else if (CGUtils.isInlineableId(elementId)) {
+		else if (CGUtils.isInlinedId(elementId)) {
 			elementId.accept(id2JavaExpressionVisitor);
 		}
 		else {
@@ -581,7 +564,9 @@ public class JavaStream
 	 * Inline and global contributions are excluded.
 	 */
 	public void appendLocalStatements(@NonNull CGValuedElement cgElement) {
-		if (!cgElement.isInlineable() && !cgElement.isConstant() && !cgElement.isGlobal()) {			// Exclude global constants and inline constants
+//		if (!cgElement.isInlineable() && !cgElement.isConstant() && !cgElement.isGlobal()) {			// Exclude global constants and inline constants
+		if (!cgElement.isInlined()			// Exclude inline constants
+		 && !cgElement.isGlobal()) {			// Exclude global constant expressions
 			cgElement.accept(cg2java);
 		}
 	}
@@ -663,11 +648,14 @@ public class JavaStream
 		if (cgElement == null) {
 			append("<<null-appendValueName>>");
 		}
-		else if (cgElement.isInlineable()) {
-			CGValuedElement cgValue = cgElement;
-			for (CGValuedElement cgNext; (cgNext = cgValue.getReferredValuedElement()) != cgValue; cgValue = cgNext) {}
-			cgValue.accept(cg2java);
+		else if (cgElement.isInlined()) {
+			cgElement.accept(cg2java);
 		}
+//		else if (cgElement.isInlined() && (cgElement.isInvalid() || cgElement.isNull() || cgElement.isTrue() || cgElement.isFalse() || !cgElement.isGlobal())) {	// FIXME
+//			CGValuedElement cgValue = cgElement;
+//			for (CGValuedElement cgNext; (cgNext = cgValue.getReferredValuedElement()) != cgValue; cgValue = cgNext) {}
+//			cgValue.accept(cg2java);
+//		}
 		else {
 			if (cgElement.isGlobal()) {
 				cg2java.appendGlobalPrefix();

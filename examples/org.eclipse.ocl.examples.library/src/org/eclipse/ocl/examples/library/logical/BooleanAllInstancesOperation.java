@@ -31,12 +31,6 @@ public class BooleanAllInstancesOperation extends AbstractUntypedUnaryOperation
 {
 	public static final @NonNull BooleanAllInstancesOperation INSTANCE = new BooleanAllInstancesOperation();
 	public static final @NonNull CollectionTypeId SET_BOOLEAN = TypeId.SET.getSpecializedId(TypeId.BOOLEAN);
-
-	@Override
-	@Deprecated
-	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		return evaluate(evaluator, sourceVal);
-	}
 	
 	@Override
 	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal) {

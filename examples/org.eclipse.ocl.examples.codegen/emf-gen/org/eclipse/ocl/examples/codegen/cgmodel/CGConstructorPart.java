@@ -25,11 +25,11 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart#getInit <em>Init</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart#getConstructorExp <em>Constructor Exp</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart#getExecutorPart <em>Executor Part</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstructorPart()
- * @model
  * @generated
  */
 public interface CGConstructorPart extends CGValuedElement {
@@ -44,7 +44,6 @@ public interface CGConstructorPart extends CGValuedElement {
 	 * @return the value of the '<em>Init</em>' containment reference.
 	 * @see #setInit(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstructorPart_Init()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getInit();
@@ -71,9 +70,32 @@ public interface CGConstructorPart extends CGValuedElement {
 	 * @return the value of the '<em>Constructor Exp</em>' container reference.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstructorPart_ConstructorExp()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp#getParts
-	 * @model opposite="parts" resolveProxies="false" required="true" transient="false" changeable="false"
 	 * @generated
 	 */
 	CGConstructorExp getConstructorExp();
+
+	/**
+	 * Returns the value of the '<em><b>Executor Part</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The shared type.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Executor Part</em>' reference.
+	 * @see #setExecutorPart(CGExecutorConstructorPart)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstructorPart_ExecutorPart()
+	 * @generated
+	 */
+	CGExecutorConstructorPart getExecutorPart();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart#getExecutorPart <em>Executor Part</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Executor Part</em>' reference.
+	 * @see #getExecutorPart()
+	 * @generated
+	 */
+	void setExecutorPart(CGExecutorConstructorPart value);
 
 } // CGConstructorPart

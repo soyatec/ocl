@@ -272,15 +272,14 @@ public class IfExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ IfExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean = idResolver.getType(TypeId.BOOLEAN, null);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @NonNull /*@Thrown*/ DomainExpression condition = self.getCondition();
+		    final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
+		    final @NonNull /*@Thrown*/ DomainExpression condition = this.getCondition();
 		    final @Nullable /*@Thrown*/ DomainType type = condition.getType();
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean);
+		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {

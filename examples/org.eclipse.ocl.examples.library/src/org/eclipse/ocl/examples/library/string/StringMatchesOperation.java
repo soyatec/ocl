@@ -16,8 +16,6 @@ package org.eclipse.ocl.examples.library.string;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 
 /**
@@ -26,12 +24,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 public class StringMatchesOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringMatchesOperation INSTANCE = new StringMatchesOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		return evaluate(left, right);
-	}
 
 	@Override
 	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {

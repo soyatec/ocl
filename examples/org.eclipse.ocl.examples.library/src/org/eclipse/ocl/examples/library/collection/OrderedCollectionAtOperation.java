@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 public class OrderedCollectionAtOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OrderedCollectionAtOperation INSTANCE = new OrderedCollectionAtOperation();
-
-	@Override
-	@Deprecated
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		return evaluate(left, right);
-	}
 
 	@Override
 	public @Nullable Object evaluate(@Nullable Object left, @Nullable Object right) {

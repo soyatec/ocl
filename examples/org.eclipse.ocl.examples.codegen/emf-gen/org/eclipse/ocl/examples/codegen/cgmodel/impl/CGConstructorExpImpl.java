@@ -16,16 +16,18 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
@@ -37,6 +39,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorExpImpl#getParts <em>Parts</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorExpImpl#getExecutorType <em>Executor Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,6 +55,16 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * @ordered
 	 */
 	protected EList<CGConstructorPart> parts;
+
+	/**
+	 * The cached value of the '{@link #getExecutorType() <em>Executor Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutorType()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGExecutorType executorType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,6 +96,27 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 			parts = new EObjectContainmentWithInverseEList<CGConstructorPart>(CGConstructorPart.class, this, CGModelPackage.CG_CONSTRUCTOR_EXP__PARTS, CGModelPackage.CG_CONSTRUCTOR_PART__CONSTRUCTOR_EXP);
 		}
 		return parts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGExecutorType getExecutorType() {
+		return executorType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExecutorType(CGExecutorType newExecutorType) {
+		CGExecutorType oldExecutorType = executorType;
+		executorType = newExecutorType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CONSTRUCTOR_EXP__EXECUTOR_TYPE, oldExecutorType, executorType));
 	}
 
 	/**
@@ -124,6 +158,8 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 		switch (featureID) {
 			case CGModelPackage.CG_CONSTRUCTOR_EXP__PARTS:
 				return getParts();
+			case CGModelPackage.CG_CONSTRUCTOR_EXP__EXECUTOR_TYPE:
+				return getExecutorType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,6 +177,9 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 				getParts().clear();
 				getParts().addAll((Collection<? extends CGConstructorPart>)newValue);
 				return;
+			case CGModelPackage.CG_CONSTRUCTOR_EXP__EXECUTOR_TYPE:
+				setExecutorType((CGExecutorType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -156,6 +195,9 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 			case CGModelPackage.CG_CONSTRUCTOR_EXP__PARTS:
 				getParts().clear();
 				return;
+			case CGModelPackage.CG_CONSTRUCTOR_EXP__EXECUTOR_TYPE:
+				setExecutorType((CGExecutorType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -170,10 +212,11 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 		switch (featureID) {
 			case CGModelPackage.CG_CONSTRUCTOR_EXP__PARTS:
 				return parts != null && !parts.isEmpty();
+			case CGModelPackage.CG_CONSTRUCTOR_EXP__EXECUTOR_TYPE:
+				return executorType != null;
 		}
 		return super.eIsSet(featureID);
 	}
-
 
 	/**
 	 * {@inheritDoc}
@@ -218,12 +261,7 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 */
 	@Override
 	public boolean isGlobal() {
-		for (CGConstructorPart cgPart : getParts()) {
-			if (!cgPart.isGlobal()) {
-				return false;
-			}
-		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -241,6 +279,19 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 */
 	@Override
 	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
+		if (oldValue == executorType) {
+			setExecutorType((CGExecutorType)newValue);
+			return true;
+		}
 		return false;
 	}
 

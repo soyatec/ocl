@@ -163,7 +163,6 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 		return super.eIsSet(featureID);
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 * @generated

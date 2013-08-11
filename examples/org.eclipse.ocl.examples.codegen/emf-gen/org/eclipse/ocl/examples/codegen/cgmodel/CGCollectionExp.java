@@ -29,7 +29,6 @@ import java.util.List;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionExp()
- * @model
  * @generated
  */
 public interface CGCollectionExp extends CGValuedElement {
@@ -46,7 +45,6 @@ public interface CGCollectionExp extends CGValuedElement {
 	 * @return the value of the '<em>Parts</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionExp_Parts()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#getCollectionExp
-	 * @model opposite="collectionExp" containment="true"
 	 * @generated
 	 */
 	List<CGCollectionPart> getParts();

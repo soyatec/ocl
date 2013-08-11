@@ -22,7 +22,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorCompositionProperty()
- * @model
  * @generated
  */
 public interface CGExecutorCompositionProperty extends CGExecutorProperty {

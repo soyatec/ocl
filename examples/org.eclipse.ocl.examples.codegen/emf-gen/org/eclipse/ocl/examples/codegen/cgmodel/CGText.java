@@ -34,7 +34,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGText()
- * @model
  * @generated
  */
 public interface CGText extends CGConstant {
@@ -49,7 +48,6 @@ public interface CGText extends CGConstant {
 	 * @return the value of the '<em>Text Value</em>' attribute.
 	 * @see #setTextValue(String)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGText_TextValue()
-	 * @model required="true"
 	 * @generated
 	 */
 	String getTextValue();

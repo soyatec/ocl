@@ -208,7 +208,6 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 		return super.eIsSet(featureID);
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 * @generated

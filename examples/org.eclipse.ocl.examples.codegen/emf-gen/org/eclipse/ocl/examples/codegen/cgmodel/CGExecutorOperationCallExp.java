@@ -29,7 +29,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorOperationCallExp()
- * @model
  * @generated
  */
 public interface CGExecutorOperationCallExp extends CGOperationCallExp {
@@ -45,7 +44,6 @@ public interface CGExecutorOperationCallExp extends CGOperationCallExp {
 	 * @return the value of the '<em>Executor Operation</em>' reference.
 	 * @see #setExecutorOperation(CGExecutorOperation)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorOperationCallExp_ExecutorOperation()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGExecutorOperation getExecutorOperation();

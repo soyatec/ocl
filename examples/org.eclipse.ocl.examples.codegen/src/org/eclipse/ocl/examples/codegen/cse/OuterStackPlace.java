@@ -16,31 +16,28 @@ package org.eclipse.ocl.examples.codegen.cse;
 
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.common.utils.TracingOption;
 
 public class OuterStackPlace extends StackPlace
 {
-	public static @Nullable OuterStackPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGElement cgStackElement, @Nullable EObject eObject) {
-		if (eObject == null) {
-			return null;
-		}
-		EReference eContainmentFeature = eObject.eContainmentFeature();
-		if (eContainmentFeature == null) {
-			throw new IllegalStateException("Null eContainmentFeature for " + cgStackElement);
-		}
+	public static @Nullable OuterStackPlace createOuterStackPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGElement cgStackElement) {
+//		if (eObject == null) {
+//			return null;
+//		}
+//		EReference eContainmentFeature = eObject.eContainmentFeature();
+//		if (eContainmentFeature == null) {
+//			throw new IllegalStateException("Null eContainmentFeature for " + cgStackElement);
+//		}
 		GlobalPlace globalPlace = getGlobalPlace(element2place);
-		OuterStackPlace stackPlace = new OuterStackPlace(globalPlace, cgStackElement, eContainmentFeature);
+		OuterStackPlace stackPlace = new OuterStackPlace(globalPlace, cgStackElement); //, eContainmentFeature);
 		return stackPlace;
 	}
 	
-	protected OuterStackPlace(@NonNull GlobalPlace globalPlace, @NonNull CGElement stackElement, @NonNull EReference eContainmentFeature) {
-		super(globalPlace, stackElement, eContainmentFeature);
+	protected OuterStackPlace(@NonNull GlobalPlace globalPlace, @NonNull CGElement stackElement) { //, @NonNull EReference eContainmentFeature) {
+		super(globalPlace, stackElement); //, eContainmentFeature);
 		globalPlace.addStackPlace(this);
 	}
 	
@@ -81,8 +78,8 @@ public class OuterStackPlace extends StackPlace
 		if (CommonSubexpressionEliminator.CSE_REWRITE.isActive()) {
 			CommonSubexpressionEliminator.CSE_REWRITE.println("Places after rewrite");
 			printHierarchy(CommonSubexpressionEliminator.CSE_REWRITE, "");
-			@SuppressWarnings("null")@NonNull String string = String.valueOf(stackElement.eGet(eContainmentFeature));
-			TracingOption.println(CommonSubexpressionEliminator.CSE_REWRITE, string);
+//			@SuppressWarnings("null")@NonNull String string = String.valueOf(stackElement.eGet(eContainmentFeature));
+//			TracingOption.println(CommonSubexpressionEliminator.CSE_REWRITE, string);
 		}
 	}
 }

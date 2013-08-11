@@ -34,7 +34,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLetExp()
- * @model
  * @generated
  */
 public interface CGLetExp extends CGValuedElement {
@@ -49,7 +48,6 @@ public interface CGLetExp extends CGValuedElement {
 	 * @return the value of the '<em>Init</em>' containment reference.
 	 * @see #setInit(CGVariable)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLetExp_Init()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGVariable getInit();
@@ -75,7 +73,6 @@ public interface CGLetExp extends CGValuedElement {
 	 * @return the value of the '<em>In</em>' containment reference.
 	 * @see #setIn(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLetExp_In()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getIn();

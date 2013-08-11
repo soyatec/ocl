@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryOperation;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryOperationCallExp()
- * @model
  * @generated
  */
 public interface CGLibraryOperationCallExp extends CGOperationCallExp {
@@ -44,7 +43,6 @@ public interface CGLibraryOperationCallExp extends CGOperationCallExp {
 	 * @return the value of the '<em>Library Operation</em>' attribute.
 	 * @see #setLibraryOperation(LibraryOperation)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryOperationCallExp_LibraryOperation()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.LibraryOperation" required="true"
 	 * @generated
 	 */
 	LibraryOperation getLibraryOperation();

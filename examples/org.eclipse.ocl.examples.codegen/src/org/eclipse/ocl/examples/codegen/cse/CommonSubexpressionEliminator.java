@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.common.utils.TracingOption;
  */
 public class CommonSubexpressionEliminator
 {	
+	public static final @NonNull TracingOption CSE_BUILD = new TracingOption(CodeGenConstants.PLUGIN_ID, "cse/build");
 	public static final @NonNull TracingOption CSE_PLACES = new TracingOption(CodeGenConstants.PLUGIN_ID, "cse/places");
 	public static final @NonNull TracingOption CSE_PRUNE = new TracingOption(CodeGenConstants.PLUGIN_ID, "cse/prune");
 	public static final @NonNull TracingOption CSE_PULL_UP = new TracingOption(CodeGenConstants.PLUGIN_ID, "cse/pullUp");
@@ -45,9 +46,11 @@ public class CommonSubexpressionEliminator
 
 	/**
 	 * Optimize the cgRoot tree by eliminating common subexpressions.
+	 * @param globals 
 	 */
-	public void optimize(@NonNull CGElement cgRoot) {
+	public @NonNull GlobalPlace optimize(@NonNull CGElement cgRoot) {
 		GlobalPlace globalPlace = new GlobalPlace(analyzer);
 		globalPlace.optimize(cgRoot);
+		return globalPlace;
 	}
 }

@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cse;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,10 +25,15 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 /**
  * The GlobalPlace describes a forest of CG trees that can be resolved as global constants. 
@@ -35,7 +41,7 @@ import org.eclipse.ocl.examples.common.utils.TracingOption;
 public class GlobalPlace extends AbstractPlace
 {
 	@SuppressWarnings("null")
-	public static @NonNull AbstractPlace createPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGElement cgElement) {
+	public static @NonNull AbstractPlace createGlobalPlace(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGElement cgElement) {
 		return element2place.get(null);
 	}
 
@@ -44,6 +50,7 @@ public class GlobalPlace extends AbstractPlace
 	private final @NonNull Map<CGElement, AbstractPlace> element2place = new HashMap<CGElement, AbstractPlace>();
 	private final @NonNull Set<OuterStackPlace> stackPlaces = new HashSet<OuterStackPlace>();
 	private final @NonNull Map<CGElement, SimpleAnalysis> element2simpleAnalysis = new HashMap<CGElement, SimpleAnalysis>();
+	protected final @NonNull HashedAnalyses globalAnalyses = new HashedAnalyses();
 
 	public GlobalPlace(@NonNull CodeGenAnalyzer analyzer) {
 		this.analyzer = analyzer;
@@ -51,7 +58,13 @@ public class GlobalPlace extends AbstractPlace
 	}
 
 	public void addSimpleAnalysis(@NonNull SimpleAnalysis simpleAnalysis) {
-		element2simpleAnalysis.put(simpleAnalysis.getCGElement(), simpleAnalysis);
+//		System.out.println(DomainUtil.debugSimpleName(simpleAnalysis.getCGElement()) + " => " + DomainUtil.debugSimpleName(simpleAnalysis));
+		CGValuedElement cgElement = simpleAnalysis.getElement();
+		element2simpleAnalysis.put(cgElement, simpleAnalysis);
+		if (cgElement.isGlobal() && !cgElement.isInlined()) {
+			assert cgElement.isConstant();							// FIXME debugging
+			globalAnalyses.addSimpleAnalysis(simpleAnalysis);				
+		}
 	}
 
 	void addStackPlace(@NonNull OuterStackPlace stackPlace) {
@@ -64,37 +77,30 @@ public class GlobalPlace extends AbstractPlace
 	 * Returns the SimpleAnalysis of cgElement.
 	 */
 	protected @Nullable SimpleAnalysis buildSimpleAnalysisTree(@NonNull CGElement cgElement, int depth) {
+		if (CommonSubexpressionEliminator.CSE_BUILD.isActive()) {
+			CommonSubexpressionEliminator.CSE_BUILD.println(DomainUtil.getIndentation(depth, "  ") + "Build " + DomainUtil.debugSimpleName(cgElement) + " " + DomainUtil.convertToOCLString(cgElement.toString()));
+		}
 		//
 		//	Create the Place hierarchy in Preorder
 		//
-		AbstractPlace abstractPlace = element2place.get(cgElement);
+		AbstractPlace abstractPlace = cgElement.getPlace(element2place);
 		if (abstractPlace == null) {
-			abstractPlace = cgElement.getPlace(element2place);
-			if (abstractPlace == null) {
-				return null;
-			}
-			if (element2place.get(cgElement) == null) {
-				element2place.put(cgElement, abstractPlace);
-			}
+			return null;
+		}
+		if (element2place.get(cgElement) == null) {
+			element2place.put(cgElement, abstractPlace);
 		}
 		//
 		//	Determine the local part of the structural hash code from referenced objects
 		//
-		int structuralHashCode = cgElement.getClass().hashCode();
-		List<Object> referencedObjects = cgElement.accept(referencesVisitor);
-		if (referencedObjects != null) {
-			for (Object referencedObject : referencedObjects) {
-				int referenceHashCode = referencedObject != null ? referencedObject.hashCode() : 0;
-				structuralHashCode = 3 * structuralHashCode + referenceHashCode;
-			}
-		}
+		int structuralHashCode = getStructuralHashCode(cgElement, "");
 		//
 		//	Accumulate the contained part of the structural hash code in a post order traversal
 		//
 		Iterable<? extends CGElement> childElements = cgElement.getChildren();
 		List<SimpleAnalysis> childAnalyses = null;
 		for (CGElement cgChild : childElements) {
-			if (cgChild != null) {
+			if ((cgChild != null) /*&& (cgChild.eContainmentFeature() != CGModelPackage.Literals.CG_VALUED_ELEMENT__OWNS)*/) {
 				SimpleAnalysis childAnalysis = buildSimpleAnalysisTree(cgChild, depth+1);
 				if (childAnalysis != null) {
 					structuralHashCode = 3 * structuralHashCode + childAnalysis.getStructuralHashCode();
@@ -109,37 +115,31 @@ public class GlobalPlace extends AbstractPlace
 			return null;
 		}
 		CGValuedElement cgValuedElement = (CGValuedElement)cgElement;
-/*		if (cgValuedElement.isContext()) {
-			return null;
+//		System.out.println("Build2 " + DomainUtil.debugSimpleName(cgElement));
+		if (CommonSubexpressionEliminator.CSE_BUILD.isActive()) {
+			CommonSubexpressionEliminator.CSE_BUILD.println(DomainUtil.getIndentation(depth, "  ") + "=> " + DomainUtil.debugSimpleName(abstractPlace) + " " + structuralHashCode);
 		}
-		@NonNull CGValuedElement stackedElement = cgValuedElement;
-		for (CGElement cgParent; (cgParent = stackedElement.getParent()) instanceof CGValuedElement; stackedElement = (CGValuedElement) cgParent) {
-			if (cgParent.isContext()) {
-				break;
+		if (abstractPlace != this) {			// FIXME Ugh!
+			StackPlace stackPlace = abstractPlace.getStackPlace();
+			if (stackPlace == null) {
+				return null;
 			}
-		} */
-	//	StackPlace stackPlace = element2place.get(stackedElement);
-	//	if (stackPlace == null) {
-	//		stackPlace = new StackPlace(this, stackedElement);
-	//		element2place.put(stackedElement, stackPlace);
-	//	}
-	//	if (stackedElement != cgElement) {
-	//		element2place.put(cgElement, stackPlace);
-	//	}
-		StackPlace stackPlace = abstractPlace.getStackPlace();
-		if (stackPlace == null) {
-			return null;
+			if ((cgValuedElement == stackPlace.getStackElement()) && (stackPlace instanceof OuterStackPlace)) {
+				return null;
+			}
 		}
-		if (cgValuedElement == stackPlace.getStackElement()) {
-			return null;
-		}
+//		System.out.println("Build3 " + DomainUtil.debugSimpleName(cgElement));
+//		System.out.println("new " + structuralHashCode + " " + DomainUtil.debugSimpleName(cgValuedElement) + " " + cgValuedElement.toString());
 		SimpleAnalysis structuralAnalysis;
 		if (childAnalyses != null) {
 			@SuppressWarnings("null")@NonNull SimpleAnalysis[] childArray = childAnalyses.toArray(new SimpleAnalysis[childAnalyses.size()]);
-			structuralAnalysis = new SimpleAnalysis(stackPlace, cgValuedElement, depth, structuralHashCode, childArray);
+			structuralAnalysis = new SimpleAnalysis(this, cgValuedElement, depth, structuralHashCode, childArray);
 		}
 		else {
-			structuralAnalysis = new SimpleAnalysis(stackPlace, cgValuedElement, depth, structuralHashCode, SimpleAnalysis.EMPTY_LIST);
+			structuralAnalysis = new SimpleAnalysis(this, cgValuedElement, depth, structuralHashCode, SimpleAnalysis.EMPTY_LIST);
+		}
+		if (CommonSubexpressionEliminator.CSE_BUILD.isActive()) {
+			CommonSubexpressionEliminator.CSE_BUILD.println(DomainUtil.getIndentation(depth, "  ") + "=> " + DomainUtil.debugSimpleName(structuralAnalysis) + " " + structuralAnalysis.toString());
 		}
 		return structuralAnalysis;
 	}
@@ -180,13 +180,50 @@ public class GlobalPlace extends AbstractPlace
 		return element2simpleAnalysis.get(anObject);
 	}
 
+	public @Nullable List<CGValuedElement> getSortedGlobals(@NonNull DependencyVisitor dependencyVisitor) {
+		if (globalAnalyses.isEmpty()) {
+			return null;
+		}
+		Set<CGValuedElement> sortedGlobals = new HashSet<CGValuedElement>();
+		for (AbstractAnalysis analysis : globalAnalyses) {
+			sortedGlobals.add(analysis.getPrimaryElement().getValue());
+		}
+		dependencyVisitor.visitAll(sortedGlobals);
+		return dependencyVisitor.getSortedDependencies();
+	}
+
 	@Override
 	public @Nullable StackPlace getStackPlace() {
 		return null;
 	}
 
+	protected int getStructuralHashCode(@NonNull CGElement cgElement, @NonNull String prefix) {
+//		System.out.println(prefix + "getStructuralHashCode " + DomainUtil.debugSimpleName(cgElement) + " " + cgElement.toString());
+		int structuralHashCode = cgElement.getClass().getName().hashCode();
+//		System.out.println(prefix + "  class " + structuralHashCode);
+		List<Object> referencedObjects = cgElement.accept(referencesVisitor);
+		if (referencedObjects != null) {
+			for (Object referencedObject : referencedObjects) {
+				int referenceHashCode = 0;
+				if (referencedObject != null) {
+					if (referencedObject instanceof CGElement) {
+						referenceHashCode = getStructuralHashCode((CGElement) referencedObject, prefix + "  ");
+					}
+					else {
+						referenceHashCode = referencedObject.hashCode();
+					}
+//					System.out.println(prefix + "  ref " + referenceHashCode + " " + DomainUtil.debugSimpleName(referencedObject) + " " + referencedObject.toString());
+				}
+				structuralHashCode = 3 * structuralHashCode + referenceHashCode;
+			}
+		}
+//		System.out.println(prefix + "  = " + structuralHashCode + " " + DomainUtil.debugSimpleName(cgElement) + " " + cgElement.toString());
+		return structuralHashCode;
+	}
+
 	/**
 	 * Optimize the cgRoot tree by eliminating common subexpressions.
+	 * @param globals 
 	 */
 	public void optimize(@NonNull CGElement cgRoot) {
 		element2place.put(null, this);
@@ -207,11 +244,52 @@ public class GlobalPlace extends AbstractPlace
 		for (OuterStackPlace stackPlace : stackPlaces) {
 			stackPlace.optimize(analyzer);
 		}
+		optimizeGlobals(cgRoot);
+	}
+
+	public void optimizeGlobals(@NonNull CGElement cgRoot) {
+		//
+		//	Rewrite shared analyses as LetExps, VarExps.
+		//
+		if (!globalAnalyses.isEmpty()) {
+			Multimap<Integer, CommonAnalysis> depth2commonAnalyses = HashMultimap.create();
+			for (AbstractAnalysis analysis : globalAnalyses) {
+				if (analysis instanceof CommonAnalysis) {
+					CommonAnalysis commonAnalysis = (CommonAnalysis)analysis;
+					int maxDepth = commonAnalysis.getMaxDepth();
+					depth2commonAnalyses.put(maxDepth, commonAnalysis);
+				}
+			}
+			List<Integer> sortedMaxDepths = new ArrayList<Integer>(depth2commonAnalyses.keySet());
+			Collections.sort(sortedMaxDepths);
+			Collections.reverse(sortedMaxDepths);
+			for (int maxDepth : sortedMaxDepths) {
+				List<CommonAnalysis> commonAnalyses = new ArrayList<CommonAnalysis>(depth2commonAnalyses.get(maxDepth));
+				Collections.sort(commonAnalyses);
+				for (CommonAnalysis commonAnalysis : commonAnalyses) {
+					commonAnalysis.rewriteGlobal(analyzer);
+				}
+			}
+ 		}
+		if (CommonSubexpressionEliminator.CSE_REWRITE.isActive()) {
+			CommonSubexpressionEliminator.CSE_REWRITE.println("Places after rewrite");
+			printHierarchy(CommonSubexpressionEliminator.CSE_REWRITE, "");
+			@SuppressWarnings("null")@NonNull String string = String.valueOf(cgRoot);
+			TracingOption.println(CommonSubexpressionEliminator.CSE_REWRITE, string);
+		}
 	}
 	
 	@Override
 	public void printHierarchy(@NonNull Appendable appendable, @NonNull String indentation) {
 		TracingOption.println(appendable, indentation + "GlobalPlace");
+		if (!globalAnalyses.isEmpty()) {
+			for (AbstractAnalysis analysis : globalAnalyses) {
+				TracingOption.println(appendable, indentation + "    " + analysis.getStructuralHashCode() + "," + analysis);
+			}
+		}
+		else {
+			TracingOption.println(appendable, indentation + "    <empty>");
+		}
 		for (OuterStackPlace stackPlace : stackPlaces) {
 			stackPlace.printHierarchy(appendable, indentation + "  ");
 		}

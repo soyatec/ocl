@@ -21,10 +21,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.*;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
@@ -34,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreClassConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
@@ -49,7 +51,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
@@ -58,6 +59,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable;
@@ -65,7 +67,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModel;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -81,6 +82,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -141,7 +143,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_BOOLEAN: return createCGBoolean();
 			case CGModelPackage.CG_BOX_EXP: return createCGBoxExp();
 			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP: return createCGBuiltInIterationCallExp();
-			case CGModelPackage.CG_CAST_PARAMETER: return createCGCastParameter();
+			case CGModelPackage.CG_CAST_EXP: return createCGCastExp();
 			case CGModelPackage.CG_CATCH_EXP: return createCGCatchExp();
 			case CGModelPackage.CG_CLASS: return createCGClass();
 			case CGModelPackage.CG_COLLECTION_EXP: return createCGCollectionExp();
@@ -151,6 +153,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_CONSTRUCTOR_PART: return createCGConstructorPart();
 			case CGModelPackage.CG_ECORE_CLASS_CONSTRUCTOR_EXP: return createCGEcoreClassConstructorExp();
 			case CGModelPackage.CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP: return createCGEcoreDataTypeConstructorExp();
+			case CGModelPackage.CG_ECORE_OPERATION: return createCGEcoreOperation();
 			case CGModelPackage.CG_ECORE_OPERATION_CALL_EXP: return createCGEcoreOperationCallExp();
 			case CGModelPackage.CG_ECORE_PROPERTY_CALL_EXP: return createCGEcorePropertyCallExp();
 			case CGModelPackage.CG_ELEMENT_ID: return createCGElementId();
@@ -166,7 +169,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_FINAL_VARIABLE: return createCGFinalVariable();
 			case CGModelPackage.CG_GUARD_EXP: return createCGGuardExp();
 			case CGModelPackage.CG_IF_EXP: return createCGIfExp();
-			case CGModelPackage.CG_INFINITY: return createCGInfinity();
 			case CGModelPackage.CG_INTEGER: return createCGInteger();
 			case CGModelPackage.CG_INVALID: return createCGInvalid();
 			case CGModelPackage.CG_IS_INVALID_EXP: return createCGIsInvalidExp();
@@ -175,12 +177,12 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_LET_EXP: return createCGLetExp();
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP: return createCGLibraryIterateCallExp();
 			case CGModelPackage.CG_LIBRARY_ITERATION_CALL_EXP: return createCGLibraryIterationCallExp();
+			case CGModelPackage.CG_LIBRARY_OPERATION: return createCGLibraryOperation();
 			case CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP: return createCGLibraryOperationCallExp();
 			case CGModelPackage.CG_LIBRARY_PROPERTY_CALL_EXP: return createCGLibraryPropertyCallExp();
 			case CGModelPackage.CG_LOCAL_VARIABLE: return createCGLocalVariable();
 			case CGModelPackage.CG_MODEL: return createCGModel();
 			case CGModelPackage.CG_NULL: return createCGNull();
-			case CGModelPackage.CG_OPERATION: return createCGOperation();
 			case CGModelPackage.CG_PACKAGE: return createCGPackage();
 			case CGModelPackage.CG_PARAMETER: return createCGParameter();
 			case CGModelPackage.CG_PROPERTY: return createCGProperty();
@@ -196,6 +198,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_TYPE_ID: return createCGTypeId();
 			case CGModelPackage.CG_TYPE_EXP: return createCGTypeExp();
 			case CGModelPackage.CG_UNBOX_EXP: return createCGUnboxExp();
+			case CGModelPackage.CG_UNLIMITED: return createCGUnlimited();
 			case CGModelPackage.CG_VARIABLE_EXP: return createCGVariableExp();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -305,7 +308,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGBuiltInIterationCallExp createCGBuiltInIterationCallExp() {
+	public @NonNull CGBuiltInIterationCallExp createCGBuiltInIterationCallExp() {
 		CGBuiltInIterationCallExpImpl cgBuiltInIterationCallExp = new CGBuiltInIterationCallExpImpl();
 		return cgBuiltInIterationCallExp;
 	}
@@ -315,9 +318,9 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGCastParameter createCGCastParameter() {
-		CGCastParameterImpl cgCastParameter = new CGCastParameterImpl();
-		return cgCastParameter;
+	public @NonNull CGCastExp createCGCastExp() {
+		CGCastExpImpl cgCastExp = new CGCastExpImpl();
+		return cgCastExp;
 	}
 
 	/**
@@ -415,6 +418,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGEcoreOperation createCGEcoreOperation() {
+		CGEcoreOperationImpl cgEcoreOperation = new CGEcoreOperationImpl();
+		return cgEcoreOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGEcoreOperationCallExp createCGEcoreOperationCallExp() {
 		CGEcoreOperationCallExpImpl cgEcoreOperationCallExp = new CGEcoreOperationCallExpImpl();
 		return cgEcoreOperationCallExp;
@@ -445,7 +458,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGEqualsExp createCGEqualsExp() {
+	public @NonNull CGEqualsExp createCGEqualsExp() {
 		CGEqualsExpImpl cgEqualsExp = new CGEqualsExpImpl();
 		return cgEqualsExp;
 	}
@@ -565,16 +578,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGInfinity createCGInfinity() {
-		CGInfinityImpl cgInfinity = new CGInfinityImpl();
-		return cgInfinity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public @NonNull CGInteger createCGInteger() {
 		CGIntegerImpl cgInteger = new CGIntegerImpl();
 		return cgInteger;
@@ -595,7 +598,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGIsInvalidExp createCGIsInvalidExp() {
+	public @NonNull CGIsInvalidExp createCGIsInvalidExp() {
 		CGIsInvalidExpImpl cgIsInvalidExp = new CGIsInvalidExpImpl();
 		return cgIsInvalidExp;
 	}
@@ -605,7 +608,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGIsUndefinedExp createCGIsUndefinedExp() {
+	public @NonNull CGIsUndefinedExp createCGIsUndefinedExp() {
 		CGIsUndefinedExpImpl cgIsUndefinedExp = new CGIsUndefinedExpImpl();
 		return cgIsUndefinedExp;
 	}
@@ -648,6 +651,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGLibraryIterationCallExp createCGLibraryIterationCallExp() {
 		CGLibraryIterationCallExpImpl cgLibraryIterationCallExp = new CGLibraryIterationCallExpImpl();
 		return cgLibraryIterationCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGLibraryOperation createCGLibraryOperation() {
+		CGLibraryOperationImpl cgLibraryOperation = new CGLibraryOperationImpl();
+		return cgLibraryOperation;
 	}
 
 	/**
@@ -698,16 +711,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGNull createCGNull() {
 		CGNullImpl cgNull = new CGNullImpl();
 		return cgNull;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGOperation createCGOperation() {
-		CGOperationImpl cgOperation = new CGOperationImpl();
-		return cgOperation;
 	}
 
 	/**
@@ -785,7 +788,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGTextParameter createCGTextParameter() {
+	public @NonNull CGTextParameter createCGTextParameter() {
 		CGTextParameterImpl cgTextParameter = new CGTextParameterImpl();
 		return cgTextParameter;
 	}
@@ -858,6 +861,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGUnboxExp createCGUnboxExp() {
 		CGUnboxExpImpl cgUnboxExp = new CGUnboxExpImpl();
 		return cgUnboxExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGUnlimited createCGUnlimited() {
+		CGUnlimitedImpl cgUnlimited = new CGUnlimitedImpl();
+		return cgUnlimited;
 	}
 
 	/**

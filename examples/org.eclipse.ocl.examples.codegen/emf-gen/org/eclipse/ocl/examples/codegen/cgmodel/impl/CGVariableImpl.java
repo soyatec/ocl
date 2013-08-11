@@ -182,7 +182,6 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 		return super.eIsSet(featureID);
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 * @generated

@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -336,7 +335,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 */
 	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return IfPlaces.createPlaces(element2place, this);
+		return IfPlaces.createIfPlaces(element2place, this);
 	}
 
 	/**

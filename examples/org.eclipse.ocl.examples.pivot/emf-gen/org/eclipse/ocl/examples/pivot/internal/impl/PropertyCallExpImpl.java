@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
@@ -466,13 +467,13 @@ public class PropertyCallExpImpl
 		 * inv NonStaticSourceTypeIsConformant: not referredProperty.isStatic implies source.type.conformsTo(getSpecializedReferredPropertyOwningType())
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ PropertyCallExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_not;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = self.getReferredProperty();
+		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = this.getReferredProperty();
 		        if (referredProperty == null) {
 		            throw new InvalidValueException("Null source");
 		        }
@@ -485,12 +486,12 @@ public class PropertyCallExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression source = self.getSource();
+		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
 		        if (source == null) {
 		            throw new InvalidValueException("Null source");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = self.getSpecializedReferredPropertyOwningType();
+		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        CAUGHT_conformsTo = conformsTo;
 		    }
@@ -526,11 +527,12 @@ public class PropertyCallExpImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ PropertyCallExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
-		    final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = self.getSpecializedReferredPropertyType();
+		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		    final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
 		    CAUGHT_eq = eq;
 		}

@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGVariable()
- * @model abstract="true"
  * @generated
  */
 public interface CGVariable extends CGValuedElement {
@@ -50,7 +49,6 @@ public interface CGVariable extends CGValuedElement {
 	 * @return the value of the '<em>Init</em>' containment reference.
 	 * @see #setInit(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGVariable_Init()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGValuedElement getInit();
@@ -70,7 +68,7 @@ public interface CGVariable extends CGValuedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$21
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$24
 	void setNonInvalid();
 
 	/**
@@ -78,7 +76,7 @@ public interface CGVariable extends CGValuedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$22
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$25
 	void setNonNull();
 
 } // CGVariableDeclaration

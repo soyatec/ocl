@@ -211,4 +211,13 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
+		return false;
+	}
+
 } //CGTextImpl

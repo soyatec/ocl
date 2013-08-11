@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -30,12 +28,6 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 public class NumericCompareToOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull NumericCompareToOperation INSTANCE = new NumericCompareToOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		return evaluate(left, right);
-	}
 
 	@Override
 	public @NonNull IntegerValue evaluate(@Nullable Object left, @Nullable Object right) {

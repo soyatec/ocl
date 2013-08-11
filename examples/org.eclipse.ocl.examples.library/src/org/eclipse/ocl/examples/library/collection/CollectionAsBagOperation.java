@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.BagValue;
 public class CollectionAsBagOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionAsBagOperation INSTANCE = new CollectionAsBagOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull BagValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull BagValue evaluate(@Nullable Object argument) {

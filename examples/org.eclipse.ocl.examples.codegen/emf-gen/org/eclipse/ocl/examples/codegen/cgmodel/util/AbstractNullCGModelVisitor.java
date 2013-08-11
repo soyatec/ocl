@@ -54,7 +54,7 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitCGCastParameter(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter object) {
+	public @Nullable R visitCGCastExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp object) {
 		return null;
 	}
 
@@ -99,6 +99,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGEcoreDataTypeConstructorExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp object) {
+		return null;
+	}
+
+	public @Nullable R visitCGEcoreOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation object) {
 		return null;
 	}
 
@@ -170,10 +174,6 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitCGInfinity(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity object) {
-		return null;
-	}
-
 	public @Nullable R visitCGInteger(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInteger object) {
 		return null;
 	}
@@ -207,6 +207,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGLibraryIterationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp object) {
+		return null;
+	}
+
+	public @Nullable R visitCGLibraryOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation object) {
 		return null;
 	}
 
@@ -307,6 +311,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGUnboxExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp object) {
+		return null;
+	}
+
+	public @Nullable R visitCGUnlimited(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGUnlimited object) {
 		return null;
 	}
 

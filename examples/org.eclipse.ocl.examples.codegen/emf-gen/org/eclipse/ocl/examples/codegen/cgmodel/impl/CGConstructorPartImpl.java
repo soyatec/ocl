@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorPartImpl#getInit <em>Init</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorPartImpl#getConstructorExp <em>Constructor Exp</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorPartImpl#getExecutorPart <em>Executor Part</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +53,16 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * @ordered
 	 */
 	protected CGValuedElement init;
+
+	/**
+	 * The cached value of the '{@link #getExecutorPart() <em>Executor Part</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutorPart()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGExecutorConstructorPart executorPart;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,6 +141,27 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGExecutorConstructorPart getExecutorPart() {
+		return executorPart;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExecutorPart(CGExecutorConstructorPart newExecutorPart) {
+		CGExecutorConstructorPart oldExecutorPart = executorPart;
+		executorPart = newExecutorPart;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CONSTRUCTOR_PART__EXECUTOR_PART, oldExecutorPart, executorPart));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -182,6 +215,8 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 				return getInit();
 			case CGModelPackage.CG_CONSTRUCTOR_PART__CONSTRUCTOR_EXP:
 				return getConstructorExp();
+			case CGModelPackage.CG_CONSTRUCTOR_PART__EXECUTOR_PART:
+				return getExecutorPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,6 +232,9 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 			case CGModelPackage.CG_CONSTRUCTOR_PART__INIT:
 				setInit((CGValuedElement)newValue);
 				return;
+			case CGModelPackage.CG_CONSTRUCTOR_PART__EXECUTOR_PART:
+				setExecutorPart((CGExecutorConstructorPart)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -211,6 +249,9 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 		switch (featureID) {
 			case CGModelPackage.CG_CONSTRUCTOR_PART__INIT:
 				setInit((CGValuedElement)null);
+				return;
+			case CGModelPackage.CG_CONSTRUCTOR_PART__EXECUTOR_PART:
+				setExecutorPart((CGExecutorConstructorPart)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,6 +269,8 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 				return init != null;
 			case CGModelPackage.CG_CONSTRUCTOR_PART__CONSTRUCTOR_EXP:
 				return getConstructorExp() != null;
+			case CGModelPackage.CG_CONSTRUCTOR_PART__EXECUTOR_PART:
+				return executorPart != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -283,6 +326,19 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 */
 	@Override
 	public boolean isUnboxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
+		if (oldValue == executorPart) {
+			setExecutorPart((CGExecutorConstructorPart)newValue);
+			return true;
+		}
 		return false;
 	}
 

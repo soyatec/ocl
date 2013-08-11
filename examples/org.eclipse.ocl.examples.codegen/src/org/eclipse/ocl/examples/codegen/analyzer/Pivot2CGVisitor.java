@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreClassConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
@@ -43,6 +44,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
@@ -135,6 +137,7 @@ import org.eclipse.ocl.examples.pivot.internal.impl.TuplePartImpl;
 import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
+import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.StaticProperty;
@@ -414,7 +417,6 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		CGConstant constant = context.getBoolean(element.isBooleanSymbol());
 		CGConstantExp cgLiteralExp = context.createCGConstantExp(element, constant);
 		setPivot(cgLiteralExp, element);
-//		thisAnalysis.initHashSource(DomainUtil.nonNullModel(Boolean.valueOf(element.isBooleanSymbol())));
 		return cgLiteralExp;
 	}
 
@@ -509,6 +511,8 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 				CGEcoreClassConstructorExp cgEConstructorExp = CGModelFactory.eINSTANCE.createCGEcoreClassConstructorExp();
 				cgEConstructorExp.setEClass((EClass)eTarget);
 				cgConstructorExp = cgEConstructorExp;
+
+				
 //				LocalContext localContext = globalContext.getLocalContext(element);
 //				if (localContext != null) {
 //					CGExecutorType cgExecutorType = localContext.getExecutorType(type);
@@ -518,6 +522,9 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			}
 		}
 		if (cgConstructorExp != null) {
+			CGExecutorType cgExecutorType = context.createExecutorType(element.getType());
+			cgConstructorExp.setExecutorType(cgExecutorType);
+			cgConstructorExp.getOwns().add(cgExecutorType);
 			setPivot(cgConstructorExp, element);
 //			context.setNames(cgConstructorExp, element);
 			List<CGConstructorPart> cgParts = cgConstructorExp.getParts();
@@ -535,8 +542,8 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		cgConstructorPart.setInit(doVisit(CGValuedElement.class, element.getInitExpression()));
 		Property referredProperty = element.getReferredProperty();
 		if (referredProperty != null) {
-			CGExecutorConstructorPart cgExecutorConstructorPart = context.getExecutorConstructorPart(referredProperty);
-			cgConstructorPart.getDependsOn().add(cgExecutorConstructorPart);
+			CGExecutorConstructorPart cgExecutorConstructorPart = context.createExecutorConstructorPart(referredProperty);
+			cgConstructorPart.setExecutorPart(cgExecutorConstructorPart);
 		}
 		return cgConstructorPart;
 	}
@@ -547,7 +554,6 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		CGConstant constant = context.getElementId(element.getReferredEnumLiteral().getEnumerationLiteralId());
 		CGConstantExp cgLiteralExp = context.createCGConstantExp(element, constant);
 		setPivot(cgLiteralExp, element);
-//		thisAnalysis.initHashSource(DomainUtil.nonNullModel(Boolean.valueOf(element.isBooleanSymbol())));
 		return cgLiteralExp;
 	}
 
@@ -764,7 +770,19 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 
 	@Override
 	public @Nullable CGOperation visitOperation(@NonNull Operation element) {
-		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGOperation();
+		CGOperation cgOperation = null;
+		LibraryOperation libraryOperation = metaModelManager.getImplementation(element);
+		if (libraryOperation instanceof EObjectOperation) {
+			EOperation eOperation = (EOperation) element.getETarget();
+			if (eOperation != null) {
+				CGEcoreOperation cgEcoreOperation = CGModelFactory.eINSTANCE.createCGEcoreOperation();
+				cgEcoreOperation.setEOperation(eOperation);
+				cgOperation = cgEcoreOperation;
+			}
+		}
+		if (cgOperation == null) {
+			cgOperation = CGModelFactory.eINSTANCE.createCGLibraryOperation();
+		}
 		setPivot(cgOperation, element);
 		cgOperation.setRequired(element.isRequired());
 		OpaqueExpression specification = element.getBodyExpression();
@@ -782,23 +800,12 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 				cgOperation.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
 			}
 		}
-
-		LibraryOperation libraryOperation = metaModelManager.getImplementation(element);
-		if (libraryOperation instanceof EObjectOperation) {
-			EOperation eOperation = (EOperation) element.getETarget();
-			if (eOperation != null) {
-				cgOperation.setEOperation(eOperation);
-			}
-		}
 		return cgOperation;
 	}
 
 	@Override
 	public @NonNull CGValuedElement visitOperationCallExp(@NonNull OperationCallExp element) {
 		Operation pivotOperation = DomainUtil.nonNullState(element.getReferredOperation());
-//		if ("allOwnedElements".equals(pivotOperation.getName())) {
-//			System.out.println("Got it");
-//		}
 		OCLExpression pSource = element.getSource();
 		CGValuedElement cgSource = pSource != null ? doVisit(CGValuedElement.class, pSource) : null;
 		LibraryOperation libraryOperation = metaModelManager.getImplementation(pivotOperation);
@@ -838,7 +845,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			}
 		}
 		CGOperationCallExp cgOperationCallExp = null;
-		if ((libraryOperation != null) && !(libraryOperation instanceof EObjectOperation)) {
+		if ((libraryOperation != null) && !(libraryOperation instanceof EObjectOperation) && !(libraryOperation instanceof EInvokeOperation)) {
 			CGLibraryOperationCallExp cgLibraryOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
 			cgLibraryOperationCallExp.setLibraryOperation(libraryOperation);
 			cgOperationCallExp = cgLibraryOperationCallExp;
@@ -856,10 +863,10 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		}
 		if (cgOperationCallExp == null) {
 			CGExecutorOperationCallExp cgExecutorOperationCallExp = CGModelFactory.eINSTANCE.createCGExecutorOperationCallExp();
-			CGExecutorOperation cgExecutorOperation = context.getExecutorOperation(pivotOperation);
+			CGExecutorOperation cgExecutorOperation = context.createExecutorOperation(pivotOperation);
 			cgExecutorOperationCallExp.setExecutorOperation(cgExecutorOperation);
+			cgExecutorOperationCallExp.getOwns().add(cgExecutorOperation);
 			cgOperationCallExp = cgExecutorOperationCallExp;
-			cgOperationCallExp.getDependsOn().add(cgExecutorOperation);
 		}
 		cgOperationCallExp.setReferredOperation(pivotOperation);
 		setPivot(cgOperationCallExp, element);
@@ -908,7 +915,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 	}
 
 	@Override
-	public @NonNull CGPropertyCallExp visitPropertyCallExp(@NonNull PropertyCallExp element) {
+	public @NonNull CGValuedElement visitPropertyCallExp(@NonNull PropertyCallExp element) {
 		Property pivotProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		LibraryProperty libraryProperty = metaModelManager.getImplementation(pivotProperty);
 		CGPropertyCallExp cgPropertyCallExp = null;
@@ -935,11 +942,11 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			cgPropertyCallExp = cgLibraryPropertyCallExp;
 		}
 		if (cgPropertyCallExp == null) {
-			CGExecutorPropertyCallExp cgExecutorPropertyCallExp = CGModelFactory.eINSTANCE.createCGExecutorPropertyCallExp();					
-			CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(pivotProperty);
+			CGExecutorPropertyCallExp cgExecutorPropertyCallExp = CGModelFactory.eINSTANCE.createCGExecutorPropertyCallExp();
+			CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(pivotProperty);
 			cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
+			cgExecutorPropertyCallExp.getOwns().add(cgExecutorProperty);
 			cgPropertyCallExp = cgExecutorPropertyCallExp;
-			cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
 		}
 		cgPropertyCallExp.setReferredProperty(pivotProperty);
 		setPivot(cgPropertyCallExp, element);
@@ -1003,10 +1010,13 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		CGTypeExp cgTypeExp = CGModelFactory.eINSTANCE.createCGTypeExp();
 //		setPivot(cgTypeExp, pTypeExp);
 		cgTypeExp.setPivot(pTypeExp);
+		CGExecutorType cgExecutorType = context.createExecutorType(pTypeExp.getReferredType());
+		cgTypeExp.setExecutorType(cgExecutorType);
+		cgTypeExp.getOwns().add(cgExecutorType);
 //		cgTypeExp.setReferredType(codeGenerator.getGlobalContext().getLocalContext(cgTypeExp).getExecutorType(pTypeExp.getReferredType()));
 //		TypeId pivotTypeId = pTypeExp.getTypeId();
 //		cgTypeExp.setTypeId(context.getTypeId(pivotTypeId)); -- no need to reify the metaclassid
-		cgTypeExp.setName(pTypeExp.getName());
+		cgTypeExp.setName(cgExecutorType.getName());
 		return cgTypeExp;
 	}
 
@@ -1015,10 +1025,10 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		Number unlimitedNaturalSymbol = element.getUnlimitedNaturalSymbol();
 		CGConstantExp cgLiteralExp;
 		if (unlimitedNaturalSymbol instanceof UnlimitedValue) {
-			cgLiteralExp = context.createCGConstantExp(element, context.getInfinity());
+			cgLiteralExp = context.createCGConstantExp(element, context.getUnlimited());
 		}
 		else if (unlimitedNaturalSymbol instanceof Unlimited) {
-			cgLiteralExp = context.createCGConstantExp(element, context.getInfinity());
+			cgLiteralExp = context.createCGConstantExp(element, context.getUnlimited());
 		}
 		else if (unlimitedNaturalSymbol != null) {
 			cgLiteralExp = context.createCGConstantExp(element, context.getInteger(unlimitedNaturalSymbol));
@@ -1037,7 +1047,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 	}
 
 	@Override
-	public @Nullable CGVariableExp visitVariableExp(@NonNull VariableExp pVariableExp) {
+	public @Nullable CGValuedElement visitVariableExp(@NonNull VariableExp pVariableExp) {
 		VariableDeclaration referredVariable = pVariableExp.getReferredVariable();
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		setPivot(cgVariableExp, pVariableExp);

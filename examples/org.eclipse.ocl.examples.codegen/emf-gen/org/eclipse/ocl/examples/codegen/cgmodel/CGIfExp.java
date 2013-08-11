@@ -31,7 +31,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIfExp()
- * @model
  * @generated
  */
 public interface CGIfExp extends CGValuedElement {
@@ -46,7 +45,6 @@ public interface CGIfExp extends CGValuedElement {
 	 * @return the value of the '<em>Condition</em>' containment reference.
 	 * @see #setCondition(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIfExp_Condition()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getCondition();
@@ -72,7 +70,6 @@ public interface CGIfExp extends CGValuedElement {
 	 * @return the value of the '<em>Then Expression</em>' containment reference.
 	 * @see #setThenExpression(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIfExp_ThenExpression()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getThenExpression();
@@ -98,7 +95,6 @@ public interface CGIfExp extends CGValuedElement {
 	 * @return the value of the '<em>Else Expression</em>' containment reference.
 	 * @see #setElseExpression(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIfExp_ElseExpression()
-	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	CGValuedElement getElseExpression();

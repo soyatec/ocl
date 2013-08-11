@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -30,12 +28,6 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 public class NumericFloorOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull NumericFloorOperation INSTANCE = new NumericFloorOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @NonNull IntegerValue evaluate(@Nullable Object sourceVal) {

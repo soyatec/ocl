@@ -34,7 +34,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass()
- * @model
  * @generated
  */
 public interface CGClass extends CGNamedElement {
@@ -51,7 +50,6 @@ public interface CGClass extends CGNamedElement {
 	 * @return the value of the '<em>Operations</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_Operations()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getContainingClass
-	 * @model opposite="containingClass" containment="true" ordered="false"
 	 * @generated
 	 */
 	@NonNull List<CGOperation> getOperations();
@@ -69,7 +67,6 @@ public interface CGClass extends CGNamedElement {
 	 * @return the value of the '<em>Properties</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_Properties()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGProperty#getContainingClass
-	 * @model opposite="containingClass" containment="true" ordered="false"
 	 * @generated
 	 */
 	@NonNull List<CGProperty> getProperties();
@@ -84,7 +81,6 @@ public interface CGClass extends CGNamedElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Invariants</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_Invariants()
-	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGConstraint> getInvariants();
@@ -102,7 +98,6 @@ public interface CGClass extends CGNamedElement {
 	 * @see #setContainingPackage(CGPackage)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_ContainingPackage()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPackage#getClasses
-	 * @model opposite="classes" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
 	CGPackage getContainingPackage();

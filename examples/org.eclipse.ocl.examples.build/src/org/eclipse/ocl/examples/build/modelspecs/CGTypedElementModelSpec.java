@@ -17,9 +17,11 @@ package org.eclipse.ocl.examples.build.modelspecs;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
@@ -50,7 +52,7 @@ public class CGTypedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for getPivotTypeId()
 	 */
-	protected static enum Pti { ROOT, TEXT, T_ID }
+	protected static enum Pti { ROOT, TEXT, TYPE, T_ID }
 		
 	protected static MethodSpec getPivotTypeId = new MyMethodSpec(CGTypedElement.class, "@Nullable " + classRef(TypeId.class) + " getPivotTypeId()", null,
 		"Return the TypeId of the pivot element.")
@@ -64,6 +66,7 @@ public class CGTypedElementModelSpec extends ModelSpec
 				switch (enumValue) {
 					case ROOT: return "return pivot != null ? ((" + classRef(DomainTypedElement.class) + ") pivot).getTypeId() : null;";
 					case TEXT: return "return (" + classRef(TypeId.class) + ") getTypeId().getElementId();		// FIXME Why irregular?";
+					case TYPE: return "return pivot != null ? ((" + classRef(DomainType.class) + ") pivot).getTypeId() : null;";
 					case T_ID: return "return (" + classRef(TypeId.class) + ")elementId;";
 					default: return "MISSING_CASE_for_" + enumValue + ";";
 				}
@@ -72,6 +75,7 @@ public class CGTypedElementModelSpec extends ModelSpec
 
 	public static void register() {
 		new CGTypedElementModelSpec(CGTypedElement.class, Pti.ROOT );
+		new CGTypedElementModelSpec(CGExecutorType.class, Pti.TYPE );
 		new CGTypedElementModelSpec(CGText.class, Pti.TEXT );
 		new CGTypedElementModelSpec(CGTypeId.class, Pti.T_ID );
 	}

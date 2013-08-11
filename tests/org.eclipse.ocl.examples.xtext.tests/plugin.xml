@@ -76,5 +76,40 @@ The actual constraints are lazily loaded by the first validation run that uses t
       <!--package uri="http://cses" class="cses.CSEsPackage"/-->
       <package uri="dummy-protocol://dummy-nsuri/cses" class="cses.CSEsPackage"/>
    </extension>
+   
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SysML_ValueTypes_QUDV NOT -->
+      <!--package uri="http://www.omg.org/spec/SysML/20131220/SysML_ValueTypes_QUDV"
+            class="SysML_ValueTypes_QUDV.SysML_ValueTypes_QUDVPackage"
+            genModel="model/SysML_ValueTypes_QUDV.genmodel"/-->
+      <package uri="dummy-protocol://dummy-nsuri/spec/SysML/20131220/SysML_ValueTypes_QUDV"
+            class="SysML_ValueTypes_QUDV.SysML_ValueTypes_QUDVPackage"/>
+   </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SysML_ValueTypes_QUDV NOT -->
+      <!--package uri="http://www.omg.org/spec/SysML/20131220/PrimitiveValueTypes"
+            class="SysML_ValueTypes_QUDV.PrimitiveValueTypes.PrimitiveValueTypesPackage"
+            genModel="model/SysML_ValueTypes_QUDV.genmodel"/-->
+      <package uri="dummy-protocol://dummy-nsuri/spec/SysML/20131220/PrimitiveValueTypes"
+            class="SysML_ValueTypes_QUDV.PrimitiveValueTypes.PrimitiveValueTypesPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SysML_ValueTypes_QUDV NOT -->
+      <!--package uri="http://www.omg.org/spec/SysML/20131220/UnitAndQuantityKind"
+            class="SysML_ValueTypes_QUDV.UnitAndQuantityKind.UnitAndQuantityKindPackage"
+            genModel="model/SysML_ValueTypes_QUDV.genmodel"/-->
+      <package uri="dummy-protocol://dummy-nsuri/spec/SysML/20131220/UnitAndQuantityKind"
+            class="SysML_ValueTypes_QUDV.UnitAndQuantityKind.UnitAndQuantityKindPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SysML_ValueTypes_QUDV NOT -->
+      <!--package uri="http://www.omg.org/spec/SysML/20131220/QUDV"
+            class="SysML_ValueTypes_QUDV.QUDV.QUDVPackage"
+            genModel="model/SysML_ValueTypes_QUDV.genmodel"/-->
+      <package uri="dummy-protocol://dummy-nsuri/spec/SysML/20131220/QUDV"
+            class="SysML_ValueTypes_QUDV.QUDV.QUDVPackage"/>
+   </extension>
 </plugin>

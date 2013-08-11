@@ -16,28 +16,37 @@ package org.eclipse.ocl.examples.codegen.analyzer;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
@@ -47,6 +56,8 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.library.iterator.IterateIteration;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
@@ -221,6 +232,20 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	public @Nullable Object visitCGIfExp(@NonNull CGIfExp cgElement) {
 		super.visitCGIfExp(cgElement);
 		rewriteAsGuarded(cgElement.getCondition());
+		CGValuedElement thenExpression = cgElement.getThenExpression();
+		CGValuedElement elseExpression = cgElement.getElseExpression();
+		if ((thenExpression != null) && (elseExpression != null)) {
+			boolean thenIsBoxed = thenExpression.isBoxed();
+			boolean elseIsBoxed = elseExpression.isBoxed();
+			if (thenIsBoxed != elseIsBoxed) {
+				if (thenIsBoxed) {
+					rewriteAsBoxed(cgElement.getElseExpression());
+				}
+				else {
+					rewriteAsBoxed(cgElement.getThenExpression());
+				}
+			}
+		}
 		return null;
 	}
 
@@ -298,5 +323,46 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		super.visitCGPropertyCallExp(cgElement);
 		rewriteAsGuarded(cgElement.getSource());
 		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGVariableExp(@NonNull CGVariableExp cgElement) {
+		super.visitCGVariableExp(cgElement);
+		CGVariable referredVariable = cgElement.getReferredVariable();
+		if (referredVariable instanceof CGIterator) {
+			CGIterator cgIterator = (CGIterator)referredVariable;
+			EObject cgOperation = cgIterator.eContainer();
+			if ((cgOperation instanceof CGIterationCallExp) && !(cgOperation instanceof CGBuiltInIterationCallExp)) {
+				rewriteAsCast(cgElement);
+			}
+		}
+		else if (referredVariable instanceof CGParameter) {
+			CGParameter cgParameter = (CGParameter)referredVariable;
+			EObject cgOperation = cgParameter.eContainer();
+			if (cgOperation instanceof CGLibraryOperation) {
+				rewriteAsCast(cgElement);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Insert a CGCastExp around cgChild.
+	 */
+	protected CGValuedElement rewriteAsCast(@Nullable CGVariableExp cgChild) {
+		if (cgChild == null) {
+			return cgChild;
+		}
+		CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
+		CGUtils.wrap(cgCastExp, cgChild);
+		TypedElement pivot = (TypedElement) cgChild.getPivot();
+		Type pivotType = pivot.getType();
+		cgCastExp.setPivot(pivot);
+		if (pivotType != null) {
+			CGExecutorType cgExecutorType = context.createExecutorType(pivotType);
+			cgCastExp.setExecutorType(cgExecutorType);
+		}
+		cgCastExp.setTypeId(codeGenerator.getAnalyzer().getTypeId(pivot.getTypeId()));
+		return cgCastExp;
 	}
 }

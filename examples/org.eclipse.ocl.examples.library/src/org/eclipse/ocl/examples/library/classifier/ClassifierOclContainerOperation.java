@@ -19,8 +19,6 @@ package org.eclipse.ocl.examples.library.classifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 
 /**
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 public class ClassifierOclContainerOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull ClassifierOclContainerOperation INSTANCE = new ClassifierOclContainerOperation();
-
-	@Override
-	@Deprecated
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		return evaluate(sourceValue);
-	}
 
 	@Override
 	public @Nullable Object evaluate(@Nullable Object sourceVal) {

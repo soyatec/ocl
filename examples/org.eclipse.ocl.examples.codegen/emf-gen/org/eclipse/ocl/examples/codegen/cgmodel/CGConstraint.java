@@ -33,7 +33,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstraint()
- * @model
  * @generated
  */
 public interface CGConstraint extends CGNamedElement {
@@ -48,7 +47,6 @@ public interface CGConstraint extends CGNamedElement {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstraint_Body()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGValuedElement getBody();
@@ -74,7 +72,6 @@ public interface CGConstraint extends CGNamedElement {
 	 * @return the value of the '<em>Message</em>' containment reference.
 	 * @see #setMessage(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstraint_Message()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGValuedElement getMessage();

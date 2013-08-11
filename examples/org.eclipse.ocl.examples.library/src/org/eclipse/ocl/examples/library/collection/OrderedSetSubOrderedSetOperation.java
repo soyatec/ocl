@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.library.collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 
@@ -29,12 +27,6 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 public class OrderedSetSubOrderedSetOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull OrderedSetSubOrderedSetOperation INSTANCE = new OrderedSetSubOrderedSetOperation();
-
-	@Override
-	@Deprecated
-	public @NonNull OrderedSetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
-		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
-	}
 
 	@Override
 	public @NonNull OrderedSetValue evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {

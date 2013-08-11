@@ -19,9 +19,10 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstant;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
@@ -29,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
@@ -67,8 +67,8 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 	}
 
 	@Override
-	public @Nullable List<Object> visitCGCastParameter(@NonNull CGCastParameter cgElement) {
-		return append(super.visitCGCastParameter(cgElement), cgElement.getReferredParameter());
+	public @Nullable List<Object> visitCGCastExp(@NonNull CGCastExp cgElement) {
+		return append(super.visitCGCastExp(cgElement), cgElement.getExecutorType());
 	}
 
 	@Override
@@ -79,6 +79,11 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 	@Override
 	public @Nullable List<Object> visitCGConstantExp(@NonNull CGConstantExp cgElement) {
 		return append(super.visitCGConstantExp(cgElement), cgElement.getReferredConstant());
+	}
+
+	@Override
+	public @Nullable List<Object> visitCGEcoreOperation(@NonNull CGEcoreOperation cgElement) {
+		return append(super.visitCGEcoreOperation(cgElement), cgElement.getEOperation());
 	}
 
 	@Override
@@ -117,11 +122,6 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 	}
 
 	@Override
-	public @Nullable List<Object> visitCGOperation(@NonNull CGOperation cgElement) {
-		return append(super.visitCGOperation(cgElement), cgElement.getEOperation());
-	}
-
-	@Override
 	public @Nullable List<Object> visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
 		return append(super.visitCGOperationCallExp(cgElement), cgElement.getReferredOperation());
 	}
@@ -133,7 +133,7 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 
 	@Override
 	public @Nullable List<Object> visitCGTypeExp(@NonNull CGTypeExp cgElement) {
-		return append(super.visitCGTypeExp(cgElement), cgElement.getReferredType());
+		return append(super.visitCGTypeExp(cgElement), cgElement.getPivotTypeId());
 	}
 
 	@Override

@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryProperty;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryPropertyCallExp()
- * @model
  * @generated
  */
 public interface CGLibraryPropertyCallExp extends CGPropertyCallExp {
@@ -45,7 +44,6 @@ public interface CGLibraryPropertyCallExp extends CGPropertyCallExp {
 	 * @return the value of the '<em>Library Property</em>' attribute.
 	 * @see #setLibraryProperty(LibraryProperty)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGLibraryPropertyCallExp_LibraryProperty()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.LibraryProperty" required="true"
 	 * @generated
 	 */
 	LibraryProperty getLibraryProperty();

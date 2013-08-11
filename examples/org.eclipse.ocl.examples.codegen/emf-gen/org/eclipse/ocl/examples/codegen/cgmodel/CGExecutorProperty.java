@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorProperty()
- * @model abstract="true"
  * @generated
  */
 public interface CGExecutorProperty extends CGValuedElement {
@@ -47,7 +46,6 @@ public interface CGExecutorProperty extends CGValuedElement {
 	 * @return the value of the '<em>Underlying Property Id</em>' reference.
 	 * @see #setUnderlyingPropertyId(CGElementId)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorProperty_UnderlyingPropertyId()
-	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	CGElementId getUnderlyingPropertyId();

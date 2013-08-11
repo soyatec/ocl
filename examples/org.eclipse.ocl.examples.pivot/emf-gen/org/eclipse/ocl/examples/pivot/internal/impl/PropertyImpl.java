@@ -1089,9 +1089,9 @@ public class PropertyImpl
 		/**
 		 * p.oclIsKindOf(self.oclType())
 		 */
-		final @NonNull /*@NonInvalid*/ ParameterableElement self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, this);
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
 		return oclIsKindOf;
 	}
@@ -1111,13 +1111,11 @@ public class PropertyImpl
 		 *   container.oclAsType(Type)
 		 *   .ownedAttribute->includes(self)
 		 */
-		final @NonNull /*@NonInvalid*/ DomainProperty self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(PivotTables.CLSSid_Type, null);
 		@Nullable /*@Caught*/ Object CAUGHT_container;
 		try {
-		    final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(self);
+		    final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(this);
 		    CAUGHT_container = container;
 		}
 		catch (Exception e) {
@@ -1125,10 +1123,11 @@ public class PropertyImpl
 		}
 		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		try {
+		    final @NonNull /*@NonInvalid*/ DomainType TYP_Type_0 = idResolver.getType(PivotTables.CLSSid_Type, null);
 		    if (CAUGHT_container instanceof InvalidValueException) {
 		        throw (InvalidValueException)CAUGHT_container;
 		    }
-		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type);
+		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_0);
 		    CAUGHT_oclIsKindOf = oclIsKindOf;
 		}
 		catch (Exception e) {
@@ -1136,16 +1135,17 @@ public class PropertyImpl
 		}
 		@NonNull /*@Caught*/ Object CAUGHT_includes;
 		try {
+		    final @NonNull /*@NonInvalid*/ DomainType TYP_Type_1 = idResolver.getType(PivotTables.CLSSid_Type, null);
 		    if (CAUGHT_container instanceof InvalidValueException) {
 		        throw (InvalidValueException)CAUGHT_container;
 		    }
-		    final @Nullable /*@Thrown*/ DomainType oclAsType = (DomainType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type);
+		    final @Nullable /*@Thrown*/ DomainType oclAsType = (DomainType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_1);
 		    if (oclAsType == null) {
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
-		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
+		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, this);
 		    CAUGHT_includes = includes;
 		}
 		catch (Exception e) {
@@ -1171,17 +1171,15 @@ public class PropertyImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ DomainProperty self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
 		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_and;
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression = self.getDefaultExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression = this.getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -1190,8 +1188,9 @@ public class PropertyImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = self.getDefaultExpression();
-		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL);
+		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
+		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = this.getDefaultExpression();
+		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
 		        catch (Exception e) {
@@ -1205,8 +1204,8 @@ public class PropertyImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = self.getDefaultExpression();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)defaultExpression_1);
+		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = this.getDefaultExpression();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {

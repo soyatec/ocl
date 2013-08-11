@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
@@ -40,6 +42,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
+import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
+import org.eclipse.ocl.examples.codegen.cse.SimpleAnalysis;
 import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -75,49 +79,55 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 {	
 	private static final int TOUCHED = -1;
 	protected static final int NOT_AVAILABLE = -2;
-	
-	
+		
 	private @NonNull Map<CGValuedElement, Set<CGValuedElement>> directDependencies = new HashMap<CGValuedElement, Set<CGValuedElement>>();
 	protected @NonNull Id2DependencyVisitor id2DependencyVisitor = new Id2DependencyVisitor();
+	protected final @NonNull GlobalPlace globalPlace;
 
-	public DependencyVisitor(@NonNull CodeGenAnalyzer analyzer) {
+	public DependencyVisitor(@NonNull CodeGenAnalyzer analyzer, @NonNull GlobalPlace globalPlace) {
         super(analyzer);
-	}
-
-	public void visit(@NonNull CGNamedElement cgElement) {
-		if (cgElement instanceof CGValuedElement) {
-			addDependency((CGValuedElement) cgElement, null);
-		}
-		cgElement.accept(this);
-	}
-
-	public void visitAll(@Nullable Iterable<? extends CGNamedElement> cgElements) {
-		if (cgElements != null) {
-			for (CGNamedElement cgElement : cgElements) {
-				if (cgElement != null) {
-					visit(cgElement);
-				}
-			}
-		}
+        this.globalPlace = globalPlace;
 	}
 
 	protected void addDependency(@Nullable CGValuedElement cgElement, @Nullable CGValuedElement dependsOn) {
 		cgElement = cgElement != null ? cgElement.getValue() : null;
 		dependsOn = dependsOn != null ? dependsOn.getValue() : null;
 		if ((cgElement != null) && (cgElement != dependsOn)) {
-			Set<CGValuedElement> dependencies = directDependencies.get(cgElement);
-			List<CGValuedElement> dependsOns = cgElement.getDependsOn();
+			CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
+			Set<CGValuedElement> dependencies = directDependencies.get(cgPrimaryElement);
+			List<CGValuedElement> dependsOns = cgPrimaryElement.getDependsOn();
 			if (dependencies == null) {
 				dependencies = new HashSet<CGValuedElement>();
-				directDependencies.put(cgElement, dependencies);
-				for (CGValuedElement cgDependent : dependsOns) {
-					addDependency(cgElement, cgDependent);
+				directDependencies.put(cgPrimaryElement, dependencies);
+				for (CGValuedElement cgDependent : new ArrayList<CGValuedElement>(dependsOns)) {
+					addDependency(cgPrimaryElement, cgDependent);
+				}
+				for (EStructuralFeature eFeature : cgPrimaryElement.eClass().getEAllStructuralFeatures()) {
+					if (eFeature instanceof EReference) {
+						EReference eReference = (EReference)eFeature;
+						if (!eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
+							Object childOrChildren = cgPrimaryElement.eGet(eReference);
+							if (eReference.isMany()) {
+								for (Object child : (List<?>)childOrChildren) {
+									if (child instanceof CGValuedElement) {
+										addDependency(cgPrimaryElement, (CGValuedElement)child);
+									}
+								}
+							}
+							else {
+								if ((childOrChildren instanceof CGValuedElement) && (childOrChildren != cgPrimaryElement.eContainer())) {
+									addDependency(cgPrimaryElement, (CGValuedElement)childOrChildren);
+								}
+							}
+						}
+					}
 				}
 			}
 			if (dependsOn != null) {
-				dependencies.add(dependsOn);
-				if (!dependsOns.contains(dependsOn)) {
-					dependsOns.add(dependsOn);
+				CGValuedElement cgPrimaryDependsOn = getPrimaryElement(dependsOn);
+				dependencies.add(cgPrimaryDependsOn);
+				if (!dependsOns.contains(cgPrimaryDependsOn)) {
+					dependsOns.add(cgPrimaryDependsOn);
 				}
 			}
 		}
@@ -136,20 +146,31 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 	}
 
 	private int computeDepths(@NonNull CGValuedElement cgElement, @NonNull Map<CGValuedElement, Integer> dependencyDepths) {
-		Set<CGValuedElement> dependencies = directDependencies.get(cgElement);
+		@NonNull CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
+		Set<CGValuedElement> dependencies = directDependencies.get(cgPrimaryElement);
 		if (dependencies == null) {
-			int depth = getRootDepth(cgElement);
-			dependencyDepths.put(cgElement,  depth);
+			int depth = getRootDepth(cgPrimaryElement);
+			dependencyDepths.put(cgPrimaryElement, depth);
 			return depth;
 		}
-		Integer knownDepth = dependencyDepths.get(cgElement);
+/*		for (EObject eObject : cgElement.eContents()) {
+			if ((eObject instanceof CGValuedElement) && (eObject.eContainmentFeature() != CGModelPackage.Literals.CG_VALUED_ELEMENT__OWNS)) {
+				dependencies.add((CGValuedElement)eObject);
+			}
+		}
+		for (EObject eObject : cgElement.eCrossReferences()) {
+			if (eObject instanceof CGValuedElement) {
+				dependencies.add((CGValuedElement)eObject);
+			}
+		} */
+		Integer knownDepth = dependencyDepths.get(cgPrimaryElement);
 		if (knownDepth != null) {
 			if (knownDepth != TOUCHED) {
 				return knownDepth;
 			}
-			throw new IllegalStateException("Cyclic dependency for " + cgElement);
+			throw new IllegalStateException("Cyclic dependency for " + cgPrimaryElement);
 		}
-		dependencyDepths.put(cgElement, TOUCHED);			// Mark already here
+		dependencyDepths.put(cgPrimaryElement, TOUCHED);			// Mark already here
 		int maxDepth = 0;
 		for (@SuppressWarnings("null")@NonNull CGValuedElement dependency : dependencies) {
 			int depth = computeDepths(dependency, dependencyDepths);
@@ -158,8 +179,16 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 			}
 		}
 		int myDepth = maxDepth+1;
-		dependencyDepths.put(cgElement, myDepth);
+		dependencyDepths.put(cgPrimaryElement, myDepth);
 		return myDepth;
+	}
+	
+	public @NonNull CGValuedElement getPrimaryElement(@NonNull CGValuedElement cgElement) {
+		SimpleAnalysis simpleAnalysis = globalPlace.getSimpleAnalysis(cgElement);
+		if (simpleAnalysis != null) {
+			return simpleAnalysis.getPrimaryElement();
+		}
+		return cgElement;
 	}
 	
 	public int getRootDepth(@NonNull CGValuedElement cgElement) {
@@ -169,12 +198,17 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		return 0;
 	}
 
-	public @NonNull Iterable<CGValuedElement> getSortedDependencies() {
+	public @NonNull List<CGValuedElement> getSortedDependencies() {
 		final Map<CGValuedElement, Integer> dependencyDepths = new HashMap<CGValuedElement, Integer>();
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgElement : directDependencies.keySet()) {
 			computeDepths(cgElement, dependencyDepths);
 		}
-		List<CGValuedElement> sortedList = new ArrayList<CGValuedElement>(dependencyDepths.keySet());
+		List<CGValuedElement> sortedList = new ArrayList<CGValuedElement>();
+		for (CGValuedElement cgElement : dependencyDepths.keySet()) {
+			if (!cgElement.isInlined() && (cgElement.getValue() == cgElement)) {
+				sortedList.add(cgElement);
+			}
+		}
 		Collections.sort(sortedList, new Comparator<CGValuedElement>()
 		{
 			public int compare(CGValuedElement o1, CGValuedElement o2) {
@@ -189,6 +223,27 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 			}
 		});
 		return sortedList;
+	}
+
+	public void visit(@NonNull CGNamedElement cgElement) {
+		if (cgElement instanceof CGValuedElement) {
+			CGValuedElement cgPrimaryElement = getPrimaryElement(((CGValuedElement) cgElement).getValue());
+			addDependency(cgPrimaryElement, null);
+			cgPrimaryElement.accept(this);
+		}
+		else {
+			cgElement.accept(this);
+		}
+	}
+
+	public void visitAll(@Nullable Iterable<? extends CGNamedElement> cgElements) {
+		if (cgElements != null) {
+			for (CGNamedElement cgElement : cgElements) {
+				if (cgElement != null) {
+					visit(cgElement);
+				}
+			}
+		}
 	}
 
 	@Override

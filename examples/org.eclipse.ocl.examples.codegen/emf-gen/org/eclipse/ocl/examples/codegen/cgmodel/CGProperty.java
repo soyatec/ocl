@@ -29,7 +29,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGProperty()
- * @model
  * @generated
  */
 public interface CGProperty extends CGValuedElement {
@@ -46,7 +45,6 @@ public interface CGProperty extends CGValuedElement {
 	 * @see #setContainingClass(CGClass)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGProperty_ContainingClass()
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getProperties
-	 * @model opposite="properties" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
 	CGClass getContainingClass();
@@ -71,7 +69,6 @@ public interface CGProperty extends CGValuedElement {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGProperty_Body()
-	 * @model containment="true"
 	 * @generated
 	 */
 	CGValuedElement getBody();

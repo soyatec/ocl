@@ -164,4 +164,31 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 		return referredConstant != null ? referredConstant : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isCommonable() {
+		return (referredConstant != null) && referredConstant.isCommonable();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return (referredConstant != null) && referredConstant.isGlobal();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
+		return (referredConstant != null) && referredConstant.isUncommonable();
+	}
+
 } //CGConstantExpImpl

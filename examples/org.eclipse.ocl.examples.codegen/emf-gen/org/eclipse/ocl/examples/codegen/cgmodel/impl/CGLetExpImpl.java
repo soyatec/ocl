@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -271,7 +270,7 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 */
 	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return LetPlaces.createPlaces(element2place, this);
+		return LetPlaces.createLetPlaces(element2place, this);
 	}
 
 	/**

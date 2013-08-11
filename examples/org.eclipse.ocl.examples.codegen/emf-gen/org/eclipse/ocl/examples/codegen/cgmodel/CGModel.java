@@ -30,7 +30,6 @@ import java.util.List;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGModel()
- * @model
  * @generated
  */
 public interface CGModel extends CGNamedElement {
@@ -45,7 +44,6 @@ public interface CGModel extends CGNamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Globals</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGModel_Globals()
-	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGConstant> getGlobals();
@@ -61,7 +59,6 @@ public interface CGModel extends CGNamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Packages</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGModel_Packages()
-	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	List<CGPackage> getPackages();

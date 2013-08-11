@@ -22,7 +22,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypeId()
- * @model
  * @generated
  */
 public interface CGTypeId extends CGElementId {

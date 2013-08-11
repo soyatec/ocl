@@ -60,16 +60,16 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Built In Iteration Call Exp</em>'.
 	 * @generated
 	 */
-	CGBuiltInIterationCallExp createCGBuiltInIterationCallExp();
+	@NonNull CGBuiltInIterationCallExp createCGBuiltInIterationCallExp();
 
 	/**
-	 * Returns a new object of class '<em>CG Cast Parameter</em>'.
+	 * Returns a new object of class '<em>CG Cast Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Cast Parameter</em>'.
+	 * @return a new object of class '<em>CG Cast Exp</em>'.
 	 * @generated
 	 */
-	@NonNull CGCastParameter createCGCastParameter();
+	@NonNull CGCastExp createCGCastExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Class</em>'.
@@ -159,7 +159,7 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Equals Exp</em>'.
 	 * @generated
 	 */
-	CGEqualsExp createCGEqualsExp();
+	@NonNull CGEqualsExp createCGEqualsExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Executor Composition Property</em>'.
@@ -234,15 +234,6 @@ public interface CGModelFactory extends EFactory {
 	@NonNull CGExecutorType createCGExecutorType();
 
 	/**
-	 * Returns a new object of class '<em>CG Infinity</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Infinity</em>'.
-	 * @generated
-	 */
-	@NonNull CGInfinity createCGInfinity();
-
-	/**
 	 * Returns a new object of class '<em>CG Integer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -267,7 +258,7 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Is Invalid Exp</em>'.
 	 * @generated
 	 */
-	CGIsInvalidExp createCGIsInvalidExp();
+	@NonNull CGIsInvalidExp createCGIsInvalidExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Is Undefined Exp</em>'.
@@ -276,7 +267,7 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Is Undefined Exp</em>'.
 	 * @generated
 	 */
-	CGIsUndefinedExp createCGIsUndefinedExp();
+	@NonNull CGIsUndefinedExp createCGIsUndefinedExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Iterator</em>'.
@@ -351,6 +342,15 @@ public interface CGModelFactory extends EFactory {
 	@NonNull CGEcoreDataTypeConstructorExp createCGEcoreDataTypeConstructorExp();
 
 	/**
+	 * Returns a new object of class '<em>CG Ecore Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Ecore Operation</em>'.
+	 * @generated
+	 */
+	CGEcoreOperation createCGEcoreOperation();
+
+	/**
 	 * Returns a new object of class '<em>CG Let Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -376,6 +376,15 @@ public interface CGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGLibraryIterationCallExp createCGLibraryIterationCallExp();
+
+	/**
+	 * Returns a new object of class '<em>CG Library Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Library Operation</em>'.
+	 * @generated
+	 */
+	CGLibraryOperation createCGLibraryOperation();
 
 	/**
 	 * Returns a new object of class '<em>CG Local Variable</em>'.
@@ -412,15 +421,6 @@ public interface CGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGIfExp createCGIfExp();
-
-	/**
-	 * Returns a new object of class '<em>CG Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Operation</em>'.
-	 * @generated
-	 */
-	@NonNull CGOperation createCGOperation();
 
 	/**
 	 * Returns a new object of class '<em>CG Package</em>'.
@@ -492,7 +492,7 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Text Parameter</em>'.
 	 * @generated
 	 */
-	CGTextParameter createCGTextParameter();
+	@NonNull CGTextParameter createCGTextParameter();
 
 	/**
 	 * Returns a new object of class '<em>CG Throw Exp</em>'.
@@ -556,6 +556,15 @@ public interface CGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGUnboxExp createCGUnboxExp();
+
+	/**
+	 * Returns a new object of class '<em>CG Unlimited</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Unlimited</em>'.
+	 * @generated
+	 */
+	@NonNull CGUnlimited createCGUnlimited();
 
 	/**
 	 * Returns a new object of class '<em>CG Variable Exp</em>'.

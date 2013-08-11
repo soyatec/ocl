@@ -22,7 +22,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -37,7 +36,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
 
@@ -53,13 +51,12 @@ import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getPostconditions <em>Postconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getContainingClass <em>Containing Class</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getEOperation <em>EOperation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGOperationImpl extends CGValuedElementImpl implements CGOperation {
+public abstract class CGOperationImpl extends CGValuedElementImpl implements CGOperation {
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -99,16 +96,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * @ordered
 	 */
 	protected EList<CGConstraint> postconditions;
-
-	/**
-	 * The cached value of the '{@link #getEOperation() <em>EOperation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEOperation()
-	 * @generated
-	 * @ordered
-	 */
-	protected EOperation eOperation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -255,44 +242,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getEOperation() {
-		if (eOperation != null && eOperation.eIsProxy()) {
-			InternalEObject oldEOperation = (InternalEObject)eOperation;
-			eOperation = (EOperation)eResolveProxy(oldEOperation);
-			if (eOperation != oldEOperation) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CGModelPackage.CG_OPERATION__EOPERATION, oldEOperation, eOperation));
-			}
-		}
-		return eOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation basicGetEOperation() {
-		return eOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEOperation(EOperation newEOperation) {
-		EOperation oldEOperation = eOperation;
-		eOperation = newEOperation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_OPERATION__EOPERATION, oldEOperation, eOperation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -358,9 +307,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 				return getPostconditions();
 			case CGModelPackage.CG_OPERATION__CONTAINING_CLASS:
 				return getContainingClass();
-			case CGModelPackage.CG_OPERATION__EOPERATION:
-				if (resolve) return getEOperation();
-				return basicGetEOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -392,9 +338,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 			case CGModelPackage.CG_OPERATION__CONTAINING_CLASS:
 				setContainingClass((CGClass)newValue);
 				return;
-			case CGModelPackage.CG_OPERATION__EOPERATION:
-				setEOperation((EOperation)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -422,9 +365,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 			case CGModelPackage.CG_OPERATION__CONTAINING_CLASS:
 				setContainingClass((CGClass)null);
 				return;
-			case CGModelPackage.CG_OPERATION__EOPERATION:
-				setEOperation((EOperation)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -447,8 +387,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 				return postconditions != null && !postconditions.isEmpty();
 			case CGModelPackage.CG_OPERATION__CONTAINING_CLASS:
 				return getContainingClass() != null;
-			case CGModelPackage.CG_OPERATION__EOPERATION:
-				return eOperation != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -458,26 +396,8 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGOperation(this);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return OuterStackPlace.createPlace(element2place, this, body);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isBoxed() {
-		return eOperation == null;
+		return OuterStackPlace.createOuterStackPlace(element2place, this);
 	}
 
 	/**
@@ -487,15 +407,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	@Override
 	public boolean isContext() {
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUnboxed() {
-		return eOperation != null;
 	}
 
 } //CGOperationImpl

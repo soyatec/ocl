@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cgmodel" nsURI="http://www.eclipse.org/ocl/1.0.0/CG" nsPrefix="ch">
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-    <details key="documentation" value="The CGModel provides a Code Generation friendly form of the OCL Pivot model, with distinct classes&#xA;such as LibraryPropertyCallExp and EcorePropertyCallExp for distinct purposes. Additional classes&#xA;such as BoxExpr, CatchExpr and CastParameter support rewrite optimizations.&#xA;&lt;p>&#xA;References to the Pivot model are expressed as attributes with datatype values in order to avoid&#xA;confusion as to whether the new or old pivot mosdel is in use while code generating the pivot model."/>
+    <details key="documentation" value="The CGModel provides a Code Generation friendly form of the OCL Pivot model, with distinct classes&#xA;such as LibraryPropertyCallExp and EcorePropertyCallExp for distinct purposes. Additional classes&#xA;such as BoxExp, CatchExp and CastExp support rewrite optimizations.&#xA;&lt;p>&#xA;References to the Pivot model are expressed as attributes with datatype values in order to avoid&#xA;confusion as to whether the new or old pivot mosdel is in use while code generating the pivot model."/>
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
@@ -43,12 +43,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//CGValuedElement"
         containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGCastParameter" eSuperTypes="#//CGParameter">
+  <eClassifiers xsi:type="ecore:EClass" name="CGCastExp" eSuperTypes="#//CGCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A cast parameter wraps a passed parameter to apply the known type to the much weaker type&#xA;available as part of some polymorphic API."/>
+      <details key="documentation" value="A cast expression imposes a known type on a poorly typer source such as a CGEcoreParameter."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredParameter" lowerBound="1"
-        eType="#//CGParameter" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executorType" lowerBound="1"
+        eType="#//CGExecutorType" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The shared type."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGCatchExp" eSuperTypes="#//CGCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -111,12 +115,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="CGConstructorExp" abstract="true" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
         eType="#//CGConstructorPart" containment="true" resolveProxies="false" eOpposite="#//CGConstructorPart/constructorExp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executorType" lowerBound="1"
+        eType="#//CGExecutorType" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConstructorPart" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="init" lowerBound="1" eType="#//CGValuedElement"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constructorExp" lowerBound="1"
         eType="#//CGConstructorExp" changeable="false" resolveProxies="false" eOpposite="#//CGConstructorExp/parts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executorPart" lowerBound="1"
+        eType="#//CGExecutorConstructorPart" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The shared type."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcoreClassConstructorExp" eSuperTypes="#//CGConstructorExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1"
@@ -131,6 +143,12 @@
         <details key="documentation" value="the integer value"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGEcoreOperation" eSuperTypes="#//CGOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An operation that must be called using the EcoreOperation calling convention."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcoreOperationCallExp" eSuperTypes="#//CGOperationCallExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" lowerBound="1"
@@ -224,11 +242,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" lowerBound="1"
         eType="#//CGValuedElement" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGInfinity" eSuperTypes="#//CGConstant">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="CGInfinity represents the infinite or unlimited value."/>
-    </eAnnotations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGInteger" eSuperTypes="#//CGConstant">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="CGInteger represents an integer value."/>
@@ -299,6 +312,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="libraryIteration" lowerBound="1"
         eType="#//LibraryIteration"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGLibraryOperation" eSuperTypes="#//CGOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An operation that must be called using the LibraryOperation calling convention."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGLibraryOperationCallExp" eSuperTypes="#//CGOperationCallExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="libraryOperation" lowerBound="1"
         eType="#//LibraryOperation"/>
@@ -327,7 +345,7 @@
       <details key="documentation" value="CGNull represents the null value."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGOperation" eSuperTypes="#//CGValuedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CGOperation" abstract="true" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
         upperBound="-1" eType="#//CGParameter" containment="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -354,7 +372,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" lowerBound="1"
         eType="#//CGClass" resolveProxies="false" eOpposite="#//CGClass/operations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGOperationCallExp" abstract="true"
       eSuperTypes="#//CGCallExp">
@@ -464,7 +481,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A CGTypeExp is a non-constant expression that references a type."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredType" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executorType" lowerBound="1"
         eType="#//CGExecutorType" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The shared type."/>
@@ -482,6 +499,11 @@
       <details key="documentation" value="A CGUnboxExp converts a boxed source value to an unboxed value."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGUnlimited" eSuperTypes="#//CGConstant">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="CGUnlimited represents the unlimited value."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGValuedElement" abstract="true" eSuperTypes="#//CGTypedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" upperBound="-1"
         eType="#//CGValuedElement" resolveProxies="false">
@@ -489,6 +511,8 @@
         <details key="documentation" value="The elements that must be declared before this element."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owns" upperBound="-1" eType="#//CGValuedElement"
+        containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGVariable" abstract="true" eSuperTypes="#//CGValuedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

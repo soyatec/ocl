@@ -188,7 +188,25 @@ public class CGIntegerImpl extends CGConstantImpl implements CGInteger {
 	 * @generated
 	 */
 	@Override
+	public boolean isCommonable() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
 		return false;
 	}
 

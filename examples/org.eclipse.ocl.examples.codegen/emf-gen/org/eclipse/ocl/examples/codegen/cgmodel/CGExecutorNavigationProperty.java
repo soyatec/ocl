@@ -26,7 +26,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorNavigationProperty()
- * @model
  * @generated
  */
 public interface CGExecutorNavigationProperty extends CGExecutorProperty {

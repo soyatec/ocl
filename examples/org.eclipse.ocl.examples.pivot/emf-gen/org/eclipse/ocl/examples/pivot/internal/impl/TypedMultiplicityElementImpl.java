@@ -81,10 +81,10 @@ public abstract class TypedMultiplicityElementImpl
 		/**
 		 * bodySpecification.type.conformsTo(self.type)
 		 */
-		final @NonNull /*@NonInvalid*/ TypedMultiplicityElement self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
-		final @Nullable /*@Thrown*/ DomainType type_0 = self.getType();
+		final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
 		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		return conformsTo;
 	}
@@ -102,8 +102,8 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainProperty CTORid_name = idResolver.getProperty(PivotTables.PROPid_name);
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
-		final @NonNull /*@Thrown*/ DomainTypedElement symbol_0 = (DomainTypedElement)TYP_pivot_c_c_Parameter.createInstance();
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter_0 = idResolver.getType(PivotTables.CLSSid_Parameter, null);
+		final @NonNull /*@Thrown*/ DomainTypedElement symbol_0 = (DomainTypedElement)TYP_pivot_c_c_Parameter_0.createInstance();
 		CTORid_name.initValue(symbol_0, PivotTables.STR_name);
 		return (Parameter)symbol_0;
 	}

@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreClassConstructorExp()
- * @model
  * @generated
  */
 public interface CGEcoreClassConstructorExp extends CGConstructorExp {
@@ -44,7 +43,6 @@ public interface CGEcoreClassConstructorExp extends CGConstructorExp {
 	 * @return the value of the '<em>EClass</em>' reference.
 	 * @see #setEClass(EClass)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreClassConstructorExp_EClass()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	EClass getEClass();

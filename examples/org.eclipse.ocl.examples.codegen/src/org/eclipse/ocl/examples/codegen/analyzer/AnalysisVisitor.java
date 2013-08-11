@@ -14,8 +14,6 @@
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
@@ -42,7 +40,6 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 
@@ -67,19 +64,19 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 
 	@Override
 	public @Nullable Object visitCGConstructorExp(@NonNull CGConstructorExp cgConstructorExp) {
-		ConstructorExp pConstructorExp = (ConstructorExp) cgConstructorExp.getPivot();
-		Type pType = pConstructorExp.getType();
-		if (pType != null) {
-			EObject eTarget = pType.getETarget();
-			if (eTarget instanceof EClass) {
-				LocalContext localContext = context.getCodeGenerator().getGlobalContext().getLocalContext(cgConstructorExp);
-				if (localContext != null) {
-					CGExecutorType cgExecutorType = localContext.getExecutorType(pType);
+//		ConstructorExp pConstructorExp = (ConstructorExp) cgConstructorExp.getPivot();
+//		Type pType = pConstructorExp.getType();
+//		if (pType != null) {
+//			EObject eTarget = pType.getETarget();
+//			if (eTarget instanceof EClass) {
+//				LocalContext localContext = context.getCodeGenerator().getGlobalContext().getLocalContext(cgConstructorExp);
+//				if (localContext != null) {
+//					CGExecutorType cgExecutorType = localContext.getExecutorType(pType);
 //					cgConstructorExp.setReferredType(cgExecutorType);
-					cgConstructorExp.getDependsOn().add(cgExecutorType);
-				}
-			}
-		}
+//					cgConstructorExp.getDependsOn().add(cgExecutorType);
+//				}
+//			}
+//		}
 		if (cgConstructorExp.isInvalid()) {
 			context.setConstant(cgConstructorExp, cgConstructorExp.getValue());
 		}
@@ -153,14 +150,14 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 	public @Nullable Object visitCGLetExp(@NonNull CGLetExp cgLetExp) {
 		super.visitCGLetExp(cgLetExp);
 		CGValuedElement in = context.getExpression(cgLetExp.getIn());
-		if (cgLetExp.getInit().isGlobal()) { //Constant()) {
-			CGUtils.replace(cgLetExp, in);
-		}
-		else {
+//		if (cgLetExp.getInit().isGlobal()) { //Constant()) {
+//			CGUtils.replace(cgLetExp, in);
+//		}
+//		else {
 			if (in.isConstant()) {
 				context.setConstant(cgLetExp, in.getValue());
 			}
-		}
+//		}
 		return null;
 	}
 
@@ -256,8 +253,7 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 		if (referredType != null) {
 			LocalContext localContext = context.getCodeGenerator().getGlobalContext().getLocalContext(cgTypeExp);
 			if (localContext != null) {
-				CGExecutorType cgExecutorType = localContext.getExecutorType(referredType);
-				cgTypeExp.setReferredType(cgExecutorType);
+				CGExecutorType cgExecutorType = cgTypeExp.getExecutorType();
 				cgTypeExp.setTypeId(cgExecutorType.getUnderlyingTypeId());
 				cgTypeExp.getDependsOn().add(cgExecutorType);
 			}

@@ -35,7 +35,6 @@ import java.util.List;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGInvalid()
- * @model
  * @generated
  */
 public interface CGInvalid extends CGConstant {
@@ -50,7 +49,6 @@ public interface CGInvalid extends CGConstant {
 	 * @return the value of the '<em>Message Template</em>' attribute.
 	 * @see #setMessageTemplate(String)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGInvalid_MessageTemplate()
-	 * @model
 	 * @generated
 	 */
 	String getMessageTemplate();
@@ -75,7 +73,6 @@ public interface CGInvalid extends CGConstant {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Bindings</em>' attribute list.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGInvalid_Bindings()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Object"
 	 * @generated
 	 */
 	List<Object> getBindings();

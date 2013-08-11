@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGElementId()
- * @model
  * @generated
  */
 public interface CGElementId extends CGConstant {
@@ -43,7 +42,6 @@ public interface CGElementId extends CGConstant {
 	 * @return the value of the '<em>Element Id</em>' attribute.
 	 * @see #setElementId(ElementId)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGElementId_ElementId()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.ElementId" required="true"
 	 * @generated
 	 */
 	ElementId getElementId();

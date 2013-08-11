@@ -27,7 +27,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGSettableVariable()
- * @model
  * @generated
  */
 public interface CGSettableVariable extends CGVariable {

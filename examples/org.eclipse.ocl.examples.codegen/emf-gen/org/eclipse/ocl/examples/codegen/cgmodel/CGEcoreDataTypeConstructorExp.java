@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EDataType;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreDataTypeConstructorExp()
- * @model
  * @generated
  */
 public interface CGEcoreDataTypeConstructorExp extends CGConstructorExp {
@@ -45,7 +44,6 @@ public interface CGEcoreDataTypeConstructorExp extends CGConstructorExp {
 	 * @return the value of the '<em>EData Type</em>' reference.
 	 * @see #setEDataType(EDataType)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreDataTypeConstructorExp_EDataType()
-	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	EDataType getEDataType();
@@ -70,7 +68,6 @@ public interface CGEcoreDataTypeConstructorExp extends CGConstructorExp {
 	 * @return the value of the '<em>String</em>' attribute.
 	 * @see #setString(String)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreDataTypeConstructorExp_String()
-	 * @model required="true"
 	 * @generated
 	 */
 	String getString();

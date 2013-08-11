@@ -49,7 +49,8 @@ public class CGElementModelSpec extends ModelSpec
 			@Override
 			protected @Nullable String getBody(@NonNull CGElementModelSpec modelSpec) {
 				if (modelSpec.cgClass == rootClass) {
-					return "return (Iterable<? extends " + classRef(CGElement.class) + ">) eContents();";
+					return "@SuppressWarnings({\"null\", \"unchecked\"}) @NonNull Iterable<? extends CGElement> eContents = (Iterable<? extends CGElement>) eContents();\n" +
+					"		return eContents;";
 				}
 				else {
 					return null;

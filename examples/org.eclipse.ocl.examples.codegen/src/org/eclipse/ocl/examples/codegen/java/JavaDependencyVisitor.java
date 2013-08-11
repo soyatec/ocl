@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class JavaDependencyVisitor extends DependencyVisitor
@@ -29,16 +30,10 @@ public class JavaDependencyVisitor extends DependencyVisitor
 	protected final @NonNull JavaGlobalContext globalContext;
 	protected final JavaLocalContext localContext;
 
-	public JavaDependencyVisitor(@NonNull CodeGenAnalyzer analyzer, @NonNull JavaGlobalContext globalContext) {
-        super(analyzer);
+	public JavaDependencyVisitor(@NonNull CodeGenAnalyzer analyzer, @NonNull JavaGlobalContext globalContext, @NonNull GlobalPlace globalPlace) {
+        super(analyzer, globalPlace);
         this.globalContext = globalContext;
         this.localContext = null;
-	}
-	
-	public JavaDependencyVisitor(@NonNull JavaLocalContext localContext) {
-        super(localContext.getAnalyzer());
-        this.globalContext = localContext.getGlobalContext();
-        this.localContext = localContext;
 	}
 
 	@Override
@@ -53,8 +48,8 @@ public class JavaDependencyVisitor extends DependencyVisitor
 
 	@Override
 	public @Nullable Object visitCGExecutorType(@NonNull CGExecutorType cgTypeWithReflection) {
-		addDependency(cgTypeWithReflection, localContext.getIdResolverVariable());
-		cgTypeWithReflection.setTypeId(context.getTypeId(JavaConstants.DOMAIN_TYPE_TYPE_ID));		// FIXME
+//		addDependency(cgTypeWithReflection, localContext.getIdResolverVariable());
+//		cgTypeWithReflection.setTypeId(context.getTypeId(JavaConstants.DOMAIN_TYPE_TYPE_ID));		// FIXME
 		return super.visitCGExecutorType(cgTypeWithReflection);
 	}
 
@@ -67,7 +62,7 @@ public class JavaDependencyVisitor extends DependencyVisitor
 //		ElementId elementId = ((CGType)cgTypeVariable.getVariableValue()).getElementId();
 //		CGElementId cgElementId = context.getElementId(elementId);
 //		addDependency(cgTypeVariable, cgElementId);
-		addDependency(cgTypeExp, cgTypeExp.getReferredType());
+//		addDependency(cgTypeExp, cgTypeExp.getReferredType());
 		return super.visitCGTypeExp(cgTypeExp);
 	}
 }

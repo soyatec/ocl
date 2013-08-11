@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorType()
- * @model
  * @generated
  */
 public interface CGExecutorType extends CGValuedElement {
@@ -47,7 +46,6 @@ public interface CGExecutorType extends CGValuedElement {
 	 * @return the value of the '<em>Underlying Type Id</em>' reference.
 	 * @see #setUnderlyingTypeId(CGTypeId)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGExecutorType_UnderlyingTypeId()
-	 * @model resolveProxies="false"
 	 * @generated
 	 */
 	CGTypeId getUnderlyingTypeId();

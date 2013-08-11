@@ -29,15 +29,14 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  */
 public class LetPlaces
 {
-	public static @NonNull LocalPlace createPlaces(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGLetExp cgLetExp) {
-		ControlPlace letPlace = ControlPlace.createPlace(element2place, cgLetExp);
+	public static @NonNull LocalPlace createLetPlaces(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGLetExp cgLetExp) {
+		ControlPlace letPlace = ControlPlace.getControlPlace(element2place, cgLetExp);
 		CGValuedElement cgInExp = cgLetExp.getIn();
 		CGValuedElement cgInitExp = cgLetExp.getInit();
 		if ((cgInExp != null) && (cgInitExp != null)) {
 			InPlace inPlace = new InPlace(letPlace, cgInExp, cgInitExp);
-			InitPlace initPlace = inPlace.initPlace;
+//			InitPlace initPlace = new InitPlace(letPlace, cgInitExp);
 			element2place.put(cgInExp, inPlace);
-			element2place.put(cgInitExp, initPlace);
 		}
 		return letPlace;
 	}
@@ -47,24 +46,24 @@ public class LetPlaces
 	 */
 	public static class InPlace extends ControlPlace
 	{
-		protected final @NonNull InitPlace initPlace;
+//		protected final @NonNull InitPlace initPlace;
 		
 		private InPlace(@NonNull LocalPlace letPlace, @NonNull CGValuedElement cgThenExp, @NonNull CGValuedElement cgInitExp) {
 			super(letPlace, cgThenExp);
-			initPlace = new InitPlace(letPlace, this, cgInitExp);
+//			initPlace = new InitPlace(letPlace, this, cgInitExp);
 		}
 	}
 	
 	/**
 	 * An InitPlace describes the init forest of CG trees for a Let expression.
-	 */
+	 *
 	public static class InitPlace extends ControlPlace
 	{
-		protected final @NonNull InPlace inPlace;
+//		protected final @NonNull InPlace inPlace;
 		
 		private InitPlace(@NonNull LocalPlace letPlace, @NonNull InPlace inPlace, @NonNull CGValuedElement cgInitExp) {
 			super(letPlace, cgInitExp);
-			this.inPlace = inPlace;
+//			this.inPlace = inPlace;
 		}
-	}
+	} */
 }
