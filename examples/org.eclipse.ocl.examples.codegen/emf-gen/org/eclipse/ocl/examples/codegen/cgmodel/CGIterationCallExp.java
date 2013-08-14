@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Iteration;
 
 /**
@@ -74,7 +75,7 @@ public interface CGIterationCallExp extends CGCallExp {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_Iterators()
 	 * @generated
 	 */
-	List<CGIterator> getIterators();
+	@NonNull List<CGIterator> getIterators();
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.

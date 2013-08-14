@@ -657,7 +657,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGLibraryOperation createCGLibraryOperation() {
+	public @NonNull CGLibraryOperation createCGLibraryOperation() {
 		CGLibraryOperationImpl cgLibraryOperation = new CGLibraryOperationImpl();
 		return cgLibraryOperation;
 	}

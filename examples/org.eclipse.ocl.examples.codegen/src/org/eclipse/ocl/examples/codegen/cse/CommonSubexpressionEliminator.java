@@ -16,13 +16,12 @@ package org.eclipse.ocl.examples.codegen.cse;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.CodeGenConstants;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 
 /**
- * A CommonSubExpressionEliminator annotates the structurally equivalent analysis nodes in an analyzed tree with CommonSubExpression instances that
- * unify and potentially hoist their computations.
+ * A CommonSubexpressionEliminator supervises the rewrites of structurally equivalent CG nodes with shared CG nodes.
  */
 public class CommonSubexpressionEliminator
 {	
@@ -34,22 +33,17 @@ public class CommonSubexpressionEliminator
 	public static final @NonNull TracingOption CSE_REWRITE = new TracingOption(CodeGenConstants.PLUGIN_ID, "cse/rewrite");
 
 	
-	protected final @NonNull CodeGenAnalyzer analyzer;
+	protected final @NonNull CodeGenerator codeGenerator;
 	
-	public CommonSubexpressionEliminator(@NonNull CodeGenAnalyzer analyzer) {
-		this.analyzer = analyzer;
-	}
-
-	public @NonNull CodeGenAnalyzer getAnalyzer() {
-		return analyzer;
+	public CommonSubexpressionEliminator(@NonNull CodeGenerator codeGenerator) {
+		this.codeGenerator = codeGenerator;
 	}
 
 	/**
 	 * Optimize the cgRoot tree by eliminating common subexpressions.
-	 * @param globals 
 	 */
 	public void optimize(@NonNull CGElement cgRoot) {
-		GlobalPlace globalPlace = analyzer.getCodeGenerator().getGlobalPlace();
+		GlobalPlace globalPlace = codeGenerator.getGlobalPlace();
 		globalPlace.optimize(cgRoot);
 	}
 }

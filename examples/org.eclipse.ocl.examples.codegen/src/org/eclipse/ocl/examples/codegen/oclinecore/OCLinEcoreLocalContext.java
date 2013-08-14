@@ -53,14 +53,6 @@ public class OCLinEcoreLocalContext extends JavaLocalContext
 			this.severityName = null;
 		}
 	}
-	
-	public OCLinEcoreLocalContext(@NonNull OCLinEcoreLocalContext parentContext, @NonNull CGElement cgScope) {
-		super(parentContext, cgScope);
-		this.contextName = null;
-		this.diagnosticsName = null;
-		this.messageName = null;
-		this.severityName = null;
-	}
 
 	@Override
 	public @Nullable CGParameter createEvaluatorParameter() {
@@ -82,11 +74,6 @@ public class OCLinEcoreLocalContext extends JavaLocalContext
 	@Override
 	public @Nullable CGParameter createTypeIdParameter() {
 		return null;
-	}
-
-	@Override
-	public @NonNull OCLinEcoreLocalContext createNestedContext(@NonNull CGElement cgScope) {
-		return new OCLinEcoreLocalContext(this, cgScope);
 	}
 
 	public @Nullable String getContextName() {

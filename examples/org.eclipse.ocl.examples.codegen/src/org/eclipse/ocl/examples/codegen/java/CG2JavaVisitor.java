@@ -309,6 +309,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			}
 		}
 	}
+
 	private @Nullable Method getLeastDerivedMethodInternal(@NonNull Class<?> requiredClass, @NonNull String getAccessor) {
 		Class<?> superClass = requiredClass.getSuperclass();
 		if (superClass != null) {
@@ -324,7 +325,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			} catch (Exception e) {
 			}
 		}
-		for (Class<?> superInterface : requiredClass.getInterfaces()) {
+		for (@SuppressWarnings("null")@NonNull Class<?> superInterface : requiredClass.getInterfaces()) {
 			Method lessDerivedSuperMethod = getLeastDerivedMethodInternal(superInterface, getAccessor);
 			if (lessDerivedSuperMethod != null) {
 				return lessDerivedSuperMethod;
@@ -413,7 +414,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	
 	@Override
 	public @NonNull String toString() {
-		@SuppressWarnings("null")@NonNull String string = js.toString();
+		String string = js.toString();
 		return string;
 	}
 	
@@ -533,7 +534,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
 		CGIterator cgIterator = cgIterationCallExp.getIterators().get(0);
 		String iteratorName = localContext.getNameManagerContext().getSymbolName(null, "ITERATOR_" + cgIterator.getValueName());
-		Iteration2Java iterationHelper = context.getIterationHelper(cgIterationCallExp.getReferredIteration());
+		Iteration2Java iterationHelper = context.getIterationHelper(DomainUtil.nonNullState(cgIterationCallExp.getReferredIteration()));
 		assert iterationHelper != null;
 		//
 		js.appendLocalStatements(cgSource);
@@ -857,7 +858,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		Operation pOperation = cgOperationCallExp.getReferredOperation();
 		CGTypeId cgTypeId = analyzer.getTypeId(pOperation.getOwningType().getTypeId());
 //		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = context.getTypeDescriptor(cgTypeId.getElementId(), false);
+		TypeDescriptor requiredTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(cgTypeId.getElementId()), false);
 		CGValuedElement source = getExpression(cgOperationCallExp.getSource());
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameter();
@@ -890,15 +891,15 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			}
 			CGValuedElement cgArgument = cgArguments.get(i);
 			CGValuedElement argument = getExpression(cgArgument);
-			Parameter pParameter = pParameters.get(i);
+			Parameter pParameter = DomainUtil.nonNullState(pParameters.get(i));
 			GenParameter genParameter = context.getGenModelHelper().getGenParameter(pParameter);
 			if (genParameter != null) {
-				String rawBoundType = genParameter.getRawBoundType();
+				String rawBoundType = DomainUtil.nonNullState(genParameter.getRawBoundType());
 				js.appendEcoreValue(rawBoundType, argument);
 			}
 			else {	// ? never happens
 				CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-				TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(cgParameterTypeId.getElementId(), false);
+				TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(cgParameterTypeId.getElementId()), false);
 				js.appendReferenceTo(parameterTypeDescriptor, argument);
 				
 			}
@@ -982,7 +983,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		js.append("(");
 		Property pivotProperty = (Property) cgExecutorProperty.getPivot();
 		Property pivotOppositeProperty = pivotProperty.getOpposite();
-		js.appendString(pivotOppositeProperty.getName());
+		js.appendString(DomainUtil.nonNullState(pivotOppositeProperty.getName()));
 		js.append(");\n");
 		return null;
 	}
@@ -1063,7 +1064,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			CGValuedElement cgArgument = cgArguments.get(i);
 			Parameter pParameter = pParameters.get(i);
 			CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(cgTypeId.getElementId(), false);
+			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(cgTypeId.getElementId()), false);
 			CGValuedElement argument = getExpression(cgArgument);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
@@ -1187,7 +1188,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.appendString(message);
 			for (Object binding : object.getBindings()) {
 				js.append(", ");
-				js.appendString(String.valueOf(binding));
+				js.appendString(DomainUtil.nonNullState(String.valueOf(binding)));
 			}
 			js.append(")");
 		}
@@ -1370,7 +1371,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		js.append( ")" + staticTypeName + ".lookupImplementation("); 
 		js.appendReferenceTo(localContext.getStandardLibraryVariable(cgIterateCallExp));
 		js.append(", ");
-		js.appendQualifiedLiteralName(referredOperation);
+		js.appendQualifiedLiteralName(DomainUtil.nonNullState(referredOperation));
 		js.append(");\n");
 		//
 		js.appendClassReference(managerClass);
@@ -1492,7 +1493,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		js.append( ")" + staticTypeName + ".lookupImplementation("); 
 		js.appendReferenceTo(localContext.getStandardLibraryVariable(cgIterationCallExp));
 		js.append(", ");
-		js.appendQualifiedLiteralName(referredOperation);
+		js.appendQualifiedLiteralName(DomainUtil.nonNullState(referredOperation));
 		js.append(");\n");
 		//
 		js.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
@@ -1693,7 +1694,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGString(@NonNull CGString object) {
 		js.appendDeclaration(object);
 		js.append(" = ");
-		js.appendString(object.getStringValue());
+		js.appendString(DomainUtil.nonNullState(object.getStringValue()));
 		js.append(";\n");
 		return null;
 	}
@@ -1727,12 +1728,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		else {
 			js.appendLocalStatements(cgSource);
 			js.append("if (");
-			if (cgSource.isGlobal()) {				// FIXME debugging
-				js.appendValueName(cgSource);
-			}
-			else {
-				js.appendValueName(cgSource);
-			}
+			js.appendValueName(cgSource);
 			js.append(" instanceof ");
 			js.appendClassReference(InvalidValueException.class);
 			js.append(") {\n");

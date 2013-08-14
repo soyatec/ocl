@@ -18,8 +18,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
@@ -47,19 +45,6 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 		this.cgScope = cgScope;
 		this.nameManagerContext = codeGenerator.getNameManager().createNestedContext();
 	}
-	
-	public JavaLocalContext(@NonNull JavaLocalContext parentContext, @NonNull CGElement cgScope) {
-		super(parentContext.getCodeGenerator());
-		this.globalContext = parentContext.getGlobalContext();
-		this.parentContext = parentContext;
-		this.cgScope = cgScope;
-		this.nameManagerContext = parentContext.nameManagerContext; //.createNestedContext();	-- distinct namespace is more trouble than its worth
-		if (cgScope instanceof CGIterationCallExp) {
-			for (CGIterator cgIterator : ((CGIterationCallExp)cgScope).getIterators()) {
-				nameManagerContext.getSymbolName(cgIterator);
-			}
-		}
-	}
 
 	public @Nullable CGParameter createEvaluatorParameter() {
 		CGParameter evaluatorParameter = CGModelFactory.eINSTANCE.createCGParameter();
@@ -75,10 +60,6 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 		idResolver.setTextValue(JavaConstants.EVALUATOR_NAME + ".getIdResolver()");
 //		idResolver.getOwns().add(evaluatorParameter);
 		return idResolver;
-	}
-
-	protected @NonNull JavaLocalContext createNestedContext(@NonNull CGElement cgScope) {
-		return new JavaLocalContext(this, cgScope);
 	}
 
 	public @NonNull CGText createStandardLibraryVariable() {

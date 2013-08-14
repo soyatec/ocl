@@ -200,7 +200,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	}
 
 	public @NonNull CommonSubexpressionEliminator createCommonSubexpressionEliminator() {
-		return new CommonSubexpressionEliminator(getAnalyzer());
+		return new CommonSubexpressionEliminator(this);
 	}
 
 	public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {

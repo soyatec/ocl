@@ -18,6 +18,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 /**
+ * The Place hierarchy is a sub-hierarchy of the CG hierarchy comprising only those nodes at which declarations may be introduced,
+ * typically be a chain of LetExp.
+ * <p>
  * An AbstractPlace describes a place where forests of CG trees may be placed for code generation. 
  * <p>A GlobalPlace describes the place for global constants and all outer stack places.
  * <p>A StackPlace describes a callable forest such as an Operation of Iteration.
@@ -34,10 +37,19 @@ public abstract class AbstractPlace
 		}
 	}
 
+	/**
+	 * Return the GlobalPlace.
+	 */
 	public abstract @NonNull GlobalPlace getGlobalPlace();
 
+	/**
+	 * Return the parent of this place, which is self for the GlobalPlace.
+	 */
 	public abstract @NonNull AbstractPlace getParentPlace();
 	
+	/**
+	 * Return the stack place hosting this place. Returns for the GlobalPlace..
+	 */
 	public abstract @Nullable StackPlace getStackPlace();
 	
 	public abstract void printHierarchy(@NonNull Appendable appendable, @NonNull String indentation);

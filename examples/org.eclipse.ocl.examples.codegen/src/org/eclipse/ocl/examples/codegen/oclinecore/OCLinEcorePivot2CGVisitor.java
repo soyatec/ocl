@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -44,7 +45,7 @@ public final class OCLinEcorePivot2CGVisitor extends Pivot2CGVisitor
 		if (representedParameter != null) {
 			GenParameter genParameter = genModelHelper.getGenParameter(representedParameter);
 			if (genParameter != null) {
-				String name = genParameter.getName();
+				String name = DomainUtil.nonNullState(genParameter.getName());
 				cgParameter.setValueName(name);
 				// reserve name
 			}

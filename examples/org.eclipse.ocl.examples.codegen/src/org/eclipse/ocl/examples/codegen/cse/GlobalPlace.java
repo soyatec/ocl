@@ -247,7 +247,7 @@ public class GlobalPlace extends AbstractPlace
 		//	Optimize each outer stack place.
 		//
 		for (OuterStackPlace stackPlace : stackPlaces) {
-			stackPlace.optimize(analyzer);
+			stackPlace.optimize();
 		}
 		optimizeGlobals(cgRoot);
 	}

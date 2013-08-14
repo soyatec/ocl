@@ -32,9 +32,6 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
  */
 public class CGUtils
 {
-//	public static final CGInvalid INVALID = CGModelFactory.eINSTANCE.createCGInvalid();
-//	public static final CGConstantExp INVALID_EXP = CGModelFactory.eINSTANCE.createCGConstantExp();
-
 	public static @NonNull CGParameter createCGParameter(@NonNull String name, @NonNull CGTypeId typeId) {
 		CGParameter cgParameter = CGModelFactory.eINSTANCE.createCGParameter();
 		cgParameter.setName(name);

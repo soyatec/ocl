@@ -30,7 +30,6 @@ public class InnerStackPlace extends StackPlace
 		ControlPlace loopPlace = ControlPlace.getControlPlace(element2place, cgLoopExp);
 		CGValuedElement cgBodyExp = cgLoopExp.getBody();
 		if (cgBodyExp != null) {
-//			@SuppressWarnings("null")@NonNull EReference loopExpBody = PivotPackage.Literals.LOOP_EXP__BODY;
 			InnerStackPlace innerPlace = new InnerStackPlace(loopPlace, cgBodyExp);
 			ControlPlace bodyPlace = new ControlPlace(innerPlace, cgBodyExp);
 			element2place.put(cgBodyExp, bodyPlace);

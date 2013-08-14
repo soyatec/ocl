@@ -138,7 +138,8 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<CGIterator> getIterators() {
+	@SuppressWarnings("null")
+	public @NonNull List<CGIterator> getIterators() {
 		if (iterators == null) {
 			iterators = new EObjectContainmentEList<CGIterator>(CGIterator.class, this, CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS);
 		}

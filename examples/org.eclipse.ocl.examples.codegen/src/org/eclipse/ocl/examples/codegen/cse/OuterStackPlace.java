@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 
 public class OuterStackPlace extends StackPlace
@@ -39,7 +38,7 @@ public class OuterStackPlace extends StackPlace
 		return globalPlace;
 	}
 
-	public void optimize(@NonNull CodeGenAnalyzer analyzer) {
+	public void optimize() {
 		//
 		//	Push common SEs upwards (e.g. terms on both then and else of an IF).
 		//
@@ -71,8 +70,6 @@ public class OuterStackPlace extends StackPlace
 		if (CommonSubexpressionEliminator.CSE_REWRITE.isActive()) {
 			CommonSubexpressionEliminator.CSE_REWRITE.println("Places after rewrite");
 			printHierarchy(CommonSubexpressionEliminator.CSE_REWRITE, "");
-//			@SuppressWarnings("null")@NonNull String string = String.valueOf(stackElement.eGet(eContainmentFeature));
-//			TracingOption.println(CommonSubexpressionEliminator.CSE_REWRITE, string);
 		}
 	}
 }

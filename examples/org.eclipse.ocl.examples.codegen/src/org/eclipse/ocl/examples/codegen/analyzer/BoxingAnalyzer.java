@@ -62,9 +62,12 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 
 /**
- * A BoxingAnalyzer performs a bottom up tree-traversal inserting CGBoxExp or CGUnboxExp wherever a
- * conversion from boxed to unboxed or vice-versa is required. No attempt at optimisation is made,
- * since this can be performed by Common SubExpression Elimination.
+ * A BoxingAnalyzer performs a bottom up tree-traversal inserting:
+ * <p>CGBoxExp or CGUnboxExp whereever a conversion from boxed to unboxed or vice-versa is required.
+ * <p>CGCastExp whereever the apparent type is not available (e.g. Parameters passed as Object).
+ * <p>CGGuardExp whereever a non-null value is required.
+ * <p>
+ * No attempt at optimisation is made, since this can be performed by Common SubExpression Elimination.
  * <p>
  * <h2>Simple (both boxed and unboxed)</h2>
  * Boolean, String, null, EObject (except Types)
@@ -102,7 +105,7 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	}
 
 	/**
-	 * Insert a CGBoxExp between cgParent and cgChild.
+	 * Insert a CGBoxExp around cgChildd.
 	 */
 	protected CGValuedElement rewriteAsBoxed(@Nullable CGValuedElement cgChild) {
 		if ((cgChild == null) || cgChild.isBoxed()) {
@@ -122,6 +125,9 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		return cgBoxExp;
 	}
 
+	/**
+	 * Insert a CGGuardExp around cgChild.
+	 */
 	protected @Nullable CGValuedElement rewriteAsGuarded(@Nullable CGValuedElement cgChild) {
 		if ((cgChild == null) || cgChild.isNonNull() /*|| (cgParent instanceof CGGuardExp)*/) {
 			return cgChild;
@@ -132,7 +138,27 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	}
 
 	/**
-	 * Insert a CGUnboxExp between cgParent and cgChild.
+	 * Insert a CGCastExp around cgChild.
+	 */
+	protected CGValuedElement rewriteAsCast(@Nullable CGVariableExp cgChild) {
+		if (cgChild == null) {
+			return cgChild;
+		}
+		CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
+		CGUtils.wrap(cgCastExp, cgChild);
+		TypedElement pivot = (TypedElement) cgChild.getPivot();
+		Type pivotType = pivot.getType();
+		cgCastExp.setPivot(pivot);
+		if (pivotType != null) {
+			CGExecutorType cgExecutorType = context.createExecutorType(pivotType);
+			cgCastExp.setExecutorType(cgExecutorType);
+		}
+		cgCastExp.setTypeId(codeGenerator.getAnalyzer().getTypeId(pivot.getTypeId()));
+		return cgCastExp;
+	}
+
+	/**
+	 * Insert a CGUnboxExp around cgChild.
 	 */
 	protected CGValuedElement rewriteAsUnboxed(@Nullable CGValuedElement cgChild) {
 		if ((cgChild == null) || cgChild.isUnboxed()) {
@@ -344,25 +370,5 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Insert a CGCastExp around cgChild.
-	 */
-	protected CGValuedElement rewriteAsCast(@Nullable CGVariableExp cgChild) {
-		if (cgChild == null) {
-			return cgChild;
-		}
-		CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
-		CGUtils.wrap(cgCastExp, cgChild);
-		TypedElement pivot = (TypedElement) cgChild.getPivot();
-		Type pivotType = pivot.getType();
-		cgCastExp.setPivot(pivot);
-		if (pivotType != null) {
-			CGExecutorType cgExecutorType = context.createExecutorType(pivotType);
-			cgCastExp.setExecutorType(cgExecutorType);
-		}
-		cgCastExp.setTypeId(codeGenerator.getAnalyzer().getTypeId(pivot.getTypeId()));
-		return cgCastExp;
 	}
 }

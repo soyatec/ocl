@@ -159,16 +159,6 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 			dependencyDepths.put(cgPrimaryElement, depth);
 			return depth;
 		}
-/*		for (EObject eObject : cgElement.eContents()) {
-			if ((eObject instanceof CGValuedElement) && (eObject.eContainmentFeature() != CGModelPackage.Literals.CG_VALUED_ELEMENT__OWNS)) {
-				dependencies.add((CGValuedElement)eObject);
-			}
-		}
-		for (EObject eObject : cgElement.eCrossReferences()) {
-			if (eObject instanceof CGValuedElement) {
-				dependencies.add((CGValuedElement)eObject);
-			}
-		} */
 		Integer knownDepth = dependencyDepths.get(cgPrimaryElement);
 		if (knownDepth != null) {
 			if (knownDepth != TOUCHED) {

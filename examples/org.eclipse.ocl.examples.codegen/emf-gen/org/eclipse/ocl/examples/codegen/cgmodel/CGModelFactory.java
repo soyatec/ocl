@@ -384,7 +384,7 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Library Operation</em>'.
 	 * @generated
 	 */
-	CGLibraryOperation createCGLibraryOperation();
+	@NonNull CGLibraryOperation createCGLibraryOperation();
 
 	/**
 	 * Returns a new object of class '<em>CG Local Variable</em>'.

@@ -195,20 +195,9 @@ public class ControlPlace extends LocalPlace
 		super.rewrite();
 		CodeGenAnalyzer analyzer = globalPlace.getAnalyzer();
 		if (!hashedAnalyses.isEmpty()) {
-/*			Multimap<Integer, CommonAnalysis> depth2commonAnalyses = getDepth2commonAnalyses();
-			List<Integer> sortedMaxDepths = getDeepestFirstDepths(depth2commonAnalyses);
-			for (int maxDepth : sortedMaxDepths) {
-				List<CommonAnalysis> commonAnalyses = new ArrayList<CommonAnalysis>(depth2commonAnalyses.get(maxDepth));
-				Collections.sort(commonAnalyses);
-				for (CommonAnalysis commonAnalysis : commonAnalyses) {
-					commonAnalysis.rewrite(analyzer, placedElement);
-				}
-			} */
 			Map<CGValuedElement, AbstractAnalysis> locals = new HashMap<CGValuedElement, AbstractAnalysis>();
 			for (AbstractAnalysis analysis : hashedAnalyses) {
-//				for (CGValuedElement primaryElement : analysis.getElements()) {
-					locals.put(analysis.getPrimaryElement(), analysis);
-//				}
+				locals.put(analysis.getPrimaryElement(), analysis);
 			}
 			DependencyVisitor dependencyVisitor = analyzer.getCodeGenerator().createDependencyVisitor();
 			HashSet<CGValuedElement> allElements = new HashSet<CGValuedElement>(locals.keySet());

@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.analyzer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -69,7 +68,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVis
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -178,19 +176,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
         super(Object.class);						// Useless dummy object as context
 	}
 
-	/*
-	 * protected List<? extends EObject> getConstrainedElements(Constraint
-	 * constraint) { if (uml == null) { return Collections.emptyList(); } else {
-	 * return uml.getConstrainedElements(constraint); } }
-	 * 
-	 * protected String getStereotype(Constraint constraint) { return (uml ==
-	 * null)? null : uml.getStereotype(constraint); }
-	 * 
-	 * @Override protected ExpressionInOCL getSpecification(Constraint
-	 * constraint) { return (uml == null)? null :
-	 * uml.getSpecification(constraint); }
-	 */
-
 	protected void append(Number number) {
 		if (number != null) {
 			result.append(number.toString());
@@ -208,12 +193,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 			result.append(NULL_PLACEHOLDER);
 		}
 	}
-
-/*	protected void appendAtPre(FeatureCallExp mpc) {
-		if (mpc.isPre()) {
-			append("@pre"); //$NON-NLS-1$
-		}
-	} */
 
 	protected void appendElementType(@Nullable CGTypedElement cgTypedElement) {
 		if (cgTypedElement == null) {
@@ -302,54 +281,8 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 				append("::"); //$NON-NLS-1$
 			}
 			appendName(object);
-//			if (object instanceof TemplateableElement) {
-//				TemplateableElement templateableElement = (TemplateableElement) object;
-//				appendTemplateBindings(templateableElement.getTemplateBinding());
-//				appendTemplateSignature(templateableElement.getOwnedTemplateSignature());
-//			}
 		}
 	}
-
-/*	protected void appendTemplateBindings(List<TemplateBinding> templateBindings) {
-		if (templateBindings.size() > 0) {
-			append("(");
-			String prefix = ""; //$NON-NLS-1$
-			for (TemplateBinding templateBinding : templateBindings) {
-				for (TemplateParameterSubstitution templateParameterSubstitution : templateBinding.getParameterSubstitution()) {
-					append(prefix);
-					safeVisit(templateParameterSubstitution.getActual());
-					prefix = ",";
-				}
-			}
-			append(")");
-		}
-	}
-
-	protected void appendTemplateSignature(TemplateSignature templateSignature) {
-		if (templateSignature != null) {
-			List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
-			if (!templateParameters.isEmpty()) {
-				append("(");
-				String prefix = ""; //$NON-NLS-1$
-				for (TemplateParameter templateParameter : templateParameters) {
-					append(prefix);
-					safeVisit(templateParameter.getParameteredElement());
-					prefix = ",";
-				}
-				append(")");
-			}
-		}
-	} */
-
-/*	protected void appendType(CGType type) {
-		if ((type != null)
-				 && (type.eClass() == PivotPackage.Literals.CLASS)	// i.e. by pass AnyType, PrimitiveType, ...
-				 && (type.eContainer() instanceof NamedElement)) {
-			appendQualifiedName((NamedElement) type.eContainer());
-			append("::");
-		}
-		appendName(type);
-	} */
 
 	@Override
 	public String toString() {
@@ -383,33 +316,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(")");//$NON-NLS-1$
 		return null;
 	}
-
-	/**
-	 * Callback for an IteratorExp visit.
-	 * 
-	 * @param callExp
-	 *            an iterator expression
-	 * @return the string representation
-	 *
-	@Override
-	public String visitIteratorExp(@NonNull IteratorExp callExp) {
-		safeVisit(callExp.getSource());
-		append("->");
-		appendName(callExp.getReferredIteration());
-		append("("); //$NON-NLS-1$
-		boolean isFirst = true;
-		for (Variable variable : callExp.getIterator()) {
-			if (!isFirst) {
-				append(", ");
-			}
-            safeVisit(variable);
-			isFirst = false;
-		}
-		append(" | ");
-		safeVisit(callExp.getBody());
-		append(")");//$NON-NLS-1$
-		return null;        
-	} */
 	
 	@Override
 	public @Nullable String visitCGCastExp(@NonNull CGCastExp cgCastExp) {
@@ -431,25 +337,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 
 	@Override
 	public String visitCGClass(@NonNull CGClass cgClass) {
-/*		TemplateParameter owningTemplateParameter = cls.getOwningTemplateParameter();
-		if (owningTemplateParameter != null) {
-			appendName(cls);
-		}
-		else {
-			org.eclipse.ocl.examples.pivot.Package pkg = cls.getPackage();
-			if (pkg == null) {
-				append("null::");
-				appendName(cls);
-			}
-			else if (!(pkg.eContainer() instanceof Root) || !PivotConstants.OCL_NAME.equals(pkg.getName())) {
-				appendQualifiedName(pkg, "::", cls);
-			}
-			else {
-				appendName(cls);
-			}
-			appendTemplateBindings(cls.getTemplateBinding());
-			appendTemplateSignature(cls.getOwnedTemplateSignature());
-		} */
 		appendQualifiedName(cgClass);
 		return null;
 	}
@@ -481,22 +368,12 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 
 	@Override
 	public @Nullable String visitCGConstant(@NonNull CGConstant cgConstant) {
-//		super.visitCGConstant(cgConstant);
-//		append(" = ");
 		append(cgConstant.getConstantValue().toString());
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitCGConstantExp(@NonNull CGConstantExp cgConstantExp) {
-//		CGValuedElement cgVariable = cgConstantExp.getValue();
-//		appendName(cgVariable);
-//		CGTypeId type = cgVariable.getTypeId();
-//		if (type != null) {
-//			append(" : ");
-//			appendElementType(cgVariable);
-//		}
-//		append(" = ");
 		CGValuedElement referredConstant = cgConstantExp.getReferredConstant();
 		if (referredConstant != null) {
 			referredConstant.accept(this);
@@ -511,83 +388,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		safeVisit(cgConstraint.getBody());
 		return null;
 	}
-
-	/**
-	 * Renders a constraint with its context and expression.
-	 *
-	@Override
-	public String visitConstraint(@NonNull Constraint constraint) {
-		List<? extends EObject> constrained = constraint.getConstrainedElement();
-		if (!constrained.isEmpty()) {
-			EObject elem = constrained.get(0);
-			append("context "); //$NON-NLS-1$
-			if (elem instanceof Type) {
-				appendName((NamedElement) elem);
-			} else if (elem instanceof Operation) {
-				Operation oper = (Operation) elem;
-				appendOperationSignature(oper);
-			} else if (elem instanceof Property) {
-				Property prop = (Property) elem;
-				appendPropertySignature(prop);
-			}
-			append(" ");
-		}
-
-		String stereo = constraint.getStereotype();
-		append(stereo); //$NON-NLS-1$
-		String name = constraint.getName();
-		if (name != null) {
-			append(" "); //$NON-NLS-1$
-			append(name);
-		}
-		append(": "); //$NON-NLS-1$
-/* FIXME def context
-		EObject elem = constrained.get(1);
-		if (elem instanceof Operation) {
-			appendOperationSignature((Operation) elem);
-		} else if (elem instanceof Property) {
-			appendPropertySignature((Property) elem);
-		}
-		append(" = "); //$NON-NLS-1$
-* /
-		safeVisit(constraint.getSpecification());
-		return null;
-	} */
-
-	/**
-	 * Callback for a ConstructorExp visit.
-	 * 
-	 * @param constructorExp
-	 *            constructor expression
-	 * @return the string representation
-	 *
-	@Override
-	public String visitConstructorExp(@NonNull ConstructorExp constructorExp) {
-		appendQualifiedName(constructorExp.getType());
-		append("{");//$NON-NLS-1$
-		String prefix = "";
-		for (ConstructorPart part : constructorExp.getPart()) {
-			append(prefix);
-            safeVisit(part);
-			prefix = ", ";//$NON-NLS-1$
-		}
-		append("}");
-		return null;
-	} */
-	
-    /**
-     * Visits the tuple constructor part's value, if any.
-     *
-	@Override
-	public String visitConstructorPart(@NonNull ConstructorPart part) {
-		appendName(part.getReferredProperty());
-		OCLExpression initExpression = part.getInitExpression();
-		if (initExpression != null) {
-			append(" = ");
-			safeVisit(initExpression);
-		}
-		return null;
-	} */
 	
 	@Override
 	public @Nullable String visitCGEqualsExp(@NonNull CGEqualsExp cgEqualsExp) {
@@ -598,46 +398,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(")"); //$NON-NLS-1$
 		return null;
 	}
-
-	/**
-	 * Renders an ExpressionInOCL with its context variables and body.
-	 *
-	@Override
-	public String visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
-		return safeVisit(expression.getBodyExpression());
-	} */
-
-    /**
-     * Visits the expressions context variable, its parameter variables (if any),
-     * its result variable (if any), and finally its body expression.
-     * 
-     * Returns the result of
-     * {@link #handleExpressionInOCL(ExpressionInOCL, Object, Object, List, Object)}.
-     *
-    @Override
-	public T visitExpressionInOCL(ExpressionInOCL expression) {
-        T contextResult = safeVisit(expression.getContextVariable());
-        
-        Variable resultVar = expression.getResultVariable();
-        T resultResult = safeVisit(resultVar);
-        
-        List<T> parameterResults;
-        List<Variable> parameters = expression.getParameterVariable();
-        
-        if (parameters.isEmpty()) {
-            parameterResults = Collections.emptyList();
-        } else {
-            parameterResults = new java.util.ArrayList<T>(parameters.size());
-            for (Variable iterVar : parameters) {
-                parameterResults.add(safeVisit(iterVar));
-            }
-        }
-        
-        T bodyResult = safeVisit(expression.getBodyExpression());
-        
-        return handleExpressionInOCL(expression, contextResult, resultResult,
-            parameterResults, bodyResult);
-    } */
 	
 	@Override
 	public @Nullable String visitCGGuardExp(@NonNull CGGuardExp cgGuardExp) {
@@ -670,65 +430,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		}
 		return null;
 	}
-
-	/**
-	 * Callback for an IterateExp visit.
-	 * 
-	 * @param callExp
-	 *            an iterate expression
-	 * @return the string representation
-	 *
-	@Override
-	public String visitIterateExp(@NonNull IterateExp callExp) {
-		safeVisit(callExp.getSource());
-		append("->");
-		appendName(callExp.getReferredIteration());
-		append("("); //$NON-NLS-1$
-		boolean isFirst = true;
-		for (Variable variable : callExp.getIterator()) {
-			if (!isFirst) {
-				append(", ");
-			}
-            safeVisit(variable);
-			isFirst = false;
-		}
-		append("; ");
-		safeVisit(callExp.getResult());
-		append(" | ");
-		safeVisit(callExp.getBody());
-		append(")");//$NON-NLS-1$
-		return null;        
-	} */
-
-	/*
-	@Override
-	public String visitIteration(@NonNull Iteration iteration) {
-		appendQualifiedName(iteration.getOwningType(), ".", iteration);
-		appendTemplateBindings(iteration.getTemplateBinding());
-		appendTemplateSignature(iteration.getOwnedTemplateSignature());
-		append("(");
-		boolean isFirst = true;
-		for (Parameter parameter : iteration.getOwnedIterator()) {
-			if (!isFirst) {
-				append(", ");
-			}
-			appendElementType(parameter);
-			isFirst = false;
-		}
-		isFirst = true;
-		for (Parameter parameter : iteration.getOwnedAccumulator()) {
-			if (!isFirst) {
-				append(", ");
-			}
-			else {
-				append("; ");
-			}
-			appendElementType(parameter);
-			isFirst = false;
-		}
-		append(")");
-		return null;
-	} */
 	
 	@Override
 	public @Nullable String visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
@@ -780,8 +481,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	@Override
 	public @Nullable String visitCGOperation(@NonNull CGOperation cgOperation) {
 		appendQualifiedName(cgOperation.getContainingClass(), ".", cgOperation);
-//		appendTemplateBindings(cgOperation.getTemplateBinding());
-//		appendTemplateSignature(cgOperation.getOwnedTemplateSignature());
 		append("(");
 		boolean isFirst = true;
 		for (CGParameter cgParameter : cgOperation.getParameters()) {

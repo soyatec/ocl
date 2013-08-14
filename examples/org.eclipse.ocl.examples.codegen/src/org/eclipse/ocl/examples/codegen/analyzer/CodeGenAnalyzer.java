@@ -87,7 +87,6 @@ public class CodeGenAnalyzer
 	private /*@LazyNonNull*/ CGInvalid cgInvalid = null;
 	protected final @NonNull CGNull cgNull;
 	private final @NonNull Map<Number, CGInteger> cgIntegers = new HashMap<Number, CGInteger>();
-//	private final @NonNull Map<PropertyId, CGExecutorConstructorPart> cgParts = new HashMap<PropertyId, CGExecutorConstructorPart>();
 	private final @NonNull Map<Number, CGReal> cgReals = new HashMap<Number, CGReal>();
 	private final @NonNull Map<String, CGString> cgStrings = new HashMap<String, CGString>();
 
@@ -108,9 +107,6 @@ public class CodeGenAnalyzer
 		//
 		FieldingAnalyzer fieldingAnalyzer = codeGenerator.createFieldingAnalyzer();
 		fieldingAnalyzer.analyze(cgRoot, false);
-		//
-//		CommonSubexpressionEliminator cseEliminator = codeGenerator.createCommonSubexpressionEliminator();
-//		cseEliminator.optimize(cgRoot);
 	}
 
 	public @NonNull CGConstantExp createCGConstantExp(@NonNull OCLExpression element, @NonNull CGConstant constant) {
@@ -302,7 +298,7 @@ public class CodeGenAnalyzer
 			cgTypeId = CGModelFactory.eINSTANCE.createCGTypeId();
 			cgTypeId.setElementId(typeId);
 			cgTypeId.setName(nameManager.getGlobalSymbolName(typeId));
-			cgTypeId.setValueName(cgTypeId.getName());
+			cgTypeId.setValueName(DomainUtil.nonNullState(cgTypeId.getName()));
 			cgElementIds.put(typeId, cgTypeId);
 		}
 		return cgTypeId;

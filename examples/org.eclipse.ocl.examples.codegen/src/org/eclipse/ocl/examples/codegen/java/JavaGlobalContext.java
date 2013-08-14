@@ -120,7 +120,6 @@ public class JavaGlobalContext extends AbstractJavaContext implements GlobalCont
 					localContexts.put(cgScope, localContext);
 				}
 				if (cgIterationScope != null) {
-					localContext = localContext.createNestedContext(cgIterationScope);
 					localContexts.put(cgIterationScope, localContext);
 				}
 			}
