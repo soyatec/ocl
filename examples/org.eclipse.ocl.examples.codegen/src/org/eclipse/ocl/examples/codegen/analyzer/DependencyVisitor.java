@@ -109,7 +109,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 							if (!eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
 								Object childOrChildren = cgPrimaryElement.eGet(eReference);
 								if (eReference.isMany()) {
-									for (Object child : (List<?>)childOrChildren) {
+									for (Object child : new ArrayList<Object>((List<?>)childOrChildren)) {
 										if (child instanceof CGValuedElement) {
 											addDependency(cgPrimaryElement, (CGValuedElement)child);
 										}
