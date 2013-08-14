@@ -126,9 +126,11 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 				}
 				if (dependsOn != null) {
 					CGValuedElement cgPrimaryDependsOn = getPrimaryElement(dependsOn);
-					dependencies.add(cgPrimaryDependsOn);
-					if (!dependsOns.contains(cgPrimaryDependsOn)) {
-						dependsOns.add(cgPrimaryDependsOn);
+					if (cgPrimaryDependsOn != cgPrimaryElement) {
+						dependencies.add(cgPrimaryDependsOn);
+						if (!dependsOns.contains(cgPrimaryDependsOn)) {
+							dependsOns.add(cgPrimaryDependsOn);
+						}
 					}
 				}
 			}
