@@ -15,14 +15,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated cgmodel -->
-      <parser
-            contentTypeIdentifier="org.eclipse.ocl.examples.codegen.cgmodel"
-            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.content_parser">
       <!-- @generated cgmodel NOT -->
+      <!-- parser
+            contentTypeIdentifier="org.eclipse.ocl.examples.codegen.cgmodel"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
       <parser
             contentTypeIdentifier="org.eclipse.ocl.examples.codegen.cgmodel"
             class="org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactoryImpl"/>
