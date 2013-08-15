@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.java;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -190,7 +191,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	private @NonNull Map<ElementId, SimpleDescriptor> simpleDescriptors = new HashMap<ElementId, SimpleDescriptor>();
 	private @NonNull Map<ElementId, BoxedDescriptor> boxedDescriptors = new HashMap<ElementId, BoxedDescriptor>();
 	private @NonNull Map<ElementId, UnboxedDescriptor> unboxedDescriptors = new HashMap<ElementId, UnboxedDescriptor>();
-
+	private /*@LazyNonNull*/ JavaAnnotationReader annotationReader = null;
+	
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 	}
@@ -301,6 +303,20 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			id2UnboxedJavaClassVisitor = id2UnboxedJavaClassVisitor2 = createId2UnboxedJavaClassVisitor();
 		}
 		return id2UnboxedJavaClassVisitor2;
+	}
+
+	/**
+	 * Return true for an @NonNull annotation, false for an @Nullable annotation, null otherwise.
+	 */
+	public Boolean getIsNonNull(@NonNull Method method) {
+		JavaAnnotationReader annotationReader2 = annotationReader;
+		if (annotationReader2 == null) {
+			try {
+				annotationReader = annotationReader2 = new JavaAnnotationReader();
+			}
+			catch (Throwable e) {}	// Fails if no org.objectweb.asm
+		}
+		return (annotationReader2 != null) ? annotationReader2.getIsNonNull(method) : null;
 	}
 
 	public @Nullable Iteration2Java getIterationHelper(@NonNull Iteration asIteration) {

@@ -212,17 +212,17 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		return genModelHelper;
 	}
 
-	private Class<?> getJavaReturnClass(@NonNull LibraryIteration libraryIteration) {
+	private Method getJavaMethod(@NonNull LibraryIteration libraryIteration) {
 		try {
 			@SuppressWarnings("null") @NonNull Class<? extends LibraryIteration> implementationClass = libraryIteration.getClass();
 			Method method = implementationClass.getMethod("evaluateIteration", DomainIterationManager.class);
-			return method.getReturnType();
+			return method;
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	private Class<?> getJavaReturnClass(@NonNull LibraryOperation libraryOperation, int argumentSize) {
+	private Method getJavaMethod(@NonNull LibraryOperation libraryOperation, int argumentSize) {
 		try {
 			@SuppressWarnings("null") @NonNull Class<? extends LibraryOperation> implementationClass = libraryOperation.getClass();
 			Class<?>[] arguments;
@@ -243,13 +243,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 				arguments[i++] = Object.class; 
 			}
 			Method method = implementationClass.getMethod("evaluate", arguments);
-			return method.getReturnType();
+			return method;
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	private Class<?> getJavaReturnClass(@NonNull LibraryProperty libraryProperty) {
+	private Method getJavaMethod(@NonNull LibraryProperty libraryProperty) {
 		try {
 			@SuppressWarnings("null") @NonNull Class<? extends LibraryProperty> implementationClass = libraryProperty.getClass();
 			Class<?>[] arguments = new Class<?>[3];
@@ -257,7 +257,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			arguments[1] = TypeId.class; 
 			arguments[2] = Object.class; 
 			Method method = implementationClass.getMethod("evaluate", arguments);
-			return method.getReturnType();
+			return method;
 		} catch (Exception e) {
 			return null;
 		}
@@ -459,8 +459,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		else if (unboxedTypeDescriptor.isAssignableTo(Enumerator.class)) {
 			js.appendIdReference(typeId);
 			js.append(".getEnumerationLiteralId(");
+			js.appendClassReference(DomainUtil.class);
+			js.append(".nonNullState(");
 			js.appendReferenceTo(unboxedValue);
-			js.append(".getName())");
+			js.append(".getName()))");
 		}
 		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
 			js.appendClassReference(ValuesUtil.class);
@@ -866,10 +868,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
 		Method leastDerivedMethod = requiredJavaClass != null ? getLeastDerivedMethod(requiredJavaClass, getAccessor) : null;
+		
+		
 //		boolean isNonNull;
 //		boolean isNullable;
 		Class<?> unboxedSourceClass;
 		if (leastDerivedMethod != null){
+//			Boolean isNonNull = context.getIsNonNull(leastDerivedMethod);
 //			NonNull nonNullAnnotation = leastDerivedMethod.getAnnotation(NonNull.class);
 //			Nullable nullableAnnotation = leastDerivedMethod.getAnnotation(Nullable.class);
 //			isNonNull = nonNullAnnotation != null;		// FIXME Never present
@@ -1222,7 +1227,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement source = getExpression(cgIterateCallExp.getSource());
 		CGValuedElement body = getExpression(cgIterateCallExp.getBody());
 		LibraryIteration libraryIteration = DomainUtil.nonNullState(cgIterateCallExp.getLibraryIteration());
-		Class<?> actualReturnClass = getJavaReturnClass(libraryIteration);
+		Method actualMethod = getJavaMethod(libraryIteration);
+		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
+//		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
+//		boolean expectedIsNonNull = cgIterateCallExp.isNonNull();
 		CGIterator iterateResult = cgIterateCallExp.getResult();
 		CGTypeId resultType = cgIterateCallExp.getTypeId();
 //		CGValuedElement evaluatorParameter = localContext.getEvaluatorParameter(cgIterateCallExp);
@@ -1347,7 +1355,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement source = getExpression(cgIterationCallExp.getSource());
 		CGValuedElement body = getExpression(cgIterationCallExp.getBody());
 		LibraryIteration libraryIteration = DomainUtil.nonNullState(cgIterationCallExp.getLibraryIteration());
-		Class<?> actualReturnClass = getJavaReturnClass(libraryIteration);
+		Method actualMethod = getJavaMethod(libraryIteration);
+		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
+//		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
+//		boolean expectedIsNonNull = cgIterationCallExp.isNonNull();
 //		Class<?> actualBoxedReturnClass = getBoxedReturnClass(libraryIteration, 0);
 //		CGValuedElement resultVariable = cgIterationCallExp.getValue();
 		CGTypeId resultType = cgIterationCallExp.getTypeId();
@@ -1477,7 +1488,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement source = getExpression(cgOperationCallExp.getSource());
 		List<CGValuedElement> arguments = cgOperationCallExp.getArguments();
 		LibraryOperation libraryOperation = DomainUtil.nonNullState(cgOperationCallExp.getLibraryOperation());
-		Class<?> actualReturnClass = getJavaReturnClass(libraryOperation, arguments.size());
+		Method actualMethod = getJavaMethod(libraryOperation, arguments.size());
+		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
+		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
+		boolean expectedIsNonNull = cgOperationCallExp.isNonNull();
 		CGTypeId resultType = cgOperationCallExp.getTypeId();
 		js.appendLocalStatements(source);
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : arguments) {
@@ -1485,6 +1499,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		}
 		js.appendDeclaration(cgOperationCallExp);
 		js.append(" = ");
+		if (expectedIsNonNull && !actualIsNonNull) {
+			js.appendClassReference(DomainUtil.class);
+			js.append(".nonNullState(");
+		}
 		js.appendClassCast(cgOperationCallExp, actualReturnClass);
 		js.appendClassReference(libraryOperation.getClass());
 		js.append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
@@ -1503,6 +1521,9 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.append(", ");
 			js.appendValueName(cgArgument);		// FIXME cast
 		}
+		if (expectedIsNonNull && !actualIsNonNull) {
+			js.append(")");
+		}
 		js.append(");\n");
 		return null;
 	}
@@ -1511,7 +1532,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGLibraryPropertyCallExp(@NonNull CGLibraryPropertyCallExp cgPropertyCallExp) {
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		LibraryProperty libraryProperty = DomainUtil.nonNullState(cgPropertyCallExp.getLibraryProperty());
-		Class<?> actualReturnClass = getJavaReturnClass(libraryProperty);
+		Method actualMethod = getJavaMethod(libraryProperty);
+		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
+		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
+		boolean expectedIsNonNull = cgPropertyCallExp.isNonNull();
 //		Class<?> actualBoxedReturnClass = getBoxedReturnClass(libraryProperty);
 //		CGValuedElement resultVariable = cgOperationCallExp; //.getValue();
 		CGTypeId resultType = cgPropertyCallExp.getTypeId();
@@ -1519,6 +1543,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		js.appendLocalStatements(source);
 		js.appendDeclaration(cgPropertyCallExp);
 		js.append(" = ");
+		if (expectedIsNonNull && !actualIsNonNull) {
+			js.appendClassReference(DomainUtil.class);
+			js.append(".nonNullState(");
+		}
 		js.appendClassCast(cgPropertyCallExp, actualReturnClass);
 		js.appendClassReference(libraryProperty.getClass());
 //		CGOperation cgOperation = DomainUtil.nonNullState(CGUtils.getContainingOperation(cgPropertyCallExp));
@@ -1534,6 +1562,9 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //			}
 //		}
 		js.appendValueName(source);
+		if (expectedIsNonNull && !actualIsNonNull) {
+			js.append(")");
+		}
 		js.append(");\n");
 		return null;
 	}

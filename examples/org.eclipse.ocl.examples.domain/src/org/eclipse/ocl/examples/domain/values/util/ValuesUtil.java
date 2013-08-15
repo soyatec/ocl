@@ -609,8 +609,11 @@ public abstract class ValuesUtil
 		}
 	}
 	
-	public static @NonNull IntegerValue integerValueOf(@NonNull BigInteger value) {
-		if (value.signum() >= 0) {
+	public static @NonNull IntegerValue integerValueOf(@Nullable BigInteger value) {
+		if (value == null) {
+			throw new InvalidValueException(EvaluatorMessages.InvalidInteger, value);
+		}
+		else if (value.signum() >= 0) {
 			if (value.compareTo(INTEGER_MAX_VALUE) <= 0) {
 				return new IntIntegerValueImpl(value.intValue());
 			}
@@ -629,7 +632,7 @@ public abstract class ValuesUtil
 		return new BigIntegerValueImpl(value);
 	}
     
-	public static @NonNull IntegerValue integerValueOf(@NonNull Object aValue) {
+	public static @NonNull IntegerValue integerValueOf(@Nullable Object aValue) {
 		if (aValue instanceof BigInteger) {
 			return new BigIntegerValueImpl((BigInteger)aValue);
 		}
@@ -740,11 +743,19 @@ public abstract class ValuesUtil
 		return new RealValueImpl(value);
 	}
 
-	public static @NonNull RealValue realValueOf(@NonNull BigDecimal value) {
-		return new RealValueImpl(value);
+	public static @NonNull RealValue realValueOf(@Nullable BigDecimal value) {
+		if (value != null) {
+			return new RealValueImpl(value);
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.InvalidReal, value);
+		}
 	}
 
-	public static @NonNull RealValue realValueOf(@NonNull IntegerValue integerValue) {
+	public static @NonNull RealValue realValueOf(@Nullable IntegerValue integerValue) {
+		if (integerValue == null) {
+			throw new InvalidValueException(EvaluatorMessages.InvalidInteger, integerValue);
+		}
 		try {
 			return realValueOf(integerValue.bigDecimalValue());
 		} catch (InvalidValueException e) {
@@ -752,7 +763,7 @@ public abstract class ValuesUtil
 		}
 	}
     
-	public static @NonNull RealValue realValueOf(@NonNull Number aNumber) {
+	public static @NonNull RealValue realValueOf(@Nullable Number aNumber) {
 		if (aNumber instanceof BigDecimal) {
 			return new RealValueImpl((BigDecimal)aNumber);
 		}
@@ -762,8 +773,11 @@ public abstract class ValuesUtil
 		else if (aNumber instanceof Unlimited) {
 			return new RealValueImpl(Double.POSITIVE_INFINITY);
 		}
-		else {
+		else if (aNumber != null) {
 			return new RealValueImpl(aNumber.doubleValue());
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.InvalidReal, aNumber);
 		}
 	}
 	

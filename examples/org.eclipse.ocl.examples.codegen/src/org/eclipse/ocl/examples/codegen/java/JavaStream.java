@@ -26,6 +26,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -34,8 +36,6 @@ import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.UnboxedDynamicEObjectsDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.UnboxedEObjectsDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -402,11 +402,16 @@ public class JavaStream
 		if (!cgElement.isSettable()) {
 			append("final ");
 		}
-		TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgElement);
+//		TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgElement);
 		if (suppressNullWarnings) {
-			if ((typeDescriptor instanceof UnboxedEObjectsDescriptor)
-			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
+//			if ((typeDescriptor instanceof UnboxedEObjectsDescriptor)
+//			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
 //				append("@SuppressWarnings(\"null\")");
+//			}
+			if (cgElement.isNonNull() &&
+				((cgElement instanceof CGEcoreOperationCallExp)
+				|| (cgElement instanceof CGEcorePropertyCallExp))) {
+				append("@SuppressWarnings(\"null\")");
 			}
 		}
 		appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);
