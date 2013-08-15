@@ -236,7 +236,6 @@ public class VariableImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_ne;

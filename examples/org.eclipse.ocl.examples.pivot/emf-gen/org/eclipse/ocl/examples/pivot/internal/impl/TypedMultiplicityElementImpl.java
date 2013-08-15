@@ -82,7 +82,6 @@ public abstract class TypedMultiplicityElementImpl
 		 * bodySpecification.type.conformsTo(self.type)
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
 		final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
 		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);

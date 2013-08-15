@@ -406,7 +406,7 @@ public class JavaStream
 		if (suppressNullWarnings) {
 			if ((typeDescriptor instanceof UnboxedEObjectsDescriptor)
 			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
-				append("@SuppressWarnings(\"null\")");
+//				append("@SuppressWarnings(\"null\")");
 			}
 		}
 		appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);

@@ -260,6 +260,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		}
 		return new EcoreEList.UnmodifiableEList<Object>(null, null, i, unboxedValues);
 	}
+	
+	@SuppressWarnings("unchecked")			// FIXME check element types
+	public @NonNull <T> List<T> asEcoreObjects(@NonNull IdResolver idResolver, @NonNull Class<T> elementClass) {
+		return (List<T>) asEcoreObject(idResolver);
+	}
 
 	public @NonNull List<? extends Object> asList() {
 		return new ArrayList<Object>(elements);

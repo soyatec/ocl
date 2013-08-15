@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -32,6 +33,11 @@ public class UnboxedElementsDescriptor extends AbstractValueDescriptor implement
 		super(elementId, List.class);
 		this.standardLibrary = standardLibrary;
 		this.type = type;
+	}
+
+	@Override
+	public void append(@NonNull JavaStream javaStream) {
+		javaStream.appendClassReference(javaClass, true, Object.class);
 	}
 
 	@Override

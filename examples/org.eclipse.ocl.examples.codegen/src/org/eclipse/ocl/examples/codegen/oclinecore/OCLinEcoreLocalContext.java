@@ -60,12 +60,17 @@ public class OCLinEcoreLocalContext extends JavaLocalContext
 	}
 
 	@Override
-	public @NonNull CGValuedElement createIdResolverVariable() {
+	public @Nullable CGValuedElement createEvaluatorVariable() {
 		CGText evaluator = CGModelFactory.eINSTANCE.createCGText();
 		setNames2(evaluator, JavaConstants.EVALUATOR_NAME, JavaConstants.EVALUATOR_TYPE_ID);
 		String managerClassName = ImportUtils.getAffixedName(EcoreExecutorManager.class);
 		evaluator.setTextValue("new " + managerClassName + "(this, " + getGlobalContext().getTablesClassName() + ".LIBRARY)");
-//		addLocalVariable(evaluatorParameter);
+		return evaluator;
+	}
+
+	@Override
+	public @NonNull CGValuedElement createIdResolverVariable() {
+		CGValuedElement evaluator = createEvaluatorVariable();
 		CGValuedElement idResolverVariable = super.createIdResolverVariable();
 		idResolverVariable.getOwns().add(evaluator);
 		return idResolverVariable;

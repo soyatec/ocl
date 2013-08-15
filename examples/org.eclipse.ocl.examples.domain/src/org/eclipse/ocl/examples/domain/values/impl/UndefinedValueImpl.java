@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -107,6 +108,10 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 
 	public @NonNull Double asDouble() {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getTypeName());
+	}
+	
+	public @NonNull <T> List<T> asEcoreObjects(@NonNull IdResolver idResolver, @NonNull Class<T> elementClass) {
+		throw new InvalidValueException(this, "asEcoreObjects");
 	}
 
 	public @NonNull Integer asInteger() {

@@ -233,7 +233,7 @@ public class UsageTests
 			+ "    updateClasspath=\"false\">\n"
 			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
 			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
-			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
+			+ "    <details key=\"Use Null Annotations\" value=\"true\"/>\n"
 			+ "  </genAnnotations>\n"
 			+ "  <foreignModel>" + fileName + ".ecore</foreignModel>\n"
 			+ "  <genPackages prefix=\"" + fileName + "\"\n"
@@ -392,7 +392,7 @@ public class UsageTests
 		// genModel.setValidateModel(true);
 		genModel.setBundleManifest(false); // New manifests should be generated manually
 		genModel.setUpdateClasspath(false); // New class-paths should be generated manually
-		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+//		genModel.setComplianceLevel(GenJDKLevel.JDK60_LITERAL);
 		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 		Diagnostic diagnostic = genModel.diagnose();
 		if (diagnostic.getSeverity() != Diagnostic.OK) {

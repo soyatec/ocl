@@ -162,14 +162,16 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		return codeGenerator;
 	}
 
-/*	protected @NonNull CGValuedElement installEvaluatorVariable(@NonNull CGValuedElement cgValuedElement) {
-		CGValuedElement idResolverVariable = localContext.createEvaluatorVariable();
-		cgValuedElement.getOwns().add(idResolverVariable);
+	protected @Nullable CGValuedElement installEvaluatorVariable(@NonNull CGValuedElement cgValuedElement) {
+		CGValuedElement evaluatorVariable = localContext.createEvaluatorVariable();
+		if (evaluatorVariable != null) {
+			cgValuedElement.getOwns().add(evaluatorVariable);
+		}
 //		CGTypeId type = idResolverVariable.getTypeId();
 //		type.accept(this);
 //		installEvaluatorParameter(cgValuedElement);
-		return idResolverVariable;
-	} */
+		return evaluatorVariable;
+	}
 
 	protected @NonNull CGValuedElement installIdResolverVariable(@NonNull CGValuedElement cgValuedElement) {
 		CGValuedElement idResolverVariable = localContext.createIdResolverVariable();
@@ -433,9 +435,9 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 
 	@Override
 	public @Nullable Object visitCGLibraryOperationCallExp(@NonNull CGLibraryOperationCallExp cgOperationCallExp) {
-		installIdResolverVariable(cgOperationCallExp);			// FIXME Only evaluator needed
 		LibraryOperation libraryOperation = cgOperationCallExp.getLibraryOperation();
 		if (!(libraryOperation instanceof LibrarySimpleOperation)) {
+			installEvaluatorVariable(cgOperationCallExp);
 			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
 				TypeId pivotTypeId = cgOperationCallExp.getPivotTypeId();
 				if (pivotTypeId != null) {

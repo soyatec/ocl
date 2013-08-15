@@ -139,7 +139,6 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	protected final @NonNull GenModelHelper genModelHelper;
 	protected final @NonNull CodeGenAnalyzer analyzer;
 	protected final @NonNull Id2JavaInterfaceVisitor id2JavaInterfaceVisitor;
-//	protected final @NonNull Id2JavaExpressionVisitor id2JavaExpressionVisitor;
 	protected final @NonNull JavaStream js;
 	
 	/**
@@ -153,7 +152,6 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		this.genModelHelper = context.getGenModelHelper();
 		this.analyzer = context.getAnalyzer();
 		this.id2JavaInterfaceVisitor = createId2JavaClassVisitor();
-//		this.id2JavaExpressionVisitor = createId2JavaExpressionVisitor();
 		this.js = new JavaStream(codeGenerator, this);
 	}
 
@@ -1814,20 +1812,24 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGUnboxExp(@NonNull CGUnboxExp cgUnboxExp) {
 		CGValuedElement source = getExpression(cgUnboxExp.getSource());
 		TypeDescriptor boxedTypeDescriptor = context.getTypeDescriptor(source);
+		TypeDescriptor unboxedTypeDescriptor = context.getTypeDescriptor(cgUnboxExp);
 		//
 		js.appendLocalStatements(source);
 		if (boxedTypeDescriptor.isAssignableTo(CollectionValue.class)) {
 			js.append("final ");
 //			js.appendIsRequired(true);
 //			js.append(" ");
-			js.appendClassReference(List.class);
+			js.appendClassReference(unboxedTypeDescriptor);
+//			js.appendClassReference(List.class, false, unboxedTypeDescriptor.getJavaClass());
 			js.append(" ");
 			js.appendValueName(cgUnboxExp);
 			js.append(" = ");
 			js.appendValueName(source);
-			js.append(".asEcoreObject(");
+			js.append(".asEcoreObjects(");
 			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
-			js.append(")");
+			js.append(", ");
+			js.appendClassReference(unboxedTypeDescriptor.getJavaClass().getName());
+			js.append(".class)");
 		}
 		else {
 			js.appendDeclaration(cgUnboxExp);
