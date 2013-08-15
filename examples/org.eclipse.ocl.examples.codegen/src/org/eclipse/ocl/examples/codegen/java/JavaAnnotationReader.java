@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,9 +62,13 @@ public class JavaAnnotationReader
 			return null;
 		}
 //		System.out.println("getIsNonNull: " + requiredDesc);
+		InputStream classStream = null;		
 		try {
 			final int flags = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES | ClassReader.SKIP_CODE;
-			final ClassReader cr = new ClassReader(className);
+			ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+			String classFileName = className.replace('.', '/') + ".class";
+			classStream = contextClassLoader.getResourceAsStream(classFileName);		
+			final ClassReader cr = new ClassReader(classStream);
 			ClassVisitor cv = new ClassVisitor()
 			{
 				public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
@@ -164,6 +169,12 @@ public class JavaAnnotationReader
 			cr.accept(cv, flags);
 		} catch (IOException e) {
 			logger.error("Failed to read '" + className + "'", e);
+		} finally {
+			if (classStream != null) {
+				try {
+					classStream.close();
+				} catch (IOException e) {}
+			}
 		}
 		return desc2state.get(requiredDesc);
 	}
