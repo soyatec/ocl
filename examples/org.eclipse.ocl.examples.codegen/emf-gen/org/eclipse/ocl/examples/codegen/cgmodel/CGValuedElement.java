@@ -217,6 +217,14 @@ public interface CGValuedElement extends CGTypedElement {
 	boolean isUncommonable();
 
 	/**
+	 * Return true if this value is not null but is not declared as such.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$34
+	boolean isUndeclaredNonNull();
+
+	/**
 	 * Set the caught status.
 	 *
 	 * @generated

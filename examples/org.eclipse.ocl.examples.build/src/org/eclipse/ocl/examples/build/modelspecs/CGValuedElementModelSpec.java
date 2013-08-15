@@ -177,9 +177,9 @@ public class CGValuedElementModelSpec extends ModelSpec
 	protected static enum Log { BOOL, DELEG, EQUAL, ISINV, ISUND, FALSE, ROOT }
 
 	/**
-	 * The algorithm options for isNonNull()/isNull()/setNonNull()
+	 * The algorithm options for isNonNull()/isNull()/isUndeclaredNonNull()/setNonNull()
 	 */
-	protected static enum Nul { CPART, DELEG, FALSE, FEAT, IF, ROOT, TRUE, VAR }
+	protected static enum Nul { CPART, DELEG, FALSE, FEAT, IF, ROOT, TRUE, UNDEC, VAR }
 
 	/**
 	 * The algorithm options for getReferredValue()
@@ -660,13 +660,14 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case CPART: return "return first.isNonNull() || ((last != null) && last.isNonNull());";
 					case DELEG: return "return (" + modelSpec.delegate + " != null) && " + modelSpec.delegate + ".isRequired();";
 					case FALSE: return "return true;";
-					case FEAT: return "return (" + modelSpec.delegate + " != null) && (" + modelSpec.delegate + ".isRequired()  || " + modelSpec.delegate + ".isMany());";
-					case IF: return "return condition.isTrue() ? thenExpression.isNonNull() : condition.isFalse() ? elseExpression.isNonNull() : thenExpression.isNonNull() && elseExpression.isNonNull();";
+					case FEAT: 	return "return (" + modelSpec.delegate + " != null) && (" + modelSpec.delegate + ".isRequired()  || " + modelSpec.delegate + ".isMany());";
+					case IF: 	return "return condition.isTrue() ? thenExpression.isNonNull() : condition.isFalse() ? elseExpression.isNonNull() : thenExpression.isNonNull() && elseExpression.isNonNull();";
 					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isNonNull();";
-					case TRUE: return "return false;";
-					case VAR: return "return nonNull || super.isNonNull();";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
+					case TRUE: 	return "return false;";
+					case UNDEC: return "return true;";
+					case VAR: 	return "return nonNull || super.isNonNull();";
+					default: 	return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}
 		};
@@ -684,13 +685,14 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case CPART: return "return first.isNull() && (last == null);";
 					case DELEG: return "return false;";
 					case FALSE: return "return false;";
-					case FEAT: return "return false;";
-					case IF: return "return condition.isTrue() ? thenExpression.isNull() : condition.isFalse() ? elseExpression.isNull() : thenExpression.isNull() && elseExpression.isNull();";
+					case FEAT: 	return "return false;";
+					case IF: 	return "return condition.isTrue() ? thenExpression.isNull() : condition.isFalse() ? elseExpression.isNull() : thenExpression.isNull() && elseExpression.isNull();";
 					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isNull();";
-					case TRUE: return "return true;";
-					case VAR: return "return !nonNull && super.isNull();";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
+					case TRUE: 	return "return true;";
+					case UNDEC: return "return false;";
+					case VAR: 	return "return !nonNull && super.isNull();";
+					default: 	return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}
 		};
@@ -792,6 +794,30 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 			}
 		};
+		
+		protected static MethodSpec isUndeclaredNonNull = new MyMethodSpec(CGValuedElement.class, "boolean isUndeclaredNonNull()", null,
+			"Return true if this value is not null but is not declared as such.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
+					Nul enumValue = modelSpec.nul;
+					if (enumValue == null) {
+						return null;
+					}
+					switch (enumValue) {
+						case CPART: return "return false;";
+						case DELEG: return "return false;";
+						case FALSE: return "return false;";
+						case FEAT: 	return "return false;";
+						case IF: 	return "return false;";
+						case ROOT: 	return "return false;";
+						case TRUE:  return "return false;";
+						case UNDEC: return "return true;";
+						case VAR:   return "return false;";
+						default: 	return "MISSING_CASE_for_" + enumValue + ";";
+					}
+				}
+			};
 		
 	protected static MethodSpec rewriteAs = new MyMethodSpec(CGElement.class, "boolean rewriteAs(@NonNull " + classRef(CGValuedElement.class) + " oldValue, @NonNull " + classRef(CGValuedElement.class) + " newValue)", null,
 		"Rewrite the reference to oldValue by newValue.")
@@ -918,12 +944,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 		new CGValuedElementModelSpec(CGLibraryIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 
 		new CGValuedElementModelSpec(CGOperationCallExp.class, "referredOperation",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGEcoreOperationCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGEcoreOperationCallExp.class, null,			Box.FALSE, null     , null     , Nul.UNDEC, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		new CGValuedElementModelSpec(CGExecutorOperationCallExp.class, null,		Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		new CGValuedElementModelSpec(CGLibraryOperationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		
 		new CGValuedElementModelSpec(CGPropertyCallExp.class, "referredProperty",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
-		new CGValuedElementModelSpec(CGEcorePropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
+		new CGValuedElementModelSpec(CGEcorePropertyCallExp.class, null,			Box.FALSE, null     , null     , Nul.UNDEC, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		new CGValuedElementModelSpec(CGExecutorPropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , Rew.PROP );
 		new CGValuedElementModelSpec(CGLibraryPropertyCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		new CGValuedElementModelSpec(CGTuplePartCallExp.class, null,				Box.TRUE , null     , null     , null     , Inv.FALSE, null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
@@ -1034,6 +1060,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 		isTrue.generate(s, this, genModel, isImplementation);
 		isUnboxed.generate(s, this, genModel, isImplementation);
 		isUncommonable.generate(s, this, genModel, isImplementation);
+		isUndeclaredNonNull.generate(s, this, genModel, isImplementation);
 		rewriteAs.generate(s, this, genModel, isImplementation);
 		setCaught.generate(s, this, genModel, isImplementation);
 		setNonInvalid.generate(s, this, genModel, isImplementation);

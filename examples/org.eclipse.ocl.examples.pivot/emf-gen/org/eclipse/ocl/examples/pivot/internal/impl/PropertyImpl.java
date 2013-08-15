@@ -1142,7 +1142,7 @@ public class PropertyImpl
 		    if (oclAsType == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, this);
 		    CAUGHT_includes = includes;
@@ -1178,7 +1178,7 @@ public class PropertyImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression = this.getDefaultExpression();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression defaultExpression = this.getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -1188,7 +1188,7 @@ public class PropertyImpl
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = this.getDefaultExpression();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression defaultExpression_0 = this.getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -1203,8 +1203,8 @@ public class PropertyImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = this.getDefaultExpression();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression defaultExpression_1 = this.getDefaultExpression();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {

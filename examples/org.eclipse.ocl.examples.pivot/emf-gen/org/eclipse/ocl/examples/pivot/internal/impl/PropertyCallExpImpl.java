@@ -38,8 +38,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -472,11 +470,8 @@ public class PropertyCallExpImpl
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_not;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = this.getReferredProperty();
-		        if (referredProperty == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @NonNull /*@Thrown*/ Boolean isStatic = referredProperty.isStatic();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainProperty referredProperty = this.getReferredProperty();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean isStatic = referredProperty.isStatic();
 		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
 		        CAUGHT_not = not;
 		    }
@@ -485,12 +480,9 @@ public class PropertyCallExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		        if (source == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        CAUGHT_conformsTo = conformsTo;
 		    }
@@ -528,8 +520,8 @@ public class PropertyCallExpImpl
 		 */
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		    final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
 		    CAUGHT_eq = eq;
 		}

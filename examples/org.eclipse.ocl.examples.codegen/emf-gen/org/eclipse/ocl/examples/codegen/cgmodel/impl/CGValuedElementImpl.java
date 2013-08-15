@@ -395,6 +395,14 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public boolean isUndeclaredNonNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
 		return false;

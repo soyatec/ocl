@@ -850,7 +850,7 @@ public class OperationImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = this.getBodyExpression();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression bodyExpression = this.getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -860,7 +860,7 @@ public class OperationImpl
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = this.getBodyExpression();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression bodyExpression_0 = this.getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -875,8 +875,8 @@ public class OperationImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = this.getBodyExpression();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression bodyExpression_1 = this.getBodyExpression();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {
@@ -937,7 +937,7 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = this.getPrecondition();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = this.getPrecondition();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_precondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, precondition);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_precondition.iterator();
@@ -954,7 +954,7 @@ public class OperationImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ String name = _1.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = _1.getName();
 		        //
 		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
 		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find
@@ -996,7 +996,7 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = this.getPostcondition();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = this.getPostcondition();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_postcondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, postcondition);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_postcondition.iterator();
@@ -1013,7 +1013,7 @@ public class OperationImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ String name = _1.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = _1.getName();
 		        //
 		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
 		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find

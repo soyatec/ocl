@@ -253,11 +253,8 @@ public abstract class LoopExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		    final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		    if (source == null) {
-		        throw new InvalidValueException("Null source");
-		    }
-		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
 		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
 		    CAUGHT_oclIsKindOf = oclIsKindOf;
 		}
@@ -291,7 +288,7 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;
@@ -307,7 +304,7 @@ public abstract class LoopExpImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
 		        final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		        final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
 		        //

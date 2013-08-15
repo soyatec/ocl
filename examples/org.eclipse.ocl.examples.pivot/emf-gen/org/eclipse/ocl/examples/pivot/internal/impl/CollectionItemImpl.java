@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -155,9 +154,9 @@ public class CollectionItemImpl
 		 */
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		    final @NonNull /*@Thrown*/ DomainExpression item = this.getItem();
-		    final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression item = this.getItem();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = item.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		    CAUGHT_eq = eq;
 		}

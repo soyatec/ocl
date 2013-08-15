@@ -21,7 +21,6 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
@@ -82,8 +81,8 @@ public abstract class TypedMultiplicityElementImpl
 		 * bodySpecification.type.conformsTo(self.type)
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
-		final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = bodySpecification.getType();
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = this.getType();
 		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		return conformsTo;
 	}

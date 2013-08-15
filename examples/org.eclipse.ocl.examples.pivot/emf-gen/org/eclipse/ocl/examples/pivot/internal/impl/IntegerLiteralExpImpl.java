@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -144,7 +143,7 @@ public class IntegerLiteralExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_Integer_0 = idResolver.getType(TypeId.INTEGER, null);
-		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Integer_0);
 		    CAUGHT_eq = eq;
 		}

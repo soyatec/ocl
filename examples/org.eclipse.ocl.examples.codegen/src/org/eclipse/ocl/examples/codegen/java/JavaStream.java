@@ -26,8 +26,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -408,9 +406,7 @@ public class JavaStream
 //			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
 //				append("@SuppressWarnings(\"null\")");
 //			}
-			if (cgElement.isNonNull() &&
-				((cgElement instanceof CGEcoreOperationCallExp)
-				|| (cgElement instanceof CGEcorePropertyCallExp))) {
+			if (cgElement.isUndeclaredNonNull()) {
 				append("@SuppressWarnings(\"null\")");
 			}
 		}

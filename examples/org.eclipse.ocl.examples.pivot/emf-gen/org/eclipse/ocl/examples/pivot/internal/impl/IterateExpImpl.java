@@ -32,15 +32,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
@@ -457,12 +454,9 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 */
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
-		    if (result == null) {
-		        throw new InvalidValueException("Null source");
-		    }
-		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ Variable result = this.getResult();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = result.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		    CAUGHT_eq = eq;
 		}
@@ -495,13 +489,10 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		try {
-		    final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		    final @Nullable /*@Thrown*/ DomainType type = body.getType();
-		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
-		    if (result == null) {
-		        throw new InvalidValueException("Null source");
-		    }
-		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = body.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ Variable result = this.getResult();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = result.getType();
 		    final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		    CAUGHT_conformsTo = conformsTo;
 		}
@@ -534,11 +525,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
-		    if (result == null) {
-		        throw new InvalidValueException("Null source");
-		    }
-		    final @Nullable /*@Thrown*/ DomainExpression initExpression = result.getInitExpression();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ Variable result = this.getResult();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression = result.getInitExpression();
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);

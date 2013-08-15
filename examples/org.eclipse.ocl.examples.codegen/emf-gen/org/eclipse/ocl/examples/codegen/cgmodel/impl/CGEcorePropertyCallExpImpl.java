@@ -169,7 +169,25 @@ public class CGEcorePropertyCallExpImpl extends CGPropertyCallExpImpl implements
 	 * @generated
 	 */
 	@Override
+	public boolean isNonNull() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUndeclaredNonNull() {
 		return true;
 	}
 

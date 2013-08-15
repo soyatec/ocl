@@ -60,7 +60,7 @@ public class JavaAnnotationReader
 		if (!readClasses.add(className)) {
 			return null;
 		}
-		System.out.println("getIsNonNull: " + requiredDesc);
+//		System.out.println("getIsNonNull: " + requiredDesc);
 		try {
 			final int flags = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES | ClassReader.SKIP_CODE;
 			final ClassReader cr = new ClassReader(className);
@@ -68,12 +68,12 @@ public class JavaAnnotationReader
 			{
 				public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 					final String methodDesc = className + ";" + name + desc;
-					System.out.println("  ClassVisitor.visitMethod: " + methodDesc);
+//					System.out.println("  ClassVisitor.visitMethod: " + methodDesc);
 					desc2state.put(methodDesc, null);
 					return new MethodVisitor()
 					{
 						public AnnotationVisitor visitAnnotation(String annotationDesc, boolean visible) {
-							System.out.println("    MethodVisitor:" + annotationDesc + " " + true);
+//							System.out.println("    MethodVisitor:" + annotationDesc + " " + true);
 							if (annotationDesc.equals(nonNullDesc)) {
 								desc2state.put(methodDesc, true);
 							}

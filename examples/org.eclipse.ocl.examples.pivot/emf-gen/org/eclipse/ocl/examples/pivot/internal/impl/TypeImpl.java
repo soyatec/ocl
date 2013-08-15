@@ -1239,7 +1239,7 @@ public class TypeImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @NonNull /*@Thrown*/ List<? extends DomainConstraint> ownedInvariant = this.getOwnedInvariant();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> ownedInvariant = this.getOwnedInvariant();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_ownedInvariant = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, ownedInvariant);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedInvariant.iterator();
@@ -1256,7 +1256,7 @@ public class TypeImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ String name = _1.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = _1.getName();
 		        //
 		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
 		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find

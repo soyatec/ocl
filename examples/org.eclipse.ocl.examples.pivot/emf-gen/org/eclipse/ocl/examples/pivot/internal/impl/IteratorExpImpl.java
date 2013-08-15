@@ -214,7 +214,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_any);
 		        CAUGHT_eq = eq;
 		    }
@@ -223,7 +223,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -268,7 +268,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_any);
 		        CAUGHT_eq = eq;
 		    }
@@ -278,17 +278,14 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		        if (source == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = source.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_CollectionType_0);
 		        if (oclAsType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, elementType);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -328,7 +325,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_any);
 		        CAUGHT_eq = eq;
 		    }
@@ -337,8 +334,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = body.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, PivotTables.STR_Boolean);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -380,7 +377,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_closure);
 		        CAUGHT_eq = eq;
 		    }
@@ -389,7 +386,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -439,7 +436,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_closure);
 		        CAUGHT_eq = eq;
 		    }
@@ -448,15 +445,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_symbol_0;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type_2 = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_2 = this.getType();
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType_0 = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
-		            final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		            if (source == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -466,11 +460,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf_0;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType_0 = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
-		            final @Nullable /*@Thrown*/ DomainExpression source_0 = this.getSource();
-		            if (source_0 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ DomainType type_0 = source_0.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source_0 = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = source_0.getType();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_OrderedSetType_0);
 		            CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 		        }
@@ -538,7 +529,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_closure);
 		        CAUGHT_eq = eq;
 		    }
@@ -548,26 +539,23 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_1 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @NonNull /*@Thrown*/ DomainExpression body_1 = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type_2 = body_1.getType();
-		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		        if (source == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body_1 = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_2 = body_1.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_CollectionType_1);
-		        @Nullable /*@Thrown*/ DomainType symbol_0;
+		        @NonNull /*@Thrown*/ DomainType symbol_0;
 		        if (oclIsKindOf) {
 		            final @Nullable /*@Thrown*/ CollectionType oclAsType_0 = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_CollectionType_1);
 		            if (oclAsType_0 == null) {
 		                throw new InvalidValueException("Null source");
 		            }
-		            final @NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
 		            symbol_0 = elementType_0;
 		        }
 		        else {
@@ -617,7 +605,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_closure);
 		        CAUGHT_eq = eq;
 		    }
@@ -627,22 +615,19 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_1 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
-		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		        if (source == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = source.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType_0 = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType_0 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(elementType, elementType_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -684,7 +669,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_collect);
 		        CAUGHT_eq = eq;
 		    }
@@ -693,7 +678,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -743,7 +728,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_collect);
 		        CAUGHT_eq = eq;
 		    }
@@ -752,15 +737,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_symbol_0;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type_2 = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_2 = this.getType();
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType_0 = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
-		            final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		            if (source == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -770,11 +752,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf_0;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType_0 = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
-		            final @Nullable /*@Thrown*/ DomainExpression source_0 = this.getSource();
-		            if (source_0 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ DomainType type_0 = source_0.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source_0 = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = source_0.getType();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_OrderedSetType_0);
 		            CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 		        }
@@ -839,7 +818,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_collect);
 		        CAUGHT_eq = eq;
 		    }
@@ -849,19 +828,19 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_1 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type_0 = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = body.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType_0 = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType_0 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(elementType, elementType_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -904,7 +883,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_collectNested);
 		        CAUGHT_eq = eq;
 		    }
@@ -913,7 +892,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -958,7 +937,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_collectNested);
 		        CAUGHT_eq = eq;
 		    }
@@ -968,7 +947,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType_0 = idResolver.getType(PivotTables.CLSSid_BagType, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType_0);
 		        CAUGHT_oclIsKindOf = oclIsKindOf;
 		    }
@@ -1009,7 +988,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_collectNested);
 		        CAUGHT_eq = eq;
 		    }
@@ -1018,9 +997,9 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type_0 = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = body.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1062,7 +1041,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_exists);
 		        CAUGHT_eq = eq;
 		    }
@@ -1072,7 +1051,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1114,7 +1093,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_exists);
 		        CAUGHT_eq = eq;
 		    }
@@ -1124,8 +1103,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = body.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1167,7 +1146,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_forAll);
 		        CAUGHT_eq = eq;
 		    }
@@ -1177,7 +1156,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1219,7 +1198,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_forAll);
 		        CAUGHT_eq = eq;
 		    }
@@ -1229,8 +1208,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = body.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1272,7 +1251,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_isUnique);
 		        CAUGHT_eq = eq;
 		    }
@@ -1281,7 +1260,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -1325,7 +1304,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_isUnique);
 		        CAUGHT_eq = eq;
 		    }
@@ -1335,7 +1314,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1377,7 +1356,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_one);
 		        CAUGHT_eq = eq;
 		    }
@@ -1386,7 +1365,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -1430,7 +1409,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_one);
 		        CAUGHT_eq = eq;
 		    }
@@ -1440,7 +1419,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1482,7 +1461,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_one);
 		        CAUGHT_eq = eq;
 		    }
@@ -1492,8 +1471,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = body.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1538,7 +1517,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_eq;
 		        try {
-		            final @Nullable /*@Thrown*/ String name = this.getName();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		            final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_reject);
 		            CAUGHT_eq = eq;
 		        }
@@ -1547,7 +1526,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		        try {
-		            final @Nullable /*@Thrown*/ String name_0 = this.getName();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = this.getName();
 		            final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name_0, PivotTables.STR_select);
 		            CAUGHT_eq_0 = eq_0;
 		        }
@@ -1562,7 +1541,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_1;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -1607,7 +1586,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_eq;
 		        try {
-		            final @Nullable /*@Thrown*/ String name = this.getName();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		            final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_reject);
 		            CAUGHT_eq = eq;
 		        }
@@ -1616,7 +1595,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		        try {
-		            final @Nullable /*@Thrown*/ String name_0 = this.getName();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = this.getName();
 		            final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name_0, PivotTables.STR_select);
 		            CAUGHT_eq_0 = eq_0;
 		        }
@@ -1631,12 +1610,9 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_1;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		        if (source == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = source.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		        CAUGHT_eq_1 = eq_1;
 		    }
@@ -1681,7 +1657,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_eq;
 		        try {
-		            final @Nullable /*@Thrown*/ String name = this.getName();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		            final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_reject);
 		            CAUGHT_eq = eq;
 		        }
@@ -1690,7 +1666,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		        try {
-		            final @Nullable /*@Thrown*/ String name_0 = this.getName();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name_0 = this.getName();
 		            final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(name_0, PivotTables.STR_select);
 		            CAUGHT_eq_0 = eq_0;
 		        }
@@ -1706,7 +1682,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_1;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		        CAUGHT_eq_1 = eq_1;
 		    }
@@ -1748,7 +1724,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_sortedBy);
 		        CAUGHT_eq = eq;
 		    }
@@ -1757,7 +1733,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
@@ -1807,7 +1783,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_sortedBy);
 		        CAUGHT_eq = eq;
 		    }
@@ -1816,15 +1792,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_symbol_0;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type_2 = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_2 = this.getType();
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType_0 = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
-		            final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		            if (source == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -1834,11 +1807,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf_0;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType_0 = idResolver.getType(PivotTables.CLSSid_BagType, null);
-		            final @Nullable /*@Thrown*/ DomainExpression source_0 = this.getSource();
-		            if (source_0 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ DomainType type_0 = source_0.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source_0 = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = source_0.getType();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_BagType_0);
 		            CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
 		        }
@@ -1903,7 +1873,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ String name = this.getName();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = this.getName();
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(name, PivotTables.STR_sortedBy);
 		        CAUGHT_eq = eq;
 		    }
@@ -1913,19 +1883,19 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_1 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
-		        final @NonNull /*@Thrown*/ DomainExpression body = this.getBody();
-		        final @Nullable /*@Thrown*/ DomainType type_0 = body.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression body = this.getBody();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = body.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType_0 = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_CollectionType_1);
 		        if (oclAsType_0 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType_0 = oclAsType_0.getElementType();
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(elementType, elementType_0);
 		        CAUGHT_eq_0 = eq_0;
 		    }
@@ -1966,7 +1936,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;
@@ -1982,20 +1952,17 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		         * .elementType.conformsTo(type)
 		         */
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
-		        if (source == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
 		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
 		        if (oclAsType == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ DomainType type_0 = _1.getType();
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = _1.getType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, elementType, type_0);
 		        //
 		        if (conformsTo != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found

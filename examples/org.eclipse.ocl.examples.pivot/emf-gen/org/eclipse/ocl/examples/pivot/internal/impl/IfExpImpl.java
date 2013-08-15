@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -277,8 +276,8 @@ public class IfExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		    final @NonNull /*@Thrown*/ DomainExpression condition = this.getCondition();
-		    final @Nullable /*@Thrown*/ DomainType type = condition.getType();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression condition = this.getCondition();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = condition.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
 		    CAUGHT_eq = eq;
 		}
