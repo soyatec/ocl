@@ -52,9 +52,9 @@ import org.eclipse.ocl.examples.pivot.Type;
 /**
  * A CodeGenAnalyzer performs the analysis of a Pivot AST in preparation for code generation.
  * <p>
- * Pass 1: Pivot2CGAnalysisVisitor
+ * Pass 1: AS2CGAnalysisVisitor
  * <br>
- * Each Pivot Element is converted to a CGElement
+ * Each AS Element is converted to a CGElement
  * <br>
  * This conversion creates objects such as CGLibraryOperationCallEXp that are more atuned to CG
  * and provides a tree that can be rewritten by optimizations.
@@ -66,11 +66,15 @@ import org.eclipse.ocl.examples.pivot.Type;
  * constant folding
  * <p>
  * <p>
- * Pass N-1: CG2JavaPreVisitor
+ * Pass N-2: CG2JavaPreVisitor
  * <br>
  * Traversal of the CG containment tree prepares for Java CG by
  * <br>
  * gathering imports
+ * <p>
+ * Pass N-1: CommonSubexpressionEliminator
+ * <br>
+ * Traversal of the CG tree to share common terms and remove dead code
  * <p>
  * Pass N: CG2JavaVisitor
  * <br>
@@ -111,7 +115,7 @@ public class CodeGenAnalyzer
 
 	public @NonNull CGConstantExp createCGConstantExp(@NonNull OCLExpression element, @NonNull CGConstant constant) {
 		CGConstantExp cgLiteralExp = CGModelFactory.eINSTANCE.createCGConstantExp();
-		cgLiteralExp.setPivot(element);
+		cgLiteralExp.setAst(element);
 		cgLiteralExp.setReferredConstant(constant);
 		cgLiteralExp.setTypeId(getTypeId(element.getTypeId()));
 		return cgLiteralExp;
@@ -132,29 +136,29 @@ public class CodeGenAnalyzer
 		return cgNull;
 	}
 
-	public @NonNull CGExecutorConstructorPart createExecutorConstructorPart(@NonNull Property pivotProperty) {
-		PropertyId propertyId = pivotProperty.getPropertyId();
+	public @NonNull CGExecutorConstructorPart createExecutorConstructorPart(@NonNull Property asProperty) {
+		PropertyId propertyId = asProperty.getPropertyId();
 		CGExecutorConstructorPart cgPart = CGModelFactory.eINSTANCE.createCGExecutorConstructorPart();					
 		CGElementId cgPropertyId = getElementId(propertyId);
 		cgPart.setUnderlyingPropertyId(cgPropertyId);
-		cgPart.setPivot(pivotProperty);
-		cgPart.setName("CTORid_" + pivotProperty.getName());
+		cgPart.setAst(asProperty);
+		cgPart.setName("CTORid_" + asProperty.getName());
 		cgPart.getDependsOn().add(cgPropertyId);
 		return cgPart;
 	}
 
-	public @NonNull CGExecutorProperty createExecutorProperty(@NonNull Property pivotProperty) {
-		PropertyId propertyId = pivotProperty.getPropertyId();
+	public @NonNull CGExecutorProperty createExecutorProperty(@NonNull Property asProperty) {
+		PropertyId propertyId = asProperty.getPropertyId();
 		CGExecutorProperty cgProperty = null;
 		CGElementId cgPropertyId = getElementId(propertyId);
-		Property pivotOppositeProperty = pivotProperty.getOpposite();
-		if (pivotOppositeProperty != null) {
-			if (pivotOppositeProperty.isComposite()) {
+		Property asOppositeProperty = asProperty.getOpposite();
+		if (asOppositeProperty != null) {
+			if (asOppositeProperty.isComposite()) {
 				cgPropertyId = getElementId(propertyId);
 				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorCompositionProperty();					
 			}
-			else if (pivotProperty.isImplicit()){
-				cgPropertyId = getElementId(pivotOppositeProperty.getPropertyId());
+			else if (asProperty.isImplicit()){
+				cgPropertyId = getElementId(asOppositeProperty.getPropertyId());
 				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorOppositeProperty();					
 			}
 		}
@@ -162,31 +166,31 @@ public class CodeGenAnalyzer
 			cgProperty = CGModelFactory.eINSTANCE.createCGExecutorNavigationProperty();					
 		}
 		cgProperty.setUnderlyingPropertyId(cgPropertyId);
-		cgProperty.setPivot(pivotProperty);
-		cgProperty.setName("IMPPROPid_" + pivotProperty.getName());
+		cgProperty.setAst(asProperty);
+		cgProperty.setName("IMPPROPid_" + asProperty.getName());
 		cgProperty.getDependsOn().add(cgPropertyId);
 		return cgProperty;
 	}
 
-	public @NonNull CGExecutorOperation createExecutorOperation(@NonNull Operation pivotOperation) {
-		OperationId operationId = pivotOperation.getOperationId();
+	public @NonNull CGExecutorOperation createExecutorOperation(@NonNull Operation asOperation) {
+		OperationId operationId = asOperation.getOperationId();
 		CGExecutorOperation cgOperation = CGModelFactory.eINSTANCE.createCGExecutorOperation();
 		CGElementId cgOperationId = getElementId(operationId);
 		cgOperation.setUnderlyingOperationId(cgOperationId);
-		cgOperation.setPivot(pivotOperation);
-		cgOperation.setName(nameManager.getGlobalSymbolName(pivotOperation));
+		cgOperation.setAst(asOperation);
+		cgOperation.setName(nameManager.getGlobalSymbolName(asOperation));
 //		cgOperation.setValueName(cgOperation.getName());
 		cgOperation.getDependsOn().add(cgOperationId);
 		return cgOperation;
 	}
 
-	public @NonNull CGExecutorType createExecutorType(@NonNull Type pivotType) {
-		TypeId typeId = pivotType.getTypeId();
+	public @NonNull CGExecutorType createExecutorType(@NonNull Type asType) {
+		TypeId typeId = asType.getTypeId();
 		CGExecutorType cgType = CGModelFactory.eINSTANCE.createCGExecutorType();
 		CGTypeId cgTypeId = getTypeId(typeId);
 		cgType.setUnderlyingTypeId(cgTypeId);
-		cgType.setPivot(pivotType);
-		cgType.setName(getNameManager().getGlobalSymbolName(pivotType));
+		cgType.setAst(asType);
+		cgType.setName(getNameManager().getGlobalSymbolName(asType));
 //		cgType.setValueName(cgType.getName());
 		cgType.getDependsOn().add(cgTypeId);
 		return cgType;
@@ -217,7 +221,7 @@ public class CodeGenAnalyzer
 	public @NonNull CGValuedElement getExpression(@Nullable CGValuedElement cgExpression) {
 		if (cgExpression == null) {
 			CGConstantExp cgLiteralExp = CGModelFactory.eINSTANCE.createCGConstantExp();
-//			cgLiteralExp.setPivot(element);
+//			cgLiteralExp.setAst(element);
 			cgLiteralExp.setReferredConstant(cgInvalid);
 			cgLiteralExp.setTypeId(getTypeId(TypeId.OCL_INVALID));
 			cgExpression = cgLiteralExp;
@@ -241,7 +245,7 @@ public class CodeGenAnalyzer
 		CGInvalid cgInvalid2 = cgInvalid;
 		if (cgInvalid2 == null) {
 			cgInvalid = cgInvalid2 = CGModelFactory.eINSTANCE.createCGInvalid();
-//			cgInvalid.setPivot(ValuesUtil.INVALID_VALUE);
+//			cgInvalid.setAst(ValuesUtil.INVALID_VALUE);
 			setNames(cgInvalid2, ValuesUtil.INVALID_VALUE);
 			cgInvalid2.setTypeId(getTypeId(TypeId.OCL_INVALID));
 		}
@@ -318,7 +322,7 @@ public class CodeGenAnalyzer
 		CGConstantExp newElement = CGModelFactory.eINSTANCE.createCGConstantExp();		// FIXME wrapper not needed
 		newElement.setReferredConstant(aConstant);
 		newElement.setTypeId(oldElement.getTypeId());
-		newElement.setPivot(oldElement.getPivot());
+		newElement.setAst(oldElement.getAst());
 		CGUtils.replace(oldElement, newElement);		
 	}
 

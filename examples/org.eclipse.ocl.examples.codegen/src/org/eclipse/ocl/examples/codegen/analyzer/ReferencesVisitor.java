@@ -93,7 +93,7 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 
 	@Override
 	public @Nullable List<Object> visitCGElementId(@NonNull CGElementId cgElement) {
-		return append(super.visitCGElementId(cgElement), cgElement.getPivotTypeId());
+		return append(super.visitCGElementId(cgElement), cgElement.getASTypeId());
 	}
 
 	@Override
@@ -133,12 +133,12 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 
 	@Override
 	public @Nullable List<Object> visitCGTypeExp(@NonNull CGTypeExp cgElement) {
-		return append(super.visitCGTypeExp(cgElement), cgElement.getPivotTypeId());
+		return append(super.visitCGTypeExp(cgElement), cgElement.getASTypeId());
 	}
 
 	@Override
 	public @Nullable List<Object> visitCGTypedElement(@NonNull CGTypedElement cgElement) {
-		return append(super.visitCGTypedElement(cgElement), cgElement.getPivotTypeId());
+		return append(super.visitCGTypedElement(cgElement), cgElement.getASTypeId());
 	}
 
 	@Override

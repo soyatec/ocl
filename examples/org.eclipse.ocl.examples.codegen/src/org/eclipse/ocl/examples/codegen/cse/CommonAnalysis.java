@@ -127,7 +127,7 @@ public class CommonAnalysis extends AbstractAnalysis
 			CGVariable cgVariable = CGModelFactory.eINSTANCE.createCGLocalVariable();
 			cgVariable.setTypeId(cgCSE.getTypeId());
 			cgVariable.setRequired(cgCSE.isNonNull());
-			cgVariable.setPivot(cgCSE.getPivot());
+			cgVariable.setAst(cgCSE.getAst());
 			cgVariable.setName(analyzer.getNameManager().getGlobalSymbolName(cgVariable, "_cse"));
 			for (SimpleAnalysis simpleAnalysis : simpleAnalyses) {
 				CGValuedElement commonElement = simpleAnalysis.getElement();
@@ -148,7 +148,7 @@ public class CommonAnalysis extends AbstractAnalysis
 	protected @NonNull CGLetExp rewriteAsLet(@NonNull CGValuedElement cgIn, @NonNull CGVariable cgVariable) {
 		CGLetExp cgLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
 		cgLetExp.setTypeId(cgIn.getTypeId());
-		cgLetExp.setPivot(cgIn.getPivot());
+		cgLetExp.setAst(cgIn.getAst());
 		CGUtils.replace(cgIn, cgLetExp);
 		cgLetExp.setIn(cgIn);
 		cgLetExp.setInit(cgVariable);
@@ -158,18 +158,10 @@ public class CommonAnalysis extends AbstractAnalysis
 	protected void rewriteAsVariableExp(@NonNull CGValuedElement cgElement, @NonNull CGVariable cgVariable) {
 		CGVariableExp cgVarExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		cgVarExp.setTypeId(cgVariable.getTypeId());
-		cgVarExp.setPivot(cgVariable.getPivot());
+		cgVarExp.setAst(cgVariable.getAst());
 		cgVarExp.setReferredVariable(cgVariable);
 		CGUtils.replace(cgElement, cgVarExp);
 	}
-
-/*	protected void rewriteAsConstantExp(@NonNull CGValuedElement cgElement, @NonNull CGValuedElement cgConstant) {
-		CGConstantExp cgConstantExp = CGModelFactory.eINSTANCE.createCGConstantExp();
-		cgConstantExp.setTypeId(cgElement.getTypeId());
-		cgConstantExp.setPivot(cgElement.getPivot());
-		cgConstantExp.setReferredConstant(cgConstant);
-		CGUtils.replace(cgElement, cgConstantExp);
-	} */
 
 	public void rewriteGlobal(@NonNull CodeGenAnalyzer analyzer) {
 		if (simpleAnalyses.size() > 1) {
@@ -186,7 +178,7 @@ public class CommonAnalysis extends AbstractAnalysis
 				else {
 					primaryConstantExp = CGModelFactory.eINSTANCE.createCGConstantExp();
 					primaryConstantExp.setReferredConstant(primaryElement);
-					primaryConstantExp.setPivot(primaryElement.getPivot());
+					primaryConstantExp.setAst(primaryElement.getAst());
 					primaryConstantExp.setTypeId(primaryElement.getTypeId());
 					primaryConstantExp.setName(primaryElement.getName());
 					CGUtils.replace(primaryElement, primaryConstantExp);
@@ -207,7 +199,7 @@ public class CommonAnalysis extends AbstractAnalysis
 						else {
 							secondaryConstantExp = CGModelFactory.eINSTANCE.createCGConstantExp();
 							secondaryConstantExp.setReferredConstant(secondaryElement);
-							secondaryConstantExp.setPivot(secondaryElement.getPivot());
+							secondaryConstantExp.setAst(secondaryElement.getAst());
 							secondaryConstantExp.setTypeId(secondaryElement.getTypeId());
 							secondaryConstantExp.setName(secondaryElement.getName());
 							CGUtils.replace(secondaryElement, secondaryConstantExp);

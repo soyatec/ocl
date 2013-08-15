@@ -26,8 +26,8 @@ import org.eclipse.ocl.examples.pivot.Element;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getAst <em>Ast</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getPivot <em>Pivot</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,28 +61,28 @@ public interface CGNamedElement extends CGElement, Nameable {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Pivot</b></em>' attribute.
+	 * Returns the value of the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Pivot</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Ast</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pivot</em>' attribute.
-	 * @see #setPivot(Element)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement_Pivot()
+	 * @return the value of the '<em>Ast</em>' attribute.
+	 * @see #setAst(Element)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement_Ast()
 	 * @generated
 	 */
-	Element getPivot();
+	Element getAst();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getPivot <em>Pivot</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getAst <em>Ast</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pivot</em>' attribute.
-	 * @see #getPivot()
+	 * @param value the new value of the '<em>Ast</em>' attribute.
+	 * @see #getAst()
 	 * @generated
 	 */
-	void setPivot(Element value);
+	void setAst(Element value);
 
 } // CGNamedElement

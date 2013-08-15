@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl#getPivotTuplePartId <em>Pivot Tuple Part Id</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl#getAstTuplePartId <em>Ast Tuple Part Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,24 +39,24 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
  */
 public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGTuplePartCallExp {
 	/**
-	 * The default value of the '{@link #getPivotTuplePartId() <em>Pivot Tuple Part Id</em>}' attribute.
+	 * The default value of the '{@link #getAstTuplePartId() <em>Ast Tuple Part Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPivotTuplePartId()
+	 * @see #getAstTuplePartId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final TuplePartId PIVOT_TUPLE_PART_ID_EDEFAULT = null;
+	protected static final TuplePartId AST_TUPLE_PART_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPivotTuplePartId() <em>Pivot Tuple Part Id</em>}' attribute.
+	 * The cached value of the '{@link #getAstTuplePartId() <em>Ast Tuple Part Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPivotTuplePartId()
+	 * @see #getAstTuplePartId()
 	 * @generated
 	 * @ordered
 	 */
-	protected TuplePartId pivotTuplePartId = PIVOT_TUPLE_PART_ID_EDEFAULT;
+	protected TuplePartId astTuplePartId = AST_TUPLE_PART_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,8 +82,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TuplePartId getPivotTuplePartId() {
-		return pivotTuplePartId;
+	public TuplePartId getAstTuplePartId() {
+		return astTuplePartId;
 	}
 
 	/**
@@ -91,11 +91,11 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPivotTuplePartId(TuplePartId newPivotTuplePartId) {
-		TuplePartId oldPivotTuplePartId = pivotTuplePartId;
-		pivotTuplePartId = newPivotTuplePartId;
+	public void setAstTuplePartId(TuplePartId newAstTuplePartId) {
+		TuplePartId oldAstTuplePartId = astTuplePartId;
+		astTuplePartId = newAstTuplePartId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID, oldPivotTuplePartId, pivotTuplePartId));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID, oldAstTuplePartId, astTuplePartId));
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID:
-				return getPivotTuplePartId();
+			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID:
+				return getAstTuplePartId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,8 +130,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID:
-				setPivotTuplePartId((TuplePartId)newValue);
+			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID:
+				setAstTuplePartId((TuplePartId)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -145,8 +145,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID:
-				setPivotTuplePartId(PIVOT_TUPLE_PART_ID_EDEFAULT);
+			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID:
+				setAstTuplePartId(AST_TUPLE_PART_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -160,8 +160,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID:
-				return PIVOT_TUPLE_PART_ID_EDEFAULT == null ? pivotTuplePartId != null : !PIVOT_TUPLE_PART_ID_EDEFAULT.equals(pivotTuplePartId);
+			case CGModelPackage.CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID:
+				return AST_TUPLE_PART_ID_EDEFAULT == null ? astTuplePartId != null : !AST_TUPLE_PART_ID_EDEFAULT.equals(astTuplePartId);
 		}
 		return super.eIsSet(featureID);
 	}

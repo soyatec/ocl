@@ -343,7 +343,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 
 	@Override
 	public @Nullable String visitCGCollectionExp(@NonNull CGCollectionExp cgCollectionExp) {
-		append(((CollectionLiteralExp)cgCollectionExp.getPivot()).getKind() + "{");//$NON-NLS-1$
+		append(((CollectionLiteralExp)cgCollectionExp.getAst()).getKind() + "{");//$NON-NLS-1$
         boolean isFirst = true;
 		for (CGCollectionPart cgPart : cgCollectionExp.getParts()) {
 			if (!isFirst) {
@@ -499,7 +499,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	public @Nullable String visitCGOperationCallExp(@NonNull CGOperationCallExp oc) {
 		CGValuedElement source = oc.getSource();
 		safeVisit(source);
-		OperationCallExp operationCallExp = (OperationCallExp) oc.getPivot();
+		OperationCallExp operationCallExp = (OperationCallExp) oc.getAst();
 		Operation oper = operationCallExp.getReferredOperation();
 	        Type sourceType = source != null ? operationCallExp.getSource().getType() : null;
 			append(sourceType instanceof CollectionType
@@ -530,7 +530,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
         //    association class navigation qualifier
         CGValuedElement source = pc.getSource();
 		safeVisit(source);
-		PropertyCallExp propertyCallExp = (PropertyCallExp) pc.getPivot();
+		PropertyCallExp propertyCallExp = (PropertyCallExp) pc.getAst();
 		Property property = propertyCallExp.getReferredProperty();
         Type sourceType = source != null ? propertyCallExp.getSource().getType() : null;
 		result.append(sourceType instanceof CollectionType

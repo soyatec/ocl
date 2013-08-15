@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cgmodel" nsURI="http://www.eclipse.org/ocl/1.0.0/CG" nsPrefix="ch">
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-    <details key="documentation" value="The CGModel provides a Code Generation friendly form of the OCL Pivot model, with distinct classes&#xA;such as LibraryPropertyCallExp and EcorePropertyCallExp for distinct purposes. Additional classes&#xA;such as BoxExp, CatchExp and CastExp support rewrite optimizations.&#xA;&lt;p>&#xA;References to the Pivot model are expressed as attributes with datatype values in order to avoid&#xA;confusion as to whether the new or old pivot mosdel is in use while code generating the pivot model."/>
+    <details key="documentation" value="The CGModel provides a Code Generation friendly form of the OCL Abstract Syntax pivot model, with distinct classes&#xA;such as LibraryPropertyCallExp and EcorePropertyCallExp for distinct purposes. Additional classes&#xA;such as BoxExp, CatchExp and CastExp support rewrite optimizations.&#xA;&lt;p>&#xA;References to the Abstract Syntax model are expressed as attributes with datatype values in order to avoid&#xA;confusion as to whether the new or old pivot mosdel is in use while code generating the pivot model."/>
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
@@ -337,8 +337,8 @@
         upperBound="-1" eType="#//CGPackage" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGNamedElement" abstract="true" eSuperTypes="#//CGElement #//Nameable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ast" lowerBound="1" eType="#//Element"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pivot" lowerBound="1" eType="#//Element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGNull" eSuperTypes="#//CGConstant">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -473,7 +473,7 @@
         eType="#//CGTupleExp" changeable="false" resolveProxies="false" eOpposite="#//CGTupleExp/parts"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGTuplePartCallExp" eSuperTypes="#//CGPropertyCallExp">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pivotTuplePartId" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="astTuplePartId" lowerBound="1"
         eType="#//TuplePartId"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGTypeId" eSuperTypes="#//CGElementId"/>

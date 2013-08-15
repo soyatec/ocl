@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 
 /**
- * CGTypedElementModelSpec supports generation of the CGTypedElement.getPivotTypeId() method hierarchy.
+ * CGElementModelSpec supports generation of the CGElement.getChildren()/getParent() method hierarchy.
  */
 public class CGElementModelSpec extends ModelSpec
 {

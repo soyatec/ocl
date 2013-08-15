@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
@@ -72,10 +72,10 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		this.genPackage = genPackage;
 		MetaModelManager metaModelManager = codeGenerator.getMetaModelManager();
 		EPackage ecorePackage = genPackage.getEcorePackage();
-		org.eclipse.ocl.examples.pivot.Package pivotPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ecorePackage);
-		assert pivotPackage != null;
-		Pivot2CGVisitor pivot2CGVisitor = new OCLinEcorePivot2CGVisitor(analyzer, getGlobalContext());
-		this.cgPackage = (CGPackage) DomainUtil.nonNullState(pivotPackage.accept(pivot2CGVisitor));
+		org.eclipse.ocl.examples.pivot.Package asPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ecorePackage);
+		assert asPackage != null;
+		AS2CGVisitor pivot2CGVisitor = new OCLinEcoreAS2CGVisitor(analyzer, getGlobalContext());
+		this.cgPackage = (CGPackage) DomainUtil.nonNullState(asPackage.accept(pivot2CGVisitor));
 		Resource resource = new XMIResourceImpl(URI.createURI("cg.xmi"));
 		resource.getContents().add(cgPackage);
 		analyzer.analyze(cgPackage);
@@ -99,35 +99,35 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		for (CGClass cgClass : cgPackage.getClasses()) {
 			for (CGConstraint cgConstraint : cgClass.getInvariants()) {
 				CGValuedElement cgBody = cgConstraint.getBody();
-				Element pivotClass = cgClass.getPivot();
-				Element pivotElement = cgConstraint.getPivot();
-				if ((cgBody != null) && (pivotClass instanceof Type) && (pivotElement instanceof Constraint)) {
-					Constraint pivotConstraint = (Constraint) pivotElement;
+				Element pivotClass = cgClass.getAst();
+				Element asElement = cgConstraint.getAst();
+				if ((cgBody != null) && (pivotClass instanceof Type) && (asElement instanceof Constraint)) {
+					Constraint asConstraint = (Constraint) asElement;
 					localContext = globalContext.getLocalContext(cgConstraint);
-					String bodyText = generateValidatorBody(cgBody, pivotConstraint, (Type)pivotClass);
-					String fragmentURI = getFragmentURI(pivotClass) + "==" + getRuleName(pivotConstraint);
+					String bodyText = generateValidatorBody(cgBody, asConstraint, (Type)pivotClass);
+					String fragmentURI = getFragmentURI(pivotClass) + "==" + getRuleName(asConstraint);
 					bodies.put(fragmentURI, bodyText);
 				}
 			}
 			for (CGOperation cgOperation : cgClass.getOperations()) {
 				CGValuedElement cgBody = cgOperation.getBody();
-				Element pivotOperation = cgOperation.getPivot();
-				if ((cgBody != null) && (pivotOperation instanceof Operation)) {
-					String returnClassName = genModelHelper.getOperationReturnType((Operation)pivotOperation);
+				Element asOperation = cgOperation.getAst();
+				if ((cgBody != null) && (asOperation instanceof Operation)) {
+					String returnClassName = genModelHelper.getOperationReturnType((Operation)asOperation);
 					localContext = globalContext.getLocalContext(cgOperation);
 					String bodyText = generateBody(cgBody, returnClassName);
-					String fragmentURI = getFragmentURI(pivotOperation);
+					String fragmentURI = getFragmentURI(asOperation);
 					bodies.put(fragmentURI, bodyText);
 				}
 			}
 			for (CGProperty cgProperty : cgClass.getProperties()) {
 				CGValuedElement cgBody = cgProperty.getBody();
-				Element pivotProperty = cgProperty.getPivot();
-				if ((cgBody != null) && (pivotProperty instanceof Property)) {
-					String returnClassName = genModelHelper.getPropertyResultType((Property)pivotProperty);
+				Element asProperty = cgProperty.getAst();
+				if ((cgBody != null) && (asProperty instanceof Property)) {
+					String returnClassName = genModelHelper.getPropertyResultType((Property)asProperty);
 					localContext = globalContext.getLocalContext(cgProperty);
 					String bodyText = generateBody(cgBody, returnClassName);
-					String fragmentURI = getFragmentURI(pivotProperty);
+					String fragmentURI = getFragmentURI(asProperty);
 					bodies.put(fragmentURI, bodyText);
 				}
 			}
@@ -141,7 +141,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 //		if ("isAttribute".equals(((CGNamedElement)cgBody.getParent()).getName())) {
 //			System.out.println("generateBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
 //		}
-		js.appendCommentWithOCL(null, cgBody.getPivot());
+		js.appendCommentWithOCL(null, cgBody.getAst());
 //		JavaDependencyVisitor dependencyVisitor = new JavaDependencyVisitor(localContext, null);
 //		dependencyVisitor.visit(cgBody);
 //		dependencyVisitor.visitAll(localContext.getLocalVariables());
@@ -179,13 +179,13 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		return toString();
 	}
 
-	public @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint pivotConstraint, @NonNull Type pivotType) {
+	public @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint asConstraint, @NonNull Type asType) {
 		js.resetStream();
 //		if ("CompatibleInitialiser".equals(((CGNamedElement)cgBody.getParent()).getName())) {
 //			System.out.println("generateValidatorBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
 //		}
-		String constraintName = pivotConstraint.getName();
-		GenClassifier genClassifier = genModelHelper.getGenClassifier(pivotType);
+		String constraintName = asConstraint.getName();
+		GenClassifier genClassifier = genModelHelper.getGenClassifier(asType);
 		String genClassifierName = genClassifier != null ? genClassifier.getName() : null;
 		if (genClassifierName == null) {
 			genClassifierName = "";
@@ -193,7 +193,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		String constraintLiteralName = CodeGenUtil.upperName(genClassifierName) + "__" + CodeGenUtil.upperName(constraintName != null ? constraintName : "");
 		String validatorClass = genModelHelper.getQualifiedValidatorClassName(genPackage);
 
-		js.appendCommentWithOCL(null, pivotConstraint);
+		js.appendCommentWithOCL(null, asConstraint);
 //		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(localContext, null);
 //		dependencyVisitor.visit(cgBody);
 //		dependencyVisitor.visitAll(localContext.getLocalVariables());

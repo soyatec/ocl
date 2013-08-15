@@ -748,15 +748,15 @@ public class OCLinEcoreTablesUtils
 		return getGenPackage(pPackage);
 	}
 	
-	protected @Nullable GenPackage getGenPackage(@NonNull DomainPackage pivotPackage) {
+	protected @Nullable GenPackage getGenPackage(@NonNull DomainPackage asPackage) {
 		EPackage firstEPackage = genPackage.getEcorePackage();
-		if (firstEPackage.getName().equals(pivotPackage.getName())) {
+		if (firstEPackage.getName().equals(asPackage.getName())) {
 			return genPackage;
 		}
 		List<GenPackage> usedGenPackages = genPackage.getGenModel().getUsedGenPackages();
 		assert usedGenPackages != null;
-//		String nsURI = pivotPackage.getNsURI();
-//		String name = pivotType.getName();
+//		String nsURI = asPackage.getNsURI();
+//		String name = asType.getName();
 //		GenPackage usedGenPackage = getNsURIGenPackage(usedGenPackages, nsURI, name);
 //		if (usedGenPackage != null) {
 //			return usedGenPackage;
@@ -766,21 +766,21 @@ public class OCLinEcoreTablesUtils
 		assert genModelResourceSet != null;
 		DomainPackage metaModelPackage = metaModelManager.getPivotMetaModel();
 		org.eclipse.ocl.examples.pivot.Package libraryPackage = metaModelManager.getLibraries().get(0);
-		if (pivotPackage == libraryPackage) {
+		if (asPackage == libraryPackage) {
 			GenPackage libraryGenPackage = getLibraryGenPackage(usedGenPackages);
 			if (libraryGenPackage == null) {
 				libraryGenPackage = loadGenPackage(genModelResourceSet, LibraryConstants.GEN_MODEL_URI);
 			}
 			return libraryGenPackage;
 		}
-		if (pivotPackage == metaModelPackage) {
+		if (asPackage == metaModelPackage) {
 			GenPackage metaModelGenPackage = getMetaModelGenPackage(usedGenPackages);
 			if (metaModelGenPackage == null) {
 				metaModelGenPackage = loadGenPackage(genModelResourceSet, PivotConstants.GEN_MODEL_URI);
 			}
 			return metaModelGenPackage;
 		}
-		String nsURI = pivotPackage.getNsURI();
+		String nsURI = asPackage.getNsURI();
 		if (nsURI != null) {
 			GenPackage genPackage2 = metaModelManager.getGenPackage(nsURI);
 			if (genPackage2 != null) {
@@ -861,14 +861,14 @@ public class OCLinEcoreTablesUtils
 			return null;
 		}
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		org.eclipse.ocl.examples.pivot.Package pivotPackage = ecore2Pivot.getCreated(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
-		if (pivotPackage == null) {
+		org.eclipse.ocl.examples.pivot.Package asPackage = ecore2Pivot.getCreated(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
+		if (asPackage == null) {
 			return null;
 		}
-		if (pivotPackage.getNsURI().equals(OCLstdlibPackage.eNS_URI)) {				// If generating OCLstdlibTables ...
-			mergeLibrary(pivotPackage);			// FIXME: redundant once M2T scans all partial types
+		if (asPackage.getNsURI().equals(OCLstdlibPackage.eNS_URI)) {				// If generating OCLstdlibTables ...
+			mergeLibrary(asPackage);			// FIXME: redundant once M2T scans all partial types
 		}
-		return pivotPackage;
+		return asPackage;
 	}
 	
 	protected @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
@@ -920,9 +920,9 @@ public class OCLinEcoreTablesUtils
 		}
 /*		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
 		for (DomainType type : typeServer.getPartialTypes()) {
-			DomainPackage pivotPackage = type.getPackage();
-			if ((pivotPackage != null) && (pivotPackage != thisPackage)) {
-				GenPackage gPackage = getGenPackage(genPackage, pivotPackage);
+			DomainPackage asPackage = type.getPackage();
+			if ((asPackage != null) && (asPackage != thisPackage)) {
+				GenPackage gPackage = getGenPackage(genPackage, asPackage);
 				if (gPackage != null) {
 					return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
 				}

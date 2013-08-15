@@ -38,7 +38,7 @@ public class JavaDependencyVisitor extends DependencyVisitor
 
 	@Override
 	public @Nullable Object visitCGBoxExp(@NonNull CGBoxExp cgBoxExp) {
-		TypeId typeId = cgBoxExp.getSource().getPivotTypeId();
+		TypeId typeId = cgBoxExp.getSource().getASTypeId();
 		if (typeId != null) {
 			addDependency(cgBoxExp, context.getElementId(typeId));
 			typeId.accept(id2DependencyVisitor);						// FIXME this should be automatic (needed for OclAny testNotEqual)

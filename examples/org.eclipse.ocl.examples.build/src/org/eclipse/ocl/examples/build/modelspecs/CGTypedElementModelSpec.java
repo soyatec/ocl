@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
- * CGTypedElementModelSpec supports generation of the CGTypedElement.getPivotTypeId() method hierarchy.
+ * CGTypedElementModelSpec supports generation of the CGTypedElement.getASTypeId() method hierarchy.
  */
 public class CGTypedElementModelSpec extends ModelSpec
 {
@@ -50,51 +50,51 @@ public class CGTypedElementModelSpec extends ModelSpec
 	}
 
 	/**
-	 * The algorithm options for getPivotTypeId()
+	 * The algorithm options for getASTypeId()
 	 */
-	public interface Pti {
+	public interface Ati {
 		@NonNull String generate();
 	}
 	
-	public static final @NonNull Pti PTI_ROOT = new Pti() { public @NonNull String generate() {
-		return "return pivot instanceof " + classRef(DomainTypedElement.class) + " ? ((" + classRef(DomainTypedElement.class) + ") pivot).getTypeId() : null;";
+	public static final @NonNull Ati ATI_ROOT = new Ati() { public @NonNull String generate() {
+		return "return ast instanceof " + classRef(DomainTypedElement.class) + " ? ((" + classRef(DomainTypedElement.class) + ") ast).getTypeId() : null;";
 	}};
-	public static final @NonNull Pti PTI_TEXT = new Pti() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_TEXT = new Ati() { public @NonNull String generate() {
 		return "return (" + classRef(TypeId.class) + ") getTypeId().getElementId();		// FIXME Why irregular?";
 	}};
-	public static final @NonNull Pti PTI_TYPE = new Pti() { public @NonNull String generate() {
-		return "return pivot instanceof " + classRef(DomainType.class) + " ? ((" + classRef(DomainType.class) + ") pivot).getTypeId() : null;";
+	public static final @NonNull Ati ATI_TYPE = new Ati() { public @NonNull String generate() {
+		return "return ast instanceof " + classRef(DomainType.class) + " ? ((" + classRef(DomainType.class) + ") ast).getTypeId() : null;";
 	}};
-	public static final @NonNull Pti PTI_T_ID = new Pti() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_T_ID = new Ati() { public @NonNull String generate() {
 		return "return (" + classRef(TypeId.class) + ")elementId;";
 	}};
 		
-	protected static MethodSpec getPivotTypeId = new MyMethodSpec(CGTypedElement.class, "@Nullable " + classRef(TypeId.class) + " getPivotTypeId()", null,
-		"Return the TypeId of the pivot element.")
+	protected static MethodSpec getASTypeId = new MyMethodSpec(CGTypedElement.class, "@Nullable " + classRef(TypeId.class) + " getASTypeId()", null,
+		"Return the TypeId of the AS element.")
 		{
 			@Override
 			protected @Nullable String getBody(@NonNull CGTypedElementModelSpec modelSpec) {
-				Pti pti = modelSpec.pti;
-				return pti != null ? pti.generate() : null;
+				Ati ati = modelSpec.ati;
+				return ati != null ? ati.generate() : null;
 			}
 		};
 
 	public static void register() {
-		new CGTypedElementModelSpec(CGTypedElement.class, PTI_ROOT );
-		new CGTypedElementModelSpec(CGExecutorType.class, PTI_TYPE );
-		new CGTypedElementModelSpec(CGText.class, PTI_TEXT );
-		new CGTypedElementModelSpec(CGTypeId.class, PTI_T_ID );
+		new CGTypedElementModelSpec(CGTypedElement.class, ATI_ROOT );
+		new CGTypedElementModelSpec(CGExecutorType.class, ATI_TYPE );
+		new CGTypedElementModelSpec(CGText.class, ATI_TEXT );
+		new CGTypedElementModelSpec(CGTypeId.class, ATI_T_ID );
 	}
 
-	protected final @Nullable Pti pti;
+	protected final @Nullable Ati ati;
 	
-	protected CGTypedElementModelSpec(@NonNull Class<?> cgClass, @Nullable Pti pti) {
+	protected CGTypedElementModelSpec(@NonNull Class<?> cgClass, @Nullable Ati ati) {
 		super(cgClass);
-		this.pti = pti;
+		this.ati = ati;
 	}
 	
 	@Override
 	public void generate(@NonNull StringBuilder s, @NonNull GenModel genModel, boolean isImplementation) {
-		getPivotTypeId.generate(s, this, genModel, isImplementation);
+		getASTypeId.generate(s, this, genModel, isImplementation);
 	}
 }

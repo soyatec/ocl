@@ -146,11 +146,11 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		}
 		CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
 		CGUtils.wrap(cgCastExp, cgChild);
-		TypedElement pivot = (TypedElement) cgChild.getPivot();
-		Type pivotType = pivot.getType();
-		cgCastExp.setPivot(pivot);
-		if (pivotType != null) {
-			CGExecutorType cgExecutorType = context.createExecutorType(pivotType);
+		TypedElement pivot = (TypedElement) cgChild.getAst();
+		Type asType = pivot.getType();
+		cgCastExp.setAst(pivot);
+		if (asType != null) {
+			CGExecutorType cgExecutorType = context.createExecutorType(asType);
 			cgCastExp.setExecutorType(cgExecutorType);
 		}
 		cgCastExp.setTypeId(codeGenerator.getAnalyzer().getTypeId(pivot.getTypeId()));
@@ -321,7 +321,7 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	public @Nullable Object visitCGOperation(@NonNull CGOperation cgElement) {
 		super.visitCGOperation(cgElement);
 //		if ("isAttribute".equals(cgElement.getName())) {
-//			System.out.println("visitCGOperation for " + cgElement.getPivot().toString());
+//			System.out.println("visitCGOperation for " + cgElement.getAst().toString());
 //		}
 		if (cgElement.isRequired()) {
 			CGValuedElement body = cgElement.getBody();

@@ -303,9 +303,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return id2UnboxedJavaClassVisitor2;
 	}
 
-	public @Nullable Iteration2Java getIterationHelper(@NonNull Iteration pivotIteration) {
-		LibraryIteration libraryIteration = (LibraryIteration) pivotIteration.getImplementation();
-		if (pivotIteration.getOwnedIterator().size() != 1) {
+	public @Nullable Iteration2Java getIterationHelper(@NonNull Iteration asIteration) {
+		LibraryIteration libraryIteration = (LibraryIteration) asIteration.getImplementation();
+		if (asIteration.getOwnedIterator().size() != 1) {
 			return null;
 		}
 		if (libraryIteration instanceof AnyIteration) {

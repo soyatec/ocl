@@ -34,11 +34,11 @@ import org.eclipse.jdt.annotation.NonNull;
  * </ul>
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * The CGModel provides a Code Generation friendly form of the OCL Pivot model, with distinct classes
+ * The CGModel provides a Code Generation friendly form of the OCL Abstract Syntax pivot model, with distinct classes
  * such as LibraryPropertyCallExp and EcorePropertyCallExp for distinct purposes. Additional classes
  * such as BoxExp, CatchExp and CastExp support rewrite optimizations.
  * <p>
- * References to the Pivot model are expressed as attributes with datatype values in order to avoid
+ * References to the Abstract Syntax model are expressed as attributes with datatype values in order to avoid
  * confusion as to whether the new or old pivot mosdel is in use while code generating the pivot model.
  * <!-- end-model-doc -->
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory
@@ -114,6 +114,15 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	int CG_NAMED_ELEMENT = 48;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_NAMED_ELEMENT__AST = CG_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl <em>CG Class</em>}' class.
@@ -582,16 +591,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_NAMED_ELEMENT__NAME = CG_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NAMED_ELEMENT__PIVOT = CG_ELEMENT_FEATURE_COUNT + 1;
+	int CG_NAMED_ELEMENT__NAME = CG_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Named Element</em>' class.
@@ -603,6 +603,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_NAMED_ELEMENT_FEATURE_COUNT = CG_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPED_ELEMENT__AST = CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -610,15 +619,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPED_ELEMENT__NAME = CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_ELEMENT__PIVOT = CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -648,6 +648,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPED_ELEMENT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VALUED_ELEMENT__AST = CG_TYPED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -655,15 +664,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VALUED_ELEMENT__NAME = CG_TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__PIVOT = CG_TYPED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -711,6 +711,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTANT__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -718,15 +727,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTANT__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -774,6 +774,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_BOOLEAN__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -781,15 +790,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOOLEAN__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -846,6 +846,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOOLEAN_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CALL_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -853,15 +862,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CALL_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -936,6 +936,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CALL_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_BOX_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -943,15 +952,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOX_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1024,6 +1024,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOX_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ITERATION_CALL_EXP__AST = CG_CALL_EXP__AST;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOperationImpl <em>CG Executor Operation</em>}' class.
@@ -1185,15 +1194,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1303,6 +1303,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_BUILT_IN_ITERATION_CALL_EXP = 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_BUILT_IN_ITERATION_CALL_EXP__AST = CG_ITERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1310,15 +1319,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BUILT_IN_ITERATION_CALL_EXP__NAME = CG_ITERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__PIVOT = CG_ITERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1439,6 +1439,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_EXP = 4;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CAST_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1446,15 +1455,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CAST_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1538,6 +1538,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CATCH_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1545,15 +1554,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CATCH_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1628,6 +1628,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CATCH_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CLASS__AST = CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1635,15 +1644,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CLASS__NAME = CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CLASS__PIVOT = CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Containing Package</b></em>' container reference.
@@ -1691,6 +1691,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CLASS_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_COLLECTION_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1698,15 +1707,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1763,6 +1763,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_COLLECTION_PART__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1770,15 +1779,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_PART__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1853,6 +1853,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTANT_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1860,15 +1869,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTANT_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1925,6 +1925,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTRAINT__AST = CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1932,15 +1941,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRAINT__NAME = CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRAINT__PIVOT = CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1970,6 +1970,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRAINT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTRUCTOR_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1977,15 +1986,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2051,6 +2051,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTRUCTOR_PART__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2058,15 +2067,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_PART__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2141,6 +2141,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__AST = CG_CONSTRUCTOR_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2148,15 +2157,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__NAME = CG_CONSTRUCTOR_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__PIVOT = CG_CONSTRUCTOR_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2231,6 +2231,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_CONSTRUCTOR_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__AST = CG_CONSTRUCTOR_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2238,15 +2247,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__NAME = CG_CONSTRUCTOR_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__PIVOT = CG_CONSTRUCTOR_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2330,6 +2330,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_CONSTRUCTOR_EXP_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIteratorImpl <em>CG Iterator</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2347,15 +2356,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_OPERATION__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2458,6 +2458,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION = 16;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPERATION__AST = CG_OPERATION__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2465,15 +2474,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_OPERATION__NAME = CG_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION__PIVOT = CG_OPERATION__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2575,6 +2575,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_FEATURE_COUNT = CG_OPERATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2582,15 +2591,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_OPERATION_CALL_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2683,6 +2683,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPERATION_CALL_EXP__AST = CG_OPERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2690,15 +2699,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_OPERATION_CALL_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2800,6 +2800,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2807,15 +2816,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY_CALL_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -2899,6 +2899,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_PROPERTY_CALL_EXP__AST = CG_PROPERTY_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2906,15 +2915,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_PROPERTY_CALL_EXP__NAME = CG_PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3007,6 +3007,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ELEMENT_ID__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3014,15 +3023,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ELEMENT_ID__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3079,6 +3079,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ELEMENT_ID_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EQUALS_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3086,15 +3095,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EQUALS_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3178,6 +3178,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EQUALS_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_PROPERTY__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3185,15 +3194,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3250,6 +3250,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_COMPOSITION_PROPERTY__AST = CG_EXECUTOR_PROPERTY__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3257,15 +3266,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_COMPOSITION_PROPERTY__NAME = CG_EXECUTOR_PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3322,6 +3322,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_COMPOSITION_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_CONSTRUCTOR_PART__AST = CG_EXECUTOR_PROPERTY__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3329,15 +3338,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_CONSTRUCTOR_PART__NAME = CG_EXECUTOR_PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3394,6 +3394,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_CONSTRUCTOR_PART_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_NAVIGATION_PROPERTY__AST = CG_EXECUTOR_PROPERTY__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3401,15 +3410,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_NAVIGATION_PROPERTY__NAME = CG_EXECUTOR_PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3466,6 +3466,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_NAVIGATION_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY__AST = CG_EXECUTOR_PROPERTY__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3473,15 +3482,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPPOSITE_PROPERTY__NAME = CG_EXECUTOR_PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3538,6 +3538,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPPOSITE_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPERATION__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3545,15 +3554,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3610,6 +3610,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPERATION_CALL_EXP__AST = CG_OPERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3617,15 +3626,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION_CALL_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3727,6 +3727,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_PROPERTY_CALL_EXP__AST = CG_PROPERTY_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3734,15 +3743,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__NAME = CG_PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3835,6 +3835,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_TYPE__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3842,15 +3851,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_TYPE__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3907,6 +3907,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_TYPE_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VARIABLE__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3914,15 +3923,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3979,6 +3979,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FINAL_VARIABLE__AST = CG_VARIABLE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3986,15 +3995,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FINAL_VARIABLE__NAME = CG_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4051,6 +4051,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_FINAL_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_GUARD_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4058,15 +4067,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_GUARD_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4141,6 +4141,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_GUARD_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4148,15 +4157,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IF_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4231,6 +4231,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_IF_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_INTEGER__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4238,15 +4247,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INTEGER__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4303,6 +4303,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_INTEGER_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_INVALID__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4310,15 +4319,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INVALID__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4384,6 +4384,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_INVALID_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IS_INVALID_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4391,15 +4400,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IS_INVALID_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4474,6 +4474,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_INVALID_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IS_UNDEFINED_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4481,15 +4490,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IS_UNDEFINED_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4564,6 +4564,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_UNDEFINED_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PARAMETER__AST = CG_VARIABLE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4571,15 +4580,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PARAMETER__NAME = CG_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4645,6 +4645,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_PARAMETER_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ITERATOR__AST = CG_PARAMETER__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4652,15 +4661,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ITERATOR__NAME = CG_PARAMETER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__PIVOT = CG_PARAMETER__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4726,6 +4726,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATOR_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LET_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4733,15 +4742,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LET_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4807,6 +4807,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LET_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__AST = CG_ITERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4814,15 +4823,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATE_CALL_EXP__NAME = CG_ITERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__PIVOT = CG_ITERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4942,6 +4942,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATION_CALL_EXP__AST = CG_ITERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4949,15 +4958,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATION_CALL_EXP__NAME = CG_ITERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__PIVOT = CG_ITERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5078,6 +5078,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION = 43;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_OPERATION__AST = CG_OPERATION__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5085,15 +5094,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_OPERATION__NAME = CG_OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION__PIVOT = CG_OPERATION__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5186,6 +5186,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_FEATURE_COUNT = CG_OPERATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_OPERATION_CALL_EXP__AST = CG_OPERATION_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5193,15 +5202,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_OPERATION_CALL_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5303,6 +5303,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_PROPERTY_CALL_EXP__AST = CG_PROPERTY_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5310,15 +5319,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_PROPERTY_CALL_EXP__NAME = CG_PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5411,6 +5411,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LOCAL_VARIABLE__AST = CG_VARIABLE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5418,15 +5427,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LOCAL_VARIABLE__NAME = CG_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5483,6 +5483,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LOCAL_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MODEL__AST = CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5490,15 +5499,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MODEL__NAME = CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MODEL__PIVOT = CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Globals</b></em>' containment reference list.
@@ -5528,6 +5528,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_MODEL_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_NULL__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5535,15 +5544,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_NULL__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5591,6 +5591,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_NULL_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PACKAGE__AST = CG_NAMED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5598,15 +5607,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PACKAGE__NAME = CG_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PACKAGE__PIVOT = CG_NAMED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
@@ -5645,6 +5645,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_PACKAGE_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5652,15 +5661,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5726,6 +5726,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_REAL__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5733,15 +5742,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_REAL__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5798,6 +5798,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_REAL_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SETTABLE_VARIABLE__AST = CG_VARIABLE__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5805,15 +5814,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_SETTABLE_VARIABLE__NAME = CG_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5870,6 +5870,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_SETTABLE_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_STRING__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5877,15 +5886,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_STRING__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -5942,6 +5942,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_STRING_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TEXT__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5949,15 +5958,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TEXT__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6024,6 +6024,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER = 60;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TEXT_PARAMETER__AST = CG_PARAMETER__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6031,15 +6040,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TEXT_PARAMETER__NAME = CG_PARAMETER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__PIVOT = CG_PARAMETER__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6114,6 +6114,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_THROW_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6121,15 +6130,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_THROW_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6204,6 +6204,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_THROW_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6211,15 +6220,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6276,6 +6276,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_PART__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6283,15 +6292,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_PART__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6367,6 +6367,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP = 64;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_PART_CALL_EXP__AST = CG_PROPERTY_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6374,15 +6383,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_PART_CALL_EXP__NAME = CG_PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6457,13 +6457,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Tuple Part Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Ast Tuple Part Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Tuple Part Call Exp</em>' class.
@@ -6475,6 +6475,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPE_ID__AST = CG_ELEMENT_ID__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6482,15 +6491,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPE_ID__NAME = CG_ELEMENT_ID__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__PIVOT = CG_ELEMENT_ID__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6547,6 +6547,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_ID_FEATURE_COUNT = CG_ELEMENT_ID_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPE_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6554,15 +6563,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6629,6 +6629,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_UNBOX_EXP = 68;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_UNBOX_EXP__AST = CG_CALL_EXP__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6636,15 +6645,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_UNBOX_EXP__NAME = CG_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6729,6 +6729,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_UNLIMITED = 69;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_UNLIMITED__AST = CG_CONSTANT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6736,15 +6745,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_UNLIMITED__NAME = CG_CONSTANT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNLIMITED__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -6802,6 +6802,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE_EXP = 72;
 
 	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VARIABLE_EXP__AST = CG_VALUED_ELEMENT__AST;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6809,15 +6818,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -8096,6 +8096,17 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGNamedElement();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getAst <em>Ast</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ast</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getAst()
+	 * @see #getCGNamedElement()
+	 * @generated
+	 */
+	EAttribute getCGNamedElement_Ast();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8105,17 +8116,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCGNamedElement_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getPivot <em>Pivot</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pivot</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement#getPivot()
-	 * @see #getCGNamedElement()
-	 * @generated
-	 */
-	EAttribute getCGNamedElement_Pivot();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNull <em>CG Null</em>}'.
@@ -8509,15 +8509,15 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGTuplePartCallExp();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getPivotTuplePartId <em>Pivot Tuple Part Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getAstTuplePartId <em>Ast Tuple Part Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pivot Tuple Part Id</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getPivotTuplePartId()
+	 * @return the meta object for the attribute '<em>Ast Tuple Part Id</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getAstTuplePartId()
 	 * @see #getCGTuplePartCallExp()
 	 * @generated
 	 */
-	EAttribute getCGTuplePartCallExp_PivotTuplePartId();
+	EAttribute getCGTuplePartCallExp_AstTuplePartId();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId <em>CG Type Id</em>}'.
@@ -9754,20 +9754,20 @@ public interface CGModelPackage extends EPackage {
 		EClass CG_NAMED_ELEMENT = eINSTANCE.getCGNamedElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Ast</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CG_NAMED_ELEMENT__AST = eINSTANCE.getCGNamedElement_Ast();
+
+		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CG_NAMED_ELEMENT__NAME = eINSTANCE.getCGNamedElement_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Pivot</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_NAMED_ELEMENT__PIVOT = eINSTANCE.getCGNamedElement_Pivot();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNullImpl <em>CG Null</em>}' class.
@@ -10098,12 +10098,12 @@ public interface CGModelPackage extends EPackage {
 		EClass CG_TUPLE_PART_CALL_EXP = eINSTANCE.getCGTuplePartCallExp();
 
 		/**
-		 * The meta object literal for the '<em><b>Pivot Tuple Part Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Ast Tuple Part Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID = eINSTANCE.getCGTuplePartCallExp_PivotTuplePartId();
+		EAttribute CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID = eINSTANCE.getCGTuplePartCallExp_AstTuplePartId();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeIdImpl <em>CG Type Id</em>}' class.

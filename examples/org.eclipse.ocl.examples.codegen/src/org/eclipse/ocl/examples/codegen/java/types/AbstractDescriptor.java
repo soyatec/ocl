@@ -41,8 +41,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 public abstract class AbstractDescriptor implements TypeDescriptor
 {
 	/**
-	 * Convert a Pivot javaClass to its underlying Domain interface.
-	 * FIXME Avoid two-level Pivot interfaces
+	 * Convert an AS javaClass to its underlying Domain interface.
+	 * FIXME Avoid two-level AS interfaces
 	 */
 	protected static @NonNull Class<?> reClass(@NonNull Class<?> javaClass) {
 		if (javaClass == Constraint.class) {

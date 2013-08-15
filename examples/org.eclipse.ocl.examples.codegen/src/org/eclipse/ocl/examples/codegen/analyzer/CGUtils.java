@@ -81,7 +81,7 @@ public class CGUtils
 	 */
 	public static void wrap(@NonNull CGCallExp wrapExp, @NonNull CGValuedElement wrappedExp) {
 		wrapExp.setTypeId(wrappedExp.getTypeId());
-		wrapExp.setPivot(wrappedExp.getPivot());
+		wrapExp.setAst(wrappedExp.getAst());
 		replace(wrappedExp, wrapExp);
 		wrapExp.setSource(wrappedExp);
 	}

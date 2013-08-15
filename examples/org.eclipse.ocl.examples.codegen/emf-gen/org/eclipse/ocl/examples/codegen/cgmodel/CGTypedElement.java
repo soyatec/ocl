@@ -93,5 +93,5 @@ public interface CGTypedElement extends CGNamedElement {
 	 * @generated
 	 */
 	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGTypedElementModelSpec$1
-	@Nullable TypeId getPivotTypeId();
+	@Nullable TypeId getASTypeId();
 } // CGTypedElement

@@ -212,8 +212,8 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	public @Nullable TypeId getPivotTypeId() {
-		return pivot instanceof DomainTypedElement ? ((DomainTypedElement) pivot).getTypeId() : null;
+	public @Nullable TypeId getASTypeId() {
+		return ast instanceof DomainTypedElement ? ((DomainTypedElement) ast).getTypeId() : null;
 	}
 
 } //CGTypedElementImpl

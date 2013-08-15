@@ -25,7 +25,7 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getPivotTuplePartId <em>Pivot Tuple Part Id</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getAstTuplePartId <em>Ast Tuple Part Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,28 +34,28 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
  */
 public interface CGTuplePartCallExp extends CGPropertyCallExp {
 	/**
-	 * Returns the value of the '<em><b>Pivot Tuple Part Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Ast Tuple Part Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Pivot Tuple Part Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Ast Tuple Part Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pivot Tuple Part Id</em>' attribute.
-	 * @see #setPivotTuplePartId(TuplePartId)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePartCallExp_PivotTuplePartId()
+	 * @return the value of the '<em>Ast Tuple Part Id</em>' attribute.
+	 * @see #setAstTuplePartId(TuplePartId)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTuplePartCallExp_AstTuplePartId()
 	 * @generated
 	 */
-	TuplePartId getPivotTuplePartId();
+	TuplePartId getAstTuplePartId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getPivotTuplePartId <em>Pivot Tuple Part Id</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp#getAstTuplePartId <em>Ast Tuple Part Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pivot Tuple Part Id</em>' attribute.
-	 * @see #getPivotTuplePartId()
+	 * @param value the new value of the '<em>Ast Tuple Part Id</em>' attribute.
+	 * @see #getAstTuplePartId()
 	 * @generated
 	 */
-	void setPivotTuplePartId(TuplePartId value);
+	void setAstTuplePartId(TuplePartId value);
 
 } // CGTuplePartCallExp

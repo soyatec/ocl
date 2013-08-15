@@ -66,7 +66,7 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 	 * @generated
 	 */
 	@Override
-	public @Nullable TypeId getPivotTypeId() {
+	public @Nullable TypeId getASTypeId() {
 		return (TypeId)elementId;
 	}
 

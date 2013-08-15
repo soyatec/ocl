@@ -163,8 +163,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * @generated
 	 */
 	@Override
-	public @Nullable TypeId getPivotTypeId() {
-		return pivot instanceof DomainType ? ((DomainType) pivot).getTypeId() : null;
+	public @Nullable TypeId getASTypeId() {
+		return ast instanceof DomainType ? ((DomainType) ast).getTypeId() : null;
 	}
 
 	/**

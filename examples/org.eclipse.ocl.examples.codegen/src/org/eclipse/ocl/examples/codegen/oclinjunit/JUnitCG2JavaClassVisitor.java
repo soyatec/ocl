@@ -20,7 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -70,7 +70,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		if (contextVariable != null) {
 			contextVariable.setIsRequired(false);			// May be null for test
 		}
-		Pivot2CGVisitor pivot2CGVisitor = new Pivot2CGVisitor(analyzer);
+		AS2CGVisitor pivot2CGVisitor = new AS2CGVisitor(analyzer);
 		CGValuedElement cgBody = (CGValuedElement)DomainUtil.nonNullState(expInOcl.accept(pivot2CGVisitor));
 		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGLibraryOperation();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
@@ -82,9 +82,9 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 			CGParameter cgParameter = pivot2CGVisitor.getParameter(parameterVariable);
 			cgParameters.add(cgParameter);
 		}
-		cgOperation.setPivot(expInOcl);
-		TypeId pivotTypeId = expInOcl.getTypeId();
-		cgOperation.setTypeId(analyzer.getTypeId(pivotTypeId));
+		cgOperation.setAst(expInOcl);
+		TypeId asTypeId = expInOcl.getTypeId();
+		cgOperation.setTypeId(analyzer.getTypeId(asTypeId));
 		cgOperation.setName(globalContext.getEvaluateName());
 		cgOperation.setBody(cgBody);
 		return cgOperation;

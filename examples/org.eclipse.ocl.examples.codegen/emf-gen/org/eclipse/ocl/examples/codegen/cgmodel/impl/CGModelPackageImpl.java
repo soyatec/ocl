@@ -1708,7 +1708,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCGNamedElement_Name() {
+	public EAttribute getCGNamedElement_Ast() {
 		return (EAttribute)cgNamedElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1717,7 +1717,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCGNamedElement_Pivot() {
+	public EAttribute getCGNamedElement_Name() {
 		return (EAttribute)cgNamedElementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2059,7 +2059,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCGTuplePartCallExp_PivotTuplePartId() {
+	public EAttribute getCGTuplePartCallExp_AstTuplePartId() {
 		return (EAttribute)cgTuplePartCallExpEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2502,8 +2502,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgModelEClass, CG_MODEL__PACKAGES);
 
 		cgNamedElementEClass = createEClass(CG_NAMED_ELEMENT);
+		createEAttribute(cgNamedElementEClass, CG_NAMED_ELEMENT__AST);
 		createEAttribute(cgNamedElementEClass, CG_NAMED_ELEMENT__NAME);
-		createEAttribute(cgNamedElementEClass, CG_NAMED_ELEMENT__PIVOT);
 
 		cgNullEClass = createEClass(CG_NULL);
 
@@ -2557,7 +2557,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgTuplePartEClass, CG_TUPLE_PART__TUPLE_EXP);
 
 		cgTuplePartCallExpEClass = createEClass(CG_TUPLE_PART_CALL_EXP);
-		createEAttribute(cgTuplePartCallExpEClass, CG_TUPLE_PART_CALL_EXP__PIVOT_TUPLE_PART_ID);
+		createEAttribute(cgTuplePartCallExpEClass, CG_TUPLE_PART_CALL_EXP__AST_TUPLE_PART_ID);
 
 		cgTypeIdEClass = createEClass(CG_TYPE_ID);
 
@@ -2853,8 +2853,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGModel_Packages(), this.getCGPackage(), null, "packages", null, 0, -1, CGModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(cgNamedElementEClass, CGNamedElement.class, "CGNamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCGNamedElement_Ast(), this.getElement(), "ast", null, 1, 1, CGNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGNamedElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, CGNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGNamedElement_Pivot(), this.getElement(), "pivot", null, 1, 1, CGNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgNullEClass, CGNull.class, "CGNull", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2908,7 +2908,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGTuplePart_TupleExp(), this.getCGTupleExp(), this.getCGTupleExp_Parts(), "tupleExp", null, 1, 1, CGTuplePart.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgTuplePartCallExpEClass, CGTuplePartCallExp.class, "CGTuplePartCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCGTuplePartCallExp_PivotTuplePartId(), this.getTuplePartId(), "pivotTuplePartId", null, 1, 1, CGTuplePartCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCGTuplePartCallExp_AstTuplePartId(), this.getTuplePartId(), "astTuplePartId", null, 1, 1, CGTuplePartCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgTypeIdEClass, CGTypeId.class, "CGTypeId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -28,14 +28,34 @@ import org.eclipse.ocl.examples.pivot.Element;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl#getAst <em>Ast</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl#getPivot <em>Pivot</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class CGNamedElementImpl extends CGElementImpl implements CGNamedElement {
+	/**
+	 * The default value of the '{@link #getAst() <em>Ast</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAst()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Element AST_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAst() <em>Ast</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAst()
+	 * @generated
+	 * @ordered
+	 */
+	protected Element ast = AST_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,26 +75,6 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getPivot() <em>Pivot</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPivot()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Element PIVOT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPivot() <em>Pivot</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPivot()
-	 * @generated
-	 * @ordered
-	 */
-	protected Element pivot = PIVOT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,8 +121,8 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Element getPivot() {
-		return pivot;
+	public Element getAst() {
+		return ast;
 	}
 
 	/**
@@ -130,11 +130,11 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPivot(Element newPivot) {
-		Element oldPivot = pivot;
-		pivot = newPivot;
+	public void setAst(Element newAst) {
+		Element oldAst = ast;
+		ast = newAst;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_NAMED_ELEMENT__PIVOT, oldPivot, pivot));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_NAMED_ELEMENT__AST, oldAst, ast));
 	}
 
 	/**
@@ -155,10 +155,10 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CGModelPackage.CG_NAMED_ELEMENT__AST:
+				return getAst();
 			case CGModelPackage.CG_NAMED_ELEMENT__NAME:
 				return getName();
-			case CGModelPackage.CG_NAMED_ELEMENT__PIVOT:
-				return getPivot();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,11 +171,11 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CGModelPackage.CG_NAMED_ELEMENT__AST:
+				setAst((Element)newValue);
+				return;
 			case CGModelPackage.CG_NAMED_ELEMENT__NAME:
 				setName((String)newValue);
-				return;
-			case CGModelPackage.CG_NAMED_ELEMENT__PIVOT:
-				setPivot((Element)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -189,11 +189,11 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CGModelPackage.CG_NAMED_ELEMENT__AST:
+				setAst(AST_EDEFAULT);
+				return;
 			case CGModelPackage.CG_NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case CGModelPackage.CG_NAMED_ELEMENT__PIVOT:
-				setPivot(PIVOT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -207,10 +207,10 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CGModelPackage.CG_NAMED_ELEMENT__AST:
+				return AST_EDEFAULT == null ? ast != null : !AST_EDEFAULT.equals(ast);
 			case CGModelPackage.CG_NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case CGModelPackage.CG_NAMED_ELEMENT__PIVOT:
-				return PIVOT_EDEFAULT == null ? pivot != null : !PIVOT_EDEFAULT.equals(pivot);
 		}
 		return super.eIsSet(featureID);
 	}

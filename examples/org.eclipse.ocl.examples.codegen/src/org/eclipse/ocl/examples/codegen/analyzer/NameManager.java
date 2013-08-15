@@ -694,15 +694,15 @@ public class NameManager
 		}
 		else if (anObject instanceof CGCallExp) {
 			if (anObject instanceof CGPropertyCallExp) {
-				Property referredProperty = ((PropertyCallExp)((CGPropertyCallExp)anObject).getPivot()).getReferredProperty();
+				Property referredProperty = ((PropertyCallExp)((CGPropertyCallExp)anObject).getAst()).getReferredProperty();
 				return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
 			}
 			else if (anObject instanceof CGIterationCallExp) {
-				Iteration referredIteration = ((LoopExp)((CGIterationCallExp)anObject).getPivot()).getReferredIteration();
+				Iteration referredIteration = ((LoopExp)((CGIterationCallExp)anObject).getAst()).getReferredIteration();
 				return referredIteration != null ? getIterationNameHint(referredIteration) : null;
 			}
 			else if (anObject instanceof CGOperationCallExp) {
-				Operation referredOperation = ((OperationCallExp)((CGOperationCallExp)anObject).getPivot()).getReferredOperation();
+				Operation referredOperation = ((OperationCallExp)((CGOperationCallExp)anObject).getAst()).getReferredOperation();
 				return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
 			}
 			else if (anObject instanceof CGBoxExp) {
@@ -747,7 +747,7 @@ public class NameManager
 			return getTypeNameHint((DomainType)anObject);
 		}
 		else if (anObject instanceof CGTypeId) {
-			Element type = ((CGTypeId)anObject).getPivot();
+			Element type = ((CGTypeId)anObject).getAst();
 			return (type instanceof DomainType) ? getTypeNameHint((DomainType) type) : null;
 		}
 		else if (anObject instanceof TypeExp) {

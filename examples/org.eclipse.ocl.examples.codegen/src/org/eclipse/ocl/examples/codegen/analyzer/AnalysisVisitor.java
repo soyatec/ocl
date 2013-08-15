@@ -121,8 +121,8 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 				CGUtils.replace(cgIfExp, elseExpression);
 			}
 			else {
-				ElementId pivotTypeId = condition.getTypeId().getElementId();
-				context.setConstant(cgIfExp, context.getInvalid(EvaluatorMessages.TypedValueRequired, "Boolean", pivotTypeId));
+				ElementId asTypeId = condition.getTypeId().getElementId();
+				context.setConstant(cgIfExp, context.getInvalid(EvaluatorMessages.TypedValueRequired, "Boolean", asTypeId));
 			}
 		}
 		return null;
@@ -248,7 +248,7 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 
 	@Override
 	public @Nullable Object visitCGTypeExp(@NonNull CGTypeExp cgTypeExp) {
-		TypeExp pTypeExp = (TypeExp) cgTypeExp.getPivot();
+		TypeExp pTypeExp = (TypeExp) cgTypeExp.getAst();
 		Type referredType = pTypeExp.getReferredType();
 		if (referredType != null) {
 			LocalContext localContext = context.getCodeGenerator().getGlobalContext().getLocalContext(cgTypeExp);

@@ -181,7 +181,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * @generated
 	 */
 	@Override
-	public @Nullable TypeId getPivotTypeId() {
+	public @Nullable TypeId getASTypeId() {
 		return (TypeId) getTypeId().getElementId();		// FIXME Why irregular?
 	}
 

@@ -45,7 +45,7 @@ public class OCLinEcoreGlobalContext extends JavaGlobalContext
 		CGTextParameter cgTextParameter = CGModelFactory.eINSTANCE.createCGTextParameter();
 		cgTextParameter.setName(contextVariable.getName());
 		cgTextParameter.setValueName(getSelfName());
-		cgTextParameter.setPivot(contextVariable);
+		cgTextParameter.setAst(contextVariable);
 		cgTextParameter.setTextValue("this");
 		cgTextParameter.setNonInvalid();
 		cgTextParameter.setNonNull();

@@ -20,5 +20,5 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 
 public interface GlobalContext
 {
-	@Nullable LocalContext getLocalContext(@NonNull CGElement pivotElement);
+	@Nullable LocalContext getLocalContext(@NonNull CGElement asElement);
 }
