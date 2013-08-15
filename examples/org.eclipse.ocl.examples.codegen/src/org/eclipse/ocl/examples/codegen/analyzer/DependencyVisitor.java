@@ -216,7 +216,13 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 				}
 				String n1 = String.valueOf(o1.getName());
 				String n2 = String.valueOf(o2.getName());
-				return n1.compareTo(n2);
+				int diff = n1.compareTo(n2);
+				if (diff != 0) {
+					return diff;
+				}
+				String s1 = String.valueOf(o1);
+				String s2 = String.valueOf(o2);
+				return s1.compareTo(s2);
 			}
 		});
 		return sortedList;
