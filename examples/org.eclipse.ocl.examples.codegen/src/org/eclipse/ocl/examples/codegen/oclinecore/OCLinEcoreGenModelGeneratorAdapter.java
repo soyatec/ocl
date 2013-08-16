@@ -64,7 +64,6 @@ import org.eclipse.ocl.common.internal.options.CodeGenerationMode;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -79,7 +78,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
@@ -241,13 +239,7 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		Map<String, String> allResults = new HashMap<String, String>();
 		List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
 		for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genPackages) {
-			MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(DomainUtil.nonNullState(genPackage.eResource()));
-			OCLinEcoreCodeGenerator converter = new OCLinEcoreCodeGenerator(metaModelManager, genPackage);
-			Map<String, String> results = converter.generateBodies();
-			for (Map.Entry<String, String> entry : results.entrySet()) {
-				allResults.put(entry.getKey(), entry.getValue());
-			}
-	        constantsTexts.put(genPackage, converter.generateConstants());
+			OCLinEcoreCodeGenerator.generatePackage(genPackage, allResults, constantsTexts);
 		}
         List<String> resultsKeys = new ArrayList<String>(allResults.keySet());
         Collections.sort(resultsKeys);

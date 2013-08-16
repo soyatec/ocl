@@ -23,16 +23,10 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
@@ -40,8 +34,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
-import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -54,11 +46,11 @@ import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * A CG2JavaClassVisitor supports generation of an OCL expression as the LIbraryOperation INSTSANCE of a Java Class.
+ * An OCLinEcoreCG2JavaVisitor supports generation of the OCL embedded in an Ecore model
+ * into the Java bodies of the code producxed by GenModel.
  */
 public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 {
@@ -67,31 +59,17 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	protected ExpressionInOCL expInOcl;
 	protected Feature feature;
 	
-	public OCLinEcoreCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator, @NonNull GenPackage genPackage) {
+	public OCLinEcoreCG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator,
+			@NonNull GenPackage genPackage, @NonNull CGPackage cgPackage) {
 		super(codeGenerator);
 		this.genPackage = genPackage;
-		MetaModelManager metaModelManager = codeGenerator.getMetaModelManager();
-		EPackage ecorePackage = genPackage.getEcorePackage();
-		org.eclipse.ocl.examples.pivot.Package asPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ecorePackage);
-		assert asPackage != null;
-		AS2CGVisitor pivot2CGVisitor = new OCLinEcoreAS2CGVisitor(analyzer, getGlobalContext());
-		this.cgPackage = (CGPackage) DomainUtil.nonNullState(asPackage.accept(pivot2CGVisitor));
-		Resource resource = new XMIResourceImpl(URI.createURI("cg.xmi"));
-		resource.getContents().add(cgPackage);
-		analyzer.analyze(cgPackage);
+		this.cgPackage = cgPackage;
 	}
 
 	@Override
 	protected void appendGlobalPrefix() {
 		js.append(getGlobalContext().getTablesClassName());
 		js.append(".");
-	}
-
-	public @NonNull CGPackage generate() {
-		js.resetStream();
-		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
-		cgPackage.accept(cg2PreVisitor);
-		return cgPackage;
 	}
 
 	public @NonNull Map<String, String> generateBodies() {
@@ -136,22 +114,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		return bodies;
 	}
 
-	public @NonNull String generateBody(@NonNull CGValuedElement cgBody, @NonNull String returnClassName) {
+	protected @NonNull String generateBody(@NonNull CGValuedElement cgBody, @NonNull String returnClassName) {
 		js.resetStream();
-//		if ("isAttribute".equals(((CGNamedElement)cgBody.getParent()).getName())) {
-//			System.out.println("generateBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
-//		}
 		js.appendCommentWithOCL(null, cgBody.getAst());
-//		JavaDependencyVisitor dependencyVisitor = new JavaDependencyVisitor(localContext, null);
-//		dependencyVisitor.visit(cgBody);
-//		dependencyVisitor.visitAll(localContext.getLocalVariables());
-//		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-//		for (CGValuedElement cgElement : sortedDependencies) {
-//			if (!cgElement.isInlined() && cgElement.isConstant() && !cgElement.isGlobal()) {
-//				cgElement.accept(this);
-//			}
-//		}
-		// FIXME merge locals into AST as LetExps.
 		js.appendLocalStatements(cgBody);
 		if (cgBody.isInvalid()) {
 			js.append("throw ");
@@ -165,25 +130,17 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		return toString();
 	}
 
-	public @NonNull String generateConstants(@NonNull GlobalPlace globalPlace) {
+	public @NonNull String generateConstants(List<CGValuedElement> sortedGlobals) {
 		js.resetStream();
 		js.pushIndentation(null);
-//		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
-//		GlobalPlace globalPlace = cseEliminator.optimize(cgPackage);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
-		dependencyVisitor.visitAll(globalContext.getGlobals());
-		List<CGValuedElement> sortedGlobals = globalPlace.getSortedGlobals(dependencyVisitor);
 		if (sortedGlobals != null) {
 			generateGlobals(sortedGlobals);
 		}
 		return toString();
 	}
 
-	public @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint asConstraint, @NonNull Type asType) {
+	protected @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint asConstraint, @NonNull Type asType) {
 		js.resetStream();
-//		if ("CompatibleInitialiser".equals(((CGNamedElement)cgBody.getParent()).getName())) {
-//			System.out.println("generateValidatorBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
-//		}
 		String constraintName = asConstraint.getName();
 		GenClassifier genClassifier = genModelHelper.getGenClassifier(asType);
 		String genClassifierName = genClassifier != null ? genClassifier.getName() : null;
@@ -194,16 +151,6 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		String validatorClass = genModelHelper.getQualifiedValidatorClassName(genPackage);
 
 		js.appendCommentWithOCL(null, asConstraint);
-//		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(localContext, null);
-//		dependencyVisitor.visit(cgBody);
-//		dependencyVisitor.visitAll(localContext.getLocalVariables());
-//		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-//		for (CGValuedElement cgElement : sortedDependencies) {
-//			if (!cgElement.isInlined() && cgElement.isConstant() && !cgElement.isGlobal()) {
-//				cgElement.accept(this);
-//			}
-//		}
-		// FIXME merge locals into AST as LetExps.
 		js.appendLocalStatements(cgBody);		// FieldingAnalyzer override ensures this is caught
 		js.append("if (");
 		js.appendValueName(cgBody);

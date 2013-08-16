@@ -30,6 +30,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import javax.tools.JavaCompiler.CompilationTask;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 
 public class OCL2JavaFileObject extends SimpleJavaFileObject
@@ -68,7 +69,7 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 		return testClass;
 	}
 	
-	public static LibraryOperation loadLibraryOperationClass(String qualifiedName, String javaCodeSource) throws Exception {
+	public static LibraryOperation loadLibraryOperationClass(@NonNull String qualifiedName, @NonNull String javaCodeSource) throws Exception {
 		Class<?> testClass = loadClass(qualifiedName, javaCodeSource);
 		Field testField = testClass.getField("INSTANCE");
 //		System.out.printf("%6.3f get\n", 0.001 * (System.currentTimeMillis()-base));

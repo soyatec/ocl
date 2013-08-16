@@ -19,86 +19,26 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
-import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
  * A CG2JavaClassVisitor supports generation of an OCL expression as the LibraryOperation INSTANCE of a Java Class.
  */
 public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 {
-	public static @NonNull JUnitCG2JavaClassVisitor generate(@NonNull JavaCodeGenerator codeGenerator,
-			@NonNull ExpressionInOCL expInOcl, String packageName, String className) {
-		JUnitCG2JavaClassVisitor cg2JavaClassVisitor = new JUnitCG2JavaClassVisitor(codeGenerator, expInOcl, packageName, className);
-		cg2JavaClassVisitor.generate();
-		return cg2JavaClassVisitor;
-	}
-
 	protected final @NonNull ExpressionInOCL expInOcl;
-	protected final @NonNull CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
-	protected final @NonNull CGClass cgClass = CGModelFactory.eINSTANCE.createCGClass();
-	private @Nullable List<CGValuedElement> sortedGlobals = null;
+	protected final @Nullable List<CGValuedElement> sortedGlobals;
 	
 	public JUnitCG2JavaClassVisitor(@NonNull JavaCodeGenerator codeGenerator,
-			@NonNull ExpressionInOCL expInOcl, String packageName, String className) {
+			@NonNull ExpressionInOCL expInOcl, @Nullable List<CGValuedElement> sortedGlobals) {
 		super(codeGenerator);
 		this.expInOcl = expInOcl;
-		cgPackage.setName(packageName);
-		cgClass.setName(className);
-		cgPackage.getClasses().add(cgClass);
-		CGOperation cgOperation = createCGOperation(expInOcl);
-		cgClass.getOperations().add(cgOperation);
-		analyzer.analyze(cgPackage);
-	}
-
-	public @NonNull CGOperation createCGOperation(@NonNull ExpressionInOCL expInOcl) {
-		Variable contextVariable = expInOcl.getContextVariable();
-		if (contextVariable != null) {
-			contextVariable.setIsRequired(false);			// May be null for test
-		}
-		AS2CGVisitor pivot2CGVisitor = new AS2CGVisitor(analyzer);
-		CGValuedElement cgBody = (CGValuedElement)DomainUtil.nonNullState(expInOcl.accept(pivot2CGVisitor));
-		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGLibraryOperation();
-		List<CGParameter> cgParameters = cgOperation.getParameters();
-		if (contextVariable != null) {
-			CGParameter cgContext = pivot2CGVisitor.getParameter(contextVariable);
-			cgParameters.add(cgContext);
-		}
-		for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expInOcl.getParameterVariable()) {
-			CGParameter cgParameter = pivot2CGVisitor.getParameter(parameterVariable);
-			cgParameters.add(cgParameter);
-		}
-		cgOperation.setAst(expInOcl);
-		TypeId asTypeId = expInOcl.getTypeId();
-		cgOperation.setTypeId(analyzer.getTypeId(asTypeId));
-		cgOperation.setName(globalContext.getEvaluateName());
-		cgOperation.setBody(cgBody);
-		return cgOperation;
-	}
-
-	protected void generate() {
-		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
-		cgPackage.accept(cg2PreVisitor);
-		CommonSubexpressionEliminator cseEliminator = context.createCommonSubexpressionEliminator();
-		cseEliminator.optimize(cgPackage);
-		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
-		dependencyVisitor.visitAll(globalContext.getGlobals());
-		sortedGlobals = context.getGlobalPlace().getSortedGlobals(dependencyVisitor);
-		safeVisit(cgPackage);
+		this.sortedGlobals = sortedGlobals;
 	}
 
 	@Override
@@ -108,7 +48,6 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 
 	@Override
 	public @Nullable Object visitCGClass(@NonNull CGClass cgClass) {
-		
 		Class<?> baseClass = genModelHelper.getAbstractOperationClass(expInOcl.getParameterVariable());
 		String title = cgClass.getName() + " provides the Java implementation for\n";
 		js.appendCommentWithOCL(title, expInOcl);

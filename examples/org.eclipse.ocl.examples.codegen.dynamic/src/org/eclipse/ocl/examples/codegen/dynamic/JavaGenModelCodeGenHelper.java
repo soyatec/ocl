@@ -140,29 +140,10 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		throw new IllegalArgumentException("Unknown package '" + nsURI + "'");
 	}
 
-	public LibraryOperation loadClass(ExpressionInOCL query, File targetFolder,
-			String packageName, String className, boolean saveSource) throws Exception {
+	public LibraryOperation loadClass(@NonNull ExpressionInOCL query, @NonNull File targetFolder,
+			@NonNull String packageName, @NonNull String className, boolean saveSource) throws Exception {
 		String qualifiedName = packageName + "." + className;
-		
-		
-		JUnitCodeGenerator expressionInOCL2Class = new JUnitCodeGenerator(metaModelManager, query, true);
-		String javaCodeSource = expressionInOCL2Class.generateClassFile(/*this,*/ packageName, className);
-//		CodeGenSnippet rootSnippet = expressionInOCL2Class.generateClassFile(this, packageName, className);
-//		LinkedHashMap<CodeGenText, String> flatContents = rootSnippet.flatten();
-//		StringBuilder s = new StringBuilder();
-//		for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
-//			entry.getKey().toString(s, entry.getValue());
-//		}
-//		String javaCodeSource = s.toString();
-//		System.out.println(javaCodeSource);
-/*		List<Object> arguments = new ArrayList<Object>();
-		arguments.add(this);
-		arguments.add(packageName);
-		arguments.add(className);
-		ast2class.reinitialize(query, targetFolder, arguments);
-		Map<String, String> results = ast2class.generate(null);
-		String javaCodeSource = results.values().iterator().next();
-		String javaFileName = results.keySet().iterator().next(); */
+		String javaCodeSource = JUnitCodeGenerator.generateClassFile(metaModelManager, query, packageName, className);
 		if (saveSource) {
 			String fileName = "src-gen/" + qualifiedName.replace('.', '/') + ".java";
 			Writer writer = new FileWriter(fileName);

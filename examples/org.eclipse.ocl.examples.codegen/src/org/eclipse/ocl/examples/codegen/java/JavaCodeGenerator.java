@@ -15,10 +15,15 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
@@ -26,6 +31,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
@@ -462,5 +468,32 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			unboxedDescriptors.put(elementId, unboxedDescriptor);
 			return unboxedDescriptor;
 		}
+	}
+
+	/**
+	 * Perform the overall optimization of the CG tree.
+	 */
+	protected void optimize(@NonNull CGPackage cgPackage) {
+		Resource resource = new XMIResourceImpl(URI.createURI("cg.xmi"));
+		resource.getContents().add(cgPackage);
+		getAnalyzer().analyze(cgPackage);
+		CG2JavaPreVisitor cg2PreVisitor = createCG2JavaPreVisitor();
+		cgPackage.accept(cg2PreVisitor);
+		CommonSubexpressionEliminator cseEliminator = createCommonSubexpressionEliminator();
+		cseEliminator.optimize(cgPackage);
+	}
+
+	/**
+	 * After overall optimization, return a sorted list of global declarations.
+	 */
+	public @Nullable List<CGValuedElement> prepareGlobals() {
+		DependencyVisitor dependencyVisitor = createDependencyVisitor();
+		Collection<CGValuedElement> globals = getGlobalContext().getGlobals();
+		for (CGValuedElement cgGlobal : globals) {
+			assert cgGlobal.isGlobal();
+		}
+		dependencyVisitor.visitAll(globals);
+		List<CGValuedElement> sortedGlobals = getGlobalPlace().getSortedGlobals(dependencyVisitor);
+		return sortedGlobals;
 	}
 }
