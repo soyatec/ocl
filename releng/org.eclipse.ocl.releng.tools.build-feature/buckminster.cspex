@@ -14,6 +14,11 @@
 		<!-- We explicitly need to specify this to add the some ocl Core featre sources into the target platform -->		
 		<cs:dependency name="org.eclipse.ocl.all.source" componentType="eclipse.feature" />		
 		<cs:dependency name="org.eclipse.ocl.core.sdk.source" componentType="eclipse.feature" />
+
+		<!-- We explicitly need to specify this to add the lpg sources into the target platform -->
+		<cs:dependency name="lpg.runtime.java.source" componentType="osgi.bundle" />
+		<!-- We explicitly need to specify this to add the asm sources into the target platform -->
+		<cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" />
 		
 	</cs:dependencies>
 	<cs:actions>
@@ -66,7 +71,7 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.ocl.all.sdk.feature.group" />
-				<cs:property key="target.platform.ius" value="lpg.runtime.java,lpg.runtime.java.source" />
+				<cs:property key="target.platform.ius" value="lpg.runtime.java,lpg.runtime.java.source,org.objectweb.asm,org.objectweb.asm.source" />
 				<cs:property key="package.name" value="mdt-ocl-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
