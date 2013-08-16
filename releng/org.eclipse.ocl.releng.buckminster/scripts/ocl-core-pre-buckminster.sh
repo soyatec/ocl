@@ -40,7 +40,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "hudson.build.id=${BUILD_ID}"
 
 	echo
-	echo "# Define if Huson Build should create javadoc (added by Hudson job definition)"
+	echo "# Define if Hudson Build should create javadoc (added by Hudson job definition)"
 	echo "manage.javadoc=false"
 
 	echo
@@ -64,7 +64,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "packages.base=MDT-OCL.downloads"
 	echo "tests.base=MDT-OCL.test.results"
 	echo "version=4.2.0"
-	echo "component.name=core"
+	echo "component.name=pre"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/modeling/mdt/ocl"
 
 
