@@ -276,7 +276,7 @@ public class EditorTests extends XtextTestCase
 	}	
 	
 	public void testEditor_OpenOCLStdLibEditor4OCL_OCLstdlib() throws Exception {
-		URI uri = URI.createPlatformPluginURI("org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib", true);
+		URI uri = URI.createPlatformPluginURI("org.eclipse.ocl.examples.library/model/OCL-2.5.oclstdlib", true);
 		String documentText = doTestEditor(OCLstdlibUiModule.EDITOR_ID, uri);
 		assertTrue(documentText.contains("type UniqueCollection(T) : CollectionType conformsTo Collection(T) {"));
 	}	

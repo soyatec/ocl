@@ -37,7 +37,7 @@ Workflow {
     }
     component = GenerateOCLstdlib { resourceSet = resourceSet
     	projectName = "${sourceName}"
-    	modelFile = "model/OCL-2.4.oclstdlib"
+    	modelFile = "model/OCL-2.5.oclstdlib"
     	uri = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib"
     	javaFolder = "/${targetName}/emf-gen"
     	javaPackageName = "${targetName}.model"

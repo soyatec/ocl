@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.Root
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource
+import org.eclipse.ocl.examples.common.utils.XMIUtils
 
 public class GenerateOCLstdlib extends GenerateOCLCommon
 {
@@ -377,6 +378,12 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			var MergeWriter fw = new MergeWriter(fileName);
 			fw.append(metaModel);
 			fw.close();
+			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("oclstdlib", "pivot");
+			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
+			log.info("Saving '" + saveURI + "'");
+			pivotResource.setURI(saveURI);
+	    	XMIUtils.assignIds(pivotResource, new XMIUtils.HierachicalENamedElementIdCreator(), null);
+			pivotResource.save(null);
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {

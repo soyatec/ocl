@@ -96,7 +96,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			URL url = new URL(locationURI.toString());
 			java.net.URI uri = url.toURI();
 			File targetFolder = new File(uri.getRawPath() + folderPath);
-			log.info("Generating to ' " + targetFolder + "'");
+			log.info("Generating to '" + targetFolder + "'");
    			List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
    			for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genPackages) {
 				OCLinEcoreTables generateTables = new OCLinEcoreTables(genPackage);

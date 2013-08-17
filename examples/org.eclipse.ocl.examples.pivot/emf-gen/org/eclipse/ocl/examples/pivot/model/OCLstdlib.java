@@ -13,7 +13,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: /org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib
+ * from: /org.eclipse.ocl.examples.library/model/OCL-2.5.oclstdlib
  * by: org.eclipse.ocl.examples.build.xtend.generateOCLstdlib.xtend
  * and: org.eclipse.ocl.examples.build.GenerateOCLstdlibModel.mwe2
  *
@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * This is the http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib Standard Library
- * auto-generated from /org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib.
+ * auto-generated from /org.eclipse.ocl.examples.library/model/OCL-2.5.oclstdlib.
  * It facilitates efficient library loading without the overheads of model reading.
  * <p>
  * This Standard Library may be registered as the definition of a Standard Library for
@@ -68,7 +68,7 @@ public class OCLstdlib extends XMIResourceImpl
 
 	/**
 	 * Return the default OCL standard Library. 
-	 *  This static definition auto-generated from /org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib
+	 *  This static definition auto-generated from /org.eclipse.ocl.examples.library/model/OCL-2.5.oclstdlib
 	 *  is used as the default when no overriding copy is registered. 
 	 */
 	public static @NonNull OCLstdlib getDefault() {
@@ -152,7 +152,7 @@ public class OCLstdlib extends XMIResourceImpl
 
 		protected @NonNull Root create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 		{
-			Root theRoot = root = createRoot("OCL-2.4.oclstdlib", uri);
+			Root theRoot = root = createRoot("OCL-2.5.oclstdlib", uri);
 			library = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
