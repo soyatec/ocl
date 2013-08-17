@@ -51,14 +51,6 @@ public class EssentialOCLUtils	// FIXME Find some extensible instantiation echan
 		}
 		else if (csElement instanceof NavigationOperatorCS) {
 			return getPivotedCS(((NavigationOperatorCS)csElement).getArgument());
-//			if (argument instanceof NameExpCS) {
-//				return (MonikeredElementCS) csElement;	// PropertyCall
-//				OperatorCS parent = ((NavigationOperatorCS)csElement).getParent();
-//				return  parent != null ? parent : getPivotedCS(csElement.eContainer().eContainer());	// PropertyCall
-//			}
-//			else {
-//				return getPivotedCS(argument);			// OperationCall
-//			}
 		}
 		else if (csElement instanceof NestedExpCS) {
 			return getPivotedCS(((NestedExpCS)csElement).getSource());
@@ -105,17 +97,9 @@ public class EssentialOCLUtils	// FIXME Find some extensible instantiation echan
 		}
 		else if (csParent instanceof NavigatingArgCS) {
 			return (NavigatingArgCS) csParent;
-//			return getPivotingChildCS((NavigatingArgCS) csParent);
 		}
 		else if (csParent instanceof InvocationExpCS) {
 			return getPivotingChildCS((InvocationExpCS) csParent);
-//			InvocationExpCS csNavigatingExp = (InvocationExpCS)csParent;
-//			if (csElement == csNavigatingExp.getNamedExp()) {
-//				return getChildCS(csNavigatingExp.getParent());
-//			}
-//			else {
-//				return csElement;
-//			}
 		}
 		else if (csParent instanceof NestedExpCS) {
 			return getPivotingChildCS((NestedExpCS) csParent);
@@ -141,29 +125,7 @@ public class EssentialOCLUtils	// FIXME Find some extensible instantiation echan
 			}
 		}
 		EObject csParent = csElement.eContainer();
-/*		if (csParent instanceof InfixExpCS) {
-			return getPivotingParentCS((InfixExpCS)csParent);
-		}
-		else if (csParent instanceof NavigatingArgCS) {
-			return getPivotingParentCS((NavigatingArgCS)csParent);
-		}
-		else if (csParent instanceof InvocationExpCS) {
-			InvocationExpCS csNavigatingExp = (InvocationExpCS)csParent;
-			if (csElement == csNavigatingExp.getNamedExp()) {
-				return getPivotingParentCS(csNavigatingExp.getParent());
-			}
-			else {
-				return (MonikeredElementCS) csParent;
-//				return getParent(csNavigatingExp);
-			}
-		}
-		else if (csParent instanceof NestedExpCS) {
-			return getPivotingParentCS((NestedExpCS)csParent);
-		}
-		else if (csParent instanceof PrefixExpCS) {
-			return getPivotingParentCS((PrefixExpCS)csParent);
-		}
-		else*/ if (csParent instanceof ModelElementCS) {
+		if (csParent instanceof ModelElementCS) {
 			return (ModelElementCS) csParent;
 		}
 		else {

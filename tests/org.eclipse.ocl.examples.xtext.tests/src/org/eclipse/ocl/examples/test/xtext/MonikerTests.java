@@ -25,12 +25,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Moniker;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
@@ -68,7 +65,7 @@ public class MonikerTests extends XtextTestCase
 	/**
 	 * Check that ever monikered CS element references the same pivot element as
 	 * the CS element that defines the moniker.
-	 */
+	 *
 	public void checkCShasPivots(Resource csResource, Map<String, ModelElementCS> csMonikerMap) {
 		for (TreeIterator<EObject> tit = csResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
@@ -85,7 +82,7 @@ public class MonikerTests extends XtextTestCase
 				}
 			}
 		}
-	}
+	} */
 
 	/**
 	 * Check that the pivot moniker for the pivot of every monikered CS element

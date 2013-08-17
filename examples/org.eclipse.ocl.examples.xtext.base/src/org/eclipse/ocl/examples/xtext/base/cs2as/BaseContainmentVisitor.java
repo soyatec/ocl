@@ -170,7 +170,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		T pivotElement;
 		if (pivotObject == null) {
 			pivotElement = metaModelManager.createPackage(pivotClass, pivotEClass, name, csElement.getNsURI());
-//			logger.trace("Created " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {
@@ -179,7 +178,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 			@SuppressWarnings("unchecked")
 			T pivotElement2 = (T) pivotObject;
 			pivotElement = pivotElement2;
-//			logger.trace("Reusing " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
 			context.refreshName(pivotElement, name);
 		}
 		context.converter.installPivotDefinition(csElement, pivotElement);
@@ -231,7 +229,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		T pivotElement;
 		if (pivotObject == null) {
 			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, name, csElement.getNsURI());
-//			logger.trace("Created " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {
@@ -240,7 +237,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 			@SuppressWarnings("unchecked")
 			T pivotElement2 = (T) pivotObject;
 			pivotElement = pivotElement2;
-//			logger.trace("Reusing " + pivotEClass.getName() + " : " + moniker); //$NON-NLS-1$ //$NON-NLS-2$
 			context.refreshName(pivotElement, name);
 		}
 		context.converter.installPivotDefinition(csElement, pivotElement);

@@ -187,7 +187,6 @@ public final class BasePlugin extends EMFPlugin {
 		@Override
 		public void start(BundleContext context) throws Exception {
 			BaseStandaloneSetup.doSetup();
-//			BaseCS2MonikerSwitch.FACTORY.getClass();
 			super.start(context);
 		}
 	}

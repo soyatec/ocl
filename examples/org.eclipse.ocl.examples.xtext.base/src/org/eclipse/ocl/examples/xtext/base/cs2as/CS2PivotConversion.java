@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -99,7 +100,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasePreOrderVisitor.TemplateSignatureContinuation;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -227,7 +227,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	protected void diagnoseContinuationFailure(@NonNull List<BasicContinuation<?>> continuations) {
 		if (CONTINUATION.isActive()) {
 			for (BasicContinuation<?> continuation : continuations) {
-				CONTINUATION.println(continuation.toString());
+				CONTINUATION.println(DomainUtil.nonNullState(continuation.toString()));
 				for (Dependency dependency : continuation.getDependencies()) {
 					boolean canExecute = dependency.canExecute();
 					CONTINUATION.println((canExecute ? "+ " : "- ") + dependency.toString());
@@ -807,7 +807,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		boolean tracingOn = CONTINUATION.isActive();
 		if (tracingOn) {
 			CONTINUATION.println("------------------------------------------------ " + continuations.size());
-			CONTINUATION.println(typesHaveSignatures.toString());
+			CONTINUATION.println(DomainUtil.nonNullState(typesHaveSignatures.toString()));
 		}
 		for (BasicContinuation<?> continuation : continuations) {
 			boolean canExecute = continuation.canExecute();
@@ -1076,7 +1076,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		int pivotIMax = templateSignatures.size();
 		if (csIMax != pivotIMax) {
 			TypedTypeRefCS owningTemplateBindableElement = csTemplateBindings.get(0).getOwningTemplateBindableElement();
-			String string = owningTemplateBindableElement != null ? CS2Moniker.toString(owningTemplateBindableElement) : "<null>";
+			String string = owningTemplateBindableElement != null ? owningTemplateBindableElement.toString() : "<null>";
 			logger.warn("Inconsistent template bindings size for " + string); //$NON-NLS-1$
 		}
 		int newMax = Math.min(csIMax, pivotIMax);
@@ -1199,7 +1199,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		Type unspecializedPivotElement = csElement.getType();
 //		logger.trace("Specializing " + moniker); //$NON-NLS-1$
 		if ((unspecializedPivotElement == null) || unspecializedPivotElement.eIsProxy()) {
-			String moniker = CS2Moniker.toString(csElement);
+			String moniker = csElement.toString();
 			logger.error("Nothing to specialize as " + moniker); //$NON-NLS-1$
 			return null;
 		}

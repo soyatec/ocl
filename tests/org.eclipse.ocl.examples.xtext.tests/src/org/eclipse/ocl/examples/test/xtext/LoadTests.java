@@ -18,9 +18,7 @@ package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,10 +66,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
 import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
@@ -93,7 +88,7 @@ public class LoadTests extends XtextTestCase
 //	CS2PivotResourceAdapter cs2PivotAdapter = null;
 	protected BaseCSResource xtextResource = null;
 
-	public void checkMonikers(Resource resource) {
+/*	public void checkMonikers(Resource resource) {
 		Map<String, NamedElementCS> sigMap = new HashMap<String, NamedElementCS>();
 		for (Iterator<EObject> it = resource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
@@ -120,7 +115,7 @@ public class LoadTests extends XtextTestCase
 			ModelElementCS value = sigMap.get(key);
 			System.out.println(key + "                              => " + value.eClass().getName()); // + " : " + value.toString());
 		}
-	}	
+	} */
 
 	public Resource doLoad(String stem, String extension) throws IOException {
 //		long startTime = System.currentTimeMillis();
@@ -639,7 +634,7 @@ public class LoadTests extends XtextTestCase
 		metaModelManager = new MetaModelManager();
 //		StandardLibraryContribution.REGISTRY.put(MetaModelManager.DEFAULT_OCL_STDLIB_URI, StandardLibraryContribution.NULL);
 		Resource pivotResource = doLoad_Concrete("oclstdlib", "oclstdlib");
-		checkMonikers(pivotResource);
+//		checkMonikers(pivotResource);
 		String ecoreName = "oclstdlib" + ".saved.ecore";
 		URI ecoreURI = getProjectFileURI(ecoreName);
 		Map<String,Object> options = new HashMap<String,Object>();

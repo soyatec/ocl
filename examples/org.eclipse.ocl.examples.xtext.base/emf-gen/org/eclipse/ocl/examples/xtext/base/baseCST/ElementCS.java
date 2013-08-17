@@ -18,6 +18,9 @@
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 /**
@@ -60,4 +63,11 @@ public interface ElementCS extends EObject, VisitableCS {
 	 * @generated
 	 */
 	String getDescription();
+
+	/**
+	 * Accept a visit from a visitor and return the result of a call to the derived type-specific visitXXX in the visitor.
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor);
 } // ElementCS

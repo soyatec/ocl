@@ -27,10 +27,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.ExceptionAdapter;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeProvider;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -179,12 +177,7 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 			EObject eObjectOrProxy = eObjectDescription.getEObjectOrProxy();
 			linkedObjects.add(eObjectOrProxy);
 			if (BaseScopeProvider.LOOKUP.isActive()) {
-				if (eObjectOrProxy instanceof ModelElementCS) {
-					BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + qualifiedName + " => " + CS2Moniker.toString((ModelElementCS)eObjectOrProxy));
-				}
-				else {
-					BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + qualifiedName + " => " + eObjectOrProxy);									
-				}
+				BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + qualifiedName + " => " + eObjectOrProxy);									
 			}
 		}
 		return linkedObjects;

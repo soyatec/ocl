@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScoping;
-import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCS2MonikerVisitor;
 
 import com.google.inject.Injector;
 
@@ -52,7 +51,6 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 	public static void init() {
 		BaseStandaloneSetup.doSetup();
 		EssentialOCLScoping.init();
-		EssentialOCLCS2MonikerVisitor.FACTORY.getClass();
 //		EssentialOCLCS2Pivot.FACTORY.getClass();
 //		EssentialOCLPivot2CS.FACTORY.getClass();
 		EPackage.Registry.INSTANCE.put(EssentialOCLCSTPackage.eNS_URI, EssentialOCLCSTPackage.eINSTANCE);

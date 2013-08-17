@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.util.OCLstdlibCSTValidator;
 import org.eclipse.ocl.examples.xtext.oclstdlib.scoping.OCLstdlibScoping;
-import org.eclipse.ocl.examples.xtext.oclstdlib.utilities.OCLstdlibCS2MonikerVisitor;
 
 import com.google.inject.Injector;
 
@@ -46,7 +45,6 @@ public class OCLstdlibStandaloneSetup extends OCLstdlibStandaloneSetupGenerated
 
 	public static void init() {
 		OCLstdlibScoping.init();
-		OCLstdlibCS2MonikerVisitor.FACTORY.getClass();
 //		OCLstdlibCS2Pivot.FACTORY.getClass();
 		EPackage.Registry.INSTANCE.put(OCLstdlibCSTPackage.eNS_URI, OCLstdlibCSTPackage.eINSTANCE);
 		EValidator.Registry.INSTANCE.put(OCLstdlibCSTPackage.eINSTANCE, OCLstdlibCSTValidator.INSTANCE);

@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.cs2as.CompleteOCLCS2Pivot;
 import org.eclipse.ocl.examples.xtext.completeocl.scoping.CompleteOCLScoping;
-import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLCS2MonikerVisitor;
 
 import com.google.inject.Injector;
 
@@ -44,7 +43,6 @@ public class CompleteOCLStandaloneSetup extends CompleteOCLStandaloneSetupGenera
 
 	public static void init() {
 		CompleteOCLScoping.init();
-		CompleteOCLCS2MonikerVisitor.FACTORY.getClass();
 		CompleteOCLCS2Pivot.FACTORY.getClass();
 //		CompleteOCLPivot2CS.FACTORY.getClass();
 		EPackage.Registry.INSTANCE.put(CompleteOCLCSTPackage.eNS_URI, CompleteOCLCSTPackage.eINSTANCE);
