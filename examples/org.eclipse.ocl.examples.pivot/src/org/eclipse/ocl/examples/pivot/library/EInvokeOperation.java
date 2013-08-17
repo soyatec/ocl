@@ -16,10 +16,11 @@ package org.eclipse.ocl.examples.pivot.library;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
@@ -48,11 +49,13 @@ public class EInvokeOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue,
 			Object... argumentValues) {
 		EObject eObject = asNavigableObject(sourceValue);
-		BasicEList<Object> arguments = new BasicEList<Object>();
+		Object[] data = new Object[argumentValues.length];
+		int i= 0;
 		for (Object argumentValue : argumentValues) {
 			assert argumentValue != null;
-			arguments.add(asObject(argumentValue));
+			data[i++] = asObject(argumentValue);
 		}
+		EList<Object> arguments = new EcoreEList.UnmodifiableEList<Object>(null, null, data.length, data);
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			DomainType returnType = callExp.getType();
@@ -65,7 +68,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue);
-		BasicEList<Object> arguments = new BasicEList<Object>();
+		EList<Object> arguments = new EcoreEList.UnmodifiableEList<Object>(null, null, 0, new Object[]{});
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);
@@ -77,8 +80,8 @@ public class EInvokeOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
 			@Nullable Object argumentValue) {
 		EObject eObject = asNavigableObject(sourceValue);
-		BasicEList<Object> arguments = new BasicEList<Object>();
-		arguments.add(asObject(argumentValue));
+		EList<Object> arguments = new EcoreEList.UnmodifiableEList<Object>(null, null, 1,
+				new Object[]{asObject(argumentValue)});
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);
@@ -90,9 +93,8 @@ public class EInvokeOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
 			@Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		EObject eObject = asNavigableObject(sourceValue);
-		BasicEList<Object> arguments = new BasicEList<Object>();
-		arguments.add(asObject(firstArgumentValue));
-		arguments.add(asObject(secondArgumentValue));
+		EList<Object> arguments = new EcoreEList.UnmodifiableEList<Object>(null, null, 2,
+				new Object[]{asObject(firstArgumentValue), asObject(secondArgumentValue)});
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);

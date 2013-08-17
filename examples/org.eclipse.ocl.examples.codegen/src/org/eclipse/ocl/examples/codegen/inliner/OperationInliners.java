@@ -16,11 +16,11 @@ package org.eclipse.ocl.examples.codegen.inliner;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
@@ -51,10 +51,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicEList<Object>();
-			for (Object argumentValue : argumentValues) {
-				args.add(argumentValue);
-			}
+			EList<Object> args = new EcoreEList.UnmodifiableEList<Object>(null, null, argumentValues.length, argumentValues);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -69,8 +66,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicEList<Object>();
-			args.add(sourceValue);
+			EList<Object> args = new EcoreEList.UnmodifiableEList<Object>(null, null, 1, new Object[]{sourceValue});
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -86,8 +82,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicEList<Object>();
-			args.add(argumentValue);
+			EList<Object> args = new EcoreEList.UnmodifiableEList<Object>(null, null, 1, new Object[]{argumentValue});
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -103,9 +98,8 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicEList<Object>();
-			args.add(firstArgumentValue);
-			args.add(secondArgumentValue);
+			EList<Object> args = new EcoreEList.UnmodifiableEList<Object>(null, null, 2,
+					new Object[]{firstArgumentValue, secondArgumentValue});
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
