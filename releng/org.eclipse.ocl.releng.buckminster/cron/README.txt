@@ -9,16 +9,12 @@ This is a release engineer task. To configure that:
 A new milestone build may be explicitly promoted by:
 
 logon to build.eclipse.org
-ant -f /shared/jobs/buckminster-ocl-core-luna-master/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-ocl-core-luna-master/lastSuccessful/archive &> logs/ocl-publishing-kepler.log 
-or
-ant -f /shared/jobs/buckminster-ocl-tools-luna-master/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-ocl-tools-luna-master/lastSuccessful/archive &> logs/ocl-publishing-kepler.log 
+ant -f /shared/jobs/buckminster-ocl-core-luna-master/lastSuccessful/archive/publishroot/publisher.ant -Dbuild.archives=/shared/jobs/buckminster-ocl-core-luna-master/lastSuccessful/archive &> logs/ocl-publishing-luna.log 
 
 A new milestone build can be added to the composite repository by:
 
 logon to build.eclipse.org
-cd downloads/modeling/mdt/ocl/updates/milestones/4.2.0/core
-or
-cd downloads/modeling/mdt/ocl/updates/milestones/4.2.0/tools
+cd downloads/modeling/mdt/ocl/updates/milestones/4.2.0
 ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201210020848
 
 The Luna aggregator is configured by GIT\org.eclipse.simrel.build\mdt-ocl.b3aggrcon to use the milestones repo
