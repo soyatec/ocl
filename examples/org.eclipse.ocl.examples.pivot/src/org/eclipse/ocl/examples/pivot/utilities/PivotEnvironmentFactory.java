@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2012 IBM Corporation and others.
+ * Copyright (c) 2005, 2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 415697
  *
  * </copyright>
  *
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.AbstractEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
@@ -133,7 +135,8 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 
 	@Override
 	protected @NonNull Type getClassifier(@NonNull Object context) {
-		throw new UnsupportedOperationException();				// FIXME
+		DomainType dType = metaModelManager.getIdResolver().getStaticTypeOf(context);
+		return metaModelManager.getType(dType);
 	}
 	
 	@SuppressWarnings("null")
