@@ -69,6 +69,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "tests.base=MDT-OCL.test.results"
 	echo "version=4.2.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/modeling/mdt/ocl"
+	echo "generateSourceReferences=true"
 
 
 } > buildroot/build.properties
