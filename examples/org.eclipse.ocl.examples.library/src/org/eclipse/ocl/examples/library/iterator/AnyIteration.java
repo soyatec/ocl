@@ -51,6 +51,9 @@ public class AnyIteration extends AbstractIteration
 		else if (bodyVal == Boolean.FALSE) {
 			return CARRY_ON;								// Carry on for nothing found
 		}
+		else if (bodyVal != Boolean.TRUE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "any"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		else {
 			Object value = iterationManager.get();		
 			return value;									// Terminate after first find

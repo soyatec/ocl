@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class OneIteration2Java extends AbstractAccumulation2Java
@@ -36,35 +37,40 @@ public class OneIteration2Java extends AbstractAccumulation2Java
 	}
 	
 	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
-		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
-		js.append("if (");
-		js.appendValueName(cgBody);
-		js.append(" != ");
-		js.appendClassReference(ValuesUtil.class);
-		js.append(".FALSE_VALUE) {			// Carry on till something found\n");
-		js.pushIndentation(null);
+		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
+			CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 			js.append("if (");
-			js.appendValueName(cgAccumulator);
-			js.append(") {\n");
+			js.appendValueName(cgBody);
+			js.append(" != ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".FALSE_VALUE) {			// Carry on till something found\n");
 			js.pushIndentation(null);
-				js.appendValueName(cgIterationCallExp);
-				js.append(" = ");
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".FALSE_VALUE;\n");
-				js.append("break;\n");
-			js.popIndentation();
-			js.append("}\n");
-			js.append("else {\n");
-				js.pushIndentation(null);
+				js.append("if (");
 				js.appendValueName(cgAccumulator);
-				js.append(" = ");
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".TRUE_VALUE;\n");
+				js.append(") {\n");
+				js.pushIndentation(null);
+					js.appendValueName(cgIterationCallExp);
+					js.append(" = ");
+					js.appendClassReference(ValuesUtil.class);
+					js.append(".FALSE_VALUE;\n");
+					js.append("break;\n");
+				js.popIndentation();
+				js.append("}\n");
+				js.append("else {\n");
+					js.pushIndentation(null);
+					js.appendValueName(cgAccumulator);
+					js.append(" = ");
+					js.appendClassReference(ValuesUtil.class);
+					js.append(".TRUE_VALUE;\n");
+				js.popIndentation();
+				js.append("}\n");
 			js.popIndentation();
 			js.append("}\n");
-		js.popIndentation();
-		js.append("}\n");
+		}
+		else {
+			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "one");
+		}
 	}
 
 	@Override

@@ -52,6 +52,9 @@ public class SelectIteration extends AbstractIteration
 			assert accumulatorValue != null;												// createAccumulatorValue is @NonNull
 			accumulatorValue.add(value);
 		}
+		else if (bodyVal != Boolean.FALSE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "select"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		return CARRY_ON;
 	}
 }

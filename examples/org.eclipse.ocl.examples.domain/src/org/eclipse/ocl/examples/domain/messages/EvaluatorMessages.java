@@ -49,6 +49,7 @@ public class EvaluatorMessages
 	public static String MissingSubstring;
 	public static String MissingValue;
 	public static String NonBinaryOperation;
+	public static String NonBooleanBody;
 	public static String NonFiniteIntegerValue;
 	public static String NonPositiveUnlimitedNaturalValue;
 	public static String TypedResultRequired;

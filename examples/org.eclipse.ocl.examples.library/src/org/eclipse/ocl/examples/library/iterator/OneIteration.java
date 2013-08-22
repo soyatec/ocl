@@ -66,6 +66,9 @@ public class OneIteration extends AbstractIteration
 		else if (bodyVal == Boolean.FALSE) {
 			return CARRY_ON;								// Carry on for nothing found
 		}
+		else if (bodyVal != Boolean.TRUE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "one"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		else {
 			MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
 			assert accumulatorValue != null;

@@ -18,6 +18,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class ExistsIteration2Java extends AbstractIteration2Java
@@ -26,19 +28,24 @@ public class ExistsIteration2Java extends AbstractIteration2Java
 	
 	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
-		js.append("if (");
-		js.appendValueName(cgBody);
-		js.append(" != ");
-		js.appendClassReference(ValuesUtil.class);
-		js.append(".FALSE_VALUE) {			// Carry on till something found\n");
-		js.pushIndentation(null);
-			js.appendValueName(cgIterationCallExp);
-			js.append(" = ");
+		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
+			js.append("if (");
+			js.appendValueName(cgBody);
+			js.append(" != ");
 			js.appendClassReference(ValuesUtil.class);
-			js.append(".TRUE_VALUE;			// Abort after a find\n");
-			js.append("break;\n");
-		js.popIndentation();
-		js.append("}\n");
+			js.append(".FALSE_VALUE) {			// Carry on till something found\n");
+			js.pushIndentation(null);
+				js.appendValueName(cgIterationCallExp);
+				js.append(" = ");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".TRUE_VALUE;			// Abort after a find\n");
+				js.append("break;\n");
+			js.popIndentation();
+			js.append("}\n");
+		}
+		else {
+			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "exists");
+		}
 	}
 	
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {

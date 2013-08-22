@@ -45,6 +45,9 @@ public class ForAllIteration extends AbstractIteration
 		else if (bodyVal == TRUE_VALUE) {
 			return CARRY_ON;						// Carry on for nothing found
 		}
+		else if (bodyVal != Boolean.FALSE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		else {
 			return false;							// Abort after a fail
 		}

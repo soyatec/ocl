@@ -72,6 +72,9 @@ public class OnlyIteration extends AbstractIteration
 		else if (bodyVal == Boolean.FALSE) {
 			return CARRY_ON;									// Carry on for nothing found
 		}
+		else if (bodyVal != Boolean.TRUE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "only"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		else {
 			MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
 			assert accumulatorValue != null;

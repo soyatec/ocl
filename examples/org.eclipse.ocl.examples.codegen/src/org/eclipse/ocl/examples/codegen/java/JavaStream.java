@@ -35,6 +35,8 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -635,6 +637,18 @@ public class JavaStream
 		append("\"");
 		append(javaString);
 		append("\"");
+	}
+
+	public void appendThrowInvalidValueException(/*@NonNull*/ String message, @NonNull String... arguments) {
+		append("throw new ");
+		appendClassReference(InvalidValueException.class);
+		append("(");
+		appendString(DomainUtil.nonNullState(message));
+		for (String argument : arguments) {
+			append(", ");
+			appendString(DomainUtil.nonNullState(argument));
+		}
+		append(");\n");
 	}
 
 	public void appendTrue() {

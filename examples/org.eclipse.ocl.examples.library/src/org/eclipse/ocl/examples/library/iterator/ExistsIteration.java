@@ -45,6 +45,9 @@ public class ExistsIteration extends AbstractIteration
 		else if (bodyVal == Boolean.FALSE) {
 			return CARRY_ON;						// Carry on for nothing found
 		}
+		else if (bodyVal != Boolean.TRUE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBinaryOperation, "exists"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		else {
 			return true;							// Abort after a find
 		}

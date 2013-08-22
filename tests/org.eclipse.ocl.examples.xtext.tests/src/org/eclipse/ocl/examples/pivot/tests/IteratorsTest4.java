@@ -608,6 +608,9 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_forAll_invalidBody_142518() {
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->forAll('true')");		// Bug 415669
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->forAll(2)");			// Bug 415669
+
         assertQueryInvalid(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->forAll(b and b)");
 
@@ -626,8 +629,11 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_exists_invalidBody_142518() {
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->exists('true')");		// Bug 415669
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->exists(2)");			// Bug 415669
+
     	assertQueryInvalid(EcorePackage.eINSTANCE,
-            "let b:Boolean = null in Bag{1, 2, 3}->exists(b and b)");
+                "let b:Boolean = null in Bag{1, 2, 3}->exists(b and b)");
 
         // same deal for a null value (in the exists case)
     	assertQueryInvalid(EcorePackage.eINSTANCE,
@@ -639,6 +645,9 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_one_invalidBody_142518() {
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->one('true')");		// Bug 415669
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->one(2)");			// Bug 415669
+
     	assertQueryInvalid(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->one(b and b)");
 
@@ -652,6 +661,11 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_any_invalidBody_142518() {
+    	if (!useCodeGen) {					// FIXME gives unreachable code
+	    	assertQueryInvalid(null, "Bag{1, 2, 3}->any('true')");		// Bug 415669
+	    	assertQueryInvalid(null, "Bag{1, 2, 3}->any(2)");			// Bug 415669   	
+    	}
+    	
         assertQueryInvalid(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->any(b and b)");
 
@@ -665,6 +679,9 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_select_invalidBody_142518() {
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->select('true')");		// Bug 415669
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->select(2)");			// Bug 415669
+    	
         assertQueryInvalid(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->select(b and b)");
 
@@ -678,7 +695,10 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_reject_invalidBody_142518() {
-        assertQueryInvalid(EcorePackage.eINSTANCE,
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->reject('true')");		// Bug 415669
+    	assertQueryInvalid(null, "Bag{1, 2, 3}->reject(2)");			// Bug 415669
+
+    	assertQueryInvalid(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->reject(b and b)");
 
         // same deal for a null value (in the exists case)

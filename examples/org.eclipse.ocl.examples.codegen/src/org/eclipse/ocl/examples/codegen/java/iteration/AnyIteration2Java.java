@@ -19,6 +19,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -28,20 +30,25 @@ public class AnyIteration2Java extends AbstractIteration2Java
 	
 	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
-		CGIterator cgIterator = getIterator(cgIterationCallExp);
-		js.append("if (");
-		js.appendValueName(cgBody);
-		js.append(" != ");
-		js.appendClassReference(ValuesUtil.class);
-		js.append(".FALSE_VALUE) {			// Carry on till something found\n");
-		js.pushIndentation(null);
-			js.appendValueName(cgIterationCallExp);
-			js.append(" = ");
-			js.appendValueName(cgIterator);
-			js.append(";\n");
-			js.append("break;\n");
-		js.popIndentation();
-		js.append("}\n");
+		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
+			CGIterator cgIterator = getIterator(cgIterationCallExp);
+			js.append("if (");
+			js.appendValueName(cgBody);
+			js.append(" != ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".FALSE_VALUE) {			// Carry on till something found\n");
+			js.pushIndentation(null);
+				js.appendValueName(cgIterationCallExp);
+				js.append(" = ");
+				js.appendValueName(cgIterator);
+				js.append(";\n");
+				js.append("break;\n");
+			js.popIndentation();
+			js.append("}\n");
+		}
+		else {
+			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "any");
+		}
 	}
 	
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {

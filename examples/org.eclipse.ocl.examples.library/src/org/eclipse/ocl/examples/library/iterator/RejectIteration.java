@@ -51,6 +51,9 @@ public class RejectIteration extends AbstractIteration
 			assert accumulatorValue != null;												// createAccumulatorValue is @NonNull
 			accumulatorValue.add(value);
 		}
+		else if (bodyVal != Boolean.TRUE) {
+			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "reject"); 	// Non boolean body is invalid //$NON-NLS-1$
+		}
 		return CARRY_ON;
 	}
 }
