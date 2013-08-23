@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -259,10 +260,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	}
 
 	protected EClass getEClass(@NonNull Type type) {
+		return (EClass) getEClassifier(type);
+	}
+	
+	protected EClassifier getEClassifier(@NonNull Type type) {
 		for (DomainType dType : metaModelManager.getPartialTypes(type)) {
 			if (dType instanceof Type) {
 				Type pType = (Type) dType;
-				EClass eClass = (EClass) pType.getETarget();
+				EClassifier eClass = (EClassifier) pType.getETarget();
 				if (eClass != null) {
 					return eClass;
 				}
@@ -448,17 +453,18 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				CollectionTypeId collectionTypeId = (CollectionTypeId)elementId;
 				TypeId typeId = collectionTypeId.getElementTypeId();
 				Type type = metaModelManager.getIdResolver().getType(typeId, null);
-				EClass eClass = getEClass(type);
-				if (eClass != null) {
-					try {
+				
+				EClassifier eClassifier = getEClassifier(type);
+				if (eClassifier instanceof EClass) {
+					EClass eClass = (EClass) eClassifier;
+					try {						
 						Class<?> javaClass = genModelHelper.getEcoreInterfaceClass(eClass);
 						unboxedDescriptor = new UnboxedEObjectsDescriptor(collectionTypeId, javaClass, eClass);
 					}
 					catch (Exception e) {
 						unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClass);
 					}
-				}
-				if (unboxedDescriptor == null) {
+				} else  {
 					unboxedDescriptor = new UnboxedElementsDescriptor(collectionTypeId, metaModelManager, type);
 				}
 			}

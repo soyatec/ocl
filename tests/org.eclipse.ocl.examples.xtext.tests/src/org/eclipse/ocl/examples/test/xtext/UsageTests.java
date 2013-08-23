@@ -783,7 +783,32 @@ public class UsageTests
 		assertTrue(ValuesUtil.initAllStatics());
 		assertFalse(ValuesUtil.initAllStatics());
 	}
-
+	
+	public void testBug415782() throws Exception {
+		String testFileStem = "Bug415782";
+		String testProjectName = "bug415782";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String oclinecoreFile = 
+			  "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
+			+ "package bug415782 : bug415782 = 'http://bug415782'\n"
+			+ "{\n"		
+			+ "    class MyClass\n"
+			+ "    {\n"
+			+ "    	   attribute manyDates : ecore::EDate[*] { ordered };\n"
+			+ "        attribute aBool : Boolean;\n"
+			+ "        operation anOp() : MyClass {"
+			+ "             body : MyClass {"
+			+ "               aBool = manyDates->isEmpty()\n"
+			+ "             };"
+			+ "        }\n"
+			+ "    }\n"
+			+ "}\n";
+		String genmodelFile = createGenModelContent(testProjectPath, testFileStem);
+		doDelete(testProjectName);
+		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doCompile(testProjectName, testFileStem);
+	}
+	
 	/*
 	 * public void testType_Parameters() throws Exception { String testFile =
 	 * "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
