@@ -70,6 +70,7 @@ public class EPackageAlphabetizer extends WorkflowComponentWithModelSlot
 		List<T> newList = new ArrayList<T>(list);
 		Collections.sort(newList, new Comparator<T>()
 		{
+			@Override
 			public int compare(T o1, T o2) {
 				EClass e1 = o1.eClass();
 				EClass e2 = o2.eClass();

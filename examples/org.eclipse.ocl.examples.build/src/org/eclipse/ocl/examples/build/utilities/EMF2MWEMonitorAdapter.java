@@ -31,13 +31,16 @@ public class EMF2MWEMonitorAdapter implements Monitor
 		this.monitor = monitor;
 	}
 	
+	@Override
 	public void beginTask(String name, int totalWork) {
 		monitor.beginTask(name, totalWork);
 	}
 
+	@Override
 	public void clearBlocked() {
 	}
 
+	@Override
 	public void done() {
 		monitor.done();
 	}
@@ -46,10 +49,12 @@ public class EMF2MWEMonitorAdapter implements Monitor
 		monitor.finished(element, context);
 	}
 
+	@Override
 	public void internalWorked(double work) {
 		monitor.internalWorked(work);
 	}
 
+	@Override
 	public boolean isCanceled() {
 		return monitor.isCanceled();
 	}
@@ -62,13 +67,16 @@ public class EMF2MWEMonitorAdapter implements Monitor
 		monitor.preTask(element, context);
 	}
 
+	@Override
 	public void setBlocked(Diagnostic diagnostic) {
 	}
 
+	@Override
 	public void setCanceled(boolean value) {
 		monitor.setCanceled(value);
 	}
 
+	@Override
 	public void setTaskName(String name) {
 		monitor.setTaskName(name);
 	}
@@ -77,10 +85,12 @@ public class EMF2MWEMonitorAdapter implements Monitor
 		monitor.started(element, context);
 	}
 
+	@Override
 	public void subTask(String name) {
 		monitor.subTask(name);
 	}
 
+	@Override
 	public void worked(int work) {
 		monitor.worked(work);
 	}

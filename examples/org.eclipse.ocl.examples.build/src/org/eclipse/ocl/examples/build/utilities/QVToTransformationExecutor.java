@@ -53,6 +53,7 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 		ins.add(fileName);
 	}
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		if (getUri() == null) {
 			issues.addError(this, "uri not specified.");

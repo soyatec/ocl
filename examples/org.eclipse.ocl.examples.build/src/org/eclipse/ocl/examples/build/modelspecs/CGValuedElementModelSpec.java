@@ -236,37 +236,37 @@ public class CGValuedElementModelSpec extends ModelSpec
 			@NonNull String generate();
 		}
 		
-		public static final @NonNull Ctl CTL_BODY = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_BODY = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(OuterStackPlace.class) + ".createOuterStackPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_CATCH = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_CATCH = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(CatchPlace.class) + ".createCatchPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_CNTRL = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_CNTRL = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(ControlPlace.class) + ".createControlPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_GLOBL = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_GLOBL = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(GlobalPlace.class) + ".createGlobalPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_IF = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_IF = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(IfPlaces.class) + ".createIfPlaces(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_INNER = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_INNER = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(InnerStackPlace.class) + ".createInnerStackPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_LET = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_LET = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(LetPlaces.class) + ".createLetPlaces(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_LORG = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_LORG = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(LocalPlace.class) + ".createLocalPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_PARAM = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_PARAM = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(StackPlace.class) + ".createStackPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_THROW = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_THROW = new Ctl() { @Override public @NonNull String generate() {
 			return "return " + classRef(ThrowPlace.class) + ".createThrowPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_UNSUP = new Ctl() { public @NonNull String generate() {
+		public static final @NonNull Ctl CTL_UNSUP = new Ctl() { @Override public @NonNull String generate() {
 			return "throw new UnsupportedOperationException();";
 		}};
 		

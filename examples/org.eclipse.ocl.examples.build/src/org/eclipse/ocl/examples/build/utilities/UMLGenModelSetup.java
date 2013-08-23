@@ -30,12 +30,14 @@ import org.eclipse.uml2.uml.ecore.importer.UMLImporter;
 public class UMLGenModelSetup
 {
 	public static final GeneratorAdapterFactory.Descriptor UML_DESCRIPTOR1 = new GeneratorAdapterFactory.Descriptor() {
+		@Override
 		public GeneratorAdapterFactory createAdapterFactory() {
 			return new GenModelGeneratorAdapterFactory();
 		}
 	};
 
 	public static final GeneratorAdapterFactory.Descriptor UML_DESCRIPTOR2 = new GeneratorAdapterFactory.Descriptor() {
+		@Override
 		public GeneratorAdapterFactory createAdapterFactory() {
 			return new UML2GenModelGeneratorAdapterFactory();
 		}

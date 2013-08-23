@@ -29,7 +29,8 @@ public class OCLBuildGenModelGeneratorAdapterFactory extends GenModelGeneratorAd
    */
   public static final GeneratorAdapterFactory.Descriptor DESCRIPTOR = new GeneratorAdapterFactory.Descriptor()
   {
-    public GeneratorAdapterFactory createAdapterFactory()
+    @Override
+	public GeneratorAdapterFactory createAdapterFactory()
     {
       return new OCLBuildGenModelGeneratorAdapterFactory();
     }

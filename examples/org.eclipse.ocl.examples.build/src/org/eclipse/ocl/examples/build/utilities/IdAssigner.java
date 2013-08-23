@@ -58,6 +58,7 @@ public class IdAssigner extends AbstractWorkflowComponent
 		uriMapping.put(fromURI, toURI);
 	}
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 	}
 

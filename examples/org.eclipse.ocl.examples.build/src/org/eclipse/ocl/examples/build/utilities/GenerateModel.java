@@ -59,6 +59,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 		EssentialOCLLinkingService.DEBUG_RETRY = true;
 	}
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		if (genModel == null) {
 			issues.addError(this, "uri not specified.");

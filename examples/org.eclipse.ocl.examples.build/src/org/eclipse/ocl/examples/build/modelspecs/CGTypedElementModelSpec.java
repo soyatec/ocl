@@ -56,16 +56,16 @@ public class CGTypedElementModelSpec extends ModelSpec
 		@NonNull String generate();
 	}
 	
-	public static final @NonNull Ati ATI_ROOT = new Ati() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_ROOT = new Ati() { @Override public @NonNull String generate() {
 		return "return ast instanceof " + classRef(DomainTypedElement.class) + " ? ((" + classRef(DomainTypedElement.class) + ") ast).getTypeId() : null;";
 	}};
-	public static final @NonNull Ati ATI_TEXT = new Ati() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_TEXT = new Ati() { @Override public @NonNull String generate() {
 		return "return (" + classRef(TypeId.class) + ") getTypeId().getElementId();		// FIXME Why irregular?";
 	}};
-	public static final @NonNull Ati ATI_TYPE = new Ati() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_TYPE = new Ati() { @Override public @NonNull String generate() {
 		return "return ast instanceof " + classRef(DomainType.class) + " ? ((" + classRef(DomainType.class) + ") ast).getTypeId() : null;";
 	}};
-	public static final @NonNull Ati ATI_T_ID = new Ati() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_T_ID = new Ati() { @Override public @NonNull String generate() {
 		return "return (" + classRef(TypeId.class) + ")elementId;";
 	}};
 		

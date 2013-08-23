@@ -51,6 +51,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 	private boolean genOCLstdlib = false;	
 	protected String genModelFile;
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		if (genModelFile == null) {
 			issues.addError(this, "genModel not specified.");
