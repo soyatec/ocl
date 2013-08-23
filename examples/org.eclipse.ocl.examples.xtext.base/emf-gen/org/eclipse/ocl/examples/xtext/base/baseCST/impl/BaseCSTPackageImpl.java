@@ -2462,21 +2462,21 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL", //$NON-NLS-1$ //$NON-NLS-2$
 			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL", //$NON-NLS-1$ //$NON-NLS-2$
 			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL" //$NON-NLS-1$ //$NON-NLS-2$
-		   });		
+		   });	
 		addAnnotation
 		  (rootCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "constraints", "TestConstraint" //$NON-NLS-1$ //$NON-NLS-2$
-		   });		
+		   });	
 		addAnnotation
 		  (rootPackageCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "constraints", "TestConstraint" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
+		   });
 	}
 
 	/**
@@ -2494,14 +2494,14 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		   new String[] 
 		   {
 			 "TestConstraint", "true" //$NON-NLS-1$ //$NON-NLS-2$
-		   });		
+		   });	
 		addAnnotation
 		  (rootPackageCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "TestConstraint", "true" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
+		   });
 	}
 
 } //BaseCSTPackageImpl

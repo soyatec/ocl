@@ -3,7 +3,7 @@
     modelDirectory="/org.eclipse.ocl.examples.domain/src" modelPluginID="org.eclipse.ocl.examples.domain"
     modelName="Values" rootExtendsInterface="" rootExtendsClass="" suppressEMFModelTags="true"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="5.0"
-    copyrightFields="false">
+    copyrightFields="false" runtimeVersion="2.7">
   <foreignModel>Values.ecore</foreignModel>
   <genPackages prefix="Values" basePackage="org.eclipse.ocl.examples.domain" disposableProviderFactory="true"
       ecorePackage="Values.ecore#/">

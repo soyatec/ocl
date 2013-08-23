@@ -7034,7 +7034,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 	}
 
 	/**
@@ -7051,25 +7051,25 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });		
+		   });	
 		addAnnotation
 		  (dynamicTypeEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });		
+		   });	
 		addAnnotation
 		  (featureEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });		
+		   });	
 		addAnnotation
 		  (operationEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (operationEClass, 
 		   1,
@@ -7083,7 +7083,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (operationTemplateParameterEClass, 
 		   1,
@@ -7097,7 +7097,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (typeEClass, 
 		   1,
@@ -7111,7 +7111,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (typeTemplateParameterEClass, 
 		   1,
@@ -7140,7 +7140,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateParameter_OwnedDefault(), 
 		   source, 
@@ -7150,7 +7150,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateParameter/default") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 
@@ -7160,7 +7160,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateParameter/parameteredElement") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateParameterSubstitution_OwnedActual(), 
 		   source, 
@@ -7170,7 +7170,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateParameterSubstitution/actual") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateSignature_OwnedParameter(), 
 		   source, 
@@ -7180,6 +7180,6 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateSignature/parameter") //$NON-NLS-1$
-		   });	
+		   });
 	}
 } //PivotPackageImpl

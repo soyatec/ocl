@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.ocl.examples.xtext.oclinecore/emf-gen"
     editDirectory="/org.eclipse.ocl.examples.xtext.oclinecore.edit/emf-gen" editorDirectory="/org.eclipse.ocl.examples.xtext.oclinecore.editor/emf-gen"
     modelPluginID="org.eclipse.ocl.examples.xtext.oclinecore" forceOverwrite="true"
@@ -8,8 +7,7 @@
     codeFormatting="true" testsDirectory="/org.eclipse.ocl.examples.xtext.oclinecore.tests/emf-gen"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.eclipse.ocl.examples.xtext.oclinecore.edit" editorPluginID="org.eclipse.ocl.examples.xtext.oclinecore.editor"
-    usedGenPackages="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//baseCST ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel#//essentialOCLCST ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot">
-  <foreignModel>OCLinEcoreCST.ecore</foreignModel>
+    runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//baseCST ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel#//essentialOCLCST ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
@@ -18,12 +16,15 @@
     <details key="Root Visitor Class" value="org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"/>
     <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.xtext.oclinecore.util.OCLinEcoreCSVisitor"/>
   </genAnnotations>
+  <foreignModel>OCLinEcoreCST.ecore</foreignModel>
   <genPackages prefix="OCLinEcoreCST" basePackage="org.eclipse.ocl.examples.xtext.oclinecore"
       disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.ocl.examples.xtext.oclinecore"
       ecorePackage="OCLinEcoreCST.ecore#/">
     <genClasses ecoreClass="OCLinEcoreCST.ecore#//OCLinEcoreConstraintCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCLinEcoreCST.ecore#//OCLinEcoreConstraintCS/callable"/>
     </genClasses>
-    <genClasses ecoreClass="OCLinEcoreCST.ecore#//OCLinEcoreSpecificationCS"/>
+    <genClasses ecoreClass="OCLinEcoreCST.ecore#//SysMLCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCLinEcoreCST.ecore#//SysMLCS/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
