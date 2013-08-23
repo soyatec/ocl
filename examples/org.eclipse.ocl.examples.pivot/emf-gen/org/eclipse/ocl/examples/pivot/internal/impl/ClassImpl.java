@@ -363,17 +363,12 @@ public class ClassImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public @NonNull List<Type> getSuperClass()
-	{
-		if (superClass == null)
-		{
-			superClass = new EObjectResolvingEList<Type>(org.eclipse.ocl.examples.pivot.Class.class, this, PivotPackage.CLASS__SUPER_CLASS);
-		}
-		return superClass;
+	{		// The UML JET templates give a bad type for the duplicates
+		return super.getSuperClass();
 	}
 
 	/**
