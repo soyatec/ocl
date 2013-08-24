@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLSave;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
-public abstract class AbstractASResourceImpl extends XMIResourceImpl implements PivotResource
+public abstract class AbstractASResourceImpl extends XMIResourceImpl implements ASResource
 {
 	/**
 	 * Creates an instance of the resource.

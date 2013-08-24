@@ -112,8 +112,8 @@ public class MonikerTests extends XtextTestCase
 	 *
 	public Map<String, MonikeredElement> checkPivotMonikers(ResourceSet pivotResourceSet) {
 		Map<String, MonikeredElement> monikerMap = new HashMap<String, MonikeredElement>();
-		for (Resource pivotResource : pivotResourceSet.getResources()) {
-			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		for (Resource asResource : pivotResourceSet.getResources()) {
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof MonikeredElement) {
 					MonikeredElement pivotElement = (MonikeredElement) eObject;
@@ -181,11 +181,11 @@ public class MonikerTests extends XtextTestCase
 		//
 		//	Get the pivot resource and check for load failures
 		//
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(csResource, null);
-		Resource pivotResource = adapter.getPivotResource(csResource);		
-		assertNoValidationErrors("Pivot validation problems", pivotResource);
-		pivotResource.setURI(pivotURI);
-		pivotResource.save(null);
+		CS2PivotResourceAdapter adapter = csResource.getCS2ASAdapter(null);
+		Resource asResource = adapter.getPivotResource(csResource);		
+		assertNoValidationErrors("Pivot validation problems", asResource);
+		asResource.setURI(pivotURI);
+		asResource.save(null);
 		//
 		//	Check CS-Pivot moniker consistency
 		//

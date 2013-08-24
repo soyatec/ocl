@@ -338,36 +338,36 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 					throw new CoreException(new Status(IStatus.ERROR, OCLExamplesCommonPlugin.PLUGIN_ID, s.toString()));
 				}
 //				RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, "", ecoreResource);		
-				Resource pivotResource = null;
+				Resource asResource = null;
 				EList<EObject> contents = xmiResource.getContents();
 				if (contents.size() > 0) {
 					EObject xmiRoot = contents.get(0);
 					if (xmiRoot instanceof EPackage) {
 						Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(xmiResource, getMetaModelManager());
 						Root pivotRoot = ecore2Pivot.getPivotRoot();
-						pivotResource = pivotRoot.eResource();
-						if (pivotResource != null) {
+						asResource = pivotRoot.eResource();
+						if (asResource != null) {
 							if (reload) {
-								ecore2Pivot.update(pivotResource, contents);
+								ecore2Pivot.update(asResource, contents);
 							}
-							diagnoseErrors(pivotResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
+							diagnoseErrors(asResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
 						}
 						persistAs = PERSIST_AS_ECORE;
 						exportDelegateURIMap.put(document, DelegateInstaller.getDelegateURI(contents));
 					}
 					else if (xmiRoot instanceof org.eclipse.ocl.examples.pivot.Package) {
-						pivotResource = xmiResource;
+						asResource = xmiResource;
 						persistAs = PERSIST_AS_PIVOT;
 					}
 					else if (xmiRoot instanceof org.eclipse.uml2.uml.Package) {
 						UML2Pivot uml2Pivot = UML2Pivot.getAdapter(xmiResource, getMetaModelManager());
 						Root pivotRoot = uml2Pivot.getPivotRoot();
-						pivotResource = pivotRoot.eResource();
+						asResource = pivotRoot.eResource();
 						persistAs = PERSIST_AS_OCLINECORE;		// FIXME
 					}
 					// FIXME general extensibility
 				}
-				if (pivotResource == null) {
+				if (asResource == null) {
 					throw new CoreException(new Status(IStatus.ERROR, OCLExamplesCommonPlugin.PLUGIN_ID, "Failed to load"));
 				}
 //				
@@ -386,7 +386,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 				//		Ecore XMI resource with *.ecore URI, possibly in URIResourceMap as *.ecore
 				//		OCLinEcore CS resource with *.ecore URI, in URIResourceMap as *.ecore.oclinecore
 				//
-				csResource.updateFrom(pivotResource, getMetaModelManager());
+				csResource.updateFrom(asResource, getMetaModelManager());
 //				csResource.save(null);
 				Resource xtextResource = csResource;		
 				
@@ -402,7 +402,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 				}
 				xtextResource.unload();
 				resourceSet.getResources().remove(xtextResource);
-//				resourceSet.getResources().remove(pivotResource);
+//				resourceSet.getResources().remove(asResource);
 //				resourceSet.getResources().remove(xmiResource);
 				inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 			}

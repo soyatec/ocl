@@ -199,8 +199,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 		Map<String, ExpressionInOCL> constraintMap = new HashMap<String, ExpressionInOCL>();
 
 		// parse the contents as an OCL document
-		Resource pivotResource = ocl.parse(uri);
-	    for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		Resource asResource = ocl.parse(uri);
+	    for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 	    	EObject next = tit.next();
 	    	if (next instanceof Constraint) {
 		        Constraint constraint = (Constraint)next;

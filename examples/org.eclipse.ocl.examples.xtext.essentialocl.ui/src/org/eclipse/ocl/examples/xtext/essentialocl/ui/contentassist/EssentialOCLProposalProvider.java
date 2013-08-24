@@ -142,7 +142,7 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 				BaseCSResource csResource = (BaseCSResource) eResource;
 				try {
 					ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
-					CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(csResource, null);
+					CS2PivotResourceAdapter resourceAdapter = csResource.getCS2ASAdapter(null);
 					resourceAdapter.refreshPivotMappings(diagnosticsConsumer);
 				}
 				catch (Exception exception) {

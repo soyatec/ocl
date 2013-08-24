@@ -59,8 +59,8 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 		}
 
 		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable URI uri) {
-			Resource pivotResource = ((CompleteOCLCSResource)resource).getPivotResource(metaModelManager);
-			List<EObject> contents = pivotResource.getContents();
+			Resource asResource = ((CompleteOCLCSResource)resource).getPivotResource(metaModelManager);
+			List<EObject> contents = asResource.getContents();
 			if (contents.size() <= 0) {
 				return null;
 			}

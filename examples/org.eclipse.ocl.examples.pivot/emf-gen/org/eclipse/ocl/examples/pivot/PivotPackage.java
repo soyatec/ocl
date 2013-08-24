@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,7 +50,7 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "pivot"; //$NON-NLS-1$
+	@NonNull String eNAME = "pivot"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
@@ -57,7 +58,7 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot"; //$NON-NLS-1$
+	@NonNull String eNS_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -65,7 +66,7 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "pivot"; //$NON-NLS-1$
+	@NonNull String eNS_PREFIX = "pivot"; //$NON-NLS-1$
 
 	/**
 	 * The package content type ID.
@@ -73,7 +74,7 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eCONTENT_TYPE = "org.eclipse.ocl.examples.pivot"; //$NON-NLS-1$
+	@NonNull String eCONTENT_TYPE = "org.eclipse.ocl.examples.pivot"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.
@@ -81,7 +82,7 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PivotPackage eINSTANCE = org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl.init();
+	@SuppressWarnings("null")@NonNull PivotPackage eINSTANCE = org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl <em>OCL Expression</em>}' class.

@@ -92,13 +92,13 @@ public class OCLinEcoreDocument extends BaseDocument
 				public XMLResource exec(XtextResource resource) throws Exception {
 					assert resource != null;
 					BaseCSResource csResource = (BaseCSResource)resource;
-					CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter(csResource);
+					CS2PivotResourceAdapter adapter = csResource.findCS2ASAdapter();
 					if (adapter == null) {
 						return null;
 					}
-					XMLResource pivotResource = (XMLResource) adapter.getPivotResource(csResource);
-					checkForErrors(pivotResource);
-					return pivotResource;
+					XMLResource asResource = (XMLResource) adapter.getPivotResource(csResource);
+					checkForErrors(asResource);
+					return asResource;
 				}
 			});
 	}
@@ -112,15 +112,15 @@ public class OCLinEcoreDocument extends BaseDocument
 			{
 				public Object exec(XtextResource resource) throws Exception {
 					assert resource != null;
-					XMLResource pivotResource = getPivotResouce();
-					if (pivotResource != null) {
-						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+					XMLResource asResource = getPivotResouce();
+					if (asResource != null) {
+						CS2PivotResourceAdapter adapter = ((BaseCSResource)resource).findCS2ASAdapter();
 						if (adapter != null) {
 							Resource csResource = adapter.getTarget();
 							checkForErrors(csResource);
 							Map<String,Object> options = new HashMap<String,Object>();
 							options.put(OCLConstants.OCL_DELEGATE_URI, exportDelegateURI);
-							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
+							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), asResource, ecoreURI, options);
 		//					ResourceSetImpl resourceSet = new ResourceSetImpl();
 		//					XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
 		//					ecoreResource.getContents().addAll(ecoreContents);
@@ -137,9 +137,9 @@ public class OCLinEcoreDocument extends BaseDocument
 	 * Write the XMI representation of the Pivot to be saved.
 	 */
 	public void saveAsPivot(@NonNull StringWriter writer) throws CoreException, IOException {
-		XMLResource pivotResource = getPivotResouce();
-		if (pivotResource != null) {
-			pivotResource.save(writer, null);
+		XMLResource asResource = getPivotResouce();
+		if (asResource != null) {
+			asResource.save(writer, null);
 		}
 	}
 
@@ -151,11 +151,11 @@ public class OCLinEcoreDocument extends BaseDocument
 			{
 				public Object exec(XtextResource resource) throws Exception {
 					assert resource != null;
-					XMLResource pivotResource = getPivotResouce();
-					if (pivotResource != null) {
-						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+					XMLResource asResource = getPivotResouce();
+					if (asResource != null) {
+						CS2PivotResourceAdapter adapter = ((BaseCSResource)resource).findCS2ASAdapter();
 						if (adapter != null) {
-							List<EObject> umlContents = Pivot2UML.createResource(adapter.getMetaModelManager(), pivotResource);
+							List<EObject> umlContents = Pivot2UML.createResource(adapter.getMetaModelManager(), asResource);
 							ResourceSetImpl resourceSet = new ResourceSetImpl();
 			//				URI umlURI = URI.createURI("internal.uml");
 							UMLResource umlResource = (UMLResource) resourceSet.createResource(umlURI);
@@ -177,14 +177,14 @@ public class OCLinEcoreDocument extends BaseDocument
 			{
 				public Object exec(XtextResource resource) throws Exception {
 					assert resource != null;
-					XMLResource pivotResource = getPivotResouce();
-					if (pivotResource != null) {
-						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
+					XMLResource asResource = getPivotResouce();
+					if (asResource != null) {
+						CS2PivotResourceAdapter adapter = ((BaseCSResource)resource).findCS2ASAdapter();
 						if (adapter != null) {
 							Map<String,Object> options = new HashMap<String,Object>();
 							options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
 							options.put(OCLConstants.OCL_DELEGATE_URI, exportDelegateURI);
-							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
+							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), asResource, ecoreURI, options);
 							ecoreResource.save(writer, null);
 							checkForErrors(ecoreResource);
 						}

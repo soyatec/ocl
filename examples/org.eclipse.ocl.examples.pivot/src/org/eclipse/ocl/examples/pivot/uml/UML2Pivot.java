@@ -345,12 +345,12 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			Root pivotRoot2 = pivotRoot;
 			if (pivotRoot2 == null) {
 				pivotRoot2 = root.getPivotRoot();
-				Resource pivotResource = pivotRoot.eResource();
-				if (pivotResource == null) {
+				Resource asResource = pivotRoot.eResource();
+				if (asResource == null) {
 					throw new IllegalStateException("Missing containing resource");
 				}
-//				installAliases(pivotResource);
-				metaModelManager.installResource(pivotResource);
+//				installAliases(asResource);
+				metaModelManager.installResource(asResource);
 			}
 			return pivotRoot2;
 		}
@@ -539,9 +539,9 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			Root pivotRoot2 = pivotRoot;
 			if (pivotRoot2 == null) {
 				URI pivotURI = createPivotURI();
-				Resource pivotResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+				Resource asResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 				try {
-					pivotRoot2 = installDeclarations(pivotResource);					
+					pivotRoot2 = installDeclarations(asResource);					
 //					Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
 //					for (EGenericType eGenericType : genericTypes) {
 //						Type pivotType = resolveType(resolvedSpecializations, eGenericType);
@@ -567,10 +567,10 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					throw new ParserException("Failed to load '" + pivotURI + "' : " + e.getMessage(), e);
 				}
 				if (errors != null) {
-					pivotResource.getErrors().addAll(errors);
+					asResource.getErrors().addAll(errors);
 				}
-				installAliases(pivotResource);
-				metaModelManager.installResource(pivotResource);
+				installAliases(asResource);
+				metaModelManager.installResource(asResource);
 			}
 			return pivotRoot2;
 		}
@@ -615,11 +615,11 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			return this;
 		}
 
-		protected void installAliases(@NonNull Resource pivotResource) {
+		protected void installAliases(@NonNull Resource asResource) {
 			AliasAdapter umlAdapter = AliasAdapter.findAdapter(umlResource);
 			if (umlAdapter != null) {
 				Map<EObject, String> umlAliasMap = umlAdapter.getAliasMap();
-				AliasAdapter pivotAdapter = AliasAdapter.getAdapter(pivotResource);
+				AliasAdapter pivotAdapter = AliasAdapter.getAdapter(asResource);
 				Map<EObject, String> pivotAliasMap = pivotAdapter.getAliasMap();
 				for (EObject eObject : umlAliasMap.keySet()) {
 					String alias = umlAliasMap.get(eObject);
@@ -643,10 +643,10 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 								Inner importedAdapter = new Inner(importedResource, this);
 								importedResource.eAdapters().add(importedAdapter);
 								URI pivotURI = importedAdapter.createPivotURI();
-								Resource pivotResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
-								importedAdapter.installDeclarations(pivotResource);
+								Resource asResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+								importedAdapter.installDeclarations(asResource);
 								adapter = importedAdapter;
-								metaModelManager.installResource(pivotResource);
+								metaModelManager.installResource(asResource);
 							}
 	//					adapter.getPivotRoot();
 						}
@@ -971,7 +971,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		if (uri == null) {
 			throw new IllegalStateException("Missing resource URI");
 		}
-		return PivotUtil.getPivotURI(uri);
+		return PivotUtil.getASURI(uri);
 	}
 
 	public void dispose() {
@@ -1005,10 +1005,10 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		return DomainUtil.nonNullState(umlResource.getURI());
 	}
 
-	protected @NonNull Root installDeclarations(@NonNull Resource pivotResource) {
-		URI pivotURI = pivotResource.getURI();
+	protected @NonNull Root installDeclarations(@NonNull Resource asResource) {
+		URI pivotURI = asResource.getURI();
 		Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), umlURI != null ? umlURI.toString() : pivotURI.toString());
-		pivotResource.getContents().add(pivotRoot2);
+		asResource.getContents().add(pivotRoot2);
 		UML2PivotDeclarationSwitch declarationPass = getDeclarationPass();
 		List<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
 		for (EObject eObject : umlResource.getContents()) {

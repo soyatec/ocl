@@ -110,8 +110,8 @@ public class ConstraintMerger extends AbstractProjectComponent
 		Root pivotRoot = ecore2pivot.getPivotRoot();
 //		metaModelManager.setPivotMetaModel(pivotRoot.getNestedPackage().get(0));
 //		metaModelManager.setLibraryLoadInProgress(false);
-		Resource pivotResource = DomainUtil.nonNullState(pivotRoot.eResource());
-//FIXME		diagnoseErrors(pivotResource);
+		Resource asResource = DomainUtil.nonNullState(pivotRoot.eResource());
+//FIXME		diagnoseErrors(asResource);
 //		URI fileURI = URI.createPlatformResourceURI(uri, true);
 		try {
 			EssentialOCLCSResource xtextResource = DomainUtil.nonNullState((EssentialOCLCSResource) metaModelManager.getExternalResourceSet().createResource(inputURI, null));
@@ -130,7 +130,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 //			primaryPivotResources.removeAll(libraryPivotResources);
 //			for (Resource secondaryPivotResource : secondaryPivotResources) {
 			for (Resource resource : metaModelManager.getPivotResourceSet().getResources()) {
-				if (resource != pivotResource) {
+				if (resource != asResource) {
 					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 						EObject eObject = tit.next();
 						if ((eObject instanceof Library) || (eObject instanceof Orphanage)) {
@@ -142,7 +142,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 							for (DomainType dType : typeServer.getPartialTypes()) {
 								if (dType instanceof Type) {
 									Type primaryType = (Type)dType;
-									if (primaryType.eResource() == pivotResource) {
+									if (primaryType.eResource() == asResource) {
 										mergeType(metaModelManager, primaryType, mergeType);
 										break;
 									}
@@ -161,8 +161,8 @@ public class ConstraintMerger extends AbstractProjectComponent
 //					resources.remove(resource);
 //				}
 //			}
-//				System.out.println("Pivot2Ecore " + pivotResource.getURI());
-			Resource ecoreResource2 = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+//				System.out.println("Pivot2Ecore " + asResource.getURI());
+			Resource ecoreResource2 = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, null);
 			ctx.set(getModelSlot(), ecoreResource2);
 			projectDescriptor.useModelsAndPackages(ecoreResource2);
 			

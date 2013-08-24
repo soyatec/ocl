@@ -34,8 +34,8 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
+import org.eclipse.ocl.examples.pivot.utilities.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.xtext.console.ColorManager;
 import org.eclipse.ocl.examples.xtext.console.OCLConsole;
 import org.eclipse.ocl.examples.xtext.console.OCLConsolePage;
@@ -159,7 +159,7 @@ public class ConsoleTests extends PivotTestCase
 	public TestConsolePage consolePage;
 	public MetaModelManager metaModelManager;
 	public OCL ocl;
-	public PivotResource pivotResource;
+	public ASResource asResource;
 	public Type englishClass;
 	public Type frenchClass;
 	public Type germanClass;
@@ -197,8 +197,8 @@ public class ConsoleTests extends PivotTestCase
 
 		URI testModelURI = getTestModelURI("model/InternationalizedClasses.uml");
         Resource umlResource = resourceSet.getResource(testModelURI, true);
-        pivotResource = ocl.uml2pivot(umlResource);
-        Root root = (Root) pivotResource.getContents().get(0);
+        asResource = ocl.uml2pivot(umlResource);
+        Root root = (Root) asResource.getContents().get(0);
         org.eclipse.ocl.examples.pivot.Package modelPackage = DomainUtil.getNamedElement(root.getNestedPackage(), "Model");
         englishClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "EnglishClass");
         frenchClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "FrenchClass");

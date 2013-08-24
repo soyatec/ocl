@@ -153,7 +153,7 @@ public class LoadTests extends XtextTestCase
 //		}
 		finally {
 			if (xtextResource instanceof BaseCSResource) {
-				CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter((BaseCSResource)xtextResource, null);
+				CS2PivotResourceAdapter adapter = ((BaseCSResource)xtextResource).getCS2ASAdapter(null);
 				adapter.dispose();
 			}
 			metaModelManager.dispose();
@@ -202,7 +202,7 @@ public class LoadTests extends XtextTestCase
 		}
 		finally {
 			if (xtextResource instanceof BaseCSResource) {
-				CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter((BaseCSResource)xtextResource, null);
+				CS2PivotResourceAdapter adapter = ((BaseCSResource)xtextResource).getCS2ASAdapter(null);
 				adapter.dispose();
 			}
 			metaModelManager.dispose();
@@ -318,8 +318,8 @@ public class LoadTests extends XtextTestCase
 				for (Resource uResource : importedResources) {
 					UML2Pivot anAdapter = UML2Pivot.getAdapter(uResource, metaModelManager);
 					Root pivotModel = anAdapter.getPivotRoot();
-					Resource pivotResource = pivotModel.eResource();
-					allResources.add(pivotResource);
+					Resource asResource = pivotModel.eResource();
+					allResources.add(asResource);
 				}
 			}
 			OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
@@ -327,15 +327,15 @@ public class LoadTests extends XtextTestCase
 //			int parses = 0;
 			StringBuilder s = new StringBuilder();
 			s.append("Parsing errors");
-			for (Resource pivotResource : allResources) {
-				assertNoResourceErrors("Load failed", pivotResource);
-				@SuppressWarnings("unused") URI savedURI = pivotResource.getURI();
-//				pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+			for (Resource asResource : allResources) {
+				assertNoResourceErrors("Load failed", asResource);
+				@SuppressWarnings("unused") URI savedURI = asResource.getURI();
+//				asResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 //				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
-//					pivotResource.save(null);
+//					asResource.save(null);
 //				}
-//				pivotResource.setURI(savedURI);
-				for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+//				asResource.setURI(savedURI);
+				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
 					if (validateEmbeddedOCL && (eObject instanceof Constraint)) {
 						Constraint constraint = (Constraint)eObject;
@@ -355,8 +355,8 @@ public class LoadTests extends XtextTestCase
 				}
 			}
 //			System.out.printf("Exceptions %d, Parses %d\n", exceptions, parses);
-			for (Resource pivotResource : allResources) {
-				assertNoValidationErrors("Overall validation", pivotResource);
+			for (Resource asResource : allResources) {
+				assertNoValidationErrors("Overall validation", asResource);
 			}
 			assertEquals(s.toString(), 0, exceptions);
 
@@ -446,7 +446,7 @@ public class LoadTests extends XtextTestCase
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(null);
 		assertNoResourceErrors("Load failed", xtextResource);
-		Resource pivotResource = xtextResource.getPivotResource(null);
+		Resource asResource = xtextResource.getPivotResource(null);
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 //FIXME		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
@@ -456,10 +456,10 @@ public class LoadTests extends XtextTestCase
 		xtextResource.setURI(inputURI);
 		assertNoResourceErrors("Save failed", xtextResource);
 		saveAsXMI(xtextResource, cstURI);
-		pivotResource.setURI(pivotURI);
-		assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-		pivotResource.save(null);
-		return pivotResource;
+		asResource.setURI(pivotURI);
+		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
+		asResource.save(null);
+		return asResource;
 	}
 	
 	public Resource doLoad_Pivot(String stem, String extension) throws IOException {
@@ -475,16 +475,16 @@ public class LoadTests extends XtextTestCase
 			metaModelManager = new MetaModelManager();
 		}
 		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
-		Resource pivotResource = null;
+		Resource asResource = null;
 		try {
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
-			pivotResource = resourceSet.getResource(inputURI, true);
+			asResource = resourceSet.getResource(inputURI, true);
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
-			assertNoResourceErrors("Load failed", pivotResource);
+			assertNoResourceErrors("Load failed", asResource);
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
-			assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
+			assertNoUnresolvedProxies("Unresolved proxies", asResource);
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
-			assertNoValidationErrors("Validation errors", pivotResource.getContents().get(0));
+			assertNoValidationErrors("Validation errors", asResource.getContents().get(0));
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 //			xtextResource.setURI(output2URI);
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
@@ -500,7 +500,7 @@ public class LoadTests extends XtextTestCase
 //			}
 //			unloadPivot(metaModelManager);
 		}
-		return pivotResource;
+		return asResource;
 	}
 
 	protected void saveAsXMI(Resource resource, URI xmiURI) throws IOException {
@@ -525,7 +525,7 @@ public class LoadTests extends XtextTestCase
 	@Override
 	protected void tearDown() throws Exception {
 		if (xtextResource != null) {
-			CS2PivotResourceAdapter cs2PivotAdapter = CS2PivotResourceAdapter.findAdapter(xtextResource);
+			CS2PivotResourceAdapter cs2PivotAdapter = xtextResource.findCS2ASAdapter();
 			if (cs2PivotAdapter != null) {
 				cs2PivotAdapter.dispose();
 				cs2PivotAdapter.getMetaModelManager().dispose();
@@ -567,12 +567,12 @@ public class LoadTests extends XtextTestCase
 	public void testLoad_Expression_oclinecore() throws IOException, InterruptedException {
 		metaModelManager = new MetaModelManager();
 //		metaModelManager.loadLibrary(OCLstdlib.INSTANCE);
-		Resource pivotResource = doLoad_Concrete("Expression", "oclinecore");
+		Resource asResource = doLoad_Concrete("Expression", "oclinecore");
 		String ecoreName = "Expression" + ".saved.ecore";
 		URI ecoreURI = getProjectFileURI(ecoreName);
 		Map<String,Object> options = new HashMap<String,Object>();
 		options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
-		XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, options);
+		XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, options);
 		ecoreResource.save(null);
 	}	
 
@@ -613,9 +613,9 @@ public class LoadTests extends XtextTestCase
 						"	}\n" +
 						"}\n";
 		createOCLinEcoreFile("Refresh.oclinecore", testFile);
-		Resource pivotResource = doLoad_Concrete("Refresh", "oclinecore");
-		assertNoValidationErrors("First validation", pivotResource);
-		CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
+		Resource asResource = doLoad_Concrete("Refresh", "oclinecore");
+		assertNoValidationErrors("First validation", asResource);
+		CS2PivotResourceAdapter resourceAdapter = xtextResource.getCS2ASAdapter(null);
 		try {
 			resourceAdapter.refreshPivotMappings(new ListBasedDiagnosticConsumer());
 		} catch (Exception e) {
@@ -623,7 +623,7 @@ public class LoadTests extends XtextTestCase
 			e.printStackTrace();
 		}
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-		assertNoValidationErrors("Second validation", pivotResource);
+		assertNoValidationErrors("Second validation", asResource);
 	}
 
 	public void testLoad_RoyalAndLoyal_ecore() throws IOException, InterruptedException {
@@ -633,13 +633,13 @@ public class LoadTests extends XtextTestCase
 	public void testLoad_oclstdlib_oclstdlib() throws IOException, InterruptedException {
 		metaModelManager = new MetaModelManager();
 //		StandardLibraryContribution.REGISTRY.put(MetaModelManager.DEFAULT_OCL_STDLIB_URI, StandardLibraryContribution.NULL);
-		Resource pivotResource = doLoad_Concrete("oclstdlib", "oclstdlib");
-//		checkMonikers(pivotResource);
+		Resource asResource = doLoad_Concrete("oclstdlib", "oclstdlib");
+//		checkMonikers(asResource);
 		String ecoreName = "oclstdlib" + ".saved.ecore";
 		URI ecoreURI = getProjectFileURI(ecoreName);
 		Map<String,Object> options = new HashMap<String,Object>();
 		options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
-		XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, options);
+		XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, options);
 		ecoreResource.save(null);
 	}
 
@@ -716,9 +716,9 @@ public class LoadTests extends XtextTestCase
 	}
 	
 	public void testLoad_Bug328485_oclinecore() throws IOException, InterruptedException {
-		Resource pivotResource = doLoad_Concrete("Bug328485", "oclinecore");
+		Resource asResource = doLoad_Concrete("Bug328485", "oclinecore");
 		VariableDeclaration referredVariable = null;
-		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext();  ) {
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext();  ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof VariableExp) {
 				assertNull(referredVariable);
@@ -924,9 +924,9 @@ public class LoadTests extends XtextTestCase
 		XMLResource ecoreResource = (XMLResource) metaModelManager2.getExternalResourceSet().createResource(ecoreURI, null);
 		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileA), null);
 		Ecore2Pivot conversion = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager2);
-		Resource pivotResource = conversion.getPivotRoot().eResource();
-		assertEquals(1, pivotResource.getContents().size());
-		Root pivotRoot1 = (Root) pivotResource.getContents().get(0);
+		Resource asResource = conversion.getPivotRoot().eResource();
+		assertEquals(1, asResource.getContents().size());
+		Root pivotRoot1 = (Root) asResource.getContents().get(0);
 		assertEquals(ecoreFileName, pivotRoot1.getName());
 		assertEquals(1, pivotRoot1.getNestedPackage().size());
 		org.eclipse.ocl.examples.pivot.Package pivotPackage1 = pivotRoot1.getNestedPackage().get(0);
@@ -939,9 +939,9 @@ public class LoadTests extends XtextTestCase
 //
 		ecoreResource.unload();
 		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileB), null);
-		conversion.update(pivotResource, ecoreResource.getContents());
-		assertEquals(1, pivotResource.getContents().size());
-		Root pivotRoot2 = (Root) pivotResource.getContents().get(0);
+		conversion.update(asResource, ecoreResource.getContents());
+		assertEquals(1, asResource.getContents().size());
+		Root pivotRoot2 = (Root) asResource.getContents().get(0);
 		assertEquals(ecoreFileName, pivotRoot2.getName());
 		assertEquals(1, pivotRoot2.getNestedPackage().size());
 		org.eclipse.ocl.examples.pivot.Package pivotPackage2 = pivotRoot2.getNestedPackage().get(0);
@@ -990,9 +990,9 @@ public class LoadTests extends XtextTestCase
 		XMLResource ecoreResource = (XMLResource) metaModelManager2.getExternalResourceSet().createResource(ecoreURI, null);
 		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileXXX), null);
 		Ecore2Pivot conversion = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager2);
-		Resource pivotResource = conversion.getPivotRoot().eResource();
-		assertEquals(1, pivotResource.getContents().size());
-		Root pivotRootXXX = (Root) pivotResource.getContents().get(0);
+		Resource asResource = conversion.getPivotRoot().eResource();
+		assertEquals(1, asResource.getContents().size());
+		Root pivotRootXXX = (Root) asResource.getContents().get(0);
 		assertEquals(ecoreFileName, pivotRootXXX.getName());
 		assertEquals(1, pivotRootXXX.getNestedPackage().size());
 		org.eclipse.ocl.examples.pivot.Package pivotPackageXXX = pivotRootXXX.getNestedPackage().get(0);
@@ -1015,9 +1015,9 @@ public class LoadTests extends XtextTestCase
 //
 		ecoreResource.unload();
 		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileYYY), null);
-		conversion.update(pivotResource, ecoreResource.getContents());
-		assertEquals(1, pivotResource.getContents().size());
-		Root pivotRootYYY = (Root) pivotResource.getContents().get(0);
+		conversion.update(asResource, ecoreResource.getContents());
+		assertEquals(1, asResource.getContents().size());
+		Root pivotRootYYY = (Root) asResource.getContents().get(0);
 		assertEquals(ecoreFileName, pivotRootYYY.getName());
 		assertEquals(1, pivotRootYYY.getNestedPackage().size());
 		org.eclipse.ocl.examples.pivot.Package pivotPackageYYY = pivotRootYYY.getNestedPackage().get(0);

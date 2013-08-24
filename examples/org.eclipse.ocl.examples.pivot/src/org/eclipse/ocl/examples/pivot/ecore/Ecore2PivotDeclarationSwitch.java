@@ -75,7 +75,7 @@ import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
@@ -450,7 +450,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 			pivotElement.setNsPrefix(null);
 		}
 		if (!(eObject2.eContainer() instanceof EAnnotation)) {
-			String moniker = Pivot2Moniker.toString(pivotElement);
+			String moniker = AS2Moniker.toString(pivotElement);
 			AliasAdapter adapter = AliasAdapter.getAdapter(eObject2.eResource());
 			if (adapter != null) {
 				adapter.getAliasMap().put(eObject2, moniker);

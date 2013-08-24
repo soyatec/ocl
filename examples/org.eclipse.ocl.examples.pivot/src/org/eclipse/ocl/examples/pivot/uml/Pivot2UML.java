@@ -36,9 +36,9 @@ import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 
 public class Pivot2UML extends AbstractConversion
 {
-	public static List<EObject> createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource pivotResource) {
+	public static List<EObject> createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource asResource) {
 		@SuppressWarnings("null")
-		@NonNull List<EObject> pivotRoots = pivotResource.getContents();
+		@NonNull List<EObject> pivotRoots = asResource.getContents();
 		Pivot2UML converter = new Pivot2UML(metaModelManager);
 		return converter.convertAll(pivotRoots);
 	}

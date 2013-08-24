@@ -69,13 +69,13 @@ public class SerializeTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		XtextResource xtextResource = null;
 		try {
-			Resource pivotResource = ocl1.ecore2pivot(ecoreResource);
-			assertNoResourceErrors("Normalisation failed", pivotResource);
-			assertNoValidationErrors("Normalisation invalid", pivotResource);
+			Resource asResource = ocl1.ecore2pivot(ecoreResource);
+			assertNoResourceErrors("Normalisation failed", asResource);
+			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
 			//		
-			xtextResource = pivot2cs(ocl1, resourceSet, pivotResource, outputURI);
+			xtextResource = pivot2cs(ocl1, resourceSet, asResource, outputURI);
 			resourceSet.getResources().clear();
 		}
 		finally {
@@ -105,7 +105,7 @@ public class SerializeTests extends XtextTestCase
 			//
 			//
 			//
-	//		assertSameModel(pivotResource, pivotResource2);
+	//		assertSameModel(asResource, pivotResource2);
 			Resource referenceResource = loadEcore(referenceURI);
 			if (doCompare) {	// Workaround for Bug 354621
 				assertSameModel(referenceResource, ecoreResource2);		
@@ -135,13 +135,13 @@ public class SerializeTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		XtextResource xtextResource = null;
 		try {
-			Resource pivotResource = getPivotFromUML(metaModelManager1, umlResource);
+			Resource asResource = getPivotFromUML(metaModelManager1, umlResource);
 			//
 			//	Pivot to CS
 			/*		
 			String outputName = stem + ".serialized.oclinecore";
 			URI outputURI = getProjectFileURI(outputName);
-			xtextResource = pivot2cs(ocl1, resourceSet, pivotResource, outputURI);
+			xtextResource = pivot2cs(ocl1, resourceSet, asResource, outputURI);
 			resourceSet.getResources().clear();
 			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.getResource(outputURI, true);
 			assertNoResourceErrors("Reload failed", xtextResource2);
@@ -169,7 +169,7 @@ public class SerializeTests extends XtextTestCase
 		//
 		//
 		//
-		assertSameModel(pivotResource, pivotResource2);
+		assertSameModel(asResource, pivotResource2);
 		UML2Ecore2Pivot uml2Ecore2Pivot = UML2Ecore2Pivot.getAdapter(umlResource, metaModelManager);	// FIXME Use UML2Pivot
 		Resource ecoreResource = uml2Ecore2Pivot.getEcoreResource();
 		assertSameModel(ecoreResource, ecoreResource2);		*/
@@ -182,10 +182,10 @@ public class SerializeTests extends XtextTestCase
 //		assertNull(problem);
 		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
 		Root pivotRoot = uml2Pivot.getPivotRoot();
-		Resource pivotResource = pivotRoot.eResource();
-		assertNoResourceErrors("Normalisation failed", pivotResource);
-		assertNoValidationErrors("Normalisation invalid", pivotResource);
-		return pivotResource;
+		Resource asResource = pivotRoot.eResource();
+		assertNoResourceErrors("Normalisation failed", asResource);
+		assertNoValidationErrors("Normalisation invalid", asResource);
+		return asResource;
 	}
 
 	@SuppressWarnings("null")

@@ -22,8 +22,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.PivotSaver.LocateVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.PivotSaver.ResolveVisitor;
 
 public class PivotResourceImpl extends AbstractASResourceImpl
 {
@@ -35,21 +33,21 @@ public class PivotResourceImpl extends AbstractASResourceImpl
 	public PivotResourceImpl(URI uri) {
 		super(uri);
 	}
-
-	public @NonNull AS2IDVisitor createIDVisitor(@NonNull AS2ID as2id) {
-		return new AS2IDVisitor(as2id);
-	}
-
-	public @NonNull LocateVisitor createLocateVisitor(@NonNull AbstractPivotSaver saver) {
-		return new LocateVisitor(saver);
-	}
 	
-	public @NonNull Pivot2MonikerVisitor createMonikerVisitor(@NonNull Abstract2Moniker pivot2moniker) {
-		return new Pivot2MonikerVisitor(pivot2moniker);
+	public @NonNull AS2MonikerVisitor createAS2MonikerVisitor(@NonNull AS2Moniker as2moniker) {
+		return new AS2MonikerVisitor(as2moniker);
 	}
 
-	public @NonNull ResolveVisitor createResolveVisitor(@NonNull AbstractPivotSaver saver) {
-		return new ResolveVisitor(saver);
+	public @NonNull AS2XMIidVisitor createAS2XMIidVisitor(@NonNull AS2XMIid as2id) {
+		return new AS2XMIidVisitor(as2id);
+	}
+
+	public @NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver saver) {
+		return new ASSaverLocateVisitor(saver);
+	}
+
+	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver saver) {
+		return new ASSaverResolveVisitor(saver);
 	}
 
 	@Override

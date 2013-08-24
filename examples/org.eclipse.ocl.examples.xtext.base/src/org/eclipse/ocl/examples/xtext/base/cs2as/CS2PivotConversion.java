@@ -719,8 +719,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			if (eObject instanceof Pivotable) {
 				Element pivotElement = ((Pivotable)eObject).getPivot();
 				if (pivotElement != null) {
-					Resource pivotResource = pivotElement.eResource();
-					if (pivotResource == null) {
+					Resource asResource = pivotElement.eResource();
+					if (asResource == null) {
 						installRootElement(csResource, pivotElement);
 					}
 				}
@@ -755,10 +755,10 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	}
 
 	public void installRootElement(@NonNull Resource csResource, @NonNull Element pivotElement) {
-		Resource pivotResource = converter.getPivotResource(csResource);
-		if (pivotResource != null) {
-			pivotResource.getContents().add(pivotElement);
-			metaModelManager.installResource(pivotResource);
+		Resource asResource = converter.getPivotResource(csResource);
+		if (asResource != null) {
+			asResource.getContents().add(pivotElement);
+			metaModelManager.installResource(asResource);
 		}
 	}
 

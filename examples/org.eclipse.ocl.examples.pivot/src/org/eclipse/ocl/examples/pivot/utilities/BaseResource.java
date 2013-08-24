@@ -30,5 +30,5 @@ public interface BaseResource extends Resource
 	@Nullable ParserContext getParserContext();
 	@NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager);
 	void setParserContext(@Nullable ParserContext parserContext);
-	void updateFrom(@NonNull Resource pivotResource, @NonNull MetaModelManager metaModelManager);
+	void updateFrom(@NonNull Resource asResource, @NonNull MetaModelManager metaModelManager);
 }

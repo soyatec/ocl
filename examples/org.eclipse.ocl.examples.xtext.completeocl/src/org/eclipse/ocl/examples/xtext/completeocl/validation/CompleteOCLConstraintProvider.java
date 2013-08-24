@@ -109,7 +109,7 @@ public class CompleteOCLConstraintProvider extends LoadableConstraintProvider
 			logger.error("Failed to load '" + uri + message);
 			return false;
 		}
-		Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
-		return installResource(pivotResource, categories);
+		Resource asResource = xtextResource.getPivotResource(metaModelManager);
+		return installResource(asResource, categories);
 	}
 }

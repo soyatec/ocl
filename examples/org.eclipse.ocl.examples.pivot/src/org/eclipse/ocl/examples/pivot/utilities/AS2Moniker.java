@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010, 2013 E.D.Willink and others.
+ * Copyright (c) 2010, 2012 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: Abstract2Moniker.java,v 1.12 2011/05/22 21:06:19 ewillink Exp $
+ * $Id: Pivot2Moniker.java,v 1.4 2011/04/20 19:02:46 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 
@@ -45,9 +45,18 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 
-public abstract class Abstract2Moniker implements PivotConstants
-{			
-	private static final Logger logger = Logger.getLogger(Abstract2Moniker.class);
+public class AS2Moniker implements PivotConstants
+{
+	public static @NonNull String toString(@NonNull Element pivotElement) {
+		AS2Moniker moniker = new AS2Moniker(pivotElement);
+		moniker.appendElement(pivotElement);
+		String string = moniker.toString();
+		assert !"".equals(string) : "Zero length moniker for '" + pivotElement.eClass().getName() + "'";
+		assert string != null;
+		return string;
+	}
+	
+	private static final Logger logger = Logger.getLogger(AS2Moniker.class);
 
 	/**
 	 * The CS element for which a moniker is required.
@@ -62,14 +71,14 @@ public abstract class Abstract2Moniker implements PivotConstants
 	/**
 	 * A pivot 2 moniker conversion visitor, if needed.
 	 */
-	private Pivot2MonikerVisitor pivotVisitor = null;
+//	private AS2MonikerVisitor pivotVisitor = null;
 
 	/**
 	 * TemplateParameters that already appear in the result and do not need re-qualification.
 	 */
 	private List<TemplateParameter> emittedParameters = null;
-	
-	protected Abstract2Moniker(EObject target) {
+
+	public AS2Moniker(@NonNull Element target) {
 		this.target = target;
 	}
 
@@ -96,18 +105,8 @@ public abstract class Abstract2Moniker implements PivotConstants
 			append(UNRESOLVED_PROXY_MARKER);	
 		}
 		else {
-			if (pivotVisitor == null) {
-				Resource resource = element.eResource();
-				if (resource instanceof PivotResource) {
-					pivotVisitor = ((PivotResource)resource).createMonikerVisitor(this);
-				}
-				else {
-					pivotVisitor = new Pivot2MonikerVisitor(this);
-				}
-			}
-			@SuppressWarnings("null")
-			@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;
-			element.accept(nonNullVisitor);
+			AS2MonikerVisitor as2MonikerVisitor = createAS2MonikerVisitor(element);
+			element.accept(as2MonikerVisitor);
 		}		
 	}
 	
@@ -118,25 +117,13 @@ public abstract class Abstract2Moniker implements PivotConstants
 		else if (element == null) {
 			append(NULL_MARKER);	
 		}
-		else if (templateBindings != null) {
-			Pivot2MonikerVisitor savedPivotVisitor = pivotVisitor;
-			try {
-				pivotVisitor = new Pivot2MonikerVisitor(this, templateBindings);
-				@SuppressWarnings("null")
-				@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;
-				element.accept(nonNullVisitor);
-			}
-			finally {
-				pivotVisitor = savedPivotVisitor;
-			}
+		else if (templateBindings != null) {			// FIXME is this needed
+			AS2MonikerVisitor nestedAS2MonikerVisitor = new AS2MonikerVisitor(this, templateBindings);
+			element.accept(nestedAS2MonikerVisitor);
 		}
 		else {
-			if (pivotVisitor == null) {
-				pivotVisitor = new Pivot2MonikerVisitor(this);
-			}
-			@SuppressWarnings("null")
-			@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;
-			element.accept(nonNullVisitor);
+			AS2MonikerVisitor as2MonikerVisitor = createAS2MonikerVisitor(element);
+			element.accept(as2MonikerVisitor);
 		}
 	}
 
@@ -284,6 +271,19 @@ public abstract class Abstract2Moniker implements PivotConstants
 			}
 		}
 	}
+
+	public void appendTemplateArguments(List<? extends ParameterableElement> templateArguments, Map<TemplateParameter, ParameterableElement> templateBindings) {
+		if (!templateArguments.isEmpty()) {
+			append(TEMPLATE_BINDING_PREFIX);
+			String prefix = ""; //$NON-NLS-1$
+			for (ParameterableElement templateArgument : templateArguments) {
+				append(prefix);
+				appendElement(templateArgument, templateBindings);
+				prefix = TEMPLATE_BINDING_SEPARATOR;
+			}
+			append(TEMPLATE_BINDING_SUFFIX);
+		}
+	}
 	
 	public void appendTemplateBindings(TemplateableElement templateableElement, Map<TemplateParameter, ParameterableElement> bindings) {
 		List<TemplateBinding> templateBindings = templateableElement.getTemplateBinding();
@@ -371,6 +371,18 @@ public abstract class Abstract2Moniker implements PivotConstants
 			prefix = TUPLE_SIGNATURE_PART_SEPARATOR;
 		}
 		append(TUPLE_SIGNATURE_SUFFIX);
+	}
+
+	protected @NonNull AS2MonikerVisitor createAS2MonikerVisitor(@NonNull Element element) {
+		AS2MonikerVisitor as2MonikerVisitor;
+		Resource resource = element.eResource();
+		if (resource instanceof ASResource) {
+			as2MonikerVisitor = ((ASResource)resource).createAS2MonikerVisitor(this);
+		}
+		else {
+			as2MonikerVisitor = new AS2MonikerVisitor(this);
+		}
+		return as2MonikerVisitor;
 	}
 
 	protected void emittedTemplateParameter(TemplateParameter templateParameter) {

@@ -139,15 +139,15 @@ public abstract class LoadableConstraintProvider extends XmlConstraintProvider
 		load(metaModelManager, uri, categories);
 	}
 
-	protected boolean installResource(@NonNull Resource pivotResource, @NonNull Set<Category> categories) {
-		List<Resource.Diagnostic> errors = pivotResource.getErrors();
+	protected boolean installResource(@NonNull Resource asResource, @NonNull Set<Category> categories) {
+		List<Resource.Diagnostic> errors = asResource.getErrors();
 		assert errors != null;
 		String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 		if (message != null) {
 			logger.error("Failed to load Pivot from '" + this + "': " + message);
 			return false;
 		}
-		installContents(pivotResource.getContents(), categories);
+		installContents(asResource.getContents(), categories);
 		try {
 			registerConstraints(getConstraints());
 		} catch (ConstraintExistsException e) {

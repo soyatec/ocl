@@ -72,7 +72,7 @@ import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
-public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstract2Moniker> implements PivotConstants
+public class AS2MonikerVisitor extends AbstractExtendingVisitor<Object, AS2Moniker> implements PivotConstants
 {	
 	private static boolean initialized = false;
 	
@@ -99,7 +99,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 	
 	protected final @Nullable Map<TemplateParameter, ParameterableElement> templateBindings;
 	
-	public Pivot2MonikerVisitor(@NonNull Abstract2Moniker context) {
+	public AS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
 		templateBindings = null;
 		if (!initialized) {
@@ -107,7 +107,7 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 		}
 	}
 
-	public Pivot2MonikerVisitor(@NonNull Abstract2Moniker context, @Nullable Map<TemplateParameter, ParameterableElement> templateBindings) {
+	public AS2MonikerVisitor(@NonNull AS2Moniker context, @Nullable Map<TemplateParameter, ParameterableElement> templateBindings) {
 		super(context);
 		this.templateBindings = templateBindings;
 	}

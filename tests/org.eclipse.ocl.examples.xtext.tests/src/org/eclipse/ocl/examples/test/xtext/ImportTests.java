@@ -144,7 +144,7 @@ public class ImportTests extends XtextTestCase
 		InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Load failed", xtextResource);
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(metaModelManager);
 		Resource fileResource = adapter.getPivotResource(xtextResource);
 		assert fileResource != null;
 		assertNoResourceErrors("File Model", fileResource);

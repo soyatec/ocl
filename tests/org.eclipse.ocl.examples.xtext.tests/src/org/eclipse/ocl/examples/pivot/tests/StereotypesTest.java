@@ -37,8 +37,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.uml2.uml.util.UMLUtil;
 
 /**
@@ -52,7 +52,7 @@ public class StereotypesTest extends PivotTestSuite
 		Resource umlResource;
 		org.eclipse.uml2.uml.Package umlRoot;
 		Element umlMMM;
-		PivotResource pivotResource;
+		ASResource asResource;
 	    Type englishClass;
 	    Type frenchClass;
 	    Type germanClass;
@@ -72,9 +72,9 @@ public class StereotypesTest extends PivotTestSuite
 	        umlResource = resourceSet.getResource(testModelURI, true);
 	        umlRoot = (org.eclipse.uml2.uml.Package) umlResource.getContents().get(0);
 	        umlMMM = metaModelManager.getPivotOf(Element.class, umlRoot.eClass());
-	        pivotResource = ocl.uml2pivot(umlResource);
-	        Root root = (Root) pivotResource.getContents().get(0);
-	        assertNoResourceErrors("Loading model/InternationalizedClasses.uml", pivotResource);
+	        asResource = ocl.uml2pivot(umlResource);
+	        Root root = (Root) asResource.getContents().get(0);
+	        assertNoResourceErrors("Loading model/InternationalizedClasses.uml", asResource);
 	        org.eclipse.ocl.examples.pivot.Package modelPackage = DomainUtil.getNamedElement(root.getNestedPackage(), "Model");
 	        englishClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "EnglishClass");
 	        frenchClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "FrenchClass");

@@ -520,8 +520,8 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 //		Collection<? extends Resource> pivotResources = cs2pivotResourceMap.values();
 //		for (Entry<? extends Resource, ? extends Resource> entry : cs2pivotResourceMap.entrySet()) {
 //			Resource csResource = entry.getKey();
-//			Resource pivotResource = entry.getValue();
-//			System.out.println("CS " + csResource.getClass().getName() + "@" + csResource.hashCode() + " => " + pivotResource.getClass().getName() + "@" + pivotResource.hashCode());
+//			Resource asResource = entry.getValue();
+//			System.out.println("CS " + csResource.getClass().getName() + "@" + csResource.hashCode() + " => " + asResource.getClass().getName() + "@" + asResource.hashCode());
 //		}
 /*		Set<String> deadCSIs = new HashSet<String>(oldCSI2Pivot.keySet());
 		deadCSIs.removeAll(newCSIs);

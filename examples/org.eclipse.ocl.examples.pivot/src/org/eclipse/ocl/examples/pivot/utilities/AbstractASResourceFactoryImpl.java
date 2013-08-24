@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 
@@ -25,12 +26,12 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
  * The <b>Resource Factory</b> associated with the package.
  * @see org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl
  */
-public class PivotResourceFactoryImpl extends AbstractASResourceFactoryImpl implements ASResource.Factory
+public class AbstractASResourceFactoryImpl extends ResourceFactoryImpl implements ASResource.Factory
 {
 	/**
 	 * Creates an instance of the resource factory.
 	 */
-	public PivotResourceFactoryImpl() {
+	public AbstractASResourceFactoryImpl() {
 		super();
 	}
 

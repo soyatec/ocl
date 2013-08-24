@@ -28,9 +28,9 @@ import org.eclipse.ocl.examples.pivot.DataType
 import org.eclipse.ocl.examples.pivot.Library
 import org.eclipse.ocl.examples.pivot.Package
 import org.eclipse.ocl.examples.pivot.Root
-import org.eclipse.ocl.examples.pivot.utilities.AS2ID
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource
-import org.eclipse.ocl.examples.pivot.utilities.PivotSaver
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
+import org.eclipse.ocl.examples.pivot.utilities.ASResource
+import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource
 
@@ -367,12 +367,12 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 				issues.addError(this, message, null, null, null);
 				return;
 			}
-			var PivotResource pivotResource = xtextResource.getPivotResource(null) as PivotResource;
+			var ASResource pivotResource = xtextResource.getPivotResource(null) as ASResource;
 			if (pivotResource == null) {
 				return;
 			}
 			var EObject pivotModel = pivotResource.getContents().get(0);
-			var PivotSaver saver = new PivotSaver(pivotResource);
+			var ASSaver saver = new ASSaver(pivotResource);
 			var Package orphanage = saver.localizeSpecializations();
 			if ((orphanage != null) && (pivotModel instanceof Root)) {
 				(pivotModel as Root).getNestedPackage().add(orphanage);
@@ -386,7 +386,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("oclstdlib", "pivot");
 			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
 			log.info("Loading '" + saveURI + "'");
-			var AS2ID as2id = AS2ID.load(saveURI);
+			var AS2XMIid as2id = AS2XMIid.load(saveURI);
 			log.info("Saving '" + saveURI + "'");
 			pivotResource.setURI(saveURI);
 	    	as2id.assignIds(pivotResource.getResourceSet());

@@ -205,9 +205,9 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		}
 		Object pivotObject = csElement.getPivot();
 		if (pivotObject == null) {
-			Resource pivotResource = context.converter.getPivotResource(csResource);
-			if (pivotResource != null) {
-				for (EObject oldRoot : pivotResource.getContents()) {
+			Resource asResource = context.converter.getPivotResource(csResource);
+			if (asResource != null) {
+				for (EObject oldRoot : asResource.getContents()) {
 					if (oldRoot instanceof Root) {
 						pivotObject = oldRoot;
 						break;

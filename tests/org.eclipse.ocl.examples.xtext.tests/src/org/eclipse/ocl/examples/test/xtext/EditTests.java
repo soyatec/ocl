@@ -101,23 +101,23 @@ public class EditTests extends XtextTestCase
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager1);
-		Resource pivotResource = cs2pivot(ocl1, xtextResource, null);
-		Resource ecoreResource = pivot2ecore(ocl1, pivotResource, ecoreURI, true);
+		Resource asResource = cs2pivot(ocl1, xtextResource, null);
+		Resource ecoreResource = pivot2ecore(ocl1, asResource, ecoreURI, true);
 		adapter.dispose();
 		return ecoreResource;
 	}
 
-	protected Resource doRename(EssentialOCLCSResource xtextResource, Resource pivotResource, String oldString, String newString, String... expectedErrors) throws IOException {
+	protected Resource doRename(EssentialOCLCSResource xtextResource, Resource asResource, String oldString, String newString, String... expectedErrors) throws IOException {
 		String contextMessage = "Renaming '" + oldString + "' to '" + newString + "'";
 //		System.out.println("-----------------" + contextMessage + "----------------");
 		replace(xtextResource, oldString, newString); 
 		assertResourceErrors(contextMessage, xtextResource, expectedErrors);
-		assertNoResourceErrors(contextMessage, pivotResource);
+		assertNoResourceErrors(contextMessage, asResource);
 		boolean validSave = expectedErrors.length == 0;
 		if (validSave) {
-			assertNoValidationErrors(contextMessage, pivotResource);
+			assertNoValidationErrors(contextMessage, asResource);
 		}
-		Resource ecoreResource = pivot2ecore(ocl, pivotResource, null, true);
+		Resource ecoreResource = pivot2ecore(ocl, asResource, null, true);
 		assertNoResourceErrors(contextMessage, ecoreResource);
 		return ecoreResource;
 	}	
@@ -152,7 +152,7 @@ public class EditTests extends XtextTestCase
 			"	body: packages->sortedBy(name)->iterate(p; acc : String = '' | acc + ' ' + p.name);\n" +
 			"}";
 		EssentialOCLCSResource xtextResource;
-		Resource pivotResource;
+		Resource asResource;
 		{
 			URI ecoreURI1 = getProjectFileURI("test1.ecore");
 			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
@@ -160,8 +160,8 @@ public class EditTests extends XtextTestCase
 			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 			xtextResource.load(inputStream, null);
-			pivotResource = cs2pivot(ocl, xtextResource, null);
-			@SuppressWarnings("unused") Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			asResource = cs2pivot(ocl, xtextResource, null);
+			@SuppressWarnings("unused") Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 		}
 		//
 		//	Change "/*$$*/" to "pasteText".
@@ -170,10 +170,10 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "/*$$*/", pasteText);
 			assertNoResourceErrors("Pasting operation", xtextResource);
 			assertNoValidationErrors("Pasting operation", xtextResource);
-			assertNoResourceErrors("Pasting operation", pivotResource);
-			assertNoValidationErrors("Pasting operation", pivotResource);
+			assertNoResourceErrors("Pasting operation", asResource);
+			assertNoValidationErrors("Pasting operation", asResource);
 			URI ecoreURI2 = getProjectFileURI("test2.ecore");
-			@SuppressWarnings("unused") Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+			@SuppressWarnings("unused") Resource ecoreResource2 = pivot2ecore(ocl, asResource, ecoreURI2, false);
 		}
 		//
 		//	Change "pasteText" back to "/*$$*/".
@@ -182,10 +182,10 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, pasteText, "/*$$*/");
 			assertNoResourceErrors("Unpasting operation", xtextResource);
 			assertNoValidationErrors("Unpasting operation", xtextResource);
-			assertNoResourceErrors("Unpasting operation", pivotResource);
-			assertNoValidationErrors("Unpasting operation", pivotResource);
+			assertNoResourceErrors("Unpasting operation", asResource);
+			assertNoValidationErrors("Unpasting operation", asResource);
 			URI ecoreURI3 = getProjectFileURI("test3.ecore");
-			@SuppressWarnings("unused") Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			@SuppressWarnings("unused") Resource ecoreResource3 = pivot2ecore(ocl, asResource, ecoreURI3, true);
 		}
 	}	
 
@@ -207,7 +207,7 @@ public class EditTests extends XtextTestCase
 		Resource ecoreResource_class = getEcoreFromCS1(ocl_class, testDocument_class, ecoreURI_class);
 		Resource ecoreResource_datatype = getEcoreFromCS1(ocl_datatype, testDocument_datatype, ecoreURI_datatype);
 		EssentialOCLCSResource xtextResource;
-		Resource pivotResource;
+		Resource asResource;
 		{
 			URI ecoreURI1 = getProjectFileURI("test1.ecore");
 			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument_class, "UTF-8");
@@ -215,8 +215,8 @@ public class EditTests extends XtextTestCase
 			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 			xtextResource.load(inputStream, null);
-			pivotResource = cs2pivot(ocl, xtextResource, null);
-			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			asResource = cs2pivot(ocl, xtextResource, null);
+			Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 			assertSameModel(ecoreResource_class, ecoreResource1);
 		}
 		//
@@ -226,7 +226,7 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "class", "datatype");
 			assertNoResourceErrors("Reclassing to datatype", xtextResource);
 			URI ecoreURI2 = getProjectFileURI("test2.ecore");
-			Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+			Resource ecoreResource2 = pivot2ecore(ocl, asResource, ecoreURI2, false);
 			assertSameModel(ecoreResource_datatype, ecoreResource2);
 		}
 		//
@@ -236,7 +236,7 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "datatype", "class");
 			assertNoResourceErrors("Reclassing to class", xtextResource);
 			URI ecoreURI3 = getProjectFileURI("test3.ecore");
-			Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			Resource ecoreResource3 = pivot2ecore(ocl, asResource, ecoreURI3, true);
 			assertSameModel(ecoreResource_class, ecoreResource3);
 		}
 		metaModelManager_class.dispose();
@@ -278,7 +278,7 @@ public class EditTests extends XtextTestCase
 		assertHasComments(ecoreResource_commented, new String[]{"a comment"});
 		assertHasComments(ecoreResource_recommented, new String[]{"yet\nanother\ncomment"});
 		EssentialOCLCSResource xtextResource;
-		Resource pivotResource;
+		Resource asResource;
 		{
 			URI ecoreURI1 = getProjectFileURI("test1.ecore");
 			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument_uncommented, "UTF-8");
@@ -286,8 +286,8 @@ public class EditTests extends XtextTestCase
 			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 			xtextResource.load(inputStream, null);
-			pivotResource = cs2pivot(ocl, xtextResource, null);
-			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			asResource = cs2pivot(ocl, xtextResource, null);
+			Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 			assertSameModel(ecoreResource_uncommented, ecoreResource1);
 		}
 		//
@@ -297,7 +297,7 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "class", "/* a comment */class");
 			assertNoResourceErrors("Adding comment", xtextResource);
 			URI ecoreURI2 = getProjectFileURI("test2.ecore");
-			Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+			Resource ecoreResource2 = pivot2ecore(ocl, asResource, ecoreURI2, false);
 			assertSameModel(ecoreResource_commented, ecoreResource2);
 		}
 		//
@@ -307,7 +307,7 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "/* a comment */", "/* yet\n* another\n * comment */");
 			assertNoResourceErrors("Changing comment", xtextResource);
 			URI ecoreURI3 = getProjectFileURI("test3.ecore");
-			Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			Resource ecoreResource3 = pivot2ecore(ocl, asResource, ecoreURI3, true);
 			assertSameModel(ecoreResource_recommented, ecoreResource3);
 		}
 		//
@@ -317,7 +317,7 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "/* yet\n* another\n * comment */", "");
 			assertNoResourceErrors("Removing comment", xtextResource);
 			URI ecoreURI4 = getProjectFileURI("test4.ecore");
-			Resource ecoreResource4 = pivot2ecore(ocl, pivotResource, ecoreURI4, true);
+			Resource ecoreResource4 = pivot2ecore(ocl, asResource, ecoreURI4, true);
 			assertSameModel(ecoreResource_uncommented, ecoreResource4);
 		}
 		metaModelManager_uncommented.dispose();
@@ -379,11 +379,11 @@ public class EditTests extends XtextTestCase
 		Resource ecoreResource = metaModelManager1.getExternalResourceSet().getResource(ecoreURI, true);
 		assertNoResourceErrors("Ecore load", ecoreResource);
 		assertNoValidationErrors("Ecore load", ecoreResource);
-		Resource pivotResource = ocl1.ecore2pivot(ecoreResource);
-		assertNoResourceErrors("Pivot load", pivotResource);
-		assertNoValidationErrors("Pivot load", pivotResource);
+		Resource asResource = ocl1.ecore2pivot(ecoreResource);
+		assertNoResourceErrors("Pivot load", asResource);
+		assertNoValidationErrors("Pivot load", asResource);
 		Set<EObject> loadPivotContent = new HashSet<EObject>();
-		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 //			System.out.println(PivotUtil.debugSimpleName(eObject));
 			loadPivotContent.add(eObject);
@@ -392,14 +392,14 @@ public class EditTests extends XtextTestCase
 			ResourceSet resourceSet = new ResourceSetImpl();
 			BaseCSResource xtextResource1 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSTPackage.eCONTENT_TYPE);
 			xtextResource1.setURI(ecoreURI);
-			ocl1.pivot2cs(pivotResource, xtextResource1);
+			ocl1.pivot2cs(asResource, xtextResource1);
 			assertNoResourceErrors("Xtext load", xtextResource1);
 			assertNoValidationErrors("Xtext load", xtextResource1);
-			CS2PivotResourceAdapter cs2pivotAdapter1 = CS2PivotResourceAdapter.getAdapter(xtextResource1, null);
+			CS2PivotResourceAdapter cs2pivotAdapter1 = xtextResource1.getCS2ASAdapter(null);
 			ListBasedDiagnosticConsumer diagnosticsConsumer1 = new ListBasedDiagnosticConsumer();
 			cs2pivotAdapter1.refreshPivotMappings(diagnosticsConsumer1);
 			Set<EObject> parsePivotContent = new HashSet<EObject>();
-			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 //				System.out.println(PivotUtil.debugSimpleName(eObject));
 				parsePivotContent.add(eObject);
@@ -420,11 +420,11 @@ public class EditTests extends XtextTestCase
 		assertNoResourceErrors("Ecore reload", ecoreResource);
 		assertNoValidationErrors("Ecore reload", ecoreResource);
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager1);
-		ecore2Pivot.update(pivotResource, ecoreResource.getContents());
+		ecore2Pivot.update(asResource, ecoreResource.getContents());
 		assertNoResourceErrors("Pivot reload", ecoreResource);
 		assertNoValidationErrors("Pivot reload", ecoreResource);
 		Set<EObject> newPivotContent = new HashSet<EObject>();
-		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 //			System.out.println(PivotUtil.debugSimpleName(eObject));
 			newPivotContent.add(eObject);
@@ -435,14 +435,14 @@ public class EditTests extends XtextTestCase
 			ResourceSet resourceSet = new ResourceSetImpl();
 			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSTPackage.eCONTENT_TYPE);
 			xtextResource2.setURI(ecoreURI);
-			ocl1.pivot2cs(pivotResource, xtextResource2);
+			ocl1.pivot2cs(asResource, xtextResource2);
 			assertNoResourceErrors("Xtext load", xtextResource2);
 			assertNoValidationErrors("Xtext load", xtextResource2);
-			CS2PivotResourceAdapter cs2pivotAdapter2 = CS2PivotResourceAdapter.getAdapter(xtextResource2, null);
+			CS2PivotResourceAdapter cs2pivotAdapter2 = xtextResource2.getCS2ASAdapter(null);
 			ListBasedDiagnosticConsumer diagnosticsConsumer2 = new ListBasedDiagnosticConsumer();
 			cs2pivotAdapter2.refreshPivotMappings(diagnosticsConsumer2);
 			Set<EObject> reparsePivotContent = new HashSet<EObject>();
-			for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 //				System.out.println(PivotUtil.debugSimpleName(eObject));
 				reparsePivotContent.add(eObject);
@@ -463,7 +463,7 @@ public class EditTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
 		EssentialOCLCSResource xtextResource;
-		Resource pivotResource;
+		Resource asResource;
 		{
 			URI ecoreURI1 = getProjectFileURI("test1.ecore");
 			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
@@ -471,8 +471,8 @@ public class EditTests extends XtextTestCase
 			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 			xtextResource.load(inputStream, null);
-			pivotResource = cs2pivot(ocl, xtextResource, null);
-			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			asResource = cs2pivot(ocl, xtextResource, null);
+			Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 			assertSameModel(ecoreResource0, ecoreResource1);
 		}
 		//
@@ -482,7 +482,7 @@ public class EditTests extends XtextTestCase
 			xtextResource.update(0, 0, " ");
 			assertNoResourceErrors("Adding space", xtextResource);
 			URI ecoreURI2 = getProjectFileURI("test2.ecore");
-			Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, true);
+			Resource ecoreResource2 = pivot2ecore(ocl, asResource, ecoreURI2, true);
 			assertSameModel(ecoreResource0, ecoreResource2);
 		}
 		//
@@ -492,7 +492,7 @@ public class EditTests extends XtextTestCase
 			xtextResource.update(0, 1, "");
 			assertNoResourceErrors("Deleting space", xtextResource);
 			URI ecoreURI3 = getProjectFileURI("test3.ecore");
-			Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			Resource ecoreResource3 = pivot2ecore(ocl, asResource, ecoreURI3, true);
 			assertSameModel(ecoreResource0, ecoreResource3);
 		}
 		//
@@ -502,7 +502,7 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "p1", "pkg"); 
 			assertNoResourceErrors("Renaming", xtextResource);
 			URI ecoreURI4 = getProjectFileURI("test4.ecore");
-			Resource ecoreResource4 = pivot2ecore(ocl, pivotResource, ecoreURI4, true);
+			Resource ecoreResource4 = pivot2ecore(ocl, asResource, ecoreURI4, true);
 			((EPackage)ecoreResource0.getContents().get(0)).setName("pkg");
 			assertSameModel(ecoreResource0, ecoreResource4);		
 		}
@@ -534,59 +534,59 @@ public class EditTests extends XtextTestCase
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 		xtextResource.load(inputStream, null);
-		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		Resource asResource = cs2pivot(ocl, xtextResource, null);
 		{
-			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 			assertSameModel(ecoreResource0, ecoreResource1);
 		}
 		Type pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the invariant.
 		//
-		doRename(xtextResource, pivotResource, "TestClass1", "Testing",
+		doRename(xtextResource, asResource, "TestClass1", "Testing",
 //			DomainUtil.bind(OCLMessages.Unresolved_ERROR_, "Type", pivotTestClass1.getName()),
 			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()));
 		//
 		//	Changing "Testing" back to "TestClass1" restores the type and the invariant.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "Testing", "TestClass1"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "Testing", "TestClass1"));
 		pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "testProperty1" to "tProperty" renames the property and breaks the invariant.
 		//
-		doRename(xtextResource, pivotResource, "testProperty1", "tProperty",
+		doRename(xtextResource, asResource, "testProperty1", "tProperty",
 			DomainUtil.bind(OCLMessages.UnresolvedProperty_ERROR_, "testProperty1", pivotTestClass1 + ""));
 		//
 		//	Changing "tProperty" back to "testProperty" restores the property and the invariant.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "tProperty", "testProperty1"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "tProperty", "testProperty1"));
 		//
 		//	Changing "testOperation" to "tOperation" renames the operation and breaks the invariant.
 		//
-		doRename(xtextResource, pivotResource, "testOperation", "tOperation",
+		doRename(xtextResource, asResource, "testOperation", "tOperation",
 			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "testOperation", pivotTestClass1 + "", "UnlimitedNatural"));
 		//
 		//	Changing "tOperation" back to "testOperation" restores the operation and the invariant.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "tOperation", "testOperation"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "tOperation", "testOperation"));
 		//
 		//	Changing "testOperation(i : Integer)" to "testOperation()" mismatches the operation signature and breaks the invariant.
 		//
-		doRename(xtextResource, pivotResource, "testOperation(i : Integer)", "testOperation()",
+		doRename(xtextResource, asResource, "testOperation(i : Integer)", "testOperation()",
 			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "testOperation", pivotTestClass1 + "", "UnlimitedNatural"));
 		//
 		//	Changing "testOperation()" back to "testOperation(i : Integer)" restores the operation and the invariant.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "testOperation()", "testOperation(i : Integer)"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "testOperation()", "testOperation(i : Integer)"));
 		//
 		//	Changing "testOperation(i : Integer)" to "testOperation(s : String)" mismatches the operation signature and breaks the invariant.
 		//
-		doRename(xtextResource, pivotResource, "testOperation(i : Integer)", "testOperation(s : String)",
+		doRename(xtextResource, asResource, "testOperation(i : Integer)", "testOperation(s : String)",
 			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "testOperation", pivotTestClass1 + "", "UnlimitedNatural"));
 		//
 		//	Changing "testOperation()" back to "testOperation(i : Integer)" restores the operation and the invariant.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "testOperation(s : String)", "testOperation(i : Integer)"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "testOperation(s : String)", "testOperation(i : Integer)"));
 		//
 		adapter.dispose();
 		metaModelManager1.dispose();
@@ -618,31 +618,31 @@ public class EditTests extends XtextTestCase
 		MetaModelManagerResourceAdapter adapter = MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 //		System.out.println("*************load*********************************************************");
 		xtextResource.load(inputStream, null);
-		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		Resource asResource = cs2pivot(ocl, xtextResource, null);
 		{
-			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 			assertSameModel(ecoreResource0, ecoreResource1);
 		}
 		Type pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the referredProperty/referredOperation.
 		//
-		doRename(xtextResource, pivotResource, "TestClass1", "Testing",
+		doRename(xtextResource, asResource, "TestClass1", "Testing",
 			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()));
 		//
 		//	Changing "Testing" back to "TestClass1" restores the type and the referredProperty/referredOperation.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "Testing", "TestClass1"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "Testing", "TestClass1"));
 		pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the referredProperty/referredOperation.
 		//
-		doRename(xtextResource, pivotResource, "TestClass1", "Testing",
+		doRename(xtextResource, asResource, "TestClass1", "Testing",
 			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()));
 		//
 		//	Changing "Testing" back to "TestClass1" restores the type and the referredProperty/referredOperation.
 		//
-		assertSameModel(ecoreResource0, doRename(xtextResource, pivotResource, "Testing", "TestClass1"));
+		assertSameModel(ecoreResource0, doRename(xtextResource, asResource, "Testing", "TestClass1"));
 		pivotTestClass1 = ocl.getMetaModelManager().getPrimaryType("TestPackage", "TestClass1");
 		//
 		adapter.dispose();
@@ -661,9 +661,9 @@ public class EditTests extends XtextTestCase
 		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		ModelContext modelContext = new ModelContext(metaModelManager, outputURI);
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) modelContext.createBaseResource(testDocument);
-		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		Resource asResource = cs2pivot(ocl, xtextResource, null);
 		assertResourceErrors("Loading input", xtextResource);
-		assertNoResourceErrors("Loading input", pivotResource);
+		assertNoResourceErrors("Loading input", asResource);
 		//
 		Type myType = metaModelManager.getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
 		SequenceType sequenceType = metaModelManager.getSequenceType();
@@ -672,11 +672,11 @@ public class EditTests extends XtextTestCase
 		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 
 		//
-		doRename(xtextResource, pivotResource, "Boolean", "Sequence(MyType)");
+		doRename(xtextResource, asResource, "Boolean", "Sequence(MyType)");
 		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNotNull(sequenceMyType.get()); 
 		//		
-		doRename(xtextResource, pivotResource, "Sequence(MyType)", "Set(MyType)");
+		doRename(xtextResource, asResource, "Sequence(MyType)", "Set(MyType)");
 		System.gc();
 		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
 		assertNull(sequenceMyType.get()); 
@@ -699,7 +699,7 @@ public class EditTests extends XtextTestCase
 			"context IterateExp\n" +
 			"inv False: true\n";
 		EssentialOCLCSResource xtextResource;
-		Resource pivotResource;
+		Resource asResource;
 		{
 //			URI ecoreURI1 = getProjectFileURI("test1.ecore");
 			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
@@ -707,12 +707,12 @@ public class EditTests extends XtextTestCase
 			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
 			xtextResource.load(inputStream, null);
-			pivotResource = cs2pivot(ocl, xtextResource, null);
+			asResource = cs2pivot(ocl, xtextResource, null);
 			assertNoResourceErrors("Loading", xtextResource);
 			assertNoValidationErrors("Loading", xtextResource);
-			assertNoResourceErrors("Loading", pivotResource);
-			assertNoValidationErrors("Loading", pivotResource);
-//			@SuppressWarnings("unused") Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			assertNoResourceErrors("Loading", asResource);
+			assertNoValidationErrors("Loading", asResource);
+//			@SuppressWarnings("unused") Resource ecoreResource1 = pivot2ecore(ocl, asResource, ecoreURI1, true);
 		}
 		//
 		//	Change "/*$$*/" to "pasteText".
@@ -721,10 +721,10 @@ public class EditTests extends XtextTestCase
 			replace(xtextResource, "/*$$*/", pasteText);
 			assertNoResourceErrors("Pasting operation", xtextResource);
 			assertNoValidationErrors("Pasting operation", xtextResource);
-			assertNoResourceErrors("Pasting operation", pivotResource);
-			assertNoValidationErrors("Pasting operation", pivotResource);
+			assertNoResourceErrors("Pasting operation", asResource);
+			assertNoValidationErrors("Pasting operation", asResource);
 //			URI ecoreURI2 = getProjectFileURI("test2.ecore");
-//			@SuppressWarnings("unused") Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+//			@SuppressWarnings("unused") Resource ecoreResource2 = pivot2ecore(ocl, asResource, ecoreURI2, false);
 		}
 		//
 		//	Change "pasteText" back to "/*$$*/".
@@ -733,10 +733,10 @@ public class EditTests extends XtextTestCase
 //			replace(xtextResource, pasteText, "/*$$*/");
 //			assertNoResourceErrors("Unpasting operation", xtextResource);
 //			assertNoValidationErrors("Unpasting operation", xtextResource);
-//			assertNoResourceErrors("Unpasting operation", pivotResource);
-//			assertNoValidationErrors("Unpasting operation", pivotResource);
+//			assertNoResourceErrors("Unpasting operation", asResource);
+//			assertNoValidationErrors("Unpasting operation", asResource);
 //			URI ecoreURI3 = getProjectFileURI("test3.ecore");
-//			@SuppressWarnings("unused") Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+//			@SuppressWarnings("unused") Resource ecoreResource3 = pivot2ecore(ocl, asResource, ecoreURI3, true);
 		}
 	}	
 }

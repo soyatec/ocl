@@ -219,11 +219,11 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 
 	public final @NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager) {
 		CS2PivotResourceAdapter adapter = getCS2ASAdapter(metaModelManager);
-		Resource pivotResource = adapter.getPivotResource(this);
-		if (pivotResource == null) {
+		Resource asResource = adapter.getPivotResource(this);
+		if (asResource == null) {
 			throw new IllegalStateException("No Pivot Resource created");
 		}
-		return pivotResource;
+		return asResource;
 	}
 
 	/**
@@ -354,9 +354,9 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		this.parserContext = parserContext;
 	}
 
-	public void updateFrom(@NonNull Resource pivotResource, @NonNull MetaModelManager metaModelManager) {		
+	public void updateFrom(@NonNull Resource asResource, @NonNull MetaModelManager metaModelManager) {		
 		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-		cs2PivotResourceMap.put(this, pivotResource);
+		cs2PivotResourceMap.put(this, asResource);
 		Pivot2CS pivot2cs = createPivot2CS(cs2PivotResourceMap, metaModelManager);
 		pivot2cs.update();
 	}

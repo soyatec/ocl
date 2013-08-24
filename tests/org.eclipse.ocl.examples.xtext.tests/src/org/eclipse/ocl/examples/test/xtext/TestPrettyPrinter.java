@@ -31,8 +31,8 @@ public class TestPrettyPrinter extends XtextTestCase
 	public void testDeclarations() throws Exception {
 		URI libraryURI = getProjectFileURI("OCL-2.3.oclstdlib");
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(libraryURI, true);
-		Resource pivotResource = xtextResource.getPivotResource(null);
-		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		Resource asResource = xtextResource.getPivotResource(null);
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof NamedElement) {
 				String s = PrettyPrinter.printName((Element) eObject);
@@ -44,8 +44,8 @@ public class TestPrettyPrinter extends XtextTestCase
 	public void testSignatures() throws Exception {
 		URI libraryURI = getProjectFileURI("OCL-2.3.oclstdlib");
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(libraryURI, true);
-		Resource pivotResource = xtextResource.getPivotResource(null);
-		for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+		Resource asResource = xtextResource.getPivotResource(null);
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof NamedElement) {
 				String s = PrettyPrinter.printType((Element) eObject);

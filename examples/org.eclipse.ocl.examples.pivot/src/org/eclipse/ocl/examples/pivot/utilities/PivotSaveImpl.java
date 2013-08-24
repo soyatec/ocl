@@ -18,9 +18,11 @@ package org.eclipse.ocl.examples.pivot.utilities;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMISaveImpl;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * PivotSaveImpl ensures that all references to specialized types are terminated
@@ -38,8 +40,12 @@ public final class PivotSaveImpl extends XMISaveImpl
 	 */
 	@Override
 	protected void init(XMLResource resource, Map<?, ?> options) {
-		PivotUtil.localizeSpecializations(resource);
-    	new AS2ID().assignIds(resource.getResourceSet());
-		super.init(resource, options);
+		XMLResource asResource = DomainUtil.nonNullState(resource);
+    	ResourceSet asResourceSet = DomainUtil.nonNullState(asResource.getResourceSet());
+		ASSaver asSaver = new ASSaver(asResource);
+		AS2XMIid as2xmIid = new AS2XMIid();
+		asSaver.localizeSpecializations();
+		as2xmIid.assignIds(asResourceSet);
+		super.init(asResource, options);
 	}
 }

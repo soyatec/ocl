@@ -88,10 +88,10 @@ public class ValidateTests extends XtextTestCase
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(null);
 		assertNoResourceErrors("Load failed", xtextResource);
-		Resource pivotResource = ocl.cs2pivot(xtextResource);
+		Resource asResource = ocl.cs2pivot(xtextResource);
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-		assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-		Resource ecoreResource = pivot2ecore(ocl, pivotResource, ecoreURI, true);
+		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
+		Resource ecoreResource = pivot2ecore(ocl, asResource, ecoreURI, true);
 		return ecoreResource;
 	}
 

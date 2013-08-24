@@ -92,10 +92,10 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 		}
 	}
 
-	protected void performValidation(IAcceptor<Issue> acceptor, Resource pivotResource, CancelIndicator monitor) {
+	protected void performValidation(IAcceptor<Issue> acceptor, Resource asResource, CancelIndicator monitor) {
 		Diagnostician diagnostician = getDiagnostician();
 		Map<Object, Object> context = DomainSubstitutionLabelProvider.createDefaultContext(diagnostician);
-		List<Resource> resources = pivotResource.getResourceSet().getResources();
+		List<Resource> resources = asResource.getResourceSet().getResources();
 		for (int i = 0; i < resources.size(); i++) {
 			Resource pResource = resources.get(i);
 //			System.out.println(" performValidation " + pResource.getURI() + " on " + Thread.currentThread().getName());
@@ -132,8 +132,8 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 		}
 	}
 
-	protected void reuseValidation(IAcceptor<Issue> acceptor, Resource pivotResource, CancelIndicator monitor) {
-		for (Resource pResource : pivotResource.getResourceSet().getResources()) {
+	protected void reuseValidation(IAcceptor<Issue> acceptor, Resource asResource, CancelIndicator monitor) {
+		for (Resource pResource : asResource.getResourceSet().getResources()) {
 //			System.out.println(" reuseValidation " + pResource.getURI() + " on " + Thread.currentThread().getName());
 			for (Resource.Diagnostic diagnostic : pResource.getErrors()) {
 				if (diagnostic instanceof ValidationDiagnostic) {
@@ -230,16 +230,16 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 			return null;
 		if (resource instanceof BaseCSResource) {
 			BaseCSResource csResource = (BaseCSResource)resource;
-			CS2PivotResourceAdapter cs2pivotAdapter = CS2PivotResourceAdapter.findAdapter(csResource);
+			CS2PivotResourceAdapter cs2pivotAdapter = csResource.findCS2ASAdapter();
 			if (cs2pivotAdapter != null) {
-				Resource pivotResource = cs2pivotAdapter.getPivotResource(csResource);
-				if (pivotResource != null) {
+				Resource asResource = cs2pivotAdapter.getPivotResource(csResource);
+				if (asResource != null) {
 					IAcceptor<Issue> acceptor = createAcceptor(result);
 					if (mode.shouldCheck(CheckType.EXPENSIVE)) {
-						performValidation(acceptor, pivotResource, monitor);
+						performValidation(acceptor, asResource, monitor);
 					}
 					else {
-						reuseValidation(acceptor, pivotResource, monitor);
+						reuseValidation(acceptor, asResource, monitor);
 					}
 				}
 			}

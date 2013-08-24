@@ -47,9 +47,9 @@ import org.eclipse.ocl.examples.pivot.helper.OCLHelperImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
+import org.eclipse.ocl.examples.pivot.utilities.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.utilities.QueryImpl;
 
@@ -349,8 +349,8 @@ public class OCL {
 	 */
 	public @NonNull Resource cs2pivot(@NonNull BaseResource csResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
-		Resource pivotResource = csResource.getPivotResource(metaModelManager);
-		return pivotResource;
+		Resource asResource = csResource.getPivotResource(metaModelManager);
+		return asResource;
 	}
 
 	/**
@@ -379,12 +379,12 @@ public class OCL {
 	/**
 	 * Return the Pivot resource counterpart of an ecoreResource.
 	 */
-	public @NonNull PivotResource ecore2pivot(@NonNull Resource ecoreResource) throws ParserException {
+	public @NonNull ASResource ecore2pivot(@NonNull Resource ecoreResource) throws ParserException {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 		Root pivotRoot = ecore2Pivot.getPivotRoot();
-		PivotResource pivotResource = (PivotResource) pivotRoot.eResource();
-		return DomainUtil.nonNullModel(pivotResource);
+		ASResource asResource = (ASResource) pivotRoot.eResource();
+		return DomainUtil.nonNullModel(asResource);
 	}
 
 	/**
@@ -643,24 +643,24 @@ public class OCL {
 	}
 
 	/**
-	 * Update the CS resource from a pivotResource.
+	 * Update the CS resource from a asResource.
 	 * 
 	 * For a first update, the csResource may be created by something like
 	 * <p><tt>
 	 * (BaseResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 	 * </tt>
 	 */
-	public void pivot2cs(@NonNull Resource pivotResource, @NonNull BaseResource csResource) {
+	public void pivot2cs(@NonNull Resource asResource, @NonNull BaseResource csResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
-		csResource.updateFrom(pivotResource, metaModelManager);
+		csResource.updateFrom(asResource, metaModelManager);
 	}
 
 	/**
-	 * Return the Ecore resource counterpart of a pivotResource, specifying the uri of the resulting Ecore resource.
+	 * Return the Ecore resource counterpart of a asResource, specifying the uri of the resulting Ecore resource.
 	 */
-	public @NonNull Resource pivot2ecore(@NonNull Resource pivotResource, @NonNull URI uri) throws IOException {
+	public @NonNull Resource pivot2ecore(@NonNull Resource asResource, @NonNull URI uri) throws IOException {
 		MetaModelManager metaModelManager = getMetaModelManager();
-		Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, uri, null);
+		Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, asResource, uri, null);
 		return ecoreResource;
 	}
 
@@ -749,12 +749,12 @@ public class OCL {
 	 * Return the Pivot resource counterpart of a umlResource.
 	 * @throws ParserException 
 	 */
-	public @NonNull PivotResource uml2pivot(@NonNull Resource umlResource) throws ParserException {
+	public @NonNull ASResource uml2pivot(@NonNull Resource umlResource) throws ParserException {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
 		Root pivotRoot = uml2Pivot.getPivotRoot();
-		PivotResource pivotResource = (PivotResource) pivotRoot.eResource();
-		return DomainUtil.nonNullModel(pivotResource);
+		ASResource asResource = (ASResource) pivotRoot.eResource();
+		return DomainUtil.nonNullModel(asResource);
 	}
 
 	/**

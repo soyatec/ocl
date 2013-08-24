@@ -15,6 +15,9 @@
 package org.eclipse.ocl.examples.build.xtend
 
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker
+import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 
 public class GenerateASVisitors extends GenerateVisitors
 {
@@ -27,6 +30,12 @@ public class GenerateASVisitors extends GenerateVisitors
 		ePackage.generateAbstractNullVisitor();
 		ePackage.generateAbstractDelegatingVisitor();
 		ePackage.generateAbstractExtendingVisitor();
+		if (isDerived()) {
+			ePackage.generateAbstractGenericVisitor("AS2XMIid", typeof(Boolean), typeof(AS2XMIid));
+			ePackage.generateAbstractGenericVisitor("AS2Moniker", typeof(Object), typeof(AS2Moniker));
+			ePackage.generateAbstractGenericVisitor("SaverLocate", typeof(Object), typeof(ASSaver));
+			ePackage.generateAbstractGenericVisitor("SaverResolve", typeof(Object), typeof(ASSaver));
+		}
 		/* ePackage.generateDecorableVisitorInterface("org.eclipse.ocl.examples.pivot.util.Visitor"); */
 	}
 }

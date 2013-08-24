@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.CollectionType
 import org.eclipse.ocl.examples.pivot.DataType
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral
 import org.eclipse.ocl.examples.pivot.Package
+import org.eclipse.ocl.examples.pivot.PivotPackage
 import org.eclipse.ocl.examples.pivot.Property
 import org.eclipse.ocl.examples.pivot.Root
 import org.eclipse.ocl.examples.pivot.Type
@@ -38,9 +39,8 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib
-import org.eclipse.ocl.examples.pivot.utilities.PivotSaver
+import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
-import org.eclipse.ocl.examples.pivot.PivotPackage
 
 public class GenerateOCLMetaModel extends GenerateOCLCommon
 {
@@ -400,7 +400,7 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 				return;
 			}
 			var EObject pivotModel = pivotResource.getContents().get(0);
-			var PivotSaver saver = new PivotSaver(pivotResource);
+			var ASSaver saver = new ASSaver(pivotResource);
 			var Package orphanage = saver.localizeSpecializations();
 			if ((orphanage != null) && (pivotModel instanceof Root)) {
 				(pivotModel as Root).getNestedPackage().add(orphanage);

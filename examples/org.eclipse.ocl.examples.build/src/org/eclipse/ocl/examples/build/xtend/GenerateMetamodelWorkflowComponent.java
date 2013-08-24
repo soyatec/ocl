@@ -37,6 +37,7 @@ public abstract class GenerateMetamodelWorkflowComponent extends AbstractWorkflo
 		OCLstdlibStandaloneSetup.doSetup();
 	}	
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		if (uri == null) {
 			issues.addError(this, "uri not specified.");

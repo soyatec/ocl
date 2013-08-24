@@ -389,15 +389,15 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				error("Failed to load '" + oclURI, message);
 				return null;
 			}
-			Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
-			errors = pivotResource.getErrors();
+			Resource asResource = xtextResource.getPivotResource(metaModelManager);
+			errors = asResource.getErrors();
 			assert errors != null;
 			message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 			if (message != null) {
 				error("Failed to load Pivot from '" + oclURI, message);
 				return null;
 			}
-			return pivotResource;
+			return asResource;
 		}
 	}
 

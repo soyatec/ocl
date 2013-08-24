@@ -189,8 +189,8 @@ public class EditorTests extends XtextTestCase
 				assertNoResourceErrors("Loaded CS", resource);
 				CS2Pivot cs2Pivot = PivotUtil.getAdapter(CS2Pivot.class, resource);		// FIXME Wrong class
 				if (cs2Pivot != null) {
-					Resource pivotResource = cs2Pivot.getPivotResource(resource);
-					assertNoResourceErrors("Loaded pivot", pivotResource);
+					Resource asResource = cs2Pivot.getPivotResource(resource);
+					assertNoResourceErrors("Loaded pivot", asResource);
 				}
 				return null;
 			}
@@ -218,9 +218,9 @@ public class EditorTests extends XtextTestCase
 //				assertNoResourceErrors("Loaded CS", resource);
 				CS2PivotResourceAdapter cs2Pivot = PivotUtil.getAdapter(CS2PivotResourceAdapter.class, resource);
 				if (cs2Pivot != null) {
-					Resource pivotResource = cs2Pivot.getPivotResource((BaseCSResource) resource);
-					assertNoResourceErrors(prefix, pivotResource);
-					for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+					Resource asResource = cs2Pivot.getPivotResource((BaseCSResource) resource);
+					assertNoResourceErrors(prefix, asResource);
+					for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 						EObject eObject = tit.next();
 //						System.out.println(PivotUtil.debugSimpleName(eObject));
 						pivotContent.add(eObject);

@@ -100,7 +100,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
@@ -314,7 +314,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 			return "<unresolved-proxy>";
 		}
 		else {
-			return Pivot2Moniker.toString(element);
+			return AS2Moniker.toString(element);
 		}
 	}
 

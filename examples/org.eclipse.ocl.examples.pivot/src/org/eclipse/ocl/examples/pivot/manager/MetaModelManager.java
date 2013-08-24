@@ -122,10 +122,10 @@ import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.pivot.utilities.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
@@ -464,6 +464,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resourceSet.eAdapters());
 		MetaModelManager adapter = PivotUtil.getAdapter(MetaModelManager.class, eAdapters);
 		if (adapter == null) {
+			if (resourceSet.getResourceFactoryRegistry().getContentTypeToFactoryMap().get(ASResource.CONTENT_TYPE) == null) {
+				MetaModelManager.initializePivotResourceSet(resourceSet);
+			}
 			adapter = new MetaModelManager(resourceSet);
 //			eAdapters.add(adapter);
 		}
@@ -471,17 +474,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	private static final @NonNull ContentHandler PIVOT_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		PivotResource.CONTENT_TYPE,
-		new String[]{PivotResource.FILE_EXTENSION},
+		PivotPackage.eCONTENT_TYPE,
+		new String[]{ASResource.FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, PivotPackage.eNS_URI, null);
 
 	public static void initializePivotResourceSet(@NonNull ResourceSet pivotResourceSet) {
 		StandaloneProjectMap.initializeURIResourceMap(pivotResourceSet);
 		Registry resourceFactoryRegistry = pivotResourceSet.getResourceFactoryRegistry();
 		Map<String, Object> contentTypeToFactoryMap = resourceFactoryRegistry.getContentTypeToFactoryMap();
-		contentTypeToFactoryMap.put(PivotResource.CONTENT_TYPE, new PivotResourceFactoryImpl()); //$NON-NLS-1$
-		Map<String, Object> extensionToFactoryMap = resourceFactoryRegistry.getExtensionToFactoryMap();
-		extensionToFactoryMap.put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
+		contentTypeToFactoryMap.put(ASResource.CONTENT_TYPE, new PivotResourceFactoryImpl()); //$NON-NLS-1$
+//		Map<String, Object> extensionToFactoryMap = resourceFactoryRegistry.getExtensionToFactoryMap();
+//		extensionToFactoryMap.put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 //		extensionToFactoryMap.put(PivotResource.FILE_EXTENSION, new PivotResourceFactoryImpl()); //$NON-NLS-1$
 		org.eclipse.emf.ecore.EPackage.Registry packageRegistry = pivotResourceSet.getPackageRegistry();
 		packageRegistry.put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
@@ -580,7 +583,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	
 	public MetaModelManager() {
 		this(new ResourceSetImpl());
-		initializePivotResourceSet(pivotResourceSet);
+//		initializePivotResourceSet(pivotResourceSet);
 	}
 	
 	/**
@@ -596,6 +599,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * of meta-models, and {@link ProjectMap.getAdapter(ResourceSet)} to assist in locating resources.
 	 */
 	public MetaModelManager(@NonNull ResourceSet pivotResourceSet) {
+		if (pivotResourceSet.getResourceFactoryRegistry().getContentTypeToFactoryMap().get(ASResource.CONTENT_TYPE) == null) {
+			initializePivotResourceSet(pivotResourceSet);
+		};
 		idResolver = createIdResolver();
 //		System.out.println("ctor " + this);
 		this.pivotResourceSet = pivotResourceSet;
@@ -1237,6 +1243,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return singletonList;
 	}
 
+	@Override
 	public @NonNull Iterable<PackageServer> getAllPackages() {
 		if (!libraryLoadInProgress && (pivotMetaModel == null))  {
 			getPivotMetaModel();
@@ -2433,8 +2440,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return ambiguousOpposites;
 	}
 
-	public void installResource(@NonNull Resource pivotResource) {
-		for (EObject eObject : pivotResource.getContents()) {
+	public void installResource(@NonNull Resource asResource) {
+		for (EObject eObject : asResource.getContents()) {
 			if (eObject instanceof Root) {
 				installRoot((Root)eObject);
 			}
@@ -2631,9 +2638,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		org.eclipse.ocl.examples.pivot.Package oclMetaModel = OCLMetaModel.create(this, name, pivotLibrary.getNsPrefix(), nsURI);
 		setPivotMetaModel(oclMetaModel);		// Standard meta-model
 		@SuppressWarnings("null")
-		@NonNull Resource pivotResource = oclMetaModel.eResource();
-//		pivotResourceSet.getResources().add(pivotResource);
-		installResource(pivotResource);
+		@NonNull Resource asResource = oclMetaModel.eResource();
+//		pivotResourceSet.getResources().add(asResource);
+		installResource(asResource);
 		packageManager.addPackageNsURISynonym(OCLMetaModel.PIVOT_URI, nsURI);
 	}
 
@@ -2710,10 +2717,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 														if (pivot instanceof Root) {
 															Root root = (Root)pivot;
 															packageManager.removeRoot(root);
-															Resource pivotResource = root.eResource();
-															if (pivotResource != null) {
-																pivotResourceSet.getResources().remove(pivotResource);
-																pivotResource.unload();
+															Resource asResource = root.eResource();
+															if (asResource != null) {
+																pivotResourceSet.getResources().remove(asResource);
+																asResource.unload();
 															}
 														}
 													}

@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
 /**
- * The AS2IDVisitor generates an xmi:id for an AS element. Using one of three policies.
+ * The AS2XMIidVisitor generates an xmi:id for an AS element. Using one of three policies.
  * <p>
  * null - no xmi:id generated
  * <p>
@@ -58,7 +58,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * in the context Moniker to XMIId Map.
  *
  */
-public class AS2IDVisitor extends AbstractExtendingVisitor<Boolean, AS2ID>
+public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 {
 	public static final int OVERFLOW_LIMIT = 1024;
 	public static final @NonNull String OVERFLOW_MARKER = "##"; //$NON-NLS-1$
@@ -79,7 +79,7 @@ public class AS2IDVisitor extends AbstractExtendingVisitor<Boolean, AS2ID>
 
 	protected final @NonNull StringBuilder s = new StringBuilder();
 	
-	protected AS2IDVisitor(@NonNull AS2ID context) {
+	protected AS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}
 

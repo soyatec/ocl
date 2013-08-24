@@ -77,7 +77,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
@@ -454,7 +454,7 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		}
 		String body = fragmentURI != null ? results.get(fragmentURI) : null;
 		if ((body == null) || ((body = body.trim()).length() == 0)) {
-			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pOperation != null ? Pivot2Moniker.toString(pOperation) : "");
+			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pOperation != null ? AS2Moniker.toString(pOperation) : "");
 		}
 		EcoreUtil.setAnnotation(eOperation, GenModelPackage.eNS_URI, "body", body);
 		List<EAnnotation> eAnnotations = eOperation.getEAnnotations();
@@ -481,7 +481,7 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		String fragmentURI = EcoreUtil.getURI(pProperty).fragment().toString();
 		String body = results.get(fragmentURI);
 		if (body == null) {
-			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pProperty != null ? Pivot2Moniker.toString(pProperty) : "");
+			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pProperty != null ? AS2Moniker.toString(pProperty) : "");
 		}
 		EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "get", body);
 //		EcoreUtil.setAnnotation(eFeature, GenModelPackage.eNS_URI, "body", body);

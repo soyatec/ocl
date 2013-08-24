@@ -73,7 +73,6 @@ import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.console.actions.CloseAction;
 import org.eclipse.ocl.examples.xtext.console.actions.LoadExpressionAction;
 import org.eclipse.ocl.examples.xtext.console.actions.SaveExpressionAction;
@@ -953,7 +952,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
 			    if (csResource != null) {
 					if (contextObject != null) {
-						CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
+						csResource.getCS2ASAdapter(metaModelManager);
 					}
 					ResourceSet resourceSet = editor.getResourceSet();
 					if (resourceSet != null) {

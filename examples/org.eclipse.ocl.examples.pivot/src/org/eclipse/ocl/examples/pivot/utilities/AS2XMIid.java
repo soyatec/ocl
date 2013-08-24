@@ -31,12 +31,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 
-public class AS2ID
+public class AS2XMIid
 {
 	/**
 	 * Create an AS2ID conversion primed with the xmi:id values obtained by loading uri. 
 	 */
-	public static @NonNull AS2ID load(@NonNull URI uri) {
+	public static @NonNull AS2XMIid load(@NonNull URI uri) {
 		Map<String, String> moniker2id = new HashMap<String, String>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(PivotConstants.OCL_AS_FILE_EXTENSION, new PivotResourceFactoryImpl());
@@ -44,7 +44,7 @@ public class AS2ID
 			Resource resource = resourceSet.getResource(uri, true);
 			if (resource instanceof XMLResource) {
 				@SuppressWarnings("null")@NonNull List<Adapter> eAdapters = resource.eAdapters();
-				Pivot2MonikerVisitor monikerVisitor = PivotUtil.getAdapter(Pivot2MonikerVisitor.class, eAdapters);
+				AS2MonikerVisitor monikerVisitor = PivotUtil.getAdapter(AS2MonikerVisitor.class, eAdapters);
 				if (monikerVisitor != null) {
 					XMLResource xmlResource = (XMLResource) resource;
 					for (TreeIterator<EObject> tit = xmlResource.getAllContents(); tit.hasNext(); ) {
@@ -63,16 +63,16 @@ public class AS2ID
 				}
 			}
 		} catch (Exception e) {}
-		return new AS2ID(moniker2id);
+		return new AS2XMIid(moniker2id);
 	}
 
 	protected final @NonNull Map<String, String> moniker2id;
 	
-	public AS2ID() {
+	public AS2XMIid() {
 		this.moniker2id = new HashMap<String, String>();
 	}
 	
-	protected AS2ID(@NonNull Map<String, String> moniker2id) {
+	protected AS2XMIid(@NonNull Map<String, String> moniker2id) {
 		this.moniker2id = moniker2id;
 	}
 
@@ -80,13 +80,13 @@ public class AS2ID
 	 * Assign xmi:id values to referenceable elements in asResource re-using the xmi:id
 	 * values read when this AS2ID was constructed.
 	 */
-	public void assignIds(@NonNull PivotResource asResource) {
+	public void assignIds(@NonNull ASResource asResource) {
 		Map<String, EObject> allIds = new HashMap<String, EObject>();
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof Element) {
 				Element element = (Element)eObject;
-				AS2IDVisitor idVisitor = asResource.createIDVisitor(this);
+				AS2XMIidVisitor idVisitor = asResource.createAS2XMIidVisitor(this);
 				String id = idVisitor.getID(element);
 				if (id != null) {
 					assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
@@ -105,14 +105,14 @@ public class AS2ID
 	 */
 	public void assignIds(@NonNull ResourceSet asResourceSet) {
 		for (@SuppressWarnings("null")@NonNull Resource resource : asResourceSet.getResources()) {
-			if (resource instanceof PivotResource) {
-				assignIds((PivotResource)resource);
+			if (resource instanceof ASResource) {
+				assignIds((ASResource)resource);
 			}
 		}
 	}
 
 	public String getID(@NonNull Element element) {
-		String moniker = Pivot2Moniker.toString(element);
+		String moniker = AS2Moniker.toString(element);
 		String id = moniker2id.get(moniker);
 		if (id != null) {
 			return id;

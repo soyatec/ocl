@@ -214,7 +214,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 		if (uri == null) {
 			throw new IllegalStateException("Missing resource URI");
 		}
-		return PivotUtil.getPivotURI(uri);
+		return PivotUtil.getASURI(uri);
 	}
 
 	@Override

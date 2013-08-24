@@ -183,14 +183,14 @@ public class BaseDocument extends XtextDocument implements ConsoleContext
 
 	@Deprecated
 	public @Nullable Object setContext(@NonNull EssentialOCLCSResource resource, @Nullable EClassifier ecoreContext, @Nullable Map<String, EClassifier> ecoreParameters) {
-		CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter(resource, null);
+		CS2PivotResourceAdapter csAdapter = resource.getCS2ASAdapter(null);
 		MetaModelManager metaModelManager = csAdapter.getMetaModelManager();
 		resource.setParserContext(new EInvocationContext(metaModelManager, resource.getURI(), ecoreContext, ecoreParameters));
 		return null;
 	}
 
 	public @Nullable Object setContext(@NonNull EssentialOCLCSResource resource, @Nullable EObject eObject) {
-		CS2PivotResourceAdapter csAdapter = CS2PivotResourceAdapter.getAdapter(resource, null);
+		CS2PivotResourceAdapter csAdapter = resource.getCS2ASAdapter(null);
 		MetaModelManager metaModelManager = csAdapter.getMetaModelManager();
 		resource.setParserContext(new EObjectContext(metaModelManager, resource.getURI(), eObject));
 		return null;

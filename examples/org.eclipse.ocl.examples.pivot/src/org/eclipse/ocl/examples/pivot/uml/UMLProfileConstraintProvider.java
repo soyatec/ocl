@@ -72,13 +72,13 @@ public class UMLProfileConstraintProvider extends LoadableConstraintProvider
 			return false;
 		}
 		
-		Resource pivotResource;
+		Resource asResource;
 		try {
-			pivotResource = getOCL().uml2pivot(umlResource);
+			asResource = getOCL().uml2pivot(umlResource);
 		} catch (ParserException e) {
 			logger.error("Failed to load Pivot from '" + uri + "': ", e);
 			return false;
 		}
-		return installResource(pivotResource, categories);
+		return installResource(asResource, categories);
 	}
 }

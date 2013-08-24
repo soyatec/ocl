@@ -269,9 +269,9 @@ public abstract class PivotTestSuite extends PivotTestCase
    		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
    		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
-			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
-			Resource pivotResource = cs2pivot.getPivotResource(csResource);
-			assertNoValidationErrors("Validating", pivotResource);
+			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
+			Resource asResource = cs2pivot.getPivotResource(csResource);
+			assertNoValidationErrors("Validating", asResource);
 			
            fail("Should not have parsed \"" + expression + "\"");
        } catch (ParserException e) {
@@ -302,9 +302,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 			ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
 			csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
-			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
-			Resource pivotResource = cs2pivot.getPivotResource(csResource);
-			assertNoValidationErrors("Validating", pivotResource);
+			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
+			Resource asResource = cs2pivot.getPivotResource(csResource);
+			assertNoValidationErrors("Validating", asResource);
 			
 			fail("Should not have parsed \"" + expression + "\"");
 		} catch (ParserException e) {
@@ -784,10 +784,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	   		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
 	   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
-			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
-			Resource pivotResource = cs2pivot.getPivotResource(csResource);
+			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
+			Resource asResource = cs2pivot.getPivotResource(csResource);
 	       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
-			assertValidationDiagnostics("Validating", pivotResource, new String[] {expectedMessage});
+			assertValidationDiagnostics("Validating", asResource, new String[] {expectedMessage});
 		} catch (Exception e) {
 			fail(e.getMessage());
 		} finally {
@@ -808,10 +808,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	   		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
 	   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
-			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
-			Resource pivotResource = cs2pivot.getPivotResource(csResource);
+			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
+			Resource asResource = cs2pivot.getPivotResource(csResource);
 	       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
-			assertValidationDiagnostics("Validating", pivotResource, new String[] {expectedMessage});
+			assertValidationDiagnostics("Validating", asResource, new String[] {expectedMessage});
 		} catch (Exception e) {
 			fail(e.getMessage());
 		} finally {

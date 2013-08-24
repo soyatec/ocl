@@ -53,7 +53,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature
 import org.eclipse.ocl.examples.pivot.TemplateableElement
 import org.eclipse.ocl.examples.pivot.TupleType
 import org.eclipse.ocl.examples.pivot.Type
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker
 import org.eclipse.xtext.util.Strings
 
 public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowComponent
@@ -743,7 +743,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 	protected def String getMoniker(Element elem) {
 		var String moniker = element2moniker.get(elem);
 		if (moniker == null) {
-			moniker = Pivot2Moniker.toString(elem);
+			moniker = AS2Moniker.toString(elem);
 			element2moniker.put(elem, moniker);
 		}
 		return moniker;

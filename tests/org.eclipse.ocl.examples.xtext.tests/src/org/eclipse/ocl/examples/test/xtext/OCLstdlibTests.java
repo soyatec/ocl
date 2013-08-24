@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
@@ -66,8 +66,8 @@ public class OCLstdlibTests extends XtextTestCase
 
 		@Override
 		public int compare(Element o1, Element o2) {
-			String m1 = Pivot2Moniker.toString(o1);
-			String m2 = Pivot2Moniker.toString(o2);
+			String m1 = AS2Moniker.toString(o1);
+			String m2 = AS2Moniker.toString(o2);
 			return m1.compareTo(m2);
 		}
 	}
@@ -76,13 +76,13 @@ public class OCLstdlibTests extends XtextTestCase
 
 	public Map<String, Element> computeMoniker2PivotMap(Collection<? extends Resource> pivotResources) {
 		Map<String, Element> map = new HashMap<String, Element>();
-		for (Resource pivotResource : pivotResources) {
-			for (Iterator<EObject> it = pivotResource.getAllContents(); it.hasNext();) {
+		for (Resource asResource : pivotResources) {
+			for (Iterator<EObject> it = asResource.getAllContents(); it.hasNext();) {
 				EObject eObject = it.next();
-				assert eObject.eResource() == pivotResource;
+				assert eObject.eResource() == asResource;
 				if ((eObject instanceof Element) && !(eObject instanceof TemplateParameter) && !(eObject instanceof Comment) /*&& (eObject != orphanagePackage)*/) {
 					Element newElement = (Element) eObject;
-					String moniker = Pivot2Moniker.toString(newElement);
+					String moniker = AS2Moniker.toString(newElement);
 					assert moniker != null;
 					Element oldElement = map.get(moniker);
 					if (oldElement == null) {
@@ -102,12 +102,12 @@ public class OCLstdlibTests extends XtextTestCase
 		ModelContext modelContext = new ModelContext(metaModelManager, libraryURI);
 		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
 		assertNoResourceErrors("Load failed", xtextResource);
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-		Resource pivotResource = adapter.getPivotResource(xtextResource);
-		assertNoResourceErrors("File Model", pivotResource);
-		assertNoUnresolvedProxies("File Model", pivotResource);
-		assertNoValidationErrors("File Model", pivotResource);
-		return pivotResource;
+		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
+		Resource asResource = adapter.getPivotResource(xtextResource);
+		assertNoResourceErrors("File Model", asResource);
+		assertNoUnresolvedProxies("File Model", asResource);
+		assertNoValidationErrors("File Model", asResource);
+		return asResource;
 	}
 
 	@Override
@@ -163,8 +163,8 @@ public class OCLstdlibTests extends XtextTestCase
 			"       }\n"+
 			"    }\n"+
 			"}\n";		
-		Resource pivotResource = doLoadFromString("string.oclstdlib", testFile);
-		MetaModelManager metaModelManager = MetaModelManager.getAdapter(pivotResource.getResourceSet());
+		Resource asResource = doLoadFromString("string.oclstdlib", testFile);
+		MetaModelManager metaModelManager = MetaModelManager.getAdapter(asResource.getResourceSet());
 		AnyType oclAnyType = metaModelManager.getOclAnyType();
 		Iterable<? extends DomainOperation> ownedOperations = metaModelManager.getAllOperations(oclAnyType, false);
 		assertEquals(2, Iterables.size(ownedOperations));		// one from OclAny::=
@@ -186,7 +186,7 @@ public class OCLstdlibTests extends XtextTestCase
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(null);
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter(xtextResource);
+		CS2PivotResourceAdapter adapter = xtextResource.findCS2ASAdapter();
 		assertNoResourceErrors("Load failed", xtextResource);
 		Resource fileResource = adapter.getPivotResource(xtextResource);
 		assertNoResourceErrors("File Model", fileResource);
@@ -235,8 +235,8 @@ public class OCLstdlibTests extends XtextTestCase
 				Type fileType = ((TypedElement)fileElement).getType();
 				Type javaType = ((TypedElement)javaElement).getType();
 				assertEquals(fileType.getClass(), javaType.getClass());
-				String fileMoniker = Pivot2Moniker.toString(fileType);
-				String javaMoniker = Pivot2Moniker.toString(javaType);
+				String fileMoniker = AS2Moniker.toString(fileType);
+				String javaMoniker = AS2Moniker.toString(javaType);
 				assertEquals(fileMoniker, javaMoniker);
 			}
 			if (fileElement instanceof Feature) {
@@ -265,8 +265,8 @@ public class OCLstdlibTests extends XtextTestCase
 				for (int i = 0; i < fileTypes.size(); i++) {
 					Element fileType = fileTypes.get(i);
 					Element javaType = javaTypes.get(i);
-					String fileMoniker = Pivot2Moniker.toString(fileType);
-					String javaMoniker = Pivot2Moniker.toString(javaType);
+					String fileMoniker = AS2Moniker.toString(fileType);
+					String javaMoniker = AS2Moniker.toString(javaType);
 					assertEquals(fileMoniker, javaMoniker);
 				}
 			}

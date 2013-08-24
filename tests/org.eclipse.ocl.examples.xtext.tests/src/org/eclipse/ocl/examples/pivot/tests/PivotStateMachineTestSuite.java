@@ -59,10 +59,10 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 //		assertNull(problem);
 		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
 		Root pivotRoot = uml2Pivot.getPivotRoot();
-		Resource pivotResource = pivotRoot.eResource();
-		assertNoResourceErrors("Normalisation failed", pivotResource);
-		assertNoValidationErrors("Normalisation invalid", pivotResource);
-		return pivotResource;
+		Resource asResource = pivotRoot.eResource();
+		assertNoResourceErrors("Normalisation failed", asResource);
+		assertNoValidationErrors("Normalisation invalid", asResource);
+		return asResource;
 	}
 	
 	protected Resource initStateMachinePackage() throws ParserException {
@@ -96,8 +96,8 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 //		OCL ocl1 = OCL.newInstance();
 //		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 //		try {
-			Resource pivotResource = getPivotFromUML(metaModelManager, umlResource);
-		return pivotResource;
+			Resource asResource = getPivotFromUML(metaModelManager, umlResource);
+		return asResource;
 	}
 
 	@SuppressWarnings("null")

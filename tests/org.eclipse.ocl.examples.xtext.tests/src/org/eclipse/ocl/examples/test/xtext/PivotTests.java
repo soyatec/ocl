@@ -100,8 +100,8 @@ public class PivotTests extends XtextTestCase
 			} */
 /*			Collection<? extends Resource> pivotResources = cs2pivotResourceMap.values();
 			Map<String, MonikeredElementCS> moniker2CSMap = computeMoniker2CSMap(csResources);
-			for (Resource pivotResource : pivotResources) {
-				for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
+			for (Resource asResource : pivotResources) {
+				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 					Element pivotElement = (Element) tit.next();
 					if (pivotElement instanceof MonikeredElement) { //&& !(pivotElement instanceof TemplateSignature) && !(pivotElement instanceof TemplateParameterSubstitution) && !(pivotElement instanceof TemplateParameter)) {
 						MonikeredElement pivotNameableElement = (MonikeredElement)pivotElement;
@@ -201,7 +201,7 @@ public class PivotTests extends XtextTestCase
 //		assertNoCSErrors("Load failed", xtextResource);
 //		CSAliasCreator.refreshPackageAliases(xtextResource);
 //		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource);
-//		Resource pivotResource = adapter.getPivotResource(xtextResource);
+//		Resource asResource = adapter.getPivotResource(xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
@@ -230,8 +230,8 @@ public class PivotTests extends XtextTestCase
 		//
 		//	Create Pivot model from CS
 		//
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter(csResource);
-		Resource pivotResource = adapter.getPivotResource(csResource);
+		CS2PivotResourceAdapter adapter = csResource.findCS2ASAdapter();
+		Resource asResource = adapter.getPivotResource(csResource);
 		OCLstdlibCS2Pivot creator = (OCLstdlibCS2Pivot) adapter.getConverter();
 		//
 		//	Check that Pivot model is ready for damage
@@ -240,11 +240,11 @@ public class PivotTests extends XtextTestCase
 		//
 		//	Save Pivot Model for manual inspection
 		//
-		assertNoValidationErrors("Pivot validation problems", pivotResource);
-		URI savedPivotURI = pivotResource.getURI();
-		pivotResource.setURI(pivotURI);
-		pivotResource.save(null);
-		pivotResource.setURI(savedPivotURI);
+		assertNoValidationErrors("Pivot validation problems", asResource);
+		URI savedPivotURI = asResource.getURI();
+		asResource.setURI(pivotURI);
+		asResource.save(null);
+		asResource.setURI(savedPivotURI);
 		//
 		//	Check CS and Pivot have consistent content
 		//
@@ -280,7 +280,7 @@ public class PivotTests extends XtextTestCase
 //		URI libraryURI = getProjectFileURI(libraryName);
 //		BaseCSResource xtextLibraryResource = (BaseCSResource) resourceSet.getResource(libraryURI, true);
 //		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.refreshPivotMappings(xtextLibraryResource, null);
-//		Resource pivotResource = adapter.getPivotResource(xtextLibraryResource);
+//		Resource asResource = adapter.getPivotResource(xtextLibraryResource);
 //		pivotResourceSet.getResource(libraryURI, true);
 		String inputName = stem + ".ecore";
 		String csName = stem + ".ecore.cs";
@@ -307,10 +307,10 @@ public class PivotTests extends XtextTestCase
 //		xtextResource.save(null);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 //		assertNoResourceErrors("Save failed", xtextResource.getErrors());
-		Resource pivotResource = pivotRoot.eResource();
-//		CS2PivotAliasCreator.createPackageAliases(pivotResource);
-//		Resource pivotResource = resourceSet.createResource(outputURI);
-//		pivotResource.getContents().add(pivotRoot);
+		Resource asResource = pivotRoot.eResource();
+//		CS2PivotAliasCreator.createPackageAliases(asResource);
+//		Resource asResource = resourceSet.createResource(outputURI);
+//		asResource.getContents().add(pivotRoot);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
 		for (Resource pResource : pivotResourceSet.getResources()) {
 			URI uri = pResource.getURI();
@@ -320,13 +320,13 @@ public class PivotTests extends XtextTestCase
 			assertNoResourceErrors("Pivot Save failed", pResource);
 		}
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
-//		return pivotResource;
+//		return asResource;
 		ResourceSetImpl csResourceSet = new ResourceSetImpl();
 		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
 		Resource csResource = csResourceSet.createResource(csURI);
 		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-		cs2PivotResourceMap.put(csResource, pivotResource);
+		cs2PivotResourceMap.put(csResource, asResource);
 		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metaModelManager);
 		pivot2cs.update();
 		csResource.save(null);

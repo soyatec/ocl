@@ -145,8 +145,8 @@ public class CompleteOCLEObjectValidator extends PivotEObjectValidator
 			logger.error("Failed to load '" + oclURI + message);
 			return false;
 		}
-		Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
-		errors = pivotResource.getErrors();
+		Resource asResource = xtextResource.getPivotResource(metaModelManager);
+		errors = asResource.getErrors();
 		assert errors != null;
 		message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 		if (message != null) {

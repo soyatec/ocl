@@ -71,11 +71,11 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		//			if (!"java".equals(uri.scheme())) { //$NON-NLS-1$
 					if ((contents.size() > 0) && (contents.get(0) instanceof ModelElementCS)) { //$NON-NLS-1$
 						URI pivotURI = PivotUtil.getASURI(uri);
-						Resource pivotResource = pivotResourceSet.getResource(pivotURI, false);
-						if (pivotResource == null) {
-							pivotResource = pivotResourceSet.createResource(pivotURI, csResource.getASContentType());
+						Resource asResource = pivotResourceSet.getResource(pivotURI, false);
+						if (asResource == null) {
+							asResource = pivotResourceSet.createResource(pivotURI, csResource.getASContentType());
 						}
-						cs2pivotResourceMap.put(acsResource, pivotResource);
+						cs2pivotResourceMap.put(acsResource, asResource);
 					}
 				}
 	//		}

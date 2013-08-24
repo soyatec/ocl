@@ -81,7 +81,7 @@ public class ContextCSAttribution extends AbstractRootCSAttribution
 			if (eResource != null) {
 				URI baseURI = eResource.getURI();
 				if (baseURI != null) {
-					URI nonPivotBaseURI = PivotUtil.getNonPivotURI(baseURI);
+					URI nonPivotBaseURI = PivotUtil.getNonASURI(baseURI);
 					String nonPivotScheme = nonPivotBaseURI.scheme();
 					if ((nonPivotScheme != null) && !"null".equals(nonPivotScheme)) {
 						environmentView.addImportedElement(baseURI);

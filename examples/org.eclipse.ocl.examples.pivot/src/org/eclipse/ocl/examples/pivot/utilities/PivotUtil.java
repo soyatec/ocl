@@ -230,7 +230,7 @@ public class PivotUtil extends DomainUtil
 			if (eResource != null) {
 				if (element instanceof Element) {
 					s.append(" ");
-					s.append(Pivot2Moniker.toString((Element) element));
+					s.append(AS2Moniker.toString((Element) element));
 				}
 				s.append(" ");
 				s.append(eResource.getURI());
@@ -1182,15 +1182,6 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * Create local copies of specializations in a local orphanage so that pivotResource
-	 * can be saved without dangling references to the global orphanage.
-	 */
-	public static void localizeSpecializations(Resource pivotResource) {
-		PivotSaver saver = new PivotSaver(pivotResource);
-		saver.localizeSpecializations();
 	}
 
 	public static <T extends EObject> void refreshList(@Nullable List<? super T> oldElements, @Nullable List<? extends T> newElements) {

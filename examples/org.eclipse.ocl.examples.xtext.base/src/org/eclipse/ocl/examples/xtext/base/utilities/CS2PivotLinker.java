@@ -71,9 +71,9 @@ public class CS2PivotLinker extends LazyLinker
 //				System.out.println("Starting to refreshPivotMappings for " + eResource.getURI());
 				BaseCSResource csResource = (BaseCSResource) eResource;
 				try {
-					CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(csResource, null);
+					CS2PivotResourceAdapter resourceAdapter = csResource.getCS2ASAdapter(null);
 					resourceAdapter.refreshPivotMappings(diagnosticsConsumer);		// FIXME redundant
-/*					Resource pivotResource = resourceAdapter.getPivotResource(csResource);
+/*					Resource asResource = resourceAdapter.getPivotResource(csResource);
 					ResourceSet resourceSet = csResource.getResourceSet();
 					if (resourceSet instanceof ResourceSetImpl) {
 						ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
@@ -82,7 +82,7 @@ public class CS2PivotLinker extends LazyLinker
 							uriResourceMap = new HashMap<URI, Resource>();
 							resourceSetImpl.setURIResourceMap(uriResourceMap);
 						}
-						uriResourceMap.put(pivotResource.getURI(), pivotResource);
+						uriResourceMap.put(asResource.getURI(), asResource);
 					} */
 				}
 				catch (Exception exception) {	// Never let an Exception leak out to abort Xtext

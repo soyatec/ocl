@@ -337,11 +337,11 @@ public class PivotTestCase extends TestCase
 			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
 			BaseCSResource xtextResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.getResource(inputURI, true));
 			assertNoResourceErrors("Load failed", xtextResource);
-			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
-			Resource pivotResource = adapter.getPivotResource(xtextResource);
+			adapter = xtextResource.getCS2ASAdapter(null);
+			Resource asResource = adapter.getPivotResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
+			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
 			if (assignIds) {
 				for (TreeIterator<EObject> tit = ecoreResource.getAllContents(); tit.hasNext(); ) {
@@ -375,8 +375,8 @@ public class PivotTestCase extends TestCase
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
-		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
-		Resource ecoreResource = pivot2ecore(ocl, pivotResource, ecoreURI, true);
+		Resource asResource = cs2pivot(ocl, xtextResource, null);
+		Resource ecoreResource = pivot2ecore(ocl, asResource, ecoreURI, true);
 		return ecoreResource;
 	}
 	
@@ -389,18 +389,18 @@ public class PivotTestCase extends TestCase
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
-		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
-		return pivotResource;
+		Resource asResource = cs2pivot(ocl, xtextResource, null);
+		return asResource;
 	}
 	
 	public static @NonNull Resource cs2pivot(@NonNull OCL ocl, @NonNull BaseResource xtextResource, @Nullable URI pivotURI) throws IOException {
-		Resource pivotResource = ocl.cs2pivot(xtextResource);
-		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
+		Resource asResource = ocl.cs2pivot(xtextResource);
+		assertNoUnresolvedProxies("Unresolved proxies", asResource);
 		if (pivotURI != null) {
-			pivotResource.setURI(pivotURI);
-			pivotResource.save(null);
+			asResource.setURI(pivotURI);
+			asResource.save(null);
 		}
-		return pivotResource;
+		return asResource;
 	}
 
 	public static void doCompleteOCLSetup() {
@@ -513,24 +513,24 @@ public class PivotTestCase extends TestCase
 		return DomainUtil.nonNullState(projectURL);
 	}
 
-	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull Resource pivotResource, @NonNull URI outputURI) throws IOException {
+	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull Resource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE));
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 //		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
 //		Resource csResource = csResourceSet.createResource(uri);
 //		URI oclinecoreURI = ecoreResource.getURI().appendFileExtension("oclinecore");
-		ocl.pivot2cs(pivotResource, (BaseResource) xtextResource);
+		ocl.pivot2cs(asResource, (BaseResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
 //		csResource.save(null);
 		//
 		//	CS save and reload
 		//		
-		URI savedURI = DomainUtil.nonNullState(pivotResource.getURI());
-//		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
-		pivotResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
-		pivotResource.save(null);
-		pivotResource.setURI(savedURI);
+		URI savedURI = DomainUtil.nonNullState(asResource.getURI());
+//		asResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.save(null);
+		asResource.setURI(savedURI);
 		
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 		try {
@@ -547,8 +547,8 @@ public class PivotTestCase extends TestCase
 		return xtextResource;
 	}
 
-	public static @NonNull Resource pivot2ecore(@NonNull OCL ocl, @NonNull Resource pivotResource, @Nullable URI ecoreURI, boolean validateSaved) throws IOException {
-		Resource ecoreResource = ocl.pivot2ecore(pivotResource, ecoreURI != null ? ecoreURI : DomainUtil.nonNullEMF(URI.createURI("test.ecore")));
+	public static @NonNull Resource pivot2ecore(@NonNull OCL ocl, @NonNull Resource asResource, @Nullable URI ecoreURI, boolean validateSaved) throws IOException {
+		Resource ecoreResource = ocl.pivot2ecore(asResource, ecoreURI != null ? ecoreURI : DomainUtil.nonNullEMF(URI.createURI("test.ecore")));
 		if (ecoreURI != null) {
 			ecoreResource.save(null);
 		}

@@ -480,9 +480,9 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		for (Resource csResource : csResources) {
 			if (csResource != null) {
 				importedNamespaces = new HashMap<Namespace, List<String>>();
-				Resource pivotResource = converter.getPivotResource(csResource);
-				if (pivotResource != null) {
-					List<PackageCS> list = visitDeclarations(PackageCS.class, pivotResource.getContents(), null);
+				Resource asResource = converter.getPivotResource(csResource);
+				if (asResource != null) {
+					List<PackageCS> list = visitDeclarations(PackageCS.class, asResource.getContents(), null);
 					refreshList(csResource.getContents(), list);
 					imports.put(csResource, importedNamespaces);
 				}

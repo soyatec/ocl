@@ -340,8 +340,8 @@ public class DelegatesTest extends PivotTestSuite
 		message = PivotUtil.formatResourceDiagnostics(xtextResource.getErrors(), "OCL load", "\n\t");
 		if (message != null)
 			fail(message);
-		Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
-		message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "Pivot OCL load", "\n\t");
+		Resource asResource = xtextResource.getPivotResource(metaModelManager);
+		message = PivotUtil.formatResourceDiagnostics(asResource.getErrors(), "Pivot OCL load", "\n\t");
 		if (message != null)
 			fail(message);
 		DelegateInstaller pivotInstaller = new DelegateInstaller(metaModelManager, null);
