@@ -64,7 +64,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
@@ -190,8 +189,8 @@ public class UsageTests
 		// AcceleoNature.class.getName(); // Pull in the plugin for Hudson
 		doOCLinEcoreSetup();
 		configurePlatformResources();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-			.put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+//			.put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 	}
 
 	@Override

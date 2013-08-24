@@ -16,12 +16,19 @@
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.XMLSave;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import java.io.IOException;
+import java.util.Map;
 
-public class PivotResourceImpl extends XMIResourceImpl implements PivotResource
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.utilities.PivotSaver.LocateVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotSaver.ResolveVisitor;
+
+public class PivotResourceImpl extends AbstractASResourceImpl
 {
+	private Resource adaptedResource = null;
+	
 	/**
 	 * Creates an instance of the resource.
 	 */
@@ -29,13 +36,36 @@ public class PivotResourceImpl extends XMIResourceImpl implements PivotResource
 		super(uri);
 	}
 
-	@Override
-	protected XMLSave createXMLSave() {
-		return new PivotSaveImpl(createXMLHelper());
+	public @NonNull AS2IDVisitor createIDVisitor(@NonNull AS2ID as2id) {
+		return new AS2IDVisitor(as2id);
+	}
+
+	public @NonNull LocateVisitor createLocateVisitor(@NonNull AbstractPivotSaver saver) {
+		return new LocateVisitor(saver);
+	}
+	
+	public @NonNull Pivot2MonikerVisitor createMonikerVisitor(@NonNull Abstract2Moniker pivot2moniker) {
+		return new Pivot2MonikerVisitor(pivot2moniker);
+	}
+
+	public @NonNull ResolveVisitor createResolveVisitor(@NonNull AbstractPivotSaver saver) {
+		return new ResolveVisitor(saver);
 	}
 
 	@Override
-	protected boolean useIDs() {
-		return true;
+	public void load(Map<?, ?> options) throws IOException {
+		try {
+			super.load(options);
+		} catch (IOException e) {
+			URI trimmedURI1 = uri.trimFileExtension();
+			URI trimmedURI2 = trimmedURI1.trimFileExtension();
+			if (trimmedURI1 != trimmedURI2) {
+				adaptedResource = resourceSet.createResource(trimmedURI1);
+				adaptedResource.load(options);
+			}
+			else {
+				throw e;
+			}
+		}
 	}
 }

@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
@@ -30,8 +31,41 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
  */
 public interface BaseCSResource extends BaseResource
 {
+	/**
+	 * Create the CS2AS converter for the cs2pivotResourceMap conversions using metaModelManager.
+	 */
 	@NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager);
+
+	/**
+	 * Return a MetaModelManager for use with this CS resource, unless one can be located
+	 * via a CS2AS adapter.
+	 */
 	@NonNull MetaModelManager createMetaModelManager();
+
+	/**
+	 * Return the CS2AS adapter for this resource, or null if none installed.
+	 */
+	@Nullable CS2PivotResourceAdapter findCS2ASAdapter();
+
+	/**
+	 * Return the eContentType to be used whenh creating an AS resource.
+	 */
+	@NonNull String getASContentType();
+
+	/**
+	 * Return the CS2AS adapter for this resource.
+	 * If no CS2AS adapter installed, one is created and installed using the provided metaModelManager,
+	 * which if null is also created. 
+	 */
+	@NonNull CS2PivotResourceAdapter getCS2ASAdapter(@Nullable MetaModelManager metaModelManager);
+	
+	/**
+	 * Return the name of the editor for use in diagnostics.
+	 */
 	@NonNull String getEditorName();
+	
+	/**
+	 * Return a uri against the URI of this CS resource.
+	 */
 	@NonNull URI resolve(@NonNull URI uri);
 }

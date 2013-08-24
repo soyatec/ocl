@@ -30,7 +30,7 @@ public class Pivot2Moniker extends Abstract2Moniker
 		Pivot2Moniker moniker = new Pivot2Moniker(pivotElement);
 		moniker.appendElement(pivotElement);
 		String string = moniker.toString();
-		assert !"".equals(string);
+		assert !"".equals(string) : "Zero length moniker for '" + pivotElement.eClass().getName() + "'";
 		assert string != null;
 		return string;
 	}

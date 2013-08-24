@@ -534,8 +534,8 @@ public class PrettyPrinter
 			            else {
 			            	uri = rootElement.eResource().getURI();
 			            	if (uri != null) {
-			                	if (PivotUtil.isPivotURI(uri)) {
-			                		uri = PivotUtil.getNonPivotURI(uri);
+			                	if (PivotUtil.isASURI(uri)) {
+			                		uri = PivotUtil.getNonASURI(uri);
 			                	}
 			            	}
 			            }

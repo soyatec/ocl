@@ -17,9 +17,12 @@
 package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.utilities.PivotSaver.LocateVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotSaver.ResolveVisitor;
 
 /**
  * The resource associated with the '<em><b>pivot</b></em>' package.
@@ -37,7 +40,7 @@ public interface PivotResource extends XMIResource
 	/**
 	 * The file extension for '<em><b>pivot</b></em>' resources.
 	 */
-	public static final String FILE_EXTENSION = "pivot"; //$NON-NLS-1$
+	public static final String FILE_EXTENSION = PivotConstants.OCL_AS_FILE_EXTENSION;
 
 	/**
 	 * The default encoding for '<em><b>pivot</b></em>' resources.
@@ -45,4 +48,24 @@ public interface PivotResource extends XMIResource
 	public static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
 
 	public static final String CONTENT_TYPE = PivotPackage.eCONTENT_TYPE;
+	
+	/**
+	 * Create a visitor to compute the xmi:id value of an element. 
+	 */
+	@NonNull AS2IDVisitor createIDVisitor(@NonNull AS2ID as2id);
+
+	/**
+	 * Create a visitor to locate orphan specializations. 
+	 */
+	@NonNull LocateVisitor createLocateVisitor(@NonNull AbstractPivotSaver saver);
+	
+	/**
+	 * Create a visitor to compute a structural descriptor for an element. 
+	 */
+	@NonNull Pivot2MonikerVisitor createMonikerVisitor(@NonNull Abstract2Moniker as2moniker);
+
+	/**
+	 * Create a visitor to resolve orphan specializations. 
+	 */
+	@NonNull ResolveVisitor createResolveVisitor(@NonNull AbstractPivotSaver saver);
 }

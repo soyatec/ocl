@@ -40,6 +40,9 @@ import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.utilities.AS2ID;
+import org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * This is the http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib Standard Library
@@ -54,7 +57,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  * as this Standard Library.
  */
 @SuppressWarnings({"nls", "unused"})
-public class OCLstdlib extends XMIResourceImpl
+public class OCLstdlib extends PivotResourceImpl
 {
 	/**
 	 *	The static package-of-types pivot model of the Standard Library.
@@ -76,7 +79,8 @@ public class OCLstdlib extends XMIResourceImpl
 		if (oclstdlib == null) {
 			Contents contents = new Contents();
 			Root libraryModel = contents.create("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
-			oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
+			oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, libraryModel);
+			new AS2ID().assignIds(oclstdlib);
 		}
 		return oclstdlib;
 	}
@@ -128,17 +132,18 @@ public class OCLstdlib extends XMIResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static @NonNull OCLstdlib create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
+	public static @NonNull OCLstdlib create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 		Contents contents = new Contents();
-		Root libraryModel = contents.create(uri, name, nsPrefix, nsURI);
-		return new OCLstdlib(uri, libraryModel);
+		Root libraryModel = contents.create(asURI, name, nsPrefix, nsURI);
+		return new OCLstdlib(asURI, libraryModel);
 	}
 	
 	/**
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
-	public OCLstdlib(@NonNull String uri, @NonNull Root libraryModel) {
-		super(URI.createURI(uri));
+	public OCLstdlib(@NonNull String asURI, @NonNull Root libraryModel) {
+		super(URI.createURI(asURI));
+		assert PivotUtil.isASURI(asURI);
 		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
 //		liveOCLstdlibs.put(this, null);
@@ -150,9 +155,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected Library library;
 		// protected Package orphans;
 
-		protected @NonNull Root create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
+		protected @NonNull Root create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 		{
-			Root theRoot = root = createRoot("OCL-2.5.oclstdlib", uri);
+			Root theRoot = root = createRoot("OCL-2.5.oclstdlib", asURI);
 			library = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();

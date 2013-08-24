@@ -18,7 +18,6 @@ import java.io.File
 import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
@@ -29,10 +28,11 @@ import org.eclipse.ocl.examples.pivot.DataType
 import org.eclipse.ocl.examples.pivot.Library
 import org.eclipse.ocl.examples.pivot.Package
 import org.eclipse.ocl.examples.pivot.Root
+import org.eclipse.ocl.examples.pivot.utilities.AS2ID
+import org.eclipse.ocl.examples.pivot.utilities.PivotResource
 import org.eclipse.ocl.examples.pivot.utilities.PivotSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource
-import org.eclipse.ocl.examples.common.utils.XMIUtils
 
 public class GenerateOCLstdlib extends GenerateOCLCommon
 {
@@ -93,6 +93,9 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			import org.eclipse.ocl.examples.pivot.Package;
 			import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 			import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+			import org.eclipse.ocl.examples.pivot.utilities.AS2ID;
+			import org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl;
+			import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 			
 			/**
 			 * This is the «uri» Standard Library
@@ -107,7 +110,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			 * as this Standard Library.
 			 */
 			@SuppressWarnings({"nls", "unused"})
-			public class «javaClassName» extends XMIResourceImpl
+			public class «javaClassName» extends PivotResourceImpl
 			{
 				/**
 				 *	The static package-of-types pivot model of the Standard Library.
@@ -129,7 +132,8 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 					if (oclstdlib == null) {
 						Contents contents = new Contents();
 						Root libraryModel = contents.create("«lib.nsURI»", "«lib.name»", "«lib.nsPrefix»", "«lib.nsURI»");
-						oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
+						oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, libraryModel);
+						new AS2ID().assignIds(oclstdlib);
 					}
 					return oclstdlib;
 				}
@@ -181,17 +185,18 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 				 *	Construct a copy of the OCL Standard Library with specified resource URI,
 				 *  and package name, prefix and namespace URI.
 				 */
-				public static @NonNull «javaClassName» create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
+				public static @NonNull «javaClassName» create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 					Contents contents = new Contents();
-					Root libraryModel = contents.create(uri, name, nsPrefix, nsURI);
-					return new «javaClassName»(uri, libraryModel);
+					Root libraryModel = contents.create(asURI, name, nsPrefix, nsURI);
+					return new «javaClassName»(asURI, libraryModel);
 				}
 				
 				/**
 				 *	Construct an OCL Standard Library with specified resource URI and library content.
 				 */
-				public «javaClassName»(@NonNull String uri, @NonNull Root libraryModel) {
-					super(URI.createURI(uri));
+				public «javaClassName»(@NonNull String asURI, @NonNull Root libraryModel) {
+					super(URI.createURI(asURI));
+					assert PivotUtil.isASURI(asURI);
 					getContents().add(libraryModel);
 			//		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
 			//		liveOCLstdlibs.put(this, null);
@@ -203,9 +208,9 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 					protected Library «lib.getPrefixedSymbolName("library")»;
 					// protected Package «root.getOrphanPackage().getPrefixedSymbolName("orphans")»;
 			
-					protected @NonNull Root create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
+					protected @NonNull Root create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 					{
-						Root theRoot = «root.getSymbolName()» = createRoot("«root.name»", uri);
+						Root theRoot = «root.getSymbolName()» = createRoot("«root.name»", asURI);
 						«lib.getSymbolName()» = createLibrary(name, nsPrefix, nsURI);
 						installPackages();
 						installOclTypes();
@@ -362,7 +367,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 				issues.addError(this, message, null, null, null);
 				return;
 			}
-			var Resource pivotResource = xtextResource.getPivotResource(null);
+			var PivotResource pivotResource = xtextResource.getPivotResource(null) as PivotResource;
 			if (pivotResource == null) {
 				return;
 			}
@@ -380,9 +385,11 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			fw.close();
 			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("oclstdlib", "pivot");
 			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
+			log.info("Loading '" + saveURI + "'");
+			var AS2ID as2id = AS2ID.load(saveURI);
 			log.info("Saving '" + saveURI + "'");
 			pivotResource.setURI(saveURI);
-	    	XMIUtils.assignIds(pivotResource, new XMIUtils.HierachicalENamedElementIdCreator(), null);
+	    	as2id.assignIds(pivotResource.getResourceSet());
 			pivotResource.save(null);
 		} catch (RuntimeException e) {
 			throw e;

@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.osgi.util.NLS;
 
@@ -50,7 +51,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	 * constant is repeated in GenersateOCLstdlibModel.mwe2 an in
 	 * org.eclipse.ocl.examples.library/plugin.xml.
 	 */
-	public static final @NonNull String DEFAULT_OCL_STDLIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib";
+	public static final @NonNull String DEFAULT_OCL_STDLIB_URI = OCLstdlib.STDLIB_URI;
 
 	/**
 	 * The URI to provide the default Standard Library. This value may be

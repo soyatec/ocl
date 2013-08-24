@@ -41,10 +41,12 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.manager.Orphanage;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
@@ -329,7 +331,7 @@ public class PivotSaver extends AbstractPivotSaver
 	/**
 	 * The extra package for copies of specializations.
 	 */
-	private org.eclipse.ocl.examples.pivot.Class orphanageClass = null;
+	private Type orphanageClass = null;
 	
 	public PivotSaver(Resource resource) {
 		this.resource = resource;
@@ -364,10 +366,33 @@ public class PivotSaver extends AbstractPivotSaver
 
 	protected org.eclipse.ocl.examples.pivot.Package getOrphanPackage(Resource resource) {
 		if (orphanage == null) {
+			for (EObject eRoot : resource.getContents()) {
+				if ((orphanage == null) && (eRoot instanceof Root)) {
+					for (org.eclipse.ocl.examples.pivot.Package asPackage : ((Root)eRoot).getNestedPackage()) {
+						if (Orphanage.isTypeOrphanage(asPackage)) {
+							orphanage = asPackage;
+							for (Type asType : orphanage.getOwnedType()) {
+								if (PivotConstants.ORPHANAGE_NAME.equals(asType.getName())) {
+									orphanageClass = asType;
+								}
+								else {
+									specializations.put(asType, asType);
+								}
+							}
+							break;
+						}
+					}
+					
+				}
+			}
+		}
+		if (orphanage == null) {
 			orphanage = PivotFactory.eINSTANCE.createPackage();
 			orphanage.setName(PivotConstants.ORPHANAGE_NAME);
 			orphanage.setNsURI(PivotConstants.ORPHANAGE_URI);
 			resource.getContents().add(orphanage);
+		}
+		if (orphanageClass == null) {
 			orphanageClass = PivotFactory.eINSTANCE.createAnyType();		// No superclasses
 			orphanageClass.setName(PivotConstants.ORPHANAGE_NAME);
 			orphanage.getOwnedType().add(orphanageClass);
@@ -457,7 +482,9 @@ public class PivotSaver extends AbstractPivotSaver
 			resolvedType = DomainUtil.nonNullEMF(EcoreUtil.copy(referredType));
 			specializations.put(referredType, resolvedType);
 			specializations.put(resolvedType, resolvedType);
-			orphanage.getOwnedType().add(resolvedType);
+			if (resolvedType.eContainer() != orphanage) {
+				orphanage.getOwnedType().add(resolvedType);
+			}
 		}
 /*			String moniker = Pivot2Moniker.toString(referredType);
 		Type type = types.get(moniker);

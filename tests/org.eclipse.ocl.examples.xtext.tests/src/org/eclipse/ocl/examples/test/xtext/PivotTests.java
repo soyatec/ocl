@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -223,7 +224,7 @@ public class PivotTests extends XtextTestCase
 
 	@SuppressWarnings("null")
 	protected void doPivotTestOCLstdlib(@NonNull String stem) throws IOException {
-		String pivotName = stem + ".pivot";
+		String pivotName = stem + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
 		URI pivotURI = getProjectFileURI(pivotName);
 		BaseCSResource csResource = doLoadOCLstdlib(stem, "oclstdlib");
 		//

@@ -446,8 +446,8 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				String nsURI = ((EPackage)ecoreContents.iterator().next()).getNsURI();
 				if (nsURI != null) {
-					String stdlibUri = OCLstdlib.STDLIB_URI;
-					OCLstdlib library = OCLstdlib.create(stdlibUri, "ocl", "ocl", nsURI);
+					String stdlibASUri = OCLstdlib.STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
+					OCLstdlib library = OCLstdlib.create(stdlibASUri, "ocl", "ocl", nsURI);
 					metaModelManager.installResource(library);
 //					metaModelManager.installAs(nsURI, OCLstdlibTables.PACKAGE);
 				}
@@ -461,7 +461,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				}
 			}
 			if (pivotRoot2 == null) {
-				pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), uri.toString());
+				pivotRoot2 = pivotRoot = metaModelManager.createRoot(PivotUtil.getNonPivotURI(pivotURI).lastSegment(), uri.toString());
 			}
 			pivotRoot = pivotRoot2;
 			update(pivotResource, ecoreContents);

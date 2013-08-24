@@ -262,10 +262,10 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 	public /*@NonNull*/ Iterable<IEObjectDescription> getElements(EObject object) {
 		String descriptiveName = null;
 		if (targetReference == BaseCSTPackage.Literals.IMPORT_CS__NAMESPACE) {
-			descriptiveName = getNonPivotURI(object);
+			descriptiveName = getNonASURI(object);
 		}
 		else if (targetReference == BaseCSTPackage.Literals.MODEL_ELEMENT_REF_CS__ELEMENT) {
-			descriptiveName = getNonPivotURI(object);
+			descriptiveName = getNonASURI(object);
 		}
 		else if (targetReference == BaseCSTPackage.Literals.REFERENCE_CS__OPPOSITE) {
 			descriptiveName = ((NamedElement)object).getName();
@@ -337,7 +337,7 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 		return metaModelManager;
 	}
 	
-	private @Nullable String getNonPivotURI(@Nullable EObject object) {
+	private @Nullable String getNonASURI(@Nullable EObject object) {
 		URI uri = null;
 		if (object == null) {
 			return null;
@@ -354,8 +354,8 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 		if (uri == null) {
 			return null;
 		}
-		if (PivotUtil.isPivotURI(uri)) {
-			uri = PivotUtil.getNonPivotURI(uri);
+		if (PivotUtil.isASURI(uri)) {
+			uri = PivotUtil.getNonASURI(uri);
 		}
 		return uri.toString();
 	}

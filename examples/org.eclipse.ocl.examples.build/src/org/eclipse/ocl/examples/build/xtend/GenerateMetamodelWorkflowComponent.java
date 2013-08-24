@@ -12,13 +12,13 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.build.xtend
+package org.eclipse.ocl.examples.build.xtend;
 
-import org.apache.log4j.Logger
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.mwe.core.issues.Issues
-import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent
-import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup
+import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
+import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 public abstract class GenerateMetamodelWorkflowComponent extends AbstractWorkflowComponent
 {
@@ -33,11 +33,11 @@ public abstract class GenerateMetamodelWorkflowComponent extends AbstractWorkflo
 
 	protected String sourceFile;
 
-	protected new() {
+	protected GenerateMetamodelWorkflowComponent() {
 		OCLstdlibStandaloneSetup.doSetup();
 	}	
 
-	override checkConfiguration(Issues issues) {
+	public void checkConfiguration(Issues issues) {
 		if (uri == null) {
 			issues.addError(this, "uri not specified.");
 		}
@@ -61,42 +61,42 @@ public abstract class GenerateMetamodelWorkflowComponent extends AbstractWorkflo
 	/**
 	 * The Class Name of the generated metamodel.
 	 */
-	public def void setJavaClassName(String javaClassName) {
+	public void setJavaClassName(String javaClassName) {
 		this.javaClassName = javaClassName;
 	}
 
 	/**
 	 * The Java package path for the metamodel. (e.g. "org.eclipse.ocl.examples.pivot.path")
 	 */
-	public def void setJavaPackageName(String javaPackageName) {
+	public void setJavaPackageName(String javaPackageName) {
 		this.javaPackageName = javaPackageName;
 	}
 
 	/**
 	 * The projectName relative path to the metamodel definition. (e.g. "model/Pivot.ecore")
 	 */
-	public def void setModelFile(String modelFile) {
+	public void setModelFile(String modelFile) {
 		this.modelFile = modelFile;
 	}
 
 	/**
 	 * The project name hosting the Metamodel. (e.g. "org.eclipse.ocl.examples.pivot")
 	 */
-	public def void setProjectName(String projectName) {
+	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
 	
 	/**
 	 * An optional ResourceSet that MWE components may share to reduce model loading. 
 	 */
-	public def void setResourceSet(ResourceSet resourceSet) {
+	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}
 	
 	/**
 	 * The nsURI for use in the generated metamodel. (e.g. "http://www.eclipse.org/ocl/3.1.0/Pivot").
 	 */
-	public def void setUri(String uri) {
+	public void setUri(String uri) {
 		this.uri = uri;
 	}
 }

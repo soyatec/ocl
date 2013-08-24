@@ -25,9 +25,11 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -173,17 +175,50 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 //			CS2Pivot.printDiagnostic(getClass().getSimpleName() + ".doLoad end", true, -1);
 		}
 	}
+	
+	public final @Nullable CS2PivotResourceAdapter findCS2ASAdapter() {
+		return PivotUtil.getAdapter(CS2PivotResourceAdapter.class, this);
+	}
+	
+	public @NonNull String getASContentType() {
+		return PivotPackage.eCONTENT_TYPE;
+	}
+	
+	public final @NonNull CS2PivotResourceAdapter getCS2ASAdapter(@Nullable MetaModelManager metaModelManager) {
+		CS2PivotResourceAdapter adapter = PivotUtil.getAdapter(CS2PivotResourceAdapter.class, this);
+		if (adapter == null) {
+			if (metaModelManager == null) {
+				metaModelManager = PivotUtil.findMetaModelManager(this);					
+				if (metaModelManager == null) {
+					metaModelManager = createMetaModelManager();
+					ResourceSet csResourceSet = getResourceSet();
+					if (csResourceSet != null) {
+						MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);
+					}
+				}
+				ClassLoader classLoader = getClass().getClassLoader();
+				if (classLoader != null) {
+					metaModelManager.addClassLoader(classLoader);
+				}
+			}
+			@SuppressWarnings("null")@NonNull Registry resourceFactoryRegistry = metaModelManager.getPivotResourceSet().getResourceFactoryRegistry();
+			initializeResourceFactory(resourceFactoryRegistry);
+			adapter = new CS2PivotResourceAdapter(this, metaModelManager);
+			eAdapters().add(adapter);
+		}
+		return adapter;
+	}
 
 	public @NonNull String getEditorName() {
 		return "Essential OCL";
 	}
 
-	public @Nullable ParserContext getParserContext() {
+	public final @Nullable ParserContext getParserContext() {
 		return parserContext;
 	}
 
-	public @NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager) {
-		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(this, metaModelManager);
+	public final @NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager) {
+		CS2PivotResourceAdapter adapter = getCS2ASAdapter(metaModelManager);
 		Resource pivotResource = adapter.getPivotResource(this);
 		if (pivotResource == null) {
 			throw new IllegalStateException("No Pivot Resource created");
@@ -191,7 +226,13 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		return pivotResource;
 	}
 
-	public @NonNull URI resolve(@NonNull URI uri) {
+	/**
+	 * Install any required extension/content-type registrations to enable AS Resources
+	 * to be created satisfactorily.
+	 */
+	protected void initializeResourceFactory(@NonNull Resource.Factory.Registry resourceFactoryRegistry) {}
+
+	public final @NonNull URI resolve(@NonNull URI uri) {
 		URI csURI = getURI();
 		if (csURI.isRelative()) {
 			File csRelative = new File(csURI.toFileString());
@@ -309,7 +350,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		super.resolveLazyCrossReferences(mon);
 	}
 
-	public void setParserContext(@Nullable ParserContext parserContext) {
+	public final void setParserContext(@Nullable ParserContext parserContext) {
 		this.parserContext = parserContext;
 	}
 

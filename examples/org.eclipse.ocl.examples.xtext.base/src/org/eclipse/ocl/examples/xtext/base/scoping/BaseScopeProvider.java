@@ -66,7 +66,7 @@ public class BaseScopeProvider extends AbstractDeclarativeScopeProvider
 		}
 		ElementCS csElement = (ElementCS) context;
 		@SuppressWarnings("unused")
-		CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter((BaseCSResource)csResource, null);
+		CS2PivotResourceAdapter resourceAdapter = ((BaseCSResource)csResource).getCS2ASAdapter(null);
 		return BaseScopeView.getScopeView(metaModelManager, csElement, reference);
 	}
 }

@@ -330,7 +330,7 @@ public class LoadTests extends XtextTestCase
 			for (Resource pivotResource : allResources) {
 				assertNoResourceErrors("Load failed", pivotResource);
 				@SuppressWarnings("unused") URI savedURI = pivotResource.getURI();
-//				pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+//				pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 //				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
 //					pivotResource.save(null);
 //				}
@@ -436,7 +436,7 @@ public class LoadTests extends XtextTestCase
 	public Resource doLoad_Concrete(String stem, String extension) throws IOException {
 		String inputName = stem + "." + extension;
 		String cstName = inputName + ".xmi";
-		String pivotName = inputName + ".pivot";
+		String pivotName = inputName + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
 		String savedName = stem + ".saved." + extension;
 		URI inputURI = getProjectFileURI(inputName);
 		URI cstURI = getProjectFileURI(cstName);
@@ -519,7 +519,7 @@ public class LoadTests extends XtextTestCase
 	protected void setUp() throws Exception {
 		super.setUp();
 		configurePlatformResources();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 	}
 
 	@Override

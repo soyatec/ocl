@@ -27,8 +27,8 @@ public class BaseURIEditorOpener extends GlobalURIEditorOpener
 	@Override
 	public IEditorPart open(URI uri, boolean select) {
 		if (uri != null) {
-			if (PivotUtil.isPivotURI(uri)) {
-				uri = PivotUtil.getNonPivotURI(uri);		// FIXME map AST to CST URI too
+			if (PivotUtil.isASURI(uri)) {
+				uri = PivotUtil.getNonASURI(uri);		// FIXME map AST to CST URI too
 			}
 		}
 		return super.open(uri, select);
@@ -37,7 +37,7 @@ public class BaseURIEditorOpener extends GlobalURIEditorOpener
 	@Override
 	public IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select) {
 		if (referenceOwnerURI != null) {
-			referenceOwnerURI = PivotUtil.isPivotURI(referenceOwnerURI) ? PivotUtil.getNonPivotURI(referenceOwnerURI) : referenceOwnerURI;
+			referenceOwnerURI = PivotUtil.isASURI(referenceOwnerURI) ? PivotUtil.getNonASURI(referenceOwnerURI) : referenceOwnerURI;
 		}
 		return super.open(referenceOwnerURI, reference, indexInList, select);
 	}

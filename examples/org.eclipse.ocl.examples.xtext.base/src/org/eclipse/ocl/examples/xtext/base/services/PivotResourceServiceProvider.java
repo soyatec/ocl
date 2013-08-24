@@ -31,7 +31,7 @@ public class PivotResourceServiceProvider extends DefaultResourceServiceProvider
 {
 	@Override
 	public boolean canHandle(URI uri) {
-		if (PivotUtil.SCHEME_PIVOT.equals(uri.scheme())) {
+		if (PivotUtil.isASURI(uri)) {
 			return true;
 		}
 		else if ("oclstdlib".equals(uri.fileExtension())) {		// FIXME Use rather than fight Xtext

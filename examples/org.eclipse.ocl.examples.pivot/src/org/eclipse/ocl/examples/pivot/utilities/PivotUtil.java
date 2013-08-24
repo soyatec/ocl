@@ -104,8 +104,6 @@ public class PivotUtil extends DomainUtil
 {	
 	private static final Logger logger = Logger.getLogger(PivotUtil.class);
 
-	public static final String SCHEME_PIVOT = "pivot";
-
 	/**
 	 * 'Highest' precedence first
 	 */
@@ -378,6 +376,16 @@ public class PivotUtil extends DomainUtil
 	public static <T> T getAdapter(@NonNull Class<T> adapterClass, @NonNull Notifier notifier) {
 		List<Adapter> eAdapters = DomainUtil.nonNullEMF(notifier.eAdapters());
 		return getAdapter(adapterClass, eAdapters);
+	}
+
+	@SuppressWarnings("null")
+	public static @NonNull URI getASURI(@NonNull URI uri) {
+		URI asURI = uri.appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION);
+		if (!isASURI(asURI)) {
+			asURI = uri.appendSegment(PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
+		}
+		assert isASURI(asURI);
+		return asURI;
 	}
 
 	public static <T> T getAdapter(@NonNull Class<T> adapterClass, @NonNull List<Adapter> eAdapters) {
@@ -829,15 +837,15 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
+	@SuppressWarnings("null")
+	public static @NonNull URI getNonASURI(@NonNull URI uri) {
+		assert isASURI(uri);
+		return uri.trimFileExtension();
+	}
+
+	@Deprecated	// Use getNonASURI
 	public static @NonNull URI getNonPivotURI(@NonNull URI uri) {
-		assert isPivotURI(uri);
-		String[] oldSegments = uri.segments();
-		String[] newSegments = new String[oldSegments.length - 1];
-		newSegments[0] = uri.scheme();
-		System.arraycopy(oldSegments, 1, newSegments, 0, oldSegments.length-1);
-		URI pivotURI = DomainUtil.nonNullEMF(URI.createHierarchicalURI(oldSegments[0], uri.authority(), uri.device(), newSegments,
-				uri.query(), uri.fragment()));
-		return pivotURI;
+		return getNonASURI(uri);
 	}
 
 	/**
@@ -964,19 +972,9 @@ public class PivotUtil extends DomainUtil
 		return castElement;
 	}
 
+	@Deprecated	// Use getASURI
 	public static @NonNull URI getPivotURI(@NonNull URI uri) {
-		String oldScheme = uri.scheme();
-		if (oldScheme == null) {
-			oldScheme = "null";
-		}
-		String[] oldSegments = uri.segments();
-		String[] newSegments = new String[oldSegments.length + 1];
-		newSegments[0] = oldScheme;
-		System.arraycopy(oldSegments, 0, newSegments, 1, oldSegments.length);
-		@SuppressWarnings("null")
-		@NonNull URI pivotURI = URI.createHierarchicalURI(SCHEME_PIVOT, uri.authority(), uri.device(), newSegments,
-				uri.query(), uri.fragment());
-		return pivotURI;
+		return getASURI(uri);
 	}
 
 	public static Feature getReferredFeature(CallExp callExp) {
@@ -1139,6 +1137,14 @@ public class PivotUtil extends DomainUtil
 		return castUnspecializedElement;
 	}
 
+	public static boolean isASURI(@Nullable String uri) {
+		return (uri != null) && uri.endsWith(PivotConstants.OCL_AS_FILE_EXTENSION);
+	}
+
+	public static boolean isASURI(@Nullable URI uri) {
+		return (uri != null) && PivotConstants.OCL_AS_FILE_EXTENSION.equals(uri.fileExtension());
+	}
+
 	public static boolean isLibraryType(@NonNull Type type) {
 		if (type instanceof LambdaType) {
 			return false;
@@ -1151,8 +1157,9 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
+	@Deprecated	// Use isASURI
 	public static boolean isPivotURI(@NonNull URI uri) {
-		return SCHEME_PIVOT.equals(uri.scheme()) && (uri.segments().length > 0);
+		return isASURI(uri);
 	}
 	
 	public static boolean isValidIdentifier(@Nullable String value) {

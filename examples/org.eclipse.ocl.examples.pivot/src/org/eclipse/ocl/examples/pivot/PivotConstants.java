@@ -32,6 +32,9 @@ public interface PivotConstants
 	@SuppressWarnings("null")
 	static final @NonNull URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/Pivot.merged.genmodel", true); //$NON-NLS-1$
 
+	static final @NonNull String OCL_AS_FILE_EXTENSION = "oclas";
+	static final @NonNull String DOT_OCL_AS_FILE_EXTENSION = "." + OCL_AS_FILE_EXTENSION;
+	
 	/**
 	 * String-valued URI prefix of a package defining the primitive types. Proxy references to
 	 * e.g. OCL's String rather than Ecore's EString are constructed by just appending 'String' to

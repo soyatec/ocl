@@ -58,6 +58,8 @@ import org.eclipse.xtext.util.Strings
 
 public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowComponent
 {
+	private var Map<Element, String> element2moniker = new HashMap<Element, String>();
+	 
 	protected def String declareCollectionTypes(Package pkg) {
 		'''
 			«FOR type : pkg.getRootPackage().getSortedCollectionTypes()»
@@ -739,7 +741,12 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 	}
 
 	protected def String getMoniker(Element elem) {
-		return Pivot2Moniker.toString(elem);
+		var String moniker = element2moniker.get(elem);
+		if (moniker == null) {
+			moniker = Pivot2Moniker.toString(elem);
+			element2moniker.put(elem, moniker);
+		}
+		return moniker;
 	}
 
 	protected def Collection<Type> getOclTypes(Root root) {

@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,6 +47,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -468,6 +470,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return adapter;
 	}
 
+	private static final @NonNull ContentHandler PIVOT_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
+		PivotResource.CONTENT_TYPE,
+		new String[]{PivotResource.FILE_EXTENSION},
+		RootXMLContentHandlerImpl.XMI_KIND, PivotPackage.eNS_URI, null);
+
 	public static void initializePivotResourceSet(@NonNull ResourceSet pivotResourceSet) {
 		StandaloneProjectMap.initializeURIResourceMap(pivotResourceSet);
 		Registry resourceFactoryRegistry = pivotResourceSet.getResourceFactoryRegistry();
@@ -475,9 +482,25 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		contentTypeToFactoryMap.put(PivotResource.CONTENT_TYPE, new PivotResourceFactoryImpl()); //$NON-NLS-1$
 		Map<String, Object> extensionToFactoryMap = resourceFactoryRegistry.getExtensionToFactoryMap();
 		extensionToFactoryMap.put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
-		extensionToFactoryMap.put(PivotResource.FILE_EXTENSION, new PivotResourceFactoryImpl()); //$NON-NLS-1$
+//		extensionToFactoryMap.put(PivotResource.FILE_EXTENSION, new PivotResourceFactoryImpl()); //$NON-NLS-1$
 		org.eclipse.emf.ecore.EPackage.Registry packageRegistry = pivotResourceSet.getPackageRegistry();
 		packageRegistry.put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
+		
+		
+		installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, PIVOT_CONTENT_HANDLER);
+		
+	}
+
+	public static void installContentHandler(int priority, @NonNull ContentHandler contentHandler) {
+		List<ContentHandler> contentHandlers = ContentHandler.Registry.INSTANCE.get(priority);
+		if (contentHandlers == null) {
+			contentHandlers = new ArrayList<ContentHandler>();
+			ContentHandler.Registry.INSTANCE.put(priority, contentHandlers);
+		}
+
+		if (!contentHandlers.contains(contentHandler)) {
+			contentHandlers.add(contentHandler);
+		}
 	}
 	
 	/**
@@ -2922,6 +2945,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public void setDefaultStandardLibraryURI(@NonNull String defaultStandardLibraryURI) {
+		assert !PivotUtil.isASURI(defaultStandardLibraryURI);
 		this.defaultStandardLibraryURI = defaultStandardLibraryURI;
 	}
 

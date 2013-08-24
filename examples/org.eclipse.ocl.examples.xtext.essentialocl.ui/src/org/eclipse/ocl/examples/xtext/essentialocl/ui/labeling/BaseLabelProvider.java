@@ -438,9 +438,9 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	public String text(Constraint ele) {
 		StringBuilder s = new StringBuilder();
 		s.append("<");
-		appendString(s, PivotUtil.getStereotype(ele));
+		appendString(s, ele != null ? PivotUtil.getStereotype(ele) : "null");
 		s.append("> ");
-		String name = ele.getName();
+		String name = ele != null ? ele.getName() : null;
 		if (name != null) {
 			s.append(name);
 		}	

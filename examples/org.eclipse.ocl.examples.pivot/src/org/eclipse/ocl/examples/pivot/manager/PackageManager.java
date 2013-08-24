@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -290,7 +289,7 @@ public class PackageManager implements PackageServerParent
 		if (packageServer == null) {
 			String nsPrefix = pivotPackage.getNsPrefix();
 			String nsURI = pivotPackage.getNsURI();
-			if (PivotConstants.ORPHANAGE_URI.equals(nsURI)) {
+			if (Orphanage.isTypeOrphanage(pivotPackage)) {
 				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
 			}
 			else {

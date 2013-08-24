@@ -66,6 +66,7 @@ import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -526,8 +527,8 @@ public class PivotTestCase extends TestCase
 		//	CS save and reload
 		//		
 		URI savedURI = DomainUtil.nonNullState(pivotResource.getURI());
-//		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
-		pivotResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension("pivot"));
+//		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		pivotResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		pivotResource.save(null);
 		pivotResource.setURI(savedURI);
 		

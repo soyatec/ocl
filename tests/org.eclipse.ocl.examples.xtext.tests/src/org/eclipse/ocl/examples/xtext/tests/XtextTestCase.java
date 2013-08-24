@@ -43,7 +43,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
@@ -153,7 +152,7 @@ public class XtextTestCase extends PivotTestCase
 	@SuppressWarnings("null")
 	protected void assertPivotIsValid(URI pivotURI) {
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
-		reloadResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new EcoreResourceFactoryImpl());
+//		reloadResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new EcoreResourceFactoryImpl());
 		Resource reloadedPivotResource = reloadResourceSet.getResource(pivotURI, true);
 		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(reloadedPivotResource);
 		assertNoValidationErrors("Pivot reload validation problems", reloadedPivotResource);

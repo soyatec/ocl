@@ -39,6 +39,7 @@ public final class PivotSaveImpl extends XMISaveImpl
 	@Override
 	protected void init(XMLResource resource, Map<?, ?> options) {
 		PivotUtil.localizeSpecializations(resource);
+    	new AS2ID().assignIds(resource.getResourceSet());
 		super.init(resource, options);
 	}
 }

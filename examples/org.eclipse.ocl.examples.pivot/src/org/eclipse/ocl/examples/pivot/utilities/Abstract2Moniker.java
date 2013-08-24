@@ -26,6 +26,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -96,7 +97,13 @@ public abstract class Abstract2Moniker implements PivotConstants
 		}
 		else {
 			if (pivotVisitor == null) {
-				pivotVisitor = new Pivot2MonikerVisitor(this);
+				Resource resource = element.eResource();
+				if (resource instanceof PivotResource) {
+					pivotVisitor = ((PivotResource)resource).createMonikerVisitor(this);
+				}
+				else {
+					pivotVisitor = new Pivot2MonikerVisitor(this);
+				}
 			}
 			@SuppressWarnings("null")
 			@NonNull Pivot2MonikerVisitor nonNullVisitor = pivotVisitor;

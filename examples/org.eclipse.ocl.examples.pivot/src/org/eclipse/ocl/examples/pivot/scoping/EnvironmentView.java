@@ -615,8 +615,8 @@ public class EnvironmentView
 	}
 
 	public void addImportedElement(@NonNull URI baseURI) {
-    	if (PivotUtil.isPivotURI(baseURI)) {
-    		baseURI = PivotUtil.getNonPivotURI(baseURI);
+    	if (PivotUtil.isASURI(baseURI)) {
+    		baseURI = PivotUtil.getNonASURI(baseURI);
     	}
 		String name = getName();
 		if (name != null) {
