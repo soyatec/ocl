@@ -174,29 +174,6 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
-	public @NonNull Class<?> getEcoreInterfaceClass(@NonNull EClass eClass) throws GenModelException {
-		GenClassifier genClassifier = getGenClass(eClass);
-		String qualifiedInterfaceName;
-		if (genClassifier instanceof GenDataType) {
-			qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
-			Class<?> primitiveClass = JavaCodeGenerator.javaPrimitiveNames.get(qualifiedInterfaceName);
-			if (primitiveClass != null) {
-				return primitiveClass;
-			}
-		}
-		else {
-			qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
-		}
-		try {
-			Thread currentThread = Thread.currentThread();
-			@SuppressWarnings("null") @NonNull ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-			@SuppressWarnings("null") @NonNull Class<?> loadedClass = contextClassLoader.loadClass(qualifiedInterfaceName);
-			return loadedClass;
-		} catch (Exception e) {		// FIXME this is a normal path for dynamic models
-			throw new GenModelException("Failed to load class for " + eClass);
-		}
-	}
-
 	public @Nullable String getEcoreInterfaceClassName(@NonNull EClass eClass) throws GenModelException {
 		try {
 			GenClassifier genClassifier = getGenClass(eClass);
@@ -215,6 +192,29 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 		catch (GenModelException e) {
 			return null;
+		}
+	}
+
+	public @NonNull Class<?> getEcoreInterfaceClassifier(@NonNull EClassifier eClassifier) throws GenModelException {
+		GenClassifier genClassifier = getGenClassifier(eClassifier);
+		String qualifiedInterfaceName;
+		if (genClassifier instanceof GenDataType) {
+			qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
+			Class<?> primitiveClass = JavaCodeGenerator.javaPrimitiveNames.get(qualifiedInterfaceName);
+			if (primitiveClass != null) {
+				return primitiveClass;
+			}
+		}
+		else {
+			qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
+		}
+		try {
+			Thread currentThread = Thread.currentThread();
+			@SuppressWarnings("null") @NonNull ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+			@SuppressWarnings("null") @NonNull Class<?> loadedClass = contextClassLoader.loadClass(qualifiedInterfaceName);
+			return loadedClass;
+		} catch (Exception e) {		// FIXME this is a normal path for dynamic models
+			throw new GenModelException("Failed to load class for " + eClassifier);
 		}
 	}
 

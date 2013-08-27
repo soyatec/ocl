@@ -808,14 +808,4 @@ public class UsageTests
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
 	}
-	
-	/*
-	 * public void testType_Parameters() throws Exception { String testFile =
-	 * "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
-	 * "package C1 : C2 = 'C3'\n" + "{\n" + "    class A {\n" +
-	 * "    	operation opEBigInteger(arg : ecore::EBigInteger) : Boolean {\n" +
-	 * "	 	}\n" + "	 }\n" + "    class Test {\n" + "       property a : A;\n" +
-	 * "       invariant EBigInteger: a.opEBigInteger(1);\n" + "    }\n" +
-	 * "}\n"; doLoadFromString("Type_Parameters.oclinecore", testFile); }
-	 */
 }

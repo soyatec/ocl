@@ -68,7 +68,7 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 		EClass eClass = (EClass) type.getETarget();
 		if (eClass != null) {
 			try {
-				return genModelHelper.getEcoreInterfaceClass(eClass);
+				return genModelHelper.getEcoreInterfaceClassifier(eClass);
 			}
 			catch (Exception e) {}
 		}

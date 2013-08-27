@@ -16,7 +16,7 @@ package org.eclipse.ocl.examples.codegen.java.types;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -24,12 +24,12 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
 public class UnboxedEObjectsDescriptor extends AbstractValueDescriptor implements UnboxedDescriptor
 {
-	protected final @NonNull EClass eClass;
+	protected final @NonNull EClassifier eClassifier;
 	protected final @NonNull Class<?> oldJavaClass;
 	
-	public UnboxedEObjectsDescriptor(@NonNull CollectionTypeId elementId, @NonNull Class<?> javaClass, @NonNull EClass eClass) {
+	public UnboxedEObjectsDescriptor(@NonNull CollectionTypeId elementId, @NonNull Class<?> javaClass, @NonNull EClassifier eClassifier) {
 		super(elementId, reClass(javaClass));
-		this.eClass = eClass;
+		this.eClassifier = eClassifier;
 		this.oldJavaClass = javaClass;
 	}
 

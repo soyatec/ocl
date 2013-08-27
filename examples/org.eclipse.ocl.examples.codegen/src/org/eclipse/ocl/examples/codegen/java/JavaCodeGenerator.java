@@ -399,7 +399,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			EClass eClass = getEClass(type);
 			if (eClass != null) {
 				try {
-					Class<?> javaClass = genModelHelper.getEcoreInterfaceClass(eClass);
+					Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClass);
 					simpleDescriptor = new SimpleEObjectDescriptor(elementId, javaClass, eClass);
 					simpleDescriptors.put(elementId, simpleDescriptor);
 					return simpleDescriptor;
@@ -453,18 +453,17 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				CollectionTypeId collectionTypeId = (CollectionTypeId)elementId;
 				TypeId typeId = collectionTypeId.getElementTypeId();
 				Type type = metaModelManager.getIdResolver().getType(typeId, null);
-				
 				EClassifier eClassifier = getEClassifier(type);
-				if (eClassifier instanceof EClass) {
-					EClass eClass = (EClass) eClassifier;
-					try {						
-						Class<?> javaClass = genModelHelper.getEcoreInterfaceClass(eClass);
-						unboxedDescriptor = new UnboxedEObjectsDescriptor(collectionTypeId, javaClass, eClass);
+				if (eClassifier != null) {
+					try {
+						Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
+						unboxedDescriptor = new UnboxedEObjectsDescriptor(collectionTypeId, javaClass, eClassifier);
 					}
 					catch (Exception e) {
-						unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClass);
+						unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClassifier);
 					}
-				} else  {
+				}
+				if (unboxedDescriptor == null) {
 					unboxedDescriptor = new UnboxedElementsDescriptor(collectionTypeId, metaModelManager, type);
 				}
 			}

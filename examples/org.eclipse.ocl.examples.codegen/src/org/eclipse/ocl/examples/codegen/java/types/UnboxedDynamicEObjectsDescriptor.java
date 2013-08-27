@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.java.types;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -24,11 +25,11 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
 public class UnboxedDynamicEObjectsDescriptor extends AbstractValueDescriptor implements UnboxedDescriptor
 {
-	protected final @NonNull EClass eClass;
+	protected final @NonNull EClassifier eClassifier;
 	
-	public UnboxedDynamicEObjectsDescriptor(@NonNull CollectionTypeId elementId, @NonNull EClass eClass) {
+	public UnboxedDynamicEObjectsDescriptor(@NonNull CollectionTypeId elementId, @NonNull EClassifier eClassifier) {
 		super(elementId, List.class);
-		this.eClass = eClass;
+		this.eClassifier = eClassifier;
 	}
 
 	@Override
@@ -40,12 +41,18 @@ public class UnboxedDynamicEObjectsDescriptor extends AbstractValueDescriptor im
 		if (!(typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
 			return false;
 		}
-		EClass thatEClass = ((UnboxedDynamicEObjectsDescriptor)typeDescriptor).eClass;
-		return (eClass == thatEClass) || eClass.isSuperTypeOf(thatEClass);
+		EClassifier thatEClassifier = ((UnboxedDynamicEObjectsDescriptor)typeDescriptor).eClassifier;
+		if (eClassifier == thatEClassifier) {
+			return true;
+		}
+		if (!(eClassifier instanceof EClass) || !(thatEClassifier instanceof EClass)) {
+			return false;
+		}
+		return ((EClass)eClassifier).isSuperTypeOf((EClass)thatEClassifier);
 	}
 
 	@Override
 	public @NonNull String toString() {
-		return elementId + " => List<Object/*" + eClass.getName() + "*/>";
+		return elementId + " => List<Object/*" + eClassifier.getName() + "*/>";
 	}
 }
