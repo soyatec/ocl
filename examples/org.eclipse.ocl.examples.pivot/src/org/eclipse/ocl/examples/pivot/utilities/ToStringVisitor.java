@@ -169,7 +169,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 		}
 
 		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
-			return new ToStringVisitor(s, getClass());
+			return new ToStringVisitor(s);
 		}
 
 		public @NonNull EPackage getEPackage() {
@@ -191,17 +191,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 
 	@Deprecated // Since 16-Jul-2013 use "context"
 	protected final @NonNull StringBuilder result;
-	
-	protected final @NonNull Class<? extends ToStringVisitor.Factory> factoryClass;
 
 	/**
 	 * Initializes me.
 	 */
-	protected ToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+	public ToStringVisitor(@NonNull StringBuilder s) {
         super(s);
         result = s;
-        assert factoryClass != null;
-        this.factoryClass = factoryClass;
 	}
 
 	/*
@@ -382,17 +378,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 			append(NULL_PLACEHOLDER);
 		}
 		else {
-			Factory nestedFactory = getFactory((EObject)v);
-			if (nestedFactory == null) {
-				append(NULL_PLACEHOLDER);
-			}
-			else if (nestedFactory.getClass().isAssignableFrom(factoryClass)) {
-				v.accept(this);
-			}
-			else {
-				ToStringVisitor nestedVisitor = nestedFactory.createToStringVisitor(context);
-				v.accept(nestedVisitor);
-			}
+			v.accept(this);
 		}
 		return null;
 	}

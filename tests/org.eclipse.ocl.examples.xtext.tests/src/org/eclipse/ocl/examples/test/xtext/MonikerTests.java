@@ -110,9 +110,9 @@ public class MonikerTests extends XtextTestCase
 	 * Check that all pivot elements that should have monikers do, and that
 	 * there are no duplicates. Return a map of moniker to pivot.
 	 *
-	public Map<String, MonikeredElement> checkPivotMonikers(ResourceSet pivotResourceSet) {
+	public Map<String, MonikeredElement> checkPivotMonikers(ResourceSet asResourceSet) {
 		Map<String, MonikeredElement> monikerMap = new HashMap<String, MonikeredElement>();
-		for (Resource asResource : pivotResourceSet.getResources()) {
+		for (Resource asResource : asResourceSet.getResources()) {
 			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof MonikeredElement) {
@@ -182,7 +182,7 @@ public class MonikerTests extends XtextTestCase
 		//	Get the pivot resource and check for load failures
 		//
 		CS2PivotResourceAdapter adapter = csResource.getCS2ASAdapter(null);
-		Resource asResource = adapter.getPivotResource(csResource);		
+		Resource asResource = adapter.getASResource(csResource);		
 		assertNoValidationErrors("Pivot validation problems", asResource);
 		asResource.setURI(pivotURI);
 		asResource.save(null);

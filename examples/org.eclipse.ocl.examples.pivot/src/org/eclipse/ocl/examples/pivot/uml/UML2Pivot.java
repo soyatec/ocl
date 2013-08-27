@@ -55,7 +55,6 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -66,6 +65,8 @@ import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.AbstractEcore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -79,73 +80,6 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	public static final @SuppressWarnings("null")@NonNull String STEREOTYPE_EXTENSION_PREFIX = org.eclipse.uml2.uml.Extension.STEREOTYPE_ROLE_PREFIX; //"extension_";
 
 	private static final Logger logger = Logger.getLogger(UML2Pivot.class);
-
-	private static final class Factory extends MetaModelManager.AbstractFactory
-	{
-		private Factory() {
-			MetaModelManager.addFactory(this);
-		}
-
-		@Override
-		public int getHandlerPriority(@NonNull EObject eObject) {
-			if (eObject instanceof org.eclipse.uml2.uml.Element) {
-				return CAN_HANDLE;
-			}
-			if (eObject.eResource() instanceof UMLResource) {
-				return CAN_HANDLE;		// e.g. A StereotypeApplication
-			}
-			return CANNOT_HANDLE;
-		}
-
-		@Override
-		public int getHandlerPriority(@NonNull Resource resource) {
-			return isUML(resource) ? CAN_HANDLE : CANNOT_HANDLE;
-		}
-
-		public void configure(@NonNull ResourceSet resourceSet) {
-			OCL.initialize(resourceSet);
-		}
-
-		public @Nullable URI getPackageURI(@NonNull EObject eObject) {
-			if (eObject instanceof org.eclipse.uml2.uml.Package) {
-				String uri = ((org.eclipse.uml2.uml.Package)eObject).getURI();
-				if (uri != null) {
-					return URI.createURI(uri);
-				}
-			}
-			return null;
-		}
-
-		public <T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager,
-				@NonNull Class<T> pivotClass, @NonNull EObject eObject) throws ParserException {
-			Resource metaModel = eObject.eResource();
-			if (metaModel == null) {
-				return null;
-			}
-			UML2Pivot uml2pivot = UML2Pivot.getAdapter(metaModel, metaModelManager);
-			uml2pivot.getPivotRoot();
-			return uml2pivot.getCreated(pivotClass, eObject);
-		}
-
-		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource umlResource, @Nullable URI uri) throws ParserException {
-			UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
-			conversion.setUMLURI(uri);
-			Root pivotRoot = conversion.getPivotRoot();
-			String uriFragment = uri != null ? uri.fragment() : null;
-			if (uriFragment == null) {
-				return pivotRoot;
-			}
-			else {
-				EObject eObject = umlResource.getEObject(uriFragment);
-				if (eObject == null) {
-					return null;
-				}
-				return conversion.getCreated(Element.class, eObject);
-			}
-		}
-	}
-
-	public static MetaModelManager.Factory FACTORY = new Factory();
 
 	public static @Nullable UML2Pivot findAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
 		for (Adapter adapter : resource.eAdapters()) {
@@ -539,7 +473,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			Root pivotRoot2 = pivotRoot;
 			if (pivotRoot2 == null) {
 				URI pivotURI = createPivotURI();
-				Resource asResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+				ASResource asResource = metaModelManager.getResource(pivotURI, ASResource.UML_CONTENT_TYPE);
 				try {
 					pivotRoot2 = installDeclarations(asResource);					
 //					Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
@@ -634,7 +568,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				for (int i = 0; i < importedResources.size(); i++) {			// List may grow re-entrantly
 					Resource importedResource = importedResources.get(i);
 					if (importedResource != null) {
-						if (FACTORY.getHandlerPriority(importedResource) != Factory.CAN_HANDLE) {
+						if (UMLASResourceFactory.INSTANCE.getHandlerPriority(importedResource) != ASResourceFactory.CAN_HANDLE) {
 							metaModelManager.loadResource(importedResource, null);
 						}
 						else {
@@ -643,7 +577,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 								Inner importedAdapter = new Inner(importedResource, this);
 								importedResource.eAdapters().add(importedAdapter);
 								URI pivotURI = importedAdapter.createPivotURI();
-								Resource asResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+								ASResource asResource = metaModelManager.getResource(pivotURI, ASResource.UML_CONTENT_TYPE);
 								importedAdapter.installDeclarations(asResource);
 								adapter = importedAdapter;
 								metaModelManager.installResource(asResource);

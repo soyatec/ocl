@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  */
 public class ASSaverResolveVisitor extends AbstractExtendingVisitor<Object, ASSaver>
 {
-	protected ASSaverResolveVisitor(@NonNull ASSaver saver) {
+	public ASSaverResolveVisitor(@NonNull ASSaver saver) {
 		super(saver);
 	}
 

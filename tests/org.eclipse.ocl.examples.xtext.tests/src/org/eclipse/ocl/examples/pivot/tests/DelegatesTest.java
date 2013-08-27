@@ -97,8 +97,8 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator;
@@ -340,7 +340,7 @@ public class DelegatesTest extends PivotTestSuite
 		message = PivotUtil.formatResourceDiagnostics(xtextResource.getErrors(), "OCL load", "\n\t");
 		if (message != null)
 			fail(message);
-		Resource asResource = xtextResource.getPivotResource(metaModelManager);
+		Resource asResource = xtextResource.getASResource(metaModelManager);
 		message = PivotUtil.formatResourceDiagnostics(asResource.getErrors(), "Pivot OCL load", "\n\t");
 		if (message != null)
 			fail(message);

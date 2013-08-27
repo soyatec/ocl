@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
 
 public class GenerateOCLMetaModel extends GenerateOCLCommon
 {
@@ -174,6 +175,8 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 			import org.eclipse.ocl.examples.pivot.Package;
 			import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 			import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+			import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
+			import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 			import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 			
 			/**
@@ -182,7 +185,7 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 			 * It facilitates efficient model loading without the overheads of model reading.
 			 */
 			@SuppressWarnings({"nls", "unused"})
-			public class «javaClassName» extends XMIResourceImpl
+			public class «javaClassName» extends ASResourceImpl
 			{
 				/**
 				 *	The URI of this Standard Library.
@@ -197,7 +200,7 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 				}
 			
 				protected OCLMetaModel(@NonNull URI uri) {
-					super(uri);
+					super(uri, OCLASResourceFactory.INSTANCE);
 				}
 			
 				protected static class LibraryContents extends AbstractContents
@@ -389,18 +392,18 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 			}
 			var Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
 			var Root pivotRoot = ecore2Pivot.getPivotRoot();
-			var Resource pivotResource = pivotRoot.eResource();
-			var String pivotErrorsString = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(pivotResource.getErrors()), "Converting " + inputURI, "\n");
+			var Resource asResource = pivotRoot.eResource();
+			var String pivotErrorsString = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(asResource.getErrors()), "Converting " + inputURI, "\n");
 				if (pivotErrorsString != null) {
 					issues.addError(this, pivotErrorsString, null, null, null);
 					return;
 				}
 			sourceFile = "/" + projectName + "/" + modelFile;
-			if (pivotResource == null) {
+			if (asResource == null) {
 				return;
 			}
-			var EObject pivotModel = pivotResource.getContents().get(0);
-			var ASSaver saver = new ASSaver(pivotResource);
+			var EObject pivotModel = asResource.getContents().get(0);
+			var ASSaver saver = new ASSaver(asResource);
 			var Package orphanage = saver.localizeSpecializations();
 			if ((orphanage != null) && (pivotModel instanceof Root)) {
 				(pivotModel as Root).getNestedPackage().add(orphanage);
@@ -411,6 +414,14 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 			var MergeWriter fw = new MergeWriter(fileName);
 			fw.append(metaModel);
 			fw.close();
+			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("ecore", "oclas");
+			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
+			log.info("Loading '" + saveURI + "'");
+			var AS2XMIid as2id = AS2XMIid.load(saveURI);
+			log.info("Saving '" + saveURI + "'");
+			asResource.setURI(saveURI);
+	    	as2id.assignIds(asResource.getResourceSet());
+			asResource.save(null);
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {

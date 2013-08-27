@@ -40,10 +40,10 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.ASResource;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.MessageBinder;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -81,7 +81,7 @@ public class RoundTripTests extends XtextTestCase
 		CS2PivotResourceAdapter adapter = null;
 		try {
 			adapter = xtextResource.getCS2ASAdapter(null);
-			ASResource asResource = (ASResource)adapter.getPivotResource(xtextResource);
+			ASResource asResource = adapter.getASResource(xtextResource);
 			assertNoResourceErrors("To Pivot errors", xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			List<EObject> pivotContents = asResource.getContents();
@@ -113,7 +113,7 @@ public class RoundTripTests extends XtextTestCase
 		return xtextResource;
 	}
 	
-	public BaseResource createCompleteOCLXtextFromPivot(MetaModelManager metaModelManager, Resource asResource, URI xtextURI) throws IOException {
+	public BaseResource createCompleteOCLXtextFromPivot(MetaModelManager metaModelManager, ASResource asResource, URI xtextURI) throws IOException {
 		BaseResource xtextResource = (BaseResource) resourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 		xtextResource.updateFrom(asResource, metaModelManager);
 		xtextResource.save(null);
@@ -143,7 +143,7 @@ public class RoundTripTests extends XtextTestCase
 			MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager1);
 			BaseCSResource xtextResource1 = createXtextFromURI(metaModelManager1, inputURI);
 			ASResource pivotResource1 = createPivotFromXtext(metaModelManager1, xtextResource1, 1);
-			Resource pivotResource2 = CompleteOCLSplitter.separate(metaModelManager1, pivotResource1);
+			ASResource pivotResource2 = CompleteOCLSplitter.separate(metaModelManager1, pivotResource1);
 			@SuppressWarnings("unused")
 			BaseResource xtextResource2 = createCompleteOCLXtextFromPivot(metaModelManager1, pivotResource2, outputURI);
 			metaModelManager1.dispose();

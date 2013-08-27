@@ -38,16 +38,13 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -66,73 +63,13 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
-import org.eclipse.ocl.examples.pivot.utilities.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2Pivot extends AbstractEcore2Pivot
 {
-	private static final class Factory extends MetaModelManager.AbstractFactory
-	{
-		private Factory() {
-			MetaModelManager.addFactory(this);
-		}
-
-		@Override
-		public int getHandlerPriority(@NonNull EObject eObject) {
-			if (eObject instanceof ENamedElement) {  // Not EModelElement which could be UML
-				return MAY_HANDLE;
-			}
-			else if (eObject instanceof DynamicEObjectImpl) {
-				return MAY_HANDLE;
-			}
-			else {
-				return CANNOT_HANDLE;
-			}
-		}
-
-		@Override
-		public int getHandlerPriority(@NonNull Resource resource) {
-			return isEcore(resource) ? MAY_HANDLE : CANNOT_HANDLE;
-		}
-
-		public void configure(@NonNull ResourceSet resourceSet) {}
-
-		public @Nullable URI getPackageURI(@NonNull EObject eObject) {
-			if (eObject instanceof EPackage) {
-				String uri = ((EPackage)eObject).getNsURI();
-				if (uri != null) {
-					return URI.createURI(uri);
-				}
-			}
-			return null;
-		}
-
-		public <T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager, @NonNull Class<T> pivotClass, @NonNull EObject eObject) {
-			return metaModelManager.getPivotOfEcore(pivotClass, eObject);
-		}
-
-		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource ecoreResource, @Nullable URI uri) {
-			Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
-			conversion.setEcoreURI(uri);
-			Root pivotRoot = conversion.getPivotRoot();
-			String uriFragment = uri != null ? uri.fragment() : null;
-			if (uriFragment == null) {
-				return pivotRoot;
-			}
-			else {
-				EObject eObject = ecoreResource.getEObject(uriFragment);
-				if (eObject == null) {
-					return null;
-				}
-				return conversion.newCreateMap.get(eObject);
-			}
-		}
-	}
-
-	public static MetaModelManager.Factory FACTORY = new Factory();
-
 	public static @Nullable Ecore2Pivot findAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
 		for (Adapter adapter : resource.eAdapters()) {
 			if (adapter instanceof Ecore2Pivot) {
@@ -185,6 +122,30 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		return false;
 	}
 
+	public static Ecore2Pivot loadFromEcore(@NonNull ASResource ecoreASResource, @NonNull URI ecoreURI) {
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(ecoreASResource);
+		Resource ecoreResource = metaModelManager.getExternalResourceSet().getResource(ecoreURI, true);
+		Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
+		
+		conversion.pivotRoot = metaModelManager.createRoot(ecoreURI.lastSegment(), ecoreASResource.getURI().toString());
+		conversion.update(ecoreASResource, ecoreResource.getContents());
+		
+		AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
+		if (ecoreAdapter != null) {
+			Map<EObject, String> ecoreAliasMap = ecoreAdapter.getAliasMap();
+			AliasAdapter pivotAdapter = AliasAdapter.getAdapter(ecoreASResource);
+			Map<EObject, String> pivotAliasMap = pivotAdapter.getAliasMap();
+			for (EObject eObject : ecoreAliasMap.keySet()) {
+				String alias = ecoreAliasMap.get(eObject);
+				Element element = conversion.newCreateMap.get(eObject);
+				pivotAliasMap.put(element, alias);
+			}
+		}
+		metaModelManager.installResource(ecoreASResource);
+		conversion.installImports();
+		return conversion;
+	}
+
 /*	public static Ecore2Pivot createConverter(MetaModelManager metaModelManager, Resource ecoreResource) {
 		EList<Adapter> eAdapters = ecoreResource.eAdapters();
 		Ecore2Pivot conversion = (Ecore2Pivot) EcoreUtil.getAdapter(eAdapters, Ecore2Pivot.class);
@@ -218,7 +179,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	/**
 	 * Mapping of source Ecore objects to their resulting pivot element in the current conversion.
 	 */
-	private Map<EObject, Element> newCreateMap = null;
+	Map<EObject, Element> newCreateMap = null;
 
 	/**
 	 * Set of all Ecore objects requiring further work during the reference pass.
@@ -442,7 +403,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	public @NonNull Root importObjects(@NonNull Collection<EObject> ecoreContents, @NonNull URI pivotURI) {
-		@NonNull Resource asResource = metaModelManager.getResource(pivotURI, ASResource.CONTENT_TYPE);
+		@NonNull ASResource asResource = metaModelManager.getResource(pivotURI, ASResource.ECORE_CONTENT_TYPE);
 //		try {
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				String nsURI = ((EPackage)ecoreContents.iterator().next()).getNsURI();

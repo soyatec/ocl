@@ -28,6 +28,7 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
@@ -85,7 +86,7 @@ public class CompleteOCLSeparator extends WorkflowComponentWithModelSlot
 		ResourceSet resourceSet = resource.getResourceSet();
 		assert resourceSet != null;
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-		Resource oclResource = CompleteOCLSplitter.separate(metaModelManager, resource);
+		ASResource oclResource = CompleteOCLSplitter.separate(metaModelManager, resource);
 		URI xtextURI = oclURI != null ? URI.createPlatformResourceURI(oclURI, true) : uri.trimFileExtension().appendFileExtension("ocl");
 		ResourceSetImpl csResourceSet = new ResourceSetImpl();
 		MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);

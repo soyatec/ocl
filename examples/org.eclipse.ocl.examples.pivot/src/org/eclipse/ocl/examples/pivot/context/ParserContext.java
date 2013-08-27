@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 
 /**
  * A ParserContext captures the context in which source text is parsed.

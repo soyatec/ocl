@@ -53,10 +53,10 @@ public class OCLinEcorePivot2CS extends EssentialOCLPivot2CS
 		}
 	}
 		
-	public OCLinEcorePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2pivotResourceMap, metaModelManager);
+	public OCLinEcorePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+		super(cs2asResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
-		for (Resource csResource : cs2pivotResourceMap.keySet()) {
+		for (Resource csResource : cs2asResourceMap.keySet()) {
 			assert csResource != null;
 			MetaModelManagerResourceAdapter.getAdapter(csResource, metaModelManager);
 		}

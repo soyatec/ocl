@@ -45,10 +45,10 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelperImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
-import org.eclipse.ocl.examples.pivot.utilities.ASResource;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.utilities.QueryImpl;
@@ -349,7 +349,7 @@ public class OCL {
 	 */
 	public @NonNull Resource cs2pivot(@NonNull BaseResource csResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
-		Resource asResource = csResource.getPivotResource(metaModelManager);
+		Resource asResource = csResource.getASResource(metaModelManager);
 		return asResource;
 	}
 
@@ -371,9 +371,10 @@ public class OCL {
 		// forget the constraints
 		getConstraints().clear();
 
-		// dispose of my environment
-		getEnvironment().dispose();
-		getMetaModelManager().dispose();
+		if (environmentFactory != PivotEnvironmentFactory.getGlobalRegistryInstance()) { // dispose of my environment
+			getEnvironment().dispose();
+			getMetaModelManager().dispose();
+		}
 	}
 
 	/**
@@ -650,7 +651,7 @@ public class OCL {
 	 * (BaseResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 	 * </tt>
 	 */
-	public void pivot2cs(@NonNull Resource asResource, @NonNull BaseResource csResource) {
+	public void pivot2cs(@NonNull ASResource asResource, @NonNull BaseResource csResource) {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		csResource.updateFrom(asResource, metaModelManager);
 	}

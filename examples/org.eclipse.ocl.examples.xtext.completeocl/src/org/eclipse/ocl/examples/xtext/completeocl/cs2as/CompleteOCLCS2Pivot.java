@@ -16,65 +16,19 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.cs2as;
 
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
 
 public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 {	
-	public static @NonNull MetaModelManager.Factory FACTORY = new Factory();
-
-	private static final class Factory extends MetaModelManager.AbstractFactory
-	{
-		private Factory() {
-			MetaModelManager.addFactory(this);
-		}
-
-		@Override
-		public int getHandlerPriority(@NonNull Resource resource) {
-			return resource instanceof CompleteOCLCSResource ? CAN_HANDLE : CANNOT_HANDLE;
-		}
-
-		public void configure(@NonNull ResourceSet resourceSet) {}
-
-		public URI getPackageURI(@NonNull EObject eObject) {
-			return null;
-		}
-
-		public <T extends Element> T getPivotOf(@NonNull MetaModelManager metaModelManager,
-				@NonNull Class<T> pivotClass, @NonNull EObject eObject)throws ParserException {
-			throw new UnsupportedOperationException();
-		}
-
-		public @Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable URI uri) {
-			Resource asResource = ((CompleteOCLCSResource)resource).getPivotResource(metaModelManager);
-			List<EObject> contents = asResource.getContents();
-			if (contents.size() <= 0) {
-				return null;
-			}
-			if ((uri != null) && (uri.fragment() == null)) {
-				return (Element) contents.get(0);
-			}
-			else {
-				throw new UnsupportedOperationException();	// FIXME
-			}
-		}
-	}
-		
-	public CompleteOCLCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2pivotResourceMap, metaModelManager);
+	public CompleteOCLCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+		super(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override

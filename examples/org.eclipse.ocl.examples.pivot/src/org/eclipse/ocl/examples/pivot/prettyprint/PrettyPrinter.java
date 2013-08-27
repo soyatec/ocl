@@ -18,14 +18,12 @@ package org.eclipse.ocl.examples.pivot.prettyprint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -52,6 +50,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions.Global;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
 import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PathElement;
@@ -68,18 +68,6 @@ public class PrettyPrinter
 	public static @NonNull List<String> reservedNameList = Arrays.asList("and", "else", "endif", "false", "if", "implies", "in", "invalid", "let", "not", "null", "or", "self", "then", "true", "xor");
 	@SuppressWarnings("null")
 	public static @NonNull List<String> restrictedNameList = Arrays.asList(TypeId.BAG_NAME, TypeId.BOOLEAN_NAME, "Collection", TypeId.INTEGER_NAME, TypeId.OCL_ANY_NAME, TypeId.OCL_INVALID_NAME, TypeId.OCL_VOID_NAME, TypeId.ORDERED_SET_NAME, TypeId.REAL_NAME, TypeId.SEQUENCE_NAME, TypeId.SET_NAME, TypeId.STRING_NAME, TypeId.TUPLE_NAME, TypeId.UNLIMITED_NATURAL_NAME);
-
-	public static interface Factory
-	{
-		@NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer);
-	}
-	
-	private static @NonNull Map<EPackage, Factory> factoryMap = new HashMap<EPackage, Factory>();
-	
-	public static synchronized void addFactory(/*@NonNull*/ EPackage ePackage, @NonNull Factory factory) {
-		assert ePackage != null;
-		factoryMap.put(ePackage, factory);
-	}
 	
 	private static class Fragment
 	{
@@ -336,10 +324,9 @@ public class PrettyPrinter
 		this.scope = options.getScope();
 		pendingText = new StringBuilder();
 		fragment = new Fragment(null, 0, "", "", "");
-		EObject rootObject = EcoreUtil.getRootContainer(element);	// root is a dialect-dependent Model class.
-		EPackage rootPackage = rootObject.eClass().getEPackage();	// rootPackage is dialect-dependent EPackage.
-		Factory factory = factoryMap.get(rootPackage);
-		this.visitor = factory.createPrettyPrintVisitor(this);
+		Resource eResource = element.eResource();
+		ASResourceFactory asResourceFactory = ((ASResource) eResource).getASResourceFactory();
+		this.visitor = asResourceFactory.createPrettyPrintVisitor(this);
 	}
 
 	public void append(Number number) {

@@ -48,7 +48,6 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -63,28 +62,14 @@ import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.util.AbstractVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * The PrettyPrintExprVisitor supports pretty printing of OCL expressions.
  * PrettyPrintOptions may be used to configure the printing.
  */
-public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
+public class EssentialOCLPrettyPrintVisitor extends PrettyPrintVisitor
 {	
-	private static final class Factory implements PrettyPrinter.Factory
-	{
-		private Factory() {
-			PrettyPrinter.addFactory(PivotPackage.eINSTANCE, this);
-		}
-
-		public @NonNull AbstractVisitor<Object, PrettyPrinter> createPrettyPrintVisitor(@NonNull PrettyPrinter printer) {
-			return new EssentialOCLPrettyPrintVisitor(printer);
-		}
-	}
-
-	public static @NonNull PrettyPrinter.Factory FACTORY = new Factory();
-
 	public EssentialOCLPrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}

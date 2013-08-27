@@ -53,8 +53,8 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature
 import org.eclipse.ocl.examples.pivot.TemplateableElement
 import org.eclipse.ocl.examples.pivot.TupleType
 import org.eclipse.ocl.examples.pivot.Type
-import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker
 import org.eclipse.xtext.util.Strings
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker
 
 public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowComponent
 {

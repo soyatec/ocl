@@ -37,6 +37,7 @@ import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
@@ -96,7 +97,7 @@ public class OCLinEcoreDocument extends BaseDocument
 					if (adapter == null) {
 						return null;
 					}
-					XMLResource asResource = (XMLResource) adapter.getPivotResource(csResource);
+					ASResource asResource = adapter.getASResource(csResource);
 					checkForErrors(asResource);
 					return asResource;
 				}

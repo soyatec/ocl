@@ -21,15 +21,16 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 
 /**
  * BaseCST2Pivot provides an extensible conversion from CS models to the pivot model.
  */
 public class BaseCS2Pivot extends CS2Pivot
 {	
-	public BaseCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public BaseCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		super(cs2pivotResourceMap, metaModelManager);
+		super(cs2asResourceMap, metaModelManager);
 	}
 
 	public BaseCS2Pivot(@NonNull BaseCS2Pivot cs2pivot) {

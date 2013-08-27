@@ -129,7 +129,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 //			secondaryPivotResources.removeAll(libraryPivotResources);
 //			primaryPivotResources.removeAll(libraryPivotResources);
 //			for (Resource secondaryPivotResource : secondaryPivotResources) {
-			for (Resource resource : metaModelManager.getPivotResourceSet().getResources()) {
+			for (Resource resource : metaModelManager.getASResourceSet().getResources()) {
 				if (resource != asResource) {
 					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 						EObject eObject = tit.next();

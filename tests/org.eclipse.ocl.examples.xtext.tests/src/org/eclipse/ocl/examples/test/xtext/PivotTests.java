@@ -74,7 +74,7 @@ public class PivotTests extends XtextTestCase
 
 		public void assertSameContents() { // WIP
 /*			Map<String, MonikeredElement> moniker2PivotMap = metaModelManager.computeMoniker2PivotMap(getPivotResources());
-			Collection<? extends Resource> csResources = cs2pivotResourceMap.keySet();
+			Collection<? extends Resource> csResources = cs2asResourceMap.keySet();
 			for (Resource csResource : csResources) {
 				for (TreeIterator<EObject> tit = csResource.getAllContents(); tit.hasNext(); ) {
 					ElementCS csElement = (ElementCS) tit.next();
@@ -98,7 +98,7 @@ public class PivotTests extends XtextTestCase
 					}
 				}
 			} */
-/*			Collection<? extends Resource> pivotResources = cs2pivotResourceMap.values();
+/*			Collection<? extends Resource> pivotResources = cs2asResourceMap.values();
 			Map<String, MonikeredElementCS> moniker2CSMap = computeMoniker2CSMap(csResources);
 			for (Resource asResource : pivotResources) {
 				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
@@ -124,7 +124,7 @@ public class PivotTests extends XtextTestCase
 
 		public List<EObject> getRoots() {
 			List<EObject> roots = new ArrayList<EObject>();
-			for (Map.Entry<? extends Resource, ? extends Resource> entry : cs2pivotResourceMap.entrySet()) {
+			for (Map.Entry<? extends Resource, ? extends Resource> entry : cs2asResourceMap.entrySet()) {
 				roots.addAll(entry.getKey().getContents());
 				roots.addAll(entry.getValue().getContents());
 			}
@@ -231,7 +231,7 @@ public class PivotTests extends XtextTestCase
 		//	Create Pivot model from CS
 		//
 		CS2PivotResourceAdapter adapter = csResource.findCS2ASAdapter();
-		Resource asResource = adapter.getPivotResource(csResource);
+		Resource asResource = adapter.getASResource(csResource);
 		OCLstdlibCS2Pivot creator = (OCLstdlibCS2Pivot) adapter.getConverter();
 		//
 		//	Check that Pivot model is ready for damage
@@ -272,7 +272,7 @@ public class PivotTests extends XtextTestCase
 	@SuppressWarnings("null")
 	public void doPivotTestEcore(@NonNull String stem) throws IOException {
 		metaModelManager = new MetaModelManager();
-		ResourceSet pivotResourceSet = metaModelManager.getPivotResourceSet();
+		ResourceSet asResourceSet = metaModelManager.getASResourceSet();
 //		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
 //		String libraryName = "oclstdlib.pivot";
@@ -281,7 +281,7 @@ public class PivotTests extends XtextTestCase
 //		BaseCSResource xtextLibraryResource = (BaseCSResource) resourceSet.getResource(libraryURI, true);
 //		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.refreshPivotMappings(xtextLibraryResource, null);
 //		Resource asResource = adapter.getPivotResource(xtextLibraryResource);
-//		pivotResourceSet.getResource(libraryURI, true);
+//		asResourceSet.getResource(libraryURI, true);
 		String inputName = stem + ".ecore";
 		String csName = stem + ".ecore.cs";
 		URI inputURI = getProjectFileURI(inputName);
@@ -312,7 +312,7 @@ public class PivotTests extends XtextTestCase
 //		Resource asResource = resourceSet.createResource(outputURI);
 //		asResource.getContents().add(pivotRoot);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
-		for (Resource pResource : pivotResourceSet.getResources()) {
+		for (Resource pResource : asResourceSet.getResources()) {
 			URI uri = pResource.getURI();
 			if (uri.isFile()) {
 				pResource.save(null);

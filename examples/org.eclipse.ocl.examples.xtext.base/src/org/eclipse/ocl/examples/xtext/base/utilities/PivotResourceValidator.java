@@ -232,7 +232,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 			BaseCSResource csResource = (BaseCSResource)resource;
 			CS2PivotResourceAdapter cs2pivotAdapter = csResource.findCS2ASAdapter();
 			if (cs2pivotAdapter != null) {
-				Resource asResource = cs2pivotAdapter.getPivotResource(csResource);
+				Resource asResource = cs2pivotAdapter.getASResource(csResource);
 				if (asResource != null) {
 					IAcceptor<Issue> acceptor = createAcceptor(result);
 					if (mode.shouldCheck(CheckType.EXPENSIVE)) {

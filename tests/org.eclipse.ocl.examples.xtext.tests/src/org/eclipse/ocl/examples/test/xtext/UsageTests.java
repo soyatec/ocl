@@ -347,7 +347,7 @@ public class UsageTests
 		// System.out.println("Generating Ecore Model using '" + fileURI + "'");
 		metaModelManager2.dispose();
 		metaModelManager = new MetaModelManager();
-		ResourceSet resourceSet = metaModelManager2.getExternalResourceSet();
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
 		//FIXME this is needed so long as Pivot.merged.genmodel is a UML genmodel
 		resourceSet.getPackageRegistry().put(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);

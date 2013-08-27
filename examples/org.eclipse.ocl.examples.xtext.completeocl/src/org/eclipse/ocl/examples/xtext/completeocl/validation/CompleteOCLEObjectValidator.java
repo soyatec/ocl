@@ -38,7 +38,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.validation.PivotEObjectValidator;
 
@@ -145,7 +145,7 @@ public class CompleteOCLEObjectValidator extends PivotEObjectValidator
 			logger.error("Failed to load '" + oclURI + message);
 			return false;
 		}
-		Resource asResource = xtextResource.getPivotResource(metaModelManager);
+		Resource asResource = xtextResource.getASResource(metaModelManager);
 		errors = asResource.getErrors();
 		assert errors != null;
 		message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");

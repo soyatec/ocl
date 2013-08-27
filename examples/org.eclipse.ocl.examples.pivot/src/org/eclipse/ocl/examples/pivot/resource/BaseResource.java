@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.pivot.utilities;
+package org.eclipse.ocl.examples.pivot.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -27,8 +27,13 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public interface BaseResource extends Resource
 {
+	/**
+	 * Return the Abstract Syntax representation of thjis Concrete Syntax resource
+	 * under the supervision of metaModelManager.
+	 */
+	@NonNull ASResource getASResource(@Nullable MetaModelManager metaModelManager);
+	
 	@Nullable ParserContext getParserContext();
-	@NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager);
 	void setParserContext(@Nullable ParserContext parserContext);
-	void updateFrom(@NonNull Resource asResource, @NonNull MetaModelManager metaModelManager);
+	void updateFrom(@NonNull ASResource asResource, @NonNull MetaModelManager metaModelManager);
 }

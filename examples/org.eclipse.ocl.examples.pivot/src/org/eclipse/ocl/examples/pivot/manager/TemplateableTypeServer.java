@@ -92,7 +92,7 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 //		}
 		specializedType.setUnspecializedElement(unspecializedType);
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
-		Orphanage orphanage = Orphanage.getOrphanage(metaModelManager.getPivotResourceSet());
+		Orphanage orphanage = Orphanage.getOrphanage(metaModelManager.getASResourceSet());
 		specializedType.setPackage(orphanage);
 		return specializedType;
 	}

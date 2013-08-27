@@ -84,8 +84,8 @@ public class TypeManager extends MetaModelManager
 		super();
 	}
 
-	public TypeManager(@NonNull ResourceSet pivotResourceSet) {
-		super(pivotResourceSet);		
+	public TypeManager(@NonNull ResourceSet asResourceSet) {
+		super(asResourceSet);		
 	}
 
 //	public void addPackage(String key, Package pivotPackage) {

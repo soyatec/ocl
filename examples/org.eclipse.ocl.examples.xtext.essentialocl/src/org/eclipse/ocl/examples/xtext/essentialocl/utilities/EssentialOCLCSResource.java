@@ -29,10 +29,11 @@ import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
@@ -128,14 +129,14 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		}
 	}
 
-	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new EssentialOCLCS2Pivot(cs2pivotResourceMap, metaModelManager);
+		return new EssentialOCLCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
-	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new EssentialOCLPivot2CS(cs2pivotResourceMap, metaModelManager);
+		return new EssentialOCLPivot2CS(cs2asResourceMap, metaModelManager);
 	}
 
 	public @NonNull MetaModelManager createMetaModelManager() {
@@ -181,7 +182,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 	}
 	
 	public @NonNull String getASContentType() {
-		return PivotPackage.eCONTENT_TYPE;
+		return ASResource.ESSENTIALOCL_CONTENT_TYPE;
 	}
 	
 	public final @NonNull CS2PivotResourceAdapter getCS2ASAdapter(@Nullable MetaModelManager metaModelManager) {
@@ -201,7 +202,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 					metaModelManager.addClassLoader(classLoader);
 				}
 			}
-			@SuppressWarnings("null")@NonNull Registry resourceFactoryRegistry = metaModelManager.getPivotResourceSet().getResourceFactoryRegistry();
+			@SuppressWarnings("null")@NonNull Registry resourceFactoryRegistry = metaModelManager.getASResourceSet().getResourceFactoryRegistry();
 			initializeResourceFactory(resourceFactoryRegistry);
 			adapter = new CS2PivotResourceAdapter(this, metaModelManager);
 			eAdapters().add(adapter);
@@ -217,13 +218,18 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		return parserContext;
 	}
 
-	public final @NonNull Resource getPivotResource(@Nullable MetaModelManager metaModelManager) {
+	public final @NonNull ASResource getASResource(@Nullable MetaModelManager metaModelManager) {
 		CS2PivotResourceAdapter adapter = getCS2ASAdapter(metaModelManager);
-		Resource asResource = adapter.getPivotResource(this);
+		ASResource asResource = adapter.getASResource(this);
 		if (asResource == null) {
 			throw new IllegalStateException("No Pivot Resource created");
 		}
 		return asResource;
+	}
+
+	@SuppressWarnings("null")
+	public @NonNull URI getASURI(@NonNull URI csURI) {
+		return csURI.appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION);
 	}
 
 	/**
@@ -354,8 +360,8 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		this.parserContext = parserContext;
 	}
 
-	public void updateFrom(@NonNull Resource asResource, @NonNull MetaModelManager metaModelManager) {		
-		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
+	public void updateFrom(@NonNull ASResource asResource, @NonNull MetaModelManager metaModelManager) {		
+		Map<Resource, ASResource> cs2PivotResourceMap = new HashMap<Resource, ASResource>();
 		cs2PivotResourceMap.put(this, asResource);
 		Pivot2CS pivot2cs = createPivot2CS(cs2PivotResourceMap, metaModelManager);
 		pivot2cs.update();

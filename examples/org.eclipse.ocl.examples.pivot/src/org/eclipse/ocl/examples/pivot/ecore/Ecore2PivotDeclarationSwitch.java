@@ -74,8 +74,8 @@ import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>

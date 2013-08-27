@@ -218,7 +218,7 @@ public class EditorTests extends XtextTestCase
 //				assertNoResourceErrors("Loaded CS", resource);
 				CS2PivotResourceAdapter cs2Pivot = PivotUtil.getAdapter(CS2PivotResourceAdapter.class, resource);
 				if (cs2Pivot != null) {
-					Resource asResource = cs2Pivot.getPivotResource((BaseCSResource) resource);
+					Resource asResource = cs2Pivot.getASResource((BaseCSResource) resource);
 					assertNoResourceErrors(prefix, asResource);
 					for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 						EObject eObject = tit.next();

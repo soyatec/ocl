@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.ocl.examples.xtext.oclstdlib.cs2as.OCLstdlibCS2Pivot;
@@ -28,16 +29,15 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.cs2as.OCLstdlibCS2Pivot;
 public class OCLstdlibCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new OCLstdlibCS2Pivot(cs2pivotResourceMap, metaModelManager);
+		return new OCLstdlibCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
-//	@Override
-//	public Pivot2CS createPivot2CS(Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
-//			MetaModelManager metaModelManager) {
-//		return new OCLstdlibPivot2CS(cs2pivotResourceMap, metaModelManager);		// FIXME
-//	}
+	@Override
+	public @NonNull String getASContentType() {
+		return ASResource.OCLSTDLIB_CONTENT_TYPE;
+	}
 
 	@Override
 	public @NonNull String getEditorName() {

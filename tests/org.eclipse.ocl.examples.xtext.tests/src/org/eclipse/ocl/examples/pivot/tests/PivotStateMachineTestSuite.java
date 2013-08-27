@@ -104,6 +104,6 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 	@Override
     protected void setUp() throws Exception {
         super.setUp();
-		metaModelManager.addGlobalNamespace(PivotConstants.OCL_NAME, metaModelManager.getPivotMetaModel());
+		metaModelManager.addGlobalNamespace(PivotConstants.OCL_NAME, metaModelManager.getASMetamodel());
     }
 }

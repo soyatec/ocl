@@ -42,9 +42,9 @@ public class BasePivot2CS extends Pivot2CS
 		}
 	}
 
-	public BasePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public BasePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		super(cs2pivotResourceMap, metaModelManager);
+		super(cs2asResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
 	}
 }

@@ -145,7 +145,7 @@ public class ImportTests extends XtextTestCase
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Load failed", xtextResource);
 		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(metaModelManager);
-		Resource fileResource = adapter.getPivotResource(xtextResource);
+		Resource fileResource = adapter.getASResource(xtextResource);
 		assert fileResource != null;
 		assertNoResourceErrors("File Model", fileResource);
 		assertNoUnresolvedProxies("File Model", fileResource);

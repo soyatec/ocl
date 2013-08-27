@@ -88,7 +88,7 @@ public class SaveExpressionAction extends Action
 					editorDocument.modify(new IUnitOfWork<Object, XtextResource>()
 					{
 						public Object exec(XtextResource resource) throws Exception {
-							Resource asResource = ((BaseCSResource)resource).getPivotResource(null);
+							Resource asResource = ((BaseCSResource)resource).getASResource(null);
 							asResource.setURI(URI.createFileURI(file));
 							asResource.save(saveOptions);
 							return null;

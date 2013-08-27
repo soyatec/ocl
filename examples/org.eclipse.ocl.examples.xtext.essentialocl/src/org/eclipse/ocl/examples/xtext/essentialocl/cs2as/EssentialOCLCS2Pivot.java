@@ -21,13 +21,14 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 
 public class EssentialOCLCS2Pivot extends BaseCS2Pivot
 {		
-	public EssentialOCLCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2pivotResourceMap, metaModelManager);
+	public EssentialOCLCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+		super(cs2asResourceMap, metaModelManager);
 	}
 	
 	

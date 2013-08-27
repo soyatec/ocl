@@ -107,8 +107,8 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -270,7 +270,7 @@ public abstract class PivotTestSuite extends PivotTestCase
    		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
-			Resource asResource = cs2pivot.getPivotResource(csResource);
+			Resource asResource = cs2pivot.getASResource(csResource);
 			assertNoValidationErrors("Validating", asResource);
 			
            fail("Should not have parsed \"" + expression + "\"");
@@ -303,7 +303,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
-			Resource asResource = cs2pivot.getPivotResource(csResource);
+			Resource asResource = cs2pivot.getASResource(csResource);
 			assertNoValidationErrors("Validating", asResource);
 			
 			fail("Should not have parsed \"" + expression + "\"");
@@ -785,7 +785,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
-			Resource asResource = cs2pivot.getPivotResource(csResource);
+			Resource asResource = cs2pivot.getASResource(csResource);
 	       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
 			assertValidationDiagnostics("Validating", asResource, new String[] {expectedMessage});
 		} catch (Exception e) {
@@ -809,7 +809,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = csResource.getCS2ASAdapter(metaModelManager);
-			Resource asResource = cs2pivot.getPivotResource(csResource);
+			Resource asResource = cs2pivot.getASResource(csResource);
 	       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
 			assertValidationDiagnostics("Validating", asResource, new String[] {expectedMessage});
 		} catch (Exception e) {
@@ -1171,7 +1171,7 @@ public abstract class PivotTestSuite extends PivotTestCase
         try {
         	return evaluate(query, context);
 		} finally {
-			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
+			metaModelManager.getASResourceSet().getResources().remove(query.eResource());
 		}
     }
 
@@ -1182,7 +1182,7 @@ public abstract class PivotTestSuite extends PivotTestCase
         try {
         	return evaluate(query, context);
 		} finally {
-			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
+			metaModelManager.getASResourceSet().getResources().remove(query.eResource());
 		}
     }
 
@@ -1193,7 +1193,7 @@ public abstract class PivotTestSuite extends PivotTestCase
         try {
     		return ocl.evaluate(context, query);
 		} finally {
-			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
+			metaModelManager.getASResourceSet().getResources().remove(query.eResource());
 		}
     }
 	
@@ -1340,7 +1340,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 
 	protected @NonNull DomainPackage getUMLMetamodel() {
-		return DomainUtil.nonNullState(metaModelManager.getPivotMetaModel());
+		return DomainUtil.nonNullState(metaModelManager.getASMetamodel());
 	}
 	
 	protected @NonNull DomainType getUMLString() {

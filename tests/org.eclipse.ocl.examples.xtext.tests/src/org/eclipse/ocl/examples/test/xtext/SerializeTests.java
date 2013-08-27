@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
@@ -69,7 +70,7 @@ public class SerializeTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		XtextResource xtextResource = null;
 		try {
-			Resource asResource = ocl1.ecore2pivot(ecoreResource);
+			ASResource asResource = ocl1.ecore2pivot(ecoreResource);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
@@ -148,7 +149,7 @@ public class SerializeTests extends XtextTestCase
 			assertNoUnresolvedProxies("unresolved reload proxies", xtextResource2); */
 		}
 		finally {
-			metaModelManager1.dispose();
+			ocl1.dispose();
 			metaModelManager1 = null;
 		}
 /*		//

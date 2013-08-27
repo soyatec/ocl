@@ -96,6 +96,7 @@ import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAd
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.NullAttribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
@@ -1138,11 +1139,11 @@ public class PivotUtil extends DomainUtil
 	}
 
 	public static boolean isASURI(@Nullable String uri) {
-		return (uri != null) && uri.endsWith(PivotConstants.OCL_AS_FILE_EXTENSION);
+		return (uri != null) && uri.endsWith("as");
 	}
 
 	public static boolean isASURI(@Nullable URI uri) {
-		return (uri != null) && PivotConstants.OCL_AS_FILE_EXTENSION.equals(uri.fileExtension());
+		return (uri != null) && isASURI(uri.toString());
 	}
 
 	public static boolean isLibraryType(@NonNull Type type) {

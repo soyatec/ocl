@@ -72,7 +72,8 @@ import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
@@ -338,7 +339,7 @@ public class PivotTestCase extends TestCase
 			BaseCSResource xtextResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.getResource(inputURI, true));
 			assertNoResourceErrors("Load failed", xtextResource);
 			adapter = xtextResource.getCS2ASAdapter(null);
-			Resource asResource = adapter.getPivotResource(xtextResource);
+			Resource asResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, null);
@@ -513,7 +514,7 @@ public class PivotTestCase extends TestCase
 		return DomainUtil.nonNullState(projectURL);
 	}
 
-	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull Resource asResource, @NonNull URI outputURI) throws IOException {
+	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE));
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());

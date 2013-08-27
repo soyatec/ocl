@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.Orphanage;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
 /**
@@ -101,7 +102,7 @@ public class ASSaver
 	protected @NonNull ASSaverLocateVisitor getLocateVisitor(@NonNull EObject eObject) {
 		Resource resource = eObject.eResource();
 		if (resource instanceof ASResource) {
-			return ((ASResource)resource).createASSaverLocateVisitor(this);
+			return ((ASResource)resource).getASResourceFactory().createASSaverLocateVisitor(this);
 		}
 		else if (resource == null) {
 			throw new IllegalStateException("Cannot locate " + ASSaverLocateVisitor.class.getName() + " for resource-less " + eObject.eClass().getName());
@@ -151,7 +152,7 @@ public class ASSaver
 	protected @NonNull ASSaverResolveVisitor getResolveVisitor(@NonNull EObject eObject) {
 		Resource resource = eObject.eResource();
 		if (resource instanceof ASResource) {
-			return ((ASResource)resource).createASSaverResolveVisitor(this);
+			return ((ASResource)resource).getASResourceFactory().createASSaverResolveVisitor(this);
 		}
 		else if (resource == null) {
 			throw new IllegalStateException("Cannot locate " + ASSaverResolveVisitor.class.getName() + " for resource-less " + eObject.eClass().getName());

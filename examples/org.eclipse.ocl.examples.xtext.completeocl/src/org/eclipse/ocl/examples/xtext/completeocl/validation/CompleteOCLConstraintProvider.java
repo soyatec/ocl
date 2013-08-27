@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.validation.model.Category;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.validation.LoadableConstraintProvider;
 
@@ -109,7 +109,7 @@ public class CompleteOCLConstraintProvider extends LoadableConstraintProvider
 			logger.error("Failed to load '" + uri + message);
 			return false;
 		}
-		Resource asResource = xtextResource.getPivotResource(metaModelManager);
+		Resource asResource = xtextResource.getASResource(metaModelManager);
 		return installResource(asResource, categories);
 	}
 }

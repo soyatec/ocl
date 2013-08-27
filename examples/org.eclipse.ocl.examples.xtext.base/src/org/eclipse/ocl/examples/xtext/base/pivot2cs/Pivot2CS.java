@@ -51,16 +51,16 @@ public class Pivot2CS extends AbstractConversion
 	/**
 	 * Mapping of each CS resource to its corresponding pivot Resource.
 	 */
-	protected final @NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap;
+	protected final @NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap;
 	
-	public Pivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
+	public Pivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
-		this.cs2pivotResourceMap = cs2pivotResourceMap;
+		this.cs2asResourceMap = cs2asResourceMap;
 	}
 	
 	public Pivot2CS(@NonNull Pivot2CS aConverter) {
 		super(aConverter.metaModelManager);
-		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
+		this.cs2asResourceMap = aConverter.cs2asResourceMap;
 	}
 
 	protected synchronized void addFactory(@NonNull Factory factory) {
@@ -78,7 +78,7 @@ public class Pivot2CS extends AbstractConversion
 	}
 
 	public @NonNull Collection<? extends Resource> getCSResources() {
-		@SuppressWarnings("null") @NonNull Set<? extends Resource> keySet = cs2pivotResourceMap.keySet();
+		@SuppressWarnings("null") @NonNull Set<? extends Resource> keySet = cs2asResourceMap.keySet();
 		return keySet;
 	}
 
@@ -87,11 +87,11 @@ public class Pivot2CS extends AbstractConversion
 	}
 
 	public @Nullable Resource getPivotResource(@NonNull Resource csResource) {
-		return cs2pivotResourceMap.get(csResource);
+		return cs2asResourceMap.get(csResource);
 	}
 
 	public @NonNull Collection<? extends Resource> getPivotResources() {
-		@SuppressWarnings("null") @NonNull Collection<? extends Resource> values = cs2pivotResourceMap.values();
+		@SuppressWarnings("null") @NonNull Collection<? extends Resource> values = cs2asResourceMap.values();
 		return values;
 	}
 	

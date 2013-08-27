@@ -36,8 +36,8 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.uml2.uml.util.UMLUtil;
 

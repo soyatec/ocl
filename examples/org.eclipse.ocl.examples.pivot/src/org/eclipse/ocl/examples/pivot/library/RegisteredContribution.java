@@ -21,13 +21,18 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.plugin.RegistryReader.PluginClassDescriptor;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface RegisteredContribution<C extends RegisteredContribution<C>> {
 
 	/**
 	 * A registry of contributions.
 	 */
-	interface Registry<C extends RegisteredContribution<C>> extends Map<String, C> {
+	interface Registry<C extends RegisteredContribution<C>> {
+		@Nullable C get(@NonNull String key);
+		@Nullable C put(@NonNull String key, @NonNull C contribution);
+		@Nullable C remove(@NonNull String key);
 	}
 	/**
 	 * A <code>Factory</code> wrapper that is used by the
@@ -60,16 +65,23 @@ public interface RegisteredContribution<C extends RegisteredContribution<C>> {
 		}
 	}	
 
-	class AbstractRegistry<C extends RegisteredContribution<C>> extends HashMap<String, C> implements Registry<C>
+	class AbstractRegistry<C extends RegisteredContribution<C>> implements Registry<C>
 	{
-		private static final long serialVersionUID = 1L;
+		private final @NonNull Map<String, C>  map = new HashMap<String, C>();
 
-		@Override
-		public C get(Object key) {
-			C contribution = super.get(key);
+		public @Nullable C get(@NonNull String key) {
+			C contribution = map.get(key);
 			return contribution != null ? contribution.getContribution() : null;
 		}
+
+		public @Nullable C put(@NonNull String key, @NonNull C contribution) {
+			return map.put(key, contribution);
+		}
+
+		public C remove(@NonNull String key) {
+			return map.remove(key);
+		}
 	}
-	
+
 	C getContribution();
 }

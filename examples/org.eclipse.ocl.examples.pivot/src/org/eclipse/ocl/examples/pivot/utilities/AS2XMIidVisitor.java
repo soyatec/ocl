@@ -79,7 +79,7 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 
 	protected final @NonNull StringBuilder s = new StringBuilder();
 	
-	protected AS2XMIidVisitor(@NonNull AS2XMIid context) {
+	public AS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}
 

@@ -64,6 +64,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -362,7 +363,7 @@ public class LoadTests extends XtextTestCase
 
 		
 		
-			Resource oclResource = CompleteOCLSplitter.separate(metaModelManager, allResources.get(0));
+			ASResource oclResource = CompleteOCLSplitter.separate(metaModelManager, allResources.get(0));
 			if (oclResource != null) {
 				URI xtextURI = oclURI;// != null ? URI.createPlatformResourceURI(oclURI, true) : uri.trimFileExtension().appendFileExtension("ocl");
 				ResourceSetImpl csResourceSet = new ResourceSetImpl();
@@ -446,7 +447,7 @@ public class LoadTests extends XtextTestCase
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(null);
 		assertNoResourceErrors("Load failed", xtextResource);
-		Resource asResource = xtextResource.getPivotResource(null);
+		Resource asResource = xtextResource.getASResource(null);
 		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 //FIXME		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));

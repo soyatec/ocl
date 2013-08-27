@@ -37,6 +37,8 @@ import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
+import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -45,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * It facilitates efficient model loading without the overheads of model reading.
  */
 @SuppressWarnings({"nls", "unused"})
-public class OCLMetaModel extends XMIResourceImpl
+public class OCLMetaModel extends ASResourceImpl
 {
 	/**
 	 *	The URI of this Standard Library.
@@ -60,7 +62,7 @@ public class OCLMetaModel extends XMIResourceImpl
 	}
 
 	protected OCLMetaModel(@NonNull URI uri) {
-		super(uri);
+		super(uri, OCLASResourceFactory.INSTANCE);
 	}
 
 	protected static class LibraryContents extends AbstractContents

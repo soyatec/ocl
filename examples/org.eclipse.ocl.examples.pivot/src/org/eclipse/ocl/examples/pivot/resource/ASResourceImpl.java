@@ -14,19 +14,24 @@
  *
  * $Id: PivotResourceImpl.java,v 1.2 2011/01/24 20:42:33 ewillink Exp $
  */
-package org.eclipse.ocl.examples.pivot.utilities;
+package org.eclipse.ocl.examples.pivot.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLSave;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.utilities.PivotSaveImpl;
 
-public abstract class AbstractASResourceImpl extends XMIResourceImpl implements ASResource
+public class ASResourceImpl extends XMIResourceImpl implements ASResource
 {
+	protected final @NonNull ASResourceFactory asResourceFactory;
+
 	/**
 	 * Creates an instance of the resource.
 	 */
-	protected AbstractASResourceImpl(URI uri) {
+	public ASResourceImpl(@NonNull URI uri, @NonNull ASResourceFactory asResourceFactory) {
 		super(uri);
+		this.asResourceFactory = asResourceFactory;
 	}
 
 	@Override
@@ -34,6 +39,10 @@ public abstract class AbstractASResourceImpl extends XMIResourceImpl implements 
 		return new PivotSaveImpl(createXMLHelper());
 	}
 
+	public @NonNull ASResourceFactory getASResourceFactory() {
+		return asResourceFactory;
+	}
+	
 	@Override
 	protected boolean useIDs() {
 		return true;

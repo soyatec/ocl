@@ -35,13 +35,15 @@ import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
+import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -57,7 +59,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * as this Standard Library.
  */
 @SuppressWarnings({"nls", "unused"})
-public class OCLstdlib extends PivotResourceImpl
+public class OCLstdlib extends ASResourceImpl
 {
 	/**
 	 *	The static package-of-types pivot model of the Standard Library.
@@ -142,7 +144,7 @@ public class OCLstdlib extends PivotResourceImpl
 	 *	Construct an OCL Standard Library with specified resource URI and library content.
 	 */
 	public OCLstdlib(@NonNull String asURI, @NonNull Root libraryModel) {
-		super(URI.createURI(asURI));
+		super(DomainUtil.nonNullState(URI.createURI(asURI)), OCLASResourceFactory.INSTANCE);
 		assert PivotUtil.isASURI(asURI);
 		getContents().add(libraryModel);
 //		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		

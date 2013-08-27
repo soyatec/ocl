@@ -28,11 +28,11 @@ import org.eclipse.ocl.examples.pivot.DataType
 import org.eclipse.ocl.examples.pivot.Library
 import org.eclipse.ocl.examples.pivot.Package
 import org.eclipse.ocl.examples.pivot.Root
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
-import org.eclipse.ocl.examples.pivot.utilities.ASResource
+import org.eclipse.ocl.examples.pivot.resource.ASResource
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
 
 public class GenerateOCLstdlib extends GenerateOCLCommon
 {
@@ -88,13 +88,15 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			import org.eclipse.emf.ecore.resource.Resource;
 			import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 			import org.eclipse.jdt.annotation.NonNull;
+			import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 			import org.eclipse.ocl.examples.pivot.*;
 			import org.eclipse.ocl.examples.pivot.Class;
 			import org.eclipse.ocl.examples.pivot.Package;
 			import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 			import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-			import org.eclipse.ocl.examples.pivot.utilities.AS2ID;
-			import org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl;
+			import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
+			import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
+			import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 			import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 			
 			/**
@@ -110,7 +112,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			 * as this Standard Library.
 			 */
 			@SuppressWarnings({"nls", "unused"})
-			public class «javaClassName» extends PivotResourceImpl
+			public class «javaClassName» extends ASResourceImpl
 			{
 				/**
 				 *	The static package-of-types pivot model of the Standard Library.
@@ -133,7 +135,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 						Contents contents = new Contents();
 						Root libraryModel = contents.create("«lib.nsURI»", "«lib.name»", "«lib.nsPrefix»", "«lib.nsURI»");
 						oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, libraryModel);
-						new AS2ID().assignIds(oclstdlib);
+						new AS2XMIid().assignIds(oclstdlib);
 					}
 					return oclstdlib;
 				}
@@ -195,7 +197,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 				 *	Construct an OCL Standard Library with specified resource URI and library content.
 				 */
 				public «javaClassName»(@NonNull String asURI, @NonNull Root libraryModel) {
-					super(URI.createURI(asURI));
+					super(DomainUtil.nonNullState(URI.createURI(asURI)), OCLASResourceFactory.INSTANCE);
 					assert PivotUtil.isASURI(asURI);
 					getContents().add(libraryModel);
 			//		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
@@ -367,12 +369,12 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 				issues.addError(this, message, null, null, null);
 				return;
 			}
-			var ASResource pivotResource = xtextResource.getPivotResource(null) as ASResource;
-			if (pivotResource == null) {
+			var ASResource asResource = xtextResource.getASResource(null);
+			if (asResource == null) {
 				return;
 			}
-			var EObject pivotModel = pivotResource.getContents().get(0);
-			var ASSaver saver = new ASSaver(pivotResource);
+			var EObject pivotModel = asResource.getContents().get(0);
+			var ASSaver saver = new ASSaver(asResource);
 			var Package orphanage = saver.localizeSpecializations();
 			if ((orphanage != null) && (pivotModel instanceof Root)) {
 				(pivotModel as Root).getNestedPackage().add(orphanage);
@@ -383,14 +385,14 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 			var MergeWriter fw = new MergeWriter(fileName);
 			fw.append(metaModel);
 			fw.close();
-			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("oclstdlib", "pivot");
+			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("oclstdlib", "oclas");
 			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
 			log.info("Loading '" + saveURI + "'");
 			var AS2XMIid as2id = AS2XMIid.load(saveURI);
 			log.info("Saving '" + saveURI + "'");
-			pivotResource.setURI(saveURI);
-	    	as2id.assignIds(pivotResource.getResourceSet());
-			pivotResource.save(null);
+			asResource.setURI(saveURI);
+	    	as2id.assignIds(asResource.getResourceSet());
+			asResource.save(null);
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {

@@ -47,8 +47,8 @@ public class EssentialOCLPivot2CS extends BasePivot2CS
 		}
 	}
 		
-	public EssentialOCLPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2pivotResourceMap, metaModelManager);
+	public EssentialOCLPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+		super(cs2asResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);
 	}
 }

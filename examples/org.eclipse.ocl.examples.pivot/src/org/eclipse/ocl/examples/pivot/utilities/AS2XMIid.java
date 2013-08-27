@@ -29,7 +29,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceFactoryRegistry;
 
 public class AS2XMIid
 {
@@ -39,7 +41,8 @@ public class AS2XMIid
 	public static @NonNull AS2XMIid load(@NonNull URI uri) {
 		Map<String, String> moniker2id = new HashMap<String, String>();
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(PivotConstants.OCL_AS_FILE_EXTENSION, new PivotResourceFactoryImpl());
+		ASResourceFactoryRegistry.INSTANCE.configureResourceSet(resourceSet);
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(PivotConstants.OCL_AS_FILE_EXTENSION, OCLASResourceFactory.INSTANCE);
 		try {
 			Resource resource = resourceSet.getResource(uri, true);
 			if (resource instanceof XMLResource) {
@@ -82,11 +85,12 @@ public class AS2XMIid
 	 */
 	public void assignIds(@NonNull ASResource asResource) {
 		Map<String, EObject> allIds = new HashMap<String, EObject>();
+		ASResourceFactory resourceHelper = asResource.getASResourceFactory();
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof Element) {
 				Element element = (Element)eObject;
-				AS2XMIidVisitor idVisitor = asResource.createAS2XMIidVisitor(this);
+				AS2XMIidVisitor idVisitor = resourceHelper.createAS2XMIidVisitor(this);
 				String id = idVisitor.getID(element);
 				if (id != null) {
 					assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";

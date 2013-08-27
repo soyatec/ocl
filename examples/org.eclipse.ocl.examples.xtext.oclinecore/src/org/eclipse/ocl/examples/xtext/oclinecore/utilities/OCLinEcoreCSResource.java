@@ -23,6 +23,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
@@ -32,15 +33,15 @@ import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
 public class OCLinEcoreCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new OCLinEcoreCS2Pivot(cs2pivotResourceMap, metaModelManager);
+		return new OCLinEcoreCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override
-	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,
+	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new OCLinEcorePivot2CS(cs2pivotResourceMap, metaModelManager);
+		return new OCLinEcorePivot2CS(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override
@@ -48,6 +49,11 @@ public class OCLinEcoreCSResource extends EssentialOCLCSResource
 		if (getContents().size() > 0) {
 			super.doSave(outputStream, options);	// Avoid NPE or ISE from XtextResource
 		}
+	}
+
+	@Override
+	public @NonNull String getASContentType() {
+		return ASResource.OCLINECORE_CONTENT_TYPE;
 	}
 
 	@Override

@@ -350,7 +350,7 @@ public class XtextTestCase extends PivotTestCase
 			BaseCSResource xtextResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.getResource(inputURI, true));
 			assertNoResourceErrors("Load failed", xtextResource);
 			adapter = xtextResource.getCS2ASAdapter(null);
-			Resource asResource = adapter.getPivotResource(xtextResource);
+			Resource asResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, null);

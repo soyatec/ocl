@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -53,14 +53,14 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 	
 	public CS2PivotResourceAdapter(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
 		super(csResource, metaModelManager);
-		Map<Resource, Resource> cs2pivotResourceMap = computeCS2PivotResourceMap(
+		Map<Resource, ASResource> cs2asResourceMap = computeCS2ASResourceMap(
 			csResource, metaModelManager);
-		converter = csResource.createCS2Pivot(cs2pivotResourceMap, metaModelManager);
+		converter = csResource.createCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
-	public @NonNull Map<Resource, Resource> computeCS2PivotResourceMap(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
-		ResourceSet pivotResourceSet = metaModelManager.getTarget();
-		Map<Resource,Resource> cs2pivotResourceMap = new HashMap<Resource,Resource>();
+	public @NonNull Map<Resource, ASResource> computeCS2ASResourceMap(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
+		ResourceSet asResourceSet = metaModelManager.getTarget();
+		Map<Resource,ASResource> cs2asResourceMap = new HashMap<Resource,ASResource>();
 	//	ResourceSet csResourceSet = csResource.getResourceSet();
 	//	if (csResourceSet != null) {
 //		for (Resource acsResource : csResourceSet.getResources()) {
@@ -70,25 +70,25 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 					List<EObject> contents = acsResource.getContents();
 		//			if (!"java".equals(uri.scheme())) { //$NON-NLS-1$
 					if ((contents.size() > 0) && (contents.get(0) instanceof ModelElementCS)) { //$NON-NLS-1$
-						URI pivotURI = PivotUtil.getASURI(uri);
-						Resource asResource = pivotResourceSet.getResource(pivotURI, false);
+						URI asURI = csResource.getASURI(uri);
+						Resource asResource = asResourceSet.getResource(asURI, false);
 						if (asResource == null) {
-							asResource = pivotResourceSet.createResource(pivotURI, csResource.getASContentType());
+							asResource = asResourceSet.createResource(asURI, csResource.getASContentType());
 						}
-						cs2pivotResourceMap.put(acsResource, asResource);
+						cs2asResourceMap.put(acsResource, (ASResource) asResource);
 					}
 				}
 	//		}
 	//	}
-		return cs2pivotResourceMap;
+		return cs2asResourceMap;
+	}
+
+	public ASResource getASResource(@NonNull BaseCSResource csResource) {
+		return converter.getPivotResource(csResource);
 	}
 	
 	public CS2Pivot getConverter() {
 		return converter;
-	}
-
-	public Resource getPivotResource(@NonNull BaseCSResource csResource) {
-		return converter.getPivotResource(csResource);
 	}
 
 	@Override

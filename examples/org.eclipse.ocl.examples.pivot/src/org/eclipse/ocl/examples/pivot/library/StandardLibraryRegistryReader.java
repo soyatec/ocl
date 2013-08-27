@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.plugin.RegistryReader;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 
 /**
@@ -31,9 +32,9 @@ import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
  */
 public class StandardLibraryRegistryReader extends RegistryReader
 {
-	static final String TAG_LIBRARY = "library";
-	static final String ATT_URI = "uri";
-	static final String ATT_CLASS = "class";
+	static final @NonNull String TAG_LIBRARY = "library";
+	static final @NonNull String ATT_URI = "uri";
+	static final @NonNull String ATT_CLASS = "class";
 
 	public StandardLibraryRegistryReader() {
 		super(Platform.getExtensionRegistry(), PivotPlugin.getPlugin()

@@ -114,7 +114,7 @@ public class IteratorsTest4 extends PivotTestSuite
     @Before public void setUp() throws Exception {
         super.setUp();
         PivotTables.LIBRARY.getClass();
-		metaModelManager.addGlobalNamespace(PivotConstants.OCL_NAME, DomainUtil.nonNullState(metaModelManager.getPivotMetaModel()));
+		metaModelManager.addGlobalNamespace(PivotConstants.OCL_NAME, DomainUtil.nonNullState(metaModelManager.getASMetamodel()));
 
         // need a metamodel that has a reflexive EReference.
         // Ecore will do nicely. Create the following structure:

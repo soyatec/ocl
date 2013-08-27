@@ -44,6 +44,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 
 public class AS2Moniker implements PivotConstants
 {
@@ -377,7 +378,7 @@ public class AS2Moniker implements PivotConstants
 		AS2MonikerVisitor as2MonikerVisitor;
 		Resource resource = element.eResource();
 		if (resource instanceof ASResource) {
-			as2MonikerVisitor = ((ASResource)resource).createAS2MonikerVisitor(this);
+			as2MonikerVisitor = ((ASResource)resource).getASResourceFactory().createAS2MonikerVisitor(this);
 		}
 		else {
 			as2MonikerVisitor = new AS2MonikerVisitor(this);

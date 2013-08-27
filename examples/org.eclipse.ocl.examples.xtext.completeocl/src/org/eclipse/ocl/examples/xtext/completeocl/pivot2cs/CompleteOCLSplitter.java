@@ -43,14 +43,16 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.util.PivotSwitch;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * 
  */
 public class CompleteOCLSplitter
 {
-	public static @Nullable Resource separate(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource) {
+	public static @Nullable ASResource separate(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource) {
 		List<Constraint> allConstraints = new ArrayList<Constraint>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
@@ -65,8 +67,9 @@ public class CompleteOCLSplitter
 			return null;
 		}
 		URI uri = resource.getURI();
-		URI oclURI = uri.trimFileExtension().appendFileExtension("ocl.pivot");
-		Resource oclResource = resource.getResourceSet().createResource(oclURI);	
+		@SuppressWarnings("null")@NonNull URI oclURI = PivotUtil.getNonASURI(uri).appendFileExtension("ocl");
+		URI oclASuri = PivotUtil.getASURI(oclURI);	// xxx.ocl.ocl.oclas
+		ASResource oclResource = (ASResource) resource.getResourceSet().createResource(oclASuri, ASResource.COMPLETE_OCL_CONTENT_TYPE);	
 		if (oclResource != null) {
 			Separator separator = new Separator(metaModelManager, oclResource);
 			for (Constraint constraint : allConstraints) {
@@ -97,7 +100,8 @@ public class CompleteOCLSplitter
 				separateParent.eSet(eContainingFeature, object);
 			}
 			else {
-				((List<Constraint>)separateParent.eGet(eContainingFeature)).add(object);
+				@SuppressWarnings("unchecked") List<Constraint> eGet = (List<Constraint>)separateParent.eGet(eContainingFeature);
+				eGet.add(object);
 			}
 			return object;
 		}

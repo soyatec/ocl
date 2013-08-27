@@ -313,20 +313,20 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	 * - except pivot resources mapped to incoming CS resources
 	 *     this is what we're cleaning up
 	 */
-	public void garbageCollect(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap) {
+	public void garbageCollect(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap) {
 //		org.eclipse.ocl.examples.pivot.Class orphanClass = metaModelManager.getOrphanClass();
 //		org.eclipse.ocl.examples.pivot.Package orphanPackage = metaModelManager.getOrphanPackage();
 //		Resource orphanResource = orphanPackage.eResource();
-		final Collection<Notifier> prunableResources = new ArrayList<Notifier>(cs2pivotResourceMap.values());
+		final Collection<Notifier> prunableResources = new ArrayList<Notifier>(cs2asResourceMap.values());
 //		prunableResources.add(orphanResource);
-		Collection<Notifier> allPivotResources = new ArrayList<Notifier>(metaModelManager.getPivotResourceSet().getResources());
+		Collection<Notifier> allPivotResources = new ArrayList<Notifier>(metaModelManager.getASResourceSet().getResources());
 //		allPivotResources.removeAll(prunableResources);					// Dead elements in orphanage or pivot of CS can be pruned
 		EObject lockingObject = metaModelManager.getLockingObject();
 		if (lockingObject != null) {
 			allPivotResources.add(lockingObject);						// Locked elements are not dead
 		}
 		allPivotResources.addAll(metaModelManager.getLibraries());			// Library elements are not dead
-		allPivotResources.addAll(cs2pivotResourceMap.keySet());			// Incoming elements are not dead
+		allPivotResources.addAll(cs2asResourceMap.keySet());			// Incoming elements are not dead
 		allPivotResources.remove(metaModelManager.getOrphanage().eResource());
 		@SuppressWarnings("serial")
 		Map<EObject, Collection<Setting>> referencesToOrphans = new EcoreUtil.CrossReferencer(allPivotResources)
@@ -1248,7 +1248,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		resetPivotMappings(csResources);
 		oldPackagesByName = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
 		oldPackagesByQualifiedName = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
-		for (Resource resource : converter.cs2pivotResourceMap.values()) {
+		for (Resource resource : converter.cs2asResourceMap.values()) {
 			for (EObject eObject : resource.getContents()) {
 				if (eObject instanceof Root) {
 					@SuppressWarnings("null") @NonNull List<org.eclipse.ocl.examples.pivot.Package> nestedPackage = ((Root)eObject).getNestedPackage();

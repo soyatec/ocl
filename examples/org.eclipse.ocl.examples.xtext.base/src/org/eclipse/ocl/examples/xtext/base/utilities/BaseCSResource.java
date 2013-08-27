@@ -23,7 +23,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 
 /**
@@ -32,9 +33,9 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 public interface BaseCSResource extends BaseResource
 {
 	/**
-	 * Create the CS2AS converter for the cs2pivotResourceMap conversions using metaModelManager.
+	 * Create the CS2AS converter for the cs2asResourceMap conversions using metaModelManager.
 	 */
-	@NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager);
+	@NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager);
 
 	/**
 	 * Return a MetaModelManager for use with this CS resource, unless one can be located
@@ -48,9 +49,14 @@ public interface BaseCSResource extends BaseResource
 	@Nullable CS2PivotResourceAdapter findCS2ASAdapter();
 
 	/**
-	 * Return the eContentType to be used whenh creating an AS resource.
+	 * Return the eContentType to be used when creating an AS resource.
 	 */
 	@NonNull String getASContentType();
+
+	/**
+	 * Return the Abstract Syntax URI for the fiven Concrete Syntax URI.
+	 */
+	@NonNull URI getASURI(@NonNull URI csURI);
 
 	/**
 	 * Return the CS2AS adapter for this resource.

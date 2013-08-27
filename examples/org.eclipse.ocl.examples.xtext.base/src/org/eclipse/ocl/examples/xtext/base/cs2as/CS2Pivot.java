@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagedAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -308,7 +309,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	/**
 	 * Mapping of each CS resource to its corresponding pivot Resource.
 	 */
-	protected final @NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap;
+	protected final @NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap;
 
 	/**
 	 * CS to Pivot mapping controller for aliases and CSIs.
@@ -320,17 +321,17 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	 */
 	private Map<Element, ModelElementCS> pivot2cs = null;
 
-	public CS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap, @NonNull MetaModelManager metaModelManager) {
+	public CS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
-		this.cs2pivotResourceMap = cs2pivotResourceMap;
+		this.cs2asResourceMap = cs2asResourceMap;
 		metaModelManager.addListener(this);
-		metaModelManager.getPivotResourceSet().eAdapters().add(this);
+		metaModelManager.getASResourceSet().eAdapters().add(this);
 	}
 	
 	protected CS2Pivot(@NonNull CS2Pivot aConverter) {
 		super(aConverter.metaModelManager);
-		this.cs2pivotResourceMap = aConverter.cs2pivotResourceMap;
+		this.cs2asResourceMap = aConverter.cs2asResourceMap;
 		this.cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
 	}
 
@@ -341,7 +342,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 
 	public @NonNull Map<Element, ModelElementCS> computePivot2CSMap() {
 		Map<Element, ModelElementCS> map = new HashMap<Element, ModelElementCS>();
-		for (Resource csResource : cs2pivotResourceMap.keySet()) {
+		for (Resource csResource : cs2asResourceMap.keySet()) {
 			for (Iterator<EObject> it = csResource.getAllContents(); it.hasNext(); ) {
 				EObject eObject = it.next();
 				if (eObject instanceof ModelElementCS) {
@@ -365,10 +366,10 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	protected abstract @NonNull BaseCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter);
 
 	public void dispose() {
-		cs2pivotResourceMap.clear();
+		cs2asResourceMap.clear();
 		cs2PivotMapping.clear();
 		pivot2cs = null;
-		metaModelManager.getPivotResourceSet().eAdapters().remove(this);
+		metaModelManager.getASResourceSet().eAdapters().remove(this);
 		metaModelManager.removeListener(this);
 	}
 
@@ -380,7 +381,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 
 	public @NonNull Collection<? extends Resource> getCSResources() {
-		@SuppressWarnings("null") @NonNull Set<? extends Resource> keySet = cs2pivotResourceMap.keySet();
+		@SuppressWarnings("null") @NonNull Set<? extends Resource> keySet = cs2asResourceMap.keySet();
 		return keySet;
 	}
 
@@ -401,16 +402,16 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		return castElement;
 	}
 
-	public Resource getPivotResource(@NonNull Resource csResource) {
-		return cs2pivotResourceMap.get(csResource);
+	public ASResource getPivotResource(@NonNull Resource csResource) {
+		return cs2asResourceMap.get(csResource);
 	}
 
 	public Collection<? extends Resource> getPivotResources() {
-		return metaModelManager.getPivotResourceSet().getResources();//cs2pivotResourceMap.values();
+		return metaModelManager.getASResourceSet().getResources();//cs2asResourceMap.values();
 	}
 
 	public Notifier getTarget() {
-		return metaModelManager.getPivotResourceSet();
+		return metaModelManager.getASResourceSet();
 	}
 	
 	/**
@@ -498,17 +499,17 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 
 	public void setTarget(Notifier newTarget) {
-		assert newTarget == metaModelManager.getPivotResourceSet();
+		assert newTarget == metaModelManager.getASResourceSet();
 	}
 
 	public void unsetTarget(Notifier oldTarget) {
-		assert oldTarget == metaModelManager.getPivotResourceSet();
+		assert oldTarget == metaModelManager.getASResourceSet();
 	}
 	
 	public synchronized void update(@NonNull IDiagnosticConsumer diagnosticsConsumer) {
 //		printDiagnostic("CS2Pivot.update start", false, 0);
 		@SuppressWarnings("unused") Map<String, Element> oldCSI2Pivot = cs2PivotMapping.getMapping();
-		@SuppressWarnings("unused") Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2pivotResourceMap.keySet());
+		@SuppressWarnings("unused") Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2asResourceMap.keySet());
 //		System.out.println("==========================================================================");
 		Collection<? extends Resource> csResources = getCSResources();
 //		for (Resource csResource : csResources) {
@@ -517,8 +518,8 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		CS2PivotConversion conversion = createConversion(diagnosticsConsumer, csResources);
 		conversion.update();
 //		System.out.println("---------------------------------------------------------------------------");
-//		Collection<? extends Resource> pivotResources = cs2pivotResourceMap.values();
-//		for (Entry<? extends Resource, ? extends Resource> entry : cs2pivotResourceMap.entrySet()) {
+//		Collection<? extends Resource> pivotResources = cs2asResourceMap.values();
+//		for (Entry<? extends Resource, ? extends Resource> entry : cs2asResourceMap.entrySet()) {
 //			Resource csResource = entry.getKey();
 //			Resource asResource = entry.getValue();
 //			System.out.println("CS " + csResource.getClass().getName() + "@" + csResource.hashCode() + " => " + asResource.getClass().getName() + "@" + asResource.hashCode());
@@ -529,8 +530,8 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 			Element deadPivot = oldCSI2Pivot.get(deadCSI);	// WIP
 //			metaModelManager.kill(deadPivot);
 		} */
-		conversion.garbageCollect(cs2pivotResourceMap);
-		cs2PivotMapping.update(cs2pivotResourceMap.keySet());
+		conversion.garbageCollect(cs2asResourceMap);
+		cs2PivotMapping.update(cs2asResourceMap.keySet());
 		pivot2cs = null;
 //		printDiagnostic("CS2Pivot.update end", false, 0);
 	}

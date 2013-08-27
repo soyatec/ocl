@@ -604,7 +604,7 @@ public class OCLinEcoreTablesUtils
 	
 	protected @NonNull Set<? extends Type> getActiveTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
 		Package oclstdlibPackage = metaModelManager.getBooleanType().getPackage();
-		DomainPackage pivotMetaModel = metaModelManager.getPivotMetaModel();
+		DomainPackage pivotMetaModel = metaModelManager.getASMetamodel();
 		Type elementType = metaModelManager.getPivotType("Element");
 		if (oclstdlibPackage == pPackage) {
 			Set<Type> types = new HashSet<Type>();
@@ -699,7 +699,7 @@ public class OCLinEcoreTablesUtils
 	
 	protected @Nullable org.eclipse.ocl.examples.pivot.Package getExtendedPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
 		Package oclstdlibPackage = metaModelManager.getBooleanType().getPackage();
-		DomainPackage pivotMetaModel = metaModelManager.getPivotMetaModel();
+		DomainPackage pivotMetaModel = metaModelManager.getASMetamodel();
 		if (oclstdlibPackage == pPackage) {
 			return null;
 		}
@@ -764,7 +764,7 @@ public class OCLinEcoreTablesUtils
 		Resource genModelResource = genPackage.eResource();
 		ResourceSet genModelResourceSet = genModelResource.getResourceSet();
 		assert genModelResourceSet != null;
-		DomainPackage metaModelPackage = metaModelManager.getPivotMetaModel();
+		DomainPackage metaModelPackage = metaModelManager.getASMetamodel();
 		org.eclipse.ocl.examples.pivot.Package libraryPackage = metaModelManager.getLibraries().get(0);
 		if (asPackage == libraryPackage) {
 			GenPackage libraryGenPackage = getLibraryGenPackage(usedGenPackages);

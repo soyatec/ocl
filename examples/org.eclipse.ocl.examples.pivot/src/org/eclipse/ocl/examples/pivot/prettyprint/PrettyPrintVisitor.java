@@ -43,9 +43,9 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * The PivotPrettyPrintVisitor supports pretty printing of a Pivot model elements.
  * PrettyPrintOptions may be used to configure the printing.
  */
-public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,PrettyPrinter>
+public class PrettyPrintVisitor extends AbstractExtendingVisitor<Object,PrettyPrinter>
 {
-	public PivotPrettyPrintVisitor(@NonNull PrettyPrinter context) {
+	public PrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 	

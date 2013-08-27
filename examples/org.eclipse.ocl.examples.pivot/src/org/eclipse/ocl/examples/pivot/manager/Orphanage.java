@@ -41,7 +41,8 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
+import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 
 /**
  * An Orphanage provides a Package that weakly contains elements such as type specializations that
@@ -50,10 +51,10 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotResourceImpl;
  */
 public class Orphanage extends PackageImpl
 {
-	protected static class OrphanResource extends PivotResourceImpl
+	protected static class OrphanResource extends ASResourceImpl
 	{
-		protected OrphanResource(URI uri) {
-			super(uri);
+		protected OrphanResource(@NonNull URI uri) {
+			super(uri, OCLASResourceFactory.INSTANCE);
 		}
 
 		@Override

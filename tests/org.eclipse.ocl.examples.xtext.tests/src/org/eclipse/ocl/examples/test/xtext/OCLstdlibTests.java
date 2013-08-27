@@ -103,7 +103,7 @@ public class OCLstdlibTests extends XtextTestCase
 		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
 		assertNoResourceErrors("Load failed", xtextResource);
 		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
-		Resource asResource = adapter.getPivotResource(xtextResource);
+		Resource asResource = adapter.getASResource(xtextResource);
 		assertNoResourceErrors("File Model", asResource);
 		assertNoUnresolvedProxies("File Model", asResource);
 		assertNoValidationErrors("File Model", asResource);
@@ -188,7 +188,7 @@ public class OCLstdlibTests extends XtextTestCase
 		xtextResource.load(null);
 		CS2PivotResourceAdapter adapter = xtextResource.findCS2ASAdapter();
 		assertNoResourceErrors("Load failed", xtextResource);
-		Resource fileResource = adapter.getPivotResource(xtextResource);
+		Resource fileResource = adapter.getASResource(xtextResource);
 		assertNoResourceErrors("File Model", fileResource);
 		assertNoUnresolvedProxies("File Model", fileResource);
 		assertNoValidationErrors("File Model", fileResource);

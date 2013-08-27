@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 public class CSI2PivotMapping extends AdapterImpl implements MetaModelManagerListener
 {
 	public static @NonNull CSI2PivotMapping getAdapter(@NonNull MetaModelManager metaModelManager) {
-		List<Adapter> eAdapters = metaModelManager.getPivotResourceSet().eAdapters();
+		List<Adapter> eAdapters = metaModelManager.getASResourceSet().eAdapters();
 		for (Adapter adapter : eAdapters) {
 			if (adapter instanceof CSI2PivotMapping) {
 				return (CSI2PivotMapping) adapter;

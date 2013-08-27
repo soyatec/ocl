@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.manager.CollectionTypeServer;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
@@ -379,7 +380,7 @@ public class EditTests extends XtextTestCase
 		Resource ecoreResource = metaModelManager1.getExternalResourceSet().getResource(ecoreURI, true);
 		assertNoResourceErrors("Ecore load", ecoreResource);
 		assertNoValidationErrors("Ecore load", ecoreResource);
-		Resource asResource = ocl1.ecore2pivot(ecoreResource);
+		ASResource asResource = ocl1.ecore2pivot(ecoreResource);
 		assertNoResourceErrors("Pivot load", asResource);
 		assertNoValidationErrors("Pivot load", asResource);
 		Set<EObject> loadPivotContent = new HashSet<EObject>();
