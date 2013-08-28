@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.pivot.ecore;
+package org.eclipse.ocl.examples.pivot.uml;
 
 import java.io.IOException;
 import java.util.Map;
@@ -23,16 +23,16 @@ import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 
-public class EcoreASResourceImpl extends ASResourceImpl
+public class UMLASResourceImpl extends ASResourceImpl
 {
-	public EcoreASResourceImpl(@NonNull URI uri, @NonNull ASResourceFactory asResourceFactory) {
+	public UMLASResourceImpl(@NonNull URI uri, @NonNull ASResourceFactory asResourceFactory) {
 		super(uri, asResourceFactory);
 	}
 
 	@Override
 	public void load(Map<?, ?> options) throws IOException {
-		@SuppressWarnings("null")@NonNull URI ecoreURI = uri.trimFileExtension();
-		Ecore2Pivot.loadFromEcore(this, ecoreURI);
+		@SuppressWarnings("null")@NonNull URI umlURI = uri.trimFileExtension();
+		UML2Pivot.loadFromUML(this, umlURI);
 		AS2XMIid as2id = new AS2XMIid();
 		as2id.assignIds(this);
 		super.load(options);

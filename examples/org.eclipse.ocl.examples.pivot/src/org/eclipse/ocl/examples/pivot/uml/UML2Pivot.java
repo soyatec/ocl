@@ -215,6 +215,38 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 		return false;
 	}
+
+	public static UML2Pivot loadFromUML(@NonNull ASResource umlASResource, @NonNull URI umlURI) {
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(umlASResource);
+		Resource umlResource = metaModelManager.getExternalResourceSet().getResource(umlURI, true);
+		if (umlResource == null) {
+			return null;
+		}
+		UML2Pivot conversion = getAdapter(umlResource, metaModelManager);
+		try {
+			conversion.getPivotRoot();
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+/*		conversion.pivotRoot = metaModelManager.createRoot(umlURI.lastSegment(), umlResource.getURI().toString());
+		conversion.update(umlASResource, umlResource.getContents());
+		
+		AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(umlResource);
+		if (ecoreAdapter != null) {
+			Map<EObject, String> ecoreAliasMap = ecoreAdapter.getAliasMap();
+			AliasAdapter pivotAdapter = AliasAdapter.getAdapter(umlASResource);
+			Map<EObject, String> pivotAliasMap = pivotAdapter.getAliasMap();
+			for (EObject eObject : ecoreAliasMap.keySet()) {
+				String alias = ecoreAliasMap.get(eObject);
+				Element element = conversion.newCreateMap.get(eObject);
+				pivotAliasMap.put(element, alias);
+			}
+		}
+		metaModelManager.installResource(umlASResource);
+		conversion.installImports(); */
+		return conversion;
+	}
 	
 	/**
 	 * A UML2Pivot$Inner adapts an unconverted UML resource that has been imported during

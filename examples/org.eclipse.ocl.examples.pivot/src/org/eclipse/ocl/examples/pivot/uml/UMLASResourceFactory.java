@@ -65,6 +65,14 @@ public final class UMLASResourceFactory extends AbstractASResourceFactory
 	}
 
 	@Override
+	public @NonNull Resource createResource(URI uri) {
+		assert uri != null;
+		ASResource asResource = new UMLASResourceImpl(uri, this);
+		configureResource(asResource);
+	    return asResource;
+	}
+
+	@Override
 	public @Nullable <T extends Element> T getASElement(@NonNull MetaModelManager metaModelManager,
 			@NonNull Class<T> pivotClass, @NonNull EObject eObject) throws ParserException {
 		Resource metaModel = eObject.eResource();
