@@ -85,7 +85,8 @@ public class TupleLiteralExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<TupleLiteralPart> getPart()
+	@SuppressWarnings("null")
+	public @NonNull List<TupleLiteralPart> getPart()
 	{
 		if (part == null)
 		{

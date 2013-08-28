@@ -73,7 +73,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 		OpaqueExpression specification = object.getSpecification();
 		if (specification != null) {
 			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));
-			String message = PivotUtil.getMessage(specification);
+/*			String message = PivotUtil.getMessage(specification);
 			if ((message != null) && (message.length() > 0)) {
 				int lastComment = message.lastIndexOf("--");
 				if (lastComment >= 0) {
@@ -85,7 +85,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 				ExpSpecificationCS csMessageElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
 				csMessageElement.setExprString(message);
 				csElement.setMessageSpecification(csMessageElement);
-			}
+			} */
 		}
 		return csElement;
 	}

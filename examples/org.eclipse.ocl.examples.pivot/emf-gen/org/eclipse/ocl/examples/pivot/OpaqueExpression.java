@@ -84,5 +84,5 @@ public interface OpaqueExpression
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_Message()
 	 * @generated
 	 */
-	List<String> getMessage();
+	List<String> zzgetMessage();
 } // OpaqueExpression

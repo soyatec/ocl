@@ -306,7 +306,7 @@ public class SerializeTests extends XtextTestCase
 	}
 
 	public void testSerialize_ConstraintMessages() throws Exception {
-		doSerialize("ConstraintMessages");
+		doSerialize("ConstraintMessages", "ConstraintMessages.reference", null, true, true);
 	}
 
 	public void testSerialize_Ecore() throws Exception {

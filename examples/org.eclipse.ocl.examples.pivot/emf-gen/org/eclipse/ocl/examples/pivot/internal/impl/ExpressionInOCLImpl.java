@@ -289,6 +289,10 @@ public class ExpressionInOCLImpl
 	{
 		return messageExpression;
 	}
+	public OCLExpression zzgetMessageExpression()
+	{
+		return messageExpression;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -326,6 +330,10 @@ public class ExpressionInOCLImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, newMessageExpression, newMessageExpression));
+	}
+	public void zzsetMessageExpression(OCLExpression newMessageExpression)
+	{
+		setMessageExpression(newMessageExpression);
 	}
 
 	/**

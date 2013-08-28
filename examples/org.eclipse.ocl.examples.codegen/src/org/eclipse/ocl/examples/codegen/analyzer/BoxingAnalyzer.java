@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
@@ -201,6 +202,16 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	public @Nullable Object visitCGConstructorPart(@NonNull CGConstructorPart cgConstructorPart) {
 		rewriteAsUnboxed(cgConstructorPart.getInit());
 		return super.visitCGConstructorPart(cgConstructorPart);
+	}
+
+	@Override
+	public @Nullable Object visitCGEcoreOperation(@NonNull CGEcoreOperation cgElement) {
+		super.visitCGEcoreOperation(cgElement);
+		CGValuedElement body = cgElement.getBody();
+		if (body != null) {
+			rewriteAsUnboxed(body);
+		}
+		return null;
 	}
 
 	@Override

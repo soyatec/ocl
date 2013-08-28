@@ -142,6 +142,14 @@ public class OpaqueExpressionImpl
 		}
 		return message;
 	}
+	public List<String> zzgetMessage()
+	{
+		if (message == null)
+		{
+			message = new EDataTypeEList<String>(String.class, this, PivotPackage.OPAQUE_EXPRESSION__MESSAGE);
+		}
+		return message;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

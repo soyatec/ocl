@@ -146,12 +146,12 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				}	
 				String expr = PrettyPrinter.print(specification, prettyPrintOptions);		
 				csSpec.setExprString("\t" + expr.trim().replaceAll("\\r", "").replaceAll("\\n", "\n\t\t"));
-				String message = PivotUtil.getMessage(specification);
+/*				String message = PivotUtil.getMessage(specification);
 				if ((message != null) && (message.length() > 0)) {
 					ExpSpecificationCS csMessageElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
 					csMessageElement.setExprString(message);
 					csElement.setMessageSpecification(csMessageElement);
-				}
+				} */
 			}
 		}
 		return csElement;

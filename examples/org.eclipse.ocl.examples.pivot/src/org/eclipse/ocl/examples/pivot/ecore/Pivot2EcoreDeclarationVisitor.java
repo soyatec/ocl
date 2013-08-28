@@ -368,16 +368,24 @@ public class Pivot2EcoreDeclarationVisitor
 			}
 		}
 		for (Import anImport : pivotRoot.getImports()) {
-			if (importAnnotation == null) {
-				importAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-				importAnnotation.setSource(PivotConstants.IMPORT_ANNOTATION_SOURCE);
-			}
 			Namespace importedNamespace = anImport.getImportedNamespace();
 			if (importedNamespace != null) {
+				if (importAnnotation == null) {
+					importAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+					importAnnotation.setSource(PivotConstants.IMPORT_ANNOTATION_SOURCE);
+				}
 				EObject eTarget = importedNamespace.getETarget();
-				URI uri = EcoreUtil.getURI(eTarget);
-				URI uri2 = uri.deresolve(context.getEcoreURI());
-				importAnnotation.getDetails().put(anImport.getName(), uri2.toString());
+				if (eTarget != null) {
+					URI uri = EcoreUtil.getURI(eTarget);
+					URI uri2 = uri.deresolve(context.getEcoreURI());
+					importAnnotation.getDetails().put(anImport.getName(), uri2.toString());
+				}
+				else if (importedNamespace instanceof org.eclipse.ocl.examples.pivot.Package) {
+					importAnnotation.getDetails().put(anImport.getName(), ((org.eclipse.ocl.examples.pivot.Package)importedNamespace).getNsURI());
+				}
+				else {
+					importAnnotation.getDetails().put(anImport.getName(), importedNamespace.toString());
+				}
 			}
 		}
 		if ((firstElement != null) && (importAnnotation != null)) {

@@ -143,7 +143,7 @@ public interface ExpressionInOCL
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_MessageExpression()
 	 * @generated
 	 */
-	OCLExpression getMessageExpression();
+	OCLExpression zzgetMessageExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}' containment reference.
@@ -153,6 +153,6 @@ public interface ExpressionInOCL
 	 * @see #getMessageExpression()
 	 * @generated
 	 */
-	void setMessageExpression(OCLExpression value);
+	void zzsetMessageExpression(OCLExpression value);
 
 } // ExpressionInOCL

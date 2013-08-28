@@ -485,10 +485,10 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 					getParameter(parameterVariable);
 				}
 				cgConstraint.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
-				OCLExpression messageExpression = expressionInOCL.getMessageExpression();
+/*				OCLExpression messageExpression = expressionInOCL.getMessageExpression();
 				if (messageExpression != null) {
 					cgConstraint.setMessage(doVisit(CGValuedElement.class, messageExpression));
-				}
+				} */
 			}
 		}
 		return cgConstraint;

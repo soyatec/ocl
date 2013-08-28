@@ -151,9 +151,9 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 					((EClass)eClassifier).getEOperations().add(eOperation);
 					ecore2pivot.addMapping(eOperation, rule);
 					EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body", body);
-					if (message != null) {
-						EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body" + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, message);
-					}
+//					if (message != null) {
+//						EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body" + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, message);
+//					}
 				}
 			}
 		}
@@ -177,11 +177,11 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 								if (OCLCommon.isDelegateURI(source)) {
 									EMap<String, String> details = eAnnotation.getDetails();
 									for (String key : details.keySet()) {
-										if ((key != null) && !key.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
+										if ((key != null) && !key.endsWith(PivotConstants.zzMESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
 											String expression = details.get(key);
-											String messageExpression = details.get(key + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
+//											String messageExpression = details.get(key + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
 											if (expression != null) {
-												convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, messageExpression);
+												convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, null);
 											}
 										}
 									}

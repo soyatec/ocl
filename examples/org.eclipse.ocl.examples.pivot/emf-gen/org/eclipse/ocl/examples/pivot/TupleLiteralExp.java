@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Tuple Literal Exp</b></em>'.
@@ -49,6 +51,6 @@ public interface TupleLiteralExp
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTupleLiteralExp_Part()
 	 * @generated
 	 */
-	List<TupleLiteralPart> getPart();
+	@NonNull List<TupleLiteralPart> getPart();
 
 } // TupleLiteralExp

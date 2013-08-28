@@ -213,7 +213,7 @@ public class ElementUtil
 	 * The leading whitespace of the next element is included since the folloowing token
 	 * is expected to be a semicolon.
 	 */
-	public static @Nullable String getExpressionText(@NonNull ElementCS csElement) {
+	public static @NonNull String getExpressionText(@NonNull ElementCS csElement) {
 		ICompositeNode parserNode = NodeModelUtils.getNode(csElement);
 		if (parserNode != null) {
 			String text = parserNode.getText().replace("\r", "");
@@ -235,9 +235,10 @@ public class ElementUtil
 					return text + nextText.substring(0, i);
 				}
 			}
+			assert text != null;
 			return text;
 		}
-		return null;
+		return "null";
 	}
 
 	public static @Nullable TemplateParameter getFormalTemplateParameter(@NonNull TemplateParameterSubstitutionCS csTemplateParameterSubstitution) {

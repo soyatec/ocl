@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -60,7 +59,6 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -89,7 +87,6 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
@@ -265,7 +262,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			}
 		}
 		else if (csExp instanceof ExpSpecificationCS) {
-			ExpressionInOCL pivotElement = PivotUtil.getPivot(ExpressionInOCL.class, csExp);
+			ExpressionInOCL pivotElement = PivotUtil.getContainingExpressionInOCL(csExp.getPivot());
 			if (pivotElement != null) {
 				return pivotElement.getContextVariable();
 			}
@@ -1137,14 +1134,14 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				pivotElement.getBody().add(csExpression.toString());
 				OCLExpression expression = context.visitLeft2Right(OCLExpression.class, csExpression);
 				if (expression != null) {
-					if (pivotElement.getBodyExpression() == null) {
+//					if (pivotElement.getBodyExpression() == null) {
 						PivotUtil.setBody(pivotElement, expression, ElementUtil.getExpressionText(csExpression));
 						context.setType(pivotElement, expression.getType(), expression.isRequired());
 //						pivotElement.setIsRequired(false); // FIXME expression.isRequired());
-					}
-					else {
-						PivotUtil.setMessage(pivotElement, expression, ElementUtil.getExpressionText(csExpression));
-					}
+//					}
+//					else {
+//						PivotUtil.setMessage(pivotElement, expression, ElementUtil.getExpressionText(csExpression));
+//					}
 		//			context.setType(pivotElement, expression.getType());
 				}
 			}
@@ -1157,21 +1154,51 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		return null;
 	}
 
-	@Override
+/*	@Override
 	public Element visitExpSpecificationCS(@NonNull ExpSpecificationCS object) {
+		throw new UnsupportedOperationException();
 		OpaqueExpression pivotElement = PivotUtil.getPivot(OpaqueExpression.class, object);
 		if (pivotElement instanceof ExpressionInOCL) {
 			ExpCS csExpression = object.getOwnedExpression();
 			if (csExpression != null) {
 				String expressionText = ElementUtil.getExpressionText(csExpression);
 				OCLExpression expression = context.visitLeft2Right(OCLExpression.class, csExpression);
-				EStructuralFeature eContainingFeature = object.eContainingFeature();
-				if (eContainingFeature == BaseCSTPackage.Literals.CONSTRAINT_CS__MESSAGE_SPECIFICATION) {
-					PivotUtil.setMessage((ExpressionInOCL) pivotElement, expression, expressionText);
-				}
-				else {
+//				EStructuralFeature eContainingFeature = object.eContainingFeature();
+//				if (eContainingFeature == BaseCSTPackage.Literals.CONSTRAINT_CS__MESSAGE_SPECIFICATION) {
+//					PivotUtil.setMessage((ExpressionInOCL) pivotElement, expression, expressionText);
+//				}
+//				else {
 					PivotUtil.setBody((ExpressionInOCL) pivotElement, expression, expressionText);
-				}
+//				}
+			}
+		}
+		return pivotElement;
+	} */
+	
+	@Override
+	public Element visitExpSpecificationCS(@NonNull ExpSpecificationCS object) {
+		Element pivotElement = PivotUtil.getPivot(Element.class, object);
+		if (pivotElement instanceof ExpressionInOCL) {
+			ExpCS csExpression = object.getOwnedExpression();
+			if (csExpression != null) {
+				ExpressionInOCL pivotElement2 = (ExpressionInOCL) pivotElement;
+				context.refreshContextVariable(pivotElement2);
+				String expressionText = ElementUtil.getExpressionText(csExpression);
+				OCLExpression expression = context.visitLeft2Right(OCLExpression.class, csExpression);
+				PivotUtil.setBody(pivotElement2, expression, expressionText);
+				context.setType(pivotElement2, expression.getType(), expression.isRequired());
+			}
+		}
+		else if (pivotElement instanceof TupleLiteralPart) {
+			ExpCS csExpression = object.getOwnedExpression();
+			if (csExpression != null) {
+				TupleLiteralPart pivotElement2 = (TupleLiteralPart) pivotElement;
+//				context.refreshContextVariable(pivotElement2);
+//				String expressionText = ElementUtil.getExpressionText(csExpression);
+				OCLExpression expression = context.visitLeft2Right(OCLExpression.class, csExpression);
+//				PivotUtil.setBody(pivotElement2, expression, expressionText);
+				pivotElement2.setInitExpression(expression);
+				context.setType(pivotElement2, expression.getType(), expression.isRequired());
 			}
 		}
 		return pivotElement;

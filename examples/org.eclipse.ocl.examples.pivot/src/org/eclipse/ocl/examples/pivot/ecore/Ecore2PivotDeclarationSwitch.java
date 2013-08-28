@@ -724,7 +724,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				if (invariantName == null) {
 					invariantName = "";
 				}
-				if (!invariantName.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
+				if (!invariantName.endsWith(PivotConstants.zzMESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
 					Constraint invariant = null;
 					OpaqueExpression specification = null;
 					if (oldInvariantMap != null) {
@@ -746,10 +746,13 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 						invariant.setSpecification(expression);
 					}
 					String value = entry.getValue();
+					// Rescue any deprecated format message expressions
+					String message = oclAnnotationDetails.get(invariantName + PivotConstants.zzMESSAGE_ANNOTATION_DETAIL_SUFFIX);
+					if (message != null) {
+						value = PivotUtil.createTupleValuedConstraint(value, null, message);
+					}
 					expression.getBody().add(value);
 					expression.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-					String message = oclAnnotationDetails.get(invariantName + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
-					expression.getMessage().add(message != null ? message : "");
 					if (newInvariants == null) {
 						newInvariants = new ArrayList<Constraint>();
 					}

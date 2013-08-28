@@ -76,17 +76,20 @@ public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisit
 					        context.setOperationContext(pivotSpecification, contextOperation, resultVariableName);
 						}
 					}
-					OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
-					PivotUtil.setBody(pivotSpecification, bodyExpression, ElementUtil.getExpressionText(csExpression));
-					context.setType(pivotSpecification, bodyExpression.getType(), bodyExpression.isRequired());
+					String statusText = ElementUtil.getExpressionText(csExpression);
+					String severityText = null;
+					String messageText = null;
 					ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csConstraint.getMessageSpecification();
 					if (csMessageSpecification != null) {
 						ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
 						if (csMessageExpression != null) {
-							OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
-							PivotUtil.setMessage(pivotSpecification, messageExpression, ElementUtil.getExpressionText(csMessageExpression));
+							messageText = ElementUtil.getExpressionText(csMessageExpression);
 						}
 					}
+					String constraintText = PivotUtil.createTupleValuedConstraint(statusText, severityText, messageText);
+					OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		// FIXME full expression	
+					context.setType(pivotSpecification, bodyExpression.getType(), bodyExpression.isRequired());
+					PivotUtil.setBody(pivotSpecification, bodyExpression, constraintText);
 				}
 			}
 		}

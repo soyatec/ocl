@@ -1124,7 +1124,7 @@ public class DelegatesTest extends PivotTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationEvaluatingToWrongType"), null);
 		Type type = metaModelManager.getPivotOfEcore(Type.class, badClassInstance.eClass());
 		validateWithDelegationSeverity("evaluatingToWrongType", Diagnostic.ERROR, badClassInstance, null,
-			OCLMessages.ValidationConstraintIsNotBoolean_ERROR_, "ValidationEvaluatingToWrongType", "evaluatingToWrongType", DomainUtil.getLabel(type));
+			OCLMessages.ValidationConstraintIsNeitherBooleanNorTupleType_ERROR_, "ValidationEvaluatingToWrongType", "evaluatingToWrongType", DomainUtil.getLabel(type));
 	}
 	
 	public void test_validationParsingToLexicalError() {

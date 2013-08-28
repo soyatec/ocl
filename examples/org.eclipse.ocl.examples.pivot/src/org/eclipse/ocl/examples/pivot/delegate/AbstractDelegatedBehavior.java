@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
@@ -40,13 +39,9 @@ import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
-import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
-import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -141,7 +136,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 				if (expression != null) {
 					ExpressionInOCL expressionInOCL = parserContext.parse(expression);
 					constraint.setSpecification(expressionInOCL);
-					String message = PivotUtil.getMessage(valueSpecification);
+/*					String message = PivotUtil.getMessage(valueSpecification);
 					if ((message != null) && (message.length() > 0)) {
 						ParserContext messageContext = new DiagnosticContext(parserContext, constraint);
 						ExpressionInOCL resolveSpecification = messageContext.parse(message);
@@ -156,7 +151,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 							}
 						}
 						PivotUtil.setMessage(expressionInOCL, messageExpression, message);
-					}
+					} */
 					return expressionInOCL;
 				}
 			} catch (ParserException e) {

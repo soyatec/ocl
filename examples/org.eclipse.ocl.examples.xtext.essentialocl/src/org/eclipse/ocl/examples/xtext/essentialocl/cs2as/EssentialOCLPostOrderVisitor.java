@@ -24,16 +24,23 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
+import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
+import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
+import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil.PrecedenceComparator;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
@@ -46,6 +53,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BinaryOperato
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ContextCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NameExpCS;
@@ -65,6 +73,59 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 {
 	static final Logger logger = Logger.getLogger(EssentialOCLPostOrderVisitor.class);
 
+	public static class ConstraintCSCompletion extends SingleContinuation<ConstraintCS>
+	{
+		public ConstraintCSCompletion(@NonNull CS2PivotConversion context, @NonNull ConstraintCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			// NB Three cases for the Constraint content
+			// a) refreshing an OpaqueExpression that originated from Ecore2Pivot 
+			// b) refreshing an ExpressionInOCL for a simple statusExpression 
+			// c) refreshing an ExpressionInOCL+TupleLIteral for statusExpression+messageExpression
+			Constraint asConstraint = PivotUtil.getPivot(Constraint.class, csElement);
+			ExpSpecificationCS csStatusSpecification = (ExpSpecificationCS)csElement.getSpecification();
+			if ((asConstraint != null) && (csStatusSpecification != null)) {
+				ExpCS csStatusExpression = csStatusSpecification.getOwnedExpression();
+				if (csStatusExpression != null) {
+					@SuppressWarnings("null")@NonNull ExpressionInOCL asSpecification = (ExpressionInOCL) asConstraint.getSpecification();
+					context.refreshContextVariable(asSpecification);
+					ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS)csElement.getMessageSpecification();
+					String statusText = ElementUtil.getExpressionText(csStatusExpression);
+					if (csMessageSpecification == null) {
+						OCLExpression asExpression = context.visitLeft2Right(OCLExpression.class, csStatusExpression);
+						asSpecification.setBodyExpression(asExpression);
+						context.setType(asSpecification, asExpression != null ? asExpression.getType() : null, (asExpression != null) && asExpression.isRequired());
+						PivotUtil.setBody(asSpecification, asExpression, statusText);
+					}
+					else {
+						TupleLiteralPart asStatusTuplePart = PivotUtil.getNonNullAst(TupleLiteralPart.class, csStatusSpecification);
+						OCLExpression asStatusExpression = context.visitLeft2Right(OCLExpression.class, csStatusExpression);
+						asStatusTuplePart.setInitExpression(asStatusExpression);
+						TupleLiteralPart asMessageTuplePart = PivotUtil.getNonNullAst(TupleLiteralPart.class, csMessageSpecification);
+						ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
+						OCLExpression asMessageExpression = csMessageExpression != null ? context.visitLeft2Right(OCLExpression.class, csMessageExpression) : null;
+						asMessageTuplePart.setInitExpression(asMessageExpression);
+						@SuppressWarnings("null")@NonNull TupleLiteralExp asTupleLiteralExp = (TupleLiteralExp) asSpecification.getBodyExpression();
+						TupleType tupleType = context.getMetaModelManager().getTupleType("Tuple", asTupleLiteralExp.getPart(), null);
+						context.setType(asTupleLiteralExp, tupleType, true);
+						context.setType(asSpecification, tupleType, true);
+						String messageText = csMessageExpression != null ? ElementUtil.getExpressionText(csMessageExpression) : "null";
+						String tupleText = PivotUtil.createTupleValuedConstraint(statusText, null, messageText);
+						PivotUtil.setBody(asSpecification, asTupleLiteralExp, tupleText);					
+					}
+				}
+				else {
+					@SuppressWarnings("null")@NonNull OpaqueExpression asSpecification = asConstraint.getSpecification();
+					PivotUtil.setBody(asSpecification, csStatusSpecification.getExprString());					
+				}
+			}
+			return null;
+		}
+	}
+
 	protected static class ContextCSCompletion extends SingleContinuation<ContextCS>
 	{
 		public ContextCSCompletion(@NonNull CS2PivotConversion context, @NonNull ContextCS csElement) {
@@ -74,6 +135,26 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		@Override
 		public BasicContinuation<?> execute() {
 			context.visitLeft2Right(Element.class, csElement);
+			return null;
+		}
+	}
+
+	public static class ExpSpecificationCSCompletion extends SingleContinuation<ExpSpecificationCS>
+	{
+		public ExpSpecificationCSCompletion(@NonNull CS2PivotConversion context, @NonNull ExpSpecificationCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			ExpressionInOCL asSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csElement);
+			if (asSpecification != null) {
+				context.refreshContextVariable(asSpecification);
+				ExpCS csExpression = csElement.getOwnedExpression();
+				OCLExpression asExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
+				String statusText = csExpression != null ? ElementUtil.getExpressionText(csExpression) : "null";
+				PivotUtil.setBody(asSpecification, asExpression, statusText);
+			}
 			return null;
 		}
 	}
@@ -321,6 +402,11 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	}
 
 	@Override
+	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csConstraint) {
+		return new ConstraintCSCompletion(context, csConstraint);
+	}
+
+	@Override
 	public Continuation<?> visitContextCS(@NonNull ContextCS csContext) {
 		ExpCS ownedExpression = csContext.getOwnedExpression();
 		if (ownedExpression != null) {
@@ -334,6 +420,25 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	@Override
 	public Continuation<?> visitExpCS(@NonNull ExpCS csExp) {
 		return null;
+	}
+
+	@Override
+	public final @Nullable Continuation<?> visitExpSpecificationCS(@NonNull ExpSpecificationCS csElement) {
+		if (!(csElement.eContainer() instanceof ConstraintCS)) {
+			return new ExpSpecificationCSCompletion(context, csElement);
+		}
+		else {
+			return null;
+		}
+/*		Element asElement = csElement.getPivot();
+		if (asElement instanceof ExpressionInOCL) {
+			ExpressionInOCL asExpressionInOCL = (ExpressionInOCL)asElement;
+			csElement.getOwnedExpression()
+			String exprString = csSpecification.getExprString();
+			pivotSpecification.getBody().add(exprString);
+			pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		}
+		return null; */
 	}
 
 	@Override
@@ -403,7 +508,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		return null;
 	}
 
-	@Override
+/*	@Override
 	public Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csSpecification) {
 		OpaqueExpression pivotSpecification = PivotUtil.getPivot(OpaqueExpression.class, csSpecification);
 		if (pivotSpecification != null) {
@@ -412,6 +517,11 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 			pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 		}
 		return super.visitSpecificationCS(csSpecification);
+	} */
+
+	@Override
+	public final Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csSpecification) {
+		return null;	// Must be managed by container
 	}
 
 	@Override

@@ -45,7 +45,6 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -210,7 +209,7 @@ public class DelegateInstaller
 		EAnnotation oclAnnotation = createAnnotation(eModelElement);
 		String key = getAnnotationKey(pivotConstraint);
 		oclAnnotation.getDetails().put(key, exprString);
-		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
+/*		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
 		if ((eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) && !(eModelElement instanceof EOperation)) {
 			String messageString = PivotUtil.getMessage(specification);
 			if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
@@ -223,7 +222,7 @@ public class DelegateInstaller
 				String name = pivotConstraint.getName();
 				oclAnnotation.getDetails().put(name + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, messageString);
 			}
-		}
+		} */
 		return oclAnnotation;
 	}
 
@@ -416,7 +415,7 @@ public class DelegateInstaller
 			}
 			else {
 				oclAnnotation.getDetails().put(name, exprString);
-				String messageString = PivotUtil.getMessage(specification);
+/*				String messageString = PivotUtil.getMessage(specification);
 				if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
 					OCLExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
 					if (messageExpression != null) {
@@ -425,7 +424,7 @@ public class DelegateInstaller
 				}
 				if ((messageString != null) && (messageString.length() > 0)) {
 					oclAnnotation.getDetails().put(name + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, messageString);
-				}
+				} */
 			}
 		}
 		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION) {

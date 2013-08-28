@@ -34,17 +34,17 @@ public class ExpSpecificationCSAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ExpSpecificationCS targetElement = (ExpSpecificationCS)target;
-		ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
-		if (pivot != null) {
-			Variable resultVariable = pivot.getResultVariable();
+		ExpressionInOCL asExpression = PivotUtil.getContainingExpressionInOCL(targetElement.getPivot());
+		if (asExpression != null) {
+			Variable resultVariable = asExpression.getResultVariable();
 			if (resultVariable != null) {
 				environmentView.addNamedElement(resultVariable);
 			}
-			for (Variable parameterVariable : pivot.getParameterVariable()) {
+			for (Variable parameterVariable : asExpression.getParameterVariable()) {
 				assert parameterVariable != null;
 				environmentView.addNamedElement(parameterVariable);
 			}
-			Variable contextVariable = pivot.getContextVariable();
+			Variable contextVariable = asExpression.getContextVariable();
 			if (contextVariable != null) {
 				environmentView.addNamedElement(contextVariable);
 				if (!environmentView.hasFinalResult()) {

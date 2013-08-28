@@ -44,7 +44,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionKind;
@@ -89,13 +94,13 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
-import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.NullAttribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
@@ -215,8 +220,26 @@ public class PivotUtil extends DomainUtil
 		@SuppressWarnings("null")@NonNull ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
 		stringLiteral.setStringSymbol(string);
-		PivotUtil.setMessage(expressionInOCL, stringLiteral, string);
+//		PivotUtil.setMessage(expressionInOCL, stringLiteral, string);
 		return expressionInOCL;
+	}
+
+	public static @NonNull String createTupleValuedConstraint(@NonNull String statusText, @Nullable String severityText, @Nullable String messageText) {
+		if ((severityText == null) && (messageText == null)) {
+			return statusText;
+		}
+		StringBuilder s = new StringBuilder();
+		s.append("Tuple {");
+		s.append("\n\tstatus : Boolean = " + statusText);
+		if (severityText != null) {
+			s.append(",\n\tseverity : String = " + severityText);
+		}
+		if (messageText != null) {
+			s.append(",\n\tmessage : String = " + messageText);
+		}
+		s.append("\n}");
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 
 	public static void debugObjectUsage(String prefix, EObject element) {
@@ -609,6 +632,105 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
+	/**
+	 * Return the message of result, which is null
+	 * unless result is a Tuple with a more informative severity part.
+	 */
+	public static @Nullable String getConstraintResultMessage(Object result) {
+		if (result instanceof TupleValue) {
+			TupleValue tupleValue = (TupleValue)result;
+			TupleTypeId tupleTypeId = tupleValue.getTypeId();
+			TuplePartId messagePartId = tupleTypeId.getPartId(PivotConstants.MESSAGE_PART_NAME);
+			if (messagePartId != null) {
+				return String.valueOf(tupleValue.getValue(messagePartId));
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return the org.eclipse.emf.common.util.Diagnostic severity of result, which is ERROR
+	 * unless result is a Tuple with a more informative severity part.
+	 */
+	public static int getConstraintResultSeverity(Object result) {
+		if (result instanceof TupleValue) {
+			TupleValue tupleValue = (TupleValue)result;
+			TupleTypeId tupleTypeId = tupleValue.getTypeId();
+			TuplePartId severityPartId = tupleTypeId.getPartId(PivotConstants.SEVERITY_PART_NAME);
+			if (severityPartId != null) {
+				String value = String.valueOf(tupleValue.getValue(severityPartId));
+				if (value.toLowerCase().contains("warn")) {
+					return Diagnostic.WARNING;
+				}
+				else {
+					return Diagnostic.ERROR;
+				}
+			}
+			else {
+				TuplePartId statusPartId = tupleTypeId.getPartId(PivotConstants.STATUS_PART_NAME);
+				if (statusPartId != null) {
+					result = tupleValue.getValue(statusPartId);
+				}
+			}
+		}
+		return result == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+	}
+
+	/**
+	 * Return true if result represents a successful constraint evaluation result.
+	 * Anything else leads to a false return (no null or exception).
+	 */
+	public static boolean getConstraintResultStatus(Object result) {
+		if (result == Boolean.TRUE){
+			return true;
+		}
+		if (result instanceof TupleValue) {
+			TupleValue tupleValue = (TupleValue)result;
+			TupleTypeId tupleTypeId = tupleValue.getTypeId();
+			TuplePartId statusPartId = tupleTypeId.getPartId(PivotConstants.STATUS_PART_NAME);
+			if (statusPartId == null) {
+				return false;
+			}
+			Object value = tupleValue.getValue(statusPartId);
+			if (value == Boolean.TRUE){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Return null message if the result type of the constraintName query is a
+	 * BooleanType or a TupleType with a part name status with a BooleanType. 
+	 * Return a non-null message diagnosing the anomally otherwise.
+	 */
+	public static @Nullable String getConstraintResultTypeErrorMessage(String constraintName, @NonNull ExpressionInOCL query) {
+		TypeId typeId = query.getTypeId();
+		if (typeId == TypeId.BOOLEAN) {
+			return null;
+		}
+		else if ((typeId instanceof TupleTypeId) && !(typeId instanceof OclVoidTypeId)) {
+			TupleTypeId tupleTypeId = (TupleTypeId)typeId;
+			TuplePartId tuplePartId = tupleTypeId.getPartId(PivotConstants.STATUS_PART_NAME);
+			if (tuplePartId == null) {
+				String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
+				String constraintTypeName = getConstraintTypeName(query);
+				return DomainUtil.bind(OCLMessages.ValidationConstraintIsTupleTypeWithoutStatus_ERROR_, constraintTypeName, constraintName, objectLabel);
+			}
+			if (tuplePartId.getTypeId() == TypeId.BOOLEAN) {
+				return null;
+			}
+			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
+			String constraintTypeName = getConstraintTypeName(query);
+			return DomainUtil.bind(OCLMessages.ValidationConstraintIsTupleTypeWithNonBooleanStatus_ERROR_, constraintTypeName, constraintName, objectLabel);
+		}
+		else {
+			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
+			String constraintTypeName = getConstraintTypeName(query);
+			return DomainUtil.bind(OCLMessages.ValidationConstraintIsNeitherBooleanNorTupleType_ERROR_, constraintTypeName, constraintName, objectLabel);
+		}
+	}
+
 	public static String getConstraintTypeName(@NonNull OpaqueExpression expression) {
 		return ((NamedElement) expression.eContainer().eContainer()).getName();
 	}
@@ -617,7 +739,16 @@ public class PivotUtil extends DomainUtil
 		return ((NamedElement) constraint.eContainer()).getName();
 	}
 
-	public static Namespace getContainingNamespace(EObject element) {
+	public static @Nullable ExpressionInOCL getContainingExpressionInOCL(@Nullable Element element) {
+		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ExpressionInOCL) {
+				return (ExpressionInOCL)eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable Namespace getContainingNamespace(@Nullable EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Namespace) {
 				return (Namespace)eObject;
@@ -626,7 +757,7 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 	
-	public static org.eclipse.ocl.examples.pivot.Package getContainingPackage(EObject element) {
+	public static @Nullable org.eclipse.ocl.examples.pivot.Package getContainingPackage(@Nullable EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
 				return (org.eclipse.ocl.examples.pivot.Package)eObject;
@@ -635,7 +766,7 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 	
-	public static Root getContainingRoot(EObject element) {
+	public static @Nullable Root getContainingRoot(@Nullable EObject element) {
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Root) {
 				return (Root)eObject;
@@ -711,7 +842,7 @@ public class PivotUtil extends DomainUtil
 			logger.error(message);
 			return createExpressionInOCLError(message);
 		}
-		String messageExpression = PivotUtil.getMessage(specification);
+/*		String messageExpression = PivotUtil.getMessage(specification);
 		if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
 			try {
 				parserContext = new DiagnosticContext(parserContext, null);
@@ -719,7 +850,7 @@ public class PivotUtil extends DomainUtil
 			} catch (ParserException e) {
 				logger.error("Failed to parse \"" + messageExpression + "\"", e);
 			}
-		}
+		} */
 		return expressionInOCL;
 	}
 
@@ -797,8 +928,8 @@ public class PivotUtil extends DomainUtil
 		return element;
 	}
 
-	public static @Nullable String getMessage(@NonNull OpaqueExpression specification) {
-		List<String> messages = specification.getMessage();
+	public static @Nullable String zzgetMessage(@NonNull OpaqueExpression specification) {
+/*		List<String> messages = specification.getMessage();
 		List<String> languages = specification.getLanguage();
 		if ((messages == null) || (languages == null)) {
 			return null;
@@ -808,7 +939,7 @@ public class PivotUtil extends DomainUtil
 			if (PivotConstants.OCL_LANGUAGE.equalsIgnoreCase(languages.get(i))) {
 				return messages.get(i);
 			}
-		}
+		} */
 		return null;
 	}
 
@@ -841,6 +972,22 @@ public class PivotUtil extends DomainUtil
 	public static @NonNull URI getNonASURI(@NonNull URI uri) {
 		assert isASURI(uri);
 		return uri.trimFileExtension();
+	}
+
+	public static @NonNull <T extends Element> T getNonNullAst(@NonNull Class<T> pivotClass, @NonNull Pivotable pivotableElement) {
+//		if (pivotableElement == null) {
+//			return null;
+//		}
+		Element pivotElement = pivotableElement.getPivot();
+		if (pivotElement == null) {
+			throw new IllegalStateException("Null pivotElementfor a " + pivotClass.getName());
+		}
+		if (!pivotClass.isAssignableFrom(pivotElement.getClass())) {
+			throw new ClassCastException(pivotElement.getClass().getName() + " is not assignable to " + pivotClass.getName());
+		}
+		@SuppressWarnings("unchecked")
+		T castElement = (T) pivotElement;
+		return castElement;
 	}
 
 	@Deprecated	// Use getNonASURI
@@ -1264,12 +1411,7 @@ public class PivotUtil extends DomainUtil
 	 * also define stringExpression as the OCL-languaged body.
 	 */
 	public static void setBody(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
-		expressionInOCL.getBody().clear();
-		expressionInOCL.getLanguage().clear();
-		if (stringExpression != null) {
-			expressionInOCL.getBody().add(stringExpression);
-			expressionInOCL.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-		}
+		setBody(expressionInOCL, stringExpression);
 		expressionInOCL.setBodyExpression(oclExpression);
 	}
 
@@ -1277,14 +1419,27 @@ public class PivotUtil extends DomainUtil
 	 * Define oclExpression as the bodyExpression of an expressionInOCL, and if non-null
 	 * also define stringExpression as the OCL-languaged body.
 	 */
-	public static void setMessage(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
+	public static void setBody(@NonNull OpaqueExpression opaqueExpression, @Nullable String stringExpression) {
+		opaqueExpression.getBody().clear();
+		opaqueExpression.getLanguage().clear();
+		if (stringExpression != null) {
+			opaqueExpression.getBody().add(stringExpression);
+			opaqueExpression.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		}
+	}
+
+	/**
+	 * Define oclExpression as the bodyExpression of an expressionInOCL, and if non-null
+	 * also define stringExpression as the OCL-languaged body.
+	 */
+	public static void zzsetMessage(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
 //		expressionInOCL.getBody().clear();
 //		expressionInOCL.getLanguage().clear();
 //		if (stringExpression != null) {
 //			expressionInOCL.getBody().add(stringExpression);
 //			expressionInOCL.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 //		}
-		expressionInOCL.setMessageExpression(oclExpression);
+//		expressionInOCL.setMessageExpression(oclExpression);
 	}
 
 	/**
