@@ -560,6 +560,6 @@ public class AS2MonikerVisitor extends AbstractExtendingVisitor<Object, AS2Monik
 	}
 
 	public Object visiting(@NonNull Visitable visitable) {
-		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for Pivot2Moniker");
+		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
 	}	
 }
