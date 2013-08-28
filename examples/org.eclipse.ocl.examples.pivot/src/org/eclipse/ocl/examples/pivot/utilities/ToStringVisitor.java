@@ -27,6 +27,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
@@ -97,6 +98,7 @@ import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
@@ -146,6 +148,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 	}
 
 	public static String toString(@NonNull Element asElement) {
+		Resource resource = asElement.eResource();
+		if (resource instanceof ASResource) {
+			StringBuilder s = new StringBuilder();
+			ToStringVisitor v = ((ASResource)resource).getASResourceFactory().createToStringVisitor(s);
+			asElement.accept(v);
+			return s.toString();
+		}
 		Factory factory = getFactory(asElement);
 		if (factory == null) {
 			return NULL_PLACEHOLDER;
