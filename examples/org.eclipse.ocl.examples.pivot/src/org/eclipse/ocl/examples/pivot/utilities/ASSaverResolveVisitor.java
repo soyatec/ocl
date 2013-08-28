@@ -38,7 +38,7 @@ public class ASSaverResolveVisitor extends AbstractExtendingVisitor<Object, ASSa
 				superClasses.set(i, resolvedClass);
 			}
 		}
-		return null;
+		return super.visitClass(object);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class ASSaverResolveVisitor extends AbstractExtendingVisitor<Object, ASSa
 		Iteration referredIteration = DomainUtil.nonNullModel(object.getReferredIteration());
 		Iteration resolvedIteration = context.resolveOperation(referredIteration);
 		object.setReferredIteration(resolvedIteration);
-		return null;
+		return super.visitLoopExp(object);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class ASSaverResolveVisitor extends AbstractExtendingVisitor<Object, ASSa
 		Operation referredOperation = DomainUtil.nonNullModel(object.getReferredOperation());
 		Operation resolvedOperation = context.resolveOperation(referredOperation);
 		object.setReferredOperation(resolvedOperation);
-		return null;
+		return super.visitOperationCallExp(object);
 	}
 
 	@Override
@@ -112,6 +112,11 @@ public class ASSaverResolveVisitor extends AbstractExtendingVisitor<Object, ASSa
 				constrainingTypes.set(i, resolvedType);
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public Object visitType(@NonNull Type object) {
 		return null;
 	}
 
