@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -33,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
+import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
@@ -65,12 +68,16 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 
 	public static final @NonNull String NULL_MARKER = "<<null-element>>"; //$NON-NLS-1$
 
+	public static final @NonNull String ACCUMULATOR_PREFIX = "a"; //$NON-NLS-1$
 	public static final @NonNull String ITERATION_PREFIX = "i."; //$NON-NLS-1$
+	public static final @NonNull String ITERATOR_PREFIX = "i"; //$NON-NLS-1$
 	public static final @NonNull String OPERATION_PREFIX = "o."; //$NON-NLS-1$
+	public static final @NonNull String PARAMETER_PREFIX = "p"; //$NON-NLS-1$
 	public static final @NonNull String PACKAGE_PREFIX = "P."; //$NON-NLS-1$
 	public static final @NonNull String PRECEDENCE_PREFIX = "Z."; //$NON-NLS-1$
 	public static final @NonNull String PROPERTY_PREFIX = "p."; //$NON-NLS-1$
 	public static final @NonNull String TEMPLATE_PARAMETER_PREFIX = "t."; //$NON-NLS-1$
+	public static final @NonNull String TEMPLATE_SIGNATURE_PREFIX = "s."; //$NON-NLS-1$
 	public static final @NonNull String TYPE_PREFIX = "T."; //$NON-NLS-1$
 	
 	public static final @NonNull String OPERATION_PARAMETER_SEPARATOR = ".."; //$NON-NLS-1$
@@ -114,6 +121,16 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 					s.append("%");
 				}
 			}
+		}
+	}
+
+	protected void appendOperation(Operation object) {
+		appendParent(object);
+		appendName(object.getName());
+		List<Parameter> parameters = object instanceof Iteration ? ((Iteration)object).getOwnedIterator() : object.getOwnedParameter();
+		for (Parameter parameter : parameters) {
+			s.append(OPERATION_PARAMETER_SEPARATOR);
+			appendType(parameter.getType());
 		}
 	}
 
@@ -259,12 +276,7 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 	@Override
 	public Boolean visitIteration(@NonNull Iteration object) {
 		s.append(ITERATION_PREFIX);
-		appendParent(object);
-		appendName(object.getName());
-		for (Parameter parameter : object.getOwnedIterator()) {
-			s.append(OPERATION_PARAMETER_SEPARATOR);
-			appendType(parameter.getType());
-		}
+		appendOperation(object);
 		return true;
 	}
 
@@ -282,12 +294,7 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 	@Override
 	public @Nullable Boolean visitOperation(@NonNull Operation object) {
 		s.append(OPERATION_PREFIX);
-		appendParent(object);
-		appendName(object.getName());
-		for (Parameter parameter : object.getOwnedParameter()) {
-			s.append(OPERATION_PARAMETER_SEPARATOR);
-			appendType(parameter.getType());
-		}
+		appendOperation(object);
 		return true;
 	}
 
@@ -311,7 +318,29 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 
 	@Override
 	public @Nullable Boolean visitParameter(@NonNull Parameter object) {
-		return false;
+		Operation operation = (Operation)object.eContainer();
+		int index = operation.getOwnedParameter().indexOf(object);
+		if (index >= 0) {
+			s.append(PARAMETER_PREFIX);
+			s.append(index);
+		}
+		else if (operation instanceof Iteration) {
+			Iteration iteration = (Iteration)operation;
+			index = iteration.getOwnedIterator().indexOf(object);
+			if (index >= 0) {
+				s.append(ITERATOR_PREFIX);
+				s.append(index);
+			}
+			else {
+				index = iteration.getOwnedAccumulator().indexOf(object);
+				if (index >= 0) {
+					s.append(ACCUMULATOR_PREFIX);
+					s.append(index);
+				}
+			}
+		}
+		operation.accept(this);
+		return true;
 	}
 
 	@Override
@@ -366,7 +395,10 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 
 	@Override
 	public @Nullable Boolean visitTemplateSignature(@NonNull TemplateSignature object) {
-		return false;
+		s.append(TEMPLATE_SIGNATURE_PREFIX);
+		TemplateableElement template = object.getTemplate();
+		template.accept(this);
+		return true;
 	}
 
 	@Override
