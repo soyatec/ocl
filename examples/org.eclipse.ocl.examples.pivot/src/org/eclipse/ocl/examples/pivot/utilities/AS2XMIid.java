@@ -84,6 +84,7 @@ public class AS2XMIid
 	 * values read when this AS2ID was constructed.
 	 */
 	public void assignIds(@NonNull ASResource asResource) {
+		StringBuilder s = null;
 		Map<String, EObject> allIds = new HashMap<String, EObject>();
 		ASResourceFactory resourceHelper = asResource.getASResourceFactory();
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
@@ -95,11 +96,20 @@ public class AS2XMIid
 				if (id != null) {
 					assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
 					EObject oldElement = allIds.put(id, element);
-					assert oldElement == null : "Duplicate id '" + id + "' for '" + element.eClass().getName() + "'";
+					if (oldElement != null) {
+						if (s == null) {
+							s = new StringBuilder();
+							s.append("Duplicate xmi:id values generated for ");
+						}
+						s.append("\n '" + id + "' for '" + element.eClass().getName() + "'");
+					}
 					//						System.out.println(DomainUtil.debugSimpleName(element) + " => " + xmi);
 					asResource.setID(element, id);
 				}
 			}
+		}
+		if (s != null) {
+			throw new IllegalStateException(s.toString());
 		}
 	}
 

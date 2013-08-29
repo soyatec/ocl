@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+	<extension point="org.eclipse.ui.commands">
+	  <command id="org.eclipse.ocl.examples.xtext.base.ui.SaveASCommand"
+	    name="%MF_Save_AS_Command" description="%MF_Save_AS_Description"/>
+	  <command id="org.eclipse.ocl.examples.xtext.base.ui.SaveCSCommand"
+	    name="%MF_Save_CS_Command" description="%MF_Save_CS_Description"/>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	  <handler commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveASCommand"
+	    class="org.eclipse.ocl.examples.xtext.base.ui.commands.SaveASHandler"/>
+	  <handler commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveCSCommand"
+	    class="org.eclipse.ocl.examples.xtext.base.ui.commands.SaveCSHandler"/>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+      <menuContribution locationURI="popup:#TextEditorContext?before=group.open">
+         <menu id="org.eclipse.ocl.examples.xtext.base.ui.Save" label="%MF_Save"/>         
+      </menuContribution>
+	</extension>
+
+</plugin>
