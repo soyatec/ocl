@@ -39,8 +39,8 @@ import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAd
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public abstract class AbstractParserContext /*extends AdapterImpl*/ implements ParserContext

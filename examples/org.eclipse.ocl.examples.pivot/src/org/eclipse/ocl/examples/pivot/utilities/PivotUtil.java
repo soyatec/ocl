@@ -96,7 +96,6 @@ import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAd
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.pivot.resource.BaseResource;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.NullAttribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;

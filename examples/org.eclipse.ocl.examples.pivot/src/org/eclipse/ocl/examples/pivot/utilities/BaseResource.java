@@ -12,13 +12,14 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.pivot.resource;
+package org.eclipse.ocl.examples.pivot.utilities;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 
 /**
  * BaseResource defines the Xtext-independent extended interface for a Concrete Syntax resource
