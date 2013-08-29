@@ -36,7 +36,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
-import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
 
 public class NameQueries
 {
@@ -110,7 +110,7 @@ public class NameQueries
 	}
 	
 	public static String getMoniker(@NonNull Element element) {
-		return Pivot2Moniker.toString(element);
+		return AS2Moniker.toString(element);
 	}
 	
 	/**
