@@ -107,6 +107,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -722,6 +723,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EDataType typeEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType typeIdEDataType = null;
 
 	/**
@@ -936,6 +944,33 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 */
 	public EReference getCGClass_Invariants() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGClass_SuperTypes() {
+		return (EReference)cgClassEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCGClass_Interface() {
+		return (EAttribute)cgClassEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGClass_TemplateParameters() {
+		return (EReference)cgClassEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2320,6 +2355,15 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getType() {
+		return typeEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getTypeId() {
 		return typeIdEDataType;
 	}
@@ -2375,6 +2419,9 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgClassEClass, CG_CLASS__OPERATIONS);
 		createEReference(cgClassEClass, CG_CLASS__PROPERTIES);
 		createEReference(cgClassEClass, CG_CLASS__INVARIANTS);
+		createEReference(cgClassEClass, CG_CLASS__SUPER_TYPES);
+		createEAttribute(cgClassEClass, CG_CLASS__INTERFACE);
+		createEReference(cgClassEClass, CG_CLASS__TEMPLATE_PARAMETERS);
 
 		cgCollectionExpEClass = createEClass(CG_COLLECTION_EXP);
 		createEReference(cgCollectionExpEClass, CG_COLLECTION_EXP__PARTS);
@@ -2597,6 +2644,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		operationEDataType = createEDataType(OPERATION);
 		propertyEDataType = createEDataType(PROPERTY);
 		tuplePartIdEDataType = createEDataType(TUPLE_PART_ID);
+		typeEDataType = createEDataType(TYPE);
 		typeIdEDataType = createEDataType(TYPE_ID);
 	}
 
@@ -2726,6 +2774,9 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGClass_Operations(), this.getCGOperation(), this.getCGOperation_ContainingClass(), "operations", null, 0, -1, CGClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGClass_Properties(), this.getCGProperty(), this.getCGProperty_ContainingClass(), "properties", null, 0, -1, CGClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGClass_Invariants(), this.getCGConstraint(), null, "invariants", null, 0, -1, CGClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getCGClass_SuperTypes(), this.getCGClass(), null, "superTypes", null, 0, -1, CGClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCGClass_Interface(), ecorePackage.getEBoolean(), "interface", "false", 1, 1, CGClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGClass_TemplateParameters(), this.getCGClass(), null, "templateParameters", null, 0, -1, CGClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgCollectionExpEClass, CGCollectionExp.class, "CGCollectionExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGCollectionExp_Parts(), this.getCGCollectionPart(), this.getCGCollectionPart_CollectionExp(), "parts", null, 0, -1, CGCollectionExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2948,6 +2999,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEDataType(operationEDataType, Operation.class, "Operation", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(propertyEDataType, Property.class, "Property", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(tuplePartIdEDataType, TuplePartId.class, "TuplePartId", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(typeEDataType, Type.class, "Type", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(typeIdEDataType, TypeId.class, "TypeId", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
@@ -2971,7 +3023,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		   source, 
 		   new String[] {
 			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		   });	
+		   });
 	}
 
 } //CGModelPackageImpl

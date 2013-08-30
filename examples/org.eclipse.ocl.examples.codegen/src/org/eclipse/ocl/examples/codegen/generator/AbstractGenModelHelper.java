@@ -373,12 +373,8 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + operation);
 	}
 
-	public @Nullable GenPackage getGenPackage(@NonNull Type type) {
-		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
-		if (pPackage == null) {
-			return null;
-		}
-		EObject eContainer = pPackage.eContainer();
+	public @Nullable GenPackage getGenPackage(@NonNull org.eclipse.ocl.examples.pivot.Package asPackage) {
+		EObject eContainer = asPackage.eContainer();
 		if (eContainer instanceof Root) {
 			String nsURI = ((Root)eContainer).getExternalURI();
 			if (nsURI != null) {
@@ -388,11 +384,19 @@ public class AbstractGenModelHelper implements GenModelHelper
 				}
 			}
 		}
-		String nsURI = pPackage.getNsURI();
+		String nsURI = asPackage.getNsURI();
 		if (nsURI == null) {
 			return null;
 		}
 		return metaModelManager.getGenPackage(nsURI);
+	}
+
+	public @Nullable GenPackage getGenPackage(@NonNull Type type) {
+		org.eclipse.ocl.examples.pivot.Package asPackage = type.getPackage();
+		if (asPackage == null) {
+			return null;
+		}
+		return getGenPackage(asPackage);
 	}
 
 	public @Nullable GenPackage getGenPackage(@NonNull EClassifier eClassifier) {

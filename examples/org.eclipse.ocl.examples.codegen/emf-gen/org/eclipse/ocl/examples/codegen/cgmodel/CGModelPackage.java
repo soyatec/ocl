@@ -1682,13 +1682,40 @@ public interface CGModelPackage extends EPackage {
 	int CG_CLASS__INVARIANTS = CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CLASS__SUPER_TYPES = CG_NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Interface</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CLASS__INTERFACE = CG_NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Template Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CLASS__TEMPLATE_PARAMETERS = CG_NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>CG Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CLASS_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int CG_CLASS_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -7013,6 +7040,16 @@ public interface CGModelPackage extends EPackage {
 	int TUPLE_PART_ID = 85;
 
 	/**
+	 * The meta object id for the '<em>Type</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.pivot.Type
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getType()
+	 * @generated
+	 */
+	int TYPE = 86;
+
+	/**
 	 * The meta object id for the '<em>Type Id</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7020,7 +7057,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getTypeId()
 	 * @generated
 	 */
-	int TYPE_ID = 86;
+	int TYPE_ID = 87;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean <em>CG Boolean</em>}'.
@@ -7116,6 +7153,39 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGClass_Invariants();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getSuperTypes <em>Super Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Super Types</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getSuperTypes()
+	 * @see #getCGClass()
+	 * @generated
+	 */
+	EReference getCGClass_SuperTypes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#isInterface <em>Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Interface</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGClass#isInterface()
+	 * @see #getCGClass()
+	 * @generated
+	 */
+	EAttribute getCGClass_Interface();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getTemplateParameters <em>Template Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Template Parameters</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getTemplateParameters()
+	 * @see #getCGClass()
+	 * @generated
+	 */
+	EReference getCGClass_TemplateParameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp <em>CG Call Exp</em>}'.
@@ -8807,6 +8877,16 @@ public interface CGModelPackage extends EPackage {
 	EDataType getTuplePartId();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.ocl.examples.pivot.Type <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Type</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Type
+	 * @generated
+	 */
+	EDataType getType();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.ocl.examples.domain.ids.TypeId <em>Type Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8918,6 +8998,30 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_CLASS__INVARIANTS = eINSTANCE.getCGClass_Invariants();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CLASS__SUPER_TYPES = eINSTANCE.getCGClass_SuperTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CG_CLASS__INTERFACE = eINSTANCE.getCGClass_Interface();
+
+		/**
+		 * The meta object literal for the '<em><b>Template Parameters</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CLASS__TEMPLATE_PARAMETERS = eINSTANCE.getCGClass_TemplateParameters();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCallExpImpl <em>CG Call Exp</em>}' class.
@@ -10370,6 +10474,16 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType TUPLE_PART_ID = eINSTANCE.getTuplePartId();
+
+		/**
+		 * The meta object literal for the '<em>Type</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.pivot.Type
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getType()
+		 * @generated
+		 */
+		EDataType TYPE = eINSTANCE.getType();
 
 		/**
 		 * The meta object literal for the '<em>Type Id</em>' data type.

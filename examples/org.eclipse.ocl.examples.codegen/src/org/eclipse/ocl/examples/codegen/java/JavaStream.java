@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import java.lang.reflect.TypeVariable;
+import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -26,6 +27,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -362,6 +365,35 @@ public class JavaStream
 				append(ImportUtils.getAffixedName(className));
 				cg2java.addImport(className);
 			}
+		}
+	}
+
+	public void appendClassReference(@NonNull CGClass cgClass) {
+		CGPackage cgPackage = cgClass.getContainingPackage();
+		String packageName = cgPackage.getName();
+		if (packageName != null) {
+			appendClassReference(packageName + "." + cgClass.getName());
+			List<CGClass> cgTemplateParameters = cgClass.getTemplateParameters();
+			if (cgTemplateParameters.size() > 0) {
+				append("<");
+				boolean isFirst = true;
+				for (CGClass cgTemplateParameter : cgTemplateParameters) {
+					if (!isFirst) {
+						append(", ");
+					}
+					if (cgTemplateParameter != null) {
+						appendClassReference(cgTemplateParameter);
+					}
+					else {
+						append("?");
+					}
+					isFirst = false;
+				}
+				append(">");
+			}
+		}
+		else {
+			append(cgClass.getName());		// the ? wildcard
 		}
 	}
 

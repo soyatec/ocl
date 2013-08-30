@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -48,6 +49,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl#getInvariants <em>Invariants</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl#getTemplateParameters <em>Template Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +87,46 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * @ordered
 	 */
 	protected EList<CGConstraint> invariants;
+
+	/**
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGClass> superTypes;
+
+	/**
+	 * The default value of the '{@link #isInterface() <em>Interface</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInterface()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INTERFACE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInterface() <em>Interface</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInterface()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean interface_ = INTERFACE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTemplateParameters() <em>Template Parameters</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTemplateParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGClass> templateParameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -187,6 +231,61 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<CGClass> getSuperTypes() {
+		if (superTypes == null) {
+			superTypes = new EObjectEList<CGClass>(CGClass.class, this, CGModelPackage.CG_CLASS__SUPER_TYPES);
+		}
+		return superTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isInterface() {
+		return interface_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInterface(boolean newInterface) {
+		boolean oldInterface = interface_;
+		interface_ = newInterface;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CLASS__INTERFACE, oldInterface, interface_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<CGClass> getTemplateParameters() {
+		if (templateParameters == null) {
+			templateParameters = new EObjectEList<CGClass>(CGClass.class, this, CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS);
+		}
+		return templateParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -253,6 +352,12 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 				return getProperties();
 			case CGModelPackage.CG_CLASS__INVARIANTS:
 				return getInvariants();
+			case CGModelPackage.CG_CLASS__SUPER_TYPES:
+				return getSuperTypes();
+			case CGModelPackage.CG_CLASS__INTERFACE:
+				return isInterface();
+			case CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS:
+				return getTemplateParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,6 +386,17 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 				getInvariants().clear();
 				getInvariants().addAll((Collection<? extends CGConstraint>)newValue);
 				return;
+			case CGModelPackage.CG_CLASS__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends CGClass>)newValue);
+				return;
+			case CGModelPackage.CG_CLASS__INTERFACE:
+				setInterface((Boolean)newValue);
+				return;
+			case CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS:
+				getTemplateParameters().clear();
+				getTemplateParameters().addAll((Collection<? extends CGClass>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -305,6 +421,15 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 			case CGModelPackage.CG_CLASS__INVARIANTS:
 				getInvariants().clear();
 				return;
+			case CGModelPackage.CG_CLASS__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
+			case CGModelPackage.CG_CLASS__INTERFACE:
+				setInterface(INTERFACE_EDEFAULT);
+				return;
+			case CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS:
+				getTemplateParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -325,6 +450,12 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 				return properties != null && !properties.isEmpty();
 			case CGModelPackage.CG_CLASS__INVARIANTS:
 				return invariants != null && !invariants.isEmpty();
+			case CGModelPackage.CG_CLASS__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
+			case CGModelPackage.CG_CLASS__INTERFACE:
+				return interface_ != INTERFACE_EDEFAULT;
+			case CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS:
+				return templateParameters != null && !templateParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

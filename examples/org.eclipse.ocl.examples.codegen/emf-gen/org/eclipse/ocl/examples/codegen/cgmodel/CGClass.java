@@ -30,6 +30,9 @@ import org.eclipse.jdt.annotation.NonNull;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getInvariants <em>Invariants</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getTemplateParameters <em>Template Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +87,61 @@ public interface CGClass extends CGNamedElement {
 	 * @generated
 	 */
 	List<CGConstraint> getInvariants();
+
+	/**
+	 * Returns the value of the '<em><b>Super Types</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super Types</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super Types</em>' reference list.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_SuperTypes()
+	 * @generated
+	 */
+	List<CGClass> getSuperTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Interface</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * the boolean value
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Interface</em>' attribute.
+	 * @see #setInterface(boolean)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_Interface()
+	 * @generated
+	 */
+	boolean isInterface();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#isInterface <em>Interface</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Interface</em>' attribute.
+	 * @see #isInterface()
+	 * @generated
+	 */
+	void setInterface(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Template Parameters</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Template Parameters</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Template Parameters</em>' reference list.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGClass_TemplateParameters()
+	 * @generated
+	 */
+	List<CGClass> getTemplateParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Containing Package</b></em>' container reference.
