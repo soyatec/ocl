@@ -1,0 +1,74 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2010, 2013 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429"
+ * </copyright>
+ * 
+ * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ */
+module GenerateAutoCSModels
+
+import org.eclipse.ocl.examples.build.*
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+/**
+ *	Generate the Concrete Syntax Models used by the Xtext editors.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = ".."
+    	scanClassPath = true
+    }
+    bean = GenModelSetup { resourceSet = resourceSet }
+    bean = UMLGenModelSetup { resourceSet = resourceSet }
+//    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+//    	genModel = "/org.eclipse.ocl.examples.xtext.markup/model/Markup.genmodel"
+//    }
+    component = @SubGenerateAutoCSModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.ocl.examples.xtext.base"
+    	modelName = "baseCST"
+    	projectPrefix = "Base"
+    	superProjectName = ""
+    }
+    component = @SubGenerateAutoCSModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	modelName = "essentialOCLCST"
+    	projectPrefix = "EssentialOCL"
+    	superProjectName = "org.eclipse.ocl.examples.xtext.base"
+    	superProjectPrefix = "Base"
+    }
+    component = @SubGenerateAutoCSModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.ocl.examples.xtext.oclstdlib"
+    	modelName = "oclstdlibCST"
+    	projectPrefix = "OCLstdlib"
+    	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	superProjectPrefix = "EssentialOCL"
+    }
+    component = @SubGenerateAutoCSModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.ocl.examples.xtext.oclinecore"
+    	modelName = "oclinEcoreCST"
+    	projectPrefix = "OCLinEcore"
+    	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	superProjectPrefix = "EssentialOCL"
+    }
+    component = @SubGenerateAutoCSModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.ocl.examples.xtext.completeocl"
+    	modelName = "completeOCLCST"
+    	projectPrefix = "CompleteOCL"
+    	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	superProjectPrefix = "EssentialOCL"
+    }
+}

@@ -15,10 +15,11 @@
 package org.eclipse.ocl.examples.build.xtend
 
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.jdt.annotation.NonNull
 
 public class GenerateCSVisitors extends GenerateVisitors
 {
-	override void generateVisitors(EPackage ePackage) {
+	override void generateVisitors(@NonNull EPackage ePackage) {
 		if (!isDerived()) {
 			ePackage.generateVisitableInterface();
 		}
