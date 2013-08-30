@@ -14,27 +14,18 @@
  */
 package org.eclipse.ocl.examples.codegen.utilities;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * The <b>Resource </b> associated with the package.
  */
-public class CGModelResourceImpl extends XMIResourceImpl implements CGModelResource
+public interface CGModelResource extends XMIResource
 {
-	protected final @NonNull CGModelResourceFactory resourceFactory;
 	
 	/**
-	 * Creates an instance of the resource.
+	 * Return the CGModelResourceFactory that created this CGModelResource and which may be used
+	 * to create further artefacts.
 	 */
-	public CGModelResourceImpl(@NonNull URI uri, @NonNull CGModelResourceFactory resourceFactory) {
-		super(uri);
-		this.resourceFactory = resourceFactory;
-	}
-
-	public @NonNull CGModelResourceFactory getResourceFactory() {
-		return resourceFactory;
-	}
-
-} //CGModelResourceImpl
+	@NonNull CGModelResourceFactory getResourceFactory();
+}

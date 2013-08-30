@@ -15,26 +15,25 @@
 package org.eclipse.ocl.examples.codegen.utilities;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
- * The <b>Resource </b> associated with the package.
+ * The <b>Resource Factory</b> associated with the package.
  */
-public class CGModelResourceImpl extends XMIResourceImpl implements CGModelResource
+public class AbstractCGModelResourceFactory extends ResourceFactoryImpl implements CGModelResourceFactory
 {
-	protected final @NonNull CGModelResourceFactory resourceFactory;
-	
 	/**
 	 * Creates an instance of the resource.
 	 */
-	public CGModelResourceImpl(@NonNull URI uri, @NonNull CGModelResourceFactory resourceFactory) {
-		super(uri);
-		this.resourceFactory = resourceFactory;
+	@Override
+	public @NonNull CGModelResource createResource(URI uri) {
+		return new CGModelResourceImpl(DomainUtil.nonNullState(uri), this);
 	}
 
-	public @NonNull CGModelResourceFactory getResourceFactory() {
-		return resourceFactory;
+	public @NonNull CG2StringVisitor createToStringVisitor() {
+		return new CG2StringVisitor();
 	}
-
-} //CGModelResourceImpl
+}

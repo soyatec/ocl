@@ -23,7 +23,6 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
@@ -65,6 +64,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
+import org.eclipse.ocl.examples.codegen.utilities.CGModelResource;
+import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -98,24 +99,11 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	public static String toString(@NonNull CGElement cgElement) {
 		try {
 			Resource resource = cgElement.eResource();
-			if (resource != null) {
-				for (Adapter adapter : resource.eAdapters()) {
-					if (adapter.isAdapterForType(CG2StringVisitor.Factory.class)) {
-						CG2StringVisitor v = ((CG2StringVisitor.Factory) adapter).createToStringVisitor();
-						cgElement.accept(v);
-						return v.toString();
-					}
-				}
-				ResourceSet resourceSet = resource.getResourceSet();
-				if (resourceSet != null) {
-					for (Adapter adapter : resourceSet.eAdapters()) {
-						if (adapter.isAdapterForType(CG2StringVisitor.Factory.class)) {
-							CG2StringVisitor v = ((CG2StringVisitor.Factory) adapter).createToStringVisitor();
-							cgElement.accept(v);
-							return v.toString();
-						}
-					}
-				}
+			if (resource instanceof CGModelResource) {
+				CGModelResourceFactory resourceFactory = ((CGModelResource)resource).getResourceFactory();
+				CG2StringVisitor v = resourceFactory.createToStringVisitor();
+				cgElement.accept(v);
+				return v.toString();
 			}
 			EPackage ePackage = cgElement.eClass().getEPackage();
 			Factory factory = factoryMap.get(ePackage);
@@ -172,7 +160,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	/**
 	 * Initializes me.
 	 */
-	protected CG2StringVisitor() {
+	public CG2StringVisitor() {
         super(Object.class);						// Useless dummy object as context
 	}
 

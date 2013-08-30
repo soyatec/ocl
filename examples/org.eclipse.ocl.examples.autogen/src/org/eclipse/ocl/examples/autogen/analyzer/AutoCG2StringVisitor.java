@@ -45,7 +45,7 @@ public class AutoCG2StringVisitor extends CG2StringVisitor implements AutoCGMode
 
 	public static @NonNull AutoCG2StringVisitor.Factory FACTORY = new MyFactory();
 
-	protected AutoCG2StringVisitor() {}
+	public AutoCG2StringVisitor() {}
 
 	public @Nullable String visitCGASTCallExp(@NonNull CGASTCallExp object) {
 		return visitCGOperationCallExp(object);

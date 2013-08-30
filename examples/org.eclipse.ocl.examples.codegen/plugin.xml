@@ -21,7 +21,7 @@
             class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/-->
       <parser
             contentTypeIdentifier="org.eclipse.ocl.examples.codegen.cgmodel"
-            class="org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactoryImpl"/>
+            class="org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">

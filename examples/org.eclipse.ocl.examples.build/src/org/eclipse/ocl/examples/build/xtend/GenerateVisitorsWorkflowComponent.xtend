@@ -29,6 +29,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
+import org.eclipse.jdt.annotation.NonNull
 
 public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflowComponent
 {
@@ -92,7 +93,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		}
 	}
 
-	abstract def void generateVisitors(EPackage ePackage);
+	abstract def void generateVisitors(@NonNull EPackage ePackage);
 
 	private def String getCopyright(Resource genModelResource) {
 		var GenModel genModel = genModelResource.getContents().get(0) as GenModel;

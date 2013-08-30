@@ -98,6 +98,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 	public static void generate(@NonNull EPackage ePackage, @Nullable String superProjectPrefix) {
 		PivotStandaloneSetup.doSetup();		// FIXME
 		OCLstdlib.install();
+		AutoCG2StringVisitor.FACTORY.getClass();
 		Resource eResource = DomainUtil.nonNullState(ePackage.eResource());
 		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource);
 		org.eclipse.ocl.examples.pivot.Package asPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
@@ -140,7 +141,6 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		super(metaModelManager);
 		this.genModel = DomainUtil.nonNullState(genPackage.getGenModel());
 		getOptions().setUseNullAnnotations(OCLinEcoreGenModelGeneratorAdapter.useNullAnnotations(genModel));
-		AutoCG2StringVisitor.FACTORY.getClass();
 		cgAnalyzer = new AutoAnalyzer(this);
 		this.asPackage = asPackage;
 		this.asSuperPackage = asSuperPackage;
