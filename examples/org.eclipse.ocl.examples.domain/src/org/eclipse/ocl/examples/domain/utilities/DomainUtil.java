@@ -35,7 +35,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.elements.DomainIteration;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
@@ -385,7 +384,7 @@ public class DomainUtil
 		return parameterTypes;
 	}
 
-	public static <T extends DomainNamedElement> T getNamedElement(Iterable<T> elements, String name) {
+	public static <T extends Nameable> T getNamedElement(Iterable<T> elements, String name) {
 		if (elements == null)
 			return null;
 		for (T element : elements)
