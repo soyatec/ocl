@@ -124,6 +124,17 @@ public class AutoCGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AutoCGModelPackage.CG_CONTAINMENT_BODY: {
+				CGContainmentBody cgContainmentBody = (CGContainmentBody)theEObject;
+				T result = caseCGContainmentBody(cgContainmentBody);
+				if (result == null) result = caseCGValuedElement(cgContainmentBody);
+				if (result == null) result = caseCGTypedElement(cgContainmentBody);
+				if (result == null) result = caseCGNamedElement(cgContainmentBody);
+				if (result == null) result = caseCGElement(cgContainmentBody);
+				if (result == null) result = caseNameable(cgContainmentBody);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -170,6 +181,21 @@ public class AutoCGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGContainmentPart(CGContainmentPart object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Containment Body</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Containment Body</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGContainmentBody(CGContainmentBody object) {
 		return null;
 	}
 

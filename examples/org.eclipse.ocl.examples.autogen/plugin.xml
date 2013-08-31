@@ -26,6 +26,13 @@
             genModel="model/autocgmodel.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated autocgmodel -->
+      <parser
+            contentTypeIdentifier="org.eclipse.ocl.examples.autogen.autocgmodel"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
    <extension point="org.eclipse.core.contenttype.contentTypes">
       <!-- @generated autocgmodel -->
       <content-type

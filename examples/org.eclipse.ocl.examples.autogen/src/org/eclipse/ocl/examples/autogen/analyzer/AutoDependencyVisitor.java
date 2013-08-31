@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.autogen.analyzer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
@@ -32,6 +33,10 @@ public class AutoDependencyVisitor extends JavaDependencyVisitor implements Auto
 
 	public @Nullable Object visitCGASTCallExp(@NonNull CGASTCallExp object) {
 		return visitCGOperationCallExp(object);
+	}
+
+	public @Nullable Object visitCGContainmentBody(@NonNull CGContainmentBody object) {
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable Object visitCGContainmentPart(@NonNull CGContainmentPart object) {

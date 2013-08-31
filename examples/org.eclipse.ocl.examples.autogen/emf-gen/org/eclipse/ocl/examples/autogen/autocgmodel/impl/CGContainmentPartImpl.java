@@ -16,26 +16,19 @@ package org.eclipse.ocl.examples.autogen.autocgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelPackage;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
-import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
-
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
-
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
-
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -45,8 +38,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentPartImpl#getContainmentVisit <em>Containment Visit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentPartImpl#getContainmentBody <em>Containment Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentPartImpl#getInit <em>Init</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentPartImpl#getEStructuralFeature <em>EStructural Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +56,16 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	 * @ordered
 	 */
 	protected CGValuedElement init;
+
+	/**
+	 * The cached value of the '{@link #getEStructuralFeature() <em>EStructural Feature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEStructuralFeature()
+	 * @generated
+	 * @ordered
+	 */
+	protected EStructuralFeature eStructuralFeature;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,9 +91,9 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGContainmentVisit getContainmentVisit() {
-		if (eContainerFeatureID() != AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT) return null;
-		return (CGContainmentVisit)eInternalContainer();
+	public CGContainmentBody getContainmentBody() {
+		if (eContainerFeatureID() != AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY) return null;
+		return (CGContainmentBody)eInternalContainer();
 	}
 
 	/**
@@ -97,8 +101,8 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetContainmentVisit(CGContainmentVisit newContainmentVisit, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newContainmentVisit, AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT, msgs);
+	public NotificationChain basicSetContainmentBody(CGContainmentBody newContainmentBody, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newContainmentBody, AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY, msgs);
 		return msgs;
 	}
 
@@ -107,20 +111,20 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContainmentVisit(CGContainmentVisit newContainmentVisit) {
-		if (newContainmentVisit != eInternalContainer() || (eContainerFeatureID() != AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT && newContainmentVisit != null)) {
-			if (EcoreUtil.isAncestor(this, newContainmentVisit))
+	public void setContainmentBody(CGContainmentBody newContainmentBody) {
+		if (newContainmentBody != eInternalContainer() || (eContainerFeatureID() != AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY && newContainmentBody != null)) {
+			if (EcoreUtil.isAncestor(this, newContainmentBody))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newContainmentVisit != null)
-				msgs = ((InternalEObject)newContainmentVisit).eInverseAdd(this, AutoCGModelPackage.CG_CONTAINMENT_VISIT__PARTS, CGContainmentVisit.class, msgs);
-			msgs = basicSetContainmentVisit(newContainmentVisit, msgs);
+			if (newContainmentBody != null)
+				msgs = ((InternalEObject)newContainmentBody).eInverseAdd(this, AutoCGModelPackage.CG_CONTAINMENT_BODY__PARTS, CGContainmentBody.class, msgs);
+			msgs = basicSetContainmentBody(newContainmentBody, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT, newContainmentVisit, newContainmentVisit));
+			eNotify(new ENotificationImpl(this, Notification.SET, AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY, newContainmentBody, newContainmentBody));
 	}
 
 	/**
@@ -171,13 +175,34 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EStructuralFeature getEStructuralFeature() {
+		return eStructuralFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEStructuralFeature(EStructuralFeature newEStructuralFeature) {
+		EStructuralFeature oldEStructuralFeature = eStructuralFeature;
+		eStructuralFeature = newEStructuralFeature;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AutoCGModelPackage.CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE, oldEStructuralFeature, eStructuralFeature));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetContainmentVisit((CGContainmentVisit)otherEnd, msgs);
+				return basicSetContainmentBody((CGContainmentBody)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -190,8 +215,8 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
-				return basicSetContainmentVisit(null, msgs);
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
+				return basicSetContainmentBody(null, msgs);
 			case AutoCGModelPackage.CG_CONTAINMENT_PART__INIT:
 				return basicSetInit(null, msgs);
 		}
@@ -206,8 +231,8 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
-				return eInternalContainer().eInverseRemove(this, AutoCGModelPackage.CG_CONTAINMENT_VISIT__PARTS, CGContainmentVisit.class, msgs);
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
+				return eInternalContainer().eInverseRemove(this, AutoCGModelPackage.CG_CONTAINMENT_BODY__PARTS, CGContainmentBody.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -220,10 +245,12 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
-				return getContainmentVisit();
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
+				return getContainmentBody();
 			case AutoCGModelPackage.CG_CONTAINMENT_PART__INIT:
 				return getInit();
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE:
+				return getEStructuralFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -236,11 +263,14 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
-				setContainmentVisit((CGContainmentVisit)newValue);
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
+				setContainmentBody((CGContainmentBody)newValue);
 				return;
 			case AutoCGModelPackage.CG_CONTAINMENT_PART__INIT:
 				setInit((CGValuedElement)newValue);
+				return;
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE:
+				setEStructuralFeature((EStructuralFeature)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -254,11 +284,14 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
-				setContainmentVisit((CGContainmentVisit)null);
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
+				setContainmentBody((CGContainmentBody)null);
 				return;
 			case AutoCGModelPackage.CG_CONTAINMENT_PART__INIT:
 				setInit((CGValuedElement)null);
+				return;
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE:
+				setEStructuralFeature((EStructuralFeature)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -272,10 +305,12 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_VISIT:
-				return getContainmentVisit() != null;
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__CONTAINMENT_BODY:
+				return getContainmentBody() != null;
 			case AutoCGModelPackage.CG_CONTAINMENT_PART__INIT:
 				return init != null;
+			case AutoCGModelPackage.CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE:
+				return eStructuralFeature != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -288,6 +323,60 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((AutoCGModelVisitor<?>)visitor).visitCGContainmentPart(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isBoxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNonNull() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return true;
 	}
 
 } //CGContainmentPartImpl

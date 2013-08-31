@@ -17,15 +17,13 @@ package org.eclipse.ocl.examples.autogen.autocgmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelFactory;
 import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelPackage;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
-
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 
 /**
@@ -55,6 +53,13 @@ public class AutoCGModelPackageImpl extends EPackageImpl implements AutoCGModelP
 	 * @generated
 	 */
 	private EClass cgContainmentPartEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgContainmentBodyEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -143,15 +148,6 @@ public class AutoCGModelPackageImpl extends EPackageImpl implements AutoCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGContainmentVisit_Parts() {
-		return (EReference)cgContainmentVisitEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCGContainmentPart() {
 		return cgContainmentPartEClass;
 	}
@@ -161,7 +157,7 @@ public class AutoCGModelPackageImpl extends EPackageImpl implements AutoCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCGContainmentPart_ContainmentVisit() {
+	public EReference getCGContainmentPart_ContainmentBody() {
 		return (EReference)cgContainmentPartEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -172,6 +168,42 @@ public class AutoCGModelPackageImpl extends EPackageImpl implements AutoCGModelP
 	 */
 	public EReference getCGContainmentPart_Init() {
 		return (EReference)cgContainmentPartEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGContainmentPart_EStructuralFeature() {
+		return (EReference)cgContainmentPartEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGContainmentBody() {
+		return cgContainmentBodyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGContainmentBody_ContainmentVisit() {
+		return (EReference)cgContainmentBodyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGContainmentBody_Parts() {
+		return (EReference)cgContainmentBodyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -205,11 +237,15 @@ public class AutoCGModelPackageImpl extends EPackageImpl implements AutoCGModelP
 		cgastCallExpEClass = createEClass(CGAST_CALL_EXP);
 
 		cgContainmentVisitEClass = createEClass(CG_CONTAINMENT_VISIT);
-		createEReference(cgContainmentVisitEClass, CG_CONTAINMENT_VISIT__PARTS);
 
 		cgContainmentPartEClass = createEClass(CG_CONTAINMENT_PART);
-		createEReference(cgContainmentPartEClass, CG_CONTAINMENT_PART__CONTAINMENT_VISIT);
+		createEReference(cgContainmentPartEClass, CG_CONTAINMENT_PART__CONTAINMENT_BODY);
 		createEReference(cgContainmentPartEClass, CG_CONTAINMENT_PART__INIT);
+		createEReference(cgContainmentPartEClass, CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE);
+
+		cgContainmentBodyEClass = createEClass(CG_CONTAINMENT_BODY);
+		createEReference(cgContainmentBodyEClass, CG_CONTAINMENT_BODY__CONTAINMENT_VISIT);
+		createEReference(cgContainmentBodyEClass, CG_CONTAINMENT_BODY__PARTS);
 	}
 
 	/**
@@ -246,16 +282,21 @@ public class AutoCGModelPackageImpl extends EPackageImpl implements AutoCGModelP
 		cgastCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOperationCallExp());
 		cgContainmentVisitEClass.getESuperTypes().add(theCGModelPackage.getCGOperation());
 		cgContainmentPartEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
+		cgContainmentBodyEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(cgastCallExpEClass, CGASTCallExp.class, "CGASTCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cgContainmentVisitEClass, CGContainmentVisit.class, "CGContainmentVisit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGContainmentVisit_Parts(), this.getCGContainmentPart(), this.getCGContainmentPart_ContainmentVisit(), "parts", null, 0, -1, CGContainmentVisit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(cgContainmentPartEClass, CGContainmentPart.class, "CGContainmentPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGContainmentPart_ContainmentVisit(), this.getCGContainmentVisit(), this.getCGContainmentVisit_Parts(), "containmentVisit", null, 1, 1, CGContainmentPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGContainmentPart_ContainmentBody(), this.getCGContainmentBody(), this.getCGContainmentBody_Parts(), "containmentBody", null, 1, 1, CGContainmentPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGContainmentPart_Init(), theCGModelPackage.getCGValuedElement(), null, "init", null, 0, 1, CGContainmentPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGContainmentPart_EStructuralFeature(), ecorePackage.getEStructuralFeature(), null, "eStructuralFeature", null, 1, 1, CGContainmentPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgContainmentBodyEClass, CGContainmentBody.class, "CGContainmentBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGContainmentBody_ContainmentVisit(), this.getCGContainmentVisit(), null, "containmentVisit", null, 1, 1, CGContainmentBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGContainmentBody_Parts(), this.getCGContainmentPart(), this.getCGContainmentPart_ContainmentBody(), "parts", null, 0, -1, CGContainmentBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

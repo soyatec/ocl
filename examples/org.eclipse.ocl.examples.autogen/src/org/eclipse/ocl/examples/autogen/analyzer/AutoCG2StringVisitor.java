@@ -19,10 +19,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelPackage;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 public class AutoCG2StringVisitor extends CG2StringVisitor implements AutoCGModelVisitor<String>
 {	
@@ -48,7 +50,14 @@ public class AutoCG2StringVisitor extends CG2StringVisitor implements AutoCGMode
 	public AutoCG2StringVisitor() {}
 
 	public @Nullable String visitCGASTCallExp(@NonNull CGASTCallExp object) {
-		return visitCGOperationCallExp(object);
+        CGValuedElement source = object.getSource();
+		safeVisit(source);
+		result.append(".$AST()");
+		return null;
+	}
+
+	public @Nullable String visitCGContainmentBody(@NonNull CGContainmentBody object) {
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable String visitCGContainmentPart(@NonNull CGContainmentPart object) {

@@ -15,17 +15,13 @@
 package org.eclipse.ocl.examples.autogen.autocgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelPackage;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
-
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
-
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl;
-
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -65,6 +61,33 @@ public class CGASTCallExpImpl extends CGOperationCallExpImpl implements CGASTCal
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((AutoCGModelVisitor<?>)visitor).visitCGASTCallExp(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return source != null ? source : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isBoxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return true;
 	}
 
 } //CGASTCallExpImpl

@@ -24,6 +24,8 @@ import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory
  */
 public class AutoCGModelResourceFactory extends AbstractCGModelResourceFactory
 {
+	public static final @NonNull AutoCGModelResourceFactory INSTANCE = new AutoCGModelResourceFactory();
+
 	@Override
 	public @NonNull CG2StringVisitor createToStringVisitor() {
 		return new AutoCG2StringVisitor();

@@ -38,9 +38,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -56,8 +58,10 @@ import org.eclipse.ocl.examples.autogen.analyzer.AutoDependencyVisitor;
 import org.eclipse.ocl.examples.autogen.analyzer.AutoFieldingAnalyzer;
 import org.eclipse.ocl.examples.autogen.analyzer.AutoReferencesVisitor;
 import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelFactory;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
+import org.eclipse.ocl.examples.autogen.utilities.AutoCGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
@@ -68,6 +72,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
@@ -78,14 +83,17 @@ import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGenModelGeneratorAd
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 
 /**
  * AutoCodeGenerator supports generation of the content of a JavaClassFile to
@@ -96,7 +104,13 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 //	private static final Logger logger = Logger.getLogger(AutoCodeGenerator.class);
 	
 	public static void generate(@NonNull EPackage ePackage, @Nullable String superProjectPrefix) {
-		PivotStandaloneSetup.doSetup();		// FIXME
+//		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
+//		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
+//		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
+//		CommonSubexpressionEliminator.CSE_PULL_UP.setState(true);
+//		CommonSubexpressionEliminator.CSE_PUSH_UP.setState(true);
+//		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
+		EssentialOCLStandaloneSetup.doSetup();		// FIXME
 		OCLstdlib.install();
 		AutoCG2StringVisitor.FACTORY.getClass();
 		Resource eResource = DomainUtil.nonNullState(ePackage.eResource());
@@ -199,14 +213,33 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 				cgOperation.setName("visit" + asType.getName());
 				cgOperation.setAst(asType);
 				cgClass.getOperations().add(cgOperation);
-				ConstructorExp constructorExp = (ConstructorExp) astOperation.getBodyExpression();
+				CGContainmentBody cgBody = AutoCGModelFactory.eINSTANCE.createCGContainmentBody();
+				cgBody.setAst(astOperation);
+//				cgBody.setTypeId(getAnalyzer().getTypeId(astOperation.getTypeId()));
+				cgOperation.setBody(cgBody);
+				OpaqueExpression bodyExpression = DomainUtil.nonNullState(astOperation.getBodyExpression());
+				ExpressionInOCL expressionInOCL = DomainUtil.nonNullState(PivotUtil.getExpressionInOCL(asType, bodyExpression));
+				Variable contextVariable = expressionInOCL.getContextVariable();
+				if (contextVariable != null) {
+					List<CGParameter> cgParameters = cgOperation.getParameters();
+					CGParameter cgContext = as2cgVisitor.getParameter(contextVariable);
+					cgContext.setValueName("self");
+					cgParameters.add(cgContext);
+				}
+				ConstructorExp constructorExp = (ConstructorExp) expressionInOCL.getBodyExpression();
+				Type constructorType = DomainUtil.nonNullState(constructorExp.getType());
+				GenClass genClass = DomainUtil.nonNullState((GenClass) genModelHelper.getGenClassifier(constructorType));
+				EClass eClass = DomainUtil.nonNullState(genClass.getEcoreClass());
 				for (ConstructorPart constructorPart : constructorExp.getPart()) {
 					CGContainmentPart cgPart = AutoCGModelFactory.eINSTANCE.createCGContainmentPart();
-	//				cgPart.setName("visit" + asType.getName());
+					String name = constructorPart.getName();
+					cgPart.setName(name);
 					cgPart.setAst(constructorPart);
-					cgPart.setInit((CGValuedElement) constructorPart.accept(as2cgVisitor));
-					cgOperation.getParts().add(cgPart);
+					cgPart.setEStructuralFeature(DomainUtil.nonNullState(eClass.getEStructuralFeature(name)));
+					cgPart.setInit((CGValuedElement) constructorPart.getInitExpression().accept(as2cgVisitor));
+					cgBody.getParts().add(cgPart);
 				}
+				cgClass.getOperations().add(cgOperation);
 			}
 			else {
 				CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGEcoreOperation();
@@ -216,6 +249,11 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			}
 		}
 		return cgPackage;
+	}
+
+	@Override
+	public @NonNull AutoCGModelResourceFactory getCGResourceFactory() {
+		return AutoCGModelResourceFactory.INSTANCE;
 	}
 
 	@Override

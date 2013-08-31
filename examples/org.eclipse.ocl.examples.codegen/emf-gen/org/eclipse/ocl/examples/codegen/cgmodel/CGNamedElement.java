@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
+import java.util.List;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 

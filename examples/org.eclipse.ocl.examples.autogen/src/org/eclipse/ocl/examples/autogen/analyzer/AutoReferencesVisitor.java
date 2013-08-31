@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
@@ -25,6 +26,10 @@ public class AutoReferencesVisitor extends ReferencesVisitor implements AutoCGMo
 
 	public @Nullable List<Object> visitCGASTCallExp(@NonNull CGASTCallExp object) {
 		return visitCGOperationCallExp(object);
+	}
+
+	public @Nullable List<Object> visitCGContainmentBody(@NonNull CGContainmentBody object) {
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable List<Object> visitCGContainmentPart(@NonNull CGContainmentPart object) {

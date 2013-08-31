@@ -34,6 +34,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
@@ -300,6 +301,20 @@ public class AbstractGenModelHelper implements GenModelHelper
 				String clsName = genClassifier.getEcoreClassifier().getName();
 				if (name.equals(clsName)) {
 					return genClassifier;
+				}
+			}
+		}
+		for (DomainType partialType : metaModelManager.getPartialTypes(type)) {
+			if (partialType instanceof Type) {
+				genPackage = getGenPackage((Type)partialType);
+				if (genPackage != null) {
+					String name = partialType.getName();
+					for (GenClassifier genClassifier : genPackage.getGenClassifiers()) {
+						String clsName = genClassifier.getEcoreClassifier().getName();
+						if (name.equals(clsName)) {
+							return genClassifier;
+						}
+					}
 				}
 			}
 		}

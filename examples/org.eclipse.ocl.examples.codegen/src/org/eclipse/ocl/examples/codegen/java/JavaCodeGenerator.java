@@ -23,8 +23,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
@@ -63,6 +61,9 @@ import org.eclipse.ocl.examples.codegen.java.types.UnboxedDynamicEObjectsDescrip
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedEObjectsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedElementsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedValueDescriptor;
+import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory;
+import org.eclipse.ocl.examples.codegen.utilities.CGModelResource;
+import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -104,6 +105,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		initPrimitive(long.class, Long.class);
 		initPrimitive(short.class, Short.class);
 	}
+	
+	private static final @NonNull AbstractCGModelResourceFactory CG_RESOURCE_FACTORY = new AbstractCGModelResourceFactory();
 
 	/**
 	 * The known classes that templates may use in unqualified form. The list is
@@ -253,6 +256,10 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	@NonNull
 	public ReferencesVisitor createReferencesVisitor() {
 		return ReferencesVisitor.INSTANCE;
+	}
+
+	public @NonNull CGModelResourceFactory getCGResourceFactory() {
+		return CG_RESOURCE_FACTORY;
 	}
 
 	public @Nullable String getConstantsClass() {
@@ -479,7 +486,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	 * Perform the overall optimization of the CG tree.
 	 */
 	protected void optimize(@NonNull CGPackage cgPackage) {
-		Resource resource = new XMIResourceImpl(URI.createURI("cg.xmi"));
+		CGModelResource resource = getCGResourceFactory().createResource(URI.createURI("cg.xmi"));
 		resource.getContents().add(cgPackage);
 		getAnalyzer().analyze(cgPackage);
 		CG2JavaPreVisitor cg2PreVisitor = createCG2JavaPreVisitor();

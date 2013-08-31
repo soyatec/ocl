@@ -9,22 +9,28 @@
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="CGASTCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOperationCallExp"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGContainmentVisit" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOperation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" ordered="false"
-        upperBound="-1" eType="#//CGContainmentPart" containment="true" resolveProxies="false"
-        eOpposite="#//CGContainmentPart/containmentVisit">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGContainmentVisit" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGContainmentPart" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentVisit" lowerBound="1"
-        eType="#//CGContainmentVisit" resolveProxies="false" eOpposite="#//CGContainmentVisit/parts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentBody" lowerBound="1"
+        eType="#//CGContainmentBody" resolveProxies="false" eOpposite="#//CGContainmentBody/parts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="init" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The shared value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
+        resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGContainmentBody" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentVisit" lowerBound="1"
+        eType="#//CGContainmentVisit" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" ordered="false"
+        upperBound="-1" eType="#//CGContainmentPart" containment="true" resolveProxies="false"
+        eOpposite="#//CGContainmentPart/containmentBody">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

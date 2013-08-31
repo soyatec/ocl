@@ -42,6 +42,10 @@ public abstract class AbstractNullAutoCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGContainmentBody(@NonNull org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody object) {
+		return null;
+	}
+
 	public @Nullable R visitCGContainmentPart(@NonNull org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart object) {
 		return null;
 	}

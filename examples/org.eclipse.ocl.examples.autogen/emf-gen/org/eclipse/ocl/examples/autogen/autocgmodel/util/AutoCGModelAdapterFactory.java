@@ -102,6 +102,10 @@ public class AutoCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGContainmentPartAdapter();
 			}
 			@Override
+			public Adapter caseCGContainmentBody(CGContainmentBody object) {
+				return createCGContainmentBodyAdapter();
+			}
+			@Override
 			public Adapter caseCGElement(CGElement object) {
 				return createCGElementAdapter();
 			}
@@ -192,6 +196,20 @@ public class AutoCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGContainmentPartAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody <em>CG Containment Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody
+	 * @generated
+	 */
+	public Adapter createCGContainmentBodyAdapter() {
 		return null;
 	}
 

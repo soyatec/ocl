@@ -46,6 +46,10 @@ public abstract class AbstractExtendingAutoCGModelVisitor<R, C>
 		return visitCGOperationCallExp(object);
 	}
 
+	public @Nullable R visitCGContainmentBody(@NonNull org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody object) {
+		return visitCGValuedElement(object);
+	}
+
 	public @Nullable R visitCGContainmentPart(@NonNull org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart object) {
 		return visitCGValuedElement(object);
 	}

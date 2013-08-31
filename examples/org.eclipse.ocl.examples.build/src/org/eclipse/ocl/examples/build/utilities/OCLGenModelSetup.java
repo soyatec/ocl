@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.build.utilities;
 
+import org.eclipse.ocl.examples.build.modelspecs.AutoCGValuedElementModelSpec;
 import org.eclipse.ocl.examples.build.modelspecs.CGElementModelSpec;
 import org.eclipse.ocl.examples.build.modelspecs.CGTypedElementModelSpec;
 import org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec;
@@ -29,5 +30,6 @@ public class OCLGenModelSetup
 	    CGElementModelSpec.register();
 	    CGTypedElementModelSpec.register();
 	    CGValuedElementModelSpec.register();
+	    AutoCGValuedElementModelSpec.register();
 	}
 }

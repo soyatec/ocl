@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.autogen.autocgmodel;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +32,8 @@ public interface AutoCGModelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	AutoCGModelFactory eINSTANCE = org.eclipse.ocl.examples.autogen.autocgmodel.impl.AutoCGModelFactoryImpl.init();
+	@SuppressWarnings("null")
+	@NonNull AutoCGModelFactory eINSTANCE = org.eclipse.ocl.examples.autogen.autocgmodel.impl.AutoCGModelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>CGAST Call Exp</em>'.
@@ -40,7 +42,7 @@ public interface AutoCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CGAST Call Exp</em>'.
 	 * @generated
 	 */
-	CGASTCallExp createCGASTCallExp();
+	@NonNull CGASTCallExp createCGASTCallExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Containment Visit</em>'.
@@ -49,7 +51,7 @@ public interface AutoCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Containment Visit</em>'.
 	 * @generated
 	 */
-	CGContainmentVisit createCGContainmentVisit();
+	@NonNull CGContainmentVisit createCGContainmentVisit();
 
 	/**
 	 * Returns a new object of class '<em>CG Containment Part</em>'.
@@ -58,7 +60,16 @@ public interface AutoCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Containment Part</em>'.
 	 * @generated
 	 */
-	CGContainmentPart createCGContainmentPart();
+	@NonNull CGContainmentPart createCGContainmentPart();
+
+	/**
+	 * Returns a new object of class '<em>CG Containment Body</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Containment Body</em>'.
+	 * @generated
+	 */
+	CGContainmentBody createCGContainmentBody();
 
 	/**
 	 * Returns the package supported by this factory.
@@ -67,6 +78,6 @@ public interface AutoCGModelFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	AutoCGModelPackage getAutoCGModelPackage();
+	@NonNull AutoCGModelPackage getAutoCGModelPackage();
 
 } //AutoCGModelFactory

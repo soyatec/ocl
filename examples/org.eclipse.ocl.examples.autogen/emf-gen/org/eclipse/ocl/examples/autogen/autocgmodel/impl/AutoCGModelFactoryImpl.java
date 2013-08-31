@@ -17,12 +17,15 @@ package org.eclipse.ocl.examples.autogen.autocgmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.ocl.examples.autogen.autocgmodel.*;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelFactory;
+import org.eclipse.ocl.examples.autogen.autocgmodel.AutoCGModelPackage;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,6 +74,7 @@ public class AutoCGModelFactoryImpl extends EFactoryImpl implements AutoCGModelF
 			case AutoCGModelPackage.CGAST_CALL_EXP: return createCGASTCallExp();
 			case AutoCGModelPackage.CG_CONTAINMENT_VISIT: return createCGContainmentVisit();
 			case AutoCGModelPackage.CG_CONTAINMENT_PART: return createCGContainmentPart();
+			case AutoCGModelPackage.CG_CONTAINMENT_BODY: return createCGContainmentBody();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,7 +85,7 @@ public class AutoCGModelFactoryImpl extends EFactoryImpl implements AutoCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGASTCallExp createCGASTCallExp() {
+	public @NonNull CGASTCallExp createCGASTCallExp() {
 		CGASTCallExpImpl cgastCallExp = new CGASTCallExpImpl();
 		return cgastCallExp;
 	}
@@ -91,7 +95,7 @@ public class AutoCGModelFactoryImpl extends EFactoryImpl implements AutoCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGContainmentVisit createCGContainmentVisit() {
+	public @NonNull CGContainmentVisit createCGContainmentVisit() {
 		CGContainmentVisitImpl cgContainmentVisit = new CGContainmentVisitImpl();
 		return cgContainmentVisit;
 	}
@@ -101,7 +105,7 @@ public class AutoCGModelFactoryImpl extends EFactoryImpl implements AutoCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGContainmentPart createCGContainmentPart() {
+	public @NonNull CGContainmentPart createCGContainmentPart() {
 		CGContainmentPartImpl cgContainmentPart = new CGContainmentPartImpl();
 		return cgContainmentPart;
 	}
@@ -111,7 +115,18 @@ public class AutoCGModelFactoryImpl extends EFactoryImpl implements AutoCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AutoCGModelPackage getAutoCGModelPackage() {
+	public CGContainmentBody createCGContainmentBody() {
+		CGContainmentBodyImpl cgContainmentBody = new CGContainmentBodyImpl();
+		return cgContainmentBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	public @NonNull AutoCGModelPackage getAutoCGModelPackage() {
 		return (AutoCGModelPackage)getEPackage();
 	}
 

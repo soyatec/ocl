@@ -16,10 +16,13 @@ package org.eclipse.ocl.examples.autogen.java;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.autogen.analyzer.AutoAnalyzer;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGASTCallExp;
+import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
@@ -30,6 +33,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
@@ -66,6 +74,8 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		js.append(" context) {\n");
 		js.pushIndentation(null);
 		js.append("super(context);\n");
+		js.append("this.converter = context.getConverter();\n");
+			js.append("this.idResolver = converter.getMetaModelManager().getIdResolver();\n");
 		js.popIndentation();
 		js.append("}\n");
 	}
@@ -87,24 +97,19 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 	}
 
 	public @Nullable Object visitCGASTCallExp(@NonNull CGASTCallExp object) {
-		return visitCGOperationCallExp(object);
+		CGValuedElement cgSource = DomainUtil.nonNullState(object.getSource());
+		TypeDescriptor typeDescriptor = context.getTypeDescriptor(object);
+		js.appendLocalStatements(cgSource);
+		js.appendDeclaration(object);
+		js.append(" = ");
+		js.appendReferenceTo(typeDescriptor, cgSource);
+		js.append(".getPivot();\n");
+		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGClass(@NonNull CGClass cgClass) {		
 		String className = cgClass.getName();
-/*		js.append("/**\n");
-		js.append(" * The " + className + " transformation:\n");
-		js.append(" * <p>\n");
-		js.append(" * Construct with an evaluator\n");
-		js.append(" * <br>\n");
-		js.append(" * Populate each input model with {@link addRootObjects(String,List)}\n");
-		js.append(" * <br>\n");
-		js.append(" * {@link run()}\n");
-		js.append(" * <br>\n");
-		js.append(" * Extract each output model with {@link getRootObjects(String)}\n");
-		js.append(" * /\n"); */
-//		js.append("@SuppressWarnings(\"nls\")\n");
 		js.append("public class " + className);
 		List<CGClass> cgSuperTypes = cgClass.getSuperTypes();
 		boolean isFirst = true;
@@ -143,6 +148,17 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 			}
 		}
 		js.append("\n");
+	    js.append("protected final ");
+	    js.appendIsRequired(true);
+	    js.append(" ");
+	    js.appendClassReference(CS2Pivot.class);
+	    js.append(" converter;\n");
+	    js.append("protected final ");
+	    js.appendIsRequired(true);
+	    js.append(" ");
+	    js.appendClassReference(IdResolver.class);
+	    js.append(" idResolver;\n");
+		js.append("\n");
 		doConstructor(cgClass);
 		if (cgSuperTypes.size() <= 1) {
 			js.append("\n");
@@ -170,7 +186,7 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		js.append(" ");
 		js.appendClassReference(typeDescriptor);
 		js.append(" ");
-		js.append("csElement");
+		js.append("self");
 		js.append(") {\n");
 		js.pushIndentation(null);
 		js.append("throw new UnsupportedOperationException();\n");
@@ -179,53 +195,116 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		return null;
 	}
 
-	public @Nullable Object visitCGContainmentPart(@NonNull CGContainmentPart object) {
-		return visitCGValuedElement(object);
-	}
-
-	public @Nullable Object visitCGContainmentVisit(@NonNull CGContainmentVisit object) {
-		Type csType = (Type) object.getAst();
-//		Operation astOperation = DomainUtil.getNamedElement(csType.getOwnedOperation(), "ast");
-		TypeDescriptor typeDescriptor = context.getTypeDescriptor(csType.getTypeId(), false);
-		js.append("public ");
-		js.appendIsRequired(false);
-		js.append(" ");
-		js.appendClassReference(Continuation.class);
-		js.append(" " + object.getName() + "(");
-		js.appendIsRequired(true);
-		js.append(" ");
+	public @Nullable Object visitCGContainmentBody(@NonNull CGContainmentBody object) {
+		Type asType = ((Operation) object.getAst()).getType();
+		EPackage ePackage = DomainUtil.nonNullState(asType.eClass().getEPackage());
+		String factoryName = context.getGenModelHelper().getQualifiedFactoryInterfaceName(ePackage);
+		TypeDescriptor typeDescriptor = context.getTypeDescriptor(asType.getTypeId(), false);
+		js.append("//\n");
+		js.append("// " + asType.getName() + "\n");
+		js.append("//\n");
 		js.appendClassReference(typeDescriptor);
-		js.append(" ");
-		js.append("csElement");
-		js.append(") {\n");
+		js.append(" result;\n");
+		js.appendClassReference(Element.class);
+		js.append(" element = converter.getPivotElement(self);\n");
+		
+		js.append("if ((element != null) && (element.getClass() == ");
+		js.appendClassReference(typeDescriptor);
+		js.append(".class)) {\n");
 		js.pushIndentation(null);
+		js.append("result = (");
+		js.appendClassReference(typeDescriptor);
+		js.append(")element;\n");
+		js.popIndentation();
+		js.append("}\n");
 		
-		js.appendClassReference(CS2Pivot.class);
-		js.append("converter = context.getConverter();\n");
-		js.append("// AS element creation\n");
+		js.append("else {\n");
+		js.pushIndentation(null);
+		js.append("result = ");
+		js.appendClassReference(factoryName);
+		js.append(".eINSTANCE.create" + asType.getName() + "();\n");
+		js.append("converter.installPivotDefinition(self, result);\n");
+		js.popIndentation();
+		js.append("}\n");
 		
-/*		result.append('''
-			CS2Pivot converter = context.getConverter();
-			// AS element creation
-			«typeQN» asElement = csElement != null ? («typeQN») converter.getPivotElement(csElement) : null;
-			if (asElement == null) {
-				asElement = «getFactoryInstanceAccessor(astType)».create«astType.name»();
-				converter.installPivotDefinition(csElement, asElement);
-			}
-			
-		''');
-		
-		*/
 		for (CGContainmentPart part : object.getParts()) {
 			part.accept(this);
 		}
-			
 		// TODO any heuristic to include comment update ?
 		js.append("// AS element comments update;\n");
-		js.append("context.refreshComments(asElement, csElement);\n");
-		js.append("return null;\n");
-		js.popIndentation();
-		js.append("}\n");
+		js.append("context.refreshComments(result, self);\n");
+		return null;
+	}
+
+	public @Nullable Object visitCGContainmentPart(@NonNull CGContainmentPart object) {
+		CGValuedElement cgInit = DomainUtil.nonNullState(object.getInit());
+		EStructuralFeature eStructuralFeature = DomainUtil.nonNullModel(object.getEStructuralFeature());
+		js.append("//\n");
+		js.append("// " + eStructuralFeature.getEContainingClass().getName() + "::" + eStructuralFeature.getName() + "\n");
+		js.append("//\n");
+		js.appendLocalStatements(cgInit);
+		//
+		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
+		if (eStructuralFeature.isMany()) {
+			js.append("context.refreshList(result.");
+			js.append(getAccessor);
+			js.append("(), ");
+			js.appendValueName(cgInit);
+			js.append(");\n");
+		}
+		else {
+			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
+//	        if (name != null ? !name.equals(result.getName()) : (null != result.getName())) {
+	        js.append("if (");
+			js.appendValueName(cgInit);
+			js.append(" != null ? !");
+			js.appendValueName(cgInit);
+			js.append(".equals(result.");
+			js.append(getAccessor);
+			js.append("()) : (null != result.");
+			js.append(getAccessor);
+			js.append("())) {\n");
+			js.pushIndentation(null);
+			js.append("result.");
+			js.append(setAccessor);
+			js.append("(");
+			js.appendValueName(cgInit);
+			js.append(");\n");
+			js.popIndentation();
+			js.append("}\n");
+		}
+		return null;
+	}
+
+	public @Nullable Object visitCGContainmentVisit(@NonNull CGContainmentVisit object) {
+		JavaLocalContext localContext2 = globalContext.getLocalContext(object);
+		if (localContext2 != null) {
+			localContext = localContext2;
+			try {
+				CGValuedElement cgContainmentBody = DomainUtil.nonNullState(object.getBody());
+				Type csType = (Type) object.getAst();
+				TypeDescriptor typeDescriptor = context.getTypeDescriptor(csType.getTypeId(), false);
+				js.append("public ");
+				js.appendIsRequired(false);
+				js.append(" ");
+				js.appendClassReference(Continuation.class);
+				js.append(" " + object.getName() + "(");
+				js.appendIsRequired(true);
+				js.append(" ");
+				js.appendClassReference(typeDescriptor);
+				js.append(" ");
+				js.append("self");
+				js.append(") {\n");
+				js.pushIndentation(null);
+				cgContainmentBody.accept(this);
+				js.append("return null;\n");
+				js.popIndentation();
+				js.append("}\n");
+			}
+			finally {
+				localContext = null;
+			}
+		}
 		return null;
 	}
 }

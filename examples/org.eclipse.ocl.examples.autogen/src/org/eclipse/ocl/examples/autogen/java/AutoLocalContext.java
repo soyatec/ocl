@@ -53,4 +53,9 @@ public class AutoLocalContext extends JavaLocalContext
 	public @NonNull AutoGlobalContext getGlobalContext() {
 		return (AutoGlobalContext) globalContext;
 	}
+
+	@Override
+	public @NonNull CGValuedElement getIdResolverVariable(@NonNull CGValuedElement cgValuedElement) {
+		return getGlobalContext().getIdResolverVariable(cgValuedElement);
+	}
 }

@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.autogen.autocgmodel;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 
 /**
@@ -313,22 +312,13 @@ public interface AutoCGModelPackage extends EPackage {
 	int CG_CONTAINMENT_VISIT__CONTAINING_CLASS = CGModelPackage.CG_OPERATION__CONTAINING_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONTAINMENT_VISIT__PARTS = CGModelPackage.CG_OPERATION_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>CG Containment Visit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONTAINMENT_VISIT_FEATURE_COUNT = CGModelPackage.CG_OPERATION_FEATURE_COUNT + 1;
+	int CG_CONTAINMENT_VISIT_FEATURE_COUNT = CGModelPackage.CG_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentPartImpl <em>CG Containment Part</em>}' class.
@@ -395,13 +385,13 @@ public interface AutoCGModelPackage extends EPackage {
 	int CG_CONTAINMENT_PART__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Containment Visit</b></em>' container reference.
+	 * The feature id for the '<em><b>Containment Body</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONTAINMENT_PART__CONTAINMENT_VISIT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+	int CG_CONTAINMENT_PART__CONTAINMENT_BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -413,13 +403,114 @@ public interface AutoCGModelPackage extends EPackage {
 	int CG_CONTAINMENT_PART__INIT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>CG Containment Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONTAINMENT_PART_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+	int CG_CONTAINMENT_PART_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
+
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentBodyImpl <em>CG Containment Body</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentBodyImpl
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.impl.AutoCGModelPackageImpl#getCGContainmentBody()
+	 * @generated
+	 */
+	int CG_CONTAINMENT_BODY = 3;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__TYPE_ID = CGModelPackage.CG_VALUED_ELEMENT__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__REQUIRED = CGModelPackage.CG_VALUED_ELEMENT__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__DEPENDS_ON = CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Containment Visit</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__CONTAINMENT_VISIT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY__PARTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>CG Containment Body</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONTAINMENT_BODY_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 
 	/**
@@ -443,17 +534,6 @@ public interface AutoCGModelPackage extends EPackage {
 	EClass getCGContainmentVisit();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit#getParts <em>Parts</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parts</em>'.
-	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit#getParts()
-	 * @see #getCGContainmentVisit()
-	 * @generated
-	 */
-	EReference getCGContainmentVisit_Parts();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart <em>CG Containment Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -464,15 +544,15 @@ public interface AutoCGModelPackage extends EPackage {
 	EClass getCGContainmentPart();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getContainmentVisit <em>Containment Visit</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getContainmentBody <em>Containment Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Containment Visit</em>'.
-	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getContainmentVisit()
+	 * @return the meta object for the container reference '<em>Containment Body</em>'.
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getContainmentBody()
 	 * @see #getCGContainmentPart()
 	 * @generated
 	 */
-	EReference getCGContainmentPart_ContainmentVisit();
+	EReference getCGContainmentPart_ContainmentBody();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getInit <em>Init</em>}'.
@@ -484,6 +564,49 @@ public interface AutoCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGContainmentPart_Init();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getEStructuralFeature <em>EStructural Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EStructural Feature</em>'.
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart#getEStructuralFeature()
+	 * @see #getCGContainmentPart()
+	 * @generated
+	 */
+	EReference getCGContainmentPart_EStructuralFeature();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody <em>CG Containment Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Containment Body</em>'.
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody
+	 * @generated
+	 */
+	EClass getCGContainmentBody();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody#getContainmentVisit <em>Containment Visit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Containment Visit</em>'.
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody#getContainmentVisit()
+	 * @see #getCGContainmentBody()
+	 * @generated
+	 */
+	EReference getCGContainmentBody_ContainmentVisit();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody#getParts <em>Parts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parts</em>'.
+	 * @see org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody#getParts()
+	 * @see #getCGContainmentBody()
+	 * @generated
+	 */
+	EReference getCGContainmentBody_Parts();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -528,14 +651,6 @@ public interface AutoCGModelPackage extends EPackage {
 		EClass CG_CONTAINMENT_VISIT = eINSTANCE.getCGContainmentVisit();
 
 		/**
-		 * The meta object literal for the '<em><b>Parts</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_CONTAINMENT_VISIT__PARTS = eINSTANCE.getCGContainmentVisit_Parts();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentPartImpl <em>CG Containment Part</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -546,12 +661,12 @@ public interface AutoCGModelPackage extends EPackage {
 		EClass CG_CONTAINMENT_PART = eINSTANCE.getCGContainmentPart();
 
 		/**
-		 * The meta object literal for the '<em><b>Containment Visit</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Containment Body</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_CONTAINMENT_PART__CONTAINMENT_VISIT = eINSTANCE.getCGContainmentPart_ContainmentVisit();
+		EReference CG_CONTAINMENT_PART__CONTAINMENT_BODY = eINSTANCE.getCGContainmentPart_ContainmentBody();
 
 		/**
 		 * The meta object literal for the '<em><b>Init</b></em>' containment reference feature.
@@ -560,6 +675,40 @@ public interface AutoCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_CONTAINMENT_PART__INIT = eINSTANCE.getCGContainmentPart_Init();
+
+		/**
+		 * The meta object literal for the '<em><b>EStructural Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CONTAINMENT_PART__ESTRUCTURAL_FEATURE = eINSTANCE.getCGContainmentPart_EStructuralFeature();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentBodyImpl <em>CG Containment Body</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.autogen.autocgmodel.impl.CGContainmentBodyImpl
+		 * @see org.eclipse.ocl.examples.autogen.autocgmodel.impl.AutoCGModelPackageImpl#getCGContainmentBody()
+		 * @generated
+		 */
+		EClass CG_CONTAINMENT_BODY = eINSTANCE.getCGContainmentBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Containment Visit</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CONTAINMENT_BODY__CONTAINMENT_VISIT = eINSTANCE.getCGContainmentBody_ContainmentVisit();
+
+		/**
+		 * The meta object literal for the '<em><b>Parts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CONTAINMENT_BODY__PARTS = eINSTANCE.getCGContainmentBody_Parts();
 
 	}
 

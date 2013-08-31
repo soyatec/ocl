@@ -167,26 +167,18 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		if (evaluatorVariable != null) {
 			cgValuedElement.getOwns().add(evaluatorVariable);
 		}
-//		CGTypeId type = idResolverVariable.getTypeId();
-//		type.accept(this);
-//		installEvaluatorParameter(cgValuedElement);
 		return evaluatorVariable;
 	}
 
-	protected @NonNull CGValuedElement installIdResolverVariable(@NonNull CGValuedElement cgValuedElement) {
+	protected @Nullable CGValuedElement installIdResolverVariable(@NonNull CGValuedElement cgValuedElement) {
 		CGValuedElement idResolverVariable = localContext.createIdResolverVariable();
 		cgValuedElement.getOwns().add(idResolverVariable);
-//		CGTypeId type = idResolverVariable.getTypeId();
-//		type.accept(this);
-//		installEvaluatorParameter(cgValuedElement);
 		return idResolverVariable;
 	}
 
 	protected @NonNull CGText installStandardLibraryVariable(@NonNull CGValuedElement cgValuedElement) {
 		CGText standardLibraryVariable = localContext.createStandardLibraryVariable();
 		cgValuedElement.getOwns().add(standardLibraryVariable);
-//		CGTypeId type = standardLibraryVariable.getTypeId();
-//		type.accept(this);
 		installIdResolverVariable(standardLibraryVariable);
 		return standardLibraryVariable;
 	}
