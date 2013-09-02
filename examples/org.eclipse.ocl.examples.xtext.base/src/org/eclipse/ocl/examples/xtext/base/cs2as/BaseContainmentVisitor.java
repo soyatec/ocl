@@ -9,6 +9,7 @@
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
  */

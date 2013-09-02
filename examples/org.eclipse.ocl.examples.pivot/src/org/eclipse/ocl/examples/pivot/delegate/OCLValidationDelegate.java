@@ -9,10 +9,9 @@
  * 
  * Contributors:
  *   C.Damus, K.Hussey, E.D.Willink - Initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: OCLValidationDelegate.java,v 1.7 2011/05/13 18:43:42 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 

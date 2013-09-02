@@ -9,10 +9,9 @@
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: BasePostOrderVisitor.java,v 1.10 2011/05/20 15:27:24 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.base.cs2as;
 

@@ -8,11 +8,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  * 
  * </copyright>
- *
- * $Id: PivotUtil.java,v 1.18 2011/05/20 15:27:20 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 

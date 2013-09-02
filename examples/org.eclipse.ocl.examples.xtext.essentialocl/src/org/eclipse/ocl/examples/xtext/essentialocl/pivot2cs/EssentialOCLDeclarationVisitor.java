@@ -8,11 +8,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: EssentialOCLDeclarationVisitor.java,v 1.2 2011/01/24 21:31:46 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs;
 

@@ -8,11 +8,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: ElementUtil.java,v 1.10 2011/05/22 21:06:21 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.base.utilities;
 

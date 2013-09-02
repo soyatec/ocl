@@ -9,10 +9,9 @@
  * 
  * Contributors:
  *   C.Damus, K.Hussey, E.D.Willink - Initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  * 
  * </copyright>
- *
- * $Id: PivotInstaller.java,v 1.3 2011/04/25 09:49:15 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 

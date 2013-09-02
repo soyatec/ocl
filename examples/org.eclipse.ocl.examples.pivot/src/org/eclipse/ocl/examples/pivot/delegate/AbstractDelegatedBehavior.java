@@ -10,10 +10,9 @@
  * Contributors: 
  *   E.D.Willink - Initial API and implementation
  * 	 E.D.Willink - Bug 306079
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: AbstractDelegatedBehavior.java,v 1.5 2011/04/20 19:02:46 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 

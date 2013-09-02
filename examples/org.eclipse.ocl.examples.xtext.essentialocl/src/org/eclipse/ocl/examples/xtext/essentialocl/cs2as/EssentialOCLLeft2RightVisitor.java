@@ -8,12 +8,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *     E.D.Willink (CEA LIST) - Bug 388493
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 388493
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: EssentialOCLLeft2RightVisitor.java,v 1.23 2011/05/23 05:51:23 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.cs2as;
 

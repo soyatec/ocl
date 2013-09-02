@@ -12,10 +12,9 @@
  *   E.D.Willink - Bugs 176110, 191689 
  *   Zeligsoft - Bug 253512
  *   Borland - Bug 242880
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: OCLMessages.java,v 1.10 2011/05/22 16:42:03 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.pivot.messages;

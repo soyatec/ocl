@@ -8,11 +8,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: OCLinEcoreDeclarationVisitor.java,v 1.8 2011/05/14 10:38:08 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.completeocl.pivot2cs;
 
@@ -146,12 +145,6 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				}	
 				String expr = PrettyPrinter.print(specification, prettyPrintOptions);		
 				csSpec.setExprString("\t" + expr.trim().replaceAll("\\r", "").replaceAll("\\n", "\n\t\t"));
-/*				String message = PivotUtil.getMessage(specification);
-				if ((message != null) && (message.length() > 0)) {
-					ExpSpecificationCS csMessageElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
-					csMessageElement.setExprString(message);
-					csElement.setMessageSpecification(csMessageElement);
-				} */
 			}
 		}
 		return csElement;

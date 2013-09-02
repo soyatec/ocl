@@ -8,11 +8,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
  *
  * </copyright>
- *
- * $Id: Ecore2PivotDeclarationSwitch.java,v 1.15 2011/05/20 19:06:01 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
