@@ -407,8 +407,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStereotypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStereotypePostconditionKeyword_0_0 = (Keyword)cStereotypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cMessageSpecificationAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0 = (RuleCall)cMessageSpecificationAssignment_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cSpecificationAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_0 = (RuleCall)cSpecificationAssignment_3.eContents().get(0);
@@ -416,10 +422,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PostconditionConstraintCS returns OCLinEcoreConstraintCS:
 		//
-		//	stereotype="postcondition" name=UnrestrictedName? ":" specification=SpecificationCS? ";";
+		//	stereotype="postcondition" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//	specification=SpecificationCS? ";";
 		public ParserRule getRule() { return rule; }
 
-		//stereotype="postcondition" name=UnrestrictedName? ":" specification=SpecificationCS? ";"
+		//stereotype="postcondition" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//specification=SpecificationCS? ";"
 		public Group getGroup() { return cGroup; }
 
 		//stereotype="postcondition"
@@ -428,11 +438,29 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//"postcondition"
 		public Keyword getStereotypePostconditionKeyword_0_0() { return cStereotypePostconditionKeyword_0_0; }
 
-		//name=UnrestrictedName?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//(name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0_0() { return cNameUnrestrictedNameParserRuleCall_1_0_0; }
+
+		//("(" messageSpecification=SpecificationCS ")")?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
+
+		//messageSpecification=SpecificationCS
+		public Assignment getMessageSpecificationAssignment_1_1_1() { return cMessageSpecificationAssignment_1_1_1; }
+
+		//SpecificationCS
+		public RuleCall getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0() { return cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
 
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
@@ -452,8 +480,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStereotypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStereotypePreconditionKeyword_0_0 = (Keyword)cStereotypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cMessageSpecificationAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0 = (RuleCall)cMessageSpecificationAssignment_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cSpecificationAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_0 = (RuleCall)cSpecificationAssignment_3.eContents().get(0);
@@ -461,10 +495,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PreconditionConstraintCS returns OCLinEcoreConstraintCS:
 		//
-		//	stereotype="precondition" name=UnrestrictedName? ":" specification=SpecificationCS? ";";
+		//	stereotype="precondition" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//	specification=SpecificationCS? ";";
 		public ParserRule getRule() { return rule; }
 
-		//stereotype="precondition" name=UnrestrictedName? ":" specification=SpecificationCS? ";"
+		//stereotype="precondition" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//specification=SpecificationCS? ";"
 		public Group getGroup() { return cGroup; }
 
 		//stereotype="precondition"
@@ -473,11 +511,29 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//"precondition"
 		public Keyword getStereotypePreconditionKeyword_0_0() { return cStereotypePreconditionKeyword_0_0; }
 
-		//name=UnrestrictedName?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//(name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0_0() { return cNameUnrestrictedNameParserRuleCall_1_0_0; }
+
+		//("(" messageSpecification=SpecificationCS ")")?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
+
+		//messageSpecification=SpecificationCS
+		public Assignment getMessageSpecificationAssignment_1_1_1() { return cMessageSpecificationAssignment_1_1_1; }
+
+		//SpecificationCS
+		public RuleCall getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0() { return cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
 
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
@@ -3745,7 +3801,9 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PostconditionConstraintCS returns OCLinEcoreConstraintCS:
 	//
-	//	stereotype="postcondition" name=UnrestrictedName? ":" specification=SpecificationCS? ";";
+	//	stereotype="postcondition" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+	//
+	//	specification=SpecificationCS? ";";
 	public PostconditionConstraintCSElements getPostconditionConstraintCSAccess() {
 		return (pPostconditionConstraintCS != null) ? pPostconditionConstraintCS : (pPostconditionConstraintCS = new PostconditionConstraintCSElements());
 	}
@@ -3756,7 +3814,9 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PreconditionConstraintCS returns OCLinEcoreConstraintCS:
 	//
-	//	stereotype="precondition" name=UnrestrictedName? ":" specification=SpecificationCS? ";";
+	//	stereotype="precondition" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+	//
+	//	specification=SpecificationCS? ";";
 	public PreconditionConstraintCSElements getPreconditionConstraintCSAccess() {
 		return (pPreconditionConstraintCS != null) ? pPreconditionConstraintCS : (pPreconditionConstraintCS = new PreconditionConstraintCSElements());
 	}

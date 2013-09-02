@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -71,21 +72,31 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 			csElement.setStereotype(UMLReflection.INVARIANT);
 		}
 		OpaqueExpression specification = object.getSpecification();
-		if (specification != null) {
-			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));
-/*			String message = PivotUtil.getMessage(specification);
-			if ((message != null) && (message.length() > 0)) {
-				int lastComment = message.lastIndexOf("--");
-				if (lastComment >= 0) {
-					int lastNewLine = message.lastIndexOf("\n");
-					if (lastNewLine < lastComment) {
-						message += "\n";				// Avoid the trailing ';' getting added within the comment
-					}
+		if (specification instanceof ExpressionInOCL) {
+			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));	
+		}
+		else if (specification != null) {
+			String body = PivotUtil.getBody(specification);
+			if ((body != null) && body.startsWith("Tuple")) {
+				String[] lines = body.split("\n");
+				if ((lines.length == 4)
+				 && lines[0].replaceAll("\\s", "").equals("Tuple{")
+				 && lines[1].endsWith(",")
+				 && lines[3].trim().equals("}")
+				 && lines[1].replaceAll("\\s", "").startsWith("message:String=")
+				 && lines[2].replaceAll("\\s", "").startsWith("status:Boolean=")) {
+					String messageText = lines[1].substring(lines[1].indexOf("=")+1, lines[1].length()-1).trim();
+					ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+					csMessage.setExprString(messageText);
+					csElement.setMessageSpecification(csMessage);
+					String statusText = lines[2].substring(lines[2].indexOf("=")+1).trim();
+					ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+					csStatus.setExprString(statusText);
+					csElement.setSpecification(csStatus);
+					return csElement;
 				}
-				ExpSpecificationCS csMessageElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
-				csMessageElement.setExprString(message);
-				csElement.setMessageSpecification(csMessageElement);
-			} */
+			}
+			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));	
 		}
 		return csElement;
 	}
@@ -95,6 +106,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
 		OCLExpression bodyExpression = object.getBodyExpression();
 		if (bodyExpression != null) {
+			assert !(bodyExpression instanceof TupleLiteralExp);
 			String body = PrettyPrinter.print(bodyExpression);
 			csElement.setExprString(body);
 		}
@@ -107,6 +119,22 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 		if (body == null) {
 			return null;
 		}
+/*		if (body.startsWith("Tuple")) {
+			String[] lines = body.split("\n");
+			if ((lines.length == 4)
+			 && lines[0].replaceAll("\\s", "").equals("Tuple{")
+			 && lines[1].endsWith(",")
+			 && lines[3].trim().equals("}")
+			 && lines[1].replaceAll("\\s", "").startsWith("message:String=")
+			 && lines[2].replaceAll("\\s", "").startsWith("status:Boolean=")) {
+				String messageText = lines[1].substring(lines[1].indexOf("=")+1, lines[1].length()-1).trim();
+				String statusText = lines[2].substring(lines[2].indexOf("=")+1).trim();
+				ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
+				csElement.setExprString(statusText);
+				return csElement;
+			}
+		}
+//		assert !body.contains("Tuple"); */
 		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
 		csElement.setExprString(body);
 		return csElement;

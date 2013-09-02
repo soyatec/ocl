@@ -723,7 +723,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='inv' name=UnrestrictedName? specification=SpecificationCS)
+	 *     (stereotype='inv' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS)
 	 */
 	protected void sequence_InvCS(EObject context, LibConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -930,7 +930,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='post' name=UnrestrictedName? specification=SpecificationCS)
+	 *     (stereotype='post' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS)
 	 */
 	protected void sequence_PostCS(EObject context, LibConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -939,7 +939,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='pre' name=UnrestrictedName? specification=SpecificationCS)
+	 *     (stereotype='pre' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS)
 	 */
 	protected void sequence_PreCS(EObject context, LibConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

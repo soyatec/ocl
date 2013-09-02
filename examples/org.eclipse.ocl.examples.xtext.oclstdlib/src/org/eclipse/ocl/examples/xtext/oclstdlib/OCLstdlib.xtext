@@ -122,7 +122,7 @@ DocumentationCS returns base::DocumentationCS:
 ;
 
 InvCS returns LibConstraintCS:
-	stereotype='inv' (name=UnrestrictedName)? ':' specification=SpecificationCS ';'
+	stereotype='inv' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS ';'
 ;
 
 LibIterationCS returns LibIterationCS:
@@ -215,11 +215,11 @@ LibPropertyCS returns LibPropertyCS:
 ;
 
 PostCS returns LibConstraintCS:
-	stereotype='post' (name=UnrestrictedName)? ':' specification=SpecificationCS ';'
+	stereotype='post' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS ';'
 ;
 
 PreCS returns LibConstraintCS:
-	stereotype='pre' (name=UnrestrictedName)? ':' specification=SpecificationCS ';'
+	stereotype='pre' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS ';'
 ;
 
 PrecedenceCS returns PrecedenceCS:

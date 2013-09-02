@@ -97,6 +97,8 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 			InvCSElements a = f.getInvCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_1_0());
+			c.setNoSpace().around(a.getRightParenthesisKeyword_1_1_2());
 			c.setNoSpace().before(a.getColonKeyword_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 	    }
@@ -151,18 +153,22 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 //			ParameterCSElements a = f.getParameterCSAccess();
 	    }
 	    {
+			PostCSElements a = f.getPostCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_1_0());
+			c.setNoSpace().around(a.getRightParenthesisKeyword_1_1_2());
+			c.setNoSpace().before(a.getColonKeyword_2());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+	    }
+	    {
 			PreCSElements a = f.getPreCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_1_0());
+			c.setNoSpace().around(a.getRightParenthesisKeyword_1_1_2());
 			c.setNoSpace().before(a.getColonKeyword_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 	    }
 	    {
 			PrecedenceCSElements a = f.getPrecedenceCSAccess();
 			c.setNoSpace().around(a.getColonKeyword_1());
-	    }
-	    {
-			PostCSElements a = f.getPostCSAccess();
-			c.setNoSpace().before(a.getColonKeyword_2());
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 	    }
 	    {
 			LibPropertyCSElements a = f.getLibPropertyCSAccess();

@@ -736,8 +736,14 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStereotypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStereotypeInvKeyword_0_0 = (Keyword)cStereotypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cMessageSpecificationAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0 = (RuleCall)cMessageSpecificationAssignment_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cSpecificationAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_0 = (RuleCall)cSpecificationAssignment_3.eContents().get(0);
@@ -745,10 +751,14 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//InvCS returns LibConstraintCS:
 		//
-		//	stereotype="inv" name=UnrestrictedName? ":" specification=SpecificationCS ";";
+		//	stereotype="inv" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//	specification=SpecificationCS ";";
 		public ParserRule getRule() { return rule; }
 
-		//stereotype="inv" name=UnrestrictedName? ":" specification=SpecificationCS ";"
+		//stereotype="inv" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//specification=SpecificationCS ";"
 		public Group getGroup() { return cGroup; }
 
 		//stereotype="inv"
@@ -757,11 +767,29 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		//"inv"
 		public Keyword getStereotypeInvKeyword_0_0() { return cStereotypeInvKeyword_0_0; }
 
-		//name=UnrestrictedName?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//(name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0_0() { return cNameUnrestrictedNameParserRuleCall_1_0_0; }
+
+		//("(" messageSpecification=SpecificationCS ")")?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
+
+		//messageSpecification=SpecificationCS
+		public Assignment getMessageSpecificationAssignment_1_1_1() { return cMessageSpecificationAssignment_1_1_1; }
+
+		//SpecificationCS
+		public RuleCall getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0() { return cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
 
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
@@ -1796,8 +1824,14 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStereotypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStereotypePostKeyword_0_0 = (Keyword)cStereotypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cMessageSpecificationAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0 = (RuleCall)cMessageSpecificationAssignment_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cSpecificationAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_0 = (RuleCall)cSpecificationAssignment_3.eContents().get(0);
@@ -1805,10 +1839,14 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PostCS returns LibConstraintCS:
 		//
-		//	stereotype="post" name=UnrestrictedName? ":" specification=SpecificationCS ";";
+		//	stereotype="post" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//	specification=SpecificationCS ";";
 		public ParserRule getRule() { return rule; }
 
-		//stereotype="post" name=UnrestrictedName? ":" specification=SpecificationCS ";"
+		//stereotype="post" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//specification=SpecificationCS ";"
 		public Group getGroup() { return cGroup; }
 
 		//stereotype="post"
@@ -1817,11 +1855,29 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		//"post"
 		public Keyword getStereotypePostKeyword_0_0() { return cStereotypePostKeyword_0_0; }
 
-		//name=UnrestrictedName?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//(name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0_0() { return cNameUnrestrictedNameParserRuleCall_1_0_0; }
+
+		//("(" messageSpecification=SpecificationCS ")")?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
+
+		//messageSpecification=SpecificationCS
+		public Assignment getMessageSpecificationAssignment_1_1_1() { return cMessageSpecificationAssignment_1_1_1; }
+
+		//SpecificationCS
+		public RuleCall getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0() { return cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
 
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
@@ -1841,8 +1897,14 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStereotypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStereotypePreKeyword_0_0 = (Keyword)cStereotypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cMessageSpecificationAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0 = (RuleCall)cMessageSpecificationAssignment_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cSpecificationAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_0 = (RuleCall)cSpecificationAssignment_3.eContents().get(0);
@@ -1850,10 +1912,14 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PreCS returns LibConstraintCS:
 		//
-		//	stereotype="pre" name=UnrestrictedName? ":" specification=SpecificationCS ";";
+		//	stereotype="pre" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//	specification=SpecificationCS ";";
 		public ParserRule getRule() { return rule; }
 
-		//stereotype="pre" name=UnrestrictedName? ":" specification=SpecificationCS ";"
+		//stereotype="pre" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+		//
+		//specification=SpecificationCS ";"
 		public Group getGroup() { return cGroup; }
 
 		//stereotype="pre"
@@ -1862,11 +1928,29 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		//"pre"
 		public Keyword getStereotypePreKeyword_0_0() { return cStereotypePreKeyword_0_0; }
 
-		//name=UnrestrictedName?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//(name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0_0() { return cNameUnrestrictedNameParserRuleCall_1_0_0; }
+
+		//("(" messageSpecification=SpecificationCS ")")?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
+
+		//messageSpecification=SpecificationCS
+		public Assignment getMessageSpecificationAssignment_1_1_1() { return cMessageSpecificationAssignment_1_1_1; }
+
+		//SpecificationCS
+		public RuleCall getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0() { return cMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
 
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
@@ -2638,7 +2722,9 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//InvCS returns LibConstraintCS:
 	//
-	//	stereotype="inv" name=UnrestrictedName? ":" specification=SpecificationCS ";";
+	//	stereotype="inv" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+	//
+	//	specification=SpecificationCS ";";
 	public InvCSElements getInvCSAccess() {
 		return (pInvCS != null) ? pInvCS : (pInvCS = new InvCSElements());
 	}
@@ -2798,7 +2884,9 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PostCS returns LibConstraintCS:
 	//
-	//	stereotype="post" name=UnrestrictedName? ":" specification=SpecificationCS ";";
+	//	stereotype="post" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+	//
+	//	specification=SpecificationCS ";";
 	public PostCSElements getPostCSAccess() {
 		return (pPostCS != null) ? pPostCS : (pPostCS = new PostCSElements());
 	}
@@ -2809,7 +2897,9 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PreCS returns LibConstraintCS:
 	//
-	//	stereotype="pre" name=UnrestrictedName? ":" specification=SpecificationCS ";";
+	//	stereotype="pre" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)? ":"
+	//
+	//	specification=SpecificationCS ";";
 	public PreCSElements getPreCSAccess() {
 		return (pPreCS != null) ? pPreCS : (pPreCS = new PreCSElements());
 	}

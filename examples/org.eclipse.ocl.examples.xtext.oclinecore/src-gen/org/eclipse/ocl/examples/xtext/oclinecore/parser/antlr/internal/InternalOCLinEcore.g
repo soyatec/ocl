@@ -709,10 +709,10 @@ rulePostconditionConstraintCS returns [EObject current=null]
 	    }
 
 )
-)(
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPostconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getPostconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); 
 	    }
 		lv_name_1_0=ruleUnrestrictedName		{
 	        if ($current==null) {
@@ -727,31 +727,57 @@ rulePostconditionConstraintCS returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_2=':' 
+)(	otherlv_2='(' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getPostconditionConstraintCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getPostconditionConstraintCSAccess().getLeftParenthesisKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPostconditionConstraintCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); 
+	    }
+		lv_messageSpecification_3_0=ruleSpecificationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPostconditionConstraintCSRule());
+	        }
+       		set(
+       			$current, 
+       			"messageSpecification",
+        		lv_messageSpecification_3_0, 
+        		"SpecificationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getPostconditionConstraintCSAccess().getRightParenthesisKeyword_1_1_2());
+    }
+)?)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getPostconditionConstraintCSAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getPostconditionConstraintCSAccess().getSpecificationSpecificationCSParserRuleCall_3_0()); 
 	    }
-		lv_specification_3_0=ruleSpecificationCS		{
+		lv_specification_6_0=ruleSpecificationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPostconditionConstraintCSRule());
 	        }
        		set(
        			$current, 
        			"specification",
-        		lv_specification_3_0, 
+        		lv_specification_6_0, 
         		"SpecificationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?	otherlv_4=';' 
+)?	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPostconditionConstraintCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_7, grammarAccess.getPostconditionConstraintCSAccess().getSemicolonKeyword_4());
     }
 )
 ;
@@ -789,10 +815,10 @@ rulePreconditionConstraintCS returns [EObject current=null]
 	    }
 
 )
-)(
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPreconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getPreconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); 
 	    }
 		lv_name_1_0=ruleUnrestrictedName		{
 	        if ($current==null) {
@@ -807,31 +833,57 @@ rulePreconditionConstraintCS returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_2=':' 
+)(	otherlv_2='(' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getPreconditionConstraintCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getPreconditionConstraintCSAccess().getLeftParenthesisKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPreconditionConstraintCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); 
+	    }
+		lv_messageSpecification_3_0=ruleSpecificationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPreconditionConstraintCSRule());
+	        }
+       		set(
+       			$current, 
+       			"messageSpecification",
+        		lv_messageSpecification_3_0, 
+        		"SpecificationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getPreconditionConstraintCSAccess().getRightParenthesisKeyword_1_1_2());
+    }
+)?)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getPreconditionConstraintCSAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getPreconditionConstraintCSAccess().getSpecificationSpecificationCSParserRuleCall_3_0()); 
 	    }
-		lv_specification_3_0=ruleSpecificationCS		{
+		lv_specification_6_0=ruleSpecificationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPreconditionConstraintCSRule());
 	        }
        		set(
        			$current, 
        			"specification",
-        		lv_specification_3_0, 
+        		lv_specification_6_0, 
         		"SpecificationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?	otherlv_4=';' 
+)?	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPreconditionConstraintCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_7, grammarAccess.getPreconditionConstraintCSAccess().getSemicolonKeyword_4());
     }
 )
 ;

@@ -80,6 +80,8 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 		}
 	    {
 			ConstraintCSElements a = f.getConstraintCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_0_1_0());
+			c.setNoSpace().around(a.getRightParenthesisKeyword_0_1_2());
 			setNoSpaceLineWrap(c, a.getColonKeyword_1());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_2());
 //		    c.setIndentation(a.getColonKeyword_2(), a.getWSTerminalRuleCall_4());

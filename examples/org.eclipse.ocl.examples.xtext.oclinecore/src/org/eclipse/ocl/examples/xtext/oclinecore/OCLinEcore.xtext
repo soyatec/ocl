@@ -93,11 +93,11 @@ InvariantConstraintCS returns OCLinEcoreConstraintCS:
 ;
 
 PostconditionConstraintCS returns OCLinEcoreConstraintCS:
-	stereotype='postcondition' name=UnrestrictedName? ':' specification=SpecificationCS? ';'
+	stereotype='postcondition' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS? ';'
 ;
 
 PreconditionConstraintCS returns OCLinEcoreConstraintCS:
-	stereotype='precondition' name=UnrestrictedName? ':' specification=SpecificationCS? ';'
+	stereotype='precondition' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS? ';'
 ;
 
 AnnotationCS returns base::AnnotationCS:

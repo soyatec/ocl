@@ -102,6 +102,8 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDocumentationCSAccess().getGroup_3(), "rule__DocumentationCS__Group_3__0");
 					put(grammarAccess.getDocumentationCSAccess().getGroup_3_2(), "rule__DocumentationCS__Group_3_2__0");
 					put(grammarAccess.getInvCSAccess().getGroup(), "rule__InvCS__Group__0");
+					put(grammarAccess.getInvCSAccess().getGroup_1(), "rule__InvCS__Group_1__0");
+					put(grammarAccess.getInvCSAccess().getGroup_1_1(), "rule__InvCS__Group_1_1__0");
 					put(grammarAccess.getLibIterationCSAccess().getGroup(), "rule__LibIterationCS__Group__0");
 					put(grammarAccess.getLibIterationCSAccess().getGroup_5(), "rule__LibIterationCS__Group_5__0");
 					put(grammarAccess.getLibIterationCSAccess().getGroup_6(), "rule__LibIterationCS__Group_6__0");
@@ -132,7 +134,11 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLibPropertyCSAccess().getGroup_5(), "rule__LibPropertyCS__Group_5__0");
 					put(grammarAccess.getLibPropertyCSAccess().getGroup_6_0(), "rule__LibPropertyCS__Group_6_0__0");
 					put(grammarAccess.getPostCSAccess().getGroup(), "rule__PostCS__Group__0");
+					put(grammarAccess.getPostCSAccess().getGroup_1(), "rule__PostCS__Group_1__0");
+					put(grammarAccess.getPostCSAccess().getGroup_1_1(), "rule__PostCS__Group_1_1__0");
 					put(grammarAccess.getPreCSAccess().getGroup(), "rule__PreCS__Group__0");
+					put(grammarAccess.getPreCSAccess().getGroup_1(), "rule__PreCS__Group_1__0");
+					put(grammarAccess.getPreCSAccess().getGroup_1_1(), "rule__PreCS__Group_1_1__0");
 					put(grammarAccess.getPrecedenceCSAccess().getGroup(), "rule__PrecedenceCS__Group__0");
 					put(grammarAccess.getTemplateBindingCSAccess().getGroup(), "rule__TemplateBindingCS__Group__0");
 					put(grammarAccess.getTemplateBindingCSAccess().getGroup_2(), "rule__TemplateBindingCS__Group_2__0");
@@ -248,7 +254,8 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDocumentationCSAccess().getOwnedDetailAssignment_3_1(), "rule__DocumentationCS__OwnedDetailAssignment_3_1");
 					put(grammarAccess.getDocumentationCSAccess().getOwnedDetailAssignment_3_2_1(), "rule__DocumentationCS__OwnedDetailAssignment_3_2_1");
 					put(grammarAccess.getInvCSAccess().getStereotypeAssignment_0(), "rule__InvCS__StereotypeAssignment_0");
-					put(grammarAccess.getInvCSAccess().getNameAssignment_1(), "rule__InvCS__NameAssignment_1");
+					put(grammarAccess.getInvCSAccess().getNameAssignment_1_0(), "rule__InvCS__NameAssignment_1_0");
+					put(grammarAccess.getInvCSAccess().getMessageSpecificationAssignment_1_1_1(), "rule__InvCS__MessageSpecificationAssignment_1_1_1");
 					put(grammarAccess.getInvCSAccess().getSpecificationAssignment_3(), "rule__InvCS__SpecificationAssignment_3");
 					put(grammarAccess.getLibIterationCSAccess().getNameAssignment_1(), "rule__LibIterationCS__NameAssignment_1");
 					put(grammarAccess.getLibIterationCSAccess().getOwnedTemplateSignatureAssignment_2(), "rule__LibIterationCS__OwnedTemplateSignatureAssignment_2");
@@ -309,10 +316,12 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLibPropertyCSAccess().getImplementationAssignment_5_1(), "rule__LibPropertyCS__ImplementationAssignment_5_1");
 					put(grammarAccess.getLibPropertyCSAccess().getOwnedAnnotationAssignment_6_0_1(), "rule__LibPropertyCS__OwnedAnnotationAssignment_6_0_1");
 					put(grammarAccess.getPostCSAccess().getStereotypeAssignment_0(), "rule__PostCS__StereotypeAssignment_0");
-					put(grammarAccess.getPostCSAccess().getNameAssignment_1(), "rule__PostCS__NameAssignment_1");
+					put(grammarAccess.getPostCSAccess().getNameAssignment_1_0(), "rule__PostCS__NameAssignment_1_0");
+					put(grammarAccess.getPostCSAccess().getMessageSpecificationAssignment_1_1_1(), "rule__PostCS__MessageSpecificationAssignment_1_1_1");
 					put(grammarAccess.getPostCSAccess().getSpecificationAssignment_3(), "rule__PostCS__SpecificationAssignment_3");
 					put(grammarAccess.getPreCSAccess().getStereotypeAssignment_0(), "rule__PreCS__StereotypeAssignment_0");
-					put(grammarAccess.getPreCSAccess().getNameAssignment_1(), "rule__PreCS__NameAssignment_1");
+					put(grammarAccess.getPreCSAccess().getNameAssignment_1_0(), "rule__PreCS__NameAssignment_1_0");
+					put(grammarAccess.getPreCSAccess().getMessageSpecificationAssignment_1_1_1(), "rule__PreCS__MessageSpecificationAssignment_1_1_1");
 					put(grammarAccess.getPreCSAccess().getSpecificationAssignment_3(), "rule__PreCS__SpecificationAssignment_3");
 					put(grammarAccess.getPrecedenceCSAccess().getRightAssociativeAssignment_0_1(), "rule__PrecedenceCS__RightAssociativeAssignment_0_1");
 					put(grammarAccess.getPrecedenceCSAccess().getNameAssignment_2(), "rule__PrecedenceCS__NameAssignment_2");

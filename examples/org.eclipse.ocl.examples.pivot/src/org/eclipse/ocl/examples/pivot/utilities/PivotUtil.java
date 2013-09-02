@@ -230,13 +230,13 @@ public class PivotUtil extends DomainUtil
 		}
 		StringBuilder s = new StringBuilder();
 		s.append("Tuple {");
-		s.append("\n\tstatus : Boolean = " + statusText);
-		if (severityText != null) {
-			s.append(",\n\tseverity : String = " + severityText);
-		}
 		if (messageText != null) {
-			s.append(",\n\tmessage : String = " + messageText);
+			s.append("\n\tmessage : String = " + messageText + ",");
 		}
+		if (severityText != null) {
+			s.append("\n\tseverity : String = " + severityText + ",");
+		}
+		s.append("\n\tstatus : Boolean = " + statusText);		// NB parts in alphabetical order
 		s.append("\n}");
 		@SuppressWarnings("null")@NonNull String string = s.toString();
 		return string;

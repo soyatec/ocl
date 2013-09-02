@@ -205,6 +205,8 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 	    	PostconditionConstraintCSElements a = f.getPostconditionConstraintCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_1_0());
+			c.setNoSpace().around(a.getRightParenthesisKeyword_1_1_2());
 			c.setNoSpace().around(a.getColonKeyword_2());
 			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
@@ -212,6 +214,8 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 	    	PreconditionConstraintCSElements a = f.getPreconditionConstraintCSAccess();
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_1_0());
+			c.setNoSpace().around(a.getRightParenthesisKeyword_1_1_2());
 			c.setNoSpace().around(a.getColonKeyword_2());
 			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());

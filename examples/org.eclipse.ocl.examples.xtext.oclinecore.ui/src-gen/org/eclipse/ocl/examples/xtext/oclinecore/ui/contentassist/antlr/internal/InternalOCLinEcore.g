@@ -5871,9 +5871,9 @@ rule__PostconditionConstraintCS__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1()); }
-(rule__PostconditionConstraintCS__NameAssignment_1)?
-{ after(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getGroup_1()); }
+(rule__PostconditionConstraintCS__Group_1__0)?
+{ after(grammarAccess.getPostconditionConstraintCSAccess().getGroup_1()); }
 )
 
 ;
@@ -5982,6 +5982,163 @@ finally {
 
 
 
+rule__PostconditionConstraintCS__Group_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PostconditionConstraintCS__Group_1__0__Impl
+	rule__PostconditionConstraintCS__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PostconditionConstraintCS__Group_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1_0()); }
+(rule__PostconditionConstraintCS__NameAssignment_1_0)
+{ after(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__PostconditionConstraintCS__Group_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PostconditionConstraintCS__Group_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PostconditionConstraintCS__Group_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getGroup_1_1()); }
+(rule__PostconditionConstraintCS__Group_1_1__0)?
+{ after(grammarAccess.getPostconditionConstraintCSAccess().getGroup_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__PostconditionConstraintCS__Group_1_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PostconditionConstraintCS__Group_1_1__0__Impl
+	rule__PostconditionConstraintCS__Group_1_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PostconditionConstraintCS__Group_1_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getLeftParenthesisKeyword_1_1_0()); }
+
+	'(' 
+
+{ after(grammarAccess.getPostconditionConstraintCSAccess().getLeftParenthesisKeyword_1_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__PostconditionConstraintCS__Group_1_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PostconditionConstraintCS__Group_1_1__1__Impl
+	rule__PostconditionConstraintCS__Group_1_1__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PostconditionConstraintCS__Group_1_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getMessageSpecificationAssignment_1_1_1()); }
+(rule__PostconditionConstraintCS__MessageSpecificationAssignment_1_1_1)
+{ after(grammarAccess.getPostconditionConstraintCSAccess().getMessageSpecificationAssignment_1_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__PostconditionConstraintCS__Group_1_1__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PostconditionConstraintCS__Group_1_1__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PostconditionConstraintCS__Group_1_1__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getRightParenthesisKeyword_1_1_2()); }
+
+	')' 
+
+{ after(grammarAccess.getPostconditionConstraintCSAccess().getRightParenthesisKeyword_1_1_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+
+
 rule__PreconditionConstraintCS__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -6029,9 +6186,9 @@ rule__PreconditionConstraintCS__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getPreconditionConstraintCSAccess().getNameAssignment_1()); }
-(rule__PreconditionConstraintCS__NameAssignment_1)?
-{ after(grammarAccess.getPreconditionConstraintCSAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getGroup_1()); }
+(rule__PreconditionConstraintCS__Group_1__0)?
+{ after(grammarAccess.getPreconditionConstraintCSAccess().getGroup_1()); }
 )
 
 ;
@@ -6132,6 +6289,163 @@ finally {
 
 
 
+
+
+
+
+
+
+
+
+rule__PreconditionConstraintCS__Group_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PreconditionConstraintCS__Group_1__0__Impl
+	rule__PreconditionConstraintCS__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PreconditionConstraintCS__Group_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getNameAssignment_1_0()); }
+(rule__PreconditionConstraintCS__NameAssignment_1_0)
+{ after(grammarAccess.getPreconditionConstraintCSAccess().getNameAssignment_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__PreconditionConstraintCS__Group_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PreconditionConstraintCS__Group_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PreconditionConstraintCS__Group_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getGroup_1_1()); }
+(rule__PreconditionConstraintCS__Group_1_1__0)?
+{ after(grammarAccess.getPreconditionConstraintCSAccess().getGroup_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__PreconditionConstraintCS__Group_1_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PreconditionConstraintCS__Group_1_1__0__Impl
+	rule__PreconditionConstraintCS__Group_1_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PreconditionConstraintCS__Group_1_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getLeftParenthesisKeyword_1_1_0()); }
+
+	'(' 
+
+{ after(grammarAccess.getPreconditionConstraintCSAccess().getLeftParenthesisKeyword_1_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__PreconditionConstraintCS__Group_1_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PreconditionConstraintCS__Group_1_1__1__Impl
+	rule__PreconditionConstraintCS__Group_1_1__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PreconditionConstraintCS__Group_1_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getMessageSpecificationAssignment_1_1_1()); }
+(rule__PreconditionConstraintCS__MessageSpecificationAssignment_1_1_1)
+{ after(grammarAccess.getPreconditionConstraintCSAccess().getMessageSpecificationAssignment_1_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__PreconditionConstraintCS__Group_1_1__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__PreconditionConstraintCS__Group_1_1__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PreconditionConstraintCS__Group_1_1__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getRightParenthesisKeyword_1_1_2()); }
+
+	')' 
+
+{ after(grammarAccess.getPreconditionConstraintCSAccess().getRightParenthesisKeyword_1_1_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 
@@ -21755,14 +22069,29 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__PostconditionConstraintCS__NameAssignment_1
+rule__PostconditionConstraintCS__NameAssignment_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getPostconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); }
-	ruleUnrestrictedName{ after(grammarAccess.getPostconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); }
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); }
+	ruleUnrestrictedName{ after(grammarAccess.getPostconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PostconditionConstraintCS__MessageSpecificationAssignment_1_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPostconditionConstraintCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); }
+	ruleSpecificationCS{ after(grammarAccess.getPostconditionConstraintCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); }
 )
 
 ;
@@ -21808,14 +22137,29 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__PreconditionConstraintCS__NameAssignment_1
+rule__PreconditionConstraintCS__NameAssignment_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getPreconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); }
-	ruleUnrestrictedName{ after(grammarAccess.getPreconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); }
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); }
+	ruleUnrestrictedName{ after(grammarAccess.getPreconditionConstraintCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__PreconditionConstraintCS__MessageSpecificationAssignment_1_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getPreconditionConstraintCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); }
+	ruleSpecificationCS{ after(grammarAccess.getPreconditionConstraintCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); }
 )
 
 ;

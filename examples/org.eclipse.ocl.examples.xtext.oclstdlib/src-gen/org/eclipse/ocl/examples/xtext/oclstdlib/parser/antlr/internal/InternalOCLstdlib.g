@@ -1283,10 +1283,10 @@ ruleInvCS returns [EObject current=null]
 	    }
 
 )
-)(
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInvCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getInvCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); 
 	    }
 		lv_name_1_0=ruleUnrestrictedName		{
 	        if ($current==null) {
@@ -1301,31 +1301,57 @@ ruleInvCS returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_2=':' 
+)(	otherlv_2='(' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getInvCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getInvCSAccess().getLeftParenthesisKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getInvCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); 
+	    }
+		lv_messageSpecification_3_0=ruleSpecificationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getInvCSRule());
+	        }
+       		set(
+       			$current, 
+       			"messageSpecification",
+        		lv_messageSpecification_3_0, 
+        		"SpecificationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getInvCSAccess().getRightParenthesisKeyword_1_1_2());
+    }
+)?)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getInvCSAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getInvCSAccess().getSpecificationSpecificationCSParserRuleCall_3_0()); 
 	    }
-		lv_specification_3_0=ruleSpecificationCS		{
+		lv_specification_6_0=ruleSpecificationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getInvCSRule());
 	        }
        		set(
        			$current, 
        			"specification",
-        		lv_specification_3_0, 
+        		lv_specification_6_0, 
         		"SpecificationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4=';' 
+)	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getInvCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_7, grammarAccess.getInvCSAccess().getSemicolonKeyword_4());
     }
 )
 ;
@@ -2871,10 +2897,10 @@ rulePostCS returns [EObject current=null]
 	    }
 
 )
-)(
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPostCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getPostCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); 
 	    }
 		lv_name_1_0=ruleUnrestrictedName		{
 	        if ($current==null) {
@@ -2889,31 +2915,57 @@ rulePostCS returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_2=':' 
+)(	otherlv_2='(' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getPostCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getPostCSAccess().getLeftParenthesisKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPostCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); 
+	    }
+		lv_messageSpecification_3_0=ruleSpecificationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPostCSRule());
+	        }
+       		set(
+       			$current, 
+       			"messageSpecification",
+        		lv_messageSpecification_3_0, 
+        		"SpecificationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getPostCSAccess().getRightParenthesisKeyword_1_1_2());
+    }
+)?)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getPostCSAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getPostCSAccess().getSpecificationSpecificationCSParserRuleCall_3_0()); 
 	    }
-		lv_specification_3_0=ruleSpecificationCS		{
+		lv_specification_6_0=ruleSpecificationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPostCSRule());
 	        }
        		set(
        			$current, 
        			"specification",
-        		lv_specification_3_0, 
+        		lv_specification_6_0, 
         		"SpecificationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4=';' 
+)	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPostCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_7, grammarAccess.getPostCSAccess().getSemicolonKeyword_4());
     }
 )
 ;
@@ -2951,10 +3003,10 @@ rulePreCS returns [EObject current=null]
 	    }
 
 )
-)(
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPreCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getPreCSAccess().getNameUnrestrictedNameParserRuleCall_1_0_0()); 
 	    }
 		lv_name_1_0=ruleUnrestrictedName		{
 	        if ($current==null) {
@@ -2969,31 +3021,57 @@ rulePreCS returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_2=':' 
+)(	otherlv_2='(' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getPreCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getPreCSAccess().getLeftParenthesisKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPreCSAccess().getMessageSpecificationSpecificationCSParserRuleCall_1_1_1_0()); 
+	    }
+		lv_messageSpecification_3_0=ruleSpecificationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPreCSRule());
+	        }
+       		set(
+       			$current, 
+       			"messageSpecification",
+        		lv_messageSpecification_3_0, 
+        		"SpecificationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getPreCSAccess().getRightParenthesisKeyword_1_1_2());
+    }
+)?)?	otherlv_5=':' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getPreCSAccess().getColonKeyword_2());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getPreCSAccess().getSpecificationSpecificationCSParserRuleCall_3_0()); 
 	    }
-		lv_specification_3_0=ruleSpecificationCS		{
+		lv_specification_6_0=ruleSpecificationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPreCSRule());
 	        }
        		set(
        			$current, 
        			"specification",
-        		lv_specification_3_0, 
+        		lv_specification_6_0, 
         		"SpecificationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_4=';' 
+)	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getPreCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_7, grammarAccess.getPreCSAccess().getSemicolonKeyword_4());
     }
 )
 ;

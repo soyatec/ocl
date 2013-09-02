@@ -113,7 +113,11 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2_1(), "rule__InvariantConstraintCS__Group_2_1__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_3_0(), "rule__InvariantConstraintCS__Group_3_0__0");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getGroup(), "rule__PostconditionConstraintCS__Group__0");
+					put(grammarAccess.getPostconditionConstraintCSAccess().getGroup_1(), "rule__PostconditionConstraintCS__Group_1__0");
+					put(grammarAccess.getPostconditionConstraintCSAccess().getGroup_1_1(), "rule__PostconditionConstraintCS__Group_1_1__0");
 					put(grammarAccess.getPreconditionConstraintCSAccess().getGroup(), "rule__PreconditionConstraintCS__Group__0");
+					put(grammarAccess.getPreconditionConstraintCSAccess().getGroup_1(), "rule__PreconditionConstraintCS__Group_1__0");
+					put(grammarAccess.getPreconditionConstraintCSAccess().getGroup_1_1(), "rule__PreconditionConstraintCS__Group_1_1__0");
 					put(grammarAccess.getAnnotationCSAccess().getGroup(), "rule__AnnotationCS__Group__0");
 					put(grammarAccess.getAnnotationCSAccess().getGroup_3(), "rule__AnnotationCS__Group_3__0");
 					put(grammarAccess.getAnnotationCSAccess().getGroup_3_2(), "rule__AnnotationCS__Group_3_2__0");
@@ -292,10 +296,12 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInvariantConstraintCSAccess().getMessageSpecificationAssignment_2_1_1(), "rule__InvariantConstraintCS__MessageSpecificationAssignment_2_1_1");
 					put(grammarAccess.getInvariantConstraintCSAccess().getSpecificationAssignment_3_0_1(), "rule__InvariantConstraintCS__SpecificationAssignment_3_0_1");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getStereotypeAssignment_0(), "rule__PostconditionConstraintCS__StereotypeAssignment_0");
-					put(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1(), "rule__PostconditionConstraintCS__NameAssignment_1");
+					put(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1_0(), "rule__PostconditionConstraintCS__NameAssignment_1_0");
+					put(grammarAccess.getPostconditionConstraintCSAccess().getMessageSpecificationAssignment_1_1_1(), "rule__PostconditionConstraintCS__MessageSpecificationAssignment_1_1_1");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getSpecificationAssignment_3(), "rule__PostconditionConstraintCS__SpecificationAssignment_3");
 					put(grammarAccess.getPreconditionConstraintCSAccess().getStereotypeAssignment_0(), "rule__PreconditionConstraintCS__StereotypeAssignment_0");
-					put(grammarAccess.getPreconditionConstraintCSAccess().getNameAssignment_1(), "rule__PreconditionConstraintCS__NameAssignment_1");
+					put(grammarAccess.getPreconditionConstraintCSAccess().getNameAssignment_1_0(), "rule__PreconditionConstraintCS__NameAssignment_1_0");
+					put(grammarAccess.getPreconditionConstraintCSAccess().getMessageSpecificationAssignment_1_1_1(), "rule__PreconditionConstraintCS__MessageSpecificationAssignment_1_1_1");
 					put(grammarAccess.getPreconditionConstraintCSAccess().getSpecificationAssignment_3(), "rule__PreconditionConstraintCS__SpecificationAssignment_3");
 					put(grammarAccess.getAnnotationCSAccess().getNameAssignment_2(), "rule__AnnotationCS__NameAssignment_2");
 					put(grammarAccess.getAnnotationCSAccess().getOwnedDetailAssignment_3_1(), "rule__AnnotationCS__OwnedDetailAssignment_3_1");

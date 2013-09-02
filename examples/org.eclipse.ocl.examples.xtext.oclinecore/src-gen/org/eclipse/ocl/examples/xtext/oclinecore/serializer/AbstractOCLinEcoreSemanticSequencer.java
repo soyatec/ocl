@@ -932,7 +932,7 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='postcondition' name=UnrestrictedName? specification=SpecificationCS?)
+	 *     (stereotype='postcondition' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS?)
 	 */
 	protected void sequence_PostconditionConstraintCS(EObject context, OCLinEcoreConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -941,7 +941,7 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='precondition' name=UnrestrictedName? specification=SpecificationCS?)
+	 *     (stereotype='precondition' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS?)
 	 */
 	protected void sequence_PreconditionConstraintCS(EObject context, OCLinEcoreConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
