@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DocumentationCS;
@@ -277,6 +278,16 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	}
 
 	@Override
+	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csElement) {
+		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CONSTRAINT;
+		Constraint pivotElement = refreshNamedElement(Constraint.class, eClass, csElement);
+		if (pivotElement != null) {
+			pivotElement.setSpecification(PivotUtil.getPivot(OpaqueExpression.class, csElement.getSpecification()));
+		}
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitDataTypeCS(@NonNull DataTypeCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.DATA_TYPE;
 		DataType pivotElement = refreshNamedElement(DataType.class, eClass, csElement);
@@ -455,7 +466,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		if (pivotElement != null) {
 			pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 			pivotElement.getBody().add(csElement.getExprString());
-//			pivotElement.getMessage().add(null);
 		}
 		return null;
 	}

@@ -67,6 +67,7 @@ public interface CGConstraint extends CGNamedElement {
 	 * <p>
 	 * If the meaning of the '<em>Message</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
+	 * @Deprecated message now encoded as tuple parts
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Message</em>' containment reference.
@@ -74,16 +75,19 @@ public interface CGConstraint extends CGNamedElement {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstraint_Message()
 	 * @generated
 	 */
+	@Deprecated
 	CGValuedElement getMessage();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getMessage <em>Message</em>}' containment reference.
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Message</em>' containment reference.
 	 * @see #getMessage()
 	 * @generated
 	 */
+	@Deprecated
 	void setMessage(CGValuedElement value);
 
 } // CGConstraint

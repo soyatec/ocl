@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -58,8 +57,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
@@ -75,7 +72,6 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
-
 	public static class ListCompletion<CST extends ModelElementCS, P extends NamedElement> extends MultipleContinuation<CST>
 	{
 		protected final @NonNull Class<P> pivotClass;
@@ -91,42 +87,6 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		@Override
 		public BasicContinuation<?> execute() {
 			context.refreshPivotList(pivotClass, pivotElements, csElement);
-			return null;
-		}
-	}
-	
-	public static class OperationCSCompletion extends SingleContinuation<OperationCS>
-	{
-		public OperationCSCompletion(@NonNull CS2PivotConversion context, @NonNull OperationCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Operation pivotElement = PivotUtil.getPivot(Operation.class, csElement);
-			if (pivotElement != null) {
-				SpecificationCS csSpecification = csElement.getOwnedBodyExpression().get(0);
-				ExpressionInOCL asSpecification = csSpecification != null ? context.visitLeft2Right(ExpressionInOCL.class, csSpecification) : null;
-				pivotElement.setBodyExpression(asSpecification);
-			}
-			return null;
-		}
-	}
-	
-	public static class StructuralFeatureCSCompletion extends SingleContinuation<StructuralFeatureCS>
-	{
-		public StructuralFeatureCSCompletion(@NonNull CS2PivotConversion context, @NonNull StructuralFeatureCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Property pivotElement = PivotUtil.getPivot(Property.class, csElement);
-			if (pivotElement != null) {
-				SpecificationCS csSpecification = csElement.getOwnedDefaultExpression().get(0);
-				ExpressionInOCL asSpecification = csSpecification != null ? context.visitLeft2Right(ExpressionInOCL.class, csSpecification) : null;
-				pivotElement.setDefaultExpression(asSpecification);
-			}
 			return null;
 		}
 	}
@@ -280,19 +240,12 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	}
 
 	@Override
-	public Continuation<?> visitOperationCS(@NonNull OperationCS csOperation) {
-		Operation pivotOperation = PivotUtil.getPivot(Operation.class, csOperation);
+	public Continuation<?> visitOperationCS(@NonNull OperationCS csElement) {
+		Operation pivotOperation = PivotUtil.getPivot(Operation.class, csElement);
 		if (pivotOperation != null) {
-			context.refreshList(Type.class, pivotOperation.getRaisedException(), csOperation.getOwnedException());
+			context.refreshList(Type.class, pivotOperation.getRaisedException(), csElement.getOwnedException());
 		}
-		Continuation<?> continuation = super.visitOperationCS(csOperation);
-		assert continuation == null;
-		if (csOperation.getOwnedBodyExpression().size() > 0) {
-			return new OperationCSCompletion(context, csOperation);
-		}
-		else {
-			return null;
-		}
+		return super.visitOperationCS(csElement);
 	}
 
 	@Override
@@ -346,27 +299,6 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			context.handleVisitNamedElement(csPackage, pivotElement);
 		}
 		return null;
-	}
-
-	@Override
-	public Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csSpecification) {
-//		OpaqueExpression pivotElement = PivotUtil.getPivot(OpaqueExpression.class, csSpecification);
-//		if (pivotElement != null) {
-//			return new SpecificationCSCompletion(context, csSpecification);
-//		}
-		return null;
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitStructuralFeatureCS(@NonNull StructuralFeatureCS csStructuralFeature) {
-		Continuation<?> continuation = super.visitStructuralFeatureCS(csStructuralFeature);
-		assert continuation == null;
-		if (csStructuralFeature.getOwnedDefaultExpression().size() > 0) {
-			return new StructuralFeatureCSCompletion(context, csStructuralFeature);
-		}
-		else {
-			return null;
-		}
 	}
 
 	@Override

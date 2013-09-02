@@ -86,10 +86,6 @@ public class OCLValidationDelegate implements ValidationDelegate
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			throw new OCLDelegateException(message, e);
-//		} catch (InvalidEvaluationException e) {
-//			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-//			String message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
-//			throw new OCLDelegateException(message, e);
 		}
 	}
 
@@ -117,26 +113,6 @@ public class OCLValidationDelegate implements ValidationDelegate
 		evaluationEnvironment.add(contextVariable, value);
 		return evaluationEnvironment;
 	}
-
-/*	protected String evaluateMessage(@NonNull EvaluationVisitor evaluationVisitor, String constraintName, ExpressionInOCL query) {
-		OCLExpression messageExpression = query.getMessageExpression();
-		if (messageExpression == null) {
-			return null;
-		}
-		try {
-			Object result = messageExpression.accept(evaluationVisitor);
-			if (result != null) {
-				return ValuesUtil.asString(result);
-			}
-			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-			String message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
-			throw new OCLDelegateException(message);
-		} catch (InvalidValueException e) {
-			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-			String message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
-			throw new OCLDelegateException(message, e);
-		}
-	} */
 
 	@Override
 	public String toString() {
@@ -272,14 +248,6 @@ public class OCLValidationDelegate implements ValidationDelegate
 			if (status) {
 				return true;
 			}
-/*			if (diagnostics == null) {
-				String message = PivotUtil.getConstraintResultMessage(result);
-				if (message == null) {
-					String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-					message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
-				}
-				throw new OCLDelegateException(message);
-			} */
 			if (diagnostics != null) {
 				String message = PivotUtil.getConstraintResultMessage(result);
 				if (message == null) {
@@ -291,25 +259,10 @@ public class OCLValidationDelegate implements ValidationDelegate
 			    diagnostics.add(new BasicDiagnostic(severity, source, code, message, new Object [] { value }));
 			}
 		} catch (InvalidValueException e) {
-//			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-//			String message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
-//			throw new OCLDelegateException(message, e);
-//		} catch (InvalidEvaluationException e) {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			throw new OCLDelegateException(message, e);
 		}
-/*		if (diagnostics != null) {
-			String message = evaluateMessage(evaluationVisitor, constraintName, query);
-			if (message == null) {
-				Object objectLabel = DomainUtil.getLabel(eClassifier, value, context);
-				message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
-					PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
-			}
-			int severity = result == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-		    diagnostics.add(new BasicDiagnostic(severity, source, code, message, new Object [] { value }));
-		} */
 		return false;
 	}
-
 }

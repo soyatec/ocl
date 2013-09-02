@@ -59,11 +59,13 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	/**
 	 * The cached value of the '{@link #getMessage() <em>Message</em>}' containment reference.
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @see #getMessage()
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	protected CGValuedElement message;
 
 	/**
@@ -130,18 +132,22 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public CGValuedElement getMessage() {
 		return message;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public NotificationChain basicSetMessage(CGValuedElement newMessage, NotificationChain msgs) {
 		CGValuedElement oldMessage = message;
 		message = newMessage;
@@ -154,9 +160,11 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public void setMessage(CGValuedElement newMessage) {
 		if (newMessage != message) {
 			NotificationChain msgs = null;

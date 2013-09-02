@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: BaseLeft2RightVisitor.java,v 1.3 2011/03/01 08:47:46 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.base.cs2as;
 
@@ -54,11 +52,6 @@ public class BaseLeft2RightVisitor extends AbstractExtendingBaseCSVisitor<Elemen
 
 	@Override
 	public Element visitConstraintCS(@NonNull ConstraintCS object) {
-//		SpecificationCS specification = object.getSpecification();
-//		if (specification == null) {
-//			return null;
-//		}
-//		return context.visitLeft2Right(ExpressionInOCL.class, specification);
 		return null;
 	}
 

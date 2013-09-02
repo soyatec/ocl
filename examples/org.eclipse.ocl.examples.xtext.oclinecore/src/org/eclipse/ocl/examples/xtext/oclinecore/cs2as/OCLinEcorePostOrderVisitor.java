@@ -17,13 +17,10 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
@@ -44,16 +41,6 @@ public class OCLinEcorePostOrderVisitor extends AbstractOCLinEcorePostOrderVisit
 			pivotElement.setIsCallable(csConstraint.isCallable());
 		}
 		return continuation;
-	}
-
-	@Override
-	public Continuation<?> visitOperationCS(@NonNull OperationCS csOperation) {
-		return super.visitOperationCS(csOperation);
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitStructuralFeatureCS(@NonNull StructuralFeatureCS csStructuralFeature) {
-		return super.visitStructuralFeatureCS(csStructuralFeature);
 	}
 
 	@Override

@@ -75,11 +75,13 @@ public class OpaqueExpressionImpl
 	/**
 	 * The cached value of the '{@link #getMessage() <em>Message</em>}' attribute list.
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @see #getMessage()
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	protected EList<String> message;
 
 	/**
@@ -131,18 +133,12 @@ public class OpaqueExpressionImpl
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public List<String> getMessage()
-	{
-		if (message == null)
-		{
-			message = new EDataTypeEList<String>(String.class, this, PivotPackage.OPAQUE_EXPRESSION__MESSAGE);
-		}
-		return message;
-	}
-	public List<String> zzgetMessage()
 	{
 		if (message == null)
 		{

@@ -18,15 +18,11 @@ package org.eclipse.ocl.examples.xtext.completeocl.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
-import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
@@ -40,78 +36,6 @@ import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLPostOr
 
 public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVisitor
 {
-	public static class DefOperationCSCompletion extends SingleContinuation<DefOperationCS>
-	{
-		public DefOperationCSCompletion(@NonNull CS2PivotConversion context, @NonNull DefOperationCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Operation pivotElement = PivotUtil.getPivot(Operation.class, csElement);
-			if (pivotElement != null) {
-				SpecificationCS csSpecification = csElement.getSpecification();
-				ExpressionInOCL asSpecification = csSpecification != null ? context.visitLeft2Right(ExpressionInOCL.class, csSpecification) : null;
-				pivotElement.setBodyExpression(asSpecification);
-			}
-			return null;
-		}
-	}
-
-	public static class DefPropertyCSCompletion extends SingleContinuation<DefPropertyCS>
-	{
-		public DefPropertyCSCompletion(@NonNull CS2PivotConversion context, @NonNull DefPropertyCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Property pivotElement = PivotUtil.getPivot(Property.class, csElement);
-			if (pivotElement != null) {
-				SpecificationCS csSpecification = csElement.getSpecification();
-				ExpressionInOCL asSpecification = csSpecification != null ? context.visitLeft2Right(ExpressionInOCL.class, csSpecification) : null;
-				pivotElement.setDefaultExpression(asSpecification);
-			}
-			return null;
-		}
-	}
-
-	public static class OperationContextDeclCSCompletion extends SingleContinuation<OperationContextDeclCS>
-	{
-		public OperationContextDeclCSCompletion(@NonNull CS2PivotConversion context, @NonNull OperationContextDeclCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Operation pivotElement = PivotUtil.getPivot(Operation.class, csElement);
-			if (pivotElement != null) {
-				SpecificationCS csSpecification = csElement.getBodies().get(0);
-				ExpressionInOCL asSpecification = csSpecification != null ? context.visitLeft2Right(ExpressionInOCL.class, csSpecification) : null;
-				pivotElement.setBodyExpression(asSpecification);
-			}
-			return null;
-		}
-	}
-
-	public static class PropertyContextDeclCSCompletion extends SingleContinuation<PropertyContextDeclCS>
-	{
-		public PropertyContextDeclCSCompletion(@NonNull CS2PivotConversion context, @NonNull PropertyContextDeclCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Property pivotElement = PivotUtil.getPivot(Property.class, csElement);
-			if (pivotElement != null) {
-				SpecificationCS csSpecification = csElement.getDefaultExpressions().get(0);
-				ExpressionInOCL asSpecification = csSpecification != null ? context.visitLeft2Right(ExpressionInOCL.class, csSpecification) : null;
-				pivotElement.setDefaultExpression(asSpecification);
-			}
-			return null;
-		}
-	}
-	
 	public CompleteOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
@@ -137,7 +61,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 		if (contextOperation != null) {
 			context.refreshRequiredType(contextOperation, csElement);		// FIXME type consistency check
 		}
-		return new DefOperationCSCompletion(context, csElement);
+		return null;
 	}
 
 	@Override
@@ -146,7 +70,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 		if (contextProperty != null) {
 			context.refreshRequiredType(contextProperty, csElement);		// FIXME type consistency check
 		}
-		return new DefPropertyCSCompletion(context, csElement);
+		return null;
 	}
 
 	@Override
@@ -164,12 +88,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 				context.setType(contextOperation, modelOperation.getType(), modelOperation.isRequired());		// FIXME type consistency check
 			}
 		}
-		if (csElement.getBodies().size() > 0) {
-			return new OperationContextDeclCSCompletion(context, csElement);
-		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	@Override
@@ -179,11 +98,6 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 
 	@Override
 	public Continuation<?> visitPropertyContextDeclCS(@NonNull PropertyContextDeclCS csElement) {
-		if (csElement.getDefaultExpressions().size() > 0) {
-			return new PropertyContextDeclCSCompletion(context, csElement);
-		}
-		else {
-			return null;
-		}
+		return null;
 	}
 }

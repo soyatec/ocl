@@ -724,7 +724,9 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				if (invariantName == null) {
 					invariantName = "";
 				}
-				if (!invariantName.endsWith(PivotConstants.zzMESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
+				@SuppressWarnings("deprecation")
+				String messageAnnotationDetailSuffix = PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX;
+				if (!invariantName.endsWith(messageAnnotationDetailSuffix)) {
 					Constraint invariant = null;
 					OpaqueExpression specification = null;
 					if (oldInvariantMap != null) {
@@ -747,8 +749,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					}
 					String value = entry.getValue();
 					// Rescue any deprecated format message expressions
-					String message = oclAnnotationDetails.get(invariantName + PivotConstants.zzMESSAGE_ANNOTATION_DETAIL_SUFFIX);
-					if (message != null) {
+					String message = oclAnnotationDetails.get(invariantName + messageAnnotationDetailSuffix);
+					if ((value != null) && (message != null)) {
 						value = PivotUtil.createTupleValuedConstraint(value, null, message);
 					}
 					expression.getBody().add(value);

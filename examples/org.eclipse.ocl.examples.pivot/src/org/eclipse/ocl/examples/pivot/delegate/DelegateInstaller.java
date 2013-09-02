@@ -209,20 +209,6 @@ public class DelegateInstaller
 		EAnnotation oclAnnotation = createAnnotation(eModelElement);
 		String key = getAnnotationKey(pivotConstraint);
 		oclAnnotation.getDetails().put(key, exprString);
-/*		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
-		if ((eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) && !(eModelElement instanceof EOperation)) {
-			String messageString = PivotUtil.getMessage(specification);
-			if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
-				OCLExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
-				if (messageExpression != null) {
-					messageString = createExpression(messageExpression, ecoreURI);
-				}
-			}
-			if ((messageString != null) && (messageString.length() > 0)) {
-				String name = pivotConstraint.getName();
-				oclAnnotation.getDetails().put(name + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, messageString);
-			}
-		} */
 		return oclAnnotation;
 	}
 
@@ -415,16 +401,6 @@ public class DelegateInstaller
 			}
 			else {
 				oclAnnotation.getDetails().put(name, exprString);
-/*				String messageString = PivotUtil.getMessage(specification);
-				if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
-					OCLExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
-					if (messageExpression != null) {
-						messageString = PrettyPrinter.print(messageExpression, options);
-					}
-				}
-				if ((messageString != null) && (messageString.length() > 0)) {
-					oclAnnotation.getDetails().put(name + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, messageString);
-				} */
 			}
 		}
 		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION) {

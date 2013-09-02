@@ -79,10 +79,12 @@ public interface OpaqueExpression
 	 * If the meaning of the '<em>Message</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Message</em>' attribute list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_Message()
 	 * @generated
 	 */
-	List<String> zzgetMessage();
+	@Deprecated
+	List<String> getMessage();
 } // OpaqueExpression

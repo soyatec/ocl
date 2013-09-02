@@ -154,6 +154,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 				OCLExpression asExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
 				String statusText = csExpression != null ? ElementUtil.getExpressionText(csExpression) : "null";
 				PivotUtil.setBody(asSpecification, asExpression, statusText);
+				context.setType(asSpecification, asExpression != null ? asExpression.getType() : null, (asExpression != null) && asExpression.isRequired());
 			}
 			return null;
 		}
@@ -430,15 +431,6 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		else {
 			return null;
 		}
-/*		Element asElement = csElement.getPivot();
-		if (asElement instanceof ExpressionInOCL) {
-			ExpressionInOCL asExpressionInOCL = (ExpressionInOCL)asElement;
-			csElement.getOwnedExpression()
-			String exprString = csSpecification.getExprString();
-			pivotSpecification.getBody().add(exprString);
-			pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-		}
-		return null; */
 	}
 
 	@Override
@@ -507,17 +499,6 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 		}
 		return null;
 	}
-
-/*	@Override
-	public Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csSpecification) {
-		OpaqueExpression pivotSpecification = PivotUtil.getPivot(OpaqueExpression.class, csSpecification);
-		if (pivotSpecification != null) {
-			String exprString = csSpecification.getExprString();
-			pivotSpecification.getBody().add(exprString);
-			pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-		}
-		return super.visitSpecificationCS(csSpecification);
-	} */
 
 	@Override
 	public final Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csSpecification) {

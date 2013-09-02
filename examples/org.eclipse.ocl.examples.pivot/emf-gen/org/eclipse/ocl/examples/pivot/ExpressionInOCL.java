@@ -136,6 +136,7 @@ public interface ExpressionInOCL
 	 * <p>
 	 * If the meaning of the '<em>Message Expression</em>' reference isn't clear,
 	 * there really should be more of a description here...
+	 * @Deprecated message now encoded as tuple parts
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Message Expression</em>' containment reference.
@@ -143,16 +144,19 @@ public interface ExpressionInOCL
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_MessageExpression()
 	 * @generated
 	 */
-	OCLExpression zzgetMessageExpression();
+	@Deprecated
+	OCLExpression getMessageExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Message Expression</em>' containment reference.
 	 * @see #getMessageExpression()
 	 * @generated
 	 */
-	void zzsetMessageExpression(OCLExpression value);
+	@Deprecated
+	void setMessageExpression(OCLExpression value);
 
 } // ExpressionInOCL

@@ -219,8 +219,7 @@ public class PivotUtil extends DomainUtil
 	public static @NonNull ExpressionInOCL createExpressionInOCLError(@NonNull String string) {
 		@SuppressWarnings("null")@NonNull ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
-		stringLiteral.setStringSymbol(string);
-//		PivotUtil.setMessage(expressionInOCL, stringLiteral, string);
+		stringLiteral.setStringSymbol(createTupleValuedConstraint("false", null, string));
 		return expressionInOCL;
 	}
 
@@ -842,15 +841,6 @@ public class PivotUtil extends DomainUtil
 			logger.error(message);
 			return createExpressionInOCLError(message);
 		}
-/*		String messageExpression = PivotUtil.getMessage(specification);
-		if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
-			try {
-				parserContext = new DiagnosticContext(parserContext, null);
-				parserContext.parse(messageExpression);
-			} catch (ParserException e) {
-				logger.error("Failed to parse \"" + messageExpression + "\"", e);
-			}
-		} */
 		return expressionInOCL;
 	}
 
@@ -928,18 +918,8 @@ public class PivotUtil extends DomainUtil
 		return element;
 	}
 
-	public static @Nullable String zzgetMessage(@NonNull OpaqueExpression specification) {
-/*		List<String> messages = specification.getMessage();
-		List<String> languages = specification.getLanguage();
-		if ((messages == null) || (languages == null)) {
-			return null;
-		}
-		int iMax = Math.min(messages.size(), languages.size());
-		for (int i = 0; i < iMax; i++) {
-			if (PivotConstants.OCL_LANGUAGE.equalsIgnoreCase(languages.get(i))) {
-				return messages.get(i);
-			}
-		} */
+	@Deprecated		// messages now encoded with Tuple
+	public static @Nullable String getMessage(@NonNull OpaqueExpression specification) {
 		return null;
 	}
 
@@ -1432,7 +1412,8 @@ public class PivotUtil extends DomainUtil
 	 * Define oclExpression as the bodyExpression of an expressionInOCL, and if non-null
 	 * also define stringExpression as the OCL-languaged body.
 	 */
-	public static void zzsetMessage(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
+	@Deprecated // Rich invariants now represented by Tuples
+	public static void setMessage(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
 //		expressionInOCL.getBody().clear();
 //		expressionInOCL.getLanguage().clear();
 //		if (stringExpression != null) {

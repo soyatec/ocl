@@ -48,7 +48,8 @@ public interface PivotConstants
 	static final @NonNull String IMPORT_ANNOTATION_SOURCE = "http://www.eclipse.org/OCL/Import";
 	static final @NonNull String SYSML_ANNOTATION_SOURCE = "http://www.omg.org/spec/SysML";
 
-	static final @NonNull String zzMESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
+	@Deprecated // Tuples are now used for rich invariants
+	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
 
 	static final int MONIKER_OVERFLOW_LIMIT = 1024;
 	static final @NonNull String ANNOTATION_QUOTE = "'"; //$NON-NLS-1$

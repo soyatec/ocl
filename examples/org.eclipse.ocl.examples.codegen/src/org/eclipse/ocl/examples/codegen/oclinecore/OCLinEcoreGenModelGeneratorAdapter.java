@@ -78,6 +78,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
@@ -150,10 +151,10 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 					EOperation eOperation = Pivot2Ecore.createConstraintEOperation(rule, prefix + ruleName);
 					((EClass)eClassifier).getEOperations().add(eOperation);
 					ecore2pivot.addMapping(eOperation, rule);
+					if (message != null) {
+						body = PivotUtil.createTupleValuedConstraint(body, null, message);
+					}
 					EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body", body);
-//					if (message != null) {
-//						EcoreUtil.setAnnotation(eOperation, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, "body" + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, message);
-//					}
 				}
 			}
 		}
@@ -175,13 +176,15 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 							for (EAnnotation eAnnotation : eClassifier.getEAnnotations()) {
 								String source = eAnnotation.getSource();
 								if (OCLCommon.isDelegateURI(source)) {
+									@SuppressWarnings("deprecation")
+									String messageAnnotationDetailSuffix = PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX;
 									EMap<String, String> details = eAnnotation.getDetails();
 									for (String key : details.keySet()) {
-										if ((key != null) && !key.endsWith(PivotConstants.zzMESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
+										if ((key != null) && !key.endsWith(messageAnnotationDetailSuffix)) {
 											String expression = details.get(key);
-//											String messageExpression = details.get(key + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
+											String messageExpression = details.get(key + messageAnnotationDetailSuffix);
 											if (expression != null) {
-												convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, null);
+												convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, messageExpression);
 											}
 										}
 									}

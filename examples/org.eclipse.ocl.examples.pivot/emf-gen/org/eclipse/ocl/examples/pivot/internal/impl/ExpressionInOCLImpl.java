@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
+@SuppressWarnings("deprecation")
 public class ExpressionInOCLImpl
 		extends OpaqueExpressionImpl
 		implements ExpressionInOCL {
@@ -282,23 +283,23 @@ public class ExpressionInOCLImpl
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public OCLExpression getMessageExpression()
-	{
-		return messageExpression;
-	}
-	public OCLExpression zzgetMessageExpression()
 	{
 		return messageExpression;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public NotificationChain basicSetMessageExpression(OCLExpression newMessageExpression, NotificationChain msgs)
 	{
 		OCLExpression oldMessageExpression = messageExpression;
@@ -313,9 +314,11 @@ public class ExpressionInOCLImpl
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @Deprecated message now encoded as tuple parts
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Deprecated
 	public void setMessageExpression(OCLExpression newMessageExpression)
 	{
 		if (newMessageExpression != messageExpression)

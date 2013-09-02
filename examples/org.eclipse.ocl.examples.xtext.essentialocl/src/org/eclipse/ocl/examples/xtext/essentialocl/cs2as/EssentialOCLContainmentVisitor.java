@@ -158,7 +158,6 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 		return null;
 	}
 
-
 	@Override
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csElement) {
 		Constraint asConstraint = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
@@ -226,7 +225,6 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 		ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
 		if (pivotElement != null) {
 			PivotUtil.setBody(pivotElement, null, null);
-//			PivotUtil.setMessage(pivotElement, null, null);
 			Resource resource = csElement.eResource();
 			if (resource instanceof BaseResource) {	
 				ParserContext parserContext = ((BaseResource)resource).getParserContext();
@@ -276,24 +274,6 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 			context.refreshModelElement(OpaqueExpression.class, PivotPackage.Literals.OPAQUE_EXPRESSION, csElement);
 		}
 		return null;
-/*		
-		EStructuralFeature eContainingFeature = csElement.eContainingFeature();
-		SpecificationCS csSpecification;
-		Class<? extends Element> pivotClass = csElement.getOwnedExpression() != null ? ExpressionInOCL.class : OpaqueExpression.class;
-		EClass ecoreLiteral = csElement.getOwnedExpression() != null ? PivotPackage.Literals.EXPRESSION_IN_OCL : PivotPackage.Literals.OPAQUE_EXPRESSION;
-		if (eContainingFeature == BaseCSTPackage.Literals.CONSTRAINT_CS__MESSAGE_SPECIFICATION) {
-			csSpecification = ((ConstraintCS)csElement.eContainer()).getSpecification();
-			if (csSpecification != null) {
-				Element pivotElement = context.refreshModelElement(pivotClass, ecoreLiteral, csSpecification);
-				if (pivotElement != null) {
-					context.installPivotUsage(csElement, pivotElement);
-				}
-			}
-		}
-		else {
-			context.refreshModelElement(pivotClass, ecoreLiteral, csElement);
-		}
-		return null; */
 	}
 
 	@Override

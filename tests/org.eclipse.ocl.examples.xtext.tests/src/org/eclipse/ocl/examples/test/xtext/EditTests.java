@@ -386,7 +386,7 @@ public class EditTests extends XtextTestCase
 		Set<EObject> loadPivotContent = new HashSet<EObject>();
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
-			System.out.println(DomainUtil.debugSimpleName(eObject));
+//			System.out.println(DomainUtil.debugSimpleName(eObject));
 			loadPivotContent.add(eObject);
 		}
 		{
@@ -402,7 +402,7 @@ public class EditTests extends XtextTestCase
 			Set<EObject> parsePivotContent = new HashSet<EObject>();
 			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
-				System.out.println(DomainUtil.debugSimpleName(eObject));
+//				System.out.println(DomainUtil.debugSimpleName(eObject));
 				parsePivotContent.add(eObject);
 			}
 			assertEquals(loadPivotContent.size(), parsePivotContent.size());
