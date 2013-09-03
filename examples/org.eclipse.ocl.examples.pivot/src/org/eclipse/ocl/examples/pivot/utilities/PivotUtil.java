@@ -48,7 +48,9 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionKind;
@@ -222,19 +224,19 @@ public class PivotUtil extends DomainUtil
 		return expressionInOCL;
 	}
 
-	public static @NonNull String createTupleValuedConstraint(@NonNull String statusText, @Nullable String severityText, @Nullable String messageText) {
-		if ((severityText == null) && (messageText == null)) {
+	public static @NonNull String createTupleValuedConstraint(@NonNull String statusText, @Nullable Integer severity, @Nullable String messageText) {
+		if ((severity == null) && (messageText == null)) {
 			return statusText;
 		}
 		StringBuilder s = new StringBuilder();
 		s.append("Tuple {");
 		if (messageText != null) {
-			s.append("\n\tmessage : String = " + messageText + ",");
+			s.append("\n\t" + PivotConstants.MESSAGE_PART_NAME + " : String = " + messageText + ",");
 		}
-		if (severityText != null) {
-			s.append("\n\tseverity : String = " + severityText + ",");
+		if (severity != null) {
+			s.append("\n\t" + PivotConstants.SEVERITY_PART_NAME + " : Integer = " + severity + ",");
 		}
-		s.append("\n\tstatus : Boolean = " + statusText);		// NB parts in alphabetical order
+		s.append("\n\t" + PivotConstants.STATUS_PART_NAME + " : Boolean = " + statusText);		// NB parts in alphabetical order
 		s.append("\n}");
 		@SuppressWarnings("null")@NonNull String string = s.toString();
 		return string;
@@ -656,12 +658,16 @@ public class PivotUtil extends DomainUtil
 			TupleTypeId tupleTypeId = tupleValue.getTypeId();
 			TuplePartId severityPartId = tupleTypeId.getPartId(PivotConstants.SEVERITY_PART_NAME);
 			if (severityPartId != null) {
-				String value = String.valueOf(tupleValue.getValue(severityPartId));
-				if (value.toLowerCase().contains("warn")) {
-					return Diagnostic.WARNING;
+				IntegerValue value = ValuesUtil.integerValueOf(tupleValue.getValue(severityPartId));
+				int signum = value.signum();
+				if (signum < 0) {
+					return Diagnostic.ERROR;
+				}
+				else if (signum == 0) {
+					return Diagnostic.INFO;
 				}
 				else {
-					return Diagnostic.ERROR;
+					return Diagnostic.WARNING;
 				}
 			}
 			else {
