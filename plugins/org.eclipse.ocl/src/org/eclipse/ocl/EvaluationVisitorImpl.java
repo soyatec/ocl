@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005,2013 IBM Corporation, CEA LIST, and others.
+ * Copyright (c) 2005,2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -2751,25 +2751,19 @@ public class EvaluationVisitorImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	 * @since 3.4
 	 */
 	protected Matcher getRegexMatcher(String regex, String stringToMatch) {
-		final Map<String, Matcher> cache = getRegexCache();
-		Matcher result = cache.get(regex);
+		if (regexMatchers == null) {
+			regexMatchers = createRegexCache();
+		}
+		Matcher result = regexMatchers.get(regex);
 
 		if (result == null) {
 			result = Pattern.compile(regex).matcher(stringToMatch);
-			cache.put(regex, result);
+			regexMatchers.put(regex, result);
 		} else {
 			result.reset(stringToMatch);
 		}
 
 		return result;
-	}
-	
-	private Map<String, Matcher> getRegexCache() {
-		if (regexMatchers == null) {
-			regexMatchers = createRegexCache();
-		}
-		
-		return regexMatchers;
 	}
 	
 	/**
