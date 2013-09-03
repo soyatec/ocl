@@ -326,13 +326,12 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //					}
 					// TODO: enhance IntegerRangeList to support multiple ranges
 					// add values between first and last inclusive
-					int increment = lastInt.compareTo(firstInt);
-					for (int i = firstInt; true; i = i + increment) {
+					for (int i = firstInt; true; i++) {
                         IntegerValue integerValue = ValuesUtil.integerValueOf(i);
     					if ((uniqueResults == null) || uniqueResults.add(integerValue)) {
     						orderedResults.add(integerValue);
     					}
-                        if (i == lastInt) {
+                        if (i >= lastInt) {
                         	break;
                         }
                     }

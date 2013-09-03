@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.util.Map;
+import java.util.regex.Pattern;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -30,16 +33,51 @@ import org.eclipse.ocl.examples.domain.values.Value;
 
 public abstract class ExecutorManager implements DomainEvaluator
 {	
+	// This is the same as HashMap's default initial capacity
+	private static final int DEFAULT_REGEX_CACHE_LIMIT = 16;
+
+	// this is the same as HashMap's default load factor
+	private static final float DEFAULT_REGEX_CACHE_LOAD_FACTOR = 0.75f;
+
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 
     /**
      * Set true by {@link #setCanceled} to terminate execution at next call to {@link #getValuefactory()}.
      */
 	private boolean isCanceled = false;
-
+	
+	/**
+	 * Lazily-created cache of reusable regex patterns to avoid
+	 * repeatedly parsing the same regexes.
+	 */
+	private /*@LazyNonNull*/ Map<String, Pattern> regexPatterns = null;
 	
 	public ExecutorManager(@NonNull DomainStandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;
+	}
+	
+	/**
+	 * Creates (on demand) the regular-expression matcher cache. The default
+	 * implementation creates an access-ordered LRU cache with a limit of 16
+	 * entries. Subclasses may override to create a map with whatever different
+	 * performance characteristics may be required.
+	 * 
+	 * @return the new regular-expression matcher cache
+	 * 
+	 * @see #getRegexPattern(String)
+	 */
+	protected @NonNull Map<String, Pattern> createRegexCache() {
+		return new java.util.LinkedHashMap<String, Pattern>(
+			DEFAULT_REGEX_CACHE_LIMIT, DEFAULT_REGEX_CACHE_LOAD_FACTOR, true) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected boolean removeEldestEntry(
+					Map.Entry<String, Pattern> eldest) {
+				return size() > DEFAULT_REGEX_CACHE_LIMIT;
+			}
+		};
 	}
 
 	public @NonNull Value evaluate(@NonNull DomainExpression body) {
@@ -71,6 +109,32 @@ public abstract class ExecutorManager implements DomainEvaluator
 
 	public @Nullable DomainLogger getLogger() {
 		return null;
+	}
+
+	/**
+	 * Return a cached matcher for a give regular expression.
+	 */
+	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
+		if (regexPatterns == null) {
+			synchronized (this) {
+				if (regexPatterns == null) {
+					regexPatterns = createRegexCache();
+				}
+			}
+		}
+		synchronized (regexPatterns) {
+			Pattern pattern = regexPatterns.get(regex);
+			if (pattern == null) {
+//				System.out.println("Compile " + regex);
+				pattern = Pattern.compile(regex);
+				assert pattern != null;
+				regexPatterns.put(regex, pattern);
+			}
+//			else {
+//				System.out.println("Re-use " + regex);
+//			}
+			return pattern;
+		}
 	}
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {

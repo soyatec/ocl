@@ -15,6 +15,8 @@
 
 package org.eclipse.ocl.examples.pivot.evaluation;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -97,6 +99,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return delegate.getMetaModelManager();
+	}
+
+	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
+		return delegate.getRegexPattern(regex);
 	}
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {

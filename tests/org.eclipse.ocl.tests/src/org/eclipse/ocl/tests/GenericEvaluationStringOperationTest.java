@@ -308,6 +308,8 @@ public abstract class GenericEvaluationStringOperationTest<E extends EObject, PK
 		//
 		assertResultInvalid("invalid.matches('(\\\\w+)\\\\s*')");
 		assertResultInvalid("'repla ce operation'.matches(invalid)");
+		// -- visual inspection of println's demonstrates cache re-use; this test just conforms cache still ok once full
+		assertQueryEquals(null, 50, "let seq : Sequence(Integer) = Sequence{1..20}, rseq : Sequence(Integer) = seq->collect(i | 21-i), seqs : Sequence(Integer) = Sequence{seq,rseq,seq,rseq,seq}->flatten() in seqs->iterate(i; acc : Integer = 0 | if '123456789'.matches('.*' + i.toString() + '.*') then acc + 1 else acc endif)");
 	}
 
 	public void testStringNotEqual() {

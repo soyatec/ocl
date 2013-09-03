@@ -299,6 +299,8 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 		//
 		assertQueryInvalid(null, "invalid.matches('(\\\\w+)\\\\s*')");
 		assertQueryInvalid(null, "'repla ce operation'.matches(invalid)");
+		// -- visual inspection of println's demonstrates cache re-use; this test just conforms cache still ok once full
+		assertQueryEquals(null, 50, "let seq = Sequence{1..20}, rseq = seq->reverse(), seqs = Sequence{seq,rseq,seq,rseq,seq}->flatten() in seqs->iterate(i; acc : Integer = 0 | if '123456789'.matches('.*' + i.toString() + '.*') then acc + 1 else acc endif)");
 	}
 
 	@Test public void testStringNotEqual() {

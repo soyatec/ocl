@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.evaluation;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -39,6 +41,11 @@ public interface DomainEvaluator
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.
 	 */
 	@NonNull DomainModelManager getModelManager();
+
+	/**
+	 * Return a cached matcher for a give regular expression.
+	 */
+	@NonNull Pattern getRegexPattern(@NonNull String regex);
 
 	@NonNull DomainStandardLibrary getStandardLibrary();
 

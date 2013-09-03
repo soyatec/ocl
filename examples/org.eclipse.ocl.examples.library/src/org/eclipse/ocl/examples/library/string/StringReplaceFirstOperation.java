@@ -14,23 +14,30 @@
  */
 package org.eclipse.ocl.examples.library.string;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 
 /**
  * StringReplaceFirstOperation realises the String::replaceFirst() library operation.
  */
-public class StringReplaceFirstOperation extends AbstractSimpleTernaryOperation
+public class StringReplaceFirstOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringReplaceFirstOperation INSTANCE = new StringReplaceFirstOperation();
 
 	@Override
-	public @NonNull String evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String regex = asString(firstArgumentValue);
 		String replacement = asString(secondArgumentValue);
-		@SuppressWarnings("null")@NonNull String result = sourceString.replaceFirst(regex, replacement);
+		Pattern pattern = evaluator.getRegexPattern(regex);
+		Matcher matcher = pattern.matcher(sourceString);
+		@SuppressWarnings("null")@NonNull String result = matcher.replaceFirst(replacement);
 		return result;
 	}
 }
