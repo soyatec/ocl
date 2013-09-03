@@ -119,4 +119,20 @@ The actual constraints are lazily loaded by the first validation run that uses t
             class="SysML_ValueTypes_QUDV.QUDV.QUDVPackage"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug416421A NOT -->
+      <!--package uri="example.org/bug416421A"
+            class="bug416421A.Bug416421APackage"/-->
+      <package uri="dummy-protocol://dummy-nsuri/bug416421A"
+            class="bug416421A.Bug416421APackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug416421B NOT -->
+      <!--package uri="example.org/bug416421B"
+            class="bug416421B.Bug416421BPackage"/-->
+      <package uri="dummy-protocol://dummy-nsuri/bug416421A"
+            class="bug416421A.Bug416421APackage"/>
+   </extension>
+
 </plugin>

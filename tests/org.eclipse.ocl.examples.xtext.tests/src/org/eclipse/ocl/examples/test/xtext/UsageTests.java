@@ -808,4 +808,44 @@ public class UsageTests
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
 	}
+	
+	public void testBug416421() throws Exception {
+		String testFileStemA = "Bug416421A";
+		String testProjectNameA = "bug416421A";
+		String testProjectPathA = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameA : "org.eclipse.ocl.examples.xtext.tests";
+		String oclinecoreFileA = 
+				  "package bug416421A : bug416421A = 'example.org/bug416421A'\n"
+				+ "{\n"
+				+ "	class ClassA\n"
+				+ "	{\n"
+				+ "		operation getFalse() : Boolean\n"
+				+ "		{\n"
+				+ "			body: false;\n"
+				+ "		}\n"
+				+ "	}\n"
+				+ "}\n";
+		String genmodelFileA = createGenModelContent(testProjectPathA, testFileStemA);
+		String testFileStemB = "Bug416421B";
+		String testProjectNameB = "bug416421B";
+		String testProjectPathB = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameB : "org.eclipse.ocl.examples.xtext.tests";
+		String oclinecoreFileB = 
+				  "import bug416421A : 'Bug416421A.ecore#/';\n"
+				+ "package bug416421B : bug416421B = 'example.org/bug416421B'\n"
+				+ "{\n"
+				+ "	class ClassB extends bug416421A::ClassA\n"
+				+ "	{\n"
+				+ "		operation getTrue() : Boolean\n"
+				+ "		{\n"
+				+ "			body: true;\n"
+				+ "		}\n"
+				+ "	}\n"
+				+ "}\n";
+		String genmodelFileB = createGenModelContent(testProjectPathB, testFileStemB);
+		doDelete(testProjectNameA);
+		doDelete(testProjectNameB);
+		doGenModel(testProjectPathA, testFileStemA, oclinecoreFileA, genmodelFileA);
+		doCompile(testProjectNameA, testFileStemA);
+		doGenModel(testProjectPathB, testFileStemB, oclinecoreFileB, genmodelFileB);
+		doCompile(testProjectNameB, testFileStemB);
+	}
 }
