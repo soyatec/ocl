@@ -231,6 +231,13 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 				s.append(");\n");
 			}
 		}
+		s.append("\n");
+		s.append("		/*\n");
+		s.append("		 * Force initialization.\n");
+		s.append("		 */\n");
+		s.append("		public static void init() {\n");
+		s.append("			Types.init();\n");
+		s.append("		}\n");
 		s.append("	}\n");
 	}
 
@@ -309,7 +316,8 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 		s.append("		/*\n");
 		s.append("		 *	Install the operation descriptors in the fragment descriptors.\n");
 		s.append("		 */\n");
-		s.append("		static {");
+		s.append("		public static void init() {\n");
+		s.append("			TypeFragments.init();\n");
 		for (/*@NonNull*/ org.eclipse.ocl.examples.pivot.Class pClass : activeClassesSortedByName) {
 			assert pClass != null;
 			s.append("\n");
@@ -327,8 +335,6 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			}
 		}
 		s.append("		}\n");
-		s.append("\n");
-		s.append("		public static void init() {}\n");
 		s.append("	}\n");
 	}
 	
@@ -379,7 +385,12 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 		s.append("		/**\n");
 		s.append("		 *	Install the property descriptors in the fragment descriptors.\n");
 		s.append("		 */\n");
-		s.append("		static {\n");
+//		s.append("		static {\n");
+//		s.append("		}\n");
+//		s.append("\n");
+		s.append("		public static void init() {\n");
+		s.append("			TypeFragments.init();\n");
+		s.append("\n");
 		for (/*@NonNull*/ org.eclipse.ocl.examples.pivot.Class pClass : activeClassesSortedByName) {
 			assert pClass != null;
 			s.append("			Fragments.");
@@ -391,8 +402,6 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			s.append(");\n");
 		}
 		s.append("		}\n");
-		s.append("\n");
-		s.append("		public static void init() {}\n");
 		s.append("	}\n");
 	}
 
@@ -582,6 +591,13 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			}
 		}
 		s.append("\n");
+		s.append("\n");
+		s.append("		/*\n");
+		s.append("		 * Force initialization.\n");
+		s.append("		 */\n");
+		s.append("		public static void init() {\n");
+		s.append("			Types.init();\n");
+		s.append("		}\n");
 		s.append("	}\n");
 	}
 
@@ -680,6 +696,8 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			s.append("			EnumerationLiterals.init();\n");
 		}
 		s.append("		}\n");
+		s.append("\n");
+		s.append("		public static void init() {}\n");
 		s.append("	}\n");
 	}
 	
@@ -751,7 +769,10 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 		s.append("		/**\n");
 		s.append("		 *	Install the fragment descriptors in the class descriptors.\n");
 		s.append("		 */\n");
-		s.append("		static {\n");
+		s.append("		public static void init() {\n");
+		s.append("			Fragments.init();\n");
+		s.append("			Properties.init();\n");
+		s.append("\n");
 		for (/*@NonNull*/ org.eclipse.ocl.examples.pivot.Class pClass : activeClassesSortedByName) {
 			assert pClass != null;
 			s.append("			");
@@ -767,8 +788,6 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			s.append(");\n");
 		}
 		s.append("		}\n");
-		s.append("\n");
-		s.append("		public static void init() {}\n");
 		s.append("	}\n");
 	}
 		
@@ -916,8 +935,11 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 		s.append("\n");
 		declareEnumerationLiterals();
 		s.append("\n");
+		s.append("	/*\n");
+		s.append("	 * Force initialization.\n");
+		s.append("	 */\n");
 		s.append("	static {\n");
-		s.append("		Types.types[0].getClass();\n");
+		s.append("		Types.init();\n");
 		s.append("	}\n");
 		s.append("}\n");
 		return s.toString();

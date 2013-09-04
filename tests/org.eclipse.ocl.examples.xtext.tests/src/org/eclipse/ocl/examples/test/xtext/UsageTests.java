@@ -697,7 +697,7 @@ public class UsageTests
 			EFactory eFactory = ePackage.getEFactoryInstance();
 			//
 			EObject eObject = eFactory.create(eClass);
-			assertQueryTrue(eObject, "dependsOnQuantityKinds() = null");
+			assertQueryTrue(eObject, "dependsOnQuantityKinds() <> null");
 		}
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
 			String qualifiedPackageName = testProjectName + ".PrimitiveValueTypes.PrimitiveValueTypesPackage";
