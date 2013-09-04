@@ -858,8 +858,8 @@ public class UsageTests
 		URI fileURIB = createModels(testProjectPathB, testFileStemB, oclinecoreFileB, genmodelFileB);
 		// B first demonstrates the demand load of Bug416421A to fix Bug 416421
 		doGenModel(testProjectPathB, fileURIB);
-		doCompile(testProjectNameB, testFileStemB);
 		doGenModel(testProjectPathA, fileURIA);
+		doCompile(testProjectNameB, testFileStemB);
 		doCompile(testProjectNameA, testFileStemA);
 	}
 }
