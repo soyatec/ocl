@@ -104,9 +104,13 @@ public class AS2XMIid
 						s.append("\n '" + id + "' for '" + element.eClass().getName() + "'");
 					}
 					//						System.out.println(DomainUtil.debugSimpleName(element) + " => " + xmi);
-					asResource.setID(element, id);
+					// Move to separate pass to try to avoid intertmittent NoSuchElementException from TreeIterator
+//					asResource.setID(element, id);
 				}
 			}
+		}
+		for (String id : allIds.keySet()) {
+			asResource.setID(allIds.get(id), id);
 		}
 		if (s != null) {
 			throw new IllegalStateException(s.toString());
