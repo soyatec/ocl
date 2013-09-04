@@ -859,7 +859,7 @@ public class UsageTests
 		// B first demonstrates the demand load of Bug416421A to fix Bug 416421
 		doGenModel(testProjectPathB, fileURIB);
 		doGenModel(testProjectPathA, fileURIA);
-		doCompile(testProjectNameB, testFileStemB);
 		doCompile(testProjectNameA, testFileStemA);
+		doCompile(testProjectNameB, testFileStemB);
 	}
 }
