@@ -541,6 +541,8 @@ public class PivotTables
 			FragmentProperties.init();
 			EnumerationLiterals.init();
 		}
+
+		public static void init() {}
 	}
 
 	/**
@@ -1825,6 +1827,13 @@ public class PivotTables
 		private static final @NonNull ExecutorFragment _VoidType__Type = new ExecutorFragment(Types._VoidType, PivotTables.Types._Type);
 		private static final @NonNull ExecutorFragment _VoidType__Visitable = new ExecutorFragment(Types._VoidType, PivotTables.Types._Visitable);
 		private static final @NonNull ExecutorFragment _VoidType__VoidType = new ExecutorFragment(Types._VoidType, PivotTables.Types._VoidType);
+
+		/*
+		 * Force initialization.
+		 */
+		public static void init() {
+			Types.init();
+		}
 	}
 
 	/**
@@ -2289,6 +2298,13 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Vertex__container = new EcoreExecutorProperty(PivotPackage.Literals.VERTEX__CONTAINER, Types._Vertex, 0);
 		public static final @NonNull ExecutorProperty _Vertex__incoming = new EcoreExecutorProperty(PivotPackage.Literals.VERTEX__INCOMING, Types._Vertex, 1);
 		public static final @NonNull ExecutorProperty _Vertex__outgoing = new EcoreExecutorProperty(PivotPackage.Literals.VERTEX__OUTGOING, Types._Vertex, 2);
+
+		/*
+		 * Force initialization.
+		 */
+		public static void init() {
+			Types.init();
+		}
 	}
 
 	/**
@@ -4069,7 +4085,10 @@ public class PivotTables
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
 		 */
-		static {
+		public static void init() {
+			Fragments.init();
+			Properties.init();
+
 			Types._Annotation.initFragments(_Annotation, __Annotation);
 			Types._AnyType.initFragments(_AnyType, __AnyType);
 			Types._AssociationClass.initFragments(_AssociationClass, __AssociationClass);
@@ -4194,8 +4213,6 @@ public class PivotTables
 			Types._Visitor.initFragments(_Visitor, __Visitor);
 			Types._VoidType.initFragments(_VoidType, __VoidType);
 		}
-
-		public static void init() {}
 	}
 
 	/**
@@ -8563,7 +8580,9 @@ public class PivotTables
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
 		 */
-		static {
+		public static void init() {
+			TypeFragments.init();
+
 			Fragments._Annotation__Annotation.initOperations(_Annotation__Annotation);
 			Fragments._Annotation__Element.initOperations(_Annotation__Element);
 			Fragments._Annotation__Nameable.initOperations(_Annotation__Nameable);
@@ -9843,8 +9862,6 @@ public class PivotTables
 			Fragments._VoidType__Visitable.initOperations(_VoidType__Visitable);
 			Fragments._VoidType__VoidType.initOperations(_VoidType__VoidType);
 		}
-
-		public static void init() {}
 	}
 
 	/**
@@ -12667,7 +12684,9 @@ public class PivotTables
 		/**
 		 *	Install the property descriptors in the fragment descriptors.
 		 */
-		static {
+		public static void init() {
+			TypeFragments.init();
+
 			Fragments._Annotation__Annotation.initProperties(_Annotation);
 			Fragments._AnyType__AnyType.initProperties(_AnyType);
 			Fragments._AssociationClass__AssociationClass.initProperties(_AssociationClass);
@@ -12792,8 +12811,6 @@ public class PivotTables
 			Fragments._Visitor__Visitor.initProperties(_Visitor);
 			Fragments._VoidType__VoidType.initProperties(_VoidType);
 		}
-
-		public static void init() {}
 	}
 
 	/**
@@ -12865,7 +12882,10 @@ public class PivotTables
 		public static void init() {}
 	}
 
+	/*
+	 * Force initialization.
+	 */
 	static {
-		Types.types[0].getClass();
+		Types.init();
 	}
 }
