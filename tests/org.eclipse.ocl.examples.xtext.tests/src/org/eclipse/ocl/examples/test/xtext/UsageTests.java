@@ -329,25 +329,7 @@ public class UsageTests
 		dir.delete();
 	}
 
-	protected void doGenModel(@NonNull String testProjectName,
-			@NonNull String testFileStem, @NonNull String oclinecoreFile,
-			@NonNull String genmodelFile)
-			throws Exception {
-		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			suppressGitPrefixPopUp();
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			IProject project = workspace.getRoot().getProject(testProjectName);
-			if (!project.exists()) {
-				project.create(null);
-			}
-		}
-		MetaModelManager metaModelManager2 = new MetaModelManager();
-		metaModelManager = metaModelManager2;
-		createEcoreFile(metaModelManager2, testFileStem, oclinecoreFile);
-		createGenModelFile(testFileStem + ".genmodel", genmodelFile);
-		URI fileURI = getProjectFileURI(testFileStem + ".genmodel");
-		// System.out.println("Generating Ecore Model using '" + fileURI + "'");
-		metaModelManager2.dispose();
+	protected void zzdoGenModel(@NonNull URI fileURI) {
 		metaModelManager = new MetaModelManager();
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
@@ -422,6 +404,27 @@ public class UsageTests
 			String s = PivotUtil.formatDiagnostics(diagnostic, "\n");
 			fail("Generation failure" + s);
 		}
+	}
+
+	protected @NonNull URI createModels(@NonNull String testProjectName, @NonNull String testFileStem,
+			@NonNull String oclinecoreFile, @NonNull String genmodelFile)
+			throws CoreException, IOException {
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			suppressGitPrefixPopUp();
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			IProject project = workspace.getRoot().getProject(testProjectName);
+			if (!project.exists()) {
+				project.create(null);
+			}
+		}
+		MetaModelManager metaModelManager2 = new MetaModelManager();
+		metaModelManager = metaModelManager2;
+		createEcoreFile(metaModelManager2, testFileStem, oclinecoreFile);
+		createGenModelFile(testFileStem + ".genmodel", genmodelFile);
+		URI fileURI = getProjectFileURI(testFileStem + ".genmodel");
+		// System.out.println("Generating Ecore Model using '" + fileURI + "'");
+		metaModelManager2.dispose();
+		return fileURI;
 	}
 
 	protected void doGenModel(@NonNull String testProjectName, @NonNull URI genmodelURI)
@@ -529,7 +532,8 @@ public class UsageTests
 			+ "    }\n"
 			+ "}\n";
 		String genmodelFile = createGenModelContent(testProjectPath, "Bug370824", null);
-		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		URI fileURI = createModels(testProjectName, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
 	}
 
 	public void testBug409650() throws Exception {
@@ -549,7 +553,8 @@ public class UsageTests
 			+ "    }\n" + "}\n";
 		String genmodelFile = createGenModelContent(testProjectPath, "Bug409650", null);
 		doDelete(testProjectName);
-		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
 		doCompile(testProjectName, testFileStem);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
 			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
@@ -619,7 +624,8 @@ public class UsageTests
 			+ "    }\n" + "}\n";
 		String genmodelFile = createGenModelContent(testProjectPath, "Bug412736", null);
 		doDelete(testProjectName);
-		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
 		doCompile(testProjectName, testFileStem);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
 			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
@@ -663,7 +669,8 @@ public class UsageTests
 			+ "}\n";
 		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, null);
 		doDelete(testProjectName);
-		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
 		doCompile(testProjectName, testFileStem);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
 			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
@@ -699,7 +706,8 @@ public class UsageTests
 			+ "}\n";
 		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, null);
 		doDelete(testProjectName);
-		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
 		doCompile(testProjectName, testFileStem);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
 			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
@@ -807,7 +815,8 @@ public class UsageTests
 			+ "}\n";
 		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, null);
 		doDelete(testProjectName);
-		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
 		doCompile(testProjectName, testFileStem);
 	}
 	
@@ -845,10 +854,12 @@ public class UsageTests
 		String genmodelFileB = createGenModelContent(testProjectPathB, testFileStemB, "Bug416421A.genmodel#//bug416421A");
 		doDelete(testProjectNameA);
 		doDelete(testProjectNameB);
+		URI fileURIA = createModels(testProjectPathA, testFileStemA, oclinecoreFileA, genmodelFileA);
+		URI fileURIB = createModels(testProjectPathB, testFileStemB, oclinecoreFileB, genmodelFileB);
 		// B first demonstrates the demand load of Bug416421A to fix Bug 416421
-		doGenModel(testProjectPathB, testFileStemB, oclinecoreFileB, genmodelFileB);
+		doGenModel(testProjectPathB, fileURIB);
 		doCompile(testProjectNameB, testFileStemB);
-		doGenModel(testProjectPathA, testFileStemA, oclinecoreFileA, genmodelFileA);
+		doGenModel(testProjectPathA, fileURIA);
 		doCompile(testProjectNameA, testFileStemA);
 	}
 }
