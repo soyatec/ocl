@@ -629,7 +629,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryNull(Object context, @NonNull String expression) {
 		try {
 			Object value = evaluate(getHelper(), context, expression);
-			assertNull(expression, value);
+			assertEquals(expression, null, value);
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);

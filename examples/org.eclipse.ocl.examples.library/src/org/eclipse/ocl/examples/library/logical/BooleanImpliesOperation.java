@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
  * ImpliesOperation realises the implies() library operation.
@@ -37,6 +38,9 @@ public class BooleanImpliesOperation extends AbstractSimpleBinaryOperation
 		}
 		else if ((left == Boolean.TRUE) && (right == Boolean.FALSE)) {
 			return FALSE_VALUE;
+		}
+		if (LibraryConstants.NULL_SATISFIES_INVOLUTION && ((left == null) || (right == null))) {
+			return null;
 		}
 		else if (left instanceof InvalidValueException) {
 			throw (InvalidValueException)left;

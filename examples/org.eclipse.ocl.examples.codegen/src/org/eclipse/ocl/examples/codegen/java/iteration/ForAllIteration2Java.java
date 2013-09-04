@@ -25,6 +25,13 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 public class ForAllIteration2Java extends AbstractIteration2Java
 {
 	public static final @NonNull ForAllIteration2Java INSTANCE = new ForAllIteration2Java();
+
+//	@Override
+//	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+//		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+//			js.append("null");
+//		};
+//	}
 	
 	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
@@ -49,7 +56,17 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 	}
 	
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
-		js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
+//		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+//			js.append("forAll = accumulator == evaluator ? null : accumulator != null ? throw accumulator : true");
+//		};
+//		else {
+			js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
+//		}
 		return true;
 	}
+
+//	@Override
+//	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+//		return LibraryConstants.NULL_SATISFIES_INVOLUTION ? analyzer.getTypeId(new JavaTypeId(Object.class)) : null;
+//	}
 }

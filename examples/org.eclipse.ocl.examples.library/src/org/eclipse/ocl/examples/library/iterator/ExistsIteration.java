@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
  * ExistsIteration realises the Collection::exists() library iteration.
@@ -32,24 +33,88 @@ public class ExistsIteration extends AbstractIteration
 {
 	public static final @NonNull ExistsIteration INSTANCE = new ExistsIteration();
 
-	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
-		return false;
-	}
-	
-	@Override
-    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		Object bodyVal = iterationManager.evaluateBody();
-		if (bodyVal == null) {
-			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$
+	public static class ExistsResult 
+	{
+		private Exception exception = null;
+		private boolean isNull = false;
+		
+		public Object get() throws InvalidValueException {
+			if (isNull) {
+				return null;
+			}
+			else if (exception instanceof InvalidValueException) {
+				throw (InvalidValueException)exception;
+			}
+			else if (exception != null) {
+				throw new InvalidValueException(exception);
+			}
+			return false;
 		}
-		else if (bodyVal == Boolean.FALSE) {
-			return CARRY_ON;						// Carry on for nothing found
+		
+		public void setException(Exception exception) {
+			this.exception = exception;
+		}
+		
+		public void setIsNull() {
+			this.isNull = true;
+		}
+	}
+
+	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
+		return LibraryConstants.NULL_SATISFIES_INVOLUTION ? new ExistsResult() : false;
+	}
+
+	@Override
+	protected @Nullable Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+			ExistsResult accumulatorValue = (ExistsResult) iterationManager.getAccumulatorValue();
+			assert accumulatorValue != null;
+			return accumulatorValue.get();
 		}
 		else if (bodyVal != Boolean.TRUE) {
 			throw new InvalidValueException(EvaluatorMessages.NonBinaryOperation, "exists"); 	// Non boolean body is invalid //$NON-NLS-1$
 		}
 		else {
-			return true;							// Abort after a find
+			return false;
+		}
+	}
+
+	@Override
+    protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
+		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+			try {
+				Object bodyVal = iterationManager.evaluateBody();
+				if (bodyVal == null) {
+					ExistsResult accumulatorValue = (ExistsResult) iterationManager.getAccumulatorValue();
+					assert accumulatorValue != null;
+					accumulatorValue.setIsNull();
+					return CARRY_ON;						// Carry on for nothing found
+				}
+				else if (bodyVal == FALSE_VALUE) {
+					return CARRY_ON;						// Carry on for nothing found
+				}
+				else {
+					return true;							// Abort after a find
+				}
+			}
+			catch (Exception e) {
+				ExistsResult accumulatorValue = (ExistsResult) iterationManager.getAccumulatorValue();
+				assert accumulatorValue != null;
+				accumulatorValue.setException(e);
+				return CARRY_ON;							// Carry on for nothing found
+			}
+		}
+		else {
+			Object bodyVal = iterationManager.evaluateBody();
+			if (bodyVal == null) {
+				throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$
+			}
+			else if (bodyVal == Boolean.FALSE) {
+				return CARRY_ON;						// Carry on for nothing found
+			}
+			else {
+				return true;							// Abort after a find
+			}
 		}
 	}
 }

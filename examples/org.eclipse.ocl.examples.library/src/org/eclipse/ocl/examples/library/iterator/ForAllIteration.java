@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
  * ForAllIteration realizes the Collection::forAll() library iteration.
@@ -32,24 +33,88 @@ public class ForAllIteration extends AbstractIteration
 {
 	public static final @NonNull ForAllIteration INSTANCE = new ForAllIteration();
 
+	public static class ForAllResult 
+	{
+		private Exception exception = null;
+		private boolean isNull = false;
+		
+		public Object get() throws InvalidValueException {
+			if (isNull) {
+				return null;
+			}
+			else if (exception instanceof InvalidValueException) {
+				throw (InvalidValueException)exception;
+			}
+			else if (exception != null) {
+				throw new InvalidValueException(exception);
+			}
+			return true;
+		}
+		
+		public void setException(Exception exception) {
+			this.exception = exception;
+		}
+		
+		public void setIsNull() {
+			this.isNull = true;
+		}
+	}
+
 	public @NonNull Object createAccumulatorValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId accumulatorTypeId, @NonNull TypeId bodyTypeId) {
-		return true;
+		return LibraryConstants.NULL_SATISFIES_INVOLUTION ? new ForAllResult() : true;
+	}
+
+	@Override
+	protected @Nullable Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
+		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+			ForAllResult accumulatorValue = (ForAllResult) iterationManager.getAccumulatorValue();
+			assert accumulatorValue != null;
+			return accumulatorValue.get();
+		}
+		else {
+			return true;
+		}
 	}
 
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		Object bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal == null) {
-			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll"); 	// Null body is invalid //$NON-NLS-1$
-		}
-		else if (bodyVal == TRUE_VALUE) {
-			return CARRY_ON;						// Carry on for nothing found
+		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+			try {
+				Object bodyVal = iterationManager.evaluateBody();
+				if (bodyVal == null) {
+					ForAllResult accumulatorValue = (ForAllResult) iterationManager.getAccumulatorValue();
+					assert accumulatorValue != null;
+					accumulatorValue.setIsNull();
+					return CARRY_ON;						// Carry on for nothing found
+				}
+				else if (bodyVal == TRUE_VALUE) {
+					return CARRY_ON;						// Carry on for nothing found
+				}
+				else {
+					return false;							// Abort after a fail
+				}
+			}
+			catch (Exception e) {
+				ForAllResult accumulatorValue = (ForAllResult) iterationManager.getAccumulatorValue();
+				assert accumulatorValue != null;
+				accumulatorValue.setException(e);
+				return CARRY_ON;							// Carry on for nothing found
+			}
 		}
 		else if (bodyVal != Boolean.FALSE) {
 			throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll"); 	// Non boolean body is invalid //$NON-NLS-1$
 		}
 		else {
-			return false;							// Abort after a fail
+			Object bodyVal = iterationManager.evaluateBody();		
+			if (bodyVal == null) {
+				throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll"); 	// Null body is invalid //$NON-NLS-1$
+			}
+			else if (bodyVal == TRUE_VALUE) {
+				return CARRY_ON;						// Carry on for nothing found
+			}
+			else {
+				return false;							// Abort after a fail
+			}
 		}
 	}
 }

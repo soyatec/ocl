@@ -335,6 +335,18 @@ public class FieldingAnalyzer
 			return isCaught;
 		}
 
+//		@Override
+//		public @NonNull Boolean visitCGLibraryIterationCallExp(@NonNull CGLibraryIterationCallExp cgElement) {
+//			boolean isCaught = super.visitCGLibraryIterationCallExp(cgElement) == Boolean.TRUE;
+//			if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
+//				LibraryFeature implementation = cgElement.getReferredIteration().getImplementation();
+//				if ((implementation == ExistsIteration.INSTANCE) || (implementation == ForAllIteration.INSTANCE)) {
+//					rewriteAsCaught(cgElement.getBody());
+//				}
+//			}
+//			return isCaught;
+//		}
+
 		@Override
 		public @NonNull Boolean visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
 			List<CGValuedElement> cgArguments = cgElement.getArguments();

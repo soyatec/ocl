@@ -72,6 +72,7 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.iterator.AnyIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectNestedIteration;
@@ -351,10 +352,10 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		else if (libraryIteration instanceof CollectNestedIteration) {
 			return CollectNestedIteration2Java.INSTANCE;
 		}
-		else if (libraryIteration instanceof ExistsIteration) {
+		else if (!LibraryConstants.NULL_SATISFIES_INVOLUTION && (libraryIteration instanceof ExistsIteration)) {
 			return ExistsIteration2Java.INSTANCE;
 		}
-		else if (libraryIteration instanceof ForAllIteration) {
+		else if (!LibraryConstants.NULL_SATISFIES_INVOLUTION && (libraryIteration instanceof ForAllIteration)) {
 			return ForAllIteration2Java.INSTANCE;
 		}
 		else if (libraryIteration instanceof IsUniqueIteration) {

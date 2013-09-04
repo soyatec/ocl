@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
  * NotOperation realises the not() library operation.
@@ -37,6 +38,9 @@ public class BooleanNotOperation extends AbstractSimpleUnaryOperation
 		}
 		else if (argument == Boolean.TRUE) {
 			return FALSE_VALUE;
+		}
+		if (LibraryConstants.NULL_SATISFIES_INVOLUTION && (argument == null)) {
+			return null;
 		}
 		else if (argument instanceof InvalidValueException) {
 			throw (InvalidValueException)argument;
