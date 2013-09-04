@@ -786,8 +786,17 @@ public class OCLinEcoreTablesUtils
 			if (genPackage2 != null) {
 				return genPackage2;
 			}
+			for (GenPackage usedGenPackage : usedGenPackages) {
+				if (usedGenPackage != null) {
+					metaModelManager.addGenPackage(usedGenPackage);
+				}
+			}
+			genPackage2 = metaModelManager.getGenPackage(nsURI);
+			if (genPackage2 != null) {
+				return genPackage2;
+			}
 		}
-		return genPackage;	// FIXME
+		throw new IllegalStateException("No GenPackage for '" + nsURI + "'");
 	}
 
 	protected @NonNull String getImplementationName(@NonNull Operation operation) {

@@ -66,6 +66,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -215,7 +216,7 @@ public class UsageTests
 		writer.close();
 	}
 	
-	public @NonNull String createGenModelContent(@NonNull String testProjectPath, @NonNull String fileName) {
+	public @NonNull String createGenModelContent(@NonNull String testProjectPath, @NonNull String fileName, @Nullable String usedGenPackages) {
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 			+ "<genmodel:GenModel xmi:version=\"2.0\"\n"
 			+ "    xmlns:xmi=\"http://www.omg.org/XMI\"\n"
@@ -229,6 +230,7 @@ public class UsageTests
 			+ "    operationReflection=\"true\"\n"
 			+ "    copyrightFields=\"false\"\n"
 			+ "    bundleManifest=\"false\"\n"
+			+ (usedGenPackages != null ? "    usedGenPackages=\"" + usedGenPackages + "\"\n" : "")
 			+ "    updateClasspath=\"false\">\n"
 			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
 			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
@@ -526,7 +528,7 @@ public class UsageTests
 			+ "        attribute name : String[?] { ordered };\n"
 			+ "    }\n"
 			+ "}\n";
-		String genmodelFile = createGenModelContent(testProjectPath, "Bug370824");
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug370824", null);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 	}
 
@@ -545,7 +547,7 @@ public class UsageTests
 			+ "        operation myPrefixedName(s1 : String, s2 : String) : String { body: s1 + name + s2; }\n"
 			+ "        operation me() : Clase1 { body: self.oclAsType(Clase1); }\n"
 			+ "    }\n" + "}\n";
-		String genmodelFile = createGenModelContent(testProjectPath, "Bug409650");
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug409650", null);
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -615,7 +617,7 @@ public class UsageTests
 			+ "        operation notEBooleanObject(b : ecore::EBooleanObject) : ecore::EBooleanObject { body: not b; }\n"
 			+ "        operation upCase(b : ecore::EString) : ecore::EString { body: b.toUpper(); }\n"
 			+ "    }\n" + "}\n";
-		String genmodelFile = createGenModelContent(testProjectPath, "Bug412736");
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug412736", null);
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -659,7 +661,7 @@ public class UsageTests
 			+ "        operation otherColor(eColor : Color) : Color { body: if eColor = Color::BLACK then Color::WHITE else Color::BLACK endif; }\n"
 			+ "    }\n"
 			+ "}\n";
-		String genmodelFile = createGenModelContent(testProjectPath, testFileStem);
+		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, null);
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -695,7 +697,7 @@ public class UsageTests
 			+ "        operation test(a : ecore::EInt, b : ecore::EInt, c : ecore::EInt) : ecore::EInt { body: if a + b + c > 0 then a + b + c else a + b endif; }\n"
 			+ "    }\n"
 			+ "}\n";
-		String genmodelFile = createGenModelContent(testProjectPath, testFileStem);
+		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, null);
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -803,7 +805,7 @@ public class UsageTests
 			+ "        }\n"
 			+ "    }\n"
 			+ "}\n";
-		String genmodelFile = createGenModelContent(testProjectPath, testFileStem);
+		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, null);
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -824,7 +826,7 @@ public class UsageTests
 				+ "		}\n"
 				+ "	}\n"
 				+ "}\n";
-		String genmodelFileA = createGenModelContent(testProjectPathA, testFileStemA);
+		String genmodelFileA = createGenModelContent(testProjectPathA, testFileStemA, null);
 		String testFileStemB = "Bug416421B";
 		String testProjectNameB = "bug416421B";
 		String testProjectPathB = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameB : "org.eclipse.ocl.examples.xtext.tests";
@@ -840,12 +842,13 @@ public class UsageTests
 				+ "		}\n"
 				+ "	}\n"
 				+ "}\n";
-		String genmodelFileB = createGenModelContent(testProjectPathB, testFileStemB);
+		String genmodelFileB = createGenModelContent(testProjectPathB, testFileStemB, "Bug416421A.genmodel#//bug416421A");
 		doDelete(testProjectNameA);
 		doDelete(testProjectNameB);
-		doGenModel(testProjectPathA, testFileStemA, oclinecoreFileA, genmodelFileA);
-		doCompile(testProjectNameA, testFileStemA);
+		// B first demonstrates the demand load of Bug416421A to fix Bug 416421
 		doGenModel(testProjectPathB, testFileStemB, oclinecoreFileB, genmodelFileB);
 		doCompile(testProjectNameB, testFileStemB);
+		doGenModel(testProjectPathA, testFileStemA, oclinecoreFileA, genmodelFileA);
+		doCompile(testProjectNameA, testFileStemA);
 	}
 }
