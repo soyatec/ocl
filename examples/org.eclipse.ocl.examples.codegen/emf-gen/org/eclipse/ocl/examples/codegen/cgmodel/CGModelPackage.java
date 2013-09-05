@@ -4840,141 +4840,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__AST = CG_ITERATION_CALL_EXP__AST;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__NAME = CG_ITERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type Id</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__TYPE_ID = CG_ITERATION_CALL_EXP__TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__REQUIRED = CG_ITERATION_CALL_EXP__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__DEPENDS_ON = CG_ITERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__OWNS = CG_ITERATION_CALL_EXP__OWNS;
-
-	/**
-	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__INVALIDATING = CG_ITERATION_CALL_EXP__INVALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Validating</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__VALIDATING = CG_ITERATION_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__SOURCE = CG_ITERATION_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
-
-	/**
-	 * The feature id for the '<em><b>Iterators</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__ITERATORS = CG_ITERATION_CALL_EXP__ITERATORS;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__BODY = CG_ITERATION_CALL_EXP__BODY;
-
-	/**
-	 * The feature id for the '<em><b>Library Iteration</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Result</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__RESULT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>CG Library Iterate Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Ast</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int CG_LIBRARY_ITERATION_CALL_EXP__AST = CG_ITERATION_CALL_EXP__AST;
 
 	/**
@@ -5093,6 +4958,141 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATION_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__AST = CG_LIBRARY_ITERATION_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__NAME = CG_LIBRARY_ITERATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__TYPE_ID = CG_LIBRARY_ITERATION_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__REQUIRED = CG_LIBRARY_ITERATION_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__DEPENDS_ON = CG_LIBRARY_ITERATION_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__OWNS = CG_LIBRARY_ITERATION_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__INVALIDATING = CG_LIBRARY_ITERATION_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__VALIDATING = CG_LIBRARY_ITERATION_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__SOURCE = CG_LIBRARY_ITERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_ITERATION = CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_ITERATION;
+
+	/**
+	 * The feature id for the '<em><b>Iterators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__ITERATORS = CG_LIBRARY_ITERATION_CALL_EXP__ITERATORS;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__BODY = CG_LIBRARY_ITERATION_CALL_EXP__BODY;
+
+	/**
+	 * The feature id for the '<em><b>Library Iteration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION = CG_LIBRARY_ITERATION_CALL_EXP__LIBRARY_ITERATION;
+
+	/**
+	 * The feature id for the '<em><b>Result</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__RESULT = CG_LIBRARY_ITERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>CG Library Iterate Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP_FEATURE_COUNT = CG_LIBRARY_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryOperationImpl <em>CG Library Operation</em>}' class.
@@ -7821,17 +7821,6 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGLibraryIterateCallExp();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp#getLibraryIteration <em>Library Iteration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Library Iteration</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp#getLibraryIteration()
-	 * @see #getCGLibraryIterateCallExp()
-	 * @generated
-	 */
-	EAttribute getCGLibraryIterateCallExp_LibraryIteration();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9556,14 +9545,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_LIBRARY_ITERATE_CALL_EXP = eINSTANCE.getCGLibraryIterateCallExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Library Iteration</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION = eINSTANCE.getCGLibraryIterateCallExp_LibraryIteration();
 
 		/**
 		 * The meta object literal for the '<em><b>Result</b></em>' containment reference feature.

@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.codegen.java;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -26,8 +25,10 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -119,6 +120,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorDoubleIterationManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -146,6 +148,11 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	 */
 	protected JavaLocalContext localContext;
 	
+	/**
+	 * Scoping prefix for "this"
+	 */
+	private @Nullable String localPrefix = null;
+	
 	public CG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator) {
 		super(codeGenerator);
 		this.globalContext = codeGenerator.getGlobalContext();
@@ -160,6 +167,185 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	}
 
 	protected void appendGlobalPrefix() {}
+
+	protected void appendLoopCall(@NonNull CGLibraryIterationCallExp cgIterationCallExp, @Nullable CGIterator iterateResult) {
+		final CGValuedElement source = getExpression(cgIterationCallExp.getSource());
+		final List<CGIterator> iterators = cgIterationCallExp.getIterators();
+		final CGValuedElement body = getExpression(cgIterationCallExp.getBody());
+		final CGTypeId resultType = cgIterationCallExp.getTypeId();
+		final Operation referredOperation = ((LoopExp)cgIterationCallExp.getAst()).getReferredIteration();
+		final Class<?> operationClass = genModelHelper.getAbstractOperationClass(iterators);
+		final int arity = iterators.size();
+		final Class<?> managerClass = arity == 1 ? ExecutorSingleIterationManager.class : ExecutorDoubleIterationManager.class; 	// FIXME ExecutorMultipleIterationManager
+		final LibraryIteration libraryIteration = DomainUtil.nonNullState(cgIterationCallExp.getLibraryIteration());
+		final Method actualMethod = getJavaMethod(libraryIteration);
+		final Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
+		final String astName = cgIterationCallExp.getValueName();
+		final String bodyName = "BODY_" + astName;
+		final String implementationName = "IMPL_" + astName;
+		final String managerName = "MGR_" + astName;
+		final String staticTypeName = "TYPE_" + astName;
+		String accumulatorName;
+		//
+		//	Pre-amble: hoisted assignments
+		//
+		js.appendLocalStatements(source);
+		//
+		//	Dispatch: Determine static type
+		//
+		js.append("final "); 
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(DomainType.class);
+		js.append(" " + staticTypeName + " = ");
+//		js.appendReferenceTo(evaluatorParameter);
+		js.append(JavaConstants.EVALUATOR_NAME);
+		js.append(".getStaticTypeOf(");
+		js.appendValueName(source);
+		js.append(");\n");
+		//
+		//	Dispatch: Determine dynamic operation
+		//
+		js.append("final "); 
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(LibraryIteration.class);
+		js.append(" " + implementationName + " = ("); 
+		js.appendClassReference(LibraryIteration.class);
+		js.append( ")" + staticTypeName + ".lookupImplementation("); 
+		js.appendReferenceTo(localContext.getStandardLibraryVariable(cgIterationCallExp));
+		js.append(", ");
+		js.appendQualifiedLiteralName(DomainUtil.nonNullState(referredOperation));
+		js.append(");\n");
+		//
+		if (iterateResult != null) {
+			CGValuedElement init = iterateResult.getInit();
+			accumulatorName = init.getValueName();
+			js.appendLocalStatements(init);
+			js.appendDeclaration(iterateResult);
+			js.append(" = ");
+			js.appendValueName(init);
+			js.append(";\n");
+			//
+/*			js.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
+//			js.appendValueName(evaluatorParameter);
+			js.append(JavaConstants.EVALUATOR_NAME);
+			js.append(", ");
+			js.appendValueName(resultType);
+			js.append(", ");
+			js.appendValueName(body.getTypeId());
+			js.append(");\n"); */
+		}
+		else {
+			accumulatorName = "ACC_" + astName;	
+			js.append("final ");
+			js.appendIsRequired(true);
+			js.append(" Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
+//			js.appendValueName(evaluatorParameter);
+			js.append(JavaConstants.EVALUATOR_NAME);
+			js.append(", ");
+			js.appendValueName(resultType);
+			js.append(", ");
+			js.appendValueName(body.getTypeId());
+			js.append(");\n");
+		}
+		//
+		js.append("/**\n"); 
+		js.append(" * Implementation of the iterator body.\n");
+		js.append(" */\n");
+		js.append("final ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(operationClass);
+		js.append(" " + bodyName + " = new ");
+		js.appendClassReference(operationClass);
+		js.append("()\n");
+		js.append("{\n");
+		js.pushIndentation(null);
+			js.appendCommentWithOCL(null, body.getAst());
+			js.append("@Override\n");
+			js.append("public ");
+			js.appendIsRequired(false);
+			js.append(" Object evaluate(");
+			js.append("final ");
+			js.appendIsRequired(true);
+			js.append(" ");
+	//		js.appendDeclaration(evaluatorParameter);
+			js.appendClassReference(DomainEvaluator.class);
+			js.append(" ");
+			js.append(JavaConstants.EVALUATOR_NAME);
+			js.append(", ");
+			js.append("final ");
+			js.appendIsRequired(true);
+			js.append(" ");
+	//		js.appendDeclaration(localContext.getTypeIdParameter(cgIterateCallExp));
+			js.appendClassReference(TypeId.class);
+			js.append(" ");
+			js.append(JavaConstants.TYPE_ID_NAME);
+			if (iterateResult != null) {
+				js.append(", ");
+				js.appendDeclaration(iterateResult);
+			}
+			else {
+				js.append(", final ");
+				js.appendIsRequired(false);
+				js.append(" Object ");
+				js.appendValueName(source);
+//				js.appendDeclaration(source);
+			}
+			for (@SuppressWarnings("null")@NonNull CGParameter iterator : iterators) {
+				js.append(", ");
+				js.appendDeclaration(iterator);
+			}
+			js.append(") {\n");
+			js.pushIndentation(null);
+				String savedLocalPrefix = localPrefix;
+				JavaLocalContext savedLocalContext = localContext;
+				try {
+					CGClass cgClass = CGUtils.getContainingClass(cgIterationCallExp);
+					Element ast = cgClass != null ? cgClass.getAst() : null;
+					EObject eObject = ast != null ? ast.getETarget() : null;
+					if (eObject instanceof EClassifier) {
+						localPrefix = genModelHelper.getImplementationClassName((EClassifier)eObject);
+					}
+					localContext = globalContext.getLocalContext(cgIterationCallExp);
+					appendReturn(body);
+				}
+				finally {
+					localContext = savedLocalContext;
+					localPrefix = savedLocalPrefix;
+				}
+			js.popIndentation();
+			js.append("}\n");
+		js.popIndentation();
+		js.append("};\n");
+		//
+		//	Dispatch: Create execution manager
+		//
+		js.append("final ");
+		js.appendIsRequired(true);
+		js.append("  ");
+		js.appendClassReference(managerClass);
+		js.append(" " + managerName + " = new ");
+		js.appendClassReference(managerClass);
+		js.append("(");
+//		js.appendReferenceTo(evaluatorParameter);
+		js.append(JavaConstants.EVALUATOR_NAME);
+		js.append(", ");
+		js.appendValueName(resultType);
+		js.append(", " + bodyName + ", ");
+		js.appendReferenceTo(CollectionValue.class, source);
+//		js.appendValueName(source);
+		js.append(", " + accumulatorName + ");\n");
+		//
+		//	Dispatch: Invoke iteration
+		//
+		js.appendDeclaration(cgIterationCallExp);
+		js.append(" = ");
+		js.appendClassCast(cgIterationCallExp, actualReturnClass);
+		js.append(implementationName + ".evaluateIteration(" + managerName + ")");
+		js.append(";\n");
+	}
 
 	protected void appendReturn(@NonNull CGValuedElement body) {
 		js.appendLocalStatements(body);
@@ -1224,262 +1410,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	@Override
 	public @Nullable Object visitCGLibraryIterateCallExp(@NonNull CGLibraryIterateCallExp cgIterateCallExp) {
-		CGValuedElement source = getExpression(cgIterateCallExp.getSource());
-		CGValuedElement body = getExpression(cgIterateCallExp.getBody());
-		LibraryIteration libraryIteration = DomainUtil.nonNullState(cgIterateCallExp.getLibraryIteration());
-		Method actualMethod = getJavaMethod(libraryIteration);
-		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
-//		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
-//		boolean expectedIsNonNull = cgIterateCallExp.isNonNull();
-		CGIterator iterateResult = cgIterateCallExp.getResult();
-		CGTypeId resultType = cgIterateCallExp.getTypeId();
-//		CGValuedElement evaluatorParameter = localContext.getEvaluatorParameter(cgIterateCallExp);
-		List<CGIterator> iterators = cgIterateCallExp.getIterators();
-//		final int arity = iterators.size();
-		final Class<?> operationClass = genModelHelper.getAbstractOperationClass(iterators);
-		final String astName = cgIterateCallExp.getValueName();
-		Operation referredOperation = ((LoopExp)cgIterateCallExp.getAst()).getReferredIteration();
-		final Class<?> managerClass = ExecutorSingleIterationManager.class;
-		final String staticTypeName = "TYPE_" + astName;
-		final String implementationName = "IMPL_" + astName;
-		final String managerName = "MGR_" + astName;
-		final String bodyName = "BODY_" + astName;
-		
-		
-		
-		js.appendLocalStatements(source);
-		CGValuedElement init = iterateResult.getInit();
-		final String accumulatorName = init.getValueName();
-		js.appendLocalStatements(init);
-		js.appendDeclaration(iterateResult);
-		js.append(" = ");
-		js.appendValueName(init);
-		js.append(";\n");
-		//
-		js.append("/**\n"); 
-		js.append(" * Implementation of the iterator body.\n");
-		js.append(" */\n");
-		js.append("final ");
-		js.appendIsRequired(true);
-		js.append(" ");
-		js.appendClassReference(operationClass);
-		js.append(" " + bodyName + " = new ");
-		js.appendClassReference(operationClass);
-		js.append("()\n");
-		js.append("{\n");
-
-		js.pushIndentation(null);
-			js.appendCommentWithOCL(null, body.getAst());
-			js.append("@Override\n");
-			js.append("public ");
-			js.appendIsRequired(false);
-			js.append(" Object evaluate(");
-			js.append("final ");
-			js.appendIsRequired(true);
-			js.append("  ");
-//			js.appendDeclaration(evaluatorParameter);
-			js.appendClassReference(DomainEvaluator.class);
-			js.append("  ");
-			js.append(JavaConstants.EVALUATOR_NAME);
-			js.append(", ");
-			js.append("final ");
-			js.appendIsRequired(true);
-			js.append("  ");
-//			js.appendDeclaration(localContext.getTypeIdParameter(cgIterateCallExp));
-			js.appendClassReference(TypeId.class);
-			js.append("  ");
-			js.append(JavaConstants.TYPE_ID_NAME);
-			js.append(", ");
-			js.appendDeclaration(iterateResult);
-			for (@SuppressWarnings("null")@NonNull CGParameter iterator : iterators) {
-				js.append(", ");
-				js.appendDeclaration(iterator);
-			}
-			js.append(") {\n");
-			js.pushIndentation(null);
-				JavaLocalContext savedLocalContext = localContext;
-				try {
-					localContext = globalContext.getLocalContext(cgIterateCallExp);
-					List<CGIterator> allIterators = new ArrayList<CGIterator>(iterators);
-					allIterators.add(iterateResult);
-					appendReturn(body);
-				}
-				finally {
-					localContext = savedLocalContext;
-				}
-			js.popIndentation();
-			js.append("}\n");
-		js.popIndentation();
-		js.append("};\n");
-		//
-		js.appendClassReference(DomainType.class);
-		js.append(" " + staticTypeName + " = ");
-//		js.appendReferenceTo(evaluatorParameter);
-		js.appendClassReference(DomainEvaluator.class);
-		js.append(".getStaticTypeOf(");
-		js.appendValueName(source);
-		js.append(");\n");
-		//
-		js.appendClassReference(LibraryIteration.class);
-		js.append(" " + implementationName + " = ("); 
-		js.appendClassReference(LibraryIteration.class);
-		js.append( ")" + staticTypeName + ".lookupImplementation("); 
-		js.appendReferenceTo(localContext.getStandardLibraryVariable(cgIterateCallExp));
-		js.append(", ");
-		js.appendQualifiedLiteralName(DomainUtil.nonNullState(referredOperation));
-		js.append(");\n");
-		//
-		js.appendClassReference(managerClass);
-		js.append(" " + managerName + " = new ");
-		js.appendClassReference(managerClass);
-		js.append("(");
-//		js.appendReferenceTo(evaluatorParameter);
-		js.appendClassReference(DomainEvaluator.class);
-		js.append(", ");
-		js.appendValueName(resultType);
-		js.append(", " + bodyName + ", ");
-//		js.appendReferenceTo(CollectionValue.class, source);
-		js.appendValueName(source);
-		js.append(", " + accumulatorName + ");\n");
-		//
-		js.appendDeclaration(cgIterateCallExp);
-		js.append(" = ");
-		js.appendClassCast(cgIterateCallExp, actualReturnClass);
-		js.append(implementationName + ".evaluateIteration(" + managerName + ")");
-		js.append(";\n");
+		appendLoopCall(cgIterateCallExp, cgIterateCallExp.getResult());
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGLibraryIterationCallExp(@NonNull CGLibraryIterationCallExp cgIterationCallExp) {
-		CGValuedElement source = getExpression(cgIterationCallExp.getSource());
-		CGValuedElement body = getExpression(cgIterationCallExp.getBody());
-		LibraryIteration libraryIteration = DomainUtil.nonNullState(cgIterationCallExp.getLibraryIteration());
-		Method actualMethod = getJavaMethod(libraryIteration);
-		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
-//		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
-//		boolean expectedIsNonNull = cgIterationCallExp.isNonNull();
-//		Class<?> actualBoxedReturnClass = getBoxedReturnClass(libraryIteration, 0);
-//		CGValuedElement resultVariable = cgIterationCallExp.getValue();
-		CGTypeId resultType = cgIterationCallExp.getTypeId();
-//		Class<?> requiredBoxedReturnClass = context.getBoxedClass(resultType.getElementId());
-//		CGValuedElement evaluatorParameter = localContext.getEvaluatorParameter(cgIterationCallExp);
-		List<CGIterator> iterators = cgIterationCallExp.getIterators();
-		final int arity = iterators.size();
-		final Class<?> operationClass = genModelHelper.getAbstractOperationClass(iterators);
-		final String astName = cgIterationCallExp.getValueName();
-		Operation referredOperation = ((LoopExp)cgIterationCallExp.getAst()).getReferredIteration();
-		final Class<?> managerClass = arity == 1 ? ExecutorSingleIterationManager.class : ExecutorDoubleIterationManager.class; 	// FIXME ExecutorMultipleIterationManager
-		final String staticTypeName = "TYPE_" + astName;
-		final String accumulatorName = "ACC_" + astName;
-		final String implementationName = "IMPL_" + astName;
-		final String managerName = "MGR_" + astName;
-		final String bodyName = "BODY_" + astName;
-		
-		
-		
-		js.appendLocalStatements(source);
-		//
-		js.append("/**\n"); 
-		js.append(" * Implementation of the iterator body.\n");
-		js.append(" */\n");
-		js.append("final ");
-		js.appendIsRequired(true);
-		js.append(" ");
-		js.appendClassReference(operationClass);
-		js.append(" " + bodyName + " = new ");
-		js.appendClassReference(operationClass);
-		js.append("()\n");
-		js.append("{\n");
-
-		js.pushIndentation(null);
-			js.appendCommentWithOCL(null, body.getAst());
-			js.append("@Override\n");
-			js.append("public ");
-			js.appendIsRequired(false);
-			js.append(" Object evaluate(");
-			js.append("final ");
-			js.appendIsRequired(true);
-			js.append("  ");
-//			js.appendDeclaration(evaluatorParameter);
-			js.appendClassReference(DomainEvaluator.class);
-			js.append("  ");
-			js.append(JavaConstants.EVALUATOR_NAME);
-			js.append(", ");
-			js.append("final ");
-			js.appendIsRequired(true);
-			js.append("  ");
-//			js.appendDeclaration(localContext.getTypeIdParameter(cgIterateCallExp));
-			js.appendClassReference(TypeId.class);
-			js.append("  ");
-			js.append(JavaConstants.TYPE_ID_NAME);
-			js.append(", final ");
-			js.appendIsRequired(false);
-			js.append(" Object ");
-			js.appendValueName(source);
-//			js.appendDeclaration(source);
-			for (@SuppressWarnings("null")@NonNull CGParameter iterator : iterators) {
-				js.append(", ");
-				js.appendDeclaration(iterator);
-			}
-			js.append(") {\n");
-			js.pushIndentation(null);
-				JavaLocalContext savedLocalContext = localContext;
-				try {
-					localContext = globalContext.getLocalContext(cgIterationCallExp);
-					appendReturn(body);
-				}
-				finally {
-					localContext = savedLocalContext;
-				}
-			js.popIndentation();
-			js.append("}\n");
-		js.popIndentation();
-		js.append("};\n");
-		//
-		js.appendClassReference(DomainType.class);
-		js.append(" " + staticTypeName + " = ");
-//		js.appendReferenceTo(evaluatorParameter);
-		js.append(JavaConstants.EVALUATOR_NAME);
-		js.append(".getStaticTypeOf(");
-		js.appendValueName(source);
-		js.append(");\n");
-		//
-		js.appendClassReference(LibraryIteration.class);
-		js.append(" " + implementationName + " = ("); 
-		js.appendClassReference(LibraryIteration.class);
-		js.append( ")" + staticTypeName + ".lookupImplementation("); 
-		js.appendReferenceTo(localContext.getStandardLibraryVariable(cgIterationCallExp));
-		js.append(", ");
-		js.appendQualifiedLiteralName(DomainUtil.nonNullState(referredOperation));
-		js.append(");\n");
-		//
-		js.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
-//		js.appendValueName(evaluatorParameter);
-		js.append(JavaConstants.EVALUATOR_NAME);
-		js.append(", ");
-		js.appendValueName(resultType);
-		js.append(", ");
-		js.appendValueName(body.getTypeId());
-		js.append(");\n");
-		//
-		js.appendClassReference(managerClass);
-		js.append(" " + managerName + " = new ");
-		js.appendClassReference(managerClass);
-		js.append("(");
-//		js.appendReferenceTo(evaluatorParameter);
-		js.append(JavaConstants.EVALUATOR_NAME);
-		js.append(", ");
-		js.appendValueName(resultType);
-		js.append(", " + bodyName + ", ");
-		js.appendReferenceTo(CollectionValue.class, source);
-		js.append(", " + accumulatorName + ");\n");
-		//
-		js.appendDeclaration(cgIterationCallExp);
-		js.append(" = ");
-		js.appendClassCast(cgIterationCallExp, actualReturnClass);
-		js.append(implementationName + ".evaluateIteration(" + managerName + ")");
-		js.append(";\n");
+		appendLoopCall(cgIterationCallExp, null);
 		return null;
 	}
 
@@ -1688,7 +1625,12 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	@Override
 	public @Nullable Object visitCGTextParameter(@NonNull CGTextParameter cgTextParameter) {
-		js.append(cgTextParameter.getTextValue());
+		String name = cgTextParameter.getTextValue();
+		if ((localPrefix != null) && "this".equals(name)) {
+			js.append(localPrefix);
+			js.append(".");
+		}
+		js.append(name);
 		return null;
 	}
 

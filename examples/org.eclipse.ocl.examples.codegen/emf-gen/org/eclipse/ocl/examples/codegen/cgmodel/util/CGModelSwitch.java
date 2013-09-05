@@ -556,6 +556,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP: {
 				CGLibraryIterateCallExp cgLibraryIterateCallExp = (CGLibraryIterateCallExp)theEObject;
 				T result = caseCGLibraryIterateCallExp(cgLibraryIterateCallExp);
+				if (result == null) result = caseCGLibraryIterationCallExp(cgLibraryIterateCallExp);
 				if (result == null) result = caseCGIterationCallExp(cgLibraryIterateCallExp);
 				if (result == null) result = caseCGCallExp(cgLibraryIterateCallExp);
 				if (result == null) result = caseCGValuedElement(cgLibraryIterateCallExp);

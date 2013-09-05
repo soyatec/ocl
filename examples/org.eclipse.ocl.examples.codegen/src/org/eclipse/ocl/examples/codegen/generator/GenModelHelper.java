@@ -48,6 +48,7 @@ public interface GenModelHelper
 	@Nullable GenPackage getGenPackage(@NonNull org.eclipse.ocl.examples.pivot.Package asPackage);
 	@Nullable GenPackage getGenPackage(@NonNull Type type);
 	@Nullable GenParameter getGenParameter(@NonNull Parameter parameter);
+	@Nullable String getImplementationClassName(@NonNull EClassifier eClassifier);
 	@NonNull String getLiteralName(@NonNull EClassifier eClassifier);
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull String getOperationAccessor(@NonNull Operation anOperation) throws GenModelException;

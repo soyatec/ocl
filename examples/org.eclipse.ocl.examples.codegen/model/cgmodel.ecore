@@ -312,9 +312,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" eType="#//CGValuedElement"
         containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGLibraryIterateCallExp" eSuperTypes="#//CGIterationCallExp">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="libraryIteration" lowerBound="1"
-        eType="#//LibraryIteration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CGLibraryIterateCallExp" eSuperTypes="#//CGLibraryIterationCallExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//CGIterator"
         containment="true" resolveProxies="false"/>
   </eClassifiers>

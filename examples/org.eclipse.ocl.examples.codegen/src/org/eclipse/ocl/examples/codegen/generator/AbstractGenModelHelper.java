@@ -461,6 +461,21 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + eStructuralFeature);
 	}
 
+	public @Nullable String getImplementationClassName(@NonNull EClassifier eClassifier) throws GenModelException {
+		try {
+			GenClassifier genClassifier = getGenClassifier(eClassifier);
+			if (genClassifier instanceof GenClass) {
+				return ((GenClass)genClassifier).getClassName();
+			}
+			else {
+				return genClassifier.getName();
+			}
+		}
+		catch (GenModelException e) {
+			return null;
+		}
+	}
+
 	@SuppressWarnings("null")
 	public @NonNull String getLiteralName(@NonNull EClassifier eClassifier) {
 		String name = eClassifier.getName();

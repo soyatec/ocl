@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,34 +33,13 @@ import org.eclipse.ocl.examples.domain.library.LibraryIteration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryIterateCallExpImpl#getLibraryIteration <em>Library Iteration</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryIterateCallExpImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implements CGLibraryIterateCallExp {
-	/**
-	 * The default value of the '{@link #getLibraryIteration() <em>Library Iteration</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLibraryIteration()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final LibraryIteration LIBRARY_ITERATION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLibraryIteration() <em>Library Iteration</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLibraryIteration()
-	 * @generated
-	 * @ordered
-	 */
-	protected LibraryIteration libraryIteration = LIBRARY_ITERATION_EDEFAULT;
-
+public class CGLibraryIterateCallExpImpl extends CGLibraryIterationCallExpImpl implements CGLibraryIterateCallExp {
 	/**
 	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -89,27 +67,6 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	@Override
 	protected EClass eStaticClass() {
 		return CGModelPackage.Literals.CG_LIBRARY_ITERATE_CALL_EXP;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LibraryIteration getLibraryIteration() {
-		return libraryIteration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLibraryIteration(LibraryIteration newLibraryIteration) {
-		LibraryIteration oldLibraryIteration = libraryIteration;
-		libraryIteration = newLibraryIteration;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION, oldLibraryIteration, libraryIteration));
 	}
 
 	/**
@@ -161,16 +118,6 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	 * @generated
 	 */
 	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__RESULT:
@@ -187,8 +134,6 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION:
-				return getLibraryIteration();
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__RESULT:
 				return getResult();
 		}
@@ -203,9 +148,6 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION:
-				setLibraryIteration((LibraryIteration)newValue);
-				return;
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__RESULT:
 				setResult((CGIterator)newValue);
 				return;
@@ -221,9 +163,6 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION:
-				setLibraryIteration(LIBRARY_ITERATION_EDEFAULT);
-				return;
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__RESULT:
 				setResult((CGIterator)null);
 				return;
@@ -239,8 +178,6 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__LIBRARY_ITERATION:
-				return LIBRARY_ITERATION_EDEFAULT == null ? libraryIteration != null : !LIBRARY_ITERATION_EDEFAULT.equals(libraryIteration);
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__RESULT:
 				return result != null;
 		}
