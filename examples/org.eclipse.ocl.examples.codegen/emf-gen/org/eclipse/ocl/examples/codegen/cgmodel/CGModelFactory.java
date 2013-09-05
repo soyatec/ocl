@@ -36,6 +36,15 @@ public interface CGModelFactory extends EFactory {
 	@NonNull CGModelFactory eINSTANCE = org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>CG Accumulator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Accumulator</em>'.
+	 * @generated
+	 */
+	CGAccumulator createCGAccumulator();
+
+	/**
 	 * Returns a new object of class '<em>CG Boolean</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

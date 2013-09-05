@@ -193,22 +193,4 @@ public class CGLibraryIterateCallExpImpl extends CGLibraryIterationCallExpImpl i
 		return visitor.visitCGLibraryIterateCallExp(this);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isBoxed() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUnboxed() {
-		return false;
-	}
-
 } //CGLibraryIterateCallExpImpl

@@ -46,10 +46,6 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		super(useCodeGen);
 	}
 
-	private void assertQueryNullOrInvalid(@Nullable Object object, @NonNull String string) {
-		assertQueryNull(object, string);
-	}
-
 	@Override
 	protected @NonNull String getTestPackageName() {
 		return "EvaluateBooleanOperations";
@@ -92,10 +88,10 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = invalid, b : Boolean = invalid in a and b");
 		// null
 		assertQueryFalse(null, "let b : Boolean = null in false and b");
-		assertQueryNullOrInvalid(null, "let b : Boolean = null in true and b");
+		assertQueryNull(null, "let b : Boolean = null in true and b");
 		assertQueryFalse(null, "let a : Boolean = null in a and false");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null in a and true");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null, b : Boolean = null in a and b");
+		assertQueryNull(null, "let a : Boolean = null in a and true");
+		assertQueryNull(null, "let a : Boolean = null, b : Boolean = null in a and b");
 	}
 
 	@Test public void testBooleanEqual() {
@@ -128,10 +124,10 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = invalid, b : Boolean = invalid in a implies b");
 		// null
 		assertQueryTrue(null, "let b : Boolean = null in false implies b");
-		assertQueryNullOrInvalid(null, "let b : Boolean = null in true implies b");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null in a implies false");
+		assertQueryNull(null, "let b : Boolean = null in true implies b");
+		assertQueryNull(null, "let a : Boolean = null in a implies false");
 		assertQueryTrue(null, "let a : Boolean = null in a implies true");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null, b : Boolean = null in a implies b");
+		assertQueryNull(null, "let a : Boolean = null, b : Boolean = null in a implies b");
 	}
 
 	@Test public void testBooleanNot() {
@@ -140,7 +136,7 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		// invalid
 		assertQueryInvalid(null, "let a : Boolean = invalid in not a");
 		// null
-		assertQueryNullOrInvalid(null, "let a : Boolean = null in not a");
+		assertQueryNull(null, "let a : Boolean = null in not a");
 	}
 
 	@Test public void testBooleanNotEqual() {
@@ -172,11 +168,11 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		assertQueryTrue(null, "let a : Boolean = invalid in a or true");
 		assertQueryInvalid(null, "let a : Boolean = invalid, b : Boolean = invalid in a or b");
 		// null
-		assertQueryNullOrInvalid(null, "let b : Boolean = null in false or b");
+		assertQueryNull(null, "let b : Boolean = null in false or b");
 		assertQueryTrue(null, "let b : Boolean = null in true or b");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null in a or false");
+		assertQueryNull(null, "let a : Boolean = null in a or false");
 		assertQueryTrue(null, "let a : Boolean = null in a or true");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null, b : Boolean = null in a or b");
+		assertQueryNull(null, "let a : Boolean = null, b : Boolean = null in a or b");
 	}
 
 	@Test public void testBooleanToString() {
@@ -197,10 +193,10 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "let a : Boolean = invalid in a xor true");
 		assertQueryInvalid(null, "let a : Boolean = invalid, b : Boolean = invalid in a xor b");
 		// xor
-		assertQueryNullOrInvalid(null, "let b : Boolean = null in false xor b");
-		assertQueryNullOrInvalid(null, "let b : Boolean = null in true xor b");
-		assertQueryNullOrInvalid(null, "let b : Boolean = null in true xor b");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null in a xor true");
-		assertQueryNullOrInvalid(null, "let a : Boolean = null, b : Boolean = null in a xor b");
+		assertQueryNull(null, "let b : Boolean = null in false xor b");
+		assertQueryNull(null, "let b : Boolean = null in true xor b");
+		assertQueryNull(null, "let b : Boolean = null in true xor b");
+		assertQueryNull(null, "let a : Boolean = null in a xor true");
+		assertQueryNull(null, "let a : Boolean = null, b : Boolean = null in a xor b");
 	}
 }

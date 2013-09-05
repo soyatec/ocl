@@ -20,6 +20,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -169,7 +170,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for isInvalid()/isNonInvalid()/setNonInvalid()
 	 */
-	protected static enum Inv { CPART, FALSE, IF, PARTS, ROOT, TRUE, VAR }
+	protected static enum Inv { CPART, FALSE, IF, PARTS, ROOT, TRUE, VAL, VAR }
 
 	/**
 	 * The algorithm options for isFalse()/isTrue()
@@ -612,6 +613,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isInvalid();";
 					case TRUE: return "return true;";
+					case VAL: return "return !nonInvalid && super.isInvalid();";
 					case VAR: return "return !nonInvalid && super.isInvalid();";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
@@ -641,6 +643,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isNonInvalid();";
 					case TRUE: return "return false;";
+					case VAL: return "return nonInvalid;";
 					case VAR: return "return nonInvalid || super.isNonInvalid();";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
@@ -873,17 +876,29 @@ public class CGValuedElementModelSpec extends ModelSpec
 	};
 	
 	protected static MethodSpec setNonInvalid = new MyMethodSpec(CGVariable.class, "void setNonInvalid()", "boolean nonInvalid = false",
-		"Set the non-invalid status.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
-			if (modelSpec.cgClass != rootClass) {
-				return null;
+			"Set the non-invalid status.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
+				if (modelSpec.cgClass != rootClass) {
+					return null;
+				}
+				return "nonInvalid = true;";
 			}
-			return "nonInvalid = true;";
-		}
-	};
-	
+		};
+		
+		protected static MethodSpec setNonInvalidValue = new MyMethodSpec(CGAccumulator.class, "void setNonInvalid(boolean nonInvalid)", "boolean nonInvalid = false",
+				"Set the non-invalid status.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec modelSpec) {
+					if (modelSpec.cgClass != rootClass) {
+						return null;
+					}
+					return "this.nonInvalid = nonInvalid;";
+				}
+			};
+			
 	protected static MethodSpec setNonNull = new MyMethodSpec(CGVariable.class, "void setNonNull()", "boolean nonNull = false",
 		"Set the non-null status.")
 	{
@@ -965,6 +980,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 
 		new CGValuedElementModelSpec(CGParameter.class, "init",						Box.PARAM, null     , null     , null     , Inv.FALSE, Glo.DELEG, null     , null     , null    , Con.DELEG, Val.THIS , null     , null     , CTL_PARAM, null     , null     );
 		new CGValuedElementModelSpec(CGIterator.class, null,						null     , null     , null     , null     , null     , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , CTL_CNTRL, null     , null     );
+		new CGValuedElementModelSpec(CGAccumulator.class, null,						null     , null     , null     , null     , Inv.VAL  , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     );
 		new CGValuedElementModelSpec(CGTextParameter.class, null,					Box.FALSE, Ref.THIS , null     , null     , Inv.FALSE, Glo.FALSE, Inl.TRUE , null     , null    , null     , null     , null     , null     , CTL_CNTRL, null     , null     );
 
 		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , CTL_LORG , null     , null     );
@@ -1064,6 +1080,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 		rewriteAs.generate(s, this, genModel, isImplementation);
 		setCaught.generate(s, this, genModel, isImplementation);
 		setNonInvalid.generate(s, this, genModel, isImplementation);
+		setNonInvalidValue.generate(s, this, genModel, isImplementation);
 		setNonNull.generate(s, this, genModel, isImplementation);
 		setValueName.generate(s, this, genModel, isImplementation);
 	}

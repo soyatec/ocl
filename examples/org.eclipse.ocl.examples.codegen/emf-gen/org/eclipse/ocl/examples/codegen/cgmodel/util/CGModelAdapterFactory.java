@@ -81,6 +81,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	protected CGModelSwitch<Adapter> modelSwitch =
 		new CGModelSwitch<Adapter>() {
 			@Override
+			public Adapter caseCGAccumulator(CGAccumulator object) {
+				return createCGAccumulatorAdapter();
+			}
+			@Override
 			public Adapter caseCGBoolean(CGBoolean object) {
 				return createCGBooleanAdapter();
 			}
@@ -395,6 +399,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator <em>CG Accumulator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator
+	 * @generated
+	 */
+	public Adapter createCGAccumulatorAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean <em>CG Boolean</em>}'.

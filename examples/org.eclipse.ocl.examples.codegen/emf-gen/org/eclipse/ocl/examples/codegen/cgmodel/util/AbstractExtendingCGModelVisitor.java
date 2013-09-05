@@ -42,6 +42,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 		super(context);
 	}	
 
+	public @Nullable R visitCGAccumulator(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator object) {
+		return visitCGIterator(object);
+	}
+
 	public @Nullable R visitCGBoolean(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean object) {
 		return visitCGConstant(object);
 	}

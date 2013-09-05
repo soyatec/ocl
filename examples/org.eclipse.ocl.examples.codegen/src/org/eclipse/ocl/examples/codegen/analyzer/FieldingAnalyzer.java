@@ -308,7 +308,12 @@ public class FieldingAnalyzer
 			for (CGIterator cgIterator : cgElement.getIterators()) {
 				cgIterator.accept(this);
 			}
-			rewriteAsThrown(cgElement.getBody());
+			if (cgElement.getReferredIteration().isValidating()) {
+				rewriteAsCaught(cgElement.getBody());
+			}
+			else {
+				rewriteAsThrown(cgElement.getBody());
+			}
 			cgElement.setCaught(false);
 			return false;
 		}

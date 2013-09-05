@@ -15,58 +15,159 @@
 package org.eclipse.ocl.examples.codegen.java.iteration;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.codegen.java.types.JavaTypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class ForAllIteration2Java extends AbstractIteration2Java
 {
 	public static final @NonNull ForAllIteration2Java INSTANCE = new ForAllIteration2Java();
 
-//	@Override
-//	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
-//		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
-//			js.append("null");
-//		};
-//	}
+	@Override
+	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".TRUE_VALUE");
+	}
+	
+	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
+		js.append("if ((");
+		js.appendValueName(cgAccumulator);
+		js.append(" == null) || (");
+		js.appendValueName(cgAccumulator);
+		js.append(" == ");
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".TRUE_VALUE)) {\n");
+		js.pushIndentation(null);
+			js.appendValueName(cgIterationCallExp);
+			js.append(" = (");
+			js.appendClassReference(Boolean.class);
+			js.append(")");
+			js.appendValueName(cgAccumulator);
+			js.append(";\n");
+		js.popIndentation();
+		js.append("}\n");
+		js.append("else {\n");
+		js.pushIndentation(null);
+			js.append("throw (");
+			js.appendClassReference(InvalidValueException.class);
+			js.append(")");
+			js.appendValueName(cgAccumulator);
+			js.append(";\n");
+		js.popIndentation();
+		js.append("}\n");
+		return true;
+	}
 	
 	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
-		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
+//		if ((cgBody.getASTypeId() == TypeId.BOOLEAN) || (cgBody.getASTypeId() == TypeId.OCL_VOID)) {
+		if (cgBody.isTrue()) {
+			js.appendValueName(cgIterationCallExp);
+			js.append(" = ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".TRUE_VALUE;\n");
+			js.append("break;\n");
+		}
+		else if (cgBody.isFalse()) {
+			js.appendValueName(cgIterationCallExp);
+			js.append(" = ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".FALSE_VALUE;\n");
+			js.append("break;\n");
+		}
+		else if (cgBody.isNull()) {
+			js.appendValueName(cgIterationCallExp);
+			js.append(" = null;\n");
+			js.append("break;\n");
+		}
+		else if (cgBody.isInvalid()) {
+			js.append("throw new ");
+			js.appendValueName(cgBody);
+			js.append(";\n");
+			js.append("break;\n");
+		}
+		else if (cgBody.isConstant()) {
+			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll");
+		}
+		else {
 			js.append("if (");
 			js.appendValueName(cgBody);
-			js.append(" != ");
+			js.append(" == ");
 			js.appendClassReference(ValuesUtil.class);
-			js.append(".TRUE_VALUE) {			// Carry unless something not found\n");
+			js.append(".FALSE_VALUE) {					// Normal unsuccessful body evaluation result\n");
 			js.pushIndentation(null);
 				js.appendValueName(cgIterationCallExp);
 				js.append(" = ");
 				js.appendClassReference(ValuesUtil.class);
-				js.append(".FALSE_VALUE;			// Abort after a fail\n");
-				js.append("break;\n");
+				js.append(".FALSE_VALUE;\n");
+				js.append("break;														// Stop immediately \n");
+			js.popIndentation();
+			js.append("}\n");
+			//
+			js.append("else if (");
+			js.appendValueName(cgBody);
+			js.append(" == ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".TRUE_VALUE) {				// Normal successful body evaluation result\n");
+			js.pushIndentation(null);
+				js.append(";															// Carry on\n");
+			js.popIndentation();
+			js.append("}\n");
+			//
+			js.append("else if (");
+			js.appendValueName(cgBody);
+			js.append(" == null) {								// Abnormal null body evaluation result\n");
+			js.pushIndentation(null);
+				js.append("if (");
+				js.appendValueName(cgAccumulator);
+				js.append(" == ");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".TRUE_VALUE) {\n");
+				js.pushIndentation(null);
+					js.appendValueName(cgAccumulator);
+					js.append(" = null;										// Cache a null failure\n");
+				js.popIndentation();
+				js.append("}\n");
+			js.popIndentation();
+			js.append("}\n");
+			//
+			js.append("else if (");
+			js.appendValueName(cgBody);
+			js.append(" instanceof ");
+			js.appendClassReference(InvalidValueException.class);
+			js.append(") {		// Abnormal exception evaluation result\n");
+			js.pushIndentation(null);
+				js.appendValueName(cgAccumulator);
+				js.append(" = ");
+				js.appendValueName(cgBody);
+				js.append(";									// Cache an exception failure\n");
+			js.popIndentation();
+			js.append("}\n");
+			js.append("else {															// Impossible badly typed result\n");
+			js.pushIndentation(null);
+				js.appendValueName(cgAccumulator);
+				js.append(" = new ");
+				js.appendClassReference(InvalidValueException.class);
+				js.append("(");
+				js.appendClassReference(EvaluatorMessages.class);
+				js.append(".NonBooleanBody, \"forAll\");\n");
 			js.popIndentation();
 			js.append("}\n");
 		}
-		else {
-			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll");
-		}
 	}
 	
-	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
-//		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
-//			js.append("forAll = accumulator == evaluator ? null : accumulator != null ? throw accumulator : true");
-//		};
-//		else {
-			js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
-//		}
-		return true;
+	@Override
+	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		return analyzer.getTypeId(new JavaTypeId(Object.class));
 	}
-
-//	@Override
-//	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
-//		return LibraryConstants.NULL_SATISFIES_INVOLUTION ? analyzer.getTypeId(new JavaTypeId(Object.class)) : null;
-//	}
 }

@@ -79,6 +79,20 @@ public class CGModelSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case CGModelPackage.CG_ACCUMULATOR: {
+				CGAccumulator cgAccumulator = (CGAccumulator)theEObject;
+				T result = caseCGAccumulator(cgAccumulator);
+				if (result == null) result = caseCGIterator(cgAccumulator);
+				if (result == null) result = caseCGParameter(cgAccumulator);
+				if (result == null) result = caseCGVariable(cgAccumulator);
+				if (result == null) result = caseCGValuedElement(cgAccumulator);
+				if (result == null) result = caseCGTypedElement(cgAccumulator);
+				if (result == null) result = caseCGNamedElement(cgAccumulator);
+				if (result == null) result = caseCGElement(cgAccumulator);
+				if (result == null) result = caseNameable(cgAccumulator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_BOOLEAN: {
 				CGBoolean cgBoolean = (CGBoolean)theEObject;
 				T result = caseCGBoolean(cgBoolean);
@@ -931,6 +945,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Accumulator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Accumulator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGAccumulator(CGAccumulator object) {
+		return null;
 	}
 
 	/**

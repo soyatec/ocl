@@ -100,10 +100,6 @@ public class IteratorsTest4 extends PivotTestSuite
 	org.eclipse.ocl.examples.pivot.Package bob;
 	org.eclipse.ocl.examples.pivot.Package george;
 
-	private void assertQueryNullOrInvalid(@Nullable Object object, @NonNull String string) {
-		assertQueryNull(object, string);
-	}
-
 	@Override
 	protected @NonNull String getTestPackageName() {
 		return "Iterators";
@@ -264,9 +260,10 @@ public class IteratorsTest4 extends PivotTestSuite
     	assertQueryFalse(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{false}, Sequence{false}}->exists(e | e->first())");
     	assertQueryTrue(null, "Sequence{Sequence{false}, Sequence{true}, Sequence{false}, Sequence{false}}->exists(e | e->first())");
     	assertQueryTrue(null, "Sequence{Sequence{false}, Sequence{true}, Sequence{null}, Sequence{true}}->exists(e | e->first())");
-    	assertQueryNullOrInvalid(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{null}, Sequence{false}}->exists(e | e->first())");
+    	assertQueryNull(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{null}, Sequence{false}}->exists(e | e->first())");
     	assertQueryTrue(null, "Sequence{Sequence{false}, Sequence{true}, Sequence{null}, Sequence{}}->exists(e | e->first())");
-       	assertQueryNullOrInvalid(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{null}, Sequence{}}->exists(e | e->first())");
+    	assertQueryInvalid(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{null}, Sequence{}}->exists(e | e->first())");
+    	assertQueryInvalid(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{}, Sequence{null}}->exists(e | e->first())");
        	assertQueryInvalid(null, "Sequence{Sequence{false}, Sequence{false}, Sequence{false}, Sequence{}}->exists(e | e->first())");
 
         assertQueryTrue(pkg1, "Sequence{'a', 'b', 'c', 'd', 'e'}->exists(e | e = 'c')");
@@ -286,14 +283,13 @@ public class IteratorsTest4 extends PivotTestSuite
      * Tests the forAll() iterator.
      */
     @Test public void test_forAll() {
-    	assertQueryNullOrInvalid(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{null}, Sequence{true}}->forAll(e | e->first())");
-//
     	assertQueryTrue(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{true}, Sequence{true}}->forAll(e | e->first())");
     	assertQueryFalse(null, "Sequence{Sequence{true}, Sequence{false}, Sequence{true}, Sequence{true}}->forAll(e | e->first())");
     	assertQueryFalse(null, "Sequence{Sequence{true}, Sequence{false}, Sequence{null}, Sequence{false}}->forAll(e | e->first())");
-    	assertQueryNullOrInvalid(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{null}, Sequence{true}}->forAll(e | e->first())");
+    	assertQueryNull(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{null}, Sequence{true}}->forAll(e | e->first())");
        	assertQueryFalse(null, "Sequence{Sequence{true}, Sequence{false}, Sequence{null}, Sequence{}}->forAll(e | e->first())");
-       	assertQueryNullOrInvalid(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{null}, Sequence{}}->forAll(e | e->first())");
+       	assertQueryInvalid(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{null}, Sequence{}}->forAll(e | e->first())");
+       	assertQueryInvalid(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{}, Sequence{null}}->forAll(e | e->first())");
        	assertQueryInvalid(null, "Sequence{Sequence{true}, Sequence{true}, Sequence{true}, Sequence{}}->forAll(e | e->first())");
 
         assertQueryFalse(pkg1, "Sequence{'a', 'b', 'c', 'd', 'e'}->forAll(e | e = 'c')");
@@ -633,7 +629,7 @@ public class IteratorsTest4 extends PivotTestSuite
     	assertQueryInvalid(null, "Bag{1, 2, 3}->forAll('true')");		// Bug 415669
     	assertQueryInvalid(null, "Bag{1, 2, 3}->forAll(2)");			// Bug 415669
 
-    	assertQueryNullOrInvalid(EcorePackage.eINSTANCE,
+    	assertQueryNull(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->forAll(b and b)");
 
         // check that the "check" API interprets invalid as a constraint
@@ -642,7 +638,7 @@ public class IteratorsTest4 extends PivotTestSuite
             "let b:Boolean = null in Bag{1}->forAll(b and b)");
 
         // same deal for a null value (in the forAll case)
-        assertQueryNullOrInvalid(EcorePackage.eINSTANCE,
+        assertQueryNull(EcorePackage.eINSTANCE,
             "Bag{1, 2, 3}->forAll(null.oclAsType(Boolean))");
     	assertQueryInvalid(EcorePackage.eINSTANCE,
                 "Bag{1, 2, 3}->forAll(Sequence{}->first())");
@@ -656,11 +652,11 @@ public class IteratorsTest4 extends PivotTestSuite
     	assertQueryInvalid(null, "Bag{1, 2, 3}->exists('true')");		// Bug 415669
     	assertQueryInvalid(null, "Bag{1, 2, 3}->exists(2)");			// Bug 415669
 
-    	assertQueryNullOrInvalid(EcorePackage.eINSTANCE,
+    	assertQueryNull(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->exists(b and b)");
 
         // same deal for a null value (in the exists case)
-    	assertQueryNullOrInvalid(EcorePackage.eINSTANCE,
+    	assertQueryNull(EcorePackage.eINSTANCE,
                 "Bag{1, 2, 3}->exists(null.oclAsType(Boolean))");
     	assertQueryInvalid(EcorePackage.eINSTANCE,
                 "Bag{1, 2, 3}->exists(Sequence{}->first())");

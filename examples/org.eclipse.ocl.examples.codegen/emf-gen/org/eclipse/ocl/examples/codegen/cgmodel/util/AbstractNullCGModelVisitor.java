@@ -38,6 +38,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		super(context);
 	}	
 
+	public @Nullable R visitCGAccumulator(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator object) {
+		return null;
+	}
+
 	public @Nullable R visitCGBoolean(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean object) {
 		return null;
 	}

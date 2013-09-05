@@ -31,6 +31,26 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * that the iteration should carry on rather than terminate using the returned value.
 	 */
 	protected static final @NonNull Object CARRY_ON = new Object();
+
+	/**
+	 * A MutableObject may be used as an iteration accumulatior containing a single changing value.
+	 */
+	public static class MutableObject 
+	{
+		private @Nullable Object value;
+		
+		public MutableObject(@Nullable Object value) {
+			this.value = value;
+		}
+
+		public @Nullable Object get() {
+			return value;
+		}
+		
+		public void set(@Nullable Object value) {
+			this.value = value;
+		}
+	}
 	
 	/**
 	 * The default iteration algorithm steps through the iteration domain by invoking

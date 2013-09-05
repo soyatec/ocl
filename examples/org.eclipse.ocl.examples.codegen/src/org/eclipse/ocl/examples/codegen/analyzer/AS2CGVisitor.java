@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
@@ -684,7 +685,6 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 				if (iterator.isRequired()) {
 					cgIterator.setNonNull();
 				}
-				cgIterator.setNonInvalid();
 				cgBuiltInIterationCallExp.getIterators().add(cgIterator);
 			}
 			cgBuiltInIterationCallExp.setInvalidating(false);
@@ -693,12 +693,16 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 			setAst(cgBuiltInIterationCallExp, element);
 			CGTypeId cgAccumulatorId = iterationHelper.getAccumulatorTypeId(context, cgBuiltInIterationCallExp);
 			if (cgAccumulatorId != null) {
-				CGIterator cgAccumulator = CGModelFactory.eINSTANCE.createCGIterator();
+				CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();
 				cgAccumulator.setName("accumulator");
 				cgAccumulator.setTypeId(cgAccumulatorId);
 //				cgAccumulator.setRequired(true);
-				cgAccumulator.setNonNull();
-				cgAccumulator.setNonInvalid();
+				if (asIteration.isRequired()) {
+					cgAccumulator.setNonNull();
+				}
+				if (!asIteration.isValidating()) {
+					cgAccumulator.setNonInvalid();
+				}
 				cgBuiltInIterationCallExp.setAccumulator(cgAccumulator);
 //				variablesStack.putVariable(asVariable, cgAccumulator);
 //				cgAccumulator.setNonInvalid();

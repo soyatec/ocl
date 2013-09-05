@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -116,6 +117,13 @@ import org.eclipse.ocl.examples.pivot.Type;
  * @generated
  */
 public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgAccumulatorEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -791,6 +799,15 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(CGModelPackage.eNS_URI, theCGModelPackage);
 		return theCGModelPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGAccumulator() {
+		return cgAccumulatorEClass;
 	}
 
 	/**
@@ -2387,6 +2404,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		cgAccumulatorEClass = createEClass(CG_ACCUMULATOR);
+
 		cgBooleanEClass = createEClass(CG_BOOLEAN);
 		createEAttribute(cgBooleanEClass, CG_BOOLEAN__BOOLEAN_VALUE);
 
@@ -2666,6 +2685,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		cgAccumulatorEClass.getESuperTypes().add(this.getCGIterator());
 		cgBooleanEClass.getESuperTypes().add(this.getCGConstant());
 		cgBoxExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgBuiltInIterationCallExpEClass.getESuperTypes().add(this.getCGIterationCallExp());
@@ -2741,6 +2761,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgVariableExpEClass.getESuperTypes().add(this.getCGValuedElement());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(cgAccumulatorEClass, CGAccumulator.class, "CGAccumulator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(cgBooleanEClass, CGBoolean.class, "CGBoolean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGBoolean_BooleanValue(), ecorePackage.getEBoolean(), "booleanValue", null, 1, 1, CGBoolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.*;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -140,6 +141,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case CGModelPackage.CG_ACCUMULATOR: return createCGAccumulator();
 			case CGModelPackage.CG_BOOLEAN: return createCGBoolean();
 			case CGModelPackage.CG_BOX_EXP: return createCGBoxExp();
 			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP: return createCGBuiltInIterationCallExp();
@@ -285,6 +287,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGAccumulator createCGAccumulator() {
+		CGAccumulatorImpl cgAccumulator = new CGAccumulatorImpl();
+		return cgAccumulator;
 	}
 
 	/**
