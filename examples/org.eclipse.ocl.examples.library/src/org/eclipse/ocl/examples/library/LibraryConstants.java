@@ -27,10 +27,4 @@ public interface LibraryConstants
 	static final @NonNull URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/oclstdlib.genmodel", true); //$NON-NLS-1$ //$NON-NLS-2$
 
 	static final @NonNull String COMPARE_TO = "compareTo"; //$NON-NLS-1$
-	
-	/**
-	 * True for the proposed OCL 2.4 behaviour where not not X = X for all X including null.
-	 * False for the OCL 2.3 behaviour where not not X = X for all X except null.
-	 */
-	public static boolean NULL_SATISFIES_INVOLUTION = true; 
 }

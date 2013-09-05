@@ -22,7 +22,6 @@ import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -49,12 +48,7 @@ public class EvaluateBooleanOperationsTest4 extends PivotTestSuite
 	}
 
 	private void assertQueryNullOrInvalid(@Nullable Object object, @NonNull String string) {
-		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
-			assertQueryNull(object, string);
-		}
-		else {
-			assertQueryInvalid(object, string);
-		}
+		assertQueryNull(object, string);
 	}
 
 	@Override

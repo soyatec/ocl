@@ -102,12 +102,7 @@ public class IteratorsTest4 extends PivotTestSuite
 	org.eclipse.ocl.examples.pivot.Package george;
 
 	private void assertQueryNullOrInvalid(@Nullable Object object, @NonNull String string) {
-		if (LibraryConstants.NULL_SATISFIES_INVOLUTION) {
-			assertQueryNull(object, string);
-		}
-		else {
-			assertQueryInvalid(object, string);
-		}
+		assertQueryNull(object, string);
 	}
 
 	@Override

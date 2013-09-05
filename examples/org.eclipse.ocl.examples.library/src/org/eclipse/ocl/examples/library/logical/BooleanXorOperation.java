@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.library.LibraryConstants;
 
 /**
  * BooleanXorOperation realises the Boolean::xor() library operation.
@@ -49,7 +48,7 @@ public class BooleanXorOperation extends AbstractSimpleBinaryOperation
 				return TRUE_VALUE;
 			}
 		}
-		if (LibraryConstants.NULL_SATISFIES_INVOLUTION && ((left == null) || (right == null))) {
+		if ((left == null) || (right == null)) {
 			return null;
 		}
 		if (left instanceof InvalidValueException) {

@@ -42,8 +42,6 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.iteration.AnyIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.CollectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.CollectNestedIteration2Java;
-import org.eclipse.ocl.examples.codegen.java.iteration.ExistsIteration2Java;
-import org.eclipse.ocl.examples.codegen.java.iteration.ForAllIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.IsUniqueIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.IterateIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
@@ -72,12 +70,9 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.iterator.AnyIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectNestedIteration;
-import org.eclipse.ocl.examples.library.iterator.ExistsIteration;
-import org.eclipse.ocl.examples.library.iterator.ForAllIteration;
 import org.eclipse.ocl.examples.library.iterator.IsUniqueIteration;
 import org.eclipse.ocl.examples.library.iterator.IterateIteration;
 import org.eclipse.ocl.examples.library.iterator.OneIteration;
@@ -352,12 +347,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		else if (libraryIteration instanceof CollectNestedIteration) {
 			return CollectNestedIteration2Java.INSTANCE;
 		}
-		else if (!LibraryConstants.NULL_SATISFIES_INVOLUTION && (libraryIteration instanceof ExistsIteration)) {
-			return ExistsIteration2Java.INSTANCE;
-		}
-		else if (!LibraryConstants.NULL_SATISFIES_INVOLUTION && (libraryIteration instanceof ForAllIteration)) {
-			return ForAllIteration2Java.INSTANCE;
-		}
+//		else if (libraryIteration instanceof ExistsIteration) {
+//			return ExistsIteration2Java.INSTANCE;
+//		}
+//		else if (libraryIteration instanceof ForAllIteration) {
+//			return ForAllIteration2Java.INSTANCE;
+//		}
 		else if (libraryIteration instanceof IsUniqueIteration) {
 			return IsUniqueIteration2Java.INSTANCE;
 		}
