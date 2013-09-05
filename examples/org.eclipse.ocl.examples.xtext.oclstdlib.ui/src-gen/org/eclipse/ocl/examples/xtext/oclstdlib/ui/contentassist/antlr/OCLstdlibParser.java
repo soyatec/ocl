@@ -47,8 +47,8 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassCSAccess().getAlternatives_6(), "rule__ClassCS__Alternatives_6");
 					put(grammarAccess.getDetailCSAccess().getNameAlternatives_0_0(), "rule__DetailCS__NameAlternatives_0_0");
 					put(grammarAccess.getDetailCSAccess().getValueAlternatives_2_0(), "rule__DetailCS__ValueAlternatives_2_0");
-					put(grammarAccess.getLibIterationCSAccess().getAlternatives_13(), "rule__LibIterationCS__Alternatives_13");
-					put(grammarAccess.getLibIterationCSAccess().getAlternatives_13_0_1(), "rule__LibIterationCS__Alternatives_13_0_1");
+					put(grammarAccess.getLibIterationCSAccess().getAlternatives_14(), "rule__LibIterationCS__Alternatives_14");
+					put(grammarAccess.getLibIterationCSAccess().getAlternatives_14_0_1(), "rule__LibIterationCS__Alternatives_14_0_1");
 					put(grammarAccess.getOperationCSAccess().getAlternatives(), "rule__OperationCS__Alternatives");
 					put(grammarAccess.getLibOperationCSAccess().getAlternatives_13(), "rule__LibOperationCS__Alternatives_13");
 					put(grammarAccess.getLibOperationCSAccess().getAlternatives_13_0_1(), "rule__LibOperationCS__Alternatives_13_0_1");
@@ -110,8 +110,8 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLibIterationCSAccess().getGroup_6_2(), "rule__LibIterationCS__Group_6_2__0");
 					put(grammarAccess.getLibIterationCSAccess().getGroup_7(), "rule__LibIterationCS__Group_7__0");
 					put(grammarAccess.getLibIterationCSAccess().getGroup_7_2(), "rule__LibIterationCS__Group_7_2__0");
-					put(grammarAccess.getLibIterationCSAccess().getGroup_12(), "rule__LibIterationCS__Group_12__0");
-					put(grammarAccess.getLibIterationCSAccess().getGroup_13_0(), "rule__LibIterationCS__Group_13_0__0");
+					put(grammarAccess.getLibIterationCSAccess().getGroup_13(), "rule__LibIterationCS__Group_13__0");
+					put(grammarAccess.getLibIterationCSAccess().getGroup_14_0(), "rule__LibIterationCS__Group_14_0__0");
 					put(grammarAccess.getIteratorCSAccess().getGroup(), "rule__IteratorCS__Group__0");
 					put(grammarAccess.getLambdaTypeCSAccess().getGroup(), "rule__LambdaTypeCS__Group__0");
 					put(grammarAccess.getLambdaTypeCSAccess().getGroup_4(), "rule__LambdaTypeCS__Group_4__0");
@@ -267,10 +267,11 @@ public class OCLstdlibParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLibIterationCSAccess().getOwnedParameterAssignment_7_2_1(), "rule__LibIterationCS__OwnedParameterAssignment_7_2_1");
 					put(grammarAccess.getLibIterationCSAccess().getOwnedTypeAssignment_10(), "rule__LibIterationCS__OwnedTypeAssignment_10");
 					put(grammarAccess.getLibIterationCSAccess().getInvalidatingAssignment_11(), "rule__LibIterationCS__InvalidatingAssignment_11");
-					put(grammarAccess.getLibIterationCSAccess().getImplementationAssignment_12_1(), "rule__LibIterationCS__ImplementationAssignment_12_1");
-					put(grammarAccess.getLibIterationCSAccess().getOwnedAnnotationAssignment_13_0_1_0(), "rule__LibIterationCS__OwnedAnnotationAssignment_13_0_1_0");
-					put(grammarAccess.getLibIterationCSAccess().getOwnedPreconditionAssignment_13_0_1_1(), "rule__LibIterationCS__OwnedPreconditionAssignment_13_0_1_1");
-					put(grammarAccess.getLibIterationCSAccess().getOwnedPostconditionAssignment_13_0_1_2(), "rule__LibIterationCS__OwnedPostconditionAssignment_13_0_1_2");
+					put(grammarAccess.getLibIterationCSAccess().getValidatingAssignment_12(), "rule__LibIterationCS__ValidatingAssignment_12");
+					put(grammarAccess.getLibIterationCSAccess().getImplementationAssignment_13_1(), "rule__LibIterationCS__ImplementationAssignment_13_1");
+					put(grammarAccess.getLibIterationCSAccess().getOwnedAnnotationAssignment_14_0_1_0(), "rule__LibIterationCS__OwnedAnnotationAssignment_14_0_1_0");
+					put(grammarAccess.getLibIterationCSAccess().getOwnedPreconditionAssignment_14_0_1_1(), "rule__LibIterationCS__OwnedPreconditionAssignment_14_0_1_1");
+					put(grammarAccess.getLibIterationCSAccess().getOwnedPostconditionAssignment_14_0_1_2(), "rule__LibIterationCS__OwnedPostconditionAssignment_14_0_1_2");
 					put(grammarAccess.getIteratorCSAccess().getNameAssignment_0(), "rule__IteratorCS__NameAssignment_0");
 					put(grammarAccess.getIteratorCSAccess().getOwnedTypeAssignment_2(), "rule__IteratorCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getLambdaTypeCSAccess().getNameAssignment_0(), "rule__LambdaTypeCS__NameAssignment_0");

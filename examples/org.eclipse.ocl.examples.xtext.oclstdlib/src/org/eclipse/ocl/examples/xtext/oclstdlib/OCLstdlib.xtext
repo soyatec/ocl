@@ -135,6 +135,7 @@ LibIterationCS returns LibIterationCS:
 	')'
 	':' ownedType=TypedMultiplicityRefCS
 	(invalidating?='invalidating')?
+	(validating?='validating')?
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS
 	     | ownedPrecondition+=PostCS

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.examples.pivot.Enumeration;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,5 +52,14 @@ public interface EnumerationCS extends ClassifierCS, NamespaceCS
 	 * @generated
 	 */
 	EList<EnumerationLiteralCS> getOwnedLiterals();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL body='ocl::Enumeration {\n\t\t\t\tname = name,\n\t\t\t\townedLiteral = ownedLiterals.ast()\n\t\t\t}'"
+	 * @generated
+	 */
+	Enumeration ast();
 
 } // EnumCS

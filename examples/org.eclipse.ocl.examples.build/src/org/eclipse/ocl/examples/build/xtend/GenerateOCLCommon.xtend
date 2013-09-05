@@ -216,6 +216,9 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 						«IF iteration.isStatic»
 							iteration.setIsStatic(true);
 						«ENDIF»
+						«IF iteration.isValidating»
+							iteration.setIsValidating(true);
+						«ENDIF»
 						«IF iteration.ownedIterator.size() > 0»
 							ownedParameters = iteration.getOwnedIterator();
 							«FOR parameter : iteration.ownedIterator»

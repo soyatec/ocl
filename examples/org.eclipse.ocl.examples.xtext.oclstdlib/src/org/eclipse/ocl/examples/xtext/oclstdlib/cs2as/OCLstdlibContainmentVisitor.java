@@ -71,6 +71,7 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 		Iteration pivotElement = refreshNamedElement(Iteration.class, PivotPackage.Literals.ITERATION, csElement);
 		if (pivotElement != null) {
 			pivotElement.setIsInvalidating(csElement.isInvalidating());
+			pivotElement.setIsValidating(csElement.isValidating());
 			context.refreshTemplateSignature(csElement, pivotElement);
 			context.refreshPivotList(Parameter.class, pivotElement.getOwnedIterator(), csElement.getOwnedIterator());
 			context.refreshPivotList(Parameter.class, pivotElement.getOwnedAccumulator(), csElement.getOwnedAccumulator());

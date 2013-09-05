@@ -2150,7 +2150,6 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 
 		// Obtain other dependent packages
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -2271,8 +2270,12 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		initEClass(enumerationCSEClass, EnumerationCS.class, "EnumerationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getEnumerationCS_OwnedLiterals(), this.getEnumerationLiteralCS(), null, "ownedLiterals", null, 0, -1, EnumerationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
+		addEOperation(enumerationCSEClass, thePivotPackage.getEnumeration(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(enumerationLiteralCSEClass, EnumerationLiteralCS.class, "EnumerationLiteralCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getEnumerationLiteralCS_Value(), ecorePackage.getEInt(), "value", null, 0, 1, EnumerationLiteralCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		addEOperation(enumerationLiteralCSEClass, thePivotPackage.getEnumerationLiteral(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(featureCSEClass, FeatureCS.class, "FeatureCS", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
@@ -2340,7 +2343,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		initEClass(pathElementCSEClass, PathElementCS.class, "PathElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getPathElementCS_PathName(), this.getPathNameCS(), this.getPathNameCS_Path(), "pathName", null, 1, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getPathElementCS_Element(), thePivotPackage.getElement(), null, "element", null, 1, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getPathElementCS_ElementType(), theEcorePackage.getEClassifier(), null, "elementType", null, 0, 1, PathElementCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getPathElementCS_ElementType(), ecorePackage.getEClassifier(), null, "elementType", null, 0, 1, PathElementCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(pathElementWithURICSEClass, PathElementWithURICS.class, "PathElementWithURICS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getPathElementWithURICS_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, PathElementWithURICS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -2439,10 +2442,30 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/OCL/Import
+		createImportAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore/OCL
 		createOCLAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createImportAnnotations()
+	{
+		String source = "http://www.eclipse.org/OCL/Import"; //$NON-NLS-1$	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] 
+		   {
+			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/" //$NON-NLS-1$ //$NON-NLS-2$
+		   });	
 	}
 
 	/**
@@ -2462,21 +2485,21 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL", //$NON-NLS-1$ //$NON-NLS-2$
 			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL", //$NON-NLS-1$ //$NON-NLS-2$
 			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
+		   });		
 		addAnnotation
 		  (rootCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "constraints", "TestConstraint" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
+		   });		
 		addAnnotation
 		  (rootPackageCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "constraints", "TestConstraint" //$NON-NLS-1$ //$NON-NLS-2$
-		   });
+		   });	
 	}
 
 	/**
@@ -2489,19 +2512,33 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	{
 		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL"; //$NON-NLS-1$	
 		addAnnotation
+		  (enumerationCSEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] 
+		   {
+			 "body", "ocl::Enumeration {\n\t\t\t\tname = name,\n\t\t\t\townedLiteral = ownedLiterals.ast()\n\t\t\t}" //$NON-NLS-1$ //$NON-NLS-2$
+		   });		
+		addAnnotation
+		  (enumerationLiteralCSEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] 
+		   {
+			 "body", "ocl::EnumerationLiteral {\n\t\t\t\tname = name\n\t\t\t}" //$NON-NLS-1$ //$NON-NLS-2$
+		   });		
+		addAnnotation
 		  (rootCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "TestConstraint", "true" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
+		   });		
 		addAnnotation
 		  (rootPackageCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "TestConstraint", "true" //$NON-NLS-1$ //$NON-NLS-2$
-		   });
+		   });	
 	}
 
 } //BaseCSTPackageImpl

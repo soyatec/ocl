@@ -156,6 +156,8 @@ public class OCLstdlibTables
 			FragmentOperations.init();
 			FragmentProperties.init();
 		}
+
+		public static void init() {}
 	}
 
 	/**
@@ -251,6 +253,13 @@ public class OCLstdlibTables
 		private static final @NonNull ExecutorFragment _UnlimitedNatural__OclSummable = new ExecutorFragment(Types._UnlimitedNatural, OCLstdlibTables.Types._OclSummable);
 		private static final @NonNull ExecutorFragment _UnlimitedNatural__Real = new ExecutorFragment(Types._UnlimitedNatural, OCLstdlibTables.Types._Real);
 		private static final @NonNull ExecutorFragment _UnlimitedNatural__UnlimitedNatural = new ExecutorFragment(Types._UnlimitedNatural, OCLstdlibTables.Types._UnlimitedNatural);
+
+		/*
+		 * Force initialization.
+		 */
+		public static void init() {
+			Types.init();
+		}
 	}
 
 	/**
@@ -851,6 +860,13 @@ public class OCLstdlibTables
 	 *	The property descriptors for each property of each type.
 	 */
 	public static class Properties {
+
+		/*
+		 * Force initialization.
+		 */
+		public static void init() {
+			Types.init();
+		}
 	}
 
 	/**
@@ -1042,7 +1058,10 @@ public class OCLstdlibTables
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
 		 */
-		static {
+		public static void init() {
+			Fragments.init();
+			Properties.init();
+
 			Types._Bag.initFragments(_Bag, __Bag);
 			Types._Boolean.initFragments(_Boolean, __Boolean);
 			Types._Collection.initFragments(_Collection, __Collection);
@@ -1067,8 +1086,6 @@ public class OCLstdlibTables
 			Types._UniqueCollection.initFragments(_UniqueCollection, __UniqueCollection);
 			Types._UnlimitedNatural.initFragments(_UnlimitedNatural, __UnlimitedNatural);
 		}
-
-		public static void init() {}
 	}
 
 	/**
@@ -1107,11 +1124,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Bag__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Bag__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Bag__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Bag__including /* including(T[?]) */,
@@ -1195,11 +1212,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Collection__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Collection__including /* including(T[?]) */,
@@ -1617,11 +1634,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._OrderedSet__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._OrderedSet__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._OrderedSet__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._OrderedSet__including /* including(T[?]) */,
@@ -1786,11 +1803,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Sequence__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Sequence__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Sequence__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Sequence__including /* including(T[?]) */,
@@ -1878,11 +1895,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Set__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Set__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Set__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Set__including /* including(T[?]) */,
@@ -2017,11 +2034,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Collection__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
 			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
 			OCLstdlibTables.Operations._Collection__including /* including(T[?]) */,
@@ -2130,7 +2147,9 @@ public class OCLstdlibTables
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
 		 */
-		static {
+		public static void init() {
+			TypeFragments.init();
+
 			Fragments._Bag__Bag.initOperations(_Bag__Bag);
 			Fragments._Bag__Collection.initOperations(_Bag__Collection);
 			Fragments._Bag__OclAny.initOperations(_Bag__OclAny);
@@ -2221,8 +2240,6 @@ public class OCLstdlibTables
 			Fragments._UnlimitedNatural__Real.initOperations(_UnlimitedNatural__Real);
 			Fragments._UnlimitedNatural__UnlimitedNatural.initOperations(_UnlimitedNatural__UnlimitedNatural);
 		}
-
-		public static void init() {}
 	}
 
 	/**
@@ -2278,7 +2295,9 @@ public class OCLstdlibTables
 		/**
 		 *	Install the property descriptors in the fragment descriptors.
 		 */
-		static {
+		public static void init() {
+			TypeFragments.init();
+
 			Fragments._Bag__Bag.initProperties(_Bag);
 			Fragments._Boolean__Boolean.initProperties(_Boolean);
 			Fragments._Collection__Collection.initProperties(_Collection);
@@ -2303,8 +2322,6 @@ public class OCLstdlibTables
 			Fragments._UniqueCollection__UniqueCollection.initProperties(_UniqueCollection);
 			Fragments._UnlimitedNatural__UnlimitedNatural.initProperties(_UnlimitedNatural);
 		}
-
-		public static void init() {}
 	}
 
 	/**
@@ -2320,7 +2337,10 @@ public class OCLstdlibTables
 		public static void init() {}
 	}
 
+	/*
+	 * Force initialization.
+	 */
 	static {
-		Types.types[0].getClass();
+		Types.init();
 	}
 }

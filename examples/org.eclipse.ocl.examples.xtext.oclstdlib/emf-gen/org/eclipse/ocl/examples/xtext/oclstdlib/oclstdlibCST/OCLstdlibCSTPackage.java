@@ -576,13 +576,22 @@ public interface OCLstdlibCSTPackage
 	int LIB_ITERATION_CS__INVALIDATING = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ITERATION_CS__VALIDATING = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Lib Iteration CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIB_ITERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 4;
+	int LIB_ITERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1356,6 +1365,17 @@ public interface OCLstdlibCSTPackage
 	EAttribute getLibIterationCS_Invalidating();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#isValidating <em>Validating</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validating</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#isValidating()
+	 * @see #getLibIterationCS()
+	 * @generated
+	 */
+	EAttribute getLibIterationCS_Validating();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS <em>Lib Operation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1608,6 +1628,14 @@ public interface OCLstdlibCSTPackage
 		 * @generated
 		 */
 		EAttribute LIB_ITERATION_CS__INVALIDATING = eINSTANCE.getLibIterationCS_Invalidating();
+
+		/**
+		 * The meta object literal for the '<em><b>Validating</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIB_ITERATION_CS__VALIDATING = eINSTANCE.getLibIterationCS_Validating();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl <em>Lib Operation CS</em>}' class.
