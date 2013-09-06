@@ -286,31 +286,53 @@ public abstract class LoopExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object CAUGHT_forAll;
+		@Nullable /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		    @NonNull /*@Thrown*/ Object accumulator = ValuesUtil.TRUE_VALUE;
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
-		    @NonNull /*@Thrown*/ Boolean forAll;
+		    @Nullable /*@Thrown*/ Boolean forAll;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
-		            forAll = ValuesUtil.TRUE_VALUE;
+		            if (accumulator == ValuesUtil.TRUE_VALUE) {
+		                forAll = (Boolean)accumulator;
+		            }
+		            else {
+		                throw (InvalidValueException)accumulator;
+		            }
 		            break;
 		        }
 		        @Nullable /*@NonInvalid*/ Variable _1 = (Variable)ITERATOR__1.next();
 		        /**
 		         * initExpression->isEmpty()
 		         */
-		        if (_1 == null) {
-		            throw new InvalidValueException("Null source");
+		        @NonNull /*@Caught*/ Object CAUGHT_isEmpty;
+		        try {
+		            if (_1 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
+		            final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
+		            final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
+		            CAUGHT_isEmpty = isEmpty;
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
-		        final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
-		        final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
+		        catch (Exception e) {
+		            CAUGHT_isEmpty = ValuesUtil.createInvalidValue(e);
+		        }
 		        //
-		        if (isEmpty != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
-		            forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail
-		            break;
+		        if (CAUGHT_isEmpty == ValuesUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+		            forAll = ValuesUtil.FALSE_VALUE;
+		            break;														// Stop immediately 
+		        }
+		        else if (CAUGHT_isEmpty == ValuesUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+		            ;															// Carry on
+		        }
+		        else if (CAUGHT_isEmpty instanceof InvalidValueException) {		// Abnormal exception evaluation result
+		            accumulator = CAUGHT_isEmpty;									// Cache an exception failure
+		        }
+		        else {															// Impossible badly typed result
+		            accumulator = new InvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll");
 		        }
 		    }
 		    CAUGHT_forAll = forAll;
@@ -322,7 +344,7 @@ public abstract class LoopExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__NO_INITIALIZERS, message, new Object [] { this }));
 		}

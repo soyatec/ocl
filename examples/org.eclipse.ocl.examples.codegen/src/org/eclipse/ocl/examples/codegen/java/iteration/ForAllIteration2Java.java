@@ -39,13 +39,23 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 	
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
-		js.append("if ((");
-		js.appendValueName(cgAccumulator);
-		js.append(" == null) || (");
-		js.appendValueName(cgAccumulator);
-		js.append(" == ");
-		js.appendClassReference(ValuesUtil.class);
-		js.append(".TRUE_VALUE)) {\n");
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
+		if (!cgBody.isNonNull()) {
+			js.append("if ((");
+			js.appendValueName(cgAccumulator);
+			js.append(" == null) || (");
+			js.appendValueName(cgAccumulator);
+			js.append(" == ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".TRUE_VALUE)) {\n");
+		}
+		else {
+			js.append("if (");
+			js.appendValueName(cgAccumulator);
+			js.append(" == ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".TRUE_VALUE) {\n");
+		}
 		js.pushIndentation(null);
 			js.appendValueName(cgIterationCallExp);
 			js.append(" = (");
@@ -124,35 +134,40 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 			js.popIndentation();
 			js.append("}\n");
 			//
-			js.append("else if (");
-			js.appendValueName(cgBody);
-			js.append(" == null) {								// Abnormal null body evaluation result\n");
-			js.pushIndentation(null);
-				js.append("if (");
-				js.appendValueName(cgAccumulator);
-				js.append(" == ");
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".TRUE_VALUE) {\n");
+			if (!cgBody.isNonNull()) {
+				js.append("else if (");
+				js.appendValueName(cgBody);
+				js.append(" == null) {								// Abnormal null body evaluation result\n");
 				js.pushIndentation(null);
+					js.append("if (");
 					js.appendValueName(cgAccumulator);
-					js.append(" = null;										// Cache a null failure\n");
+					js.append(" == ");
+					js.appendClassReference(ValuesUtil.class);
+					js.append(".TRUE_VALUE) {\n");
+					js.pushIndentation(null);
+						js.appendValueName(cgAccumulator);
+						js.append(" = null;										// Cache a null failure\n");
+					js.popIndentation();
+					js.append("}\n");
 				js.popIndentation();
 				js.append("}\n");
-			js.popIndentation();
-			js.append("}\n");
+			}
 			//
-			js.append("else if (");
-			js.appendValueName(cgBody);
-			js.append(" instanceof ");
-			js.appendClassReference(InvalidValueException.class);
-			js.append(") {		// Abnormal exception evaluation result\n");
-			js.pushIndentation(null);
-				js.appendValueName(cgAccumulator);
-				js.append(" = ");
+			if (!cgBody.isNonInvalid()) {
+				js.append("else if (");
 				js.appendValueName(cgBody);
-				js.append(";									// Cache an exception failure\n");
-			js.popIndentation();
-			js.append("}\n");
+				js.append(" instanceof ");
+				js.appendClassReference(InvalidValueException.class);
+				js.append(") {		// Abnormal exception evaluation result\n");
+				js.pushIndentation(null);
+					js.appendValueName(cgAccumulator);
+					js.append(" = ");
+					js.appendValueName(cgBody);
+					js.append(";									// Cache an exception failure\n");
+				js.popIndentation();
+				js.append("}\n");
+			}
+			//
 			js.append("else {															// Impossible badly typed result\n");
 			js.pushIndentation(null);
 				js.appendValueName(cgAccumulator);

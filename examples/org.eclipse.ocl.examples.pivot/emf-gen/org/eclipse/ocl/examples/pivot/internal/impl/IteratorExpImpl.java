@@ -1934,15 +1934,21 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object CAUGHT_forAll;
+		@Nullable /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		    @NonNull /*@Thrown*/ Object accumulator = ValuesUtil.TRUE_VALUE;
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
-		    @NonNull /*@Thrown*/ Boolean forAll;
+		    @Nullable /*@Thrown*/ Boolean forAll;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
-		            forAll = ValuesUtil.TRUE_VALUE;
+		            if (accumulator == ValuesUtil.TRUE_VALUE) {
+		                forAll = (Boolean)accumulator;
+		            }
+		            else {
+		                throw (InvalidValueException)accumulator;
+		            }
 		            break;
 		        }
 		        @Nullable /*@NonInvalid*/ Variable _1 = (Variable)ITERATOR__1.next();
@@ -1951,23 +1957,39 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		         * source.type.oclAsType(CollectionType)
 		         * .elementType.conformsTo(type)
 		         */
-		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
-		        final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
-		        if (oclAsType == null) {
-		            throw new InvalidValueException("Null source");
+		        @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
+		        try {
+		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
+		            final @Nullable /*@Thrown*/ CollectionType oclAsType = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
+		            if (oclAsType == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
+		            if (_1 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = _1.getType();
+		            final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, elementType, type_0);
+		            CAUGHT_conformsTo = conformsTo;
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
-		        if (_1 == null) {
-		            throw new InvalidValueException("Null source");
+		        catch (Exception e) {
+		            CAUGHT_conformsTo = ValuesUtil.createInvalidValue(e);
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = _1.getType();
-		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, elementType, type_0);
 		        //
-		        if (conformsTo != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
-		            forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail
-		            break;
+		        if (CAUGHT_conformsTo == ValuesUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+		            forAll = ValuesUtil.FALSE_VALUE;
+		            break;														// Stop immediately 
+		        }
+		        else if (CAUGHT_conformsTo == ValuesUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+		            ;															// Carry on
+		        }
+		        else if (CAUGHT_conformsTo instanceof InvalidValueException) {		// Abnormal exception evaluation result
+		            accumulator = CAUGHT_conformsTo;									// Cache an exception failure
+		        }
+		        else {															// Impossible badly typed result
+		            accumulator = new InvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll");
 		        }
 		    }
 		    CAUGHT_forAll = forAll;
@@ -1979,7 +2001,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IteratorTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
 		}

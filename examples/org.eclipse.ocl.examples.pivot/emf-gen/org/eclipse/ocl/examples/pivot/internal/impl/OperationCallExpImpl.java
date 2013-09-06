@@ -465,23 +465,29 @@ public class OperationCallExpImpl
 		 * 
 		 * 
 		 */
-		@NonNull /*@Caught*/ Object CAUGHT_forAll;
+		@Nullable /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainOperation operation = this.getReferredOperation();
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainTypedElement> parameters = operation.getOwnedParameter();
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType selfType_1 = operation.getOwningType();
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument_0 = this.getArgument();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument_0);
-		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument_0);
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainExpression> argument = this.getArgument();
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
+		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 		    final @NonNull /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
 		    final @NonNull /*@Thrown*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
+		    @NonNull /*@Thrown*/ Object accumulator = ValuesUtil.TRUE_VALUE;
 		    @Nullable Iterator<?> ITERATOR_i = Sequence.iterator();
-		    @NonNull /*@Thrown*/ Boolean forAll;
+		    @Nullable /*@Thrown*/ Boolean forAll;
 		    while (true) {
 		        if (!ITERATOR_i.hasNext()) {
-		            forAll = ValuesUtil.TRUE_VALUE;
+		            if (accumulator == ValuesUtil.TRUE_VALUE) {
+		                forAll = (Boolean)accumulator;
+		            }
+		            else {
+		                throw (InvalidValueException)accumulator;
+		            }
 		            break;
 		        }
 		        @Nullable /*@NonInvalid*/ IntegerValue i = (IntegerValue)ITERATOR_i.next();
@@ -495,23 +501,39 @@ public class OperationCallExpImpl
 		         *     in
 		         *       argument.type.conformsTo(parameterType.specializeIn(self, selfType))
 		         */
-		        final @Nullable /*@Thrown*/ DomainExpression argument_1 = (DomainExpression)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_argument_0, i);
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_parameters = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
-		        final @Nullable /*@Thrown*/ DomainTypedElement parameter = (DomainTypedElement)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_parameters, i);
-		        if (parameter == null) {
-		            throw new InvalidValueException("Null source");
+		        @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
+		        try {
+		            final @Nullable /*@Thrown*/ DomainExpression argument_1 = (DomainExpression)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_argument, i);
+		            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_parameters = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
+		            final @Nullable /*@Thrown*/ DomainTypedElement parameter = (DomainTypedElement)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_parameters, i);
+		            if (parameter == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType parameterType = parameter.getType();
+		            if (argument_1 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = argument_1.getType();
+		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
+		            final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
+		            CAUGHT_conformsTo = conformsTo;
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType parameterType = parameter.getType();
-		        if (argument_1 == null) {
-		            throw new InvalidValueException("Null source");
+		        catch (Exception e) {
+		            CAUGHT_conformsTo = ValuesUtil.createInvalidValue(e);
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = argument_1.getType();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
-		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
 		        //
-		        if (conformsTo != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
-		            forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail
-		            break;
+		        if (CAUGHT_conformsTo == ValuesUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+		            forAll = ValuesUtil.FALSE_VALUE;
+		            break;														// Stop immediately 
+		        }
+		        else if (CAUGHT_conformsTo == ValuesUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+		            ;															// Carry on
+		        }
+		        else if (CAUGHT_conformsTo instanceof InvalidValueException) {		// Abnormal exception evaluation result
+		            accumulator = CAUGHT_conformsTo;									// Cache an exception failure
+		        }
+		        else {															// Impossible badly typed result
+		            accumulator = new InvalidValueException(EvaluatorMessages.NonBooleanBody, "forAll");
 		        }
 		    }
 		    CAUGHT_forAll = forAll;
@@ -523,7 +545,7 @@ public class OperationCallExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}
