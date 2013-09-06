@@ -724,6 +724,24 @@ public class UsageTests
 		assertFalse(ValuesUtil.initAllStatics());
 	}
 	
+	public void testPivotMetamodelImport414855() throws Exception {
+		String testFileStem = "Bug414855";
+		String testProjectName = "bug414855";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String oclinecoreFile =
+			"import pivot : 'http://www.eclipse.org/ocl/3.1.0/Pivot#/';\n"
+			+ "package bug414855 : bug414855 = 'http://bug414855'\n"
+			+ "{\n"
+			+ "    datatype MyString : 'java.lang.String' { serializable };\n"
+			+ "    class ClassExtension extends pivot::Class {}\n"
+			+ "}\n";
+		String genmodelFile = createGenModelContent(testProjectPath, testFileStem, "platform:/plugin/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot");
+		doDelete(testProjectName);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
+		doCompile(testProjectName);		
+	}
+	
 	public void testBug415782() throws Exception {
 		String testFileStem = "Bug415782";
 		String testProjectName = "bug415782";
