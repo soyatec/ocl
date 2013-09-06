@@ -439,8 +439,9 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	public @Nullable String visitCGLetExp(@NonNull CGLetExp cgLetExp) {
 		append("let "); //$NON-NLS-1$
 		safeVisit(cgLetExp.getInit());
-		append(" in "); //$NON-NLS-1$
+		append(" in ("); //$NON-NLS-1$
 		safeVisit(cgLetExp.getIn());
+		append(")"); //$NON-NLS-1$
 		return null;
 	}
 

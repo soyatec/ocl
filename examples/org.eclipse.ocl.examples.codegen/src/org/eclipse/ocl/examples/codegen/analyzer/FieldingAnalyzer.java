@@ -14,8 +14,10 @@
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -161,6 +163,16 @@ public class FieldingAnalyzer
 		 * The externals of a VariableExp are the externals of the referenced variable.
 		 */
 		@Override
+		public @Nullable Set<CGVariable> visitCGVariable(@NonNull CGVariable cgElement) {
+			Set<CGVariable> externals = super.visitCGVariable(cgElement);
+			context.allExternalVariables.put(cgElement, externals);
+			return externals;
+		}
+
+		/**
+		 * The externals of a VariableExp are the externals of the referenced variable.
+		 */
+		@Override
 		public @Nullable Set<CGVariable> visitCGVariableExp(@NonNull CGVariableExp cgElement) {
 			Set<CGVariable> childExternal = null;
 			CGVariable cgVariable = cgElement.getReferredVariable();
@@ -179,17 +191,18 @@ public class FieldingAnalyzer
 	 */
 	public static class RewriteVisitor extends AbstractNonNullExtendingCGModelVisitor<Boolean, CodeGenAnalyzer>
 	{
-		protected final @NonNull Set<CGVariable> caughtVariables;
+		protected final @NonNull Set<CGVariable> externalVariables;
 		
-		public RewriteVisitor(@NonNull CodeGenAnalyzer context, @NonNull Set<CGVariable> caughtVariables) {
+		public RewriteVisitor(@NonNull CodeGenAnalyzer context, @NonNull Set<CGVariable> externalVariables) {
 			super(context);
-			this.caughtVariables = caughtVariables;
+			this.externalVariables = externalVariables;
 		}
 
 		protected void insertCatch(@NonNull CGValuedElement cgChild) {
 			assert !(cgChild instanceof CGCatchExp);
 			if (!cgChild.isNonInvalid()) {
 				CGCatchExp cgCatchExp = CGModelFactory.eINSTANCE.createCGCatchExp();
+				cgCatchExp.setCaught(true);
 				CGUtils.wrap(cgCatchExp, cgChild);
 			}
 		}
@@ -394,7 +407,7 @@ public class FieldingAnalyzer
 				if (DomainUtil.nonNullState(cgInit.accept(this))) {	// If explicitly caught
 					isCaught = true;								// then just propagate caught
 				}
-				else if (caughtVariables.contains(cgElement)) {		// In not caught but needs to be
+				else if (externalVariables.contains(cgElement)) {		// If not caught but needs to be
 					insertCatch(cgInit);							//  catch it
 					isCaught = true;
 				}
@@ -405,7 +418,9 @@ public class FieldingAnalyzer
 
 		@Override
 		public @NonNull Boolean visitCGVariableExp(@NonNull CGVariableExp cgElement) {
-			boolean isCaught = caughtVariables.contains(cgElement.getReferredVariable());
+			CGVariable referredVariable = cgElement.getReferredVariable();
+			boolean isCaught = referredVariable.isCaught() || externalVariables.contains(referredVariable);
+			cgElement.setCaught(isCaught);
 			return isCaught;
 		}
 	}
@@ -415,7 +430,12 @@ public class FieldingAnalyzer
 	/**
 	 * The CGVariables that are accessed outside their defining tree.
 	 */
-	private final @NonNull Set<CGVariable> caughtVariables = new HashSet<CGVariable>();
+	private final @NonNull Set<CGVariable> externalVariables = new HashSet<CGVariable>();
+
+	/**
+	 * The CGVariables that are accessed by the init of a given CGVariable.
+	 */
+	private final @NonNull Map<CGVariable, Set<CGVariable>> allExternalVariables = new HashMap<CGVariable, Set<CGVariable>>();
 	
 	public FieldingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
 		this.analyzer = analyzer;
@@ -424,7 +444,7 @@ public class FieldingAnalyzer
 	public void analyze(@NonNull CGElement cgTree, boolean mustBeCaught) {	
 		AnalysisVisitor analysisVisitor = createAnalysisVisitor();
 		cgTree.accept(analysisVisitor);
-		RewriteVisitor rewriteVisitor = createRewriteVisitor(caughtVariables);
+		RewriteVisitor rewriteVisitor = createRewriteVisitor(externalVariables);
 		cgTree.accept(rewriteVisitor);
 	}
 
@@ -451,7 +471,15 @@ public class FieldingAnalyzer
 		if (catchers != null) {
 			for (CGVariable catcher : catchers) {
 				if (!catcher.isNonInvalid()) {
-					caughtVariables.add(catcher);
+					externalVariables.add(catcher);
+				}
+				Set<CGVariable> indirectCatchers = allExternalVariables.get(catcher);
+				if (indirectCatchers != null) {
+					for (CGVariable indirectCatcher : indirectCatchers) {
+						if (!indirectCatcher.isNonInvalid()) {
+							externalVariables.add(indirectCatcher);
+						}
+					}
 				}
 			}
 		}

@@ -57,8 +57,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
-import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
@@ -1120,19 +1119,19 @@ public class PropertyImpl
 		}
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
+		@NonNull /*@Caught*/ Object CAUGHT_self_71;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_Type_0 = idResolver.getType(PivotTables.CLSSid_Type, null);
 		    if (CAUGHT_container instanceof InvalidValueException) {
 		        throw (InvalidValueException)CAUGHT_container;
 		    }
-		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_0);
-		    CAUGHT_oclIsKindOf = oclIsKindOf;
+		    final @NonNull /*@Thrown*/ Boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_0);
+		    CAUGHT_self_71 = self_71;
 		}
 		catch (Exception e) {
-		    CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		}
-		@NonNull /*@Caught*/ Object CAUGHT_includes;
+		@NonNull /*@Caught*/ Object CAUGHT_b;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_Type_1 = idResolver.getType(PivotTables.CLSSid_Type, null);
 		    if (CAUGHT_container instanceof InvalidValueException) {
@@ -1144,17 +1143,98 @@ public class PropertyImpl
 		    }
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
-		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, this);
-		    CAUGHT_includes = includes;
+		    final @NonNull /*@Thrown*/ Boolean b = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, this);
+		    CAUGHT_b = b;
 		}
 		catch (Exception e) {
-		    CAUGHT_includes = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		}
-		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, CAUGHT_includes);
-		if (and == null) {
+		final @NonNull /*@NonInvalid*/ Boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		@Nullable /*@Thrown*/ Boolean symbol_12;
+		if (symbol_0) {
+		    final @NonNull /*@NonInvalid*/ Boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
+		    @NonNull /*@Thrown*/ Boolean symbol_3;
+		    if (symbol_1) {
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
+		        }
+		        symbol_3 = (Boolean)CAUGHT_self_71;
+		    }
+		    else {
+		        if (CAUGHT_b instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_b;
+		        }
+		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.FALSE_VALUE);
+		        @NonNull /*@Thrown*/ Boolean symbol_2;
+		        if (eq) {
+		            symbol_2 = ValuesUtil.FALSE_VALUE;
+		        }
+		        else {
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
+		            }
+		            symbol_2 = (Boolean)CAUGHT_self_71;
+		        }
+		        symbol_3 = symbol_2;
+		    }
+		    symbol_12 = symbol_3;
+		}
+		else {
+		    if (CAUGHT_self_71 instanceof InvalidValueException) {
+		        throw (InvalidValueException)CAUGHT_self_71;
+		    }
+		    final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.FALSE_VALUE);
+		    @Nullable /*@Thrown*/ Boolean symbol_11;
+		    if (eq_0) {
+		        symbol_11 = ValuesUtil.FALSE_VALUE;
+		    }
+		    else {
+		        final @NonNull /*@NonInvalid*/ Boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
+		        @Nullable /*@Thrown*/ Boolean symbol_10;
+		        if (symbol_4) {
+		            if (CAUGHT_b instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_b;
+		            }
+		            symbol_10 = (Boolean)CAUGHT_b;
+		        }
+		        else {
+		            if (CAUGHT_b instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_b;
+		            }
+		            final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.FALSE_VALUE);
+		            @Nullable /*@NonInvalid*/ Boolean symbol_9;
+		            if (eq_1) {
+		                symbol_9 = ValuesUtil.FALSE_VALUE;
+		            }
+		            else {
+		                final @NonNull /*@NonInvalid*/ Boolean symbol_5 = CAUGHT_self_71 instanceof InvalidValueException;
+		                @Nullable /*@NonInvalid*/ Boolean symbol_8;
+		                if (symbol_5) {
+		                    symbol_8 = (Boolean)null;
+		                }
+		                else {
+		                    final @NonNull /*@NonInvalid*/ Boolean symbol_6 = CAUGHT_b instanceof InvalidValueException;
+		                    @Nullable /*@NonInvalid*/ Boolean symbol_7;
+		                    if (symbol_6) {
+		                        symbol_7 = (Boolean)null;
+		                    }
+		                    else {
+		                        symbol_7 = ValuesUtil.TRUE_VALUE;
+		                    }
+		                    symbol_8 = symbol_7;
+		                }
+		                symbol_9 = symbol_8;
+		            }
+		            symbol_10 = symbol_9;
+		        }
+		        symbol_11 = symbol_10;
+		    }
+		    symbol_12 = symbol_11;
+		}
+		if (symbol_12 == null) {
 		    throw new InvalidValueException("Null source");
 		}
-		return and;
+		return symbol_12;
 	}
 
 	/**
@@ -1170,57 +1250,222 @@ public class PropertyImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object CAUGHT_implies;
+		@Nullable /*@Caught*/ Object CAUGHT_symbol_25;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_and;
+		    @Nullable /*@Caught*/ Object CAUGHT_symbol_12;
 		    try {
-		        @NonNull /*@Caught*/ Object CAUGHT_ne;
+		        @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		        try {
 		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression defaultExpression = this.getDefaultExpression();
-		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
-		            CAUGHT_ne = ne;
+		            final @NonNull /*@Thrown*/ Boolean self_71 = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
+		            CAUGHT_self_71 = self_71;
 		        }
 		        catch (Exception e) {
-		            CAUGHT_ne = ValuesUtil.createInvalidValue(e);
+		            CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		        }
-		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
+		        final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		        @NonNull /*@Caught*/ Object CAUGHT_b;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
 		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression defaultExpression_0 = this.getDefaultExpression();
-		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
-		            CAUGHT_oclIsKindOf = oclIsKindOf;
+		            final @NonNull /*@Thrown*/ Boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
+		            CAUGHT_b = b;
 		        }
 		        catch (Exception e) {
-		            CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
+		            CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		        }
-		        final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_oclIsKindOf);
-		        CAUGHT_and = and;
+		        final @NonNull /*@NonInvalid*/ Boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		        @Nullable /*@Thrown*/ Boolean symbol_12;
+		        if (symbol_0) {
+		            final @NonNull /*@NonInvalid*/ Boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
+		            @NonNull /*@Thrown*/ Boolean symbol_3;
+		            if (symbol_1) {
+		                if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_self_71;
+		                }
+		                symbol_3 = (Boolean)CAUGHT_self_71;
+		            }
+		            else {
+		                if (CAUGHT_b instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_b;
+		                }
+		                final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.FALSE_VALUE);
+		                @NonNull /*@Thrown*/ Boolean symbol_2;
+		                if (eq) {
+		                    symbol_2 = ValuesUtil.FALSE_VALUE;
+		                }
+		                else {
+		                    if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                        throw (InvalidValueException)CAUGHT_self_71;
+		                    }
+		                    symbol_2 = (Boolean)CAUGHT_self_71;
+		                }
+		                symbol_3 = symbol_2;
+		            }
+		            symbol_12 = symbol_3;
+		        }
+		        else {
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
+		            }
+		            final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.FALSE_VALUE);
+		            @Nullable /*@Thrown*/ Boolean symbol_11;
+		            if (eq_0) {
+		                symbol_11 = ValuesUtil.FALSE_VALUE;
+		            }
+		            else {
+		                final @NonNull /*@NonInvalid*/ Boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
+		                @Nullable /*@Thrown*/ Boolean symbol_10;
+		                if (symbol_4) {
+		                    if (CAUGHT_b instanceof InvalidValueException) {
+		                        throw (InvalidValueException)CAUGHT_b;
+		                    }
+		                    symbol_10 = (Boolean)CAUGHT_b;
+		                }
+		                else {
+		                    if (CAUGHT_b instanceof InvalidValueException) {
+		                        throw (InvalidValueException)CAUGHT_b;
+		                    }
+		                    final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.FALSE_VALUE);
+		                    @Nullable /*@NonInvalid*/ Boolean symbol_9;
+		                    if (eq_1) {
+		                        symbol_9 = ValuesUtil.FALSE_VALUE;
+		                    }
+		                    else {
+		                        final @NonNull /*@NonInvalid*/ Boolean symbol_5 = CAUGHT_self_71 instanceof InvalidValueException;
+		                        @Nullable /*@NonInvalid*/ Boolean symbol_8;
+		                        if (symbol_5) {
+		                            symbol_8 = (Boolean)null;
+		                        }
+		                        else {
+		                            final @NonNull /*@NonInvalid*/ Boolean symbol_6 = CAUGHT_b instanceof InvalidValueException;
+		                            @Nullable /*@NonInvalid*/ Boolean symbol_7;
+		                            if (symbol_6) {
+		                                symbol_7 = (Boolean)null;
+		                            }
+		                            else {
+		                                symbol_7 = ValuesUtil.TRUE_VALUE;
+		                            }
+		                            symbol_8 = symbol_7;
+		                        }
+		                        symbol_9 = symbol_8;
+		                    }
+		                    symbol_10 = symbol_9;
+		                }
+		                symbol_11 = symbol_10;
+		            }
+		            symbol_12 = symbol_11;
+		        }
+		        CAUGHT_symbol_12 = symbol_12;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_and = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_symbol_12 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
+		    @NonNull /*@Caught*/ Object CAUGHT_b_0;
 		    try {
 		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression defaultExpression_1 = this.getDefaultExpression();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
-		        CAUGHT_CompatibleBody = CompatibleBody;
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
+		        CAUGHT_b_0 = b_0;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_CompatibleBody = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_b_0 = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_CompatibleBody);
-		    CAUGHT_implies = implies;
+		    final @NonNull /*@NonInvalid*/ Boolean symbol_13 = CAUGHT_symbol_12 instanceof InvalidValueException;
+		    @Nullable /*@Thrown*/ Boolean symbol_25;
+		    if (symbol_13) {
+		        final @NonNull /*@NonInvalid*/ Boolean symbol_14 = CAUGHT_b_0 instanceof InvalidValueException;
+		        @Nullable /*@Thrown*/ Boolean symbol_16;
+		        if (symbol_14) {
+		            if (CAUGHT_symbol_12 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_symbol_12;
+		            }
+		            symbol_16 = (Boolean)CAUGHT_symbol_12;
+		        }
+		        else {
+		            if (CAUGHT_b_0 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_b_0;
+		            }
+		            final @NonNull /*@Thrown*/ Boolean eq_2 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b_0, ValuesUtil.TRUE_VALUE);
+		            @Nullable /*@Thrown*/ Boolean symbol_15;
+		            if (eq_2) {
+		                symbol_15 = ValuesUtil.TRUE_VALUE;
+		            }
+		            else {
+		                if (CAUGHT_symbol_12 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_symbol_12;
+		                }
+		                symbol_15 = (Boolean)CAUGHT_symbol_12;
+		            }
+		            symbol_16 = symbol_15;
+		        }
+		        symbol_25 = symbol_16;
+		    }
+		    else {
+		        if (CAUGHT_symbol_12 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_symbol_12;
+		        }
+		        final @NonNull /*@Thrown*/ Boolean eq_3 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_symbol_12, ValuesUtil.FALSE_VALUE);
+		        @Nullable /*@Thrown*/ Boolean symbol_24;
+		        if (eq_3) {
+		            symbol_24 = ValuesUtil.TRUE_VALUE;
+		        }
+		        else {
+		            final @NonNull /*@NonInvalid*/ Boolean symbol_17 = CAUGHT_b_0 instanceof InvalidValueException;
+		            @Nullable /*@Thrown*/ Boolean symbol_23;
+		            if (symbol_17) {
+		                if (CAUGHT_b_0 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_b_0;
+		                }
+		                symbol_23 = (Boolean)CAUGHT_b_0;
+		            }
+		            else {
+		                if (CAUGHT_b_0 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_b_0;
+		                }
+		                final @NonNull /*@Thrown*/ Boolean eq_4 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b_0, ValuesUtil.TRUE_VALUE);
+		                @Nullable /*@Thrown*/ Boolean symbol_22;
+		                if (eq_4) {
+		                    symbol_22 = ValuesUtil.TRUE_VALUE;
+		                }
+		                else {
+		                    final @NonNull /*@NonInvalid*/ Boolean symbol_18 = (CAUGHT_symbol_12 == null) || (CAUGHT_symbol_12 instanceof InvalidValueException);
+		                    @Nullable /*@Thrown*/ Boolean symbol_21;
+		                    if (symbol_18) {
+		                        symbol_21 = (Boolean)null;
+		                    }
+		                    else {
+		                        final @NonNull /*@NonInvalid*/ Boolean symbol_19 = CAUGHT_b_0 instanceof InvalidValueException;
+		                        @NonNull /*@Thrown*/ Boolean symbol_20;
+		                        if (symbol_19) {
+		                            if (CAUGHT_b_0 instanceof InvalidValueException) {
+		                                throw (InvalidValueException)CAUGHT_b_0;
+		                            }
+		                            symbol_20 = (Boolean)CAUGHT_b_0;
+		                        }
+		                        else {
+		                            symbol_20 = ValuesUtil.FALSE_VALUE;
+		                        }
+		                        symbol_21 = symbol_20;
+		                    }
+		                    symbol_22 = symbol_21;
+		                }
+		                symbol_23 = symbol_22;
+		            }
+		            symbol_24 = symbol_23;
+		        }
+		        symbol_25 = symbol_24;
+		    }
+		    CAUGHT_symbol_25 = symbol_25;
 		}
 		catch (Exception e) {
-		    CAUGHT_implies = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_symbol_25 = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_implies == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_symbol_25 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = CAUGHT_symbol_25 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleDefaultExpression", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_DEFAULT_EXPRESSION, message, new Object [] { this }));
 		}

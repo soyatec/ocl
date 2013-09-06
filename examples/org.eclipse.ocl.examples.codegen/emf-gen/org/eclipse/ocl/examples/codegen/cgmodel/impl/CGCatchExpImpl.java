@@ -126,6 +126,7 @@ public class CGCatchExpImpl extends CGCallExpImpl implements CGCatchExp {
 	@Override
 	public void setCaught(boolean isCaught) {
 		assert isCaught;
+		super.setCaught(true);
 	}
 
 } //CGCatchExpImpl

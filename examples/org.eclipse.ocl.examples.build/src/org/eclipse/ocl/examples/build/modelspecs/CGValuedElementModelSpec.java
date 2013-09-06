@@ -869,7 +869,9 @@ public class CGValuedElementModelSpec extends ModelSpec
 			switch (enumValue) {
 				case FALSE: 	return "assert !isCaught;";
 				case ROOT: 		return "caught = isCaught;";
-				case TRUE: 		return "assert isCaught;";
+				case TRUE:
+					return "assert isCaught;\n" +
+					"		super.setCaught(true);";
 				default: 		return "MISSING_CASE_for_" + enumValue + ";";
 			}
 		}

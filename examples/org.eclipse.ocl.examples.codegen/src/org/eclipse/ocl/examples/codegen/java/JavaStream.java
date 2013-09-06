@@ -146,10 +146,11 @@ public class JavaStream
 			cgExpression.accept(cg2java);
 		}
 		else {
+			TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(toVariable);
 			appendLocalStatements(cgExpression);
 			appendValueName(toVariable);
 			append(" = ");
-			appendValueName(cgExpression);
+			appendReferenceTo(typeDescriptor, cgExpression);
 			append(";\n");
 		}
 	}

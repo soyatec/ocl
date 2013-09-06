@@ -15,19 +15,13 @@
 package org.eclipse.ocl.examples.codegen.oclinecore;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.AS2CGVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-import org.eclipse.ocl.examples.pivot.VariableExp;
 
 public final class OCLinEcoreAS2CGVisitor extends AS2CGVisitor
 {
@@ -53,17 +47,9 @@ public final class OCLinEcoreAS2CGVisitor extends AS2CGVisitor
 	}
 
 	@Override
-	public @Nullable CGValuedElement visitVariableExp(@NonNull VariableExp pVariableExp) {
-		VariableDeclaration referredVariable = pVariableExp.getReferredVariable();
-		if (referredVariable != null) {
-			EObject eContainer = referredVariable.eContainer();
-			if (eContainer instanceof ExpressionInOCL) {
-				Variable contextVariable = ((ExpressionInOCL)eContainer).getContextVariable();
-				if (referredVariable == contextVariable) {
-					return globalContext.createSelfParameter(contextVariable);
-				}
-			}
-		}
-		return super.visitVariableExp(pVariableExp);
+	public @NonNull CGParameter getSelfParameter(@NonNull Variable aParameter) {
+		CGParameter selfParameter = super.getSelfParameter(aParameter);
+		selfParameter.setValueName("this");
+		return selfParameter;
 	}
 }
