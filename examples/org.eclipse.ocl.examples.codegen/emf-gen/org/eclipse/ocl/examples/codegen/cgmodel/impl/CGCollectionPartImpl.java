@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -374,6 +375,14 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	@Override
 	public boolean isConstant() {
 		return first.isConstant() && ((last == null) || last.isConstant());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGCollectionPart)thatValue) : null;
 	}
 
 	/**

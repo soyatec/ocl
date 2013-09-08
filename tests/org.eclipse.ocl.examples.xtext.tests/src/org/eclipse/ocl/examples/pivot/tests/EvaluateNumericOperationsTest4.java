@@ -74,7 +74,6 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 		super.tearDown();
 	}
 
-	@SuppressWarnings("null")
 	@Test public void testIntValue() {
 		assert ValuesUtil.integerValueOf(Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
 		assert ValuesUtil.integerValueOf((long)Integer.MAX_VALUE) instanceof IntIntegerValueImpl;

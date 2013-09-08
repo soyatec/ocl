@@ -37,16 +37,16 @@ public class CGTypedElementModelSpec extends ModelSpec
 		}
 
 		@Override
-		protected final @Nullable String getBody(@NonNull ModelSpec modelSpec) {
+		protected final @Nullable String getBody(@NonNull ModelSpec modelSpec, @NonNull GenModel genModel) {
 			if (modelSpec instanceof CGTypedElementModelSpec) {
-				return getBody((CGTypedElementModelSpec)modelSpec);
+				return getBody((CGTypedElementModelSpec)modelSpec, genModel);
 			}
 			else {
 				return null;
 			}
 		}
 
-		protected abstract @Nullable String getBody(@NonNull CGTypedElementModelSpec cgModelSpec);		
+		protected abstract @Nullable String getBody(@NonNull CGTypedElementModelSpec cgModelSpec, @NonNull GenModel genModel);		
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class CGTypedElementModelSpec extends ModelSpec
 		"Return the TypeId of the AS element.")
 		{
 			@Override
-			protected @Nullable String getBody(@NonNull CGTypedElementModelSpec modelSpec) {
+			protected @Nullable String getBody(@NonNull CGTypedElementModelSpec modelSpec, @NonNull GenModel genModel) {
 				Ati ati = modelSpec.ati;
 				return ati != null ? ati.generate() : null;
 			}

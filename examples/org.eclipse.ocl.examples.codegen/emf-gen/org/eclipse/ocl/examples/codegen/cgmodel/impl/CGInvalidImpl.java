@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -221,6 +222,22 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 */
 	public @NonNull Object getConstantValue() {
 		return ValuesUtil.INVALID_VALUE;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (thatValue.isInvalid()) {
+			return Boolean.TRUE;
+		}
+		else if (thatValue.isNonInvalid()) {
+			return Boolean.FALSE;
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**

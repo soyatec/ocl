@@ -196,6 +196,23 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * @generated
 	 */
 	@Override
+	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
+		return referredConstant != null ? thatValue.isEquivalentTo(referredConstant) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return referredConstant != null ? thatValue.isEquivalentToInternal(referredConstant) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return (referredConstant != null) && referredConstant.isUnboxed();
 	}

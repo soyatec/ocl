@@ -329,18 +329,6 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CGModelPackage.CG_EQUALS_EXP: {
-				CGEqualsExp cgEqualsExp = (CGEqualsExp)theEObject;
-				T result = caseCGEqualsExp(cgEqualsExp);
-				if (result == null) result = caseCGCallExp(cgEqualsExp);
-				if (result == null) result = caseCGValuedElement(cgEqualsExp);
-				if (result == null) result = caseCGTypedElement(cgEqualsExp);
-				if (result == null) result = caseCGNamedElement(cgEqualsExp);
-				if (result == null) result = caseCGElement(cgEqualsExp);
-				if (result == null) result = caseNameable(cgEqualsExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CGModelPackage.CG_EXECUTOR_COMPOSITION_PROPERTY: {
 				CGExecutorCompositionProperty cgExecutorCompositionProperty = (CGExecutorCompositionProperty)theEObject;
 				T result = caseCGExecutorCompositionProperty(cgExecutorCompositionProperty);
@@ -486,6 +474,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_INTEGER: {
 				CGInteger cgInteger = (CGInteger)theEObject;
 				T result = caseCGInteger(cgInteger);
+				if (result == null) result = caseCGNumber(cgInteger);
 				if (result == null) result = caseCGConstant(cgInteger);
 				if (result == null) result = caseCGValuedElement(cgInteger);
 				if (result == null) result = caseCGTypedElement(cgInteger);
@@ -504,6 +493,18 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCGNamedElement(cgInvalid);
 				if (result == null) result = caseCGElement(cgInvalid);
 				if (result == null) result = caseNameable(cgInvalid);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CGModelPackage.CG_IS_EQUAL_EXP: {
+				CGIsEqualExp cgIsEqualExp = (CGIsEqualExp)theEObject;
+				T result = caseCGIsEqualExp(cgIsEqualExp);
+				if (result == null) result = caseCGCallExp(cgIsEqualExp);
+				if (result == null) result = caseCGValuedElement(cgIsEqualExp);
+				if (result == null) result = caseCGTypedElement(cgIsEqualExp);
+				if (result == null) result = caseCGNamedElement(cgIsEqualExp);
+				if (result == null) result = caseCGElement(cgIsEqualExp);
+				if (result == null) result = caseNameable(cgIsEqualExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -673,6 +674,18 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_NUMBER: {
+				CGNumber cgNumber = (CGNumber)theEObject;
+				T result = caseCGNumber(cgNumber);
+				if (result == null) result = caseCGConstant(cgNumber);
+				if (result == null) result = caseCGValuedElement(cgNumber);
+				if (result == null) result = caseCGTypedElement(cgNumber);
+				if (result == null) result = caseCGNamedElement(cgNumber);
+				if (result == null) result = caseCGElement(cgNumber);
+				if (result == null) result = caseNameable(cgNumber);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_OPERATION: {
 				CGOperation cgOperation = (CGOperation)theEObject;
 				T result = caseCGOperation(cgOperation);
@@ -743,6 +756,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_REAL: {
 				CGReal cgReal = (CGReal)theEObject;
 				T result = caseCGReal(cgReal);
+				if (result == null) result = caseCGNumber(cgReal);
 				if (result == null) result = caseCGConstant(cgReal);
 				if (result == null) result = caseCGValuedElement(cgReal);
 				if (result == null) result = caseCGTypedElement(cgReal);
@@ -1203,6 +1217,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Is Equal Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Is Equal Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGIsEqualExp(CGIsEqualExp object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Is Invalid Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1518,21 +1547,6 @@ public class CGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG Equals Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG Equals Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCGEqualsExp(CGEqualsExp object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Executor Composition Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1709,6 +1723,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGNull(CGNull object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Number</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Number</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGNumber(CGNumber object) {
 		return null;
 	}
 

@@ -47,7 +47,6 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.numeric.NumericPlusOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -311,14 +310,14 @@ public class MessageExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ CallOperationAction calledOperation = this.getCalledOperation();
+		    final @Nullable /*@Thrown*/ CallOperationAction calledOperation = this.getCalledOperation();
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_CallOperationAction, calledOperation);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ SendSignalAction sentSignal = this.getSentSignal();
+		    final @Nullable /*@Thrown*/ SendSignalAction sentSignal = this.getSentSignal();
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_SendSignalAction, sentSignal);
 		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet_0);
 		    final @NonNull /*@Thrown*/ IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(size, size_0);
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(sum, PivotTables.INT_1);
+		    final /*@Thrown*/ boolean eq = sum.equals(PivotTables.INT_1);
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
@@ -354,15 +353,18 @@ public class MessageExpImpl
 		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression target = this.getTarget();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = target.getType();
-		        final @NonNull /*@Thrown*/ Boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
+		        final @Nullable /*@Thrown*/ DomainExpression target = this.getTarget();
+		        if (target == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ DomainType type = target.getType();
+		        final /*@Thrown*/ boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
 		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
 		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @NonNull /*@NonInvalid*/ Boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
 		    @Nullable /*@Thrown*/ Boolean symbol_5;
 		    if (symbol_0) {
 		        if (CAUGHT_self_71 instanceof InvalidValueException) {
@@ -371,25 +373,21 @@ public class MessageExpImpl
 		        symbol_5 = (Boolean)CAUGHT_self_71;
 		    }
 		    else {
-		        if (CAUGHT_self_71 instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_self_71;
-		        }
-		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.TRUE_VALUE);
 		        @Nullable /*@Thrown*/ Boolean symbol_4;
-		        if (eq) {
+		        if (CAUGHT_self_71 == Boolean.TRUE) {
 		            symbol_4 = ValuesUtil.FALSE_VALUE;
 		        }
 		        else {
 		            if (CAUGHT_self_71 instanceof InvalidValueException) {
 		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.FALSE_VALUE);
+		            final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		            @Nullable /*@Thrown*/ Boolean symbol_3;
-		            if (eq_0) {
+		            if (eq) {
 		                symbol_3 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                final @NonNull /*@NonInvalid*/ Boolean symbol_1 = CAUGHT_self_71 instanceof InvalidValueException;
+		                final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_self_71 instanceof InvalidValueException;
 		                @Nullable /*@Thrown*/ Object symbol_2;
 		                if (symbol_1) {
 		                    symbol_2 = null;

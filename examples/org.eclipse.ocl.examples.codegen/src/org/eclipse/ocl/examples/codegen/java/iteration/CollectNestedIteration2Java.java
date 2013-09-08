@@ -24,12 +24,13 @@ public class CollectNestedIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull CollectNestedIteration2Java INSTANCE = new CollectNestedIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 		js.appendValueName(cgAccumulator);
 		js.append(".add(");
 		js.appendValueName(cgBody);
 		js.append(");\n");
+		return true;
 	}
 }

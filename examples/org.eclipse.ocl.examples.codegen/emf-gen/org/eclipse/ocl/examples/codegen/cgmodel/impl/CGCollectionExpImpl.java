@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.LocalPlace;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -232,6 +233,14 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGCollectionExp)thatValue) : null;
 	}
 
 	/**

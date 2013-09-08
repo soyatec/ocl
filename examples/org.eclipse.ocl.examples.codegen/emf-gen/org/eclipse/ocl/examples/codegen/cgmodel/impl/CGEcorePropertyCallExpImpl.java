@@ -170,7 +170,7 @@ public class CGEcorePropertyCallExpImpl extends CGPropertyCallExpImpl implements
 	 */
 	@Override
 	public boolean isNonNull() {
-		return true;
+		return isRequired();
 	}
 
 	/**
@@ -179,15 +179,6 @@ public class CGEcorePropertyCallExpImpl extends CGPropertyCallExpImpl implements
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUndeclaredNonNull() {
 		return true;
 	}
 

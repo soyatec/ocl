@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
@@ -228,12 +227,12 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	}
 
 	@Override
-	public @Nullable Object visitCGClass(@NonNull CGClass cgClass) {
-		return null;
+	public @NonNull Boolean visitCGClass(@NonNull CGClass cgClass) {
+		return true;
 	}
 
 	@Override
-	public @Nullable Object visitCGConstantExp(@NonNull CGConstantExp cgConstantExp) {
+	public @NonNull Boolean visitCGConstantExp(@NonNull CGConstantExp cgConstantExp) {
 		CGValuedElement globalConstant = cgConstantExp.getReferredConstant();
 		if (globalConstant != null) {
 			if (!cgConstantExp.isInlined()) {
@@ -241,16 +240,16 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			}
 			js.appendValueName(globalConstant);
 		}
-		return null;
+		return true;
 	}
 
 	@Override
-	public @Nullable Object visitCGOperation(@NonNull CGOperation cgOperation) {
-		return null;
+	public @NonNull Boolean visitCGOperation(@NonNull CGOperation cgOperation) {
+		return true;
 	}
 
 	@Override
-	public @Nullable Object visitCGPackage(@NonNull CGPackage cgPackage) {
-		return null;
+	public @NonNull Boolean visitCGPackage(@NonNull CGPackage cgPackage) {
+		return true;
 	}
 }

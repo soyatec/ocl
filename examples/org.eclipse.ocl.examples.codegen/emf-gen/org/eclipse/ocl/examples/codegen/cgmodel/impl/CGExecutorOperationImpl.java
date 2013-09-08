@@ -209,6 +209,14 @@ public class CGExecutorOperationImpl extends CGValuedElementImpl implements CGEx
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isGlobal() {
 		return false;

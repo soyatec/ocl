@@ -43,11 +43,10 @@ public class IsUniqueIteration2Java extends AbstractAccumulation2Java
 	
 	@Override
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
-		js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
-		return true;
+		return js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
 	}
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 		js.append("if (");
@@ -77,6 +76,7 @@ public class IsUniqueIteration2Java extends AbstractAccumulation2Java
 			js.popIndentation();
 		}
 		js.append("}\n");
+		return true;
 	}
 
 	@Override

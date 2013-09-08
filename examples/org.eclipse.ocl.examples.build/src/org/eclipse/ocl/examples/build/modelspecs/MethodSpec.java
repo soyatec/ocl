@@ -88,8 +88,8 @@ public abstract class MethodSpec
 				appendHeader(s, null);
 			    s.append("\tprivate " + variableDecl + ";\n");
 		    }
-		    String body = getBody(modelSpec);
-		    String superBody = getSuperBody(modelSpec);
+		    String body = getBody(modelSpec, genModel);
+		    String superBody = getSuperBody(modelSpec, genModel);
 		    if ((body != null) && !body.equals(superBody)) {
 	    		String resolvedDeclaration = OCLBuildGenModelUtil.resolveImports(genModel, resolveJDTAnnotations(genModel, interfaceDecl));
 	    		String resolvedBody = OCLBuildGenModelUtil.resolveImports(genModel, body);
@@ -107,13 +107,13 @@ public abstract class MethodSpec
 	/**
 	 * Return the text to appear as the body of cgModelSpec. If the return is null the definition is omitted.
 	 */
-	protected abstract @Nullable String getBody(@NonNull ModelSpec modelSpec);
+	protected abstract @Nullable String getBody(@NonNull ModelSpec modelSpec, @NonNull GenModel genModel);
 	
 	/**
 	 * Return the non-null body implementation of of the primary inheritance if there is one,
 	 * or null if there is no inherited body.
 	 */
-	protected @Nullable String getSuperBody(@NonNull ModelSpec modelSpec) {
+	protected @Nullable String getSuperBody(@NonNull ModelSpec modelSpec, @NonNull GenModel genModel) {
 		Class<?> cgClass = modelSpec.cgClass;
 		while (cgClass != null) {
 			List<ModelSpec> specs = null;
@@ -139,7 +139,7 @@ public abstract class MethodSpec
 			if (specs != null) {
 				for (ModelSpec spec : specs) {
 					if (spec != null) {
-						String body = getBody(spec);
+						String body = getBody(spec, genModel);
 						if (body != null) {
 							return body;
 						}

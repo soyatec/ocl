@@ -193,11 +193,27 @@ public interface CGValuedElement extends CGTypedElement {
 	boolean isSettable();
 
 	/**
+	 * Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$48
+	@Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue);
+
+	/**
+	 * Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$50
+	@Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue);
+
+	/**
 	 * Return true if this value is true.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$20
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$30
 	boolean isTrue();
 
 	/**

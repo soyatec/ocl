@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -470,14 +469,17 @@ public class PropertyCallExpImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		        try {
-		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainProperty referredProperty = this.getReferredProperty();
-		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean self_71 = referredProperty.isStatic();
+		            final @Nullable /*@Thrown*/ DomainProperty referredProperty = this.getReferredProperty();
+		            if (referredProperty == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final /*@Thrown*/ boolean self_71 = referredProperty.isStatic();
 		            CAUGHT_self_71 = self_71;
 		        }
 		        catch (Exception e) {
 		            CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		        }
-		        final @NonNull /*@NonInvalid*/ Boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		        final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
 		        @Nullable /*@Thrown*/ Boolean symbol_5;
 		        if (symbol_0) {
 		            if (CAUGHT_self_71 instanceof InvalidValueException) {
@@ -486,25 +488,21 @@ public class PropertyCallExpImpl
 		            symbol_5 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            if (CAUGHT_self_71 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_self_71;
-		            }
-		            final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.TRUE_VALUE);
 		            @Nullable /*@Thrown*/ Boolean symbol_4;
-		            if (eq) {
+		            if (CAUGHT_self_71 == Boolean.TRUE) {
 		                symbol_4 = ValuesUtil.FALSE_VALUE;
 		            }
 		            else {
 		                if (CAUGHT_self_71 instanceof InvalidValueException) {
 		                    throw (InvalidValueException)CAUGHT_self_71;
 		                }
-		                final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.FALSE_VALUE);
+		                final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		                @Nullable /*@Thrown*/ Boolean symbol_3;
-		                if (eq_0) {
+		                if (eq) {
 		                    symbol_3 = ValuesUtil.TRUE_VALUE;
 		                }
 		                else {
-		                    final @NonNull /*@NonInvalid*/ Boolean symbol_1 = CAUGHT_self_71 instanceof InvalidValueException;
+		                    final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_self_71 instanceof InvalidValueException;
 		                    @Nullable /*@Thrown*/ Object symbol_2;
 		                    if (symbol_1) {
 		                        symbol_2 = null;
@@ -526,19 +524,22 @@ public class PropertyCallExpImpl
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    @NonNull /*@Caught*/ Object CAUGHT_b;
 		    try {
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
+		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
+		        if (source == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
 		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
-		        final @NonNull /*@Thrown*/ Boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
+		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @NonNull /*@NonInvalid*/ Boolean symbol_6 = CAUGHT_symbol_5 instanceof InvalidValueException;
+		    final /*@NonInvalid*/ boolean symbol_6 = CAUGHT_symbol_5 instanceof InvalidValueException;
 		    @Nullable /*@Thrown*/ Boolean symbol_18;
 		    if (symbol_6) {
-		        final @NonNull /*@NonInvalid*/ Boolean symbol_7 = CAUGHT_b instanceof InvalidValueException;
+		        final /*@NonInvalid*/ boolean symbol_7 = CAUGHT_b instanceof InvalidValueException;
 		        @Nullable /*@Thrown*/ Boolean symbol_9;
 		        if (symbol_7) {
 		            if (CAUGHT_symbol_5 instanceof InvalidValueException) {
@@ -547,12 +548,8 @@ public class PropertyCallExpImpl
 		            symbol_9 = (Boolean)CAUGHT_symbol_5;
 		        }
 		        else {
-		            if (CAUGHT_b instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_b;
-		            }
-		            final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.TRUE_VALUE);
 		            @Nullable /*@Thrown*/ Boolean symbol_8;
-		            if (eq_1) {
+		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_8 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
@@ -569,13 +566,13 @@ public class PropertyCallExpImpl
 		        if (CAUGHT_symbol_5 instanceof InvalidValueException) {
 		            throw (InvalidValueException)CAUGHT_symbol_5;
 		        }
-		        final @NonNull /*@Thrown*/ Boolean eq_2 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_symbol_5, ValuesUtil.FALSE_VALUE);
+		        final /*@Thrown*/ boolean eq_0 = CAUGHT_symbol_5 == Boolean.FALSE;
 		        @Nullable /*@Thrown*/ Boolean symbol_17;
-		        if (eq_2) {
+		        if (eq_0) {
 		            symbol_17 = ValuesUtil.TRUE_VALUE;
 		        }
 		        else {
-		            final @NonNull /*@NonInvalid*/ Boolean symbol_10 = CAUGHT_b instanceof InvalidValueException;
+		            final /*@NonInvalid*/ boolean symbol_10 = CAUGHT_b instanceof InvalidValueException;
 		            @Nullable /*@Thrown*/ Boolean symbol_16;
 		            if (symbol_10) {
 		                if (CAUGHT_b instanceof InvalidValueException) {
@@ -584,23 +581,19 @@ public class PropertyCallExpImpl
 		                symbol_16 = (Boolean)CAUGHT_b;
 		            }
 		            else {
-		                if (CAUGHT_b instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_b;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean eq_3 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.TRUE_VALUE);
 		                @Nullable /*@Thrown*/ Boolean symbol_15;
-		                if (eq_3) {
+		                if (CAUGHT_b == Boolean.TRUE) {
 		                    symbol_15 = ValuesUtil.TRUE_VALUE;
 		                }
 		                else {
-		                    final @NonNull /*@NonInvalid*/ Boolean symbol_11 = (CAUGHT_symbol_5 == null) || (CAUGHT_symbol_5 instanceof InvalidValueException);
+		                    final /*@NonInvalid*/ boolean symbol_11 = (CAUGHT_symbol_5 == null) || (CAUGHT_symbol_5 instanceof InvalidValueException);
 		                    @Nullable /*@Thrown*/ Boolean symbol_14;
 		                    if (symbol_11) {
-		                        symbol_14 = (Boolean)null;
+		                        symbol_14 = null;
 		                    }
 		                    else {
-		                        final @NonNull /*@NonInvalid*/ Boolean symbol_12 = CAUGHT_b instanceof InvalidValueException;
-		                        @NonNull /*@Thrown*/ Boolean symbol_13;
+		                        final /*@NonInvalid*/ boolean symbol_12 = CAUGHT_b instanceof InvalidValueException;
+		                        /*@Thrown*/ boolean symbol_13;
 		                        if (symbol_12) {
 		                            if (CAUGHT_b instanceof InvalidValueException) {
 		                                throw (InvalidValueException)CAUGHT_b;
@@ -650,9 +643,10 @@ public class PropertyCallExpImpl
 		 */
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
+		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
+		    final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == getSpecializedReferredPropertyType.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
+		    ;
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {

@@ -47,7 +47,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 	}
 
 	@Override
-	public @Nullable Object visitCGClass(@NonNull CGClass cgClass) {
+	public @NonNull Boolean visitCGClass(@NonNull CGClass cgClass) {
 		Class<?> baseClass = genModelHelper.getAbstractOperationClass(expInOcl.getParameterVariable());
 		String title = cgClass.getName() + " provides the Java implementation for\n";
 		js.appendCommentWithOCL(title, expInOcl);
@@ -77,6 +77,6 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		}
 		js.popIndentation();
 		js.append("}\n");
-		return null;
+		return true;
 	}
 }

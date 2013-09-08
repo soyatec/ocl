@@ -162,15 +162,6 @@ public interface CGModelFactory extends EFactory {
 	@NonNull CGElementId createCGElementId();
 
 	/**
-	 * Returns a new object of class '<em>CG Equals Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Equals Exp</em>'.
-	 * @generated
-	 */
-	@NonNull CGEqualsExp createCGEqualsExp();
-
-	/**
 	 * Returns a new object of class '<em>CG Executor Composition Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -259,6 +250,15 @@ public interface CGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGInvalid createCGInvalid();
+
+	/**
+	 * Returns a new object of class '<em>CG Is Equal Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Is Equal Exp</em>'.
+	 * @generated
+	 */
+	CGIsEqualExp createCGIsEqualExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Is Invalid Exp</em>'.

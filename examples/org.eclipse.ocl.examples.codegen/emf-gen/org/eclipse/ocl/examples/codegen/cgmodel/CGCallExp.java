@@ -101,6 +101,9 @@ public interface CGCallExp extends CGValuedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The source expression for the call.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(CGValuedElement)
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCallExp_Source()

@@ -27,7 +27,7 @@ public class SelectIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull SelectIteration2Java INSTANCE = new SelectIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
 			CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
@@ -44,9 +44,10 @@ public class SelectIteration2Java extends AbstractAccumulation2Java
 				js.append(");\n");
 			js.popIndentation();
 			js.append("}\n");
+			return true;
 		}
 		else {
-			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "select");
+			return js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "select");
 		}
 	}
 }

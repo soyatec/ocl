@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -180,6 +181,38 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 */
 	public @NonNull Object getConstantValue() {
 		return booleanValue == true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (this == thatValue) {
+			return Boolean.TRUE;
+		}
+		if (booleanValue) {
+			if (thatValue.isTrue()) {
+				return Boolean.TRUE;
+			}
+			else if (thatValue.isFalse()) {
+				return Boolean.FALSE;
+			}
+		}
+		else {
+			if (thatValue.isTrue()) {
+				return Boolean.FALSE;
+			}
+			else if (thatValue.isFalse()) {
+				return Boolean.TRUE;
+			}
+		}
+		if (thatValue.isConstant()) {
+			return Boolean.FALSE;
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**

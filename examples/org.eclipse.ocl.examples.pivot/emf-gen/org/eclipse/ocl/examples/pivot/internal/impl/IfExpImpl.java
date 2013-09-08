@@ -32,15 +32,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -276,9 +277,13 @@ public class IfExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean_0 = idResolver.getType(TypeId.BOOLEAN, null);
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression condition = this.getCondition();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = condition.getType();
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean_0);
+		    final @Nullable /*@Thrown*/ DomainExpression condition = this.getCondition();
+		    if (condition == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ DomainType type = condition.getType();
+		    final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Boolean_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
+		    ;
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {

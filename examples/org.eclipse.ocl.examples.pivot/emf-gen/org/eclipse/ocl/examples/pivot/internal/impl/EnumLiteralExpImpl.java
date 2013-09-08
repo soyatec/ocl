@@ -31,10 +31,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -147,10 +148,14 @@ public class EnumLiteralExpImpl
 		 */
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ EnumerationLiteral referredEnumLiteral = this.getReferredEnumLiteral();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ Enumeration enumeration = referredEnumLiteral.getEnumeration();
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
+		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		    final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = this.getReferredEnumLiteral();
+		    if (referredEnumLiteral == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ Enumeration enumeration = referredEnumLiteral.getEnumeration();
+		    final /*@Thrown*/ boolean eq = (type != null) && (enumeration != null) ? (type.getTypeId() == enumeration.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
+		    ;
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {

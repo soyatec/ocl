@@ -683,10 +683,8 @@ public class IteratorsTest4 extends PivotTestSuite
      * iterator expression's value is invalid.
      */
     @Test public void test_any_invalidBody_142518() {
-    	if (!useCodeGen) {					// FIXME gives unreachable code
-	    	assertQueryInvalid(null, "Bag{1, 2, 3}->any('true')");		// Bug 415669
-	    	assertQueryInvalid(null, "Bag{1, 2, 3}->any(2)");			// Bug 415669   	
-    	}
+	    assertQueryInvalid(null, "Bag{1, 2, 3}->any('true')");		// Bug 415669
+	    assertQueryInvalid(null, "Bag{1, 2, 3}->any(2)");			// Bug 415669   	
     	
         assertQueryInvalid(EcorePackage.eINSTANCE,
             "let b:Boolean = null in Bag{1, 2, 3}->any(b and b)");

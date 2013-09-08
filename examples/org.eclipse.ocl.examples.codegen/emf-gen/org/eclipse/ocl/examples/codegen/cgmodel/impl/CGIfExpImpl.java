@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.IfPlaces;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -346,6 +347,14 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	@Override
 	public boolean isBoxed() {
 		return thenExpression.isBoxed() || elseExpression.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGIfExp)thatValue) : null;
 	}
 
 	/**

@@ -472,7 +472,7 @@ public class TypeImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, this);
-		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
 		return oclIsKindOf;
 	}
 
@@ -1239,11 +1239,11 @@ public class TypeImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> ownedInvariant = this.getOwnedInvariant();
+		    final @NonNull /*@Thrown*/ List<? extends DomainConstraint> ownedInvariant = this.getOwnedInvariant();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_ownedInvariant = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, ownedInvariant);
 		    @NonNull /*@Thrown*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedInvariant.iterator();
-		    @NonNull /*@Thrown*/ Boolean isUnique;
+		    /*@Thrown*/ boolean isUnique;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
 		            isUnique = ValuesUtil.TRUE_VALUE;
@@ -1256,7 +1256,7 @@ public class TypeImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = _1.getName();
+		        final @Nullable /*@Thrown*/ String name = _1.getName();
 		        //
 		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
 		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find

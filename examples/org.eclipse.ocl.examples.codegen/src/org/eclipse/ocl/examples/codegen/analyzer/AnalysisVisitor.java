@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
@@ -104,25 +105,60 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 		CGValuedElement condition = context.getExpression(cgIfExp.getCondition());
 		CGValuedElement thenExpression = context.getExpression(cgIfExp.getThenExpression());
 		CGValuedElement elseExpression = context.getExpression(cgIfExp.getElseExpression());
-		if (condition.isInvalid()) {
-			CGUtils.replace(cgIfExp, condition);
-		}
-		else if (condition.isNull()) {
-			context.setConstant(cgIfExp, context.getInvalid("Null condition"));
-		}
-		else if (thenExpression.isInvalid() && elseExpression.isInvalid()) {
-			CGUtils.replace(cgIfExp, thenExpression);
-		}
-		else if (condition.isConstant()) {
-			if (condition.isTrue()) {
-				CGUtils.replace(cgIfExp, thenExpression);
+		if (condition.isConstant()) {
+			if (condition.isInvalid()) {
+				CGUtils.replace(cgIfExp, condition);
+			}
+			else if (condition.isNull()) {
+				context.setConstant(cgIfExp, context.getInvalid("Null condition"));
+			}
+			else if (condition.isTrue()) {
+				context.replace(cgIfExp, thenExpression, "Null then-expression");
 			}
 			else if (condition.isFalse()) {
-				CGUtils.replace(cgIfExp, elseExpression);
+				context.replace(cgIfExp, elseExpression, "Null else-expression");
 			}
 			else {
 				ElementId asTypeId = condition.getTypeId().getElementId();
 				context.setConstant(cgIfExp, context.getInvalid(EvaluatorMessages.TypedValueRequired, "Boolean", asTypeId));
+			}
+		}
+		else if (thenExpression.isEquivalentTo(elseExpression) == Boolean.TRUE) {
+			context.setConstant(cgIfExp, context.getBoolean(true));
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGIsEqualExp(@NonNull CGIsEqualExp cgIsEqualExp) {
+		super.visitCGIsEqualExp(cgIsEqualExp);
+		CGValuedElement cgSource = cgIsEqualExp.getSource();
+		if (cgSource == null) {
+			return null;
+		}
+		CGValuedElement cgArgument = cgIsEqualExp.getArgument();
+		if (cgArgument == null) {
+			return null;
+		}
+		boolean cgSourceIsInvalid = cgSource.isInvalid();
+		if (cgSourceIsInvalid || cgArgument.isInvalid()) {
+			context.setConstant(cgIsEqualExp, cgSourceIsInvalid ? cgSource : cgArgument);
+		}
+		else {
+			CGValuedElement cgSourceValue = cgSource.getValue();
+			CGValuedElement cgArgumentValue = cgArgument.getValue();
+			Boolean isEqual = cgSourceValue.isEquivalentTo(cgArgumentValue);
+			if (isEqual == Boolean.TRUE) {
+				context.setConstant(cgIsEqualExp, context.getBoolean(!cgIsEqualExp.isNotEquals()));
+			}
+			else if (isEqual == Boolean.FALSE) {
+				context.setConstant(cgIsEqualExp, context.getBoolean(cgIsEqualExp.isNotEquals()));
+			}
+			else if (cgSource.isTrue() && (cgArgument.getASTypeId() == TypeId.BOOLEAN)) {
+				context.replace(cgIsEqualExp, cgArgument, "Null term");
+			}
+			else if (cgArgument.isTrue() && (cgSource.getASTypeId() == TypeId.BOOLEAN)) {
+				context.replace(cgIsEqualExp, cgSource, "Null term");
 			}
 		}
 		return null;
@@ -155,7 +191,7 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 //		}
 //		else {
 			if (in.isConstant()) {
-				context.setConstant(cgLetExp, in.getValue());
+				context.replace(cgLetExp, in.getValue(), "Null let-expression");
 			}
 //		}
 		return null;

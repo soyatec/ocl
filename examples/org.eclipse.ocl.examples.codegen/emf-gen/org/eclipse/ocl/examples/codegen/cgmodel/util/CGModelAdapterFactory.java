@@ -169,10 +169,6 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGElementIdAdapter();
 			}
 			@Override
-			public Adapter caseCGEqualsExp(CGEqualsExp object) {
-				return createCGEqualsExpAdapter();
-			}
-			@Override
 			public Adapter caseCGExecutorCompositionProperty(CGExecutorCompositionProperty object) {
 				return createCGExecutorCompositionPropertyAdapter();
 			}
@@ -229,6 +225,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGInvalidAdapter();
 			}
 			@Override
+			public Adapter caseCGIsEqualExp(CGIsEqualExp object) {
+				return createCGIsEqualExpAdapter();
+			}
+			@Override
 			public Adapter caseCGIsInvalidExp(CGIsInvalidExp object) {
 				return createCGIsInvalidExpAdapter();
 			}
@@ -283,6 +283,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGNull(CGNull object) {
 				return createCGNullAdapter();
+			}
+			@Override
+			public Adapter caseCGNumber(CGNumber object) {
+				return createCGNumberAdapter();
 			}
 			@Override
 			public Adapter caseCGOperation(CGOperation object) {
@@ -639,6 +643,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp <em>CG Is Equal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp
+	 * @generated
+	 */
+	public Adapter createCGIsEqualExpAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp <em>CG Is Invalid Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -933,20 +951,6 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp <em>CG Equals Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp
-	 * @generated
-	 */
-	public Adapter createCGEqualsExpAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorCompositionProperty <em>CG Executor Composition Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1111,6 +1115,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGNullAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNumber <em>CG Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNumber
+	 * @generated
+	 */
+	public Adapter createCGNumberAdapter() {
 		return null;
 	}
 

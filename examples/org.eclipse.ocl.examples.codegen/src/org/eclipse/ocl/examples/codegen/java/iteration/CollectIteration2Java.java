@@ -26,7 +26,7 @@ public class CollectIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull CollectIteration2Java INSTANCE = new CollectIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 //		CGTypeId cgBodyTypeId = cgBody.getTypeId();
@@ -85,5 +85,6 @@ public class CollectIteration2Java extends AbstractAccumulation2Java
 			js.appendValueName(cgBody);
 			js.append(");\n");
 		}
+		return true;
 	}
 }

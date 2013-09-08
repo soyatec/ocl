@@ -17,8 +17,12 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
 import org.eclipse.ocl.examples.pivot.Property;
 
 /**
@@ -161,6 +165,15 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 				return REFERRED_PROPERTY_EDEFAULT == null ? referredProperty != null : !REFERRED_PROPERTY_EDEFAULT.equals(referredProperty);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGPropertyCallExp)thatValue) : null;
 	}
 
 	/**

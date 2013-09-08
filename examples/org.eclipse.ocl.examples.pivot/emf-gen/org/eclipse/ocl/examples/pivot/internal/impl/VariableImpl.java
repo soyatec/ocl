@@ -42,8 +42,6 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -238,8 +236,8 @@ public class VariableImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression = this.getInitExpression();
-		        final @NonNull /*@Thrown*/ Boolean self_71 = OclAnyNotEqualOperation.INSTANCE.evaluate(initExpression, null);
+		        final @Nullable /*@Thrown*/ DomainExpression initExpression = this.getInitExpression();
+		        final /*@Thrown*/ boolean self_71 = initExpression != null;
 		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
@@ -248,20 +246,23 @@ public class VariableImpl
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    @NonNull /*@Caught*/ Object CAUGHT_b;
 		    try {
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression_0 = this.getInitExpression();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = initExpression_0.getType();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = this.getType();
-		        final @NonNull /*@Thrown*/ Boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
+		        final @Nullable /*@Thrown*/ DomainExpression initExpression_0 = this.getInitExpression();
+		        if (initExpression_0 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ DomainType type = initExpression_0.getType();
+		        final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
+		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @NonNull /*@NonInvalid*/ Boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
 		    @Nullable /*@Thrown*/ Boolean symbol_12;
 		    if (symbol_0) {
-		        final @NonNull /*@NonInvalid*/ Boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		        @NonNull /*@Thrown*/ Boolean symbol_3;
+		        final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
+		        /*@Thrown*/ boolean symbol_3;
 		        if (symbol_1) {
 		            if (CAUGHT_self_71 instanceof InvalidValueException) {
 		                throw (InvalidValueException)CAUGHT_self_71;
@@ -269,12 +270,8 @@ public class VariableImpl
 		            symbol_3 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            if (CAUGHT_b instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_b;
-		            }
-		            final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.TRUE_VALUE);
-		            @NonNull /*@Thrown*/ Boolean symbol_2;
-		            if (eq) {
+		            /*@Thrown*/ boolean symbol_2;
+		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_2 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
@@ -291,13 +288,13 @@ public class VariableImpl
 		        if (CAUGHT_self_71 instanceof InvalidValueException) {
 		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.FALSE_VALUE);
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		        @Nullable /*@Thrown*/ Boolean symbol_11;
-		        if (eq_0) {
+		        if (eq) {
 		            symbol_11 = ValuesUtil.TRUE_VALUE;
 		        }
 		        else {
-		            final @NonNull /*@NonInvalid*/ Boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
+		            final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
 		            @Nullable /*@Thrown*/ Boolean symbol_10;
 		            if (symbol_4) {
 		                if (CAUGHT_b instanceof InvalidValueException) {
@@ -306,23 +303,19 @@ public class VariableImpl
 		                symbol_10 = (Boolean)CAUGHT_b;
 		            }
 		            else {
-		                if (CAUGHT_b instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_b;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.TRUE_VALUE);
 		                @Nullable /*@Thrown*/ Boolean symbol_9;
-		                if (eq_1) {
+		                if (CAUGHT_b == Boolean.TRUE) {
 		                    symbol_9 = ValuesUtil.TRUE_VALUE;
 		                }
 		                else {
-		                    final @NonNull /*@NonInvalid*/ Boolean symbol_5 = CAUGHT_self_71 instanceof InvalidValueException;
+		                    final /*@NonInvalid*/ boolean symbol_5 = CAUGHT_self_71 instanceof InvalidValueException;
 		                    @Nullable /*@Thrown*/ Boolean symbol_8;
 		                    if (symbol_5) {
-		                        symbol_8 = (Boolean)null;
+		                        symbol_8 = null;
 		                    }
 		                    else {
-		                        final @NonNull /*@NonInvalid*/ Boolean symbol_6 = CAUGHT_b instanceof InvalidValueException;
-		                        @NonNull /*@Thrown*/ Boolean symbol_7;
+		                        final /*@NonInvalid*/ boolean symbol_6 = CAUGHT_b instanceof InvalidValueException;
+		                        /*@Thrown*/ boolean symbol_7;
 		                        if (symbol_6) {
 		                            if (CAUGHT_b instanceof InvalidValueException) {
 		                                throw (InvalidValueException)CAUGHT_b;

@@ -21,7 +21,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreClassConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -170,6 +172,14 @@ public class CGEcoreClassConstructorExpImpl extends CGConstructorExpImpl impleme
 	@Override
 	public boolean isConstant() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGEcoreClassConstructorExp)thatValue) : null;
 	}
 
 	/**

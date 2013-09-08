@@ -234,7 +234,7 @@ public class CodeGenAnalyzer
 		if (cgInteger == null) {
 			cgInteger = CGModelFactory.eINSTANCE.createCGInteger();
 			setNames(cgInteger, aNumber);
-			cgInteger.setIntegerValue(aNumber);
+			cgInteger.setNumericValue(aNumber);
 			cgInteger.setTypeId(getTypeId(TypeId.INTEGER));
 			cgIntegers.put(aNumber, cgInteger);
 		}
@@ -272,7 +272,7 @@ public class CodeGenAnalyzer
 		if (cgReal == null) {
 			cgReal = CGModelFactory.eINSTANCE.createCGReal();
 			setNames(cgReal, aNumber);
-			cgReal.setRealValue(aNumber);
+			cgReal.setNumericValue(aNumber);
 			cgReal.setTypeId(getTypeId(TypeId.REAL));
 			cgReals.put(aNumber, cgReal);
 		}
@@ -318,7 +318,18 @@ public class CodeGenAnalyzer
 		return cgUnlimited2;
 	}
 
-	public void setConstant(@NonNull CGValuedElement oldElement, @Nullable CGValuedElement aConstant) {
+	/**
+	 * Replace oldElement by newElement and return oldElement which is orphaned by the replacement.
+	 */
+	public @NonNull CGValuedElement replace(@NonNull CGValuedElement oldElement, @NonNull CGValuedElement newElement,
+			/*@NonNull*/ String messageTemplate, Object... bindings) {
+		if (oldElement.isRequired() && newElement.isNull()) {
+			newElement = getInvalid(messageTemplate, bindings);
+		}
+		return CGUtils.replace(oldElement, newElement);		
+	}
+
+	public void setConstant(@NonNull CGValuedElement oldElement, @NonNull CGValuedElement aConstant) {
 		CGConstantExp newElement = CGModelFactory.eINSTANCE.createCGConstantExp();		// FIXME wrapper not needed
 		newElement.setReferredConstant(aConstant);
 		newElement.setTypeId(oldElement.getTypeId());

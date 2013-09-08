@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -207,6 +208,23 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	@Override
 	public boolean isCommonable() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
+		return init != null ? thatValue.isEquivalentTo(init) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return init != null ? thatValue.isEquivalentToInternal(init) : null;
 	}
 
 	/**

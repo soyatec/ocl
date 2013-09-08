@@ -27,7 +27,7 @@ public class RejectIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull RejectIteration2Java INSTANCE = new RejectIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
 			CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
@@ -44,9 +44,10 @@ public class RejectIteration2Java extends AbstractAccumulation2Java
 				js.append(");\n");
 			js.popIndentation();
 			js.append("}\n");
+			return true;
 		}
 		else {
-			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "reject");
+			return js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "reject");
 		}
 	}
 }

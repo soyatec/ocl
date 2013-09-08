@@ -28,5 +28,11 @@ public interface Iteration2Java extends IterationHelper
 	 * Returns true if control flow continues into a break, false if terminated by a throw.
 	 */
 	boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
-	void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
+	
+	/**
+	 * Append the code to update the accumulator
+	 * <p>
+	 * Returns true if control flow continues to loop again, false if terminated by a throw.
+	 */
+	boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
 }

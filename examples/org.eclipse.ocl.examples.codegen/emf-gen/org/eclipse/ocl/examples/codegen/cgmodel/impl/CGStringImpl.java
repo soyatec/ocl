@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
@@ -190,6 +191,29 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	@Override
 	public boolean isCommonable() {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (!thatValue.isNonInvalid()) {
+			return null;
+		}
+		CGValuedElement value = thatValue.getValue();
+		if (this == value) {
+			return Boolean.TRUE;
+		}
+		if (!value.isConstant()) {
+			return null;
+		}
+		else if (value instanceof CGString) {
+			return stringValue.equals(((CGString)thatValue).getStringValue());
+		}
+		else {
+			return Boolean.FALSE;
+		}
 	}
 
 	/**

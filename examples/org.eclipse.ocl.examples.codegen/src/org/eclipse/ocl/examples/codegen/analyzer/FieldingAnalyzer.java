@@ -27,9 +27,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstant;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
@@ -113,6 +113,16 @@ public class FieldingAnalyzer
 			}
 			return childExternals;
 		}
+
+		/**
+		 * All childExternals of a validating operation are marked as caught variables.
+		 *
+		@Override
+		public @Nullable Set<CGVariable> visitCGIsEqualExp(@NonNull CGIsEqualExp cgElement) {
+			Set<CGVariable> childExternals = super.visitCGIsEqualExp(cgElement);
+			context.setCaught(childExternals);
+			return childExternals;
+		} */
 
 		/**
 		 * All childExternals of a validating operation are marked as caught variables.
@@ -267,14 +277,6 @@ public class FieldingAnalyzer
 		}
 
 		@Override
-		public @NonNull Boolean visitCGEqualsExp(@NonNull CGEqualsExp cgElement) {
-			rewriteAsThrown(cgElement.getSource());
-			rewriteAsThrown(cgElement.getArgument());
-			cgElement.setCaught(false);
-			return false;
-		}
-
-		@Override
 		public @NonNull Boolean visitCGIfExp(@NonNull CGIfExp cgElement) {
 			CGValuedElement cgCondition = cgElement.getCondition();
 			CGValuedElement cgThen = cgElement.getThenExpression();
@@ -299,6 +301,14 @@ public class FieldingAnalyzer
 		@Override
 		public @NonNull Boolean visitCGInvalid(@NonNull CGInvalid object) {
 			return true;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIsEqualExp(@NonNull CGIsEqualExp cgElement) {
+			rewriteAsThrown(cgElement.getSource());
+			rewriteAsThrown(cgElement.getArgument());
+			cgElement.setCaught(false);
+			return false;
 		}
 
 		@Override

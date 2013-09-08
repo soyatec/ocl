@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 /**
  * A AutoCG2JavaVisitor supports generation of Java code from an optimized Auto CG transformation tree.
  */
-public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVisitor<Object>
+public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVisitor<Boolean>
 {
 	protected final @NonNull AutoAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
@@ -96,19 +96,21 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		js.append("}\n");
 	}
 
-	public @Nullable Object visitCGASTCallExp(@NonNull CGASTCallExp object) {
+	public @NonNull Boolean visitCGASTCallExp(@NonNull CGASTCallExp object) {
 		CGValuedElement cgSource = DomainUtil.nonNullState(object.getSource());
 		TypeDescriptor typeDescriptor = context.getTypeDescriptor(object);
-		js.appendLocalStatements(cgSource);
+		if (!js.appendLocalStatements(cgSource)) {
+			return false;
+		}
 		js.appendDeclaration(object);
 		js.append(" = ");
 		js.appendReferenceTo(typeDescriptor, cgSource);
 		js.append(".getPivot();\n");
-		return null;
+		return true;
 	}
 
 	@Override
-	public @Nullable Object visitCGClass(@NonNull CGClass cgClass) {		
+	public @NonNull Boolean visitCGClass(@NonNull CGClass cgClass) {		
 		String className = cgClass.getName();
 		js.append("public class " + className);
 		List<CGClass> cgSuperTypes = cgClass.getSuperTypes();
@@ -170,11 +172,11 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		}
 		js.popIndentation();
 		js.append("}\n");
-		return null;
+		return true;
 	}
 
 	@Override
-	public @Nullable Object visitCGEcoreOperation(@NonNull CGEcoreOperation object) {
+	public @NonNull Boolean visitCGEcoreOperation(@NonNull CGEcoreOperation object) {
 		Type csType = (Type) object.getAst();
 		TypeDescriptor typeDescriptor = context.getTypeDescriptor(csType.getTypeId(), false);
 		js.append("public ");
@@ -192,10 +194,10 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		js.append("throw new UnsupportedOperationException();\n");
 		js.popIndentation();
 		js.append("}\n");
-		return null;
+		return true;
 	}
 
-	public @Nullable Object visitCGContainmentBody(@NonNull CGContainmentBody object) {
+	public @NonNull Boolean visitCGContainmentBody(@NonNull CGContainmentBody object) {
 		Type asType = ((Operation) object.getAst()).getType();
 		EPackage ePackage = DomainUtil.nonNullState(asType.eClass().getEPackage());
 		String factoryName = context.getGenModelHelper().getQualifiedFactoryInterfaceName(ePackage);
@@ -233,16 +235,18 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		// TODO any heuristic to include comment update ?
 		js.append("// AS element comments update;\n");
 		js.append("context.refreshComments(result, self);\n");
-		return null;
+		return true;
 	}
 
-	public @Nullable Object visitCGContainmentPart(@NonNull CGContainmentPart object) {
+	public @NonNull Boolean visitCGContainmentPart(@NonNull CGContainmentPart object) {
 		CGValuedElement cgInit = DomainUtil.nonNullState(object.getInit());
 		EStructuralFeature eStructuralFeature = DomainUtil.nonNullModel(object.getEStructuralFeature());
 		js.append("//\n");
 		js.append("// " + eStructuralFeature.getEContainingClass().getName() + "::" + eStructuralFeature.getName() + "\n");
 		js.append("//\n");
-		js.appendLocalStatements(cgInit);
+		if (!js.appendLocalStatements(cgInit)) {
+			return false;
+		}
 		//
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 		if (eStructuralFeature.isMany()) {
@@ -273,10 +277,10 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 			js.popIndentation();
 			js.append("}\n");
 		}
-		return null;
+		return true;
 	}
 
-	public @Nullable Object visitCGContainmentVisit(@NonNull CGContainmentVisit object) {
+	public @NonNull Boolean visitCGContainmentVisit(@NonNull CGContainmentVisit object) {
 		JavaLocalContext localContext2 = globalContext.getLocalContext(object);
 		if (localContext2 != null) {
 			localContext = localContext2;
@@ -305,6 +309,6 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 				localContext = null;
 			}
 		}
-		return null;
+		return true;
 	}
 }

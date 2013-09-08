@@ -36,10 +36,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstant;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
@@ -378,16 +378,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	}
 	
 	@Override
-	public @Nullable String visitCGEqualsExp(@NonNull CGEqualsExp cgEqualsExp) {
-		append("$EQUALS("); //$NON-NLS-1$
-		safeVisit(cgEqualsExp.getSource());
-		append(", )"); //$NON-NLS-1$
-		safeVisit(cgEqualsExp.getArgument());
-		append(")"); //$NON-NLS-1$
-		return null;
-	}
-	
-	@Override
 	public @Nullable String visitCGGuardExp(@NonNull CGGuardExp cgGuardExp) {
 		append("$GUARD("); //$NON-NLS-1$
 		safeVisit(cgGuardExp.getSource());
@@ -416,6 +406,16 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		else {
 			append("invalid");
 		}
+		return null;
+	}
+	
+	@Override
+	public @Nullable String visitCGIsEqualExp(@NonNull CGIsEqualExp cgIsEqualExp) {
+		append(cgIsEqualExp.isNotEquals() ? "$isNotEQUAL(" : "$isEQUAL("); //$NON-NLS-1$
+		safeVisit(cgIsEqualExp.getSource());
+		append(","); //$NON-NLS-1$
+		safeVisit(cgIsEqualExp.getArgument());
+		append(")"); //$NON-NLS-1$
 		return null;
 	}
 	

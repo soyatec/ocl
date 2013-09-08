@@ -77,7 +77,7 @@ public class ExistsIteration2Java extends AbstractIteration2Java
 		return true;
 	}
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 //		if ((cgBody.getASTypeId() == TypeId.BOOLEAN) || (cgBody.getASTypeId() == TypeId.OCL_VOID)) {
@@ -107,7 +107,7 @@ public class ExistsIteration2Java extends AbstractIteration2Java
 			js.append("break;\n");
 		}
 		else if (cgBody.isConstant()) {
-			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "exists");
+			return js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "exists");
 		}
 		else {
 			js.append("if (");
@@ -179,6 +179,7 @@ public class ExistsIteration2Java extends AbstractIteration2Java
 			js.popIndentation();
 			js.append("}\n");
 		}
+		return true;
 	}
 	
 	@Override

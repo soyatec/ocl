@@ -32,11 +32,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -212,10 +213,14 @@ public class LetExpImpl
 		 */
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = this.getType();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression in = this.getIn();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type_0 = in.getType();
-		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
+		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
+		    final @Nullable /*@Thrown*/ DomainExpression in = this.getIn();
+		    if (in == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ DomainType type_0 = in.getType();
+		    final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
+		    ;
 		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {

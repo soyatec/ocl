@@ -705,6 +705,14 @@ public abstract class ValuesUtil
 		}
 	}
 	
+	/**
+	 * Return true if aNumber is a known integer representation that can be converted to an IntegerValue.
+	 * Returns false for other types including IntegerValue. 
+	 */
+	public static boolean isIntegerNumber(@NonNull Number aNumber) {
+		return (aNumber instanceof BigInteger) || (aNumber instanceof Long) || (aNumber instanceof Integer) || (aNumber instanceof Short) || (aNumber instanceof Byte);
+	}
+	
 	public static IntegerValue isIntegerValue(@Nullable Object value) {
 		if ((value instanceof IntegerValue) && !(value instanceof NullValue)) {
 			return (IntegerValue)value;
@@ -712,6 +720,14 @@ public abstract class ValuesUtil
 		else {
 			return null;
 		}
+	}
+	
+	/**
+	 * Return true if aNumber is a known floating point representation that can be converted to a RealValue.
+	 * Returns false for other types including RealValue. 
+	 */
+	public static boolean isRealNumber(@NonNull Number aNumber) {
+		return (aNumber instanceof BigDecimal) || (aNumber instanceof Double) || (aNumber instanceof Float);
 	}
 
 	public static boolean isUnboxed(Object object) {
@@ -764,7 +780,10 @@ public abstract class ValuesUtil
 	}
     
 	public static @NonNull RealValue realValueOf(@Nullable Number aNumber) {
-		if (aNumber instanceof BigDecimal) {
+		if (aNumber instanceof RealValue) {
+			return (RealValue)aNumber;
+		}
+		else if (aNumber instanceof BigDecimal) {
 			return new RealValueImpl((BigDecimal)aNumber);
 		}
 		else if (aNumber instanceof BigInteger) {
@@ -824,6 +843,10 @@ public abstract class ValuesUtil
 			stringValue = String.valueOf(aValue);
 		}
 		return stringValue != null ? stringValue : "<<null>>"; 
+	}
+
+	public static boolean throwBooleanInvalidValueException(@NonNull String string) {
+		throw new InvalidValueException(string);
 	}
 
 	/**

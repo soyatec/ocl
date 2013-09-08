@@ -141,18 +141,21 @@ public class JavaStream
 		}
 	}
 
-	public void appendAssignment(@NonNull CGValuedElement toVariable, @NonNull CGValuedElement cgExpression) {
+	public boolean appendAssignment(@NonNull CGValuedElement toVariable, @NonNull CGValuedElement cgExpression) {
 		if (cgExpression.isInvalid()) {
 			cgExpression.accept(cg2java);
 		}
 		else {
 			TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(toVariable);
-			appendLocalStatements(cgExpression);
+			if (!appendLocalStatements(cgExpression)) {
+				return false;
+			}
 			appendValueName(toVariable);
 			append(" = ");
 			appendReferenceTo(typeDescriptor, cgExpression);
 			append(";\n");
 		}
+		return true;
 	}
 
 	public void appendAtomicReferenceTo(@NonNull Class<?> requiredClass, @Nullable CGValuedElement cgValue) {
@@ -210,6 +213,20 @@ public class JavaStream
 			else {
 				appendValueName(cgValue);
 			}
+		}
+	}
+
+	public void appendBooleanValueName(@NonNull CGValuedElement cgValue, boolean isTrue) {
+		if (cgValue.isCaught() || cgValue.getValue().isCaught()) {
+			appendValueName(cgValue);
+			append(" == ");
+			append(isTrue ? "Boolean.TRUE" : "Boolean.FALSE");
+		}
+		else {
+			if (!isTrue) {
+				append("!");
+			}
+			appendValueName(cgValue);
 		}
 	}
 
@@ -408,8 +425,8 @@ public class JavaStream
 			PrettyPrintOptions.Global createOptions = createOptions(element);
 			append(PrettyPrinter.print(element, createOptions).replace("*/",  "* /") + "\n");
 //			append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
-			popIndentation();
 		}
+		popIndentation();
 		append(" */\n");
 	}
 
@@ -428,6 +445,7 @@ public class JavaStream
 	}
 
 	public void appendDeclaration(@NonNull CGValuedElement cgElement) {
+		boolean is_boolean = is_boolean(cgElement);
 		boolean isGlobal = cgElement.isGlobal();
 		if (isGlobal) {
 			append("public static ");
@@ -445,11 +463,18 @@ public class JavaStream
 				append("@SuppressWarnings(\"null\")");
 			}
 		}
-		appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);
-		append(" ");
+		if (!is_boolean) {
+			appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);
+			append(" ");
+		}
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
 		append(" ");
-		appendClassReference(cgElement);
+		if (is_boolean) {
+			append(boolean.class.getSimpleName());
+		}
+		else {
+			appendClassReference(cgElement);
+		}
 		append(" ");
 		String valueName = cg2java.getValueName2(cgElement);
 		append(valueName);
@@ -599,12 +624,13 @@ public class JavaStream
 	 * Append the complete statements for cgElement for use with in a local operation context.
 	 * Inline and global contributions are excluded.
 	 */
-	public void appendLocalStatements(@NonNull CGValuedElement cgElement) {
+	public boolean appendLocalStatements(@NonNull CGValuedElement cgElement) {
 //		if (!cgElement.isInlineable() && !cgElement.isConstant() && !cgElement.isGlobal()) {			// Exclude global constants and inline constants
 		if (!cgElement.isInlined()			// Exclude inline constants
 		 && !cgElement.isGlobal()) {			// Exclude global constant expressions
-			cgElement.accept(cg2java);
+			return cgElement.accept(cg2java) == Boolean.TRUE;
 		}
+		return true;
 	}
 
 	public void appendQualifiedLiteralName(@NonNull Operation anOperation) {
@@ -641,7 +667,7 @@ public class JavaStream
 		}
 		else {
 			TypeDescriptor actualTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
-			if (cgValue.getValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor)) {
+			if (!cgValue.isNull() && (cgValue.getValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor))) {
 				append("(");
 				appendClassReference(requiredTypeDescriptor.getClassName());
 				append(")");
@@ -672,7 +698,19 @@ public class JavaStream
 		append("\"");
 	}
 
-	public void appendThrowInvalidValueException(/*@NonNull*/ String message, @NonNull String... arguments) {
+	public boolean appendThrowBooleanInvalidValueException(/*@NonNull*/ String message, @NonNull String... arguments) {
+		appendClassReference(ValuesUtil.class);
+		append(".throwBooleanInvalidValueException(");
+		appendString(DomainUtil.nonNullState(message));
+		for (String argument : arguments) {
+			append(", ");
+			appendString(DomainUtil.nonNullState(argument));
+		}
+		append(");\n");
+		return false;
+	}
+
+	public boolean appendThrowInvalidValueException(/*@NonNull*/ String message, @NonNull String... arguments) {
 		append("throw new ");
 		appendClassReference(InvalidValueException.class);
 		append("(");
@@ -682,6 +720,7 @@ public class JavaStream
 			appendString(DomainUtil.nonNullState(argument));
 		}
 		append(");\n");
+		return false;
 	}
 
 	public void appendTrue() {
@@ -726,6 +765,20 @@ public class JavaStream
 			name = "<null-" + cgElement.eClass().getName() + ">";
 		}
 		return name;
+	}
+
+	public boolean is_boolean(@Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			return false;
+		}
+		else if (cgValue.getValue().isCaught()) {
+			return false;
+		}
+		else {
+			TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
+			Class<?> javaClass = typeDescriptor.getJavaClass();
+			return (javaClass == boolean.class) || ((javaClass == Boolean.class) && cgValue.isNonNull());
+		}
 	}
 
 	public void popIndentation() {

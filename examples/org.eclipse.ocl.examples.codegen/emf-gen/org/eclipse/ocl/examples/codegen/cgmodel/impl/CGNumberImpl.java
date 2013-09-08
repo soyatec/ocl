@@ -19,44 +19,52 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNumber;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Executor Type</b></em>'.
+ * An implementation of the model object '<em><b>CG Number</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorTypeImpl#getUnderlyingTypeId <em>Underlying Type Id</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNumberImpl#getNumericValue <em>Numeric Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecutorType {
+public abstract class CGNumberImpl extends CGConstantImpl implements CGNumber {
 	/**
-	 * The cached value of the '{@link #getUnderlyingTypeId() <em>Underlying Type Id</em>}' reference.
+	 * The default value of the '{@link #getNumericValue() <em>Numeric Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUnderlyingTypeId()
+	 * @see #getNumericValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGTypeId underlyingTypeId;
+	protected static final Number NUMERIC_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNumericValue() <em>Numeric Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumericValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Number numericValue = NUMERIC_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGExecutorTypeImpl() {
+	protected CGNumberImpl() {
 		super();
 	}
 
@@ -67,7 +75,7 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CGModelPackage.Literals.CG_EXECUTOR_TYPE;
+		return CGModelPackage.Literals.CG_NUMBER;
 	}
 
 	/**
@@ -75,8 +83,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGTypeId getUnderlyingTypeId() {
-		return underlyingTypeId;
+	public Number getNumericValue() {
+		return numericValue;
 	}
 
 	/**
@@ -84,11 +92,21 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUnderlyingTypeId(CGTypeId newUnderlyingTypeId) {
-		CGTypeId oldUnderlyingTypeId = underlyingTypeId;
-		underlyingTypeId = newUnderlyingTypeId;
+	public void setNumericValue(Number newNumericValue) {
+		Number oldNumericValue = numericValue;
+		numericValue = newNumericValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_EXECUTOR_TYPE__UNDERLYING_TYPE_ID, oldUnderlyingTypeId, underlyingTypeId));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_NUMBER__NUMERIC_VALUE, oldNumericValue, numericValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -99,8 +117,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_EXECUTOR_TYPE__UNDERLYING_TYPE_ID:
-				return getUnderlyingTypeId();
+			case CGModelPackage.CG_NUMBER__NUMERIC_VALUE:
+				return getNumericValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,8 +131,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_EXECUTOR_TYPE__UNDERLYING_TYPE_ID:
-				setUnderlyingTypeId((CGTypeId)newValue);
+			case CGModelPackage.CG_NUMBER__NUMERIC_VALUE:
+				setNumericValue((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +146,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_EXECUTOR_TYPE__UNDERLYING_TYPE_ID:
-				setUnderlyingTypeId((CGTypeId)null);
+			case CGModelPackage.CG_NUMBER__NUMERIC_VALUE:
+				setNumericValue(NUMERIC_VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,8 +161,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_EXECUTOR_TYPE__UNDERLYING_TYPE_ID:
-				return underlyingTypeId != null;
+			case CGModelPackage.CG_NUMBER__NUMERIC_VALUE:
+				return NUMERIC_VALUE_EDEFAULT == null ? numericValue != null : !NUMERIC_VALUE_EDEFAULT.equals(numericValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,9 +171,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGExecutorType(this);
+	public @NonNull Object getConstantValue() {
+		return DomainUtil.nonNullState(numericValue);
 	}
 
 	/**
@@ -163,34 +180,7 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * @generated
 	 */
 	@Override
-	public @Nullable TypeId getASTypeId() {
-		return ast instanceof DomainType ? ((DomainType) ast).getTypeId() : null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isBoxed() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isConstant() {
+	public boolean isCommonable() {
 		return true;
 	}
 
@@ -209,57 +199,12 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 		if (!value.isConstant()) {
 			return null;
 		}
-		else if (value instanceof CGExecutorType) {
-			return getASTypeId() == ((CGExecutorType)thatValue).getASTypeId();
+		else if (value instanceof CGNumber) {
+			return EquivalenceUtils.isEquivalent(this, (CGNumber)value);
 		}
 		else {
 			return Boolean.FALSE;
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isGlobal() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isNonInvalid() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isNonNull() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isNull() {
-		return false;
 	}
 
 	/**
@@ -280,4 +225,5 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 		return false;
 	}
 
-} //CGExecutorTypeImpl
+
+} //CGNumberImpl

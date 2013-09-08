@@ -19,17 +19,23 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.ControlPlace;
 
@@ -47,7 +53,8 @@ import org.eclipse.ocl.examples.codegen.cse.ControlPlace;
  *
  * @generated
  */
-public abstract class CGValuedElementImpl extends CGTypedElementImpl implements CGValuedElement {
+public abstract class CGValuedElementImpl extends CGTypedElementImpl implements CGValuedElement
+{
 	/**
 	 * The cached value of the '{@link #getDependsOn() <em>Depends On</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -73,7 +80,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGValuedElementImpl() {
+	protected CGValuedElementImpl()
+	{
 		super();
 	}
 
@@ -83,7 +91,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
+	protected EClass eStaticClass()
+	{
 		return CGModelPackage.Literals.CG_VALUED_ELEMENT;
 	}
 
@@ -92,7 +101,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<CGValuedElement> getDependsOn() {
+	public List<CGValuedElement> getDependsOn()
+	{
 		if (dependsOn == null) {
 			dependsOn = new EObjectEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON);
 		}
@@ -104,7 +114,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<CGValuedElement> getOwns() {
+	public List<CGValuedElement> getOwns()
+	{
 		if (owns == null) {
 			owns = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_VALUED_ELEMENT__OWNS);
 		}
@@ -117,7 +128,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__OWNS:
 				return ((InternalEList<?>)getOwns()).basicRemove(otherEnd, msgs);
@@ -131,7 +143,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				return getDependsOn();
@@ -148,7 +161,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(int featureID, Object newValue)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				getDependsOn().clear();
@@ -168,7 +182,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(int featureID)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				getDependsOn().clear();
@@ -186,7 +201,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(int featureID)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				return dependsOn != null && !dependsOn.isEmpty();
@@ -195,6 +211,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 	/**
 	 * {@inheritDoc}
@@ -285,6 +302,14 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	@Override
 	public boolean isContext() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
+		return thatValue.isEquivalentToInternal(this);
 	}
 
 	/**

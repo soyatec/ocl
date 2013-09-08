@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
@@ -49,6 +50,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
@@ -77,7 +79,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
@@ -91,6 +92,8 @@ import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -834,6 +837,18 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 			cgIsUndefinedExp.setValidating(true);
 			return cgIsUndefinedExp;
 		}
+		if (libraryOperation instanceof OclAnyEqualOperation) {
+			OCLExpression pArgument = element.getArgument().get(0);
+			CGValuedElement cgArgument = pArgument != null ? doVisit(CGValuedElement.class, pArgument) : null;
+			CGIsEqualExp cgIsEqualExp = CGModelFactory.eINSTANCE.createCGIsEqualExp();
+			cgIsEqualExp.setNotEquals(libraryOperation instanceof OclAnyNotEqualOperation);
+			cgIsEqualExp.setSource(cgSource);
+			cgIsEqualExp.setArgument(cgArgument);
+			setAst(cgIsEqualExp, element);
+			cgIsEqualExp.setInvalidating(false);
+			cgIsEqualExp.setValidating(true);
+			return cgIsEqualExp;
+		}
 		if ((libraryOperation instanceof ConstrainedOperation) && (pSource != null)) {
 			DomainOperation finalOperation = codeGenerator.isFinal(asOperation, DomainUtil.nonNullState(pSource.getType()));
 			if (finalOperation != null) {
@@ -933,6 +948,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 	@Override
 	public @NonNull CGValuedElement visitPropertyCallExp(@NonNull PropertyCallExp element) {
 		Property asProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+		boolean isRequired = asProperty.isRequired();
 		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
 		CGPropertyCallExp cgPropertyCallExp = null;
 		if (isEcoreProperty(libraryProperty)) {
@@ -942,6 +958,10 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 					genModelHelper.getGetAccessor(eStructuralFeature);
 					CGEcorePropertyCallExp cgEcorePropertyCallExp = CGModelFactory.eINSTANCE.createCGEcorePropertyCallExp();
 					cgEcorePropertyCallExp.setEStructuralFeature(eStructuralFeature);
+					Boolean ecoreIsRequired = codeGenerator.isNonNull(element);
+					if (ecoreIsRequired != null) {
+						isRequired = ecoreIsRequired;
+					}
 					cgPropertyCallExp = cgEcorePropertyCallExp;
 				} catch (GenModelException e) {
 				}
@@ -966,7 +986,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		}
 		cgPropertyCallExp.setReferredProperty(asProperty);
 		setAst(cgPropertyCallExp, element);
-		cgPropertyCallExp.setRequired(asProperty.isRequired());
+		cgPropertyCallExp.setRequired(isRequired);
 		CGValuedElement cgSource = doVisit(CGValuedElement.class, element.getSource());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;

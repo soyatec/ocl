@@ -347,6 +347,14 @@ public class CGContainmentPartImpl extends CGValuedElementImpl implements CGCont
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isGlobal() {
 		return false;

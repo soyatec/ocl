@@ -145,10 +145,6 @@ public abstract class AbstractNonNullExtendingCGModelVisitor<R, C>
 		return visitCGConstant(object);
 	}
 
-	public @NonNull R visitCGEqualsExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp object) {
-		return visitCGCallExp(object);
-	}
-
 	public @NonNull R visitCGExecutorCompositionProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorCompositionProperty object) {
 		return visitCGExecutorProperty(object);
 	}
@@ -198,11 +194,15 @@ public abstract class AbstractNonNullExtendingCGModelVisitor<R, C>
 	}
 
 	public @NonNull R visitCGInteger(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInteger object) {
-		return visitCGConstant(object);
+		return visitCGNumber(object);
 	}
 
 	public @NonNull R visitCGInvalid(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid object) {
 		return visitCGConstant(object);
+	}
+
+	public @NonNull R visitCGIsEqualExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp object) {
+		return visitCGCallExp(object);
 	}
 
 	public @NonNull R visitCGIsInvalidExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp object) {
@@ -261,6 +261,10 @@ public abstract class AbstractNonNullExtendingCGModelVisitor<R, C>
 		return visitCGConstant(object);
 	}
 
+	public @NonNull R visitCGNumber(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNumber object) {
+		return visitCGConstant(object);
+	}
+
 	public @NonNull R visitCGOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperation object) {
 		return visitCGValuedElement(object);
 	}
@@ -286,7 +290,7 @@ public abstract class AbstractNonNullExtendingCGModelVisitor<R, C>
 	}
 
 	public @NonNull R visitCGReal(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGReal object) {
-		return visitCGConstant(object);
+		return visitCGNumber(object);
 	}
 
 	public @NonNull R visitCGSettableVariable(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGSettableVariable object) {

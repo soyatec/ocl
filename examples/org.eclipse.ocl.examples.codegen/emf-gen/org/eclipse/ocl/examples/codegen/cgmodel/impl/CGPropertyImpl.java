@@ -315,6 +315,14 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@Override
 	public boolean isUnboxed() {
 		return false;

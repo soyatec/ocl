@@ -187,6 +187,23 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * @generated
 	 */
 	@Override
+	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
+		return executorType != null ? thatValue.isEquivalentTo(executorType) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return executorType != null ? thatValue.isEquivalentToInternal(executorType) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return false;
 	}

@@ -67,6 +67,7 @@ public class CGUtils
 	 * Replace oldElement by newElement and return oldElement which is orphaned by the replacement.
 	 */
 	public static @NonNull CGValuedElement replace(@NonNull CGValuedElement oldElement, @NonNull CGValuedElement newElement) {
+		assert !oldElement.isRequired() || !newElement.isNull();
 		EObject oldContainer = oldElement.eContainer();
 //		EObject newContainer = newElement.eContainer();
 //		assert (oldContainer != null) && (newContainer == null);

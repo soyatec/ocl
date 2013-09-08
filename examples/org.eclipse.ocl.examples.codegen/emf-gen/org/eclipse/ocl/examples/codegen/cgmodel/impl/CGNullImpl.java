@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -66,6 +67,22 @@ public class CGNullImpl extends CGConstantImpl implements CGNull {
 	 */
 	public @NonNull Object getConstantValue() {
 		return ValuesUtil.NULL_VALUE;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		if (thatValue.isNull()) {
+			return Boolean.TRUE;
+		}
+		else if (thatValue.isNonNull()) {
+			return Boolean.FALSE;
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**

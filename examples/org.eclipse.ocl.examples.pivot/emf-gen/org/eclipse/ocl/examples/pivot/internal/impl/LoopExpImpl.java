@@ -253,9 +253,12 @@ public abstract class LoopExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType_0 = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression source = this.getSource();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType type = source.getType();
-		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
+		    final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
+		    if (source == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		    final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
 		    CAUGHT_oclIsKindOf = oclIsKindOf;
 		}
 		catch (Exception e) {
@@ -288,7 +291,7 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@Nullable /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
+		    final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		    @NonNull /*@Thrown*/ Object accumulator = ValuesUtil.TRUE_VALUE;
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
@@ -312,9 +315,9 @@ public abstract class LoopExpImpl
 		            if (_1 == null) {
 		                throw new InvalidValueException("Null source");
 		            }
-		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
 		            final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
-		            final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
+		            final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
 		            CAUGHT_isEmpty = isEmpty;
 		        }
 		        catch (Exception e) {

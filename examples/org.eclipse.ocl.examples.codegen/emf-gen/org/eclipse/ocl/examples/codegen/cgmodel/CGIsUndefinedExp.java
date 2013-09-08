@@ -21,7 +21,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A CGBoxExp converts an unboxed source value to a boxed value.
+ * A CGIsUndefinedExp realizes the built-in "oclIsUndefined" operation.
  * <!-- end-model-doc -->
  *
  *

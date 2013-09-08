@@ -23,6 +23,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
@@ -83,6 +85,8 @@ import org.eclipse.ocl.examples.library.iterator.OneIteration;
 import org.eclipse.ocl.examples.library.iterator.RejectIteration;
 import org.eclipse.ocl.examples.library.iterator.SelectIteration;
 import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -377,6 +381,51 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 	}
 
+	public @Nullable Method getLeastDerivedMethod(@NonNull Class<?> requiredClass, @NonNull String getAccessor) {
+		Method leastDerivedMethod = getLeastDerivedMethodInternal(requiredClass, getAccessor);
+		if (leastDerivedMethod != null) {
+			return leastDerivedMethod;
+		}
+		else {
+			try {
+				return requiredClass.getMethod(getAccessor);
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+
+	private @Nullable Method getLeastDerivedMethodInternal(@NonNull Class<?> requiredClass, @NonNull String getAccessor) {
+		Class<?> superClass = requiredClass.getSuperclass();
+		if (superClass != null) {
+			try {
+				Method lessDerivedSuperMethod = getLeastDerivedMethodInternal(superClass, getAccessor);
+				if (lessDerivedSuperMethod != null) {
+					return lessDerivedSuperMethod;
+				}
+				Method method = superClass.getMethod(getAccessor);
+				if (method != null) {
+					return method;
+				}
+			} catch (Exception e) {
+			}
+		}
+		for (@SuppressWarnings("null")@NonNull Class<?> superInterface : requiredClass.getInterfaces()) {
+			Method lessDerivedSuperMethod = getLeastDerivedMethodInternal(superInterface, getAccessor);
+			if (lessDerivedSuperMethod != null) {
+				return lessDerivedSuperMethod;
+			}
+			try {
+				Method method = superInterface.getMethod(getAccessor);
+				if (method != null) {
+					return method;
+				}
+			} catch (Exception e) {
+			}
+		}
+		return null;
+	}
+
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement) {
 		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
@@ -480,6 +529,27 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			unboxedDescriptors.put(elementId, unboxedDescriptor);
 			return unboxedDescriptor;
 		}
+	}
+
+	public @Nullable Boolean isNonNull(@NonNull PropertyCallExp asPropertyCallExp) {
+		Property asProperty = asPropertyCallExp.getReferredProperty();
+		EObject eStructuralFeature = asProperty.getETarget();
+		if (!(eStructuralFeature instanceof  EStructuralFeature)) {
+			return null;
+		}
+		CGTypeId cgTypeId = getAnalyzer().getTypeId(asProperty.getOwningType().getTypeId());
+		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
+		TypeDescriptor requiredTypeDescriptor = getTypeDescriptor(elementId, false);
+		String getAccessor = genModelHelper.getGetAccessor((EStructuralFeature)eStructuralFeature);
+		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
+		if (requiredJavaClass == null) {
+			return null;
+		}
+		Method leastDerivedMethod = getLeastDerivedMethod(requiredJavaClass, getAccessor);
+		if (leastDerivedMethod == null) {
+			return null;
+		}
+		return getIsNonNull(leastDerivedMethod) == Boolean.TRUE;
 	}
 
 	/**

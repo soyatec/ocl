@@ -409,4 +409,12 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
+	}
+
 } //CGOperationImpl

@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.codegen.utilities.EquivalenceUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -309,6 +310,14 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	@Override
 	public boolean isConstant() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGConstructorPart)thatValue) : null;
 	}
 
 	/**

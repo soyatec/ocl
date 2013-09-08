@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.*;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -39,7 +39,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorCompositionProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorNavigationProperty;
@@ -53,6 +52,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
@@ -159,7 +159,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_ECORE_OPERATION_CALL_EXP: return createCGEcoreOperationCallExp();
 			case CGModelPackage.CG_ECORE_PROPERTY_CALL_EXP: return createCGEcorePropertyCallExp();
 			case CGModelPackage.CG_ELEMENT_ID: return createCGElementId();
-			case CGModelPackage.CG_EQUALS_EXP: return createCGEqualsExp();
 			case CGModelPackage.CG_EXECUTOR_COMPOSITION_PROPERTY: return createCGExecutorCompositionProperty();
 			case CGModelPackage.CG_EXECUTOR_CONSTRUCTOR_PART: return createCGExecutorConstructorPart();
 			case CGModelPackage.CG_EXECUTOR_NAVIGATION_PROPERTY: return createCGExecutorNavigationProperty();
@@ -173,6 +172,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_IF_EXP: return createCGIfExp();
 			case CGModelPackage.CG_INTEGER: return createCGInteger();
 			case CGModelPackage.CG_INVALID: return createCGInvalid();
+			case CGModelPackage.CG_IS_EQUAL_EXP: return createCGIsEqualExp();
 			case CGModelPackage.CG_IS_INVALID_EXP: return createCGIsInvalidExp();
 			case CGModelPackage.CG_IS_UNDEFINED_EXP: return createCGIsUndefinedExp();
 			case CGModelPackage.CG_ITERATOR: return createCGIterator();
@@ -474,16 +474,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGEqualsExp createCGEqualsExp() {
-		CGEqualsExpImpl cgEqualsExp = new CGEqualsExpImpl();
-		return cgEqualsExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public @NonNull CGExecutorCompositionProperty createCGExecutorCompositionProperty() {
 		CGExecutorCompositionPropertyImpl cgExecutorCompositionProperty = new CGExecutorCompositionPropertyImpl();
 		return cgExecutorCompositionProperty;
@@ -607,6 +597,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGInvalid createCGInvalid() {
 		CGInvalidImpl cgInvalid = new CGInvalidImpl();
 		return cgInvalid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGIsEqualExp createCGIsEqualExp() {
+		CGIsEqualExpImpl cgIsEqualExp = new CGIsEqualExpImpl();
+		return cgIsEqualExp;
 	}
 
 	/**

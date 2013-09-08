@@ -46,7 +46,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The source expression for the call."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGCastExp" eSuperTypes="#//CGCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -190,13 +194,6 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGEqualsExp" eSuperTypes="#//CGCallExp">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" eType="#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGExecutorCompositionProperty" eSuperTypes="#//CGExecutorProperty"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGExecutorConstructorPart" eSuperTypes="#//CGExecutorProperty">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -257,16 +254,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" lowerBound="1"
         eType="#//CGValuedElement" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGInteger" eSuperTypes="#//CGConstant">
+  <eClassifiers xsi:type="ecore:EClass" name="CGInteger" eSuperTypes="#//CGNumber">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="CGInteger represents an integer value."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" lowerBound="1"
-        eType="#//Number">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="the integer value"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGInvalid" eSuperTypes="#//CGConstant">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -284,14 +275,31 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGIsEqualExp" eSuperTypes="#//CGCallExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CGIsEqualExp realizes the built-in &quot;=&quot; operation."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" eType="#//CGValuedElement"
+        containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The argument expression for the call."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEquals" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True for not-equals rather than equals."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGIsInvalidExp" eSuperTypes="#//CGCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
+      <details key="documentation" value="A CGIsInvalidExp realizes the built-in &quot;oclIsInvalid&quot; operation."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGIsUndefinedExp" eSuperTypes="#//CGCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
+      <details key="documentation" value="A CGIsUndefinedExp realizes the built-in &quot;oclIsUndefined&quot; operation."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGIterationCallExp" abstract="true"
@@ -358,6 +366,17 @@
       <details key="documentation" value="CGNull represents the null value."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGNumber" abstract="true" eSuperTypes="#//CGConstant">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="CGNumber represents a numeric value."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numericValue" lowerBound="1"
+        eType="#//Number">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="the numeric value"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGOperation" abstract="true" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
         upperBound="-1" eType="#//CGParameter" containment="true" resolveProxies="false">
@@ -421,16 +440,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredProperty" lowerBound="1"
         eType="#//Property"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGReal" eSuperTypes="#//CGConstant">
+  <eClassifiers xsi:type="ecore:EClass" name="CGReal" eSuperTypes="#//CGNumber">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="CGReal represents a real value."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="realValue" lowerBound="1"
-        eType="#//Number">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="the real value"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGSettableVariable" eSuperTypes="#//CGVariable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

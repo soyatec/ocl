@@ -21,25 +21,26 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Equals Exp</b></em>'.
+ * An implementation of the model object '<em><b>CG Is Equal Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEqualsExpImpl#getArgument <em>Argument</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIsEqualExpImpl#getArgument <em>Argument</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIsEqualExpImpl#isNotEquals <em>Not Equals</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
+public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	/**
 	 * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -51,11 +52,30 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	protected CGValuedElement argument;
 
 	/**
+	 * The default value of the '{@link #isNotEquals() <em>Not Equals</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNotEquals()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NOT_EQUALS_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isNotEquals() <em>Not Equals</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNotEquals()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean notEquals = NOT_EQUALS_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGEqualsExpImpl() {
+	protected CGIsEqualExpImpl() {
 		super();
 	}
 
@@ -66,7 +86,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CGModelPackage.Literals.CG_EQUALS_EXP;
+		return CGModelPackage.Literals.CG_IS_EQUAL_EXP;
 	}
 
 	/**
@@ -87,7 +107,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 		CGValuedElement oldArgument = argument;
 		argument = newArgument;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_EQUALS_EXP__ARGUMENT, oldArgument, newArgument);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT, oldArgument, newArgument);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,14 +122,45 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 		if (newArgument != argument) {
 			NotificationChain msgs = null;
 			if (argument != null)
-				msgs = ((InternalEObject)argument).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_EQUALS_EXP__ARGUMENT, null, msgs);
+				msgs = ((InternalEObject)argument).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT, null, msgs);
 			if (newArgument != null)
-				msgs = ((InternalEObject)newArgument).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_EQUALS_EXP__ARGUMENT, null, msgs);
+				msgs = ((InternalEObject)newArgument).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT, null, msgs);
 			msgs = basicSetArgument(newArgument, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_EQUALS_EXP__ARGUMENT, newArgument, newArgument));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT, newArgument, newArgument));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isNotEquals() {
+		return notEquals;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNotEquals(boolean newNotEquals) {
+		boolean oldNotEquals = notEquals;
+		notEquals = newNotEquals;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_IS_EQUAL_EXP__NOT_EQUALS, oldNotEquals, notEquals));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -120,7 +171,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
+			case CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT:
 				return basicSetArgument(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,8 +185,10 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
+			case CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT:
 				return getArgument();
+			case CGModelPackage.CG_IS_EQUAL_EXP__NOT_EQUALS:
+				return isNotEquals();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -148,8 +201,11 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
+			case CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT:
 				setArgument((CGValuedElement)newValue);
+				return;
+			case CGModelPackage.CG_IS_EQUAL_EXP__NOT_EQUALS:
+				setNotEquals((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -163,8 +219,11 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
+			case CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT:
 				setArgument((CGValuedElement)null);
+				return;
+			case CGModelPackage.CG_IS_EQUAL_EXP__NOT_EQUALS:
+				setNotEquals(NOT_EQUALS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -178,8 +237,10 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
+			case CGModelPackage.CG_IS_EQUAL_EXP__ARGUMENT:
 				return argument != null;
+			case CGModelPackage.CG_IS_EQUAL_EXP__NOT_EQUALS:
+				return notEquals != NOT_EQUALS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -190,7 +251,16 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 */
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGEqualsExp(this);
+		return visitor.visitCGIsEqualExp(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return source != null ? source : this;
 	}
 
 	/**
@@ -207,8 +277,8 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 * @generated
 	 */
 	@Override
-	public boolean isCaught() {
-		return false;
+	public boolean isConstant() {
+		return source.isConstant() && argument.isConstant();
 	}
 
 	/**
@@ -217,7 +287,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 */
 	@Override
 	public boolean isFalse() {
-		return (source != null) && (argument != null) && source.isConstant() && argument.isConstant() && !source.equals(argument);
+		return (source != null) && (argument != null) && (source.isEquivalentTo(argument) == Boolean.valueOf(notEquals));
 	}
 
 	/**
@@ -225,7 +295,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 * @generated
 	 */
 	@Override
-	public boolean isInvalid() {
+	public boolean isInlined() {
 		return false;
 	}
 
@@ -234,8 +304,17 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 * @generated
 	 */
 	@Override
+	public boolean isInvalid() {
+		return source.isInvalid() || argument.isInvalid();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isNonInvalid() {
-		return true;
+		return source.isNonInvalid() && argument.isNonInvalid();
 	}
 
 	/**
@@ -262,7 +341,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 */
 	@Override
 	public boolean isTrue() {
-		return (source != null) && (argument != null) && source.isConstant() && argument.isConstant() && source.equals(argument);
+		return (source != null) && (argument != null) && (source.isEquivalentTo(argument) == Boolean.valueOf(!notEquals));
 	}
 
 	/**
@@ -271,16 +350,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return false;
+		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public void setCaught(boolean isCaught) {
-		assert !isCaught;
-	}
-
-} //CGEqualsExpImpl
+} //CGIsEqualExpImpl

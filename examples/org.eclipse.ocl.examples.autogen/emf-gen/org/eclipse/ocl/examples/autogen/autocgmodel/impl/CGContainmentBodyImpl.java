@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentBody;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentPart;
 import org.eclipse.ocl.examples.autogen.autocgmodel.CGContainmentVisit;
 import org.eclipse.ocl.examples.autogen.autocgmodel.util.AutoCGModelVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
@@ -229,6 +230,68 @@ public class CGContainmentBodyImpl extends CGValuedElementImpl implements CGCont
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((AutoCGModelVisitor<?>)visitor).visitCGContainmentBody(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isBoxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isCommonable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNonNull() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUnboxed() {
+		return true;
 	}
 
 } //CGContainmentBodyImpl

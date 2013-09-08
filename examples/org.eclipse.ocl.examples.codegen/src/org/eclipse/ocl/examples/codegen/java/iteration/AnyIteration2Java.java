@@ -28,7 +28,7 @@ public class AnyIteration2Java extends AbstractIteration2Java
 {
 	public static final @NonNull AnyIteration2Java INSTANCE = new AnyIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
 			CGIterator cgIterator = getIterator(cgIterationCallExp);
@@ -45,9 +45,10 @@ public class AnyIteration2Java extends AbstractIteration2Java
 				js.append("break;\n");
 			js.popIndentation();
 			js.append("}\n");
+			return true;
 		}
 		else {
-			js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "any");
+			return js.appendThrowInvalidValueException(EvaluatorMessages.NonBooleanBody, "any");
 		}
 	}
 	

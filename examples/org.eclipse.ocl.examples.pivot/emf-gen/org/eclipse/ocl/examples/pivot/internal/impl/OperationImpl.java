@@ -61,8 +61,6 @@ import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -825,7 +823,7 @@ public class OperationImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, this);
-		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
 		return oclIsKindOf;
 	}
 
@@ -847,8 +845,8 @@ public class OperationImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		        try {
-		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression bodyExpression = this.getBodyExpression();
-		            final @NonNull /*@Thrown*/ Boolean self_71 = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = this.getBodyExpression();
+		            final /*@Thrown*/ boolean self_71 = bodyExpression != null;
 		            CAUGHT_self_71 = self_71;
 		        }
 		        catch (Exception e) {
@@ -859,18 +857,18 @@ public class OperationImpl
 		        @NonNull /*@Caught*/ Object CAUGHT_b;
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression bodyExpression_0 = this.getBodyExpression();
-		            final @NonNull /*@Thrown*/ Boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = this.getBodyExpression();
+		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
 		            CAUGHT_b = b;
 		        }
 		        catch (Exception e) {
 		            CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		        }
-		        final @NonNull /*@NonInvalid*/ Boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		        final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
 		        @Nullable /*@Thrown*/ Boolean symbol_12;
 		        if (symbol_0) {
-		            final @NonNull /*@NonInvalid*/ Boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		            @NonNull /*@Thrown*/ Boolean symbol_3;
+		            final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
+		            /*@Thrown*/ boolean symbol_3;
 		            if (symbol_1) {
 		                if (CAUGHT_self_71 instanceof InvalidValueException) {
 		                    throw (InvalidValueException)CAUGHT_self_71;
@@ -881,8 +879,8 @@ public class OperationImpl
 		                if (CAUGHT_b instanceof InvalidValueException) {
 		                    throw (InvalidValueException)CAUGHT_b;
 		                }
-		                final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.FALSE_VALUE);
-		                @NonNull /*@Thrown*/ Boolean symbol_2;
+		                final /*@Thrown*/ boolean eq = CAUGHT_b == Boolean.FALSE;
+		                /*@Thrown*/ boolean symbol_2;
 		                if (eq) {
 		                    symbol_2 = ValuesUtil.FALSE_VALUE;
 		                }
@@ -900,13 +898,13 @@ public class OperationImpl
 		            if (CAUGHT_self_71 instanceof InvalidValueException) {
 		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_self_71, ValuesUtil.FALSE_VALUE);
+		            final /*@Thrown*/ boolean eq_0 = CAUGHT_self_71 == Boolean.FALSE;
 		            @Nullable /*@Thrown*/ Boolean symbol_11;
 		            if (eq_0) {
 		                symbol_11 = ValuesUtil.FALSE_VALUE;
 		            }
 		            else {
-		                final @NonNull /*@NonInvalid*/ Boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
+		                final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
 		                @Nullable /*@Thrown*/ Boolean symbol_10;
 		                if (symbol_4) {
 		                    if (CAUGHT_b instanceof InvalidValueException) {
@@ -918,22 +916,22 @@ public class OperationImpl
 		                    if (CAUGHT_b instanceof InvalidValueException) {
 		                        throw (InvalidValueException)CAUGHT_b;
 		                    }
-		                    final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b, ValuesUtil.FALSE_VALUE);
+		                    final /*@Thrown*/ boolean eq_1 = CAUGHT_b == Boolean.FALSE;
 		                    @Nullable /*@NonInvalid*/ Boolean symbol_9;
 		                    if (eq_1) {
 		                        symbol_9 = ValuesUtil.FALSE_VALUE;
 		                    }
 		                    else {
-		                        final @NonNull /*@NonInvalid*/ Boolean symbol_5 = CAUGHT_self_71 instanceof InvalidValueException;
+		                        final /*@NonInvalid*/ boolean symbol_5 = CAUGHT_self_71 instanceof InvalidValueException;
 		                        @Nullable /*@NonInvalid*/ Boolean symbol_8;
 		                        if (symbol_5) {
-		                            symbol_8 = (Boolean)null;
+		                            symbol_8 = null;
 		                        }
 		                        else {
-		                            final @NonNull /*@NonInvalid*/ Boolean symbol_6 = CAUGHT_b instanceof InvalidValueException;
+		                            final /*@NonInvalid*/ boolean symbol_6 = CAUGHT_b instanceof InvalidValueException;
 		                            @Nullable /*@NonInvalid*/ Boolean symbol_7;
 		                            if (symbol_6) {
-		                                symbol_7 = (Boolean)null;
+		                                symbol_7 = null;
 		                            }
 		                            else {
 		                                symbol_7 = ValuesUtil.TRUE_VALUE;
@@ -955,17 +953,17 @@ public class OperationImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_b_0;
 		    try {
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainExpression bodyExpression_1 = this.getBodyExpression();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ Boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
+		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = this.getBodyExpression();
+		        final @SuppressWarnings("null")/*@Thrown*/ boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
 		        CAUGHT_b_0 = b_0;
 		    }
 		    catch (Exception e) {
 		        CAUGHT_b_0 = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @NonNull /*@NonInvalid*/ Boolean symbol_13 = CAUGHT_symbol_12 instanceof InvalidValueException;
+		    final /*@NonInvalid*/ boolean symbol_13 = CAUGHT_symbol_12 instanceof InvalidValueException;
 		    @Nullable /*@Thrown*/ Boolean symbol_25;
 		    if (symbol_13) {
-		        final @NonNull /*@NonInvalid*/ Boolean symbol_14 = CAUGHT_b_0 instanceof InvalidValueException;
+		        final /*@NonInvalid*/ boolean symbol_14 = CAUGHT_b_0 instanceof InvalidValueException;
 		        @Nullable /*@Thrown*/ Boolean symbol_16;
 		        if (symbol_14) {
 		            if (CAUGHT_symbol_12 instanceof InvalidValueException) {
@@ -974,12 +972,8 @@ public class OperationImpl
 		            symbol_16 = (Boolean)CAUGHT_symbol_12;
 		        }
 		        else {
-		            if (CAUGHT_b_0 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_b_0;
-		            }
-		            final @NonNull /*@Thrown*/ Boolean eq_2 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b_0, ValuesUtil.TRUE_VALUE);
 		            @Nullable /*@Thrown*/ Boolean symbol_15;
-		            if (eq_2) {
+		            if (CAUGHT_b_0 == Boolean.TRUE) {
 		                symbol_15 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
@@ -996,13 +990,13 @@ public class OperationImpl
 		        if (CAUGHT_symbol_12 instanceof InvalidValueException) {
 		            throw (InvalidValueException)CAUGHT_symbol_12;
 		        }
-		        final @NonNull /*@Thrown*/ Boolean eq_3 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_symbol_12, ValuesUtil.FALSE_VALUE);
+		        final /*@Thrown*/ boolean eq_2 = CAUGHT_symbol_12 == Boolean.FALSE;
 		        @Nullable /*@Thrown*/ Boolean symbol_24;
-		        if (eq_3) {
+		        if (eq_2) {
 		            symbol_24 = ValuesUtil.TRUE_VALUE;
 		        }
 		        else {
-		            final @NonNull /*@NonInvalid*/ Boolean symbol_17 = CAUGHT_b_0 instanceof InvalidValueException;
+		            final /*@NonInvalid*/ boolean symbol_17 = CAUGHT_b_0 instanceof InvalidValueException;
 		            @Nullable /*@Thrown*/ Boolean symbol_23;
 		            if (symbol_17) {
 		                if (CAUGHT_b_0 instanceof InvalidValueException) {
@@ -1011,23 +1005,19 @@ public class OperationImpl
 		                symbol_23 = (Boolean)CAUGHT_b_0;
 		            }
 		            else {
-		                if (CAUGHT_b_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_b_0;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean eq_4 = OclAnyEqualOperation.INSTANCE.evaluate(CAUGHT_b_0, ValuesUtil.TRUE_VALUE);
 		                @Nullable /*@Thrown*/ Boolean symbol_22;
-		                if (eq_4) {
+		                if (CAUGHT_b_0 == Boolean.TRUE) {
 		                    symbol_22 = ValuesUtil.TRUE_VALUE;
 		                }
 		                else {
-		                    final @NonNull /*@NonInvalid*/ Boolean symbol_18 = (CAUGHT_symbol_12 == null) || (CAUGHT_symbol_12 instanceof InvalidValueException);
+		                    final /*@NonInvalid*/ boolean symbol_18 = (CAUGHT_symbol_12 == null) || (CAUGHT_symbol_12 instanceof InvalidValueException);
 		                    @Nullable /*@Thrown*/ Boolean symbol_21;
 		                    if (symbol_18) {
-		                        symbol_21 = (Boolean)null;
+		                        symbol_21 = null;
 		                    }
 		                    else {
-		                        final @NonNull /*@NonInvalid*/ Boolean symbol_19 = CAUGHT_b_0 instanceof InvalidValueException;
-		                        @NonNull /*@Thrown*/ Boolean symbol_20;
+		                        final /*@NonInvalid*/ boolean symbol_19 = CAUGHT_b_0 instanceof InvalidValueException;
+		                        /*@Thrown*/ boolean symbol_20;
 		                        if (symbol_19) {
 		                            if (CAUGHT_b_0 instanceof InvalidValueException) {
 		                                throw (InvalidValueException)CAUGHT_b_0;
@@ -1101,11 +1091,11 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = this.getPrecondition();
+		    final @NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = this.getPrecondition();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_precondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, precondition);
 		    @NonNull /*@Thrown*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_precondition.iterator();
-		    @NonNull /*@Thrown*/ Boolean isUnique;
+		    /*@Thrown*/ boolean isUnique;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
 		            isUnique = ValuesUtil.TRUE_VALUE;
@@ -1118,7 +1108,7 @@ public class OperationImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = _1.getName();
+		        final @Nullable /*@Thrown*/ String name = _1.getName();
 		        //
 		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
 		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find
@@ -1160,11 +1150,11 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = this.getPostcondition();
+		    final @NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = this.getPostcondition();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_postcondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, postcondition);
 		    @NonNull /*@Thrown*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_postcondition.iterator();
-		    @NonNull /*@Thrown*/ Boolean isUnique;
+		    /*@Thrown*/ boolean isUnique;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
 		            isUnique = ValuesUtil.TRUE_VALUE;
@@ -1177,7 +1167,7 @@ public class OperationImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = _1.getName();
+		        final @Nullable /*@Thrown*/ String name = _1.getName();
 		        //
 		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
 		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find

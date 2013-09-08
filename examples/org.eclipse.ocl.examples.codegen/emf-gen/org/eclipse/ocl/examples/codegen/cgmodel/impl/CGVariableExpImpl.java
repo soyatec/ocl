@@ -197,6 +197,23 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
+	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
+		return referredVariable != null ? thatValue.isEquivalentTo(referredVariable) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
+		return referredVariable != null ? thatValue.isEquivalentToInternal(referredVariable) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return (referredVariable != null) && referredVariable.isUnboxed();
 	}
