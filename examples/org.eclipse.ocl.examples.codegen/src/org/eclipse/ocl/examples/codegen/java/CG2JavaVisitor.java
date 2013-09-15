@@ -188,11 +188,11 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		final LibraryIteration libraryIteration = DomainUtil.nonNullState(cgIterationCallExp.getLibraryIteration());
 		final Method actualMethod = getJavaMethod(libraryIteration);
 		final Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
-		final String astName = cgIterationCallExp.getValueName();
-		final String bodyName = "BODY_" + astName;
-		final String implementationName = "IMPL_" + astName;
-		final String managerName = "MGR_" + astName;
-		final String staticTypeName = "TYPE_" + astName;
+		final String astName = getSymbolName(null, cgIterationCallExp.getValueName());
+		final String bodyName = getSymbolName(null, "BODY_" + astName);
+		final String implementationName = getSymbolName(null, "IMPL_" + astName);
+		final String managerName = getSymbolName(null, "MGR_" + astName);
+		final String staticTypeName = getSymbolName(null, "TYPE_" + astName);
 		String accumulatorName;
 		//
 		//	Pre-amble: hoisted assignments
@@ -230,7 +230,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		//
 		if (iterateResult != null) {
 			CGValuedElement init = iterateResult.getInit();
-			accumulatorName = init.getValueName();
+			accumulatorName = getSymbolName(null, init.getValueName());
 			if (!js.appendLocalStatements(init)) {
 				return false;
 			}
@@ -366,13 +366,15 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 				body.accept(this);
 			}
 			else {
-				if (body.isInvalid()) {
+				CGInvalid cgInvalidValue = body.getInvalidValue();
+				if (cgInvalidValue != null) {
 					js.append("throw ");
+					js.appendValueName(cgInvalidValue);
 				}
 				else {
 					js.append("return ");
+					js.appendValueName(body);
 				}
-				js.appendValueName(body);
 				js.append(";\n");
 			}
 		}
@@ -498,18 +500,11 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		return context.getMetaModelManager();
 	}
 
-	protected @NonNull String getValueName(@NonNull CGValuedElement cgElement) {
-		String name = cgElement.getValueName();
-		if (name == null) {
-			name = cgElement.getName();
-		}
-		if (name == null) {
-			name = "<null-" + cgElement.eClass().getName() + ">";
-		}
-		return name;
+	protected @NonNull String getSymbolName(@Nullable Object anObject, @Nullable String... nameHints) {
+		return localContext.getNameManagerContext().getSymbolName(anObject, nameHints);
 	}
 
-	protected String getValueName2(@NonNull CGValuedElement cgElement) {
+	protected String getValueName(@NonNull CGValuedElement cgElement) {
 		String valueName = localContext != null ? localContext.getValueName(cgElement) : globalContext.getValueName(cgElement);
 		return valueName;
 	}
@@ -660,7 +655,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		CGValuedElement cgBody = getExpression(cgIterationCallExp.getBody());
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
 		CGIterator cgIterator = cgIterationCallExp.getIterators().get(0);
-		String iteratorName = localContext.getNameManagerContext().getSymbolName(null, "ITERATOR_" + cgIterator.getValueName());
+		String iteratorName = getSymbolName(null, "ITERATOR_" + cgIterator.getValueName());
 		Iteration2Java iterationHelper = context.getIterationHelper(DomainUtil.nonNullState(cgIterationCallExp.getReferredIteration()));
 		assert iterationHelper != null;
 		boolean flowContinues = false;
@@ -1722,7 +1717,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 					js.appendIsRequired(cgOperation.isRequired());
 				}
 				js.append(" ");
-				js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
+				boolean cgOperationIsInvalid = cgOperation.getInvalidValue() != null;
+				js.appendIsCaught(!cgOperationIsInvalid, cgOperationIsInvalid);
 				js.append(" ");
 				js.appendClassReference(cgOperation);
 				js.append(" ");
@@ -1829,13 +1825,15 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 	@Override
 	public @NonNull Boolean visitCGThrowExp(@NonNull CGThrowExp cgThrowExp) {
 		CGValuedElement cgSource = getExpression(cgThrowExp.getSource());
+		CGInvalid cgInvalidValue;
 		if (cgSource.isNonInvalid()) {
 			cgSource.accept(this);
 		}
-		else if (cgSource.isInvalid()) {
+		else if ((cgInvalidValue = cgSource.getInvalidValue()) != null) {
 			js.append("throw ");
-			js.appendReferenceTo(InvalidValueException.class, cgSource);
+			js.appendReferenceTo(InvalidValueException.class, cgInvalidValue);
 			js.append(";\n");
+			return false;
 		}
 		else {
 			if (!js.appendLocalStatements(cgSource)) {
@@ -1860,7 +1858,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 	public @NonNull Boolean visitCGTupleExp(@NonNull CGTupleExp cgTupleExp) {
 		List<CGTuplePart> parts = cgTupleExp.getParts();
 		for (CGTuplePart cgPart : parts) {
-			if (!js.appendLocalStatements(cgPart.getValue())) {
+			if (!js.appendLocalStatements(cgPart.getNamedValue())) {
 				return false;
 			}
 		}
@@ -1871,7 +1869,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		js.appendIdReference(cgTupleExp.getTypeId().getElementId());
 		int iSize = parts.size();
 		for (int i = 0; i < iSize; i++) {
-			CGValuedElement cgPartValue = parts.get(i).getValue();
+			CGValuedElement cgPartValue = parts.get(i).getNamedValue();
 			js.append(", ");
 			if ((cgPartValue.isNull()) && (iSize == 1)) {
 				js.append("(Object)");						// Disambiguate Object... from Object[] 

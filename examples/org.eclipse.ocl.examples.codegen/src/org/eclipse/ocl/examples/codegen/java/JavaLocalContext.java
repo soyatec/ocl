@@ -52,12 +52,12 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 		return evaluatorParameter;
 	}
 
-	public @Nullable CGValuedElement createEvaluatorVariable() {
+/*	public @Nullable CGValuedElement createEvaluatorVariable() {
 		CGText evaluator = CGModelFactory.eINSTANCE.createCGText();
 		setNames2(evaluator, JavaConstants.EVALUATOR_NAME, JavaConstants.EVALUATOR_TYPE_ID);
 		evaluator.setTextValue(JavaConstants.EVALUATOR_NAME);
 		return evaluator;
-	}
+	} */
 	
 	public @NonNull CGValuedElement createIdResolverVariable() {
 //		CGValuedElement evaluatorParameter = createEvaluatorParameter();
@@ -165,7 +165,7 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 			assert false;
 		} */
 //FIXME		assert cgValue == cgValue.getValue();
-		cgValue = cgValue.getValue();
+		cgValue = cgValue.getNamedValue();
 		valueName = cgValue.getValueName();
 		if (valueName == null) {
 			valueName = nameManagerContext.getSymbolName(cgValue, cgValue.getName());

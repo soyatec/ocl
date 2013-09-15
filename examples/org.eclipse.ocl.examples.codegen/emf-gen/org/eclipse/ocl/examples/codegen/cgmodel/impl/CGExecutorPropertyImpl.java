@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
@@ -151,8 +152,8 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
+	public @Nullable CGInvalid getInvalidValue() {
+		return null;
 	}
 
 	/**
@@ -214,15 +215,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 */
 	@Override
 	public boolean isInlined() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
 		return false;
 	}
 

@@ -160,8 +160,8 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return executorType != null ? executorType : this;
+	public @NonNull CGValuedElement getSourceValue() {
+		return executorType != null ? executorType.getSourceValue() : this;
 	}
 
 	/**
@@ -169,8 +169,26 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return executorType.getValue();
+	public @NonNull CGValuedElement getNamedValue() {
+		return executorType != null ? executorType.getNamedValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getTypedValue() {
+		return executorType != null ? executorType.getTypedValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable String getValueName() {
+		return executorType != null ? executorType.getValueName() : null;
 	}
 
 	/**

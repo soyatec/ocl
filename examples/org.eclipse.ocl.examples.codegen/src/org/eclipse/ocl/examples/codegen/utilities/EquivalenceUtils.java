@@ -210,8 +210,8 @@ public class EquivalenceUtils
 			return Boolean.TRUE;
 		}
 		if (thisValue.isConstant() && thatValue.isConstant()) {				// FIXME Move to caller
-			CGValuedElement thisConstant = thisValue.getValue();
-			CGValuedElement thatConstant = thatValue.getValue();
+			CGValuedElement thisConstant = thisValue.getNamedValue();
+			CGValuedElement thatConstant = thatValue.getNamedValue();
 			return thisConstant.isEquivalentTo(thatConstant);
 		}
 		CGValuedElement thisCondition = thisValue.getCondition();
@@ -311,8 +311,8 @@ public class EquivalenceUtils
 			return Boolean.TRUE;
 		}
 		if (thisValue.isConstant() && thatValue.isConstant()) {				// FIXME Move to caller
-			CGValuedElement thisConstant = thisValue.getValue();
-			CGValuedElement thatConstant = thatValue.getValue();
+			CGValuedElement thisConstant = thisValue.getNamedValue();
+			CGValuedElement thatConstant = thatValue.getNamedValue();
 			return thisConstant.isEquivalentTo(thatConstant);
 		}
 		CGValuedElement thisInit = thisValue.getInit();

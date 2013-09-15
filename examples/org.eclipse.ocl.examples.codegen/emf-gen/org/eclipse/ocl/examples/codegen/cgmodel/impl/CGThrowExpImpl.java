@@ -79,8 +79,8 @@ public class CGThrowExpImpl extends CGCallExpImpl implements CGThrowExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return source != null ? source : this;
+	public @NonNull CGValuedElement getSourceValue() {
+		return source != null ? source.getSourceValue() : this;
 	}
 
 	/**
@@ -88,8 +88,26 @@ public class CGThrowExpImpl extends CGCallExpImpl implements CGThrowExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return getReferredValuedElement();
+	public @NonNull CGValuedElement getTypedValue() {
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getNamedValue() {
+		return source != null ? source.getNamedValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable String getValueName() {
+		return source != null ? source.getValueName() : null;
 	}
 
 	/**

@@ -228,6 +228,15 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
+	public @Nullable CGInvalid getInvalidValue() {
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (thatValue.isInvalid()) {
 			return Boolean.TRUE;
@@ -246,15 +255,6 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 */
 	@Override
 	public boolean isInlined() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
 		return true;
 	}
 

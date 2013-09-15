@@ -55,7 +55,7 @@ public class JavaDependencyVisitor extends DependencyVisitor
 
 	@Override
 	public @Nullable Object visitCGTypeExp(@NonNull CGTypeExp cgTypeExp) {
-		CGValuedElement variableValue = cgTypeExp.getValue();
+		CGValuedElement variableValue = cgTypeExp.getNamedValue();
 		variableValue.accept(this);
 		addDependency(cgTypeExp, variableValue);
 //		addDependency(cgVariable, cgVariable.getTypeId());

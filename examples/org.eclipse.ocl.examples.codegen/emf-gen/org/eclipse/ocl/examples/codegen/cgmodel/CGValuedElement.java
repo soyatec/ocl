@@ -70,21 +70,52 @@ public interface CGValuedElement extends CGTypedElement {
 	List<CGValuedElement> getOwns();
 
 	/**
+	 * Return a non-null invalid value if this value is invalid.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Inv$10
+	@Nullable CGInvalid getInvalidValue();
+
+	/**
 	 * Return the value to which this valuedElement delegates to obtain its value.
 	 * Returns this if no delegation occurs.
 	 *
 	 * @generated
 	 */
 	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$3
-	@NonNull CGValuedElement getReferredValuedElement();
+	@NonNull CGValuedElement getSourceValue();
 
 	/**
-	 * Return the value of this element.
+	 * Return the CGValuedElement which is used as this element.
+	 * Unwinds Collection/TupleParts does not follow delegation.
+	 * Returns this if no delegation occurs.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$4
-	@NonNull CGValuedElement getValue();
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$11
+	@NonNull CGValuedElement getThisValue();
+
+	/**
+	 * Return the CGValuedElement that provides the name of a declaration from which the value of this CGValuedElement may be obtained.
+	 * Fundamental elements such as constants and operations call provide the named value themselves.
+	 * More complex elements such as VariableExp and ThrowExp may delegate.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$63
+	@NonNull CGValuedElement getNamedValue();
+
+	/**
+	 * Return the CGValuedElement that provides the strong type of a declaration from which the type of this CGValuedElement may be obtained.
+	 * Fundamental elements such as constants and operations call provide their own accurate strong type.
+	 * More complex elements such as CatchExp have a weak type that includes invalid and so delegate to identify the strong type.
+	 * More complex elements such as GuardExp/ThrowExp propagate an unchanged value with a stronger type than their source.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$64
+	@NonNull CGValuedElement getTypedValue();
 
 	/**
 	 * Return the declared name value of this element. The text is valid for use in the target language and

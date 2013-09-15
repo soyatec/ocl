@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -180,8 +181,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * @generated
 	 */
 	@Override
-	public boolean isBoxed() {
-		return true;
+	public @Nullable CGInvalid getInvalidValue() {
+		return null;
 	}
 
 	/**
@@ -189,8 +190,8 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * @generated
 	 */
 	@Override
-	public boolean isInvalid() {
-		return false;
+	public boolean isBoxed() {
+		return true;
 	}
 
 	/**

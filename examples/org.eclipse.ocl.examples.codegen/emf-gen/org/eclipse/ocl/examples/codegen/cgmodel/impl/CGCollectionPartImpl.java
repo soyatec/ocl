@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -313,23 +314,12 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		CGValuedElement first2 = first;
-		if (first2 != null) {
-			if (first2.isInvalid()) {
-				return first2;
-			}
-			CGValuedElement last2 = last;
-			if (last2 != null) {
-				if (last2.isInvalid()) {
-					return last2;
-				}
-			}
-			else {
-				return first2;
-			}
+	public @Nullable CGInvalid getInvalidValue() {
+		CGInvalid invalidValue = first.getInvalidValue();
+		if ((invalidValue == null) && (last != null)) {
+			invalidValue = last.getInvalidValue();
 		}
-		return this;
+		return invalidValue;
 	}
 
 	/**
@@ -337,17 +327,18 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return getReferredValuedElement();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @Nullable String getValueName() {
-		return (last == null) ? first.getValueName() : super.getValueName();
+	public @NonNull CGValuedElement getThisValue() {
+		CGInvalid invalidValue = getInvalidValue();
+		if (invalidValue != null) {
+			return invalidValue;
+		}
+		else if (last != null) {
+			return this;
+		}
+		else {
+			assert first != null;
+			return first;
+		}
 	}
 
 	/**
@@ -401,15 +392,6 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	@Override
 	public boolean isInlined() {
 		return (last == null) && first.isInlined();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
-		return first.isInvalid() || ((last != null) && last.isInvalid());
 	}
 
 	/**

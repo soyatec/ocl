@@ -127,6 +127,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	// set this variable true when testing for memory leaks
     private static boolean DISPOSE_RESOURCE_SET = false;
 //	protected static int testCounter = 0;
+
+	public static final @NonNull String ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS = "org.eclipse.ocl.examples.xtext.tests";
 	
     public static final class CheckedTestSuite extends TestSuite {
 
@@ -1223,7 +1225,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 				@SuppressWarnings("null")
 				CodeGenHelper genModelHelper = getCodeGenHelper(metaModelManager);
 
-				File targetFolder = new File("src-gen");
+				File targetFolder = new File("../" + ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS + "/src-gen");
 				targetFolder.mkdir();
 				String packageName = getTestPackageName();			// FIXME need to create this
 				String className = "TestClass" + testCounter++;

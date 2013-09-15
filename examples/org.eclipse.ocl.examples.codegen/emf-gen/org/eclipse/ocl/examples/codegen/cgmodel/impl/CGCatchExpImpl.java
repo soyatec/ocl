@@ -70,6 +70,15 @@ public class CGCatchExpImpl extends CGCallExpImpl implements CGCatchExp {
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getNamedValue() {
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
 		return CatchPlace.createCatchPlace(element2place, this);
 	}
@@ -79,8 +88,17 @@ public class CGCatchExpImpl extends CGCallExpImpl implements CGCatchExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return source != null ? source : this;
+	public @NonNull CGValuedElement getSourceValue() {
+		return source != null ? source.getSourceValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getTypedValue() {
+		return source != null ? source.getTypedValue() : this;
 	}
 
 	/**

@@ -142,7 +142,7 @@ public class JavaGlobalContext extends AbstractJavaContext implements GlobalCont
 			return localContext.getValueName(cgValuedElement);
 		}
 		else {
-			CGValuedElement cgValue = cgValuedElement.getValue();
+			CGValuedElement cgValue = cgValuedElement.getNamedValue();
 			String valueName = cgValue.getValueName();
 			if (valueName == null) {
 				valueName = nameManager.getGlobalSymbolName(cgValue, cgValue.getName());

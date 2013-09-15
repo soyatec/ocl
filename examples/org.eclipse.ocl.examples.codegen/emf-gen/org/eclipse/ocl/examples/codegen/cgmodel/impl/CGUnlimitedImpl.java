@@ -77,7 +77,7 @@ public class CGUnlimitedImpl extends CGConstantImpl implements CGUnlimited {
 		if (!thatValue.isNonInvalid()) {
 			return null;
 		}
-		CGValuedElement value = thatValue.getValue();
+		CGValuedElement value = thatValue.getNamedValue();
 		if (this == value) {
 			return Boolean.TRUE;
 		}

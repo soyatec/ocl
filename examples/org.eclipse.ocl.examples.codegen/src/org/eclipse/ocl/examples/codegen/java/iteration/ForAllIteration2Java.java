@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -78,6 +79,7 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 	}
 	
 	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGInvalid cgInvalidValue;
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 //		if ((cgBody.getASTypeId() == TypeId.BOOLEAN) || (cgBody.getASTypeId() == TypeId.OCL_VOID)) {
@@ -100,9 +102,9 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 			js.append(" = null;\n");
 			js.append("break;\n");
 		}
-		else if (cgBody.isInvalid()) {
+		else if ((cgInvalidValue = cgBody.getInvalidValue()) != null) {
 			js.append("throw new ");
-			js.appendValueName(cgBody);
+			js.appendValueName(cgInvalidValue);
 			js.append(";\n");
 			js.append("break;\n");
 		}

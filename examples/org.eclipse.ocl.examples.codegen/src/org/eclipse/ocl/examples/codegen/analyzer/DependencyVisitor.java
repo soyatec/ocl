@@ -90,8 +90,8 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 	}
 
 	protected void addDependency(@Nullable CGValuedElement cgElement, @Nullable CGValuedElement dependsOn) {
-		cgElement = cgElement != null ? cgElement.getValue() : null;
-		dependsOn = dependsOn != null ? dependsOn.getValue() : null;
+		cgElement = cgElement != null ? cgElement.getNamedValue() : null;
+		dependsOn = dependsOn != null ? dependsOn.getNamedValue() : null;
 		if ((cgElement != null) && (cgElement != dependsOn)) {
 			if (!cgElement.isGlobal() || (dependsOn == null) || dependsOn.isGlobal()) {
 				CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
@@ -201,7 +201,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		}
 		List<CGValuedElement> sortedList = new ArrayList<CGValuedElement>();
 		for (CGValuedElement cgElement : dependencyDepths.keySet()) {
-			if (!cgElement.isInlined() && (cgElement.getValue() == cgElement)) {
+			if (!cgElement.isInlined() && (cgElement.getNamedValue() == cgElement)) {
 				if (isGlobal) assert cgElement.isGlobal();
 				sortedList.add(cgElement);
 			}
@@ -230,7 +230,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 
 	public void visit(@NonNull CGNamedElement cgElement) {
 		if (cgElement instanceof CGValuedElement) {
-			CGValuedElement cgPrimaryElement = getPrimaryElement(((CGValuedElement) cgElement).getValue());
+			CGValuedElement cgPrimaryElement = getPrimaryElement(((CGValuedElement) cgElement).getNamedValue());
 			addDependency(cgPrimaryElement, null);
 			cgPrimaryElement.accept(this);
 		}
@@ -276,7 +276,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 
 	@Override
 	public @Nullable Object visitCGConstantExp(@NonNull CGConstantExp visitCGConstantExp) {
-		addDependency(visitCGConstantExp, visitCGConstantExp.getValue());
+		addDependency(visitCGConstantExp, visitCGConstantExp.getNamedValue());
 		return super.visitCGConstantExp(visitCGConstantExp);
 	}
 

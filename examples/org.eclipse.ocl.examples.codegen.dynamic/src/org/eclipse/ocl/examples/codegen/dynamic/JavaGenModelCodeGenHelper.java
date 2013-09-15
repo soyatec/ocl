@@ -145,7 +145,7 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		String qualifiedName = packageName + "." + className;
 		String javaCodeSource = JUnitCodeGenerator.generateClassFile(metaModelManager, query, packageName, className);
 		if (saveSource) {
-			String fileName = "src-gen/" + qualifiedName.replace('.', '/') + ".java";
+			String fileName = targetFolder + "/" + qualifiedName.replace('.', '/') + ".java";
 			Writer writer = new FileWriter(fileName);
 			writer.append(javaCodeSource);
 			writer.close();

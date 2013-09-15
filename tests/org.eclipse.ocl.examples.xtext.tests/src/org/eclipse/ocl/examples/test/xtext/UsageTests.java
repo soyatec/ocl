@@ -444,7 +444,7 @@ public class UsageTests
 	public void testBug370824() throws Exception {
 		String testFileStem = "Bug370824";
 		String testProjectName = "bug370824";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile = "package bug370824 : bug370824 = 'http://bug370824'\n"
 			+ "{\n"
 			+ "    class Clase1\n"
@@ -461,7 +461,7 @@ public class UsageTests
 	public void testBug409650() throws Exception {
 		String testFileStem = "Bug409650";
 		String testProjectName = "bug409650";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile = "package bug409650 : bug409650 = 'http://bug409650'\n"
 			+ "{\n"
 			+ "    class Clase1\n"
@@ -500,7 +500,7 @@ public class UsageTests
 	public void testEcoreTypes412736() throws Exception {
 		String testFileStem = "Bug412736";
 		String testProjectName = "bug412736";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
 			+ "package bug412736 : bug412736 = 'http://bug412736'\n"
 			+ "{\n"
@@ -572,7 +572,7 @@ public class UsageTests
 	public void testEnumTypes412685() throws Exception {
 		String testFileStem = "Bug412685";
 		String testProjectName = "bug412685";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
 			+ "package bug412685 : bug412685 = 'http://bug412685'\n"
 			+ "{\n"
@@ -616,7 +616,7 @@ public class UsageTests
 //		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
 		String testFileStem = "CSEs";
 		String testProjectName = "cses";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
 			+ "package cses : cses = 'http://cses'\n"
 			+ "{\n"
@@ -679,12 +679,12 @@ public class UsageTests
 //		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
 //		String testFileStem = "SysML_ValueTypes_QUDV";
 		String testProjectName = "SysML_ValueTypes_QUDV";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		doDelete(testProjectName);
 		//		MetaModelManager metaModelManager2 = new MetaModelManager();
 //		createEcoreFile(metaModelManager2, "Dummy" + testFileStem, "");
 //		metaModelManager2.dispose();
-		@SuppressWarnings("null")@NonNull URI genModelURI = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.tests/model/SysML_ValueTypes_QUDV.genmodel", true);
+		@SuppressWarnings("null")@NonNull URI genModelURI = URI.createPlatformResourceURI("/" + ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS + "/model/SysML_ValueTypes_QUDV.genmodel", true);
 		if (!resourceSet.getURIConverter().exists(genModelURI, null)) {
 			return;
 		}			
@@ -727,7 +727,7 @@ public class UsageTests
 	public void testPivotMetamodelImport414855() throws Exception {
 		String testFileStem = "Bug414855";
 		String testProjectName = "bug414855";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile =
 			"import pivot : 'http://www.eclipse.org/ocl/3.1.0/Pivot#/';\n"
 			+ "package bug414855 : bug414855 = 'http://bug414855'\n"
@@ -745,7 +745,7 @@ public class UsageTests
 	public void testBug415782() throws Exception {
 		String testFileStem = "Bug415782";
 		String testProjectName = "bug415782";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFile = 
 			  "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
 			+ "package bug415782 : bug415782 = 'http://bug415782'\n"
@@ -771,7 +771,7 @@ public class UsageTests
 	public void testBug416421() throws Exception {
 		String testFileStemA = "Bug416421A";
 		String testProjectNameA = "bug416421A";
-		String testProjectPathA = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameA : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPathA = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameA : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFileA = 
 				  "package bug416421A : bug416421A = 'example.org/bug416421A'\n"
 				+ "{\n"
@@ -786,7 +786,7 @@ public class UsageTests
 		String genmodelFileA = createGenModelContent(testProjectPathA, testFileStemA, null);
 		String testFileStemB = "Bug416421B";
 		String testProjectNameB = "bug416421B";
-		String testProjectPathB = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameB : "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPathB = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectNameB : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
 		String oclinecoreFileB = 
 				  "import bug416421A : 'Bug416421A.ecore#/';\n"
 				+ "package bug416421B : bug416421B = 'example.org/bug416421B'\n"

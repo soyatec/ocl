@@ -140,7 +140,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	}
 
 	protected void doValuedElement(@NonNull CGValuedElement cgValuedElement) {
-		CGValuedElement value = cgValuedElement.getValue();
+		CGValuedElement value = cgValuedElement.getNamedValue();
 		if (value.isGlobal()) {
 			context.addGlobal(value);
 		}
@@ -148,7 +148,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		if (asTypeId != null) {
 			addOwnedTypeId(cgValuedElement, asTypeId);
 		}
-		if (cgValuedElement.getValue() == cgValuedElement) {
+		if (cgValuedElement.getNamedValue() == cgValuedElement) {
 			if ((localContext != null) && !cgValuedElement.isGlobal()) {
 				localContext.getValueName(cgValuedElement);
 			}
@@ -160,14 +160,6 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 
 	public @NonNull JavaCodeGenerator getCodeGenerator() {
 		return codeGenerator;
-	}
-
-	protected @Nullable CGValuedElement installEvaluatorVariable(@NonNull CGValuedElement cgValuedElement) {
-		CGValuedElement evaluatorVariable = localContext.createEvaluatorVariable();
-		if (evaluatorVariable != null) {
-			cgValuedElement.getOwns().add(evaluatorVariable);
-		}
-		return evaluatorVariable;
 	}
 
 	protected @Nullable CGValuedElement installIdResolverVariable(@NonNull CGValuedElement cgValuedElement) {
@@ -429,7 +421,6 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	public @Nullable Object visitCGLibraryOperationCallExp(@NonNull CGLibraryOperationCallExp cgOperationCallExp) {
 		LibraryOperation libraryOperation = cgOperationCallExp.getLibraryOperation();
 		if (!(libraryOperation instanceof LibrarySimpleOperation)) {
-			installEvaluatorVariable(cgOperationCallExp);
 			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
 				TypeId asTypeId = cgOperationCallExp.getASTypeId();
 				if (asTypeId != null) {

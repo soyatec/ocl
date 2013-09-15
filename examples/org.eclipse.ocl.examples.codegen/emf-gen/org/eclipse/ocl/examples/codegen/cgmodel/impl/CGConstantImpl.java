@@ -15,10 +15,10 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstant;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,8 +54,8 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
+	public @Nullable CGInvalid getInvalidValue() {
+		return null;
 	}
 
 	/**
@@ -109,15 +109,6 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 	 */
 	@Override
 	public boolean isInlined() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
 		return false;
 	}
 

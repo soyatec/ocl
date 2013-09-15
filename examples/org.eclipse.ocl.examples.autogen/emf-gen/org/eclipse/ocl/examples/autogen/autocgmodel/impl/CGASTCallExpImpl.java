@@ -68,7 +68,7 @@ public class CGASTCallExpImpl extends CGOperationCallExpImpl implements CGASTCal
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	public @NonNull CGValuedElement getSourceValue() {
 		return source != null ? source : this;
 	}
 

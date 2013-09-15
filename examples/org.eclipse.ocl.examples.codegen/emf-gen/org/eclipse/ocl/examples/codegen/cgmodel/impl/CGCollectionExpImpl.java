@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -194,6 +195,21 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 	 * @generated
 	 */
 	@Override
+	public @Nullable CGInvalid getInvalidValue() {
+		for (CGCollectionPart cgPart : getParts()) {
+			CGInvalid invalidValue = cgPart.getInvalidValue();
+			if (invalidValue != null) {
+				return invalidValue;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
 		return LocalPlace.createLocalPlace(element2place, this);
 	}
@@ -203,13 +219,14 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		for (CGCollectionPart cgPart : getParts()) {
-			if (cgPart.isInvalid()) {
-				return cgPart;
-			}
+	public @NonNull CGValuedElement getThisValue() {
+		CGInvalid invalidValue = getInvalidValue();
+		if (invalidValue != null) {
+			return invalidValue;
 		}
-		return this;
+		else {
+			return this;
+		}
 	}
 
 	/**
@@ -255,20 +272,6 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
-		for (CGCollectionPart cgPart : getParts()) {
-			if (cgPart.isInvalid()) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

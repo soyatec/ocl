@@ -219,7 +219,7 @@ public class SimpleAnalysis extends AbstractAnalysis
 
 	@Override
 	public String toString() {
-		CGValuedElement cgValue = cgElement.getValue();
+		CGValuedElement cgValue = cgElement.getNamedValue();
 		if (cgValue == cgElement) {
 			return depth + ",\"" + String.valueOf(cgElement) + "\":" + cgElement.eClass().getName();
 		}

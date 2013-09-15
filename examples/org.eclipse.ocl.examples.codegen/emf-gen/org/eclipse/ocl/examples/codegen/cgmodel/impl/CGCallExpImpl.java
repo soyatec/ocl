@@ -302,15 +302,6 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGCallExp)thatValue) : null;
 	}

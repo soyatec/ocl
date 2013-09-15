@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -172,8 +173,8 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
+	public @Nullable CGInvalid getInvalidValue() {
+		return null;
 	}
 
 	/**
@@ -202,7 +203,7 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 		if (!thatValue.isNonInvalid()) {
 			return null;
 		}
-		CGValuedElement value = thatValue.getValue();
+		CGValuedElement value = thatValue.getNamedValue();
 		if (this == value) {
 			return Boolean.TRUE;
 		}
@@ -223,15 +224,6 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 */
 	@Override
 	public boolean isGlobal() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
 		return false;
 	}
 

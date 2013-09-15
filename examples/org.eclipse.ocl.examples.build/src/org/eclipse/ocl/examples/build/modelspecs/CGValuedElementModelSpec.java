@@ -131,1050 +131,950 @@ public class CGValuedElementModelSpec extends ModelSpec
 	/**
 	 * The algorithm options for isBoxed()/isUnboxed()
 	 */
-	protected static enum Box { BIBOX, DELEG, FALSE, IF, PARAM, RANGE, ROOT, TRUE }
+	public interface Box {
+		@Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		
+		public static final @NonNull Box BIBOX = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+		};
+		
+		public static final @NonNull Box DELEG = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isBoxed();";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isUnboxed();";
+			}
+		};
+		
+		public static final @NonNull Box FALSE = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+		};
+		
+		public static final @NonNull Box IF = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return thenExpression.isBoxed() || elseExpression.isBoxed();";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return thenExpression.isUnboxed() && elseExpression.isUnboxed();";
+			}
+		};
+		
+		public static final @NonNull Box PARAM = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (init != null) ? init.isBoxed() : operation != null ? operation.isBoxed() : true;";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (init != null) ? init.isUnboxed() : operation != null ? operation.isUnboxed() : false;";
+			}
+		};
+		
+		public static final @NonNull Box RANGE = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return isRange() || first.isBoxed();";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return isRange() || first.isUnboxed();";
+			}
+		};
+		
+		public static final @NonNull Box ROOT = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+				"//		CGValuedElement value = getNamedValue();\n" +
+				"		assert referredValue != this : \"isBoxed must be overridden for a \" + getClass().getSimpleName() + \" since referredValue returns this\";\n" +
+				"		return referredValue.isBoxed();";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+				"//		CGValuedElement value = getNamedValue();\n" +
+				"		assert referredValue != this : \"isUnboxed must be overridden for a \" + getClass().getSimpleName() + \" since referredValue returns this\";\n" +
+				"		return referredValue.isUnboxed();";
+			}
+		};
+		
+		public static final @NonNull Box TRUE = new Box() {
+			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+			
+		public static MethodSpec isBoxed = new MyMethodSpec(CGValuedElement.class, "boolean isBoxed()", null,
+			"Return true if this value is a boxed value.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Box box = cgModelSpec.box;
+					return box != null ? box.generateIsBoxed(cgModelSpec, genModel) : null;
+				}
+			};
+			
+		public static MethodSpec isUnboxed = new MyMethodSpec(CGValuedElement.class, "boolean isUnboxed()", null,
+			"Return true if this value is an unboxed value.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Box box = cgModelSpec.box;
+					return box != null ? box.generateIsUnboxed(cgModelSpec, genModel) : null;
+				}
+			};
+	}
 
 	/**
 	 * The algorithm options for isCommonable()/isUncommonable()
 	 */
-	protected static enum Com { DELEG, FALSE, MAY, MUST }
+	public static interface Com {
+		@Nullable String generateIsCommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateIsUncommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Com DELEG = new Com() {
+			@Override public @NonNull String generateIsCommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isCommonable();";
+			}
+			@Override public @NonNull String generateIsUncommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isUncommonable();";
+			}
+		};
+		public static final @NonNull Com FALSE = new Com() {
+			@Override public @NonNull String generateIsCommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsUncommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+		};
+		public static final @NonNull Com MAY = new Com() {
+			@Override public @NonNull String generateIsCommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @NonNull String generateIsUncommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+		};
+		public static final @NonNull Com MUST = new Com() {
+			@Override public @NonNull String generateIsCommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @NonNull String generateIsUncommonable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+		
+		public static MethodSpec isCommonable = new MyMethodSpec(CGValuedElement.class, "boolean isCommonable()", null,
+				"Return true if this value can be shared as part of a Common Subexpression.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Com com = cgModelSpec.com;
+					return com != null ? com.generateIsCommonable(cgModelSpec, genModel) : null;
+				}
+			};
+			
+		public static MethodSpec isUncommonable = new MyMethodSpec(CGValuedElement.class, "boolean isUncommonable()", null,
+				"Return true if this value does not have to be shared as part of a Common Subexpression.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Com com = cgModelSpec.com;
+					return com != null ? com.generateIsUncommonable(cgModelSpec, genModel) : null;
+				}
+			};
+	}
 
 	/**
 	 * The algorithm options for isConstant()
 	 */
-	protected static enum Con { CPART, DELEG, EQUAL, FALSE, PARTS, ROOT, TORF, TRUE }
+	public static interface Con {
+		@Nullable String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
 
-	/**
-	 * The algorithm options for isContext()
-	 */
-	protected static enum Ctx { FALSE, ROOT, TRUE }
-
-	/**
-	 * The algorithm options for getConstantValue()
-	 */
-	protected static enum Cvl { BOOL, EL_ID, INVLD, NULL, NUMBR, ROOT, STRNG, TEXT, UNLMT }
+		public static final @NonNull Con CPART = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return first.isConstant() && ((last == null) || last.isConstant());";
+		}};
+		public static final @NonNull Con DELEG = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isConstant();";
+		}};
+		public static final @NonNull Con EQUAL = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return source.isConstant() && argument.isConstant();";
+		}};
+		public static final @NonNull Con FALSE = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}};
+		public static final @NonNull Con PARTS = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
+			"			if (!cgPart.isConstant()) {\n" +
+			"				return false;\n" +
+			"			}\n" +
+			"		}\n" +
+			"		return true;";
+		}};
+		public static final @NonNull Con ROOT = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+			"		return (referredValue != this) && referredValue.isConstant();";
+		}};
+		public static final @NonNull Con TORF = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return isFalse() || isTrue();";
+		}};
+		public static final @NonNull Con TRUE = new Con() { @Override public @NonNull String generateIsConstant(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return true;";
+		}};
+		
+		public static MethodSpec isConstant = new MyMethodSpec(CGValuedElement.class, "boolean isConstant()", null,
+				"Return true if this value is a local constant (dependent of the user type system).")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Con con = cgModelSpec.con;
+					return con != null ? con.generateIsConstant(cgModelSpec, genModel) : null;
+				}
+			};
+	}
 
 	/**
 	 * The algorithm options for isCaught()
 	 */
-	protected static enum Ct { FALSE, ROOT, TRUE }
+	public static interface Ct {
+		@Nullable String generateIsCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateSetCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
 
-	/**
-	 * The algorithm options for isGlobal()
-	 */
-	protected static enum Glo { CPART, DELEG, FALSE, PARTS, ROOT, TRUE }
-
-	/**
-	 * The algorithm options for isInlined()
-	 */
-	protected static enum Inl { CPART, FALSE, ISCON, ROOT, TRUE, T_ID }
-
-	/**
-	 * The algorithm options for isInvalid()/isNonInvalid()/setNonInvalid()
-	 */
-	protected static enum Inv { CPART, EQUAL, FALSE, IF, PARTS, ROOT, TRUE, VAL, VAR }
-
-	/**
-	 * The algorithm options for isNonNull()/isNull()/isUndeclaredNonNull()/setNonNull()
-	 */
-	protected static enum Nul { CPART, DELEG, ECORE, FALSE, FEAT, IF, ROOT, TRUE, UNDEC, VAR }
-
-	/**
-	 * The algorithm options for getReferredValue()
-	 */
-	protected static enum Ref { CPART, DELEG, PARTS, THIS }
-
-	/**
-	 * The algorithm options for rewriteAs()
-	 */
-	protected static enum Rew { PART, PROP, TYPE, UNSUP, VAREX }
-
-	/**
-	 * The algorithm options for isSettable()
-	 */
-	protected static enum Set { FALSE, TRUE }
-
-	/**
-	 * The algorithm options for getValue()
-	 */
-	protected static enum Val { CPART, DELEG, REF, ROOT, THIS, TYPEX }
-	
-	protected static MethodSpec getConstantValue = new MyMethodSpec(CGConstant.class, "@NonNull Object getConstantValue()", null,
-		"Return the constant (boxed) value of this element.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Cvl enumValue = cgModelSpec.cvl;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case BOOL: return "return booleanValue == true;";
-					case EL_ID: return "return " + classRef(DomainUtil.class) + ".nonNullState(elementId);";
-					case INVLD: return "return " + classRef(ValuesUtil.class) + ".INVALID_VALUE;";
-					case NULL: return "return " + classRef(ValuesUtil.class) + ".NULL_VALUE;";
-					case NUMBR: return "return " + classRef(DomainUtil.class) + ".nonNullState(numericValue);";
-					case ROOT: return null;
-					case STRNG: return "return " + classRef(DomainUtil.class) + ".nonNullState(stringValue);";
-					case TEXT: return "return " + classRef(DomainUtil.class) + ".nonNullState(textValue);";
-					case UNLMT: return "return " + classRef(ValuesUtil.class) + ".UNLIMITED_VALUE;";
-					default: return "MISSING_CASE_for_" + enumValue + ";";
-				}
+		public static final @NonNull Ct FALSE = new Ct() {
+			@Override public @NonNull String generateIsCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateSetCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "assert !isCaught;";
+			}
+		};
+		public static final @NonNull Ct ROOT = new Ct() {
+			@Override public @NonNull String generateIsCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return caught;";
+			}
+			@Override public @NonNull String generateSetCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "caught = isCaught;";
+			}
+		};
+		public static final @NonNull Ct TRUE = new Ct() {
+			@Override public @NonNull String generateIsCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @NonNull String generateSetCaught(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "assert isCaught;\n" +
+				"		super.setCaught(true);";
 			}
 		};
 		
-
-		/**
-		 * The algorithm options for getPlace()
-		 */
-		public interface Ctl {
-			@NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
-		}
+		public static MethodSpec isCaught = new MyMethodSpec(CGValuedElement.class, "boolean isCaught()", null,
+			"Returns true if any exception associated with this value has been caught and consequently the value may be an InvalidValueException.\nReturns true if any exception has been thrown.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Ct ct = cgModelSpec.ct;
+					return ct != null ? ct.generateIsCaught(cgModelSpec, genModel) : null;
+				}
+			};
+			
+		public static MethodSpec setCaught = new MyMethodSpec(CGValuedElement.class, "void setCaught(boolean isCaught)", "boolean caught = false",
+			"Set the caught status.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Ct ct = cgModelSpec.ct;
+					return ct != null ? ct.generateSetCaught(cgModelSpec, genModel) : null;
+				}
+			};
+	}
+	
+	/**
+	 * The algorithm options for getPlace()
+	 */
+	public interface Ctl {
+		@NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
 		
-		public static final @NonNull Ctl CTL_BODY = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl BODY = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(OuterStackPlace.class) + ".createOuterStackPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_CATCH = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl CATCH = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(CatchPlace.class) + ".createCatchPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_CNTRL = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl CNTRL = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(ControlPlace.class) + ".createControlPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_GLOBL = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl GLOBL = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(GlobalPlace.class) + ".createGlobalPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_IF = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl IF = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(IfPlaces.class) + ".createIfPlaces(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_INNER = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl INNER = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(InnerStackPlace.class) + ".createInnerStackPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_LET = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl LET = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(LetPlaces.class) + ".createLetPlaces(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_LORG = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl LORG = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(LocalPlace.class) + ".createLocalPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_PARAM = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl PARAM = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(StackPlace.class) + ".createStackPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_THROW = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl THROW = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return " + classRef(ThrowPlace.class) + ".createThrowPlace(element2place, this);";
 		}};
-		public static final @NonNull Ctl CTL_UNSUP = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctl UNSUP = new Ctl() { @Override public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "throw new UnsupportedOperationException();";
 		}};
-		
-	protected static MethodSpec CTL_getPlace = new MyMethodSpec(CGElement.class, "@Nullable " + classRef(AbstractPlace.class) + " getPlace(@NonNull " + classRef(Map.class) + "<" + classRef(CGElement.class) + "," + classRef(AbstractPlace.class) + "> element2place)", null,
-		"Returns the place for this element, updating and reusing element2place as required.\nAll parent elements have entries in element2place.\nNo child elements have entries in element2place.\nThe global place is accessible as the null element.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Ctl ctl = cgModelSpec.ctl;
-				return ctl != null ? ctl.generate(cgModelSpec, genModel) : null;
-			}
-		};
+			
+		public static MethodSpec getPlace = new MyMethodSpec(CGElement.class, "@Nullable " + classRef(AbstractPlace.class) + " getPlace(@NonNull " + classRef(Map.class) + "<" + classRef(CGElement.class) + "," + classRef(AbstractPlace.class) + "> element2place)", null,
+			"Returns the place for this element, updating and reusing element2place as required.\nAll parent elements have entries in element2place.\nNo child elements have entries in element2place.\nThe global place is accessible as the null element.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Ctl ctl = cgModelSpec.ctl;
+					return ctl != null ? ctl.generate(cgModelSpec, genModel) : null;
+				}
+			};
+	}
 
-	protected static MethodSpec getReferredValuedElement = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getReferredValuedElement()", null,
-		"Return the value to which this valuedElement delegates to obtain its value.\nReturns this if no delegation occurs.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Ref enumValue = cgModelSpec.ref;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART:
-						return classRef(CGValuedElement.class) + " first2 = first;\n" +
-						"		if (first2 != null) {\n" +
-						"			if (first2.isInvalid()) {\n" +
-						"				return first2;\n" +
-						"			}\n" +
-						"			" + classRef(CGValuedElement.class) + " last2 = last;\n" +
-						"			if (last2 != null) {\n" +
-						"				if (last2.isInvalid()) {\n" +
-						"					return last2;\n" +
-						"				}\n" +
-						"			}\n" +
-						"			else {\n" +
-						"				return first2;\n" +
-						"			}\n" +
-						"		}\n" +
-						"		return this;";
-						case DELEG: 	return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + " : this;";
-						case PARTS: 
-						return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
-						"			if (cgPart.isInvalid()) {\n" +
-						"				return cgPart;\n" +
-						"			}\n" +
-						"		}\n" +
-						"		return this;";
-						case THIS: 		return "return this;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec getValue = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getValue()", null,
-		"Return the value of this element.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Val enumValue = cgModelSpec.val;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return getReferredValuedElement();";
-					case DELEG: return null;
-					case REF: return "return getReferredValuedElement();";
-					case ROOT:
-					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-					"		if (referredValue == this) {\n" +
-					"			return this;\n" +
-					"		}\n" +
-					"		else {\n" +
-					"			return referredValue.getValue();\n" +
-					"		}";
-					case THIS: return "return this;";
-					case TYPEX: return "return executorType.getValue();";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec getValueName = new MyMethodSpec(CGValuedElement.class, "@Nullable String getValueName()", null,
-		"Return the declared name value of this element. The text is valid for use in the target language and\nunique within the context in which this element is declared.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Val enumValue = cgModelSpec.val;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return (last == null) ? first.getValueName() : super.getValueName();";
-					case DELEG: return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getValueName() : null;";
-					case REF: return null;
-					case ROOT:
-					return "if (valueName != null) {\n" +
-					"			return valueName;\n" +
-					"		}\n" +
-					"		" + classRef(CGValuedElement.class) + " value = getValue(); // FIXME getReferredValuedElement();\n" +
-					"		if (value != this) {\n" +
-					"			return value.getValueName();\n" +
-					"		}\n" +
-					"		return null;";
-					case THIS: return null;
-					case TYPEX: return null;
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-
-	protected static MethodSpec isBoxed = new MyMethodSpec(CGValuedElement.class, "boolean isBoxed()", null,
-		"Return true if this value is a boxed value.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Box enumValue = cgModelSpec.box;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case BIBOX: 	return "return true;";
-					case DELEG: 	return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isBoxed();";
-					case FALSE: 	return "return false;";
-					case IF: 		return "return thenExpression.isBoxed() || elseExpression.isBoxed();";
-					case PARAM: 	return "return (init != null) ? init.isBoxed() : operation != null ? operation.isBoxed() : true;";
-					case RANGE: 	return "return isRange() || first.isBoxed();";
-					case ROOT: 		return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-					"//		CGValuedElement value = getValue();\n" +
-					"		assert referredValue != this : \"isBoxed must be overridden for a \" + getClass().getSimpleName() + \" since referredValue returns this\";\n" +
-					"		return referredValue.isBoxed();";
-					case TRUE: 		return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-		
-	protected static MethodSpec isCaught = new MyMethodSpec(CGValuedElement.class, "boolean isCaught()", null,
-		"Returns true if any exception associated with this value has been caught and consequently the value may be an InvalidValueException.\nReturns true if any exception has been thrown.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Ct enumValue = cgModelSpec.ct;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case FALSE: 	return "return false;";
-					case ROOT: 		return "return caught;";
-					case TRUE: 		return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec isCommonable = new MyMethodSpec(CGValuedElement.class, "boolean isCommonable()", null,
-		"Return true if this value can be shared as part of a Common Subexpression.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Com enumValue = cgModelSpec.com;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case DELEG: return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isCommonable();";
-					case FALSE: return "return false;";
-					case MAY: return "return true;";
-					case MUST: return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-
-	protected static MethodSpec isConstant = new MyMethodSpec(CGValuedElement.class, "boolean isConstant()", null,
-		"Return true if this value is a local constant (dependent of the user type system).")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Con enumValue = cgModelSpec.con;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return first.isConstant() && ((last == null) || last.isConstant());";
-					case DELEG: return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isConstant();";
-					case EQUAL: return "return source.isConstant() && argument.isConstant();";
-					case FALSE: 	return "return false;";
-					case PARTS:
-					return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
-					"			if (!cgPart.isConstant()) {\n" +
-					"				return false;\n" +
-					"			}\n" +
-					"		}\n" +
-					"		return true;";
-					case ROOT:
-					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-					"		return (referredValue != this) && referredValue.isConstant();";
-					case TORF: return "return isFalse() || isTrue();";
-					case TRUE: 		return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-		
-/*	protected static MethodSpec isControlledChild = new MyMethodSpec(CGElement.class, "boolean isControlledChild(@NonNull " + classRef(CGElement.class) + " cgElement)", null,
-		"Returns true if the cgElement has a control dependency on this element.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Ctl enumValue = cgModelSpec.ctl;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case FALSE: 	return "return false;";
-					case IF: 		return "return (cgElement == thenExpression) || (cgElement == elseExpression);";
-					case LET: 		return "return cgElement == in;";
-					case LOOP: 		return "return cgElement == body;";
-					case TRUE: 		return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		}; */
-		
-	protected static MethodSpec isContext = new MyMethodSpec(CGElement.class, "boolean isContext()", null,
-		"Returns true if this node may have its own symbol name context.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Ctx enumValue = cgModelSpec.ctx;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case FALSE: 	return "return false;";
-					case TRUE: 		return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-		
 	/**
-	 * The algorithm options for isFalse()/isTrue()
+	 * The algorithm options for isContext()
 	 */
-	public interface Log {
-		@NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
-		@NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
-	}	
+	public static interface Ctx {
+		@Nullable String generateIsContext(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
 
-	public static final @NonNull Log LOG_BOOL = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return booleanValue == false;";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return booleanValue == true;";
-		}
-	};
-
-	public static final @NonNull Log LOG_DELEG = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isConstant() && !" + cgModelSpec.delegate + ".isTrue();";	
-			// FIXME Why not return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isFalse();";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isTrue();";
-		}
-	};
-
-	public static final @NonNull Log LOG_EQUAL = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (source != null) && (argument != null) && (source.isEquivalentTo(argument) == Boolean.valueOf(notEquals));";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (source != null) && (argument != null) && (source.isEquivalentTo(argument) == Boolean.valueOf(!notEquals));";
-		}
-	};
-
-	public static final @NonNull Log LOG_FALSE = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public static final @NonNull Ctx FALSE = new Ctx() { @Override public @NonNull String generateIsContext(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return "return false;";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return false;";
-		}
-	};
-
-	public static final @NonNull Log LOG_ISINV = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (source != null) && source.isNonInvalid();";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (source != null) && source.isInvalid();";
-		}
-	};
-
-	public static final @NonNull Log LOG_ISUND = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (source != null) && source.isNonInvalid() && source.isNonNull();";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return (source != null) && (source.isInvalid() || source.isNull());";
-		}
-	};
-
-	public static final @NonNull Log LOG_ROOT = new Log() {
-		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-			"		return (referredValue != this) && referredValue.isFalse();";
-		}
-		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-			"		return (referredValue != this) && referredValue.isTrue();";
-		}
-	};
-			
-	protected static MethodSpec LOG_isFalse = new MyMethodSpec(CGValuedElement.class, "boolean isFalse()", null,
-			"Return true if this value is false.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Log log = cgModelSpec.log;
-			return log != null ? log.generateIsFalse(cgModelSpec, genModel) : null;
-		}
-	};
+		}};
+		public static final @NonNull Ctx TRUE = new Ctx() { @Override public @NonNull String generateIsContext(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return true;";
+		}};
 		
-	protected static MethodSpec LOG_isTrue = new MyMethodSpec(CGValuedElement.class, "boolean isTrue()", null,
-			"Return true if this value is true.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Log log = cgModelSpec.log;
-			return log != null ? log.generateIsTrue(cgModelSpec, genModel) : null;
-		}
-	};
-			
-	protected static MethodSpec isGlobal = new MyMethodSpec(CGValuedElement.class, "boolean isGlobal()", null,
-		"Return true if this value is a global constant (independent of the user type system).")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Glo enumValue = cgModelSpec.glo;
-				if (enumValue == null) {
-					return null;
+		public static MethodSpec isContext = new MyMethodSpec(CGElement.class, "boolean isContext()", null,
+				"Returns true if this node may have its own symbol name context.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Ctx ctx = cgModelSpec.ctx;
+					return ctx != null ? ctx.generateIsContext(cgModelSpec, genModel) : null;
 				}
-				switch (enumValue) {
-					case CPART: return "return first.isGlobal() && ((last == null) || last.isGlobal());";
-					case DELEG: return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isGlobal();";
-					case FALSE: return "return false;";
-					case PARTS:
-					return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
-					"			if (!cgPart.isGlobal()) {\n" +
-					"				return false;\n" +
-					"			}\n" +
-					"		}\n" +
-					"		return true;";
-					case ROOT: 
-					return "for (" + classRef(CGValuedElement.class) + " cgElement : getDependsOn()) {\n" +
-					"			if (!cgElement.isGlobal()) {\n" +
-					"				return false;\n" +
-					"			}\n" +
-					"		}\n" +
-					"		" + classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-					"		return (referredValue != this) && referredValue.isGlobal();";
-					case TRUE: return "return true;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
+			};
+	}
+
+	/**
+	 * The algorithm options for getConstantValue()
+	 */
+	public static interface Cvl {
+		@Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Cvl BOOL = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return booleanValue == true;";
+		}};
+		public static final @NonNull Cvl EL_ID = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(DomainUtil.class) + ".nonNullState(elementId);";
+		}};
+		public static final @NonNull Cvl INVLD = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(ValuesUtil.class) + ".INVALID_VALUE;";
+		}};
+		public static final @NonNull Cvl NULL = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(ValuesUtil.class) + ".NULL_VALUE;";
+		}};
+		public static final @NonNull Cvl NUMBR = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(DomainUtil.class) + ".nonNullState(numericValue);";
+		}};
+		public static final @NonNull Cvl ROOT = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return null;
+		}};
+		public static final @NonNull Cvl STRNG = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(DomainUtil.class) + ".nonNullState(stringValue);";
+		}};
+		public static final @NonNull Cvl TEXT = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(DomainUtil.class) + ".nonNullState(textValue);";
+		}};
+		public static final @NonNull Cvl UNLMT = new Cvl() { @Override public @Nullable String generateGetConstantValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return " + classRef(ValuesUtil.class) + ".UNLIMITED_VALUE;";
+		}};
+		
+		public static MethodSpec getConstantValue = new MyMethodSpec(CGConstant.class, "@NonNull Object getConstantValue()", null,
+				"Return the constant (boxed) value of this element.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Cvl cvl = cgModelSpec.cvl;
+					return cvl != null ? cvl.generateGetConstantValue(cgModelSpec, genModel) : null;
 				}
-			}
-		};
-	
-	protected static MethodSpec isInlined = new MyMethodSpec(CGValuedElement.class, "boolean isInlined()", null,
-		"Return true if this value is inlined and so has no local or global declaration.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Inl enumValue = cgModelSpec.inl;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return (last == null) && first.isInlined();";
-					case FALSE: return "return false;";
-					case ISCON: return "return isConstant();";
-					case ROOT: 
-					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-					"		return (referredValue != this) && referredValue.isInlined();";
-					case TRUE: return "return true;";
-					case T_ID: return "return (elementId != null) && " + classRef(CGUtils.class) + ".isInlinedId(elementId);";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec isInvalid = new MyMethodSpec(CGValuedElement.class, "boolean isInvalid()", null,
-		"Return true if this value is false.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Inv enumValue = cgModelSpec.inv;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return first.isInvalid() || ((last != null) && last.isInvalid());";
-					case EQUAL: return "return source.isInvalid() || argument.isInvalid();";
-					case FALSE: return "return false;";
-					case IF: return "return condition.isInvalid() || (condition.isTrue() ? thenExpression.isInvalid() : condition.isFalse() ? elseExpression.isInvalid() : thenExpression.isInvalid() && elseExpression.isInvalid());";
-					case PARTS:
-					return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
-					"			if (cgPart.isInvalid()) {\n" +
-					"				return true;\n" +
-					"			}\n" +
-					"		}\n" +
-					"		return false;";
-					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-						"		return (referredValue != this) && referredValue.isInvalid();";
-					case TRUE: return "return true;";
-					case VAL: return "return !nonInvalid && super.isInvalid();";
-					case VAR: return "return !nonInvalid && super.isInvalid();";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec isNonInvalid = new MyMethodSpec(CGValuedElement.class, "boolean isNonInvalid()", null,
-		"Return true if this value is false.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Inv enumValue = cgModelSpec.inv;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return first.isNonInvalid() && ((last == null) || last.isNonInvalid());";
-					case EQUAL: return "return source.isNonInvalid() && argument.isNonInvalid();";
-					case FALSE: return "return true;";
-					case IF: return "return condition.isTrue() ? thenExpression.isNonInvalid() : condition.isFalse() ? elseExpression.isNonInvalid() : thenExpression.isNonInvalid() && elseExpression.isNonInvalid();";
-					case PARTS:
-					return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
-					"			if (!cgPart.isNonInvalid()) {\n" +
-					"				return false;\n" +
-					"			}\n" +
-					"		}\n" +
-					"		return true;";
-					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-						"		return (referredValue != this) && referredValue.isNonInvalid();";
-					case TRUE: return "return false;";
-					case VAL: return "return nonInvalid;";
-					case VAR: return "return nonInvalid || super.isNonInvalid();";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec isNonNull = new MyMethodSpec(CGValuedElement.class, "boolean isNonNull()", null,
-		"Return true if this value is not null.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Nul enumValue = cgModelSpec.nul;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return first.isNonNull() || ((last != null) && last.isNonNull());";
-					case DELEG: return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isRequired();";
-					case ECORE: return "return isRequired();";
-					case FALSE: return "return true;";
-					case FEAT: 	return "return (" + cgModelSpec.delegate + " != null) && (" + cgModelSpec.delegate + ".isRequired()  || " + cgModelSpec.delegate + ".isMany());";
-					case IF: 	return "return condition.isTrue() ? thenExpression.isNonNull() : condition.isFalse() ? elseExpression.isNonNull() : thenExpression.isNonNull() && elseExpression.isNonNull();";
-					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-						"		return (referredValue != this) && referredValue.isNonNull();";
-					case TRUE: 	return "return false;";
-					case UNDEC: return "return true;";
-					case VAR: 	return "return nonNull || super.isNonNull();";
-					default: 	return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec isNull = new MyMethodSpec(CGValuedElement.class, "boolean isNull()", null,
-		"Return true if this value is null.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Nul enumValue = cgModelSpec.nul;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case CPART: return "return first.isNull() && (last == null);";
-					case DELEG: return "return false;";
-					case ECORE: return "return false;";
-					case FALSE: return "return false;";
-					case FEAT: 	return "return false;";
-					case IF: 	return "return condition.isTrue() ? thenExpression.isNull() : condition.isFalse() ? elseExpression.isNull() : thenExpression.isNull() && elseExpression.isNull();";
-					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-						"		return (referredValue != this) && referredValue.isNull();";
-					case TRUE: 	return "return true;";
-					case UNDEC: return "return false;";
-					case VAR: 	return "return !nonNull && super.isNull();";
-					default: 	return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-	
-	protected static MethodSpec isRange = new MyMethodSpec(CGCollectionPart.class, "boolean isRange()", null,
-		"Return true if this is a collection range.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			if (cgModelSpec.cgClass != rootClass) {
-				return null;
-			}
-			return "return last != null;";
-		}
-	};
-	
-	protected static MethodSpec isSettable = new MyMethodSpec(CGValuedElement.class, "boolean isSettable()", null,
-		"Return true if this value can be inlined as an expression term.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Set enumValue = cgModelSpec.set;
-			if (enumValue == null) {
-				return null;
-			}
-			switch (enumValue) {
-				case FALSE: return "return false;";
-				case TRUE: return "return true;";
-				default: 		return "MISSING_CASE_for_" + enumValue + ";";
-			}
-		}
-	};
+			};
+	}
 
 	/**
 	 * The algorithm options for isEqualTo()/isEquivalentTo()/isNotEqualTo()
 	 */
-	public static abstract class Eq {
-		@Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return null;
-		}
-		abstract @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+	public static interface Eq {
+		@Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		
+		public static final @NonNull Eq BOOL = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (this == thatValue) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (booleanValue) {\n" +
+				"			if (thatValue.isTrue()) {\n" +
+				"				return Boolean.TRUE;\n" +
+				"			}\n" +
+				"			else if (thatValue.isFalse()) {\n" +
+				"				return Boolean.FALSE;\n" +
+				"			}\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			if (thatValue.isTrue()) {\n" +
+				"				return Boolean.FALSE;\n" +
+				"			}\n" +
+				"			else if (thatValue.isFalse()) {\n" +
+				"				return Boolean.TRUE;\n" +
+				"			}\n" +
+				"		}\n" +
+				"		if (thatValue.isConstant()) {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return null;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq DELEG = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentTo(" + cgModelSpec.delegate + ") : null;";
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentToInternal(" + cgModelSpec.delegate + ") : null;";
+			}
+		};
+		public static final @NonNull Eq EL_ID = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (!thatValue.isNonInvalid()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		CGValuedElement value = thatValue.getNamedValue();\n" +
+				"		if (this == value) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (!value.isConstant()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		else if (value instanceof CGElementId) {\n" +
+				"			return getASTypeId() == ((CGElementId)thatValue).getASTypeId();\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq EQUIV = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				String equivalenceUtilsImport = ImportUtils.getAffixedName(EquivalenceUtils.class);
+				return "return (getClass() == thatValue.getClass()) ? "+ equivalenceUtilsImport + ".isEquivalent(this, (" + cgModelSpec.cgClass.getSimpleName() + ")thatValue) : null;";
+			}
+		};
+		public static final @NonNull Eq INVLD = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (thatValue.isInvalid()) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		else if (thatValue.isNonInvalid()) {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}\n" +
+//				"		if (thatValue.isConstant()) {\n" +
+//				"			return Boolean.FALSE;\n" +
+//				"		}\n" +
+				"		else {\n" +
+				"			return null;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq NULL = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (thatValue.isNull()) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		else if (thatValue.isNonNull()) {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}\n" +
+//				"		if (thatValue.isConstant()) {\n" +
+//				"			return Boolean.FALSE;\n" +
+//				"		}\n" +
+				"		else {\n" +
+				"			return null;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq NUMBR = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				String equivalenceUtilsImport = ImportUtils.getAffixedName(EquivalenceUtils.class);
+				return "if (!thatValue.isNonInvalid()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		CGValuedElement value = thatValue.getNamedValue();\n" +
+				"		if (this == value) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (!value.isConstant()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		else if (value instanceof CGNumber) {\n" +
+				"			return "+ equivalenceUtilsImport + ".isEquivalent(this, (CGNumber)value);\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq ROOT = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return thatValue.isEquivalentToInternal(this);";
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null; //"throw new UnsupportedOperationException(getClass().getName() + \".isEquivalentToInternal()\");";
+			}
+		};
+		public static final @NonNull Eq STRNG = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (!thatValue.isNonInvalid()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		CGValuedElement value = thatValue.getNamedValue();\n" +
+				"		if (this == value) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (!value.isConstant()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		else if (value instanceof CGString) {\n" +
+				"			return stringValue.equals(((CGString)thatValue).getStringValue());\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq TEXT = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (!thatValue.isNonInvalid()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		CGValuedElement value = thatValue.getNamedValue();\n" +
+				"		if (this == value) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (!value.isConstant()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		else if (value instanceof CGText) {\n" +
+				"			return textValue.equals(((CGText)thatValue).getTextValue());\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq TYPE = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (!thatValue.isNonInvalid()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		CGValuedElement value = thatValue.getNamedValue();\n" +
+				"		if (this == value) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (!value.isConstant()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		else if (value instanceof CGExecutorType) {\n" +
+				"			return getASTypeId() == ((CGExecutorType)thatValue).getASTypeId();\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq UNLMT = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (!thatValue.isNonInvalid()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		CGValuedElement value = thatValue.getNamedValue();\n" +
+				"		if (this == value) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		if (!value.isConstant()) {\n" +
+				"			return null;\n" +
+				"		}\n" +
+				"		else if (value instanceof CGUnlimited) {\n" +
+				"			return Boolean.TRUE;\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return Boolean.FALSE;\n" +
+				"		}";
+			}
+		};
+		public static final @NonNull Eq UNSUP = new Eq() {
+			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "throw new UnsupportedOperationException(getClass().getName() + \".isEquivalentToInternal()\");";
+			}
+		};
+		
+		public static MethodSpec isEquivalentTo = new MyMethodSpec(CGValuedElement.class, "@Nullable Boolean isEquivalentTo(@NonNull " + classRef(CGValuedElement.class) + " thatValue)", null,
+			"Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				Eq eq = cgModelSpec.eq;
+				return eq != null ? eq.generateIsEquivalentTo(cgModelSpec, genModel) : null;
+			}
+		};
+		
+		public static MethodSpec isEquivalentToInternal = new MyMethodSpec(CGValuedElement.class, "@Nullable Boolean isEquivalentToInternal(@NonNull " + classRef(CGValuedElement.class) + " thatValue)", null,
+			"Provided that thatValue does not delegate its equivalence comptatuion, return true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				Eq eq = cgModelSpec.eq;
+				return eq != null ? eq.generateIsEquivalentToInternal(cgModelSpec, genModel) : null;
+			}
+		};
 	}
-	
-	public static final @NonNull Eq EQ_BOOL = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (this == thatValue) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (booleanValue) {\n" +
-			"			if (thatValue.isTrue()) {\n" +
-			"				return Boolean.TRUE;\n" +
+
+	/**
+	 * The algorithm options for isGlobal()
+	 */
+	public static interface Glo {
+		@Nullable String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Glo CPART = new Glo() { @Override public @NonNull String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return first.isGlobal() && ((last == null) || last.isGlobal());";
+		}};
+		public static final @NonNull Glo DELEG = new Glo() { @Override public @NonNull String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isGlobal();";
+		}};
+		public static final @NonNull Glo FALSE = new Glo() { @Override public @NonNull String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}};
+		public static final @NonNull Glo PARTS = new Glo() { @Override public @NonNull String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
+			"			if (!cgPart.isGlobal()) {\n" +
+			"				return false;\n" +
 			"			}\n" +
-			"			else if (thatValue.isFalse()) {\n" +
-			"				return Boolean.FALSE;\n" +
+			"		}\n" +
+			"		return true;";
+		}};
+		public static final @NonNull Glo ROOT = new Glo() { @Override public @NonNull String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "for (" + classRef(CGValuedElement.class) + " cgElement : getDependsOn()) {\n" +
+			"			if (!cgElement.isGlobal()) {\n" +
+			"				return false;\n" +
 			"			}\n" +
 			"		}\n" +
-			"		else {\n" +
-			"			if (thatValue.isTrue()) {\n" +
-			"				return Boolean.FALSE;\n" +
-			"			}\n" +
-			"			else if (thatValue.isFalse()) {\n" +
-			"				return Boolean.TRUE;\n" +
-			"			}\n" +
-			"		}\n" +
-			"		if (thatValue.isConstant()) {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return null;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_DELEG = new Eq() {
-		@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentTo(" + cgModelSpec.delegate + ") : null;";
-		}
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentToInternal(" + cgModelSpec.delegate + ") : null;";
-		}
-	};
-	public static final @NonNull Eq EQ_EL_ID = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (!thatValue.isNonInvalid()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		CGValuedElement value = thatValue.getValue();\n" +
-			"		if (this == value) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (!value.isConstant()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		else if (value instanceof CGElementId) {\n" +
-			"			return getASTypeId() == ((CGElementId)thatValue).getASTypeId();\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_EQUIV = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			String equivalenceUtilsImport = ImportUtils.getAffixedName(EquivalenceUtils.class);
-			return "return (getClass() == thatValue.getClass()) ? "+ equivalenceUtilsImport + ".isEquivalent(this, (" + cgModelSpec.cgClass.getSimpleName() + ")thatValue) : null;";
-		}
-	};
-	public static final @NonNull Eq EQ_INVLD = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (thatValue.isInvalid()) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		else if (thatValue.isNonInvalid()) {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}\n" +
-//			"		if (thatValue.isConstant()) {\n" +
-//			"			return Boolean.FALSE;\n" +
-//			"		}\n" +
-			"		else {\n" +
-			"			return null;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_NULL = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (thatValue.isNull()) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		else if (thatValue.isNonNull()) {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}\n" +
-//			"		if (thatValue.isConstant()) {\n" +
-//			"			return Boolean.FALSE;\n" +
-//			"		}\n" +
-			"		else {\n" +
-			"			return null;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_NUMBR = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			String equivalenceUtilsImport = ImportUtils.getAffixedName(EquivalenceUtils.class);
-			return "if (!thatValue.isNonInvalid()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		CGValuedElement value = thatValue.getValue();\n" +
-			"		if (this == value) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (!value.isConstant()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		else if (value instanceof CGNumber) {\n" +
-			"			return "+ equivalenceUtilsImport + ".isEquivalent(this, (CGNumber)value);\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_ROOT = new Eq() {
-		@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return thatValue.isEquivalentToInternal(this);";
-		}
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return null; //"throw new UnsupportedOperationException(getClass().getName() + \".isEquivalentToInternal()\");";
-		}
-	};
-	public static final @NonNull Eq EQ_STRNG = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (!thatValue.isNonInvalid()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		CGValuedElement value = thatValue.getValue();\n" +
-			"		if (this == value) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (!value.isConstant()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		else if (value instanceof CGString) {\n" +
-			"			return stringValue.equals(((CGString)thatValue).getStringValue());\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_TEXT = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (!thatValue.isNonInvalid()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		CGValuedElement value = thatValue.getValue();\n" +
-			"		if (this == value) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (!value.isConstant()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		else if (value instanceof CGText) {\n" +
-			"			return textValue.equals(((CGText)thatValue).getTextValue());\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_TYPE = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (!thatValue.isNonInvalid()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		CGValuedElement value = thatValue.getValue();\n" +
-			"		if (this == value) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (!value.isConstant()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		else if (value instanceof CGExecutorType) {\n" +
-			"			return getASTypeId() == ((CGExecutorType)thatValue).getASTypeId();\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_UNLMT = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "if (!thatValue.isNonInvalid()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		CGValuedElement value = thatValue.getValue();\n" +
-			"		if (this == value) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		if (!value.isConstant()) {\n" +
-			"			return null;\n" +
-			"		}\n" +
-			"		else if (value instanceof CGUnlimited) {\n" +
-			"			return Boolean.TRUE;\n" +
-			"		}\n" +
-			"		else {\n" +
-			"			return Boolean.FALSE;\n" +
-			"		}";
-		}
-	};
-	public static final @NonNull Eq EQ_UNSUP = new Eq() {
-		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "throw new UnsupportedOperationException(getClass().getName() + \".isEquivalentToInternal()\");";
-		}
-	};
-	
-	protected static MethodSpec EQ_isEquivalentTo = new MyMethodSpec(CGValuedElement.class, "@Nullable Boolean isEquivalentTo(@NonNull " + classRef(CGValuedElement.class) + " thatValue)", null,
-		"Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Eq eq = cgModelSpec.eq;
-			return eq != null ? eq.generateIsEquivalentTo(cgModelSpec, genModel) : null;
-		}
-	};
-	
-	protected static MethodSpec EQ_isEquivalentToInternal = new MyMethodSpec(CGValuedElement.class, "@Nullable Boolean isEquivalentToInternal(@NonNull " + classRef(CGValuedElement.class) + " thatValue)", null,
-		"Provided that thatValue does not delegate its equivalence comptatuion, return true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Eq eq = cgModelSpec.eq;
-			return eq != null ? eq.generateIsEquivalentToInternal(cgModelSpec, genModel) : null;
-		}
-	};
-	
-	protected static MethodSpec isUnboxed = new MyMethodSpec(CGValuedElement.class, "boolean isUnboxed()", null,
-		"Return true if this value is an unboxed value.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Box enumValue = cgModelSpec.box;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case BIBOX: 	return "return true;";
-					case DELEG: 	return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isUnboxed();";
-					case FALSE: 	return "return true;";
-					case IF: 		return "return thenExpression.isUnboxed() && elseExpression.isUnboxed();";
-					case PARAM: 	return "return (init != null) ? init.isUnboxed() : operation != null ? operation.isUnboxed() : false;";
-					case RANGE: 	return "return isRange() || first.isUnboxed();";
-					case ROOT:	 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
-									"//		CGValuedElement value = getValue();\n" +
-									"		assert referredValue != this : \"isUnboxed must be overridden for a \" + getClass().getSimpleName() + \" since referredValue returns this\";\n" +
-									"		return referredValue.isUnboxed();";
-					case TRUE: 		return "return false;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
+			"		" + classRef(CGValuedElement.class) + " referredValue = getNamedValue();\n" +
+			"		return (referredValue != this) && referredValue.isGlobal();";
+		}};
+		public static final @NonNull Glo TRUE = new Glo() { @Override public @NonNull String generateIsGlobal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return true;";
+		}};
 		
-	protected static MethodSpec isUncommonable = new MyMethodSpec(CGValuedElement.class, "boolean isUncommonable()", null,
-		"Return true if this value does not have to be shared as part of a Common Subexpression.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				Com enumValue = cgModelSpec.com;
-				if (enumValue == null) {
-					return null;
-				}
-				switch (enumValue) {
-					case DELEG: return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isUncommonable();";
-					case FALSE: return "return true;";
-					case MAY: return "return true;";
-					case MUST: return "return false;";
-					default: 		return "MISSING_CASE_for_" + enumValue + ";";
-				}
-			}
-		};
-		
-		protected static MethodSpec isUndeclaredNonNull = new MyMethodSpec(CGValuedElement.class, "boolean isUndeclaredNonNull()", null,
-			"Return true if this value is not null but is not declared as such.")
+		public static MethodSpec isGlobal = new MyMethodSpec(CGValuedElement.class, "boolean isGlobal()", null,
+			"Return true if this value is a global constant (independent of the user type system).")
 			{
 				@Override
 				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-					Nul enumValue = cgModelSpec.nul;
-					if (enumValue == null) {
-						return null;
-					}
-					switch (enumValue) {
-						case CPART: return "return false;";
-						case DELEG: return "return false;";
-						case ECORE: return "return false;";
-						case FALSE: return "return false;";
-						case FEAT: 	return "return false;";
-						case IF: 	return "return false;";
-						case ROOT: 	return "return false;";
-						case TRUE:  return "return false;";
-						case UNDEC: return "return true;";
-						case VAR:   return "return false;";
-						default: 	return "MISSING_CASE_for_" + enumValue + ";";
-					}
+					Glo glo = cgModelSpec.glo;
+					return glo != null ? glo.generateIsGlobal(cgModelSpec, genModel) : null;
 				}
 			};
+	}
+
+	/**
+	 * The algorithm options for isInlined()
+	 */
+	public static interface Inl {
+		@Nullable String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Inl CPART = new Inl() { @Override public @NonNull String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (last == null) && first.isInlined();";
+		}};
+		public static final @NonNull Inl FALSE = new Inl() { @Override public @NonNull String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}};
+		public static final @NonNull Inl ISCON = new Inl() { @Override public @NonNull String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return isConstant();";
+		}};
+		public static final @NonNull Inl ROOT = new Inl() { @Override public @NonNull String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+			"		return (referredValue != this) && referredValue.isInlined();";
+		}};
+		public static final @NonNull Inl TRUE = new Inl() { @Override public @NonNull String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return true;";
+		}};
+		public static final @NonNull Inl T_ID = new Inl() { @Override public @NonNull String generateIsInlined(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (elementId != null) && " + classRef(CGUtils.class) + ".isInlinedId(elementId);";
+		}};
 		
-	protected static MethodSpec rewriteAs = new MyMethodSpec(CGElement.class, "boolean rewriteAs(@NonNull " + classRef(CGValuedElement.class) + " oldValue, @NonNull " + classRef(CGValuedElement.class) + " newValue)", null,
-		"Rewrite the reference to oldValue by newValue.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Rew enumValue = cgModelSpec.rew;
-			if (enumValue == null) {
-				return null;
-			}
-			switch (enumValue) {
-				case PART:
-					return "if (oldValue == executorPart) {\n" +
-					"			setExecutorPart((" + classRef(CGExecutorConstructorPart.class) + ")newValue);\n" +
-					"			return true;\n" +
-					"		}\n" +
-					"		return false;";
-				case PROP:
-					return "if (oldValue == executorProperty) {\n" +
-					"			setExecutorProperty((" + classRef(CGExecutorProperty.class) + ")newValue);\n" +
-					"			return true;\n" +
-					"		}\n" +
-					"		return false;";
-				case TYPE:
-					return "if (oldValue == executorType) {\n" +
-					"			setExecutorType((" + classRef(CGExecutorType.class) + ")newValue);\n" +
-					"			return true;\n" +
-					"		}\n" +
-					"		return false;";
-				case UNSUP: 	return "throw new UnsupportedOperationException(getClass().getName() + \".rewriteAs()\");";
-				case VAREX: 	return "return false;";
-				default: 		return "MISSING_CASE_for_" + enumValue + ";";
-			}
-		}
-	};
-	
-	protected static MethodSpec setCaught = new MyMethodSpec(CGValuedElement.class, "void setCaught(boolean isCaught)", "boolean caught = false",
-		"Set the caught status.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			Ct enumValue = cgModelSpec.ct;
-			if (enumValue == null) {
-				return null;
-			}
-			switch (enumValue) {
-				case FALSE: 	return "assert !isCaught;";
-				case ROOT: 		return "caught = isCaught;";
-				case TRUE:
-					return "assert isCaught;\n" +
-					"		super.setCaught(true);";
-				default: 		return "MISSING_CASE_for_" + enumValue + ";";
-			}
-		}
-	};
-	
-	protected static MethodSpec setNonInvalid = new MyMethodSpec(CGVariable.class, "void setNonInvalid()", "boolean nonInvalid = false",
-			"Set the non-invalid status.")
-		{
-			@Override
-			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				if (cgModelSpec.cgClass != rootClass) {
-					return null;
+		public static MethodSpec isInlined = new MyMethodSpec(CGValuedElement.class, "boolean isInlined()", null,
+			"Return true if this value is inlined and so has no local or global declaration.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Inl inl = cgModelSpec.inl;
+					return inl != null ? inl.generateIsInlined(cgModelSpec, genModel) : null;
 				}
-				return "nonInvalid = true;";
+			};
+	}
+
+	/**
+	 * The algorithm options for isInvalid()/isNonInvalid()/setNonInvalid()
+	 */
+	public interface Inv {
+		@Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Inv CPART = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGInvalid.class) + " invalidValue = first.getInvalidValue();\n" +
+				"		if ((invalidValue == null) && (last != null)) {\n" +
+				"			invalidValue = last.getInvalidValue();\n" +
+				"		}\n" +
+				"		return invalidValue;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return first.isNonInvalid() && ((last == null) || last.isNonInvalid());";
+			}
+		};
+
+		public static final @NonNull Inv EQUAL = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGInvalid.class) + " invalidValue = source.getInvalidValue();\n" +
+				"		if (invalidValue == null) {\n" +
+				"			invalidValue = argument.getInvalidValue();\n" +
+				"		}\n" +
+				"		return invalidValue;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return source.isNonInvalid() && argument.isNonInvalid();";
+			}
+		};
+
+		public static final @NonNull Inv FALSE = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return null;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+		};
+
+		public static final @NonNull Inv IF = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGInvalid.class) + " invalidValue = condition.getInvalidValue();\n" +
+				"		if (invalidValue == null) {\n" +
+				"			if (condition.isTrue()) {\n" +
+				"				invalidValue = thenExpression.getInvalidValue();\n" +
+				"			}\n" +
+				"			else if (condition.isFalse()) {\n" +
+				"				invalidValue = elseExpression.getInvalidValue();\n" +
+				"			}\n" +
+				"			else {\n" +
+				"				invalidValue = elseExpression.getInvalidValue();\n" +
+				"				if (invalidValue != null) {				// If both then and else invalid propagate then\n" +
+				"					invalidValue = thenExpression.getInvalidValue();\n" +
+				"				}\n" +
+				"			}\n" +
+				"		}\n" +
+				"		return invalidValue;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "if (condition.isTrue()) {\n" +
+				"			return thenExpression.isNonInvalid();\n" +
+				"		}\n" +
+				"		else if (condition.isFalse()) {\n" +
+				"			return elseExpression.isNonInvalid();\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return thenExpression.isNonInvalid() && elseExpression.isNonInvalid();\n" +
+				"		}";
+			}
+		};
+
+		public static final @NonNull Inv PARTS = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
+				"			" + classRef(CGInvalid.class) + " invalidValue = cgPart.getInvalidValue();\n" +
+				"			if (invalidValue != null) {\n" +
+				"				return invalidValue;\n" +
+				"			}\n" +
+				"		}\n" +
+				"		return null;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "for (" + cgModelSpec.delegate + " cgPart : getParts()) {\n" +
+				"			if (!cgPart.isNonInvalid()) {\n" +
+				"				return false;\n" +
+				"			}\n" +
+				"		}\n" +
+				"		return true;";
+			}
+		};
+
+		public static final @NonNull Inv ROOT = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " sourceValue = getSourceValue();\n" +
+				"		return sourceValue != this ? sourceValue.getInvalidValue() : null;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return getInvalidValue() != null;";
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+				"		return (referredValue != this) && referredValue.isNonInvalid();";
+			}
+		};
+
+		public static final @NonNull Inv TRUE = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Inv VAL = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return !nonInvalid ? super.getInvalidValue() : null;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return nonInvalid;";
+			}
+		};
+
+		public static final @NonNull Inv VAR = new Inv() {
+			@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return !nonInvalid ? super.getInvalidValue() : null;";
+			}
+			@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+			@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return nonInvalid || super.isNonInvalid();";
 			}
 		};
 		
-		protected static MethodSpec setNonInvalidValue = new MyMethodSpec(CGAccumulator.class, "void setNonInvalid(boolean nonInvalid)", "boolean nonInvalid = false",
+		public static MethodSpec getInvalidValue = new MyMethodSpec(CGValuedElement.class, "@Nullable " + classRef(CGInvalid.class) + " getInvalidValue()", null,
+				"Return a non-null invalid value if this value is invalid.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Inv inv = cgModelSpec.inv;
+					return inv != null ? inv.generateGetInvalidValue(cgModelSpec, genModel) : null;
+				}
+		};
+		
+		public static MethodSpec isInvalid = new MyMethodSpec(CGValuedElement.class, "boolean isInvalid()", null,
+				"Return true if this value is false.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Inv inv = cgModelSpec.inv;
+					return inv != null ? inv.generateIsInvalid(cgModelSpec, genModel) : null;
+				}
+		};
+		
+		public static MethodSpec isNonInvalid = new MyMethodSpec(CGValuedElement.class, "boolean isNonInvalid()", null,
+				"Return true if this value is false.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Inv inv = cgModelSpec.inv;
+					return inv != null ? inv.generateIsNonInvalid(cgModelSpec, genModel) : null;
+				}
+			};
+			
+		public static MethodSpec setNonInvalid = new MyMethodSpec(CGVariable.class, "void setNonInvalid()", "boolean nonInvalid = false",
+				"Set the non-invalid status.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					if (cgModelSpec.cgClass != rootClass) {
+						return null;
+					}
+					return "nonInvalid = true;";
+				}
+			};
+				
+		public static MethodSpec setNonInvalidValue = new MyMethodSpec(CGAccumulator.class, "void setNonInvalid(boolean nonInvalid)", "boolean nonInvalid = false",
 				"Set the non-invalid status.")
 			{
 				@Override
@@ -1185,115 +1085,686 @@ public class CGValuedElementModelSpec extends ModelSpec
 					return "this.nonInvalid = nonInvalid;";
 				}
 			};
-			
-	protected static MethodSpec setNonNull = new MyMethodSpec(CGVariable.class, "void setNonNull()", "boolean nonNull = false",
-		"Set the non-null status.")
-	{
-		@Override
-		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			if (cgModelSpec.cgClass != rootClass) {
-				return null;
-			}
-			return "nonNull = true;";
-		}
-	};
+	}	
 	
-	protected static MethodSpec setValueName = new MyMethodSpec(CGValuedElement.class, "void setValueName(@NonNull String valueName)", "String valueName = null",
-		"Set the name of the value.")
+/**
+ * The algorithm options for isFalse()/isTrue()
+ */
+public interface Log {
+	@NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+	@NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+	public static final @NonNull Log BOOL = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return booleanValue == false;";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return booleanValue == true;";
+		}
+	};
+
+	public static final @NonNull Log DELEG = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isConstant() && !" + cgModelSpec.delegate + ".isTrue();";	
+			// FIXME Why not return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isFalse();";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isTrue();";
+		}
+	};
+
+	public static final @NonNull Log EQUAL = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (source != null) && (argument != null) && (source.isEquivalentTo(argument) == Boolean.valueOf(notEquals));";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (source != null) && (argument != null) && (source.isEquivalentTo(argument) == Boolean.valueOf(!notEquals));";
+		}
+	};
+
+	public static final @NonNull Log FALSE = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}
+	};
+
+	public static final @NonNull Log ISINV = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (source != null) && source.isNonInvalid();";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (source != null) && source.isInvalid();";
+		}
+	};
+
+	public static final @NonNull Log ISUND = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (source != null) && source.isNonInvalid() && source.isNonNull();";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return (source != null) && (source.isInvalid() || source.isNull());";
+		}
+	};
+
+	public static final @NonNull Log ROOT = new Log() {
+		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+			"		return (referredValue != this) && referredValue.isFalse();";
+		}
+		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+			"		return (referredValue != this) && referredValue.isTrue();";
+		}
+	};
+			
+	public static MethodSpec isFalse = new MyMethodSpec(CGValuedElement.class, "boolean isFalse()", null,
+			"Return true if this value is false.")
 	{
 		@Override
 		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			if (cgModelSpec.cgClass != rootClass) {
-				return null;
-			}
-			return "this.valueName = valueName;";
+			Log log = cgModelSpec.log;
+			return log != null ? log.generateIsFalse(cgModelSpec, genModel) : null;
 		}
 	};
+		
+	public static MethodSpec isTrue = new MyMethodSpec(CGValuedElement.class, "boolean isTrue()", null,
+			"Return true if this value is true.")
+	{
+		@Override
+		protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			Log log = cgModelSpec.log;
+			return log != null ? log.generateIsTrue(cgModelSpec, genModel) : null;
+		}
+	};
+}	
+
+	/**
+	 * The algorithm options for isNonNull()/isNull()/isUndeclaredNonNull()/setNonNull()
+	 */
+	public interface Nul {
+		@NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Nul CPART = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return first.isNonNull() || ((last != null) && last.isNonNull());";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return first.isNull() && (last == null);";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul DELEG = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (" + cgModelSpec.delegate + " != null) && " + cgModelSpec.delegate + ".isRequired();";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul ECORE = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return isRequired();";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul FALSE = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul FEAT = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return (" + cgModelSpec.delegate + " != null) && (" + cgModelSpec.delegate + ".isRequired()  || " + cgModelSpec.delegate + ".isMany());";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul IF = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return condition.isTrue() ? thenExpression.isNonNull() : condition.isFalse() ? elseExpression.isNonNull() : thenExpression.isNonNull() && elseExpression.isNonNull();";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return condition.isTrue() ? thenExpression.isNull() : condition.isFalse() ? elseExpression.isNull() : thenExpression.isNull() && elseExpression.isNull();";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul ROOT = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+				"		return (referredValue != this) && referredValue.isNonNull();";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " referredValue = getSourceValue();\n" +
+				"		return (referredValue != this) && referredValue.isNull();";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul TRUE = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
+		public static final @NonNull Nul UNDEC = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return true;";
+			}
+		};
+
+		public static final @NonNull Nul VAR = new Nul() {
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return nonNull || super.isNonNull();";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return !nonNull && super.isNull();";
+			}
+			@Override public @NonNull String generateIsUndeclaredNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+		
+		public static MethodSpec isNonNull = new MyMethodSpec(CGValuedElement.class, "boolean isNonNull()", null,
+			"Return true if this value is not null.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Nul nul = cgModelSpec.nul;
+					return nul != null ? nul.generateIsNonNull(cgModelSpec, genModel) : null;
+				}
+		};
+		
+		public static MethodSpec isNull = new MyMethodSpec(CGValuedElement.class, "boolean isNull()", null,
+			"Return true if this value is null.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Nul nul = cgModelSpec.nul;
+					return nul != null ? nul.generateIsNull(cgModelSpec, genModel) : null;
+				}
+			};
+		
+		public static MethodSpec isUndeclaredNonNull = new MyMethodSpec(CGValuedElement.class, "boolean isUndeclaredNonNull()", null,
+			"Return true if this value is not null but is not declared as such.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Nul nul = cgModelSpec.nul;
+					return nul != null ? nul.generateIsUndeclaredNonNull(cgModelSpec, genModel) : null;
+				}
+		};
+		
+		public static MethodSpec setNonNull = new MyMethodSpec(CGVariable.class, "void setNonNull()", "boolean nonNull = false",
+			"Set the non-null status.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				if (cgModelSpec.cgClass != rootClass) {
+					return null;
+				}
+				return "nonNull = true;";
+			}
+		};
+	}	
+
+	/**
+	 * The algorithm options for rewriteAs()
+	 */
+	public static interface Rew {
+		@Nullable String generateRewriteAs(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Rew PART = new Rew() { @Override public @Nullable String generateRewriteAs(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "if (oldValue == executorPart) {\n" +
+			"			setExecutorPart((" + classRef(CGExecutorConstructorPart.class) + ")newValue);\n" +
+			"			return true;\n" +
+			"		}\n" +
+			"		return false;";
+		}};
+		public static final @NonNull Rew PROP = new Rew() { @Override public @Nullable String generateRewriteAs(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "if (oldValue == executorProperty) {\n" +
+			"			setExecutorProperty((" + classRef(CGExecutorProperty.class) + ")newValue);\n" +
+			"			return true;\n" +
+			"		}\n" +
+			"		return false;";
+		}};
+		public static final @NonNull Rew TYPE = new Rew() { @Override public @Nullable String generateRewriteAs(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "if (oldValue == executorType) {\n" +
+			"			setExecutorType((" + classRef(CGExecutorType.class) + ")newValue);\n" +
+			"			return true;\n" +
+			"		}\n" +
+			"		return false;";
+		}};
+		public static final @NonNull Rew UNSUP = new Rew() { @Override public @Nullable String generateRewriteAs(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "throw new UnsupportedOperationException(getClass().getName() + \".rewriteAs()\");";
+		}};
+		public static final @NonNull Rew VAREX = new Rew() { @Override public @Nullable String generateRewriteAs(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}};
+		
+		public static MethodSpec rewriteAs = new MyMethodSpec(CGElement.class, "boolean rewriteAs(@NonNull " + classRef(CGValuedElement.class) + " oldValue, @NonNull " + classRef(CGValuedElement.class) + " newValue)", null,
+				"Rewrite the reference to oldValue by newValue.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Rew rew = cgModelSpec.rew;
+					return rew != null ? rew.generateRewriteAs(cgModelSpec, genModel) : null;
+				}
+			};
+	}
+
+	/**
+	 * The algorithm options for isSettable()
+	 */
+	public static interface Rng {		
+		public static MethodSpec isRange = new MyMethodSpec(CGCollectionPart.class, "boolean isRange()", null,
+			"Return true if this is a collection range.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				if (cgModelSpec.cgClass != rootClass) {
+					return null;
+				}
+				return "return last != null;";
+			}
+		};
+	}
+
+	/**
+	 * The algorithm options for isSettable()
+	 */
+	public static interface Set {
+		@Nullable String generateIsSettable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Set FALSE = new Set() { @Override public @Nullable String generateIsSettable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return false;";
+		}};
+		public static final @NonNull Set TRUE = new Set() { @Override public @Nullable String generateIsSettable(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+			return "return true;";
+		}};
+		
+		public static MethodSpec isSettable = new MyMethodSpec(CGValuedElement.class, "boolean isSettable()", null,
+				"Return true if this value can be inlined as an expression term.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Set set = cgModelSpec.set;
+					return set != null ? set.generateIsSettable(cgModelSpec, genModel) : null;
+				}
+			};
+	}
+
+	/**
+	 * The algorithm options for getThisValue()
+	 */
+	public static interface Ths {
+		@Nullable String generateGetThisValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+
+		public static final @NonNull Ths CPART = new Ths() {
+			@Override public @Nullable String generateGetThisValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGInvalid.class) + " invalidValue = getInvalidValue();\n" +
+				"		if (invalidValue != null) {\n" +
+				"			return invalidValue;\n" +
+				"		}\n" +
+				"		else if (last != null) {\n" +
+				"			return this;\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			assert first != null;\n" +
+				"			return first;\n" +
+				"		}";
+/*				return classRef(CGValuedElement.class) + " first2 = first;\n" +
+				"		if (first2 != null) {\n" +
+				"			if (first2.isInvalid()) {\n" +
+				"				return first2;\n" +
+				"			}\n" +
+				"			" + classRef(CGValuedElement.class) + " last2 = last;\n" +
+				"			if (last2 != null) {\n" +
+				"				if (last2.isInvalid()) {\n" +
+				"					return last2;\n" +
+				"				}\n" +
+				"			}\n" +
+				"			else {\n" +
+				"				return first2;\n" +
+				"			}\n" +
+				"		}\n" +
+				"		return this;"; */
+			}
+		};
+		public static final @NonNull Ths PARTS = new Ths() {
+			@Override public @Nullable String generateGetThisValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGInvalid.class) + " invalidValue = getInvalidValue();\n" +
+				"		if (invalidValue != null) {\n" +
+				"			return invalidValue;\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return this;\n" +
+				"		}";
+			}
+		};
+		
+		public static final @NonNull Ths ROOT = new Ths() {
+			@Override public @Nullable String generateGetThisValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+/*				return classRef(CGInvalid.class) + " invalidValue = getInvalidValue();\n" +
+				"		if (invalidValue != null) {\n" +
+				"			return invalidValue;\n" +
+				"		}\n" +
+				"		else {\n" +
+				"			return this;\n" +
+				"		}"; */
+				return "return this;";
+			}
+		};
+		
+		public static MethodSpec getThisValue = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getThisValue()", null,
+			"Return a simpler CGValuedElement that is fully equivalent to this element.\n"+
+			"May return CGInvalid if this element is invalid.\n"+
+			"May return the internal value of a CollectionPart or TuplePart.\n"+
+			"May follow a delegation when the delegation has no semantic significance.\n"+
+			"Returns this if no simplification occurs.")
+			{
+				@Override
+				protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+					Ths ths = cgModelSpec.ths;
+					return ths != null ? ths.generateGetThisValue(cgModelSpec, genModel) : null;
+				}
+			};
+	}
+
+	/**
+	 * The algorithm options for getNamedValue()/getTypedValue()/getValueName()
+	 */
+	public interface Val {
+		@Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		@Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel);
+		
+		public static final @NonNull Val DELEG = new Val() {
+			@Override public @Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getNamedValue() : this;";
+			}
+			@Override public @Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getSourceValue() : this;";
+			};
+			@Override public @Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getTypedValue() : this;";
+			}
+			@Override public @Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getValueName() : null;";
+			}
+		};
+		
+		public static final @NonNull Val DELNM = new Val() {
+			@Override public @Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getNamedValue() : this;";
+			}
+			@Override public @Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getSourceValue() : this;";
+			};
+			@Override public @Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getValueName() : null;";
+			}
+		};
+		
+		public static final @NonNull Val DELTY = new Val() {
+			@Override public @Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getSourceValue() : this;";
+			};
+			@Override public @Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return source != null ? source.getTypedValue() : this;";
+			}
+			@Override public @Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+		};
+		
+		public static final @NonNull Val DELVL = new Val() {
+			@Override public @Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getSourceValue() : this;";
+			};
+			@Override public @Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+		};
+		
+		public static final @NonNull Val ROOT = new Val() {
+			@Override public @Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " value = getThisValue();\n" +
+				"		return value != this ? value.getNamedValue() : value;";
+			}
+			@Override public @Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " value = getThisValue();\n" +
+				"		return value != this ? value.getSourceValue() : value;";
+			};
+			@Override public @Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " value = getThisValue();\n" +
+				"		return value != this ? value.getTypedValue() : value;";
+			}
+			@Override public @Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return classRef(CGValuedElement.class) + " value = getThisValue();\n" +
+				"		return value != this ? value.getValueName() : valueName;";
+			}
+		};
+		
+		public static final @NonNull Val THIS = new Val() {
+			@Override public @Nullable String generateGetNamedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateGetSourceValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			};
+			@Override public @Nullable String generateGetTypedValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return this;";
+			}
+			@Override public @Nullable String generateGetValueName(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return null;
+			}
+		};
+		
+	public static MethodSpec getNamedValue = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getNamedValue()", null,
+		"Return the CGValuedElement that provides the name of a declaration from which the value of this CGValuedElement may be obtained.\n"+
+		"Fundamental elements such as constants and operation calls provide the named value themselves.\n"+
+		"More complex elements such as VariableExp and ThrowExp may delegate.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				Val val = cgModelSpec.val;
+				return val != null ? val.generateGetNamedValue(cgModelSpec, genModel) : null;
+			}
+		};
+		
+	public static MethodSpec getSourceValue = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getSourceValue()", null,
+		"Return the CGValuedElement which is the source of the information value of this element.\n"+
+		"Note that the source value may be differently guarded, caught/thrown and boxed/unboxed to this value.\n"+
+		"Returns this if no delegation occurs.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				Val val = cgModelSpec.val;
+				return val != null ? val.generateGetSourceValue(cgModelSpec, genModel) : null;
+			}
+		};
+		
+	public static MethodSpec getTypedValue = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getTypedValue()", null,
+		"Return the CGValuedElement that provides the narrowest type declaration from which the type of this CGValuedElement may be obtained.\n"+
+		"Fundamental elements such as constants and operations call provide their own narrow type.\n"+
+		"More complex elements such as CatchExp have a wide type that includes invalid and so delegate to identify the narrow type.\n"+
+		"More complex elements such as GuardExp/ThrowExp propagate an unchanged value with a narrower type than their source.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				Val val = cgModelSpec.val;
+				return val != null ? val.generateGetTypedValue(cgModelSpec, genModel) : null;
+			}
+		};
+		
+	public static MethodSpec getValueName = new MyMethodSpec(CGValuedElement.class, "@Nullable String getValueName()", null,
+		"Return the declared name value of this element. The text is valid for use in the target language and\n"+
+		"unique within the context in which this element is declared.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				Val val = cgModelSpec.val;
+				return val != null ? val.generateGetValueName(cgModelSpec, genModel) : null;
+			}
+		};
+		
+	public static MethodSpec setValueName = new MyMethodSpec(CGValuedElement.class, "void setValueName(@NonNull String valueName)", "String valueName = null",
+			"Set the name of the value.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				if (cgModelSpec.cgClass != rootClass) {
+					return null;
+				}
+				return "this.valueName = valueName;";
+			}
+		};
+	}
 	
 	// FIXME why is CGUnboxExpr CON.FALSE
 	// FIXME Why isNonNull FEAT isMany
 	public static void register() {
-		new CGValuedElementModelSpec(CGElement.class, null,							null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctx.TRUE , CTL_GLOBL, null     , Rew.UNSUP, null    );
+		new CGValuedElementModelSpec(CGElement.class, null,							null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctx.TRUE , Ctl.GLOBL, null     , Rew.UNSUP, null    );
 
-		new CGValuedElementModelSpec(CGValuedElement.class, null,					Box.ROOT , Ref.THIS , LOG_ROOT , Nul.ROOT , Inv.ROOT , Glo.ROOT , Inl.ROOT , Set.FALSE, Ct.ROOT , Con.ROOT , Val.ROOT , null     , Ctx.FALSE, CTL_CNTRL, Com.MAY  , Rew.VAREX, EQ_ROOT );
+		new CGValuedElementModelSpec(CGValuedElement.class, null,					Box.ROOT , Ths.ROOT , Log.ROOT , Nul.ROOT , Inv.ROOT , Glo.ROOT , Inl.ROOT , Set.FALSE, Ct.ROOT , Con.ROOT , Val.ROOT , null     , Ctx.FALSE, Ctl.CNTRL, Com.MAY  , Rew.VAREX, Eq.ROOT );
 
-		new CGValuedElementModelSpec(CGConstant.class, null,						Box.BIBOX, Ref.THIS , LOG_FALSE, Nul.FALSE, Inv.FALSE, Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , Val.THIS , Cvl.ROOT , null     , null     , Com.FALSE, null     , null    );
-		new CGValuedElementModelSpec(CGBoolean.class, "booleanValue",				null     , null     , LOG_BOOL , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.BOOL , null     , null     , null     , null     , EQ_BOOL );
-		new CGValuedElementModelSpec(CGInvalid.class, null,							null     , null     , null     , null     , Inv.TRUE , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.INVLD, null     , null     , null     , null     , EQ_INVLD);
-		new CGValuedElementModelSpec(CGNull.class, null,							null     , null     , null     , Nul.TRUE , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.NULL , null     , null     , null     , null     , EQ_NULL );
-		new CGValuedElementModelSpec(CGNumber.class, null,							Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.NUMBR, null     , null     , Com.MUST , null     , EQ_NUMBR);
-		new CGValuedElementModelSpec(CGString.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.STRNG, null     , null     , Com.MUST , null     , EQ_STRNG);
-		new CGValuedElementModelSpec(CGText.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , Cvl.TEXT , null     , null     , Com.MUST , null     , EQ_TEXT );
-		new CGValuedElementModelSpec(CGUnlimited.class, null,						Box.TRUE , null     , null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.UNLMT, null     , null     , null     , null     , EQ_UNLMT);
-		new CGValuedElementModelSpec(CGElementId.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.EL_ID, null     , null     , Com.MUST , null     , EQ_EL_ID);
+		new CGValuedElementModelSpec(CGConstant.class, null,						Box.BIBOX, null     , Log.FALSE, Nul.FALSE, Inv.FALSE, Glo.TRUE , Inl.FALSE, null     , null    , Con.TRUE , null     , Cvl.ROOT , null     , null     , Com.FALSE, null     , null    );
+		new CGValuedElementModelSpec(CGBoolean.class, "booleanValue",				null     , null     , Log.BOOL , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.BOOL , null     , null     , null     , null     , Eq.BOOL );
+		new CGValuedElementModelSpec(CGInvalid.class, null,							null     , null     , null     , null     , Inv.TRUE , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.INVLD, null     , null     , null     , null     , Eq.INVLD);
+		new CGValuedElementModelSpec(CGNull.class, null,							null     , null     , null     , Nul.TRUE , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.NULL , null     , null     , null     , null     , Eq.NULL );
+		new CGValuedElementModelSpec(CGNumber.class, null,							Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.NUMBR, null     , null     , Com.MUST , null     , Eq.NUMBR);
+		new CGValuedElementModelSpec(CGString.class, null,							null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.STRNG, null     , null     , Com.MUST , null     , Eq.STRNG);
+		new CGValuedElementModelSpec(CGText.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , Cvl.TEXT , null     , null     , Com.MUST , null     , Eq.TEXT );
+		new CGValuedElementModelSpec(CGUnlimited.class, null,						Box.TRUE , null     , null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , Cvl.UNLMT, null     , null     , null     , null     , Eq.UNLMT);
+		new CGValuedElementModelSpec(CGElementId.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , Cvl.EL_ID, null     , null     , Com.MUST , null     , Eq.EL_ID);
 		new CGValuedElementModelSpec(CGTypeId.class, null,							null     , null     , null     , null     , null     , null     , Inl.T_ID , null     , null    , null     , null     , null     , null     , null     , Com.MUST , null     , null    );
 
-		new CGValuedElementModelSpec(CGCallExp.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     , null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGCastExp.class, "source",	                    Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_CNTRL, null     , null     , null    );
-		new CGValuedElementModelSpec(CGBoxExp.class, "source",						Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGCatchExp.class, "source",					Box.DELEG, Ref.DELEG, null     , null     , null     , null     , null     , Set.TRUE , Ct.TRUE , null     , null     , null     , null     , CTL_CATCH, null     , null     , null    );
-		new CGValuedElementModelSpec(CGGuardExp.class, "source",					Box.DELEG, Ref.DELEG, null     , Nul.FALSE, null,      null     , null     , null     , null    , null     , Val.REF  , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGIsInvalidExp.class, "source",				Box.BIBOX, Ref.DELEG, LOG_ISINV, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , null     , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGIsUndefinedExp.class, "source",				Box.BIBOX, Ref.DELEG, LOG_ISUND, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , null     , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGIsEqualExp.class, "source",					Box.BIBOX, Ref.DELEG, LOG_EQUAL, Nul.FALSE, Inv.EQUAL, null     , Inl.FALSE, null     , Ct.ROOT , Con.EQUAL, Val.THIS , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGThrowExp.class, "source",					Box.DELEG, Ref.DELEG, null     , null     , null     , null     , null     , null     , Ct.FALSE, null     , Val.REF  , null     , null     , CTL_THROW, null     , null     , null    );
-		new CGValuedElementModelSpec(CGUnboxExp.class, "source",					Box.FALSE, Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGCallExp.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGCastExp.class, "source",	                    Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.DELVL, null     , null     , Ctl.CNTRL, null     , null     , null    );
+		new CGValuedElementModelSpec(CGBoxExp.class, "source",						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.DELVL, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGCatchExp.class, "source",					Box.DELEG, null     , null     , null     , null     , null     , null     , Set.TRUE , Ct.TRUE , null     , Val.DELTY, null     , null     , Ctl.CATCH, null     , null     , null    );
+		new CGValuedElementModelSpec(CGGuardExp.class, "source",					Box.DELEG, null     , null     , Nul.FALSE, null,      null     , null     , null     , null    , null     , Val.DELNM, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGIsInvalidExp.class, "source",				Box.BIBOX, null     , Log.ISINV, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , Val.DELVL, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGIsUndefinedExp.class, "source",				Box.BIBOX, null     , Log.ISUND, Nul.FALSE, Inv.FALSE, null     , Inl.ISCON, null     , Ct.FALSE, Con.TORF , Val.DELVL, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGIsEqualExp.class, "source",					Box.BIBOX, null     , Log.EQUAL, Nul.FALSE, Inv.EQUAL, null     , Inl.FALSE, null     , Ct.ROOT , Con.EQUAL, Val.DELVL, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGThrowExp.class, "source",					Box.DELEG, null     , null     , null     , null     , null     , null     , null     , Ct.FALSE, null     , Val.DELNM, null     , null     , Ctl.THROW, null     , null     , null    );
+		new CGValuedElementModelSpec(CGUnboxExp.class, "source",					Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , Con.FALSE, Val.DELVL, null     , null     , null     , null     , null     , null    );
 
-		new CGValuedElementModelSpec(CGIterationCallExp.class, "referredIteration",	null     , null     , null     , Nul.DELEG, null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_INNER, null     , null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGBuiltInIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , Set.TRUE , Ct.FALSE, null     , Val.THIS , null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGIterationCallExp.class, "referredIteration",	null     , null     , null     , Nul.DELEG, null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.INNER, null     , null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGBuiltInIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , Set.TRUE , Ct.FALSE, null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryIterateCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-		new CGValuedElementModelSpec(CGOperationCallExp.class, "referredOperation",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
+		new CGValuedElementModelSpec(CGOperationCallExp.class, "referredOperation",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGEcoreOperationCallExp.class, null,			Box.FALSE, null     , null     , Nul.UNDEC, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGExecutorOperationCallExp.class, null,		Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryOperationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		
-		new CGValuedElementModelSpec(CGPropertyCallExp.class, "referredProperty",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
+		new CGValuedElementModelSpec(CGPropertyCallExp.class, "referredProperty",	null     , null     , null     , Nul.FEAT , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGEcorePropertyCallExp.class, null,			Box.FALSE, null     , null     , Nul.ECORE, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGExecutorPropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , Rew.PROP , null    );
 		new CGValuedElementModelSpec(CGLibraryPropertyCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGTuplePartCallExp.class, null,				Box.TRUE , null     , null     , null     , Inv.FALSE, null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-		new CGValuedElementModelSpec(CGConstructorExp.class, "CGConstructorPart",	Box.TRUE , Ref.PARTS, null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , Com.FALSE, Rew.TYPE , null    );
-		new CGValuedElementModelSpec(CGEcoreClassConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     , null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGEcoreDataTypeConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
+		new CGValuedElementModelSpec(CGConstructorExp.class, "CGConstructorPart",	Box.TRUE , Ths.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.FALSE, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , Com.FALSE, Rew.TYPE , null    );
+		new CGValuedElementModelSpec(CGEcoreClassConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , null     , null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGEcoreDataTypeConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.EQUIV);
 
-		new CGValuedElementModelSpec(CGVariable.class, "init",						Box.DELEG, Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , EQ_DELEG    );
-		new CGValuedElementModelSpec(CGFinalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGLocalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGSettableVariable.class, null,				null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGVariable.class, "init",						Box.DELEG, null     , null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , Val.DELVL, null     , null     , null     , Com.FALSE, null     , Eq.DELEG    );
+		new CGValuedElementModelSpec(CGFinalVariable.class, "init",					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGLocalVariable.class, "init",					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGSettableVariable.class, null,				null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-		new CGValuedElementModelSpec(CGParameter.class, "init",						Box.PARAM, null     , null     , null     , Inv.FALSE, Glo.DELEG, null     , null     , null    , Con.DELEG, Val.THIS , null     , null     , CTL_PARAM, null     , null     , null    );
-		new CGValuedElementModelSpec(CGIterator.class, null,						null     , null     , null     , null     , null     , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , CTL_CNTRL, null     , null     , null    );
+		new CGValuedElementModelSpec(CGParameter.class, "init",						Box.PARAM, null     , null     , null     , Inv.FALSE, Glo.DELEG, null     , null     , null    , Con.DELEG, Val.DELVL, null     , null     , Ctl.PARAM, null     , null     , null    );
+		new CGValuedElementModelSpec(CGIterator.class, null,						null     , null     , null     , null     , null     , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , Ctl.CNTRL, null     , null     , null    );
 		new CGValuedElementModelSpec(CGAccumulator.class, null,						null     , null     , null     , null     , Inv.VAL  , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new CGValuedElementModelSpec(CGTextParameter.class, null,					Box.FALSE, Ref.THIS , null     , null     , Inv.FALSE, Glo.FALSE, Inl.TRUE , null     , null    , null     , null     , null     , null     , CTL_CNTRL, null     , null     , null    );
+		new CGValuedElementModelSpec(CGTextParameter.class, null,					Box.FALSE, null     , null     , null     , Inv.FALSE, Glo.FALSE, Inl.TRUE , null     , null    , null     , Val.THIS , null     , null     , Ctl.CNTRL, null     , null     , null    );
 
-		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , CTL_LORG , null     , null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGCollectionPart.class, null,					Box.RANGE, Ref.CPART, null     , Nul.CPART, Inv.CPART, Glo.CPART, Inl.CPART, null     , null    , Con.CPART, Val.CPART, null     , null     , null     , Com.FALSE, null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		Box.DELEG, Ref.DELEG, null     , null     , null     , Glo.DELEG, null     , null     , null    , null     , null     , null     , null     , null     , Com.DELEG, null     , EQ_DELEG);
-		new CGValuedElementModelSpec(CGConstraint.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_BODY , null     , null     , null    );
-		new CGValuedElementModelSpec(CGConstructorPart.class, null,					Box.TRUE , Ref.THIS , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, Rew.PART , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGExecutorOperation.class, null,				Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , Ctx.TRUE , CTL_UNSUP, Com.MUST , null     , EQ_UNSUP);
-		new CGValuedElementModelSpec(CGExecutorProperty.class, null,				Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, Inl.FALSE, null     , Ct.FALSE, Con.TRUE , Val.THIS , null     , Ctx.TRUE , CTL_CNTRL, Com.MUST , null     , EQ_UNSUP);
-		new CGValuedElementModelSpec(CGExecutorType.class, null,					Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, null     , null     , null    , Con.TRUE , Val.THIS , null     , null     , null     , Com.MUST , null     , EQ_TYPE );
-		new CGValuedElementModelSpec(CGIfExp.class, null,							Box.IF   , Ref.THIS , null     , Nul.IF   , Inv.IF   , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , CTL_IF   , null     , null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGLetExp.class, "in",							Box.DELEG, Ref.DELEG, null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , CTL_LET  , null     , null     , EQ_EQUIV);
+		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ths.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , Ctl.LORG , null     , null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGCollectionPart.class, null,					Box.RANGE, Ths.CPART, null     , Nul.CPART, Inv.CPART, Glo.CPART, Inl.CPART, null     , null    , Con.CPART, null     , null     , null     , null     , Com.FALSE, null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		Box.DELEG, null     , null     , null     , null     , Glo.DELEG, null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.DELEG, null     , Eq.DELEG);
+		new CGValuedElementModelSpec(CGConstraint.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.BODY , null     , null     , null    );
+		new CGValuedElementModelSpec(CGConstructorPart.class, null,					Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, Rew.PART , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGExecutorOperation.class, null,				Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.UNSUP, Com.MUST , null     , Eq.UNSUP);
+		new CGValuedElementModelSpec(CGExecutorProperty.class, null,				Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, Inl.FALSE, null     , Ct.FALSE, Con.TRUE , null     , null     , Ctx.TRUE , Ctl.CNTRL, Com.MUST , null     , Eq.UNSUP);
+		new CGValuedElementModelSpec(CGExecutorType.class, null,					Box.TRUE , null     , null     , Nul.FALSE, Inv.FALSE, Glo.FALSE, null     , null     , null    , Con.TRUE , null     , null     , null     , null     , Com.MUST , null     , Eq.TYPE );
+		new CGValuedElementModelSpec(CGIfExp.class, null,							Box.IF   , null     , null     , Nul.IF   , Inv.IF   , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , Ctl.IF   , null     , null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGLetExp.class, "in",							Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.DELEG, null     , null     , Ctl.LET  , null     , null     , Eq.EQUIV);
 
-		new CGValuedElementModelSpec(CGOperation.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , CTL_BODY , null     , null     , EQ_UNSUP);
+		new CGValuedElementModelSpec(CGOperation.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
 		new CGValuedElementModelSpec(CGEcoreOperation.class, null,					Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryOperation.class, null,				Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-		new CGValuedElementModelSpec(CGProperty.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , CTL_BODY , null     , null     , EQ_UNSUP);
-		new CGValuedElementModelSpec(CGTupleExp.class, "CGTuplePart",				Box.TRUE , Ref.PARTS, null     , Nul.FALSE, Inv.FALSE, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , null     , null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGTuplePart.class, "init",						Box.TRUE , Ref.DELEG, null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , EQ_EQUIV);
-		new CGValuedElementModelSpec(CGTypeExp.class, "executorType",				Box.TRUE , Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , Val.TYPEX, null     , null     , null     , null     , Rew.TYPE , EQ_DELEG);
-		new CGValuedElementModelSpec(CGVariableExp.class, "referredVariable",		Box.DELEG, Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE, null     , EQ_DELEG);
+		new CGValuedElementModelSpec(CGProperty.class, null,						Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
+		new CGValuedElementModelSpec(CGTupleExp.class, "CGTuplePart",				Box.TRUE , Ths.PARTS, null     , Nul.FALSE, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , null     , null     , null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGTuplePart.class, "init",						Box.TRUE , null     , null     , null     , null     , null     , Inl.TRUE , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE, null     , Eq.EQUIV);
+		new CGValuedElementModelSpec(CGTypeExp.class, "executorType",				Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , null     , Rew.TYPE , Eq.DELEG);
+		new CGValuedElementModelSpec(CGVariableExp.class, "referredVariable",		Box.DELEG, null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE, null     , Eq.DELEG);
 	}
 	
 	protected final @Nullable String delegate;
 	protected final @Nullable Box box;
-	protected final @Nullable Ref ref;
+	protected final @Nullable Ths ths;
 	protected final @Nullable Log log;
 	protected final @Nullable Nul nul;
 	protected final @Nullable Inv inv;
@@ -1311,13 +1782,13 @@ public class CGValuedElementModelSpec extends ModelSpec
 	protected final @Nullable Eq eq;
 	
 	protected CGValuedElementModelSpec(@NonNull Class<?> cgClass, @Nullable String delegate,
-			@Nullable Box box, @Nullable Ref ref, @Nullable Log log, @Nullable Nul nul, @Nullable Inv inv,
+			@Nullable Box box, @Nullable Ths ths, @Nullable Log log, @Nullable Nul nul, @Nullable Inv inv,
 			@Nullable Glo glo, @Nullable Inl inl, @Nullable Set set, @Nullable Ct ct, @Nullable Con con,
 			@Nullable Val val, @Nullable Cvl cvl, @Nullable Ctx ctx, @Nullable Ctl ctl, @Nullable Com com, @Nullable Rew rew, @Nullable Eq eq) {
 		super(cgClass);
 		this.delegate = delegate;
 		this.box = box;
-		this.ref = ref;
+		this.ths = ths;
 		this.log = log;
 		this.nul = nul;
 		this.inv = inv;
@@ -1337,41 +1808,44 @@ public class CGValuedElementModelSpec extends ModelSpec
 		if (glo == Glo.TRUE) assert con == Con.TRUE; 
 		if (glo == Glo.TRUE) assert inl == Inl.FALSE;
 		
-		assert (box != null) || (ref == null) : "Box must be defined for '" + cgClass.getSimpleName() + "' since Ref is";
+//		assert (box != null) || (ref == null) : "Box must be defined for '" + cgClass.getSimpleName() + "' since Ref is";
 	}
 	
 	@Override
 	public void generate(@NonNull StringBuilder s, @NonNull GenModel genModel, boolean isImplementation) {
-		getConstantValue.generate(s, this, genModel, isImplementation);
-		CTL_getPlace.generate(s, this, genModel, isImplementation);
-		getReferredValuedElement.generate(s, this, genModel, isImplementation);
-		getValue.generate(s, this, genModel, isImplementation);
-		getValueName.generate(s, this, genModel, isImplementation);
-		isBoxed.generate(s, this, genModel, isImplementation);
-		isCaught.generate(s, this, genModel, isImplementation);
-		isCommonable.generate(s, this, genModel, isImplementation);
-		isConstant.generate(s, this, genModel, isImplementation);
-		isContext.generate(s, this, genModel, isImplementation);
-		EQ_isEquivalentTo.generate(s, this, genModel, isImplementation);
-		EQ_isEquivalentToInternal.generate(s, this, genModel, isImplementation);
-		LOG_isFalse.generate(s, this, genModel, isImplementation);
-		isGlobal.generate(s, this, genModel, isImplementation);
-		isInlined.generate(s, this, genModel, isImplementation);
-		isInvalid.generate(s, this, genModel, isImplementation);
-		isNonInvalid.generate(s, this, genModel, isImplementation);
-		isNonNull.generate(s, this, genModel, isImplementation);
-		isNull.generate(s, this, genModel, isImplementation);
-		isRange.generate(s, this, genModel, isImplementation);
-		isSettable.generate(s, this, genModel, isImplementation);
-		LOG_isTrue.generate(s, this, genModel, isImplementation);
-		isUnboxed.generate(s, this, genModel, isImplementation);
-		isUncommonable.generate(s, this, genModel, isImplementation);
-		isUndeclaredNonNull.generate(s, this, genModel, isImplementation);
-		rewriteAs.generate(s, this, genModel, isImplementation);
-		setCaught.generate(s, this, genModel, isImplementation);
-		setNonInvalid.generate(s, this, genModel, isImplementation);
-		setNonInvalidValue.generate(s, this, genModel, isImplementation);
-		setNonNull.generate(s, this, genModel, isImplementation);
-		setValueName.generate(s, this, genModel, isImplementation);
+		Cvl.getConstantValue.generate(s, this, genModel, isImplementation);
+		Inv.getInvalidValue.generate(s, this, genModel, isImplementation);
+		Val.getNamedValue.generate(s, this, genModel, isImplementation);
+		Ctl.getPlace.generate(s, this, genModel, isImplementation);
+		Val.getSourceValue.generate(s, this, genModel, isImplementation);
+		Ths.getThisValue.generate(s, this, genModel, isImplementation);
+		Val.getTypedValue.generate(s, this, genModel, isImplementation);
+		Val.getValueName.generate(s, this, genModel, isImplementation);
+		Box.isBoxed.generate(s, this, genModel, isImplementation);
+		Ct.isCaught.generate(s, this, genModel, isImplementation);
+		Com.isCommonable.generate(s, this, genModel, isImplementation);
+		Con.isConstant.generate(s, this, genModel, isImplementation);
+		Ctx.isContext.generate(s, this, genModel, isImplementation);
+		Eq.isEquivalentTo.generate(s, this, genModel, isImplementation);
+		Eq.isEquivalentToInternal.generate(s, this, genModel, isImplementation);
+		Log.isFalse.generate(s, this, genModel, isImplementation);
+		Glo.isGlobal.generate(s, this, genModel, isImplementation);
+		Inl.isInlined.generate(s, this, genModel, isImplementation);
+		Inv.isInvalid.generate(s, this, genModel, isImplementation);
+		Inv.isNonInvalid.generate(s, this, genModel, isImplementation);
+		Nul.isNonNull.generate(s, this, genModel, isImplementation);
+		Nul.isNull.generate(s, this, genModel, isImplementation);
+		Rng.isRange.generate(s, this, genModel, isImplementation);
+		Set.isSettable.generate(s, this, genModel, isImplementation);
+		Log.isTrue.generate(s, this, genModel, isImplementation);
+		Box.isUnboxed.generate(s, this, genModel, isImplementation);
+		Com.isUncommonable.generate(s, this, genModel, isImplementation);
+		Nul.isUndeclaredNonNull.generate(s, this, genModel, isImplementation);
+		Rew.rewriteAs.generate(s, this, genModel, isImplementation);
+		Ct.setCaught.generate(s, this, genModel, isImplementation);
+		Inv.setNonInvalid.generate(s, this, genModel, isImplementation);
+		Inv.setNonInvalidValue.generate(s, this, genModel, isImplementation);
+		Nul.setNonNull.generate(s, this, genModel, isImplementation);
+		Val.setValueName.generate(s, this, genModel, isImplementation);
 	}
 }

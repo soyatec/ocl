@@ -202,7 +202,7 @@ public class CGElementIdImpl extends CGConstantImpl implements CGElementId {
 		if (!thatValue.isNonInvalid()) {
 			return null;
 		}
-		CGValuedElement value = thatValue.getValue();
+		CGValuedElement value = thatValue.getNamedValue();
 		if (this == value) {
 			return Boolean.TRUE;
 		}

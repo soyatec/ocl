@@ -26,9 +26,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
@@ -224,13 +226,29 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	public @Nullable CGInvalid getInvalidValue() {
 		for (CGConstructorPart cgPart : getParts()) {
-			if (cgPart.isInvalid()) {
-				return cgPart;
+			CGInvalid invalidValue = cgPart.getInvalidValue();
+			if (invalidValue != null) {
+				return invalidValue;
 			}
 		}
-		return this;
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getThisValue() {
+		CGInvalid invalidValue = getInvalidValue();
+		if (invalidValue != null) {
+			return invalidValue;
+		}
+		else {
+			return this;
+		}
 	}
 
 	/**
@@ -272,6 +290,20 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	@Override
 	public boolean isGlobal() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isNonInvalid() {
+		for (CGConstructorPart cgPart : getParts()) {
+			if (!cgPart.isNonInvalid()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

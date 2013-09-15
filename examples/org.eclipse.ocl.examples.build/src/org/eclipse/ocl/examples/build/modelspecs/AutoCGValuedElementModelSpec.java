@@ -25,16 +25,16 @@ public class AutoCGValuedElementModelSpec extends CGValuedElementModelSpec
 {
 	public static void register() {
 //		new AutoCGValuedElementModelSpec(CGCallExp.class, null,							null     , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.THIS , null     , null     , null     , null     , null     );
-		new AutoCGValuedElementModelSpec(CGASTCallExp.class, "source",	                Box.FALSE, Ref.DELEG, null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new AutoCGValuedElementModelSpec(CGContainmentBody.class, null,					Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , EQ_UNSUP);
-		new AutoCGValuedElementModelSpec(CGContainmentPart.class, null,					Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , EQ_UNSUP);
-		new AutoCGValuedElementModelSpec(CGContainmentVisit.class, null,				Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , EQ_UNSUP);
+		new AutoCGValuedElementModelSpec(CGASTCallExp.class, "source",	                Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+		new AutoCGValuedElementModelSpec(CGContainmentBody.class, null,					Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
+		new AutoCGValuedElementModelSpec(CGContainmentPart.class, null,					Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
+		new AutoCGValuedElementModelSpec(CGContainmentVisit.class, null,				Box.FALSE, null     , null     , Nul.FALSE, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
 	}
 	
 	protected AutoCGValuedElementModelSpec(@NonNull Class<?> cgClass, @Nullable String delegate,
-			@Nullable Box box, @Nullable Ref ref, @Nullable Log log, @Nullable Nul nul, @Nullable Inv inv,
+			@Nullable Box box, @Nullable Ths ths, @Nullable Log log, @Nullable Nul nul, @Nullable Inv inv,
 			@Nullable Glo glo, @Nullable Inl inl, @Nullable Set set, @Nullable Ct ct, @Nullable Con con,
 			@Nullable Val val, @Nullable Cvl cvl, @Nullable Ctx ctx, @Nullable Ctl ctl, @Nullable Com com, @Nullable Rew rew, @Nullable Eq eq) {
-		super(cgClass, delegate, box, ref, log, nul, inv, glo, inl, set, ct, con, val, cvl, ctx, ctl, com, rew, eq);
+		super(cgClass, delegate, box, ths, log, nul, inv, glo, inl, set, ct, con, val, cvl, ctx, ctl, com, rew, eq);
 	}
 }

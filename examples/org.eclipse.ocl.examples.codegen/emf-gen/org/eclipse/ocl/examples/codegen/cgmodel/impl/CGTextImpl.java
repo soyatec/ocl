@@ -211,7 +211,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 		if (!thatValue.isNonInvalid()) {
 			return null;
 		}
-		CGValuedElement value = thatValue.getValue();
+		CGValuedElement value = thatValue.getNamedValue();
 		if (this == value) {
 			return Boolean.TRUE;
 		}

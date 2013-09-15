@@ -192,7 +192,7 @@ public abstract class CGNumberImpl extends CGConstantImpl implements CGNumber {
 		if (!thatValue.isNonInvalid()) {
 			return null;
 		}
-		CGValuedElement value = thatValue.getValue();
+		CGValuedElement value = thatValue.getNamedValue();
 		if (this == value) {
 			return Boolean.TRUE;
 		}

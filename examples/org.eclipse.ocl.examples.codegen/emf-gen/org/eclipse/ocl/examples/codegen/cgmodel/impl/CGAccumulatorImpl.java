@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -70,8 +71,8 @@ public class CGAccumulatorImpl extends CGIteratorImpl implements CGAccumulator
 	 * @generated
 	 */
 	@Override
-	public boolean isInvalid() {
-		return !nonInvalid && super.isInvalid();
+	public @Nullable CGInvalid getInvalidValue() {
+		return !nonInvalid ? super.getInvalidValue() : null;
 	}
 
 	/**

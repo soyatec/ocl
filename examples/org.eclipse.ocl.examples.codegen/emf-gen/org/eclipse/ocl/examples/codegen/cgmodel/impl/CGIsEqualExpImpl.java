@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsEqualExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -259,8 +260,39 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return source != null ? source : this;
+	public @Nullable CGInvalid getInvalidValue() {
+		CGInvalid invalidValue = source.getInvalidValue();
+		if (invalidValue == null) {
+			invalidValue = argument.getInvalidValue();
+		}
+		return invalidValue;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getNamedValue() {
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getSourceValue() {
+		return source != null ? source.getSourceValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getTypedValue() {
+		return this;
 	}
 
 	/**
@@ -297,15 +329,6 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	@Override
 	public boolean isInlined() {
 		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isInvalid() {
-		return source.isInvalid() || argument.isInvalid();
 	}
 
 	/**

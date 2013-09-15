@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -117,9 +118,10 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		js.resetStream();
 		js.appendCommentWithOCL(null, cgBody.getAst());
 		js.appendLocalStatements(cgBody);
-		if (cgBody.isInvalid()) {
-			js.append("throw ");
-			js.appendValueName(cgBody);
+		CGInvalid cgInvalidValue = cgBody.getInvalidValue();
+		if (cgInvalidValue  != null) {
+			js.append("throw new ");
+			js.appendValueName(cgInvalidValue);
 		}
 		else {
 			js.append("return ");

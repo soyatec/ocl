@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -336,6 +337,30 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * @generated
 	 */
 	@Override
+	public @Nullable CGInvalid getInvalidValue() {
+		CGInvalid invalidValue = condition.getInvalidValue();
+		if (invalidValue == null) {
+			if (condition.isTrue()) {
+				invalidValue = thenExpression.getInvalidValue();
+			}
+			else if (condition.isFalse()) {
+				invalidValue = elseExpression.getInvalidValue();
+			}
+			else {
+				invalidValue = elseExpression.getInvalidValue();
+				if (invalidValue != null) {				// If both then and else invalid propagate then
+					invalidValue = thenExpression.getInvalidValue();
+				}
+			}
+		}
+		return invalidValue;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
 		return IfPlaces.createIfPlaces(element2place, this);
 	}
@@ -371,17 +396,16 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * @generated
 	 */
 	@Override
-	public boolean isInvalid() {
-		return condition.isInvalid() || (condition.isTrue() ? thenExpression.isInvalid() : condition.isFalse() ? elseExpression.isInvalid() : thenExpression.isInvalid() && elseExpression.isInvalid());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isNonInvalid() {
-		return condition.isTrue() ? thenExpression.isNonInvalid() : condition.isFalse() ? elseExpression.isNonInvalid() : thenExpression.isNonInvalid() && elseExpression.isNonInvalid();
+		if (condition.isTrue()) {
+			return thenExpression.isNonInvalid();
+		}
+		else if (condition.isFalse()) {
+			return elseExpression.isNonInvalid();
+		}
+		else {
+			return thenExpression.isNonInvalid() && elseExpression.isNonInvalid();
+		}
 	}
 
 	/**

@@ -47,29 +47,7 @@ The actual constraints are lazily loaded by the first validation run that uses t
             category="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml"/>
    </extension>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Bug370824 NOT -->
-      <!--package uri="http://bug370824" class="bug370824.Bug370824Package"/-->
-      <package uri="dummy-protocol://dummy-nsuri/bug370824" class="codegen.company.CodegencompanyPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Bug409650 NOT -->
-      <!--package uri="http://bug409650" class="bug409650.Bug409650Package"/-->
-      <package uri="dummy-protocol://dummy-nsuri/bug409650" class="codegen.company.CodegencompanyPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Bug412685 NOT -->
-      <!--package uri="http://bug412685" class="bug412685.Bug412685Package"/-->
-      <package uri="dummy-protocol://dummy-nsuri/bug412685" class="codegen.company.CodegencompanyPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Bug412736 NOT -->
-      <!--package uri="http://bug412736" class="bug412736.Bug412736Package"/-->
-      <package uri="dummy-protocol://dummy-nsuri/bug412736" class="codegen.company.CodegencompanyPackage"/>
-   </extension>
+   <!-- These declarations ensure that a Java version cannot be loaded -->
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Bug414855 NOT -->
@@ -140,5 +118,34 @@ The actual constraints are lazily loaded by the first validation run that uses t
       <package uri="dummy-protocol://dummy-nsuri/bug416421A"
             class="bug416421A.Bug416421APackage"/>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug412736 -->
+      <package
+            uri="http://bug412736"
+            class="bug412736.Bug412736Package"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug370824 -->
+      <package
+            uri="http://bug370824"
+            class="bug370824.Bug370824Package"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug409650 -->
+      <package
+            uri="http://bug409650"
+            class="bug409650.Bug409650Package"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug412685 -->
+      <package
+            uri="http://bug412685"
+            class="bug412685.Bug412685Package"/>
+   </extension>
+
 
 </plugin>

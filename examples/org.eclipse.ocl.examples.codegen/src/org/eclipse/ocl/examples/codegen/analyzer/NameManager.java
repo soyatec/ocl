@@ -633,7 +633,7 @@ public class NameManager
 	 */
 	public @Nullable String getNameHint(@NonNull Object anObject) {
 		if (anObject instanceof CGValuedElement) {
-			anObject = ((CGValuedElement)anObject).getValue();
+			anObject = ((CGValuedElement)anObject).getNamedValue();
 		}
 		if (anObject instanceof CollectionLiteralExp) {
 			Type type = ((CollectionLiteralExp)anObject).getType();
@@ -706,19 +706,19 @@ public class NameManager
 				return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
 			}
 			else if (anObject instanceof CGBoxExp) {
-				return "BOXED_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+				return "BOXED_" + ((CGCallExp)anObject).getSourceValue().getValueName();
 			}
 			else if (anObject instanceof CGUnboxExp) {
-				return "UNBOXED_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+				return "UNBOXED_" + ((CGCallExp)anObject).getSourceValue().getValueName();
 			}
 			else if (anObject instanceof CGCatchExp) {
-				return "CAUGHT_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+				return "CAUGHT_" + ((CGCallExp)anObject).getSourceValue().getValueName();
 			}
 			else if (anObject instanceof CGGuardExp) {
-				return "GUARDED_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+				return "GUARDED_" + ((CGCallExp)anObject).getSourceValue().getValueName();
 			}
 			else if (anObject instanceof CGThrowExp) {
-				return "THROWN_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+				return "THROWN_" + ((CGCallExp)anObject).getSourceValue().getValueName();
 			}
 			else {
 				return null;

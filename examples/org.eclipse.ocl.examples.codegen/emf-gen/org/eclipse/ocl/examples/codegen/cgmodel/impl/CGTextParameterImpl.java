@@ -194,7 +194,7 @@ public class CGTextParameterImpl extends CGParameterImpl implements CGTextParame
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	public @NonNull CGValuedElement getSourceValue() {
 		return this;
 	}
 

@@ -189,7 +189,7 @@ public class GlobalPlace extends AbstractPlace
 		}
 		Set<CGValuedElement> sortedGlobals = new HashSet<CGValuedElement>();
 		for (AbstractAnalysis analysis : globalAnalyses) {
-			CGValuedElement value = analysis.getPrimaryElement().getValue();
+			CGValuedElement value = analysis.getPrimaryElement().getNamedValue();
 			assert value.isGlobal();
 			sortedGlobals.add(value);
 		}

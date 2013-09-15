@@ -174,15 +174,6 @@ public class CGExecutorOperationImpl extends CGValuedElementImpl implements CGEx
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isBoxed() {
 		return true;
 	}

@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.autogen.java;
 
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
@@ -42,11 +41,6 @@ public class AutoLocalContext extends JavaLocalContext
 {
 	public AutoLocalContext(@NonNull AutoGlobalContext globalContext, @NonNull CGElement cgScope) {
 		super(globalContext, cgScope);
-	}
-
-	@Override
-	public @Nullable CGValuedElement createEvaluatorVariable() {
-		return null;
 	}
 
 	@Override

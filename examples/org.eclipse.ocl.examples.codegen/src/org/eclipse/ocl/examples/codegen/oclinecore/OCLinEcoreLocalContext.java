@@ -59,7 +59,7 @@ public class OCLinEcoreLocalContext extends JavaLocalContext
 		return null;
 	}
 
-	@Override
+/*	@Override */
 	public @Nullable CGValuedElement createEvaluatorVariable() {
 		CGText evaluator = CGModelFactory.eINSTANCE.createCGText();
 		setNames2(evaluator, JavaConstants.EVALUATOR_NAME, JavaConstants.EVALUATOR_TYPE_ID);
