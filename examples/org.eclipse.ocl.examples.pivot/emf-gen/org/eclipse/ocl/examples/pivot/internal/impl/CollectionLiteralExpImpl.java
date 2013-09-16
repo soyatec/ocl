@@ -201,21 +201,21 @@ public class CollectionLiteralExpImpl
 		 * 
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_kind;
+		@NonNull /*@Caught*/ Object CAUGHT_ne;
 		try {
 		    final @Nullable /*@Thrown*/ Enumerator kind = this.getKind();
 		    final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(DomainUtil.nonNullState(kind.getName()));
 		    final /*@Thrown*/ boolean ne = BOXED_kind != PivotTables.ELITid_Collection;
-		    CAUGHT_kind = ne;
+		    CAUGHT_ne = ne;
 		}
 		catch (Exception e) {
-		    CAUGHT_kind = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_ne = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_kind == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_ne == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_kind == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
 		}
@@ -233,17 +233,17 @@ public class CollectionLiteralExpImpl
 		 * inv SetKindIsSet: kind = CollectionKind::Set implies type.oclIsKindOf (SetType)
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_8;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_8;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_kind;
+		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = this.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(DomainUtil.nonNullState(kind.getName()));
 		        final /*@Thrown*/ boolean self_71 = BOXED_kind == PivotTables.ELITid_Set;
-		        CAUGHT_kind = self_71;
+		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_kind = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
@@ -257,37 +257,37 @@ public class CollectionLiteralExpImpl
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_kind instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_8;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    /*@Thrown*/ boolean symbol_8;
 		    if (symbol_0) {
 		        final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_3;
+		        /*@Thrown*/ boolean symbol_3;
 		        if (symbol_1) {
-		            if (CAUGHT_kind instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_kind;
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            symbol_3 = (Boolean)CAUGHT_kind;
+		            symbol_3 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_2;
+		            /*@Thrown*/ boolean symbol_2;
 		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_2 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_kind instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_kind;
+		                if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_self_71;
 		                }
-		                symbol_2 = (Boolean)CAUGHT_kind;
+		                symbol_2 = (Boolean)CAUGHT_self_71;
 		            }
 		            symbol_3 = symbol_2;
 		        }
 		        symbol_8 = symbol_3;
 		    }
 		    else {
-		        if (CAUGHT_kind instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_kind;
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        final /*@Thrown*/ boolean eq = CAUGHT_kind == Boolean.FALSE;
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		        /*@Thrown*/ boolean symbol_7;
 		        if (eq) {
 		            symbol_7 = ValuesUtil.TRUE_VALUE;
@@ -324,7 +324,7 @@ public class CollectionLiteralExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_8 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));
 		}
@@ -343,17 +343,17 @@ public class CollectionLiteralExpImpl
 		 * inv OrderedSetKindIsOrderedSet: kind = CollectionKind::OrderedSet implies type.oclIsKindOf (OrderedSetType)
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_8;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_8;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_kind;
+		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = this.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(DomainUtil.nonNullState(kind.getName()));
 		        final /*@Thrown*/ boolean self_71 = BOXED_kind == PivotTables.ELITid_OrderedSet;
-		        CAUGHT_kind = self_71;
+		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_kind = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
@@ -367,37 +367,37 @@ public class CollectionLiteralExpImpl
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_kind instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_8;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    /*@Thrown*/ boolean symbol_8;
 		    if (symbol_0) {
 		        final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_3;
+		        /*@Thrown*/ boolean symbol_3;
 		        if (symbol_1) {
-		            if (CAUGHT_kind instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_kind;
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            symbol_3 = (Boolean)CAUGHT_kind;
+		            symbol_3 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_2;
+		            /*@Thrown*/ boolean symbol_2;
 		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_2 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_kind instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_kind;
+		                if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_self_71;
 		                }
-		                symbol_2 = (Boolean)CAUGHT_kind;
+		                symbol_2 = (Boolean)CAUGHT_self_71;
 		            }
 		            symbol_3 = symbol_2;
 		        }
 		        symbol_8 = symbol_3;
 		    }
 		    else {
-		        if (CAUGHT_kind instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_kind;
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        final /*@Thrown*/ boolean eq = CAUGHT_kind == Boolean.FALSE;
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		        /*@Thrown*/ boolean symbol_7;
 		        if (eq) {
 		            symbol_7 = ValuesUtil.TRUE_VALUE;
@@ -434,7 +434,7 @@ public class CollectionLiteralExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_8 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "OrderedSetKindIsOrderedSet", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET, message, new Object [] { this }));
 		}
@@ -453,17 +453,17 @@ public class CollectionLiteralExpImpl
 		 * inv SequenceKindIsSequence: kind = CollectionKind::Sequence implies type.oclIsKindOf (SequenceType)
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_8;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_8;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_kind;
+		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = this.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(DomainUtil.nonNullState(kind.getName()));
 		        final /*@Thrown*/ boolean self_71 = BOXED_kind == PivotTables.ELITid_Sequence;
-		        CAUGHT_kind = self_71;
+		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_kind = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
@@ -477,37 +477,37 @@ public class CollectionLiteralExpImpl
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_kind instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_8;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    /*@Thrown*/ boolean symbol_8;
 		    if (symbol_0) {
 		        final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_3;
+		        /*@Thrown*/ boolean symbol_3;
 		        if (symbol_1) {
-		            if (CAUGHT_kind instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_kind;
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            symbol_3 = (Boolean)CAUGHT_kind;
+		            symbol_3 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_2;
+		            /*@Thrown*/ boolean symbol_2;
 		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_2 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_kind instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_kind;
+		                if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_self_71;
 		                }
-		                symbol_2 = (Boolean)CAUGHT_kind;
+		                symbol_2 = (Boolean)CAUGHT_self_71;
 		            }
 		            symbol_3 = symbol_2;
 		        }
 		        symbol_8 = symbol_3;
 		    }
 		    else {
-		        if (CAUGHT_kind instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_kind;
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        final /*@Thrown*/ boolean eq = CAUGHT_kind == Boolean.FALSE;
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		        /*@Thrown*/ boolean symbol_7;
 		        if (eq) {
 		            symbol_7 = ValuesUtil.TRUE_VALUE;
@@ -544,7 +544,7 @@ public class CollectionLiteralExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_8 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));
 		}
@@ -562,17 +562,17 @@ public class CollectionLiteralExpImpl
 		 * inv BagKindIsBag: kind = CollectionKind::Bag implies type.oclIsKindOf (BagType)
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_8;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_8;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_kind;
+		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = this.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(DomainUtil.nonNullState(kind.getName()));
 		        final /*@Thrown*/ boolean self_71 = BOXED_kind == PivotTables.ELITid_Bag;
-		        CAUGHT_kind = self_71;
+		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_kind = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
@@ -586,37 +586,37 @@ public class CollectionLiteralExpImpl
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_kind instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_8;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    /*@Thrown*/ boolean symbol_8;
 		    if (symbol_0) {
 		        final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_3;
+		        /*@Thrown*/ boolean symbol_3;
 		        if (symbol_1) {
-		            if (CAUGHT_kind instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_kind;
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            symbol_3 = (Boolean)CAUGHT_kind;
+		            symbol_3 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_2;
+		            /*@Thrown*/ boolean symbol_2;
 		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_2 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_kind instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_kind;
+		                if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_self_71;
 		                }
-		                symbol_2 = (Boolean)CAUGHT_kind;
+		                symbol_2 = (Boolean)CAUGHT_self_71;
 		            }
 		            symbol_3 = symbol_2;
 		        }
 		        symbol_8 = symbol_3;
 		    }
 		    else {
-		        if (CAUGHT_kind instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_kind;
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        final /*@Thrown*/ boolean eq = CAUGHT_kind == Boolean.FALSE;
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		        /*@Thrown*/ boolean symbol_7;
 		        if (eq) {
 		            symbol_7 = ValuesUtil.TRUE_VALUE;
@@ -653,7 +653,7 @@ public class CollectionLiteralExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_8 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));
 		}

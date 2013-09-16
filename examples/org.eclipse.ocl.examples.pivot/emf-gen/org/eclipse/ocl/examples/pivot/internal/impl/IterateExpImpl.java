@@ -453,7 +453,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * 
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_type;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
@@ -463,16 +463,16 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
 		    final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
 		    ;
-		    CAUGHT_type = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    CAUGHT_type = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_type == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_type == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IterateExp", "TypeIsResultType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATE_EXP__TYPE_IS_RESULT_TYPE, message, new Object [] { this }));
 		}
@@ -534,7 +534,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object CAUGHT_size;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
@@ -544,12 +544,12 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
 		    final /*@Thrown*/ boolean eq = size.equals(PivotTables.INT_1);
-		    CAUGHT_size = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    CAUGHT_size = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_size == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

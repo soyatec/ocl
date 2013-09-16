@@ -273,33 +273,6 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	 * @generated
 	 */
 	@Override
-	public @NonNull CGValuedElement getNamedValue() {
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getSourceValue() {
-		return source != null ? source.getSourceValue() : this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getTypedValue() {
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
 	public boolean isBoxed() {
 		return true;
 	}

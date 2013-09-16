@@ -232,16 +232,16 @@ public class VariableImpl
 		 * 
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_8;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_8;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_initExpression;
+		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainExpression initExpression = this.getInitExpression();
 		        final /*@Thrown*/ boolean self_71 = initExpression != null;
-		        CAUGHT_initExpression = self_71;
+		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_initExpression = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    @NonNull /*@Caught*/ Object CAUGHT_b;
@@ -258,37 +258,37 @@ public class VariableImpl
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_initExpression instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_8;
+		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
+		    /*@Thrown*/ boolean symbol_8;
 		    if (symbol_0) {
 		        final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_b instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_3;
+		        /*@Thrown*/ boolean symbol_3;
 		        if (symbol_1) {
-		            if (CAUGHT_initExpression instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_initExpression;
+		            if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            symbol_3 = (Boolean)CAUGHT_initExpression;
+		            symbol_3 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_2;
+		            /*@Thrown*/ boolean symbol_2;
 		            if (CAUGHT_b == Boolean.TRUE) {
 		                symbol_2 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_initExpression instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_initExpression;
+		                if (CAUGHT_self_71 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_self_71;
 		                }
-		                symbol_2 = (Boolean)CAUGHT_initExpression;
+		                symbol_2 = (Boolean)CAUGHT_self_71;
 		            }
 		            symbol_3 = symbol_2;
 		        }
 		        symbol_8 = symbol_3;
 		    }
 		    else {
-		        if (CAUGHT_initExpression instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_initExpression;
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        final /*@Thrown*/ boolean eq = CAUGHT_initExpression == Boolean.FALSE;
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		        /*@Thrown*/ boolean symbol_7;
 		        if (eq) {
 		            symbol_7 = ValuesUtil.TRUE_VALUE;
@@ -325,7 +325,7 @@ public class VariableImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_8 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Variable", "CompatibleInitialiserType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.VARIABLE__COMPATIBLE_INITIALISER_TYPE, message, new Object [] { this }));
 		}

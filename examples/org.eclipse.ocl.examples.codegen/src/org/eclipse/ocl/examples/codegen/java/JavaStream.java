@@ -473,7 +473,7 @@ public class JavaStream
 			}
 		}
 		if (!is_boolean) {
-			appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);
+			appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);	// FIXME Ugh!
 			append(" ");
 		}
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
@@ -776,11 +776,8 @@ public class JavaStream
 		return name;
 	}
 
-	public boolean is_boolean(@Nullable CGValuedElement cgValue) {
-		if (cgValue == null) {
-			return false;
-		}
-		else if (cgValue.getNamedValue().isCaught()) {
+	public boolean is_boolean(@NonNull CGValuedElement cgValue) {
+		if (cgValue.getNamedValue().isCaught()) {
 			return false;
 		}
 		else {
