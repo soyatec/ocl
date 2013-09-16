@@ -211,7 +211,7 @@ public class LetExpImpl
 		 * 
 		 * 
 		 */
-		@NonNull /*@Caught*/ Object CAUGHT_eq;
+		@Nullable /*@Caught*/ Object CAUGHT_type;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final @Nullable /*@Thrown*/ DomainExpression in = this.getIn();
@@ -221,16 +221,16 @@ public class LetExpImpl
 		    final @Nullable /*@Thrown*/ DomainType type_0 = in.getType();
 		    final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
 		    ;
-		    CAUGHT_eq = eq;
+		    CAUGHT_type = eq;
 		}
 		catch (Exception e) {
-		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_type = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_type == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = CAUGHT_type == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LetExp", "TypeIsInType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LET_EXP__TYPE_IS_IN_TYPE, message, new Object [] { this }));
 		}

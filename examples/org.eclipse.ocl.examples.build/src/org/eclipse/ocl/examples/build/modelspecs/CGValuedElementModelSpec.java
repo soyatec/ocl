@@ -558,7 +558,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 		};
 		public static final @NonNull Eq DELEG = new Eq() {
 			@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentTo(" + cgModelSpec.delegate + ") : null;";
+				return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentTo(" + cgModelSpec.delegate + ") : super.isEquivalentTo(thatValue);";
 			}
 			@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 				return "return " + cgModelSpec.delegate + " != null ? thatValue.isEquivalentToInternal(" + cgModelSpec.delegate + ") : null;";

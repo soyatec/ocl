@@ -463,9 +463,9 @@ public class PropertyCallExpImpl
 		 * inv NonStaticSourceTypeIsConformant: not referredProperty.isStatic implies source.type.conformsTo(getSpecializedReferredPropertyOwningType())
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_18;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_11;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_symbol_5;
+		    @NonNull /*@Caught*/ Object CAUGHT_symbol_2;
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		        try {
@@ -480,46 +480,27 @@ public class PropertyCallExpImpl
 		            CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		        }
 		        final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_5;
+		        /*@Thrown*/ boolean symbol_2;
 		        if (symbol_0) {
 		            if (CAUGHT_self_71 instanceof InvalidValueException) {
 		                throw (InvalidValueException)CAUGHT_self_71;
 		            }
-		            symbol_5 = (Boolean)CAUGHT_self_71;
+		            symbol_2 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_4;
+		            /*@NonInvalid*/ boolean symbol_1;
 		            if (CAUGHT_self_71 == Boolean.TRUE) {
-		                symbol_4 = ValuesUtil.FALSE_VALUE;
+		                symbol_1 = ValuesUtil.FALSE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_self_71 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_self_71;
-		                }
-		                final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
-		                @Nullable /*@Thrown*/ Boolean symbol_3;
-		                if (eq) {
-		                    symbol_3 = ValuesUtil.TRUE_VALUE;
-		                }
-		                else {
-		                    final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_self_71 instanceof InvalidValueException;
-		                    @Nullable /*@Thrown*/ Object symbol_2;
-		                    if (symbol_1) {
-		                        symbol_2 = null;
-		                    }
-		                    else {
-		                        throw ValuesUtil.INVALID_VALUE;
-		                    }
-		                    symbol_3 = (Boolean)symbol_2;
-		                }
-		                symbol_4 = symbol_3;
+		                symbol_1 = ValuesUtil.TRUE_VALUE;
 		            }
-		            symbol_5 = symbol_4;
+		            symbol_2 = symbol_1;
 		        }
-		        CAUGHT_symbol_5 = symbol_5;
+		        CAUGHT_symbol_2 = symbol_2;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_symbol_5 = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_symbol_2 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    @NonNull /*@Caught*/ Object CAUGHT_b;
@@ -536,93 +517,74 @@ public class PropertyCallExpImpl
 		    catch (Exception e) {
 		        CAUGHT_b = ValuesUtil.createInvalidValue(e);
 		    }
-		    final /*@NonInvalid*/ boolean symbol_6 = CAUGHT_symbol_5 instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_18;
-		    if (symbol_6) {
-		        final /*@NonInvalid*/ boolean symbol_7 = CAUGHT_b instanceof InvalidValueException;
-		        @Nullable /*@Thrown*/ Boolean symbol_9;
-		        if (symbol_7) {
-		            if (CAUGHT_symbol_5 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_symbol_5;
+		    final /*@NonInvalid*/ boolean symbol_3 = CAUGHT_symbol_2 instanceof InvalidValueException;
+		    /*@Thrown*/ boolean symbol_11;
+		    if (symbol_3) {
+		        final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
+		        /*@Thrown*/ boolean symbol_6;
+		        if (symbol_4) {
+		            if (CAUGHT_symbol_2 instanceof InvalidValueException) {
+		                throw (InvalidValueException)CAUGHT_symbol_2;
 		            }
-		            symbol_9 = (Boolean)CAUGHT_symbol_5;
+		            symbol_6 = (Boolean)CAUGHT_symbol_2;
 		        }
 		        else {
-		            @Nullable /*@Thrown*/ Boolean symbol_8;
+		            /*@Thrown*/ boolean symbol_5;
 		            if (CAUGHT_b == Boolean.TRUE) {
-		                symbol_8 = ValuesUtil.TRUE_VALUE;
+		                symbol_5 = ValuesUtil.TRUE_VALUE;
 		            }
 		            else {
-		                if (CAUGHT_symbol_5 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_symbol_5;
+		                if (CAUGHT_symbol_2 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_symbol_2;
 		                }
-		                symbol_8 = (Boolean)CAUGHT_symbol_5;
+		                symbol_5 = (Boolean)CAUGHT_symbol_2;
 		            }
-		            symbol_9 = symbol_8;
+		            symbol_6 = symbol_5;
 		        }
-		        symbol_18 = symbol_9;
+		        symbol_11 = symbol_6;
 		    }
 		    else {
-		        if (CAUGHT_symbol_5 instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_symbol_5;
+		        if (CAUGHT_symbol_2 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_symbol_2;
 		        }
-		        final /*@Thrown*/ boolean eq_0 = CAUGHT_symbol_5 == Boolean.FALSE;
-		        @Nullable /*@Thrown*/ Boolean symbol_17;
-		        if (eq_0) {
-		            symbol_17 = ValuesUtil.TRUE_VALUE;
+		        final /*@Thrown*/ boolean eq = CAUGHT_symbol_2 == Boolean.FALSE;
+		        /*@Thrown*/ boolean symbol_10;
+		        if (eq) {
+		            symbol_10 = ValuesUtil.TRUE_VALUE;
 		        }
 		        else {
-		            final /*@NonInvalid*/ boolean symbol_10 = CAUGHT_b instanceof InvalidValueException;
-		            @Nullable /*@Thrown*/ Boolean symbol_16;
-		            if (symbol_10) {
+		            final /*@NonInvalid*/ boolean symbol_7 = CAUGHT_b instanceof InvalidValueException;
+		            /*@Thrown*/ boolean symbol_9;
+		            if (symbol_7) {
 		                if (CAUGHT_b instanceof InvalidValueException) {
 		                    throw (InvalidValueException)CAUGHT_b;
 		                }
-		                symbol_16 = (Boolean)CAUGHT_b;
+		                symbol_9 = (Boolean)CAUGHT_b;
 		            }
 		            else {
-		                @Nullable /*@Thrown*/ Boolean symbol_15;
+		                /*@NonInvalid*/ boolean symbol_8;
 		                if (CAUGHT_b == Boolean.TRUE) {
-		                    symbol_15 = ValuesUtil.TRUE_VALUE;
+		                    symbol_8 = ValuesUtil.TRUE_VALUE;
 		                }
 		                else {
-		                    final /*@NonInvalid*/ boolean symbol_11 = (CAUGHT_symbol_5 == null) || (CAUGHT_symbol_5 instanceof InvalidValueException);
-		                    @Nullable /*@Thrown*/ Boolean symbol_14;
-		                    if (symbol_11) {
-		                        symbol_14 = null;
-		                    }
-		                    else {
-		                        final /*@NonInvalid*/ boolean symbol_12 = CAUGHT_b instanceof InvalidValueException;
-		                        /*@Thrown*/ boolean symbol_13;
-		                        if (symbol_12) {
-		                            if (CAUGHT_b instanceof InvalidValueException) {
-		                                throw (InvalidValueException)CAUGHT_b;
-		                            }
-		                            symbol_13 = (Boolean)CAUGHT_b;
-		                        }
-		                        else {
-		                            symbol_13 = ValuesUtil.FALSE_VALUE;
-		                        }
-		                        symbol_14 = symbol_13;
-		                    }
-		                    symbol_15 = symbol_14;
+		                    symbol_8 = ValuesUtil.FALSE_VALUE;
 		                }
-		                symbol_16 = symbol_15;
+		                symbol_9 = symbol_8;
 		            }
-		            symbol_17 = symbol_16;
+		            symbol_10 = symbol_9;
 		        }
-		        symbol_18 = symbol_17;
+		        symbol_11 = symbol_10;
 		    }
-		    CAUGHT_symbol_18 = symbol_18;
+		    CAUGHT_symbol_11 = symbol_11;
 		}
 		catch (Exception e) {
-		    CAUGHT_symbol_18 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_symbol_11 = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_symbol_18 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_symbol_11 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_18 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "NonStaticSourceTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}
@@ -641,22 +603,22 @@ public class PropertyCallExpImpl
 		 * 
 		 * 
 		 */
-		@NonNull /*@Caught*/ Object CAUGHT_eq;
+		@Nullable /*@Caught*/ Object CAUGHT_type;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
 		    final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == getSpecializedReferredPropertyType.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
 		    ;
-		    CAUGHT_eq = eq;
+		    CAUGHT_type = eq;
 		}
 		catch (Exception e) {
-		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_type = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_type == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = CAUGHT_type == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "CompatibleResultType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE, message, new Object [] { this }));
 		}

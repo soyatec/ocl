@@ -206,7 +206,7 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 */
 	@Override
 	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
-		return executorType != null ? thatValue.isEquivalentTo(executorType) : null;
+		return executorType != null ? thatValue.isEquivalentTo(executorType) : super.isEquivalentTo(thatValue);
 	}
 
 	/**

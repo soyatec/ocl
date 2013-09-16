@@ -194,8 +194,8 @@ type Boolean : PrimitiveType conformsTo OclAny {
 		      else if self = false then false
 		      else if b.oclIsInvalid() then b
 		      else if b = false then false
-		      else if self.oclIsUndefined() then null
-		      else if b.oclIsUndefined() then null
+		      else if self = null then null
+		      else if b = null then null
 		      else true
 		      endif endif endif endif endif endif;
 	}
@@ -215,8 +215,8 @@ type Boolean : PrimitiveType conformsTo OclAny {
 		      else if self = false then true
 		      else if b.oclIsInvalid() then b
 		      else if b = true then true
-		      else if self.oclIsUndefined() then null
-		      else if b.oclIsUndefined() then b
+		      else if self = null then null
+		      else if b = null then b
 		      else false
 		      endif endif endif endif endif endif;
 	}
@@ -229,11 +229,10 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	operation not() : Boolean[?] precedence=UNARY => 'org.eclipse.ocl.examples.library.logical.BooleanNotOperation'
 	{
 		body: if self.oclIsInvalid() then self
+		      else if self = null then null
 		      else if self = true then false
-		      else if self = false then true
-		      else if self.oclIsUndefined() then null
-		      else invalid
-		      endif endif endif endif;
+		      else true
+		      endif endif endif;
 	}
 	/**
 	oclText[true] if either oclText[self] or oclText[b] is oclText[true].
@@ -251,8 +250,8 @@ type Boolean : PrimitiveType conformsTo OclAny {
 		      else if self = true then true
 			  else if b.oclIsInvalid() then b
 			  else if b = true then true
-			  else if self.oclIsUndefined() then null
-			  else if b.oclIsUndefined() then null
+			  else if self = null then null
+			  else if b = null then null
 		      else false
 		      endif endif endif endif endif endif;
 	}
@@ -270,8 +269,8 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	{
 		body: if self.oclIsInvalid() then self
 			  else if b.oclIsInvalid() then b
-		      else if self.oclIsUndefined() then null
-			  else if b.oclIsUndefined() then null
+		      else if self = null then null
+			  else if b = null then null
 		      else if self = b then false
 			  else true
 		      endif endif endif endif endif;

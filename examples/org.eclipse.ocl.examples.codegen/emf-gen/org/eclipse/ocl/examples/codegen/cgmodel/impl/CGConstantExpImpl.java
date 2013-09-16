@@ -224,7 +224,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 */
 	@Override
 	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
-		return referredConstant != null ? thatValue.isEquivalentTo(referredConstant) : null;
+		return referredConstant != null ? thatValue.isEquivalentTo(referredConstant) : super.isEquivalentTo(thatValue);
 	}
 
 	/**

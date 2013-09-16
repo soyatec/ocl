@@ -52,12 +52,9 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 		return evaluatorParameter;
 	}
 
-/*	public @Nullable CGValuedElement createEvaluatorVariable() {
-		CGText evaluator = CGModelFactory.eINSTANCE.createCGText();
-		setNames2(evaluator, JavaConstants.EVALUATOR_NAME, JavaConstants.EVALUATOR_TYPE_ID);
-		evaluator.setTextValue(JavaConstants.EVALUATOR_NAME);
-		return evaluator;
-	} */
+	public @Nullable CGValuedElement createEvaluatorVariable() {
+		return null;
+	} 
 	
 	public @NonNull CGValuedElement createIdResolverVariable() {
 //		CGValuedElement evaluatorParameter = createEvaluatorParameter();

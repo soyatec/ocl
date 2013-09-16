@@ -140,22 +140,22 @@ public class IntegerLiteralExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object CAUGHT_eq;
+		@Nullable /*@Caught*/ Object CAUGHT_type;
 		try {
 		    final @NonNull /*@NonInvalid*/ DomainType TYP_Integer_0 = idResolver.getType(TypeId.INTEGER, null);
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Integer_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
 		    ;
-		    CAUGHT_eq = eq;
+		    CAUGHT_type = eq;
 		}
 		catch (Exception e) {
-		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_type = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_type == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = CAUGHT_type == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IntegerLiteralExp", "TypeIsInteger", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.INTEGER_LITERAL_EXP__TYPE_IS_INTEGER, message, new Object [] { this }));
 		}

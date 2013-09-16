@@ -1284,9 +1284,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		CGValuedElement thenExpression = getExpression(cgIfExp.getThenExpression());
 		CGValuedElement elseExpression = getExpression(cgIfExp.getElseExpression());
 //		CGVariable resultVariable = localContext.getLocalVariable(cgIfExp);
+		boolean flowContinues = false;
 		//
 		if (!js.appendLocalStatements(condition)) {
-			return false;
+			return flowContinues;
 		}
 		js.appendDeclaration(cgIfExp);
 		js.append(";\n");
@@ -1296,8 +1297,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		js.append(") {\n");
 		try {
 			js.pushIndentation(null);
-			if (!js.appendAssignment(cgIfExp, thenExpression)) {
-				return false;
+			if (js.appendAssignment(cgIfExp, thenExpression)) {
+				flowContinues = true;
 			}
 		} finally {
 			js.popIndentation();
@@ -1306,14 +1307,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		js.append("else {\n");
 		try {
 			js.pushIndentation(null);
-			if (!js.appendAssignment(cgIfExp, elseExpression)) {
-				return false;
+			if (js.appendAssignment(cgIfExp, elseExpression)) {
+				flowContinues = true;
 			}
 		} finally {
 			js.popIndentation();
 		}
 		js.append("}\n");
-		return true;
+		return flowContinues;
 	}
 
 	@Override

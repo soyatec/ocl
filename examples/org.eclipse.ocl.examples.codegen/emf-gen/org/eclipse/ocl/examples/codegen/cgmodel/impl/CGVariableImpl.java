@@ -244,7 +244,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 */
 	@Override
 	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
-		return init != null ? thatValue.isEquivalentTo(init) : null;
+		return init != null ? thatValue.isEquivalentTo(init) : super.isEquivalentTo(thatValue);
 	}
 
 	/**

@@ -216,7 +216,7 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 */
 	@Override
 	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
-		return referredVariable != null ? thatValue.isEquivalentTo(referredVariable) : null;
+		return referredVariable != null ? thatValue.isEquivalentTo(referredVariable) : super.isEquivalentTo(thatValue);
 	}
 
 	/**

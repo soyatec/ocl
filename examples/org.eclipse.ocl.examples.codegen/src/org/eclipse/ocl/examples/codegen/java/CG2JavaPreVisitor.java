@@ -162,6 +162,14 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		return codeGenerator;
 	}
 
+	protected @Nullable CGValuedElement installEvaluatorVariable(@NonNull CGValuedElement cgValuedElement) {
+		CGValuedElement evaluatorVariable = localContext.createEvaluatorVariable();
+		if (evaluatorVariable != null) {
+			cgValuedElement.getOwns().add(evaluatorVariable);
+		}
+		return evaluatorVariable;
+	}
+
 	protected @Nullable CGValuedElement installIdResolverVariable(@NonNull CGValuedElement cgValuedElement) {
 		CGValuedElement idResolverVariable = localContext.createIdResolverVariable();
 		cgValuedElement.getOwns().add(idResolverVariable);
@@ -421,6 +429,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	public @Nullable Object visitCGLibraryOperationCallExp(@NonNull CGLibraryOperationCallExp cgOperationCallExp) {
 		LibraryOperation libraryOperation = cgOperationCallExp.getLibraryOperation();
 		if (!(libraryOperation instanceof LibrarySimpleOperation)) {
+			installEvaluatorVariable(cgOperationCallExp);
 			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
 				TypeId asTypeId = cgOperationCallExp.getASTypeId();
 				if (asTypeId != null) {
@@ -435,6 +444,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	public @Nullable Object visitCGLibraryPropertyCallExp(@NonNull CGLibraryPropertyCallExp cgPropertyCallExp) {
 //		LibraryProperty libraryProperty = cgPropertyCallExp.getLibraryProperty();
 		try {
+			installEvaluatorVariable(cgPropertyCallExp);
 			return super.visitCGLibraryPropertyCallExp(cgPropertyCallExp);
 		}
 		finally {

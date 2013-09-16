@@ -308,7 +308,7 @@ public class MessageExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object CAUGHT_eq;
+		@NonNull /*@Caught*/ Object CAUGHT_sum;
 		try {
 		    final @Nullable /*@Thrown*/ CallOperationAction calledOperation = this.getCalledOperation();
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_CallOperationAction, calledOperation);
@@ -318,12 +318,12 @@ public class MessageExpImpl
 		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet_0);
 		    final @NonNull /*@Thrown*/ IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(size, size_0);
 		    final /*@Thrown*/ boolean eq = sum.equals(PivotTables.INT_1);
-		    CAUGHT_eq = eq;
+		    CAUGHT_sum = eq;
 		}
 		catch (Exception e) {
-		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_sum = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_sum == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -348,7 +348,7 @@ public class MessageExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object CAUGHT_symbol_5;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_2;
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
@@ -365,52 +365,33 @@ public class MessageExpImpl
 		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
-		    @Nullable /*@Thrown*/ Boolean symbol_5;
+		    /*@Thrown*/ boolean symbol_2;
 		    if (symbol_0) {
 		        if (CAUGHT_self_71 instanceof InvalidValueException) {
 		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        symbol_5 = (Boolean)CAUGHT_self_71;
+		        symbol_2 = (Boolean)CAUGHT_self_71;
 		    }
 		    else {
-		        @Nullable /*@Thrown*/ Boolean symbol_4;
+		        /*@NonInvalid*/ boolean symbol_1;
 		        if (CAUGHT_self_71 == Boolean.TRUE) {
-		            symbol_4 = ValuesUtil.FALSE_VALUE;
+		            symbol_1 = ValuesUtil.FALSE_VALUE;
 		        }
 		        else {
-		            if (CAUGHT_self_71 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_self_71;
-		            }
-		            final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
-		            @Nullable /*@Thrown*/ Boolean symbol_3;
-		            if (eq) {
-		                symbol_3 = ValuesUtil.TRUE_VALUE;
-		            }
-		            else {
-		                final /*@NonInvalid*/ boolean symbol_1 = CAUGHT_self_71 instanceof InvalidValueException;
-		                @Nullable /*@Thrown*/ Object symbol_2;
-		                if (symbol_1) {
-		                    symbol_2 = null;
-		                }
-		                else {
-		                    throw ValuesUtil.INVALID_VALUE;
-		                }
-		                symbol_3 = (Boolean)symbol_2;
-		            }
-		            symbol_4 = symbol_3;
+		            symbol_1 = ValuesUtil.TRUE_VALUE;
 		        }
-		        symbol_5 = symbol_4;
+		        symbol_2 = symbol_1;
 		    }
-		    CAUGHT_symbol_5 = symbol_5;
+		    CAUGHT_symbol_2 = symbol_2;
 		}
 		catch (Exception e) {
-		    CAUGHT_symbol_5 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_symbol_2 = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_symbol_5 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_symbol_2 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_symbol_5 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"MessageExp", "TargetIsNotACollection", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION, message, new Object [] { this }));
 		}

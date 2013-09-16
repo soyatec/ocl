@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
@@ -142,8 +143,15 @@ public class JavaStream
 	}
 
 	public boolean appendAssignment(@NonNull CGValuedElement toVariable, @NonNull CGValuedElement cgExpression) {
-		if (cgExpression.getInvalidValue() != null) {
-			cgExpression.accept(cg2java);
+		CGInvalid cgInvalidValue = cgExpression.getInvalidValue();
+		if (cgInvalidValue != null) {
+			append("throw ");
+//			append("(");
+//			appendClassReference(InvalidValueException.class);
+//			append(")");
+			appendValueName(cgInvalidValue);
+			append(";\n");
+			return false;
 		}
 		else {
 			TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(toVariable);
