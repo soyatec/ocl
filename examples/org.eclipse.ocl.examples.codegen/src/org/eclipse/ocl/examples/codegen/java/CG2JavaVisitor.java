@@ -1977,31 +1977,34 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
 			js.append(", ");
 			js.appendClassReference(unboxedTypeDescriptor.getJavaClass().getName());
-			js.append(".class)");
+			js.append(".class);\n");
+			//
+			js.append("assert ");
+			js.appendValueName(cgUnboxExp);
+			js.append(" != null;\n");
 		}
 		else {
 			js.appendDeclaration(cgUnboxExp);
 			js.append(" = ");
 			if (boxedTypeDescriptor.isAssignableTo(IntegerValue.class)) {
 				js.appendValueName(source);
-				js.append(".asNumber()");
+				js.append(".asNumber();\n");
 			}
 			else if (boxedTypeDescriptor.isAssignableTo(RealValue.class)) {
 				js.appendValueName(source);
-				js.append(".asNumber()");
+				js.append(".asNumber();\n");
 			}
 			else { //if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
 				js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
 				js.append(".unboxedValueOf(");
 				js.appendValueName(source);
-				js.append(")");
+				js.append(");\n");
 			}
 		}
 //		else {
 //			js.appendValueName(source);
-//			js.append(".GET_UNBOXED_VALUE(\"" + boxedTypeDescriptor.getClassName() + "\")");
+//			js.append(".GET_UNBOXED_VALUE(\"" + boxedTypeDescriptor.getClassName() + "\");\n");
 //		}
-		js.append(";\n");
 		return true;
 	}
 

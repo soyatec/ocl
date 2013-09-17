@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
@@ -237,6 +238,18 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		int iMax = cgArguments.size();
 		for (int i = 0; i < iMax; i++) {			// Avoid CME from rewrite
 			rewriteAsUnboxed(cgArguments.get(i));
+		}
+		if (cgElement.getEOperation().isMany()) {
+			rewriteAsAssertNonNulled(cgElement);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgElement) {
+		super.visitCGEcorePropertyCallExp(cgElement);
+		if (cgElement.getEStructuralFeature().isMany()) {
+			rewriteAsAssertNonNulled(cgElement);
 		}
 		return null;
 	}
