@@ -106,29 +106,31 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 	public @Nullable Object visitCGIfExp(@NonNull CGIfExp cgIfExp) {
 		super.visitCGIfExp(cgIfExp);
 		CGValuedElement cgCondition = context.getExpression(cgIfExp.getCondition());
-		CGValuedElement cgThen = context.getExpression(cgIfExp.getThenExpression());
-		CGValuedElement cgElse = context.getExpression(cgIfExp.getElseExpression());
-		if (cgCondition.isConstant()) {
-			CGInvalid cgInvalidValue = cgCondition.getInvalidValue();
-			if (cgInvalidValue != null) {
-				CGUtils.replace(cgIfExp, cgInvalidValue);
-			}
-			else if (cgCondition.isNull()) {
-				context.setConstant(cgIfExp, context.getInvalid("Null cgCondition"));
-			}
-			else if (cgCondition.isTrue()) {
-				context.replace(cgIfExp, cgThen, "Null then-expression");
-			}
-			else if (cgCondition.isFalse()) {
-				context.replace(cgIfExp, cgElse, "Null else-expression");
-			}
-			else {
-				ElementId asTypeId = cgCondition.getTypeId().getElementId();
-				context.setConstant(cgIfExp, context.getInvalid(EvaluatorMessages.TypedValueRequired, "Boolean", asTypeId));
-			}
+		CGInvalid cgInvalidValue = cgCondition.getInvalidValue();
+		if (cgInvalidValue != null) {
+			CGUtils.replace(cgIfExp, cgInvalidValue);
 		}
-		else if (cgThen.isEquivalentTo(cgElse) == Boolean.TRUE) {
-			context.setConstant(cgIfExp, context.getBoolean(true));
+		else if (cgCondition.isNull()) {
+			context.setConstant(cgIfExp, context.getInvalid("Null cgCondition"));
+		}
+		else if (cgCondition.isTrue()) {
+			CGValuedElement cgThen = context.getExpression(cgIfExp.getThenExpression());
+			context.replace(cgIfExp, cgThen, "Null then-expression");
+		}
+		else if (cgCondition.isFalse()) {
+			CGValuedElement cgElse = context.getExpression(cgIfExp.getElseExpression());
+			context.replace(cgIfExp, cgElse, "Null else-expression");
+		}
+		else if (cgCondition.isConstant()) {
+			ElementId asTypeId = cgCondition.getTypeId().getElementId();
+			context.setConstant(cgIfExp, context.getInvalid(EvaluatorMessages.TypedValueRequired, "Boolean", asTypeId));
+		}
+		else {
+			CGValuedElement cgThen = context.getExpression(cgIfExp.getThenExpression());
+			CGValuedElement cgElse = context.getExpression(cgIfExp.getElseExpression());
+			if (cgThen.isEquivalentTo(cgElse) == Boolean.TRUE) {
+				context.replace(cgIfExp, cgThen, "Null then/else-expression");
+			}
 		}
 		return null;
 	}
@@ -174,8 +176,12 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 	@Override
 	public @Nullable Object visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
 		super.visitCGIsInvalidExp(cgIsInvalidExp);
-		if (cgIsInvalidExp.isConstant()) {
-			context.setConstant(cgIsInvalidExp, context.getBoolean(cgIsInvalidExp.isTrue()));
+		CGValuedElement cgSource = context.getExpression(cgIsInvalidExp.getSource());
+		if (cgSource.isInvalid()) {
+			context.setConstant(cgIsInvalidExp, context.getBoolean(true));
+		}
+		else if (cgSource.isNonInvalid()) {
+			context.setConstant(cgIsInvalidExp, context.getBoolean(false));
 		}
 		return null;
 	}
@@ -183,8 +189,12 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 	@Override
 	public @Nullable Object visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgIsUndefinedExp) {
 		super.visitCGIsUndefinedExp(cgIsUndefinedExp);
-		if (cgIsUndefinedExp.isConstant()) {
-			context.setConstant(cgIsUndefinedExp, context.getBoolean(cgIsUndefinedExp.isTrue()));
+		CGValuedElement cgSource = context.getExpression(cgIsUndefinedExp.getSource());
+		if (cgSource.isInvalid() || cgSource.isNull()) {
+			context.setConstant(cgIsUndefinedExp, context.getBoolean(true));
+		}
+		else if (cgSource.isNonInvalid() && cgSource.isNonNull()) {
+			context.setConstant(cgIsUndefinedExp, context.getBoolean(false));
 		}
 		return null;
 	}
