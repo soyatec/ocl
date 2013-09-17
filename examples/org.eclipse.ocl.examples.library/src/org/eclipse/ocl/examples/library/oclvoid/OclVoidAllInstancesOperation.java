@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.library.oclvoid;
 
-import java.util.Collections;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -36,6 +34,6 @@ public class OclVoidAllInstancesOperation extends AbstractSimpleUnaryOperation
 	@Override
 	public @NonNull SetValue evaluate(@Nullable Object sourceVal) {
 		// OclVoid has a single instance: null
-		return createSetValue(SET_OCL_VOID, Collections.<Object>singletonList((Object) null));
+		return createSetOfEach(SET_OCL_VOID, (Object)null);
 	}
 }

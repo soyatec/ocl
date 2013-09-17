@@ -136,6 +136,7 @@ public class SerializeTests extends XtextTestCase
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		XtextResource xtextResource = null;
 		try {
+			@SuppressWarnings("unused")
 			Resource asResource = getPivotFromUML(metaModelManager1, umlResource);
 			//
 			//	Pivot to CS

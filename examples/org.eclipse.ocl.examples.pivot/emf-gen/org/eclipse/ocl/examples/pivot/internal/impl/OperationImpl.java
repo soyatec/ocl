@@ -938,7 +938,7 @@ public class OperationImpl
 		    @NonNull /*@Caught*/ Object CAUGHT_b_0;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = this.getBodyExpression();
-		        final @SuppressWarnings("null")/*@Thrown*/ boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
+		        final /*@Thrown*/ boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)bodyExpression_1);
 		        CAUGHT_b_0 = b_0;
 		    }
 		    catch (Exception e) {
@@ -1030,15 +1030,7 @@ public class OperationImpl
 		 * 	true
 		 * 
 		 */
-		if (ValuesUtil.TRUE_VALUE == ValuesUtil.TRUE_VALUE) {
-		    return true;
-		}
-		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Operation", "LoadableImplementation", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION__LOADABLE_IMPLEMENTATION, message, new Object [] { this }));
-		}
-		return false;
+		return true;
 	}
 
 	/**

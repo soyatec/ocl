@@ -200,8 +200,8 @@ public class CompanyImpl extends EObjectImpl implements Company
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @NonNull /*@NonInvalid*/ SequenceValue range = (SequenceValue)_1.getValue(0/*range*/);
-		    final @Nullable /*@Thrown*/ List<?> employees = self.getEmployees();
-		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_employees = employees == null ? null : idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> employees = self.getEmployees();
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_employees = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_employees);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(range, size);
 		    //

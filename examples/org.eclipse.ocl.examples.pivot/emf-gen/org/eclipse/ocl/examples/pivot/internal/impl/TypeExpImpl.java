@@ -285,7 +285,6 @@ public class TypeExpImpl
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
 		switch (operationID)

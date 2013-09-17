@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -66,9 +67,11 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 	}
 	
 	protected Resource initStateMachinePackage() throws ParserException {
-		UML2Pivot.initialize(resourceSet);
+		ResourceSet resourceSet2 = resourceSet;
+		assert resourceSet2 != null;
+		UML2Pivot.initialize(resourceSet2);
 		URI uri = getTestModelURI("model/StateMachines.uml");
-		Resource umlResource = resourceSet.getResource(uri, true);
+		Resource umlResource = resourceSet2.getResource(uri, true);
 		List<EObject> contents = umlResource.getContents();
 		Map<String, String> options = new HashMap<String, String>();
 		options.put(UML2EcoreConverter.OPTION__ECORE_TAGGED_VALUES, UMLUtil.OPTION__PROCESS);
@@ -88,7 +91,7 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 		options.put(UML2EcoreConverter.OPTION__COMMENTS,  UMLUtil.OPTION__PROCESS);
 		UML2EcoreConverter uml2EcoreConverter = new UML2EcoreConverter();
 		Collection<? extends EObject> ecoreContents = uml2EcoreConverter.convert(contents, options, null, null);
-		Resource ecoreResource = resourceSet.createResource(URI.createURI("StateMachines.ecore"));
+		Resource ecoreResource = resourceSet2.createResource(URI.createURI("StateMachines.ecore"));
 		ecoreResource.getContents().addAll(ecoreContents);
 		statefulEPackage = (EPackage) ecoreResource.getContents().get(0);
 		statefulEFactory = statefulEPackage.getEFactoryInstance();

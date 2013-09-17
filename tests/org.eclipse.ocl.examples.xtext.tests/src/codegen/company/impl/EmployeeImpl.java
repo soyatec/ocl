@@ -262,7 +262,6 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public EList<Employee> getDirectReports() {
 		/**
@@ -271,14 +270,8 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull /*@NonInvalid*/ Employee self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @Nullable /*@Thrown*/ Company company = self.getCompany();
-		if (company == null) {
-		    throw new InvalidValueException("Null source");
-		}
-		final @Nullable /*@Thrown*/ List<?> employees = company.getEmployees();
-		if (employees == null) {
-		    throw new InvalidValueException("Null source");
-		}
+		final @NonNull /*@Thrown*/ Company company = self.getCompany();
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> employees = company.getEmployees();
 		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_employees = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
 		@NonNull /*@NonInvalid*/ OrderedSetValue.Accumulator accumulator = ValuesUtil.createOrderedSetAccumulatorValue(CodegencompanyTables.ORD_CLSSid_Employee);
 		@Nullable Iterator<?> ITERATOR__1 = BOXED_employees.iterator();
@@ -302,7 +295,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		        accumulator.add(_1);
 		    }
 		}
-		final @NonNull /*@Thrown*/ List<?> UNBOXED_select = select.asEcoreObject();
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> UNBOXED_select = select.asEcoreObject();
 		return (EList<Employee>)UNBOXED_select;
 	}
 
@@ -311,7 +304,6 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public EList<Employee> getAllReports() {
 		/**
@@ -343,7 +335,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		        accumulator.add(_1);
 		    }
 		}
-		final @NonNull /*@Thrown*/ List<?> UNBOXED_select = select.asEcoreObject();
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> UNBOXED_select = select.asEcoreObject();
 		return (EList<Employee>)UNBOXED_select;
 	}
 
@@ -352,7 +344,6 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public EList<Employee> getReportingChain() {
 		/**
@@ -386,8 +377,8 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		    if (manager_1 == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List<?> reportingChain = manager_1.getReportingChain();
-		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_reportingChain = reportingChain == null ? null : idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, reportingChain);
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> reportingChain = manager_1.getReportingChain();
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_reportingChain = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, reportingChain);
 		    final @Nullable /*@Thrown*/ Employee manager_2 = self.getManager();
 		    final @NonNull /*@Thrown*/ OrderedSetValue prepend = (OrderedSetValue)OrderedCollectionPrependOperation.INSTANCE.evaluate(BOXED_reportingChain, manager_2);
 		    symbol_1 = prepend;
@@ -395,7 +386,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		if (symbol_1 == null) {
 		    throw new InvalidValueException("Null source");
 		}
-		final @NonNull /*@Thrown*/ List<?> UNBOXED_symbol_1 = symbol_1.asEcoreObject();
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> UNBOXED_symbol_1 = symbol_1.asEcoreObject();
 		return (EList<Employee>)UNBOXED_symbol_1;
 	}
 
@@ -428,10 +419,10 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull /*@NonInvalid*/ Employee self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @Nullable /*@Thrown*/ List<?> reportingChain = self.getReportingChain();
-		final @Nullable /*@Thrown*/ OrderedSetValue BOXED_reportingChain = reportingChain == null ? null : idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, reportingChain);
+		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> reportingChain = self.getReportingChain();
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_reportingChain = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, reportingChain);
 		final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_reportingChain, manager);
-		return includes.booleanValue();
+		return includes;
 	}
 
 	/**
@@ -468,8 +459,8 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_gt;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> directReports = self.getDirectReports();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_directReports = directReports == null ? null : idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, directReports);
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> directReports = self.getDirectReports();
+		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_directReports = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, directReports);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_directReports);
 		        final @NonNull /*@Thrown*/ Boolean gt = NumericGreaterThanOperation.INSTANCE.evaluate(size, CodegencompanyTables.INT_0);
 		        CAUGHT_gt = gt;
@@ -507,7 +498,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull /*@NonInvalid*/ Employee self = this;
 		final @Nullable /*@Thrown*/ String name = self.getName();
 		final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(name, null);
-		return ne.booleanValue();
+		return ne;
 	}
 
 	/**
@@ -776,7 +767,6 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case CodegencompanyPackage.EMPLOYEE___REPORTS_TO__EMPLOYEE:

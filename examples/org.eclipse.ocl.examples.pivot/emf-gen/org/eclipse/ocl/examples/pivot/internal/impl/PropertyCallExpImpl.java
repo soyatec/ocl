@@ -507,7 +507,7 @@ public class PropertyCallExpImpl
 		            throw new InvalidValueException("Null source");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
+		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
 		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        CAUGHT_b = b;
 		    }
@@ -603,7 +603,7 @@ public class PropertyCallExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
+		    final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = this.getSpecializedReferredPropertyType();
 		    final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == getSpecializedReferredPropertyType.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
 		    ;
 		    CAUGHT_eq = eq;

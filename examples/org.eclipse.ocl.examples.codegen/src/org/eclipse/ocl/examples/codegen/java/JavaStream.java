@@ -463,7 +463,7 @@ public class JavaStream
 			append("final ");
 		}
 //		TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgElement);
-		if (suppressNullWarnings) {
+/*		if (suppressNullWarnings) {
 //			if ((typeDescriptor instanceof UnboxedEObjectsDescriptor)
 //			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
 //				append("@SuppressWarnings(\"null\")");
@@ -471,7 +471,7 @@ public class JavaStream
 			if (cgElement.isUndeclaredNonNull()) {
 				append("@SuppressWarnings(\"null\")");
 			}
-		}
+		} */
 		if (!is_boolean) {
 			appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);	// FIXME Ugh!
 			append(" ");

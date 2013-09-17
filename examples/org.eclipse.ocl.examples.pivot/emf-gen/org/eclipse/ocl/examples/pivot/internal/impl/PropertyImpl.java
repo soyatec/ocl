@@ -1328,7 +1328,7 @@ public class PropertyImpl
 		    @NonNull /*@Caught*/ Object CAUGHT_b_0;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = this.getDefaultExpression();
-		        final @SuppressWarnings("null")/*@Thrown*/ boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
+		        final /*@Thrown*/ boolean b_0 = ((TypedMultiplicityElement)this).CompatibleBody((ValueSpecification)defaultExpression_1);
 		        CAUGHT_b_0 = b_0;
 		    }
 		    catch (Exception e) {

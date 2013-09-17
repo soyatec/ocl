@@ -23,8 +23,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -32,11 +30,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -46,9 +41,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->
@@ -245,15 +238,7 @@ public class ConstraintImpl
 		/**
 		 * inv UniqueName: true 
 		 */
-		if (ValuesUtil.TRUE_VALUE == ValuesUtil.TRUE_VALUE) {
-		    return true;
-		}
-		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Constraint", "UniqueName", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.CONSTRAINT__UNIQUE_NAME, message, new Object [] { this }));
-		}
-		return false;
+		return true;
 	}
 
 	/**

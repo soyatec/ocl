@@ -780,7 +780,6 @@ public class PackageImpl
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments)
 			throws InvocationTargetException {
 		switch (operationID)
@@ -828,7 +827,7 @@ public class PackageImpl
 					synchronized (this) {
 						EObject eContainer2 = eContainer();
 						String externalURI = eContainer2 instanceof Root ? ((Root)eContainer2).getExternalURI() : null;
-						@SuppressWarnings("null") @NonNull String nsUri = PivotPackage.eNS_URI;
+						@NonNull String nsUri = PivotPackage.eNS_URI;
 						if (nsUri.equals(externalURI)) {
 							packageId2 = IdManager.getNsURIPackageId(nsUri, PivotPackage.eINSTANCE);
 						}

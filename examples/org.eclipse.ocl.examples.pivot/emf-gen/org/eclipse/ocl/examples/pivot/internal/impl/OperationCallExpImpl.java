@@ -522,7 +522,7 @@ public class OperationCallExpImpl
 		            if (parameterType == null) {
 		                throw new InvalidValueException("Null source");
 		            }
-		            final @SuppressWarnings("null")@NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
+		            final @NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
 		            final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
 		            CAUGHT_conformsTo = conformsTo;
 		        }
