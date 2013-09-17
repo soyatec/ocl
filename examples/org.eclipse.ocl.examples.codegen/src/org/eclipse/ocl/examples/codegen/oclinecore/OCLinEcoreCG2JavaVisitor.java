@@ -152,62 +152,68 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		String validatorClass = genModelHelper.getQualifiedValidatorClassName(genPackage);
 
 		js.appendCommentWithOCL(null, asConstraint);
-		js.appendLocalStatements(cgBody);		// FieldingAnalyzer override ensures this is caught
-		js.append("if (");
-		js.appendValueName(cgBody);
-		js.append(" == ");
-		js.appendClassReference(ValuesUtil.class);
-		js.append(".TRUE_VALUE) {\n");
-		js.pushIndentation(null);
-			js.append("return true;\n");
-		js.popIndentation();
-		js.append("}\n");
-		//
-		js.append("if (diagnostics != null) {\n");
-		js.pushIndentation(null);
-			js.append("int ");
-			js.append(getLocalContext().getSeverityName());
-			js.append(" = ");
-			if (cgBody.isNull()) {
-				js.appendClassReference(Diagnostic.class);
-				js.append(".ERROR : ");
-			}
-			else if (cgBody.isNonNull()) {
-				js.appendClassReference(Diagnostic.class);
-				js.append(".WARNING;\n");
+		if (js.appendLocalStatements(cgBody)) {		// FieldingAnalyzer override ensures this is caught
+			if (cgBody.isTrue()) {
+				js.append("return true;");
 			}
 			else {
+				js.append("if (");
 				js.appendValueName(cgBody);
-				js.append(" == null ? ");
-				js.appendClassReference(Diagnostic.class);
-				js.append(".ERROR : ");
-				js.appendClassReference(Diagnostic.class);
-				js.append(".WARNING;\n");
+				js.append(" == ");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".TRUE_VALUE) {\n");
+				js.pushIndentation(null);
+					js.append("return true;\n");
+				js.popIndentation();
+				js.append("}\n");
+				//
+				js.append("if (diagnostics != null) {\n");
+				js.pushIndentation(null);
+					js.append("int ");
+					js.append(getLocalContext().getSeverityName());
+					js.append(" = ");
+					if (cgBody.isNull()) {
+						js.appendClassReference(Diagnostic.class);
+						js.append(".ERROR : ");
+					}
+					else if (cgBody.isNonNull()) {
+						js.appendClassReference(Diagnostic.class);
+						js.append(".WARNING;\n");
+					}
+					else {
+						js.appendValueName(cgBody);
+						js.append(" == null ? ");
+						js.appendClassReference(Diagnostic.class);
+						js.append(".ERROR : ");
+						js.appendClassReference(Diagnostic.class);
+						js.append(".WARNING;\n");
+					}
+					//
+					js.appendClassReference(String.class);
+					js.append(" " + getLocalContext().getMessageName() + " = ");
+					js.appendClassReference(NLS.class);
+					js.append(".bind(");
+					js.appendClassReference(EvaluatorMessages.class);
+					js.append(".ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"");
+					js.append(genClassifierName);
+					js.append("\", \"");
+					js.append(constraintName!= null ? constraintName : "UnnamedConstraint");
+					js.append("\", ");
+					js.appendClassReference(EObjectValidator.class);
+					js.append(".getObjectLabel(this, context)});\n");
+					//
+					js.append("diagnostics.add(new ");
+					js.appendClassReference(BasicDiagnostic.class);
+					js.append("(" + getLocalContext().getSeverityName() + ", ");
+					js.appendClassReference(validatorClass);
+					js.append(".DIAGNOSTIC_SOURCE, ");
+					js.appendClassReference(validatorClass);
+					js.append("." + constraintLiteralName + ", " + getLocalContext().getMessageName() + ", new Object [] { this }));\n");
+				js.popIndentation();
+				js.append("}\n");
+				js.append("return false;");
 			}
-			//
-			js.appendClassReference(String.class);
-			js.append(" " + getLocalContext().getMessageName() + " = ");
-			js.appendClassReference(NLS.class);
-			js.append(".bind(");
-			js.appendClassReference(EvaluatorMessages.class);
-			js.append(".ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"");
-			js.append(genClassifierName);
-			js.append("\", \"");
-			js.append(constraintName!= null ? constraintName : "UnnamedConstraint");
-			js.append("\", ");
-			js.appendClassReference(EObjectValidator.class);
-			js.append(".getObjectLabel(this, context)});\n");
-			//
-			js.append("diagnostics.add(new ");
-			js.appendClassReference(BasicDiagnostic.class);
-			js.append("(" + getLocalContext().getSeverityName() + ", ");
-			js.appendClassReference(validatorClass);
-			js.append(".DIAGNOSTIC_SOURCE, ");
-			js.appendClassReference(validatorClass);
-			js.append("." + constraintLiteralName + ", " + getLocalContext().getMessageName() + ", new Object [] { this }));\n");
-		js.popIndentation();
-		js.append("}\n");
-		js.append("return false;");
+		}
 		return toString();
 	}
 

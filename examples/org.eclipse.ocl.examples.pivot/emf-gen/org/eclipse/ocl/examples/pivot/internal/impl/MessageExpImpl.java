@@ -348,7 +348,7 @@ public class MessageExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object CAUGHT_symbol_2;
+		@NonNull /*@Caught*/ Object CAUGHT_symbol_1;
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_self_71;
 		    try {
@@ -365,29 +365,26 @@ public class MessageExpImpl
 		        CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		    }
 		    final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
-		    /*@Thrown*/ boolean symbol_2;
+		    /*@Thrown*/ boolean symbol_1;
 		    if (symbol_0) {
 		        if (CAUGHT_self_71 instanceof InvalidValueException) {
 		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        symbol_2 = (Boolean)CAUGHT_self_71;
+		        symbol_1 = (Boolean)CAUGHT_self_71;
 		    }
 		    else {
-		        /*@NonInvalid*/ boolean symbol_1;
-		        if (CAUGHT_self_71 == Boolean.TRUE) {
-		            symbol_1 = ValuesUtil.FALSE_VALUE;
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
 		        }
-		        else {
-		            symbol_1 = ValuesUtil.TRUE_VALUE;
-		        }
-		        symbol_2 = symbol_1;
+		        final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
+		        symbol_1 = eq;
 		    }
-		    CAUGHT_symbol_2 = symbol_2;
+		    CAUGHT_symbol_1 = symbol_1;
 		}
 		catch (Exception e) {
-		    CAUGHT_symbol_2 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_symbol_1 = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_symbol_2 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_symbol_1 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

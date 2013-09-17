@@ -500,7 +500,11 @@ public class DataTypeImpl
 			return owningTemplateParameter.getElementId();
 		}
 		else if (eContainer() instanceof Library) {
-			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name, getTypeParameters().parametersSize());
+			String name2 = name;
+			if (name2 == null) {
+				name2 = "";
+			}
+			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name2, getTypeParameters().parametersSize());
 		}
 		else {
 			Type behavioralType = getBehavioralType();

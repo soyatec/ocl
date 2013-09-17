@@ -1360,7 +1360,7 @@ public class OCLstdlib extends ASResourceImpl
 			ownedParameters.add(parameter = createParameter("b", _Boolean, false));
 			ownedOperations.add(operation = op_Boolean_not);
 			operation.setIsRequired(false);
-			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self.oclIsInvalid() then self\n\t\t      else if self = null then null\n\t\t      else if self = true then false\n\t\t      else true\n\t\t      endif endif endif"));
+			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self.oclIsInvalid() then self\n\t\t      else if self = null then null\n\t\t      else self = false\n\t\t      endif endif"));
 			ownedOperations.add(operation = op_Boolean_or);
 			operation.setIsInvalidating(true);
 			operation.setIsRequired(false);
@@ -1371,7 +1371,7 @@ public class OCLstdlib extends ASResourceImpl
 			ownedOperations.add(operation = op_Boolean_toString);
 			ownedOperations.add(operation = op_Boolean_xor);
 			operation.setIsRequired(false);
-			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self.oclIsInvalid() then self\n\t\t\t  else if b.oclIsInvalid() then b\n\t\t      else if self = null then null\n\t\t\t  else if b = null then null\n\t\t      else if self = b then false\n\t\t\t  else true\n\t\t      endif endif endif endif endif"));
+			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self = null then null\n\t\t      else if b = null then null\n\t\t      else self <> b\n\t\t      endif endif"));
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("b", _Boolean, false));
 			ownedOperations = _Integer.getOwnedOperation();

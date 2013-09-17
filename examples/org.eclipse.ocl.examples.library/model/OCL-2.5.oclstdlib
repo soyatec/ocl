@@ -230,9 +230,8 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	{
 		body: if self.oclIsInvalid() then self
 		      else if self = null then null
-		      else if self = true then false
-		      else true
-		      endif endif endif;
+		      else self = false
+		      endif endif;
 	}
 	/**
 	oclText[true] if either oclText[self] or oclText[b] is oclText[true].
@@ -267,13 +266,10 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	**/
 	operation xor(b : Boolean[?]) : Boolean[?] precedence=XOR => 'org.eclipse.ocl.examples.library.logical.BooleanXorOperation'
 	{
-		body: if self.oclIsInvalid() then self
-			  else if b.oclIsInvalid() then b
-		      else if self = null then null
-			  else if b = null then null
-		      else if self = b then false
-			  else true
-		      endif endif endif endif endif;
+		body: if self = null then null
+		      else if b = null then null
+		      else self <> b
+		      endif endif;
 	}
 }
 
