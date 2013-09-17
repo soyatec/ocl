@@ -18,10 +18,13 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver
+import org.eclipse.jdt.annotation.NonNull
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
 
 public class GenerateASVisitors extends GenerateVisitors
 {
-	override void generateVisitors(EPackage ePackage) {
+	override void generateVisitors(@NonNull GenPackage genPackage) {
+		var EPackage ePackage = genPackage.getEcorePackage();
 		if (!isDerived()) {
 			ePackage.generateVisitableInterface();
 		}

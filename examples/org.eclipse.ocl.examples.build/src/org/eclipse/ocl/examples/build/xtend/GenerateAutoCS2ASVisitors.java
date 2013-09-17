@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.build.xtend;
 
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.autogen.java.AutoCodeGenerator;
 import org.eclipse.ocl.examples.build.xtend.GenerateCSVisitors;
@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.build.xtend.GenerateCSVisitors;
 public class GenerateAutoCS2ASVisitors extends GenerateCSVisitors
 {
 	@Override
-	public void generateVisitors(@NonNull EPackage csPackage) {
-		AutoCodeGenerator.generate(csPackage, isDerived() ? superProjectPrefix : null);
+	public void generateVisitors(@NonNull GenPackage genPackage) {
+		AutoCodeGenerator.generate(genPackage, isDerived() ? superProjectPrefix : null);
 	}
 }

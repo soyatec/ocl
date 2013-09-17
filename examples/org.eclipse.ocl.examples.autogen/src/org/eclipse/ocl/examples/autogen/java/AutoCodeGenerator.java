@@ -74,8 +74,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
-import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -103,7 +101,9 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 {
 //	private static final Logger logger = Logger.getLogger(AutoCodeGenerator.class);
 	
-	public static void generate(@NonNull EPackage ePackage, @Nullable String superProjectPrefix) {
+	public static void generate(@NonNull GenPackage genPackage, @Nullable String superProjectPrefix) {
+		EPackage ePackage = genPackage.getEcorePackage();
+		assert ePackage != null;
 //		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
 //		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
 //		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
@@ -117,8 +117,6 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource);
 		org.eclipse.ocl.examples.pivot.Package asPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
 		if (asPackage != null) {
-			GenModelHelper genModelHelper = new AbstractGenModelHelper(metaModelManager);
-			GenPackage genPackage = DomainUtil.nonNullState(genModelHelper.getGenPackage(asPackage));
 			GenPackage superGenPackage = null;
 			org.eclipse.ocl.examples.pivot.Package asSuperPackage = null;
 			if (superProjectPrefix != null) {
@@ -154,6 +152,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			@NonNull GenPackage genPackage, @Nullable GenPackage superGenPackage) {
 		super(metaModelManager);
 		this.genModel = DomainUtil.nonNullState(genPackage.getGenModel());
+		metaModelManager.addGenModel(genModel);
 		getOptions().setUseNullAnnotations(OCLinEcoreGenModelGeneratorAdapter.useNullAnnotations(genModel));
 		cgAnalyzer = new AutoAnalyzer(this);
 		this.asPackage = asPackage;

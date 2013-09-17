@@ -20,12 +20,14 @@ import org.eclipse.jdt.annotation.NonNull
 import java.util.List
 import java.util.ArrayListimport org.eclipse.ocl.examples.xtext.base.cs2as.Continuation
 import org.eclipse.ocl.examples.pivot.Element
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
 
 public class GenerateCS2ASVisitors extends GenerateCSVisitors
 {
-	override void generateVisitors(EPackage csPackage) {
-		super.generateVisitors(csPackage);
+	override void generateVisitors(@NonNull GenPackage genPackage) {
+		super.generateVisitors(genPackage);
 		if (isDerived()) {
+			var EPackage csPackage = genPackage.getEcorePackage();
 			generateContainmentVisitor(csPackage);
 			generatePreOrderVisitor(csPackage);
 			generatePostOrderVisitor(csPackage);

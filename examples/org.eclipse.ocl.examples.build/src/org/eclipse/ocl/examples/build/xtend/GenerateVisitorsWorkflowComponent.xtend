@@ -21,7 +21,6 @@ import org.apache.log4j.Logger
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -93,7 +92,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		}
 	}
 
-	abstract def void generateVisitors(@NonNull EPackage ePackage);
+	abstract def void generateVisitors(@NonNull GenPackage genPackage);
 
 	private def String getCopyright(Resource genModelResource) {
 		var GenModel genModel = genModelResource.getContents().get(0) as GenModel;
@@ -101,13 +100,13 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		return if(copyright == null) EMPTY_STRING else copyright;
 	}
 
-	private def EPackage getEPackage(Resource genModelResource) {
+	private def GenPackage getGenPackage(Resource genModelResource) {
 		var GenModel genModel = genModelResource.getContents().get(0) as GenModel;
 		var List<GenPackage> genPackages = genModel.getAllGenPackagesWithConcreteClasses();
 		return if (genPackages.isEmpty())
 			null
 		else
-			genPackages.get(0).getEcorePackage(); // We assume we want the first one;
+			genPackages.get(0); // We assume we want the first one;
 	}
 
 	override protected invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
@@ -135,10 +134,10 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		log.info("Loading GenModel '" + genModelURI);
 		try {
 			var Resource genModelResource = resourceSet.getResource(genModelURI, true);
-			var EPackage targetEPackage = getEPackage(genModelResource);
+			var GenPackage genPackage = getGenPackage(genModelResource);
 			copyright = getCopyright(genModelResource);
 			sourceFile = genModelFile;
-			generateVisitors(targetEPackage);
+			generateVisitors(genPackage);
 		} catch (IOException e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
 		}

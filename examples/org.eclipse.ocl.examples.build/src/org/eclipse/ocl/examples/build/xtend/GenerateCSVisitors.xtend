@@ -16,10 +16,12 @@ package org.eclipse.ocl.examples.build.xtend
 
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.jdt.annotation.NonNull
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
 
 public class GenerateCSVisitors extends GenerateVisitors
 {
-	override void generateVisitors(@NonNull EPackage ePackage) {
+	override void generateVisitors(@NonNull GenPackage genPackage) {
+		var EPackage ePackage = genPackage.getEcorePackage();
 		if (!isDerived()) {
 			ePackage.generateVisitableInterface();
 		}
