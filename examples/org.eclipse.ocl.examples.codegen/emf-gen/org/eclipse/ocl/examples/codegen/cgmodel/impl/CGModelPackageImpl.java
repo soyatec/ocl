@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -124,6 +125,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	private EClass cgAccumulatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgAssertNonNullExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -816,6 +824,15 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 */
 	public EClass getCGAccumulator() {
 		return cgAccumulatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGAssertNonNullExp() {
+		return cgAssertNonNullExpEClass;
 	}
 
 	/**
@@ -2423,6 +2440,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		// Create classes and their features
 		cgAccumulatorEClass = createEClass(CG_ACCUMULATOR);
 
+		cgAssertNonNullExpEClass = createEClass(CG_ASSERT_NON_NULL_EXP);
+
 		cgBooleanEClass = createEClass(CG_BOOLEAN);
 		createEAttribute(cgBooleanEClass, CG_BOOLEAN__BOOLEAN_VALUE);
 
@@ -2705,6 +2724,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 
 		// Add supertypes to classes
 		cgAccumulatorEClass.getESuperTypes().add(this.getCGIterator());
+		cgAssertNonNullExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgBooleanEClass.getESuperTypes().add(this.getCGConstant());
 		cgBoxExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgBuiltInIterationCallExpEClass.getESuperTypes().add(this.getCGIterationCallExp());
@@ -2782,6 +2802,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(cgAccumulatorEClass, CGAccumulator.class, "CGAccumulator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cgAssertNonNullExpEClass, CGAssertNonNullExp.class, "CGAssertNonNullExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cgBooleanEClass, CGBoolean.class, "CGBoolean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGBoolean_BooleanValue(), ecorePackage.getEBoolean(), "booleanValue", null, 1, 1, CGBoolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

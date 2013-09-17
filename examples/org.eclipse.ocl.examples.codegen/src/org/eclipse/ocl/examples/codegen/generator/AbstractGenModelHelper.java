@@ -152,6 +152,22 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	public @Nullable Class<?> getEcoreFactoryClass(@NonNull EPackage ePackage) {
+		GenPackage genPackage = getGenPackage(ePackage);
+		if (genPackage == null) {
+			return null;
+		}
+		String qualifiedFactoryName = genPackage.getQualifiedFactoryInterfaceName();
+		try {
+			Thread currentThread = Thread.currentThread();
+			@SuppressWarnings("null") @NonNull ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+			@SuppressWarnings("null") @NonNull Class<?> loadedClass = contextClassLoader.loadClass(qualifiedFactoryName);
+			return loadedClass;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public @NonNull Class<?> getEcoreInterfaceClass(@NonNull Type type) throws GenModelException {
 		GenClassifier genClassifier = getGenClassifier(type);
 		String qualifiedInterfaceName;

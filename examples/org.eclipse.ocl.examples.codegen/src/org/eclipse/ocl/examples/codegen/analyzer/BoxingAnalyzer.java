@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
@@ -103,6 +104,18 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		}
 		TypeServer owningTypeServer = metaModelManager.getTypeServer(owningType);
 		return typeServer == owningTypeServer;
+	}
+
+	/**
+	 * Insert a CGAssertNonNullExp around cgChild.
+	 */
+	protected @Nullable CGValuedElement rewriteAsAssertNonNulled(@Nullable CGValuedElement cgChild) {
+		if ((cgChild == null) || cgChild.isNonNull() /*|| (cgParent instanceof CGGuardExp)*/) {
+			return cgChild;
+		}
+		CGAssertNonNullExp cgAssertExp = CGModelFactory.eINSTANCE.createCGAssertNonNullExp();
+		CGUtils.wrap(cgAssertExp, cgChild);
+		return cgAssertExp;
 	}
 
 	/**

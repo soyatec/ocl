@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -85,6 +86,8 @@ import org.eclipse.ocl.examples.library.iterator.OneIteration;
 import org.eclipse.ocl.examples.library.iterator.RejectIteration;
 import org.eclipse.ocl.examples.library.iterator.SelectIteration;
 import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -531,10 +534,31 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 	}
 
+	public @Nullable Boolean isNonNull(@NonNull OperationCallExp asOperationCallExp) {
+		Operation asOperation = asOperationCallExp.getReferredOperation();
+		EObject eOperation = asOperation.getETarget();
+		if (!(eOperation instanceof EOperation)) {
+			return null;
+		}
+		CGTypeId cgTypeId = getAnalyzer().getTypeId(asOperation.getOwningType().getTypeId());
+		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
+		TypeDescriptor requiredTypeDescriptor = getTypeDescriptor(elementId, false);
+		String getAccessor = genModelHelper.getOperationAccessor(asOperation);
+		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
+		if (requiredJavaClass == null) {
+			return null;
+		}
+		Method leastDerivedMethod = getLeastDerivedMethod(requiredJavaClass, getAccessor);
+		if (leastDerivedMethod == null) {
+			return null;
+		}
+		return getIsNonNull(leastDerivedMethod) == Boolean.TRUE;
+	}
+
 	public @Nullable Boolean isNonNull(@NonNull PropertyCallExp asPropertyCallExp) {
 		Property asProperty = asPropertyCallExp.getReferredProperty();
 		EObject eStructuralFeature = asProperty.getETarget();
-		if (!(eStructuralFeature instanceof  EStructuralFeature)) {
+		if (!(eStructuralFeature instanceof EStructuralFeature)) {
 			return null;
 		}
 		CGTypeId cgTypeId = getAnalyzer().getTypeId(asProperty.getOwningType().getTypeId());

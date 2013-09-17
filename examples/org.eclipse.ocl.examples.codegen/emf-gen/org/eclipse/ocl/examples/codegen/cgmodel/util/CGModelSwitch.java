@@ -93,6 +93,18 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_ASSERT_NON_NULL_EXP: {
+				CGAssertNonNullExp cgAssertNonNullExp = (CGAssertNonNullExp)theEObject;
+				T result = caseCGAssertNonNullExp(cgAssertNonNullExp);
+				if (result == null) result = caseCGCallExp(cgAssertNonNullExp);
+				if (result == null) result = caseCGValuedElement(cgAssertNonNullExp);
+				if (result == null) result = caseCGTypedElement(cgAssertNonNullExp);
+				if (result == null) result = caseCGNamedElement(cgAssertNonNullExp);
+				if (result == null) result = caseCGElement(cgAssertNonNullExp);
+				if (result == null) result = caseNameable(cgAssertNonNullExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_BOOLEAN: {
 				CGBoolean cgBoolean = (CGBoolean)theEObject;
 				T result = caseCGBoolean(cgBoolean);
@@ -973,6 +985,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGAccumulator(CGAccumulator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Assert Non Null Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Assert Non Null Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGAssertNonNullExp(CGAssertNonNullExp object) {
 		return null;
 	}
 

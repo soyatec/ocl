@@ -88,7 +88,7 @@ public class CGAccumulatorImpl extends CGIteratorImpl implements CGAccumulator
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	private boolean nonInvalid = false;
+	protected boolean nonInvalid = false;
 
 	/**
 	 * {@inheritDoc}

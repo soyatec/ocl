@@ -36,8 +36,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 public interface GenModelHelper
 {
 	@NonNull Class<?> getAbstractOperationClass(@NonNull List<?> parameters);
-	@NonNull String getGetAccessor(@NonNull Property aProperty) throws GenModelException;
-	@NonNull String getGetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException;
+	@Nullable Class<?> getEcoreFactoryClass(@NonNull EPackage ePackage);
 	@NonNull Class<?> getEcoreInterfaceClass(@NonNull Type owningType) throws GenModelException;
 	@Nullable String getEcoreInterfaceClassName(@NonNull EClass eClass);
 	@NonNull Class<?> getEcoreInterfaceClassifier(@NonNull EClassifier eClassifier) throws GenModelException;
@@ -48,6 +47,8 @@ public interface GenModelHelper
 	@Nullable GenPackage getGenPackage(@NonNull org.eclipse.ocl.examples.pivot.Package asPackage);
 	@Nullable GenPackage getGenPackage(@NonNull Type type);
 	@Nullable GenParameter getGenParameter(@NonNull Parameter parameter);
+	@NonNull String getGetAccessor(@NonNull Property aProperty) throws GenModelException;
+	@NonNull String getGetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException;
 	@Nullable String getImplementationClassName(@NonNull EClassifier eClassifier);
 	@NonNull String getLiteralName(@NonNull EClassifier eClassifier);
 	@NonNull MetaModelManager getMetaModelManager();

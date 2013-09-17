@@ -453,7 +453,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	private boolean caught = false;
+	protected boolean caught = false;
 
 	/**
 	 * {@inheritDoc}
@@ -467,7 +467,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	private String valueName = null;
+	protected String valueName = null;
 
 	/**
 	 * {@inheritDoc}

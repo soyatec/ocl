@@ -42,7 +42,16 @@ public interface CGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Accumulator</em>'.
 	 * @generated
 	 */
-	CGAccumulator createCGAccumulator();
+	@NonNull CGAccumulator createCGAccumulator();
+
+	/**
+	 * Returns a new object of class '<em>CG Assert Non Null Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Assert Non Null Exp</em>'.
+	 * @generated
+	 */
+	@NonNull CGAssertNonNullExp createCGAssertNonNullExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Boolean</em>'.

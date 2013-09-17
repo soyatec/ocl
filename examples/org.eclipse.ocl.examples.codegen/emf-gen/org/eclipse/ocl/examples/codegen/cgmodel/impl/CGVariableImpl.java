@@ -295,7 +295,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	private boolean nonInvalid = false;
+	protected boolean nonInvalid = false;
 
 	/**
 	 * {@inheritDoc}
@@ -309,7 +309,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	private boolean nonNull = false;
+	protected boolean nonNull = false;
 
 	/**
 	 * {@inheritDoc}

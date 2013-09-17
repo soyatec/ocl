@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
@@ -275,6 +276,14 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	@Override
 	public String toString() {
 		return result.toString();
+	}
+	
+	@Override
+	public @Nullable String visitCGAssertNonNullExp(@NonNull CGAssertNonNullExp cgAssertNonNullExp) {
+		append("$ASSERT_NON_NULL("); //$NON-NLS-1$
+		safeVisit(cgAssertNonNullExp.getSource());
+		append(")"); //$NON-NLS-1$
+		return null;
 	}
 	
 	@Override

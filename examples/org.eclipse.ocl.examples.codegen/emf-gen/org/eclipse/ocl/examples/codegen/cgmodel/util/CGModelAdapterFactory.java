@@ -85,6 +85,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGAccumulatorAdapter();
 			}
 			@Override
+			public Adapter caseCGAssertNonNullExp(CGAssertNonNullExp object) {
+				return createCGAssertNonNullExpAdapter();
+			}
+			@Override
 			public Adapter caseCGBoolean(CGBoolean object) {
 				return createCGBooleanAdapter();
 			}
@@ -415,6 +419,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGAccumulatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp <em>CG Assert Non Null Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp
+	 * @generated
+	 */
+	public Adapter createCGAssertNonNullExpAdapter() {
 		return null;
 	}
 

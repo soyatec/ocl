@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.*;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
@@ -142,6 +143,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case CGModelPackage.CG_ACCUMULATOR: return createCGAccumulator();
+			case CGModelPackage.CG_ASSERT_NON_NULL_EXP: return createCGAssertNonNullExp();
 			case CGModelPackage.CG_BOOLEAN: return createCGBoolean();
 			case CGModelPackage.CG_BOX_EXP: return createCGBoxExp();
 			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP: return createCGBuiltInIterationCallExp();
@@ -294,9 +296,19 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGAccumulator createCGAccumulator() {
+	public @NonNull CGAccumulator createCGAccumulator() {
 		CGAccumulatorImpl cgAccumulator = new CGAccumulatorImpl();
 		return cgAccumulator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGAssertNonNullExp createCGAssertNonNullExp() {
+		CGAssertNonNullExpImpl cgAssertNonNullExp = new CGAssertNonNullExpImpl();
+		return cgAssertNonNullExp;
 	}
 
 	/**

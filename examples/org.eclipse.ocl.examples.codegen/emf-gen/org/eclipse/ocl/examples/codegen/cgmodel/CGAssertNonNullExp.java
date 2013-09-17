@@ -17,16 +17,16 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>CG Guard Exp</b></em>'.
+ * A representation of the model object '<em><b>CG Assert Non Null Exp</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A CGGuardExp checks that its source is non-null and throws an invalid value exception if null.
+ * A CGAssertNonNullExp asserts that its source is non-null causing an assertion failure if null.
  * <!-- end-model-doc -->
  *
  *
- * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGGuardExp()
+ * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGAssertNonNullExp()
  * @generated
  */
-public interface CGGuardExp extends CGCallExp {
-} // CGGuardExp
+public interface CGAssertNonNullExp extends CGCallExp {
+} // CGAssertNonNullExp

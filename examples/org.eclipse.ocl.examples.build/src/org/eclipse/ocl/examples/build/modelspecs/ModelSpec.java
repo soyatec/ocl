@@ -84,6 +84,10 @@ public abstract class ModelSpec
 	}
 
 	public abstract void generate(@NonNull StringBuilder s, @NonNull GenModel genModel, boolean isImplementation);
+	
+	public @NonNull Class<?> getCgClass() {
+		return cgClass;
+	}
 
 	@Override
 	public String toString() {

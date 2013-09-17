@@ -35,6 +35,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -99,6 +100,7 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
@@ -517,6 +519,9 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		if (typeId instanceof EnumerationId) {
 			return true;
 		}
+		if (typeId instanceof ClassId) {
+			return true;
+		}
 		return false;
 	}
 
@@ -539,6 +544,28 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 	
 	public @NonNull Boolean visiting(@NonNull CGElement visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+	}
+
+	@Override
+	public @NonNull Boolean visitCGAssertNonNullExp(@NonNull CGAssertNonNullExp cgAssertNonNullExp) {
+		CGValuedElement cgSource = getExpression(cgAssertNonNullExp.getSource());
+		//
+		if (cgSource.isNull()) {
+			js.append("throw new ");
+			js.appendClassReference(InvalidValueException.class);
+			js.append("();\n");
+		}
+		else {
+			if (!js.appendLocalStatements(cgSource)) {
+				return false;
+			}
+			if (!cgSource.isNonNull()) {
+				js.append("assert ");
+				js.appendValueName(cgSource);
+				js.append(" != null;\n");
+			}
+		}
+		return true;
 	}
 
 	@Override

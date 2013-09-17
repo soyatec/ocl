@@ -819,6 +819,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 	public @NonNull CGValuedElement visitOperationCallExp(@NonNull OperationCallExp element) {
 		Operation asOperation = DomainUtil.nonNullState(element.getReferredOperation());
 		OCLExpression pSource = element.getSource();
+		boolean isRequired = asOperation.isRequired();
 		CGValuedElement cgSource = pSource != null ? doVisit(CGValuedElement.class, pSource) : null;
 		LibraryOperation libraryOperation = metaModelManager.getImplementation(asOperation);
 		if (libraryOperation instanceof OclAnyOclIsInvalidOperation) {
@@ -888,6 +889,10 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 					genModelHelper.getOperationAccessor(asOperation);
 					CGEcoreOperationCallExp cgEcoreOperationCallExp = CGModelFactory.eINSTANCE.createCGEcoreOperationCallExp();
 					cgEcoreOperationCallExp.setEOperation(eOperation);
+					Boolean ecoreIsRequired = codeGenerator.isNonNull(element);
+					if (ecoreIsRequired != null) {
+						isRequired = ecoreIsRequired;
+					}
 					cgOperationCallExp = cgEcoreOperationCallExp;
 				} catch (GenModelException e) {}
 			}
@@ -903,7 +908,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		setAst(cgOperationCallExp, element);
 		cgOperationCallExp.setInvalidating(asOperation.isInvalidating());
 		cgOperationCallExp.setValidating(asOperation.isValidating());
-		cgOperationCallExp.setRequired(asOperation.isRequired());
+		cgOperationCallExp.setRequired(isRequired);
 		cgOperationCallExp.setSource(cgSource);
 //		cgOperationCallExp.getDependsOn().add(cgSource);
 		for (OCLExpression pArgument : element.getArgument()) {

@@ -42,6 +42,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGAssertNonNullExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGAssertNonNullExp object) {
+		return null;
+	}
+
 	public @Nullable R visitCGBoolean(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean object) {
 		return null;
 	}

@@ -86,7 +86,7 @@ public abstract class MethodSpec
 		else {
 		    if (isRootSpec && (variableDecl != null)) {
 				appendHeader(s, null);
-			    s.append("\tprivate " + variableDecl + ";\n");
+			    s.append("\tprotected " + variableDecl + ";\n");
 		    }
 		    String body = getBody(modelSpec, genModel);
 		    String superBody = getSuperBody(modelSpec, genModel);
