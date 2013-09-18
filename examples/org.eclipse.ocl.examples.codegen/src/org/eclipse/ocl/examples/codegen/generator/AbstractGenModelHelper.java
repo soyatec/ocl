@@ -256,6 +256,28 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 	
+	public @Nullable String getEcoreInterfaceName(@NonNull Type type) {
+		try {
+			GenClassifier genClassifier = getGenClassifier(type);
+			return genClassifier instanceof GenDataType  
+					? ((GenDataType) genClassifier).getQualifiedInstanceClassName()
+					: ((GenClass) genClassifier).getQualifiedInterfaceName();	
+		} catch (GenModelException e) {
+			return null;
+		}
+	}
+	
+	public @Nullable String getEcoreClassName(@NonNull Type type) {
+		try {
+			GenClassifier genClassifier = getGenClassifier(type);
+			return genClassifier instanceof GenDataType  
+					? ((GenDataType) genClassifier).getQualifiedInstanceClassName()
+					: ((GenClass) genClassifier).getQualifiedClassName();	
+		} catch (GenModelException e) {
+			return null;
+		}
+	}
+	
 	protected @NonNull GenClass getGenClass(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);
 		if (genPackage != null) {
@@ -555,7 +577,31 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 		return genPackage.getQualifiedFactoryInterfaceName();
 	}
+	
+	public @Nullable String getQualifiedFactoryInterfaceName(@NonNull Type type) {
+		GenPackage genPackage = getGenPackage(type);
+		if (genPackage == null) {
+			return null;
+		}
+		return genPackage.getQualifiedFactoryInterfaceName();
+	}
 
+	public @Nullable String getQualifiedFactoryInstanceAccessor(@NonNull EPackage ePackage) {
+		GenPackage genPackage = getGenPackage(ePackage);
+		if (genPackage == null) {
+			return null;
+		}
+		return genPackage.getQualifiedFactoryInstanceAccessor();
+	}
+	
+	public @Nullable String getQualifiedFactoryInstanceAccessor(@NonNull Type type) {
+		GenPackage genPackage = getGenPackage(type);
+		if (genPackage == null) {
+			return null;
+		}
+		return genPackage.getQualifiedFactoryInstanceAccessor();
+	}
+	
 	public @Nullable String getQualifiedPackageInterfaceName(@NonNull EPackage ePackage) {
 		GenPackage genPackage = getGenPackage(ePackage);
 		if (genPackage == null) {

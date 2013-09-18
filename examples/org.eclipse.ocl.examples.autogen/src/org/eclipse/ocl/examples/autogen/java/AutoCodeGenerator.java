@@ -83,16 +83,15 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 
 /**
  * AutoCodeGenerator supports generation of the content of a JavaClassFile to
@@ -245,41 +244,47 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		}
 		cgPackage.getClasses().add(cgClass);
 		for (Type asType : asPackage.getOwnedType()) {
-			Operation astOperation = DomainUtil.getNamedElement(asType.getOwnedOperation(), "ast");
+			boolean hasCS2ASmappingOperation = false;
+			Operation astOperation = DomainUtil.getNamedElement(asType.getOwnedOperation(), "ast");			
 			if (astOperation != null) {
-				CGContainmentVisit cgOperation = AutoCGModelFactory.eINSTANCE.createCGContainmentVisit();
-				cgOperation.setName("visit" + asType.getName());
-				cgOperation.setAst(asType);
-				cgClass.getOperations().add(cgOperation);
-				CGContainmentBody cgBody = AutoCGModelFactory.eINSTANCE.createCGContainmentBody();
-				cgBody.setAst(astOperation);
-//				cgBody.setTypeId(getAnalyzer().getTypeId(astOperation.getTypeId()));
-				cgOperation.setBody(cgBody);
 				OpaqueExpression bodyExpression = DomainUtil.nonNullState(astOperation.getBodyExpression());
 				ExpressionInOCL expressionInOCL = DomainUtil.nonNullState(PivotUtil.getExpressionInOCL(asType, bodyExpression));
-				Variable contextVariable = expressionInOCL.getContextVariable();
-				if (contextVariable != null) {
-					List<CGParameter> cgParameters = cgOperation.getParameters();
-					CGParameter cgContext = as2cgVisitor.getParameter(contextVariable);
-					cgContext.setValueName("self");
-					cgParameters.add(cgContext);
+				OCLExpression oclExpression = expressionInOCL.getBodyExpression();
+				if (oclExpression instanceof ConstructorExp) {
+					hasCS2ASmappingOperation = true;
+					ConstructorExp constructorExp = (ConstructorExp) oclExpression;
+					CGContainmentVisit cgOperation = AutoCGModelFactory.eINSTANCE.createCGContainmentVisit();
+					cgOperation.setName("visit" + asType.getName());
+					cgOperation.setAst(asType);
+					cgClass.getOperations().add(cgOperation);
+					CGContainmentBody cgBody = AutoCGModelFactory.eINSTANCE.createCGContainmentBody();
+					cgBody.setAst(astOperation);
+//					cgBody.setTypeId(getAnalyzer().getTypeId(astOperation.getTypeId()));
+					cgOperation.setBody(cgBody);
+					Variable contextVariable = expressionInOCL.getContextVariable();
+					if (contextVariable != null) {
+						List<CGParameter> cgParameters = cgOperation.getParameters();
+						CGParameter cgContext = as2cgVisitor.getParameter(contextVariable);
+						cgContext.setValueName("self");
+						cgParameters.add(cgContext);
+					}
+					
+					Type constructorType = DomainUtil.nonNullState(constructorExp.getType());
+					GenClass genClass = DomainUtil.nonNullState((GenClass) genModelHelper.getGenClassifier(constructorType));
+					EClass eClass = DomainUtil.nonNullState(genClass.getEcoreClass());
+					for (ConstructorPart constructorPart : constructorExp.getPart()) {
+						CGContainmentPart cgPart = AutoCGModelFactory.eINSTANCE.createCGContainmentPart();
+						String name = constructorPart.getName();
+						cgPart.setName(name);
+						cgPart.setAst(constructorPart);
+						cgPart.setEStructuralFeature(DomainUtil.nonNullState(eClass.getEStructuralFeature(name)));
+						cgPart.setInit((CGValuedElement) constructorPart.getInitExpression().accept(as2cgVisitor));
+						cgBody.getParts().add(cgPart);
+					}
+					cgClass.getOperations().add(cgOperation);					
 				}
-				ConstructorExp constructorExp = (ConstructorExp) expressionInOCL.getBodyExpression();
-				Type constructorType = DomainUtil.nonNullState(constructorExp.getType());
-				GenClass genClass = DomainUtil.nonNullState((GenClass) genModelHelper.getGenClassifier(constructorType));
-				EClass eClass = DomainUtil.nonNullState(genClass.getEcoreClass());
-				for (ConstructorPart constructorPart : constructorExp.getPart()) {
-					CGContainmentPart cgPart = AutoCGModelFactory.eINSTANCE.createCGContainmentPart();
-					String name = constructorPart.getName();
-					cgPart.setName(name);
-					cgPart.setAst(constructorPart);
-					cgPart.setEStructuralFeature(DomainUtil.nonNullState(eClass.getEStructuralFeature(name)));
-					cgPart.setInit((CGValuedElement) constructorPart.getInitExpression().accept(as2cgVisitor));
-					cgBody.getParts().add(cgPart);
-				}
-				cgClass.getOperations().add(cgOperation);
 			}
-			else {
+			if (!hasCS2ASmappingOperation) {
 				CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGEcoreOperation();
 				cgOperation.setName("visit" + asType.getName());
 				cgOperation.setAst(asType);

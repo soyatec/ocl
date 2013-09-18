@@ -32,6 +32,11 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifierCS" abstract="true" eSuperTypes="#//NamedElementCS #//TypeCS #//TemplateableElementCS">
+    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="body" value="pivot"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//PackageCS"
         eOpposite="#//PackageCS/ownedType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -143,6 +148,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamespaceCS" abstract="true" interface="true"
       eSuperTypes="#//NamedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCS" eSuperTypes="#//FeatureCS #//TemplateableElementCS">
+    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Operation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="body" value="ocl::Operation {&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name&#xA;&#x9;&#x9;&#x9;}"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="#//ClassCS"
         eOpposite="#//ClassCS/ownedOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
@@ -157,6 +167,11 @@
         eType="#//SpecificationCS" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//NamespaceCS">
+    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="body" value="ocl::Package{&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name&#xA;&#x9;&#x9;&#x9;}"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="getClassifier" eType="#//ClassifierCS">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -168,6 +183,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterCS" eSuperTypes="#//TypedElementCS">
+    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Parameter">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="body" value="ocl::Parameter {&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name&#xA;&#x9;&#x9;&#x9;}"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//OperationCS"
         eOpposite="#//OperationCS/ownedParameter"/>
   </eClassifiers>
@@ -232,6 +252,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StructuralFeatureCS" abstract="true"
       eSuperTypes="#//FeatureCS">
+    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="body" value="ocl::Property{&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name&#xA;&#x9;&#x9;&#x9;}"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//ClassCS"
         eOpposite="#//ClassCS/ownedProperty"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

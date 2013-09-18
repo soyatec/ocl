@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.autogen.java;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -197,25 +196,25 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		return true;
 	}
 
-	public @NonNull Boolean visitCGContainmentBody(@NonNull CGContainmentBody object) {
-		Type asType = ((Operation) object.getAst()).getType();
-		EPackage ePackage = DomainUtil.nonNullState(asType.eClass().getEPackage());
-		String factoryName = context.getGenModelHelper().getQualifiedFactoryInterfaceName(ePackage);
-		TypeDescriptor typeDescriptor = context.getTypeDescriptor(asType.getTypeId(), false);
+	public @Nullable Boolean visitCGContainmentBody(@NonNull CGContainmentBody object) {
+		Type asType = DomainUtil.nonNullState(((Operation) object.getAst()).getType());
+		String factoryName = context.getGenModelHelper().getQualifiedFactoryInterfaceName(asType);
+		// TypeDescriptor typeDescriptor = context.getTypeDescriptor(asType.getTypeId(), false);
+		String typeQualifiedName = context.getGenModelHelper().getEcoreInterfaceName(asType);
 		js.append("//\n");
 		js.append("// " + asType.getName() + "\n");
 		js.append("//\n");
-		js.appendClassReference(typeDescriptor);
+		js.appendClassReference(typeQualifiedName);
 		js.append(" result;\n");
 		js.appendClassReference(Element.class);
 		js.append(" element = converter.getPivotElement(self);\n");
 		
 		js.append("if ((element != null) && (element.getClass() == ");
-		js.appendClassReference(typeDescriptor);
+		js.appendClassReference(typeQualifiedName);
 		js.append(".class)) {\n");
 		js.pushIndentation(null);
 		js.append("result = (");
-		js.appendClassReference(typeDescriptor);
+		js.appendClassReference(typeQualifiedName);
 		js.append(")element;\n");
 		js.popIndentation();
 		js.append("}\n");
@@ -258,16 +257,19 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		}
 		else {
 			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
-//	        if (name != null ? !name.equals(result.getName()) : (null != result.getName())) {
-	        js.append("if (");
+//	        if (name != null ? !name.equals(result.getName()) : (null != result.getName())) { -> It doesn't works with primitive types
+//			if ((exists != result.isComposite()) && ((exists == null) || !exists.equals(result.isComposite())))
+			js.append("if ((");
 			js.appendValueName(cgInit);
-			js.append(" != null ? !");
+			js.append(" != result.");
+			js.append(getAccessor);
+			js.append("()) && (");
+			js.appendValueName(cgInit);
+			js.append(" == null || !");
 			js.appendValueName(cgInit);
 			js.append(".equals(result.");
 			js.append(getAccessor);
-			js.append("()) : (null != result.");
-			js.append(getAccessor);
-			js.append("())) {\n");
+			js.append("()))) {\n");
 			js.pushIndentation(null);
 			js.append("result.");
 			js.append(setAccessor);
