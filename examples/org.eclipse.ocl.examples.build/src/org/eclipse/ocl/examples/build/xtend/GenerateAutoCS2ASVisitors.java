@@ -21,8 +21,16 @@ import org.eclipse.ocl.examples.build.xtend.GenerateCSVisitors;
 
 public class GenerateAutoCS2ASVisitors extends GenerateCSVisitors
 {
+	@SuppressWarnings("null")
 	@Override
 	public void generateVisitors(@NonNull GenPackage genPackage) {
-		AutoCodeGenerator.generate(genPackage, isDerived() ? superProjectPrefix : null);
+		if (isDerived()) {
+			AutoCodeGenerator.generate(genPackage, projectPrefix, visitorPackageName, visitorClassName,
+				superProjectPrefix, superVisitorPackageName, superVisitorClassName
+			);
+		} else {
+			AutoCodeGenerator.generate(genPackage, projectPrefix, visitorPackageName, visitorClassName,
+				null, null, null);
+		}
 	}
 }

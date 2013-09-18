@@ -101,9 +101,15 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 {
 //	private static final Logger logger = Logger.getLogger(AutoCodeGenerator.class);
 	
-	public static void generate(@NonNull GenPackage genPackage, @Nullable String superProjectPrefix) {
-		EPackage ePackage = genPackage.getEcorePackage();
-		assert ePackage != null;
+	public static void generate(@NonNull GenPackage genPackage,
+			@NonNull String projectPrefix,	// FIXME Since visitors/visitable package/name are really configured in the MWE file
+			@NonNull String visitorPackage,	// there is no point of providing a different to compute it here. To improve the framework, make use of the
+			@NonNull String visitorClass,	// genModel base logic in the whole framework simplyfying the number of parameters to deal with. Then, these parameters may be removed
+			@Nullable String superProjectPrefix,
+			@Nullable String superVisitorPackage,
+			@Nullable String superVisitorClass) {
+				EPackage ePackage = genPackage.getEcorePackage();
+				assert ePackage != null;
 //		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
 //		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
 //		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
@@ -133,7 +139,8 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 					throw new IllegalStateException("No super-GenPackage found in UsedGenPackages for " + superProjectPrefix);
 				}
 			}
-			AutoCodeGenerator autoCodeGenerator = new AutoCodeGenerator(metaModelManager, asPackage, asSuperPackage, genPackage, superGenPackage);
+			AutoCodeGenerator autoCodeGenerator = new AutoCodeGenerator(metaModelManager, asPackage, asSuperPackage, genPackage, // superGenPackage,
+					projectPrefix, visitorPackage, visitorClass, superProjectPrefix, superVisitorPackage, superVisitorClass);
 			autoCodeGenerator.saveSourceFile();
 		}
 	}
@@ -143,13 +150,25 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 	protected final @Nullable org.eclipse.ocl.examples.pivot.Package asSuperPackage;
 	protected final @NonNull GenModel genModel;
 	protected final @NonNull GenPackage genPackage;
-	protected final @Nullable GenPackage superGenPackage;
+	//protected final @Nullable GenPackage superGenPackage;
 	protected final @NonNull Map<String, CGPackage> externalPackages = new HashMap<String, CGPackage>();
+	protected final @NonNull String projectPrefix;
+	protected final @NonNull String visitorPackage; 
+	protected final @NonNull String visitorClass;
+	protected final @Nullable String superProjectPrefix;
+	protected final @Nullable String superVisitorPackage; 
+	protected final @Nullable String superVisitorClass;
 
 	public AutoCodeGenerator(@NonNull MetaModelManager metaModelManager,
 			@NonNull org.eclipse.ocl.examples.pivot.Package asPackage,
 			@Nullable org.eclipse.ocl.examples.pivot.Package asSuperPackage,
-			@NonNull GenPackage genPackage, @Nullable GenPackage superGenPackage) {
+			@NonNull GenPackage genPackage, // @Nullable GenPackage superGenPackage,
+			@NonNull String projectPrefix,	// FIXME Since visitors/visitable package/name are really configured in the MWE file
+			@NonNull String visitorPackage,	// there is no point of providing a different to compute it here. To improve the framework, make use of the
+			@NonNull String visitorClass,	// genModel base logic in the whole framework simplyfying the number of parameters to deal with. Then, these parameters may be removed
+			@Nullable String superProjectPrefix,
+			@Nullable String superVisitorPackage,
+			@Nullable String superVisitorClass) {
 		super(metaModelManager);
 		this.genModel = DomainUtil.nonNullState(genPackage.getGenModel());
 		metaModelManager.addGenModel(genModel);
@@ -158,7 +177,13 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		this.asPackage = asPackage;
 		this.asSuperPackage = asSuperPackage;
 		this.genPackage = genPackage;
-		this.superGenPackage = superGenPackage;
+		// this.superGenPackage = superGenPackage;
+		this.projectPrefix = projectPrefix;
+		this.visitorPackage = visitorPackage;
+		this.visitorClass = visitorClass;
+		this.superProjectPrefix = superProjectPrefix;
+		this.superVisitorPackage = superVisitorPackage;
+		this.superVisitorClass = superVisitorClass;	
 	}
 
 	@Override
@@ -177,20 +202,31 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		String prefix = genPackage.getPrefix();
-		String trimmedPrefix = prefix.endsWith("CST") ? prefix.substring(0, prefix.length()-3) : "FIXME";
-		String packageName = genPackage.getBasePackage() + ".util";
-		String className = prefix + "AutoContainmentVisitor";
+		// FIXME clean code removing unnecessary extra variables
+		// String prefix = genPackage.getPrefix();
+		// String trimmedPrefix = prefix.endsWith("CST") ? prefix.substring(0, prefix.length()-3) : "FIXME";
+		String prefix = projectPrefix;
+		
+		// String packageName = genPackage.getBasePackage() + ".util";
+		String packageName = visitorPackage; 
+		
+		//String className = prefix + "AutoContainmentVisitor";
+		String className = getVisitorClassName(prefix);
 		AS2CGVisitor as2cgVisitor = new AutoAS2CGVisitor(cgAnalyzer, getGlobalContext());
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		cgPackage.setName(packageName);
 		CGClass cgClass = CGModelFactory.eINSTANCE.createCGClass();
 		cgClass.setName(className);
-		GenPackage superGenPackage2 = superGenPackage;
-		if (superGenPackage2 != null) {
-			String superPackageName = superGenPackage2.getBasePackage() + ".util";
-			String superClassName = superGenPackage2.getPrefix() + "AutoContainmentVisitor";
-			String superInterfaceName = trimmedPrefix + "CSVisitor";
+		// GenPackage superGenPackage2 = superGenPackage;
+		String superProjectPrefix2 = superProjectPrefix;
+		if (superProjectPrefix2 != null) {
+			// String superPackageName = super
+			String superPackageName = superVisitorPackage;
+			// String superClassName = superGenPackage2.getPrefix() + "AutoContainmentVisitor";
+			String superClassName = getVisitorClassName(superProjectPrefix2);
+			// String superInterfaceName = /*trimmed*/prefix + "Visitor";
+			String superInterfaceName = visitorClass;
+			
 			CGClass superClass = getExternalClass(superPackageName, superClassName, false);
 			cgClass.getSuperTypes().add(superClass);
 			CGClass superInterface = getExternalClass(packageName, superInterfaceName, true);
@@ -198,7 +234,8 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			cgClass.getSuperTypes().add(superInterface);
 		}
 		else {
-			String superClassName = "Abstract" + trimmedPrefix + "CSVisitor";
+			// String superClassName = "Abstract" + /*trimmed*/prefix + "CSVisitor";
+			String superClassName = "Abstract" + visitorClass; // The default Abstract Visitor generated for the language
 			CGClass superClass = getExternalClass(packageName, superClassName, false);
 			superClass.getTemplateParameters().add(getExternalClass(Continuation.class, (CGClass)null));
 			superClass.getTemplateParameters().add(getExternalClass(CS2PivotConversion.class));
@@ -349,7 +386,8 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 	}
 
 	public void saveSourceFile() {
-		String utilDir = genModel.getModelDirectory() + "/" + genPackage.getBasePackage().replace('.', '/') +"/util/" + genPackage.getPrefix() + "AutoContainmentVisitor.java";
+		// String utilDir = genModel.getModelDirectory() + "/" + genPackage.getBasePackage().replace('.', '/') +"/util/" + genPackage.getPrefix() + "AutoContainmentVisitor.java";
+		String utilDir = genModel.getModelDirectory() + "/" + visitorPackage.replace('.', '/') + "/" + getVisitorClassName(projectPrefix) + ".java";
 		URI uri = URI.createPlatformResourceURI(utilDir, true);
 		String javaCodeSource = generateClassFile();
 		try {
@@ -357,9 +395,12 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			Writer writer = new OutputStreamWriter(outputStream);
 			writer.append(javaCodeSource);
 			writer.close();
-			outputStream.close();
 		} catch (IOException e) {
 			throw new IllegalStateException("Failed to save '" + uri + "'");
 		}
+	}
+	
+	protected @NonNull String getVisitorClassName(@NonNull String prefix) {
+		return "Auto"+  prefix + "ContainmentVisitor";  
 	}
 }
