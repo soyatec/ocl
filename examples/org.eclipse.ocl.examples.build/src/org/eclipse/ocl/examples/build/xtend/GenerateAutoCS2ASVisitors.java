@@ -18,9 +18,18 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.autogen.java.AutoCodeGenerator;
 import org.eclipse.ocl.examples.build.xtend.GenerateCSVisitors;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 
 public class GenerateAutoCS2ASVisitors extends GenerateCSVisitors
 {
+	
+	@Override
+	protected void doSetup() {
+		EssentialOCLStandaloneSetup.doSetup();
+		OCLstdlib.install();
+	}
+	
 	@SuppressWarnings("null")
 	@Override
 	public void generateVisitors(@NonNull GenPackage genPackage) {

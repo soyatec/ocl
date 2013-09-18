@@ -45,6 +45,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -116,11 +117,12 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 //		CommonSubexpressionEliminator.CSE_PULL_UP.setState(true);
 //		CommonSubexpressionEliminator.CSE_PUSH_UP.setState(true);
 //		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
-		EssentialOCLStandaloneSetup.doSetup();		// FIXME
-		OCLstdlib.install();
+	
 		AutoCG2StringVisitor.FACTORY.getClass();
 		Resource eResource = DomainUtil.nonNullState(ePackage.eResource());
-		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource);
+		// MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource);
+		ResourceSet rSet = DomainUtil.nonNullState(eResource.getResourceSet());
+		MetaModelManager metaModelManager = MetaModelManager.getAdapter(rSet);
 		org.eclipse.ocl.examples.pivot.Package asPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
 		if (asPackage != null) {
 			GenPackage superGenPackage = null;

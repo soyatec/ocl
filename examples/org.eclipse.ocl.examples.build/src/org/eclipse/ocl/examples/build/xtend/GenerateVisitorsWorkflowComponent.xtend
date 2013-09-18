@@ -29,6 +29,10 @@ import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.jdt.annotation.NonNull
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 
 public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflowComponent
 {
@@ -108,6 +112,28 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		else
 			genPackages.get(0); // We assume we want the first one;
 	}
+	
+	@NonNull 
+	private def GenModel getGenModel(@NonNull Resource genModelResource) {
+		var EList<EObject> contents = genModelResource.getContents();
+		if (contents.isEmpty()) {
+			throw new IllegalArgumentException("Illegal empty genModelResource: " + genModelResource.getURI())
+		}
+		var EObject rootElement = contents.get(0);
+		if (!(rootElement instanceof GenModel)) { 
+			throw new IllegalArgumentException("Illegal non GenModel root element: " + genModelResource.getURI())
+		}
+		return rootElement as GenModel;
+	}
+	
+/* 	private def void registerGenModel(@NonNull GenModel genModel, @NonNull EPackage ePackage) {
+		var MetaModelManager mManager = MetaModelManager.getAdapter(resourceSet);
+		// var MetaModelManager mManager = PivotUtil.getMetaModelManager(ePackage.eResource());
+		mManager.addGenModel(genModel);
+		for (GenPackage usedGenPackage : genModel.getUsedGenPackages()) {
+			mManager.addGenPackage(usedGenPackage);
+		}
+	} */
 
 	override protected invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		if (!isDefined(visitablePackageName)) {
@@ -121,6 +147,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 			superVisitorPackageName = "";
 			superVisitorClassName = "";
 		}
+		doSetup();
 		var URI projectFileURI = EcorePlugin.platformResourceMap.get(projectName);
 		var URI projectResourceURI = URI.createPlatformResourceURI("/" + projectName + "/", true);
 		var URI genModelURI = URI.createURI(genModelFile).resolve(projectResourceURI);
@@ -135,6 +162,9 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		try {
 			var Resource genModelResource = resourceSet.getResource(genModelURI, true);
 			var GenPackage genPackage = getGenPackage(genModelResource);
+//			var GenModel genModel = getGenModel(genModelResource);
+//			var EPackage targetEPackage = getEPackage(genModelResource);
+//			registerGenModel(genModel, targetEPackage);
 			copyright = getCopyright(genModelResource);
 			sourceFile = genModelFile;
 			generateVisitors(genPackage);
@@ -143,6 +173,16 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		}
 	}
 
+	/**
+	 * It gives a chance to derived components to do some setup subprocess, prior to
+	 * start with the component generation process
+	 * 
+	 * derived components may override
+	 */
+	protected def void doSetup() {
+		// Do nothing by
+	}
+	
 	protected static def boolean isDefined(String string) {
 		return (string != null); // && (string.length() > 0);
 	}
