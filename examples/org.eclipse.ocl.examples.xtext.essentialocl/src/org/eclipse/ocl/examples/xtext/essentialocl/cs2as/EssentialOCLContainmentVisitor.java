@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.cs2as;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -49,11 +51,15 @@ import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
+import org.eclipse.ocl.examples.pivot.TupleType;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -170,7 +176,13 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 				asConstraint.setSpecification(asSpecification);
 			}
 			else {
+				Map<String, Type> tupleParts = new HashMap<String, Type>();
+				tupleParts.put(PivotConstants.MESSAGE_PART_NAME, metaModelManager.getStringType());
+				tupleParts.put(PivotConstants.STATUS_PART_NAME, metaModelManager.getBooleanType());
+				TupleType tupleType = metaModelManager.getTupleManager().getTupleType("Tuple", tupleParts);
+				Property statusProperty = DomainUtil.getNamedElement(tupleType.getOwnedAttribute(), PivotConstants.STATUS_PART_NAME);
 				OpaqueExpression asSpecification = asConstraint.getSpecification();
+				//
 				ExpressionInOCL asExpressionInOCL;
 				if (asSpecification instanceof ExpressionInOCL) {
 					asExpressionInOCL = (ExpressionInOCL) asSpecification;	
@@ -180,14 +192,30 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 					asConstraint.setSpecification(asExpressionInOCL);
 				}
 				OCLExpression asExpression = asExpressionInOCL.getBodyExpression();
+				//
+				PropertyCallExp asTuplePartExp;
+				if (asExpression instanceof PropertyCallExp) {
+					asTuplePartExp = (PropertyCallExp) asExpression;	
+				}
+				else {
+					asTuplePartExp = PivotFactory.eINSTANCE.createPropertyCallExp();
+					asExpressionInOCL.setBodyExpression(asTuplePartExp);
+				}
+				asTuplePartExp.setReferredProperty(statusProperty);
+				asTuplePartExp.setType(statusProperty.getType());
+				asTuplePartExp.setIsRequired(true);
+				asExpression = asTuplePartExp.getSource();
+				//
 				TupleLiteralExp asTupleLiteralExp;
 				if (asExpression instanceof TupleLiteralExp) {
 					asTupleLiteralExp = (TupleLiteralExp) asExpression;	
 				}
 				else {
 					asTupleLiteralExp = PivotFactory.eINSTANCE.createTupleLiteralExp();
-					asExpressionInOCL.setBodyExpression(asTupleLiteralExp);
+					asTuplePartExp.setSource(asTupleLiteralExp);
 				}
+				asTupleLiteralExp.setType(tupleType);
+				asTupleLiteralExp.setIsRequired(true);
 				List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>();
 				TupleLiteralPart asStatusPart = PivotUtil.getPivot(TupleLiteralPart.class, csStatusSpecification);
 				TupleLiteralPart asMessagePart = PivotUtil.getPivot(TupleLiteralPart.class, csMessageSpecification);

@@ -191,9 +191,11 @@ public class TupleTypeManager
 		Map<String, Type> partMap = new HashMap<String, Type>();
 		for (DomainTypedElement part : parts) {
 			DomainType type1 = part.getType();
-			Type type2 = metaModelManager.getType(type1);
-			Type type3 = metaModelManager.getSpecializedType(type2, usageBindings);
-			partMap.put(part.getName(), type3);
+			if (type1 != null) {
+				Type type2 = metaModelManager.getType(type1);
+				Type type3 = metaModelManager.getSpecializedType(type2, usageBindings);
+				partMap.put(part.getName(), type3);
+			}
 		}
 		return getTupleType(tupleName, partMap);
 		
@@ -205,7 +207,8 @@ public class TupleTypeManager
 		//
 		//	Find the outgoing template parameter references
 		// FIXME this should be more readily and reliably computed in the caller
-		final TemplateParameter[] allTemplateParameters = getAllTemplateParameterReferences(parts.values());
+		@SuppressWarnings("null")@NonNull Collection<? extends Type> partValues = parts.values();
+		final TemplateParameter[] allTemplateParameters = getAllTemplateParameterReferences(partValues);
 		//
 		//	Create the tuple part ids
 		//
@@ -232,7 +235,10 @@ public class TupleTypeManager
 			public @NonNull DomainElement visitTemplateParameterId(@NonNull TemplateParameterId id) {
 				int index = id.getIndex();
 				if (index < allTemplateParameters.length) {
-					return allTemplateParameters[index];
+					TemplateParameter templateParameter = allTemplateParameters[index];
+					if (templateParameter != null) {
+						return templateParameter;
+					}
 				}
 				return super.visitTemplateParameterId(id);
 			}

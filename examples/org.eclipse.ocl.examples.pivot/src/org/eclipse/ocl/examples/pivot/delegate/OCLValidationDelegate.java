@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -242,7 +243,8 @@ public class OCLValidationDelegate implements ValidationDelegate
 		}
 		try {
 			EvaluationVisitor evaluationVisitor = createEvaluationVisitor(value, query);
-			Object result = query.accept(evaluationVisitor);
+			OCLExpression body = PivotUtil.getConstraintExpression(query);
+			Object result = body.accept(evaluationVisitor);
 			boolean status = PivotUtil.getConstraintResultStatus(result);
 			if (status) {
 				return true;

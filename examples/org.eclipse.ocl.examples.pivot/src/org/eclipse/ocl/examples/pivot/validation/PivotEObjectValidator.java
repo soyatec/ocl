@@ -147,7 +147,8 @@ public class PivotEObjectValidator extends EObjectValidator
 							int severity = Diagnostic.ERROR;
 							String message = PivotUtil.getConstraintResultTypeErrorMessage(constraintName, query);
 							try {
-								Object expressionResult = query.accept(evaluationVisitor);
+								OCLExpression body = PivotUtil.getConstraintExpression(query);
+								Object expressionResult = body.accept(evaluationVisitor);
 								boolean isOk = PivotUtil.getConstraintResultStatus(expressionResult);
 								if (!isOk) {
 									severity = PivotUtil.getConstraintResultSeverity(expressionResult);

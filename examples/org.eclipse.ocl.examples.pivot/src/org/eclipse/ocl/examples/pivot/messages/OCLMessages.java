@@ -242,9 +242,7 @@ public class OCLMessages
 	public static String MissingDerivationForSettingDelegate_ERROR_;
 	
 	public static String ValidationConstraintException_ERROR_;
-	public static String ValidationConstraintIsNeitherBooleanNorTupleType_ERROR_;
-	public static String ValidationConstraintIsTupleTypeWithoutStatus_ERROR_;
-	public static String ValidationConstraintIsTupleTypeWithNonBooleanStatus_ERROR_;
+	public static String ValidationConstraintIsNotBooleanType_ERROR_;
 	public static String ValidationMessageException_ERROR_;
 	public static String ValidationMessageIsNotString_ERROR_;
 	public static String ValidationResultIsInvalid_ERROR_;	

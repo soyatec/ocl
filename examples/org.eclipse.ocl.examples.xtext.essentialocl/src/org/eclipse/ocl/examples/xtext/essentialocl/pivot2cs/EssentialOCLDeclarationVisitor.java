@@ -88,7 +88,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 				if ((lines.length == 4)
 				 && lines[0].replaceAll("\\s", "").equals("Tuple{")
 				 && lines[1].endsWith(",")
-				 && lines[3].trim().equals("}")
+				 && lines[3].replaceAll("\\s", "").equals("}.status")
 				 && lines[1].replaceAll("\\s", "").startsWith("message:String=")
 				 && lines[2].replaceAll("\\s", "").startsWith("status:Boolean=")) {
 					String messageText = lines[1].substring(lines[1].indexOf("=")+1, lines[1].length()-1).trim();

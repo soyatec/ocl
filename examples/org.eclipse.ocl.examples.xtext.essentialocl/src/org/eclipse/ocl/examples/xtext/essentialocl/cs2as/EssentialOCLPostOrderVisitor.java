@@ -32,9 +32,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
-import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -83,7 +81,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 			// NB Three cases for the Constraint content
 			// a) refreshing an OpaqueExpression that originated from Ecore2Pivot 
 			// b) refreshing an ExpressionInOCL for a simple statusExpression 
-			// c) refreshing an ExpressionInOCL+TupleLIteral for statusExpression+messageExpression
+			// c) refreshing an ExpressionInOCL+PropertyCallExp of a TupleLiteralExp for statusExpression+messageExpression
 			Constraint asConstraint = PivotUtil.getPivot(Constraint.class, csElement);
 			ExpSpecificationCS csStatusSpecification = (ExpSpecificationCS)csElement.getSpecification();
 			if ((asConstraint != null) && (csStatusSpecification != null)) {
@@ -107,13 +105,11 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 						ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
 						OCLExpression asMessageExpression = csMessageExpression != null ? context.visitLeft2Right(OCLExpression.class, csMessageExpression) : null;
 						asMessageTuplePart.setInitExpression(asMessageExpression);
-						@SuppressWarnings("null")@NonNull TupleLiteralExp asTupleLiteralExp = (TupleLiteralExp) asSpecification.getBodyExpression();
-						TupleType tupleType = context.getMetaModelManager().getTupleType("Tuple", asTupleLiteralExp.getPart(), null);
-						context.setType(asTupleLiteralExp, tupleType, true);
-						context.setType(asSpecification, tupleType, true);
+						@SuppressWarnings("null")@NonNull OCLExpression asTuplePartExp = asSpecification.getBodyExpression();
+						context.setType(asSpecification, asTuplePartExp.getType(), true);
 						String messageText = csMessageExpression != null ? ElementUtil.getExpressionText(csMessageExpression) : "null";
 						String tupleText = PivotUtil.createTupleValuedConstraint(statusText, null, messageText);
-						PivotUtil.setBody(asSpecification, asTupleLiteralExp, tupleText);					
+						PivotUtil.setBody(asSpecification, asTuplePartExp, tupleText);					
 					}
 				}
 				else {

@@ -43,7 +43,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
-import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -237,7 +236,7 @@ public class PivotUtil extends DomainUtil
 			s.append("\n\t" + PivotConstants.SEVERITY_PART_NAME + " : Integer = " + severity + ",");
 		}
 		s.append("\n\t" + PivotConstants.STATUS_PART_NAME + " : Boolean = " + statusText);		// NB parts in alphabetical order
-		s.append("\n}");
+		s.append("\n}."+ PivotConstants.STATUS_PART_NAME);
 		@SuppressWarnings("null")@NonNull String string = s.toString();
 		return string;
 	}
@@ -633,6 +632,23 @@ public class PivotUtil extends DomainUtil
 	}
 
 	/**
+	 * Return the expression to be evaluated for a constraintSpecification, which is the constraintSpecification.bodyExpression
+	 * unless that is a status TuplePart PropertyCallExp in which case it is the source of the TuplePart PropertyCallExp enabling the
+	 * evaluation to compute the enriched Tuple of invariant results.
+	 */
+	public static OCLExpression getConstraintExpression(@NonNull ExpressionInOCL constraintSpecification) {
+		OCLExpression body = constraintSpecification.getBodyExpression();
+		if (body instanceof PropertyCallExp) {
+			PropertyCallExp propertyCallExp = (PropertyCallExp)body;
+			Property referredProperty = propertyCallExp.getReferredProperty();
+			if ((referredProperty != null) && (referredProperty.getOwningType() instanceof TupleType) && PivotConstants.STATUS_PART_NAME.equals(referredProperty.getName())) {
+				return propertyCallExp.getSource();
+			}
+		}
+		return body;
+	}
+
+	/**
 	 * Return the message of result, which is null
 	 * unless result is a Tuple with a more informative severity part.
 	 */
@@ -685,7 +701,7 @@ public class PivotUtil extends DomainUtil
 	 * Anything else leads to a false return (no null or exception).
 	 */
 	public static boolean getConstraintResultStatus(Object result) {
-		if (result == Boolean.TRUE){
+		if (result == Boolean.TRUE) {
 			return true;
 		}
 		if (result instanceof TupleValue) {
@@ -713,25 +729,10 @@ public class PivotUtil extends DomainUtil
 		if (typeId == TypeId.BOOLEAN) {
 			return null;
 		}
-		else if ((typeId instanceof TupleTypeId) && !(typeId instanceof OclVoidTypeId)) {
-			TupleTypeId tupleTypeId = (TupleTypeId)typeId;
-			TuplePartId tuplePartId = tupleTypeId.getPartId(PivotConstants.STATUS_PART_NAME);
-			if (tuplePartId == null) {
-				String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-				String constraintTypeName = getConstraintTypeName(query);
-				return DomainUtil.bind(OCLMessages.ValidationConstraintIsTupleTypeWithoutStatus_ERROR_, constraintTypeName, constraintName, objectLabel);
-			}
-			if (tuplePartId.getTypeId() == TypeId.BOOLEAN) {
-				return null;
-			}
-			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-			String constraintTypeName = getConstraintTypeName(query);
-			return DomainUtil.bind(OCLMessages.ValidationConstraintIsTupleTypeWithNonBooleanStatus_ERROR_, constraintTypeName, constraintName, objectLabel);
-		}
 		else {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String constraintTypeName = getConstraintTypeName(query);
-			return DomainUtil.bind(OCLMessages.ValidationConstraintIsNeitherBooleanNorTupleType_ERROR_, constraintTypeName, constraintName, objectLabel);
+			return DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBooleanType_ERROR_, constraintTypeName, constraintName, objectLabel);
 		}
 	}
 
