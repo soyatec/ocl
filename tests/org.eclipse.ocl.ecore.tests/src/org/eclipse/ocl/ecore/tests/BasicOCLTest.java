@@ -306,6 +306,13 @@ public class BasicOCLTest
 		
 		assertTrue(check(constraint, eCls));
 		
+		OCLExpression<EClassifier> constraint2 = parseConstraint(
+			"package ecore context EClass " +
+			"inv: Tuple{status:Boolean=self.eAttributes->size() = 2}.status " +
+			"endpackage");
+		
+		assertTrue(check(constraint2, eCls));
+		
 		constraint = parseConstraint(
 			"package ecore context EClass " +
 			"inv: self.eAttributes->forAll(a: EAttribute | not a.derived) " +

@@ -205,6 +205,13 @@ public class BasicOCLTest
 		
 		assertTrue(check(constraint, eCls));
 		
+		OCLExpression<Classifier> constraint2 = parseConstraint(
+			"package UML context DataType " +
+			"inv: Tuple{status:Boolean=self.ownedAttribute->size() = 2}.status " +
+			"endpackage");
+		
+		assertTrue(check(constraint2, eCls));
+		
 		constraint = parseConstraint(
 			"package UML context DataType " +
 			"inv: self.ownedAttribute->forAll(a: Property | not a.isDerived) " +
