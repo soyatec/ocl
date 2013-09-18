@@ -1509,6 +1509,13 @@ public interface Log {
 				"		return this;"; */
 			}
 		};
+		
+		public static final @NonNull Ths DELEG = new Ths() {
+			@Override public @Nullable String generateGetThisValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return " + cgModelSpec.delegate + " != null ? " + cgModelSpec.delegate + ".getNamedValue() : this;";
+			}
+		};
+
 		public static final @NonNull Ths PARTS = new Ths() {
 			@Override public @Nullable String generateGetThisValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 				return classRef(CGInvalid.class) + " invalidValue = getInvalidValue();\n" +
@@ -1775,7 +1782,7 @@ public interface Log {
 
 		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ths.PARTS, null     , Nul.NEVER, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , Ctl.LORG , null     , null     , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGCollectionPart.class, null,					Box.RANGE, Ths.CPART, null     , Nul.CPART, Inv.CPART, Glo.CPART, Inl.CPART, null     , null    , Con.CPART, null     , null     , null     , null     , Com.FALSE, null     , Eq.EQUIV);
-		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		Box.DELEG, null     , null     , null     , null     , Glo.DELEG, null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.DELEG, null     , Eq.DELEG);
+		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		Box.DELEG, Ths.DELEG, null     , null     , null     , Glo.DELEG, null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.DELEG, null     , Eq.DELEG);
 		new CGValuedElementModelSpec(CGConstraint.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.BODY , null     , null     , null    );
 		new CGValuedElementModelSpec(CGConstructorPart.class, null,					Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, Rew.PART , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGExecutorOperation.class, null,				Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.UNSUP, Com.MUST , null     , Eq.UNSUP);

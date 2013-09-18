@@ -90,8 +90,8 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 	}
 
 	protected void addDependency(@Nullable CGValuedElement cgElement, @Nullable CGValuedElement dependsOn) {
-		cgElement = cgElement != null ? cgElement.getNamedValue() : null;
-		dependsOn = dependsOn != null ? dependsOn.getNamedValue() : null;
+		cgElement = cgElement != null ? cgElement.getThisValue() : null;
+		dependsOn = dependsOn != null ? dependsOn.getThisValue() : null;
 		if ((cgElement != null) && (cgElement != dependsOn)) {
 			if (!cgElement.isGlobal() || (dependsOn == null) || dependsOn.isGlobal()) {
 				CGValuedElement cgPrimaryElement = getPrimaryElement(cgElement);
@@ -201,7 +201,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 		}
 		List<CGValuedElement> sortedList = new ArrayList<CGValuedElement>();
 		for (CGValuedElement cgElement : dependencyDepths.keySet()) {
-			if (!cgElement.isInlined() && (cgElement.getNamedValue() == cgElement)) {
+			if (!cgElement.isInlined() && (cgElement.getThisValue() == cgElement)) {
 				if (isGlobal) assert cgElement.isGlobal();
 				sortedList.add(cgElement);
 			}
@@ -230,7 +230,7 @@ public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, C
 
 	public void visit(@NonNull CGNamedElement cgElement) {
 		if (cgElement instanceof CGValuedElement) {
-			CGValuedElement cgPrimaryElement = getPrimaryElement(((CGValuedElement) cgElement).getNamedValue());
+			CGValuedElement cgPrimaryElement = getPrimaryElement(((CGValuedElement) cgElement).getThisValue());
 			addDependency(cgPrimaryElement, null);
 			cgPrimaryElement.accept(this);
 		}

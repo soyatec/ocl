@@ -30,7 +30,7 @@ public class AutoBoxingAnalyzer extends BoxingAnalyzer implements AutoCGModelVis
 	}
 
 	public @Nullable Object visitCGASTCallExp(@NonNull CGASTCallExp cgElement) {
-		rewriteAsGuarded(cgElement.getSource());
+		rewriteAsGuarded(cgElement.getSource(), "source for '" + cgElement.getReferredOperation() + "'");
 		return visitCGOperationCallExp(cgElement);
 	}
 

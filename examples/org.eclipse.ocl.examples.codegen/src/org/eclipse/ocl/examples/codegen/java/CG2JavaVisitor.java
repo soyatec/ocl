@@ -1326,7 +1326,9 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 				js.pushIndentation(null);
 					js.append("throw new ");
 					js.appendClassReference(InvalidValueException.class);
-					js.append("(\"Null source\");\n");
+					js.append("(");
+					js.appendString("Null " + cgGuardExp.getMessage());
+					js.append(");\n");
 					js.popIndentation();
 				js.append("}\n");
 			}
