@@ -504,7 +504,7 @@ public class DataTypeImpl
 			if (name2 == null) {
 				name2 = "";
 			}
-			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name2, getTypeParameters().parametersSize());
+			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eNS_PREFIX, PivotPackage.eINSTANCE).getDataTypeId(name2, getTypeParameters().parametersSize());
 		}
 		else {
 			Type behavioralType = getBehavioralType();

@@ -97,6 +97,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -132,6 +133,8 @@ import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.xtext.util.Strings;
 
@@ -525,7 +528,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		return false;
 	}
 
-	protected boolean isBoxedType(@NonNull CGValuedElement cgValue) {
+	protected boolean isBoxedType2(@NonNull CGValuedElement cgValue) {
 		TypeId typeId = cgValue.getASTypeId();
 		if (typeId instanceof MetaclassId) {
 			return true;
@@ -534,6 +537,32 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			return true;
 		}
 		return false;
+	}
+
+	protected boolean isBoxedType(@NonNull CGValuedElement cgValue) {
+		Element ast = cgValue.getAst();
+		if (!(ast instanceof TypedElement)) {
+			return false;
+		}
+		Type type = ((TypedElement)ast).getType();
+		if (type == null) {
+			return false;
+		}
+		if (type instanceof DomainEnumeration) {
+			return false;
+		}
+		MetaModelManager metaModelManager = getMetaModelManager();
+		Type oclTypeType = metaModelManager.getOclTypeType();
+		return metaModelManager.conformsTo(type, oclTypeType, null);
+	}
+
+	protected boolean isEnumerationLiteral(@NonNull CGValuedElement cgValue) {
+		Element ast = cgValue.getAst();
+		if (!(ast instanceof TypedElement)) {
+			return false;
+		}
+		Type type = ((TypedElement)ast).getType();
+		return type instanceof DomainEnumeration;
 	}
 	
 	@Override
@@ -1466,20 +1495,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			else if (cgArgument.isFalse()) {
 				js.appendBooleanValueName(cgSource, false);
 			}
-			else if (isBoxedElement(cgSource) && isBoxedElement(cgArgument)) {
+			else if (isEnumerationLiteral(cgSource) && isEnumerationLiteral(cgArgument)) {
 				js.appendValueName(cgSource);
 				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
 				js.appendValueName(cgArgument);
 			}
 			else if (isBoxedType(cgSource) && isBoxedType(cgArgument)) {
-				if (cgSource.isNonNull() && cgArgument.isNonNull()) {
-					js.appendValueName(cgSource);
-					js.append(".getTypeId()");
-					js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
-					js.appendValueName(cgArgument);
-					js.append(".getTypeId()");
-				}
-				else {
+				boolean nullSafe = cgSource.isNonNull() && cgArgument.isNonNull();
+				if (!nullSafe) {
 					String prefix = "";
 					if (!cgSource.isNonNull()) {
 						js.append("(");
@@ -1494,13 +1517,21 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 						js.append(" != null)");
 					}
 					js.append(" ? (");
-					js.appendValueName(cgSource);
-					js.append(".getTypeId()");
-					js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
-					js.appendValueName(cgArgument);
-					js.append(".getTypeId()) : ");
+				}
+				js.appendValueName(cgSource);
+				js.append(".getTypeId()");
+				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
+				js.appendValueName(cgArgument);
+				js.append(".getTypeId()");
+				if (!nullSafe) {
+					js.append(") : ");
 					js.appendThrowBooleanInvalidValueException("null equal input");
 				}
+			}
+			else if (isBoxedElement(cgSource) && isBoxedElement(cgArgument)) {		// FIXME Is this needed ?
+				js.appendValueName(cgSource);
+				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
+				js.appendValueName(cgArgument);
 			}
 			else if (cgSource.isNonNull()) {
 				if (cgIsEqualExp.isNotEquals()) {

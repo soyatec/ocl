@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public interface NsURIPackageId extends PackageId
 {
 	@Nullable EPackage getEPackage();
+	@Nullable String getNsPrefix();
 	@NonNull String getNsURI();
 	void setEPackage(@NonNull EPackage ePackage);
 }

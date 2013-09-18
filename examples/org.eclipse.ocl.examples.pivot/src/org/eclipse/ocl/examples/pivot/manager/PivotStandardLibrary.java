@@ -76,6 +76,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	private SelfType oclSelfType = null;
 	private org.eclipse.ocl.examples.pivot.Class oclSummableType = null;
 	private org.eclipse.ocl.examples.pivot.Class oclTupleType = null;
+	private org.eclipse.ocl.examples.pivot.Class oclTypeType = null;
 	private VoidType oclVoidType = null;
 	private OrderedSetType orderedSetType = null;
 	private PrimitiveType realType = null;
@@ -246,6 +247,14 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		return oclTupleType2;
 	}
 
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getOclTypeType() {
+		org.eclipse.ocl.examples.pivot.Class oclTypeType2 = oclTypeType;
+		if (oclTypeType2 == null) {
+			oclTypeType2 = oclTypeType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, "OclType");		
+		}
+		return oclTypeType2;
+	}
+
 	public @NonNull VoidType getOclVoidType() {
 		VoidType oclVoidType2 = oclVoidType;
 		if (oclVoidType2 == null) {
@@ -364,6 +373,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		oclInvalidType = null;
 		oclLambdaType = null;
 		oclTupleType = null;
+		oclTypeType = null;
 		oclVoidType = null;
 		orderedSetType = null;
 		realType = null;

@@ -1165,7 +1165,7 @@ public class TypeImpl
 			return (TypeId) owningTemplateParameter.getElementId();
 		}
 		else if (eContainer() instanceof Library) {
-			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getClassId(name, getTypeParameters().parametersSize());
+			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eNS_PREFIX, PivotPackage.eINSTANCE).getClassId(name, getTypeParameters().parametersSize());
 		}
 		else {
 			return IdManager.getClassId(this);

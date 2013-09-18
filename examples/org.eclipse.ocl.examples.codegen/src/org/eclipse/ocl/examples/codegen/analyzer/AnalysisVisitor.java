@@ -163,10 +163,10 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 			else if (isEqual == Boolean.FALSE) {
 				context.setConstant(cgIsEqualExp, context.getBoolean(cgIsEqualExp.isNotEquals()));
 			}
-			else if (cgSource.isTrue() && (cgArgument.getASTypeId() == TypeId.BOOLEAN)) {
+			else if (cgSource.isTrue() && cgArgument.isNonNull() && (cgArgument.getASTypeId() == TypeId.BOOLEAN)) {
 				context.replace(cgIsEqualExp, cgArgument, "Null term");
 			}
-			else if (cgArgument.isTrue() && (cgSource.getASTypeId() == TypeId.BOOLEAN)) {
+			else if (cgArgument.isTrue() && cgSource.isNonNull() && (cgSource.getASTypeId() == TypeId.BOOLEAN)) {
 				context.replace(cgIsEqualExp, cgSource, "Null term");
 			}
 		}

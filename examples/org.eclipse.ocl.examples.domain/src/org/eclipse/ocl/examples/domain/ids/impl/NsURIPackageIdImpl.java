@@ -24,12 +24,23 @@ import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 public class NsURIPackageIdImpl extends PackageIdImpl implements NsURIPackageId
 {
 	protected final @NonNull String nsURI;
+	protected final @Nullable String nsPrefix;
 	private @Nullable EPackage ePackage;
 
 	@SuppressWarnings("null")
+	@Deprecated
 	public NsURIPackageIdImpl(@NonNull IdManager idManager, @NonNull String nsURI, @Nullable EPackage ePackage) {
 		super(nsURI.hashCode());
 		this.nsURI = nsURI;
+		this.nsPrefix = null;
+		this.ePackage = ePackage;
+	}
+
+	@SuppressWarnings("null")
+	public NsURIPackageIdImpl(@NonNull IdManager idManager, @NonNull String nsURI, @Nullable String nsPrefix, @Nullable EPackage ePackage) {
+		super(nsURI.hashCode());
+		this.nsURI = nsURI;
+		this.nsPrefix = nsPrefix;
 		this.ePackage = ePackage;
 	}
 
@@ -45,11 +56,25 @@ public class NsURIPackageIdImpl extends PackageIdImpl implements NsURIPackageId
 		return ePackage;
 	}
 
+	public @Nullable String getNsPrefix() {
+		return nsPrefix;
+	}
+
 	public @NonNull String getNsURI() {
 		return nsURI;
 	}
 
 	public void setEPackage(@NonNull EPackage ePackage) {
 		this.ePackage = ePackage;
+	}
+
+	@Override
+	public String toString() {
+		if (nsPrefix != null) {
+			return nsPrefix;
+		}
+		else {
+			return "'" + nsURI + "'";
+		}
 	}
 }
