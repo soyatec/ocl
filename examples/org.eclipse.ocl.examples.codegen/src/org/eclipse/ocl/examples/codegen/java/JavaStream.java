@@ -462,17 +462,7 @@ public class JavaStream
 		if (!cgElement.isSettable()) {
 			append("final ");
 		}
-//		TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgElement);
-/*		if (suppressNullWarnings) {
-//			if ((typeDescriptor instanceof UnboxedEObjectsDescriptor)
-//			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
-//				append("@SuppressWarnings(\"null\")");
-//			}
-			if (cgElement.isUndeclaredNonNull()) {
-				append("@SuppressWarnings(\"null\")");
-			}
-		} */
-		if (!is_boolean) {
+		if (!is_boolean && !cgElement.isAssertedNonNull()) {
 			appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);	// FIXME Ugh!
 			append(" ");
 		}
@@ -785,6 +775,10 @@ public class JavaStream
 			Class<?> javaClass = typeDescriptor.getJavaClass();
 			return (javaClass == boolean.class) || ((javaClass == Boolean.class) && cgValue.isNonNull());
 		}
+	}
+	
+	public boolean isUseNullAnnotations() {
+		return useNullAnnotations;
 	}
 
 	public void popIndentation() {

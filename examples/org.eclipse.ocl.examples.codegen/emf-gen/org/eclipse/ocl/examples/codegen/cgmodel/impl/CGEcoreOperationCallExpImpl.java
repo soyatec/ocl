@@ -182,13 +182,4 @@ public class CGEcoreOperationCallExpImpl extends CGOperationCallExpImpl implemen
 		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUndeclaredNonNull() {
-		return true;
-	}
-
 } //CGEcoreOperationCallExpImpl

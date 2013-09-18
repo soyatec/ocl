@@ -78,43 +78,46 @@ public interface CGValuedElement extends CGTypedElement {
 	@Nullable CGInvalid getInvalidValue();
 
 	/**
-	 * Return the value to which this valuedElement delegates to obtain its value.
-	 * Returns this if no delegation occurs.
-	 *
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$3
-	@NonNull CGValuedElement getSourceValue();
-
-	/**
-	 * Return the CGValuedElement which is used as this element.
-	 * Unwinds Collection/TupleParts does not follow delegation.
-	 * Returns this if no delegation occurs.
-	 *
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$11
-	@NonNull CGValuedElement getThisValue();
-
-	/**
 	 * Return the CGValuedElement that provides the name of a declaration from which the value of this CGValuedElement may be obtained.
-	 * Fundamental elements such as constants and operations call provide the named value themselves.
+	 * Fundamental elements such as constants and operation calls provide the named value themselves.
 	 * More complex elements such as VariableExp and ThrowExp may delegate.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$63
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$7
 	@NonNull CGValuedElement getNamedValue();
 
 	/**
-	 * Return the CGValuedElement that provides the strong type of a declaration from which the type of this CGValuedElement may be obtained.
-	 * Fundamental elements such as constants and operations call provide their own accurate strong type.
-	 * More complex elements such as CatchExp have a weak type that includes invalid and so delegate to identify the strong type.
-	 * More complex elements such as GuardExp/ThrowExp propagate an unchanged value with a stronger type than their source.
+	 * Return the CGValuedElement which is the source of the information value of this element.
+	 * Note that the source value may be differently guarded, caught/thrown and boxed/unboxed to this value.
+	 * Returns this if no delegation occurs.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$64
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$8
+	@NonNull CGValuedElement getSourceValue();
+
+	/**
+	 * Return a simpler CGValuedElement that is fully equivalent to this element.
+	 * May return CGInvalid if this element is invalid.
+	 * May return the internal value of a CollectionPart or TuplePart.
+	 * May follow a delegation when the delegation has no semantic significance.
+	 * Returns this if no simplification occurs.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Ths$5
+	@NonNull CGValuedElement getThisValue();
+
+	/**
+	 * Return the CGValuedElement that provides the narrowest type declaration from which the type of this CGValuedElement may be obtained.
+	 * Fundamental elements such as constants and operations call provide their own narrow type.
+	 * More complex elements such as CatchExp have a wide type that includes invalid and so delegate to identify the narrow type.
+	 * More complex elements such as GuardExp/ThrowExp propagate an unchanged value with a narrower type than their source.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$9
 	@NonNull CGValuedElement getTypedValue();
 
 	/**
@@ -123,15 +126,23 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$5
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$10
 	@Nullable String getValueName();
+
+	/**
+	 * Return true if this value is not null, possibly with the aid of an assertion.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Nul$12
+	boolean isAssertedNonNull();
 
 	/**
 	 * Return true if this value is a boxed value.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$6
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Box$9
 	boolean isBoxed();
 
 	/**
@@ -140,7 +151,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$7
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Ct$4
 	boolean isCaught();
 
 	/**
@@ -148,7 +159,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$8
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Com$5
 	boolean isCommonable();
 
 	/**
@@ -156,15 +167,31 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$9
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Con$9
 	boolean isConstant();
+
+	/**
+	 * Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Eq$15
+	@Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue);
+
+	/**
+	 * Provided that thatValue does not delegate its equivalence comptatuion, return true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Eq$16
+	@Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue);
 
 	/**
 	 * Return true if this value is false.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$11
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Log$8
 	boolean isFalse();
 
 	/**
@@ -172,15 +199,15 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$12
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Glo$7
 	boolean isGlobal();
 
 	/**
-	 * Return true if this value can be inlined as an expression term.
+	 * Return true if this value is inlined and so has no local or global declaration.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$13
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Inl$7
 	boolean isInlined();
 
 	/**
@@ -188,7 +215,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$14
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Inv$11
 	boolean isInvalid();
 
 	/**
@@ -196,7 +223,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$15
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Inv$12
 	boolean isNonInvalid();
 
 	/**
@@ -204,7 +231,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$16
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Nul$11
 	boolean isNonNull();
 
 	/**
@@ -212,7 +239,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$17
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Nul$12
 	boolean isNull();
 
 	/**
@@ -220,31 +247,15 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$19
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Set$3
 	boolean isSettable();
-
-	/**
-	 * Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.
-	 *
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$48
-	@Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue);
-
-	/**
-	 * Returns true/false if this value can be determined to have deep value equivalence/inequivalence to thatValue, null if no determination can be made.
-	 *
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$50
-	@Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue);
 
 	/**
 	 * Return true if this value is true.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$30
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Log$9
 	boolean isTrue();
 
 	/**
@@ -252,7 +263,7 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$21
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Box$10
 	boolean isUnboxed();
 
 	/**
@@ -260,23 +271,15 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$22
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Com$6
 	boolean isUncommonable();
-
-	/**
-	 * Return true if this value is not null but is not declared as such.
-	 *
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$34
-	boolean isUndeclaredNonNull();
 
 	/**
 	 * Set the caught status.
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$23
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Ct$5
 	void setCaught(boolean isCaught);
 
 	/**
@@ -284,6 +287,6 @@ public interface CGValuedElement extends CGTypedElement {
 	 *
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$26
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$11
 	void setValueName(@NonNull String valueName);
 } // CGValuedElement

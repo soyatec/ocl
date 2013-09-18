@@ -471,7 +471,7 @@ public class PropertyCallExpImpl
 		        try {
 		            final @Nullable /*@Thrown*/ DomainProperty referredProperty = this.getReferredProperty();
 		            if (referredProperty == null) {
-		                throw new InvalidValueException("Null source");
+		                throw new InvalidValueException("Null source for \'pivot::NamedElement.isStatic\'");
 		            }
 		            final /*@Thrown*/ boolean self_71 = referredProperty.isStatic();
 		            CAUGHT_self_71 = self_71;
@@ -479,18 +479,15 @@ public class PropertyCallExpImpl
 		        catch (Exception e) {
 		            CAUGHT_self_71 = ValuesUtil.createInvalidValue(e);
 		        }
+		        if (CAUGHT_self_71 instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_self_71;
+		        }
 		        final /*@NonInvalid*/ boolean symbol_0 = CAUGHT_self_71 instanceof InvalidValueException;
 		        /*@Thrown*/ boolean symbol_1;
 		        if (symbol_0) {
-		            if (CAUGHT_self_71 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_self_71;
-		            }
 		            symbol_1 = (Boolean)CAUGHT_self_71;
 		        }
 		        else {
-		            if (CAUGHT_self_71 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_self_71;
-		            }
 		            final /*@Thrown*/ boolean eq = CAUGHT_self_71 == Boolean.FALSE;
 		            symbol_1 = eq;
 		        }
@@ -504,7 +501,7 @@ public class PropertyCallExpImpl
 		    try {
 		        final @Nullable /*@Thrown*/ DomainExpression source = this.getSource();
 		        if (source == null) {
-		            throw new InvalidValueException("Null source");
+		            throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
 		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();

@@ -1137,7 +1137,7 @@ public class PropertyImpl
 		    }
 		    final @Nullable /*@Thrown*/ DomainType oclAsType = (DomainType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_1);
 		    if (oclAsType == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::Type.ownedAttribute\'");
 		    }
 		    final @NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
@@ -1187,18 +1187,15 @@ public class PropertyImpl
 		        symbol_7 = ValuesUtil.FALSE_VALUE;
 		    }
 		    else {
+		        if (CAUGHT_b instanceof InvalidValueException) {
+		            throw (InvalidValueException)CAUGHT_b;
+		        }
 		        final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
 		        /*@Thrown*/ boolean symbol_6;
 		        if (symbol_4) {
-		            if (CAUGHT_b instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_b;
-		            }
 		            symbol_6 = (Boolean)CAUGHT_b;
 		        }
 		        else {
-		            if (CAUGHT_b instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_b;
-		            }
 		            final /*@Thrown*/ boolean eq_1 = CAUGHT_b == Boolean.FALSE;
 		            /*@NonInvalid*/ boolean symbol_5;
 		            if (eq_1) {
@@ -1294,18 +1291,15 @@ public class PropertyImpl
 		                symbol_7 = ValuesUtil.FALSE_VALUE;
 		            }
 		            else {
+		                if (CAUGHT_b instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_b;
+		                }
 		                final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
 		                /*@Thrown*/ boolean symbol_6;
 		                if (symbol_4) {
-		                    if (CAUGHT_b instanceof InvalidValueException) {
-		                        throw (InvalidValueException)CAUGHT_b;
-		                    }
 		                    symbol_6 = (Boolean)CAUGHT_b;
 		                }
 		                else {
-		                    if (CAUGHT_b instanceof InvalidValueException) {
-		                        throw (InvalidValueException)CAUGHT_b;
-		                    }
 		                    final /*@Thrown*/ boolean eq_1 = CAUGHT_b == Boolean.FALSE;
 		                    /*@NonInvalid*/ boolean symbol_5;
 		                    if (eq_1) {

@@ -1254,7 +1254,7 @@ public class TypeImpl
 		         * name
 		         */
 		        if (_1 == null) {
-		            throw new InvalidValueException("Null source");
+		            throw new InvalidValueException("Null source for \'pivot::NamedElement.name\'");
 		        }
 		        final @Nullable /*@Thrown*/ String name = _1.getName();
 		        //

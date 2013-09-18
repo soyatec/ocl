@@ -904,18 +904,15 @@ public class OperationImpl
 		                symbol_7 = ValuesUtil.FALSE_VALUE;
 		            }
 		            else {
+		                if (CAUGHT_b instanceof InvalidValueException) {
+		                    throw (InvalidValueException)CAUGHT_b;
+		                }
 		                final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_b instanceof InvalidValueException;
 		                /*@Thrown*/ boolean symbol_6;
 		                if (symbol_4) {
-		                    if (CAUGHT_b instanceof InvalidValueException) {
-		                        throw (InvalidValueException)CAUGHT_b;
-		                    }
 		                    symbol_6 = (Boolean)CAUGHT_b;
 		                }
 		                else {
-		                    if (CAUGHT_b instanceof InvalidValueException) {
-		                        throw (InvalidValueException)CAUGHT_b;
-		                    }
 		                    final /*@Thrown*/ boolean eq_1 = CAUGHT_b == Boolean.FALSE;
 		                    /*@NonInvalid*/ boolean symbol_5;
 		                    if (eq_1) {
@@ -1063,7 +1060,7 @@ public class OperationImpl
 		         * name
 		         */
 		        if (_1 == null) {
-		            throw new InvalidValueException("Null source");
+		            throw new InvalidValueException("Null source for \'pivot::NamedElement.name\'");
 		        }
 		        final @Nullable /*@Thrown*/ String name = _1.getName();
 		        //
@@ -1122,7 +1119,7 @@ public class OperationImpl
 		         * name
 		         */
 		        if (_1 == null) {
-		            throw new InvalidValueException("Null source");
+		            throw new InvalidValueException("Null source for \'pivot::NamedElement.name\'");
 		        }
 		        final @Nullable /*@Thrown*/ String name = _1.getName();
 		        //

@@ -280,6 +280,14 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	public boolean isAssertedNonNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	public boolean isBoxed() {
 		CGValuedElement referredValue = getSourceValue();
 //		CGValuedElement value = getNamedValue();
@@ -430,14 +438,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 */
 	public boolean isUncommonable() {
 		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	public boolean isUndeclaredNonNull() {
-		return false;
 	}
 
 	/**

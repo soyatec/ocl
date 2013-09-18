@@ -158,7 +158,7 @@ public class CollectionItemImpl
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final @Nullable /*@Thrown*/ DomainExpression item = this.getItem();
 		    if (item == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
 		    final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");

@@ -468,12 +468,9 @@ public class OperationCallExpImpl
 		try {
 		    final @Nullable /*@Thrown*/ DomainOperation operation = this.getReferredOperation();
 		    if (operation == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::Operation.ownedParameter\'");
 		    }
 		    final @NonNull /*@Thrown*/ List<? extends DomainTypedElement> parameters = operation.getOwnedParameter();
-		    if (operation == null) {
-		        throw new InvalidValueException("Null source");
-		    }
 		    final @Nullable /*@Thrown*/ DomainType selfType_1 = operation.getOwningType();
 		    final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		    final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
@@ -512,15 +509,15 @@ public class OperationCallExpImpl
 		            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_parameters = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
 		            final @Nullable /*@Thrown*/ DomainTypedElement parameter = (DomainTypedElement)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_parameters, i);
 		            if (parameter == null) {
-		                throw new InvalidValueException("Null source");
+		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType parameterType = parameter.getType();
 		            if (argument_1 == null) {
-		                throw new InvalidValueException("Null source");
+		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type = argument_1.getType();
 		            if (parameterType == null) {
-		                throw new InvalidValueException("Null source");
+		                throw new InvalidValueException("Null source for \'pivot::Type.specializeIn(pivot::OCLExpression,pivot::Type) : pivot::Type\'");
 		            }
 		            final @NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
 		            final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
@@ -581,7 +578,7 @@ public class OperationCallExpImpl
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 		    final @Nullable /*@Thrown*/ DomainOperation referredOperation = this.getReferredOperation();
 		    if (referredOperation == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::Operation.ownedParameter\'");
 		    }
 		    final @NonNull /*@Thrown*/ List<? extends DomainTypedElement> ownedParameter = referredOperation.getOwnedParameter();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedParameter = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, ownedParameter);

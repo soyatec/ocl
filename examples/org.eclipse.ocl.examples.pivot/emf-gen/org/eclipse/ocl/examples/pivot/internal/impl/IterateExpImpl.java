@@ -458,7 +458,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    final @Nullable /*@Thrown*/ DomainType type = this.getType();
 		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
 		    final /*@Thrown*/ boolean eq = (type != null) && (type_0 != null) ? (type.getTypeId() == type_0.getTypeId()) : ValuesUtil.throwBooleanInvalidValueException("null equal input");
@@ -496,12 +496,12 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		try {
 		    final @Nullable /*@Thrown*/ DomainExpression body = this.getBody();
 		    if (body == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType type = body.getType();
 		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
 		    final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
@@ -538,7 +538,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		try {
 		    final @Nullable /*@Thrown*/ Variable result = this.getResult();
 		    if (result == null) {
-		        throw new InvalidValueException("Null source");
+		        throw new InvalidValueException("Null source for \'pivot::Variable.initExpression\'");
 		    }
 		    final @Nullable /*@Thrown*/ DomainExpression initExpression = result.getInitExpression();
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
