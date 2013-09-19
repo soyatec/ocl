@@ -207,6 +207,15 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return init != null ? init : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getSourceValue() {
 		return init != null ? init.getSourceValue() : this;
 	}

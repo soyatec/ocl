@@ -74,6 +74,15 @@ public class CGBoxExpImpl extends CGCallExpImpl implements CGBoxExp {
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return source != null ? source : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getSourceValue() {
 		return source != null ? source.getSourceValue() : this;
 	}

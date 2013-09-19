@@ -178,6 +178,15 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return executorType != null ? executorType : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getTypedValue() {
 		return executorType != null ? executorType.getTypedValue() : this;
 	}

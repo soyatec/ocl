@@ -187,6 +187,15 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return referredConstant != null ? referredConstant : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getTypedValue() {
 		return referredConstant != null ? referredConstant.getTypedValue() : this;
 	}

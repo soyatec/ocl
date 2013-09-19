@@ -472,17 +472,17 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore"; //$NON-NLS-1$		
+		String source = "http://www.eclipse.org/emf/2002/Ecore"; //$NON-NLS-1$	
 		addAnnotation
 		  (this, 
 		   source, 
 		   new String[] {
-		   });						
+		   });		
 		addAnnotation
 		  (employeeEClass, 
 		   source, 
 		   new String[] {
-		   });												
+		   });	
 	}
 
 } //CodegencompanyPackageImpl

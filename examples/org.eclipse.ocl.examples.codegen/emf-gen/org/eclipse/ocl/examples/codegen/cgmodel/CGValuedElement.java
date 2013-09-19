@@ -88,6 +88,16 @@ public interface CGValuedElement extends CGTypedElement {
 	@NonNull CGValuedElement getNamedValue();
 
 	/**
+	 * Return the CGValuedElement to which the value of this CGValuedElement delegates.
+	 * Fundamental elements such as constants and operation calls provide the named value themselves.
+	 * More complex elements such as VariableExp and ThrowExp may delegate.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Val$8
+	@NonNull CGValuedElement getReferredValue();
+
+	/**
 	 * Return the CGValuedElement which is the source of the information value of this element.
 	 * Note that the source value may be differently guarded, caught/thrown and boxed/unboxed to this value.
 	 * Returns this if no delegation occurs.

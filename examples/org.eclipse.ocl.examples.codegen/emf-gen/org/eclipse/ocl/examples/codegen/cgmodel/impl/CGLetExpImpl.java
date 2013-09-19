@@ -280,6 +280,15 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return in != null ? in : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getSourceValue() {
 		return in != null ? in.getSourceValue() : this;
 	}

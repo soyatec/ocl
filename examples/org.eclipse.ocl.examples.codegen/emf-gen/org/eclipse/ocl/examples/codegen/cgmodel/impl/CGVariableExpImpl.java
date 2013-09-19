@@ -179,6 +179,15 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return referredVariable != null ? referredVariable : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @NonNull CGValuedElement getTypedValue() {
 		return referredVariable != null ? referredVariable.getTypedValue() : this;
 	}

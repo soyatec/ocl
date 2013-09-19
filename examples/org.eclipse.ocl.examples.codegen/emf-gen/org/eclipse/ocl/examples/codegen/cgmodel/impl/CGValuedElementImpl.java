@@ -219,7 +219,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public @Nullable CGInvalid getInvalidValue() {
-		CGValuedElement sourceValue = getSourceValue();
+		CGValuedElement sourceValue = getReferredValue();
 		return sourceValue != this ? sourceValue.getInvalidValue() : null;
 	}
 
@@ -230,6 +230,14 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
 		return ControlPlace.createControlPlace(element2place, this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @NonNull CGValuedElement getReferredValue() {
+		return getThisValue();
 	}
 
 	/**
@@ -289,7 +297,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isBoxed() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 //		CGValuedElement value = getNamedValue();
 		assert referredValue != this : "isBoxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
 		return referredValue.isBoxed();
@@ -316,7 +324,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isConstant() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isConstant();
 	}
 
@@ -342,7 +350,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isFalse() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isFalse();
 	}
 
@@ -365,7 +373,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isInlined() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isInlined();
 	}
 
@@ -382,7 +390,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isNonInvalid() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isNonInvalid();
 	}
 
@@ -391,7 +399,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isNonNull() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isNonNull();
 	}
 
@@ -400,7 +408,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isNull() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isNull();
 	}
 
@@ -417,7 +425,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isTrue() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isTrue();
 	}
 
@@ -426,7 +434,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	public boolean isUnboxed() {
-		CGValuedElement referredValue = getSourceValue();
+		CGValuedElement referredValue = getReferredValue();
 //		CGValuedElement value = getNamedValue();
 		assert referredValue != this : "isUnboxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
 		return referredValue.isUnboxed();

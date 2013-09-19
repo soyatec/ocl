@@ -140,7 +140,7 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, this);
-		final List<? extends Object> UNBOXED_oclContents = oclContents.asEcoreObjects(idResolver, List.class);
+		final List<? extends Object> UNBOXED_oclContents = oclContents.asEcoreObjects(idResolver, Object.class);
 		assert UNBOXED_oclContents != null;
 		return (List<Element>)UNBOXED_oclContents;
 	}

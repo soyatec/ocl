@@ -206,6 +206,15 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return source != null ? source : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @Nullable String getValueName() {
 		return source != null ? source.getValueName() : null;
 	}
