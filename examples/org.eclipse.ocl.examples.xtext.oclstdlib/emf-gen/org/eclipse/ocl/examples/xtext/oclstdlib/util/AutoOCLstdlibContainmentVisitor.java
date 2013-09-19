@@ -15,7 +15,7 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.AutoEssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.JavaImplementationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
 
 public class AutoOCLstdlibContainmentVisitor
-	extends AutoEssentialOCLContainmentVisitor
+	extends EssentialOCLContainmentVisitor
 	implements OCLstdlibCSVisitor<Continuation<?>>
 {
     

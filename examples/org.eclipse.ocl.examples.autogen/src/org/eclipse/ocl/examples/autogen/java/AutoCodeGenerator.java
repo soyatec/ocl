@@ -206,7 +206,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		String packageName = visitorPackage; 
 		
 		//String className = prefix + "AutoContainmentVisitor";
-		String className = getVisitorClassName(prefix);
+		String className = getAutoVisitorClassName(prefix);
 		AS2CGVisitor as2cgVisitor = new AutoAS2CGVisitor(cgAnalyzer, getGlobalContext());
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		cgPackage.setName(packageName);
@@ -218,7 +218,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			// String superPackageName = super
 			String superPackageName = superVisitorPackage;
 			// String superClassName = superGenPackage2.getPrefix() + "AutoContainmentVisitor";
-			String superClassName = getVisitorClassName(superProjectPrefix2);
+			String superClassName = getManualVisitorClassName(superProjectPrefix2);
 			// String superInterfaceName = /*trimmed*/prefix + "Visitor";
 			String superInterfaceName = visitorClass;
 			
@@ -388,7 +388,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 
 	public void saveSourceFile() {
 		// String utilDir = genModel.getModelDirectory() + "/" + genPackage.getBasePackage().replace('.', '/') +"/util/" + genPackage.getPrefix() + "AutoContainmentVisitor.java";
-		String utilDir = genModel.getModelDirectory() + "/" + visitorPackage.replace('.', '/') + "/" + getVisitorClassName(projectPrefix) + ".java";
+		String utilDir = genModel.getModelDirectory() + "/" + visitorPackage.replace('.', '/') + "/" + getAutoVisitorClassName(projectPrefix) + ".java";
 		URI uri = URI.createPlatformResourceURI(utilDir, true);
 		String javaCodeSource = generateClassFile();
 		try {
@@ -401,7 +401,11 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		}
 	}
 	
-	protected @NonNull String getVisitorClassName(@NonNull String prefix) {
+	protected @NonNull String getAutoVisitorClassName(@NonNull String prefix) {
 		return "Auto"+  prefix + "ContainmentVisitor";  
+	}
+	
+	protected @NonNull String getManualVisitorClassName(@NonNull String prefix) {
+		return prefix + "ContainmentVisitor";  
 	}
 }
