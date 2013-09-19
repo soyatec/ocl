@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 397429
  *
  * </copyright>
  *
@@ -20,9 +21,12 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
 
 public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
@@ -32,22 +36,22 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 	}
 
 	@Override
-	protected @NonNull CompleteOCLContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLContainmentVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull CompleteOCLLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull CompleteOCLPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull CompleteOCLPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull CompleteOCLCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new CompleteOCLPreOrderVisitor(converter);
 	}
 }

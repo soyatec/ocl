@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010, 2012 E.D.Willink and others.
+ * Copyright (c) 2010, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 397429
  *
  * </copyright>
  *
@@ -20,10 +21,13 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
 public class OCLstdlibCS2Pivot extends EssentialOCLCS2Pivot
@@ -37,22 +41,22 @@ public class OCLstdlibCS2Pivot extends EssentialOCLCS2Pivot
 	}
 
 	@Override
-	protected @NonNull OCLstdlibContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibContainmentVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull OCLstdlibLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull OCLstdlibPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull OCLstdlibPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull OCLstdlibCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
 		return new OCLstdlibPreOrderVisitor(converter);
 	}
 
