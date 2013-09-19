@@ -19,29 +19,50 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
-public class UnboxedDynamicEObjectsDescriptor extends AbstractCollectionDescriptor implements UnboxedDescriptor
+/**
+ * A FutureEObjectsDescriptor describes a yet-to-be-created collection type. It has a pivot CollectionTypeId, and EClassifier and a Java class name.
+ * <p>
+ * The Java class is only known by name; it is not yet loadable, since genmodel has not yet generated it.
+ * <p>
+ * There is no EClassifier available to perform type conformance checks since thie Java class name was provided as an instanceClassName.
+ */
+public class FutureEObjectsDescriptor extends AbstractCollectionDescriptor implements UnboxedDescriptor
 {
 	protected final @NonNull EClassifier eClassifier;
+	protected final @NonNull String className;
 	
-	public UnboxedDynamicEObjectsDescriptor(@NonNull CollectionTypeId elementId, @NonNull EClassifier eClassifier) {
-		super(elementId, List.class);
+	public FutureEObjectsDescriptor(@NonNull CollectionTypeId collectionTypeId, @NonNull EClassifier eClassifier, @NonNull String className) {
+		super(collectionTypeId);
 		this.eClassifier = eClassifier;
+		this.className = className;
 	}
 
-	@Override
 	public void append(@NonNull JavaStream javaStream) {
-		javaStream.appendClassReference(javaClass);
+		javaStream.appendClassReference(List.class, false, className);
+	}
+	
+	public @NonNull String getClassName() {
+		return className;
+	}
+
+	public @NonNull Class<?> getJavaClass() {
+		return NamedFuture.class;
+	}
+
+	public @Nullable Class<?> hasJavaClass() {
+		return null;
 	}
 
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
-		if (!(typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
+		if (!(typeDescriptor instanceof FutureEObjectsDescriptor)) {
 			return false;
 		}
-		EClassifier thatEClassifier = ((UnboxedDynamicEObjectsDescriptor)typeDescriptor).eClassifier;
+		EClassifier thatEClassifier = ((FutureEObjectsDescriptor)typeDescriptor).eClassifier;
 		if (eClassifier == thatEClassifier) {
 			return true;
 		}
@@ -49,10 +70,5 @@ public class UnboxedDynamicEObjectsDescriptor extends AbstractCollectionDescript
 			return false;
 		}
 		return ((EClass)eClassifier).isSuperTypeOf((EClass)thatEClassifier);
-	}
-
-	@Override
-	public @NonNull String toString() {
-		return elementId + " => List<Object/*" + eClassifier.getName() + "*/>";
 	}
 }

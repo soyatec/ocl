@@ -54,14 +54,15 @@ import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedValueDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.EObjectsDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.FutureEObjectDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.FutureEObjectsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.RootObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.SimpleDataTypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.SimpleDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.SimpleEObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.SimpleValueDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.UnboxedDynamicEObjectsDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.UnboxedEObjectsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedElementsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedValueDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory;
@@ -455,21 +456,21 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 		if (elementId instanceof ClassId) {
 			Type type = metaModelManager.getIdResolver().getType((ClassId)elementId, null);
-			EClass eClass = getEClass(type);
-			if (eClass != null) {
+			EClassifier eClassifier = getEClassifier(type);
+			if (eClassifier != null) {
 				try {
-					Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClass);
-					simpleDescriptor = new SimpleEObjectDescriptor(elementId, javaClass, eClass);
+					Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
+					simpleDescriptor = new EObjectDescriptor(elementId, eClassifier, javaClass);
 					simpleDescriptors.put(elementId, simpleDescriptor);
 					return simpleDescriptor;
 				}
 				catch (Exception e) {
 					String instanceClassName = type.getInstanceClassName();
 					if (instanceClassName == null) {
-						instanceClassName = genModelHelper.getEcoreInterfaceClassName(eClass);
+						instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
 					}
 					if (instanceClassName != null) {
-						simpleDescriptor = new SimpleDataTypeDescriptor(elementId, instanceClassName);
+						simpleDescriptor = new FutureEObjectDescriptor(elementId, eClassifier, instanceClassName);
 						simpleDescriptors.put(elementId, simpleDescriptor);
 						return simpleDescriptor;
 					}
@@ -516,10 +517,19 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				if (eClassifier != null) {
 					try {
 						Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
-						unboxedDescriptor = new UnboxedEObjectsDescriptor(collectionTypeId, javaClass, eClassifier);
+						unboxedDescriptor = new EObjectsDescriptor(collectionTypeId, eClassifier, javaClass);
 					}
 					catch (Exception e) {
-						unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClassifier);
+						String instanceClassName = type.getInstanceClassName();
+						if (instanceClassName == null) {
+							instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
+						}
+						if (instanceClassName != null) {
+							unboxedDescriptor = new FutureEObjectsDescriptor(collectionTypeId, eClassifier, instanceClassName);
+						}
+//						else {
+//							unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClassifier);
+//						}
 					}
 				}
 				if (unboxedDescriptor == null) {

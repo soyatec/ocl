@@ -306,16 +306,7 @@ public class JavaStream
 	public void appendClassReference(@Nullable Class<?> javaClass, @NonNull Class<?>... typeParameters) {
 		if (javaClass != null) {
 			appendClassReference(javaClass.getName());
-			if (typeParameters.length > 0) {
-				append("<");
-				for (int i = 0; i < typeParameters.length; i++) {
-					if (i != 0) {
-						append(",");
-					}
-					appendClassReference(typeParameters[i]);
-				}
-				append(">");
-			}
+			appendTypeParameters(false, typeParameters);
 		}
 		else {
 			appendClassReference(Object.class);
@@ -325,24 +316,32 @@ public class JavaStream
 	public void appendClassReference(@Nullable Class<?> javaClass, boolean useExtends, @NonNull Class<?>... typeParameters) {
 		if (javaClass != null) {
 			appendClassReference(javaClass.getName());
-			if (typeParameters.length > 0) {
-				append("<");
-				for (int i = 0; i < typeParameters.length; i++) {
-					if (i != 0) {
-						append(",");
-					}
-					if (useExtends) {
-						append("? extends ");
-					}
-					appendClassReference(typeParameters[i]);
-				}
-				append(">");
-			}
+			appendTypeParameters(useExtends, typeParameters);
 		}
 		else {
 			appendClassReference(Object.class);
 		}
 	}
+
+	public void appendClassReference(@Nullable Class<?> javaClass, boolean useExtends, @NonNull String... typeParameters) {
+		if (javaClass != null) {
+			appendClassReference(javaClass.getName());
+			appendTypeParameters(useExtends, typeParameters);
+		}
+		else {
+			appendClassReference(Object.class);
+		}
+	}
+
+/*	public void appendClassReference(@Nullable String className, boolean useExtends, @NonNull Class<?>... typeParameters) {
+		if (className != null) {
+			appendClassReference(className);
+			appendTypeParameters(useExtends, typeParameters);
+		}
+		else {
+			appendClassReference(Object.class);
+		}
+	} */
 
 	@Deprecated
 	public void appendClassReference(Class<?> javaClass, @NonNull TypeDescriptor... typeDescriptors) {
@@ -484,9 +483,17 @@ public class JavaStream
 	 */
 	public void appendEcoreValue(@NonNull String returnClassName, @NonNull CGValuedElement cgValue) {
 		TypeDescriptor javaTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
-		Class<?> javaClass = javaTypeDescriptor.getJavaClass();
-		String bodyTypeName = javaClass.getName();
-		if (!returnClassName.equals(bodyTypeName) && !(cgValue.getNamedValue() instanceof CGParameter)) {
+		Class<?> javaClass = javaTypeDescriptor.hasJavaClass();
+		if (cgValue.getNamedValue() instanceof CGParameter) {
+			appendValueName(cgValue);
+		}
+		else if (javaClass == null) {
+			append("(");
+			appendClassReference(returnClassName);
+			append(")");
+			appendValueName(cgValue);
+		}
+		else if (!returnClassName.equals(javaClass.getName())) {
 			if (javaClass == Boolean.class) {
 				appendValueName(cgValue);
 //				if ("boolean".equals(returnClassName) || "java.lang.Boolean".equals(returnClassName)) {
@@ -725,6 +732,38 @@ public class JavaStream
 	public void appendTrue() {
 		appendClassReference(ValuesUtil.class);
 		append(".TRUE_VALUE");
+	}
+
+	public void appendTypeParameters(boolean useExtends, @NonNull Class<?>... typeParameters) {
+		if (typeParameters.length > 0) {
+			append("<");
+			for (int i = 0; i < typeParameters.length; i++) {
+				if (i != 0) {
+					append(",");
+				}
+				if (useExtends) {
+					append("? extends ");
+				}
+				appendClassReference(typeParameters[i]);
+			}
+			append(">");
+		}
+	}
+
+	public void appendTypeParameters(boolean useExtends, @NonNull String... typeParameters) {
+		if (typeParameters.length > 0) {
+			append("<");
+			for (int i = 0; i < typeParameters.length; i++) {
+				if (i != 0) {
+					append(",");
+				}
+				if (useExtends) {
+					append("? extends ");
+				}
+				appendClassReference(typeParameters[i]);
+			}
+			append(">");
+		}
 	}
 
 	/**

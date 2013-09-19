@@ -143,9 +143,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	protected @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint asConstraint, @NonNull Type asType) {
 		js.resetStream();
 		String constraintName = asConstraint.getName();
-		if ("ArgumentTypeIsConformant".equals(constraintName)) {
-			System.out.println("Got it");
-		}
+//		if ("ArgumentTypeIsConformant".equals(constraintName)) {
+//			System.out.println("Got it");
+//		}
 		GenClassifier genClassifier = genModelHelper.getGenClassifier(asType);
 		String genClassifierName = genClassifier != null ? genClassifier.getName() : null;
 		if (genClassifierName == null) {

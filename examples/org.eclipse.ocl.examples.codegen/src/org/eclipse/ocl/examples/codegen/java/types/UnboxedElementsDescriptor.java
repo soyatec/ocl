@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.java.types;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -24,27 +25,45 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Type;
 
+/**
+ * A UnboxedElementsDescriptor describes a collection type for which no Java class may eveer exist. It has a pivot CollectionTypeId, and
+ * a stamdardLibrary and the pivot type.
+ * <p>
+ * Theis descriptor is used in JUnit tests for expressions and when the genModel is unknown.
+ */
 public class UnboxedElementsDescriptor extends AbstractCollectionDescriptor implements UnboxedDescriptor
 {
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 	protected final @NonNull Type type;
 	
-	public UnboxedElementsDescriptor(@NonNull CollectionTypeId elementId, @NonNull DomainStandardLibrary standardLibrary, @NonNull Type type) {
-		super(elementId, List.class);
+	public UnboxedElementsDescriptor(@NonNull CollectionTypeId collectionTypeId, @NonNull DomainStandardLibrary standardLibrary, @NonNull Type type) {
+		super(collectionTypeId);
 		this.standardLibrary = standardLibrary;
 		this.type = type;
 	}
 
-	@Override
 	public void append(@NonNull JavaStream javaStream) {
-		javaStream.appendClassReference(javaClass, true, Object.class);
+		javaStream.appendClassReference(List.class, true, Object.class);
 	}
 
 	@Override
+	public void appendElement(@NonNull JavaStream javaStream, boolean reClass) {
+		javaStream.appendClassReference(getJavaClass());
+	}
+
 	public @NonNull String getClassName() {
 		return DomainUtil.nonNullModel(type.getName());
 	}
 
+	@NonNull
+	public Class<?> getJavaClass() {
+		return Object.class;
+	}
+
+	@Nullable
+	public Class<?> hasJavaClass() {
+		return null;
+	}
 
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof UnboxedElementsDescriptor)) {

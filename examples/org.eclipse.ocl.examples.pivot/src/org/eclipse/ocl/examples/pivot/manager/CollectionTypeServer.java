@@ -174,6 +174,7 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		templateBinding.setSignature(templateSignature);
 		Map<TemplateParameter, ParameterableElement> allBindings = new HashMap<TemplateParameter, ParameterableElement>();
 		TemplateParameter formalParameter = templateParameters.get(0);
+		assert formalParameter != null;
 		Type elementType = templateArguments.getElementType();
 		allBindings.put(formalParameter, elementType);
 		TemplateParameterSubstitution templateParameterSubstitution = createTemplateParameterSubstitution(formalParameter, elementType);

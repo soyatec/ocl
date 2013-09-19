@@ -14,27 +14,47 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
-import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
-public abstract class AbstractCollectionDescriptor extends AbstractValueDescriptor implements CollectionDescriptor
+/**
+ * An AbstractCollectionDescriptor extends an AbstractDescriptor to describe a collection type.
+ */
+public abstract class AbstractCollectionDescriptor extends AbstractDescriptor implements CollectionDescriptor
 {
-	public AbstractCollectionDescriptor(@NonNull ElementId elementId, @NonNull Class<?> javaClass) {
-		super(elementId, javaClass);
+	public AbstractCollectionDescriptor(@NonNull CollectionTypeId collectionTypeId) {
+		super(collectionTypeId);
 	}
 
 	public void append(@NonNull JavaStream javaStream, boolean reClass) {
-		throw new UnsupportedOperationException();
+		append(javaStream);
 	}
 
 	public void appendElement(@NonNull JavaStream javaStream, boolean reClass) {
-		throw new UnsupportedOperationException();
+		javaStream.append(getClassName());
 	}
 
 	@Override
 	public @Nullable CollectionDescriptor asCollectionDescriptor() {
 		return this;
+	}
+	
+	@Override
+	public @NonNull CollectionTypeId getElementId() {
+		return (CollectionTypeId)super.getElementId();
+	}
+
+	@Override
+	public boolean isAssignableTo(@NonNull Class<?> javaClass) {
+		return javaClass.isAssignableFrom(List.class);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return elementId + " => List<" + getClassName() + ">";
 	}
 }

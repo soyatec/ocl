@@ -20,6 +20,10 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
+/**
+ * A RootObjectDescriptor describes the java.lang.Object type when that is precisely the type in use, as opposed to the usage of Object as the pragmatic
+ * usage when a Java class cannot be determined.
+ */
 public class RootObjectDescriptor extends AbstractDescriptor implements SimpleDescriptor
 {
 	public RootObjectDescriptor(@NonNull ElementId elementId) {
@@ -40,7 +44,7 @@ public class RootObjectDescriptor extends AbstractDescriptor implements SimpleDe
 	}
 
 	public @Nullable Class<?> hasJavaClass() {
-		return null;
+		return Object.class;
 	}
 
 	public boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {

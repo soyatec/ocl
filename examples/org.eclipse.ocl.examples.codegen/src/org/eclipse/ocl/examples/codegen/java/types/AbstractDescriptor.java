@@ -44,6 +44,14 @@ import org.eclipse.ocl.examples.pivot.Type;
 public abstract class AbstractDescriptor implements TypeDescriptor
 {
 	/**
+	 * NamedFuture is a placeholder for classes that have yet to be created. It should never have any real instances or references.
+	 *
+	 */
+	protected static class NamedFuture {
+		private NamedFuture() {}
+	}
+	
+	/**
 	 * Convert an AS javaClass to its underlying Domain interface.
 	 * FIXME Avoid two-level AS interfaces
 	 */

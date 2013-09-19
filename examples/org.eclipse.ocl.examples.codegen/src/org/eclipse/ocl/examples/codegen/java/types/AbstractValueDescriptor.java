@@ -20,7 +20,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 /**
- * An AbstractValueDescriptor extends an AbstractDescriptor to describe a type fopr which a Java Class as well as a pivot ElementId is available.
+ * An AbstractValueDescriptor extends an AbstractDescriptor to describe a type for which a Java Class as well as a pivot ElementId is available.
  */
 public abstract class AbstractValueDescriptor extends AbstractDescriptor
 {
