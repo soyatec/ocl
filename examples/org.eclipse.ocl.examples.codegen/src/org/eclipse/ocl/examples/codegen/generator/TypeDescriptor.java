@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
 
 /**
  * TypeDescriptor captures the characteristics of a Java type and supports serialization to a javaStream.
@@ -31,8 +32,22 @@ public interface TypeDescriptor
 	 */
 	void append(@NonNull JavaStream javaStream);
 
+	/**
+	 * Return a non-null Collection type descriptor if this type descriptor dedescribes a Collection.
+	 * @return
+	 */
+	@Nullable CollectionDescriptor asCollectionDescriptor();
+	
+	/**
+	 * Return the fully qualified Java class name described by this type. In the case of collection types, this method returns
+	 * the class name of the collection elements.
+	 */
 	@NonNull String getClassName();
 
+	/**
+	 * Return the Ecore EClassifier described by this type. In the case of collection types, this method returns
+	 * the EClassifier of the collection elements. May return null when no EClssifier available.
+	 */
 	@Nullable EClassifier getEClassifier();
 
 	/**

@@ -18,6 +18,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
+/**
+ * A SimpleValueDescriptor describes a type whose boxed and unboxed representations are the same. It has a pivot ElementId and a Java class.
+ * <p>
+ * Thus a StringValue is a TypeId.STRING and a java.lang.String.
+ */
 public class SimpleValueDescriptor extends AbstractValueDescriptor implements SimpleDescriptor
 {
 	public SimpleValueDescriptor(@NonNull ElementId elementId, @NonNull Class<?> javaClass) {

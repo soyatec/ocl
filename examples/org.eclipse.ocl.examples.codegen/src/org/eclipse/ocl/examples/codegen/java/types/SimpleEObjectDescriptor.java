@@ -19,6 +19,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
+/**
+ * A SimpleEObjectDescriptor describes a data type whose boxed and unboxed representations are the same. It has a pivot ElementId, a Java class name and an EClass.
+ * <p>
+ * This descriptor is appropriate for most Ecore types.
+ */
 public class SimpleEObjectDescriptor extends SimpleValueDescriptor implements SimpleDescriptor
 {
 	protected final @NonNull EClass eClass;

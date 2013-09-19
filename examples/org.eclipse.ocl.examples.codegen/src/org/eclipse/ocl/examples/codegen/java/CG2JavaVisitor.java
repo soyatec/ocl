@@ -97,6 +97,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -1996,11 +1997,12 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		if (!js.appendLocalStatements(source)) {
 			return false;
 		}
-		if (boxedTypeDescriptor.isAssignableTo(CollectionValue.class)) {
+		CollectionDescriptor collectionDescriptor = unboxedTypeDescriptor.asCollectionDescriptor();
+		if (collectionDescriptor != null) {
 			js.append("final ");
 //			js.appendIsRequired(true);
 //			js.append(" ");
-			js.appendClassReference(unboxedTypeDescriptor);
+			collectionDescriptor.append(js, false);
 //			js.appendClassReference(List.class, false, unboxedTypeDescriptor.getJavaClass());
 			js.append(" ");
 			js.appendValueName(cgUnboxExp);
@@ -2009,7 +2011,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			js.append(".asEcoreObjects(");
 			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
 			js.append(", ");
-			js.appendClassReference(unboxedTypeDescriptor.getJavaClass().getName());
+			collectionDescriptor.appendElement(js, false);
 			js.append(".class);\n");
 			//
 			js.append("assert ");

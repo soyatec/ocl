@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Type;
 
-public class UnboxedElementsDescriptor extends AbstractValueDescriptor implements UnboxedDescriptor
+public class UnboxedElementsDescriptor extends AbstractCollectionDescriptor implements UnboxedDescriptor
 {
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 	protected final @NonNull Type type;

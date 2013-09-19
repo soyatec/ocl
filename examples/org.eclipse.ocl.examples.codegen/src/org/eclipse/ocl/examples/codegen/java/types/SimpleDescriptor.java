@@ -14,6 +14,9 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
+/**
+ * A SimpleDescriptor defines the description of a type that may be used where either a boxed or unboxed representation is required.
+ */
 public interface SimpleDescriptor extends BoxedDescriptor, UnboxedDescriptor
 {
 }

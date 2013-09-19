@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
-public class UnboxedDynamicEObjectsDescriptor extends AbstractValueDescriptor implements UnboxedDescriptor
+public class UnboxedDynamicEObjectsDescriptor extends AbstractCollectionDescriptor implements UnboxedDescriptor
 {
 	protected final @NonNull EClassifier eClassifier;
 	

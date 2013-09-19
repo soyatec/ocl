@@ -18,6 +18,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
+/**
+ * A BoxedValueDescriptor describes a type whose boxed representation differs from its unboxed representation. It has a pivot ElementId and a Java class.
+ * <p>
+ * Thus an IntegerValue is a TypeId.INTEGER and an org.eclipse.ocl.examples.domain.values.IntegerValue.
+ */
 public class BoxedValueDescriptor extends AbstractValueDescriptor implements BoxedDescriptor
 {
 	public BoxedValueDescriptor(@NonNull ElementId elementId, @NonNull Class<?> javaClass) {
@@ -25,7 +30,7 @@ public class BoxedValueDescriptor extends AbstractValueDescriptor implements Box
 	}
 
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
-		if (!(typeDescriptor instanceof BoxedValueDescriptor)) {
+		if (!(typeDescriptor instanceof BoxedDescriptor)) {
 			return false;
 		}
 		return javaClass.isAssignableFrom(typeDescriptor.getJavaClass());

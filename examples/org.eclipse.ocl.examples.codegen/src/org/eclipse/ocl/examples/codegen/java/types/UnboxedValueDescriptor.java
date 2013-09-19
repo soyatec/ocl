@@ -18,6 +18,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
+/**
+ * An UnboxedValueDescriptor describes a type whose unboxed representation differs from its boxed representation. It has a pivot ElementId and a Java class.
+ * <p>
+ * Thus an Integer is a TypeId.INTEGER and a java.lang.Integer.
+ */
 public class UnboxedValueDescriptor extends AbstractValueDescriptor implements UnboxedDescriptor
 {
 	public UnboxedValueDescriptor(@NonNull ElementId elementId, @NonNull Class<?> javaClass) {

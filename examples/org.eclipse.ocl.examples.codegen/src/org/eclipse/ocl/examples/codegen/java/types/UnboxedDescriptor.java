@@ -16,6 +16,9 @@ package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 
+/**
+ * A UnboxedDescriptor defines the description of a type that may be used where an un representation is required.
+ */
 public interface UnboxedDescriptor extends TypeDescriptor
 {
 }

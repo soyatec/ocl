@@ -22,7 +22,15 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
-public class UnboxedEObjectsDescriptor extends AbstractValueDescriptor implements UnboxedDescriptor
+/**
+ * An UnboxedEObjectsDescriptor describes a type for a collection of unboxed representations. It has a pivot CollectionTypeId describing
+ * both collection and elements, a Java class name for the elements and an EClassifier for the elements.
+ * <br>
+ * Note that in EMF, that Java class for all collections is java.util.List.
+ * <p>
+ * This descriptor is used whenever the Java classes actually exist.
+ */
+public class UnboxedEObjectsDescriptor extends AbstractCollectionDescriptor implements UnboxedDescriptor
 {
 	protected final @NonNull EClassifier eClassifier;
 	protected final @NonNull Class<?> oldJavaClass;
@@ -36,6 +44,16 @@ public class UnboxedEObjectsDescriptor extends AbstractValueDescriptor implement
 	@Override
 	public void append(@NonNull JavaStream javaStream) {
 		javaStream.appendClassReference(List.class, javaClass != oldJavaClass, javaClass);
+	}
+
+	@Override
+	public void append(@NonNull JavaStream javaStream, boolean reClass) {
+		javaStream.appendClassReference(List.class, javaClass != oldJavaClass, reClass ? javaClass : oldJavaClass);
+	}
+
+	@Override
+	public void appendElement(@NonNull JavaStream javaStream, boolean reClass) {
+		javaStream.appendClassReference(reClass ? javaClass : oldJavaClass);
 	}
 
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {

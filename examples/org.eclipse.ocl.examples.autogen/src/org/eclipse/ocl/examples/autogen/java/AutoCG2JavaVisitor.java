@@ -224,6 +224,9 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		js.append("result = ");
 		js.appendClassReference(factoryName);
 		js.append(".eINSTANCE.create" + asType.getName() + "();\n");
+		//
+		js.append("assert result != null;\n");
+		//
 		js.append("converter.installPivotDefinition(self, result);\n");
 		js.popIndentation();
 		js.append("}\n");

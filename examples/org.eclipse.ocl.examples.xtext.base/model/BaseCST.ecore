@@ -169,7 +169,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//NamespaceCS">
     <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-        <details key="body" value="ocl::Package{&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name&#xA;&#x9;&#x9;&#x9;}"/>
+        <details key="body" value="ocl::Package{&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;nestedPackage = ownedNestedPackage.ast()&#xA;&#x9;&#x9;&#x9;}"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getClassifier" eType="#//ClassifierCS">
@@ -207,8 +207,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="path" lowerBound="1" upperBound="-1"
         eType="#//PathElementCS" containment="true" resolveProxies="false" eOpposite="#//PathElementCS/pathName"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element" changeable="false"
+        volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//ElementCS"
         transient="true" unsettable="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scopeFilter" eType="#//ScopeFilter"

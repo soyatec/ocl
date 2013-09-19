@@ -20,6 +20,13 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
+/**
+ * A SimpleDataTypeDescriptor describes a data type whose boxed and unboxed representations are the same. It has a pivot ElementId and a Java class name.
+ * <p>
+ * The Java class is only known by name; it is not yet loadable, since genmodel has not yet generated it.
+ * <p>
+ * There is no EClassifier available to perform type conformance checks since thie Java class name was provided as an instanceClassName.
+ */
 public class SimpleDataTypeDescriptor extends AbstractDescriptor implements SimpleDescriptor
 {
 	private static class NamedFuture {}

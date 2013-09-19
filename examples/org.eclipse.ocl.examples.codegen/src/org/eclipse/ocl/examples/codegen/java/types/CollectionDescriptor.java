@@ -14,11 +14,15 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.JavaStream;
 
 /**
- * A BoxedDescriptor defines the description of a type that may be used where a boxed representation is required.
+ * A CollectionDescriptor defines the description of a type for a collection of objects.
  */
-public interface BoxedDescriptor extends TypeDescriptor
+public interface CollectionDescriptor extends TypeDescriptor
 {
+	void append(@NonNull JavaStream javaStream, boolean reClass);
+	void appendElement(@NonNull JavaStream javaStream, boolean reClass);
 }

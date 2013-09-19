@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -111,7 +112,10 @@ public class AutoBaseContainmentVisitor
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_StructuralFeatureCS = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST.getClassId("StructuralFeatureCS", 0);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_EnumerationLiteral = TypeId.ORDERED_SET.getSpecializedId(CLSSid_EnumerationLiteral);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_EnumerationLiteralCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_EnumerationLiteralCS);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_PackageCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_PackageCS);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_EnumerationLiteral = TypeId.SEQUENCE.getSpecializedId(CLSSid_EnumerationLiteral);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_Package);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package);
     
     protected final @NonNull CS2Pivot converter;
     protected final @NonNull IdResolver idResolver;
@@ -186,6 +190,7 @@ public class AutoBaseContainmentVisitor
         }
         else {
             result = PivotFactory.eINSTANCE.createEnumeration();
+            assert result != null;
             converter.installPivotDefinition(self, result);
         }
         //
@@ -206,7 +211,7 @@ public class AutoBaseContainmentVisitor
         @NonNull /*@Thrown*/ SequenceValue collect;
         while (true) {
             if (!ITERATOR__1.hasNext()) {
-                collect = (SequenceValue)accumulator;
+                collect = accumulator;
                 break;
             }
             @Nullable /*@NonInvalid*/ EnumerationLiteralCS _1 = (EnumerationLiteralCS)ITERATOR__1.next();
@@ -239,6 +244,7 @@ public class AutoBaseContainmentVisitor
         }
         else {
             result = PivotFactory.eINSTANCE.createEnumerationLiteral();
+            assert result != null;
             converter.installPivotDefinition(self, result);
         }
         //
@@ -308,6 +314,7 @@ public class AutoBaseContainmentVisitor
         }
         else {
             result = PivotFactory.eINSTANCE.createOperation();
+            assert result != null;
             converter.installPivotDefinition(self, result);
         }
         //
@@ -333,6 +340,7 @@ public class AutoBaseContainmentVisitor
         }
         else {
             result = PivotFactory.eINSTANCE.createPackage();
+            assert result != null;
             converter.installPivotDefinition(self, result);
         }
         //
@@ -342,6 +350,34 @@ public class AutoBaseContainmentVisitor
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }
+        //
+        // Package::nestedPackage
+        //
+        final @Nullable /*@Thrown*/ List<PackageCS> ownedNestedPackage = self.getOwnedNestedPackage();
+        assert ownedNestedPackage != null;
+        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedNestedPackage = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedNestedPackage);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedNestedPackage.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect = accumulator;
+                break;
+            }
+            @Nullable /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
+            /**
+             * ast()
+             */
+            if (_1 == null) {
+                throw new InvalidValueException("Null source for \'null\'");
+            }
+            final @Nullable /*@NonInvalid*/ DomainPackage ast = (DomainPackage)_1.getPivot();
+            //
+            accumulator.add(ast);
+        }
+        final List<? extends Package> UNBOXED_collect = collect.asEcoreObjects(idResolver, Package.class);
+        assert UNBOXED_collect != null;
+        context.refreshList(result.getNestedPackage(), UNBOXED_collect);
         // AS element comments update;
         context.refreshComments(result, self);
         return null;
@@ -358,6 +394,7 @@ public class AutoBaseContainmentVisitor
         }
         else {
             result = PivotFactory.eINSTANCE.createParameter();
+            assert result != null;
             converter.installPivotDefinition(self, result);
         }
         //
@@ -419,6 +456,7 @@ public class AutoBaseContainmentVisitor
         }
         else {
             result = PivotFactory.eINSTANCE.createProperty();
+            assert result != null;
             converter.installPivotDefinition(self, result);
         }
         //

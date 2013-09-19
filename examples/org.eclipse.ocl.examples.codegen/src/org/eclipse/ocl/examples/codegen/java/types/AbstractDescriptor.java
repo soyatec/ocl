@@ -38,6 +38,9 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 
+/**
+ * An AbstractDescriptor provides the most fundamental capabilities of any type description: the correspondence to a pivot ElementId.
+ */
 public abstract class AbstractDescriptor implements TypeDescriptor
 {
 	/**
@@ -82,6 +85,10 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 	
 	public AbstractDescriptor(@NonNull ElementId elementId) {
 		this.elementId = elementId;
+	}
+
+	public @Nullable CollectionDescriptor asCollectionDescriptor() {
+		return null;
 	}
 
 	public @Nullable EClassifier getEClassifier() {
