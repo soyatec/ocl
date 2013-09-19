@@ -32,7 +32,6 @@ import org.eclipse.jdt.annotation.NonNull
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 
 public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflowComponent
 {
@@ -105,7 +104,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	private def GenPackage getGenPackage(Resource genModelResource) {
-		var GenModel genModel = genModelResource.getContents().get(0) as GenModel;
+		var GenModel genModel = getGenModel(genModelResource);
 		var List<GenPackage> genPackages = genModel.getAllGenPackagesWithConcreteClasses();
 		return if (genPackages.isEmpty())
 			null
@@ -126,14 +125,13 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		return rootElement as GenModel;
 	}
 	
-/* 	private def void registerGenModel(@NonNull GenModel genModel, @NonNull EPackage ePackage) {
-		var MetaModelManager mManager = MetaModelManager.getAdapter(resourceSet);
-		// var MetaModelManager mManager = PivotUtil.getMetaModelManager(ePackage.eResource());
+ 	private def void registerGenModel(@NonNull GenModel genModel) {
+		var MetaModelManager mManager = MetaModelManager.getAdapter(resourceSet); // We prepare the mManager for the whole resourceSet
 		mManager.addGenModel(genModel);
 		for (GenPackage usedGenPackage : genModel.getUsedGenPackages()) {
 			mManager.addGenPackage(usedGenPackage);
 		}
-	} */
+	}
 
 	override protected invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		if (!isDefined(visitablePackageName)) {
@@ -162,9 +160,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		try {
 			var Resource genModelResource = resourceSet.getResource(genModelURI, true);
 			var GenPackage genPackage = getGenPackage(genModelResource);
-//			var GenModel genModel = getGenModel(genModelResource);
-//			var EPackage targetEPackage = getEPackage(genModelResource);
-//			registerGenModel(genModel, targetEPackage);
+			var GenModel genModel = getGenModel(genModelResource);
+			registerGenModel(genModel);
 			copyright = getCopyright(genModelResource);
 			sourceFile = genModelFile;
 			generateVisitors(genPackage);

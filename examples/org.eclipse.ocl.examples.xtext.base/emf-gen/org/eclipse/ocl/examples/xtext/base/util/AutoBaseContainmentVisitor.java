@@ -95,8 +95,8 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 public class AutoBaseContainmentVisitor
 	extends AbstractBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/BaseCST", BaseCSTPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", PivotPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/BaseCST", "baseCST", BaseCSTPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", "pivot", PivotPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Enumeration = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Enumeration", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_EnumerationCS = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST.getClassId("EnumerationCS", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_EnumerationLiteral = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("EnumerationLiteral", 0);
@@ -191,21 +191,22 @@ public class AutoBaseContainmentVisitor
         //
         // NamedElement::name
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = self.getName();
+        final @Nullable /*@Thrown*/ String name = self.getName();
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }
         //
         // Enumeration::ownedLiteral
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<EnumerationLiteralCS> ownedLiterals = self.getOwnedLiterals();
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedLiterals = idResolver.createOrderedSetOfAll(ORD_CLSSid_EnumerationLiteralCS, ownedLiterals);
+        final @Nullable /*@Thrown*/ List<EnumerationLiteralCS> ownedLiterals = self.getOwnedLiterals();
+        assert ownedLiterals != null;
+        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedLiterals = idResolver.createOrderedSetOfAll(ORD_CLSSid_EnumerationLiteralCS, ownedLiterals);
         @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_EnumerationLiteral);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedLiterals.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect;
         while (true) {
             if (!ITERATOR__1.hasNext()) {
-                collect = accumulator;
+                collect = (SequenceValue)accumulator;
                 break;
             }
             @Nullable /*@NonInvalid*/ EnumerationLiteralCS _1 = (EnumerationLiteralCS)ITERATOR__1.next();
@@ -213,13 +214,14 @@ public class AutoBaseContainmentVisitor
              * ast()
              */
             if (_1 == null) {
-                throw new InvalidValueException("Null source");
+                throw new InvalidValueException("Null source for \'null\'");
             }
             final @Nullable /*@NonInvalid*/ EnumerationLiteral ast = (EnumerationLiteral)_1.getPivot();
             //
             accumulator.add(ast);
         }
         final List<EnumerationLiteral> UNBOXED_collect = collect.asEcoreObjects(idResolver, EnumerationLiteral.class);
+        assert UNBOXED_collect != null;
         context.refreshList(result.getOwnedLiteral(), UNBOXED_collect);
         // AS element comments update;
         context.refreshComments(result, self);
@@ -242,7 +244,7 @@ public class AutoBaseContainmentVisitor
         //
         // NamedElement::name
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = self.getName();
+        final @Nullable /*@Thrown*/ String name = self.getName();
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }
@@ -311,7 +313,7 @@ public class AutoBaseContainmentVisitor
         //
         // NamedElement::name
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = self.getName();
+        final @Nullable /*@Thrown*/ String name = self.getName();
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }
@@ -336,7 +338,7 @@ public class AutoBaseContainmentVisitor
         //
         // NamedElement::name
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = self.getName();
+        final @Nullable /*@Thrown*/ String name = self.getName();
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }
@@ -361,7 +363,7 @@ public class AutoBaseContainmentVisitor
         //
         // NamedElement::name
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = self.getName();
+        final @Nullable /*@Thrown*/ String name = self.getName();
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }
@@ -422,7 +424,7 @@ public class AutoBaseContainmentVisitor
         //
         // NamedElement::name
         //
-        final @SuppressWarnings("null")@NonNull /*@Thrown*/ String name = self.getName();
+        final @Nullable /*@Thrown*/ String name = self.getName();
         if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
             result.setName(name);
         }

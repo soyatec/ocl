@@ -108,8 +108,8 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			@Nullable String superProjectPrefix,
 			@Nullable String superVisitorPackage,
 			@Nullable String superVisitorClass) {
-				EPackage ePackage = genPackage.getEcorePackage();
-				assert ePackage != null;
+		EPackage ePackage = genPackage.getEcorePackage();
+		assert ePackage != null;
 //		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
 //		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
 //		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
@@ -118,10 +118,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 //		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
 	
 		AutoCG2StringVisitor.FACTORY.getClass();
-		Resource eResource = DomainUtil.nonNullState(ePackage.eResource());
-		// MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(eResource);
-		ResourceSet rSet = DomainUtil.nonNullState(eResource.getResourceSet());
-		MetaModelManager metaModelManager = MetaModelManager.getAdapter(rSet);
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(DomainUtil.nonNullState(ePackage.eResource()));
 		org.eclipse.ocl.examples.pivot.Package asPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ePackage);
 		if (asPackage != null) {
 			GenPackage superGenPackage = null;
@@ -172,7 +169,6 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			@Nullable String superVisitorClass) {
 		super(metaModelManager);
 		this.genModel = DomainUtil.nonNullState(genPackage.getGenModel());
-		metaModelManager.addGenModel(genModel);
 		getOptions().setUseNullAnnotations(OCLinEcoreGenModelGeneratorAdapter.useNullAnnotations(genModel));
 		cgAnalyzer = new AutoAnalyzer(this);
 		this.asPackage = asPackage;

@@ -27,15 +27,15 @@ public class GenerateCS2ASVisitors extends GenerateCSVisitors
 	override void generateVisitors(@NonNull GenPackage genPackage) {
 		super.generateVisitors(genPackage);
 		if (isDerived()) {
-			var EPackage csPackage = genPackage.getEcorePackage();
-			generateContainmentVisitor(csPackage);
-			generatePreOrderVisitor(csPackage);
-			generatePostOrderVisitor(csPackage);
-			generateLeft2RightVisitor(csPackage);
+			generateContainmentVisitor(genPackage);
+			generatePreOrderVisitor(genPackage);
+			generatePostOrderVisitor(genPackage);
+			generateLeft2RightVisitor(genPackage);
 		}
 	}
 	
-	protected def void generateContainmentVisitor(@NonNull EPackage csPackage) {
+	protected def void generateContainmentVisitor(@NonNull GenPackage genPackage) {
+		var EPackage csPackage = genPackage.getEcorePackage();
 		var String visitorVariant = "Containment";
 		var String resultTypeName =  "Continuation<?>";
 		var String className = "Abstract" + projectPrefix + visitorVariant + "Visitor";
@@ -52,8 +52,8 @@ public class GenerateCS2ASVisitors extends GenerateCSVisitors
 			interfaceName,  resultTypeName, additionalImports);
 	}
 	
-	protected def void generatePreOrderVisitor(@NonNull EPackage csPackage) {
-		
+	protected def void generatePreOrderVisitor(@NonNull GenPackage genPackage) {
+		var EPackage csPackage = genPackage.getEcorePackage();
 		var String visitorVariant = "PreOrder";
 		var String resultTypeName =  "Continuation<?>";
 		var String className = "Abstract" + projectPrefix + visitorVariant + "Visitor";
@@ -65,8 +65,8 @@ public class GenerateCS2ASVisitors extends GenerateCSVisitors
 			interfaceName, resultTypeName, additionalImports);
 	}
 	
-	protected def void generatePostOrderVisitor(@NonNull EPackage csPackage) {
-		
+	protected def void generatePostOrderVisitor(@NonNull GenPackage genPackage) {
+		var EPackage csPackage = genPackage.getEcorePackage();
 		var String visitorVariant = "PostOrder";
 		var String resultTypeName =  "Continuation<?>";
 		var String className = "Abstract" + projectPrefix + visitorVariant + "Visitor";
@@ -78,7 +78,8 @@ public class GenerateCS2ASVisitors extends GenerateCSVisitors
 			interfaceName,  resultTypeName, additionalImports);
 	}
 	
-	protected def void generateLeft2RightVisitor(@NonNull EPackage csPackage) {
+	protected def void generateLeft2RightVisitor(@NonNull GenPackage genPackage) {
+		var EPackage csPackage = genPackage.getEcorePackage();
 		var String visitorVariant = "Left2Right";
 		var String resultTypeName =  "Element";
 		var String className = "Abstract" + projectPrefix + visitorVariant + "Visitor";

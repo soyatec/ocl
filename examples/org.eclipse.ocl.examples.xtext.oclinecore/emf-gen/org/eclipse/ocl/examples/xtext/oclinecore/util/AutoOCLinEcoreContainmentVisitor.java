@@ -15,13 +15,13 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSTAutoContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AutoEssentialOCLContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.util.OCLinEcoreCSVisitor;
 
-public class OCLinEcoreCSTAutoContainmentVisitor
-	extends EssentialOCLCSTAutoContainmentVisitor
+public class AutoOCLinEcoreContainmentVisitor
+	extends AutoEssentialOCLContainmentVisitor
 	implements OCLinEcoreCSVisitor<Continuation<?>>
 {
     
@@ -33,7 +33,7 @@ public class OCLinEcoreCSTAutoContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public OCLinEcoreCSTAutoContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoOCLinEcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();

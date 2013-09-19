@@ -15,7 +15,7 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSTAutoContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AutoEssentialOCLContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.JavaImplementationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
@@ -28,8 +28,8 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
 
-public class OCLstdlibCSTAutoContainmentVisitor
-	extends EssentialOCLCSTAutoContainmentVisitor
+public class AutoOCLstdlibContainmentVisitor
+	extends AutoEssentialOCLContainmentVisitor
 	implements OCLstdlibCSVisitor<Continuation<?>>
 {
     
@@ -41,7 +41,7 @@ public class OCLstdlibCSTAutoContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public OCLstdlibCSTAutoContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoOCLstdlibContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();

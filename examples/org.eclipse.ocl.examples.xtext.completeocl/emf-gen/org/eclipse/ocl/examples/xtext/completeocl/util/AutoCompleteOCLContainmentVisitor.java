@@ -29,10 +29,10 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarat
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSTAutoContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AutoEssentialOCLContainmentVisitor;
 
-public class CompleteOCLCSTAutoContainmentVisitor
-	extends EssentialOCLCSTAutoContainmentVisitor
+public class AutoCompleteOCLContainmentVisitor
+	extends AutoEssentialOCLContainmentVisitor
 	implements CompleteOCLCSVisitor<Continuation<?>>
 {
     
@@ -44,7 +44,7 @@ public class CompleteOCLCSTAutoContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public CompleteOCLCSTAutoContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoCompleteOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();
