@@ -14,9 +14,12 @@
  */
 package org.eclipse.ocl.examples.pivot.utilities;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -28,6 +31,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
@@ -84,28 +88,94 @@ public class AS2XMIid
 	 * values read when this AS2ID was constructed.
 	 */
 	public void assignIds(@NonNull ASResource asResource) {
-		StringBuilder s = null;
-		Map<String, EObject> allIds = new HashMap<String, EObject>();
-		ASResourceFactory resourceHelper = asResource.getASResourceFactory();
+		List<WeakReference<EObject>> debugOldEObjects = new ArrayList<WeakReference<EObject>>();
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
-			if (eObject instanceof Element) {
-				Element element = (Element)eObject;
-				AS2XMIidVisitor idVisitor = resourceHelper.createAS2XMIidVisitor(this);
-				String id = idVisitor.getID(element);
-				if (id != null) {
-					assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
-					EObject oldElement = allIds.put(id, element);
-					if (oldElement != null) {
-						if (s == null) {
-							s = new StringBuilder();
-							s.append("Duplicate xmi:id values generated for ");
+			assert eObject != null;
+			debugOldEObjects.add(new WeakReference<EObject>(eObject));
+		}
+		StringBuilder s = null;
+		Map<String, EObject> allIds = new HashMap<String, EObject>();
+		ASResourceFactory resourceFactory = asResource.getASResourceFactory();
+		EObject debugEObject = null;
+		try {
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				debugEObject = eObject;
+				if (eObject instanceof Element) {
+					Element element = (Element)eObject;
+					AS2XMIidVisitor idVisitor = resourceFactory.createAS2XMIidVisitor(this);
+					String id = idVisitor.getID(element);
+					if (id != null) {
+						assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
+						EObject oldElement = allIds.put(id, element);
+						if (oldElement != null) {
+							if (s == null) {
+								s = new StringBuilder();
+								s.append("Duplicate xmi:id values generated for ");
+							}
+							s.append("\n '" + id + "' for '" + element.eClass().getName() + "'");
 						}
-						s.append("\n '" + id + "' for '" + element.eClass().getName() + "'");
+						//						System.out.println(DomainUtil.debugSimpleName(element) + " => " + xmi);
+						// Move to separate pass to try to avoid intertmittent NoSuchElementException from TreeIterator
+	//					asResource.setID(element, id);
 					}
-					//						System.out.println(DomainUtil.debugSimpleName(element) + " => " + xmi);
-					// Move to separate pass to try to avoid intertmittent NoSuchElementException from TreeIterator
-//					asResource.setID(element, id);
+				}
+			}
+		}
+		catch (NoSuchElementException e) {
+			System.err.println("Previous EObject : " + DomainUtil.debugFullName(debugEObject));		
+			int iSize = debugOldEObjects.size();
+			for (int i = 0; i < iSize; i++) {
+				EObject eObject = debugOldEObjects.get(i).get();
+				if (debugEObject == eObject) {
+					System.err.println("Previous EObject at " + i + "/" + iSize);
+					if (i + 1 < iSize) {
+						System.err.println("Next EObject : " + DomainUtil.debugFullName(debugOldEObjects.get(i+1)));
+					}
+					break;
+				}
+				else if (eObject == null) {
+					System.err.println("EObject at " + i + "has been garbage collected");
+				}
+			}
+			int i = 0;
+			int messages = 0;
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); i++) {
+				EObject oldEObject = debugOldEObjects.get(i).get();
+				EObject eObject = tit.next();
+				assert eObject != null;
+				if (eObject != oldEObject) {
+					System.err.println("At " + i + " now " + DomainUtil.debugFullName(eObject) + " was " + DomainUtil.debugFullName(oldEObject));
+					messages++;
+					if (messages > 100) {
+						break;
+					}
+				}
+				else if (debugEObject == eObject) {
+					System.err.println("Found previous EObject at " + i);
+					if (tit.hasNext()) {
+						eObject = tit.next();
+						System.err.println("Next EObject now : " + DomainUtil.debugFullName(eObject));
+					}
+					else {
+						System.err.println("No next EObject ");
+					}
+				}
+			}
+			throw e;
+		}
+		int i = 0;
+		int messages = 0;
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); i++) {
+			EObject oldEObject = debugOldEObjects.get(i).get();
+			EObject eObject = tit.next();
+			assert eObject != null;
+			if (eObject != oldEObject) {
+				System.err.println("At " + i + " now " + DomainUtil.debugFullName(eObject) + " was " + DomainUtil.debugFullName(oldEObject));
+				messages++;
+				if (messages > 100) {
+					break;
 				}
 			}
 		}
