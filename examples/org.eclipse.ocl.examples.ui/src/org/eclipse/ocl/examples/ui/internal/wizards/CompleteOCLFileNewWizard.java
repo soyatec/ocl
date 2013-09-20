@@ -77,10 +77,8 @@ public class CompleteOCLFileNewWizard
 	 * @param the file to open
 	 * @throws PartInitException
 	 */
-	private void openCreatedFile(IFile file)
-			throws PartInitException {
-		IWorkbenchPage currentPage = PlatformUI.getWorkbench()
-			.getActiveWorkbenchWindow().getActivePage();
+	private void openCreatedFile(IFile file) throws PartInitException {
+		IWorkbenchPage currentPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		IDE.openEditor(currentPage, file, true);
 	}
 
@@ -96,18 +94,8 @@ public class CompleteOCLFileNewWizard
 			if (object instanceof IResource) {
 				selectedResource = (IResource) object;
 			} else if (object instanceof IAdaptable) {
-				selectedResource = (IResource) ((IAdaptable) object)
-					.getAdapter(IResource.class);
+				selectedResource = (IResource) ((IAdaptable) object).getAdapter(IResource.class);
 			}
-/*			if (selectedResource != null) {
-				if (selectedResource.getType() == IResource.FILE) {
-					selectedResource = selectedResource.getParent();
-				}
-				if (selectedResource.isAccessible()) {
-					resourceGroup.setContainerFullPath(selectedResource
-						.getFullPath());
-				}
-			} */
 		}
 		init(selectedResource);
 	}

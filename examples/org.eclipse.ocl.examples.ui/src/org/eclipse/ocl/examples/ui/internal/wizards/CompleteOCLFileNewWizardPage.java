@@ -87,17 +87,10 @@ public class CompleteOCLFileNewWizardPage extends WizardPage implements Listener
 	 * (non-Javadoc) Method declared on IDialogPage.
 	 */
 	public void createControl(Composite parent) {
-		System.out.println(getClass().getSimpleName() + ".createControl start");		// FIXME Debugging
 		createDialog();
-
 		Composite topLevel = dialog.createControlArea(parent);
-
 		validatePage();
-		// Show description on opening
-//		setErrorMessage(null);
-//		setMessage(null);
 		setControl(topLevel);
-		System.out.println(getClass().getSimpleName() + ".createControl start");		// FIXME Debugging
 	}
 
 	public @NonNull CompleteOCLFileDialog createDialog() {
@@ -314,7 +307,6 @@ public class CompleteOCLFileNewWizardPage extends WizardPage implements Listener
 	 * controls on this page. Subclasses may extend.
 	 */
 	public void handleEvent(Event event) {
-		System.out.println(getClass().getSimpleName() + ".handleEvent: " + event);		// FIXME Debugging
 		setPageComplete(validatePage());
 	}
 
@@ -340,10 +332,6 @@ public class CompleteOCLFileNewWizardPage extends WizardPage implements Listener
 		return false;
 	}
 
-//	protected void setDialog(NewCompleteOCLFileDialog dialog) {
-//		this.dialog = dialog;
-//	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -364,7 +352,6 @@ public class CompleteOCLFileNewWizardPage extends WizardPage implements Listener
 	 *         <code>false</code> if at least one is invalid
 	 */
 	protected boolean validatePage() {
-		System.out.println(getClass().getSimpleName() + ".validatePage");		// FIXME Debugging
 		boolean valid = true;
 		setMessage(ExamplesUIMessages.CompleteOCLFileNewWizardPage_createCompleteOCLFileBasedOnModel);
 		setErrorMessage(null);
