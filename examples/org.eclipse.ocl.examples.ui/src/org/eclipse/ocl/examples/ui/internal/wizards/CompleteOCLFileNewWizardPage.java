@@ -12,31 +12,37 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.ui.wizards;
+package org.eclipse.ocl.examples.ui.internal.wizards;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.ocl.common.ui.internal.Activator;
-import org.eclipse.ocl.examples.ui.dialogs.ExtendedNewCompleteOCLFileDialog;
+import org.eclipse.ocl.examples.ui.Activator;
+import org.eclipse.ocl.examples.ui.internal.messages.ExamplesUIMessages;
 import org.eclipse.ocl.examples.ui.internal.ripoffs.ResourceAndContainerGroup;
-import org.eclipse.ocl.examples.ui.messages.Messages;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -48,18 +54,18 @@ import org.eclipse.ui.ide.undo.WorkspaceUndoUtil;
 
 /**
  * Wizard page allowing creation of OCL rule files in the workspace.
+ * @since 1.2
  */
-public class WizardNewCompleteOCLFileCreationPage
-		extends WizardPage
-		implements Listener {
+public class CompleteOCLFileNewWizardPage extends WizardPage implements Listener
+{
 
 	// the current resource selection
-	private IStructuredSelection currentSelection;
+	private @Nullable IResource currentSelection;
 
 	// cache of newly-created file
 	private IFile newFile;
 
-	private ExtendedNewCompleteOCLFileDialog dialog;
+	private CompleteOCLFileDialog dialog;
 
 	/**
 	 * Creates a new complete OCL file creation wizard page. If the initial
@@ -69,12 +75,35 @@ public class WizardNewCompleteOCLFileCreationPage
 	 * @param selection
 	 *            the current resource selection
 	 */
-	public WizardNewCompleteOCLFileCreationPage(IStructuredSelection selection) {
-		super("page"); //$NON-NLS-1$
+	public CompleteOCLFileNewWizardPage(@Nullable IResource selection) {
+		super(ExamplesUIMessages.CompleteOCLFileNewWizardPage_pageName);
 		setPageComplete(false);
-		setTitle(Messages.WizardNewCompleteOCLFileCreationPage_completeOCLFile);
-		setDescription(Messages.WizardNewCompleteOCLFileCreationPage_createCompleteOCLFileBasedOnModel);
+		setTitle(ExamplesUIMessages.CompleteOCLFileNewWizardPage_completeOCLFile);
+		setDescription(ExamplesUIMessages.CompleteOCLFileNewWizardPage_createCompleteOCLFileBasedOnModel);
 		this.currentSelection = selection;
+	}
+
+	/**
+	 * (non-Javadoc) Method declared on IDialogPage.
+	 */
+	public void createControl(Composite parent) {
+		System.out.println(getClass().getSimpleName() + ".createControl start");		// FIXME Debugging
+		createDialog();
+
+		Composite topLevel = dialog.createControlArea(parent);
+
+		validatePage();
+		// Show description on opening
+//		setErrorMessage(null);
+//		setMessage(null);
+		setControl(topLevel);
+		System.out.println(getClass().getSimpleName() + ".createControl start");		// FIXME Debugging
+	}
+
+	public @NonNull CompleteOCLFileDialog createDialog() {
+		CompleteOCLFileDialog dialog2 = new CompleteOCLFileDialog(getShell(), null, currentSelection, this);
+		dialog = dialog2;
+		return dialog2;
 	}
 
 	/**
@@ -133,7 +162,7 @@ public class WizardNewCompleteOCLFileCreationPage
 					newFileHandle,
 					null,
 					initialContents,
-					Messages.WizardNewCompleteOCLFileCreationPage_newCompleteOCLFile);
+					ExamplesUIMessages.CompleteOCLFileNewWizardPage_newCompleteOCLFile);
 				try {
 					op.execute(monitor,
 						WorkspaceUndoUtil.getUIInfoAdapter(getShell()));
@@ -146,7 +175,7 @@ public class WizardNewCompleteOCLFileCreationPage
 									ErrorDialog
 										.openError(
 											getContainer().getShell(),
-											Messages.WizardNewCompleteOCLFileCreationPage_errorTitle,
+											ExamplesUIMessages.CompleteOCLFileNewWizardPage_errorTitle,
 											null, // no special
 											// message
 											((CoreException) e.getCause())
@@ -157,9 +186,9 @@ public class WizardNewCompleteOCLFileCreationPage
 									MessageDialog
 										.openError(
 											getContainer().getShell(),
-											Messages.WizardNewCompleteOCLFileCreationPage_internalErrorTitle,
+											ExamplesUIMessages.CompleteOCLFileNewWizardPage_internalErrorTitle,
 											NLS.bind(
-												Messages.WizardNewCompleteOCLFileCreationPage_internalErrorTitle,
+												ExamplesUIMessages.CompleteOCLFileNewWizardPage_internalErrorTitle,
 												e.getCause().getMessage()));
 								}
 							}
@@ -180,36 +209,15 @@ public class WizardNewCompleteOCLFileCreationPage
 				.open(
 					MessageDialog.ERROR,
 					getContainer().getShell(),
-					Messages.WizardNewCompleteOCLFileCreationPage_internalErrorTitle,
+					ExamplesUIMessages.CompleteOCLFileNewWizardPage_internalErrorTitle,
 					NLS.bind(
-						Messages.WizardNewCompleteOCLFileCreationPage_internalErrorMessage,
+						ExamplesUIMessages.CompleteOCLFileNewWizardPage_internalErrorMessage,
 						e.getTargetException().getMessage()), SWT.SHEET);
 
 			return null;
 		}
 
 		return newFile;
-	}
-
-	protected IPath getNewFilePath() {
-		final IPath containerPath = dialog.getGroup().getContainerFullPath();
-		return containerPath.append(dialog.getGroup().getResource());
-	}
-
-	/**
-	 * (non-Javadoc) Method declared on IDialogPage.
-	 */
-	public void createControl(Composite parent) {
-		dialog = new ExtendedNewCompleteOCLFileDialog(getShell(), null,
-			currentSelection, this);
-
-		Composite topLevel = dialog.createControlArea(parent);
-
-		validatePage();
-		// Show description on opening
-		setErrorMessage(null);
-		setMessage(null);
-		setControl(topLevel);
 	}
 
 	/**
@@ -263,21 +271,41 @@ public class WizardNewCompleteOCLFileCreationPage
 	 * 
 	 * @return contents to be given to new complete OCL file resource instances
 	 */
-	protected String getInitialContentsAsString() {
-		String line = new String("import '"); //$NON-NLS-1$
-		line = line.concat(dialog.getMetamodelNsURI()).concat("'\n"); //$NON-NLS-1$
-
+	public String getInitialContentsAsString() {
+		String metamodelNsURI = dialog.getMetamodelNsURI();
 		String firstPackageName = "undefined_root_package_name"; //$NON-NLS-1$
-
-		if (dialog.getFirstPackage() != null) {
-			firstPackageName = dialog.getFirstPackage().getName();
+		String firstTypeName = "Example";
+		String firstPropertyName = "feature";
+		EPackage firstPackage = dialog.getFirstPackage();
+		if (firstPackage != null) {
+			firstPackageName = firstPackage.getName();
+			List<EClassifier> eClassifiers = firstPackage.getEClassifiers();
+			if (eClassifiers.size() > 0) {
+				EClassifier firstType = eClassifiers.get(0);
+				firstTypeName = firstType.getName();
+				if (firstType instanceof EClass) {
+					List<EStructuralFeature> eStructuralFeatures = ((EClass)firstType).getEAllStructuralFeatures();
+					if (eStructuralFeatures.size() > 0) {
+						EStructuralFeature firstProperty = eStructuralFeatures.get(0);
+						firstPropertyName = firstProperty.getName();
+					}
+				}
+			}
 		}
+		StringBuilder s = new StringBuilder();
+		s.append("import '" + metamodelNsURI + "'\n\n");
+		s.append("package " + firstPackageName + "\n\n");
+		s.append("context " + firstTypeName + "\n");
+		s.append("inv NonNull_" + firstPropertyName + "('The \\'" + firstPropertyName + "\\' property of \"' + self.toString() + '\" is null'):\n");
+		s.append("\t" + firstPropertyName + " <> null\n\n");
+		s.append("endpackage\n");
+		return s.toString();
+	}
 
-		line = line + "\npackage " + firstPackageName + "\n\n"; //$NON-NLS-1$ //$NON-NLS-2$
-		line = line + "\tcontext type\n"; //$NON-NLS-1$
-		line = line + "\tinv InvariantName: true\n\n"; //$NON-NLS-1$
-		line = line + "endpackage\n"; //$NON-NLS-1$
-		return line;
+	protected IPath getNewFilePath() {
+		ResourceAndContainerGroup group = dialog.getGroup();
+		IPath containerPath = group.getContainerFullPath();
+		return containerPath.append(group.getResource());
 	}
 
 	/**
@@ -286,68 +314,21 @@ public class WizardNewCompleteOCLFileCreationPage
 	 * controls on this page. Subclasses may extend.
 	 */
 	public void handleEvent(Event event) {
+		System.out.println(getClass().getSimpleName() + ".handleEvent: " + event);		// FIXME Debugging
 		setPageComplete(validatePage());
 	}
 
 	/**
-	 * Returns whether this page's controls currently all contain valid values.
+	 * Returns true if this selected resource would be filtered from view.
 	 * 
-	 * @return <code>true</code> if all controls are valid, and
-	 *         <code>false</code> if at least one is invalid
+	 * {@link IWorkspace#validateFiltered(Resource)}
 	 */
-	protected boolean validatePage() {
-		boolean valid = true;
-		setMessage(Messages.WizardNewCompleteOCLFileCreationPage_createCompleteOCLFileBasedOnModel);
-		setErrorMessage(null);
-
-		if (!dialog.getGroup().areAllValuesValid()) {
-			// if blank name then fail silently
-			if (dialog.getGroup().getProblemType() == ResourceAndContainerGroup.PROBLEM_RESOURCE_EMPTY
-				|| dialog.getGroup().getProblemType() == ResourceAndContainerGroup.PROBLEM_CONTAINER_EMPTY) {
-				setMessage(dialog.getGroup().getProblemMessage());
-				setErrorMessage(null);
-			} else {
-				setErrorMessage(dialog.getGroup().getProblemMessage());
-			}
-			valid = false;
-		}
-
-		String resourceName = dialog.getGroup().getResource();
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IStatus result = workspace.validateName(resourceName, IResource.FILE);
-		if (!result.isOK()) {
-			setErrorMessage(result.getMessage());
-			return false;
-		}
-
-		if (dialog.getGroup().getAllowExistingResources()) {
-			String problemMessage = NLS.bind(
-				Messages.WizardNewCompleteOCLFileCreationPage_nameExists,
-				getFileName());
-			IPath resourcePath = getContainerFullPath().append(getFileName());
-			if (workspace.getRoot().getFolder(resourcePath).exists()) {
-				setErrorMessage(problemMessage);
-				valid = false;
-			}
-			if (workspace.getRoot().getFile(resourcePath).exists()) {
-				setMessage(problemMessage, IMessageProvider.WARNING);
-			}
-		}
-
-		if (isFilteredByParent()) {
-			setMessage(
-				Messages.WizardNewCompleteOCLFileCreationPage_resourceWillBeFilteredWarning,
-				IMessageProvider.ERROR);
-			valid = false;
-		}
-		return valid;
-	}
-
 	private boolean isFilteredByParent() {
-		IPath containerPath = dialog.getGroup().getContainerFullPath();
+		ResourceAndContainerGroup group = dialog.getGroup();
+		IPath containerPath = group.getContainerFullPath();
 		if (containerPath == null)
 			return false;
-		String resourceName = dialog.getGroup().getResource();
+		String resourceName = group.getResource();
 		if (resourceName == null)
 			return false;
 		if (resourceName.length() > 0) {
@@ -359,9 +340,9 @@ public class WizardNewCompleteOCLFileCreationPage
 		return false;
 	}
 
-	protected void setDialog(ExtendedNewCompleteOCLFileDialog dialog) {
-		this.dialog = dialog;
-	}
+//	protected void setDialog(NewCompleteOCLFileDialog dialog) {
+//		this.dialog = dialog;
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -374,5 +355,64 @@ public class WizardNewCompleteOCLFileCreationPage
 		if (visible) {
 			dialog.getGroup().setFocus();
 		}
+	}
+
+	/**
+	 * Returns whether this page's controls currently all contain valid values.
+	 * 
+	 * @return <code>true</code> if all controls are valid, and
+	 *         <code>false</code> if at least one is invalid
+	 */
+	protected boolean validatePage() {
+		System.out.println(getClass().getSimpleName() + ".validatePage");		// FIXME Debugging
+		boolean valid = true;
+		setMessage(ExamplesUIMessages.CompleteOCLFileNewWizardPage_createCompleteOCLFileBasedOnModel);
+		setErrorMessage(null);
+
+		ResourceAndContainerGroup group = dialog.getGroup();
+		if (!group.areAllValuesValid()) {
+			// if blank name then fail silently
+			int problemType = group.getProblemType();
+			String problemMessage = group.getProblemMessage();
+			if (problemType == ResourceAndContainerGroup.PROBLEM_RESOURCE_EMPTY
+				|| problemType == ResourceAndContainerGroup.PROBLEM_CONTAINER_EMPTY) {
+				setMessage(problemMessage);
+				setErrorMessage(null);
+			} else {
+				setErrorMessage(problemMessage);
+			}
+			valid = false;
+		}
+
+		String resourceName = group.getResource();
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IStatus result = workspace.validateName(resourceName, IResource.FILE);
+		if (!result.isOK()) {
+			setErrorMessage(result.getMessage());
+			return false;
+		}
+
+		if (group.getAllowExistingResources()) {
+			String problemMessage = NLS.bind(
+				ExamplesUIMessages.CompleteOCLFileNewWizardPage_nameExists,
+				getFileName());
+			IPath resourcePath = getContainerFullPath().append(getFileName());
+			IWorkspaceRoot root = workspace.getRoot();
+			if (root.getFolder(resourcePath).exists()) {
+				setErrorMessage(problemMessage);
+				valid = false;
+			}
+			if (root.getFile(resourcePath).exists()) {
+				setMessage(problemMessage, IMessageProvider.WARNING);
+			}
+		}
+
+		if (isFilteredByParent()) {
+			setMessage(
+				ExamplesUIMessages.CompleteOCLFileNewWizardPage_resourceWillBeFilteredWarning,
+				IMessageProvider.ERROR);
+			valid = false;
+		}
+		return valid;
 	}
 }

@@ -13,18 +13,16 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.ui.dialogs;
+package org.eclipse.ocl.examples.ui.internal.wizards;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
 import org.eclipse.emf.common.util.EList;
@@ -41,10 +39,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ocl.common.ui.internal.Activator;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.ui.Activator;
+import org.eclipse.ocl.examples.ui.internal.messages.ExamplesUIMessages;
 import org.eclipse.ocl.examples.ui.internal.ripoffs.ResourceAndContainerGroup;
-import org.eclipse.ocl.examples.ui.messages.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -59,7 +57,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
-public class ExtendedNewCompleteOCLFileDialog
+/**
+ * @since 1.2
+ */
+//@SuppressWarnings({"rawtypes"})	// FIXME - remove after LunaM2 when Platform reverts experimental genercs
+public class CompleteOCLFileDialog
 		extends ExtendedLoadResourceDialog {
 
 	// constants
@@ -70,19 +72,19 @@ public class ExtendedNewCompleteOCLFileDialog
 	public static final String PREFIX = Activator.PLUGIN_ID + "."; //$NON-NLS-1$
 
 	private static final String NEW_FILE_WIZARD_PAGE = PREFIX
-		+ Messages.WizardNewCompleteOCLFileCreationPage_newFileWizardContextId; //$NON-NLS-1$
+		+ ExamplesUIMessages.CompleteOCLFileNewWizardPage_newFileWizardContextId; //$NON-NLS-1$
 
 	// initial value stores
-	private final String newFileExtension = Messages.WizardNewCompleteOCLFileCreationPage_fileExtension;
+	private final String newFileExtension = ExamplesUIMessages.CompleteOCLFileNewWizardPage_fileExtension;
 
-	private final String newFileName = Messages.WizardNewCompleteOCLFileCreationPage_fileName;
+//	private final String newFileName = Messages.CompleteOCLFileNewWizardPage_fileName;
 
-	private final String resourceType = Messages.WizardNewCompleteOCLFileCreationPage_file;
+	private final String resourceType = ExamplesUIMessages.CompleteOCLFileNewWizardPage_file;
 
-	private final String newFileLabel = Messages.WizardNewCompleteOCLFileCreationPage_oclFileNameLabel;
+	private final String newFileLabel = ExamplesUIMessages.CompleteOCLFileNewWizardPage_oclFileNameLabel;
 
 	// the current resource selection
-	private IStructuredSelection selection;
+	private IResource resourceSelection;
 
 	private Listener listener;
 
@@ -109,10 +111,10 @@ public class ExtendedNewCompleteOCLFileDialog
 	 * @param listener
 	 *            object interested in changes to the group's fields value
 	 */
-	public ExtendedNewCompleteOCLFileDialog(Shell parent, EditingDomain domain,
-			IStructuredSelection selection, Listener listener) {
+	public CompleteOCLFileDialog(Shell parent, EditingDomain domain,
+			IResource selection, Listener listener) {
 		super(parent, domain);
-		this.selection = selection;
+		this.resourceSelection = selection;
 		this.listener = listener;
 	}
 
@@ -121,24 +123,225 @@ public class ExtendedNewCompleteOCLFileDialog
 		// top level group
 		Composite topLevel = new Composite(parent, SWT.NONE);
 		topLevel.setLayout(new GridLayout());
-		topLevel.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_FILL
-			| GridData.HORIZONTAL_ALIGN_FILL));
+		topLevel.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_FILL | GridData.HORIZONTAL_ALIGN_FILL));
 		topLevel.setFont(parent.getFont());
-		PlatformUI.getWorkbench().getHelpSystem()
-			.setHelp(topLevel, NEW_FILE_WIZARD_PAGE);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(topLevel, NEW_FILE_WIZARD_PAGE);
 
 		// resource and container group
 		resourceGroup = new ResourceAndContainerGroup(topLevel, listener,
 			getNewFileLabel(), getResourceType(), false,
 			SIZING_CONTAINER_GROUP_HEIGHT);
 		resourceGroup.setAllowExistingResources(false);
-		initialPopulateContainerNameField();
 		resourceGroup.setResourceExtension(getNewFileExtension());
 		resourceGroup.setResource(getNewFileName());
 
 		// load meta model area
 		createLoadMetamodelArea(topLevel);
+		initialPopulateContainerNameField();
 		return topLevel;
+	}
+
+	private void createLoadMetamodelArea(Composite parent) {
+		Label separatorLabel = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
+		{
+			GridData data = new GridData(GridData.FILL_BOTH);
+			separatorLabel.setLayoutData(data);
+		}
+
+		// meta model uri group
+		Composite metamodelURIGroup = new Composite(parent, SWT.NONE);
+		{
+			GridLayout layout = new GridLayout();
+			layout.numColumns = 2;
+			layout.marginWidth = 0;
+			metamodelURIGroup.setLayout(layout);
+			metamodelURIGroup.setLayoutData(new GridData(
+				GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
+			metamodelURIGroup.setFont(parent.getFont());
+		}
+
+		Label metamodelURILabel = new Label(metamodelURIGroup, SWT.NONE);
+		metamodelURILabel
+			.setText(ExamplesUIMessages.CompleteOCLFileNewWizardPage_resourceURI_label);
+
+		uriField = new Text(metamodelURIGroup, SWT.BORDER);
+		{
+			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
+				| GridData.GRAB_HORIZONTAL);
+			data.widthHint = SIZING_TEXT_FIELD_WIDTH;
+			uriField.setLayoutData(data);
+		}
+
+		IResource resourceSelection2 = resourceSelection;
+		if (resourceSelection2 instanceof IFile) {
+			setURISelection((IFile) resourceSelection2);
+		}
+
+		Composite modelButtonsComposite = new Composite(parent, SWT.NONE);
+		{
+			GridLayout layout = new GridLayout();
+			layout.numColumns = 4;
+			layout.marginWidth = 0;
+			modelButtonsComposite.setLayout(layout);
+			modelButtonsComposite.setLayoutData(new GridData(
+				GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
+			modelButtonsComposite.setFont(parent.getFont());
+		}
+
+		Button browseRegisteredPackagesButton = new Button(
+			modelButtonsComposite, SWT.PUSH);
+		browseRegisteredPackagesButton
+			.setText(ExamplesUIMessages.CompleteOCLFileNewWizardPage_browseRegisteredPackages_label);
+		prepareBrowseRegisteredPackagesButton(browseRegisteredPackagesButton);
+		{
+			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
+				| GridData.GRAB_HORIZONTAL);
+			browseRegisteredPackagesButton.setLayoutData(data);
+		}
+
+		Button browseTargetPlatformPackagesButton = new Button(
+			modelButtonsComposite, SWT.PUSH);
+		browseTargetPlatformPackagesButton
+			.setText(ExamplesUIMessages.CompleteOCLFileNewWizardPage_browseTargetPlatformPackages_label);
+		prepareBrowseTargetPlatformPackagesButton(browseTargetPlatformPackagesButton);
+		{
+			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
+				| GridData.GRAB_HORIZONTAL);
+			browseTargetPlatformPackagesButton.setLayoutData(data);
+		}
+
+		Button browseFileSystemButton = new Button(modelButtonsComposite,
+			SWT.PUSH);
+		browseFileSystemButton
+			.setText(ExamplesUIMessages.CompleteOCLFileNewWizardPage_browseFileSystem_label);
+		prepareBrowseFileSystemButton(browseFileSystemButton);
+
+		if (EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE) {
+			Button browseWorkspaceButton = new Button(modelButtonsComposite,
+				SWT.PUSH);
+			{
+				GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
+					| GridData.GRAB_HORIZONTAL);
+				browseWorkspaceButton.setLayoutData(data);
+			}
+			{
+				GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
+					| GridData.GRAB_HORIZONTAL);
+				browseFileSystemButton.setLayoutData(data);
+			}
+			browseWorkspaceButton
+				.setText(ExamplesUIMessages.CompleteOCLFileNewWizardPage_browseWorkspace_label);
+			prepareBrowseWorkspaceButton(browseWorkspaceButton);
+		} else {
+			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
+				| GridData.GRAB_HORIZONTAL);
+			browseFileSystemButton.setLayoutData(data);
+		}
+
+		separatorLabel = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
+		{
+			GridData data = new GridData(GridData.FILL_BOTH);
+			separatorLabel.setLayoutData(data);
+		}
+	}
+
+	/**
+	 * Fills the selected metamodel URI and the first package of the selected
+	 * metamodel basing on parsing a fullpath string.
+	 * 
+	 * @param fullPath
+	 */
+	public void fillContentsFromFilePath(String fullPath) {
+		setURI(URI.createFileURI(fullPath));
+
+		Resource resource = loadResource(getURI());
+		for (EPackage ePackage : getAllPackages(resource)) {
+			setFirstPackage(ePackage);
+			if (metamodelURI != null) {
+				setMetamodelNsURI(metamodelURI.toString());
+			}
+			break;
+		}
+	}
+	
+	/**
+	 * Fills the selected metamodel URI and the first package of the selected
+	 * metamodel basing on parsing a fullpath string.
+	 * 
+	 * @param fullPath
+	 */
+	public void fillContentsFromWorkspacePath(String fullPath) {
+		setURI(URI.createFileURI(fullPath));
+
+		Resource resource = loadResource(getURI());
+		for (EPackage ePackage : getAllPackages(resource)) {
+			setFirstPackage(ePackage);
+			URI uri = URI.createPlatformResourceURI(fullPath, true);
+			setMetamodelNsURI(uri.toString());
+			break;
+		}
+	}
+
+	/**
+	 * Fills the selected metamodel URI and the first package of the selected
+	 * metamodel basing on parsing a list of selected URIs.
+	 * 
+	 * @param nsURIs
+	 *            Platform-specific URIs
+	 */
+	public void fillContentsFromDevelopmentTimeVersion(String nsURI) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getURIConverter().getURIMap()
+			.putAll(EcorePlugin.computePlatformURIMap(true));
+
+		Map<String, URI> ePackageNsURItoGenModelLocationMap = EcorePlugin
+			.getEPackageNsURIToGenModelLocationMap(true);
+		URI location = ePackageNsURItoGenModelLocationMap.get(nsURI);
+		Resource resourceToResolve = resourceSet.getResource(location, true);
+		EcoreUtil.resolveAll(resourceToResolve);
+
+		EList<Resource> resources = resourceSet.getResources();
+
+		for (Resource resource : resources) {
+			for (EPackage ePackage : getAllPackages(resource)) {
+				if (nsURI.equals(ePackage.getNsURI())) {
+					setFirstPackage(ePackage);
+					setURI(resource.getURI());
+					setMetamodelNsURI(nsURI);
+					break;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Fills the selected metamodel URI and the first package of the selected
+	 * metamodel basing on the selected nsURI.
+	 * 
+	 * @param nsURI
+	 *            runtime-specific URI = nsURI
+	 */
+	public void fillContentsFromRunTimeVersion(String nsURI) {
+		if (nsURI.startsWith("http")) { //$NON-NLS-1$
+			String metamodelUri = getESuperPackage(nsURI);
+			setFirstPackage(EPackage.Registry.INSTANCE
+				.getEPackage(metamodelUri));
+			setMetamodelNsURI(nsURI);
+		}
+	}
+
+	/**
+	 * @return the resource group
+	 */
+	public ResourceAndContainerGroup getGroup() {
+		return resourceGroup;
+	}
+
+	/**
+	 * @return The selected meta model NsURI
+	 */
+	public String getMetamodelNsURI() {
+		return metamodelNsURI;
 	}
 
 	/**
@@ -160,7 +363,12 @@ public class ExtendedNewCompleteOCLFileDialog
 	 *         component group
 	 */
 	public String getNewFileName() {
-		return newFileName;
+		if (resourceSelection != null) {
+			return resourceSelection.getFullPath().removeFileExtension().addFileExtension("ocl").lastSegment();
+		}
+		else {
+			return ExamplesUIMessages.CompleteOCLFileNewWizardPage_oclFileNameLabel;
+		}
 	}
 
 	/**
@@ -185,31 +393,6 @@ public class ExtendedNewCompleteOCLFileDialog
 	}
 
 	/**
-	 * @return the resource group
-	 */
-	public ResourceAndContainerGroup getGroup() {
-		return resourceGroup;
-	}
-
-	/**
-	 * @return The selected meta model NsURI
-	 */
-	public String getMetamodelNsURI() {
-		return metamodelNsURI;
-	}
-
-	/**
-	 * @param metamodelNsURI
-	 *            The selected metamodel nsuri
-	 */
-	private void setMetamodelNsURI(String metamodelNsURI) {
-		this.metamodelNsURI = metamodelNsURI;
-		if (uriField != null) {
-			uriField.setText(metamodelNsURI);
-		}
-	}
-
-	/**
 	 * @return The selected meta model uri
 	 */
 	public URI getURI() {
@@ -217,11 +400,29 @@ public class ExtendedNewCompleteOCLFileDialog
 	}
 
 	/**
-	 * @param uri
-	 *            The selected metamodel uri
+	 * Gets the highest package from a meta model
+	 * 
+	 * @param mmUri
+	 *            the meta model uri
+	 * @return NsURI from the container package at the highest level
 	 */
-	private void setURI(URI uri) {
-		metamodelURI = uri;
+	private String getESuperPackage(String mmUri) {
+
+		EPackage packageTemp = EPackage.Registry.INSTANCE.getEPackage(mmUri);
+		// Calling register on superPackage
+		if (packageTemp != null) {
+			EPackage eSuperPackage = packageTemp.getESuperPackage();
+			if (eSuperPackage != null) {
+				while (eSuperPackage != null
+					&& eSuperPackage.getESuperPackage() != null) {
+					eSuperPackage = eSuperPackage.getESuperPackage();
+				}
+				return eSuperPackage.getNsURI();
+			} else {
+				return packageTemp.getNsURI();
+			}
+		}
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -231,132 +432,8 @@ public class ExtendedNewCompleteOCLFileDialog
 		return firstPackage;
 	}
 
-	/**
-	 * @param firstPackage
-	 *            The first package of the selected metamodel
-	 */
-	private void setFirstPackage(EPackage firstPackage) {
-		this.firstPackage = firstPackage;
-	}
-
-	private void createLoadMetamodelArea(Composite parent) {
-		Label separatorLabel = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
-		{
-			GridData data = new GridData(GridData.FILL_BOTH);
-			separatorLabel.setLayoutData(data);
-		}
-
-		// meta model uri group
-		Composite metamodelURIGroup = new Composite(parent, SWT.NONE);
-		{
-			GridLayout layout = new GridLayout();
-			layout.numColumns = 2;
-			layout.marginWidth = 0;
-			metamodelURIGroup.setLayout(layout);
-			metamodelURIGroup.setLayoutData(new GridData(
-				GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
-			metamodelURIGroup.setFont(parent.getFont());
-		}
-
-		Label metamodelURILabel = new Label(metamodelURIGroup, SWT.NONE);
-		metamodelURILabel
-			.setText(Messages.WizardNewCompleteOCLFileCreationPage_resourceURI_label);
-
-		uriField = new Text(metamodelURIGroup, SWT.BORDER);
-		{
-			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
-				| GridData.GRAB_HORIZONTAL);
-			data.widthHint = SIZING_TEXT_FIELD_WIDTH;
-			uriField.setLayoutData(data);
-		}
-
-		setInitialUriContent();
-
-		Composite modelButtonsComposite = new Composite(parent, SWT.NONE);
-		{
-			GridLayout layout = new GridLayout();
-			layout.numColumns = 4;
-			layout.marginWidth = 0;
-			modelButtonsComposite.setLayout(layout);
-			modelButtonsComposite.setLayoutData(new GridData(
-				GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
-			modelButtonsComposite.setFont(parent.getFont());
-		}
-
-		Button browseRegisteredPackagesButton = new Button(
-			modelButtonsComposite, SWT.PUSH);
-		browseRegisteredPackagesButton
-			.setText(Messages.WizardNewCompleteOCLFileCreationPage_browseRegisteredPackages_label);
-		prepareBrowseRegisteredPackagesButton(browseRegisteredPackagesButton);
-		{
-			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
-				| GridData.GRAB_HORIZONTAL);
-			browseRegisteredPackagesButton.setLayoutData(data);
-		}
-
-		Button browseTargetPlatformPackagesButton = new Button(
-			modelButtonsComposite, SWT.PUSH);
-		browseTargetPlatformPackagesButton
-			.setText(Messages.WizardNewCompleteOCLFileCreationPage_browseTargetPlatformPackages_label);
-		prepareBrowseTargetPlatformPackagesButton(browseTargetPlatformPackagesButton);
-		{
-			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
-				| GridData.GRAB_HORIZONTAL);
-			browseTargetPlatformPackagesButton.setLayoutData(data);
-		}
-
-		Button browseFileSystemButton = new Button(modelButtonsComposite,
-			SWT.PUSH);
-		browseFileSystemButton
-			.setText(Messages.WizardNewCompleteOCLFileCreationPage_browseFileSystem_label);
-		prepareBrowseFileSystemButton(browseFileSystemButton);
-
-		if (EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE) {
-			Button browseWorkspaceButton = new Button(modelButtonsComposite,
-				SWT.PUSH);
-			{
-				GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
-					| GridData.GRAB_HORIZONTAL);
-				browseWorkspaceButton.setLayoutData(data);
-			}
-			{
-				GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
-					| GridData.GRAB_HORIZONTAL);
-				browseFileSystemButton.setLayoutData(data);
-			}
-			browseWorkspaceButton
-				.setText(Messages.WizardNewCompleteOCLFileCreationPage_browseWorkspace_label);
-			prepareBrowseWorkspaceButton(browseWorkspaceButton);
-		} else {
-			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL
-				| GridData.GRAB_HORIZONTAL);
-			browseFileSystemButton.setLayoutData(data);
-		}
-
-		separatorLabel = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
-		{
-			GridData data = new GridData(GridData.FILL_BOTH);
-			separatorLabel.setLayoutData(data);
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	private void setInitialUriContent() {
-		if (selection != null && !selection.toList().isEmpty()) {
-			Iterator it = selection.iterator();
-			if (it.hasNext()) {
-				Object next = it.next();
-				if ((next instanceof IFile)) {
-					IFile file = (IFile) next;
-					URI uri = URI.createPlatformResourceURI(file.getFullPath()
-						.toString(), true);
-					uriField.setText(uri.toString());
-
-					fillContentsFromFilePath(file.getFullPath().toString());
-					setMetamodelNsURI(uri.toString());
-				}
-			}
-		}
+	public Collection<EPackage> getResourcePackages(Resource resource) {
+		return this.getAllPackages(resource);
 	}
 
 	/**
@@ -364,26 +441,14 @@ public class ExtendedNewCompleteOCLFileDialog
 	 * either a previously-specified initial value or the ability to determine
 	 * such a value.
 	 */
-	@SuppressWarnings("rawtypes")
 	private void initialPopulateContainerNameField() {
-		Iterator it = selection.iterator();
-		if (it.hasNext()) {
-			Object object = it.next();
-			IResource selectedResource = null;
-			if (object instanceof IResource) {
-				selectedResource = (IResource) object;
-			} else if (object instanceof IAdaptable) {
-				selectedResource = (IResource) ((IAdaptable) object)
-					.getAdapter(IResource.class);
+		IResource resourceSelection2 = resourceSelection;
+		if (resourceSelection2 != null) {
+			if (resourceSelection2.getType() == IResource.FILE) {
+				resourceSelection2 = resourceSelection2.getParent();
 			}
-			if (selectedResource != null) {
-				if (selectedResource.getType() == IResource.FILE) {
-					selectedResource = selectedResource.getParent();
-				}
-				if (selectedResource.isAccessible()) {
-					resourceGroup.setContainerFullPath(selectedResource
-						.getFullPath());
-				}
+			if (resourceSelection2.isAccessible()) {
+				resourceGroup.setContainerFullPath(resourceSelection2.getFullPath());
 			}
 		}
 	}
@@ -392,8 +457,21 @@ public class ExtendedNewCompleteOCLFileDialog
 		return uriField != null && uriField.getText() != "";//$NON-NLS-1$
 	}
 
-	public Collection<EPackage> getResourcePackages(Resource resource) {
-		return this.getAllPackages(resource);
+	/**
+	 * Loads an EMF resource and returns it.
+	 * 
+	 * @param uri
+	 *            The resource uri to load given as a {@link URI}
+	 * @return a resource
+	 */
+	private Resource loadResource(URI uri) {
+		ResourceSet set = new ResourceSetImpl();
+		set.getLoadOptions().put(XMLResource.OPTION_DEFER_ATTACHMENT, true);
+		set.getLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION,
+			true);
+		set.setPackageRegistry(new EPackageRegistryImpl(
+			EPackage.Registry.INSTANCE));
+		return set.getResource(uri, true);
 	}
 
 	/**
@@ -493,130 +571,36 @@ public class ExtendedNewCompleteOCLFileDialog
 	}
 
 	/**
-	 * Fills the selected metamodel URI and the first package of the selected
-	 * metamodel basing on parsing a fullpath string.
-	 * 
-	 * @param fullPath
+	 * @param firstPackage
+	 *            The first package of the selected metamodel
 	 */
-	public void fillContentsFromFilePath(String fullPath) {
-		setURI(URI.createFileURI(fullPath));
-
-		Resource resource = loadResource(getURI());
-		for (EPackage ePackage : getAllPackages(resource)) {
-			setFirstPackage(ePackage);
-			if (metamodelURI != null) {
-				setMetamodelNsURI(metamodelURI.toString());
-			}
-			break;
-		}
+	private void setFirstPackage(EPackage firstPackage) {
+		this.firstPackage = firstPackage;
 	}
-	
-	/**
-	 * Fills the selected metamodel URI and the first package of the selected
-	 * metamodel basing on parsing a fullpath string.
-	 * 
-	 * @param fullPath
-	 */
-	public void fillContentsFromWorkspacePath(String fullPath) {
-		setURI(URI.createFileURI(fullPath));
 
-		Resource resource = loadResource(getURI());
-		for (EPackage ePackage : getAllPackages(resource)) {
-			setFirstPackage(ePackage);
-			URI uri = URI.createPlatformResourceURI(fullPath, true);
-			setMetamodelNsURI(uri.toString());
-			break;
+	/**
+	 * @param metamodelNsURI
+	 *            The selected metamodel nsuri
+	 */
+	private void setMetamodelNsURI(String metamodelNsURI) {
+		this.metamodelNsURI = metamodelNsURI;
+		if (uriField != null) {
+			uriField.setText(metamodelNsURI);
 		}
 	}
 
 	/**
-	 * Fills the selected metamodel URI and the first package of the selected
-	 * metamodel basing on parsing a list of selected URIs.
-	 * 
-	 * @param nsURIs
-	 *            Platform-specific URIs
-	 */
-	public void fillContentsFromDevelopmentTimeVersion(String nsURI) {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getURIConverter().getURIMap()
-			.putAll(EcorePlugin.computePlatformURIMap(true));
-
-		Map<String, URI> ePackageNsURItoGenModelLocationMap = EcorePlugin
-			.getEPackageNsURIToGenModelLocationMap(true);
-		URI location = ePackageNsURItoGenModelLocationMap.get(nsURI);
-		Resource resourceToResolve = resourceSet.getResource(location, true);
-		EcoreUtil.resolveAll(resourceToResolve);
-
-		EList<Resource> resources = resourceSet.getResources();
-
-		for (Resource resource : resources) {
-			for (EPackage ePackage : getAllPackages(resource)) {
-				if (nsURI.equals(ePackage.getNsURI())) {
-					setFirstPackage(ePackage);
-					setURI(resource.getURI());
-					setMetamodelNsURI(nsURI);
-					break;
-				}
-			}
-		}
-	}
-
-	/**
-	 * Fills the selected metamodel URI and the first package of the selected
-	 * metamodel basing on the selected nsURI.
-	 * 
-	 * @param nsURI
-	 *            runtime-specific URI = nsURI
-	 */
-	public void fillContentsFromRunTimeVersion(String nsURI) {
-		if (nsURI.startsWith("http")) { //$NON-NLS-1$
-			String metamodelUri = getESuperPackage(nsURI);
-			setFirstPackage(EPackage.Registry.INSTANCE
-				.getEPackage(metamodelUri));
-			setMetamodelNsURI(nsURI);
-		}
-	}
-
-	/**
-	 * Loads an EMF resource and returns it.
-	 * 
 	 * @param uri
-	 *            The resource uri to load given as a {@link URI}
-	 * @return a resource
+	 *            The selected metamodel uri
 	 */
-	private Resource loadResource(URI uri) {
-		ResourceSet set = new ResourceSetImpl();
-		set.getLoadOptions().put(XMLResource.OPTION_DEFER_ATTACHMENT, true);
-		set.getLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION,
-			true);
-		set.setPackageRegistry(new EPackageRegistryImpl(
-			EPackage.Registry.INSTANCE));
-		return set.getResource(uri, true);
+	private void setURI(URI uri) {
+		metamodelURI = uri;
 	}
 
-	/**
-	 * Gets the highest package from a meta model
-	 * 
-	 * @param mmUri
-	 *            the meta model uri
-	 * @return NsURI from the container package at the highest level
-	 */
-	private String getESuperPackage(String mmUri) {
-
-		EPackage packageTemp = EPackage.Registry.INSTANCE.getEPackage(mmUri);
-		// Calling register on superPackage
-		if (packageTemp != null) {
-			EPackage eSuperPackage = packageTemp.getESuperPackage();
-			if (eSuperPackage != null) {
-				while (eSuperPackage != null
-					&& eSuperPackage.getESuperPackage() != null) {
-					eSuperPackage = eSuperPackage.getESuperPackage();
-				}
-				return eSuperPackage.getNsURI();
-			} else {
-				return packageTemp.getNsURI();
-			}
-		}
-		return ""; //$NON-NLS-1$
+	protected void setURISelection(@NonNull IFile file) {
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		uriField.setText(uri.toString());
+		fillContentsFromFilePath(file.getFullPath().toString());
+		setMetamodelNsURI(uri.toString());
 	}
 }

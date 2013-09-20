@@ -18,7 +18,7 @@
       </category>
       <wizard
             category="org.eclipse.ocl.ui.wizards"
-            class="org.eclipse.ocl.examples.ui.wizards.WizardNewCompleteOCLFileCreation"
+            class="org.eclipse.ocl.examples.ui.internal.wizards.CompleteOCLFileNewWizard"
             icon="icons/OCLModelFile.gif"
             id="org.eclipse.ocl.ui.wizardNewCompleteOCLFileCreation"
             name="%MF_COMPLETE_OCL_WIZARD_NAME"

@@ -9,6 +9,8 @@
  *     IBM Corporation - initial API and implementation
  *     Igor Fedorenko <igorfie@yahoo.com> - 
  *     		Fix for Bug 136921 [IDE] New File dialog locks for 20 seconds
+ *     
+ * This file is copied  from org.eclipse.ui.internal.ide.misc.ContainerSelectionGroup
  *******************************************************************************/
 package org.eclipse.ocl.examples.ui.internal.ripoffs;
 
@@ -31,7 +33,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerComparator;
-import org.eclipse.ocl.examples.ui.messages.Messages;
+import org.eclipse.ocl.examples.ui.internal.messages.ExamplesUIMessages;
 import org.eclipse.osgi.util.TextProcessor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -47,6 +49,7 @@ import org.eclipse.ui.part.DrillDownComposite;
 /**
  * Workbench-level composite for choosing a container.
  */
+@SuppressWarnings({"rawtypes","unchecked"})	// FIXME - remove after LunaM2 when Platform reverts experimental genercs
 public class ContainerSelectionGroup extends Composite {
 	// The listener to notify of events
 	private Listener listener;
@@ -66,9 +69,9 @@ public class ContainerSelectionGroup extends Composite {
 	TreeViewer treeViewer;
 
 	// the message to display at the top of this dialog
-	private static final String DEFAULT_MSG_NEW_ALLOWED = Messages.WizardNewCompleteOCLFileCreationPage_ContainerGroup_message;
+	private static final String DEFAULT_MSG_NEW_ALLOWED = ExamplesUIMessages.ContainerGroup_message;
 
-	private static final String DEFAULT_MSG_SELECT_ONLY = Messages.WizardNewCompleteOCLFileCreationPage_ContainerGroup_selectFolder;
+	private static final String DEFAULT_MSG_SELECT_ONLY = ExamplesUIMessages.ContainerGroup_selectFolder;
 
 	// sizing constants
 	private static final int SIZING_SELECTION_PANE_WIDTH = 320;
@@ -339,7 +342,6 @@ public class ContainerSelectionGroup extends Composite {
 	 * 
 	 * @param container
 	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void setSelectedContainer(IContainer container) {
 		selectedContainer = container;
 

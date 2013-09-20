@@ -7,6 +7,8 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     
+ * This file is copied  from org.eclipse.ui.internal.ide.misc.ContainerContentProvider
  *******************************************************************************/
 package org.eclipse.ocl.examples.ui.internal.ripoffs;
 
@@ -24,6 +26,7 @@ import org.eclipse.jface.viewers.Viewer;
 /**
  * Provides content for a tree viewer that shows only containers.
  */
+@SuppressWarnings({"rawtypes","unchecked"})	// FIXME - remove after LunaM2 when Platform reverts experimental genercs
 public class ContainerContentProvider implements ITreeContentProvider {
     private boolean showClosedProjects = true;
 
@@ -43,7 +46,6 @@ public class ContainerContentProvider implements ITreeContentProvider {
     /*
      * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
 	public Object[] getChildren(Object element) {
         if (element instanceof IWorkspace) {
             // check if closed projects should be shown

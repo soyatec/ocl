@@ -155,7 +155,7 @@ public class EssentialOCLScoping
 					aSource = (NestedExpCS)eContainer;
 				}
 				else if (eContainer instanceof SpecificationCS) {
-					ExpressionInOCL expression = PivotUtil.getPivot(ExpressionInOCL.class, (SpecificationCS)eContainer);
+					ExpressionInOCL expression = PivotUtil.getContainingExpressionInOCL(((SpecificationCS)eContainer).getPivot());
 					source = expression!= null ? expression.getContextVariable() : null;
 					break;
 				}

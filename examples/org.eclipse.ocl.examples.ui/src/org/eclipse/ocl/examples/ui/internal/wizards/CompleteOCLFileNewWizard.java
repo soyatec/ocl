@@ -12,13 +12,18 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.ui.wizards;
+package org.eclipse.ocl.examples.ui.internal.wizards;
+
+import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ocl.common.ui.internal.Activator;
-import org.eclipse.ocl.examples.ui.messages.Messages;
+import org.eclipse.ocl.examples.ui.Activator;
+import org.eclipse.ocl.examples.ui.internal.messages.ExamplesUIMessages;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -28,20 +33,22 @@ import org.eclipse.ui.ide.IDE;
 
 /**
  * Wizard allowing the user to create a new OCL rule file.
+ * @since 1.2
  */
-public class WizardNewCompleteOCLFileCreation
+@SuppressWarnings({"rawtypes"})	// FIXME - remove after LunaM2 when Platform reverts experimental genercs
+public class CompleteOCLFileNewWizard
 		extends Wizard
 		implements INewWizard {
 
 	/** The only page contributing to the wizard */
-	protected WizardNewCompleteOCLFileCreationPage page;
+	protected CompleteOCLFileNewWizardPage page;
 
 	/**
 	 * Constructor
 	 */
-	public WizardNewCompleteOCLFileCreation() {
+	public CompleteOCLFileNewWizard() {
 		super();
-		setWindowTitle(Messages.WizardNewCompleteOCLFileCreationPage_newCompleteOCLFile);
+		setWindowTitle(ExamplesUIMessages.CompleteOCLFileNewWizardPage_newCompleteOCLFile);
 		setDefaultPageImageDescriptor(Activator
 			.getImageDescriptor("icons/OCLModelFile.gif"));
 	}
@@ -82,7 +89,30 @@ public class WizardNewCompleteOCLFileCreation
 	 *      org.eclipse.jface.viewers.IStructuredSelection)
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		page = new WizardNewCompleteOCLFileCreationPage(selection);
+		IResource selectedResource = null;
+		Iterator it = selection.iterator();
+		if (it.hasNext()) {
+			Object object = it.next();
+			if (object instanceof IResource) {
+				selectedResource = (IResource) object;
+			} else if (object instanceof IAdaptable) {
+				selectedResource = (IResource) ((IAdaptable) object)
+					.getAdapter(IResource.class);
+			}
+/*			if (selectedResource != null) {
+				if (selectedResource.getType() == IResource.FILE) {
+					selectedResource = selectedResource.getParent();
+				}
+				if (selectedResource.isAccessible()) {
+					resourceGroup.setContainerFullPath(selectedResource
+						.getFullPath());
+				}
+			} */
+		}
+		init(selectedResource);
+	}
+	public void init(@Nullable IResource selectedResource) {
+		page = new CompleteOCLFileNewWizardPage(selectedResource);
 		addPage(page);
 	}
 }

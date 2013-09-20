@@ -9,6 +9,8 @@
  *     IBM Corporation - initial API and implementation
  *      Alexander Fedorov <Alexander.Fedorov@borland.com>
  *     		- Bug 172000 [Wizards] WizardNewFileCreationPage should support overwriting existing resources
+ *     
+ * This file is copied  from org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup
  *******************************************************************************/
 package org.eclipse.ocl.examples.ui.internal.ripoffs;
 
@@ -22,7 +24,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.equinox.bidi.StructuredTextTypeHandlerFactory;
 import org.eclipse.jface.util.BidiUtils;
-import org.eclipse.ocl.examples.ui.messages.Messages;
+import org.eclipse.ocl.examples.ui.internal.messages.ExamplesUIMessages;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
@@ -90,7 +92,7 @@ public class ResourceAndContainerGroup implements Listener {
 	private boolean allowExistingResources = false;
 
 	// resource type (file, folder, project)
-	private String resourceType = Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_resource;
+	private String resourceType = ExamplesUIMessages.ResourceGroup_resource;
 
 	// show closed projects in the tree, by default
 	private boolean showClosedProjects = true;
@@ -397,7 +399,7 @@ public class ResourceAndContainerGroup implements Listener {
 		IPath path = containerGroup.getContainerFullPath();
 		if (path == null) {
 			problemType = PROBLEM_CONTAINER_EMPTY;
-			problemMessage = Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_folderEmpty;
+			problemMessage = ExamplesUIMessages.ResourceGroup_folderEmpty;
 			return false;
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -405,7 +407,7 @@ public class ResourceAndContainerGroup implements Listener {
 		if (projectName == null
 				|| !workspace.getRoot().getProject(projectName).exists()) {
 			problemType = PROBLEM_PROJECT_DOES_NOT_EXIST;
-			problemMessage = Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_noProject;
+			problemMessage = ExamplesUIMessages.ResourceGroup_noProject;
 			return false;
 		}
 		// path is invalid if any prefix is occupied by a file
@@ -414,7 +416,7 @@ public class ResourceAndContainerGroup implements Listener {
 			if (root.getFile(path).exists()) {
 				problemType = PROBLEM_PATH_OCCUPIED;
 				problemMessage = NLS.bind(
-						Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_pathOccupied, path
+						ExamplesUIMessages.ResourceGroup_pathOccupied, path
 								.makeRelative());
 				return false;
 			}
@@ -472,7 +474,7 @@ public class ResourceAndContainerGroup implements Listener {
 						.getRoot().getFile(resourcePath).exists())) {
 			problemType = PROBLEM_RESOURCE_EXIST;
 			problemMessage = NLS.bind(
-				Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_nameExists,
+				ExamplesUIMessages.ResourceGroup_nameExists,
 					getResource());
 			return false;
 		}
@@ -493,14 +495,14 @@ public class ResourceAndContainerGroup implements Listener {
 		if (resourceName.length() == 0) {
 			problemType = PROBLEM_RESOURCE_EMPTY;
 			problemMessage = NLS.bind(
-				Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_emptyName, resourceType);
+				ExamplesUIMessages.ResourceGroup_emptyName, resourceType);
 			return false;
 		}
 
 		if (!Path.ROOT.isValidPath(resourceName)) {
 			problemType = PROBLEM_NAME_INVALID;
 			problemMessage = NLS.bind(
-				Messages.WizardNewCompleteOCLFileCreationPage_ResourceGroup_invalidFilename,
+				ExamplesUIMessages.ResourceGroup_invalidFilename,
 					resourceName);
 			return false;
 		}
