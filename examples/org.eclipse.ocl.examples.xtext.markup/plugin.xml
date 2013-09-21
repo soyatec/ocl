@@ -11,6 +11,7 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Markup -->
       <package
             uri="http://www.eclipse.org/ocl/3.2.0/Markup"
             class="org.eclipse.ocl.examples.xtext.markup.MarkupPackage"
