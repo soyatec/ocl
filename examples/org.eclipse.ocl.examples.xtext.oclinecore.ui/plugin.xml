@@ -376,5 +376,18 @@
 	    </command>
 	  </menuContribution>
 	</extension>
+ 
+    <extension point="org.eclipse.ui.newWizards">
+      <wizard id="org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreFileNewWizard"
+            category="org.eclipse.ocl.ui.wizards"
+            class="org.eclipse.ocl.examples.xtext.oclinecore.ui.wizards.OCLinEcoreFileNewWizard"
+            icon="icons/OCLModelFile.gif"          
+            name="%MF_OCLINECORE_WIZARD_NAME"
+            project="false">
+         <description>
+            %MF_OCLINECORE_WIZARD_DESCRIPTION
+         </description>
+      </wizard>
+   </extension>
 
 </plugin>

@@ -245,5 +245,18 @@
 	    </command>
 	  </menuContribution>
 	</extension>
+ 
+    <extension point="org.eclipse.ui.newWizards">
+      <wizard id="org.eclipse.ocl.examples.xtext.completeocl.ui.CompleteOCLFileNewWizard"
+            category="org.eclipse.ocl.ui.wizards"
+            class="org.eclipse.ocl.examples.xtext.completeocl.ui.wizards.CompleteOCLFileNewWizard"
+            icon="icons/OCLModelFile.gif"          
+            name="%MF_COMPLETE_OCL_WIZARD_NAME"
+            project="false">
+         <description>
+            %MF_COMPLETE_OCL_WIZARD_DESCRIPTION
+         </description>
+      </wizard>
+   </extension>
 
 </plugin>

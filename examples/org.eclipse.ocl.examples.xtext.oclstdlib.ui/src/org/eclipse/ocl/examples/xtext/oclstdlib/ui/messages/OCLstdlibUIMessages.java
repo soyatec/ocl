@@ -15,17 +15,17 @@
  * $Id$
  */
 
-package org.eclipse.ocl.examples.xtext.oclinecore.ui.messages;
+package org.eclipse.ocl.examples.xtext.oclstdlib.ui.messages;
 
 import org.eclipse.osgi.util.NLS;
 
 /**
  * An accessor class for externalized strings.
  */
-public class OCLinEcoreUIMessages
+public class OCLstdlibUIMessages
 {	
 	static {
-		NLS.initializeMessages(OCLinEcoreUIMessages.class.getName(), OCLinEcoreUIMessages.class);
+		NLS.initializeMessages(OCLstdlibUIMessages.class.getName(), OCLstdlibUIMessages.class);
 	}
 
 	public static String NewWizardPage_defaultFileName;
@@ -33,7 +33,4 @@ public class OCLinEcoreUIMessages
 	public static String NewWizardPage_pageDescription;
 	public static String NewWizardPage_pageSummary;
 	public static String NewWizardPage_pageTitle;
-
-	public static String OCLinEcore_EditorDelegationMode;
-	public static String OCLinEcore_PageTitle;
 }

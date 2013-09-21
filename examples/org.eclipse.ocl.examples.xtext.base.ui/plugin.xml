@@ -19,5 +19,11 @@
          <menu id="org.eclipse.ocl.examples.xtext.base.ui.Save" label="%MF_Save"/>         
       </menuContribution>
 	</extension>
+ 
+    <extension point="org.eclipse.ui.newWizards">
+      <category id="org.eclipse.ocl.ui.wizards"
+            name="OCL">
+      </category>
+   </extension>
 
 </plugin>

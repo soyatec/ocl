@@ -10,7 +10,7 @@
  *     
  * This file is copied  from org.eclipse.ui.internal.ide.misc.ContainerContentProvider
  *******************************************************************************/
-package org.eclipse.ocl.examples.ui.internal.ripoffs;
+package org.eclipse.ocl.examples.xtext.base.ui.ripoffs;
 
 import java.util.ArrayList;
 import java.util.List;

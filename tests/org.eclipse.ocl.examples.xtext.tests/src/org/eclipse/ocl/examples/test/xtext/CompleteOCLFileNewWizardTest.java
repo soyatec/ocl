@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.ui.tests;
+package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -36,6 +36,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ocl.examples.test.xtext.models.ParserModels;
 import org.eclipse.ocl.examples.xtext.base.ui.messages.BaseUIMessages;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileNewWizardPage;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.messages.CompleteOCLUIMessages;
@@ -60,21 +61,14 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 	private static final String TEST_PROJECT_NAME = "test-project";
 	private static final String TEST_ECORE_PATH = "/" + TEST_PROJECT_NAME + "/" + TEST_ECORE_NAME;
 
-	private static final String EXPECTED_OCL_NAME = "Test.ocl";
-//	private static final String EXPECTED_NS_URI = "platform:/resource" + TEST_ECORE_PATH;
+	private static final String EXPECTED_OCL_NAME = "/" + TEST_PROJECT_NAME + "/Test.ocl";
 	private static final String EXPECTED_PACKAGE_NAME = "test_package";
 	private static final String EXPECTED_CLASS_NAME = "TestClass";
 	private static final String EXPECTED_FEATURE_NAME = "testFeature";
 
-	private AbstractFileNewWizardPage page = null;
-
-	private CompleteOCLFileDialog dialog = null;
-
 	private IProject project = null;
 
 	private IFile modelFile = null;
-
-	private CompleteOCLFileNewWizard oclFileCreationWizard = null;
 
 	public static String getExpectedContents() {
 		StringBuilder s = new StringBuilder();
@@ -129,6 +123,7 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 
@@ -146,7 +141,7 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 		project.create(description, nullMonitor);
 		assertTrue(project.exists());
 		project.open(nullMonitor);
-		URL url = getClass().getResource(TEST_ECORE_NAME);
+		URL url = ParserModels.class.getResource(TEST_ECORE_NAME);
 		assertNotNull(url);
 		project.getFile(TEST_ECORE_NAME).create(url.openStream(), true,nullMonitor);
 		modelFile = project.getFile(TEST_ECORE_NAME);
@@ -156,6 +151,7 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 	/**
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		if (project.exists()) {
@@ -165,36 +161,38 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 
 	@Test
 	public void test_CompleteOCLFile_Dialog() {
-		oclFileCreationWizard = new CompleteOCLFileNewWizard();
-		page = oclFileCreationWizard.createNewWizardPage(modelFile);
-		dialog = new CompleteOCLFileDialog(oclFileCreationWizard, page, modelFile);
+		CompleteOCLFileNewWizard wizard = new CompleteOCLFileNewWizard();
+		AbstractFileNewWizardPage wizardPage = wizard.createNewWizardPage(modelFile);
+		CompleteOCLFileDialog dialog = new CompleteOCLFileDialog(wizard, wizardPage, modelFile);
 		dialog.createDialogArea(new Shell());
-		assertEquals("ocl", oclFileCreationWizard.getNewFileExtension());
-		assertEquals(CompleteOCLUIMessages.NewWizardPage_fileNameLabel, oclFileCreationWizard.getNewFileLabel());
-//		assertEquals(EXPECTED_OCL_NAME, dialog.getNewFileName());
+		assertEquals("ocl", wizard.getNewFileExtension());
+		assertEquals(CompleteOCLUIMessages.NewWizardPage_fileNameLabel, wizard.getNewFileLabel());
+		assertEquals(EXPECTED_OCL_NAME, dialog.getNewFilePath().toString());
 		List<URI> uris = new ArrayList<URI>();
 		uris.add(URI.createPlatformResourceURI(TEST_ECORE_PATH, true));
 		assertEquals(uris, dialog.getURIs());
+		wizard.dispose();
 	}
 
 	@Test
 	public void test_CompleteOCLFile_NewWizardPage() {
-		oclFileCreationWizard = new CompleteOCLFileNewWizard();
-		page = oclFileCreationWizard.createNewWizardPage(modelFile);
-		assertEquals(PAGE_NAME, page.getName());
-		assertEquals(CompleteOCLUIMessages.NewWizardPage_pageSummary, page.getTitle());
-		assertEquals(CompleteOCLUIMessages.NewWizardPage_pageDescription, page.getDescription());
-		assertNull(page.getErrorMessage());
+		CompleteOCLFileNewWizard wizard = new CompleteOCLFileNewWizard();
+		AbstractFileNewWizardPage wizardPage = wizard.createNewWizardPage(modelFile);
+		assertEquals(PAGE_NAME, wizardPage.getName());
+		assertEquals(CompleteOCLUIMessages.NewWizardPage_pageSummary, wizardPage.getTitle());
+		assertEquals(CompleteOCLUIMessages.NewWizardPage_pageDescription, wizardPage.getDescription());
+		assertNull(wizardPage.getErrorMessage());
+		wizard.dispose();
 	}
 
 /*	@Test
 	public void test_CompleteOCLFile_NewWizardPage_FileContent() {
-		oclFileCreationWizard = new CompleteOCLFileNewWizard();
-		page = oclFileCreationWizard.createNewWizardPage(modelFile);
-		AbstractFileDialog dialog = page.initDialog(modelFile);
+		CompleteOCLFileNewWizard wizard = new CompleteOCLFileNewWizard();
+		AbstractFileNewWizardPage wizardPage = wizard.createNewWizardPage(modelFile);
+		AbstractFileDialog dialog = wizardPage.initDialog(modelFile);
 //		dialog.fillContentsFromWorkspacePath(modelFile.getFullPath().toString());
 		String expectedContents = getExpectedContents();
-		String actualContents = oclFileCreationWizard.getInitialContentsAsString(modelFile, dialog);
+		String actualContents = wizard.getInitialContentsAsString(modelFile, dialog);
 		assertEquals(expectedContents, actualContents);
 	} */
 

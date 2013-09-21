@@ -9,7 +9,7 @@
  *     E.D.Willink - initial API and implementation
  *     Obeo - add log and image descriptor facilities
  *******************************************************************************/
-package org.eclipse.ocl.examples.ui;
+package org.eclipse.ocl.examples.xtext.base.ui;
 
 import java.text.MessageFormat;
 
@@ -28,7 +28,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin implements BundleActivator {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.ui"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.base.ui"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -43,6 +43,7 @@ public class Activator extends AbstractUIPlugin implements BundleActivator {
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 	}
@@ -51,6 +52,7 @@ public class Activator extends AbstractUIPlugin implements BundleActivator {
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
 	}

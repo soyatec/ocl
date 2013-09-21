@@ -26,7 +26,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ocl.examples.xtext.base.ui.messages.BaseMessages;
+import org.eclipse.ocl.examples.xtext.base.ui.messages.BaseUIMessages;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Shell;
@@ -82,9 +82,9 @@ public class SaveASHandler extends AbstractHandler
 		SaveAsDialog dlg = new SaveAsDialog(shell);
 		dlg.setOriginalFile(outFile);
 		dlg.create();
-		dlg.getShell().setText(BaseMessages.SaveAS_ShellTitle);
-		dlg.setTitle(BaseMessages.SaveAS_Title);
-		dlg.setMessage(NLS.bind(BaseMessages.SaveAS_Description, asURI));
+		dlg.getShell().setText(BaseUIMessages.SaveAS_ShellTitle);
+		dlg.setTitle(BaseUIMessages.SaveAS_Title);
+		dlg.setMessage(NLS.bind(BaseUIMessages.SaveAS_Description, asURI));
 		int status = dlg.open();
 		if (status != SaveAsDialog.OK) {
 			return null;
@@ -110,7 +110,7 @@ public class SaveASHandler extends AbstractHandler
 				}
 			});
 		} catch (Throwable e) {
-			MessageDialog.openError( shell, BaseMessages.SaveError_Title,
+			MessageDialog.openError( shell, BaseUIMessages.SaveError_Title,
 				e.getLocalizedMessage());
 		}
 		return null;
