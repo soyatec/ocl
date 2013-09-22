@@ -85,21 +85,37 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 			String body = PivotUtil.getBody(specification);
 			if ((body != null) && body.startsWith("Tuple")) {
 				String[] lines = body.split("\n");
-				if ((lines.length == 4)
+				int lastLineNumber = lines.length-1;
+				if ((lastLineNumber >= 3)
 				 && lines[0].replaceAll("\\s", "").equals("Tuple{")
-				 && lines[1].endsWith(",")
-				 && lines[3].replaceAll("\\s", "").equals("}.status")
 				 && lines[1].replaceAll("\\s", "").startsWith("message:String=")
-				 && lines[2].replaceAll("\\s", "").startsWith("status:Boolean=")) {
-					String messageText = lines[1].substring(lines[1].indexOf("=")+1, lines[1].length()-1).trim();
-					ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
-					csMessage.setExprString(messageText);
-					csElement.setMessageSpecification(csMessage);
-					String statusText = lines[2].substring(lines[2].indexOf("=")+1).trim();
-					ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
-					csStatus.setExprString(statusText);
-					csElement.setSpecification(csStatus);
-					return csElement;
+				 && lines[lastLineNumber].replaceAll("\\s", "").equals("}.status")) {
+					StringBuilder message = new StringBuilder();
+					message.append(lines[1].substring(lines[1].indexOf("=")+1, lines[1].length()).trim());
+					for (int i = 2; i < lastLineNumber; i++) {
+						if (!lines[i].replaceAll("\\s", "").startsWith("status:Boolean=")) {
+							message.append("\n" + lines[i]);
+						}
+						else {
+							ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+							String messageString = message.toString();
+							int lastIndex = messageString.lastIndexOf(',');
+							if (lastIndex > 0) {
+								messageString = messageString.substring(0, lastIndex); 
+							}
+							csMessage.setExprString(messageString);
+							csElement.setMessageSpecification(csMessage);
+							StringBuilder status = new StringBuilder();			
+							status.append(lines[i].substring(lines[i].indexOf("=")+1, lines[i].length()).trim());
+							for (i++; i < lastLineNumber; i++) {
+								status.append("\n" + lines[i]);
+							}
+							ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+							csStatus.setExprString(status.toString());
+							csElement.setSpecification(csStatus);
+							return csElement;
+						}					
+					}
 				}
 			}
 		}

@@ -14,17 +14,10 @@
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.ui.wizards;
 
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileDialog;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileNewWizard;
-import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileNewWizardPage;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiModule;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.messages.OCLinEcoreUIMessages;
 
@@ -33,10 +26,8 @@ import org.eclipse.ocl.examples.xtext.oclinecore.ui.messages.OCLinEcoreUIMessage
  */
 public abstract class AbstractOCLinEcoreFileNewWizard extends AbstractFileNewWizard
 {
-	@Override
-	protected @NonNull OCLinEcoreFileDialog createDialog(@NonNull AbstractFileNewWizardPage wizardPage, @Nullable IResource initialSelection) {
-		return new OCLinEcoreFileDialog(this, wizardPage, initialSelection);
-	}
+
+	protected void appendImports(StringBuilder s, AbstractFileDialog dialog, IFile newFile) {}
 
 	@Override
 	protected String getEditorId() {
@@ -46,15 +37,7 @@ public abstract class AbstractOCLinEcoreFileNewWizard extends AbstractFileNewWiz
 	@Override
 	public @NonNull String getInitialContentsAsString(@NonNull IFile newFile, @NonNull AbstractFileDialog dialog) {
 		StringBuilder s = new StringBuilder();
-		List<URI> uris = dialog.getURIs();
-		if (uris.size() > 0) {
-			URI newURI = URI.createPlatformResourceURI(newFile.getFullPath().toString(), true);
-			for (URI uri : uris) {
-				@SuppressWarnings("null")@NonNull URI deresolvedURI = uri.deresolve(newURI);
-				s.append("import '" + ValuesUtil.oclToString(deresolvedURI) + "';\n");
-			}
-			s.append("\n");
-		}
+		appendImports(s, dialog, newFile);
 		s.append("package example : ex = 'http://www.example.org/examples/example.ecore'\n");
 		s.append("{\n");
 		s.append("	-- Example Class with hierarchical properties and an invariant\n");
@@ -78,29 +61,5 @@ public abstract class AbstractOCLinEcoreFileNewWizard extends AbstractFileNewWiz
 	@Override
 	public @NonNull String getNewFileName() {
 		return OCLinEcoreUIMessages.NewWizardPage_defaultFileName;
-	}
-
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull String getNewFileLabel() {
-		return OCLinEcoreUIMessages.NewWizardPage_fileNameLabel;
-	}
-	
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull String getPageDescription() {
-		return OCLinEcoreUIMessages.NewWizardPage_pageDescription;
-	}
-
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull String getPageSummary() {
-		return OCLinEcoreUIMessages.NewWizardPage_pageSummary;
-	}
-
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull String getPageTitle() {
-		return OCLinEcoreUIMessages.NewWizardPage_pageTitle;
 	}
 }

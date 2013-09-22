@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.ui.messages.CompleteOCLUIMessa
 import org.eclipse.ocl.examples.xtext.completeocl.ui.wizards.CompleteOCLFileDialog;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.wizards.CompleteOCLFileNewWizard;
 import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLPlugin;
+import org.eclipse.ocl.examples.xtext.oclinecore.ui.wizards.EcoreWithOCLFileNewWizard;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.wizards.OCLinEcoreFileNewWizard;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcorePlugin;
 import org.eclipse.ocl.examples.xtext.oclstdlib.ui.wizards.OCLstdlibFileNewWizard;
@@ -54,6 +55,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.junit.Test;
 
 /**
@@ -276,6 +278,37 @@ public class FileNewWizardTest extends TestCase
 		assertEquals(expectedContents, actualContents);
 		XtextEditor activeEditor = getActiveEditor();
 		assertEquals(OCLinEcorePlugin.LANGUAGE_ID, activeEditor.getLanguageName());
+		activeEditor.close(false);
+	}
+
+	@Test
+	public void test_EcoreWithOCL_NewFileCreation() throws Exception {
+		IFile modelFile = project.getFile("Testing.xxx");
+		IWorkbenchWizard wizard = new EcoreWithOCLFileNewWizard();
+		wizard.init(PlatformUI.getWorkbench(), new StructuredSelection(modelFile));
+		createAndFinishWizardDialog(wizard);
+		XtextEditor activeEditor = getActiveEditor();
+		assertEquals(OCLinEcorePlugin.LANGUAGE_ID, activeEditor.getLanguageName());
+		IXtextDocument document = activeEditor.getDocument();
+		String actualContents = document.get();
+		StringBuilder s = new StringBuilder();
+		s.append("package example : ex = 'http://www.example.org/examples/example.ecore'\n");
+		s.append("{\n");
+		s.append("	class Example\n");
+		s.append("	{\n");
+		s.append("		operation ucName() : String\n");
+		s.append("		{\n");
+		s.append("			body: name.toUpperCase();\n");
+		s.append("		}\n");
+		s.append("		attribute name : String;\n");
+		s.append("		property children#parent : Example[*] { ordered composes };\n");
+		s.append("		property parent#children : Example[?];\n");
+		s.append("		invariant NameIsLowerCase('Expected a lowercase name rather than '' + name + '''):\n");
+		s.append("			name = name.toLowerCase();\n");
+		s.append("	}\n");
+		s.append("}\n");
+		String expectedContents = s.toString();
+		assertEquals(expectedContents.trim().replaceAll("\\s+", " "), actualContents.trim().replaceAll("\\s+", " "));
 		activeEditor.close(false);
 	}
 
