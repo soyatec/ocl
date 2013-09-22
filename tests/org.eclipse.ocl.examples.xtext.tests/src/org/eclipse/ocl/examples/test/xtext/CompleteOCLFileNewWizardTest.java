@@ -61,7 +61,7 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 	private static final String TEST_PROJECT_NAME = "test-project";
 	private static final String TEST_ECORE_PATH = "/" + TEST_PROJECT_NAME + "/" + TEST_ECORE_NAME;
 
-	private static final String EXPECTED_OCL_NAME = "/" + TEST_PROJECT_NAME + "/Test.ocl";
+	private static final String EXPECTED_OCL_NAME = "Test.ocl";
 	private static final String EXPECTED_PACKAGE_NAME = "test_package";
 	private static final String EXPECTED_CLASS_NAME = "TestClass";
 	private static final String EXPECTED_FEATURE_NAME = "testFeature";
@@ -167,7 +167,7 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 		dialog.createDialogArea(new Shell());
 		assertEquals("ocl", wizard.getNewFileExtension());
 		assertEquals(CompleteOCLUIMessages.NewWizardPage_fileNameLabel, wizard.getNewFileLabel());
-		assertEquals(EXPECTED_OCL_NAME, dialog.getNewFilePath().toString());
+		assertEquals("/" + TEST_PROJECT_NAME + "/" + EXPECTED_OCL_NAME, dialog.getNewFilePath().toString());
 		List<URI> uris = new ArrayList<URI>();
 		uris.add(URI.createPlatformResourceURI(TEST_ECORE_PATH, true));
 		assertEquals(uris, dialog.getURIs());
