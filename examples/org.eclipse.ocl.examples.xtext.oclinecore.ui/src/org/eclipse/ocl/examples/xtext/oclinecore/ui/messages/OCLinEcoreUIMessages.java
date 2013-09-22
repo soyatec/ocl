@@ -33,6 +33,10 @@ public class OCLinEcoreUIMessages
 	public static String NewWizardPage_pageDescription;
 	public static String NewWizardPage_pageSummary;
 	public static String NewWizardPage_pageTitle;
+	public static String Ecore_NewWizardPage_fileNameLabel;
+	public static String Ecore_NewWizardPage_pageDescription;
+	public static String Ecore_NewWizardPage_pageSummary;
+	public static String Ecore_NewWizardPage_pageTitle;
 
 	public static String OCLinEcore_EditorDelegationMode;
 	public static String OCLinEcore_PageTitle;

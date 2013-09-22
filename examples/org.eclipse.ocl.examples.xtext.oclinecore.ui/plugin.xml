@@ -388,6 +388,16 @@
             %MF_OCLINECORE_WIZARD_DESCRIPTION
          </description>
       </wizard>
+      <wizard id="org.eclipse.ocl.examples.xtext.oclinecore.ui.EcoreWithOCLFileNewWizard"
+            category="org.eclipse.ocl.ui.wizards"
+            class="org.eclipse.ocl.examples.xtext.oclinecore.ui.wizards.EcoreWithOCLFileNewWizard"
+            icon="icons/OCLModelFile.gif"          
+            name="%MF_OCL_IN_ECORE_WIZARD_NAME"
+            project="false">
+         <description>
+            %MF_OCL_IN_ECORE_WIZARD_DESCRIPTION
+         </description>
+      </wizard>
    </extension>
 
 </plugin>

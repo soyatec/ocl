@@ -35,7 +35,7 @@ public class OCLinEcoreFileDialog extends AbstractFileDialog
 	 * @param listener
 	 *            object interested in changes to the group's fields value
 	 */
-	public OCLinEcoreFileDialog(@NonNull OCLinEcoreFileNewWizard wizard, @NonNull AbstractFileNewWizardPage wizardPage, @Nullable IResource initialSelection) {
+	public OCLinEcoreFileDialog(@NonNull AbstractOCLinEcoreFileNewWizard wizard, @NonNull AbstractFileNewWizardPage wizardPage, @Nullable IResource initialSelection) {
 		super(wizard, wizardPage, initialSelection);
 	}
 }

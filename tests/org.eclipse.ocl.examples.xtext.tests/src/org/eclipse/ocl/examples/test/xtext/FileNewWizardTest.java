@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -29,6 +30,7 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -43,6 +45,10 @@ import org.eclipse.ocl.examples.xtext.completeocl.ui.messages.CompleteOCLUIMessa
 import org.eclipse.ocl.examples.xtext.completeocl.ui.wizards.CompleteOCLFileDialog;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.wizards.CompleteOCLFileNewWizard;
 import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLPlugin;
+import org.eclipse.ocl.examples.xtext.oclinecore.ui.wizards.OCLinEcoreFileNewWizard;
+import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcorePlugin;
+import org.eclipse.ocl.examples.xtext.oclstdlib.ui.wizards.OCLstdlibFileNewWizard;
+import org.eclipse.ocl.examples.xtext.oclstdlib.utilities.OCLstdlibPlugin;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWizard;
@@ -53,7 +59,7 @@ import org.junit.Test;
 /**
  * Tests that exercise the new complete OCL creation wizard page.
  */
-public class CompleteOCLFileNewWizardTest extends TestCase
+public class FileNewWizardTest extends TestCase
 {
 	private static final String PAGE_NAME = BaseUIMessages.NewWizardPage_pageName;
 
@@ -62,6 +68,8 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 	private static final String TEST_ECORE_PATH = "/" + TEST_PROJECT_NAME + "/" + TEST_ECORE_NAME;
 
 	private static final String EXPECTED_OCL_NAME = "Test.ocl";
+	private static final String EXPECTED_OCLINECORE_NAME = "Test.oclinecore";
+	private static final String EXPECTED_OCLSTDLIB_NAME = "Test.oclstdlib";
 	private static final String EXPECTED_PACKAGE_NAME = "test_package";
 	private static final String EXPECTED_CLASS_NAME = "TestClass";
 	private static final String EXPECTED_FEATURE_NAME = "testFeature";
@@ -85,7 +93,7 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 		return s.toString();
 	}
 
-	public CompleteOCLFileNewWizardTest(String name) {
+	public FileNewWizardTest(String name) {
 		super(name);
 	}
 
@@ -118,6 +126,26 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 			}
 		};
 		return dialog.open();
+	}
+
+	protected XtextEditor getActiveEditor() {
+		IWorkbenchPage currentPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		return (XtextEditor)currentPage.getActiveEditor();
+	}
+
+	protected @NonNull String readNewFile(String fileName) throws CoreException, IOException {
+		IFile oclFile = project.getFile(fileName);
+		assertTrue(oclFile.exists());
+		InputStream inputStream = oclFile.getContents();
+		Reader reader = new InputStreamReader(inputStream);
+		StringBuilder s = new StringBuilder();
+		char[] cbuf = new char[4096];
+		for (int len = 0; (len = reader.read(cbuf)) > 0; ) {
+			s.append(cbuf, 0, len);
+		}
+		reader.close();
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 
 	/**
@@ -197,27 +225,81 @@ public class CompleteOCLFileNewWizardTest extends TestCase
 	} */
 
 	@Test
-	public void test_CompleteOCLFile_NewWizardPage_FileCreation() throws Exception {
+	public void test_CompleteOCL_NewFileCreation() throws Exception {
 		IWorkbenchWizard wizard = new CompleteOCLFileNewWizard();
 		wizard.init(PlatformUI.getWorkbench(), new StructuredSelection(modelFile));
 		createAndFinishWizardDialog(wizard);
-
-		IFile oclFile = project.getFile(EXPECTED_OCL_NAME);
-		assertTrue(oclFile.exists());
-		InputStream inputStream = oclFile.getContents();
-		Reader reader = new InputStreamReader(inputStream);
+		String actualContents = readNewFile(EXPECTED_OCL_NAME);
 		StringBuilder s = new StringBuilder();
-		char[] cbuf = new char[4096];
-		for (int len = 0; (len = reader.read(cbuf)) > 0; ) {
-			s.append(cbuf, 0, len);
-		}
-		reader.close();
-		String expectedContents = getExpectedContents();
-		String actualContents = s.toString();
+		s.append("import '" + TEST_ECORE_NAME + "'\n\n");
+		s.append("package " + EXPECTED_PACKAGE_NAME + "\n\n");
+		s.append("context " + EXPECTED_CLASS_NAME + "\n");
+		s.append("--\n");
+		s.append("-- example invariant with a custom error message to verify that\n");
+		s.append("-- the '" + EXPECTED_FEATURE_NAME + "' property of all '" + EXPECTED_PACKAGE_NAME + "::" + EXPECTED_CLASS_NAME + "' instances is non-null\n");
+		s.append("--\n");
+		s.append("inv NonNull_" + EXPECTED_FEATURE_NAME + "('The \\'" + EXPECTED_FEATURE_NAME + "\\' property of \"' + self.toString() + '\" is null'):\n");
+		s.append("\t" + EXPECTED_FEATURE_NAME + " <> null\n\n");
+		s.append("endpackage\n");
+		String expectedContents = s.toString();
 		assertEquals(expectedContents, actualContents);
-		IWorkbenchPage currentPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		XtextEditor activeEditor = (XtextEditor)currentPage.getActiveEditor();
+		XtextEditor activeEditor = getActiveEditor();
 		assertEquals(CompleteOCLPlugin.LANGUAGE_ID, activeEditor.getLanguageName());
+		activeEditor.close(false);
+	}
+
+	@Test
+	public void test_OCLinEcore_NewFileCreation() throws Exception {
+		IWorkbenchWizard wizard = new OCLinEcoreFileNewWizard();
+		wizard.init(PlatformUI.getWorkbench(), new StructuredSelection(modelFile));
+		createAndFinishWizardDialog(wizard);
+		String actualContents = readNewFile(EXPECTED_OCLINECORE_NAME);
+		StringBuilder s = new StringBuilder();
+		s.append("import 'Test.ecore';\n");
+		s.append("\n");
+		s.append("package example : ex = 'http://www.example.org/examples/example.ecore'\n");
+		s.append("{\n");
+		s.append("	-- Example Class with hierarchical properties and an invariant\n");
+		s.append("	class Example\n");
+		s.append("	{\n");
+		s.append("		property name : String;\n");
+		s.append("		property children#parent : Example[*] { composes, ordered } ;\n");
+		s.append("		property parent#children : Example[?];\n");
+		s.append("		operation ucName() : String {\n");
+		s.append("			body: name.toUpperCase();\n");
+		s.append("		}\n");
+		s.append("		invariant NameIsLowerCase('Expected a lowercase name rather than '' + name + '''):\n");
+		s.append("			name = name.toLowerCase();\n");
+		s.append("	}\n");
+		s.append("}\n");
+		String expectedContents = s.toString();
+		assertEquals(expectedContents, actualContents);
+		XtextEditor activeEditor = getActiveEditor();
+		assertEquals(OCLinEcorePlugin.LANGUAGE_ID, activeEditor.getLanguageName());
+		activeEditor.close(false);
+	}
+
+	@Test
+	public void test_OCLstdlib_NewFileCreation() throws Exception {
+		IWorkbenchWizard wizard = new OCLstdlibFileNewWizard();
+		wizard.init(PlatformUI.getWorkbench(), new StructuredSelection(modelFile));
+		createAndFinishWizardDialog(wizard);
+		String actualContents = readNewFile(EXPECTED_OCLSTDLIB_NAME);
+		StringBuilder s = new StringBuilder();
+		s.append("-- import an existing library to be extended\n");
+		s.append("import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n");
+		s.append("\n");
+		s.append("-- import an extension library re-using the imported library nsURI\n");
+		s.append("library lib : lib = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {\n");
+		s.append("    type String : PrimitiveType {\n");
+		s.append("    	-- define an additional operation accessed by my.strings.ExtraOperation.INSTANCE.evaluate\n");
+		s.append("    	operation extraOperation(elem : Boolean) : Boolean => 'my.strings.ExtraOperation';\n");
+		s.append("    }\n");
+		s.append("}\n");
+		String expectedContents = s.toString();
+		assertEquals(expectedContents, actualContents);
+		XtextEditor activeEditor = getActiveEditor();
+		assertEquals(OCLstdlibPlugin.LANGUAGE_ID, activeEditor.getLanguageName());
 		activeEditor.close(false);
 	}
 }

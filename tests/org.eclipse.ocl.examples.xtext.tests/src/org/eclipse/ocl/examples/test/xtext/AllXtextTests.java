@@ -96,7 +96,7 @@ public class AllXtextTests
 			result.addTestSuite(CompletionProposalTests.class);
 			result.addTestSuite(ConsoleTests.class);
 			result.addTestSuite(EditorTests.class);
-			result.addTestSuite(CompleteOCLFileNewWizardTest.class);
+			result.addTestSuite(FileNewWizardTest.class);
 		}
 		return result;
 	}

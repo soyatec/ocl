@@ -18,5 +18,6 @@ Export-Package: org.eclipse.ocl.examples.xtext.oclstdlib.ui,
  org.eclipse.ocl.examples.xtext.oclstdlib.ui.internal,
  org.eclipse.ocl.examples.xtext.oclstdlib.ui.labeling,
  org.eclipse.ocl.examples.xtext.oclstdlib.ui.outline,
- org.eclipse.ocl.examples.xtext.oclstdlib.ui.quickfix
+ org.eclipse.ocl.examples.xtext.oclstdlib.ui.quickfix,
+ org.eclipse.ocl.examples.xtext.oclstdlib.ui.wizards
 Bundle-Activator: org.eclipse.ocl.examples.xtext.oclstdlib.ui.internal.OCLstdlibActivator

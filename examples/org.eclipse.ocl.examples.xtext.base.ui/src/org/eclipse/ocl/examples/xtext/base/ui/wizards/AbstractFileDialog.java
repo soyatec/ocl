@@ -151,17 +151,21 @@ public abstract class AbstractFileDialog extends ExtendedLoadResourceDialog
 		ResourceAndContainerGroup resourceGroup2 = resourceGroup;
 		if (resourceGroup2 != null) {
 			IResource resourceSelection2 = initialSelection;
-			if (resourceSelection2 != null) {
+			if (resourceSelection2 instanceof IFile) {
 				IPath fullPath = resourceSelection2.getFullPath();
-				URI uri = URI.createPlatformResourceURI(fullPath.toString(), true);
-				uriField.setText(uri.toString());
+				if (uriField != null) {
+					URI uri = URI.createPlatformResourceURI(fullPath.toString(), true);
+					uriField.setText(uri.toString());
+				}
 				IPath removeFileExtension = fullPath.removeFileExtension();
 				IPath addFileExtension = removeFileExtension.addFileExtension(wizard.getNewFileExtension());
 				resourceGroup2.setResource(addFileExtension.lastSegment());
-				initialPopulateContainerNameField(resourceSelection2);
 			}
 			else {
 				resourceGroup2.setResource(wizard.getNewFileName());
+			}
+			if (resourceSelection2 != null) {
+				initialPopulateContainerNameField(resourceSelection2);
 			}
 		}
 	}
@@ -206,7 +210,7 @@ public abstract class AbstractFileDialog extends ExtendedLoadResourceDialog
 	}
 
 	public boolean isURIFieldValid() {
-		return uriField != null && uriField.getText() != "";//$NON-NLS-1$
+		return (uriField == null) || (uriField.getText() != "");//$NON-NLS-1$
 	}
 
 	public boolean validateGroup() {
