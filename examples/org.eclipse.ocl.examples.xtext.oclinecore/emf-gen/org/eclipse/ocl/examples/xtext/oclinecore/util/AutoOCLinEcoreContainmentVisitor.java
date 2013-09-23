@@ -15,7 +15,7 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.util.OCLinEcoreCSVisitor;

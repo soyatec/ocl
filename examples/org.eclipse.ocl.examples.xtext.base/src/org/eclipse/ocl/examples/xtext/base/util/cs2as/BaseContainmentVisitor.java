@@ -13,7 +13,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.xtext.base.util;
+package org.eclipse.ocl.examples.xtext.base.util.cs2as;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -88,13 +88,10 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.util.AbstractExtendingBaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
-/**
- * FIXME Copied from org.eclipse.ocl.examples.xtext.base.cs2as.BaseContainmentVisitor
- * @author asbh
- *
- */
 public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
 	protected final @NonNull MetaModelManager metaModelManager;

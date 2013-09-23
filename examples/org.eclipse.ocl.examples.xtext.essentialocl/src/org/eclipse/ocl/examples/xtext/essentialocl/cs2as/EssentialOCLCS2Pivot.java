@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
 
 public class EssentialOCLCS2Pivot extends BaseCS2Pivot
 {		

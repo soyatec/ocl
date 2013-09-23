@@ -16,7 +16,7 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.base.util.BaseContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.base.util.cs2as.BaseContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BooleanLiteralExpCS;

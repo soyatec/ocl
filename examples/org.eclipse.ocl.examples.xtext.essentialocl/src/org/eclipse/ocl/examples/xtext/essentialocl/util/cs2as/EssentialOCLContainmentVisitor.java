@@ -13,7 +13,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.xtext.essentialocl.util;
+package org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -109,10 +109,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnlimitedNatu
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.VariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLContainmentVisitor;
 
-/**
- * FIXME Copied from org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLContainmentVisitor
- * @author asbh
- */
 public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainmentVisitor
 {
 	private static final Logger logger = Logger.getLogger(EssentialOCLContainmentVisitor.class);

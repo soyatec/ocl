@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarat
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
 
 public class AutoCompleteOCLContainmentVisitor
 	extends EssentialOCLContainmentVisitor

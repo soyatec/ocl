@@ -22,7 +22,7 @@ package	org.eclipse.ocl.examples.xtext.oclstdlib.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
 /**
