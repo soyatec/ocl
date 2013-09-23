@@ -203,7 +203,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		String prefix = projectPrefix;
 		
 		// String packageName = genPackage.getBasePackage() + ".util";
-		String packageName = visitorPackage; 
+		String packageName = getCS2ASVisitorPackageName(visitorPackage); 
 		
 		//String className = prefix + "AutoContainmentVisitor";
 		String className = getAutoVisitorClassName(prefix);
@@ -216,7 +216,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 		String superProjectPrefix2 = superProjectPrefix;
 		if (superProjectPrefix2 != null) {
 			// String superPackageName = super
-			String superPackageName = superVisitorPackage;
+			String superPackageName = getCS2ASVisitorPackageName(DomainUtil.nonNullState(superVisitorPackage));
 			// String superClassName = superGenPackage2.getPrefix() + "AutoContainmentVisitor";
 			String superClassName = getManualVisitorClassName(superProjectPrefix2);
 			// String superInterfaceName = /*trimmed*/prefix + "Visitor";
@@ -224,14 +224,14 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			
 			CGClass superClass = getExternalClass(superPackageName, superClassName, false);
 			cgClass.getSuperTypes().add(superClass);
-			CGClass superInterface = getExternalClass(packageName, superInterfaceName, true);
+			CGClass superInterface = getExternalClass(visitorPackage, superInterfaceName, true);
 			superInterface.getTemplateParameters().add(getExternalClass(Continuation.class, (CGClass)null));
 			cgClass.getSuperTypes().add(superInterface);
 		}
 		else {
 			// String superClassName = "Abstract" + /*trimmed*/prefix + "CSVisitor";
 			String superClassName = "Abstract" + visitorClass; // The default Abstract Visitor generated for the language
-			CGClass superClass = getExternalClass(packageName, superClassName, false);
+			CGClass superClass = getExternalClass(visitorPackage, superClassName, false);
 			superClass.getTemplateParameters().add(getExternalClass(Continuation.class, (CGClass)null));
 			superClass.getTemplateParameters().add(getExternalClass(CS2PivotConversion.class));
 			cgClass.getSuperTypes().add(superClass);
@@ -388,7 +388,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 
 	public void saveSourceFile() {
 		// String utilDir = genModel.getModelDirectory() + "/" + genPackage.getBasePackage().replace('.', '/') +"/util/" + genPackage.getPrefix() + "AutoContainmentVisitor.java";
-		String utilDir = genModel.getModelDirectory() + "/" + visitorPackage.replace('.', '/') + "/" + getAutoVisitorClassName(projectPrefix) + ".java";
+		String utilDir = genModel.getModelDirectory() + "/" + getCS2ASVisitorPackageName(visitorPackage).replace('.', '/') + "/" + getAutoVisitorClassName(projectPrefix) + ".java";
 		URI uri = URI.createPlatformResourceURI(utilDir, true);
 		String javaCodeSource = generateClassFile();
 		try {
@@ -407,5 +407,9 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 	
 	protected @NonNull String getManualVisitorClassName(@NonNull String prefix) {
 		return prefix + "ContainmentVisitor";  
+	}
+	
+	protected @NonNull String getCS2ASVisitorPackageName(@NonNull String visitorsPackageName) {
+		return visitorsPackageName + ".cs2as";
 	}
 }

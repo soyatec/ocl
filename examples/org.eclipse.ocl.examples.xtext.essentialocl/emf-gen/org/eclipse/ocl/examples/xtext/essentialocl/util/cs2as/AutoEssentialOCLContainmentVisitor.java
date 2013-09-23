@@ -7,7 +7,7 @@
  * Do not edit it.
  */
 
-package org.eclipse.ocl.examples.xtext.essentialocl.util;
+package org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
