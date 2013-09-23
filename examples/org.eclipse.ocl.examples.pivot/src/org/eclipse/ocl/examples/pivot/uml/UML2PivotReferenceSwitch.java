@@ -301,13 +301,16 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 		List<String> umlBodies = umlExpression.getBodies();
 		List<String> umlLanguages = umlExpression.getLanguages();
 		for (int i = 0; i < umlBodies.size(); i++) {
-			String umlLanguage = null;
+			String asLanguage = PivotConstants.OCL_LANGUAGE;
 			if (i < umlLanguages.size()) {		// languages are optional, with defaults implementation defined ==> OCL
-				umlLanguage = umlLanguages.get(i);
-				pivotElement.getLanguage().add(umlLanguage);
+				String umlLanguage = umlLanguages.get(i);
+				if ((umlLanguage != null) && (umlLanguage.length() > 0)) {
+					asLanguage = umlLanguage;
+				}
 			}
+			pivotElement.getLanguage().add(asLanguage);
 			String umlBody = umlBodies.get(i);
-			if ((umlLanguage == null) || umlLanguage.equals("OCL")) {
+			if (asLanguage.equals(PivotConstants.OCL_LANGUAGE)) {
 				String s = umlBody.trim();		// Trim a leading 'result=' to convert UML BodyCondition to Pivot BodyExpression
 				if ((umlExpression.eContainer() instanceof org.eclipse.uml2.uml.Constraint) && s.startsWith("result")) {
 					s = s.substring(6);
@@ -319,7 +322,6 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				}
 			}
 			pivotElement.getBody().add(umlBody);
-			pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 		}
 		copyNamedElement(pivotElement, umlExpression);
 		return pivotElement;
@@ -503,7 +505,8 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 					if (!(eObject instanceof org.eclipse.uml2.uml.Constraint)) {
 						System.out.println("Reference switching " + eObject);
 					}
-					pivotElement = (T) doSwitch(eObject);
+					@SuppressWarnings("unchecked")T doSwitchResult = (T) doSwitch(eObject);
+					pivotElement = doSwitchResult;
 				}
 				if (pivotElement != null) {
 					pivotElements.add(pivotElement);
