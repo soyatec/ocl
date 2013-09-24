@@ -28,7 +28,6 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -75,7 +74,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingS
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
@@ -342,6 +340,7 @@ public class LoadTests extends XtextTestCase
 						Constraint constraint = (Constraint)eObject;
 //						boolean donePrint = false;
 						try {
+//							parses++;
 							validateConstraint(ocl, constraint);
 						} catch (ParserException e) {
 //							if (!donePrint) {
@@ -395,10 +394,14 @@ public class LoadTests extends XtextTestCase
 	}
 
 	private void validateConstraint(@NonNull OCL ocl, @NonNull Constraint constraint) throws ParserException {
+//		if ("base_property_upper_bound".equals(constraint.getName())) {
+//			System.out.println("Got it");
+//		}
 		ExpressionInOCL specification;
-//			long startParseTime = System.currentTimeMillis();
-//			parses++;
-			specification = ocl.getSpecification(constraint);
+//		long startParseTime = System.currentTimeMillis();
+		specification = ocl.getSpecification(constraint);
+		constraint.setSpecification(specification);
+		if (specification != null) {
 			OpaqueExpression specification2 = constraint.getSpecification();
 			List<String> bodies = specification2.getBody();
 			if ((bodies != null) && (bodies.size() > 0)) {
@@ -414,24 +417,22 @@ public class LoadTests extends XtextTestCase
 					languages.set(0, "OCL");
 				}
 			}
-			if (specification != null) {
-				constraint.setSpecification(specification);
-/*								long endParseTime = System.currentTimeMillis();
-				int treeSize = 1;
-				for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); tit2.next()) {
-					treeSize++;
-				}
-				double parseTime = 0.001 * (endParseTime - startParseTime);
-				double timePerNode = parseTime/treeSize;
-				if (timePerNode > 0.02) {
-					if (!donePrint) {
-						System.out.println("\n" + constraint);
-						donePrint = true;
-					}
-					System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
-				} */
-				assertNoValidationErrors("Local validation", specification);
+/*			long endParseTime = System.currentTimeMillis();
+			int treeSize = 1;
+			for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); tit2.next()) {
+				treeSize++;
 			}
+			double parseTime = 0.001 * (endParseTime - startParseTime);
+			double timePerNode = parseTime/treeSize;
+			if (timePerNode > 0.02) {
+//				if (!donePrint) {
+					System.out.println("\n" + constraint);
+//					donePrint = true;
+//				}
+				System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
+			} */
+			assertNoValidationErrors("Local validation", specification);
+		}
 	}
 
 	public Resource doLoad_Concrete(String stem, String extension) throws IOException {
@@ -846,7 +847,7 @@ public class LoadTests extends XtextTestCase
 
 	public void testLoad_Pivot_ocl() throws IOException, InterruptedException {
 //		Abstract2Moniker.TRACE_MONIKERS.setState(true);
-		doLoad_OCL(URI.createPlatformResourceURI("org.eclipse.ocl.examples.pivot/model/Pivot.ocl", true));
+		doLoad_OCL(URI.createPlatformResourceURI("/org.eclipse.ocl.examples.pivot/model/Pivot.ocl", true));
 	}	
 
 	public void testLoad_RoyalAndLoyal_ocl() throws IOException, InterruptedException {
@@ -854,52 +855,12 @@ public class LoadTests extends XtextTestCase
 		doLoad("RoyalAndLoyal", "ocl");
 	}
 	
-//	public void testLoad_UML_ecore() throws IOException, InterruptedException {
-//		doLoadEcore(URI.createPlatformResourceURI("/org.eclipse.uml2.uml/model/UML.ecore", true));
-//	}
-	
-//	public void testLoad_UML_2_5() throws IOException, InterruptedException, ParserException {
-//		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true);
-//		doLoadUML(uml_2_5);
-//	}
-	
-	public void testLoad_UML_2_5_Beta_PrimitiveTypes() throws IOException, InterruptedException, ParserException {
-		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMLResourceFactoryImpl());
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
-		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/PrimitiveTypes.xmi", true);
-		doLoadUML(uml_2_5, true, true);
-	}
-	
-	public void testLoad_UML_2_5_Beta_UML() throws IOException, InterruptedException, ParserException {
-//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/MOF/20110701", UMLPackage.eINSTANCE);
-//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
-//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
-		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta-Edited/UML.uml", true);
-		doLoadUML(uml_2_5, true, true);
-	}
-	
-	public void testLoad_UML_2_5_Beta_XMI() throws IOException, InterruptedException, ParserException {
-//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/MOF/20110701", UMLPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
-		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/UML.xmi", true);
-		doLoadUML(uml_2_5, true, true);
-	}
-	
 	public void testLoad_Internationalized_profile_uml() throws IOException, InterruptedException, ParserException {
 //		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/MOF/20110701", UMLPackage.eINSTANCE);
 //		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
 //		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
-		URI uri = URI.createPlatformResourceURI("org.eclipse.ocl.examples.xtext.tests/model/Internationalized.profile.uml", true);
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.tests/model/Internationalized.profile.uml", true);
 		doLoadUML(uri, false, false);
-	}
-
-	// DI.xmi is missing
-	public void zztestLoad_UML_2_5_Beta_UMLDI() throws IOException, InterruptedException, ParserException {
-		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
-		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/UMLDI.xmi", true);
-		doLoadUML(uml_2_5, true, true);
 	}
 
 	public void testReload_AsReload() throws Exception {

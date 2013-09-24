@@ -26,6 +26,9 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.pivot.tests.DelegatesTest;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateBooleanOperationsTest;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateClassifierOperationsTest;
@@ -41,6 +44,7 @@ import org.eclipse.ocl.examples.pivot.tests.IteratorsTest;
 import org.eclipse.ocl.examples.pivot.tests.PrettyPrinterTest;
 import org.eclipse.ocl.examples.pivot.tests.StereotypesTest;
 import org.eclipse.ocl.examples.test.ecore.ProjectMapTest;
+import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
 /**
  * Tests for the Xtext editor support.
@@ -79,7 +83,15 @@ public class AllXtextTests
 		result.addTestSuite(DelegatesTest.class);
 		result.addTestSuite(ErrorTests.class);
 		result.addTestSuite(ImportTests.class);
-		result.addTestSuite(LoadTests.class);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		UMLResourcesUtil.init(resourceSet);
+		LoadTests.getProjectMap().initializeResourceSet(resourceSet);
+		if (resourceSet.getURIConverter().exists(URI.createPlatformResourceURI("/UML-2.5/", true), null)) {
+			result.addTestSuite(UML25LoadTests.class);
+		}
+		else {
+			result.addTestSuite(LoadTests.class);
+		}
 		result.addTestSuite(PrettyPrinterTest.class);
 		result.addTestSuite(ProjectMapTest.class);
 		result.addTestSuite(SerializeTests.class);
