@@ -17,9 +17,11 @@ package org.eclipse.ocl.examples.pivot.utilities;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -89,10 +91,39 @@ public class AS2XMIid
 	 */
 	public void assignIds(@NonNull ASResource asResource) {
 		List<WeakReference<EObject>> debugOldEObjects = new ArrayList<WeakReference<EObject>>();
-		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			assert eObject != null;
-			debugOldEObjects.add(new WeakReference<EObject>(eObject));
+		Map<Thread, StackTraceElement[]> oldStackTraces = Thread.getAllStackTraces();
+		try {
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				assert eObject != null;
+				debugOldEObjects.add(new WeakReference<EObject>(eObject));
+			}
+		}
+		catch (Throwable e) {	// Bug 417663 an Intermittent NoSuchElementException may occur in the above
+			Map<Thread, StackTraceElement[]> newStackTraces = Thread.getAllStackTraces();
+			Set<Thread> oldThreads = new HashSet<Thread>(oldStackTraces.keySet());
+			Set<Thread> newThreads = new HashSet<Thread>(newStackTraces.keySet());
+			Set<Thread> stableThreads = new HashSet<Thread>(oldThreads);
+			oldThreads.removeAll(stableThreads);
+			newThreads.removeAll(stableThreads);
+			for (Thread t : newThreads) {
+				System.err.println("New thread : " + t);
+			}
+			for (Thread t : oldThreads) {
+				System.err.println("Old thread : " + t);
+			}
+			for (Thread t : stableThreads) {
+				System.err.println("Stable thread : " + t);
+			}
+			for (WeakReference<EObject> wr : debugOldEObjects) {
+				EObject eObject = wr.get();
+				if (eObject !=  null) {
+					System.err.println("Old object : " + DomainUtil.debugFullName(eObject));
+				}
+				else {
+					System.err.println("Garbage collected object");
+				}
+			}
 		}
 		StringBuilder s = null;
 		Map<String, EObject> allIds = new HashMap<String, EObject>();
