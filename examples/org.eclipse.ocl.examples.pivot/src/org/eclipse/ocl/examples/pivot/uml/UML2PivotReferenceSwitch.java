@@ -59,6 +59,7 @@ import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
@@ -124,7 +125,8 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
 		assert umlConstraint != null;
 		Constraint pivotElement = converter.refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, umlConstraint);
-		Object pivotSpecification = doSwitch(umlConstraint.getSpecification());
+		ValueSpecification umlSpecification = umlConstraint.getSpecification();
+		Object pivotSpecification = umlSpecification != null ? doSwitch(umlSpecification) : null;
 		pivotElement.setSpecification((OpaqueExpression) pivotSpecification);
 		copyNamedElement(pivotElement, umlConstraint);
 //		if (!umlConstraint.getConstrainedElements().isEmpty()) {
@@ -393,7 +395,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				OpaqueExpression pivotExpression = (OpaqueExpression) doSwitch(umlValue);
 				Type requiredType = pivotElement.getType();
 				Type defaultValueType = pivotExpression.getType();
-				if ((requiredType != null) && !defaultValueType.conformsTo(metaModelManager, requiredType)) {
+				if ((requiredType != null) && (defaultValueType != null) && !defaultValueType.conformsTo(metaModelManager, requiredType)) {
 					converter.error("Incompatible '" + defaultValueType + "' initializer for " + pivotElement + " when '" + requiredType + "' required");
 				}
 				else {
