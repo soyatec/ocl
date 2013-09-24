@@ -18,13 +18,16 @@ package org.eclipse.ocl.examples.pivot.uml;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -67,6 +70,8 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 
 public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 {
+	private static final Logger logger = Logger.getLogger(UML2PivotDeclarationSwitch.class);
+
 	protected final Ecore2PivotDeclarationSwitch ecoreSwitch;
 	protected final UML2Pivot converter;
 	protected final MetaModelManager metaModelManager;
@@ -646,6 +651,38 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		}
 		else if (ePackage == EcorePackage.eINSTANCE) {
 			return ecoreSwitch.doInPackageSwitch(eObject);
+		}
+		else if (ePackage.getNsURI().startsWith("http://www.omg.org/spec/MOF")) {
+			if ((eObject instanceof org.eclipse.emf.ecore.xml.type.AnyType) && "Tag".equals(eClass.getName())) {
+				for (Entry entry : ((org.eclipse.emf.ecore.xml.type.AnyType)eObject).getAnyAttribute()) {
+					EStructuralFeature eFeature = entry.getEStructuralFeature();
+					Object value = entry.getValue();
+					Resource eResource = eObject.eResource();
+					boolean gotIt = false;
+					if (eResource != null) {
+						for (EObject eContent : eResource.getContents())
+						{
+							if (eContent instanceof org.eclipse.uml2.uml.Package) {
+								org.eclipse.ocl.examples.pivot.Package asPackage = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, eContent);
+								if (asPackage != null) {
+									if ("org.omg.xmi.nsPrefix".equals(eFeature.getName())) {
+										asPackage.setNsPrefix(String.valueOf(value));
+										gotIt = true;
+									}
+									else if ("org.omg.xmi.nsURI".equals(eFeature.getName())) {
+										asPackage.setNsURI(String.valueOf(value));
+										gotIt = true;
+									}
+								}
+							}
+						}
+					}
+					if (!gotIt) {
+						logger.warn("Unknown " + ePackage.getNsURI()  + " feature ignored : " + eFeature + " = " + value);
+					}
+				}
+			}
+			return null;
 		}
 		else {
 			converter.addStereotypeApplication(eObject);
