@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -340,8 +340,7 @@ public class PathElementCSImpl extends ElementCSImpl implements PathElementCS
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

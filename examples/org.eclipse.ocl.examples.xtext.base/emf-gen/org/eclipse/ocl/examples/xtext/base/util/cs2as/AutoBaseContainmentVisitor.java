@@ -88,11 +88,11 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.AbstractBaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.base.util.AbstractBaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 public class AutoBaseContainmentVisitor
 	extends AbstractBaseCSVisitor<Continuation<?>, CS2PivotConversion>

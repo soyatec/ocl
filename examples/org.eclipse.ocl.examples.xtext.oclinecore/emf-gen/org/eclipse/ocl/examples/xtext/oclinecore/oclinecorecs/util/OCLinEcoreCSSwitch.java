@@ -27,11 +27,8 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.*;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
 
 /**
  * <!-- begin-user-doc -->

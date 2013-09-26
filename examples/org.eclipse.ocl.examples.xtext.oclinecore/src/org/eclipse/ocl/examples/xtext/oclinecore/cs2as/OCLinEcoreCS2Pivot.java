@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
-import org.eclipse.ocl.examples.xtext.oclinecore.util.OCLinEcoreCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.OCLinEcoreCSVisitor;
 
 public class OCLinEcoreCS2Pivot extends EssentialOCLCS2Pivot 
 {	
@@ -37,21 +37,21 @@ public class OCLinEcoreCS2Pivot extends EssentialOCLCS2Pivot
 
 	@Override
 	protected @NonNull OCLinEcoreCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLinEcoreContainmentVisitor(converter);
+		return new OCLinEcoreCSContainmentVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull OCLinEcoreCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLinEcoreLeft2RightVisitor(converter);
+		return new OCLinEcoreCSLeft2RightVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull OCLinEcoreCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLinEcorePostOrderVisitor(converter);
+		return new OCLinEcoreCSPostOrderVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull OCLinEcoreCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLinEcorePreOrderVisitor(converter);
+		return new OCLinEcoreCSPreOrderVisitor(converter);
 	}
 }

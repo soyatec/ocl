@@ -24,8 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.base.util.cs2as.BaseContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * BaseCST2Pivot provides an extensible conversion from CS models to the pivot model.
@@ -43,21 +42,21 @@ public class BaseCS2Pivot extends CS2Pivot
 
 	@Override
 	protected @NonNull BaseCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new BaseContainmentVisitor(converter);
+		return new BaseCSContainmentVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull BaseCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new BaseLeft2RightVisitor(converter);
+		return new BaseCSLeft2RightVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull BaseCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new BasePostOrderVisitor(converter);
+		return new BaseCSPostOrderVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull BaseCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new BasePreOrderVisitor(converter);
+		return new BaseCSPreOrderVisitor(converter);
 	}
 }

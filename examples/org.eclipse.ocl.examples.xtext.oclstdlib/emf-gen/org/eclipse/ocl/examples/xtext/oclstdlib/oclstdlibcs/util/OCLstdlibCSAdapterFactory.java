@@ -41,19 +41,8 @@ import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.*;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.JavaImplementationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibClassCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibConstraintCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibIterationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibOperationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibRootPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.MetaTypeName;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -434,13 +423,13 @@ public class OCLstdlibCSAdapterFactory
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.util.VisitableCS <em>Visitable CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS <em>Visitable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.util.VisitableCS
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS
 	 * @generated
 	 */
 	public Adapter createVisitableCSAdapter() {

@@ -30,47 +30,8 @@ import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.*;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BooleanLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionLiteralPartCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionTypeCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorPartCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ContextCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.IfExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.IndexExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InfixExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvalidLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetVariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NamedExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NestedExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NullLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NumberLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrimitiveLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.SelfExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.StringLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TupleLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TupleLiteralPartCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNaturalLiteralExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -1257,7 +1218,8 @@ public class EssentialOCLCSSwitch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVisitableCS(VisitableCS object) {
+	public T caseVisitableCS(VisitableCS object)
+	{
 		return null;
 	}
 

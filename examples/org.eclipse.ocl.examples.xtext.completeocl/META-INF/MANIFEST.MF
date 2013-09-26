@@ -25,7 +25,6 @@ Export-Package: org.eclipse.ocl.examples.xtext.completeocl,
  org.eclipse.ocl.examples.xtext.completeocl.scoping,
  org.eclipse.ocl.examples.xtext.completeocl.serializer,
  org.eclipse.ocl.examples.xtext.completeocl.services,
- org.eclipse.ocl.examples.xtext.completeocl.util,
  org.eclipse.ocl.examples.xtext.completeocl.utilities,
  org.eclipse.ocl.examples.xtext.completeocl.validation
 Bundle-Activator: org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLPlugin$Implementation

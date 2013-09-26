@@ -21,7 +21,6 @@ Export-Package: org.eclipse.ocl.examples.xtext.essentialocl,
  org.eclipse.ocl.examples.xtext.essentialocl.scoping,
  org.eclipse.ocl.examples.xtext.essentialocl.serializer,
  org.eclipse.ocl.examples.xtext.essentialocl.services,
- org.eclipse.ocl.examples.xtext.essentialocl.util,
  org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as,
  org.eclipse.ocl.examples.xtext.essentialocl.utilities,
  org.eclipse.ocl.examples.xtext.essentialocl.validation

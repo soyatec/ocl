@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -341,8 +341,7 @@ public class ConstraintCSImpl extends NamedElementCSImpl implements ConstraintCS
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

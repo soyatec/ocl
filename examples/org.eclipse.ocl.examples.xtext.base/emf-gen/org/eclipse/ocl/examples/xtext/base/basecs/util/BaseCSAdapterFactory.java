@@ -24,59 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.basecs.*;
-import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
-import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.DataTypeCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.DetailCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.DocumentationCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationLiteralCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.FeatureCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.LambdaTypeCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityBoundsCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityStringCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ReferenceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TuplePartCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TupleTypeCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypeParameterCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -389,7 +336,7 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createTypedTypeRefCSAdapter();
 			}
 			@Override
-			public Adapter caseVisitableCS(VisitableCS object)
+			public Adapter caseVisitableCS(org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS object)
 			{
 				return createVisitableCSAdapter();
 			}
@@ -1151,13 +1098,13 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.util.VisitableCS <em>Visitable CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS <em>Visitable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.util.VisitableCS
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS
 	 * @generated
 	 */
 	public Adapter createVisitableCSAdapter()

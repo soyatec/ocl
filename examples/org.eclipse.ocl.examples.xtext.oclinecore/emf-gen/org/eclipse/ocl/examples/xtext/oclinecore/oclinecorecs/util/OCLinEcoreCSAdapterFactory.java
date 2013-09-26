@@ -28,11 +28,8 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.*;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -205,13 +202,13 @@ public class OCLinEcoreCSAdapterFactory extends AdapterFactoryImpl
 	}
 
 /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.util.VisitableCS <em>Visitable CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS <em>Visitable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.util.VisitableCS
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS
 	 * @generated
 	 */
 	public Adapter createVisitableCSAdapter()

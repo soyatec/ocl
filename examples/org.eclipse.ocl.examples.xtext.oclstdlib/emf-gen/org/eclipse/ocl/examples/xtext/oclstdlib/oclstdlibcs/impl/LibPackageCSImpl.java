@@ -25,11 +25,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.PackageCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -176,14 +176,12 @@ public class LibPackageCSImpl extends PackageCSImpl implements LibPackageCS
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
-	{
-		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibPackageCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibPackageCS(this);
 	}
 } //LibPackageCSImpl

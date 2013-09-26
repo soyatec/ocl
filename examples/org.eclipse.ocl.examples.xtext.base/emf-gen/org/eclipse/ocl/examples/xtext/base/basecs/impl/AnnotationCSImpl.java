@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -207,8 +207,7 @@ public class AnnotationCSImpl extends AnnotationElementCSImpl implements Annotat
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

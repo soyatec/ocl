@@ -75,10 +75,10 @@ public interface BaseCSPackage extends EPackage {
 	BaseCSPackage eINSTANCE = org.eclipse.ocl.examples.xtext.base.basecs.impl.BaseCSPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.util.VisitableCS <em>Visitable CS</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS <em>Visitable CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.base.util.VisitableCS
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS
 	 * @see org.eclipse.ocl.examples.xtext.base.basecs.impl.BaseCSPackageImpl#getVisitableCS()
 	 * @generated
 	 */
@@ -5743,12 +5743,12 @@ public interface BaseCSPackage extends EPackage {
 	EReference getTypedTypeRefCS_OwnedTemplateBinding();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.base.util.VisitableCS <em>Visitable CS</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS <em>Visitable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Visitable CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.base.util.VisitableCS
-	 * @model instanceClass="org.eclipse.ocl.examples.xtext.base.util.VisitableCS"
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS
+	 * @model instanceClass="org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS"
 	 * @generated
 	 */
 	EClass getVisitableCS();
@@ -7009,10 +7009,10 @@ public interface BaseCSPackage extends EPackage {
 		EReference TYPED_TYPE_REF_CS__OWNED_TEMPLATE_BINDING = eINSTANCE.getTypedTypeRefCS_OwnedTemplateBinding();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.base.util.VisitableCS <em>Visitable CS</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS <em>Visitable CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.base.util.VisitableCS
+		 * @see org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS
 		 * @see org.eclipse.ocl.examples.xtext.base.basecs.impl.BaseCSPackageImpl#getVisitableCS()
 		 * @generated
 		 */

@@ -84,7 +84,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSValidator;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 
 /**
  * <!-- begin-user-doc -->

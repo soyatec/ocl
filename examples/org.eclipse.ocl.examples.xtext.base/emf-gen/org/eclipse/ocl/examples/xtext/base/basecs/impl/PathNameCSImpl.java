@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -247,8 +247,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

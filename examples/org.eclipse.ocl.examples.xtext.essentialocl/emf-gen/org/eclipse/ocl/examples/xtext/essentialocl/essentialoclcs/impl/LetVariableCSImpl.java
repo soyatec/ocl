@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetVariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -308,6 +308,6 @@ public class LetVariableCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitLetVariableCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitLetVariableCS(this);
 	}
 } //VariableCSImpl

@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -167,6 +167,16 @@ public class PrecedenceCSImpl
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitPrecedenceCS(this);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -175,17 +185,5 @@ public class PrecedenceCSImpl
 	public String toString()
 	{
 		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
-	{
-		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitPrecedenceCS(this);
 	}
 } //PrecedenceCSImpl

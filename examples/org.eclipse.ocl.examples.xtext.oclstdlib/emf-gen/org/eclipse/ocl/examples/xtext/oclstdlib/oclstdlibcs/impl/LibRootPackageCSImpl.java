@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.RootPackageCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,14 +56,12 @@ public class LibRootPackageCSImpl extends RootPackageCSImpl implements LibRootPa
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
-	{
-		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibRootPackageCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibRootPackageCS(this);
 	}
 } //LibRootPackageCSImpl

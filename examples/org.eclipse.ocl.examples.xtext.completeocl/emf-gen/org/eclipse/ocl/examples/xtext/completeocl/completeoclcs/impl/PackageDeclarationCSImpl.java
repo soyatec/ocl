@@ -28,12 +28,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -186,7 +186,7 @@ public class PackageDeclarationCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitPackageDeclarationCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitPackageDeclarationCS(this);
 	}
 
 	/**

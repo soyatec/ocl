@@ -22,7 +22,6 @@ Export-Package: org.eclipse.ocl.examples.xtext.oclstdlib,
  org.eclipse.ocl.examples.xtext.oclstdlib.scoping,
  org.eclipse.ocl.examples.xtext.oclstdlib.serializer,
  org.eclipse.ocl.examples.xtext.oclstdlib.services,
- org.eclipse.ocl.examples.xtext.oclstdlib.util,
  org.eclipse.ocl.examples.xtext.oclstdlib.utilities,
  org.eclipse.ocl.examples.xtext.oclstdlib.validation
 Import-Package: org.apache.log4j

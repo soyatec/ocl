@@ -13,10 +13,10 @@ import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.base.util.cs2as.BaseContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BooleanLiteralExpCS;
@@ -55,10 +55,10 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 public class AutoEssentialOCLContainmentVisitor
-	extends BaseContainmentVisitor
+	extends BaseCSContainmentVisitor
 	implements EssentialOCLCSVisitor<Continuation<?>>
 {
     

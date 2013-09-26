@@ -55,7 +55,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.utilities.CSI2PivotMapping;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.TerminalRule;

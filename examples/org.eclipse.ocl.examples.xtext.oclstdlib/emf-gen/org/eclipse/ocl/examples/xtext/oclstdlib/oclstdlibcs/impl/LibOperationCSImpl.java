@@ -26,11 +26,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.OperationCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.JavaImplementationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibOperationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor;
 import org.eclipse.xtext.common.types.JvmType;
 
 /**
@@ -441,6 +441,16 @@ public class LibOperationCSImpl
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibOperationCS(this);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -449,17 +459,5 @@ public class LibOperationCSImpl
 	public String toString()
 	{
 		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
-	{
-		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibOperationCS(this);
 	}
 } //LibOperationCSImpl

@@ -27,8 +27,7 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 public class EssentialOCLCS2Pivot extends BaseCS2Pivot
 {		
@@ -43,21 +42,21 @@ public class EssentialOCLCS2Pivot extends BaseCS2Pivot
 
 	@Override
 	protected @NonNull EssentialOCLCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new EssentialOCLContainmentVisitor(converter);
+		return new EssentialOCLCSContainmentVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull EssentialOCLCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new EssentialOCLLeft2RightVisitor(converter);
+		return new EssentialOCLCSLeft2RightVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull EssentialOCLCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new EssentialOCLPostOrderVisitor(converter);
+		return new EssentialOCLCSPostOrderVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull EssentialOCLCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new EssentialOCLPreOrderVisitor(converter);
+		return new EssentialOCLCSPreOrderVisitor(converter);
 	}
 }

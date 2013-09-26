@@ -31,7 +31,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeParameterCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -237,8 +237,7 @@ public class TypeParameterCSImpl extends TemplateParameterCSImpl implements Type
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

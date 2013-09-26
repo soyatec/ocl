@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationLiteralCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -205,8 +205,7 @@ public class EnumerationCSImpl extends ClassifierCSImpl implements EnumerationCS
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
 public class OCLstdlibCS2Pivot extends EssentialOCLCS2Pivot
@@ -42,22 +42,22 @@ public class OCLstdlibCS2Pivot extends EssentialOCLCS2Pivot
 
 	@Override
 	protected @NonNull OCLstdlibCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLstdlibContainmentVisitor(converter);
+		return new OCLstdlibCSContainmentVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull OCLstdlibCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLstdlibLeft2RightVisitor(converter);
+		return new OCLstdlibCSLeft2RightVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull OCLstdlibCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLstdlibPostOrderVisitor(converter);
+		return new OCLstdlibCSPostOrderVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull OCLstdlibCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new OCLstdlibPreOrderVisitor(converter);
+		return new OCLstdlibCSPreOrderVisitor(converter);
 	}
 
 	@Override

@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -177,8 +177,7 @@ public class LibraryCSImpl extends NamedElementCSImpl implements LibraryCS {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

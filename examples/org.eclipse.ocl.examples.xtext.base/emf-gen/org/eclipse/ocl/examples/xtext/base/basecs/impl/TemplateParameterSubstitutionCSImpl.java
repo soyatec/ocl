@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -308,8 +308,7 @@ public class TemplateParameterSubstitutionCSImpl extends ModelElementCSImpl impl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

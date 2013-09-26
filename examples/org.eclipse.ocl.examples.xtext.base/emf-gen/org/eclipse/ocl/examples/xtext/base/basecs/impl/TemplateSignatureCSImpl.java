@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -261,8 +261,7 @@ public class TemplateSignatureCSImpl extends ModelElementCSImpl implements Templ
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

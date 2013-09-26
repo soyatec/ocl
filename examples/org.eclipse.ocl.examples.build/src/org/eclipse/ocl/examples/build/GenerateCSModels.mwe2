@@ -39,36 +39,41 @@ Workflow {
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.base"
-    	modelName = "baseCST"
-    	projectPrefix = "Base"
+    	modelName = "basecs"
+    	projectPrefix = "BaseCS"
     	superProjectName = ""
+    	superModelName = ""
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.essentialocl"
-    	modelName = "essentialOCLCST"
-    	projectPrefix = "EssentialOCL"
+    	modelName = "essentialoclcs"
+    	projectPrefix = "EssentialOCLCS"
     	superProjectName = "org.eclipse.ocl.examples.xtext.base"
-    	superProjectPrefix = "Base"
+    	superModelName = "basecs"
+    	superProjectPrefix = "BaseCS"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.oclstdlib"
-    	modelName = "oclstdlibCST"
-    	projectPrefix = "OCLstdlib"
+    	modelName = "oclstdlibcs"
+    	projectPrefix = "OCLstdlibCS"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
-    	superProjectPrefix = "EssentialOCL"
+    	superModelName = "essentialoclcs"
+    	superProjectPrefix = "EssentialOCLCS"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.oclinecore"
-    	modelName = "oclinEcoreCST"
-    	projectPrefix = "OCLinEcore"
+    	modelName = "oclinecorecs"
+    	projectPrefix = "OCLinEcoreCS"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
-    	superProjectPrefix = "EssentialOCL"
+    	superModelName = "essentialoclcs"
+    	superProjectPrefix = "EssentialOCLCS"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.completeocl"
-    	modelName = "completeOCLCST"
-    	projectPrefix = "CompleteOCL"
+    	modelName = "completeoclcs"
+    	projectPrefix = "CompleteOCLCS"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
-    	superProjectPrefix = "EssentialOCL"
+    	superModelName = "essentialoclcs"
+    	superProjectPrefix = "EssentialOCLCS"
     }
 }

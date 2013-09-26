@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLCSPreOrderVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.AbstractCompleteOCLCSPreOrderVisitor;
 
 public class CompleteOCLPreOrderVisitor extends AbstractCompleteOCLCSPreOrderVisitor
 {	

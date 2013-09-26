@@ -26,11 +26,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -195,6 +195,6 @@ public class InvocationExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitInvocationExpCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitInvocationExpCS(this);
 	}
 } //InvocationExpCSImpl

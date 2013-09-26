@@ -32,14 +32,14 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.PackageCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -373,7 +373,7 @@ public class CompleteOCLDocumentCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitCompleteOCLDocumentCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitCompleteOCLDocumentCS(this);
 	}
 
 	/**

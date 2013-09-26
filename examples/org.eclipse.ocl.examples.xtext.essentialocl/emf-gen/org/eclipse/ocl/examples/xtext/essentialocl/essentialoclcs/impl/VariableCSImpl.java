@@ -25,11 +25,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -277,6 +277,6 @@ public class VariableCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitVariableCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitVariableCS(this);
 	}
 } //VariableCSImpl

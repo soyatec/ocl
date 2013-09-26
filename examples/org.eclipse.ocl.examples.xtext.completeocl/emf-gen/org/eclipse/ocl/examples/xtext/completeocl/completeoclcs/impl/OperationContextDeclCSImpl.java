@@ -32,10 +32,10 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSFactory;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
@@ -378,7 +378,7 @@ public class OperationContextDeclCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitOperationContextDeclCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitOperationContextDeclCS(this);
 	}
 
 	/**

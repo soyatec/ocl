@@ -32,8 +32,8 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -258,8 +258,7 @@ public class RootPackageCSImpl extends PackageCSImpl implements RootPackageCS
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

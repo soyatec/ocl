@@ -33,11 +33,11 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ContextCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -329,6 +329,6 @@ public class ContextCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitContextCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitContextCS(this);
 	}
 } //ContextCSImpl

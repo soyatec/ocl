@@ -30,11 +30,11 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 
 /**
@@ -181,7 +181,7 @@ public class PropertyContextDeclCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitPropertyContextDeclCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitPropertyContextDeclCS(this);
 	}
 
 	/**

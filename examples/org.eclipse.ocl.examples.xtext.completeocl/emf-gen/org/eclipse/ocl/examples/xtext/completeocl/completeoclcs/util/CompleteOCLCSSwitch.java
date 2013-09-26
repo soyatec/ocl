@@ -30,22 +30,8 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.*;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ClassifierContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefOperationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefPropertyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.FeatureContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OCLMessageArgCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PathNameDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 
 /**
@@ -529,7 +515,8 @@ public class CompleteOCLCSSwitch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVisitableCS(VisitableCS object) {
+	public T caseVisitableCS(VisitableCS object)
+	{
 		return null;
 	}
 

@@ -14,8 +14,8 @@
     <details key="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS" value="&lt;%org.eclipse.xtext.nodemodel.ICompositeNode%> parserNode = &lt;%org.eclipse.xtext.nodemodel.util.NodeModelUtils%>.getNode(this);&#xD;&#xA;if (parserNode != null) {&#xD;&#xA;&#x9;return parserNode.getText().trim();&#xD;&#xA;}&#xD;&#xA;return &lt;%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.debugFullName(this);"/>
   </genAnnotations>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
-    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"/>
-    <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"/>
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor"/>
     <details key="Visitable Classes" value="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS"/>
   </genAnnotations>
   <foreignModel>BaseCS.ecore</foreignModel>

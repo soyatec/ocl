@@ -17,10 +17,10 @@ package org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefPropertyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,6 +61,6 @@ public class DefPropertyCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitDefPropertyCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitDefPropertyCS(this);
 	}
 } //DefPropertyCSImpl

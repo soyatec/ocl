@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.basecs.impl;
 
 import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.WrappedException;
@@ -31,7 +32,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -245,8 +246,7 @@ public class ParameterCSImpl extends TypedElementCSImpl implements ParameterCS {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

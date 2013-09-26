@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLCSPostOrderVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.AbstractCompleteOCLCSPostOrderVisitor;
 
 public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLCSPostOrderVisitor
 {

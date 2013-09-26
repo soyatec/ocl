@@ -44,7 +44,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -568,8 +568,7 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

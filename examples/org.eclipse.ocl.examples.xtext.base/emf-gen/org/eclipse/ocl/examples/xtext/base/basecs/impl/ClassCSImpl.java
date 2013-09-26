@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -353,8 +353,7 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

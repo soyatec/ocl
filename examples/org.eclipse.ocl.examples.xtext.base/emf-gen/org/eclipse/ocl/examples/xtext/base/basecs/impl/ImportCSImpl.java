@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -268,8 +268,7 @@ public class ImportCSImpl extends NamedElementCSImpl implements ImportCS {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override

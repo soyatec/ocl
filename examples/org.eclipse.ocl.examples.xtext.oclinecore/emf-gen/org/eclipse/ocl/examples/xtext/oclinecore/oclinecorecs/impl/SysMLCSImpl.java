@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.AnnotationElementCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.util.OCLinEcoreCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.OCLinEcoreCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -180,13 +180,12 @@ public class SysMLCSImpl extends AnnotationElementCSImpl implements SysMLCS
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((OCLinEcoreCSVisitor<?>)visitor).visitSysMLCS(this);
+		return (R) ((org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.OCLinEcoreCSVisitor<?>)visitor).visitSysMLCS(this);
 	}
 } //SysMLCSImpl

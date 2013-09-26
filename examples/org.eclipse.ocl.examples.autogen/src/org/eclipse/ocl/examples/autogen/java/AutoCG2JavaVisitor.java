@@ -38,10 +38,10 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 /**
  * A AutoCG2JavaVisitor supports generation of Java code from an optimized Auto CG transformation tree.

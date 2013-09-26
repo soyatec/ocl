@@ -23,11 +23,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ClassCSImpl;
-import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -179,14 +179,12 @@ public class LibClassCSImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
-	{
-		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibClassCS(this);
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibClassCS(this);
 	}
 } //LibClassCSImpl
