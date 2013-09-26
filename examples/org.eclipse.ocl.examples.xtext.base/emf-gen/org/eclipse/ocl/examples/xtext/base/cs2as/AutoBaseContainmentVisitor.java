@@ -7,7 +7,7 @@
  * Do not edit it.
  */
 
-package org.eclipse.ocl.examples.xtext.base.util.cs2as;
+package org.eclipse.ocl.examples.xtext.base.cs2as;
 
 import java.util.Iterator;
 import java.util.List;
