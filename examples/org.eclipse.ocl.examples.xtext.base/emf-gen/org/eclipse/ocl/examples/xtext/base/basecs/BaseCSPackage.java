@@ -48,7 +48,7 @@ public interface BaseCSPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "baseCST"; //$NON-NLS-1$
+	String eNAME = "basecs"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
@@ -64,7 +64,7 @@ public interface BaseCSPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "baseCST"; //$NON-NLS-1$
+	String eNS_PREFIX = "basecs"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.
@@ -5813,7 +5813,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	BaseCSFactory getBaseCSTFactory();
+	BaseCSFactory getBaseCSFactory();
 
 	/**
 	 * <!-- begin-user-doc -->

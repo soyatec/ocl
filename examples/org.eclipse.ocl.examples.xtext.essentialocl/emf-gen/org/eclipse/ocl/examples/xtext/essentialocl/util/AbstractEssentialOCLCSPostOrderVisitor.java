@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractEssentialOCLPostOrderVisitor
+public abstract class AbstractEssentialOCLCSPostOrderVisitor
 	extends BasePostOrderVisitor
 	implements EssentialOCLCSVisitor<Continuation<?>>
 {
@@ -41,7 +41,7 @@ public abstract class AbstractEssentialOCLPostOrderVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractEssentialOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractEssentialOCLCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

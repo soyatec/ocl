@@ -22,34 +22,34 @@ package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLLeft2RightVisitor;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
 /**
- * An AbstractOCLinEcoreLeft2RightVisitor provides a default implementation for each
+ * An AbstractOCLinEcoreContainmentVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractOCLinEcoreLeft2RightVisitor
-	extends EssentialOCLLeft2RightVisitor
-	implements OCLinEcoreCSVisitor<Element>
+public abstract class AbstractOCLinEcoreCSContainmentVisitor
+	extends EssentialOCLContainmentVisitor
+	implements OCLinEcoreCSVisitor<Continuation<?>>
 {
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractOCLinEcoreLeft2RightVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractOCLinEcoreCSContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
-	public @Nullable Element visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS csElement) {
+	public @Nullable Continuation<?> visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS csElement) {
 		return visitConstraintCS(csElement);
 	}
 
-	public @Nullable Element visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS csElement) {
+	public @Nullable Continuation<?> visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS csElement) {
 		return visitAnnotationElementCS(csElement);
 	}
 }

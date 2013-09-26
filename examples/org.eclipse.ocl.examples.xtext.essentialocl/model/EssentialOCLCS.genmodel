@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.ocl.examples.xtext.essentialocl/emf-gen"
+    editDirectory="/org.eclipse.ocl.examples.xtext.essentialocl.edit/emf-gen" editorDirectory="/org.eclipse.ocl.examples.xtext.essentialocl.editor/emf-gen"
+    modelPluginID="org.eclipse.ocl.examples.xtext.essentialocl" modelName="EssentialOCLCS"
+    nonNLSMarkers="true" codeFormatting="true" testsDirectory="/org.eclipse.ocl.examples.xtext.essentialocl.tests/emf-gen"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
+    classNamePattern="">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor"/>
+  </genAnnotations>
+  <foreignModel>EssentialOCLCS.ecore</foreignModel>
+  <genPackages prefix="EssentialOCLCS" basePackage="org.eclipse.ocl.examples.xtext.essentialocl"
+      disposableProviderFactory="true" generateExampleClass="false" ecorePackage="EssentialOCLCS.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EssentialOCLCS.ecore#//NavigationRole">
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCLCS.ecore#//NavigationRole/ITERATOR"/>
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCLCS.ecore#//NavigationRole/ACCUMULATOR"/>
+      <genEnumLiterals ecoreEnumLiteral="EssentialOCLCS.ecore#//NavigationRole/EXPRESSION"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="EssentialOCLCS.ecore#//BigNumber"/>
+    <genClasses image="false" ecoreClass="EssentialOCLCS.ecore#//AbstractNameExpCS">
+      <genOperations ecoreOperation="EssentialOCLCS.ecore#//AbstractNameExpCS/getNamedElement"/>
+      <genOperations ecoreOperation="EssentialOCLCS.ecore#//AbstractNameExpCS/getNameExp"/>
+      <genOperations ecoreOperation="EssentialOCLCS.ecore#//AbstractNameExpCS/getPathName"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//BinaryOperatorCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//BinaryOperatorCS/argument"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//BooleanLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//BooleanLiteralExpCS/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//CollectionLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//CollectionLiteralExpCS/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//CollectionLiteralExpCS/ownedParts"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//CollectionLiteralPartCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//CollectionLiteralPartCS/expressionCS"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//CollectionLiteralPartCS/lastExpressionCS"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//CollectionTypeCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//CollectionTypeCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//CollectionTypeCS/ownedType"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//ConstructorExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//ConstructorExpCS/ownedParts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//ConstructorExpCS/value"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//ConstructorPartCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//ConstructorPartCS/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//ConstructorPartCS/initExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//ContextCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//ContextCS/ownedExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//ExpCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//ExpCS/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//ExpSpecificationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//ExpSpecificationCS/ownedExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//IfExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//IfExpCS/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//IfExpCS/thenExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//IfExpCS/elseExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//IndexExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//IndexExpCS/firstIndexes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//IndexExpCS/secondIndexes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//IndexExpCS/atPre"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//InfixExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//InfixExpCS/ownedExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//InfixExpCS/ownedOperator"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//InvalidLiteralExpCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//InvocationExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//InvocationExpCS/argument"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//LetExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//LetExpCS/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//LetExpCS/in"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//LetVariableCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//LetVariableCS/letExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//LiteralExpCS"/>
+    <genClasses image="false" ecoreClass="EssentialOCLCS.ecore#//NameExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NameExpCS/pathName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//NameExpCS/atPre"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCLCS.ecore#//NamedExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NamedExpCS/nameExp"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//NavigatingArgCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NavigatingArgCS/navigatingExp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//NavigatingArgCS/role"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//NavigatingArgCS/prefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NavigatingArgCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NavigatingArgCS/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NavigatingArgCS/init"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//NavigationOperatorCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//NestedExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//NestedExpCS/source"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//NullLiteralExpCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//NumberLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//NumberLiteralExpCS/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EssentialOCLCS.ecore#//OperatorCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//OperatorCS/source"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//PrefixExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//PrefixExpCS/ownedOperator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//PrefixExpCS/ownedExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//PrimitiveLiteralExpCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//SelfExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//SelfExpCS/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//StringLiteralExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EssentialOCLCS.ecore#//StringLiteralExpCS/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//TupleLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//TupleLiteralExpCS/ownedParts"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//TupleLiteralPartCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//TypeLiteralExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//TypeLiteralExpCS/ownedType"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//TypeNameExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//TypeNameExpCS/pathName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//TypeNameExpCS/element"/>
+    </genClasses>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//UnaryOperatorCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//UnlimitedNaturalLiteralExpCS"/>
+    <genClasses ecoreClass="EssentialOCLCS.ecore#//VariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//VariableCS/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EssentialOCLCS.ecore#//VariableCS/initExpression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

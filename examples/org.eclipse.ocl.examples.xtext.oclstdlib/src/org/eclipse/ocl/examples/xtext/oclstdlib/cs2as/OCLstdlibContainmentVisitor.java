@@ -36,9 +36,9 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibCSContainmentVisitor;
 
-public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVisitor
+public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibCSContainmentVisitor
 {
 	public OCLstdlibContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.examples.xtext.base.basecs.*;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
@@ -105,7 +106,7 @@ public class BaseCSValidator extends EObjectValidator
 	 * @see org.eclipse.emf.common.util.Diagnostic#getCode()
 	 * @generated
 	 */
-	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.ocl.examples.xtext.base.baseCST"; //$NON-NLS-1$
+	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.ocl.examples.xtext.base.basecs"; //$NON-NLS-1$
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.

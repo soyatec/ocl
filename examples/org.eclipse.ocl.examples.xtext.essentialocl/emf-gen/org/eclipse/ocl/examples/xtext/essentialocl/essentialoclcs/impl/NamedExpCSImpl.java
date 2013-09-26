@@ -90,14 +90,10 @@ public abstract class NamedExpCSImpl
 			NotificationChain msgs) {
 		NameExpCS oldNameExp = nameExp;
 		nameExp = newNameExp;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP,
-				oldNameExp, newNameExp);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, oldNameExp, newNameExp);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -108,25 +104,18 @@ public abstract class NamedExpCSImpl
 	 * @generated
 	 */
 	public void setNameExp(NameExpCS newNameExp) {
-		if (newNameExp != nameExp) {
+		if (newNameExp != nameExp)
+		{
 			NotificationChain msgs = null;
 			if (nameExp != null)
-				msgs = ((InternalEObject) nameExp).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, null,
-					msgs);
+				msgs = ((InternalEObject)nameExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, null, msgs);
 			if (newNameExp != null)
-				msgs = ((InternalEObject) newNameExp).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, null,
-					msgs);
+				msgs = ((InternalEObject)newNameExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, null, msgs);
 			msgs = basicSetNameExp(newNameExp, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, newNameExp,
-				newNameExp));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, newNameExp, newNameExp));
 	}
 
 	/**
@@ -137,8 +126,9 @@ public abstract class NamedExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				return basicSetNameExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -151,8 +141,9 @@ public abstract class NamedExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				return getNameExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -165,9 +156,10 @@ public abstract class NamedExpCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP :
-				setNameExp((NameExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
+				setNameExp((NameExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,9 +172,10 @@ public abstract class NamedExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP :
-				setNameExp((NameExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
+				setNameExp((NameExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -195,8 +188,9 @@ public abstract class NamedExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				return nameExp != null;
 		}
 		return super.eIsSet(featureID);

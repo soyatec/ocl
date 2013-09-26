@@ -41,10 +41,10 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibOperationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPropertyCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibPreOrderVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibCSPreOrderVisitor;
 import org.eclipse.xtext.common.types.JvmType;
 
-public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
+public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibCSPreOrderVisitor
 {
 	protected static class ClassifierInstanceTypeContinuation extends SingleContinuation<LibClassCS>
 	{

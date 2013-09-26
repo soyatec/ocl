@@ -26,10 +26,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetVariableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,11 +98,9 @@ public class LetExpCSImpl
 	 * @generated
 	 */
 	public EList<LetVariableCS> getVariable() {
-		if (variable == null) {
-			variable = new EObjectContainmentWithInverseEList<LetVariableCS>(
-				LetVariableCS.class, this,
-				EssentialOCLCSPackage.LET_EXP_CS__VARIABLE,
-				EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION);
+		if (variable == null)
+		{
+			variable = new EObjectContainmentWithInverseEList<LetVariableCS>(LetVariableCS.class, this, EssentialOCLCSPackage.LET_EXP_CS__VARIABLE, EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION);
 		}
 		return variable;
 	}
@@ -120,14 +122,10 @@ public class LetExpCSImpl
 	public NotificationChain basicSetIn(ExpCS newIn, NotificationChain msgs) {
 		ExpCS oldIn = in;
 		in = newIn;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET, EssentialOCLCSPackage.LET_EXP_CS__IN, oldIn,
-				newIn);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.LET_EXP_CS__IN, oldIn, newIn);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -138,22 +136,18 @@ public class LetExpCSImpl
 	 * @generated
 	 */
 	public void setIn(ExpCS newIn) {
-		if (newIn != in) {
+		if (newIn != in)
+		{
 			NotificationChain msgs = null;
 			if (in != null)
-				msgs = ((InternalEObject) in).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.LET_EXP_CS__IN, null, msgs);
+				msgs = ((InternalEObject)in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.LET_EXP_CS__IN, null, msgs);
 			if (newIn != null)
-				msgs = ((InternalEObject) newIn).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.LET_EXP_CS__IN, null, msgs);
+				msgs = ((InternalEObject)newIn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.LET_EXP_CS__IN, null, msgs);
 			msgs = basicSetIn(newIn, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.LET_EXP_CS__IN, newIn, newIn));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.LET_EXP_CS__IN, newIn, newIn));
 	}
 
 	/**
@@ -165,10 +159,10 @@ public class LetExpCSImpl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE :
-				return ((InternalEList<InternalEObject>) (InternalEList<?>) getVariable())
-					.basicAdd(otherEnd, msgs);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariable()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -181,11 +175,11 @@ public class LetExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE :
-				return ((InternalEList<?>) getVariable()).basicRemove(otherEnd,
-					msgs);
-			case EssentialOCLCSPackage.LET_EXP_CS__IN :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE:
+				return ((InternalEList<?>)getVariable()).basicRemove(otherEnd, msgs);
+			case EssentialOCLCSPackage.LET_EXP_CS__IN:
 				return basicSetIn(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -198,10 +192,11 @@ public class LetExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE:
 				return getVariable();
-			case EssentialOCLCSPackage.LET_EXP_CS__IN :
+			case EssentialOCLCSPackage.LET_EXP_CS__IN:
 				return getIn();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -215,14 +210,14 @@ public class LetExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE:
 				getVariable().clear();
-				getVariable().addAll(
-					(Collection<? extends LetVariableCS>) newValue);
+				getVariable().addAll((Collection<? extends LetVariableCS>)newValue);
 				return;
-			case EssentialOCLCSPackage.LET_EXP_CS__IN :
-				setIn((ExpCS) newValue);
+			case EssentialOCLCSPackage.LET_EXP_CS__IN:
+				setIn((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -235,12 +230,13 @@ public class LetExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE:
 				getVariable().clear();
 				return;
-			case EssentialOCLCSPackage.LET_EXP_CS__IN :
-				setIn((ExpCS) null);
+			case EssentialOCLCSPackage.LET_EXP_CS__IN:
+				setIn((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -253,12 +249,23 @@ public class LetExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_EXP_CS__VARIABLE:
 				return variable != null && !variable.isEmpty();
-			case EssentialOCLCSPackage.LET_EXP_CS__IN :
+			case EssentialOCLCSPackage.LET_EXP_CS__IN:
 				return in != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitLetExpCS(this);
 	}
 } //LetExpCSImpl

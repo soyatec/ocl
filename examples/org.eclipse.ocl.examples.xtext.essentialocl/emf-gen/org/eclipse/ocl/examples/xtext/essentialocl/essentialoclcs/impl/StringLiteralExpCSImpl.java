@@ -21,8 +21,12 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.StringLiteralExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -76,9 +80,9 @@ public class StringLiteralExpCSImpl
 	 * @generated
 	 */
 	public EList<String> getName() {
-		if (name == null) {
-			name = new EDataTypeEList<String>(String.class, this,
-				EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME);
+		if (name == null)
+		{
+			name = new EDataTypeEList<String>(String.class, this, EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME);
 		}
 		return name;
 	}
@@ -90,14 +94,7 @@ public class StringLiteralExpCSImpl
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: "); //$NON-NLS-1$
-		result.append(name);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
@@ -107,8 +104,9 @@ public class StringLiteralExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -122,10 +120,11 @@ public class StringLiteralExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME:
 				getName().clear();
-				getName().addAll((Collection<? extends String>) newValue);
+				getName().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,8 +137,9 @@ public class StringLiteralExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME:
 				getName().clear();
 				return;
 		}
@@ -153,10 +153,21 @@ public class StringLiteralExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS__NAME:
 				return name != null && !name.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitStringLiteralExpCS(this);
 	}
 } //StringLiteralExpCSImpl

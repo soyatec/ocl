@@ -24,9 +24,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,11 +84,9 @@ public class InvocationExpCSImpl
 	 * @generated
 	 */
 	public EList<NavigatingArgCS> getArgument() {
-		if (argument == null) {
-			argument = new EObjectContainmentWithInverseEList<NavigatingArgCS>(
-				NavigatingArgCS.class, this,
-				EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP);
+		if (argument == null)
+		{
+			argument = new EObjectContainmentWithInverseEList<NavigatingArgCS>(NavigatingArgCS.class, this, EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT, EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP);
 		}
 		return argument;
 	}
@@ -98,10 +100,10 @@ public class InvocationExpCSImpl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT :
-				return ((InternalEList<InternalEObject>) (InternalEList<?>) getArgument())
-					.basicAdd(otherEnd, msgs);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getArgument()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -114,10 +116,10 @@ public class InvocationExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT :
-				return ((InternalEList<?>) getArgument()).basicRemove(otherEnd,
-					msgs);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT:
+				return ((InternalEList<?>)getArgument()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -129,8 +131,9 @@ public class InvocationExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT:
 				return getArgument();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -144,11 +147,11 @@ public class InvocationExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT:
 				getArgument().clear();
-				getArgument().addAll(
-					(Collection<? extends NavigatingArgCS>) newValue);
+				getArgument().addAll((Collection<? extends NavigatingArgCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -161,8 +164,9 @@ public class InvocationExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT:
 				getArgument().clear();
 				return;
 		}
@@ -176,10 +180,21 @@ public class InvocationExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT:
 				return argument != null && !argument.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitInvocationExpCS(this);
 	}
 } //InvocationExpCSImpl

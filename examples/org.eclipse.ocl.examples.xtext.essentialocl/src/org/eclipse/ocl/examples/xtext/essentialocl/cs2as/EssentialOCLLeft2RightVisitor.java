@@ -132,9 +132,9 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeLiteralExp
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLLeft2RightVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSLeft2RightVisitor;
 
-public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2RightVisitor
+public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLCSLeft2RightVisitor
 {
 //	private static final Logger logger = Logger.getLogger(EssentialOCLLeft2RightVisitor.class);
 

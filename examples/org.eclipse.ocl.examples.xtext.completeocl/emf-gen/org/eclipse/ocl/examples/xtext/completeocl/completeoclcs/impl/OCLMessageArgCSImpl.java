@@ -21,9 +21,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OCLMessageArgCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpCSImpl;
 
 /**
@@ -89,14 +93,10 @@ public class OCLMessageArgCSImpl
 	public NotificationChain basicSetType(TypeCS newType, NotificationChain msgs) {
 		TypeCS oldType = type;
 		type = newType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, oldType, newType);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -107,24 +107,18 @@ public class OCLMessageArgCSImpl
 	 * @generated
 	 */
 	public void setType(TypeCS newType) {
-		if (newType != type) {
+		if (newType != type)
+		{
 			NotificationChain msgs = null;
 			if (type != null)
-				msgs = ((InternalEObject) type).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, null,
-					msgs);
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, null, msgs);
 			if (newType != null)
-				msgs = ((InternalEObject) newType).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, null,
-					msgs);
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, null, msgs);
 			msgs = basicSetType(newType, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, newType, newType));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE, newType, newType));
 	}
 
 	/**
@@ -135,8 +129,9 @@ public class OCLMessageArgCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE:
 				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -149,8 +144,9 @@ public class OCLMessageArgCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE:
 				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -163,9 +159,10 @@ public class OCLMessageArgCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE :
-				setType((TypeCS) newValue);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE:
+				setType((TypeCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -178,9 +175,10 @@ public class OCLMessageArgCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE :
-				setType((TypeCS) null);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE:
+				setType((TypeCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -193,10 +191,21 @@ public class OCLMessageArgCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitOCLMessageArgCS(this);
 	}
 } //OclMessageArgCSImpl

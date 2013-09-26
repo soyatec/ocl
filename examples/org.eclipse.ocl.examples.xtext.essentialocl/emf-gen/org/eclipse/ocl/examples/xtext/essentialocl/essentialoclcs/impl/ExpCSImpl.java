@@ -19,11 +19,15 @@ package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,8 +93,7 @@ public class ExpCSImpl
 		OperatorCS oldParent = parent;
 		parent = newParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.EXP_CS__PARENT, oldParent, parent));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.EXP_CS__PARENT, oldParent, parent));
 	}
 
 	/**
@@ -100,8 +103,9 @@ public class ExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_CS__PARENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_CS__PARENT:
 				return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -114,9 +118,10 @@ public class ExpCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_CS__PARENT :
-				setParent((OperatorCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_CS__PARENT:
+				setParent((OperatorCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,9 +134,10 @@ public class ExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_CS__PARENT :
-				setParent((OperatorCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_CS__PARENT:
+				setParent((OperatorCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -144,11 +150,22 @@ public class ExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_CS__PARENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_CS__PARENT:
 				return parent != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitExpCS(this);
 	}
 
 	/**

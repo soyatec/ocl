@@ -21,9 +21,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.IfExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,14 +115,10 @@ public class IfExpCSImpl
 			NotificationChain msgs) {
 		ExpCS oldCondition = condition;
 		condition = newCondition;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__CONDITION,
-				oldCondition, newCondition);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__CONDITION, oldCondition, newCondition);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -129,25 +129,18 @@ public class IfExpCSImpl
 	 * @generated
 	 */
 	public void setCondition(ExpCS newCondition) {
-		if (newCondition != condition) {
+		if (newCondition != condition)
+		{
 			NotificationChain msgs = null;
 			if (condition != null)
-				msgs = ((InternalEObject) condition).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.IF_EXP_CS__CONDITION, null,
-					msgs);
+				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.IF_EXP_CS__CONDITION, null, msgs);
 			if (newCondition != null)
-				msgs = ((InternalEObject) newCondition).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.IF_EXP_CS__CONDITION, null,
-					msgs);
+				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.IF_EXP_CS__CONDITION, null, msgs);
 			msgs = basicSetCondition(newCondition, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.IF_EXP_CS__CONDITION, newCondition,
-				newCondition));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__CONDITION, newCondition, newCondition));
 	}
 
 	/**
@@ -168,15 +161,10 @@ public class IfExpCSImpl
 			NotificationChain msgs) {
 		ExpCS oldThenExpression = thenExpression;
 		thenExpression = newThenExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION,
-				oldThenExpression, newThenExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION, oldThenExpression, newThenExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -187,25 +175,18 @@ public class IfExpCSImpl
 	 * @generated
 	 */
 	public void setThenExpression(ExpCS newThenExpression) {
-		if (newThenExpression != thenExpression) {
+		if (newThenExpression != thenExpression)
+		{
 			NotificationChain msgs = null;
 			if (thenExpression != null)
-				msgs = ((InternalEObject) thenExpression).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)thenExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION, null, msgs);
 			if (newThenExpression != null)
-				msgs = ((InternalEObject) newThenExpression).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)newThenExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION, null, msgs);
 			msgs = basicSetThenExpression(newThenExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION,
-				newThenExpression, newThenExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION, newThenExpression, newThenExpression));
 	}
 
 	/**
@@ -226,15 +207,10 @@ public class IfExpCSImpl
 			NotificationChain msgs) {
 		ExpCS oldElseExpression = elseExpression;
 		elseExpression = newElseExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION,
-				oldElseExpression, newElseExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION, oldElseExpression, newElseExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -245,25 +221,18 @@ public class IfExpCSImpl
 	 * @generated
 	 */
 	public void setElseExpression(ExpCS newElseExpression) {
-		if (newElseExpression != elseExpression) {
+		if (newElseExpression != elseExpression)
+		{
 			NotificationChain msgs = null;
 			if (elseExpression != null)
-				msgs = ((InternalEObject) elseExpression).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)elseExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION, null, msgs);
 			if (newElseExpression != null)
-				msgs = ((InternalEObject) newElseExpression).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)newElseExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION, null, msgs);
 			msgs = basicSetElseExpression(newElseExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION,
-				newElseExpression, newElseExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION, newElseExpression, newElseExpression));
 	}
 
 	/**
@@ -274,12 +243,13 @@ public class IfExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION:
 				return basicSetCondition(null, msgs);
-			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION :
+			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION:
 				return basicSetThenExpression(null, msgs);
-			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION :
+			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION:
 				return basicSetElseExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -292,12 +262,13 @@ public class IfExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION:
 				return getCondition();
-			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION :
+			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION:
 				return getThenExpression();
-			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION :
+			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION:
 				return getElseExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -310,15 +281,16 @@ public class IfExpCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION :
-				setCondition((ExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION:
+				setCondition((ExpCS)newValue);
 				return;
-			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION :
-				setThenExpression((ExpCS) newValue);
+			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION:
+				setThenExpression((ExpCS)newValue);
 				return;
-			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION :
-				setElseExpression((ExpCS) newValue);
+			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION:
+				setElseExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,15 +303,16 @@ public class IfExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION :
-				setCondition((ExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION:
+				setCondition((ExpCS)null);
 				return;
-			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION :
-				setThenExpression((ExpCS) null);
+			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION:
+				setThenExpression((ExpCS)null);
 				return;
-			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION :
-				setElseExpression((ExpCS) null);
+			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION:
+				setElseExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -352,14 +325,25 @@ public class IfExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.IF_EXP_CS__CONDITION:
 				return condition != null;
-			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION :
+			case EssentialOCLCSPackage.IF_EXP_CS__THEN_EXPRESSION:
 				return thenExpression != null;
-			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION :
+			case EssentialOCLCSPackage.IF_EXP_CS__ELSE_EXPRESSION:
 				return elseExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitIfExpCS(this);
 	}
 } //IfExpCSImpl

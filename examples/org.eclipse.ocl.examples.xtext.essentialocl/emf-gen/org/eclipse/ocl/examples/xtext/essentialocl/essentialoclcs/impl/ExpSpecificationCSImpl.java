@@ -21,10 +21,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.SpecificationCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,15 +94,10 @@ public class ExpSpecificationCSImpl
 			NotificationChain msgs) {
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION,
-				oldOwnedExpression, newOwnedExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -109,29 +108,18 @@ public class ExpSpecificationCSImpl
 	 * @generated
 	 */
 	public void setOwnedExpression(ExpCS newOwnedExpression) {
-		if (newOwnedExpression != ownedExpression) {
+		if (newOwnedExpression != ownedExpression)
+		{
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject) ownedExpression)
-					.eInverseRemove(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION,
-						null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION, null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject) newOwnedExpression)
-					.eInverseAdd(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION,
-						null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION, null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION,
-				newOwnedExpression, newOwnedExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -142,8 +130,9 @@ public class ExpSpecificationCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -156,8 +145,9 @@ public class ExpSpecificationCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -170,9 +160,10 @@ public class ExpSpecificationCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION :
-				setOwnedExpression((ExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -185,9 +176,10 @@ public class ExpSpecificationCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION :
-				setOwnedExpression((ExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -200,10 +192,21 @@ public class ExpSpecificationCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitExpSpecificationCS(this);
 	}
 } //ExpConstraintCSImpl

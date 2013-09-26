@@ -17,18 +17,22 @@
 
 package org.eclipse.ocl.examples.xtext.base.basecs.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
@@ -290,6 +294,32 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 			qualifier = new EDataTypeUniqueEList<String>(String.class, this, BaseCSPackage.CLASSIFIER_CS__QUALIFIER);
 		}
 		return qualifier;
+	}
+
+	/**
+	 * The cached invocation delegate for the '{@link #ast() <em>Ast</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ast()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final EOperation.Internal.InvocationDelegate AST__EINVOCATION_DELEGATE = ((EOperation.Internal)BaseCSPackage.Literals.CLASSIFIER_CS.getEOperations().get(0)).getInvocationDelegate();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type ast()
+	{
+		try
+		{
+			return (Type)AST__EINVOCATION_DELEGATE.dynamicInvoke(this, null);
+		}
+		catch (InvocationTargetException ite)
+		{
+			throw new WrappedException(ite);
+		}
 	}
 
 	/**

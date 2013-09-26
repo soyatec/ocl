@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getPathElementCS()
- * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS org.eclipse.ocl.examples.pivot.Pivotable"
+ * @model superTypes="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS org.eclipse.ocl.examples.pivot.Pivotable"
  * @generated
  */
 public interface PathElementCS extends ElementCS, Pivotable

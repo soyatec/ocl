@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.*;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS;
@@ -78,7 +79,8 @@ public class CompleteOCLCSSwitch<T>
 	 * @generated
 	 */
 	public CompleteOCLCSSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = CompleteOCLCSPackage.eINSTANCE;
 		}
 	}
@@ -105,308 +107,204 @@ public class CompleteOCLCSSwitch<T>
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case CompleteOCLCSPackage.CLASSIFIER_CONTEXT_DECL_CS : {
-				ClassifierContextDeclCS classifierContextDeclCS = (ClassifierContextDeclCS) theEObject;
+		switch (classifierID)
+		{
+			case CompleteOCLCSPackage.CLASSIFIER_CONTEXT_DECL_CS:
+			{
+				ClassifierContextDeclCS classifierContextDeclCS = (ClassifierContextDeclCS)theEObject;
 				T result = caseClassifierContextDeclCS(classifierContextDeclCS);
-				if (result == null)
-					result = caseContextDeclCS(classifierContextDeclCS);
-				if (result == null)
-					result = casePathNameDeclCS(classifierContextDeclCS);
-				if (result == null)
-					result = caseModelElementCS(classifierContextDeclCS);
-				if (result == null)
-					result = caseMorePivotable(classifierContextDeclCS);
-				if (result == null)
-					result = casePivotableElementCS(classifierContextDeclCS);
-				if (result == null)
-					result = caseElementCS(classifierContextDeclCS);
-				if (result == null)
-					result = casePivotable(classifierContextDeclCS);
-				if (result == null)
-					result = caseVisitableCS(classifierContextDeclCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseContextDeclCS(classifierContextDeclCS);
+				if (result == null) result = casePathNameDeclCS(classifierContextDeclCS);
+				if (result == null) result = caseModelElementCS(classifierContextDeclCS);
+				if (result == null) result = caseMorePivotable(classifierContextDeclCS);
+				if (result == null) result = casePivotableElementCS(classifierContextDeclCS);
+				if (result == null) result = caseElementCS(classifierContextDeclCS);
+				if (result == null) result = casePivotable(classifierContextDeclCS);
+				if (result == null) result = caseVisitableCS(classifierContextDeclCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS : {
-				CompleteOCLDocumentCS completeOCLDocumentCS = (CompleteOCLDocumentCS) theEObject;
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS:
+			{
+				CompleteOCLDocumentCS completeOCLDocumentCS = (CompleteOCLDocumentCS)theEObject;
 				T result = caseCompleteOCLDocumentCS(completeOCLDocumentCS);
-				if (result == null)
-					result = casePackageCS(completeOCLDocumentCS);
-				if (result == null)
-					result = caseRootCS(completeOCLDocumentCS);
-				if (result == null)
-					result = caseNamespaceCS(completeOCLDocumentCS);
-				if (result == null)
-					result = caseNamedElementCS(completeOCLDocumentCS);
-				if (result == null)
-					result = caseModelElementCS(completeOCLDocumentCS);
-				if (result == null)
-					result = caseNameable(completeOCLDocumentCS);
-				if (result == null)
-					result = casePivotableElementCS(completeOCLDocumentCS);
-				if (result == null)
-					result = caseElementCS(completeOCLDocumentCS);
-				if (result == null)
-					result = casePivotable(completeOCLDocumentCS);
-				if (result == null)
-					result = caseVisitableCS(completeOCLDocumentCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = casePackageCS(completeOCLDocumentCS);
+				if (result == null) result = caseRootCS(completeOCLDocumentCS);
+				if (result == null) result = caseNamespaceCS(completeOCLDocumentCS);
+				if (result == null) result = caseNamedElementCS(completeOCLDocumentCS);
+				if (result == null) result = caseModelElementCS(completeOCLDocumentCS);
+				if (result == null) result = caseNameable(completeOCLDocumentCS);
+				if (result == null) result = casePivotableElementCS(completeOCLDocumentCS);
+				if (result == null) result = caseElementCS(completeOCLDocumentCS);
+				if (result == null) result = casePivotable(completeOCLDocumentCS);
+				if (result == null) result = caseVisitableCS(completeOCLDocumentCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.CONTEXT_DECL_CS : {
-				ContextDeclCS contextDeclCS = (ContextDeclCS) theEObject;
+			case CompleteOCLCSPackage.CONTEXT_DECL_CS:
+			{
+				ContextDeclCS contextDeclCS = (ContextDeclCS)theEObject;
 				T result = caseContextDeclCS(contextDeclCS);
-				if (result == null)
-					result = casePathNameDeclCS(contextDeclCS);
-				if (result == null)
-					result = caseModelElementCS(contextDeclCS);
-				if (result == null)
-					result = caseMorePivotable(contextDeclCS);
-				if (result == null)
-					result = casePivotableElementCS(contextDeclCS);
-				if (result == null)
-					result = caseElementCS(contextDeclCS);
-				if (result == null)
-					result = casePivotable(contextDeclCS);
-				if (result == null)
-					result = caseVisitableCS(contextDeclCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = casePathNameDeclCS(contextDeclCS);
+				if (result == null) result = caseModelElementCS(contextDeclCS);
+				if (result == null) result = caseMorePivotable(contextDeclCS);
+				if (result == null) result = casePivotableElementCS(contextDeclCS);
+				if (result == null) result = caseElementCS(contextDeclCS);
+				if (result == null) result = casePivotable(contextDeclCS);
+				if (result == null) result = caseVisitableCS(contextDeclCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.DEF_CS : {
-				DefCS defCS = (DefCS) theEObject;
+			case CompleteOCLCSPackage.DEF_CS:
+			{
+				DefCS defCS = (DefCS)theEObject;
 				T result = caseDefCS(defCS);
-				if (result == null)
-					result = caseTypedElementCS(defCS);
-				if (result == null)
-					result = caseNamedElementCS(defCS);
-				if (result == null)
-					result = caseModelElementCS(defCS);
-				if (result == null)
-					result = caseNameable(defCS);
-				if (result == null)
-					result = casePivotableElementCS(defCS);
-				if (result == null)
-					result = caseElementCS(defCS);
-				if (result == null)
-					result = casePivotable(defCS);
-				if (result == null)
-					result = caseVisitableCS(defCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseTypedElementCS(defCS);
+				if (result == null) result = caseNamedElementCS(defCS);
+				if (result == null) result = caseModelElementCS(defCS);
+				if (result == null) result = caseNameable(defCS);
+				if (result == null) result = casePivotableElementCS(defCS);
+				if (result == null) result = caseElementCS(defCS);
+				if (result == null) result = casePivotable(defCS);
+				if (result == null) result = caseVisitableCS(defCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.DEF_OPERATION_CS : {
-				DefOperationCS defOperationCS = (DefOperationCS) theEObject;
+			case CompleteOCLCSPackage.DEF_OPERATION_CS:
+			{
+				DefOperationCS defOperationCS = (DefOperationCS)theEObject;
 				T result = caseDefOperationCS(defOperationCS);
-				if (result == null)
-					result = caseDefCS(defOperationCS);
-				if (result == null)
-					result = caseTypedElementCS(defOperationCS);
-				if (result == null)
-					result = caseNamedElementCS(defOperationCS);
-				if (result == null)
-					result = caseModelElementCS(defOperationCS);
-				if (result == null)
-					result = caseNameable(defOperationCS);
-				if (result == null)
-					result = casePivotableElementCS(defOperationCS);
-				if (result == null)
-					result = caseElementCS(defOperationCS);
-				if (result == null)
-					result = casePivotable(defOperationCS);
-				if (result == null)
-					result = caseVisitableCS(defOperationCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseDefCS(defOperationCS);
+				if (result == null) result = caseTypedElementCS(defOperationCS);
+				if (result == null) result = caseNamedElementCS(defOperationCS);
+				if (result == null) result = caseModelElementCS(defOperationCS);
+				if (result == null) result = caseNameable(defOperationCS);
+				if (result == null) result = casePivotableElementCS(defOperationCS);
+				if (result == null) result = caseElementCS(defOperationCS);
+				if (result == null) result = casePivotable(defOperationCS);
+				if (result == null) result = caseVisitableCS(defOperationCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.DEF_PROPERTY_CS : {
-				DefPropertyCS defPropertyCS = (DefPropertyCS) theEObject;
+			case CompleteOCLCSPackage.DEF_PROPERTY_CS:
+			{
+				DefPropertyCS defPropertyCS = (DefPropertyCS)theEObject;
 				T result = caseDefPropertyCS(defPropertyCS);
-				if (result == null)
-					result = caseDefCS(defPropertyCS);
-				if (result == null)
-					result = caseTypedElementCS(defPropertyCS);
-				if (result == null)
-					result = caseNamedElementCS(defPropertyCS);
-				if (result == null)
-					result = caseModelElementCS(defPropertyCS);
-				if (result == null)
-					result = caseNameable(defPropertyCS);
-				if (result == null)
-					result = casePivotableElementCS(defPropertyCS);
-				if (result == null)
-					result = caseElementCS(defPropertyCS);
-				if (result == null)
-					result = casePivotable(defPropertyCS);
-				if (result == null)
-					result = caseVisitableCS(defPropertyCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseDefCS(defPropertyCS);
+				if (result == null) result = caseTypedElementCS(defPropertyCS);
+				if (result == null) result = caseNamedElementCS(defPropertyCS);
+				if (result == null) result = caseModelElementCS(defPropertyCS);
+				if (result == null) result = caseNameable(defPropertyCS);
+				if (result == null) result = casePivotableElementCS(defPropertyCS);
+				if (result == null) result = caseElementCS(defPropertyCS);
+				if (result == null) result = casePivotable(defPropertyCS);
+				if (result == null) result = caseVisitableCS(defPropertyCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.FEATURE_CONTEXT_DECL_CS : {
-				FeatureContextDeclCS featureContextDeclCS = (FeatureContextDeclCS) theEObject;
+			case CompleteOCLCSPackage.FEATURE_CONTEXT_DECL_CS:
+			{
+				FeatureContextDeclCS featureContextDeclCS = (FeatureContextDeclCS)theEObject;
 				T result = caseFeatureContextDeclCS(featureContextDeclCS);
-				if (result == null)
-					result = caseContextDeclCS(featureContextDeclCS);
-				if (result == null)
-					result = casePathNameDeclCS(featureContextDeclCS);
-				if (result == null)
-					result = caseModelElementCS(featureContextDeclCS);
-				if (result == null)
-					result = caseMorePivotable(featureContextDeclCS);
-				if (result == null)
-					result = casePivotableElementCS(featureContextDeclCS);
-				if (result == null)
-					result = caseElementCS(featureContextDeclCS);
-				if (result == null)
-					result = casePivotable(featureContextDeclCS);
-				if (result == null)
-					result = caseVisitableCS(featureContextDeclCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseContextDeclCS(featureContextDeclCS);
+				if (result == null) result = casePathNameDeclCS(featureContextDeclCS);
+				if (result == null) result = caseModelElementCS(featureContextDeclCS);
+				if (result == null) result = caseMorePivotable(featureContextDeclCS);
+				if (result == null) result = casePivotableElementCS(featureContextDeclCS);
+				if (result == null) result = caseElementCS(featureContextDeclCS);
+				if (result == null) result = casePivotable(featureContextDeclCS);
+				if (result == null) result = caseVisitableCS(featureContextDeclCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.INCLUDE_CS : {
-				IncludeCS includeCS = (IncludeCS) theEObject;
+			case CompleteOCLCSPackage.INCLUDE_CS:
+			{
+				IncludeCS includeCS = (IncludeCS)theEObject;
 				T result = caseIncludeCS(includeCS);
-				if (result == null)
-					result = caseNamespaceCS(includeCS);
-				if (result == null)
-					result = caseNamedElementCS(includeCS);
-				if (result == null)
-					result = caseModelElementCS(includeCS);
-				if (result == null)
-					result = caseNameable(includeCS);
-				if (result == null)
-					result = casePivotableElementCS(includeCS);
-				if (result == null)
-					result = caseElementCS(includeCS);
-				if (result == null)
-					result = casePivotable(includeCS);
-				if (result == null)
-					result = caseVisitableCS(includeCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseNamespaceCS(includeCS);
+				if (result == null) result = caseNamedElementCS(includeCS);
+				if (result == null) result = caseModelElementCS(includeCS);
+				if (result == null) result = caseNameable(includeCS);
+				if (result == null) result = casePivotableElementCS(includeCS);
+				if (result == null) result = caseElementCS(includeCS);
+				if (result == null) result = casePivotable(includeCS);
+				if (result == null) result = caseVisitableCS(includeCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS : {
-				OCLMessageArgCS oclMessageArgCS = (OCLMessageArgCS) theEObject;
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS:
+			{
+				OCLMessageArgCS oclMessageArgCS = (OCLMessageArgCS)theEObject;
 				T result = caseOCLMessageArgCS(oclMessageArgCS);
-				if (result == null)
-					result = caseExpCS(oclMessageArgCS);
-				if (result == null)
-					result = caseModelElementCS(oclMessageArgCS);
-				if (result == null)
-					result = casePivotableElementCS(oclMessageArgCS);
-				if (result == null)
-					result = caseElementCS(oclMessageArgCS);
-				if (result == null)
-					result = casePivotable(oclMessageArgCS);
-				if (result == null)
-					result = caseVisitableCS(oclMessageArgCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseExpCS(oclMessageArgCS);
+				if (result == null) result = caseModelElementCS(oclMessageArgCS);
+				if (result == null) result = casePivotableElementCS(oclMessageArgCS);
+				if (result == null) result = caseElementCS(oclMessageArgCS);
+				if (result == null) result = casePivotable(oclMessageArgCS);
+				if (result == null) result = caseVisitableCS(oclMessageArgCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS : {
-				OperationContextDeclCS operationContextDeclCS = (OperationContextDeclCS) theEObject;
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS:
+			{
+				OperationContextDeclCS operationContextDeclCS = (OperationContextDeclCS)theEObject;
 				T result = caseOperationContextDeclCS(operationContextDeclCS);
-				if (result == null)
-					result = caseFeatureContextDeclCS(operationContextDeclCS);
-				if (result == null)
-					result = caseContextDeclCS(operationContextDeclCS);
-				if (result == null)
-					result = casePathNameDeclCS(operationContextDeclCS);
-				if (result == null)
-					result = caseModelElementCS(operationContextDeclCS);
-				if (result == null)
-					result = caseMorePivotable(operationContextDeclCS);
-				if (result == null)
-					result = casePivotableElementCS(operationContextDeclCS);
-				if (result == null)
-					result = caseElementCS(operationContextDeclCS);
-				if (result == null)
-					result = casePivotable(operationContextDeclCS);
-				if (result == null)
-					result = caseVisitableCS(operationContextDeclCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseFeatureContextDeclCS(operationContextDeclCS);
+				if (result == null) result = caseContextDeclCS(operationContextDeclCS);
+				if (result == null) result = casePathNameDeclCS(operationContextDeclCS);
+				if (result == null) result = caseModelElementCS(operationContextDeclCS);
+				if (result == null) result = caseMorePivotable(operationContextDeclCS);
+				if (result == null) result = casePivotableElementCS(operationContextDeclCS);
+				if (result == null) result = caseElementCS(operationContextDeclCS);
+				if (result == null) result = casePivotable(operationContextDeclCS);
+				if (result == null) result = caseVisitableCS(operationContextDeclCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS : {
-				PackageDeclarationCS packageDeclarationCS = (PackageDeclarationCS) theEObject;
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS:
+			{
+				PackageDeclarationCS packageDeclarationCS = (PackageDeclarationCS)theEObject;
 				T result = casePackageDeclarationCS(packageDeclarationCS);
-				if (result == null)
-					result = casePathNameDeclCS(packageDeclarationCS);
-				if (result == null)
-					result = caseModelElementCS(packageDeclarationCS);
-				if (result == null)
-					result = caseMorePivotable(packageDeclarationCS);
-				if (result == null)
-					result = casePivotableElementCS(packageDeclarationCS);
-				if (result == null)
-					result = caseElementCS(packageDeclarationCS);
-				if (result == null)
-					result = casePivotable(packageDeclarationCS);
-				if (result == null)
-					result = caseVisitableCS(packageDeclarationCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = casePathNameDeclCS(packageDeclarationCS);
+				if (result == null) result = caseModelElementCS(packageDeclarationCS);
+				if (result == null) result = caseMorePivotable(packageDeclarationCS);
+				if (result == null) result = casePivotableElementCS(packageDeclarationCS);
+				if (result == null) result = caseElementCS(packageDeclarationCS);
+				if (result == null) result = casePivotable(packageDeclarationCS);
+				if (result == null) result = caseVisitableCS(packageDeclarationCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.PATH_NAME_DECL_CS : {
-				PathNameDeclCS pathNameDeclCS = (PathNameDeclCS) theEObject;
+			case CompleteOCLCSPackage.PATH_NAME_DECL_CS:
+			{
+				PathNameDeclCS pathNameDeclCS = (PathNameDeclCS)theEObject;
 				T result = casePathNameDeclCS(pathNameDeclCS);
-				if (result == null)
-					result = caseModelElementCS(pathNameDeclCS);
-				if (result == null)
-					result = caseMorePivotable(pathNameDeclCS);
-				if (result == null)
-					result = casePivotableElementCS(pathNameDeclCS);
-				if (result == null)
-					result = caseElementCS(pathNameDeclCS);
-				if (result == null)
-					result = casePivotable(pathNameDeclCS);
-				if (result == null)
-					result = caseVisitableCS(pathNameDeclCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseModelElementCS(pathNameDeclCS);
+				if (result == null) result = caseMorePivotable(pathNameDeclCS);
+				if (result == null) result = casePivotableElementCS(pathNameDeclCS);
+				if (result == null) result = caseElementCS(pathNameDeclCS);
+				if (result == null) result = casePivotable(pathNameDeclCS);
+				if (result == null) result = caseVisitableCS(pathNameDeclCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS : {
-				PropertyContextDeclCS propertyContextDeclCS = (PropertyContextDeclCS) theEObject;
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS:
+			{
+				PropertyContextDeclCS propertyContextDeclCS = (PropertyContextDeclCS)theEObject;
 				T result = casePropertyContextDeclCS(propertyContextDeclCS);
-				if (result == null)
-					result = caseFeatureContextDeclCS(propertyContextDeclCS);
-				if (result == null)
-					result = caseContextDeclCS(propertyContextDeclCS);
-				if (result == null)
-					result = casePathNameDeclCS(propertyContextDeclCS);
-				if (result == null)
-					result = caseModelElementCS(propertyContextDeclCS);
-				if (result == null)
-					result = caseMorePivotable(propertyContextDeclCS);
-				if (result == null)
-					result = casePivotableElementCS(propertyContextDeclCS);
-				if (result == null)
-					result = caseElementCS(propertyContextDeclCS);
-				if (result == null)
-					result = casePivotable(propertyContextDeclCS);
-				if (result == null)
-					result = caseVisitableCS(propertyContextDeclCS);
-				if (result == null)
-					result = defaultCase(theEObject);
+				if (result == null) result = caseFeatureContextDeclCS(propertyContextDeclCS);
+				if (result == null) result = caseContextDeclCS(propertyContextDeclCS);
+				if (result == null) result = casePathNameDeclCS(propertyContextDeclCS);
+				if (result == null) result = caseModelElementCS(propertyContextDeclCS);
+				if (result == null) result = caseMorePivotable(propertyContextDeclCS);
+				if (result == null) result = casePivotableElementCS(propertyContextDeclCS);
+				if (result == null) result = caseElementCS(propertyContextDeclCS);
+				if (result == null) result = casePivotable(propertyContextDeclCS);
+				if (result == null) result = caseVisitableCS(propertyContextDeclCS);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			default :
-				return defaultCase(theEObject);
+			default: return defaultCase(theEObject);
 		}
 	}
 

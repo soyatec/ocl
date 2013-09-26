@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getPrimitiveTypeRefCS()
- * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS org.eclipse.ocl.examples.pivot.Nameable"
+ * @model superTypes="org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
 public interface PrimitiveTypeRefCS extends TypedRefCS, Nameable {

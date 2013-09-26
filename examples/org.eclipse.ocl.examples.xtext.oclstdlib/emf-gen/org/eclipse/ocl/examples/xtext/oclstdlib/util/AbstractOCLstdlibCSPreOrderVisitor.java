@@ -22,18 +22,18 @@ package	org.eclipse.ocl.examples.xtext.oclstdlib.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPostOrderVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPreOrderVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
 /**
- * An AbstractOCLstdlibPostOrderVisitor provides a default implementation for each
+ * An AbstractOCLstdlibPreOrderVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractOCLstdlibPostOrderVisitor
-	extends EssentialOCLPostOrderVisitor
+public abstract class AbstractOCLstdlibCSPreOrderVisitor
+	extends EssentialOCLPreOrderVisitor
 	implements OCLstdlibCSVisitor<Continuation<?>>
 {
 	/**
@@ -41,7 +41,7 @@ public abstract class AbstractOCLstdlibPostOrderVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractOCLstdlibPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractOCLstdlibCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

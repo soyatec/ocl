@@ -13,7 +13,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel
+ * from: org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.genmodel
  *
  * Do not edit it.
  */

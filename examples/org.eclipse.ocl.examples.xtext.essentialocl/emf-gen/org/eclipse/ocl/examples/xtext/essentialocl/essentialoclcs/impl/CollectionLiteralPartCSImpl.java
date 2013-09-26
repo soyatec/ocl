@@ -21,10 +21,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionLiteralPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,16 +105,10 @@ public class CollectionLiteralPartCSImpl
 			NotificationChain msgs) {
 		ExpCS oldExpressionCS = expressionCS;
 		expressionCS = newExpressionCS;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(
-				this,
-				Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS,
-				oldExpressionCS, newExpressionCS);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS, oldExpressionCS, newExpressionCS);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -121,31 +119,18 @@ public class CollectionLiteralPartCSImpl
 	 * @generated
 	 */
 	public void setExpressionCS(ExpCS newExpressionCS) {
-		if (newExpressionCS != expressionCS) {
+		if (newExpressionCS != expressionCS)
+		{
 			NotificationChain msgs = null;
 			if (expressionCS != null)
-				msgs = ((InternalEObject) expressionCS)
-					.eInverseRemove(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS,
-						null, msgs);
+				msgs = ((InternalEObject)expressionCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS, null, msgs);
 			if (newExpressionCS != null)
-				msgs = ((InternalEObject) newExpressionCS)
-					.eInverseAdd(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS,
-						null, msgs);
+				msgs = ((InternalEObject)newExpressionCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS, null, msgs);
 			msgs = basicSetExpressionCS(newExpressionCS, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this,
-				Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS,
-				newExpressionCS, newExpressionCS));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS, newExpressionCS, newExpressionCS));
 	}
 
 	/**
@@ -166,16 +151,10 @@ public class CollectionLiteralPartCSImpl
 			ExpCS newLastExpressionCS, NotificationChain msgs) {
 		ExpCS oldLastExpressionCS = lastExpressionCS;
 		lastExpressionCS = newLastExpressionCS;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(
-				this,
-				Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS,
-				oldLastExpressionCS, newLastExpressionCS);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS, oldLastExpressionCS, newLastExpressionCS);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -186,31 +165,18 @@ public class CollectionLiteralPartCSImpl
 	 * @generated
 	 */
 	public void setLastExpressionCS(ExpCS newLastExpressionCS) {
-		if (newLastExpressionCS != lastExpressionCS) {
+		if (newLastExpressionCS != lastExpressionCS)
+		{
 			NotificationChain msgs = null;
 			if (lastExpressionCS != null)
-				msgs = ((InternalEObject) lastExpressionCS)
-					.eInverseRemove(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS,
-						null, msgs);
+				msgs = ((InternalEObject)lastExpressionCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS, null, msgs);
 			if (newLastExpressionCS != null)
-				msgs = ((InternalEObject) newLastExpressionCS)
-					.eInverseAdd(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS,
-						null, msgs);
+				msgs = ((InternalEObject)newLastExpressionCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS, null, msgs);
 			msgs = basicSetLastExpressionCS(newLastExpressionCS, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(
-				this,
-				Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS,
-				newLastExpressionCS, newLastExpressionCS));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS, newLastExpressionCS, newLastExpressionCS));
 	}
 
 	/**
@@ -221,10 +187,11 @@ public class CollectionLiteralPartCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS:
 				return basicSetExpressionCS(null, msgs);
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS :
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS:
 				return basicSetLastExpressionCS(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -237,10 +204,11 @@ public class CollectionLiteralPartCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS:
 				return getExpressionCS();
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS :
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS:
 				return getLastExpressionCS();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -253,12 +221,13 @@ public class CollectionLiteralPartCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS :
-				setExpressionCS((ExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS:
+				setExpressionCS((ExpCS)newValue);
 				return;
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS :
-				setLastExpressionCS((ExpCS) newValue);
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS:
+				setLastExpressionCS((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -271,12 +240,13 @@ public class CollectionLiteralPartCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS :
-				setExpressionCS((ExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS:
+				setExpressionCS((ExpCS)null);
 				return;
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS :
-				setLastExpressionCS((ExpCS) null);
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS:
+				setLastExpressionCS((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -289,12 +259,23 @@ public class CollectionLiteralPartCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__EXPRESSION_CS:
 				return expressionCS != null;
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS :
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS:
 				return lastExpressionCS != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitCollectionLiteralPartCS(this);
 	}
 } //CollectionLiteralPartCSImpl

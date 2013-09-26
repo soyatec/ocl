@@ -104,8 +104,12 @@ public enum NavigationRole
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final NavigationRole[] VALUES_ARRAY = new NavigationRole[]{
-		ITERATOR, ACCUMULATOR, EXPRESSION,};
+	private static final NavigationRole[] VALUES_ARRAY = new NavigationRole[]
+		{
+			ITERATOR,
+			ACCUMULATOR,
+			EXPRESSION,
+		};
 
 	/**
 	 * A public read-only list of all the '<em><b>Navigation Role</b></em>' enumerators.
@@ -113,8 +117,7 @@ public enum NavigationRole
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<NavigationRole> VALUES = Collections
-		.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<NavigationRole> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Navigation Role</b></em>' literal with the specified literal value.
@@ -123,9 +126,11 @@ public enum NavigationRole
 	 * @generated
 	 */
 	public static NavigationRole get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			NavigationRole result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -139,9 +144,11 @@ public enum NavigationRole
 	 * @generated
 	 */
 	public static NavigationRole getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			NavigationRole result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -155,9 +162,9 @@ public enum NavigationRole
 	 * @generated
 	 */
 	public static NavigationRole get(int value) {
-		switch (value) {
-			case ITERATOR_VALUE :
-				return ITERATOR;
+		switch (value)
+		{
+			case ITERATOR_VALUE: return ITERATOR;
 		}
 		return null;
 	}
@@ -201,7 +208,7 @@ public enum NavigationRole
 	 * @generated
 	 */
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
@@ -210,7 +217,7 @@ public enum NavigationRole
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
@@ -219,7 +226,7 @@ public enum NavigationRole
 	 * @generated
 	 */
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**

@@ -21,10 +21,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.TypedRefCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,8 +115,7 @@ public class CollectionTypeCSImpl
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME, oldName, name));
 	}
 
 	/**
@@ -133,15 +136,10 @@ public class CollectionTypeCSImpl
 			NotificationChain msgs) {
 		TypedRefCS oldOwnedType = ownedType;
 		ownedType = newOwnedType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE,
-				oldOwnedType, newOwnedType);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -152,25 +150,18 @@ public class CollectionTypeCSImpl
 	 * @generated
 	 */
 	public void setOwnedType(TypedRefCS newOwnedType) {
-		if (newOwnedType != ownedType) {
+		if (newOwnedType != ownedType)
+		{
 			NotificationChain msgs = null;
 			if (ownedType != null)
-				msgs = ((InternalEObject) ownedType).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE,
-					null, msgs);
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE, null, msgs);
 			if (newOwnedType != null)
-				msgs = ((InternalEObject) newOwnedType).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE,
-					null, msgs);
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE, null, msgs);
 			msgs = basicSetOwnedType(newOwnedType, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE,
-				newOwnedType, newOwnedType));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -180,14 +171,7 @@ public class CollectionTypeCSImpl
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: "); //$NON-NLS-1$
-		result.append(name);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
@@ -198,8 +182,9 @@ public class CollectionTypeCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE:
 				return basicSetOwnedType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -212,10 +197,11 @@ public class CollectionTypeCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME:
 				return getName();
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE :
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE:
 				return getOwnedType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -228,12 +214,13 @@ public class CollectionTypeCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME :
-				setName((String) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME:
+				setName((String)newValue);
 				return;
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE :
-				setOwnedType((TypedRefCS) newValue);
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -246,12 +233,13 @@ public class CollectionTypeCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE :
-				setOwnedType((TypedRefCS) null);
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -264,14 +252,23 @@ public class CollectionTypeCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME :
-				return NAME_EDEFAULT == null
-					? name != null
-					: !NAME_EDEFAULT.equals(name);
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS__OWNED_TYPE:
 				return ownedType != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitCollectionTypeCS(this);
 	}
 } //CollectionTypeCSImpl

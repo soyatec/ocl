@@ -21,10 +21,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,14 +82,14 @@ public class IncludeCSImpl
 	 * @generated
 	 */
 	public Namespace getNamespace() {
-		if (namespace != null && ((EObject) namespace).eIsProxy()) {
-			InternalEObject oldNamespace = (InternalEObject) namespace;
-			namespace = (Namespace) eResolveProxy(oldNamespace);
-			if (namespace != oldNamespace) {
+		if (namespace != null && ((EObject)namespace).eIsProxy())
+		{
+			InternalEObject oldNamespace = (InternalEObject)namespace;
+			namespace = (Namespace)eResolveProxy(oldNamespace);
+			if (namespace != oldNamespace)
+			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-						CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE,
-						oldNamespace, namespace));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE, oldNamespace, namespace));
 			}
 		}
 		return namespace;
@@ -109,9 +113,7 @@ public class IncludeCSImpl
 		Namespace oldNamespace = namespace;
 		namespace = newNamespace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE, oldNamespace,
-				namespace));
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE, oldNamespace, namespace));
 	}
 
 	/**
@@ -121,10 +123,10 @@ public class IncludeCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE :
-				if (resolve)
-					return getNamespace();
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE:
+				if (resolve) return getNamespace();
 				return basicGetNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -137,9 +139,10 @@ public class IncludeCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE :
-				setNamespace((Namespace) newValue);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE:
+				setNamespace((Namespace)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -152,9 +155,10 @@ public class IncludeCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE :
-				setNamespace((Namespace) null);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE:
+				setNamespace((Namespace)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -167,10 +171,21 @@ public class IncludeCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.INCLUDE_CS__NAMESPACE:
 				return namespace != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitIncludeCS(this);
 	}
 } //IncludeCSImpl

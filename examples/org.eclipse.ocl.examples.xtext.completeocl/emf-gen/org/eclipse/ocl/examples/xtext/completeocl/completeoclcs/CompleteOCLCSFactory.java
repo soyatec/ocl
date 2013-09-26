@@ -35,8 +35,7 @@ public interface CompleteOCLCSFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	CompleteOCLCSFactory eINSTANCE = org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLCSFactoryImpl
-		.init();
+	CompleteOCLCSFactory eINSTANCE = org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLCSFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Package Declaration CS</em>'.

@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.*;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS;
@@ -74,7 +75,8 @@ public class CompleteOCLCSAdapterFactory
 	 * @generated
 	 */
 	public CompleteOCLCSAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = CompleteOCLCSPackage.eINSTANCE;
 		}
 	}
@@ -89,11 +91,13 @@ public class CompleteOCLCSAdapterFactory
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
-			return ((EObject) object).eClass().getEPackage() == modelPackage;
+		if (object instanceof EObject)
+		{
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -104,144 +108,144 @@ public class CompleteOCLCSAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CompleteOCLCSSwitch<Adapter> modelSwitch = new CompleteOCLCSSwitch<Adapter>() {
-
-		@Override
-		public Adapter caseClassifierContextDeclCS(
-				ClassifierContextDeclCS object) {
-			return createClassifierContextDeclCSAdapter();
-		}
-
-		@Override
-		public Adapter caseCompleteOCLDocumentCS(CompleteOCLDocumentCS object) {
-			return createCompleteOCLDocumentCSAdapter();
-		}
-
-		@Override
-		public Adapter caseContextDeclCS(ContextDeclCS object) {
-			return createContextDeclCSAdapter();
-		}
-
-		@Override
-		public Adapter caseDefCS(DefCS object) {
-			return createDefCSAdapter();
-		}
-
-		@Override
-		public Adapter caseDefOperationCS(DefOperationCS object) {
-			return createDefOperationCSAdapter();
-		}
-
-		@Override
-		public Adapter caseDefPropertyCS(DefPropertyCS object) {
-			return createDefPropertyCSAdapter();
-		}
-
-		@Override
-		public Adapter caseFeatureContextDeclCS(FeatureContextDeclCS object) {
-			return createFeatureContextDeclCSAdapter();
-		}
-
-		@Override
-		public Adapter caseIncludeCS(IncludeCS object) {
-			return createIncludeCSAdapter();
-		}
-
-		@Override
-		public Adapter caseOCLMessageArgCS(OCLMessageArgCS object) {
-			return createOCLMessageArgCSAdapter();
-		}
-
-		@Override
-		public Adapter caseOperationContextDeclCS(OperationContextDeclCS object) {
-			return createOperationContextDeclCSAdapter();
-		}
-
-		@Override
-		public Adapter casePackageDeclarationCS(PackageDeclarationCS object) {
-			return createPackageDeclarationCSAdapter();
-		}
-
-		@Override
-		public Adapter casePathNameDeclCS(PathNameDeclCS object) {
-			return createPathNameDeclCSAdapter();
-		}
-
-		@Override
-		public Adapter casePropertyContextDeclCS(PropertyContextDeclCS object) {
-			return createPropertyContextDeclCSAdapter();
-		}
-
-		@Override
-		public Adapter caseVisitableCS(VisitableCS object) {
-			return createVisitableCSAdapter();
-		}
-
-		@Override
-		public Adapter caseElementCS(ElementCS object) {
-			return createElementCSAdapter();
-		}
-
-		@Override
-		public Adapter casePivotable(Pivotable object) {
-			return createPivotableAdapter();
-		}
-
-		@Override
-		public Adapter casePivotableElementCS(PivotableElementCS object) {
-			return createPivotableElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseModelElementCS(ModelElementCS object) {
-			return createModelElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseMorePivotable(MorePivotable object) {
-			return createMorePivotableAdapter();
-		}
-
-		@Override
-		public Adapter caseNameable(Nameable object) {
-			return createNameableAdapter();
-		}
-
-		@Override
-		public Adapter caseNamedElementCS(NamedElementCS object) {
-			return createNamedElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNamespaceCS(NamespaceCS object) {
-			return createNamespaceCSAdapter();
-		}
-
-		@Override
-		public Adapter casePackageCS(PackageCS object) {
-			return createPackageCSAdapter();
-		}
-
-		@Override
-		public Adapter caseRootCS(RootCS object) {
-			return createRootCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTypedElementCS(TypedElementCS object) {
-			return createTypedElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseExpCS(ExpCS object) {
-			return createExpCSAdapter();
-		}
-
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+	protected CompleteOCLCSSwitch<Adapter> modelSwitch = new CompleteOCLCSSwitch<Adapter>()
+		{
+			@Override
+			public Adapter caseClassifierContextDeclCS(ClassifierContextDeclCS object)
+			{
+				return createClassifierContextDeclCSAdapter();
+			}
+			@Override
+			public Adapter caseCompleteOCLDocumentCS(CompleteOCLDocumentCS object)
+			{
+				return createCompleteOCLDocumentCSAdapter();
+			}
+			@Override
+			public Adapter caseContextDeclCS(ContextDeclCS object)
+			{
+				return createContextDeclCSAdapter();
+			}
+			@Override
+			public Adapter caseDefCS(DefCS object)
+			{
+				return createDefCSAdapter();
+			}
+			@Override
+			public Adapter caseDefOperationCS(DefOperationCS object)
+			{
+				return createDefOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseDefPropertyCS(DefPropertyCS object)
+			{
+				return createDefPropertyCSAdapter();
+			}
+			@Override
+			public Adapter caseFeatureContextDeclCS(FeatureContextDeclCS object)
+			{
+				return createFeatureContextDeclCSAdapter();
+			}
+			@Override
+			public Adapter caseIncludeCS(IncludeCS object)
+			{
+				return createIncludeCSAdapter();
+			}
+			@Override
+			public Adapter caseOCLMessageArgCS(OCLMessageArgCS object)
+			{
+				return createOCLMessageArgCSAdapter();
+			}
+			@Override
+			public Adapter caseOperationContextDeclCS(OperationContextDeclCS object)
+			{
+				return createOperationContextDeclCSAdapter();
+			}
+			@Override
+			public Adapter casePackageDeclarationCS(PackageDeclarationCS object)
+			{
+				return createPackageDeclarationCSAdapter();
+			}
+			@Override
+			public Adapter casePathNameDeclCS(PathNameDeclCS object)
+			{
+				return createPathNameDeclCSAdapter();
+			}
+			@Override
+			public Adapter casePropertyContextDeclCS(PropertyContextDeclCS object)
+			{
+				return createPropertyContextDeclCSAdapter();
+			}
+			@Override
+			public Adapter caseVisitableCS(VisitableCS object)
+			{
+				return createVisitableCSAdapter();
+			}
+			@Override
+			public Adapter caseElementCS(ElementCS object)
+			{
+				return createElementCSAdapter();
+			}
+			@Override
+			public Adapter casePivotable(Pivotable object)
+			{
+				return createPivotableAdapter();
+			}
+			@Override
+			public Adapter casePivotableElementCS(PivotableElementCS object)
+			{
+				return createPivotableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseModelElementCS(ModelElementCS object)
+			{
+				return createModelElementCSAdapter();
+			}
+			@Override
+			public Adapter caseMorePivotable(MorePivotable object)
+			{
+				return createMorePivotableAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object)
+			{
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNamedElementCS(NamedElementCS object)
+			{
+				return createNamedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseNamespaceCS(NamespaceCS object)
+			{
+				return createNamespaceCSAdapter();
+			}
+			@Override
+			public Adapter casePackageCS(PackageCS object)
+			{
+				return createPackageCSAdapter();
+			}
+			@Override
+			public Adapter caseRootCS(RootCS object)
+			{
+				return createRootCSAdapter();
+			}
+			@Override
+			public Adapter caseTypedElementCS(TypedElementCS object)
+			{
+				return createTypedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseExpCS(ExpCS object)
+			{
+				return createExpCSAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object)
+			{
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -253,7 +257,7 @@ public class CompleteOCLCSAdapterFactory
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject) target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 	/**

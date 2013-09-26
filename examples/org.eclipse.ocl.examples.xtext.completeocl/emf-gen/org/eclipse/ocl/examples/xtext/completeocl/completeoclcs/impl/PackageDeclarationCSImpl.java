@@ -24,12 +24,16 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,10 +88,9 @@ public class PackageDeclarationCSImpl
 	 * @generated
 	 */
 	public EList<ContextDeclCS> getContexts() {
-		if (contexts == null) {
-			contexts = new EObjectContainmentEList<ContextDeclCS>(
-				ContextDeclCS.class, this,
-				CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS);
+		if (contexts == null)
+		{
+			contexts = new EObjectContainmentEList<ContextDeclCS>(ContextDeclCS.class, this, CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS);
 		}
 		return contexts;
 	}
@@ -100,10 +103,10 @@ public class PackageDeclarationCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS :
-				return ((InternalEList<?>) getContexts()).basicRemove(otherEnd,
-					msgs);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS:
+				return ((InternalEList<?>)getContexts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,10 +118,11 @@ public class PackageDeclarationCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__PACKAGE :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__PACKAGE:
 				return getPackage();
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS :
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS:
 				return getContexts();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -132,11 +136,11 @@ public class PackageDeclarationCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS:
 				getContexts().clear();
-				getContexts().addAll(
-					(Collection<? extends ContextDeclCS>) newValue);
+				getContexts().addAll((Collection<? extends ContextDeclCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,8 +153,9 @@ public class PackageDeclarationCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS:
 				getContexts().clear();
 				return;
 		}
@@ -164,13 +169,24 @@ public class PackageDeclarationCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__PACKAGE :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__PACKAGE:
 				return getPackage() != null;
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS :
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS__CONTEXTS:
 				return contexts != null && !contexts.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitPackageDeclarationCS(this);
 	}
 
 	/**

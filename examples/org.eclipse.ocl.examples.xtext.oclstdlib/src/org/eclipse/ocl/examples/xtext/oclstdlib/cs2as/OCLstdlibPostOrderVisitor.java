@@ -20,9 +20,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibPostOrderVisitor;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibCSPostOrderVisitor;
 
-public class OCLstdlibPostOrderVisitor extends AbstractOCLstdlibPostOrderVisitor
+public class OCLstdlibPostOrderVisitor extends AbstractOCLstdlibCSPostOrderVisitor
 {		
 	public OCLstdlibPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);

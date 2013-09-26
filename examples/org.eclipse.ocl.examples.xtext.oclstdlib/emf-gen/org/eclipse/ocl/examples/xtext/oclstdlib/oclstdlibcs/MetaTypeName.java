@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage#getMetaTypeName()
- * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS org.eclipse.ocl.examples.pivot.Nameable"
+ * @model superTypes="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
 public interface MetaTypeName

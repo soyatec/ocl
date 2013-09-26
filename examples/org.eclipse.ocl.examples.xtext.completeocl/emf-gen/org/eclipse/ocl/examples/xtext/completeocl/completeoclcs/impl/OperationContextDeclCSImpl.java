@@ -26,12 +26,16 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSFactory;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
@@ -133,10 +137,9 @@ public class OperationContextDeclCSImpl
 	 * @generated
 	 */
 	public EList<ParameterCS> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<ParameterCS>(
-				ParameterCS.class, this,
-				CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS);
+		if (parameters == null)
+		{
+			parameters = new EObjectContainmentEList<ParameterCS>(ParameterCS.class, this, CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -166,15 +169,10 @@ public class OperationContextDeclCSImpl
 			NotificationChain msgs) {
 		VariableCS oldResult = result;
 		result = newResult;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT,
-				oldResult, newResult);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT, oldResult, newResult);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -185,29 +183,18 @@ public class OperationContextDeclCSImpl
 	 * @generated
 	 */
 	public void setResult(VariableCS newResult) {
-		if (newResult != result) {
+		if (newResult != result)
+		{
 			NotificationChain msgs = null;
 			if (result != null)
-				msgs = ((InternalEObject) result)
-					.eInverseRemove(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT,
-						null, msgs);
+				msgs = ((InternalEObject)result).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT, null, msgs);
 			if (newResult != null)
-				msgs = ((InternalEObject) newResult)
-					.eInverseAdd(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT,
-						null, msgs);
+				msgs = ((InternalEObject)newResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT, null, msgs);
 			msgs = basicSetResult(newResult, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT,
-				newResult, newResult));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT, newResult, newResult));
 	}
 
 	/**
@@ -216,10 +203,9 @@ public class OperationContextDeclCSImpl
 	 * @generated
 	 */
 	public EList<ConstraintCS> getPreconditions() {
-		if (preconditions == null) {
-			preconditions = new EObjectContainmentEList<ConstraintCS>(
-				ConstraintCS.class, this,
-				CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS);
+		if (preconditions == null)
+		{
+			preconditions = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS);
 		}
 		return preconditions;
 	}
@@ -230,10 +216,9 @@ public class OperationContextDeclCSImpl
 	 * @generated
 	 */
 	public EList<ConstraintCS> getPostconditions() {
-		if (postconditions == null) {
-			postconditions = new EObjectContainmentEList<ConstraintCS>(
-				ConstraintCS.class, this,
-				CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS);
+		if (postconditions == null)
+		{
+			postconditions = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS);
 		}
 		return postconditions;
 	}
@@ -244,10 +229,9 @@ public class OperationContextDeclCSImpl
 	 * @generated
 	 */
 	public EList<ExpSpecificationCS> getBodies() {
-		if (bodies == null) {
-			bodies = new EObjectContainmentEList<ExpSpecificationCS>(
-				ExpSpecificationCS.class, this,
-				CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES);
+		if (bodies == null)
+		{
+			bodies = new EObjectContainmentEList<ExpSpecificationCS>(ExpSpecificationCS.class, this, CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES);
 		}
 		return bodies;
 	}
@@ -260,21 +244,18 @@ public class OperationContextDeclCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS :
-				return ((InternalEList<?>) getParameters()).basicRemove(
-					otherEnd, msgs);
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT:
 				return basicSetResult(null, msgs);
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS :
-				return ((InternalEList<?>) getPreconditions()).basicRemove(
-					otherEnd, msgs);
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS :
-				return ((InternalEList<?>) getPostconditions()).basicRemove(
-					otherEnd, msgs);
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES :
-				return ((InternalEList<?>) getBodies()).basicRemove(otherEnd,
-					msgs);
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS:
+				return ((InternalEList<?>)getPreconditions()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS:
+				return ((InternalEList<?>)getPostconditions()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES:
+				return ((InternalEList<?>)getBodies()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -286,18 +267,19 @@ public class OperationContextDeclCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__OPERATION :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__OPERATION:
 				return getOperation();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS:
 				return getParameters();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT:
 				return getResult();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS:
 				return getPreconditions();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS:
 				return getPostconditions();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES:
 				return getBodies();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -311,29 +293,26 @@ public class OperationContextDeclCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll(
-					(Collection<? extends ParameterCS>) newValue);
+				getParameters().addAll((Collection<? extends ParameterCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT :
-				setResult((VariableCS) newValue);
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT:
+				setResult((VariableCS)newValue);
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS:
 				getPreconditions().clear();
-				getPreconditions().addAll(
-					(Collection<? extends ConstraintCS>) newValue);
+				getPreconditions().addAll((Collection<? extends ConstraintCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS:
 				getPostconditions().clear();
-				getPostconditions().addAll(
-					(Collection<? extends ConstraintCS>) newValue);
+				getPostconditions().addAll((Collection<? extends ConstraintCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES:
 				getBodies().clear();
-				getBodies().addAll(
-					(Collection<? extends ExpSpecificationCS>) newValue);
+				getBodies().addAll((Collection<? extends ExpSpecificationCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -346,20 +325,21 @@ public class OperationContextDeclCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS:
 				getParameters().clear();
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT :
-				setResult((VariableCS) null);
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT:
+				setResult((VariableCS)null);
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS:
 				getPreconditions().clear();
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS:
 				getPostconditions().clear();
 				return;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES:
 				getBodies().clear();
 				return;
 		}
@@ -373,21 +353,32 @@ public class OperationContextDeclCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__OPERATION :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__OPERATION:
 				return getOperation() != null;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__RESULT:
 				return result != null;
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS:
 				return preconditions != null && !preconditions.isEmpty();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS:
 				return postconditions != null && !postconditions.isEmpty();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES :
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS__BODIES:
 				return bodies != null && !bodies.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitOperationContextDeclCS(this);
 	}
 
 	/**

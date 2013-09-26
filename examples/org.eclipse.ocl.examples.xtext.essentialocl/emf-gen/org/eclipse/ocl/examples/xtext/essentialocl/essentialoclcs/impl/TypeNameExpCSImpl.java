@@ -21,12 +21,16 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.TypedRefCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,15 +97,10 @@ public class TypeNameExpCSImpl
 			NotificationChain msgs) {
 		PathNameCS oldPathName = pathName;
 		pathName = newPathName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME, oldPathName,
-				newPathName);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME, oldPathName, newPathName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -112,25 +111,18 @@ public class TypeNameExpCSImpl
 	 * @generated
 	 */
 	public void setPathName(PathNameCS newPathName) {
-		if (newPathName != pathName) {
+		if (newPathName != pathName)
+		{
 			NotificationChain msgs = null;
 			if (pathName != null)
-				msgs = ((InternalEObject) pathName).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME,
-					null, msgs);
+				msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME, null, msgs);
 			if (newPathName != null)
-				msgs = ((InternalEObject) newPathName).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME,
-					null, msgs);
+				msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME, null, msgs);
 			msgs = basicSetPathName(newPathName, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME, newPathName,
-				newPathName));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME, newPathName, newPathName));
 	}
 
 	/**
@@ -141,8 +133,9 @@ public class TypeNameExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME:
 				return basicSetPathName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -164,10 +157,11 @@ public class TypeNameExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME:
 				return getPathName();
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__ELEMENT :
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__ELEMENT:
 				return getElement();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -180,9 +174,10 @@ public class TypeNameExpCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME :
-				setPathName((PathNameCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME:
+				setPathName((PathNameCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,9 +190,10 @@ public class TypeNameExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME :
-				setPathName((PathNameCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME:
+				setPathName((PathNameCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -210,13 +206,24 @@ public class TypeNameExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__PATH_NAME:
 				return pathName != null;
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__ELEMENT :
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS__ELEMENT:
 				return getElement() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitTypeNameExpCS(this);
 	}
 
 	/**

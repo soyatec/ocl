@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getNamedElementCS()
- * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
 public interface NamedElementCS extends ModelElementCS, Nameable {

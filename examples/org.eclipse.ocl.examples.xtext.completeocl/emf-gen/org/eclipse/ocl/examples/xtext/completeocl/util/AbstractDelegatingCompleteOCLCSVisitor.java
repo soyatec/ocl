@@ -13,7 +13,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: org.eclipse.ocl.examples.xtext.completeocl/model/CompleteOCLCST.genmodel
+ * from: org.eclipse.ocl.examples.xtext.completeocl/model/CompleteOCLCS.genmodel
  *
  * Do not edit it.
  */

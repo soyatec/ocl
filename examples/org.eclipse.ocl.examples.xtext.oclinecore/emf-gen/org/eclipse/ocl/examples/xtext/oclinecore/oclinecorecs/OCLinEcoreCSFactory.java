@@ -60,6 +60,6 @@ public interface OCLinEcoreCSFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	OCLinEcoreCSPackage getOCLinEcoreCSTPackage();
+	OCLinEcoreCSPackage getOCLinEcoreCSPackage();
 
 } //OCLinEcoreCSTFactory

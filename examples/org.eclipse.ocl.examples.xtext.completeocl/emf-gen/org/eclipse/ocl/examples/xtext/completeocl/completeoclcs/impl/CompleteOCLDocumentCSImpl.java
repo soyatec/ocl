@@ -25,17 +25,21 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.PackageCSImpl;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -133,10 +137,9 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	public EList<ImportCS> getOwnedImport() {
-		if (ownedImport == null) {
-			ownedImport = new EObjectContainmentEList<ImportCS>(ImportCS.class,
-				this,
-				CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT);
+		if (ownedImport == null)
+		{
+			ownedImport = new EObjectContainmentEList<ImportCS>(ImportCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT);
 		}
 		return ownedImport;
 	}
@@ -147,10 +150,9 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	public EList<LibraryCS> getOwnedLibrary() {
-		if (ownedLibrary == null) {
-			ownedLibrary = new EObjectContainmentEList<LibraryCS>(
-				LibraryCS.class, this,
-				CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY);
+		if (ownedLibrary == null)
+		{
+			ownedLibrary = new EObjectContainmentEList<LibraryCS>(LibraryCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY);
 		}
 		return ownedLibrary;
 	}
@@ -161,10 +163,9 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	public EList<PackageDeclarationCS> getPackages() {
-		if (packages == null) {
-			packages = new EObjectContainmentEList<PackageDeclarationCS>(
-				PackageDeclarationCS.class, this,
-				CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES);
+		if (packages == null)
+		{
+			packages = new EObjectContainmentEList<PackageDeclarationCS>(PackageDeclarationCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES);
 		}
 		return packages;
 	}
@@ -175,10 +176,9 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	public EList<ContextDeclCS> getContexts() {
-		if (contexts == null) {
-			contexts = new EObjectContainmentEList<ContextDeclCS>(
-				ContextDeclCS.class, this,
-				CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS);
+		if (contexts == null)
+		{
+			contexts = new EObjectContainmentEList<ContextDeclCS>(ContextDeclCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS);
 		}
 		return contexts;
 	}
@@ -189,10 +189,9 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	public EList<IncludeCS> getOwnedInclude() {
-		if (ownedInclude == null) {
-			ownedInclude = new EObjectContainmentEList<IncludeCS>(
-				IncludeCS.class, this,
-				CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE);
+		if (ownedInclude == null)
+		{
+			ownedInclude = new EObjectContainmentEList<IncludeCS>(IncludeCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE);
 		}
 		return ownedInclude;
 	}
@@ -205,22 +204,18 @@ public class CompleteOCLDocumentCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT :
-				return ((InternalEList<?>) getOwnedImport()).basicRemove(
-					otherEnd, msgs);
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY :
-				return ((InternalEList<?>) getOwnedLibrary()).basicRemove(
-					otherEnd, msgs);
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES :
-				return ((InternalEList<?>) getPackages()).basicRemove(otherEnd,
-					msgs);
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS :
-				return ((InternalEList<?>) getContexts()).basicRemove(otherEnd,
-					msgs);
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE :
-				return ((InternalEList<?>) getOwnedInclude()).basicRemove(
-					otherEnd, msgs);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT:
+				return ((InternalEList<?>)getOwnedImport()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY:
+				return ((InternalEList<?>)getOwnedLibrary()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES:
+				return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS:
+				return ((InternalEList<?>)getContexts()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE:
+				return ((InternalEList<?>)getOwnedInclude()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -232,16 +227,17 @@ public class CompleteOCLDocumentCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT:
 				return getOwnedImport();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY:
 				return getOwnedLibrary();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES:
 				return getPackages();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS:
 				return getContexts();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE:
 				return getOwnedInclude();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -255,31 +251,27 @@ public class CompleteOCLDocumentCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT:
 				getOwnedImport().clear();
-				getOwnedImport().addAll(
-					(Collection<? extends ImportCS>) newValue);
+				getOwnedImport().addAll((Collection<? extends ImportCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY:
 				getOwnedLibrary().clear();
-				getOwnedLibrary().addAll(
-					(Collection<? extends LibraryCS>) newValue);
+				getOwnedLibrary().addAll((Collection<? extends LibraryCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES:
 				getPackages().clear();
-				getPackages().addAll(
-					(Collection<? extends PackageDeclarationCS>) newValue);
+				getPackages().addAll((Collection<? extends PackageDeclarationCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS:
 				getContexts().clear();
-				getContexts().addAll(
-					(Collection<? extends ContextDeclCS>) newValue);
+				getContexts().addAll((Collection<? extends ContextDeclCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE:
 				getOwnedInclude().clear();
-				getOwnedInclude().addAll(
-					(Collection<? extends IncludeCS>) newValue);
+				getOwnedInclude().addAll((Collection<? extends IncludeCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -292,20 +284,21 @@ public class CompleteOCLDocumentCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT:
 				getOwnedImport().clear();
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY:
 				getOwnedLibrary().clear();
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES:
 				getPackages().clear();
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS:
 				getContexts().clear();
 				return;
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE:
 				getOwnedInclude().clear();
 				return;
 		}
@@ -319,16 +312,17 @@ public class CompleteOCLDocumentCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT:
 				return ownedImport != null && !ownedImport.isEmpty();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY:
 				return ownedLibrary != null && !ownedLibrary.isEmpty();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__PACKAGES:
 				return packages != null && !packages.isEmpty();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__CONTEXTS:
 				return contexts != null && !contexts.isEmpty();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE :
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE:
 				return ownedInclude != null && !ownedInclude.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -341,14 +335,13 @@ public class CompleteOCLDocumentCSImpl
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == RootCS.class) {
-			switch (derivedFeatureID) {
-				case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT :
-					return BaseCSPackage.ROOT_CS__OWNED_IMPORT;
-				case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY :
-					return BaseCSPackage.ROOT_CS__OWNED_LIBRARY;
-				default :
-					return -1;
+		if (baseClass == RootCS.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT: return BaseCSPackage.ROOT_CS__OWNED_IMPORT;
+				case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY: return BaseCSPackage.ROOT_CS__OWNED_LIBRARY;
+				default: return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -361,17 +354,26 @@ public class CompleteOCLDocumentCSImpl
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == RootCS.class) {
-			switch (baseFeatureID) {
-				case BaseCSPackage.ROOT_CS__OWNED_IMPORT :
-					return CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT;
-				case BaseCSPackage.ROOT_CS__OWNED_LIBRARY :
-					return CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY;
-				default :
-					return -1;
+		if (baseClass == RootCS.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BaseCSPackage.ROOT_CS__OWNED_IMPORT: return CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT;
+				case BaseCSPackage.ROOT_CS__OWNED_LIBRARY: return CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY;
+				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitCompleteOCLDocumentCS(this);
 	}
 
 	/**

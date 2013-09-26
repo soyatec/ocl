@@ -22,9 +22,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefOperationCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,10 +82,9 @@ public class DefOperationCSImpl
 	 * @generated
 	 */
 	public EList<ParameterCS> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<ParameterCS>(
-				ParameterCS.class, this,
-				CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS);
+		if (parameters == null)
+		{
+			parameters = new EObjectContainmentEList<ParameterCS>(ParameterCS.class, this, CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -94,10 +97,10 @@ public class DefOperationCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS :
-				return ((InternalEList<?>) getParameters()).basicRemove(
-					otherEnd, msgs);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -109,8 +112,9 @@ public class DefOperationCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS:
 				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -124,11 +128,11 @@ public class DefOperationCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll(
-					(Collection<? extends ParameterCS>) newValue);
+				getParameters().addAll((Collection<? extends ParameterCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -141,8 +145,9 @@ public class DefOperationCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS:
 				getParameters().clear();
 				return;
 		}
@@ -156,10 +161,21 @@ public class DefOperationCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_OPERATION_CS__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitDefOperationCS(this);
 	}
 } //DefOperationCSImpl

@@ -20,11 +20,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,14 +93,14 @@ public class ConstructorPartCSImpl
 	 * @generated
 	 */
 	public Property getProperty() {
-		if (property != null && ((EObject) property).eIsProxy()) {
-			InternalEObject oldProperty = (InternalEObject) property;
-			property = (Property) eResolveProxy(oldProperty);
-			if (property != oldProperty) {
+		if (property != null && ((EObject)property).eIsProxy())
+		{
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (Property)eResolveProxy(oldProperty);
+			if (property != oldProperty)
+			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-						EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY,
-						oldProperty, property));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY, oldProperty, property));
 			}
 		}
 		return property;
@@ -120,9 +124,7 @@ public class ConstructorPartCSImpl
 		Property oldProperty = property;
 		property = newProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY,
-				oldProperty, property));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY, oldProperty, property));
 	}
 
 	/**
@@ -143,15 +145,10 @@ public class ConstructorPartCSImpl
 			NotificationChain msgs) {
 		ExpCS oldInitExpression = initExpression;
 		initExpression = newInitExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION,
-				oldInitExpression, newInitExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION, oldInitExpression, newInitExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -162,29 +159,18 @@ public class ConstructorPartCSImpl
 	 * @generated
 	 */
 	public void setInitExpression(ExpCS newInitExpression) {
-		if (newInitExpression != initExpression) {
+		if (newInitExpression != initExpression)
+		{
 			NotificationChain msgs = null;
 			if (initExpression != null)
-				msgs = ((InternalEObject) initExpression)
-					.eInverseRemove(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION,
-						null, msgs);
+				msgs = ((InternalEObject)initExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION, null, msgs);
 			if (newInitExpression != null)
-				msgs = ((InternalEObject) newInitExpression)
-					.eInverseAdd(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION,
-						null, msgs);
+				msgs = ((InternalEObject)newInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION, null, msgs);
 			msgs = basicSetInitExpression(newInitExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION,
-				newInitExpression, newInitExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION, newInitExpression, newInitExpression));
 	}
 
 	/**
@@ -195,8 +181,9 @@ public class ConstructorPartCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION:
 				return basicSetInitExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -209,12 +196,12 @@ public class ConstructorPartCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY :
-				if (resolve)
-					return getProperty();
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY:
+				if (resolve) return getProperty();
 				return basicGetProperty();
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION :
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION:
 				return getInitExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -227,12 +214,13 @@ public class ConstructorPartCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY :
-				setProperty((Property) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY:
+				setProperty((Property)newValue);
 				return;
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION :
-				setInitExpression((ExpCS) newValue);
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION:
+				setInitExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -245,12 +233,13 @@ public class ConstructorPartCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY :
-				setProperty((Property) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY:
+				setProperty((Property)null);
 				return;
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION :
-				setInitExpression((ExpCS) null);
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION:
+				setInitExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -263,13 +252,24 @@ public class ConstructorPartCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__PROPERTY:
 				return property != null;
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION :
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS__INIT_EXPRESSION:
 				return initExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitConstructorPartCS(this);
 	}
 
 	/**

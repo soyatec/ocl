@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.pivot.Element;
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractOCLstdlibLeft2RightVisitor
+public abstract class AbstractOCLstdlibCSLeft2RightVisitor
 	extends EssentialOCLLeft2RightVisitor
 	implements OCLstdlibCSVisitor<Element>
 {
@@ -41,7 +41,7 @@ public abstract class AbstractOCLstdlibLeft2RightVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractOCLstdlibLeft2RightVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractOCLstdlibCSLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

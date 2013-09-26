@@ -101,9 +101,8 @@ public abstract class DefCSImpl
 	 * @generated
 	 */
 	public ClassifierContextDeclCS getClassifierContextDecl() {
-		if (eContainerFeatureID() != CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL)
-			return null;
-		return (ClassifierContextDeclCS) eInternalContainer();
+		if (eContainerFeatureID() != CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL) return null;
+		return (ClassifierContextDeclCS)eInternalContainer();
 	}
 
 	/**
@@ -124,14 +123,10 @@ public abstract class DefCSImpl
 			ExpSpecificationCS newSpecification, NotificationChain msgs) {
 		ExpSpecificationCS oldSpecification = specification;
 		specification = newSpecification;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET, CompleteOCLCSPackage.DEF_CS__SPECIFICATION,
-				oldSpecification, newSpecification);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.DEF_CS__SPECIFICATION, oldSpecification, newSpecification);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -142,25 +137,18 @@ public abstract class DefCSImpl
 	 * @generated
 	 */
 	public void setSpecification(ExpSpecificationCS newSpecification) {
-		if (newSpecification != specification) {
+		if (newSpecification != specification)
+		{
 			NotificationChain msgs = null;
 			if (specification != null)
-				msgs = ((InternalEObject) specification).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- CompleteOCLCSPackage.DEF_CS__SPECIFICATION, null,
-					msgs);
+				msgs = ((InternalEObject)specification).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.DEF_CS__SPECIFICATION, null, msgs);
 			if (newSpecification != null)
-				msgs = ((InternalEObject) newSpecification).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- CompleteOCLCSPackage.DEF_CS__SPECIFICATION, null,
-					msgs);
+				msgs = ((InternalEObject)newSpecification).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.DEF_CS__SPECIFICATION, null, msgs);
 			msgs = basicSetSpecification(newSpecification, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				CompleteOCLCSPackage.DEF_CS__SPECIFICATION, newSpecification,
-				newSpecification));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.DEF_CS__SPECIFICATION, newSpecification, newSpecification));
 	}
 
 	/**
@@ -181,8 +169,7 @@ public abstract class DefCSImpl
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				CompleteOCLCSPackage.DEF_CS__STATIC, oldStatic, static_));
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.DEF_CS__STATIC, oldStatic, static_));
 	}
 
 	/**
@@ -192,14 +179,7 @@ public abstract class DefCSImpl
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (static: ");
-		result.append(static_);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
@@ -210,12 +190,12 @@ public abstract class DefCSImpl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return eBasicSetContainer(otherEnd,
-					CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL, msgs);
+				return eBasicSetContainer(otherEnd, CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -228,11 +208,11 @@ public abstract class DefCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL :
-				return eBasicSetContainer(null,
-					CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL, msgs);
-			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				return eBasicSetContainer(null, CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL, msgs);
+			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION:
 				return basicSetSpecification(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -246,13 +226,10 @@ public abstract class DefCSImpl
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL :
-				return eInternalContainer()
-					.eInverseRemove(
-						this,
-						CompleteOCLCSPackage.CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS,
-						ClassifierContextDeclCS.class, msgs);
+		switch (eContainerFeatureID())
+		{
+			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				return eInternalContainer().eInverseRemove(this, CompleteOCLCSPackage.CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS, ClassifierContextDeclCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -264,12 +241,13 @@ public abstract class DefCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
 				return getClassifierContextDecl();
-			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION :
+			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION:
 				return getSpecification();
-			case CompleteOCLCSPackage.DEF_CS__STATIC :
+			case CompleteOCLCSPackage.DEF_CS__STATIC:
 				return isStatic();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -282,12 +260,13 @@ public abstract class DefCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION :
-				setSpecification((ExpSpecificationCS) newValue);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION:
+				setSpecification((ExpSpecificationCS)newValue);
 				return;
-			case CompleteOCLCSPackage.DEF_CS__STATIC :
-				setStatic((Boolean) newValue);
+			case CompleteOCLCSPackage.DEF_CS__STATIC:
+				setStatic((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -300,11 +279,12 @@ public abstract class DefCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION :
-				setSpecification((ExpSpecificationCS) null);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION:
+				setSpecification((ExpSpecificationCS)null);
 				return;
-			case CompleteOCLCSPackage.DEF_CS__STATIC :
+			case CompleteOCLCSPackage.DEF_CS__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
 		}
@@ -318,12 +298,13 @@ public abstract class DefCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
 				return getClassifierContextDecl() != null;
-			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION :
+			case CompleteOCLCSPackage.DEF_CS__SPECIFICATION:
 				return specification != null;
-			case CompleteOCLCSPackage.DEF_CS__STATIC :
+			case CompleteOCLCSPackage.DEF_CS__STATIC:
 				return static_ != STATIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

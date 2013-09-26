@@ -21,11 +21,15 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -102,15 +106,10 @@ public class VariableCSImpl
 			NotificationChain msgs) {
 		TypedRefCS oldOwnedType = ownedType;
 		ownedType = newOwnedType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, oldOwnedType,
-				newOwnedType);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -121,25 +120,18 @@ public class VariableCSImpl
 	 * @generated
 	 */
 	public void setOwnedType(TypedRefCS newOwnedType) {
-		if (newOwnedType != ownedType) {
+		if (newOwnedType != ownedType)
+		{
 			NotificationChain msgs = null;
 			if (ownedType != null)
-				msgs = ((InternalEObject) ownedType).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, null,
-					msgs);
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, null, msgs);
 			if (newOwnedType != null)
-				msgs = ((InternalEObject) newOwnedType).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, null,
-					msgs);
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, null, msgs);
 			msgs = basicSetOwnedType(newOwnedType, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, newOwnedType,
-				newOwnedType));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -160,15 +152,10 @@ public class VariableCSImpl
 			NotificationChain msgs) {
 		ExpCS oldInitExpression = initExpression;
 		initExpression = newInitExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION,
-				oldInitExpression, newInitExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION, oldInitExpression, newInitExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -179,25 +166,18 @@ public class VariableCSImpl
 	 * @generated
 	 */
 	public void setInitExpression(ExpCS newInitExpression) {
-		if (newInitExpression != initExpression) {
+		if (newInitExpression != initExpression)
+		{
 			NotificationChain msgs = null;
 			if (initExpression != null)
-				msgs = ((InternalEObject) initExpression).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)initExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION, null, msgs);
 			if (newInitExpression != null)
-				msgs = ((InternalEObject) newInitExpression).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)newInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION, null, msgs);
 			msgs = basicSetInitExpression(newInitExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION,
-				newInitExpression, newInitExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION, newInitExpression, newInitExpression));
 	}
 
 	/**
@@ -208,10 +188,11 @@ public class VariableCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE:
 				return basicSetOwnedType(null, msgs);
-			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION :
+			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION:
 				return basicSetInitExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -224,10 +205,11 @@ public class VariableCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE:
 				return getOwnedType();
-			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION :
+			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION:
 				return getInitExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -240,12 +222,13 @@ public class VariableCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE :
-				setOwnedType((TypedRefCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)newValue);
 				return;
-			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION :
-				setInitExpression((ExpCS) newValue);
+			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION:
+				setInitExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -258,12 +241,13 @@ public class VariableCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE :
-				setOwnedType((TypedRefCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)null);
 				return;
-			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION :
-				setInitExpression((ExpCS) null);
+			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION:
+				setInitExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -276,12 +260,23 @@ public class VariableCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.VARIABLE_CS__OWNED_TYPE:
 				return ownedType != null;
-			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION :
+			case EssentialOCLCSPackage.VARIABLE_CS__INIT_EXPRESSION:
 				return initExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitVariableCS(this);
 	}
 } //VariableCSImpl

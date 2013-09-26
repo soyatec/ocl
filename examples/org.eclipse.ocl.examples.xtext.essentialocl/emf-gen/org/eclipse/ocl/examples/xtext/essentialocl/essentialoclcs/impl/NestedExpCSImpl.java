@@ -22,9 +22,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NestedExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,14 +94,10 @@ public class NestedExpCSImpl
 			NotificationChain msgs) {
 		ExpCS oldSource = source;
 		source = newSource;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET, EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE,
-				oldSource, newSource);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, oldSource, newSource);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -108,25 +108,18 @@ public class NestedExpCSImpl
 	 * @generated
 	 */
 	public void setSource(ExpCS newSource) {
-		if (newSource != source) {
+		if (newSource != source)
+		{
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject) source).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, null,
-					msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, null, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject) newSource).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, null,
-					msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, null, msgs);
 			msgs = basicSetSource(newSource, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, newSource,
-				newSource));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE, newSource, newSource));
 	}
 
 	/**
@@ -137,8 +130,9 @@ public class NestedExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE:
 				return basicSetSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -151,8 +145,9 @@ public class NestedExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE:
 				return getSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -165,9 +160,10 @@ public class NestedExpCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE :
-				setSource((ExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE:
+				setSource((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,9 +176,10 @@ public class NestedExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE :
-				setSource((ExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE:
+				setSource((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -195,10 +192,21 @@ public class NestedExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NESTED_EXP_CS__SOURCE:
 				return source != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNestedExpCS(this);
 	}
 } //NestedExpCSImpl

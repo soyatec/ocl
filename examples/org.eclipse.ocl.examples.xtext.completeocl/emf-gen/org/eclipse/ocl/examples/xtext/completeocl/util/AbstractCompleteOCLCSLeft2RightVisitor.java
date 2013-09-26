@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLLeft2RightV
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractCompleteOCLLeft2RightVisitor
+public abstract class AbstractCompleteOCLCSLeft2RightVisitor
 	extends EssentialOCLLeft2RightVisitor
 	implements CompleteOCLCSVisitor<Element>
 {
@@ -41,7 +41,7 @@ public abstract class AbstractCompleteOCLLeft2RightVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractCompleteOCLLeft2RightVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractCompleteOCLCSLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

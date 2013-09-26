@@ -71,8 +71,7 @@ public interface CompleteOCLCSPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	CompleteOCLCSPackage eINSTANCE = org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLCSPackageImpl
-		.init();
+	CompleteOCLCSPackage eINSTANCE = org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLCSPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.PackageDeclarationCSImpl <em>Package Declaration CS</em>}' class.
@@ -1948,8 +1947,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FEATURE_CONTEXT_DECL_CS__CLASS = eINSTANCE
-			.getFeatureContextDeclCS_Class();
+		EReference FEATURE_CONTEXT_DECL_CS__CLASS = eINSTANCE.getFeatureContextDeclCS_Class();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference feature.
@@ -1957,8 +1955,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FEATURE_CONTEXT_DECL_CS__OWNED_TYPE = eINSTANCE
-			.getFeatureContextDeclCS_OwnedType();
+		EReference FEATURE_CONTEXT_DECL_CS__OWNED_TYPE = eINSTANCE.getFeatureContextDeclCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.IncludeCSImpl <em>Include CS</em>}' class.
@@ -1994,8 +1991,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PACKAGE_DECLARATION_CS__PACKAGE = eINSTANCE
-			.getPackageDeclarationCS_Package();
+		EReference PACKAGE_DECLARATION_CS__PACKAGE = eINSTANCE.getPackageDeclarationCS_Package();
 
 		/**
 		 * The meta object literal for the '<em><b>Contexts</b></em>' containment reference list feature.
@@ -2003,8 +1999,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PACKAGE_DECLARATION_CS__CONTEXTS = eINSTANCE
-			.getPackageDeclarationCS_Contexts();
+		EReference PACKAGE_DECLARATION_CS__CONTEXTS = eINSTANCE.getPackageDeclarationCS_Contexts();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.PathNameDeclCSImpl <em>Path Name Decl CS</em>}' class.
@@ -2022,8 +2017,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PATH_NAME_DECL_CS__PATH_NAME = eINSTANCE
-			.getPathNameDeclCS_PathName();
+		EReference PATH_NAME_DECL_CS__PATH_NAME = eINSTANCE.getPathNameDeclCS_PathName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.ContextDeclCSImpl <em>Context Decl CS</em>}' class.
@@ -2051,8 +2045,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_CONTEXT_DECL_CS__PROPERTY = eINSTANCE
-			.getPropertyContextDeclCS_Property();
+		EReference PROPERTY_CONTEXT_DECL_CS__PROPERTY = eINSTANCE.getPropertyContextDeclCS_Property();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Expressions</b></em>' containment reference list feature.
@@ -2060,8 +2053,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS = eINSTANCE
-			.getPropertyContextDeclCS_DefaultExpressions();
+		EReference PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS = eINSTANCE.getPropertyContextDeclCS_DefaultExpressions();
 
 		/**
 		 * The meta object literal for the '<em><b>Derived Invariants</b></em>' containment reference list feature.
@@ -2069,8 +2061,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS = eINSTANCE
-			.getPropertyContextDeclCS_DerivedInvariants();
+		EReference PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS = eINSTANCE.getPropertyContextDeclCS_DerivedInvariants();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.ClassifierContextDeclCSImpl <em>Classifier Context Decl CS</em>}' class.
@@ -2080,8 +2071,7 @@ public interface CompleteOCLCSPackage
 		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLCSPackageImpl#getClassifierContextDeclCS()
 		 * @generated
 		 */
-		EClass CLASSIFIER_CONTEXT_DECL_CS = eINSTANCE
-			.getClassifierContextDeclCS();
+		EClass CLASSIFIER_CONTEXT_DECL_CS = eINSTANCE.getClassifierContextDeclCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Self Name</b></em>' attribute feature.
@@ -2089,8 +2079,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CLASSIFIER_CONTEXT_DECL_CS__SELF_NAME = eINSTANCE
-			.getClassifierContextDeclCS_SelfName();
+		EAttribute CLASSIFIER_CONTEXT_DECL_CS__SELF_NAME = eINSTANCE.getClassifierContextDeclCS_SelfName();
 
 		/**
 		 * The meta object literal for the '<em><b>Classifier</b></em>' reference feature.
@@ -2098,8 +2087,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASSIFIER_CONTEXT_DECL_CS__CLASSIFIER = eINSTANCE
-			.getClassifierContextDeclCS_Classifier();
+		EReference CLASSIFIER_CONTEXT_DECL_CS__CLASSIFIER = eINSTANCE.getClassifierContextDeclCS_Classifier();
 
 		/**
 		 * The meta object literal for the '<em><b>Invariants</b></em>' containment reference list feature.
@@ -2107,8 +2095,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASSIFIER_CONTEXT_DECL_CS__INVARIANTS = eINSTANCE
-			.getClassifierContextDeclCS_Invariants();
+		EReference CLASSIFIER_CONTEXT_DECL_CS__INVARIANTS = eINSTANCE.getClassifierContextDeclCS_Invariants();
 
 		/**
 		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
@@ -2116,8 +2103,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS = eINSTANCE
-			.getClassifierContextDeclCS_Definitions();
+		EReference CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS = eINSTANCE.getClassifierContextDeclCS_Definitions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLDocumentCSImpl <em>Complete OCL Document CS</em>}' class.
@@ -2135,8 +2121,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPLETE_OCL_DOCUMENT_CS__PACKAGES = eINSTANCE
-			.getCompleteOCLDocumentCS_Packages();
+		EReference COMPLETE_OCL_DOCUMENT_CS__PACKAGES = eINSTANCE.getCompleteOCLDocumentCS_Packages();
 
 		/**
 		 * The meta object literal for the '<em><b>Contexts</b></em>' containment reference list feature.
@@ -2144,8 +2129,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPLETE_OCL_DOCUMENT_CS__CONTEXTS = eINSTANCE
-			.getCompleteOCLDocumentCS_Contexts();
+		EReference COMPLETE_OCL_DOCUMENT_CS__CONTEXTS = eINSTANCE.getCompleteOCLDocumentCS_Contexts();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Include</b></em>' containment reference list feature.
@@ -2153,8 +2137,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE = eINSTANCE
-			.getCompleteOCLDocumentCS_OwnedInclude();
+		EReference COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE = eINSTANCE.getCompleteOCLDocumentCS_OwnedInclude();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.DefCSImpl <em>Def CS</em>}' class.
@@ -2172,8 +2155,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEF_CS__CLASSIFIER_CONTEXT_DECL = eINSTANCE
-			.getDefCS_ClassifierContextDecl();
+		EReference DEF_CS__CLASSIFIER_CONTEXT_DECL = eINSTANCE.getDefCS_ClassifierContextDecl();
 
 		/**
 		 * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
@@ -2207,8 +2189,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEF_OPERATION_CS__PARAMETERS = eINSTANCE
-			.getDefOperationCS_Parameters();
+		EReference DEF_OPERATION_CS__PARAMETERS = eINSTANCE.getDefOperationCS_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.DefPropertyCSImpl <em>Def Property CS</em>}' class.
@@ -2228,8 +2209,7 @@ public interface CompleteOCLCSPackage
 		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.CompleteOCLCSPackageImpl#getOperationContextDeclCS()
 		 * @generated
 		 */
-		EClass OPERATION_CONTEXT_DECL_CS = eINSTANCE
-			.getOperationContextDeclCS();
+		EClass OPERATION_CONTEXT_DECL_CS = eINSTANCE.getOperationContextDeclCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
@@ -2237,8 +2217,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION_CONTEXT_DECL_CS__OPERATION = eINSTANCE
-			.getOperationContextDeclCS_Operation();
+		EReference OPERATION_CONTEXT_DECL_CS__OPERATION = eINSTANCE.getOperationContextDeclCS_Operation();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -2246,8 +2225,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION_CONTEXT_DECL_CS__PARAMETERS = eINSTANCE
-			.getOperationContextDeclCS_Parameters();
+		EReference OPERATION_CONTEXT_DECL_CS__PARAMETERS = eINSTANCE.getOperationContextDeclCS_Parameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Result</b></em>' containment reference feature.
@@ -2255,8 +2233,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION_CONTEXT_DECL_CS__RESULT = eINSTANCE
-			.getOperationContextDeclCS_Result();
+		EReference OPERATION_CONTEXT_DECL_CS__RESULT = eINSTANCE.getOperationContextDeclCS_Result();
 
 		/**
 		 * The meta object literal for the '<em><b>Preconditions</b></em>' containment reference list feature.
@@ -2264,8 +2241,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION_CONTEXT_DECL_CS__PRECONDITIONS = eINSTANCE
-			.getOperationContextDeclCS_Preconditions();
+		EReference OPERATION_CONTEXT_DECL_CS__PRECONDITIONS = eINSTANCE.getOperationContextDeclCS_Preconditions();
 
 		/**
 		 * The meta object literal for the '<em><b>Postconditions</b></em>' containment reference list feature.
@@ -2273,8 +2249,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS = eINSTANCE
-			.getOperationContextDeclCS_Postconditions();
+		EReference OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS = eINSTANCE.getOperationContextDeclCS_Postconditions();
 
 		/**
 		 * The meta object literal for the '<em><b>Bodies</b></em>' containment reference list feature.
@@ -2282,8 +2257,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION_CONTEXT_DECL_CS__BODIES = eINSTANCE
-			.getOperationContextDeclCS_Bodies();
+		EReference OPERATION_CONTEXT_DECL_CS__BODIES = eINSTANCE.getOperationContextDeclCS_Bodies();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl.OCLMessageArgCSImpl <em>OCL Message Arg CS</em>}' class.
@@ -2301,8 +2275,7 @@ public interface CompleteOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OCL_MESSAGE_ARG_CS__TYPE = eINSTANCE
-			.getOCLMessageArgCS_Type();
+		EReference OCL_MESSAGE_ARG_CS__TYPE = eINSTANCE.getOCLMessageArgCS_Type();
 
 	}
 

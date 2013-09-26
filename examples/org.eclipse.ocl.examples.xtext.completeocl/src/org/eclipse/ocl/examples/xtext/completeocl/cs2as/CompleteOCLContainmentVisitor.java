@@ -61,11 +61,11 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.AbstractOperationFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 
-public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmentVisitor
+public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLCSContainmentVisitor
 {
 	public class OperationDeclScopeFilter extends AbstractOperationFilter
 	{

@@ -23,17 +23,17 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPostOrderVisitor;
 
 /**
- * An AbstractCompleteOCLContainmentVisitor provides a default implementation for each
+ * An AbstractCompleteOCLPostOrderVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractCompleteOCLContainmentVisitor
-	extends EssentialOCLContainmentVisitor
+public abstract class AbstractCompleteOCLCSPostOrderVisitor
+	extends EssentialOCLPostOrderVisitor
 	implements CompleteOCLCSVisitor<Continuation<?>>
 {
 	/**
@@ -41,7 +41,7 @@ public abstract class AbstractCompleteOCLContainmentVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractCompleteOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractCompleteOCLCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

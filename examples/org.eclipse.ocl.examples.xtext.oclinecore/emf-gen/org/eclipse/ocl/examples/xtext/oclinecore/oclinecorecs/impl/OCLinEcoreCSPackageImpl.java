@@ -90,26 +90,26 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 		if (isInited) return (OCLinEcoreCSPackage)EPackage.Registry.INSTANCE.getEPackage(OCLinEcoreCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		OCLinEcoreCSPackageImpl theOCLinEcoreCSTPackage = (OCLinEcoreCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OCLinEcoreCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OCLinEcoreCSPackageImpl());
+		OCLinEcoreCSPackageImpl theOCLinEcoreCSPackage = (OCLinEcoreCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OCLinEcoreCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OCLinEcoreCSPackageImpl());
 
 		isInited = true;
 
 		// Initialize simple dependencies
-		EssentialOCLCSPackage.eINSTANCE.eClass();
+		BaseCSPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
-		theOCLinEcoreCSTPackage.createPackageContents();
+		theOCLinEcoreCSPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theOCLinEcoreCSTPackage.initializePackageContents();
+		theOCLinEcoreCSPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theOCLinEcoreCSTPackage.freeze();
+		theOCLinEcoreCSPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(OCLinEcoreCSPackage.eNS_URI, theOCLinEcoreCSTPackage);
-		return theOCLinEcoreCSTPackage;
+		EPackage.Registry.INSTANCE.put(OCLinEcoreCSPackage.eNS_URI, theOCLinEcoreCSPackage);
+		return theOCLinEcoreCSPackage;
 	}
 
 	/**
@@ -157,7 +157,8 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLinEcoreCSFactory getOCLinEcoreCSTFactory() {
+	public OCLinEcoreCSFactory getOCLinEcoreCSFactory()
+	{
 		return (OCLinEcoreCSFactory)getEFactoryInstance();
 	}
 
@@ -211,15 +212,15 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		BaseCSPackage theBaseCSTPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
+		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		ocLinEcoreConstraintCSEClass.getESuperTypes().add(theBaseCSTPackage.getConstraintCS());
-		sysMLCSEClass.getESuperTypes().add(theBaseCSTPackage.getAnnotationElementCS());
+		ocLinEcoreConstraintCSEClass.getESuperTypes().add(theBaseCSPackage.getConstraintCS());
+		sysMLCSEClass.getESuperTypes().add(theBaseCSPackage.getAnnotationElementCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(ocLinEcoreConstraintCSEClass, OCLinEcoreConstraintCS.class, "OCLinEcoreConstraintCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

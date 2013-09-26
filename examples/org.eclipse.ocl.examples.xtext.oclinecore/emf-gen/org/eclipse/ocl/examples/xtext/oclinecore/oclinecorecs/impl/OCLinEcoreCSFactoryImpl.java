@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.*;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSFactory;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
@@ -42,10 +43,10 @@ public class OCLinEcoreCSFactoryImpl extends EFactoryImpl implements OCLinEcoreC
 	public static OCLinEcoreCSFactory init() {
 		try
 		{
-			OCLinEcoreCSFactory theOCLinEcoreCSTFactory = (OCLinEcoreCSFactory)EPackage.Registry.INSTANCE.getEFactory(OCLinEcoreCSPackage.eNS_URI);
-			if (theOCLinEcoreCSTFactory != null)
+			OCLinEcoreCSFactory theOCLinEcoreCSFactory = (OCLinEcoreCSFactory)EPackage.Registry.INSTANCE.getEFactory(OCLinEcoreCSPackage.eNS_URI);
+			if (theOCLinEcoreCSFactory != null)
 			{
-				return theOCLinEcoreCSTFactory;
+				return theOCLinEcoreCSFactory;
 			}
 		}
 		catch (Exception exception)
@@ -108,7 +109,8 @@ public class OCLinEcoreCSFactoryImpl extends EFactoryImpl implements OCLinEcoreC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLinEcoreCSPackage getOCLinEcoreCSTPackage() {
+	public OCLinEcoreCSPackage getOCLinEcoreCSPackage()
+	{
 		return (OCLinEcoreCSPackage)getEPackage();
 	}
 

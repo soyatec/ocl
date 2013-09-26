@@ -21,9 +21,9 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.util.AbstractOCLinEcoreContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.oclinecore.util.AbstractOCLinEcoreCSContainmentVisitor;
 
-public class OCLinEcoreContainmentVisitor extends AbstractOCLinEcoreContainmentVisitor
+public class OCLinEcoreContainmentVisitor extends AbstractOCLinEcoreCSContainmentVisitor
 {
 	public OCLinEcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);

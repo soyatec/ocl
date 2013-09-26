@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getPivotableElementCS()
- * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS org.eclipse.ocl.examples.pivot.Pivotable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS org.eclipse.ocl.examples.pivot.Pivotable"
  * @generated
  */
 public interface PivotableElementCS extends ElementCS, Pivotable

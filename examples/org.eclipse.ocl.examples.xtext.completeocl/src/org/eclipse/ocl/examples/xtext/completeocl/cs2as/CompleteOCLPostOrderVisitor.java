@@ -32,9 +32,9 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLPostOrderVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.util.AbstractCompleteOCLCSPostOrderVisitor;
 
-public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVisitor
+public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLCSPostOrderVisitor
 {
 	public CompleteOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);

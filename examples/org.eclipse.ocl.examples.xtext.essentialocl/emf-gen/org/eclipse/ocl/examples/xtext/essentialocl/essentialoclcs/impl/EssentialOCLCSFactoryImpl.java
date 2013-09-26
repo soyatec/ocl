@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.*;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BooleanLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionLiteralExpCS;
@@ -78,13 +79,16 @@ public class EssentialOCLCSFactoryImpl
 	 * @generated
 	 */
 	public static EssentialOCLCSFactory init() {
-		try {
-			EssentialOCLCSFactory theEssentialOCLCSFactory = (EssentialOCLCSFactory) EPackage.Registry.INSTANCE
-				.getEFactory(EssentialOCLCSPackage.eNS_URI);
-			if (theEssentialOCLCSFactory != null) {
+		try
+		{
+			EssentialOCLCSFactory theEssentialOCLCSFactory = (EssentialOCLCSFactory)EPackage.Registry.INSTANCE.getEFactory(EssentialOCLCSPackage.eNS_URI);
+			if (theEssentialOCLCSFactory != null)
+			{
 				return theEssentialOCLCSFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new EssentialOCLCSFactoryImpl();
@@ -107,80 +111,45 @@ public class EssentialOCLCSFactoryImpl
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case EssentialOCLCSPackage.BINARY_OPERATOR_CS :
-				return createBinaryOperatorCS();
-			case EssentialOCLCSPackage.BOOLEAN_LITERAL_EXP_CS :
-				return createBooleanLiteralExpCS();
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_EXP_CS :
-				return createCollectionLiteralExpCS();
-			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS :
-				return createCollectionLiteralPartCS();
-			case EssentialOCLCSPackage.COLLECTION_TYPE_CS :
-				return createCollectionTypeCS();
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS :
-				return createConstructorExpCS();
-			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS :
-				return createConstructorPartCS();
-			case EssentialOCLCSPackage.CONTEXT_CS :
-				return createContextCS();
-			case EssentialOCLCSPackage.EXP_CS :
-				return createExpCS();
-			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS :
-				return createExpSpecificationCS();
-			case EssentialOCLCSPackage.IF_EXP_CS :
-				return createIfExpCS();
-			case EssentialOCLCSPackage.INDEX_EXP_CS :
-				return createIndexExpCS();
-			case EssentialOCLCSPackage.INFIX_EXP_CS :
-				return createInfixExpCS();
-			case EssentialOCLCSPackage.INVALID_LITERAL_EXP_CS :
-				return createInvalidLiteralExpCS();
-			case EssentialOCLCSPackage.INVOCATION_EXP_CS :
-				return createInvocationExpCS();
-			case EssentialOCLCSPackage.LET_EXP_CS :
-				return createLetExpCS();
-			case EssentialOCLCSPackage.LET_VARIABLE_CS :
-				return createLetVariableCS();
-			case EssentialOCLCSPackage.LITERAL_EXP_CS :
-				return createLiteralExpCS();
-			case EssentialOCLCSPackage.NAME_EXP_CS :
-				return createNameExpCS();
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS :
-				return createNavigatingArgCS();
-			case EssentialOCLCSPackage.NAVIGATION_OPERATOR_CS :
-				return createNavigationOperatorCS();
-			case EssentialOCLCSPackage.NESTED_EXP_CS :
-				return createNestedExpCS();
-			case EssentialOCLCSPackage.NULL_LITERAL_EXP_CS :
-				return createNullLiteralExpCS();
-			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS :
-				return createNumberLiteralExpCS();
-			case EssentialOCLCSPackage.PREFIX_EXP_CS :
-				return createPrefixExpCS();
-			case EssentialOCLCSPackage.PRIMITIVE_LITERAL_EXP_CS :
-				return createPrimitiveLiteralExpCS();
-			case EssentialOCLCSPackage.SELF_EXP_CS :
-				return createSelfExpCS();
-			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS :
-				return createStringLiteralExpCS();
-			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS :
-				return createTupleLiteralExpCS();
-			case EssentialOCLCSPackage.TUPLE_LITERAL_PART_CS :
-				return createTupleLiteralPartCS();
-			case EssentialOCLCSPackage.TYPE_LITERAL_EXP_CS :
-				return createTypeLiteralExpCS();
-			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS :
-				return createTypeNameExpCS();
-			case EssentialOCLCSPackage.UNARY_OPERATOR_CS :
-				return createUnaryOperatorCS();
-			case EssentialOCLCSPackage.UNLIMITED_NATURAL_LITERAL_EXP_CS :
-				return createUnlimitedNaturalLiteralExpCS();
-			case EssentialOCLCSPackage.VARIABLE_CS :
-				return createVariableCS();
-			default :
-				throw new IllegalArgumentException(
-					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		switch (eClass.getClassifierID())
+		{
+			case EssentialOCLCSPackage.BINARY_OPERATOR_CS: return createBinaryOperatorCS();
+			case EssentialOCLCSPackage.BOOLEAN_LITERAL_EXP_CS: return createBooleanLiteralExpCS();
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_EXP_CS: return createCollectionLiteralExpCS();
+			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS: return createCollectionLiteralPartCS();
+			case EssentialOCLCSPackage.COLLECTION_TYPE_CS: return createCollectionTypeCS();
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS: return createConstructorExpCS();
+			case EssentialOCLCSPackage.CONSTRUCTOR_PART_CS: return createConstructorPartCS();
+			case EssentialOCLCSPackage.CONTEXT_CS: return createContextCS();
+			case EssentialOCLCSPackage.EXP_CS: return createExpCS();
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS: return createExpSpecificationCS();
+			case EssentialOCLCSPackage.IF_EXP_CS: return createIfExpCS();
+			case EssentialOCLCSPackage.INDEX_EXP_CS: return createIndexExpCS();
+			case EssentialOCLCSPackage.INFIX_EXP_CS: return createInfixExpCS();
+			case EssentialOCLCSPackage.INVALID_LITERAL_EXP_CS: return createInvalidLiteralExpCS();
+			case EssentialOCLCSPackage.INVOCATION_EXP_CS: return createInvocationExpCS();
+			case EssentialOCLCSPackage.LET_EXP_CS: return createLetExpCS();
+			case EssentialOCLCSPackage.LET_VARIABLE_CS: return createLetVariableCS();
+			case EssentialOCLCSPackage.LITERAL_EXP_CS: return createLiteralExpCS();
+			case EssentialOCLCSPackage.NAME_EXP_CS: return createNameExpCS();
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS: return createNavigatingArgCS();
+			case EssentialOCLCSPackage.NAVIGATION_OPERATOR_CS: return createNavigationOperatorCS();
+			case EssentialOCLCSPackage.NESTED_EXP_CS: return createNestedExpCS();
+			case EssentialOCLCSPackage.NULL_LITERAL_EXP_CS: return createNullLiteralExpCS();
+			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS: return createNumberLiteralExpCS();
+			case EssentialOCLCSPackage.PREFIX_EXP_CS: return createPrefixExpCS();
+			case EssentialOCLCSPackage.PRIMITIVE_LITERAL_EXP_CS: return createPrimitiveLiteralExpCS();
+			case EssentialOCLCSPackage.SELF_EXP_CS: return createSelfExpCS();
+			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS: return createStringLiteralExpCS();
+			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS: return createTupleLiteralExpCS();
+			case EssentialOCLCSPackage.TUPLE_LITERAL_PART_CS: return createTupleLiteralPartCS();
+			case EssentialOCLCSPackage.TYPE_LITERAL_EXP_CS: return createTypeLiteralExpCS();
+			case EssentialOCLCSPackage.TYPE_NAME_EXP_CS: return createTypeNameExpCS();
+			case EssentialOCLCSPackage.UNARY_OPERATOR_CS: return createUnaryOperatorCS();
+			case EssentialOCLCSPackage.UNLIMITED_NATURAL_LITERAL_EXP_CS: return createUnlimitedNaturalLiteralExpCS();
+			case EssentialOCLCSPackage.VARIABLE_CS: return createVariableCS();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -191,14 +160,14 @@ public class EssentialOCLCSFactoryImpl
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case EssentialOCLCSPackage.NAVIGATION_ROLE :
+		switch (eDataType.getClassifierID())
+		{
+			case EssentialOCLCSPackage.NAVIGATION_ROLE:
 				return createNavigationRoleFromString(eDataType, initialValue);
-			case EssentialOCLCSPackage.BIG_NUMBER :
+			case EssentialOCLCSPackage.BIG_NUMBER:
 				return createBigNumberFromString(eDataType, initialValue);
-			default :
-				throw new IllegalArgumentException(
-					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -209,14 +178,14 @@ public class EssentialOCLCSFactoryImpl
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case EssentialOCLCSPackage.NAVIGATION_ROLE :
+		switch (eDataType.getClassifierID())
+		{
+			case EssentialOCLCSPackage.NAVIGATION_ROLE:
 				return convertNavigationRoleToString(eDataType, instanceValue);
-			case EssentialOCLCSPackage.BIG_NUMBER :
+			case EssentialOCLCSPackage.BIG_NUMBER:
 				return convertBigNumberToString(eDataType, instanceValue);
-			default :
-				throw new IllegalArgumentException(
-					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -358,9 +327,7 @@ public class EssentialOCLCSFactoryImpl
 	public NavigationRole createNavigationRoleFromString(EDataType eDataType,
 			String initialValue) {
 		NavigationRole result = NavigationRole.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException(
-				"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		return result;
 	}
 
@@ -371,9 +338,7 @@ public class EssentialOCLCSFactoryImpl
 	 */
 	public String convertNavigationRoleToString(EDataType eDataType,
 			Object instanceValue) {
-		return instanceValue == null
-			? null
-			: instanceValue.toString();
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
@@ -553,7 +518,7 @@ public class EssentialOCLCSFactoryImpl
 	 */
 	public Number createBigNumberFromString(EDataType eDataType,
 			String initialValue) {
-		return (Number) super.createFromString(eDataType, initialValue);
+		return (Number)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -572,7 +537,7 @@ public class EssentialOCLCSFactoryImpl
 	 * @generated
 	 */
 	public EssentialOCLCSPackage getEssentialOCLCSPackage() {
-		return (EssentialOCLCSPackage) getEPackage();
+		return (EssentialOCLCSPackage)getEPackage();
 	}
 
 	/**

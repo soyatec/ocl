@@ -13,7 +13,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCST.genmodel
+ * from: org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCS.genmodel
  *
  * Do not edit it.
  */

@@ -48,7 +48,7 @@ public interface OCLstdlibCSPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "oclstdlibCST";
+	String eNAME = "oclstdlibcs";
 
 	/**
 	 * The package namespace URI.
@@ -64,7 +64,7 @@ public interface OCLstdlibCSPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "oclstdlibCST";
+	String eNS_PREFIX = "oclstdlibcs";
 
 	/**
 	 * The singleton instance of the package.
@@ -1551,7 +1551,7 @@ public interface OCLstdlibCSPackage
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	OCLstdlibCSFactory getOCLstdlibCSTFactory();
+	OCLstdlibCSFactory getOCLstdlibCSFactory();
 
 	/**
 	 * <!-- begin-user-doc -->

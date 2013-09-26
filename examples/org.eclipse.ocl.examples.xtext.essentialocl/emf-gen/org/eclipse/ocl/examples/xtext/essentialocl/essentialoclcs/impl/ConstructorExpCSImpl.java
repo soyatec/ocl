@@ -24,9 +24,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,10 +105,9 @@ public class ConstructorExpCSImpl
 	 * @generated
 	 */
 	public EList<ConstructorPartCS> getOwnedParts() {
-		if (ownedParts == null) {
-			ownedParts = new EObjectContainmentEList<ConstructorPartCS>(
-				ConstructorPartCS.class, this,
-				EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS);
+		if (ownedParts == null)
+		{
+			ownedParts = new EObjectContainmentEList<ConstructorPartCS>(ConstructorPartCS.class, this, EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS);
 		}
 		return ownedParts;
 	}
@@ -127,9 +130,7 @@ public class ConstructorExpCSImpl
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE, oldValue,
-				value));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE, oldValue, value));
 	}
 
 	/**
@@ -139,14 +140,7 @@ public class ConstructorExpCSImpl
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: "); //$NON-NLS-1$
-		result.append(value);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
@@ -157,10 +151,10 @@ public class ConstructorExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS :
-				return ((InternalEList<?>) getOwnedParts()).basicRemove(
-					otherEnd, msgs);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS:
+				return ((InternalEList<?>)getOwnedParts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -172,10 +166,11 @@ public class ConstructorExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS:
 				return getOwnedParts();
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE :
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -189,14 +184,14 @@ public class ConstructorExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS:
 				getOwnedParts().clear();
-				getOwnedParts().addAll(
-					(Collection<? extends ConstructorPartCS>) newValue);
+				getOwnedParts().addAll((Collection<? extends ConstructorPartCS>)newValue);
 				return;
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE :
-				setValue((String) newValue);
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE:
+				setValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,11 +204,12 @@ public class ConstructorExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS:
 				getOwnedParts().clear();
 				return;
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE :
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -227,14 +223,23 @@ public class ConstructorExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__OWNED_PARTS:
 				return ownedParts != null && !ownedParts.isEmpty();
-			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE :
-				return VALUE_EDEFAULT == null
-					? value != null
-					: !VALUE_EDEFAULT.equals(value);
+			case EssentialOCLCSPackage.CONSTRUCTOR_EXP_CS__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitConstructorExpCS(this);
 	}
 } //ConstructorExpCSImpl

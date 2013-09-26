@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPreOrderVis
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractCompleteOCLPreOrderVisitor
+public abstract class AbstractCompleteOCLCSPreOrderVisitor
 	extends EssentialOCLPreOrderVisitor
 	implements CompleteOCLCSVisitor<Continuation<?>>
 {
@@ -41,7 +41,7 @@ public abstract class AbstractCompleteOCLPreOrderVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractCompleteOCLPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractCompleteOCLCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

@@ -26,14 +26,18 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ContextCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,9 +113,9 @@ public class ContextCSImpl
 	 * @generated
 	 */
 	public EList<ImportCS> getOwnedImport() {
-		if (ownedImport == null) {
-			ownedImport = new EObjectContainmentEList<ImportCS>(ImportCS.class,
-				this, EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT);
+		if (ownedImport == null)
+		{
+			ownedImport = new EObjectContainmentEList<ImportCS>(ImportCS.class, this, EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT);
 		}
 		return ownedImport;
 	}
@@ -122,10 +126,9 @@ public class ContextCSImpl
 	 * @generated
 	 */
 	public EList<LibraryCS> getOwnedLibrary() {
-		if (ownedLibrary == null) {
-			ownedLibrary = new EObjectContainmentEList<LibraryCS>(
-				LibraryCS.class, this,
-				EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY);
+		if (ownedLibrary == null)
+		{
+			ownedLibrary = new EObjectContainmentEList<LibraryCS>(LibraryCS.class, this, EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY);
 		}
 		return ownedLibrary;
 	}
@@ -148,15 +151,10 @@ public class ContextCSImpl
 			NotificationChain msgs) {
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION,
-				oldOwnedExpression, newOwnedExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -167,25 +165,18 @@ public class ContextCSImpl
 	 * @generated
 	 */
 	public void setOwnedExpression(ExpCS newOwnedExpression) {
-		if (newOwnedExpression != ownedExpression) {
+		if (newOwnedExpression != ownedExpression)
+		{
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject) ownedExpression).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION, null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject) newOwnedExpression).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION,
-					null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION, null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION,
-				newOwnedExpression, newOwnedExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -196,14 +187,13 @@ public class ContextCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT :
-				return ((InternalEList<?>) getOwnedImport()).basicRemove(
-					otherEnd, msgs);
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY :
-				return ((InternalEList<?>) getOwnedLibrary()).basicRemove(
-					otherEnd, msgs);
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT:
+				return ((InternalEList<?>)getOwnedImport()).basicRemove(otherEnd, msgs);
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY:
+				return ((InternalEList<?>)getOwnedLibrary()).basicRemove(otherEnd, msgs);
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -216,12 +206,13 @@ public class ContextCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT:
 				return getOwnedImport();
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY :
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY:
 				return getOwnedLibrary();
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION :
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -235,19 +226,18 @@ public class ContextCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT:
 				getOwnedImport().clear();
-				getOwnedImport().addAll(
-					(Collection<? extends ImportCS>) newValue);
+				getOwnedImport().addAll((Collection<? extends ImportCS>)newValue);
 				return;
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY :
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY:
 				getOwnedLibrary().clear();
-				getOwnedLibrary().addAll(
-					(Collection<? extends LibraryCS>) newValue);
+				getOwnedLibrary().addAll((Collection<? extends LibraryCS>)newValue);
 				return;
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION :
-				setOwnedExpression((ExpCS) newValue);
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -260,15 +250,16 @@ public class ContextCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT:
 				getOwnedImport().clear();
 				return;
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY :
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY:
 				getOwnedLibrary().clear();
 				return;
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION :
-				setOwnedExpression((ExpCS) null);
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -281,12 +272,13 @@ public class ContextCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT:
 				return ownedImport != null && !ownedImport.isEmpty();
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY :
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY:
 				return ownedLibrary != null && !ownedLibrary.isEmpty();
-			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION :
+			case EssentialOCLCSPackage.CONTEXT_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -299,14 +291,13 @@ public class ContextCSImpl
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == RootCS.class) {
-			switch (derivedFeatureID) {
-				case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT :
-					return BaseCSPackage.ROOT_CS__OWNED_IMPORT;
-				case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY :
-					return BaseCSPackage.ROOT_CS__OWNED_LIBRARY;
-				default :
-					return -1;
+		if (baseClass == RootCS.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT: return BaseCSPackage.ROOT_CS__OWNED_IMPORT;
+				case EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY: return BaseCSPackage.ROOT_CS__OWNED_LIBRARY;
+				default: return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -319,16 +310,25 @@ public class ContextCSImpl
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == RootCS.class) {
-			switch (baseFeatureID) {
-				case BaseCSPackage.ROOT_CS__OWNED_IMPORT :
-					return EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT;
-				case BaseCSPackage.ROOT_CS__OWNED_LIBRARY :
-					return EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY;
-				default :
-					return -1;
+		if (baseClass == RootCS.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BaseCSPackage.ROOT_CS__OWNED_IMPORT: return EssentialOCLCSPackage.CONTEXT_CS__OWNED_IMPORT;
+				case BaseCSPackage.ROOT_CS__OWNED_LIBRARY: return EssentialOCLCSPackage.CONTEXT_CS__OWNED_LIBRARY;
+				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitContextCS(this);
 	}
 } //ContextCSImpl

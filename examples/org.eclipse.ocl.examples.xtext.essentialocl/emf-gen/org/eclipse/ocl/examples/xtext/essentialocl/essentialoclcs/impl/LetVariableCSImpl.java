@@ -22,11 +22,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetVariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,9 +97,7 @@ public class LetVariableCSImpl
 		OperatorCS oldParent = parent;
 		parent = newParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT, oldParent,
-				parent));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT, oldParent, parent));
 	}
 
 	/**
@@ -104,9 +106,8 @@ public class LetVariableCSImpl
 	 * @generated
 	 */
 	public LetExpCS getLetExpression() {
-		if (eContainerFeatureID() != EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION)
-			return null;
-		return (LetExpCS) eInternalContainer();
+		if (eContainerFeatureID() != EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION) return null;
+		return (LetExpCS)eInternalContainer();
 	}
 
 	/**
@@ -116,8 +117,7 @@ public class LetVariableCSImpl
 	 */
 	public NotificationChain basicSetLetExpression(LetExpCS newLetExpression,
 			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newLetExpression,
-			EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newLetExpression, EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION, msgs);
 		return msgs;
 	}
 
@@ -127,25 +127,20 @@ public class LetVariableCSImpl
 	 * @generated
 	 */
 	public void setLetExpression(LetExpCS newLetExpression) {
-		if (newLetExpression != eInternalContainer()
-			|| (eContainerFeatureID() != EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION && newLetExpression != null)) {
+		if (newLetExpression != eInternalContainer() || (eContainerFeatureID() != EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION && newLetExpression != null))
+		{
 			if (EcoreUtil.isAncestor(this, newLetExpression))
-				throw new IllegalArgumentException(
-					"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newLetExpression != null)
-				msgs = ((InternalEObject) newLetExpression).eInverseAdd(this,
-					EssentialOCLCSPackage.LET_EXP_CS__VARIABLE, LetExpCS.class,
-					msgs);
+				msgs = ((InternalEObject)newLetExpression).eInverseAdd(this, EssentialOCLCSPackage.LET_EXP_CS__VARIABLE, LetExpCS.class, msgs);
 			msgs = basicSetLetExpression(newLetExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION,
-				newLetExpression, newLetExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION, newLetExpression, newLetExpression));
 	}
 
 	/**
@@ -156,11 +151,12 @@ public class LetVariableCSImpl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetLetExpression((LetExpCS) otherEnd, msgs);
+				return basicSetLetExpression((LetExpCS)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -173,8 +169,9 @@ public class LetVariableCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				return basicSetLetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -188,11 +185,10 @@ public class LetVariableCSImpl
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
-				return eInternalContainer().eInverseRemove(this,
-					EssentialOCLCSPackage.LET_EXP_CS__VARIABLE, LetExpCS.class,
-					msgs);
+		switch (eContainerFeatureID())
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
+				return eInternalContainer().eInverseRemove(this, EssentialOCLCSPackage.LET_EXP_CS__VARIABLE, LetExpCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -204,10 +200,11 @@ public class LetVariableCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
 				return getParent();
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				return getLetExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -220,12 +217,13 @@ public class LetVariableCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT :
-				setParent((OperatorCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
+				setParent((OperatorCS)newValue);
 				return;
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
-				setLetExpression((LetExpCS) newValue);
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
+				setLetExpression((LetExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,12 +236,13 @@ public class LetVariableCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT :
-				setParent((OperatorCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
+				setParent((OperatorCS)null);
 				return;
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
-				setLetExpression((LetExpCS) null);
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
+				setLetExpression((LetExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -256,10 +255,11 @@ public class LetVariableCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
 				return parent != null;
-			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION :
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				return getLetExpression() != null;
 		}
 		return super.eIsSet(featureID);
@@ -272,12 +272,12 @@ public class LetVariableCSImpl
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class) {
-			switch (derivedFeatureID) {
-				case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT :
-					return EssentialOCLCSPackage.EXP_CS__PARENT;
-				default :
-					return -1;
+		if (baseClass == ExpCS.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
+				default: return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -290,14 +290,24 @@ public class LetVariableCSImpl
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class) {
-			switch (baseFeatureID) {
-				case EssentialOCLCSPackage.EXP_CS__PARENT :
-					return EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT;
-				default :
-					return -1;
+		if (baseClass == ExpCS.class)
+		{
+			switch (baseFeatureID)
+			{
+				case EssentialOCLCSPackage.EXP_CS__PARENT: return EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT;
+				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitLetVariableCS(this);
 	}
 } //VariableCSImpl

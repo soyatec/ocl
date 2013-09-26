@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.*;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BooleanLiteralExpCS;
@@ -98,7 +99,8 @@ public class EssentialOCLCSAdapterFactory
 	 * @generated
 	 */
 	public EssentialOCLCSAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = EssentialOCLCSPackage.eINSTANCE;
 		}
 	}
@@ -113,11 +115,13 @@ public class EssentialOCLCSAdapterFactory
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
-			return ((EObject) object).eClass().getEPackage() == modelPackage;
+		if (object instanceof EObject)
+		{
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -128,265 +132,264 @@ public class EssentialOCLCSAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EssentialOCLCSSwitch<Adapter> modelSwitch = new EssentialOCLCSSwitch<Adapter>() {
-
-		@Override
-		public Adapter caseAbstractNameExpCS(AbstractNameExpCS object) {
-			return createAbstractNameExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseBinaryOperatorCS(BinaryOperatorCS object) {
-			return createBinaryOperatorCSAdapter();
-		}
-
-		@Override
-		public Adapter caseBooleanLiteralExpCS(BooleanLiteralExpCS object) {
-			return createBooleanLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseCollectionLiteralExpCS(CollectionLiteralExpCS object) {
-			return createCollectionLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseCollectionLiteralPartCS(
-				CollectionLiteralPartCS object) {
-			return createCollectionLiteralPartCSAdapter();
-		}
-
-		@Override
-		public Adapter caseCollectionTypeCS(CollectionTypeCS object) {
-			return createCollectionTypeCSAdapter();
-		}
-
-		@Override
-		public Adapter caseConstructorExpCS(ConstructorExpCS object) {
-			return createConstructorExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseConstructorPartCS(ConstructorPartCS object) {
-			return createConstructorPartCSAdapter();
-		}
-
-		@Override
-		public Adapter caseContextCS(ContextCS object) {
-			return createContextCSAdapter();
-		}
-
-		@Override
-		public Adapter caseExpCS(ExpCS object) {
-			return createExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseExpSpecificationCS(ExpSpecificationCS object) {
-			return createExpSpecificationCSAdapter();
-		}
-
-		@Override
-		public Adapter caseIfExpCS(IfExpCS object) {
-			return createIfExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseIndexExpCS(IndexExpCS object) {
-			return createIndexExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseInfixExpCS(InfixExpCS object) {
-			return createInfixExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseInvalidLiteralExpCS(InvalidLiteralExpCS object) {
-			return createInvalidLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseInvocationExpCS(InvocationExpCS object) {
-			return createInvocationExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseLetExpCS(LetExpCS object) {
-			return createLetExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseLetVariableCS(LetVariableCS object) {
-			return createLetVariableCSAdapter();
-		}
-
-		@Override
-		public Adapter caseLiteralExpCS(LiteralExpCS object) {
-			return createLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNameExpCS(NameExpCS object) {
-			return createNameExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNamedExpCS(NamedExpCS object) {
-			return createNamedExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNavigatingArgCS(NavigatingArgCS object) {
-			return createNavigatingArgCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNavigationOperatorCS(NavigationOperatorCS object) {
-			return createNavigationOperatorCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNestedExpCS(NestedExpCS object) {
-			return createNestedExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNullLiteralExpCS(NullLiteralExpCS object) {
-			return createNullLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNumberLiteralExpCS(NumberLiteralExpCS object) {
-			return createNumberLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseOperatorCS(OperatorCS object) {
-			return createOperatorCSAdapter();
-		}
-
-		@Override
-		public Adapter casePrefixExpCS(PrefixExpCS object) {
-			return createPrefixExpCSAdapter();
-		}
-
-		@Override
-		public Adapter casePrimitiveLiteralExpCS(PrimitiveLiteralExpCS object) {
-			return createPrimitiveLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseSelfExpCS(SelfExpCS object) {
-			return createSelfExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseStringLiteralExpCS(StringLiteralExpCS object) {
-			return createStringLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTupleLiteralExpCS(TupleLiteralExpCS object) {
-			return createTupleLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTupleLiteralPartCS(TupleLiteralPartCS object) {
-			return createTupleLiteralPartCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTypeLiteralExpCS(TypeLiteralExpCS object) {
-			return createTypeLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTypeNameExpCS(TypeNameExpCS object) {
-			return createTypeNameExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseUnaryOperatorCS(UnaryOperatorCS object) {
-			return createUnaryOperatorCSAdapter();
-		}
-
-		@Override
-		public Adapter caseUnlimitedNaturalLiteralExpCS(
-				UnlimitedNaturalLiteralExpCS object) {
-			return createUnlimitedNaturalLiteralExpCSAdapter();
-		}
-
-		@Override
-		public Adapter caseVariableCS(VariableCS object) {
-			return createVariableCSAdapter();
-		}
-
-		@Override
-		public Adapter caseVisitableCS(VisitableCS object) {
-			return createVisitableCSAdapter();
-		}
-
-		@Override
-		public Adapter caseElementCS(ElementCS object) {
-			return createElementCSAdapter();
-		}
-
-		@Override
-		public Adapter casePivotable(Pivotable object) {
-			return createPivotableAdapter();
-		}
-
-		@Override
-		public Adapter casePivotableElementCS(PivotableElementCS object) {
-			return createPivotableElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseModelElementCS(ModelElementCS object) {
-			return createModelElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseNameable(Nameable object) {
-			return createNameableAdapter();
-		}
-
-		@Override
-		public Adapter caseNamedElementCS(NamedElementCS object) {
-			return createNamedElementCSAdapter();
-		}
-
-		@Override
-		public Adapter caseElementRefCS(ElementRefCS object) {
-			return createElementRefCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTypeRefCS(TypeRefCS object) {
-			return createTypeRefCSAdapter();
-		}
-
-		@Override
-		public Adapter caseTypedRefCS(TypedRefCS object) {
-			return createTypedRefCSAdapter();
-		}
-
-		@Override
-		public Adapter caseRootCS(RootCS object) {
-			return createRootCSAdapter();
-		}
-
-		@Override
-		public Adapter caseSpecificationCS(SpecificationCS object) {
-			return createSpecificationCSAdapter();
-		}
-
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+	protected EssentialOCLCSSwitch<Adapter> modelSwitch = new EssentialOCLCSSwitch<Adapter>()
+		{
+			@Override
+			public Adapter caseAbstractNameExpCS(AbstractNameExpCS object)
+			{
+				return createAbstractNameExpCSAdapter();
+			}
+			@Override
+			public Adapter caseBinaryOperatorCS(BinaryOperatorCS object)
+			{
+				return createBinaryOperatorCSAdapter();
+			}
+			@Override
+			public Adapter caseBooleanLiteralExpCS(BooleanLiteralExpCS object)
+			{
+				return createBooleanLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseCollectionLiteralExpCS(CollectionLiteralExpCS object)
+			{
+				return createCollectionLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseCollectionLiteralPartCS(CollectionLiteralPartCS object)
+			{
+				return createCollectionLiteralPartCSAdapter();
+			}
+			@Override
+			public Adapter caseCollectionTypeCS(CollectionTypeCS object)
+			{
+				return createCollectionTypeCSAdapter();
+			}
+			@Override
+			public Adapter caseConstructorExpCS(ConstructorExpCS object)
+			{
+				return createConstructorExpCSAdapter();
+			}
+			@Override
+			public Adapter caseConstructorPartCS(ConstructorPartCS object)
+			{
+				return createConstructorPartCSAdapter();
+			}
+			@Override
+			public Adapter caseContextCS(ContextCS object)
+			{
+				return createContextCSAdapter();
+			}
+			@Override
+			public Adapter caseExpCS(ExpCS object)
+			{
+				return createExpCSAdapter();
+			}
+			@Override
+			public Adapter caseExpSpecificationCS(ExpSpecificationCS object)
+			{
+				return createExpSpecificationCSAdapter();
+			}
+			@Override
+			public Adapter caseIfExpCS(IfExpCS object)
+			{
+				return createIfExpCSAdapter();
+			}
+			@Override
+			public Adapter caseIndexExpCS(IndexExpCS object)
+			{
+				return createIndexExpCSAdapter();
+			}
+			@Override
+			public Adapter caseInfixExpCS(InfixExpCS object)
+			{
+				return createInfixExpCSAdapter();
+			}
+			@Override
+			public Adapter caseInvalidLiteralExpCS(InvalidLiteralExpCS object)
+			{
+				return createInvalidLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseInvocationExpCS(InvocationExpCS object)
+			{
+				return createInvocationExpCSAdapter();
+			}
+			@Override
+			public Adapter caseLetExpCS(LetExpCS object)
+			{
+				return createLetExpCSAdapter();
+			}
+			@Override
+			public Adapter caseLetVariableCS(LetVariableCS object)
+			{
+				return createLetVariableCSAdapter();
+			}
+			@Override
+			public Adapter caseLiteralExpCS(LiteralExpCS object)
+			{
+				return createLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNameExpCS(NameExpCS object)
+			{
+				return createNameExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNamedExpCS(NamedExpCS object)
+			{
+				return createNamedExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNavigatingArgCS(NavigatingArgCS object)
+			{
+				return createNavigatingArgCSAdapter();
+			}
+			@Override
+			public Adapter caseNavigationOperatorCS(NavigationOperatorCS object)
+			{
+				return createNavigationOperatorCSAdapter();
+			}
+			@Override
+			public Adapter caseNestedExpCS(NestedExpCS object)
+			{
+				return createNestedExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNullLiteralExpCS(NullLiteralExpCS object)
+			{
+				return createNullLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNumberLiteralExpCS(NumberLiteralExpCS object)
+			{
+				return createNumberLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseOperatorCS(OperatorCS object)
+			{
+				return createOperatorCSAdapter();
+			}
+			@Override
+			public Adapter casePrefixExpCS(PrefixExpCS object)
+			{
+				return createPrefixExpCSAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveLiteralExpCS(PrimitiveLiteralExpCS object)
+			{
+				return createPrimitiveLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseSelfExpCS(SelfExpCS object)
+			{
+				return createSelfExpCSAdapter();
+			}
+			@Override
+			public Adapter caseStringLiteralExpCS(StringLiteralExpCS object)
+			{
+				return createStringLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseTupleLiteralExpCS(TupleLiteralExpCS object)
+			{
+				return createTupleLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseTupleLiteralPartCS(TupleLiteralPartCS object)
+			{
+				return createTupleLiteralPartCSAdapter();
+			}
+			@Override
+			public Adapter caseTypeLiteralExpCS(TypeLiteralExpCS object)
+			{
+				return createTypeLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseTypeNameExpCS(TypeNameExpCS object)
+			{
+				return createTypeNameExpCSAdapter();
+			}
+			@Override
+			public Adapter caseUnaryOperatorCS(UnaryOperatorCS object)
+			{
+				return createUnaryOperatorCSAdapter();
+			}
+			@Override
+			public Adapter caseUnlimitedNaturalLiteralExpCS(UnlimitedNaturalLiteralExpCS object)
+			{
+				return createUnlimitedNaturalLiteralExpCSAdapter();
+			}
+			@Override
+			public Adapter caseVariableCS(VariableCS object)
+			{
+				return createVariableCSAdapter();
+			}
+			@Override
+			public Adapter caseVisitableCS(VisitableCS object)
+			{
+				return createVisitableCSAdapter();
+			}
+			@Override
+			public Adapter caseElementCS(ElementCS object)
+			{
+				return createElementCSAdapter();
+			}
+			@Override
+			public Adapter casePivotable(Pivotable object)
+			{
+				return createPivotableAdapter();
+			}
+			@Override
+			public Adapter casePivotableElementCS(PivotableElementCS object)
+			{
+				return createPivotableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseModelElementCS(ModelElementCS object)
+			{
+				return createModelElementCSAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object)
+			{
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNamedElementCS(NamedElementCS object)
+			{
+				return createNamedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseElementRefCS(ElementRefCS object)
+			{
+				return createElementRefCSAdapter();
+			}
+			@Override
+			public Adapter caseTypeRefCS(TypeRefCS object)
+			{
+				return createTypeRefCSAdapter();
+			}
+			@Override
+			public Adapter caseTypedRefCS(TypedRefCS object)
+			{
+				return createTypedRefCSAdapter();
+			}
+			@Override
+			public Adapter caseRootCS(RootCS object)
+			{
+				return createRootCSAdapter();
+			}
+			@Override
+			public Adapter caseSpecificationCS(SpecificationCS object)
+			{
+				return createSpecificationCSAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object)
+			{
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -398,7 +401,7 @@ public class EssentialOCLCSAdapterFactory
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject) target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 	/**

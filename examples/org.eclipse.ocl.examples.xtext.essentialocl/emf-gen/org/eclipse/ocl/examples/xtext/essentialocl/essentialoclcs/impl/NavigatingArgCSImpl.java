@@ -22,13 +22,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationRole;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -147,9 +151,8 @@ public class NavigatingArgCSImpl
 	 * @generated
 	 */
 	public InvocationExpCS getNavigatingExp() {
-		if (eContainerFeatureID() != EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP)
-			return null;
-		return (InvocationExpCS) eInternalContainer();
+		if (eContainerFeatureID() != EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP) return null;
+		return (InvocationExpCS)eInternalContainer();
 	}
 
 	/**
@@ -159,8 +162,7 @@ public class NavigatingArgCSImpl
 	 */
 	public NotificationChain basicSetNavigatingExp(
 			InvocationExpCS newNavigatingExp, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newNavigatingExp,
-			EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newNavigatingExp, EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP, msgs);
 		return msgs;
 	}
 
@@ -170,25 +172,20 @@ public class NavigatingArgCSImpl
 	 * @generated
 	 */
 	public void setNavigatingExp(InvocationExpCS newNavigatingExp) {
-		if (newNavigatingExp != eInternalContainer()
-			|| (eContainerFeatureID() != EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP && newNavigatingExp != null)) {
+		if (newNavigatingExp != eInternalContainer() || (eContainerFeatureID() != EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP && newNavigatingExp != null))
+		{
 			if (EcoreUtil.isAncestor(this, newNavigatingExp))
-				throw new IllegalArgumentException(
-					"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNavigatingExp != null)
-				msgs = ((InternalEObject) newNavigatingExp).eInverseAdd(this,
-					EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT,
-					InvocationExpCS.class, msgs);
+				msgs = ((InternalEObject)newNavigatingExp).eInverseAdd(this, EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT, InvocationExpCS.class, msgs);
 			msgs = basicSetNavigatingExp(newNavigatingExp, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP,
-				newNavigatingExp, newNavigatingExp));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP, newNavigatingExp, newNavigatingExp));
 	}
 
 	/**
@@ -207,12 +204,9 @@ public class NavigatingArgCSImpl
 	 */
 	public void setRole(NavigationRole newRole) {
 		NavigationRole oldRole = role;
-		role = newRole == null
-			? ROLE_EDEFAULT
-			: newRole;
+		role = newRole == null ? ROLE_EDEFAULT : newRole;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE, oldRole, role));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE, oldRole, role));
 	}
 
 	/**
@@ -233,9 +227,7 @@ public class NavigatingArgCSImpl
 		String oldPrefix = prefix;
 		prefix = newPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX, oldPrefix,
-				prefix));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX, oldPrefix, prefix));
 	}
 
 	/**
@@ -255,14 +247,10 @@ public class NavigatingArgCSImpl
 	public NotificationChain basicSetName(ExpCS newName, NotificationChain msgs) {
 		ExpCS oldName = name;
 		name = newName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, oldName, newName);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, oldName, newName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -273,24 +261,18 @@ public class NavigatingArgCSImpl
 	 * @generated
 	 */
 	public void setName(ExpCS newName) {
-		if (newName != name) {
+		if (newName != name)
+		{
 			NotificationChain msgs = null;
 			if (name != null)
-				msgs = ((InternalEObject) name).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, null,
-					msgs);
+				msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, null, msgs);
 			if (newName != null)
-				msgs = ((InternalEObject) newName).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, null,
-					msgs);
+				msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, null, msgs);
 			msgs = basicSetName(newName, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, newName, newName));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME, newName, newName));
 	}
 
 	/**
@@ -311,15 +293,10 @@ public class NavigatingArgCSImpl
 			NotificationChain msgs) {
 		TypedRefCS oldOwnedType = ownedType;
 		ownedType = newOwnedType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE,
-				oldOwnedType, newOwnedType);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -330,25 +307,18 @@ public class NavigatingArgCSImpl
 	 * @generated
 	 */
 	public void setOwnedType(TypedRefCS newOwnedType) {
-		if (newOwnedType != ownedType) {
+		if (newOwnedType != ownedType)
+		{
 			NotificationChain msgs = null;
 			if (ownedType != null)
-				msgs = ((InternalEObject) ownedType).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE,
-					null, msgs);
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE, null, msgs);
 			if (newOwnedType != null)
-				msgs = ((InternalEObject) newOwnedType).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE,
-					null, msgs);
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE, null, msgs);
 			msgs = basicSetOwnedType(newOwnedType, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE,
-				newOwnedType, newOwnedType));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -368,14 +338,10 @@ public class NavigatingArgCSImpl
 	public NotificationChain basicSetInit(ExpCS newInit, NotificationChain msgs) {
 		ExpCS oldInit = init;
 		init = newInit;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, oldInit, newInit);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, oldInit, newInit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -386,24 +352,18 @@ public class NavigatingArgCSImpl
 	 * @generated
 	 */
 	public void setInit(ExpCS newInit) {
-		if (newInit != init) {
+		if (newInit != init)
+		{
 			NotificationChain msgs = null;
 			if (init != null)
-				msgs = ((InternalEObject) init).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, null,
-					msgs);
+				msgs = ((InternalEObject)init).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, null, msgs);
 			if (newInit != null)
-				msgs = ((InternalEObject) newInit).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, null,
-					msgs);
+				msgs = ((InternalEObject)newInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, null, msgs);
 			msgs = basicSetInit(newInit, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, newInit, newInit));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT, newInit, newInit));
 	}
 
 	/**
@@ -413,16 +373,7 @@ public class NavigatingArgCSImpl
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (role: "); //$NON-NLS-1$
-		result.append(role);
-		result.append(", prefix: "); //$NON-NLS-1$
-		result.append(prefix);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
@@ -433,11 +384,12 @@ public class NavigatingArgCSImpl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetNavigatingExp((InvocationExpCS) otherEnd, msgs);
+				return basicSetNavigatingExp((InvocationExpCS)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -450,14 +402,15 @@ public class NavigatingArgCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
 				return basicSetNavigatingExp(null, msgs);
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME:
 				return basicSetName(null, msgs);
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE:
 				return basicSetOwnedType(null, msgs);
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT:
 				return basicSetInit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -471,11 +424,10 @@ public class NavigatingArgCSImpl
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
-				return eInternalContainer().eInverseRemove(this,
-					EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT,
-					InvocationExpCS.class, msgs);
+		switch (eContainerFeatureID())
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
+				return eInternalContainer().eInverseRemove(this, EssentialOCLCSPackage.INVOCATION_EXP_CS__ARGUMENT, InvocationExpCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -487,18 +439,19 @@ public class NavigatingArgCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
 				return getNavigatingExp();
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE:
 				return getRole();
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX:
 				return getPrefix();
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME:
 				return getName();
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE:
 				return getOwnedType();
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT:
 				return getInit();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -511,24 +464,25 @@ public class NavigatingArgCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
-				setNavigatingExp((InvocationExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
+				setNavigatingExp((InvocationExpCS)newValue);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE :
-				setRole((NavigationRole) newValue);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE:
+				setRole((NavigationRole)newValue);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX :
-				setPrefix((String) newValue);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX:
+				setPrefix((String)newValue);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME :
-				setName((ExpCS) newValue);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME:
+				setName((ExpCS)newValue);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE :
-				setOwnedType((TypedRefCS) newValue);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)newValue);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT :
-				setInit((ExpCS) newValue);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT:
+				setInit((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -541,24 +495,25 @@ public class NavigatingArgCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
-				setNavigatingExp((InvocationExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
+				setNavigatingExp((InvocationExpCS)null);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE:
 				setRole(ROLE_EDEFAULT);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME :
-				setName((ExpCS) null);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME:
+				setName((ExpCS)null);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE :
-				setOwnedType((TypedRefCS) null);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)null);
 				return;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT :
-				setInit((ExpCS) null);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT:
+				setInit((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -571,23 +526,32 @@ public class NavigatingArgCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP:
 				return getNavigatingExp() != null;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__ROLE:
 				return role != ROLE_EDEFAULT;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX :
-				return PREFIX_EDEFAULT == null
-					? prefix != null
-					: !PREFIX_EDEFAULT.equals(prefix);
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__PREFIX:
+				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__NAME:
 				return name != null;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__OWNED_TYPE:
 				return ownedType != null;
-			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT :
+			case EssentialOCLCSPackage.NAVIGATING_ARG_CS__INIT:
 				return init != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNavigatingArgCS(this);
 	}
 
 	/**

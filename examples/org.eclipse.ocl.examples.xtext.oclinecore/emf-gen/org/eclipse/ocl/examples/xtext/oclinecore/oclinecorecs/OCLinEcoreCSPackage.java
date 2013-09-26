@@ -43,7 +43,7 @@ public interface OCLinEcoreCSPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "oclinEcoreCST";
+	String eNAME = "oclinecorecs";
 
 	/**
 	 * The package namespace URI.
@@ -59,7 +59,7 @@ public interface OCLinEcoreCSPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "oclinEcoreCST";
+	String eNS_PREFIX = "oclinecorecs";
 
 	/**
 	 * The package content type ID.
@@ -137,6 +137,15 @@ public interface OCLinEcoreCSPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSysMLCS_Value();
+
+	/**
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the factory that creates the instances of the model.
+	 * @generated
+	 */
+	OCLinEcoreCSFactory getOCLinEcoreCSFactory();
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -318,15 +327,6 @@ public interface OCLinEcoreCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYS_MLCS_FEATURE_COUNT = BaseCSPackage.ANNOTATION_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * Returns the factory that creates the instances of the model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the factory that creates the instances of the model.
-	 * @generated
-	 */
-	OCLinEcoreCSFactory getOCLinEcoreCSTFactory();
 
 	/**
 	 * <!-- begin-user-doc -->

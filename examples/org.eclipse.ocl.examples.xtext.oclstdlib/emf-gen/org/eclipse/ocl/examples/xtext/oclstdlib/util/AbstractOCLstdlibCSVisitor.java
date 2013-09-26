@@ -13,7 +13,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: org.eclipse.ocl.examples.xtext.oclstdlib/model/OCLstdlibCST.genmodel
+ * from: org.eclipse.ocl.examples.xtext.oclstdlib/model/OCLstdlibCS.genmodel
  *
  * Do not edit it.
  */

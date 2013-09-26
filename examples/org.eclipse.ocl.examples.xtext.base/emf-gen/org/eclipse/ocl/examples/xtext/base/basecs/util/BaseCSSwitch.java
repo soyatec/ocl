@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.*;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;

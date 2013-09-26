@@ -26,10 +26,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,10 +98,9 @@ public class PrefixExpCSImpl
 	 * @generated
 	 */
 	public EList<UnaryOperatorCS> getOwnedOperator() {
-		if (ownedOperator == null) {
-			ownedOperator = new EObjectContainmentEList<UnaryOperatorCS>(
-				UnaryOperatorCS.class, this,
-				EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR);
+		if (ownedOperator == null)
+		{
+			ownedOperator = new EObjectContainmentEList<UnaryOperatorCS>(UnaryOperatorCS.class, this, EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR);
 		}
 		return ownedOperator;
 	}
@@ -120,15 +123,10 @@ public class PrefixExpCSImpl
 			NotificationChain msgs) {
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION,
-				oldOwnedExpression, newOwnedExpression);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -139,29 +137,18 @@ public class PrefixExpCSImpl
 	 * @generated
 	 */
 	public void setOwnedExpression(ExpCS newOwnedExpression) {
-		if (newOwnedExpression != ownedExpression) {
+		if (newOwnedExpression != ownedExpression)
+		{
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject) ownedExpression)
-					.eInverseRemove(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION,
-						null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION, null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject) newOwnedExpression)
-					.eInverseAdd(
-						this,
-						EOPPOSITE_FEATURE_BASE
-							- EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION,
-						null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION, null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION,
-				newOwnedExpression, newOwnedExpression));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -172,11 +159,11 @@ public class PrefixExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR :
-				return ((InternalEList<?>) getOwnedOperator()).basicRemove(
-					otherEnd, msgs);
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR:
+				return ((InternalEList<?>)getOwnedOperator()).basicRemove(otherEnd, msgs);
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -189,10 +176,11 @@ public class PrefixExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR:
 				return getOwnedOperator();
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION :
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -206,14 +194,14 @@ public class PrefixExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR:
 				getOwnedOperator().clear();
-				getOwnedOperator().addAll(
-					(Collection<? extends UnaryOperatorCS>) newValue);
+				getOwnedOperator().addAll((Collection<? extends UnaryOperatorCS>)newValue);
 				return;
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION :
-				setOwnedExpression((ExpCS) newValue);
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,12 +214,13 @@ public class PrefixExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR:
 				getOwnedOperator().clear();
 				return;
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION :
-				setOwnedExpression((ExpCS) null);
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -244,12 +233,23 @@ public class PrefixExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_OPERATOR:
 				return ownedOperator != null && !ownedOperator.isEmpty();
-			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION :
+			case EssentialOCLCSPackage.PREFIX_EXP_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitPrefixExpCS(this);
 	}
 } //UnaryExpressionCSImpl

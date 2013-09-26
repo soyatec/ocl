@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.*;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSFactory;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
@@ -50,13 +51,16 @@ public class CompleteOCLCSFactoryImpl
 	 * @generated
 	 */
 	public static CompleteOCLCSFactory init() {
-		try {
-			CompleteOCLCSFactory theCompleteOCLCSFactory = (CompleteOCLCSFactory) EPackage.Registry.INSTANCE
-				.getEFactory(CompleteOCLCSPackage.eNS_URI);
-			if (theCompleteOCLCSFactory != null) {
+		try
+		{
+			CompleteOCLCSFactory theCompleteOCLCSFactory = (CompleteOCLCSFactory)EPackage.Registry.INSTANCE.getEFactory(CompleteOCLCSPackage.eNS_URI);
+			if (theCompleteOCLCSFactory != null)
+			{
 				return theCompleteOCLCSFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new CompleteOCLCSFactoryImpl();
@@ -79,28 +83,19 @@ public class CompleteOCLCSFactoryImpl
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CompleteOCLCSPackage.CLASSIFIER_CONTEXT_DECL_CS :
-				return createClassifierContextDeclCS();
-			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS :
-				return createCompleteOCLDocumentCS();
-			case CompleteOCLCSPackage.DEF_OPERATION_CS :
-				return createDefOperationCS();
-			case CompleteOCLCSPackage.DEF_PROPERTY_CS :
-				return createDefPropertyCS();
-			case CompleteOCLCSPackage.INCLUDE_CS :
-				return createIncludeCS();
-			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS :
-				return createOCLMessageArgCS();
-			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS :
-				return createOperationContextDeclCS();
-			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS :
-				return createPackageDeclarationCS();
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS :
-				return createPropertyContextDeclCS();
-			default :
-				throw new IllegalArgumentException("The class '"
-					+ eClass.getName() + "' is not a valid classifier");
+		switch (eClass.getClassifierID())
+		{
+			case CompleteOCLCSPackage.CLASSIFIER_CONTEXT_DECL_CS: return createClassifierContextDeclCS();
+			case CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS: return createCompleteOCLDocumentCS();
+			case CompleteOCLCSPackage.DEF_OPERATION_CS: return createDefOperationCS();
+			case CompleteOCLCSPackage.DEF_PROPERTY_CS: return createDefPropertyCS();
+			case CompleteOCLCSPackage.INCLUDE_CS: return createIncludeCS();
+			case CompleteOCLCSPackage.OCL_MESSAGE_ARG_CS: return createOCLMessageArgCS();
+			case CompleteOCLCSPackage.OPERATION_CONTEXT_DECL_CS: return createOperationContextDeclCS();
+			case CompleteOCLCSPackage.PACKAGE_DECLARATION_CS: return createPackageDeclarationCS();
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS: return createPropertyContextDeclCS();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -130,7 +125,7 @@ public class CompleteOCLCSFactoryImpl
 	 * @generated
 	 */
 	public CompleteOCLCSPackage getCompleteOCLCSPackage() {
-		return (CompleteOCLCSPackage) getEPackage();
+		return (CompleteOCLCSPackage)getEPackage();
 	}
 
 	/**

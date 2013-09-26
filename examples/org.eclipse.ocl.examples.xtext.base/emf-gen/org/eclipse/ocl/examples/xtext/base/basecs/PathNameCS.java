@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getPathNameCS()
- * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS org.eclipse.ocl.examples.pivot.Pivotable"
+ * @model superTypes="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS org.eclipse.ocl.examples.pivot.Pivotable"
  * @generated
  */
 public interface PathNameCS extends ElementCS, Pivotable
@@ -137,7 +137,7 @@ public interface PathNameCS extends ElementCS, Pivotable
 	 * @return the value of the '<em>Scope Filter</em>' attribute.
 	 * @see #setScopeFilter(ScopeFilter)
 	 * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getPathNameCS_ScopeFilter()
-	 * @model dataType="org.eclipse.ocl.examples.xtext.base.baseCST.ScopeFilter" transient="true"
+	 * @model dataType="org.eclipse.ocl.examples.xtext.base.basecs.ScopeFilter" transient="true"
 	 * @generated
 	 */
 	ScopeFilter getScopeFilter();

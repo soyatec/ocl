@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.*;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibClassCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibIterationCS;
@@ -53,10 +54,10 @@ public class OCLstdlibCSFactoryImpl
 	public static OCLstdlibCSFactory init() {
 		try
 		{
-			OCLstdlibCSFactory theOCLstdlibCSTFactory = (OCLstdlibCSFactory)EPackage.Registry.INSTANCE.getEFactory(OCLstdlibCSPackage.eNS_URI);
-			if (theOCLstdlibCSTFactory != null)
+			OCLstdlibCSFactory theOCLstdlibCSFactory = (OCLstdlibCSFactory)EPackage.Registry.INSTANCE.getEFactory(OCLstdlibCSPackage.eNS_URI);
+			if (theOCLstdlibCSFactory != null)
 			{
-				return theOCLstdlibCSTFactory;
+				return theOCLstdlibCSFactory;
 			}
 		}
 		catch (Exception exception)
@@ -196,7 +197,8 @@ public class OCLstdlibCSFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLstdlibCSPackage getOCLstdlibCSTPackage() {
+	public OCLstdlibCSPackage getOCLstdlibCSPackage()
+	{
 		return (OCLstdlibCSPackage)getEPackage();
 	}
 

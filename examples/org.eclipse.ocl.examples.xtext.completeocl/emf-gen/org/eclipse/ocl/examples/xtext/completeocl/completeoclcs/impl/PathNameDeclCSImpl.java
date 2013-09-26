@@ -94,15 +94,10 @@ public abstract class PathNameDeclCSImpl
 			NotificationChain msgs) {
 		PathNameCS oldPathName = pathName;
 		pathName = newPathName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-				Notification.SET,
-				CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME, oldPathName,
-				newPathName);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME, oldPathName, newPathName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -113,25 +108,18 @@ public abstract class PathNameDeclCSImpl
 	 * @generated
 	 */
 	public void setPathName(PathNameCS newPathName) {
-		if (newPathName != pathName) {
+		if (newPathName != pathName)
+		{
 			NotificationChain msgs = null;
 			if (pathName != null)
-				msgs = ((InternalEObject) pathName).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE
-						- CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME,
-					null, msgs);
+				msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME, null, msgs);
 			if (newPathName != null)
-				msgs = ((InternalEObject) newPathName).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE
-						- CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME,
-					null, msgs);
+				msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME, null, msgs);
 			msgs = basicSetPathName(newPathName, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME, newPathName,
-				newPathName));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME, newPathName, newPathName));
 	}
 
 	/**
@@ -142,8 +130,9 @@ public abstract class PathNameDeclCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME:
 				return basicSetPathName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -156,8 +145,9 @@ public abstract class PathNameDeclCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME:
 				return getPathName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -170,9 +160,10 @@ public abstract class PathNameDeclCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME :
-				setPathName((PathNameCS) newValue);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME:
+				setPathName((PathNameCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -185,9 +176,10 @@ public abstract class PathNameDeclCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME :
-				setPathName((PathNameCS) null);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME:
+				setPathName((PathNameCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -200,8 +192,9 @@ public abstract class PathNameDeclCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PATH_NAME_DECL_CS__PATH_NAME:
 				return pathName != null;
 		}
 		return super.eIsSet(featureID);

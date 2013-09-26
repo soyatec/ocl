@@ -128,6 +128,15 @@ public interface PackageCS extends NamespaceCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL body='ocl::Package{\n\t\t\t\t-- TODO\n\t\t\t\tname = name,\n\t\t\t\tnestedPackage = ownedNestedPackage.ast()\n\t\t\t}'"
+	 * @generated
+	 */
+	org.eclipse.ocl.examples.pivot.Package ast();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */

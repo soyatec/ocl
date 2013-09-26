@@ -24,13 +24,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
+import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 
 /**
@@ -98,12 +102,13 @@ public class PropertyContextDeclCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__PROPERTY :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__PROPERTY:
 				return getProperty();
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS :
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS:
 				return getDefaultExpressions();
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS :
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS:
 				return getDerivedInvariants();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -117,16 +122,15 @@ public class PropertyContextDeclCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS:
 				getDefaultExpressions().clear();
-				getDefaultExpressions().addAll(
-					(Collection<? extends ExpSpecificationCS>) newValue);
+				getDefaultExpressions().addAll((Collection<? extends ExpSpecificationCS>)newValue);
 				return;
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS :
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS:
 				getDerivedInvariants().clear();
-				getDerivedInvariants().addAll(
-					(Collection<? extends ConstraintCS>) newValue);
+				getDerivedInvariants().addAll((Collection<? extends ConstraintCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,11 +143,12 @@ public class PropertyContextDeclCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS:
 				getDefaultExpressions().clear();
 				return;
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS :
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS:
 				getDerivedInvariants().clear();
 				return;
 		}
@@ -157,17 +162,26 @@ public class PropertyContextDeclCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__PROPERTY :
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__PROPERTY:
 				return getProperty() != null;
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS :
-				return defaultExpressions != null
-					&& !defaultExpressions.isEmpty();
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS :
-				return derivedInvariants != null
-					&& !derivedInvariants.isEmpty();
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS:
+				return defaultExpressions != null && !defaultExpressions.isEmpty();
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS:
+				return derivedInvariants != null && !derivedInvariants.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitPropertyContextDeclCS(this);
 	}
 
 	/**
@@ -191,11 +205,9 @@ public class PropertyContextDeclCSImpl
 	 * @generated
 	 */
 	public EList<ExpSpecificationCS> getDefaultExpressions() {
-		if (defaultExpressions == null) {
-			defaultExpressions = new EObjectContainmentEList<ExpSpecificationCS>(
-				ExpSpecificationCS.class,
-				this,
-				CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS);
+		if (defaultExpressions == null)
+		{
+			defaultExpressions = new EObjectContainmentEList<ExpSpecificationCS>(ExpSpecificationCS.class, this, CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS);
 		}
 		return defaultExpressions;
 	}
@@ -206,11 +218,9 @@ public class PropertyContextDeclCSImpl
 	 * @generated
 	 */
 	public EList<ConstraintCS> getDerivedInvariants() {
-		if (derivedInvariants == null) {
-			derivedInvariants = new EObjectContainmentEList<ConstraintCS>(
-				ConstraintCS.class,
-				this,
-				CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS);
+		if (derivedInvariants == null)
+		{
+			derivedInvariants = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS);
 		}
 		return derivedInvariants;
 	}
@@ -223,13 +233,12 @@ public class PropertyContextDeclCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS :
-				return ((InternalEList<?>) getDefaultExpressions())
-					.basicRemove(otherEnd, msgs);
-			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS :
-				return ((InternalEList<?>) getDerivedInvariants()).basicRemove(
-					otherEnd, msgs);
+		switch (featureID)
+		{
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS:
+				return ((InternalEList<?>)getDefaultExpressions()).basicRemove(otherEnd, msgs);
+			case CompleteOCLCSPackage.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS:
+				return ((InternalEList<?>)getDerivedInvariants()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

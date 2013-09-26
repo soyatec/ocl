@@ -19,9 +19,13 @@ package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,9 +91,7 @@ public class BinaryOperatorCSImpl
 		ExpCS oldArgument = argument;
 		argument = newArgument;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT,
-				oldArgument, argument));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT, oldArgument, argument));
 	}
 
 	/**
@@ -99,8 +101,9 @@ public class BinaryOperatorCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT:
 				return getArgument();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -113,9 +116,10 @@ public class BinaryOperatorCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT :
-				setArgument((ExpCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT:
+				setArgument((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,9 +132,10 @@ public class BinaryOperatorCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT :
-				setArgument((ExpCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT:
+				setArgument((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,11 +148,22 @@ public class BinaryOperatorCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.BINARY_OPERATOR_CS__ARGUMENT:
 				return argument != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitBinaryOperatorCS(this);
 	}
 
 	/**

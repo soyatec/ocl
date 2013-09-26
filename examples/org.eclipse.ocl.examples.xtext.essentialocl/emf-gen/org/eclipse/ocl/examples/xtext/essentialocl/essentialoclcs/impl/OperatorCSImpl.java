@@ -99,8 +99,7 @@ public abstract class OperatorCSImpl
 		OperatorCS oldParent = parent;
 		parent = newParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.OPERATOR_CS__PARENT, oldParent, parent));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.OPERATOR_CS__PARENT, oldParent, parent));
 	}
 
 	/**
@@ -121,8 +120,7 @@ public abstract class OperatorCSImpl
 		ExpCS oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.OPERATOR_CS__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.OPERATOR_CS__SOURCE, oldSource, source));
 	}
 
 	/**
@@ -132,10 +130,11 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
 				return getParent();
-			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE :
+			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				return getSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -148,12 +147,13 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT :
-				setParent((OperatorCS) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
+				setParent((OperatorCS)newValue);
 				return;
-			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE :
-				setSource((ExpCS) newValue);
+			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
+				setSource((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,12 +166,13 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT :
-				setParent((OperatorCS) null);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
+				setParent((OperatorCS)null);
 				return;
-			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE :
-				setSource((ExpCS) null);
+			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
+				setSource((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -184,10 +185,11 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
 				return parent != null;
-			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE :
+			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				return source != null;
 		}
 		return super.eIsSet(featureID);
@@ -200,12 +202,12 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class) {
-			switch (derivedFeatureID) {
-				case EssentialOCLCSPackage.OPERATOR_CS__PARENT :
-					return EssentialOCLCSPackage.EXP_CS__PARENT;
-				default :
-					return -1;
+		if (baseClass == ExpCS.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case EssentialOCLCSPackage.OPERATOR_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
+				default: return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -218,12 +220,12 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class) {
-			switch (baseFeatureID) {
-				case EssentialOCLCSPackage.EXP_CS__PARENT :
-					return EssentialOCLCSPackage.OPERATOR_CS__PARENT;
-				default :
-					return -1;
+		if (baseClass == ExpCS.class)
+		{
+			switch (baseFeatureID)
+			{
+				case EssentialOCLCSPackage.EXP_CS__PARENT: return EssentialOCLCSPackage.OPERATOR_CS__PARENT;
+				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.xtext.base.basecs;
 
+import org.eclipse.ocl.examples.pivot.Parameter;
+
 
 
 
@@ -64,4 +66,13 @@ public interface ParameterCS extends TypedElementCS {
 	 * @generated
 	 */
 	void setOwner(OperationCS value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL body='ocl::Parameter {\n\t\t\t\t-- TODO\n\t\t\t\tname = name\n\t\t\t}'"
+	 * @generated
+	 */
+	Parameter ast();
 } // ParameterCS

@@ -126,6 +126,6 @@ public interface OCLstdlibCSFactory
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	OCLstdlibCSPackage getOCLstdlibCSTPackage();
+	OCLstdlibCSPackage getOCLstdlibCSPackage();
 
 } //OCLstdlibCSTFactory

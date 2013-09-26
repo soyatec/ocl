@@ -36,7 +36,7 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getElementCS()
- * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.VisitableCS"
+ * @model abstract="true" superTypes="org.eclipse.ocl.examples.xtext.base.basecs.VisitableCS"
  * @generated
  */
 public interface ElementCS extends EObject, VisitableCS {

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.ocl.examples.xtext.base/emf-gen" editDirectory="/org.eclipse.ocl.examples.xtext.base.edit/emf-gen"
+    editorDirectory="/org.eclipse.ocl.examples.xtext.base.editor/emf-gen" modelPluginID="org.eclipse.ocl.examples.xtext.base"
+    templateDirectory="/org.eclipse.ocl.examples.build/templates" redirection="" modelName="basecs"
+    nonNLSMarkers="true" codeFormatting="true" testsDirectory="/org.eclipse.ocl.examples.xtext.base.tests/emf-gen"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    runtimeVersion="2.7" language="" usedGenPackages="../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
+    classNamePattern="">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString">
+    <details key="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS" value="&lt;%org.eclipse.xtext.nodemodel.ICompositeNode%> parserNode = &lt;%org.eclipse.xtext.nodemodel.util.NodeModelUtils%>.getNode(this);&#xD;&#xA;if (parserNode != null) {&#xD;&#xA;&#x9;return parserNode.getText().trim();&#xD;&#xA;}&#xD;&#xA;return &lt;%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.debugFullName(this);"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"/>
+    <details key="Visitable Classes" value="org.eclipse.ocl.examples.xtext.base.basecs.ElementCS"/>
+  </genAnnotations>
+  <foreignModel>BaseCS.ecore</foreignModel>
+  <genPackages prefix="BaseCS" basePackage="org.eclipse.ocl.examples.xtext.base" disposableProviderFactory="true"
+      generateExampleClass="false" ecorePackage="BaseCS.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BaseCS.ecore#//IteratorKind">
+      <genEnumLiterals ecoreEnumLiteral="BaseCS.ecore#//IteratorKind/Parameter"/>
+      <genEnumLiterals ecoreEnumLiteral="BaseCS.ecore#//IteratorKind/Iterator"/>
+      <genEnumLiterals ecoreEnumLiteral="BaseCS.ecore#//IteratorKind/Accumulator"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="BaseCS.ecore#//ScopeFilter"/>
+    <genClasses ecoreClass="BaseCS.ecore#//AnnotationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//AnnotationCS/ownedContent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//AnnotationCS/ownedReference"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//AnnotationElementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//AnnotationElementCS/ownedDetail"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//AttributeCS"/>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//ClassCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ClassCS/ownedSuperType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ClassCS/ownedOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ClassCS/ownedProperty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ClassCS/ownedMetaType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//ClassifierCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//ClassifierCS/owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//ClassifierCS/instanceClassName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ClassifierCS/ownedConstraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//ClassifierCS/qualifier"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//ClassifierCS/ast"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//ConstraintCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//ConstraintCS/stereotype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ConstraintCS/specification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ConstraintCS/messageSpecification"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//DataTypeCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//DataTypeCS/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//DetailCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//DetailCS/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//DocumentationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//DocumentationCS/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//ElementCS">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//ElementCS/logicalParent"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//ElementCS/getDescription"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//ElementRefCS"/>
+    <genClasses ecoreClass="BaseCS.ecore#//EnumerationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//EnumerationCS/ownedLiterals"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//EnumerationCS/ast"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//EnumerationLiteralCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//EnumerationLiteralCS/value"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//EnumerationLiteralCS/ast"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//FeatureCS"/>
+    <genClasses ecoreClass="BaseCS.ecore#//ImportCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ImportCS/pathName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ImportCS/namespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//ImportCS/all"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//LambdaTypeCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//LambdaTypeCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//LambdaTypeCS/ownedContextType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//LambdaTypeCS/ownedParameterType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//LambdaTypeCS/ownedResultType"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//LibraryCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//LibraryCS/package"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//ModelElementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ModelElementCS/ownedAnnotation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//ModelElementCS/originalXmiId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//ModelElementCS/csi"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//ModelElementRefCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ModelElementRefCS/pathName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ModelElementRefCS/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//MultiplicityBoundsCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//MultiplicityBoundsCS/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//MultiplicityBoundsCS/upperBound"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//MultiplicityCS">
+      <genOperations ecoreOperation="BaseCS.ecore#//MultiplicityCS/getLower"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//MultiplicityCS/getUpper"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//MultiplicityStringCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//MultiplicityStringCS/stringBounds"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//NamedElementCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//NamedElementCS/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//NamespaceCS"/>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//OperationCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/owningClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/ownedParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/ownedException"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/ownedPrecondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/ownedPostcondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/ownedBodyExpression"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//OperationCS/ast"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//PackageCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PackageCS/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PackageCS/ownedNestedPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PackageCS/nsPrefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PackageCS/nsURI"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//PackageCS/ast"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//PackageCS/getClassifier">
+        <genParameters ecoreParameter="BaseCS.ecore#//PackageCS/getClassifier/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//ParameterCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//ParameterCS/owner"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//ParameterCS/ast"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//PathElementCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//PathElementCS/pathName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PathElementCS/element"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PathElementCS/elementType"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//PathElementWithURICS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PathElementWithURICS/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//PathNameCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PathNameCS/path"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//PathNameCS/element"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PathNameCS/context"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PathNameCS/scopeFilter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//PivotableElementCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PivotableElementCS/pivot"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//PrimitiveTypeRefCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PrimitiveTypeRefCS/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//ReferenceCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ReferenceCS/opposite"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//ReferenceCS/keys"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//RootCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//RootCS/ownedImport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//RootCS/ownedLibrary"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//RootPackageCS"/>
+    <genClasses ecoreClass="BaseCS.ecore#//SpecificationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//SpecificationCS/exprString"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//StructuralFeatureCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//StructuralFeatureCS/owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//StructuralFeatureCS/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//StructuralFeatureCS/ownedDefaultExpression"/>
+      <genOperations ecoreOperation="BaseCS.ecore#//StructuralFeatureCS/ast"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//TemplateBindingCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateBindingCS/owningTemplateBindableElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateBindingCS/ownedParameterSubstitution"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//TemplateParameterCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateParameterCS/owningTemplateSignature"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//TemplateParameterSubstitutionCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateParameterSubstitutionCS/owningTemplateBinding"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateParameterSubstitutionCS/ownedActualParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//TemplateSignatureCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateSignatureCS/owningTemplateElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateSignatureCS/ownedTemplateParameter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//TemplateableElementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TemplateableElementCS/ownedTemplateSignature"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//TuplePartCS"/>
+    <genClasses ecoreClass="BaseCS.ecore#//TupleTypeCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//TupleTypeCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TupleTypeCS/ownedParts"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//TypeCS"/>
+    <genClasses ecoreClass="BaseCS.ecore#//TypeParameterCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypeParameterCS/ownedExtends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypeParameterCS/ownedSuper"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//TypeRefCS"/>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//TypedElementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypedElementCS/ownedType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//TypedElementCS/qualifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//TypedElementCS/optional"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//TypedRefCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypedRefCS/multiplicity"/>
+    </genClasses>
+    <genClasses ecoreClass="BaseCS.ecore#//TypedTypeRefCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypedTypeRefCS/pathName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypedTypeRefCS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//TypedTypeRefCS/ownedTemplateBinding"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//VisitableCS"/>
+    <genClasses ecoreClass="BaseCS.ecore#//WildcardTypeRefCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//WildcardTypeRefCS/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//WildcardTypeRefCS/super"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

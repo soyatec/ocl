@@ -20,8 +20,12 @@ package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NumberLiteralExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,9 +101,7 @@ public class NumberLiteralExpCSImpl
 		Number oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-				EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME, oldName,
-				name));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME, oldName, name));
 	}
 
 	/**
@@ -109,14 +111,7 @@ public class NumberLiteralExpCSImpl
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: "); //$NON-NLS-1$
-		result.append(name);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
@@ -126,8 +121,9 @@ public class NumberLiteralExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -140,9 +136,10 @@ public class NumberLiteralExpCSImpl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME :
-				setName((Number) newValue);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME:
+				setName((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -155,8 +152,9 @@ public class NumberLiteralExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -170,12 +168,21 @@ public class NumberLiteralExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME :
-				return NAME_EDEFAULT == null
-					? name != null
-					: !NAME_EDEFAULT.equals(name);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNumberLiteralExpCS(this);
 	}
 } //NumberLiteralExpCSImpl

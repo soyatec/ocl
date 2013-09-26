@@ -340,6 +340,6 @@ public interface BaseCSFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	BaseCSPackage getBaseCSTPackage();
+	BaseCSPackage getBaseCSPackage();
 
 } //BaseCSTFactory

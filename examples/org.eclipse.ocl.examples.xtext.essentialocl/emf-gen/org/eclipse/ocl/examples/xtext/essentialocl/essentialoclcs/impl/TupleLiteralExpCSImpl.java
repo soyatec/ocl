@@ -24,9 +24,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TupleLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TupleLiteralPartCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,10 +84,9 @@ public class TupleLiteralExpCSImpl
 	 * @generated
 	 */
 	public EList<TupleLiteralPartCS> getOwnedParts() {
-		if (ownedParts == null) {
-			ownedParts = new EObjectContainmentEList<TupleLiteralPartCS>(
-				TupleLiteralPartCS.class, this,
-				EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS);
+		if (ownedParts == null)
+		{
+			ownedParts = new EObjectContainmentEList<TupleLiteralPartCS>(TupleLiteralPartCS.class, this, EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS);
 		}
 		return ownedParts;
 	}
@@ -96,10 +99,10 @@ public class TupleLiteralExpCSImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS :
-				return ((InternalEList<?>) getOwnedParts()).basicRemove(
-					otherEnd, msgs);
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS:
+				return ((InternalEList<?>)getOwnedParts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -111,8 +114,9 @@ public class TupleLiteralExpCSImpl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS:
 				return getOwnedParts();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -126,11 +130,11 @@ public class TupleLiteralExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS:
 				getOwnedParts().clear();
-				getOwnedParts().addAll(
-					(Collection<? extends TupleLiteralPartCS>) newValue);
+				getOwnedParts().addAll((Collection<? extends TupleLiteralPartCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,8 +147,9 @@ public class TupleLiteralExpCSImpl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS:
 				getOwnedParts().clear();
 				return;
 		}
@@ -158,10 +163,21 @@ public class TupleLiteralExpCSImpl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS :
+		switch (featureID)
+		{
+			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS__OWNED_PARTS:
 				return ownedParts != null && !ownedParts.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitTupleLiteralExpCS(this);
 	}
 } //TupleLiteralExpCSImpl

@@ -107,9 +107,9 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeLiteralExp
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSContainmentVisitor;
 
-public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainmentVisitor
+public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLCSContainmentVisitor
 {
 	private static final Logger logger = Logger.getLogger(EssentialOCLContainmentVisitor.class);
 

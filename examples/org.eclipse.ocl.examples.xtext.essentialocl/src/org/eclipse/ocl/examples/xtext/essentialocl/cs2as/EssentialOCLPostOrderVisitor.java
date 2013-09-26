@@ -61,12 +61,12 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLPostOrderVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLCSPostOrderVisitor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
-public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderVisitor
+public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLCSPostOrderVisitor
 {
 	static final Logger logger = Logger.getLogger(EssentialOCLPostOrderVisitor.class);
 

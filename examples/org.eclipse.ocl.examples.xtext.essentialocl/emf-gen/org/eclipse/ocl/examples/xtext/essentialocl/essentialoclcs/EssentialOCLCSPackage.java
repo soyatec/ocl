@@ -72,8 +72,7 @@ public interface EssentialOCLCSPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	EssentialOCLCSPackage eINSTANCE = org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.EssentialOCLCSPackageImpl
-		.init();
+	EssentialOCLCSPackage eINSTANCE = org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.EssentialOCLCSPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpCSImpl <em>Exp CS</em>}' class.
@@ -4371,8 +4370,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BINARY_OPERATOR_CS__ARGUMENT = eINSTANCE
-			.getBinaryOperatorCS_Argument();
+		EReference BINARY_OPERATOR_CS__ARGUMENT = eINSTANCE.getBinaryOperatorCS_Argument();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.PrefixExpCSImpl <em>Prefix Exp CS</em>}' class.
@@ -4390,8 +4388,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PREFIX_EXP_CS__OWNED_OPERATOR = eINSTANCE
-			.getPrefixExpCS_OwnedOperator();
+		EReference PREFIX_EXP_CS__OWNED_OPERATOR = eINSTANCE.getPrefixExpCS_OwnedOperator();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
@@ -4399,8 +4396,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PREFIX_EXP_CS__OWNED_EXPRESSION = eINSTANCE
-			.getPrefixExpCS_OwnedExpression();
+		EReference PREFIX_EXP_CS__OWNED_EXPRESSION = eINSTANCE.getPrefixExpCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.CollectionTypeCSImpl <em>Collection Type CS</em>}' class.
@@ -4418,8 +4414,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_TYPE_CS__NAME = eINSTANCE
-			.getCollectionTypeCS_Name();
+		EAttribute COLLECTION_TYPE_CS__NAME = eINSTANCE.getCollectionTypeCS_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference feature.
@@ -4427,8 +4422,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_TYPE_CS__OWNED_TYPE = eINSTANCE
-			.getCollectionTypeCS_OwnedType();
+		EReference COLLECTION_TYPE_CS__OWNED_TYPE = eINSTANCE.getCollectionTypeCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ConstructorExpCSImpl <em>Constructor Exp CS</em>}' class.
@@ -4446,8 +4440,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTRUCTOR_EXP_CS__OWNED_PARTS = eINSTANCE
-			.getConstructorExpCS_OwnedParts();
+		EReference CONSTRUCTOR_EXP_CS__OWNED_PARTS = eINSTANCE.getConstructorExpCS_OwnedParts();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -4455,8 +4448,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONSTRUCTOR_EXP_CS__VALUE = eINSTANCE
-			.getConstructorExpCS_Value();
+		EAttribute CONSTRUCTOR_EXP_CS__VALUE = eINSTANCE.getConstructorExpCS_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ConstructorPartCSImpl <em>Constructor Part CS</em>}' class.
@@ -4474,8 +4466,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTRUCTOR_PART_CS__PROPERTY = eINSTANCE
-			.getConstructorPartCS_Property();
+		EReference CONSTRUCTOR_PART_CS__PROPERTY = eINSTANCE.getConstructorPartCS_Property();
 
 		/**
 		 * The meta object literal for the '<em><b>Init Expression</b></em>' containment reference feature.
@@ -4483,8 +4474,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTRUCTOR_PART_CS__INIT_EXPRESSION = eINSTANCE
-			.getConstructorPartCS_InitExpression();
+		EReference CONSTRUCTOR_PART_CS__INIT_EXPRESSION = eINSTANCE.getConstructorPartCS_InitExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ContextCSImpl <em>Context CS</em>}' class.
@@ -4502,8 +4492,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTEXT_CS__OWNED_EXPRESSION = eINSTANCE
-			.getContextCS_OwnedExpression();
+		EReference CONTEXT_CS__OWNED_EXPRESSION = eINSTANCE.getContextCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpCSImpl <em>Exp CS</em>}' class.
@@ -4539,8 +4528,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXP_SPECIFICATION_CS__OWNED_EXPRESSION = eINSTANCE
-			.getExpSpecificationCS_OwnedExpression();
+		EReference EXP_SPECIFICATION_CS__OWNED_EXPRESSION = eINSTANCE.getExpSpecificationCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.TypeLiteralExpCSImpl <em>Type Literal Exp CS</em>}' class.
@@ -4558,8 +4546,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_LITERAL_EXP_CS__OWNED_TYPE = eINSTANCE
-			.getTypeLiteralExpCS_OwnedType();
+		EReference TYPE_LITERAL_EXP_CS__OWNED_TYPE = eINSTANCE.getTypeLiteralExpCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.TypeNameExpCSImpl <em>Type Name Exp CS</em>}' class.
@@ -4577,8 +4564,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_NAME_EXP_CS__PATH_NAME = eINSTANCE
-			.getTypeNameExpCS_PathName();
+		EReference TYPE_NAME_EXP_CS__PATH_NAME = eINSTANCE.getTypeNameExpCS_PathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
@@ -4586,8 +4572,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_NAME_EXP_CS__ELEMENT = eINSTANCE
-			.getTypeNameExpCS_Element();
+		EReference TYPE_NAME_EXP_CS__ELEMENT = eINSTANCE.getTypeNameExpCS_Element();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.UnaryOperatorCSImpl <em>Unary Operator CS</em>}' class.
@@ -4607,8 +4592,7 @@ public interface EssentialOCLCSPackage
 		 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.EssentialOCLCSPackageImpl#getUnlimitedNaturalLiteralExpCS()
 		 * @generated
 		 */
-		EClass UNLIMITED_NATURAL_LITERAL_EXP_CS = eINSTANCE
-			.getUnlimitedNaturalLiteralExpCS();
+		EClass UNLIMITED_NATURAL_LITERAL_EXP_CS = eINSTANCE.getUnlimitedNaturalLiteralExpCS();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.VariableCSImpl <em>Variable CS</em>}' class.
@@ -4626,8 +4610,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_CS__OWNED_TYPE = eINSTANCE
-			.getVariableCS_OwnedType();
+		EReference VARIABLE_CS__OWNED_TYPE = eINSTANCE.getVariableCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '<em><b>Init Expression</b></em>' containment reference feature.
@@ -4635,8 +4618,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_CS__INIT_EXPRESSION = eINSTANCE
-			.getVariableCS_InitExpression();
+		EReference VARIABLE_CS__INIT_EXPRESSION = eINSTANCE.getVariableCS_InitExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationRole <em>Navigation Role</em>}' enum.
@@ -4718,8 +4700,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NAVIGATING_ARG_CS__NAVIGATING_EXP = eINSTANCE
-			.getNavigatingArgCS_NavigatingExp();
+		EReference NAVIGATING_ARG_CS__NAVIGATING_EXP = eINSTANCE.getNavigatingArgCS_NavigatingExp();
 
 		/**
 		 * The meta object literal for the '<em><b>Role</b></em>' attribute feature.
@@ -4727,8 +4708,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NAVIGATING_ARG_CS__ROLE = eINSTANCE
-			.getNavigatingArgCS_Role();
+		EAttribute NAVIGATING_ARG_CS__ROLE = eINSTANCE.getNavigatingArgCS_Role();
 
 		/**
 		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
@@ -4736,8 +4716,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NAVIGATING_ARG_CS__PREFIX = eINSTANCE
-			.getNavigatingArgCS_Prefix();
+		EAttribute NAVIGATING_ARG_CS__PREFIX = eINSTANCE.getNavigatingArgCS_Prefix();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
@@ -4745,8 +4724,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NAVIGATING_ARG_CS__NAME = eINSTANCE
-			.getNavigatingArgCS_Name();
+		EReference NAVIGATING_ARG_CS__NAME = eINSTANCE.getNavigatingArgCS_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference feature.
@@ -4754,8 +4732,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NAVIGATING_ARG_CS__OWNED_TYPE = eINSTANCE
-			.getNavigatingArgCS_OwnedType();
+		EReference NAVIGATING_ARG_CS__OWNED_TYPE = eINSTANCE.getNavigatingArgCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '<em><b>Init</b></em>' containment reference feature.
@@ -4763,8 +4740,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NAVIGATING_ARG_CS__INIT = eINSTANCE
-			.getNavigatingArgCS_Init();
+		EReference NAVIGATING_ARG_CS__INIT = eINSTANCE.getNavigatingArgCS_Init();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NavigationOperatorCSImpl <em>Navigation Operator CS</em>}' class.
@@ -4802,8 +4778,7 @@ public interface EssentialOCLCSPackage
 		 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.EssentialOCLCSPackageImpl#getCollectionLiteralExpCS()
 		 * @generated
 		 */
-		EClass COLLECTION_LITERAL_EXP_CS = eINSTANCE
-			.getCollectionLiteralExpCS();
+		EClass COLLECTION_LITERAL_EXP_CS = eINSTANCE.getCollectionLiteralExpCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference feature.
@@ -4811,8 +4786,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_LITERAL_EXP_CS__OWNED_TYPE = eINSTANCE
-			.getCollectionLiteralExpCS_OwnedType();
+		EReference COLLECTION_LITERAL_EXP_CS__OWNED_TYPE = eINSTANCE.getCollectionLiteralExpCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Parts</b></em>' containment reference list feature.
@@ -4820,8 +4794,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_LITERAL_EXP_CS__OWNED_PARTS = eINSTANCE
-			.getCollectionLiteralExpCS_OwnedParts();
+		EReference COLLECTION_LITERAL_EXP_CS__OWNED_PARTS = eINSTANCE.getCollectionLiteralExpCS_OwnedParts();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.CollectionLiteralPartCSImpl <em>Collection Literal Part CS</em>}' class.
@@ -4831,8 +4804,7 @@ public interface EssentialOCLCSPackage
 		 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.EssentialOCLCSPackageImpl#getCollectionLiteralPartCS()
 		 * @generated
 		 */
-		EClass COLLECTION_LITERAL_PART_CS = eINSTANCE
-			.getCollectionLiteralPartCS();
+		EClass COLLECTION_LITERAL_PART_CS = eINSTANCE.getCollectionLiteralPartCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression CS</b></em>' containment reference feature.
@@ -4840,8 +4812,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_LITERAL_PART_CS__EXPRESSION_CS = eINSTANCE
-			.getCollectionLiteralPartCS_ExpressionCS();
+		EReference COLLECTION_LITERAL_PART_CS__EXPRESSION_CS = eINSTANCE.getCollectionLiteralPartCS_ExpressionCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Last Expression CS</b></em>' containment reference feature.
@@ -4849,8 +4820,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS = eINSTANCE
-			.getCollectionLiteralPartCS_LastExpressionCS();
+		EReference COLLECTION_LITERAL_PART_CS__LAST_EXPRESSION_CS = eINSTANCE.getCollectionLiteralPartCS_LastExpressionCS();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.PrimitiveLiteralExpCSImpl <em>Primitive Literal Exp CS</em>}' class.
@@ -4896,8 +4866,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TUPLE_LITERAL_EXP_CS__OWNED_PARTS = eINSTANCE
-			.getTupleLiteralExpCS_OwnedParts();
+		EReference TUPLE_LITERAL_EXP_CS__OWNED_PARTS = eINSTANCE.getTupleLiteralExpCS_OwnedParts();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.TupleLiteralPartCSImpl <em>Tuple Literal Part CS</em>}' class.
@@ -4925,8 +4894,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STRING_LITERAL_EXP_CS__NAME = eINSTANCE
-			.getStringLiteralExpCS_Name();
+		EAttribute STRING_LITERAL_EXP_CS__NAME = eINSTANCE.getStringLiteralExpCS_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
@@ -4944,8 +4912,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BOOLEAN_LITERAL_EXP_CS__NAME = eINSTANCE
-			.getBooleanLiteralExpCS_Name();
+		EAttribute BOOLEAN_LITERAL_EXP_CS__NAME = eINSTANCE.getBooleanLiteralExpCS_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.InvalidLiteralExpCSImpl <em>Invalid Literal Exp CS</em>}' class.
@@ -4973,8 +4940,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INVOCATION_EXP_CS__ARGUMENT = eINSTANCE
-			.getInvocationExpCS_Argument();
+		EReference INVOCATION_EXP_CS__ARGUMENT = eINSTANCE.getInvocationExpCS_Argument();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
@@ -5002,8 +4968,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NUMBER_LITERAL_EXP_CS__NAME = eINSTANCE
-			.getNumberLiteralExpCS_Name();
+		EAttribute NUMBER_LITERAL_EXP_CS__NAME = eINSTANCE.getNumberLiteralExpCS_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl <em>Operator CS</em>}' class.
@@ -5057,8 +5022,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF_EXP_CS__THEN_EXPRESSION = eINSTANCE
-			.getIfExpCS_ThenExpression();
+		EReference IF_EXP_CS__THEN_EXPRESSION = eINSTANCE.getIfExpCS_ThenExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Else Expression</b></em>' containment reference feature.
@@ -5066,8 +5030,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF_EXP_CS__ELSE_EXPRESSION = eINSTANCE
-			.getIfExpCS_ElseExpression();
+		EReference IF_EXP_CS__ELSE_EXPRESSION = eINSTANCE.getIfExpCS_ElseExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.IndexExpCSImpl <em>Index Exp CS</em>}' class.
@@ -5085,8 +5048,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INDEX_EXP_CS__FIRST_INDEXES = eINSTANCE
-			.getIndexExpCS_FirstIndexes();
+		EReference INDEX_EXP_CS__FIRST_INDEXES = eINSTANCE.getIndexExpCS_FirstIndexes();
 
 		/**
 		 * The meta object literal for the '<em><b>Second Indexes</b></em>' containment reference list feature.
@@ -5094,8 +5056,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INDEX_EXP_CS__SECOND_INDEXES = eINSTANCE
-			.getIndexExpCS_SecondIndexes();
+		EReference INDEX_EXP_CS__SECOND_INDEXES = eINSTANCE.getIndexExpCS_SecondIndexes();
 
 		/**
 		 * The meta object literal for the '<em><b>At Pre</b></em>' attribute feature.
@@ -5121,8 +5082,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INFIX_EXP_CS__OWNED_EXPRESSION = eINSTANCE
-			.getInfixExpCS_OwnedExpression();
+		EReference INFIX_EXP_CS__OWNED_EXPRESSION = eINSTANCE.getInfixExpCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Operator</b></em>' containment reference list feature.
@@ -5130,8 +5090,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INFIX_EXP_CS__OWNED_OPERATOR = eINSTANCE
-			.getInfixExpCS_OwnedOperator();
+		EReference INFIX_EXP_CS__OWNED_OPERATOR = eINSTANCE.getInfixExpCS_OwnedOperator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
@@ -5175,8 +5134,7 @@ public interface EssentialOCLCSPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LET_VARIABLE_CS__LET_EXPRESSION = eINSTANCE
-			.getLetVariableCS_LetExpression();
+		EReference LET_VARIABLE_CS__LET_EXPRESSION = eINSTANCE.getLetVariableCS_LetExpression();
 
 	}
 

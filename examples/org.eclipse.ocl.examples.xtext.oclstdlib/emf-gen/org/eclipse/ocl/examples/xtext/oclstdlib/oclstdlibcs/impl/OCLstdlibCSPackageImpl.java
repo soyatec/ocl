@@ -161,27 +161,27 @@ public class OCLstdlibCSPackageImpl
 		if (isInited) return (OCLstdlibCSPackage)EPackage.Registry.INSTANCE.getEPackage(OCLstdlibCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		OCLstdlibCSPackageImpl theOCLstdlibCSTPackage = (OCLstdlibCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OCLstdlibCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OCLstdlibCSPackageImpl());
+		OCLstdlibCSPackageImpl theOCLstdlibCSPackage = (OCLstdlibCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OCLstdlibCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OCLstdlibCSPackageImpl());
 
 		isInited = true;
 
 		// Initialize simple dependencies
-		EssentialOCLCSPackage.eINSTANCE.eClass();
+		BaseCSPackage.eINSTANCE.eClass();
 		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
-		theOCLstdlibCSTPackage.createPackageContents();
+		theOCLstdlibCSPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theOCLstdlibCSTPackage.initializePackageContents();
+		theOCLstdlibCSPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theOCLstdlibCSTPackage.freeze();
+		theOCLstdlibCSPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(OCLstdlibCSPackage.eNS_URI, theOCLstdlibCSTPackage);
-		return theOCLstdlibCSTPackage;
+		EPackage.Registry.INSTANCE.put(OCLstdlibCSPackage.eNS_URI, theOCLstdlibCSPackage);
+		return theOCLstdlibCSPackage;
 	}
 
 	/**
@@ -412,7 +412,8 @@ public class OCLstdlibCSPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCLstdlibCSFactory getOCLstdlibCSTFactory() {
+	public OCLstdlibCSFactory getOCLstdlibCSFactory()
+	{
 		return (OCLstdlibCSFactory)getEFactoryInstance();
 	}
 
@@ -495,7 +496,7 @@ public class OCLstdlibCSPackageImpl
 
 		// Obtain other dependent packages
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
-		BaseCSPackage theBaseCSTPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
+		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 
 		// Create type parameters
@@ -503,19 +504,19 @@ public class OCLstdlibCSPackageImpl
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		libClassCSEClass.getESuperTypes().add(theBaseCSTPackage.getClassCS());
-		libConstraintCSEClass.getESuperTypes().add(theBaseCSTPackage.getConstraintCS());
-		libIterationCSEClass.getESuperTypes().add(theBaseCSTPackage.getOperationCS());
+		libClassCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
+		libConstraintCSEClass.getESuperTypes().add(theBaseCSPackage.getConstraintCS());
+		libIterationCSEClass.getESuperTypes().add(theBaseCSPackage.getOperationCS());
 		libIterationCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
-		libOperationCSEClass.getESuperTypes().add(theBaseCSTPackage.getOperationCS());
+		libOperationCSEClass.getESuperTypes().add(theBaseCSPackage.getOperationCS());
 		libOperationCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
-		libPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getPackageCS());
-		libPropertyCSEClass.getESuperTypes().add(theBaseCSTPackage.getAttributeCS());
+		libPackageCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
+		libPropertyCSEClass.getESuperTypes().add(theBaseCSPackage.getAttributeCS());
 		libPropertyCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
-		libRootPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getRootPackageCS());
-		metaTypeNameEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
+		libRootPackageCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
+		metaTypeNameEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		metaTypeNameEClass.getESuperTypes().add(thePivotPackage.getNameable());
-		precedenceCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
+		precedenceCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(javaImplementationCSEClass, JavaImplementationCS.class, "JavaImplementationCS", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -527,8 +528,8 @@ public class OCLstdlibCSPackageImpl
 		initEClass(libConstraintCSEClass, LibConstraintCS.class, "LibConstraintCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(libIterationCSEClass, LibIterationCS.class, "LibIterationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLibIterationCS_OwnedIterator(), theBaseCSTPackage.getParameterCS(), null, "ownedIterator", null, 0, -1, LibIterationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLibIterationCS_OwnedAccumulator(), theBaseCSTPackage.getParameterCS(), null, "ownedAccumulator", null, 0, -1, LibIterationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibIterationCS_OwnedIterator(), theBaseCSPackage.getParameterCS(), null, "ownedIterator", null, 0, -1, LibIterationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibIterationCS_OwnedAccumulator(), theBaseCSPackage.getParameterCS(), null, "ownedAccumulator", null, 0, -1, LibIterationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLibIterationCS_Invalidating(), thePivotPackage.getBoolean(), "invalidating", "false", 0, 1, LibIterationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLibIterationCS_Validating(), thePivotPackage.getBoolean(), "validating", "false", 0, 1, LibIterationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -577,7 +578,7 @@ public class OCLstdlibCSPackageImpl
 			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL",
 			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL",
 			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL"
-		   });	
+		   });
 	}
 
 } //OCLstdlibCSTPackageImpl

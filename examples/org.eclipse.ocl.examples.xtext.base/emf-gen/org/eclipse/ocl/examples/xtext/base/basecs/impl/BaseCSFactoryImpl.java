@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: BaseCSTFactoryImpl.java,v 1.10 2011/05/12 08:46:40 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.base.basecs.impl;
@@ -24,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.examples.xtext.base.basecs.*;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
@@ -77,10 +77,10 @@ public class BaseCSFactoryImpl extends EFactoryImpl implements BaseCSFactory {
 	public static BaseCSFactory init() {
 		try
 		{
-			BaseCSFactory theBaseCSTFactory = (BaseCSFactory)EPackage.Registry.INSTANCE.getEFactory(BaseCSPackage.eNS_URI);
-			if (theBaseCSTFactory != null)
+			BaseCSFactory theBaseCSFactory = (BaseCSFactory)EPackage.Registry.INSTANCE.getEFactory(BaseCSPackage.eNS_URI);
+			if (theBaseCSFactory != null)
 			{
-				return theBaseCSTFactory;
+				return theBaseCSFactory;
 			}
 		}
 		catch (Exception exception)
@@ -582,7 +582,8 @@ public class BaseCSFactoryImpl extends EFactoryImpl implements BaseCSFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BaseCSPackage getBaseCSTPackage() {
+	public BaseCSPackage getBaseCSPackage()
+	{
 		return (BaseCSPackage)getEPackage();
 	}
 

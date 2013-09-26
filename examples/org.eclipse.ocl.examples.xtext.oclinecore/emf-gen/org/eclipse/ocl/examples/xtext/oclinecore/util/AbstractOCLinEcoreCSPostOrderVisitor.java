@@ -22,18 +22,18 @@ package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPostOrderVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
 /**
- * An AbstractOCLinEcoreContainmentVisitor provides a default implementation for each
+ * An AbstractOCLinEcorePostOrderVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractOCLinEcoreContainmentVisitor
-	extends EssentialOCLContainmentVisitor
+public abstract class AbstractOCLinEcoreCSPostOrderVisitor
+	extends EssentialOCLPostOrderVisitor
 	implements OCLinEcoreCSVisitor<Continuation<?>>
 {
 	/**
@@ -41,7 +41,7 @@ public abstract class AbstractOCLinEcoreContainmentVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractOCLinEcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractOCLinEcoreCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
