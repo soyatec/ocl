@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.cs2as;
 
 import java.util.Collection;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 
 public class PivotDependencies extends AbstractDependency<Collection<? extends ModelElementCS>>
 {

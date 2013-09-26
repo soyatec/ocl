@@ -30,15 +30,15 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 
 public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pivot2CSConversion>
 {
@@ -51,17 +51,17 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 	@Override
 	public ElementCS visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 		if (object.eContainingFeature() == PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL) {
-			WildcardTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createWildcardTypeRefCS();
+			WildcardTypeRefCS csRef = BaseCSFactory.eINSTANCE.createWildcardTypeRefCS();
 			csRef.setPivot(object);
 			return csRef;
 		}
 		org.eclipse.ocl.examples.pivot.Class scopeClass = context.getScope();
 		org.eclipse.ocl.examples.pivot.Package scopePackage = scopeClass != null ? PivotUtil.getPackage(scopeClass) : null;
-		TypedTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createTypedTypeRefCS();
+		TypedTypeRefCS csRef = BaseCSFactory.eINSTANCE.createTypedTypeRefCS();
 		Type type = PivotUtil.getUnspecializedTemplateableElement(object);
 		PathNameCS csPathName = csRef.getPathName();
 		if (csPathName == null) {
-			@SuppressWarnings("null") @NonNull PathNameCS csPathName2 = BaseCSTFactory.eINSTANCE.createPathNameCS();
+			@SuppressWarnings("null") @NonNull PathNameCS csPathName2 = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csPathName = csPathName2;
 			csRef.setPathName(csPathName);
 		}
@@ -79,7 +79,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 		else {
 			TemplateBindingCS csTemplateBinding = csRef.getOwnedTemplateBinding();
 			if (csTemplateBinding == null) {
-				csTemplateBinding = BaseCSTFactory.eINSTANCE.createTemplateBindingCS();
+				csTemplateBinding = BaseCSFactory.eINSTANCE.createTemplateBindingCS();
 				csRef.setOwnedTemplateBinding(csTemplateBinding);
 			}
 			List<TemplateParameterSubstitutionCS> csParameterSubstitutions = new ArrayList<TemplateParameterSubstitutionCS>();
@@ -87,7 +87,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 				for (TemplateParameterSubstitution templateParameterSubstitution : templateBinding.getParameterSubstitution()) {
 					ParameterableElement actual = templateParameterSubstitution.getActual();
 					if (actual != null) {
-						TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSTFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
+						TemplateParameterSubstitutionCS csTemplateParameterSubstitution = BaseCSFactory.eINSTANCE.createTemplateParameterSubstitutionCS();
 						TypeRefCS csParameterable = context.visitReference(TypeRefCS.class, actual);
 						csTemplateParameterSubstitution.setOwnedActualParameter(csParameterable);
 						csParameterSubstitutions.add(csTemplateParameterSubstitution);
@@ -110,7 +110,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 
 	@Override
 	public ElementCS visitPrimitiveType(@NonNull PrimitiveType object) {
-		PrimitiveTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createPrimitiveTypeRefCS();
+		PrimitiveTypeRefCS csRef = BaseCSFactory.eINSTANCE.createPrimitiveTypeRefCS();
 //		Type type = PivotUtil.getUnspecializedTemplateableElement(object);
 //		csRef.setType(type);
 		csRef.setPivot(object);		// FIXME object ??

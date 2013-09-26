@@ -19,8 +19,8 @@ package org.eclipse.ocl.examples.xtext.oclstdlib;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.util.OCLstdlibCSTValidator;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSValidator;
 import org.eclipse.ocl.examples.xtext.oclstdlib.scoping.OCLstdlibScoping;
 import org.eclipse.ocl.examples.xtext.oclstdlib.utilities.OCLstdlibASResourceFactory;
 
@@ -48,8 +48,8 @@ public class OCLstdlibStandaloneSetup extends OCLstdlibStandaloneSetupGenerated
 		OCLstdlibScoping.init();
 		OCLstdlibASResourceFactory.INSTANCE.getClass();
 //		OCLstdlibCS2Pivot.FACTORY.getClass();
-		EPackage.Registry.INSTANCE.put(OCLstdlibCSTPackage.eNS_URI, OCLstdlibCSTPackage.eINSTANCE);
-		EValidator.Registry.INSTANCE.put(OCLstdlibCSTPackage.eINSTANCE, OCLstdlibCSTValidator.INSTANCE);
+		EPackage.Registry.INSTANCE.put(OCLstdlibCSPackage.eNS_URI, OCLstdlibCSPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(OCLstdlibCSPackage.eINSTANCE, OCLstdlibCSValidator.INSTANCE);
 	}
 	
 	/**

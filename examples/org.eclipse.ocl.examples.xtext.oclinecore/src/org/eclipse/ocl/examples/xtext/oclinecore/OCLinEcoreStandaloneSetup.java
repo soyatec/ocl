@@ -18,7 +18,7 @@
 package org.eclipse.ocl.examples.xtext.oclinecore;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreASResourceFactory;
 
 import com.google.inject.Injector;
@@ -44,7 +44,7 @@ public class OCLinEcoreStandaloneSetup extends OCLinEcoreStandaloneSetupGenerate
 	public static void init() {
 		OCLinEcoreASResourceFactory.INSTANCE.getClass();
 //		OCLinEcorePivot2CS.FACTORY.getClass();
-		EPackage.Registry.INSTANCE.put(OCLinEcoreCSTPackage.eNS_URI, OCLinEcoreCSTPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(OCLinEcoreCSPackage.eNS_URI, OCLinEcoreCSPackage.eINSTANCE);
 	}
 	
 	/**

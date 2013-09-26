@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.base.cs2as;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 
 public class PivotDependency extends AbstractDependency<PivotableElementCS>
 {

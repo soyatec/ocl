@@ -33,10 +33,10 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.attributes.PackageCSAttribution;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTFactory;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.MetaTypeName;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSFactory;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
 
 public class LibPackageCSAttribution extends PackageCSAttribution
 {
@@ -47,7 +47,7 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		LibPackageCS targetElement = (LibPackageCS)target;
-		if (environmentView.getReference() == OCLstdlibCSTPackage.Literals.LIB_CLASS_CS__META_TYPE_NAME) {
+		if (environmentView.getReference() == OCLstdlibCSPackage.Literals.LIB_CLASS_CS__META_TYPE_NAME) {
 			Map<String, MetaTypeName> metaTypeNames2 = metaTypeNames;
 			if (metaTypeNames2 == null) {
 				Resource metaTypeResource = new ResourceImpl(URI.createURI("internal_list;;//of_meta-type_names"));
@@ -56,7 +56,7 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 				for (EClassifier eClassifier : PivotPackage.eINSTANCE.getEClassifiers()) {
 					if (eClassifier instanceof EClass) {
 						if (PivotPackage.Literals.CLASS.isSuperTypeOf((EClass) eClassifier)) {
-							MetaTypeName metaTypeName = OCLstdlibCSTFactory.eINSTANCE.createMetaTypeName();
+							MetaTypeName metaTypeName = OCLstdlibCSFactory.eINSTANCE.createMetaTypeName();
 							String name = eClassifier.getName();
 							metaTypeName.setName(name);
 							metaTypeNames2.put(name, metaTypeName);

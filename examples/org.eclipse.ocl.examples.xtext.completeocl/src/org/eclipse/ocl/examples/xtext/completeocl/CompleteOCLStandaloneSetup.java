@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.xtext.completeocl;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.scoping.CompleteOCLScoping;
 import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLASResourceFactory;
 
@@ -44,7 +44,7 @@ public class CompleteOCLStandaloneSetup extends CompleteOCLStandaloneSetupGenera
 	public static void init() {
 		CompleteOCLScoping.init();
 		CompleteOCLASResourceFactory.INSTANCE.getClass();
-		EPackage.Registry.INSTANCE.put(CompleteOCLCSTPackage.eNS_URI, CompleteOCLCSTPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(CompleteOCLCSPackage.eNS_URI, CompleteOCLCSPackage.eINSTANCE);
 	}
 	
 	/**

@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl.ui.syntaxcoloring;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;

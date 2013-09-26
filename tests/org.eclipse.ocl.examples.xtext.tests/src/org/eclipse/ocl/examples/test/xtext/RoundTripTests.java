@@ -49,7 +49,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.MessageBinder;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -96,7 +96,7 @@ public class RoundTripTests extends XtextTestCase
 		}
 	}
 	public BaseCSResource createXtextFromPivot(MetaModelManager metaModelManager, ASResource asResource, URI xtextURI) throws IOException {
-		XtextResource xtextResource = (XtextResource) resourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		XtextResource xtextResource = (XtextResource) resourceSet.createResource(xtextURI, OCLinEcoreCSPackage.eCONTENT_TYPE);
 		((BaseCSResource) xtextResource).updateFrom(asResource, metaModelManager);
 		xtextResource.save(null);
 		assertNoResourceErrors("Conversion failed", xtextResource);
@@ -114,7 +114,7 @@ public class RoundTripTests extends XtextTestCase
 	}
 	
 	public BaseResource createCompleteOCLXtextFromPivot(MetaModelManager metaModelManager, ASResource asResource, URI xtextURI) throws IOException {
-		BaseResource xtextResource = (BaseResource) resourceSet.createResource(xtextURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		BaseResource xtextResource = (BaseResource) resourceSet.createResource(xtextURI, OCLinEcoreCSPackage.eCONTENT_TYPE);
 		xtextResource.updateFrom(asResource, metaModelManager);
 		xtextResource.save(null);
 		assertNoResourceErrors("Conversion failed", xtextResource);

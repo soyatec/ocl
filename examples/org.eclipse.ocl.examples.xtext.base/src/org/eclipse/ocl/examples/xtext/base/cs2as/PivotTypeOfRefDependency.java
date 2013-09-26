@@ -19,8 +19,8 @@ package org.eclipse.ocl.examples.xtext.base.cs2as;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 
 public class PivotTypeOfRefDependency extends AbstractDependency<TypedRefCS>
 {

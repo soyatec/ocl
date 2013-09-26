@@ -25,18 +25,18 @@ import org.eclipse.ocl.examples.xtext.completeocl.attributes.IncludeCSAttributio
 import org.eclipse.ocl.examples.xtext.completeocl.attributes.OperationContextCSAttribution;
 import org.eclipse.ocl.examples.xtext.completeocl.attributes.PackageDeclarationCSAttribution;
 import org.eclipse.ocl.examples.xtext.completeocl.attributes.PropertyContextCSAttribution;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
 
 public class CompleteOCLScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(CompleteOCLCSTPackage.Literals.CLASSIFIER_CONTEXT_DECL_CS, ClassifierContextCSAttribution.INSTANCE);
-		registry.put(CompleteOCLCSTPackage.Literals.COMPLETE_OCL_DOCUMENT_CS, CompleteOCLDocumentCSAttribution.INSTANCE);
-		registry.put(CompleteOCLCSTPackage.Literals.INCLUDE_CS, IncludeCSAttribution.INSTANCE);	// new IncludeAttribution()
-		registry.put(CompleteOCLCSTPackage.Literals.OPERATION_CONTEXT_DECL_CS, OperationContextCSAttribution.INSTANCE);
-		registry.put(CompleteOCLCSTPackage.Literals.PACKAGE_DECLARATION_CS, PackageDeclarationCSAttribution.INSTANCE);
-		registry.put(CompleteOCLCSTPackage.Literals.PROPERTY_CONTEXT_DECL_CS, PropertyContextCSAttribution.INSTANCE);
+		registry.put(CompleteOCLCSPackage.Literals.CLASSIFIER_CONTEXT_DECL_CS, ClassifierContextCSAttribution.INSTANCE);
+		registry.put(CompleteOCLCSPackage.Literals.COMPLETE_OCL_DOCUMENT_CS, CompleteOCLDocumentCSAttribution.INSTANCE);
+		registry.put(CompleteOCLCSPackage.Literals.INCLUDE_CS, IncludeCSAttribution.INSTANCE);	// new IncludeAttribution()
+		registry.put(CompleteOCLCSPackage.Literals.OPERATION_CONTEXT_DECL_CS, OperationContextCSAttribution.INSTANCE);
+		registry.put(CompleteOCLCSPackage.Literals.PACKAGE_DECLARATION_CS, PackageDeclarationCSAttribution.INSTANCE);
+		registry.put(CompleteOCLCSPackage.Literals.PROPERTY_CONTEXT_DECL_CS, PropertyContextCSAttribution.INSTANCE);
 		CS2Pivot.addUnresolvedProxyMessageProvider(IncludeCSAttribution.INSTANCE);			
 	}
 }

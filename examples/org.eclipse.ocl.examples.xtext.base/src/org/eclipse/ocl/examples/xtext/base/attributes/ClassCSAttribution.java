@@ -25,8 +25,8 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 
 public class ClassCSAttribution extends AbstractAttribution
 {
@@ -39,10 +39,10 @@ public class ClassCSAttribution extends AbstractAttribution
 //		TypeBindingsCS bindings = scopeView.getBindings();
 		org.eclipse.ocl.examples.pivot.Class pivot = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, targetElement);
 		if (pivot != null) {
-			if (containmentFeature == BaseCSTPackage.Literals.CLASS_CS__OWNED_SUPER_TYPE) {
+			if (containmentFeature == BaseCSPackage.Literals.CLASS_CS__OWNED_SUPER_TYPE) {
 				environmentView.addElements(PivotUtil.getTypeTemplateParameterables(pivot));
 			}
-			else if (containmentFeature == BaseCSTPackage.Literals.CLASS_CS__OWNED_META_TYPE) {
+			else if (containmentFeature == BaseCSPackage.Literals.CLASS_CS__OWNED_META_TYPE) {
 //				environmentView.addNamedElement(metaModelManager.getBagTypeType());				
 //				environmentView.addNamedElement(metaModelManager.getCollectionTypeType());
 //				environmentView.addNamedElement(metaModelManager.getOrderedSetTypeType());

@@ -29,13 +29,13 @@ import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibClassCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibIterationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibOperationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibRootPackageCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.MetaTypeName;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibContainmentVisitor;
 
 public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVisitor

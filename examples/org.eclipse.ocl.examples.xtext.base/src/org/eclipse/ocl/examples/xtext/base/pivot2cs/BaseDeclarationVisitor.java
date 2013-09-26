@@ -43,33 +43,33 @@ import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.DataTypeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.DetailCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationLiteralCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ReferenceCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 
 public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, Pivot2CSConversion>
 {
@@ -79,7 +79,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitAnnotation(@NonNull org.eclipse.ocl.examples.pivot.Annotation object) {
-		AnnotationCS csElement = context.refreshNamedElement(AnnotationCS.class, BaseCSTPackage.Literals.ANNOTATION_CS, object);
+		AnnotationCS csElement = context.refreshNamedElement(AnnotationCS.class, BaseCSPackage.Literals.ANNOTATION_CS, object);
 		context.refreshList(csElement.getOwnedContent(), context.visitDeclarations(ModelElementCS.class, object.getOwnedContent(), null));
 		context.refreshList(csElement.getOwnedDetail(), context.visitDeclarations(DetailCS.class, object.getOwnedDetail(), null));
 		List<Element> references = object.getReference();
@@ -87,8 +87,8 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 			List<ModelElementRefCS> csReferences = new ArrayList<ModelElementRefCS>(references.size());
 			for (Element reference : references) {
 				if (reference != null) {
-					ModelElementRefCS csRef = BaseCSTFactory.eINSTANCE.createModelElementRefCS();
-					@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSTFactory.eINSTANCE.createPathNameCS();
+					ModelElementRefCS csRef = BaseCSFactory.eINSTANCE.createModelElementRefCS();
+					@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 					csRef.setPathName(csPathName);
 					context.refreshPathName(csPathName, reference, context.getScope());
 					csReferences.add(csRef);
@@ -105,7 +105,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	@Override
 	public ElementCS visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class object) {
 		org.eclipse.ocl.examples.pivot.Class savedScope = context.setScope(object);
-		ClassCS csElement = context.refreshClassifier(ClassCS.class, BaseCSTPackage.Literals.CLASS_CS, object);
+		ClassCS csElement = context.refreshClassifier(ClassCS.class, BaseCSPackage.Literals.CLASS_CS, object);
 		context.refreshList(csElement.getOwnedProperty(), context.visitDeclarations(StructuralFeatureCS.class, object.getOwnedAttribute(),
 			new Pivot2CS.Predicate<Property>()
 			{
@@ -136,7 +136,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
-		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSTPackage.Literals.CONSTRAINT_CS, object);
+		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSPackage.Literals.CONSTRAINT_CS, object);
 		OpaqueExpression specification = object.getSpecification();
 		csElement.setSpecification(specification != null ? context.visitDeclaration(SpecificationCS.class, specification) : null);
 		return csElement;
@@ -144,14 +144,14 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitDataType(@NonNull DataType object) {
-		DataTypeCS csElement = context.refreshClassifier(DataTypeCS.class, BaseCSTPackage.Literals.DATA_TYPE_CS, object);
+		DataTypeCS csElement = context.refreshClassifier(DataTypeCS.class, BaseCSPackage.Literals.DATA_TYPE_CS, object);
 		context.refreshQualifiers(csElement.getQualifier(), "serializable", object.isSerializable());
 		return csElement;
 	}
 
 	@Override
 	public ElementCS visitDetail(@NonNull Detail object) {
-		DetailCS csElement = context.refreshNamedElement(DetailCS.class, BaseCSTPackage.Literals.DETAIL_CS, object);
+		DetailCS csElement = context.refreshNamedElement(DetailCS.class, BaseCSPackage.Literals.DETAIL_CS, object);
 		csElement.getValue().clear();
 		csElement.getValue().addAll(object.getValue());
 		return csElement;
@@ -159,7 +159,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitEnumeration(@NonNull org.eclipse.ocl.examples.pivot.Enumeration object) {
-		EnumerationCS csElement = context.refreshClassifier(EnumerationCS.class, BaseCSTPackage.Literals.ENUMERATION_CS, object);
+		EnumerationCS csElement = context.refreshClassifier(EnumerationCS.class, BaseCSPackage.Literals.ENUMERATION_CS, object);
 		context.refreshList(csElement.getOwnedLiterals(), context.visitDeclarations(EnumerationLiteralCS.class, object.getOwnedLiteral(), null));
 		context.refreshQualifiers(csElement.getQualifier(), "serializable", object.isSerializable());
 		return csElement;
@@ -168,12 +168,12 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	@Override
 	public ElementCS visitEnumerationLiteral(@NonNull EnumerationLiteral object) {
 		EnumerationLiteralCS csElement = context.refreshNamedElement(EnumerationLiteralCS.class,
-			BaseCSTPackage.Literals.ENUMERATION_LITERAL_CS, object);
+			BaseCSPackage.Literals.ENUMERATION_LITERAL_CS, object);
 		if (object.eIsSet(PivotPackage.Literals.ENUMERATION_LITERAL__VALUE)) {
 			csElement.setValue(object.getValue().intValue());
 		}
 		else {
-			csElement.eUnset(BaseCSTPackage.Literals.ENUMERATION_LITERAL_CS__VALUE);
+			csElement.eUnset(BaseCSPackage.Literals.ENUMERATION_LITERAL_CS__VALUE);
 		}
 		return csElement;
 	}
@@ -189,7 +189,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitOpaqueExpression(@NonNull OpaqueExpression object) {
-		SpecificationCS csElement = context.refreshElement(SpecificationCS.class, BaseCSTPackage.Literals.SPECIFICATION_CS, object);
+		SpecificationCS csElement = context.refreshElement(SpecificationCS.class, BaseCSPackage.Literals.SPECIFICATION_CS, object);
 		String body = PivotUtil.getBody(object);
 		csElement.setExprString(body);
 		return csElement;
@@ -197,7 +197,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitOperation(@NonNull Operation object) {
-		OperationCS csElement = context.refreshTypedMultiplicityElement(OperationCS.class, BaseCSTPackage.Literals.OPERATION_CS, object);
+		OperationCS csElement = context.refreshTypedMultiplicityElement(OperationCS.class, BaseCSPackage.Literals.OPERATION_CS, object);
 		TemplateSignature ownedTemplateSignature = object.getOwnedTemplateSignature();
 		csElement.setOwnedTemplateSignature(context.visitDeclaration(TemplateSignatureCS.class, ownedTemplateSignature));
 		context.refreshList(csElement.getOwnedParameter(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameter(), null));
@@ -212,7 +212,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package object) {
-		PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSTPackage.Literals.PACKAGE_CS, object);
+		PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSPackage.Literals.PACKAGE_CS, object);
 		context.refreshList(csPackage.getOwnedType(), context.visitDeclarations(ClassifierCS.class, object.getOwnedType(), null));
 		csPackage.setNsPrefix(object.getNsPrefix());
 		csPackage.setNsURI(object.getNsURI());
@@ -222,7 +222,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitParameter(@NonNull Parameter object) {
-		ParameterCS csElement = context.refreshTypedMultiplicityElement(ParameterCS.class, BaseCSTPackage.Literals.PARAMETER_CS, object);
+		ParameterCS csElement = context.refreshTypedMultiplicityElement(ParameterCS.class, BaseCSPackage.Literals.PARAMETER_CS, object);
 		return csElement;
 	}
 
@@ -234,12 +234,12 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 			type = ((CollectionType)type).getElementType();
 		}
 		if (type instanceof DataType) {
-			AttributeCS csAttribute = context.refreshStructuralFeature(AttributeCS.class, BaseCSTPackage.Literals.ATTRIBUTE_CS, object);
+			AttributeCS csAttribute = context.refreshStructuralFeature(AttributeCS.class, BaseCSPackage.Literals.ATTRIBUTE_CS, object);
 			context.refreshQualifiers(csAttribute.getQualifier(), "id", object.isID());
 			csElement = csAttribute;
 		}
 		else {
-			ReferenceCS csReference = context.refreshStructuralFeature(ReferenceCS.class, BaseCSTPackage.Literals.REFERENCE_CS, object);
+			ReferenceCS csReference = context.refreshStructuralFeature(ReferenceCS.class, BaseCSPackage.Literals.REFERENCE_CS, object);
 			context.refreshQualifiers(csReference.getQualifier(), "composes", object.isComposite());
 			context.refreshQualifiers(csReference.getQualifier(), "resolve", "!resolve", object.isResolveProxies() ? null : Boolean.FALSE);
 			Property opposite = object.getOpposite();
@@ -261,7 +261,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitRoot(@NonNull Root object) {
-		RootPackageCS csElement = context.refreshElement(RootPackageCS.class, BaseCSTPackage.Literals.ROOT_PACKAGE_CS, object);
+		RootPackageCS csElement = context.refreshElement(RootPackageCS.class, BaseCSPackage.Literals.ROOT_PACKAGE_CS, object);
 //		csElement.setNsURI(object.getExternalURI());
 		csElement.setNsURI(null);
 		context.refreshList(csElement.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
@@ -271,7 +271,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitTemplateSignature(@NonNull TemplateSignature object) {
-		TemplateSignatureCS csElement = context.refreshElement(TemplateSignatureCS.class, BaseCSTPackage.Literals.TEMPLATE_SIGNATURE_CS, object);
+		TemplateSignatureCS csElement = context.refreshElement(TemplateSignatureCS.class, BaseCSPackage.Literals.TEMPLATE_SIGNATURE_CS, object);
 		context.refreshList(csElement.getOwnedTemplateParameter(), context.visitDeclarations(TemplateParameterCS.class, object.getOwnedParameter(), null));
 		return csElement;
 	}
@@ -282,7 +282,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 		if (parameteredElement == null) {
 			return null;
 		}
-		TypeParameterCS csElement = context.refreshElement(TypeParameterCS.class, BaseCSTPackage.Literals.TYPE_PARAMETER_CS, parameteredElement);
+		TypeParameterCS csElement = context.refreshElement(TypeParameterCS.class, BaseCSPackage.Literals.TYPE_PARAMETER_CS, parameteredElement);
 		csElement.setName(((NamedElement) parameteredElement).getName());
 		return csElement;
 	}

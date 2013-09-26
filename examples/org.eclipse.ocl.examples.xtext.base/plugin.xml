@@ -14,7 +14,7 @@
       <!-- @generated BaseCST -->
       <package
             uri="http://www.eclipse.org/ocl/3.1.0/BaseCST"
-            class="org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage"
+            class="org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage"
             genModel="model/BaseCST.genmodel"/>
    </extension>
 

@@ -37,8 +37,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.ValidationDiagnostic;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.UnresolvedProxyMessageProvider;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.IncludeCS;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -186,7 +186,7 @@ public class IncludeCSAttribution extends AbstractAttribution implements Unresol
 	}
 
 	public @NonNull EReference getEReference() {
-		@SuppressWarnings("null") @NonNull EReference eReference = CompleteOCLCSTPackage.Literals.INCLUDE_CS__NAMESPACE;
+		@SuppressWarnings("null") @NonNull EReference eReference = CompleteOCLCSPackage.Literals.INCLUDE_CS__NAMESPACE;
 		return eReference;
 	}
 

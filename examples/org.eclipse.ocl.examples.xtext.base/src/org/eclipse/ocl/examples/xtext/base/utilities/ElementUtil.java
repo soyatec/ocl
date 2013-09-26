@@ -49,22 +49,22 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.LibraryDiagnostic;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -431,7 +431,7 @@ public class ElementUtil
 	public static void setPathName(@NonNull PathNameCS csPathName, @NonNull Element element, Namespace scope) {
 		List<PathElementCS> csPath = csPathName.getPath();
 		csPath.clear();		// FIXME re-use
-		PathElementCS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementCS();
+		PathElementCS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementCS();
 		csPath.add(csSimpleRef);
 		csSimpleRef.setElement(element);
 		if (isPathable(element) == null) {
@@ -446,7 +446,7 @@ public class ElementUtil
 					return;							// no need for further qualification
 				}
 			}
-			csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementCS();
+			csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementCS();
 			csPath.add(0, csSimpleRef);
 			csSimpleRef.setElement((Element) eContainer);
 		}

@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.ui.outline;
 
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.outline.EssentialOCLOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 

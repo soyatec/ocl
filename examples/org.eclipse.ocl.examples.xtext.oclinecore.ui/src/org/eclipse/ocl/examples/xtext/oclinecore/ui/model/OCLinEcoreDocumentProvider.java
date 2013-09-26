@@ -62,7 +62,7 @@ import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiPluginHelper;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
@@ -377,7 +377,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 				URI oclinecoreURI = xmiResource.getURI().appendFileExtension("oclinecore");
 				BaseResource csResource = (BaseResource) resourceSet.getResource(oclinecoreURI, false);
 				if (csResource == null) {
-					csResource = (BaseResource) resourceSet.createResource(oclinecoreURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+					csResource = (BaseResource) resourceSet.createResource(oclinecoreURI, OCLinEcoreCSPackage.eCONTENT_TYPE);
 				    Map<URI, Resource> map = csResourceSet.getURIResourceMap();
 				    map.put(oclinecoreURI, csResource);
 					csResource.setURI(xmiResource.getURI());

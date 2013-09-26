@@ -54,29 +54,29 @@ import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.DetailCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityBoundsCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityStringCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS.Factory;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
@@ -141,12 +141,12 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : importedNamespace);
 				URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
 				for (String alias : aliases) {
-					ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
+					ImportCS importCS = BaseCSFactory.eINSTANCE.createImportCS();
 					importCS.setName(alias);
-					@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSTFactory.eINSTANCE.createPathNameCS();
+					@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 					importCS.setPathName(csPathName);
 					List<PathElementCS> csPath = csPathName.getPath();
-					PathElementWithURICS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementWithURICS();
+					PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
 					csPath.add(csSimpleRef);
 					csSimpleRef.setElement(importedNamespace);
 					csSimpleRef.setUri(deresolvedURI.toString());
@@ -253,7 +253,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 			csElement.setInstanceClassName(object.getInstanceClassName());
 		}
 		else {
-			csElement.eUnset(BaseCSTPackage.Literals.CLASSIFIER_CS__INSTANCE_CLASS_NAME);
+			csElement.eUnset(BaseCSPackage.Literals.CLASSIFIER_CS__INSTANCE_CLASS_NAME);
 		}
 		return csElement;
 	}
@@ -373,7 +373,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 			csElement.setDefault(object.getDefault());
 		}
 		else {
-			csElement.eUnset(BaseCSTPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT);
+			csElement.eUnset(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT);
 		}
 		return csElement;
 	}
@@ -442,12 +442,12 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 					}
 				}
 				if (stringValue != null) {
-					MultiplicityStringCS csMultiplicity = BaseCSTFactory.eINSTANCE.createMultiplicityStringCS();
+					MultiplicityStringCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityStringCS();
 					csMultiplicity.setStringBounds(stringValue);
 					csTypeRef.setMultiplicity(csMultiplicity);
 				}
 				else {
-					MultiplicityBoundsCS csMultiplicity = BaseCSTFactory.eINSTANCE.createMultiplicityBoundsCS();
+					MultiplicityBoundsCS csMultiplicity = BaseCSFactory.eINSTANCE.createMultiplicityBoundsCS();
 					if (lower != 1) {
 						csMultiplicity.setLowerBound(lower);
 					}

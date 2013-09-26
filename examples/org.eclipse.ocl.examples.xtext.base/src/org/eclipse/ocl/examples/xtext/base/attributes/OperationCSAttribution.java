@@ -24,8 +24,8 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 
 public class OperationCSAttribution extends AbstractAttribution
 {
@@ -37,7 +37,7 @@ public class OperationCSAttribution extends AbstractAttribution
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
 		Operation pivot = PivotUtil.getPivot(Operation.class, targetElement);
 		if (pivot != null) {
-			if (containmentFeature == BaseCSTPackage.Literals.OPERATION_CS__OWNED_PARAMETER) {
+			if (containmentFeature == BaseCSPackage.Literals.OPERATION_CS__OWNED_PARAMETER) {
 			}
 			else {
 				environmentView.addAllParameters(pivot);

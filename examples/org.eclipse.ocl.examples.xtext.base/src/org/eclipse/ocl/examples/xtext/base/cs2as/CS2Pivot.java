@@ -47,14 +47,14 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.utilities.CSI2PivotMapping;
 import org.eclipse.osgi.util.NLS;
@@ -108,11 +108,11 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 				}
 			}
 		}
-		int index = containmentsList.indexOf(BaseCSTPackage.Literals.ROOT_CS__OWNED_IMPORT);
+		int index = containmentsList.indexOf(BaseCSPackage.Literals.ROOT_CS__OWNED_IMPORT);
 		if (index > 0) {
 			containmentsList.move(0, index);		// Process imports second
 		}
-		index = containmentsList.indexOf(BaseCSTPackage.Literals.ROOT_CS__OWNED_LIBRARY);
+		index = containmentsList.indexOf(BaseCSPackage.Literals.ROOT_CS__OWNED_LIBRARY);
 		if (index > 0) {
 			containmentsList.move(0, index);		// Process libraries first
 		}

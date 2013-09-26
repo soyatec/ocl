@@ -2,10 +2,10 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.ocl.examples.xtext.base/emf-gen" editDirectory="/org.eclipse.ocl.examples.xtext.base.edit/emf-gen"
     editorDirectory="/org.eclipse.ocl.examples.xtext.base.editor/emf-gen" modelPluginID="org.eclipse.ocl.examples.xtext.base"
-    templateDirectory="/org.eclipse.ocl.examples.build/templates" redirection="" modelName="BaseCST"
+    templateDirectory="/org.eclipse.ocl.examples.build/templates" redirection="" modelName="basecs"
     nonNLSMarkers="true" codeFormatting="true" testsDirectory="/org.eclipse.ocl.examples.xtext.base.tests/emf-gen"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    runtimeVersion="2.7" language="" usedGenPackages="../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
     classNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Null Annotations" value="true"/>
@@ -19,8 +19,8 @@
     <details key="Visitable Classes" value="org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS"/>
   </genAnnotations>
   <foreignModel>BaseCST.ecore</foreignModel>
-  <genPackages prefix="BaseCST" basePackage="org.eclipse.ocl.examples.xtext.base"
-      disposableProviderFactory="true" generateExampleClass="false" ecorePackage="BaseCST.ecore#/">
+  <genPackages prefix="BaseCS" basePackage="org.eclipse.ocl.examples.xtext.base" disposableProviderFactory="true"
+      generateExampleClass="false" ecorePackage="BaseCST.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BaseCST.ecore#//IteratorKind">
       <genEnumLiterals ecoreEnumLiteral="BaseCST.ecore#//IteratorKind/Parameter"/>
       <genEnumLiterals ecoreEnumLiteral="BaseCST.ecore#//IteratorKind/Iterator"/>
@@ -46,6 +46,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//ClassifierCS/instanceClassName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//ClassifierCS/ownedConstraint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//ClassifierCS/qualifier"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//ClassifierCS/ast"/>
     </genClasses>
     <genClasses ecoreClass="BaseCST.ecore#//ConstraintCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//ConstraintCS/stereotype"/>
@@ -68,9 +69,11 @@
     <genClasses image="false" ecoreClass="BaseCST.ecore#//ElementRefCS"/>
     <genClasses ecoreClass="BaseCST.ecore#//EnumerationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//EnumerationCS/ownedLiterals"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//EnumerationCS/ast"/>
     </genClasses>
     <genClasses ecoreClass="BaseCST.ecore#//EnumerationLiteralCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//EnumerationLiteralCS/value"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//EnumerationLiteralCS/ast"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BaseCST.ecore#//FeatureCS"/>
     <genClasses ecoreClass="BaseCST.ecore#//ImportCS">
@@ -118,18 +121,21 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//OperationCS/ownedPrecondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//OperationCS/ownedPostcondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//OperationCS/ownedBodyExpression"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//OperationCS/ast"/>
     </genClasses>
     <genClasses ecoreClass="BaseCST.ecore#//PackageCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//PackageCS/ownedType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//PackageCS/ownedNestedPackage"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//PackageCS/nsPrefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//PackageCS/nsURI"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//PackageCS/ast"/>
       <genOperations ecoreOperation="BaseCST.ecore#//PackageCS/getClassifier">
         <genParameters ecoreParameter="BaseCST.ecore#//PackageCS/getClassifier/name"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="BaseCST.ecore#//ParameterCS">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCST.ecore#//ParameterCS/owner"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//ParameterCS/ast"/>
     </genClasses>
     <genClasses ecoreClass="BaseCST.ecore#//PathElementCS">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCST.ecore#//PathElementCS/pathName"/>
@@ -167,6 +173,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCST.ecore#//StructuralFeatureCS/owner"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCST.ecore#//StructuralFeatureCS/default"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCST.ecore#//StructuralFeatureCS/ownedDefaultExpression"/>
+      <genOperations ecoreOperation="BaseCST.ecore#//StructuralFeatureCS/ast"/>
     </genClasses>
     <genClasses ecoreClass="BaseCST.ecore#//TemplateBindingCS">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BaseCST.ecore#//TemplateBindingCS/owningTemplateBindableElement"/>

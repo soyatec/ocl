@@ -33,14 +33,14 @@ import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 
 public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 {
@@ -72,10 +72,10 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 				TupleLiteralPart statusPart = DomainUtil.getNamedElement(((TupleLiteralExp)bodyExpression).getPart(), TUPLE_MESSAGE_STATUS_1.getName());
 				OCLExpression messageExpression = messagePart.getInitExpression();
 				OCLExpression statusExpression = statusPart.getInitExpression();
-				ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+				ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, specification);
 				csMessage.setExprString(messageExpression != null ? PrettyPrinter.print(messageExpression) : "null");
 				csElement.setMessageSpecification(csMessage);
-				ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+				ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, specification);
 				csStatus.setExprString(statusExpression != null ? PrettyPrinter.print(statusExpression) : "null");
 				csElement.setSpecification(csStatus);
 				return csElement;
@@ -97,7 +97,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 							message.append("\n" + lines[i]);
 						}
 						else {
-							ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+							ExpSpecificationCS csMessage = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, specification);
 							String messageString = message.toString();
 							int lastIndex = messageString.lastIndexOf(',');
 							if (lastIndex > 0) {
@@ -110,7 +110,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 							for (i++; i < lastLineNumber; i++) {
 								status.append("\n" + lines[i]);
 							}
-							ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+							ExpSpecificationCS csStatus = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, specification);
 							csStatus.setExprString(status.toString());
 							csElement.setSpecification(csStatus);
 							return csElement;
@@ -125,7 +125,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
-		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSTPackage.Literals.CONSTRAINT_CS, object);
+		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSPackage.Literals.CONSTRAINT_CS, object);
 		if (csElement != null) {
 			refreshConstraint(csElement, object);
 		}
@@ -134,7 +134,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 
 	@Override
 	public ElementCS visitExpressionInOCL(@NonNull ExpressionInOCL object) {
-		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
+		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, object);
 		OCLExpression bodyExpression = object.getBodyExpression();
 		if (bodyExpression != null) {
 			String body = PrettyPrinter.print(bodyExpression);
@@ -149,7 +149,7 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 		if (body == null) {
 			return null;
 		}
-		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
+		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, object);
 		csElement.setExprString(body);
 		return csElement;
 	}	}

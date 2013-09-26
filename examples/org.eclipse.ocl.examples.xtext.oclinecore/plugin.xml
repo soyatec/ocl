@@ -3,15 +3,11 @@
 
 <plugin>
 
-  <extension point="org.eclipse.team.core.fileTypes">
-    <fileTypes extension="oclinecore" type="text" />
-  </extension>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated OCLinEcoreCST -->
       <package
             uri="http://www.eclipse.org/ocl/3.1.0/OCLinEcoreCST"
-            class="org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage"
+            class="org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage"
             genModel="model/OCLinEcoreCST.genmodel"/>
    </extension>
 
@@ -26,9 +22,9 @@
       <!-- @generated OCLinEcoreCST -->
       <content-type
             base-type="org.eclipse.emf.ecore.xmi"
-            file-extensions="oclinecorecst"
+            file-extensions="oclinecorecs"
             id="org.eclipse.ocl.examples.xtext.oclinecore"
-            name="%_UI_OCLinEcoreCST_content_type"
+            name="%_UI_OCLinEcoreCS_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
             <parameter name="namespace" value="http://www.eclipse.org/ocl/3.1.0/OCLinEcoreCST"/>

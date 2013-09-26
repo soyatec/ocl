@@ -23,8 +23,8 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ConstructorExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 
 public class ConstructorPartCSAttribution extends AbstractAttribution
 {
@@ -33,7 +33,7 @@ public class ConstructorPartCSAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if (containmentFeature == EssentialOCLCSTPackage.Literals.CONSTRUCTOR_PART_CS__PROPERTY) {
+		if (containmentFeature == EssentialOCLCSPackage.Literals.CONSTRUCTOR_PART_CS__PROPERTY) {
 			ConstructorExpCS targetElement = (ConstructorExpCS)target.eContainer();
 			ConstructorExp pivot = PivotUtil.getPivot(ConstructorExp.class, targetElement);
 			if (pivot != null) {

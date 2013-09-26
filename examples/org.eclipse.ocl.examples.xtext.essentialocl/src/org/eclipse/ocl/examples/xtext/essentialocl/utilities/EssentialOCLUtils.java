@@ -18,17 +18,17 @@ package org.eclipse.ocl.examples.xtext.essentialocl.utilities;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingArgCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.PrefixExpCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InfixExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NestedExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS;
 
 public class EssentialOCLUtils	// FIXME Find some extensible instantiation echanism
 {
@@ -142,10 +142,10 @@ public class EssentialOCLUtils	// FIXME Find some extensible instantiation echan
 		assert csParentElement == getPivotingParentCS(csChildElement);
 		if (csParentElement instanceof OperatorCS) {
 			if (((OperatorCS)csParentElement).getSource() == csChildElement) {
-				return EssentialOCLCSTPackage.Literals.OPERATOR_CS__SOURCE;
+				return EssentialOCLCSPackage.Literals.OPERATOR_CS__SOURCE;
 			}
 			else {
-				return EssentialOCLCSTPackage.Literals.BINARY_OPERATOR_CS__ARGUMENT;
+				return EssentialOCLCSPackage.Literals.BINARY_OPERATOR_CS__ARGUMENT;
 			}
 		}
 		return (EReference) csChildElement.eContainingFeature();

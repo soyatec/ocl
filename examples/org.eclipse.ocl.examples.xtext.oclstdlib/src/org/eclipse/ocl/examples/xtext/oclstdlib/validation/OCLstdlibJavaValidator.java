@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
  
 
 public class OCLstdlibJavaValidator extends AbstractOCLstdlibJavaValidator {
@@ -30,8 +30,8 @@ public class OCLstdlibJavaValidator extends AbstractOCLstdlibJavaValidator {
 	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(BaseCSTPackage.eINSTANCE);
-	    result.add(OCLstdlibCSTPackage.eINSTANCE);
+	    result.add(BaseCSPackage.eINSTANCE);
+	    result.add(OCLstdlibCSPackage.eINSTANCE);
 		return result;
 	}
 

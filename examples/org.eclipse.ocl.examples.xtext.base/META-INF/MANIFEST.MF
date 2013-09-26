@@ -10,9 +10,9 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.ocl.examples.xtext.base,
  org.eclipse.ocl.examples.xtext.base.attributes,
- org.eclipse.ocl.examples.xtext.base.baseCST,
- org.eclipse.ocl.examples.xtext.base.baseCST.impl,
- org.eclipse.ocl.examples.xtext.base.baseCST.util,
+ org.eclipse.ocl.examples.xtext.base.basecs,
+ org.eclipse.ocl.examples.xtext.base.basecs.impl,
+ org.eclipse.ocl.examples.xtext.base.basecs.util,
  org.eclipse.ocl.examples.xtext.base.cs2as,
  org.eclipse.ocl.examples.xtext.base.formatting,
  org.eclipse.ocl.examples.xtext.base.pivot2cs,
@@ -22,9 +22,10 @@ Export-Package: org.eclipse.ocl.examples.xtext.base,
  org.eclipse.ocl.examples.xtext.base.util.cs2as,
  org.eclipse.ocl.examples.xtext.base.utilities
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
- org.eclipse.ocl.examples.pivot;bundle-version="[3.3.0,4.0.0)";visibility:=reexport,
- org.eclipse.xtext;bundle-version="[2.4.2,3.0.0)";visibility:=reexport,
- org.eclipse.xtext.common.types;bundle-version="[2.4.0,3.0.0)";visibility:=reexport,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ocl.examples.pivot;visibility:=reexport;bundle-version="[3.3.0,4.0.0)",
+ org.eclipse.xtext;visibility:=reexport;bundle-version="[2.4.2,3.0.0)",
+ org.eclipse.xtext.common.types;visibility:=reexport;bundle-version="[2.4.0,3.0.0)",
  org.eclipse.emf.codegen;bundle-version="[2.6.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.ocl.examples.xtext.base.utilities.BasePlugin$Implementation

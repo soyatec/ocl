@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.utilities;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.xtext.validation.DiagnosticConverterImpl;
 
 public class PivotDiagnosticConverter extends DiagnosticConverterImpl

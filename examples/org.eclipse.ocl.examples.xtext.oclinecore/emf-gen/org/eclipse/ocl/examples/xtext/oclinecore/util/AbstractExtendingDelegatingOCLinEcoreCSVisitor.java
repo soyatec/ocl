@@ -46,11 +46,11 @@ public abstract class AbstractExtendingDelegatingOCLinEcoreCSVisitor<R, C, D ext
 		return delegate.visiting(visitable);
 	}
 
-	public @Nullable R visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
+	public @Nullable R visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS object) {
 		return delegate.visitConstraintCS(object);
 	}
 
-	public @Nullable R visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS object) {
+	public @Nullable R visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS object) {
 		return delegate.visitAnnotationElementCS(object);
 	}
 }

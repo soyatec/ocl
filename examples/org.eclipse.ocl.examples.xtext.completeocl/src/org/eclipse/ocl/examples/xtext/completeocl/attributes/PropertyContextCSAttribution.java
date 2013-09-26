@@ -24,8 +24,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
 
 public class PropertyContextCSAttribution extends AbstractAttribution
 {
@@ -35,8 +35,8 @@ public class PropertyContextCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		PropertyContextDeclCS targetElement = (PropertyContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if ((containmentFeature == CompleteOCLCSTPackage.Literals.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS)
-		 || (containmentFeature == CompleteOCLCSTPackage.Literals.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS)) {
+		if ((containmentFeature == CompleteOCLCSPackage.Literals.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS)
+		 || (containmentFeature == CompleteOCLCSPackage.Literals.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS)) {
 			Property property = targetElement.getProperty();
 			if (property != null) {
 				Type type = property.getOwningType();

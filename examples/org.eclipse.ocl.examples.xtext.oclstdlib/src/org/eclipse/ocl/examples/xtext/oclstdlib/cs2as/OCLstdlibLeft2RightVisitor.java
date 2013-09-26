@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.cs2as;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibLeft2RightVisitor;
 
 public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisitor

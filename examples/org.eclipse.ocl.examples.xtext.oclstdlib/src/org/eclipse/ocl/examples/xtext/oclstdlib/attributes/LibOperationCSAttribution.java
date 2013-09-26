@@ -27,10 +27,10 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
 
 public class LibOperationCSAttribution extends AbstractAttribution
 {
@@ -43,7 +43,7 @@ public class LibOperationCSAttribution extends AbstractAttribution
 //		TypeBindingsCS bindings = scopeView.getBindings();
 		Operation pivot = PivotUtil.getPivot(Operation.class, targetElement);
 		if (pivot != null) {
-			if (containmentFeature == BaseCSTPackage.Literals.OPERATION_CS__OWNED_PARAMETER) {
+			if (containmentFeature == BaseCSPackage.Literals.OPERATION_CS__OWNED_PARAMETER) {
 			}
 			else {
 				environmentView.addAllParameters(pivot);

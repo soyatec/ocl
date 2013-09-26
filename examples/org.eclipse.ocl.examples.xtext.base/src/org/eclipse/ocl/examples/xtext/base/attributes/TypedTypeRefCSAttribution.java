@@ -23,8 +23,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 
 public class TypedTypeRefCSAttribution extends AbstractAttribution
 {
@@ -34,9 +34,9 @@ public class TypedTypeRefCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		TypedTypeRefCS targetElement = (TypedTypeRefCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__OWNED_TEMPLATE_BINDING) {		// FIXME move to TemplateBindingAttributionCS
+		if (containmentFeature == BaseCSPackage.Literals.TYPED_TYPE_REF_CS__OWNED_TEMPLATE_BINDING) {		// FIXME move to TemplateBindingAttributionCS
 		}
-		else if (containmentFeature == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__PATH_NAME) {
+		else if (containmentFeature == BaseCSPackage.Literals.TYPED_TYPE_REF_CS__PATH_NAME) {
 		}
 		else {
 			Type type = targetElement.getType();

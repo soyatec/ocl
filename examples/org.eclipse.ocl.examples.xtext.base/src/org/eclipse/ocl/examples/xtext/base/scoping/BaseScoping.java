@@ -40,9 +40,9 @@ import org.eclipse.ocl.examples.xtext.base.attributes.SpecificationCSAttribution
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateParameterSubstitutionCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateSignatureCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TypedTypeRefCSAttribution;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.AbstractUnresolvedProxyMessageProvider;
 
@@ -51,24 +51,24 @@ public class BaseScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(BaseCSTPackage.Literals.CLASS_CS, ClassCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.CONSTRAINT_CS, ConstraintCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.DATA_TYPE_CS, PivotCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.ELEMENT_CS, EmptyAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.ENUMERATION_CS, PivotCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.IMPORT_CS, ImportCSAttribution.INSTANCE);	// return new ImportAttribution();		// WIP static instance
-		registry.put(BaseCSTPackage.Literals.LAMBDA_TYPE_CS, LambdaTypeCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.LIBRARY_CS, LibraryCSAttribution.INSTANCE);	// return new LibraryAttribution();		// WIP static instance
-		registry.put(BaseCSTPackage.Literals.OPERATION_CS, OperationCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.PACKAGE_CS, PackageCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.PATH_ELEMENT_CS, PathElementCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.REFERENCE_CS, ReferenceCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.ROOT_PACKAGE_CS, RootPackageCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.SPECIFICATION_CS, SpecificationCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS, TemplateParameterSubstitutionCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.TEMPLATE_SIGNATURE_CS, TemplateSignatureCSAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.TUPLE_TYPE_CS, EmptyAttribution.INSTANCE);
-		registry.put(BaseCSTPackage.Literals.TYPED_TYPE_REF_CS, TypedTypeRefCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.CLASS_CS, ClassCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.CONSTRAINT_CS, ConstraintCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.DATA_TYPE_CS, PivotCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.ELEMENT_CS, EmptyAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.ENUMERATION_CS, PivotCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.IMPORT_CS, ImportCSAttribution.INSTANCE);	// return new ImportAttribution();		// WIP static instance
+		registry.put(BaseCSPackage.Literals.LAMBDA_TYPE_CS, LambdaTypeCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.LIBRARY_CS, LibraryCSAttribution.INSTANCE);	// return new LibraryAttribution();		// WIP static instance
+		registry.put(BaseCSPackage.Literals.OPERATION_CS, OperationCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.PACKAGE_CS, PackageCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.PATH_ELEMENT_CS, PathElementCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.REFERENCE_CS, ReferenceCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.ROOT_PACKAGE_CS, RootPackageCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.SPECIFICATION_CS, SpecificationCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS, TemplateParameterSubstitutionCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.TEMPLATE_SIGNATURE_CS, TemplateSignatureCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.TUPLE_TYPE_CS, EmptyAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.TYPED_TYPE_REF_CS, TypedTypeRefCSAttribution.INSTANCE);
 		CS2Pivot.addUnresolvedProxyMessageProvider(ImportCSAttribution.INSTANCE);			
 		CS2Pivot.addUnresolvedProxyMessageProvider(LibraryCSAttribution.INSTANCE);			
 		CS2Pivot.addUnresolvedProxyMessageProvider(new SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider());			
@@ -78,7 +78,7 @@ public class BaseScoping
 	private static final class SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider extends AbstractUnresolvedProxyMessageProvider
 	{		
 		private SimpleNamedElementRefCSTypeUnresolvedProxyMessageProvider() {
-			super(BaseCSTPackage.Literals.PATH_ELEMENT_CS__ELEMENT);
+			super(BaseCSPackage.Literals.PATH_ELEMENT_CS__ELEMENT);
 		}
 		
 		@Override
@@ -103,7 +103,7 @@ public class BaseScoping
 	private static final class TypedTypeRefCSTypeUnresolvedProxyMessageProvider extends AbstractUnresolvedProxyMessageProvider
 	{		
 		private TypedTypeRefCSTypeUnresolvedProxyMessageProvider() {
-			super(BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
+			super(BaseCSPackage.Literals.TYPED_TYPE_REF_CS__TYPE);
 		}
 		
 		@Override

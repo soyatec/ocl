@@ -2,10 +2,10 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.ocl.examples.xtext.essentialocl/emf-gen"
     editDirectory="/org.eclipse.ocl.examples.xtext.essentialocl.edit/emf-gen" editorDirectory="/org.eclipse.ocl.examples.xtext.essentialocl.editor/emf-gen"
-    modelPluginID="org.eclipse.ocl.examples.xtext.essentialocl" modelName="EssentialOCLCST"
+    modelPluginID="org.eclipse.ocl.examples.xtext.essentialocl" modelName="EssentialOCLCS"
     nonNLSMarkers="true" codeFormatting="true" testsDirectory="/org.eclipse.ocl.examples.xtext.essentialocl.tests/emf-gen"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//baseCST ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel#//basecs ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
     classNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Null Annotations" value="true"/>
@@ -16,7 +16,7 @@
     <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor"/>
   </genAnnotations>
   <foreignModel>EssentialOCLCST.ecore</foreignModel>
-  <genPackages prefix="EssentialOCLCST" basePackage="org.eclipse.ocl.examples.xtext.essentialocl"
+  <genPackages prefix="EssentialOCLCS" basePackage="org.eclipse.ocl.examples.xtext.essentialocl"
       disposableProviderFactory="true" generateExampleClass="false" ecorePackage="EssentialOCLCST.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="EssentialOCLCST.ecore#//NavigationRole">
       <genEnumLiterals ecoreEnumLiteral="EssentialOCLCST.ecore#//NavigationRole/ITERATOR"/>

@@ -58,7 +58,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
@@ -391,7 +391,7 @@ public class EditTests extends XtextTestCase
 		}
 		{
 			ResourceSet resourceSet = new ResourceSetImpl();
-			BaseCSResource xtextResource1 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSTPackage.eCONTENT_TYPE);
+			BaseCSResource xtextResource1 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSPackage.eCONTENT_TYPE);
 			xtextResource1.setURI(ecoreURI);
 			ocl1.pivot2cs(asResource, xtextResource1);
 			assertNoResourceErrors("Xtext load", xtextResource1);
@@ -434,7 +434,7 @@ public class EditTests extends XtextTestCase
 		assertEquals(loadPivotContent, newPivotContent);
 		{
 			ResourceSet resourceSet = new ResourceSetImpl();
-			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSTPackage.eCONTENT_TYPE);
+			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(ecoreURI.appendFileExtension("oclinecore"), OCLinEcoreCSPackage.eCONTENT_TYPE);
 			xtextResource2.setURI(ecoreURI);
 			ocl1.pivot2cs(asResource, xtextResource2);
 			assertNoResourceErrors("Xtext load", xtextResource2);

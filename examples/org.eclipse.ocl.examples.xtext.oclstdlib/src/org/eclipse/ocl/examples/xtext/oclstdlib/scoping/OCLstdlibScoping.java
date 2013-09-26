@@ -21,15 +21,15 @@ import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ConstraintCSAttribution;
 import org.eclipse.ocl.examples.xtext.oclstdlib.attributes.LibOperationCSAttribution;
 import org.eclipse.ocl.examples.xtext.oclstdlib.attributes.LibPackageCSAttribution;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.OCLstdlibCSPackage;
 
 public class OCLstdlibScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(OCLstdlibCSTPackage.Literals.LIB_CONSTRAINT_CS, ConstraintCSAttribution.INSTANCE);
-		registry.put(OCLstdlibCSTPackage.Literals.LIB_ITERATION_CS, LibOperationCSAttribution.INSTANCE);
-		registry.put(OCLstdlibCSTPackage.Literals.LIB_OPERATION_CS, LibOperationCSAttribution.INSTANCE);
-		registry.put(OCLstdlibCSTPackage.Literals.LIB_PACKAGE_CS, LibPackageCSAttribution.INSTANCE);
+		registry.put(OCLstdlibCSPackage.Literals.LIB_CONSTRAINT_CS, ConstraintCSAttribution.INSTANCE);
+		registry.put(OCLstdlibCSPackage.Literals.LIB_ITERATION_CS, LibOperationCSAttribution.INSTANCE);
+		registry.put(OCLstdlibCSPackage.Literals.LIB_OPERATION_CS, LibOperationCSAttribution.INSTANCE);
+		registry.put(OCLstdlibCSPackage.Literals.LIB_PACKAGE_CS, LibPackageCSAttribution.INSTANCE);
 	}
 }

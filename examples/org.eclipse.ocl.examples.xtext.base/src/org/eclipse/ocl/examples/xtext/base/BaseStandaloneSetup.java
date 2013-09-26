@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.util.BaseCSTValidator;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSValidator;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScoping;
 
 import com.google.inject.Guice;
@@ -49,8 +49,8 @@ public class BaseStandaloneSetup //implements ISetup
 	public static void init() {
 		PivotStandaloneSetup.doSetup();
 		BaseScoping.init();
-		EPackage.Registry.INSTANCE.put(BaseCSTPackage.eNS_URI, BaseCSTPackage.eINSTANCE);
-		EValidator.Registry.INSTANCE.put(BaseCSTPackage.eINSTANCE, BaseCSTValidator.INSTANCE);
+		EPackage.Registry.INSTANCE.put(BaseCSPackage.eNS_URI, BaseCSPackage.eINSTANCE);
+		EValidator.Registry.INSTANCE.put(BaseCSPackage.eINSTANCE, BaseCSValidator.INSTANCE);
 	}
 	
 	/**
@@ -79,8 +79,8 @@ public class BaseStandaloneSetup //implements ISetup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-		if (!EPackage.Registry.INSTANCE.containsKey(BaseCSTPackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(BaseCSTPackage.eNS_URI, BaseCSTPackage.eINSTANCE);
+		if (!EPackage.Registry.INSTANCE.containsKey(BaseCSPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(BaseCSPackage.eNS_URI, BaseCSPackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);

@@ -14,9 +14,9 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.ocl.examples.xtext.completeocl,
  org.eclipse.ocl.examples.xtext.completeocl.attributes,
- org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST,
- org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl,
- org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.util,
+ org.eclipse.ocl.examples.xtext.completeocl.completeoclcs,
+ org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl,
+ org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util,
  org.eclipse.ocl.examples.xtext.completeocl.cs2as,
  org.eclipse.ocl.examples.xtext.completeocl.formatting,
  org.eclipse.ocl.examples.xtext.completeocl.parser.antlr,

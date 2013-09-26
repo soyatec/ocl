@@ -25,10 +25,10 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ReferenceCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 
 public class ReferenceCSAttribution extends AbstractAttribution
 {
@@ -38,8 +38,8 @@ public class ReferenceCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ReferenceCS targetElement = (ReferenceCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if ((containmentFeature == BaseCSTPackage.Literals.REFERENCE_CS__OPPOSITE) 
-		 || (containmentFeature == BaseCSTPackage.Literals.REFERENCE_CS__KEYS)) {
+		if ((containmentFeature == BaseCSPackage.Literals.REFERENCE_CS__OPPOSITE) 
+		 || (containmentFeature == BaseCSPackage.Literals.REFERENCE_CS__KEYS)) {
 			TypedRefCS typeRef = targetElement.getOwnedType();
 			if (typeRef instanceof TypedTypeRefCS) {
 				Element type = ((TypedTypeRefCS)typeRef).getPivot();

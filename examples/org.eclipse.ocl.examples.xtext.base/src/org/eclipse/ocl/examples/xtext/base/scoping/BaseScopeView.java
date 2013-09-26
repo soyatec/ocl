@@ -44,12 +44,12 @@ import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.AliasAnalysis;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -261,19 +261,19 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 	@Override
 	public /*@NonNull*/ Iterable<IEObjectDescription> getElements(EObject object) {
 		String descriptiveName = null;
-		if (targetReference == BaseCSTPackage.Literals.IMPORT_CS__NAMESPACE) {
+		if (targetReference == BaseCSPackage.Literals.IMPORT_CS__NAMESPACE) {
 			descriptiveName = getNonASURI(object);
 		}
-		else if (targetReference == BaseCSTPackage.Literals.MODEL_ELEMENT_REF_CS__ELEMENT) {
+		else if (targetReference == BaseCSPackage.Literals.MODEL_ELEMENT_REF_CS__ELEMENT) {
 			descriptiveName = getNonASURI(object);
 		}
-		else if (targetReference == BaseCSTPackage.Literals.REFERENCE_CS__OPPOSITE) {
+		else if (targetReference == BaseCSPackage.Literals.REFERENCE_CS__OPPOSITE) {
 			descriptiveName = ((NamedElement)object).getName();
 		}
-		else if (targetReference == BaseCSTPackage.Literals.REFERENCE_CS__KEYS) {
+		else if (targetReference == BaseCSPackage.Literals.REFERENCE_CS__KEYS) {
 			descriptiveName = ((NamedElement)object).getName();
 		}
-		else if ((targetReference == BaseCSTPackage.Literals.TYPED_TYPE_REF_CS__TYPE) && (object instanceof Type)) {
+		else if ((targetReference == BaseCSPackage.Literals.TYPED_TYPE_REF_CS__TYPE) && (object instanceof Type)) {
 			if (object instanceof PrimitiveType) {		// FIXME Redundant if namespaces correct
 				descriptiveName = ((PrimitiveType)object).getName();
 			}

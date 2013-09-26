@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScoping;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLASResourceFactory;
 
@@ -55,7 +55,7 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 		EssentialOCLASResourceFactory.INSTANCE.getClass();
 //		EssentialOCLCS2Pivot.FACTORY.getClass();
 //		EssentialOCLPivot2CS.FACTORY.getClass();
-		EPackage.Registry.INSTANCE.put(EssentialOCLCSTPackage.eNS_URI, EssentialOCLCSTPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(EssentialOCLCSPackage.eNS_URI, EssentialOCLCSPackage.eINSTANCE);
 //		EValidator.Registry.INSTANCE.put(EssentialOCLCSTPackage.eINSTANCE, EssentialOCLCSTValidator.INSTANCE);
 	}
 	

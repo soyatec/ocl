@@ -26,10 +26,10 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContextDeclCS;
 
 public class OperationContextCSAttribution extends AbstractAttribution
 {
@@ -59,9 +59,9 @@ public class OperationContextCSAttribution extends AbstractAttribution
 		else if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__NAMESPACE) {
 			return getNextNamespaceScope(environmentView, scopeView, targetElement.getNamespace());
 		}
-		else*/ if ((containmentFeature == CompleteOCLCSTPackage.Literals.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS)
-				|| (containmentFeature == CompleteOCLCSTPackage.Literals.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS)
-				|| (containmentFeature == CompleteOCLCSTPackage.Literals.OPERATION_CONTEXT_DECL_CS__BODIES)) {
+		else*/ if ((containmentFeature == CompleteOCLCSPackage.Literals.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS)
+				|| (containmentFeature == CompleteOCLCSPackage.Literals.OPERATION_CONTEXT_DECL_CS__PRECONDITIONS)
+				|| (containmentFeature == CompleteOCLCSPackage.Literals.OPERATION_CONTEXT_DECL_CS__BODIES)) {
 //			return getNextNamespaceScope(environmentView, scopeView, target.getNamespace());
 //			Operation operation = targetElement.getOperation();
 			PathNameCS pathName = targetElement.getPathName();

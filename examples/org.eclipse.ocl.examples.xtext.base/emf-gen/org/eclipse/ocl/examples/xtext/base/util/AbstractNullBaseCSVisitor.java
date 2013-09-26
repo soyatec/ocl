@@ -38,183 +38,183 @@ public abstract class AbstractNullBaseCSVisitor<R, C>
 		super(context);
 	}	
 
-	public @Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS object) {
+	public @Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitAnnotationElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS object) {
+	public @Nullable R visitAnnotationElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitAttributeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS object) {
+	public @Nullable R visitAttributeCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS object) {
 		return null;
 	}
 
-	public @Nullable R visitClassCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS object) {
+	public @Nullable R visitClassCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ClassCS object) {
 		return null;
 	}
 
-	public @Nullable R visitClassifierCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS object) {
+	public @Nullable R visitClassifierCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS object) {
 		return null;
 	}
 
-	public @Nullable R visitConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS object) {
+	public @Nullable R visitConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS object) {
 		return null;
 	}
 
-	public @Nullable R visitDataTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS object) {
+	public @Nullable R visitDataTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.DataTypeCS object) {
 		return null;
 	}
 
-	public @Nullable R visitDetailCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS object) {
+	public @Nullable R visitDetailCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.DetailCS object) {
 		return null;
 	}
 
-	public @Nullable R visitDocumentationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.DocumentationCS object) {
+	public @Nullable R visitDocumentationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.DocumentationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS object) {
+	public @Nullable R visitElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitElementRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS object) {
+	public @Nullable R visitElementRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ElementRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitEnumerationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS object) {
+	public @Nullable R visitEnumerationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.EnumerationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitEnumerationLiteralCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS object) {
+	public @Nullable R visitEnumerationLiteralCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.EnumerationLiteralCS object) {
 		return null;
 	}
 
-	public @Nullable R visitImportCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS object) {
+	public @Nullable R visitImportCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ImportCS object) {
 		return null;
 	}
 
-	public @Nullable R visitLambdaTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.LambdaTypeCS object) {
+	public @Nullable R visitLambdaTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.LambdaTypeCS object) {
 		return null;
 	}
 
-	public @Nullable R visitLibraryCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS object) {
+	public @Nullable R visitLibraryCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModelElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS object) {
+	public @Nullable R visitModelElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModelElementRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS object) {
+	public @Nullable R visitModelElementRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ModelElementRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitMultiplicityBoundsCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS object) {
+	public @Nullable R visitMultiplicityBoundsCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityBoundsCS object) {
 		return null;
 	}
 
-	public @Nullable R visitMultiplicityStringCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS object) {
+	public @Nullable R visitMultiplicityStringCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityStringCS object) {
 		return null;
 	}
 
-	public @Nullable R visitNamedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS object) {
+	public @Nullable R visitNamedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitOperationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS object) {
+	public @Nullable R visitOperationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.OperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS object) {
+	public @Nullable R visitPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageCS object) {
 		return null;
 	}
 
-	public @Nullable R visitParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS object) {
+	public @Nullable R visitParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPathElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS object) {
+	public @Nullable R visitPathElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPathElementWithURICS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS object) {
+	public @Nullable R visitPathElementWithURICS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS object) {
 		return null;
 	}
 
-	public @Nullable R visitPathNameCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS object) {
+	public @Nullable R visitPathNameCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPivotableElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS object) {
+	public @Nullable R visitPivotableElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPrimitiveTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS object) {
+	public @Nullable R visitPrimitiveTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitReferenceCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS object) {
+	public @Nullable R visitReferenceCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ReferenceCS object) {
 		return null;
 	}
 
-	public @Nullable R visitRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS object) {
+	public @Nullable R visitRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS object) {
 		return null;
 	}
 
-	public @Nullable R visitSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS object) {
+	public @Nullable R visitSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitStructuralFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS object) {
+	public @Nullable R visitStructuralFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTemplateBindingCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS object) {
+	public @Nullable R visitTemplateBindingCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTemplateParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS object) {
+	public @Nullable R visitTemplateParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTemplateParameterSubstitutionCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS object) {
+	public @Nullable R visitTemplateParameterSubstitutionCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTemplateSignatureCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS object) {
+	public @Nullable R visitTemplateSignatureCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTuplePartCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS object) {
+	public @Nullable R visitTuplePartCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TuplePartCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTupleTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS object) {
+	public @Nullable R visitTupleTypeCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TupleTypeCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTypeParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypeParameterCS object) {
+	public @Nullable R visitTypeParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TypeParameterCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS object) {
+	public @Nullable R visitTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTypedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS object) {
+	public @Nullable R visitTypedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTypedRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS object) {
+	public @Nullable R visitTypedRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTypedTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS object) {
+	public @Nullable R visitTypedTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitWildcardTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS object) {
+	public @Nullable R visitWildcardTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS object) {
 		return null;
 	}
 }

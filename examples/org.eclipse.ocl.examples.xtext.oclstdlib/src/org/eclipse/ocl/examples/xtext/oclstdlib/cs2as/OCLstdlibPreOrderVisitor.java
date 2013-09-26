@@ -35,12 +35,12 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuations;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibClassCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibIterationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibOperationCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPackageCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.LibPropertyCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.PrecedenceCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibPreOrderVisitor;
 import org.eclipse.xtext.common.types.JvmType;
 
