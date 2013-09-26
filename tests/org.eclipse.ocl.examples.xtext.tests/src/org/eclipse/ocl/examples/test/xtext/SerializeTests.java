@@ -337,13 +337,13 @@ public class SerializeTests extends XtextTestCase
 	} */
 
 	public void testSerialize_BaseCST() throws Exception {
-		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore", true);
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore", true);
 		String stem = uri.trimFileExtension().lastSegment();
 		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
 	}
 
 	public void testSerialize_EssentialOCLCST() throws Exception {
-		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore", true);
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore", true);
 		String stem = uri.trimFileExtension().lastSegment();
 		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
 	}
