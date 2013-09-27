@@ -116,6 +116,13 @@ public class LoadTests extends XtextTestCase
 		}
 	} */
 
+	protected ResourceSet createResourceSet() {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		UMLResourcesUtil.init(resourceSet);
+		getProjectMap().initializeResourceSet(resourceSet);
+		return resourceSet;
+	}
+
 	public Resource doLoad(String stem, String extension) throws IOException {
 //		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
@@ -264,9 +271,7 @@ public class LoadTests extends XtextTestCase
 	public void doLoadUML(@NonNull URI inputURI, boolean ignoreNonExistence, boolean validateEmbeddedOCL) throws IOException, ParserException {
 //		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
-		ResourceSet resourceSet = new ResourceSetImpl();
-		UMLResourcesUtil.init(resourceSet);
-		getProjectMap().initializeResourceSet(resourceSet);
+		ResourceSet resourceSet = createResourceSet();
 		if (!resourceSet.getURIConverter().exists(inputURI, null)) {
 			if (ignoreNonExistence) {
 				return;
@@ -328,6 +333,8 @@ public class LoadTests extends XtextTestCase
 			s.append("Parsing errors");
 			for (Resource asResource : allResources) {
 				assertNoResourceErrors("Load failed", asResource);
+			}
+			Resource asResource = allResources.get(0); {
 				@SuppressWarnings("unused") URI savedURI = asResource.getURI();
 //				asResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 //				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
@@ -355,7 +362,7 @@ public class LoadTests extends XtextTestCase
 				}
 			}
 //			System.out.printf("Exceptions %d, Parses %d\n", exceptions, parses);
-			for (Resource asResource : allResources) {
+			/*for (Resource asResource : allResources)*/ {
 				assertNoValidationErrors("Overall validation", asResource);
 			}
 			assertEquals(s.toString(), 0, exceptions);
