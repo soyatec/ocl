@@ -7,7 +7,7 @@
  * Do not edit it.
  */
 
-package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util;
+package org.eclipse.ocl.examples.xtext.oclinecore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -15,13 +15,13 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCSContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.NewEssentialOCLCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.OCLinEcoreCSVisitor;
 
-public class AutoOCLinEcoreContainmentVisitor
-	extends EssentialOCLCSContainmentVisitor
+public class AutoOCLinEcoreCSContainmentVisitor
+	extends NewEssentialOCLCSContainmentVisitor
 	implements OCLinEcoreCSVisitor<Continuation<?>>
 {
     
@@ -33,7 +33,7 @@ public class AutoOCLinEcoreContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public AutoOCLinEcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoOCLinEcoreCSContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();

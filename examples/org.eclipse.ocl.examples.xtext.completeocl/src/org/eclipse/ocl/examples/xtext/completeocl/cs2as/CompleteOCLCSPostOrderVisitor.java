@@ -34,9 +34,9 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarati
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.AbstractCompleteOCLCSPostOrderVisitor;
 
-public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLCSPostOrderVisitor
+public class CompleteOCLCSPostOrderVisitor extends AbstractCompleteOCLCSPostOrderVisitor
 {
-	public CompleteOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	public CompleteOCLCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

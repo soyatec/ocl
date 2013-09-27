@@ -13,10 +13,10 @@ import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.cs2as.NewBaseCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BooleanLiteralExpCS;
@@ -57,8 +57,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNatur
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
-public class AutoEssentialOCLContainmentVisitor
-	extends BaseCSContainmentVisitor
+public class AutoEssentialOCLCSContainmentVisitor
+	extends NewBaseCSContainmentVisitor
 	implements EssentialOCLCSVisitor<Continuation<?>>
 {
     
@@ -70,7 +70,7 @@ public class AutoEssentialOCLContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public AutoEssentialOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoEssentialOCLCSContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();

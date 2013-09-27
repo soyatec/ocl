@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -90,14 +89,11 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.AbstractBaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
-public class AutoBaseContainmentVisitor
+public class AutoBaseCSContainmentVisitor
 	extends AbstractBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/BaseCST", "baseCST", BaseCSPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/BaseCST", "basecs", BaseCSPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", "pivot", PivotPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Enumeration = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Enumeration", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_EnumerationCS = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_BaseCST.getClassId("EnumerationCS", 0);
@@ -126,7 +122,7 @@ public class AutoBaseContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public AutoBaseContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoBaseCSContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();
@@ -206,7 +202,7 @@ public class AutoBaseContainmentVisitor
         //
         final @Nullable /*@Thrown*/ List<EnumerationLiteralCS> ownedLiterals = self.getOwnedLiterals();
         assert ownedLiterals != null;
-        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedLiterals = idResolver.createOrderedSetOfAll(ORD_CLSSid_EnumerationLiteralCS, ownedLiterals);
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedLiterals = idResolver.createOrderedSetOfAll(ORD_CLSSid_EnumerationLiteralCS, ownedLiterals);
         @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_EnumerationLiteral);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedLiterals.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect;
@@ -222,7 +218,7 @@ public class AutoBaseContainmentVisitor
             if (_1 == null) {
                 throw new InvalidValueException("Null source for \'null\'");
             }
-            final @Nullable /*@NonInvalid*/ EnumerationLiteral ast = (EnumerationLiteral)_1.getPivot();
+            final @Nullable /*@Thrown*/ EnumerationLiteral ast = (EnumerationLiteral)_1.getPivot();
             //
             accumulator.add(ast);
         }
@@ -356,7 +352,7 @@ public class AutoBaseContainmentVisitor
         //
         final @Nullable /*@Thrown*/ List<PackageCS> ownedNestedPackage = self.getOwnedNestedPackage();
         assert ownedNestedPackage != null;
-        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedNestedPackage = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedNestedPackage);
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedNestedPackage = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedNestedPackage);
         @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedNestedPackage.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect;
@@ -372,7 +368,7 @@ public class AutoBaseContainmentVisitor
             if (_1 == null) {
                 throw new InvalidValueException("Null source for \'null\'");
             }
-            final @Nullable /*@NonInvalid*/ DomainPackage ast = (DomainPackage)_1.getPivot();
+            final @Nullable /*@Thrown*/ Package ast = (Package)_1.getPivot();
             //
             accumulator.add(ast);
         }

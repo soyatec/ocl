@@ -34,11 +34,10 @@ public class GenerateAutoCS2ASVisitors extends GenerateCSVisitors
 	@Override
 	public void generateVisitors(@NonNull GenPackage genPackage) {
 		if (isDerived()) {
-			AutoCodeGenerator.generate(genPackage, projectPrefix, visitorPackageName, visitorClassName,
-				superProjectPrefix, superVisitorPackageName, superVisitorClassName
-			);
+			AutoCodeGenerator.generate(genPackage, projectPrefix, projectName, visitorPackageName, visitorClassName,
+				superProjectPrefix, superProjectName, superVisitorClassName);
 		} else {
-			AutoCodeGenerator.generate(genPackage, projectPrefix, visitorPackageName, visitorClassName,
+			AutoCodeGenerator.generate(genPackage, projectPrefix, projectName, visitorPackageName, visitorClassName,
 				null, null, null);
 		}
 	}

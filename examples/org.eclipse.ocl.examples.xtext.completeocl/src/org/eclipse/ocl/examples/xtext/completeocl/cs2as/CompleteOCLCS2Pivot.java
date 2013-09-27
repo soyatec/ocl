@@ -37,21 +37,21 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 
 	@Override
 	protected @NonNull CompleteOCLCSVisitor<Continuation<?>> createContainmentVisitor(@NonNull CS2PivotConversion converter) {
-		return new CompleteOCLContainmentVisitor(converter);
+		return new CompleteOCLCSContainmentVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull CompleteOCLCSVisitor<Element> createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
-		return new CompleteOCLLeft2RightVisitor(converter);
+		return new CompleteOCLCSLeft2RightVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull CompleteOCLCSVisitor<Continuation<?>> createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new CompleteOCLPostOrderVisitor(converter);
+		return new CompleteOCLCSPostOrderVisitor(converter);
 	}
 
 	@Override
 	protected @NonNull CompleteOCLCSVisitor<Continuation<?>> createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
-		return new CompleteOCLPreOrderVisitor(converter);
+		return new CompleteOCLCSPreOrderVisitor(converter);
 	}
 }

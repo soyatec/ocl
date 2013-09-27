@@ -7,7 +7,7 @@
  * Do not edit it.
  */
 
-package org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util;
+package org.eclipse.ocl.examples.xtext.completeocl.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -28,10 +28,11 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContext
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PathNameDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCSContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.NewEssentialOCLCSContainmentVisitor;
 
-public class AutoCompleteOCLContainmentVisitor
-	extends EssentialOCLCSContainmentVisitor
+public class AutoCompleteOCLCSContainmentVisitor
+	extends NewEssentialOCLCSContainmentVisitor
 	implements CompleteOCLCSVisitor<Continuation<?>>
 {
     
@@ -43,7 +44,7 @@ public class AutoCompleteOCLContainmentVisitor
      * 
      * @param context my initial result value
      */
-    public AutoCompleteOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
+    public AutoCompleteOCLCSContainmentVisitor(@NonNull CS2PivotConversion context) {
         super(context);
         this.converter = context.getConverter();
         this.idResolver = converter.getMetaModelManager().getIdResolver();

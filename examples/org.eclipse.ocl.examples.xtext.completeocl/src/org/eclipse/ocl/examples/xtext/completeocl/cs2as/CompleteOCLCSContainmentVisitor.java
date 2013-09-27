@@ -65,7 +65,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.AbstractCom
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.AbstractOperationFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 
-public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLCSContainmentVisitor
+public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContainmentVisitor
 {
 	public class OperationDeclScopeFilter extends AbstractOperationFilter
 	{
@@ -148,7 +148,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLCSContainm
 	private Map<Property, List<Constraint>> property2invariants = new HashMap<Property, List<Constraint>>();
 	private Map<Type, List<Constraint>> type2invariants = new HashMap<Type, List<Constraint>>();
 
-	public CompleteOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
+	public CompleteOCLCSContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
