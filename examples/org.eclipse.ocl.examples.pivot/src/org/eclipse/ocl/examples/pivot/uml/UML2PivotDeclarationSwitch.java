@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -310,8 +311,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		}
 		PrimitiveType pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
 		if (primaryElement != null) {
-			@SuppressWarnings("unused")TypeServer typeServer1 = metaModelManager.getTypeServer(primaryElement);
-			@SuppressWarnings("unused")TypeServer typeServer2 = metaModelManager.getTypeServer(pivotElement);
+//			@SuppressWarnings("unused")TypeServer typeServer1 = metaModelManager.getTypeServer(primaryElement);
+//			@SuppressWarnings("unused")TypeServer typeServer2 = metaModelManager.getTypeServer(pivotElement);
 			pivotElement.setBehavioralType(primaryElement);
 		}
 		else {
@@ -654,32 +655,48 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		}
 		else if (ePackage.getNsURI().startsWith("http://www.omg.org/spec/MOF")) {
 			if ((eObject instanceof org.eclipse.emf.ecore.xml.type.AnyType) && "Tag".equals(eClass.getName())) {
-				for (Entry entry : ((org.eclipse.emf.ecore.xml.type.AnyType)eObject).getAnyAttribute()) {
+				FeatureMap anyAttribute = ((org.eclipse.emf.ecore.xml.type.AnyType)eObject).getAnyAttribute();
+				Object name = null;
+				Object value = null;
+				Object element = null;
+				for (Entry entry : anyAttribute) {
 					EStructuralFeature eFeature = entry.getEStructuralFeature();
-					Object value = entry.getValue();
-					Resource eResource = eObject.eResource();
-					boolean gotIt = false;
-					if (eResource != null) {
-						for (EObject eContent : eResource.getContents())
-						{
-							if (eContent instanceof org.eclipse.uml2.uml.Package) {
-								org.eclipse.ocl.examples.pivot.Package asPackage = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, eContent);
-								if (asPackage != null) {
-									if ("org.omg.xmi.nsPrefix".equals(eFeature.getName())) {
-										asPackage.setNsPrefix(String.valueOf(value));
-										gotIt = true;
-									}
-									else if ("org.omg.xmi.nsURI".equals(eFeature.getName())) {
-										asPackage.setNsURI(String.valueOf(value));
-										gotIt = true;
-									}
-								}
-							}
-						}
+					if ("name".equals(eFeature.getName())) {
+						name = anyAttribute.get(eFeature, false);
 					}
-					if (!gotIt) {
-						logger.warn("Unknown " + ePackage.getNsURI()  + " feature ignored : " + eFeature + " = " + value);
+					else if ("value".equals(eFeature.getName())) {
+						value = anyAttribute.get(eFeature, false);
 					}
+					else if ("element".equals(eFeature.getName())) {
+						element = anyAttribute.get(eFeature, false);
+					}
+				}
+				boolean gotIt = false;
+				EObject taggedObject = eObject.eResource().getEObject(String.valueOf(element));
+				if ("org.omg.xmi.nsPrefix".equals(name) && (taggedObject instanceof org.eclipse.uml2.uml.Package)) {
+					org.eclipse.ocl.examples.pivot.Package asPackage = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, taggedObject);
+					if (asPackage != null) {
+						asPackage.setNsPrefix(String.valueOf(value));
+						gotIt = true;
+					}
+				}
+				else if ("org.omg.xmi.nsURI".equals(name) && (taggedObject instanceof org.eclipse.uml2.uml.Package)) {
+					org.eclipse.ocl.examples.pivot.Package asPackage = converter.getCreated(org.eclipse.ocl.examples.pivot.Package.class, taggedObject);
+					if (asPackage != null) {
+						asPackage.setNsURI(String.valueOf(value));
+						gotIt = true;
+					}
+				}
+				else if ("org.omg.xmi.schemaType".equals(name) && (taggedObject instanceof org.eclipse.uml2.uml.DataType)) {
+					DataType asPackage = converter.getCreated(DataType.class, taggedObject);
+					if (asPackage != null) {
+// FIXME						asPackage.setNsURI(String.valueOf(value));
+						System.out.println("Unknown " + ePackage.getNsURI() + "::" + eObject.eClass().getName() + "::" + name + " ignored");
+						gotIt = true;
+					}
+				}
+				if (!gotIt) {
+					logger.warn("Unknown " + ePackage.getNsURI() + "::" + eObject.eClass().getName() + "::" + name + " ignored");
 				}
 			}
 			return null;
