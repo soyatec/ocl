@@ -32,7 +32,7 @@ public class TemplateParameterSubstitutionCSAttribution extends AbstractAttribut
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 //		TemplateParameterSubstitutionCS targetElement = (TemplateParameterSubstitutionCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		/*if (containmentFeature == BaseCSTPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS__FORMAL_TEMPLATE_PARAMETER) {
+		/*if (containmentFeature == BaseCSPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS__FORMAL_TEMPLATE_PARAMETER) {
 			TemplateBindingCS templateBinding = getTarget().getOwningTemplateBinding();
 			TemplateBindableElementCS templateBindableElement = templateBinding.getOwningTemplateBindableElement();
 			if (!(templateBindableElement instanceof TypedTypeRefCS)) {
@@ -46,7 +46,7 @@ public class TemplateParameterSubstitutionCSAttribution extends AbstractAttribut
 			if (templateSignature == null) {
 				return null;
 			}
-			environmentView.addNamedElements(BaseCSTPackage.Literals.TEMPLATE_PARAMETER_CS, templateSignature.getOwnedTemplateParameter());
+			environmentView.addNamedElements(BaseCSPackage.Literals.TEMPLATE_PARAMETER_CS, templateSignature.getOwnedTemplateParameter());
 			return null;
 		}
 		else*/ if (containmentFeature == BaseCSPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS__OWNED_ACTUAL_PARAMETER) {

@@ -134,11 +134,11 @@ public class BaseScopeView extends AbstractScope implements IScopeView
 	}
 	
 	protected final @NonNull MetaModelManager metaModelManager;
-	protected final @NonNull ElementCS target;							// CST node in which a lookup is to be performed
-	protected final @Nullable ElementCS child;							// CST node from which a lookup is to be performed
+	protected final @NonNull ElementCS target;							// CS node in which a lookup is to be performed
+	protected final @Nullable ElementCS child;							// CS node from which a lookup is to be performed
 	protected final @NonNull EReference targetReference;				// The AST reference to the location at which the lookup is to be stored
 	protected final boolean isQualified;
-	private Attribution attribution = null;								// Lazily computed Attributes helper for the target CST node
+	private Attribution attribution = null;								// Lazily computed Attributes helper for the target CS node
 
 	protected BaseScopeView(@NonNull MetaModelManager metaModelManager, @NonNull ElementCS target, @Nullable ElementCS child, @NonNull EReference targetReference, boolean isQualified) {
 		super(getParent(metaModelManager, target, targetReference, isQualified), false);

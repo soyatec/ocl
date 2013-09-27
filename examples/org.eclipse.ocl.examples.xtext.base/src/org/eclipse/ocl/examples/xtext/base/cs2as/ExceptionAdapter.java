@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.base.cs2as;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 
 /**
- * An ExceptionAdapter may be attached to a CST Element to capture an exception
+ * An ExceptionAdapter may be attached to a CS Element to capture an exception
  * for diagnosis of an unresolved proxy.
  */
 public class ExceptionAdapter extends AdapterImpl

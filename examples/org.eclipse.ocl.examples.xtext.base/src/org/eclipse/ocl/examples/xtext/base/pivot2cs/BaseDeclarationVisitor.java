@@ -130,7 +130,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 //	@Override
 //	public ElementCS visitComment(Comment object) {
-//		ParameterCS pivotElement = context.refreshNamedElement(ParameterCS.class, BaseCSTPackage.Literals.COMMENT_CS, object);
+//		ParameterCS pivotElement = context.refreshNamedElement(ParameterCS.class, BaseCSPackage.Literals.COMMENT_CS, object);
 //		return null;
 //	}
 

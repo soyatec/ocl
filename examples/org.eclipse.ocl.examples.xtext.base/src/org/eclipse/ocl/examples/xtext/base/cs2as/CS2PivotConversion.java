@@ -192,7 +192,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ocl.examples.xtext.base.cs2pivot.DiagnosticHandler#addWarning(org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS, java.lang.String, java.lang.Object)
+	 * @see org.eclipse.ocl.examples.xtext.base.cs2pivot.DiagnosticHandler#addWarning(org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS, java.lang.String, java.lang.Object)
 	 */
 	public void addWarning(@NonNull ModelElementCS csElement, /*@NonNull*/ String message, Object... bindings) {
 		String boundMessage = NLS.bind(message, bindings);

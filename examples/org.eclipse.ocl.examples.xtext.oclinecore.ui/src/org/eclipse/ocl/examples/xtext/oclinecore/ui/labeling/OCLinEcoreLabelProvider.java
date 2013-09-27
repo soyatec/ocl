@@ -41,7 +41,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import com.google.inject.Inject;
 
 /**
- * Provides labels for OCLinEcoreCST objects.
+ * Provides labels for OCLinEcoreCS objects.
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */

@@ -101,7 +101,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 			return csRef;
 //		}
 		// FIXME cascade paths wrt import aliases
-/*		QualifiedTypeRefCS qRef = BaseCSTFactory.eINSTANCE.createQualifiedTypeRefCS();
+/*		QualifiedTypeRefCS qRef = BaseCSFactory.eINSTANCE.createQualifiedTypeRefCS();
 		qRef.setNamespace(objectPackage);
 		qRef.setElement(csRef);
 		qRef.setPivot(object);

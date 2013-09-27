@@ -1602,4 +1602,4 @@ public class EssentialOCLCSPackageImpl
 		createResource(eNS_URI);
 	}
 
-} //EssentialOCLCSTPackageImpl
+} //EssentialOCLCSPackageImpl

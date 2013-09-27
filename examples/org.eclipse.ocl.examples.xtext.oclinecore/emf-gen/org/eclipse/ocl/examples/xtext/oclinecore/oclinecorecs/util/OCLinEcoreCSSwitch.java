@@ -319,4 +319,4 @@ public T defaultCase(EObject object)
 		return null;
 	}
 
-} //OCLinEcoreCSTSwitch
+} //OCLinEcoreCSSwitch

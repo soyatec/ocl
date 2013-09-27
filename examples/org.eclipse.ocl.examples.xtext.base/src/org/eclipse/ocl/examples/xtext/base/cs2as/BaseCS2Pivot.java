@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 
 /**
- * BaseCST2Pivot provides an extensible conversion from CS models to the pivot model.
+ * BaseCS2Pivot provides an extensible conversion from CS models to the pivot model.
  */
 public class BaseCS2Pivot extends CS2Pivot
 {	

@@ -2585,4 +2585,4 @@ public class BaseCSPackageImpl extends EPackageImpl implements BaseCSPackage {
 		   });
 	}
 
-} //BaseCSTPackageImpl
+} //BaseCSPackageImpl
