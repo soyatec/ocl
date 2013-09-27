@@ -182,6 +182,6 @@ public class LibPackageCSImpl extends PackageCSImpl implements LibPackageCS
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibPackageCS(this);
+		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibPackageCS(this);
 	}
 } //LibPackageCSImpl

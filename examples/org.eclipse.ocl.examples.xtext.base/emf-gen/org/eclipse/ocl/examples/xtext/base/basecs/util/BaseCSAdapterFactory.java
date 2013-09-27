@@ -336,7 +336,7 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createTypedTypeRefCSAdapter();
 			}
 			@Override
-			public Adapter caseVisitableCS(org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS object)
+			public Adapter caseVisitableCS(VisitableCS object)
 			{
 				return createVisitableCSAdapter();
 			}

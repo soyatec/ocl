@@ -195,6 +195,6 @@ public class InvocationExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitInvocationExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitInvocationExpCS(this);
 	}
 } //InvocationExpCSImpl

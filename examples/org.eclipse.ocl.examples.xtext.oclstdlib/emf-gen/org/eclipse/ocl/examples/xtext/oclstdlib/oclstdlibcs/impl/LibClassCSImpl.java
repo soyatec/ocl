@@ -185,6 +185,6 @@ public class LibClassCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibClassCS(this);
+		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibClassCS(this);
 	}
 } //LibClassCSImpl

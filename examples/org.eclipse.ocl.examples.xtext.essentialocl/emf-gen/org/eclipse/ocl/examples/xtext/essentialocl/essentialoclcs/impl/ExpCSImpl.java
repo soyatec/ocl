@@ -165,7 +165,7 @@ public class ExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitExpCS(this);
 	}
 
 	/**

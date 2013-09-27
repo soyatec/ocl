@@ -186,6 +186,6 @@ public class OCLinEcoreConstraintCSImpl extends ConstraintCSImpl implements OCLi
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.OCLinEcoreCSVisitor<?>)visitor).visitOCLinEcoreConstraintCS(this);
+		return (R) ((OCLinEcoreCSVisitor<?>)visitor).visitOCLinEcoreConstraintCS(this);
 	}
 } //ConstraintCSImpl

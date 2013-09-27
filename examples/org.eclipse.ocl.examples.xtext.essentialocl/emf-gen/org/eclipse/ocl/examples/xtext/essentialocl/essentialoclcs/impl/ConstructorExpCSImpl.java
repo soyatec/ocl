@@ -240,6 +240,6 @@ public class ConstructorExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitConstructorExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitConstructorExpCS(this);
 	}
 } //ConstructorExpCSImpl

@@ -64,6 +64,6 @@ public class LibConstraintCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util.OCLstdlibCSVisitor<?>)visitor).visitLibConstraintCS(this);
+		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibConstraintCS(this);
 	}
 } //LibConstraintCSImpl

@@ -279,6 +279,6 @@ public class IndexExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitIndexExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitIndexExpCS(this);
 	}
 } //IndexExpCSImpl

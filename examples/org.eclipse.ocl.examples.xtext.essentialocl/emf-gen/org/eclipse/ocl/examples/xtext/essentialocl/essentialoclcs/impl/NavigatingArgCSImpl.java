@@ -551,7 +551,7 @@ public class NavigatingArgCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitNavigatingArgCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNavigatingArgCS(this);
 	}
 
 	/**

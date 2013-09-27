@@ -163,7 +163,7 @@ public class BinaryOperatorCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitBinaryOperatorCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitBinaryOperatorCS(this);
 	}
 
 	/**

@@ -168,6 +168,6 @@ public class StringLiteralExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitStringLiteralExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitStringLiteralExpCS(this);
 	}
 } //StringLiteralExpCSImpl

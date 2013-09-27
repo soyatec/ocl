@@ -293,6 +293,6 @@ public class NameExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitNameExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNameExpCS(this);
 	}
 } //NamedElementRefCSImpl

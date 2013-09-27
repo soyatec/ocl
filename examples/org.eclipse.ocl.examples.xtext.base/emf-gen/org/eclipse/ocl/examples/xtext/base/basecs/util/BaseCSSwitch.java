@@ -765,7 +765,7 @@ public class BaseCSSwitch<T> extends Switch<T> {
 			}
 			case BaseCSPackage.VISITABLE_CS:
 			{
-				org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitableCS = (org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS)theEObject;
+				VisitableCS visitableCS = (VisitableCS)theEObject;
 				T result = caseVisitableCS(visitableCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -1569,7 +1569,7 @@ public class BaseCSSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVisitableCS(org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS object)
+	public T caseVisitableCS(VisitableCS object)
 	{
 		return null;
 	}

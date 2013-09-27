@@ -183,6 +183,6 @@ public class NumberLiteralExpCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor<?>)visitor).visitNumberLiteralExpCS(this);
+		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNumberLiteralExpCS(this);
 	}
 } //NumberLiteralExpCSImpl

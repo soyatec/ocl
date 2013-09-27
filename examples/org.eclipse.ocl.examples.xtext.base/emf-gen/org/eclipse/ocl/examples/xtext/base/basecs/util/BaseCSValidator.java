@@ -205,7 +205,7 @@ public class BaseCSValidator extends EObjectValidator
 			case BaseCSPackage.TYPED_TYPE_REF_CS:
 				return validateTypedTypeRefCS((TypedTypeRefCS)value, diagnostics, context);
 			case BaseCSPackage.VISITABLE_CS:
-				return validateVisitableCS((org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS)value, diagnostics, context);
+				return validateVisitableCS((VisitableCS)value, diagnostics, context);
 			case BaseCSPackage.WILDCARD_TYPE_REF_CS:
 				return validateWildcardTypeRefCS((WildcardTypeRefCS)value, diagnostics, context);
 			case BaseCSPackage.ITERATOR_KIND:
@@ -812,7 +812,7 @@ public class BaseCSValidator extends EObjectValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateVisitableCS(org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitableCS, DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateVisitableCS(VisitableCS visitableCS, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return validate_EveryDefaultConstraint((EObject)visitableCS, diagnostics, context);
 	}

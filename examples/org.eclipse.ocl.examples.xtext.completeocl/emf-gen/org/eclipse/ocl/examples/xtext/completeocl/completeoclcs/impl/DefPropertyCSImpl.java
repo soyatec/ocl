@@ -61,6 +61,6 @@ public class DefPropertyCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitDefPropertyCS(this);
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitDefPropertyCS(this);
 	}
 } //DefPropertyCSImpl

@@ -378,7 +378,7 @@ public class OperationContextDeclCSImpl
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCLCSVisitor<?>)visitor).visitOperationContextDeclCS(this);
+		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitOperationContextDeclCS(this);
 	}
 
 	/**
