@@ -65,7 +65,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An EnvironmentView provides a selective view of the environment visible at
- * some CST node.
+ * some CS node.
  * 
  * The selection corresponds to an Environment lookup method as defined by the
  * OCL specification computed in accordance with the the Inherited Attributes.
@@ -75,7 +75,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * 
  * The EnvironmentView is computed on demand, rather than cached, since only
  * small parts of the overall environment are needed and caches may not remain
- * valid for long given the rapid recreation of CST nodes that occurs while
+ * valid for long given the rapid recreation of CS nodes that occurs while
  * editing.
  */
 public class EnvironmentView

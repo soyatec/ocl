@@ -12,7 +12,7 @@
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429"
  * </copyright>
  * 
- * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ * Run As->MWE2 Workflow to regenerate the Xtest CS models.
  */
 module GenerateAutoCSModels
 

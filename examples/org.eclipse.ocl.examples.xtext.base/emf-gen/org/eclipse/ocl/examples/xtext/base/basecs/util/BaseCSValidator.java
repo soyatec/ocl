@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: BaseCSTValidator.java,v 1.9 2011/05/12 08:46:40 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.base.basecs.util;
 
@@ -869,4 +868,4 @@ public class BaseCSValidator extends EObjectValidator
 		return true;
 	}
 
-} //BaseCSTValidator
+} //BaseCSValidator

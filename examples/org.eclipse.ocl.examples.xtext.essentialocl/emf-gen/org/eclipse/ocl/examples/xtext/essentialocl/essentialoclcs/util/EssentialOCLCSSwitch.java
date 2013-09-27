@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: EssentialOCLCSTSwitch.java,v 1.8 2011/03/01 08:46:48 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util;
 
@@ -1404,4 +1403,4 @@ public class EssentialOCLCSSwitch<T>
 		return null;
 	}
 
-} //EssentialOCLCSTSwitch
+} //EssentialOCLCSSwitch

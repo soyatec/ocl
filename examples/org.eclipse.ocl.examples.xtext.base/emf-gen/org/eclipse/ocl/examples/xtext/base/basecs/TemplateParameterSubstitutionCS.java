@@ -72,7 +72,7 @@ public interface TemplateParameterSubstitutionCS extends ModelElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Formal Template Parameter</em>' reference.
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getTemplateParameterSubstitutionCS_FormalTemplateParameter()
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getTemplateParameterSubstitutionCS_FormalTemplateParameter()
 	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */

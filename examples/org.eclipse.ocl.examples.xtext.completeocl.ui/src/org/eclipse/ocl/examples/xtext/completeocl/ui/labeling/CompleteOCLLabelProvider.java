@@ -46,7 +46,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabel
 import com.google.inject.Inject;
 
 /**
- * Provides labels for CompleteOCLCST objects.
+ * Provides labels for CompleteOCLCS objects.
  * 
  * see
  * http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider

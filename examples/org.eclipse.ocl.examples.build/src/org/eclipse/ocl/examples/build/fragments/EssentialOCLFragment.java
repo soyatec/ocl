@@ -75,7 +75,7 @@ public class EssentialOCLFragment extends DefaultGeneratorFragment
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory bindFactory = new BindFactory();
 		bindFactory.addTypeToType(org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer.class.getName(), EssentialOCLCrossReferenceSerializer.class.getName());
-		// Potential resolution of Pivot fragments for CST resource
+		// Potential resolution of Pivot fragments for CS resource
 		bindFactory.addTypeToType(IDiagnosticConverter.class.getName(), PivotDiagnosticConverter.class.getName());
 		bindFactory.addTypeToType(IFragmentProvider.class.getName(), BaseFragmentProvider.class.getName());
 		bindFactory.addTypeToType(org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer.class.getName(), EssentialOCLHiddenTokenSequencer.class.getName());

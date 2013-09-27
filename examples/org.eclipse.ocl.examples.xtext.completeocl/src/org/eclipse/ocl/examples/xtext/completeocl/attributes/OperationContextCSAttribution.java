@@ -39,7 +39,7 @@ public class OperationContextCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		OperationContextDeclCS targetElement = (OperationContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-/*		if (containmentFeature == CompleteOCLCSTPackage.Literals.OPERATION_CONTEXT_DECL_CS__OPERATION) {
+/*		if (containmentFeature == CompleteOCLCSPackage.Literals.OPERATION_CONTEXT_DECL_CS__OPERATION) {
 			Filter filter = new OperationContextFilter(targetElement);
 			try {
 				environmentView.addFilter(filter);
@@ -56,7 +56,7 @@ public class OperationContextCSAttribution extends AbstractAttribution
 				environmentView.removeFilter(filter);
 			}
 		}
-		else if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__NAMESPACE) {
+		else if (containmentFeature == CompleteOCLCSPackage.Literals.CONTEXT_DECL_CS__NAMESPACE) {
 			return getNextNamespaceScope(environmentView, scopeView, targetElement.getNamespace());
 		}
 		else*/ if ((containmentFeature == CompleteOCLCSPackage.Literals.OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS)

@@ -232,7 +232,7 @@
 	      label="Save as Ecore2">
 	      <visibleWhen checkEnabled="false">
 	        <iterate>
-	          <adapt type="org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreDocumentCS"/>
+	          <adapt type="org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreDocumentCS"/>
 	        </iterate>
 	      </visibleWhen>
 	    </command>

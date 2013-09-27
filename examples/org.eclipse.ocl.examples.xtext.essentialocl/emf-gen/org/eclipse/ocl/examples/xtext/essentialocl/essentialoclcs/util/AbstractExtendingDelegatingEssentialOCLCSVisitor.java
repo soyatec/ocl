@@ -13,7 +13,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: model/EssentialOCLCST.genmodel
+ * from: model/EssentialOCLCS.genmodel
  * by: org.eclipse.ocl.examples.build.acceleo.GenerateVisitor
  * defined by: org.eclipse.ocl.examples.build.acceleo.generateVisitors.mtl
  * invoked by: org.eclipse.ocl.examples.build.utilities.*

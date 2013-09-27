@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcoreCSTFactoryImpl.java,v 1.7 2011/03/01 08:46:35 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl;
 
@@ -125,4 +124,4 @@ public class OCLinEcoreCSFactoryImpl extends EFactoryImpl implements OCLinEcoreC
 		return OCLinEcoreCSPackage.eINSTANCE;
 	}
 
-} //OCLinEcoreCSTFactoryImpl
+} //OCLinEcoreCSFactoryImpl

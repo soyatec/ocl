@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.BaseLabelProvider
 import com.google.inject.Inject;
 
 /**
- * Provides labels for OCLstdlibCST objects.
+ * Provides labels for OCLstdlibCS objects.
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */

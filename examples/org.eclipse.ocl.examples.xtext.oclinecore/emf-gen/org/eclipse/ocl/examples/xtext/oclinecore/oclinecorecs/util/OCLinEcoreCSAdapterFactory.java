@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcoreCSTAdapterFactory.java,v 1.7 2011/03/01 08:46:34 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util;
 
@@ -349,4 +348,4 @@ public class OCLinEcoreCSAdapterFactory extends AdapterFactoryImpl
 		return null;
 	}
 
-} //OCLinEcoreCSTAdapterFactory
+} //OCLinEcoreCSAdapterFactory

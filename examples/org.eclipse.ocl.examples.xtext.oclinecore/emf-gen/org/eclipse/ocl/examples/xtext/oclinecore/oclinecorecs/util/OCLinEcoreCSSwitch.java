@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcoreCSTSwitch.java,v 1.8 2011/03/01 08:46:34 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util;
 

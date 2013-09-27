@@ -648,7 +648,7 @@ public class OCL {
 	 * 
 	 * For a first update, the csResource may be created by something like
 	 * <p><tt>
-	 * (BaseResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+	 * (BaseResource) resourceSet.createResource(outputURI, OCLinEcoreCSPackage.eCONTENT_TYPE);
 	 * </tt>
 	 */
 	public void pivot2cs(@NonNull ASResource asResource, @NonNull BaseResource csResource) {

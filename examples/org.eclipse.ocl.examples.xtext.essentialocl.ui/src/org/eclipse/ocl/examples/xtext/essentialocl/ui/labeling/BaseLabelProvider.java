@@ -114,7 +114,7 @@ import org.osgi.framework.Bundle;
 import com.google.inject.Inject;
 
 /**
- * Provides labels for BaseCST objects redirecting to Pivot objects.
+ * Provides labels for BaseCS objects redirecting to Pivot objects.
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */

@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibCSTPackage.java,v 1.9 2011/03/01 08:46:57 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs;
@@ -1781,4 +1780,4 @@ public interface OCLstdlibCSPackage
 
 	}
 
-} //OCLstdlibCSTPackage
+} //OCLstdlibCSPackage

@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibCSTAdapterFactory.java,v 1.5 2011/03/01 08:46:57 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util;
@@ -730,4 +729,4 @@ public class OCLstdlibCSAdapterFactory
 		return null;
 	}
 
-} //OCLstdlibCSTAdapterFactory
+} //OCLstdlibCSAdapterFactory

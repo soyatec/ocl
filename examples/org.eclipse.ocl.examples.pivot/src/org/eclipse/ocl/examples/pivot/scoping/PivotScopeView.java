@@ -71,7 +71,7 @@ public class PivotScopeView implements ScopeView
 	protected final @Nullable Element child;							// AST node from which a lookup is to be performed
 	protected final boolean isQualified;								// True of the lookup has an explicit namespace qualification
 	private ScopeView parent = null;									// Lazily computed scope view for target's parent
-	private Attribution attribution = null;								// Lazily computed attributes helper for the target CST node
+	private Attribution attribution = null;								// Lazily computed attributes helper for the target CS node
 	
 	protected PivotScopeView(@NonNull MetaModelManager metaModelManager, @NonNull Element target, @Nullable Element child, boolean isQualified) {
 		this.metaModelManager = metaModelManager;

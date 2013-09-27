@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcoreCSTPackage.java,v 1.11 2011/05/13 19:07:05 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs;
 
@@ -376,4 +375,4 @@ public interface OCLinEcoreCSPackage extends EPackage {
 
 	}
 
-} //OCLinEcoreCSTPackage
+} //OCLinEcoreCSPackage

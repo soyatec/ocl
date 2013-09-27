@@ -598,4 +598,4 @@ public class BaseCSFactoryImpl extends EFactoryImpl implements BaseCSFactory {
 		return BaseCSPackage.eINSTANCE;
 	}
 
-} //BaseCSTFactoryImpl
+} //BaseCSFactoryImpl

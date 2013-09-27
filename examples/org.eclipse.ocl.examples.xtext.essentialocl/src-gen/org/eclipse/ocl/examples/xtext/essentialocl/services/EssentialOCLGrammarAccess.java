@@ -22,7 +22,7 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedExpressionAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cOwnedExpressionExpCSParserRuleCall_0 = (RuleCall)cOwnedExpressionAssignment.eContents().get(0);
 		
-		////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
+		////generate essentialOCLCS "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
 		// Model returns ContextCS:
 		//
 		//	ownedExpression=ExpCS;

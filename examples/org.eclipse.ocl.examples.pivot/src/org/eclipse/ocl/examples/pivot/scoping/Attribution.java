@@ -47,7 +47,7 @@ public interface Attribution
 	 * The EnvironmentView contains the lookup matching criteria such as a specific name and
 	 * accumulates candidate results.
 	 * <p>
-	 * The input ScopeView identifies the CST node and the containment of the CST child from which
+	 * The input ScopeView identifies the CS node and the containment of the CS child from which
 	 * the lookup is made allowing derived implementations to present the alternative environments
 	 * specified as the <i>Inherited Attributes</i> in the OCL Specification.
 	 * <p>

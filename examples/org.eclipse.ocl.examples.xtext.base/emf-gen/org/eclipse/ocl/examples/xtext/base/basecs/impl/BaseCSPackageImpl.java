@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: BaseCSTPackageImpl.java,v 1.17 2011/05/20 15:27:24 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.base.basecs.impl;

@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: BaseCSTAdapterFactory.java,v 1.10 2011/05/12 08:46:40 ewillink Exp $
+ * $Id: BaseCSAdapterFactory.java,v 1.10 2011/05/12 08:46:40 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.base.basecs.util;
@@ -1168,4 +1168,4 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //BaseCSTAdapterFactory
+} //BaseCSAdapterFactory

@@ -1149,7 +1149,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		assert eGenericType.getEClassifier() == null;
 		EClassifier eClassifier = eGenericType.getERawType();
 		assert eClassifier == EcorePackage.Literals.EJAVA_OBJECT;
-/*			WildcardTypeRefCS csTypeRef = BaseCSTFactory.eINSTANCE.createWildcardTypeRefCS();
+/*			WildcardTypeRefCS csTypeRef = BaseCSFactory.eINSTANCE.createWildcardTypeRefCS();
 			setOriginalMapping(csTypeRef, eObject);
 //			csTypeRef.setExtends(doSwitchAll(eGenericType.getExtends()));
 //			csTypeRef.setSuper(doSwitchAll(eGenericType.getSuper()));

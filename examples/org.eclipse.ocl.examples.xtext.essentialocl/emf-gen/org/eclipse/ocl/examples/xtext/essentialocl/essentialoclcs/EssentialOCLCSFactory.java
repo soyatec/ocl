@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: EssentialOCLCSTFactory.java,v 1.6 2011/03/01 08:46:48 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs;
 
@@ -361,4 +360,4 @@ public interface EssentialOCLCSFactory
 	 */
 	LetVariableCS createLetVariableCS();
 
-} //EssentialOCLCSTFactory
+} //EssentialOCLCSFactory

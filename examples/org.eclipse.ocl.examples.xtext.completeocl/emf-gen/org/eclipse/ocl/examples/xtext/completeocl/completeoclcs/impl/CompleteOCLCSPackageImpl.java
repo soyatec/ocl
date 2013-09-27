@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: CompleteOCLCSTPackageImpl.java,v 1.10 2011/05/20 15:26:50 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl;
 
@@ -754,4 +753,4 @@ public class CompleteOCLCSPackageImpl
 		createResource(eNS_URI);
 	}
 
-} //CompleteOCLCSTPackageImpl
+} //CompleteOCLCSPackageImpl

@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcoreCSTFactory.java,v 1.7 2011/03/01 08:46:34 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs;
 
@@ -62,4 +61,4 @@ public interface OCLinEcoreCSFactory extends EFactory {
 	 */
 	OCLinEcoreCSPackage getOCLinEcoreCSPackage();
 
-} //OCLinEcoreCSTFactory
+} //OCLinEcoreCSFactory

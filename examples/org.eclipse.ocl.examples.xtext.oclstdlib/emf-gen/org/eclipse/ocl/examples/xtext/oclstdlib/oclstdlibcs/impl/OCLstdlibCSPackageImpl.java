@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibCSTPackageImpl.java,v 1.7 2011/03/01 08:46:57 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.impl;
@@ -166,7 +165,7 @@ public class OCLstdlibCSPackageImpl
 		isInited = true;
 
 		// Initialize simple dependencies
-		BaseCSPackage.eINSTANCE.eClass();
+		EssentialOCLCSPackage.eINSTANCE.eClass();
 		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -581,4 +580,4 @@ public class OCLstdlibCSPackageImpl
 		   });
 	}
 
-} //OCLstdlibCSTPackageImpl
+} //OCLstdlibCSPackageImpl

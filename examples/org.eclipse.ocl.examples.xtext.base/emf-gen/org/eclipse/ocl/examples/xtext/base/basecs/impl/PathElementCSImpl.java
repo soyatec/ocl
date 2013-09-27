@@ -369,7 +369,7 @@ public class PathElementCSImpl extends ElementCSImpl implements PathElementCS
 //			if (element != oldElement)
 //			{
 //				if (eNotificationRequired())
-//					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BaseCSTPackage.SIMPLE_NAMED_ELEMENT_REF_CS__ELEMENT, oldElement, element));
+//					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BaseCSPackage.SIMPLE_NAMED_ELEMENT_REF_CS__ELEMENT, oldElement, element));
 //			}
 		}
 		return element;

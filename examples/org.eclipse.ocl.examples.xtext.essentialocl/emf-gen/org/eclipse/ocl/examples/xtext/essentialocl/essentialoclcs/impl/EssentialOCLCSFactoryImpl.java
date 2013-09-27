@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: EssentialOCLCSTFactoryImpl.java,v 1.7 2011/03/01 08:46:48 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl;
 
@@ -601,4 +600,4 @@ public class EssentialOCLCSFactoryImpl
 		return EssentialOCLCSPackage.eINSTANCE;
 	}
 
-} //EssentialOCLCSTFactoryImpl
+} //EssentialOCLCSFactoryImpl

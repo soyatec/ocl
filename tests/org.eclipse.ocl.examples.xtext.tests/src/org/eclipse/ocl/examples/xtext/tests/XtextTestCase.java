@@ -380,7 +380,7 @@ public class XtextTestCase extends PivotTestCase
 //		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 //		Resource eResource = documentCS.eResource();
 		assertNoResourceErrors("Load failed", ecoreResource);
-//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSPackage.eCONTENT_TYPE);
 //		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
 //		xtextResource.getContents().add(documentCS);
 		return ecoreResource;

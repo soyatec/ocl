@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: BaseCSTFactory.java,v 1.10 2011/05/12 08:46:40 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.base.basecs;
@@ -342,4 +341,4 @@ public interface BaseCSFactory extends EFactory {
 	 */
 	BaseCSPackage getBaseCSPackage();
 
-} //BaseCSTFactory
+} //BaseCSFactory

@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibCSTFactoryImpl.java,v 1.4 2011/02/15 10:37:09 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.impl;
@@ -213,4 +212,4 @@ public class OCLstdlibCSFactoryImpl
 		return OCLstdlibCSPackage.eINSTANCE;
 	}
 
-} //OCLstdlibCSTFactoryImpl
+} //OCLstdlibCSFactoryImpl

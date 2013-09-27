@@ -154,7 +154,7 @@ public class EssentialOCLUtils	// FIXME Find some extensible instantiation echan
 			return getPivotingFeature((InfixExpCS) csParent);
 		}
 		else if (csParent instanceof NavigatingArgCS) {
-//			return EssentialOCLCSTPackage.Literals.NAVIGATING_EXP_CS__ARGS; //getParentChildFeature((NavigatingArgCS) csParent);
+//			return EssentialOCLCSPackage.Literals.NAVIGATING_EXP_CS__ARGS; //getParentChildFeature((NavigatingArgCS) csParent);
 			return getPivotingFeature((NavigatingArgCS) csParent);
 		}
 		else if (csParent instanceof InvocationExpCS) {
@@ -163,7 +163,7 @@ public class EssentialOCLUtils	// FIXME Find some extensible instantiation echan
 				return getPivotingFeature(csNavigatingExp.getParent());
 			}
 			else {
-				return EssentialOCLCSTPackage.Literals.NAVIGATING_EXP_CS__ARGUMENT;
+				return EssentialOCLCSPackage.Literals.NAVIGATING_EXP_CS__ARGUMENT;
 			}
 		}
 		else if (csParent instanceof NestedExpCS) {

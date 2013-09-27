@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibCSTValidator.java,v 1.2 2011/01/24 22:28:26 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util;
 
@@ -55,7 +54,7 @@ public class OCLstdlibCSValidator
 	 * @see org.eclipse.emf.common.util.Diagnostic#getCode()
 	 * @generated
 	 */
-	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST";
+	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs";
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -190,4 +189,4 @@ public class OCLstdlibCSValidator
 		return super.getResourceLocator();
 	}
 
-} //OCLstdlibCSTValidator
+} //OCLstdlibCSValidator

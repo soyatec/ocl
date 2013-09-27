@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcoreCSTPackageImpl.java,v 1.8 2011/05/13 19:07:05 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl;
 
@@ -95,7 +94,7 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 		isInited = true;
 
 		// Initialize simple dependencies
-		BaseCSPackage.eINSTANCE.eClass();
+		EssentialOCLCSPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theOCLinEcoreCSPackage.createPackageContents();
@@ -233,4 +232,4 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 		createResource(eNS_URI);
 	}
 
-} //OCLinEcoreCSTPackageImpl
+} //OCLinEcoreCSPackageImpl

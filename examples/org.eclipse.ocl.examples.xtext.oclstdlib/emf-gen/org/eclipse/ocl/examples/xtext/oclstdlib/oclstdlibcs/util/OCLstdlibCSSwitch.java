@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibCSTSwitch.java,v 1.6 2011/03/01 08:46:57 ewillink Exp $
  */
 
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibcs.util;
@@ -751,4 +750,4 @@ public class OCLstdlibCSSwitch<T>
 		return null;
 	}
 
-} //OCLstdlibCSTSwitch
+} //OCLstdlibCSSwitch

@@ -28,7 +28,7 @@ var ResourceSet resourceSet
 var projectName
 
 /**
- * The name of the generated model (the package name in the Ecore model); e.g. "essentialOCLCST"
+ * The name of the generated model (the package name in the Ecore model); e.g. "essentialoclcs"
  */
 var modelName
 

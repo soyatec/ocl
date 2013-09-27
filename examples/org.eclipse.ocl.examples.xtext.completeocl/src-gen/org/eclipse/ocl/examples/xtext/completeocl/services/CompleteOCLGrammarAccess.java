@@ -1426,7 +1426,7 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 		return getNavigatingArgExpCSAccess().getRule();
 	}
 
-	////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
+	////generate essentialOCLCS "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
 	// Model returns ContextCS:
 	//
 	//	ownedExpression=ExpCS;

@@ -64,7 +64,7 @@ var modelPackageName = "${projectName}.${modelName}"
 var superModelPackageName = "${superProjectName}.${superModelName}"
 
 /**
- * (Optional) The project-relative genmodel file; default: "model/${projectPrefix}CST.genmodel".
+ * (Optional) The project-relative genmodel file; default: "model/${projectPrefix}.genmodel".
  */
 var genModelFile = "model/${projectPrefix}.genmodel"
 

@@ -78,7 +78,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 			return typeRef;
 //		}
 //		int lower = object.getLower().intValue();
-//		CollectionTypeCS collectionTypeCS = EssentialOCLCSTFactory.eINSTANCE.createCollectionTypeCS();
+//		CollectionTypeCS collectionTypeCS = EssentialOCLCSFactory.eINSTANCE.createCollectionTypeCS();
 //		collectionTypeCS.setOwnedType(typeRef);
 //		collectionTypeCS.setName(ElementUtil.getCollectionName(object.isOrdered(), object.isUnique()));
 //		return collectionTypeCS;
@@ -217,7 +217,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitParameter(@NonNull Parameter object) {
-//		VariableCS csElement = context.refreshNamedElement(VariableCS.class, EssentialOCLCSTPackage.Literals.VARIABLE_CS, object);
+//		VariableCS csElement = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, object);
 		ParameterCS csElement = context.refreshNamedElement(ParameterCS.class, BaseCSPackage.Literals.PARAMETER_CS, object);
 		csElement.setOwnedType(convertTypeRef(object));
 		return csElement;

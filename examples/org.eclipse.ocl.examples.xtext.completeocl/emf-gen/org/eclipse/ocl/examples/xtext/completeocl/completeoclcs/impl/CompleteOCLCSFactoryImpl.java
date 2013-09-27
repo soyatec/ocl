@@ -12,7 +12,6 @@
  *
  * </copyright>
  *
- * $Id: CompleteOCLCSTFactoryImpl.java,v 1.7 2011/05/20 15:26:50 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.impl;
 
@@ -209,4 +208,4 @@ public class CompleteOCLCSFactoryImpl
 		return CompleteOCLCSPackage.eINSTANCE;
 	}
 
-} //CompleteOCLCSTFactoryImpl
+} //CompleteOCLCSFactoryImpl
