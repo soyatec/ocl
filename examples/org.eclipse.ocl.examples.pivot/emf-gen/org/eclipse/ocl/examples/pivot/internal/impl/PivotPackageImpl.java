@@ -6049,7 +6049,7 @@ public class PivotPackageImpl
 		initEReference(getConstraint_ConstrainedElement(), this.getElement(), null, "constrainedElement", null, 0, -1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getConstraint_Context(), this.getNamespace(), null, "context", null, 0, 1, Constraint.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getConstraint_IsCallable(), this.getBoolean(), "isCallable", "false", 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEReference(getConstraint_Specification(), this.getOpaqueExpression(), null, "specification", null, 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getConstraint_Specification(), this.getOpaqueExpression(), null, "specification", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		op = initEOperation(getConstraint__ValidateUniqueName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateUniqueName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
@@ -7034,7 +7034,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 	}
 
 	/**
@@ -7051,25 +7051,25 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });		
+		   });	
 		addAnnotation
 		  (dynamicTypeEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });		
+		   });	
 		addAnnotation
 		  (featureEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });		
+		   });	
 		addAnnotation
 		  (operationEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (operationEClass, 
 		   1,
@@ -7083,7 +7083,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (operationTemplateParameterEClass, 
 		   1,
@@ -7097,7 +7097,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (typeEClass, 
 		   1,
@@ -7111,7 +7111,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });	
+		   });
 		addAnnotation
 		  (typeTemplateParameterEClass, 
 		   1,
@@ -7140,7 +7140,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateParameter_OwnedDefault(), 
 		   source, 
@@ -7150,7 +7150,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateParameter/default") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 
@@ -7160,7 +7160,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateParameter/parameteredElement") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateParameterSubstitution_OwnedActual(), 
 		   source, 
@@ -7170,7 +7170,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateParameterSubstitution/actual") //$NON-NLS-1$
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateSignature_OwnedParameter(), 
 		   source, 
@@ -7180,6 +7180,6 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateSignature/parameter") //$NON-NLS-1$
-		   });	
+		   });
 	}
 } //PivotPackageImpl

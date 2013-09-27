@@ -2778,6 +2778,7 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Constraint_specification);
 			property.setIsComposite(true);
+			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_OpaqueExpression_Constraint);
 			ownedProperties = _ConstructorExp.getOwnedAttribute();
