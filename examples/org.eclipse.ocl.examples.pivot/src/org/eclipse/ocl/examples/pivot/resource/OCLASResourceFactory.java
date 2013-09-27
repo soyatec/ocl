@@ -50,7 +50,7 @@ public class OCLASResourceFactory extends AbstractASResourceFactory
 
 	@Override
 	public Resource createResource(URI uri) {
-		if (URIConverter.INSTANCE.exists(uri, null)) {
+		if ((uri.isFile() || uri.isPlatform()) && URIConverter.INSTANCE.exists(uri, null)) {
 			return super.createResource(uri);
 		}
 		URI nonASuri = uri.trimFileExtension();
