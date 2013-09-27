@@ -41,12 +41,26 @@ public class NestedPackageServer extends PackageServer
 	}
 
 	@Override
+	protected void assertSamePackage(@Nullable DomainPackage domainPackage) {
+		assert domainPackage != null;
+		DomainPackage parentPackage = domainPackage.getNestingPackage();
+		assert parentPackage != null;
+		parentPackageServer.assertSamePackage(parentPackage);
+		super.assertSamePackage(domainPackage);
+	}
+
+	@Override
 	public void dispose() {
 		super.dispose();
 		parentPackageServer.disposedNestedPackageServer(this);
 	}
 
 	public @NonNull DomainPackage getNestingPackage() {
+		return parentPackageServer;
+	}
+
+	@Override
+	public @NonNull PackageServer getParentPackageServer() {
 		return parentPackageServer;
 	}
 }

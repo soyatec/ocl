@@ -32,6 +32,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -106,6 +107,7 @@ public class PackageManager implements PackageServerParent
 		}
 		if (packageServer == null) {
 			packageServer = parentPackageServer.getMemberPackageServer(pivotPackage);
+			packageServer.assertSamePackage(pivotPackage);
 		}
 		packageServer.addTrackedPackage(pivotPackage);
 		for (DomainPackage nestedPackage : pivotPackage.getNestedPackage()) {
@@ -122,16 +124,18 @@ public class PackageManager implements PackageServerParent
 	public void addPackageNsURISynonym(String newUri, String oldURI) {
 		PackageServer packageServer = uri2package.get(oldURI);
 		if (packageServer != null) {
-			uri2package.put(newUri, packageServer);
+			@SuppressWarnings("unused") PackageServer oldPackageServer = uri2package.put(newUri, packageServer);
 		}
 	}
 
 	void addPackageServer(@NonNull PackageServer packageServer) {
 		String nsURI = packageServer.getNsURI();
-		uri2package.put(nsURI, packageServer);
+		PackageServer oldPackageServer = uri2package.put(nsURI, packageServer);
+		assert oldPackageServer == null;
 	}
 
 	void addPackageTracker(@NonNull DomainPackage pivotPackage, @NonNull PackageTracker packageTracker) {
+		packageTracker.getPackageServer().assertSamePackage(pivotPackage);
 		PackageTracker oldTracker = package2tracker.put(pivotPackage, packageTracker);
 		assert oldTracker == null;
 	}
@@ -170,6 +174,34 @@ public class PackageManager implements PackageServerParent
 		else {
 			getPackageTracker(pivotPackage);
 		}
+	}
+
+	protected @NonNull RootPackageServer createRootPackageServer(@NonNull DomainPackage pivotPackage) {
+		String name = pivotPackage.getName();
+		if (name == null) {
+			throw new IllegalStateException("Unnamed package");
+		}
+		String nsPrefix = pivotPackage.getNsPrefix();
+		String nsURI = pivotPackage.getNsURI();
+		PackageId packageId = pivotPackage.getPackageId();
+		RootPackageServer rootPackageServer;
+		if (Orphanage.isTypeOrphanage(pivotPackage)) {
+			rootPackageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI, packageId);
+		}
+		else {
+			rootPackageServer = new RootPackageServer(this, name, nsPrefix, nsURI, packageId);
+		}
+		if (!packageServers.containsKey(name)) {
+			PackageServer oldPackageServer = packageServers.put(name, rootPackageServer);		// New name
+			assert oldPackageServer == null;
+		}
+		else {
+			packageServers.put(name, null);														// Ambiguous name
+		}
+		if (nsURI != null) {
+			addPackageServer(rootPackageServer);
+		}
+		return rootPackageServer;
 	}
 
 	public synchronized void dispose() {
@@ -265,42 +297,51 @@ public class PackageManager implements PackageServerParent
 	}
 
 	public @NonNull RootPackageServer getMemberPackageServer(@NonNull DomainPackage pivotPackage) {
+		//
+		//	Try to find package by nsURI
+		//
+		String nsURI = pivotPackage.getNsURI();
+		if (nsURI != null) {
+			PackageServer packageServer = uri2package.get(nsURI);
+			if (packageServer != null) {
+				return (RootPackageServer) packageServer;
+			}
+		}
+		//
+		//	Else generate an error for a name-less Package, fatally if also nsURI-less.
+		//
 		String name = pivotPackage.getName();
 		if (name == null) {
 			String message = null;
 			if (pivotPackage instanceof EObject) {
 				for (EObject eObject = (EObject) pivotPackage; eObject != null; eObject = eObject.eContainer()) {
 					if (eObject instanceof Root) {
-						message = "Unnamed package for '" + pivotPackage.getNsURI() + "' in '" + ((Root)eObject).getExternalURI() + "'";
+						message = "Unnamed package for '" + nsURI + "' in '" + ((Root)eObject).getExternalURI() + "'";
 						break;
 					}
 				}
 			}
 			if (message == null) {
-				message = "Unnamed package for '" + pivotPackage.getNsURI() + "'";
+				message = "Unnamed package for '" + nsURI + "'";
 			}
 			logger.error(message);
-			name = pivotPackage.getNsURI();
+			name = nsURI;
 			if (name == null) {
 				throw new IllegalStateException(message);
 			}
 		}
-		RootPackageServer packageServer = packageServers.get(name);
-		if (packageServer == null) {
-			String nsPrefix = pivotPackage.getNsPrefix();
-			String nsURI = pivotPackage.getNsURI();
-			if (Orphanage.isTypeOrphanage(pivotPackage)) {
-				packageServer = new OrphanPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
-			}
-			else {
-				packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
-			}
-			packageServers.put(name, packageServer);
-			if (nsURI != null) {
-				addPackageServer(packageServer);
+		//
+		//	Try to find package by name, provided there is no nsURI conflict
+		//
+		RootPackageServer rootPackageServer = packageServers.get(name);
+		if (rootPackageServer != null) {
+			String nsURI2 = rootPackageServer.getNsURI();
+			if ((nsURI == null) || (nsURI2 == null) || nsURI.equals(nsURI2)) {
+				return rootPackageServer;
 			}
 		}
-		return packageServer;
+		rootPackageServer = createRootPackageServer(pivotPackage);
+		return rootPackageServer;
 	}
 
 	public @NonNull Iterable<RootPackageServer> getMemberPackages() {
@@ -323,33 +364,45 @@ public class PackageManager implements PackageServerParent
 	}
 
 	public @NonNull PackageServer getPackageServer(@NonNull DomainPackage pivotPackage) {
-		if (pivotPackage instanceof PackageServer) {
-			return (PackageServer)pivotPackage;
-		}
-		String nsURI = pivotPackage.getNsURI();
 		PackageServer packageServer = null;
-		if (nsURI != null) {
-			packageServer = uri2package.get(nsURI);
+		if (pivotPackage instanceof PackageServer) {
+			((PackageServer)pivotPackage).assertSamePackage(pivotPackage);
+			packageServer = (PackageServer)pivotPackage;
 		}
-		if (packageServer == null) {
-			PackageServerParent packageServerParent = getParentPackageServer(pivotPackage);
-			packageServer = packageServerParent.getMemberPackageServer(pivotPackage);
-			packageServer.addTrackedPackage(pivotPackage);
+		else {
+			String nsURI = pivotPackage.getNsURI();
+			if (nsURI != null) {
+				packageServer = uri2package.get(nsURI);
+			}
+			if (packageServer == null) {
+				PackageServerParent packageServerParent;
+				DomainPackage pivotPackageParent = pivotPackage.getNestingPackage();
+				if (pivotPackageParent == null) {
+					packageServerParent = this;
+				}
+				else {
+					PackageTracker parentTracker = getPackageTracker(pivotPackageParent);
+					packageServerParent = parentTracker.getPackageServer();
+					((PackageServer)packageServerParent).assertSamePackage(pivotPackageParent);
+				}
+				packageServer = packageServerParent.getMemberPackageServer(pivotPackage);
+				packageServer.addTrackedPackage(pivotPackage);
+				packageServer.assertSamePackage(pivotPackage);
+			}
 		}
+		packageServer.assertSamePackage(pivotPackage);
 		return packageServer;
 	}
 
 	public @NonNull PackageTracker getPackageTracker(@NonNull DomainPackage pivotPackage) {	// FIXME Review wrt getMemberPackageServer()
-		String name = pivotPackage.getName();
-		if (name == null) {
-			throw new IllegalStateException("Unnamed package");
-		}
 		PackageTracker packageTracker = package2tracker.get(pivotPackage);
 		if (packageTracker == null) {
-			String nsPrefix = pivotPackage.getNsPrefix();
-			String nsURI = pivotPackage.getNsURI();
-			PackageServer packageServer = new RootPackageServer(this, name, nsPrefix, nsURI, pivotPackage.getPackageId());
+			PackageServer packageServer = createRootPackageServer(pivotPackage);
+			packageServer.assertSamePackage(pivotPackage);
 			packageTracker = packageServer.getPackageTracker(pivotPackage);
+		}
+		else {
+			packageTracker.getPackageServer().assertSamePackage(pivotPackage);
 		}
 		return packageTracker;
 	}
@@ -395,15 +448,6 @@ public class PackageManager implements PackageServerParent
 			}
 		}
 	} */
-
-	@NonNull PackageServerParent getParentPackageServer(@NonNull DomainPackage pivotPackage) {
-		DomainPackage pivotPackageParent = pivotPackage.getNestingPackage();
-		if (pivotPackageParent == null) {
-			return this;
-		}
-		PackageTracker parentTracker = getPackageTracker(pivotPackageParent);
-		return parentTracker.getPackageServer();
-	}
 
 	public @NonNull PrimitiveTypeServer getPrimitiveTypeServer(@NonNull PrimitiveType primitiveType) {
 		String name = primitiveType.getName();

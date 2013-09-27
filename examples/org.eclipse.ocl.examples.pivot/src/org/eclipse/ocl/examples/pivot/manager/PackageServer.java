@@ -91,6 +91,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 	}
 	
 	public @NonNull PackageTracker addTrackedPackage(@NonNull DomainPackage pivotPackage) {
+		assertSamePackage(pivotPackage);
 		PackageTracker packageTracker = packageManager.findPackageTracker(pivotPackage);
 		if (packageTracker == null) {
 			packageTracker = new PackageTracker(this, pivotPackage);
@@ -110,6 +111,13 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 	public void addedMemberPackage(@NonNull DomainPackage pivotPackage) {
 		PackageServer packageServer = getMemberPackageServer(pivotPackage);
 		packageServer.addTrackedPackage(pivotPackage);
+	}
+
+	protected void assertSamePackage(@Nullable DomainPackage domainPackage) {
+		assert domainPackage != null;
+		String typeBasedNsURI = domainPackage.getNsURI();
+		String serverBasedNsURI = getNsURI();
+		assert (typeBasedNsURI == serverBasedNsURI) || typeBasedNsURI.equals(serverBasedNsURI);
 	}
 
 	@Override
@@ -298,14 +306,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		return addTrackedPackage(pivotPackage);
 	}
 
-	@NonNull PackageServerParent getParentPackageServer(@NonNull DomainPackage pivotPackage) {
-		DomainPackage pivotPackageParent = pivotPackage.getNestingPackage();
-		if (pivotPackageParent == null) {
-			return this;
-		}
-		PackageTracker parentTracker = getPackageTracker(pivotPackageParent);
-		return parentTracker.getPackageServer();
-	}
+	abstract @Nullable PackageServerParent getParentPackageServer();
 
 	@SuppressWarnings("null")
 	public @NonNull Iterable<DomainPackage> getPartialPackages() {
@@ -426,7 +427,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 			return String.valueOf(trackers.get(0).getPackage());
 		}
 		else {
-			return "<<null>>";
+			return getNsURI();
 		}
 	}
 }

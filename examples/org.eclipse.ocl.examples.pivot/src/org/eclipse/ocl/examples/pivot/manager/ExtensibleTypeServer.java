@@ -23,6 +23,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Type;
 
 import com.google.common.collect.Iterables;
@@ -41,6 +42,9 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 	
 	protected ExtensibleTypeServer(@NonNull PackageServer packageServer, @NonNull DomainType domainType) {
 		super(packageServer, domainType);
+		if (!(domainType instanceof PrimitiveType)) {		// FIXME why are primitives in mismatched packages? use testLoad_Internationalized_profile_uml 
+			packageServer.assertSamePackage(domainType.getPackage());
+		}
 	}
 
 	@Override

@@ -32,12 +32,32 @@ public class RootPackageServer extends PackageServer
 	}
 
 	@Override
+	protected void assertSamePackage(@Nullable DomainPackage domainPackage) {
+		assert domainPackage != null;
+		DomainPackage parentPackage = domainPackage.getNestingPackage();
+		assert parentPackage == null;
+		String typeBasedNsURI = domainPackage.getNsURI();
+		String serverBasedNsURI = getNsURI();
+		if (typeBasedNsURI == null) {
+//			assert serverBasedNsURI == null;
+		}
+		else {
+			assert (serverBasedNsURI == null) || (packageManager.getPackageByURI(typeBasedNsURI) == packageManager.getPackageByURI(serverBasedNsURI));
+		}
+	}
+
+	@Override
 	public void dispose() {
 		super.dispose();
 		packageManager.disposedRootPackageServer(this);
 	}
 
 	public @Nullable DomainPackage getNestingPackage() {
+		return null;
+	}
+
+	@Override
+	public @Nullable PackageServer getParentPackageServer() {
 		return null;
 	}
 }
