@@ -55,6 +55,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.OperationContext
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PathNameDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSFactory;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
@@ -130,6 +131,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				@SuppressWarnings("null")@NonNull ArrayList<String> newArrayList = Lists.newArrayList("body", "context", "def", "endpackage", "inv", "package", "post", "inv");
 				prettyPrintOptions.addReservedNames(newArrayList);	// FIXME use grammar
 				prettyPrintOptions.setMetaModelManager(metaModelManager);
+				prettyPrintOptions.setLinelength(80);
 				Resource resource = object.eResource();
 				AliasAnalysis adapter = resource != null ? AliasAnalysis.getAdapter(resource) : null;
 				if (adapter != null) {
@@ -145,6 +147,11 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				}	
 				String expr = PrettyPrinter.print(specification, prettyPrintOptions);		
 				csSpec.setExprString("\t" + expr.trim().replaceAll("\\r", "").replaceAll("\\n", "\n\t\t"));
+			}
+			else {
+				ExpSpecificationCS csSpec = EssentialOCLCSFactory.eINSTANCE.createExpSpecificationCS();
+				csElement.setSpecification(csSpec);
+				csSpec.setExprString("\tnull");
 			}
 		}
 		return csElement;
