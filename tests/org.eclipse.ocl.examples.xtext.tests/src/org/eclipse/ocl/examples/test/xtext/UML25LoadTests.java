@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.uml25.XMI252UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 
@@ -122,42 +123,42 @@ public class UML25LoadTests extends LoadTests
 	@Override
 	protected ResourceSet createResourceSet() {
 		ResourceSet resourceSet = super.createResourceSet();
-		XMI252UMLResourceFactoryImpl.install(resourceSet, URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/", true));
+		XMI252UMLResourceFactoryImpl.install(resourceSet, URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/", true));
 		return resourceSet;
 	}
 
 	public void testLoad_UML_2_5_Final_PrimitiveTypes() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/PrimitiveTypes.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/PrimitiveTypes.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Final_UML() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/UML.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/UML.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Final_DC() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/DC.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/DC.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Final_DI() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/DI.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/DI.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Final_DG() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/DG.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/DG.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Final_UMLDI() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/UMLDI.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/UMLDI.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 	
 	public void testLoad_UML_2_5_Final_StandardProfile() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("/UML-2.5/XMI-2.5-Final-Edited/StandardProfile.xmi", true);
+		URI uml_2_5 = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/StandardProfile.xmi", true);
 		doLoadUML(uml_2_5, true, true);
 	}
 }

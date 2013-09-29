@@ -25,7 +25,8 @@ Require-Bundle: org.junit;visibility:=reexport,
  org.eclipse.ocl.examples.xtext.console,
  org.eclipse.ocl.examples.xtext.oclstdlib.ui,
  UML-2.5;resolution:=optional,
- org.eclipse.jface.text
+ org.eclipse.jface.text,
+ org.eclipse.ocl.examples.uml25
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: %providerName

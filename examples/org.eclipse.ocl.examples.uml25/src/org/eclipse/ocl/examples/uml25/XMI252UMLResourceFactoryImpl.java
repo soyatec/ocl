@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.test.xtext;
+package org.eclipse.ocl.examples.uml25;
 
 import java.util.List;
 import java.util.Map;
@@ -27,10 +27,7 @@ import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.XMI2UMLResourceFactoryImpl;
-import org.eclipse.uml2.uml.resource.CMOF2UMLResourceHandler;
-import org.eclipse.uml2.uml.resource.XMI2UMLExtendedMetaData;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 
 /**
@@ -45,7 +42,7 @@ import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 public class XMI252UMLResourceFactoryImpl extends XMI2UMLResourceFactoryImpl implements XMI2UMLResource.Factory
 {
 	private static final String UML_2_5_CONTENT_TYPE_IDENTIFIER = "org.omg.uml_2_5"; //$NON-NLS-1$
-	private static final String UML_METAMODEL_2_5_NS_URI = "http://www.omg.org/spec/UML/20131001";
+	public static final String UML_METAMODEL_2_5_NS_URI = "http://www.omg.org/spec/UML/20131001";
 
 	private static final ContentHandler OMG_2_5_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
 		UML_2_5_CONTENT_TYPE_IDENTIFIER, new String[]{XMI2UMLResource.FILE_EXTENSION},
@@ -64,32 +61,13 @@ public class XMI252UMLResourceFactoryImpl extends XMI2UMLResourceFactoryImpl imp
 		uriMap.put(URI.createURI("http://www.omg.org/spec/UML/20131001/"), uml25uri);
 	}
 	
-	protected static class XMI252UMLExtendedMetaData extends XMI2UMLExtendedMetaData
-	{
-		public XMI252UMLExtendedMetaData(EPackage.Registry registry) {
-			super(registry);
-		}
-
-		@Override
-		public EPackage getPackage(String namespace) {
-			if (namespace != null) {
-				if (UML_METAMODEL_2_5_NS_URI.equals(namespace)) {
-					return UMLPackage.eINSTANCE;
-				}
-				else if ("http://www.omg.org/spec/MOF/20131001".equals(namespace)) {
-					return demandPackage(namespace);
-				}
-				else if ("http://www.omg.org/spec/XMI/20131001".equals(namespace)) {
-					return demandPackage(namespace);
-				}
-			}
-			return super.getPackage(namespace);
-		}
+	public XMI252UMLResourceFactoryImpl() {
+		
 	}
 
 	@Override
 	public Resource createResource(URI uri) {
-		XMI2UMLResource resource = (XMI2UMLResource) super.createResource(uri);
+		XMI2UMLResource resource = (XMI2UMLResource) createResourceGen(uri);
 
 		ExtendedMetaData extendedMetaData = new XMI252UMLExtendedMetaData(EPackage.Registry.INSTANCE);
 
@@ -101,7 +79,7 @@ public class XMI252UMLResourceFactoryImpl extends XMI2UMLResourceFactoryImpl imp
 		Map<Object, Object> defaultLoadOptions = resource.getDefaultLoadOptions();
 
 		defaultLoadOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
-		defaultLoadOptions.put(XMLResource.OPTION_RESOURCE_HANDLER, new CMOF2UMLResourceHandler(null));
+		defaultLoadOptions.put(XMLResource.OPTION_RESOURCE_HANDLER, new CMOF252UMLResourceHandler(null));
 
 		return resource;
 	}
