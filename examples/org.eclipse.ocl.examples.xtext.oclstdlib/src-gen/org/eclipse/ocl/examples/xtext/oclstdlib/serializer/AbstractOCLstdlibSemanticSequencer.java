@@ -2,7 +2,6 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.serializer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
