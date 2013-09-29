@@ -325,8 +325,8 @@ public class PrettyPrinter
 		pendingText = new StringBuilder();
 		fragment = new Fragment(null, 0, "", "", "");
 		Resource eResource = element.eResource();
-		ASResourceFactory asResourceFactory = ((ASResource) eResource).getASResourceFactory();
-		this.visitor = asResourceFactory.createPrettyPrintVisitor(this);
+		ASResourceFactory asResourceFactory = eResource instanceof ASResource ? ((ASResource) eResource).getASResourceFactory() : null;
+		this.visitor = asResourceFactory != null ? asResourceFactory.createPrettyPrintVisitor(this) : new PrettyPrintVisitor(this);
 	}
 
 	public void append(Number number) {
@@ -404,6 +404,14 @@ public class PrettyPrinter
 	}
 
 	public void appendParent(EObject scope, Element element, String parentSeparator) { // FIXME Use appendQualifiedName instead
+        if (element instanceof org.eclipse.ocl.examples.pivot.Package) {
+        	String alias = options.getAlias((org.eclipse.ocl.examples.pivot.Package)element);
+        	if (alias != null) {
+				append(alias);
+				append(parentSeparator);
+				return;
+        	}
+        }
     	Mode savedMode = pushMode(Mode.TYPE);
     	try {
 			for (EObject eObject = scope; eObject != null; eObject = eObject.eContainer()) {
@@ -422,6 +430,12 @@ public class PrettyPrinter
 				EObject unspecializedElement = element instanceof TemplateableElement ? ((TemplateableElement)element).getUnspecializedElement() : element;
 				EObject parent = PivotUtil.getNamespace((unspecializedElement != null ? unspecializedElement : element).eContainer());
 	            if (parent instanceof org.eclipse.ocl.examples.pivot.Package) {
+	            	String alias = options.getAlias((org.eclipse.ocl.examples.pivot.Package)parent);
+	            	if (alias != null) {
+						append(alias);
+						append(parentSeparator);
+						return;
+	            	}
 	                String name = ((org.eclipse.ocl.examples.pivot.Package)parent).getName();
 	                if (PivotConstants.ORPHANAGE_NAME.equals(name)) {
 	                    return;
@@ -493,50 +507,59 @@ public class PrettyPrinter
 	            i = PathElement.getCommonLength(parentPath, scopePath);
 	        }
 	        if ((i == 0) && (i < iMax)) {
-	            PathElement rootPathElement = parentPath.get(0);
-				String name = rootPathElement.getName();
-	        	Element rootElement = rootPathElement.getElement();
-				if (rootElement != null) {
-					String alias = options.getAlias((Namespace)rootElement);
-		        	if (alias != null) {
-		        		append(getName(alias, options.getReservedNames()));
-		        		append("::");               
-		                i++;
-		            }
-		            else if (PivotConstants.ORPHANAGE_NAME.equals(name)) {
-		                i++;
-		            }
-		            else if (PivotPackage.eNAME.equals(name)) {
-		                i++;
-		            }
-		            else if (PivotConstants.OCL_NAME.equals(name)) {
-		                i++;
-		            }
-		            else {
-		            	URI uri;
-		            	if (rootElement.getETarget() != null) {
-			            	EObject eTarget = rootElement.getETarget();
-			            	uri = EcoreUtil.getURI(eTarget);
+	        	for (int j = iMax - 1; j >= 0; j--) {
+		            PathElement rootPathElement = parentPath.get(j);
+		        	Element rootElement = rootPathElement.getElement();
+					if (rootElement instanceof Namespace) {
+						String alias = options.getAlias((Namespace)rootElement);
+			        	if (alias != null) {
+			        		append(getName(alias, options.getReservedNames()));
+			        		append("::");               
+			                i = j + 1;
+			                break;
+			            }
+					}
+	        	}
+	        	if (i == 0) {
+		            PathElement rootPathElement = parentPath.get(0);
+					String name = rootPathElement.getName();
+		        	Element rootElement = rootPathElement.getElement();
+					if (rootElement != null) {
+						if (PivotConstants.ORPHANAGE_NAME.equals(name)) {
+			                i++;
+			            }
+			            else if (PivotPackage.eNAME.equals(name)) {
+			                i++;
+			            }
+			            else if (PivotConstants.OCL_NAME.equals(name)) {
+			                i++;
 			            }
 			            else {
-			            	uri = rootElement.eResource().getURI();
-			            	if (uri != null) {
-			                	if (PivotUtil.isASURI(uri)) {
-			                		uri = PivotUtil.getNonASURI(uri);
-			                	}
-			            	}
+			            	URI uri;
+			            	if (rootElement.getETarget() != null) {
+				            	EObject eTarget = rootElement.getETarget();
+				            	uri = EcoreUtil.getURI(eTarget);
+				            }
+				            else {
+				            	uri = rootElement.eResource().getURI();
+				            	if (uri != null) {
+				                	if (PivotUtil.isASURI(uri)) {
+				                		uri = PivotUtil.getNonASURI(uri);
+				                	}
+				            	}
+				            }
+		                	if (uri != null) {
+		                		URI baseURI = options.getBaseURI();
+		                    	if (baseURI != null) {
+		                    		uri = uri.deresolve(baseURI);
+		                    	}
+		                		append("_'" + uri.toString() + "'");
+		                	}
+		            		append("::");               
+		                    i++;
 			            }
-	                	if (uri != null) {
-	                		URI baseURI = options.getBaseURI();
-	                    	if (baseURI != null) {
-	                    		uri = uri.deresolve(baseURI);
-	                    	}
-	                		append("_'" + uri.toString() + "'");
-	                	}
-	            		append("::");               
-	                    i++;
-		            }
-				}
+					}
+		        }
 	        }
 	        while (i < iMax) {
 	            appendElement(parentPath.get(i++).getElement());
@@ -550,7 +573,7 @@ public class PrettyPrinter
     }
 
     public void appendTemplateBindings(TemplateableElement typeRef) {
-    	Mode savedMode = pushMode(Mode.TYPE);
+    	Mode savedMode = pushMode(Mode.NAME);
 		try {
 			List<TemplateBinding> templateBindings = typeRef.getTemplateBinding();
 			if (!templateBindings.isEmpty()) {

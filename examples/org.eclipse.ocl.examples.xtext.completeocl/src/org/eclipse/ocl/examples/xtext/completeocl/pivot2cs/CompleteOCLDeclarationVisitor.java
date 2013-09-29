@@ -95,11 +95,12 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 	}
 
 	protected void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package aPackage) {
+		context.importNamespace(aPackage, null);
 		org.eclipse.ocl.examples.pivot.Package nestingPackage = null;
 		while ((nestingPackage = aPackage.getNestingPackage()) != null) {
 			aPackage = nestingPackage;
+			context.importNamespace(aPackage, null);
 		}
-		context.importNamespace(aPackage, null);
 	}
 
 	protected void refreshPathNamedElement(@NonNull PathNameDeclCS csDecl, @NonNull NamedElement namedElement, Namespace scope) {
