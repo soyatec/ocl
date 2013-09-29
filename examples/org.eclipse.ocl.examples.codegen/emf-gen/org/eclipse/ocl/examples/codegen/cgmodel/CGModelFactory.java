@@ -153,6 +153,15 @@ public interface CGModelFactory extends EFactory {
 	@NonNull CGEcoreOperationCallExp createCGEcoreOperationCallExp();
 
 	/**
+	 * Returns a new object of class '<em>CG Ecore Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Ecore Opposite Property Call Exp</em>'.
+	 * @generated
+	 */
+	CGEcoreOppositePropertyCallExp createCGEcoreOppositePropertyCallExp();
+
+	/**
 	 * Returns a new object of class '<em>CG Ecore Property Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -223,6 +232,15 @@ public interface CGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGExecutorOperationCallExp createCGExecutorOperationCallExp();
+
+	/**
+	 * Returns a new object of class '<em>CG Executor Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Executor Opposite Property Call Exp</em>'.
+	 * @generated
+	 */
+	CGExecutorOppositePropertyCallExp createCGExecutorOppositePropertyCallExp();
 
 	/**
 	 * Returns a new object of class '<em>CG Executor Property Call Exp</em>'.

@@ -178,9 +178,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation" resolveProxies="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGEcoreOppositePropertyCallExp" eSuperTypes="#//CGOppositePropertyCallExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="CGEcoreOppositePropertyCallExp navigates an inverse property using Ecore support."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
+        resolveProxies="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcorePropertyCallExp" eSuperTypes="#//CGPropertyCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="CGEcorePropertyCallExp navigates aproperty using Ecore support."/>
+      <details key="documentation" value="CGEcorePropertyCallExp navigates a property using Ecore support."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
@@ -225,6 +233,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="CGExecutorOperationCallExp" eSuperTypes="#//CGOperationCallExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="executorOperation" lowerBound="1"
         eType="#//CGExecutorOperation" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGExecutorOppositePropertyCallExp" eSuperTypes="#//CGOppositePropertyCallExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executorProperty" lowerBound="1"
+        eType="#//CGExecutorProperty" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGExecutorProperty" abstract="true"
       eSuperTypes="#//CGValuedElement">
@@ -376,6 +388,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ast" lowerBound="1" eType="#//Element"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGNavigationCallExp" abstract="true"
+      eSuperTypes="#//CGCallExp">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredProperty" lowerBound="1"
+        eType="#//Property"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGNull" eSuperTypes="#//CGConstant">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="CGNull represents the null value."/>
@@ -427,6 +444,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredOperation" lowerBound="1"
         eType="#//Operation"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGOppositePropertyCallExp" abstract="true"
+      eSuperTypes="#//CGNavigationCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGPackage" eSuperTypes="#//CGNamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" ordered="false"
         upperBound="-1" eType="#//CGClass" containment="true" resolveProxies="false"
@@ -451,10 +470,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGPropertyCallExp" abstract="true" eSuperTypes="#//CGCallExp">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredProperty" lowerBound="1"
-        eType="#//Property"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGPropertyCallExp" abstract="true" eSuperTypes="#//CGNavigationCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGReal" eSuperTypes="#//CGNumber">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="CGReal represents a real value."/>

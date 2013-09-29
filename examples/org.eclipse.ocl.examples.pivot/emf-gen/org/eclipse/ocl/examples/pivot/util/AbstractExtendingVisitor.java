@@ -282,6 +282,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitTemplateParameter(object);
 	}
 
+	public @Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.pivot.OppositePropertyCallExp object) {
+		return visitNavigationCallExp(object);
+	}
+
 	public @Nullable R visitOrderedSetType(@NonNull org.eclipse.ocl.examples.pivot.OrderedSetType object) {
 		return visitCollectionType(object);
 	}

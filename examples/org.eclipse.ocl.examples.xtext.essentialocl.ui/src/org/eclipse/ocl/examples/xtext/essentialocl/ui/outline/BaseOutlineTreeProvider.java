@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.swt.graphics.Image;
@@ -127,6 +128,10 @@ public class BaseOutlineTreeProvider extends DefaultOutlineTreeProvider
 		createNode(parentNode, exp.getCondition());
 		createNode(parentNode, exp.getThenExpression());
 		createNode(parentNode, exp.getElseExpression());
+	}
+
+	protected void _createChildren(IOutlineNode parentNode, OppositePropertyCallExp ele) {
+		createNode(parentNode, ele.getSource());
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, PropertyCallExp ele) {

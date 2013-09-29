@@ -159,6 +159,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP: return createCGEcoreDataTypeConstructorExp();
 			case CGModelPackage.CG_ECORE_OPERATION: return createCGEcoreOperation();
 			case CGModelPackage.CG_ECORE_OPERATION_CALL_EXP: return createCGEcoreOperationCallExp();
+			case CGModelPackage.CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP: return createCGEcoreOppositePropertyCallExp();
 			case CGModelPackage.CG_ECORE_PROPERTY_CALL_EXP: return createCGEcorePropertyCallExp();
 			case CGModelPackage.CG_ELEMENT_ID: return createCGElementId();
 			case CGModelPackage.CG_EXECUTOR_COMPOSITION_PROPERTY: return createCGExecutorCompositionProperty();
@@ -167,6 +168,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_EXECUTOR_OPPOSITE_PROPERTY: return createCGExecutorOppositeProperty();
 			case CGModelPackage.CG_EXECUTOR_OPERATION: return createCGExecutorOperation();
 			case CGModelPackage.CG_EXECUTOR_OPERATION_CALL_EXP: return createCGExecutorOperationCallExp();
+			case CGModelPackage.CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP: return createCGExecutorOppositePropertyCallExp();
 			case CGModelPackage.CG_EXECUTOR_PROPERTY_CALL_EXP: return createCGExecutorPropertyCallExp();
 			case CGModelPackage.CG_EXECUTOR_TYPE: return createCGExecutorType();
 			case CGModelPackage.CG_FINAL_VARIABLE: return createCGFinalVariable();
@@ -466,6 +468,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGEcoreOppositePropertyCallExp createCGEcoreOppositePropertyCallExp() {
+		CGEcoreOppositePropertyCallExpImpl cgEcoreOppositePropertyCallExp = new CGEcoreOppositePropertyCallExpImpl();
+		return cgEcoreOppositePropertyCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGEcorePropertyCallExp createCGEcorePropertyCallExp() {
 		CGEcorePropertyCallExpImpl cgEcorePropertyCallExp = new CGEcorePropertyCallExpImpl();
 		return cgEcorePropertyCallExp;
@@ -539,6 +551,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGExecutorOperationCallExp createCGExecutorOperationCallExp() {
 		CGExecutorOperationCallExpImpl cgExecutorOperationCallExp = new CGExecutorOperationCallExpImpl();
 		return cgExecutorOperationCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGExecutorOppositePropertyCallExp createCGExecutorOppositePropertyCallExp() {
+		CGExecutorOppositePropertyCallExpImpl cgExecutorOppositePropertyCallExp = new CGExecutorOppositePropertyCallExpImpl();
+		return cgExecutorOppositePropertyCallExp;
 	}
 
 	/**

@@ -310,10 +310,25 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP: {
+				CGEcoreOppositePropertyCallExp cgEcoreOppositePropertyCallExp = (CGEcoreOppositePropertyCallExp)theEObject;
+				T result = caseCGEcoreOppositePropertyCallExp(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGOppositePropertyCallExp(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGCallExp(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGValuedElement(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGTypedElement(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGNamedElement(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseCGElement(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = caseNameable(cgEcoreOppositePropertyCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_ECORE_PROPERTY_CALL_EXP: {
 				CGEcorePropertyCallExp cgEcorePropertyCallExp = (CGEcorePropertyCallExp)theEObject;
 				T result = caseCGEcorePropertyCallExp(cgEcorePropertyCallExp);
 				if (result == null) result = caseCGPropertyCallExp(cgEcorePropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgEcorePropertyCallExp);
 				if (result == null) result = caseCGCallExp(cgEcorePropertyCallExp);
 				if (result == null) result = caseCGValuedElement(cgEcorePropertyCallExp);
 				if (result == null) result = caseCGTypedElement(cgEcorePropertyCallExp);
@@ -413,6 +428,20 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP: {
+				CGExecutorOppositePropertyCallExp cgExecutorOppositePropertyCallExp = (CGExecutorOppositePropertyCallExp)theEObject;
+				T result = caseCGExecutorOppositePropertyCallExp(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGOppositePropertyCallExp(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGCallExp(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGValuedElement(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGTypedElement(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGNamedElement(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseCGElement(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = caseNameable(cgExecutorOppositePropertyCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_EXECUTOR_PROPERTY: {
 				CGExecutorProperty cgExecutorProperty = (CGExecutorProperty)theEObject;
 				T result = caseCGExecutorProperty(cgExecutorProperty);
@@ -428,6 +457,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 				CGExecutorPropertyCallExp cgExecutorPropertyCallExp = (CGExecutorPropertyCallExp)theEObject;
 				T result = caseCGExecutorPropertyCallExp(cgExecutorPropertyCallExp);
 				if (result == null) result = caseCGPropertyCallExp(cgExecutorPropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgExecutorPropertyCallExp);
 				if (result == null) result = caseCGCallExp(cgExecutorPropertyCallExp);
 				if (result == null) result = caseCGValuedElement(cgExecutorPropertyCallExp);
 				if (result == null) result = caseCGTypedElement(cgExecutorPropertyCallExp);
@@ -636,6 +666,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 				CGLibraryPropertyCallExp cgLibraryPropertyCallExp = (CGLibraryPropertyCallExp)theEObject;
 				T result = caseCGLibraryPropertyCallExp(cgLibraryPropertyCallExp);
 				if (result == null) result = caseCGPropertyCallExp(cgLibraryPropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgLibraryPropertyCallExp);
 				if (result == null) result = caseCGCallExp(cgLibraryPropertyCallExp);
 				if (result == null) result = caseCGValuedElement(cgLibraryPropertyCallExp);
 				if (result == null) result = caseCGTypedElement(cgLibraryPropertyCallExp);
@@ -671,6 +702,18 @@ public class CGModelSwitch<T> extends Switch<T> {
 				T result = caseCGNamedElement(cgNamedElement);
 				if (result == null) result = caseCGElement(cgNamedElement);
 				if (result == null) result = caseNameable(cgNamedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CGModelPackage.CG_NAVIGATION_CALL_EXP: {
+				CGNavigationCallExp cgNavigationCallExp = (CGNavigationCallExp)theEObject;
+				T result = caseCGNavigationCallExp(cgNavigationCallExp);
+				if (result == null) result = caseCGCallExp(cgNavigationCallExp);
+				if (result == null) result = caseCGValuedElement(cgNavigationCallExp);
+				if (result == null) result = caseCGTypedElement(cgNavigationCallExp);
+				if (result == null) result = caseCGNamedElement(cgNavigationCallExp);
+				if (result == null) result = caseCGElement(cgNavigationCallExp);
+				if (result == null) result = caseNameable(cgNavigationCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -721,6 +764,19 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP: {
+				CGOppositePropertyCallExp cgOppositePropertyCallExp = (CGOppositePropertyCallExp)theEObject;
+				T result = caseCGOppositePropertyCallExp(cgOppositePropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgOppositePropertyCallExp);
+				if (result == null) result = caseCGCallExp(cgOppositePropertyCallExp);
+				if (result == null) result = caseCGValuedElement(cgOppositePropertyCallExp);
+				if (result == null) result = caseCGTypedElement(cgOppositePropertyCallExp);
+				if (result == null) result = caseCGNamedElement(cgOppositePropertyCallExp);
+				if (result == null) result = caseCGElement(cgOppositePropertyCallExp);
+				if (result == null) result = caseNameable(cgOppositePropertyCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_PACKAGE: {
 				CGPackage cgPackage = (CGPackage)theEObject;
 				T result = caseCGPackage(cgPackage);
@@ -756,6 +812,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_PROPERTY_CALL_EXP: {
 				CGPropertyCallExp cgPropertyCallExp = (CGPropertyCallExp)theEObject;
 				T result = caseCGPropertyCallExp(cgPropertyCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgPropertyCallExp);
 				if (result == null) result = caseCGCallExp(cgPropertyCallExp);
 				if (result == null) result = caseCGValuedElement(cgPropertyCallExp);
 				if (result == null) result = caseCGTypedElement(cgPropertyCallExp);
@@ -865,6 +922,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 				CGTuplePartCallExp cgTuplePartCallExp = (CGTuplePartCallExp)theEObject;
 				T result = caseCGTuplePartCallExp(cgTuplePartCallExp);
 				if (result == null) result = caseCGPropertyCallExp(cgTuplePartCallExp);
+				if (result == null) result = caseCGNavigationCallExp(cgTuplePartCallExp);
 				if (result == null) result = caseCGCallExp(cgTuplePartCallExp);
 				if (result == null) result = caseCGValuedElement(cgTuplePartCallExp);
 				if (result == null) result = caseCGTypedElement(cgTuplePartCallExp);
@@ -1195,6 +1253,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGEcoreOperationCallExp(CGEcoreOperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Ecore Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Ecore Opposite Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGEcoreOppositePropertyCallExp(CGEcoreOppositePropertyCallExp object) {
 		return null;
 	}
 
@@ -1664,6 +1737,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Executor Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Executor Opposite Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGExecutorOppositePropertyCallExp(CGExecutorOppositePropertyCallExp object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Executor Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1739,6 +1827,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Navigation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Navigation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGNavigationCallExp(CGNavigationCallExp object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Null</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1795,6 +1898,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGOperationCallExp(CGOperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Opposite Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGOppositePropertyCallExp(CGOppositePropertyCallExp object) {
 		return null;
 	}
 

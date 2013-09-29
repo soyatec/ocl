@@ -39,11 +39,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreClassConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
@@ -64,6 +66,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -120,6 +123,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
@@ -921,6 +925,47 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 	}
 
 	@Override
+	public @NonNull CGValuedElement visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp element) {
+		Property asOppositeProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+		Property asProperty = DomainUtil.nonNullModel(asOppositeProperty.getOpposite());
+		boolean isRequired = asProperty.isRequired();
+		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
+		CGOppositePropertyCallExp cgPropertyCallExp = null;
+		if (isEcoreProperty(libraryProperty)) {
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getETarget();
+			if (eStructuralFeature != null) {
+				try {
+					genModelHelper.getGetAccessor(eStructuralFeature);
+					CGEcoreOppositePropertyCallExp cgEcorePropertyCallExp = CGModelFactory.eINSTANCE.createCGEcoreOppositePropertyCallExp();
+					cgEcorePropertyCallExp.setEStructuralFeature(eStructuralFeature);
+					Boolean ecoreIsRequired = codeGenerator.isNonNull(asProperty);
+					if (ecoreIsRequired != null) {
+						isRequired = ecoreIsRequired;
+					}
+					cgPropertyCallExp = cgEcorePropertyCallExp;
+				} catch (GenModelException e) {
+				}
+			}
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
+		if (cgPropertyCallExp == null) {
+			CGExecutorOppositePropertyCallExp cgExecutorPropertyCallExp = CGModelFactory.eINSTANCE.createCGExecutorOppositePropertyCallExp();
+			CGExecutorProperty cgExecutorProperty = context.createExecutorOppositeProperty(asProperty);
+			cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
+			cgExecutorPropertyCallExp.getOwns().add(cgExecutorProperty);
+			cgPropertyCallExp = cgExecutorPropertyCallExp;
+		}
+		cgPropertyCallExp.setReferredProperty(asProperty);
+		setAst(cgPropertyCallExp, element);
+		cgPropertyCallExp.setRequired(isRequired);
+		CGValuedElement cgSource = doVisit(CGValuedElement.class, element.getSource());
+		cgPropertyCallExp.setSource(cgSource);
+		return cgPropertyCallExp;
+	}
+
+	@Override
 	public @Nullable CGPackage visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package element) {
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		setAst(cgPackage, element);
@@ -963,7 +1008,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 					genModelHelper.getGetAccessor(eStructuralFeature);
 					CGEcorePropertyCallExp cgEcorePropertyCallExp = CGModelFactory.eINSTANCE.createCGEcorePropertyCallExp();
 					cgEcorePropertyCallExp.setEStructuralFeature(eStructuralFeature);
-					Boolean ecoreIsRequired = codeGenerator.isNonNull(element);
+					Boolean ecoreIsRequired = codeGenerator.isNonNull(asProperty);
 					if (ecoreIsRequired != null) {
 						isRequired = ecoreIsRequired;
 					}

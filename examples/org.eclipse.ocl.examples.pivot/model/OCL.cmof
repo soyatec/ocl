@@ -211,6 +211,11 @@
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_NTJZkjo3EeGv_K3BAai1xw" name="initExpression" type="_IPg0HogHEd-aGOJuUCcZBA" isComposite="true"/>
         <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-TypedElement"/>
       </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_PjN-0CkOEeOl0OBLPkF7Wg" name="OppositePropertyCallExp" superClass="_IPg0jYgHEd-aGOJuUCcZBA">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_PjN-0ikOEeOl0OBLPkF7Wg" name="referredProperty" lower="0">
+          <type xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Property"/>
+        </ownedAttribute>
+      </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_rMVQYI9nEd-UToJjGuajxg" name="OCL_Library">
       <ownedMember xmi:type="cmof:Class" xmi:id="_oWAYwAbiEeC3-uphdlDm-Q" name="Iteration" superClass="_l0ihkAbiEeC3-uphdlDm-Q">

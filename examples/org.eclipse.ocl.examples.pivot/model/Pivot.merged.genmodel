@@ -1048,6 +1048,12 @@
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">
+      <ecoreClass href="Pivot.ecore#//OppositePropertyCallExp"/>
+      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//OppositePropertyCallExp/referredProperty"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass">
       <ecoreClass href="Pivot.ecore#//OrderedSetType"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">

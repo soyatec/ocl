@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
@@ -283,6 +284,19 @@ public class TemplateParameterSubstitutionVisitor extends AbstractExtendingVisit
 	}
 
 	@Override
+	public @Nullable Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
+		Property referredOppositeProperty = object.getReferredProperty();
+		if (referredOppositeProperty != null) {
+			Property referredProperty = referredOppositeProperty.getOpposite();
+			if (referredProperty != null) {
+				visit(referredProperty, object);
+				visit(referredProperty.getOwningType(), object.getSource());
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitPrimitiveType(@NonNull PrimitiveType object) {
 		return null;
 	}
@@ -290,8 +304,10 @@ public class TemplateParameterSubstitutionVisitor extends AbstractExtendingVisit
 	@Override
 	public @Nullable Object visitPropertyCallExp(@NonNull PropertyCallExp object) {
 		Property referredProperty = object.getReferredProperty();
-		visit(referredProperty, object);
-		visit(referredProperty.getOwningType(), object.getSource());
+		if (referredProperty != null) {
+			visit(referredProperty, object);
+			visit(referredProperty.getOwningType(), object.getSource());
+		}
 		return null;
 	}
 

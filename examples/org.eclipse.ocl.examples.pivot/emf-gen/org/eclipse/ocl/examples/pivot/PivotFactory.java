@@ -191,6 +191,15 @@ public interface PivotFactory
 	OperationTemplateParameter createOperationTemplateParameter();
 
 	/**
+	 * Returns a new object of class '<em>Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Opposite Property Call Exp</em>'.
+	 * @generated
+	 */
+	OppositePropertyCallExp createOppositePropertyCallExp();
+
+	/**
 	 * Returns a new object of class '<em>Comment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

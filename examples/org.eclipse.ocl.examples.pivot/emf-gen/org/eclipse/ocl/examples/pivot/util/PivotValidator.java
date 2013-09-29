@@ -86,6 +86,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.PackageableElement;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -829,6 +830,8 @@ public class PivotValidator
 				return validateOperationCallExp((OperationCallExp)value, diagnostics, context);
 			case PivotPackage.OPERATION_TEMPLATE_PARAMETER:
 				return validateOperationTemplateParameter((OperationTemplateParameter)value, diagnostics, context);
+			case PivotPackage.OPPOSITE_PROPERTY_CALL_EXP:
+				return validateOppositePropertyCallExp((OppositePropertyCallExp)value, diagnostics, context);
 			case PivotPackage.ORDERED_SET_TYPE:
 				return validateOrderedSetType((OrderedSetType)value, diagnostics, context);
 			case PivotPackage.PACKAGE:
@@ -1391,6 +1394,16 @@ public class PivotValidator
 			OperationTemplateParameter operationTemplateParameter,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint((EObject)operationTemplateParameter, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOppositePropertyCallExp(OppositePropertyCallExp oppositePropertyCallExp, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return validate_EveryDefaultConstraint((EObject)oppositePropertyCallExp, diagnostics, context);
 	}
 
 	/**

@@ -51,6 +51,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
@@ -73,6 +74,7 @@ import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -513,6 +515,35 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		}
 		append(")");
 //		appendAtPre(oc);
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitCGOppositePropertyCallExp(@NonNull CGOppositePropertyCallExp pc) {
+        // source is null when the property call expression is an
+        //    association class navigation qualifier
+        CGValuedElement source = pc.getSource();
+		safeVisit(source);
+		OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp) pc.getAst();
+		Property oppositeProperty = propertyCallExp.getReferredProperty();
+		Property property = oppositeProperty.getOpposite();
+        Type sourceType = source != null ? propertyCallExp.getSource().getType() : null;
+		result.append(sourceType instanceof CollectionType
+				? PivotConstants.COLLECTION_NAVIGATION_OPERATOR
+				: PivotConstants.OBJECT_NAVIGATION_OPERATOR);
+		appendName(property);
+/*		appendAtPre(pc);
+        List<CGValuedElement> qualifiers = pc.getQualifier();
+		if (!qualifiers.isEmpty()) {
+			append("["); //$NON-NLS-1$
+			String prefix = ""; //$NON-NLS-1$
+			for (OCLExpression qualifier : qualifiers) {
+				append(prefix);
+				safeVisit(qualifier);
+				prefix = ", "; //$NON-NLS-1$
+			}
+			append("]");
+		} */
 		return null;
 	}
 

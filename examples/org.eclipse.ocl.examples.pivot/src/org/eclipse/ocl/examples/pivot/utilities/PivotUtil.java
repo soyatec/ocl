@@ -67,6 +67,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -1117,6 +1118,10 @@ public class PivotUtil extends DomainUtil
 		}
 		else if (callExp instanceof OperationCallExp) {
 			feature = ((OperationCallExp)callExp).getReferredOperation();
+		}
+		else if (callExp instanceof OppositePropertyCallExp) {
+			Property referredOppositeProperty = ((OppositePropertyCallExp)callExp).getReferredProperty();
+			feature = referredOppositeProperty != null ? referredOppositeProperty.getOpposite() : null;
 		}
 		else if (callExp instanceof PropertyCallExp) {
 			feature = ((PropertyCallExp)callExp).getReferredProperty();

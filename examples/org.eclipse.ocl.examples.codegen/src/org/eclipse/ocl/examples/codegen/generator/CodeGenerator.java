@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -58,5 +58,5 @@ public interface CodeGenerator
 	@NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed);
 	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
 	@Nullable Boolean isNonNull(@NonNull OperationCallExp asOperationCallExp);
-	@Nullable Boolean isNonNull(@NonNull PropertyCallExp asPropertyCallExp);
+	@Nullable Boolean isNonNull(@NonNull Property asProperty);
 }

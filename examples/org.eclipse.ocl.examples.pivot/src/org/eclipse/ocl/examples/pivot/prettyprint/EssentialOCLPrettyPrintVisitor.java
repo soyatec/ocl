@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -484,6 +485,20 @@ public class EssentialOCLPrettyPrintVisitor extends PrettyPrintVisitor
 			context.pop();
 			context.append(" : ");
 			safeVisit(object.getType());
+		}
+		return null;
+	}
+
+	@Override
+	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
+		Property referredOppositeProperty = object.getReferredProperty();
+		Property referredProperty = referredOppositeProperty != null ? referredOppositeProperty.getOpposite() : null;
+		if (context.showNames()) {
+			appendSourceNavigation(object);
+			context.appendName(referredProperty);
+		}
+		else {
+			safeVisit(referredProperty);
 		}
 		return null;
 	}

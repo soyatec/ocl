@@ -202,6 +202,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Class _Operation = createClass(PivotPackage.Literals.OPERATION);
 		protected final @NonNull Class _OperationCallExp = createClass(PivotPackage.Literals.OPERATION_CALL_EXP);
 		protected final @NonNull Class _OperationTemplateParameter = createClass(PivotPackage.Literals.OPERATION_TEMPLATE_PARAMETER);
+		protected final @NonNull Class _OppositePropertyCallExp = createClass(PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP);
 		protected final @NonNull Class _OrderedSetType = createClass(PivotPackage.Literals.ORDERED_SET_TYPE);
 		protected final @NonNull Class _Package = createClass(PivotPackage.Literals.PACKAGE);
 		protected final @NonNull Class _PackageableElement = createClass(PivotPackage.Literals.PACKAGEABLE_ELEMENT);
@@ -309,6 +310,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull BagType _Bag_NavigationCallExp = createBagType("Bag"/*NavigationCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_OperationCallExp = createBagType("Bag"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_Operation = createBagType("Bag"/*Operation*/, "0", "*");
+		protected final @NonNull BagType _Bag_OppositePropertyCallExp = createBagType("Bag"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_Package = createBagType("Bag"/*Package*/, "0", "*");
 		protected final @NonNull BagType _Bag_ParameterableElement = createBagType("Bag"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull BagType _Bag_PropertyCallExp = createBagType("Bag"/*PropertyCallExp*/, "0", "*");
@@ -359,6 +361,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_OCLExpression = createCollectionType("Collection"/*OCLExpression*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OperationCallExp = createCollectionType("Collection"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Operation = createCollectionType("Collection"/*Operation*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_OppositePropertyCallExp = createCollectionType("Collection"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Package = createCollectionType("Collection"/*Package*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Parameter = createCollectionType("Collection"/*Parameter*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_ParameterableElement = createCollectionType("Collection"/*ParameterableElement*/, "0", "*");
@@ -447,6 +450,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull SetType _Set_NavigationCallExp = createSetType("Set"/*NavigationCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_OperationCallExp = createSetType("Set"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Operation = createSetType("Set"/*Operation*/, "0", "*");
+		protected final @NonNull SetType _Set_OppositePropertyCallExp = createSetType("Set"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Package = createSetType("Set"/*Package*/, "0", "*");
 		protected final @NonNull SetType _Set_ParameterableElement = createSetType("Set"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull SetType _Set_PropertyCallExp = createSetType("Set"/*PropertyCallExp*/, "0", "*");
@@ -498,6 +502,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_OCLExpression = createCollectionType("UniqueCollection"/*OCLExpression*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OperationCallExp = createCollectionType("UniqueCollection"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Operation = createCollectionType("UniqueCollection"/*Operation*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_OppositePropertyCallExp = createCollectionType("UniqueCollection"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Package = createCollectionType("UniqueCollection"/*Package*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Parameter = createCollectionType("UniqueCollection"/*Parameter*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_ParameterableElement = createCollectionType("UniqueCollection"/*ParameterableElement*/, "0", "*");
@@ -731,6 +736,9 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedTypes.add(type = _OperationTemplateParameter);
 			superClasses = type.getSuperClass();
 			superClasses.add(_TemplateParameter);
+			ownedTypes.add(type = _OppositePropertyCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_NavigationCallExp);
 			ownedTypes.add(type = _OrderedSetType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_CollectionType);
@@ -1070,6 +1078,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Operation);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Operation);
+			orphanTypes.add(type = _Bag_OppositePropertyCallExp);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_OppositePropertyCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OppositePropertyCallExp);
 			orphanTypes.add(type = _Bag_Package);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_Package);
@@ -1318,6 +1331,11 @@ public class OCLMetaModel extends ASResourceImpl
 			orphanTypes.add(type = _Collection_Operation);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Operation);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_OppositePropertyCallExp);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_OppositePropertyCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_Package);
@@ -1802,6 +1820,12 @@ public class OCLMetaModel extends ASResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_Operation);
 			superClasses.add(_UniqueCollection_Operation);
+			orphanTypes.add(type = _Set_OppositePropertyCallExp);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_OppositePropertyCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_OppositePropertyCallExp);
+			superClasses.add(_UniqueCollection_OppositePropertyCallExp);
 			orphanTypes.add(type = _Set_Package);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Package);
@@ -2081,6 +2105,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Operation);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Operation);
+			orphanTypes.add(type = _UniqueCollection_OppositePropertyCallExp);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_OppositePropertyCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OppositePropertyCallExp);
 			orphanTypes.add(type = _UniqueCollection_Package);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Package);
@@ -2442,6 +2471,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_Operation_redefinedOperation = createProperty(PivotPackage.Literals.OPERATION__REDEFINED_OPERATION, _Set_Operation);
 		protected final @NonNull Property pr_OperationCallExp_argument = createProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT, _OrderedSet_OCLExpression);
 		protected final @NonNull Property pr_OperationCallExp_referredOperation = createProperty(PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, _Operation);
+		protected final @NonNull Property pr_OppositePropertyCallExp_referredProperty = createProperty(PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY, _Property);
 		protected final @NonNull Property pr_Package_Package = createProperty("Package", _Set_Package);
 		protected final @NonNull Property pr_Package_Root = createProperty("Root", _Root);
 		protected final @NonNull Property pr_Package_importedPackage = createProperty(PivotPackage.Literals.PACKAGE__IMPORTED_PACKAGE, _Set_Package);
@@ -2461,6 +2491,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_Property_ConstructorPart = createProperty("ConstructorPart", _Set_ConstructorPart);
 		protected final @NonNull Property pr_Property_DynamicProperty = createProperty("DynamicProperty", _Set_DynamicProperty);
 		protected final @NonNull Property pr_Property_NavigationCallExp = createProperty("NavigationCallExp", _Set_NavigationCallExp);
+		protected final @NonNull Property pr_Property_OppositePropertyCallExp = createProperty("OppositePropertyCallExp", _Set_OppositePropertyCallExp);
 		protected final @NonNull Property pr_Property_PropertyCallExp = createProperty("PropertyCallExp", _Set_PropertyCallExp);
 		protected final @NonNull Property pr_Property_association = createProperty(PivotPackage.Literals.PROPERTY__ASSOCIATION, _AssociationClass);
 		protected final @NonNull Property pr_Property_class = createProperty(PivotPackage.Literals.PROPERTY__CLASS, _Class);
@@ -3180,6 +3211,11 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Operation_OperationCallExp);
+			ownedProperties = _OppositePropertyCallExp.getOwnedAttribute();
+			ownedProperties.add(property = pr_OppositePropertyCallExp_referredProperty);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Property_OppositePropertyCallExp);
 			ownedProperties = _Package.getOwnedAttribute();
 			ownedProperties.add(property = pr_Package_Package);
 			property.setImplicit(true);
@@ -3257,6 +3293,10 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_NavigationCallExp_navigationSource);
+			ownedProperties.add(property = pr_Property_OppositePropertyCallExp);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_OppositePropertyCallExp_referredProperty);
 			ownedProperties.add(property = pr_Property_PropertyCallExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
@@ -3855,6 +3895,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _OperationCallExp)));
 			_Bag_Operation.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Operation)));
+			_Bag_OppositePropertyCallExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _OppositePropertyCallExp)));
 			_Bag_Package.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Package)));
 			_Bag_ParameterableElement.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -3955,6 +3997,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _OperationCallExp)));
 			_Collection_Operation.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Operation)));
+			_Collection_OppositePropertyCallExp.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _OppositePropertyCallExp)));
 			_Collection_Package.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Package)));
 			_Collection_Parameter.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -4131,6 +4175,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _OperationCallExp)));
 			_Set_Operation.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Operation)));
+			_Set_OppositePropertyCallExp.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _OppositePropertyCallExp)));
 			_Set_Package.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Package)));
 			_Set_ParameterableElement.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -4233,6 +4279,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _OperationCallExp)));
 			_UniqueCollection_Operation.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Operation)));
+			_UniqueCollection_OppositePropertyCallExp.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _OppositePropertyCallExp)));
 			_UniqueCollection_Package.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Package)));
 			_UniqueCollection_Parameter.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,

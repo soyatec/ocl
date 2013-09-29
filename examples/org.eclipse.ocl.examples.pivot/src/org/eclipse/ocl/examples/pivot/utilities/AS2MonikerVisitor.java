@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -426,6 +427,14 @@ public class AS2MonikerVisitor extends AbstractExtendingVisitor<Object, AS2Monik
 	public Object visitOperationCallExp(@NonNull OperationCallExp object) {
 		appendExpPrefix(object);
 		context.appendName(object.getReferredOperation());
+		return true;
+	}
+
+	@Override
+	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
+		appendExpPrefix(object);
+		context.append("~");
+		context.appendName(object.getReferredProperty());
 		return true;
 	}
 

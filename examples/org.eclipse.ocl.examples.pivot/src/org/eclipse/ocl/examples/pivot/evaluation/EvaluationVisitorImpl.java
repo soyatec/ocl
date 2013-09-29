@@ -82,10 +82,12 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
+import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -151,6 +153,26 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		Object value = expressionInOCL.accept(getUndecoratedVisitor());
 		assert ValuesUtil.isBoxed(value);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
 		return value;
+	}
+
+	protected Object evaluatePropertyCallExp(@NonNull NavigationCallExp propertyCallExp, @NonNull Property referredProperty) {
+		OCLExpression source = propertyCallExp.getSource();
+		Type propertyType = propertyCallExp.getType();
+		assert propertyType != null;
+		LibraryProperty implementation = metaModelManager.getImplementation(referredProperty);
+		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
+		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
+		try {
+			return implementation.evaluate(this, propertyType.getTypeId(), sourceValue);
+		}
+		catch (InvalidValueException e) {
+			throw e;
+		}
+		catch (Exception e) {
+			// This is a backstop. Library operations should catch their own exceptions
+			//  and produce a better reason as a result.
+			throw new InvalidValueException(e, "Failed to evaluate '" + referredProperty + "'", sourceValue, propertyCallExp);
+		}
 	}
 
 	public @NonNull EvaluationVisitor getEvaluator() {
@@ -761,29 +783,24 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	}
 
 	/**
+	 * Callback for an OppositePropertyCallExp visit.
+	 */
+	@Override
+    public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
+		Property oppositeReferredProperty = oppositePropertyCallExp.getReferredProperty();
+		Property referredProperty = oppositeReferredProperty.getOpposite();
+		assert referredProperty != null;
+		return evaluatePropertyCallExp(oppositePropertyCallExp, referredProperty);
+	}
+
+	/**
 	 * Callback for a PropertyCallExp visit.
 	 */
 	@Override
     public Object visitPropertyCallExp(@NonNull PropertyCallExp propertyCallExp) {
-		OCLExpression source = propertyCallExp.getSource();
 		Property referredProperty = propertyCallExp.getReferredProperty();
-		Type propertyType = propertyCallExp.getType();
 		assert referredProperty != null;
-		assert propertyType != null;
-		LibraryProperty implementation = metaModelManager.getImplementation(referredProperty);
-		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
-		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
-		try {
-			return implementation.evaluate(this, propertyType.getTypeId(), sourceValue);
-		}
-		catch (InvalidValueException e) {
-			throw e;
-		}
-		catch (Exception e) {
-			// This is a backstop. Library operations should catch their own exceptions
-			//  and produce a better reason as a result.
-			throw new InvalidValueException(e, "Failed to evaluate '" + referredProperty + "'", sourceValue, propertyCallExp);
-		}
+		return evaluatePropertyCallExp(propertyCallExp, referredProperty);
 	}
 	
 	/**

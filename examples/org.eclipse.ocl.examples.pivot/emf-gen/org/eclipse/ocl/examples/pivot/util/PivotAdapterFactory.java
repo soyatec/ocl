@@ -80,6 +80,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.PackageableElement;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -502,6 +503,11 @@ public class PivotAdapterFactory
 			public Adapter caseOperationTemplateParameter(OperationTemplateParameter object)
 			{
 				return createOperationTemplateParameterAdapter();
+			}
+			@Override
+			public Adapter caseOppositePropertyCallExp(OppositePropertyCallExp object)
+			{
+				return createOppositePropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter caseOrderedSetType(OrderedSetType object)
@@ -2186,6 +2192,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createOperationTemplateParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.OppositePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createOppositePropertyCallExpAdapter()
+	{
 		return null;
 	}
 

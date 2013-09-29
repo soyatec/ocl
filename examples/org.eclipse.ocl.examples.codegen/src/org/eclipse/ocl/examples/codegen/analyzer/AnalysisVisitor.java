@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp;
@@ -271,6 +272,23 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 				context.setConstant(cgOperationCallExp, cgInvalidValue);
 				return null;
 			}
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGOppositePropertyCallExp(@NonNull CGOppositePropertyCallExp cgPropertyCallExp) {
+		super.visitCGOppositePropertyCallExp(cgPropertyCallExp);
+//		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+//		thisAnalysis.initHashSource(referredProperty);
+//		context.addNamedElement(referredProperty);
+		CGValuedElement cgSource = context.getExpression(cgPropertyCallExp.getSource());
+		CGInvalid cgInvalidValue = cgSource.getInvalidValue();
+		if (cgInvalidValue != null) {
+			context.setConstant(cgPropertyCallExp, cgInvalidValue);
+		}
+		else if (cgSource.isNull()) {
+			context.setConstant(cgPropertyCallExp, context.getInvalid());
 		}
 		return null;
 	}

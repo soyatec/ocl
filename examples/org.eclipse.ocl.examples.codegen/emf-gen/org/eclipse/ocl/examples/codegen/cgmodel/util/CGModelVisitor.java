@@ -64,6 +64,7 @@ public interface CGModelVisitor<R>
 	@Nullable R visitCGEcoreDataTypeConstructorExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp object);
 	@Nullable R visitCGEcoreOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation object);
 	@Nullable R visitCGEcoreOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp object);
+	@Nullable R visitCGEcoreOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp object);
 	@Nullable R visitCGEcorePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp object);
 	@Nullable R visitCGElement(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGElement object);
 	@Nullable R visitCGElementId(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGElementId object);
@@ -73,6 +74,7 @@ public interface CGModelVisitor<R>
 	@Nullable R visitCGExecutorOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation object);
 	@Nullable R visitCGExecutorOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp object);
 	@Nullable R visitCGExecutorOppositeProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty object);
+	@Nullable R visitCGExecutorOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp object);
 	@Nullable R visitCGExecutorProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty object);
 	@Nullable R visitCGExecutorPropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp object);
 	@Nullable R visitCGExecutorType(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType object);
@@ -95,10 +97,12 @@ public interface CGModelVisitor<R>
 	@Nullable R visitCGLocalVariable(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable object);
 	@Nullable R visitCGModel(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGModel object);
 	@Nullable R visitCGNamedElement(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement object);
+	@Nullable R visitCGNavigationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp object);
 	@Nullable R visitCGNull(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNull object);
 	@Nullable R visitCGNumber(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNumber object);
 	@Nullable R visitCGOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperation object);
 	@Nullable R visitCGOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp object);
+	@Nullable R visitCGOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp object);
 	@Nullable R visitCGPackage(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGPackage object);
 	@Nullable R visitCGParameter(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGParameter object);
 	@Nullable R visitCGProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGProperty object);

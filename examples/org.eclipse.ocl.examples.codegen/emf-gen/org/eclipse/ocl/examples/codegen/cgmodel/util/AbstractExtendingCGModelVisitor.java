@@ -122,6 +122,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 		return visitCGOperationCallExp(object);
 	}
 
+	public @Nullable R visitCGEcoreOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp object) {
+		return visitCGOppositePropertyCallExp(object);
+	}
+
 	public @Nullable R visitCGEcorePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp object) {
 		return visitCGPropertyCallExp(object);
 	}
@@ -156,6 +160,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 
 	public @Nullable R visitCGExecutorOppositeProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty object) {
 		return visitCGExecutorProperty(object);
+	}
+
+	public @Nullable R visitCGExecutorOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp object) {
+		return visitCGOppositePropertyCallExp(object);
 	}
 
 	public @Nullable R visitCGExecutorProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty object) {
@@ -246,6 +254,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 		return visitCGElement(object);
 	}
 
+	public @Nullable R visitCGNavigationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp object) {
+		return visitCGCallExp(object);
+	}
+
 	public @Nullable R visitCGNull(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNull object) {
 		return visitCGConstant(object);
 	}
@@ -262,6 +274,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 		return visitCGCallExp(object);
 	}
 
+	public @Nullable R visitCGOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp object) {
+		return visitCGNavigationCallExp(object);
+	}
+
 	public @Nullable R visitCGPackage(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGPackage object) {
 		return visitCGNamedElement(object);
 	}
@@ -275,7 +291,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGPropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp object) {
-		return visitCGCallExp(object);
+		return visitCGNavigationCallExp(object);
 	}
 
 	public @Nullable R visitCGReal(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGReal object) {

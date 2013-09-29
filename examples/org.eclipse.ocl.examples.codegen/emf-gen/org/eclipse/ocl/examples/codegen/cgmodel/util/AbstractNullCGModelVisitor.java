@@ -118,6 +118,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGEcoreOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp object) {
+		return null;
+	}
+
 	public @Nullable R visitCGEcorePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp object) {
 		return null;
 	}
@@ -151,6 +155,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGExecutorOppositeProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty object) {
+		return null;
+	}
+
+	public @Nullable R visitCGExecutorOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp object) {
 		return null;
 	}
 
@@ -242,6 +250,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGNavigationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp object) {
+		return null;
+	}
+
 	public @Nullable R visitCGNull(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGNull object) {
 		return null;
 	}
@@ -255,6 +267,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp object) {
+		return null;
+	}
+
+	public @Nullable R visitCGOppositePropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp object) {
 		return null;
 	}
 

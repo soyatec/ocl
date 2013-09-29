@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp;
@@ -81,6 +82,7 @@ import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -688,12 +690,22 @@ public class NameManager
 			Operation referredOperation = ((OperationCallExp)anObject).getReferredOperation();
 			return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
 		}
+		else if (anObject instanceof OppositePropertyCallExp) {
+			Property referredOppositeProperty = ((OppositePropertyCallExp)anObject).getReferredProperty();
+			Property referredProperty = referredOppositeProperty != null ? referredOppositeProperty.getOpposite() : null;
+			return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
+		}
 		else if (anObject instanceof PropertyCallExp) {
 			Property referredProperty = ((PropertyCallExp)anObject).getReferredProperty();
 			return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
 		}
 		else if (anObject instanceof CGCallExp) {
-			if (anObject instanceof CGPropertyCallExp) {
+			if (anObject instanceof CGOppositePropertyCallExp) {
+				Property referredOppositeProperty = ((OppositePropertyCallExp)((CGOppositePropertyCallExp)anObject).getAst()).getReferredProperty();
+				Property referredProperty = referredOppositeProperty != null ? referredOppositeProperty.getOpposite() : null;
+				return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
+			}
+			else if (anObject instanceof CGPropertyCallExp) {
 				Property referredProperty = ((PropertyCallExp)((CGPropertyCallExp)anObject).getAst()).getReferredProperty();
 				return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
 			}

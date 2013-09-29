@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
@@ -124,6 +125,11 @@ public class ReferencesVisitor extends AbstractExtendingCGModelVisitor<List<Obje
 	@Override
 	public @Nullable List<Object> visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
 		return append(super.visitCGOperationCallExp(cgElement), cgElement.getReferredOperation());
+	}
+
+	@Override
+	public @Nullable List<Object> visitCGOppositePropertyCallExp(@NonNull CGOppositePropertyCallExp cgElement) {
+		return append(super.visitCGOppositePropertyCallExp(cgElement), cgElement.getReferredProperty());
 	}
 
 	@Override

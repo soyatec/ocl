@@ -90,7 +90,6 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -565,8 +564,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return getIsNonNull(leastDerivedMethod) == Boolean.TRUE;
 	}
 
-	public @Nullable Boolean isNonNull(@NonNull PropertyCallExp asPropertyCallExp) {
-		Property asProperty = asPropertyCallExp.getReferredProperty();
+	public @Nullable Boolean isNonNull(@NonNull Property asProperty) {
 		EObject eStructuralFeature = asProperty.getETarget();
 		if (!(eStructuralFeature instanceof EStructuralFeature)) {
 			return null;

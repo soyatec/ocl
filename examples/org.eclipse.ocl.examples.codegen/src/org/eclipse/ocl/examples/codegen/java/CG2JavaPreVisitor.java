@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorNavigationProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
@@ -330,6 +331,23 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		JavaTypeId javaPropertyTypeId = JavaConstants.UNBOXED_OPPOSITE_NAVIGATION_PROPERTY_TYPE_ID;
 		cgExecutorProperty.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
 		return super.visitCGExecutorOppositeProperty(cgExecutorProperty);
+	}
+
+	@Override
+	public @Nullable Object visitCGExecutorOppositePropertyCallExp(@NonNull CGExecutorOppositePropertyCallExp cgExecutorPropertyCallExp) {
+		CGExecutorProperty cgExecutorProperty = cgExecutorPropertyCallExp.getExecutorProperty();
+		if (cgExecutorProperty != null) {
+			cgExecutorProperty.accept(this);
+		}
+//		Property referredProperty = cgExecutorPropertyCallExp.getReferredProperty();
+//		PropertyId propertyId = referredProperty.getPropertyId();
+//		CGExecutorProperty cgExecutorProperty = cgExecutorPropertyCallExp.getExecutorProperty();
+//		CGExecutorProperty cgExecutorProperty = analyzer.createExecutorProperty(referredProperty);
+//		cgExecutorPropertyCallExp.getUses().add(cgExecutorProperty);
+//		cgExecutorProperty.accept(this);
+//		localContext.getOuterContext().addLocalVariable(cgExecutorProperty);
+//		cgExecutorProperty.getDependsOn().add(installIdResolverVariable());
+		return super.visitCGExecutorOppositePropertyCallExp(cgExecutorPropertyCallExp);
 	}
 
 	@Override

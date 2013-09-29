@@ -37,8 +37,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
@@ -376,6 +376,13 @@ public class FieldingAnalyzer
 //		}
 
 		@Override
+		public @NonNull Boolean visitCGNavigationCallExp(@NonNull CGNavigationCallExp cgElement) {
+			rewriteAsThrown(cgElement.getSource());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
 		public @NonNull Boolean visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
 			List<CGValuedElement> cgArguments = cgElement.getArguments();
 			int iSize = cgArguments.size();
@@ -391,13 +398,6 @@ public class FieldingAnalyzer
 					rewriteAsThrown(cgArguments.get(i));
 				}
 			}
-			cgElement.setCaught(false);
-			return false;
-		}
-
-		@Override
-		public @NonNull Boolean visitCGPropertyCallExp(@NonNull CGPropertyCallExp cgElement) {
-			rewriteAsThrown(cgElement.getSource());
 			cgElement.setCaught(false);
 			return false;
 		}

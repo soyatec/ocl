@@ -90,6 +90,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.PackageableElement;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -845,6 +846,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass operationTemplateParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass oppositePropertyCallExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -4615,6 +4623,26 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOppositePropertyCallExp()
+	{
+		return oppositePropertyCallExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOppositePropertyCallExp_ReferredProperty()
+	{
+		return (EReference)oppositePropertyCallExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComment() {
 		return commentEClass;
 	}
@@ -5498,6 +5526,9 @@ public class PivotPackageImpl
 
 		operationTemplateParameterEClass = createEClass(OPERATION_TEMPLATE_PARAMETER);
 
+		oppositePropertyCallExpEClass = createEClass(OPPOSITE_PROPERTY_CALL_EXP);
+		createEReference(oppositePropertyCallExpEClass, OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY);
+
 		orderedSetTypeEClass = createEClass(ORDERED_SET_TYPE);
 
 		packageEClass = createEClass(PACKAGE);
@@ -5860,6 +5891,7 @@ public class PivotPackageImpl
 		operationCallExpEClass.getESuperTypes().add(this.getFeatureCallExp());
 		operationCallExpEClass.getESuperTypes().add(this.getReferringElement());
 		operationTemplateParameterEClass.getESuperTypes().add(this.getTemplateParameter());
+		oppositePropertyCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
 		orderedSetTypeEClass.getESuperTypes().add(this.getCollectionType());
 		packageEClass.getESuperTypes().add(this.getNamespace());
 		packageEClass.getESuperTypes().add(this.getTemplateableElement());
@@ -6658,6 +6690,9 @@ public class PivotPackageImpl
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(operationTemplateParameterEClass, OperationTemplateParameter.class, "OperationTemplateParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(oppositePropertyCallExpEClass, OppositePropertyCallExp.class, "OppositePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getOppositePropertyCallExp_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 0, 1, OppositePropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(orderedSetTypeEClass, OrderedSetType.class, "OrderedSetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 

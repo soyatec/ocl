@@ -85,6 +85,7 @@ import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -1787,6 +1788,15 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		else if (pivotElement instanceof Operation) {
 			return new OperationContext(this, null, (Operation) pivotElement, null);
+		}
+		else if (pivotElement instanceof OppositePropertyCallExp) {
+			Property referredOppositeProperty = ((OppositePropertyCallExp) pivotElement).getReferredProperty();
+			if (referredOppositeProperty != null) {
+				Property referredProperty = referredOppositeProperty.getOpposite();
+				if (referredProperty != null) {
+					return new PropertyContext(this, null, referredProperty);
+				}
+			}
 		}
 		else if (pivotElement instanceof PropertyCallExp) {
 			Property referredProperty = ((PropertyCallExp) pivotElement).getReferredProperty();

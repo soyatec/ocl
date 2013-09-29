@@ -147,31 +147,6 @@ public class CodeGenAnalyzer
 		return cgPart;
 	}
 
-	public @NonNull CGExecutorProperty createExecutorProperty(@NonNull Property asProperty) {
-		PropertyId propertyId = asProperty.getPropertyId();
-		CGExecutorProperty cgProperty = null;
-		CGElementId cgPropertyId = getElementId(propertyId);
-		Property asOppositeProperty = asProperty.getOpposite();
-		if (asOppositeProperty != null) {
-			if (asOppositeProperty.isComposite()) {
-				cgPropertyId = getElementId(propertyId);
-				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorCompositionProperty();					
-			}
-			else if (asProperty.isImplicit()){
-				cgPropertyId = getElementId(asOppositeProperty.getPropertyId());
-				cgProperty = CGModelFactory.eINSTANCE.createCGExecutorOppositeProperty();					
-			}
-		}
-		if (cgProperty == null) {
-			cgProperty = CGModelFactory.eINSTANCE.createCGExecutorNavigationProperty();					
-		}
-		cgProperty.setUnderlyingPropertyId(cgPropertyId);
-		cgProperty.setAst(asProperty);
-		cgProperty.setName("IMPPROPid_" + asProperty.getName());
-		cgProperty.getDependsOn().add(cgPropertyId);
-		return cgProperty;
-	}
-
 	public @NonNull CGExecutorOperation createExecutorOperation(@NonNull Operation asOperation) {
 		OperationId operationId = asOperation.getOperationId();
 		CGExecutorOperation cgOperation = CGModelFactory.eINSTANCE.createCGExecutorOperation();
@@ -182,6 +157,37 @@ public class CodeGenAnalyzer
 //		cgOperation.setValueName(cgOperation.getName());
 		cgOperation.getDependsOn().add(cgOperationId);
 		return cgOperation;
+	}
+
+	public @NonNull CGExecutorProperty createExecutorOppositeProperty(@NonNull Property asProperty) {
+		PropertyId propertyId = asProperty.getPropertyId();
+		CGExecutorProperty cgProperty = null;
+		CGElementId cgPropertyId = getElementId(propertyId);
+		Property asOppositeProperty = DomainUtil.nonNullState(asProperty.getOpposite());
+		if (asOppositeProperty.isComposite()) {
+			cgPropertyId = getElementId(propertyId);
+			cgProperty = CGModelFactory.eINSTANCE.createCGExecutorCompositionProperty();					
+		}
+		else {
+			cgPropertyId = getElementId(asOppositeProperty.getPropertyId());
+			cgProperty = CGModelFactory.eINSTANCE.createCGExecutorOppositeProperty();					
+		}
+		cgProperty.setUnderlyingPropertyId(cgPropertyId);
+		cgProperty.setAst(asProperty);
+		cgProperty.setName("IMPPROPid_" + asProperty.getName());
+		cgProperty.getDependsOn().add(cgPropertyId);
+		return cgProperty;
+	}
+
+	public @NonNull CGExecutorProperty createExecutorProperty(@NonNull Property asProperty) {
+		PropertyId propertyId = asProperty.getPropertyId();
+		CGElementId cgPropertyId = getElementId(propertyId);
+		CGExecutorProperty cgProperty = CGModelFactory.eINSTANCE.createCGExecutorNavigationProperty();					
+		cgProperty.setUnderlyingPropertyId(cgPropertyId);
+		cgProperty.setAst(asProperty);
+		cgProperty.setName("IMPPROPid_" + asProperty.getName());
+		cgProperty.getDependsOn().add(cgPropertyId);
+		return cgProperty;
 	}
 
 	public @NonNull CGExecutorType createExecutorType(@NonNull Type asType) {

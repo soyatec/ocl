@@ -124,6 +124,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OpaqueExpression = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OpaqueExpression", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Operation = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Operation", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OperationCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OperationCallExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OppositePropertyCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OppositePropertyCallExp", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OrderedSetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OrderedSetType", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Package = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Package", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Parameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Parameter", 0);
@@ -244,6 +245,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OclElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Operation = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Operation);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OperationCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OperationCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OppositePropertyCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OppositePropertyCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Package);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ParameterableElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Property = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Property);
@@ -346,6 +348,7 @@ public class PivotTables
 		public static final @NonNull EcoreExecutorType _Operation = new EcoreExecutorType(PivotPackage.Literals.OPERATION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _OperationCallExp = new EcoreExecutorType(PivotPackage.Literals.OPERATION_CALL_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _OperationTemplateParameter = new EcoreExecutorType(PivotPackage.Literals.OPERATION_TEMPLATE_PARAMETER, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _OppositePropertyCallExp = new EcoreExecutorType(PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _OrderedSetType = new EcoreExecutorType(PivotPackage.Literals.ORDERED_SET_TYPE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Package = new EcoreExecutorType(PivotPackage.Literals.PACKAGE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _PackageableElement = new EcoreExecutorType(PivotPackage.Literals.PACKAGEABLE_ELEMENT, PACKAGE, 0);
@@ -471,6 +474,7 @@ public class PivotTables
 			_Operation,
 			_OperationCallExp,
 			_OperationTemplateParameter,
+			_OppositePropertyCallExp,
 			_OrderedSetType,
 			_Package,
 			_PackageableElement,
@@ -1251,6 +1255,19 @@ public class PivotTables
 		private static final @NonNull ExecutorFragment _OperationTemplateParameter__OperationTemplateParameter = new ExecutorFragment(Types._OperationTemplateParameter, PivotTables.Types._OperationTemplateParameter);
 		private static final @NonNull ExecutorFragment _OperationTemplateParameter__TemplateParameter = new ExecutorFragment(Types._OperationTemplateParameter, PivotTables.Types._TemplateParameter);
 		private static final @NonNull ExecutorFragment _OperationTemplateParameter__Visitable = new ExecutorFragment(Types._OperationTemplateParameter, PivotTables.Types._Visitable);
+
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__CallExp = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._CallExp);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__Element = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__FeatureCallExp = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._FeatureCallExp);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__Nameable = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._Nameable);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__NamedElement = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__NavigationCallExp = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._NavigationCallExp);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__OCLExpression = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._OCLExpression);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__OclAny = new ExecutorFragment(Types._OppositePropertyCallExp, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__OclElement = new ExecutorFragment(Types._OppositePropertyCallExp, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__OppositePropertyCallExp = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._OppositePropertyCallExp);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__TypedElement = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._TypedElement);
+		private static final @NonNull ExecutorFragment _OppositePropertyCallExp__Visitable = new ExecutorFragment(Types._OppositePropertyCallExp, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _OrderedSetType__Class = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._Class);
 		private static final @NonNull ExecutorFragment _OrderedSetType__CollectionType = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._CollectionType);
@@ -2104,6 +2121,8 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _OperationCallExp__argument = new EcoreExecutorProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT, Types._OperationCallExp, 0);
 		public static final @NonNull ExecutorProperty _OperationCallExp__referredOperation = new EcoreExecutorProperty(PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION, Types._OperationCallExp, 1);
 
+		public static final @NonNull ExecutorProperty _OppositePropertyCallExp__referredProperty = new EcoreExecutorProperty(PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._OppositePropertyCallExp, 0);
+
 		public static final @NonNull ExecutorProperty _Package__Package = new ExecutorPropertyWithImplementation("Package", Types._Package, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PACKAGE__IMPORTED_PACKAGE));
 		public static final @NonNull ExecutorProperty _Package__Root = new ExecutorPropertyWithImplementation("Root", Types._Package, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ROOT__NESTED_PACKAGE));
 		public static final @NonNull ExecutorProperty _Package__importedPackage = new EcoreExecutorProperty(PivotPackage.Literals.PACKAGE__IMPORTED_PACKAGE, Types._Package, 2);
@@ -2127,26 +2146,27 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Property__ConstructorPart = new ExecutorPropertyWithImplementation("ConstructorPart", Types._Property, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRUCTOR_PART__REFERRED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__DynamicProperty = new ExecutorPropertyWithImplementation("DynamicProperty", Types._Property, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.DYNAMIC_PROPERTY__REFERRED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__NavigationCallExp = new ExecutorPropertyWithImplementation("NavigationCallExp", Types._Property, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE));
-		public static final @NonNull ExecutorProperty _Property__PropertyCallExp = new ExecutorPropertyWithImplementation("PropertyCallExp", Types._Property, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY));
-		public static final @NonNull ExecutorProperty _Property__association = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__ASSOCIATION, Types._Property, 4);
-		public static final @NonNull ExecutorProperty _Property__class = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__CLASS, Types._Property, 5);
-		public static final @NonNull ExecutorProperty _Property__default = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DEFAULT, Types._Property, 6);
-		public static final @NonNull ExecutorProperty _Property__defaultExpression = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION, Types._Property, 7);
-		public static final @NonNull ExecutorProperty _Property__implicit = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IMPLICIT, Types._Property, 8);
-		public static final @NonNull ExecutorProperty _Property__isComposite = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_COMPOSITE, Types._Property, 9);
-		public static final @NonNull ExecutorProperty _Property__isDerived = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_DERIVED, Types._Property, 10);
-		public static final @NonNull ExecutorProperty _Property__isID = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_ID, Types._Property, 11);
-		public static final @NonNull ExecutorProperty _Property__isReadOnly = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_READ_ONLY, Types._Property, 12);
-		public static final @NonNull ExecutorProperty _Property__isResolveProxies = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_RESOLVE_PROXIES, Types._Property, 13);
-		public static final @NonNull ExecutorProperty _Property__isTransient = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_TRANSIENT, Types._Property, 14);
-		public static final @NonNull ExecutorProperty _Property__isUnsettable = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_UNSETTABLE, Types._Property, 15);
-		public static final @NonNull ExecutorProperty _Property__isVolatile = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_VOLATILE, Types._Property, 16);
-		public static final @NonNull ExecutorProperty _Property__keys = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__KEYS, Types._Property, 17);
-		public static final @NonNull ExecutorProperty _Property__opposite = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__OPPOSITE, Types._Property, 18);
-		public static final @NonNull ExecutorProperty _Property__owningType = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__OWNING_TYPE, Types._Property, 19);
-		public static final @NonNull ExecutorProperty _Property__redefinedProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__REDEFINED_PROPERTY, Types._Property, 20);
-		public static final @NonNull ExecutorProperty _Property__referredProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__REFERRED_PROPERTY, Types._Property, 21);
-		public static final @NonNull ExecutorProperty _Property__subsettedProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__SUBSETTED_PROPERTY, Types._Property, 22);
+		public static final @NonNull ExecutorProperty _Property__OppositePropertyCallExp = new ExecutorPropertyWithImplementation("OppositePropertyCallExp", Types._Property, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY));
+		public static final @NonNull ExecutorProperty _Property__PropertyCallExp = new ExecutorPropertyWithImplementation("PropertyCallExp", Types._Property, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY));
+		public static final @NonNull ExecutorProperty _Property__association = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__ASSOCIATION, Types._Property, 5);
+		public static final @NonNull ExecutorProperty _Property__class = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__CLASS, Types._Property, 6);
+		public static final @NonNull ExecutorProperty _Property__default = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DEFAULT, Types._Property, 7);
+		public static final @NonNull ExecutorProperty _Property__defaultExpression = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION, Types._Property, 8);
+		public static final @NonNull ExecutorProperty _Property__implicit = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IMPLICIT, Types._Property, 9);
+		public static final @NonNull ExecutorProperty _Property__isComposite = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_COMPOSITE, Types._Property, 10);
+		public static final @NonNull ExecutorProperty _Property__isDerived = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_DERIVED, Types._Property, 11);
+		public static final @NonNull ExecutorProperty _Property__isID = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_ID, Types._Property, 12);
+		public static final @NonNull ExecutorProperty _Property__isReadOnly = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_READ_ONLY, Types._Property, 13);
+		public static final @NonNull ExecutorProperty _Property__isResolveProxies = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_RESOLVE_PROXIES, Types._Property, 14);
+		public static final @NonNull ExecutorProperty _Property__isTransient = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_TRANSIENT, Types._Property, 15);
+		public static final @NonNull ExecutorProperty _Property__isUnsettable = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_UNSETTABLE, Types._Property, 16);
+		public static final @NonNull ExecutorProperty _Property__isVolatile = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_VOLATILE, Types._Property, 17);
+		public static final @NonNull ExecutorProperty _Property__keys = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__KEYS, Types._Property, 18);
+		public static final @NonNull ExecutorProperty _Property__opposite = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__OPPOSITE, Types._Property, 19);
+		public static final @NonNull ExecutorProperty _Property__owningType = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__OWNING_TYPE, Types._Property, 20);
+		public static final @NonNull ExecutorProperty _Property__redefinedProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__REDEFINED_PROPERTY, Types._Property, 21);
+		public static final @NonNull ExecutorProperty _Property__referredProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__REFERRED_PROPERTY, Types._Property, 22);
+		public static final @NonNull ExecutorProperty _Property__subsettedProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__SUBSETTED_PROPERTY, Types._Property, 23);
 
 		public static final @NonNull ExecutorProperty _PropertyCallExp__referredProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._PropertyCallExp, 0);
 
@@ -3278,6 +3298,23 @@ public class PivotTables
 		};
 		private static final @NonNull int[] __OperationTemplateParameter = { 1,1,1,1,1,1 };
 
+		private static final @NonNull ExecutorFragment[] _OppositePropertyCallExp =
+		{
+			Fragments._OppositePropertyCallExp__OclAny /* 0 */,
+			Fragments._OppositePropertyCallExp__OclElement /* 1 */,
+			Fragments._OppositePropertyCallExp__Nameable /* 2 */,
+			Fragments._OppositePropertyCallExp__Visitable /* 2 */,
+			Fragments._OppositePropertyCallExp__Element /* 3 */,
+			Fragments._OppositePropertyCallExp__NamedElement /* 4 */,
+			Fragments._OppositePropertyCallExp__TypedElement /* 5 */,
+			Fragments._OppositePropertyCallExp__OCLExpression /* 6 */,
+			Fragments._OppositePropertyCallExp__CallExp /* 7 */,
+			Fragments._OppositePropertyCallExp__FeatureCallExp /* 8 */,
+			Fragments._OppositePropertyCallExp__NavigationCallExp /* 9 */,
+			Fragments._OppositePropertyCallExp__OppositePropertyCallExp /* 10 */
+		};
+		private static final @NonNull int[] __OppositePropertyCallExp = { 1,1,2,1,1,1,1,1,1,1,1 };
+
 		private static final @NonNull ExecutorFragment[] _OrderedSetType =
 		{
 			Fragments._OrderedSetType__OclAny /* 0 */,
@@ -4155,6 +4192,7 @@ public class PivotTables
 			Types._Operation.initFragments(_Operation, __Operation);
 			Types._OperationCallExp.initFragments(_OperationCallExp, __OperationCallExp);
 			Types._OperationTemplateParameter.initFragments(_OperationTemplateParameter, __OperationTemplateParameter);
+			Types._OppositePropertyCallExp.initFragments(_OppositePropertyCallExp, __OppositePropertyCallExp);
 			Types._OrderedSetType.initFragments(_OrderedSetType, __OrderedSetType);
 			Types._Package.initFragments(_Package, __Package);
 			Types._PackageableElement.initFragments(_PackageableElement, __PackageableElement);
@@ -6569,6 +6607,41 @@ public class PivotTables
 		};
 		private static final @NonNull ExecutorOperation[] _OperationTemplateParameter__TemplateParameter = {};
 		private static final @NonNull ExecutorOperation[] _OperationTemplateParameter__Visitable = {};
+
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__OppositePropertyCallExp = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__CallExp = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type,String) */
+		};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__FeatureCallExp = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__Nameable = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__NamedElement = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__NavigationCallExp = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__OCLExpression = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
+		};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__TypedElement = {};
+		private static final @NonNull ExecutorOperation[] _OppositePropertyCallExp__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _OrderedSetType__OrderedSetType = {};
 		private static final @NonNull ExecutorOperation[] _OrderedSetType__Class = {};
@@ -9286,6 +9359,19 @@ public class PivotTables
 			Fragments._OperationTemplateParameter__TemplateParameter.initOperations(_OperationTemplateParameter__TemplateParameter);
 			Fragments._OperationTemplateParameter__Visitable.initOperations(_OperationTemplateParameter__Visitable);
 
+			Fragments._OppositePropertyCallExp__CallExp.initOperations(_OppositePropertyCallExp__CallExp);
+			Fragments._OppositePropertyCallExp__Element.initOperations(_OppositePropertyCallExp__Element);
+			Fragments._OppositePropertyCallExp__FeatureCallExp.initOperations(_OppositePropertyCallExp__FeatureCallExp);
+			Fragments._OppositePropertyCallExp__Nameable.initOperations(_OppositePropertyCallExp__Nameable);
+			Fragments._OppositePropertyCallExp__NamedElement.initOperations(_OppositePropertyCallExp__NamedElement);
+			Fragments._OppositePropertyCallExp__NavigationCallExp.initOperations(_OppositePropertyCallExp__NavigationCallExp);
+			Fragments._OppositePropertyCallExp__OCLExpression.initOperations(_OppositePropertyCallExp__OCLExpression);
+			Fragments._OppositePropertyCallExp__OclAny.initOperations(_OppositePropertyCallExp__OclAny);
+			Fragments._OppositePropertyCallExp__OclElement.initOperations(_OppositePropertyCallExp__OclElement);
+			Fragments._OppositePropertyCallExp__OppositePropertyCallExp.initOperations(_OppositePropertyCallExp__OppositePropertyCallExp);
+			Fragments._OppositePropertyCallExp__TypedElement.initOperations(_OppositePropertyCallExp__TypedElement);
+			Fragments._OppositePropertyCallExp__Visitable.initOperations(_OppositePropertyCallExp__Visitable);
+
 			Fragments._OrderedSetType__Class.initOperations(_OrderedSetType__Class);
 			Fragments._OrderedSetType__CollectionType.initOperations(_OrderedSetType__CollectionType);
 			Fragments._OrderedSetType__DataType.initOperations(_OrderedSetType__DataType);
@@ -11430,6 +11516,33 @@ public class PivotTables
 			PivotTables.Properties._TemplateParameter__signature
 		};
 
+		private static final @NonNull ExecutorProperty[] _OppositePropertyCallExp = {
+			PivotTables.Properties._OCLExpression__CallExp,
+			PivotTables.Properties._OCLExpression__CollectionItem,
+			PivotTables.Properties._Element__Comment,
+			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._OCLExpression__ConstructorPart,
+			PivotTables.Properties._OCLExpression__LetExp,
+			PivotTables.Properties._OCLExpression__LoopExp,
+			PivotTables.Properties._OCLExpression__NavigationCallExp,
+			PivotTables.Properties._OCLExpression__OperationCallExp,
+			PivotTables.Properties._OCLExpression__TupleLiteralPart,
+			PivotTables.Properties._OCLExpression__Variable,
+			PivotTables.Properties._Element__extension,
+			PivotTables.Properties._CallExp__implicit,
+			PivotTables.Properties._FeatureCallExp__isPre,
+			PivotTables.Properties._TypedElement__isRequired,
+			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._NavigationCallExp__navigationSource,
+			PivotTables.Properties._NamedElement__ownedAnnotation,
+			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._NavigationCallExp__qualifier,
+			PivotTables.Properties._OppositePropertyCallExp__referredProperty,
+			PivotTables.Properties._CallExp__source,
+			PivotTables.Properties._TypedElement__type
+		};
+
 		private static final @NonNull ExecutorProperty[] _OrderedSetType = {
 			PivotTables.Properties._Class__Class,
 			PivotTables.Properties._Type__CollectionType,
@@ -11639,6 +11752,7 @@ public class PivotTables
 			PivotTables.Properties._Property__ConstructorPart,
 			PivotTables.Properties._Property__DynamicProperty,
 			PivotTables.Properties._Property__NavigationCallExp,
+			PivotTables.Properties._Property__OppositePropertyCallExp,
 			PivotTables.Properties._Property__PropertyCallExp,
 			PivotTables.Properties._Property__association,
 			PivotTables.Properties._Property__class,
@@ -12753,6 +12867,7 @@ public class PivotTables
 			Fragments._Operation__Operation.initProperties(_Operation);
 			Fragments._OperationCallExp__OperationCallExp.initProperties(_OperationCallExp);
 			Fragments._OperationTemplateParameter__OperationTemplateParameter.initProperties(_OperationTemplateParameter);
+			Fragments._OppositePropertyCallExp__OppositePropertyCallExp.initProperties(_OppositePropertyCallExp);
 			Fragments._OrderedSetType__OrderedSetType.initProperties(_OrderedSetType);
 			Fragments._Package__Package.initProperties(_Package);
 			Fragments._PackageableElement__PackageableElement.initProperties(_PackageableElement);

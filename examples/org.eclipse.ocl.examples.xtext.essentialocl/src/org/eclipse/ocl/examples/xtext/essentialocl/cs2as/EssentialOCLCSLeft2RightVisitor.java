@@ -55,11 +55,13 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -873,9 +875,22 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 		CallExp outerExpression = null;
 		OCLExpression source = resolveNavigationSource(csNameExp, property);
 		if (source != null) {
-			PropertyCallExp innerExpression = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
+			NavigationCallExp innerExpression;
+			if (property.isImplicit()) {
+				OppositePropertyCallExp callExp = context.refreshModelElement(OppositePropertyCallExp.class, PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP, csNameExp);
+				if (callExp != null) {
+					callExp.setReferredProperty(property.getOpposite());
+				}
+				innerExpression = callExp;
+			}
+			else {
+				PropertyCallExp callExp = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
+				if (callExp != null) {
+					callExp.setReferredProperty(property);
+				}
+				innerExpression = callExp;
+			}
 			if (innerExpression != null) {
-				innerExpression.setReferredProperty(property);
 				resolveAtPre(csNameExp, innerExpression);
 				Map<TemplateParameter, ParameterableElement> templateBindings = new HashMap<TemplateParameter, ParameterableElement>();
 				Type sourceType = source.getType();

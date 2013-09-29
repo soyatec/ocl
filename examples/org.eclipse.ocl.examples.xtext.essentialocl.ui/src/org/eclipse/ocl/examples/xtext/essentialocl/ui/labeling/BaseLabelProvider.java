@@ -69,6 +69,7 @@ import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -642,6 +643,16 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	protected String text(OperationCallExp ele) {
 		Operation referredOperation = ele.getReferredOperation();
 		return referredOperation != null ? text(referredOperation) : "<<null>>";
+	}
+
+	protected String image(OppositePropertyCallExp ele) {
+		return "/org.eclipse.ocl.edit/icons/full/obj16/OppositePropertyCallExp.gif";
+	}
+
+	protected String text(OppositePropertyCallExp ele) {
+		Property referredOppositeProperty = ele.getReferredProperty();
+		Property referredProperty = referredOppositeProperty != null ? referredOppositeProperty.getOpposite() : null;
+		return referredProperty != null ? text(referredProperty) : "<<null>>";
 	}
 
 	protected String image(OrderedSetType ele) {

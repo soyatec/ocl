@@ -161,6 +161,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGEcoreOperationCallExpAdapter();
 			}
 			@Override
+			public Adapter caseCGEcoreOppositePropertyCallExp(CGEcoreOppositePropertyCallExp object) {
+				return createCGEcoreOppositePropertyCallExpAdapter();
+			}
+			@Override
 			public Adapter caseCGEcorePropertyCallExp(CGEcorePropertyCallExp object) {
 				return createCGEcorePropertyCallExpAdapter();
 			}
@@ -195,6 +199,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGExecutorOperationCallExp(CGExecutorOperationCallExp object) {
 				return createCGExecutorOperationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseCGExecutorOppositePropertyCallExp(CGExecutorOppositePropertyCallExp object) {
+				return createCGExecutorOppositePropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter caseCGExecutorProperty(CGExecutorProperty object) {
@@ -285,6 +293,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGNamedElementAdapter();
 			}
 			@Override
+			public Adapter caseCGNavigationCallExp(CGNavigationCallExp object) {
+				return createCGNavigationCallExpAdapter();
+			}
+			@Override
 			public Adapter caseCGNull(CGNull object) {
 				return createCGNullAdapter();
 			}
@@ -299,6 +311,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGOperationCallExp(CGOperationCallExp object) {
 				return createCGOperationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseCGOppositePropertyCallExp(CGOppositePropertyCallExp object) {
+				return createCGOppositePropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter caseCGPackage(CGPackage object) {
@@ -615,6 +631,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGEcoreOperationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp <em>CG Ecore Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createCGEcoreOppositePropertyCallExpAdapter() {
 		return null;
 	}
 
@@ -1053,6 +1083,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp <em>CG Executor Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createCGExecutorOppositePropertyCallExpAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty <em>CG Executor Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1123,6 +1167,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp <em>CG Navigation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp
+	 * @generated
+	 */
+	public Adapter createCGNavigationCallExpAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNull <em>CG Null</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1175,6 +1233,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGOperationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp <em>CG Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp
+	 * @generated
+	 */
+	public Adapter createCGOppositePropertyCallExpAdapter() {
 		return null;
 	}
 

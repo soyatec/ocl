@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StateExp;
@@ -245,6 +246,14 @@ public abstract class AbstractEvaluationVisitorDecorator<EV extends EvaluationVi
     @Override
 	public Object visitOperationCallExp(@NonNull OperationCallExp callExp) {
         return delegate.visitOperationCallExp(callExp);
+    }
+
+    /**
+     * Delegates to my decorated visitor.
+     */
+    @Override
+	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp callExp) {
+        return delegate.visitOppositePropertyCallExp(callExp);
     }
 
     /**

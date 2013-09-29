@@ -65,11 +65,13 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -295,6 +297,30 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 		if (operation.getType() != null) {
 			append(" ");
 			appendElementType(operation);
+		}
+	}
+
+	protected void appendPropertyCallExp(@NonNull NavigationCallExp pc, Property property) {
+		// source is null when the property call expression is an
+        //    association class navigation qualifier
+        OCLExpression source = pc.getSource();
+		safeVisit(source);
+        Type sourceType = source != null ? source.getType() : null;
+        context.append(sourceType instanceof CollectionType
+				? PivotConstants.COLLECTION_NAVIGATION_OPERATOR
+				: PivotConstants.OBJECT_NAVIGATION_OPERATOR);
+		appendName(property);
+		appendAtPre(pc);
+        List<OCLExpression> qualifiers = pc.getQualifier();
+		if (!qualifiers.isEmpty()) {
+			append("["); //$NON-NLS-1$
+			String prefix = ""; //$NON-NLS-1$
+			for (OCLExpression qualifier : qualifiers) {
+				append(prefix);
+				safeVisit(qualifier);
+				prefix = ", "; //$NON-NLS-1$
+			}
+			append("]");
 		}
 	}
 
@@ -988,6 +1014,21 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 		return null;
 	}
 
+	/**
+	 * Callback for an OppositePropertyCallExp visit.
+	 * 
+	 * @param pc
+	 *            the property call expression
+	 * @return string source.ref
+	 */
+	@Override
+	public String visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp pc) {
+		Property referredOppositeProperty = pc.getReferredProperty();
+		Property referredProperty = referredOppositeProperty != null ? referredOppositeProperty.getOpposite() : null;
+        appendPropertyCallExp(pc, referredProperty);
+		return null;
+	}
+
 	@Override
 	public String visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pkg) {
 		appendQualifiedName(pkg.getNestingPackage(), "::", pkg);
@@ -1019,7 +1060,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 	}
 
 	/**
-	 * Callback for an AssociationEndCallExp visit.
+	 * Callback for an PropertyCallExp visit.
 	 * 
 	 * @param pc
 	 *            the property call expression
@@ -1027,28 +1068,8 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 	 */
 	@Override
 	public String visitPropertyCallExp(@NonNull PropertyCallExp pc) {
-        // source is null when the property call expression is an
-        //    association class navigation qualifier
-        OCLExpression source = pc.getSource();
-		safeVisit(source);
 		Property property = pc.getReferredProperty();
-        Type sourceType = source != null ? source.getType() : null;
-        context.append(sourceType instanceof CollectionType
-				? PivotConstants.COLLECTION_NAVIGATION_OPERATOR
-				: PivotConstants.OBJECT_NAVIGATION_OPERATOR);
-		appendName(property);
-		appendAtPre(pc);
-        List<OCLExpression> qualifiers = pc.getQualifier();
-		if (!qualifiers.isEmpty()) {
-			append("["); //$NON-NLS-1$
-			String prefix = ""; //$NON-NLS-1$
-			for (OCLExpression qualifier : qualifiers) {
-				append(prefix);
-				safeVisit(qualifier);
-				prefix = ", "; //$NON-NLS-1$
-			}
-			append("]");
-		}
+        appendPropertyCallExp(pc, property);
 		return null;
 	}
 

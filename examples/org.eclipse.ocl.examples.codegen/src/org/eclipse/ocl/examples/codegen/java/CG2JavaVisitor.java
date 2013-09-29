@@ -59,6 +59,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorNavigationProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
@@ -1269,6 +1270,29 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			CGValuedElement argument = getExpression(cgArgument);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
+		js.append(");\n");
+		return true;
+	}
+
+	@Override
+	public @NonNull Boolean visitCGExecutorOppositePropertyCallExp(@NonNull CGExecutorOppositePropertyCallExp cgPropertyCallExp) {
+		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
+		//
+		if (!js.appendLocalStatements(source)) {
+			return false;
+		}
+		//
+		js.appendDeclaration(cgPropertyCallExp);
+		js.append(" = ");
+		js.appendClassCast(cgPropertyCallExp);
+		js.appendReferenceTo(cgPropertyCallExp.getExecutorProperty());
+		js.append(".evaluate(");
+//		js.append(getValueName(localContext.getEvaluatorParameter(cgPropertyCallExp)));
+		js.append(JavaConstants.EVALUATOR_NAME);
+		js.append(", ");
+		js.appendIdReference(cgPropertyCallExp.getASTypeId());
+		js.append(", ");
+		js.appendValueName(source);
 		js.append(");\n");
 		return true;
 	}

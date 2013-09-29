@@ -94,7 +94,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGElement()
 	 * @generated
 	 */
-	int CG_ELEMENT = 21;
+	int CG_ELEMENT = 22;
 
 	/**
 	 * The number of structural features of the '<em>CG Element</em>' class.
@@ -113,7 +113,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNamedElement()
 	 * @generated
 	 */
-	int CG_NAMED_ELEMENT = 50;
+	int CG_NAMED_ELEMENT = 52;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -142,7 +142,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGModel()
 	 * @generated
 	 */
-	int CG_MODEL = 49;
+	int CG_MODEL = 51;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypedElementImpl <em>CG Typed Element</em>}' class.
@@ -152,7 +152,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTypedElement()
 	 * @generated
 	 */
-	int CG_TYPED_ELEMENT = 70;
+	int CG_TYPED_ELEMENT = 74;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl <em>CG Valued Element</em>}' class.
@@ -162,7 +162,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGValuedElement()
 	 * @generated
 	 */
-	int CG_VALUED_ELEMENT = 73;
+	int CG_VALUED_ELEMENT = 77;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIfExpImpl <em>CG If Exp</em>}' class.
@@ -172,7 +172,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIfExp()
 	 * @generated
 	 */
-	int CG_IF_EXP = 34;
+	int CG_IF_EXP = 36;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl <em>CG Operation</em>}' class.
@@ -182,7 +182,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGOperation()
 	 * @generated
 	 */
-	int CG_OPERATION = 53;
+	int CG_OPERATION = 56;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPackageImpl <em>CG Package</em>}' class.
@@ -192,7 +192,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGPackage()
 	 * @generated
 	 */
-	int CG_PACKAGE = 55;
+	int CG_PACKAGE = 59;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGParameterImpl <em>CG Parameter</em>}' class.
@@ -202,7 +202,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGParameter()
 	 * @generated
 	 */
-	int CG_PARAMETER = 56;
+	int CG_PARAMETER = 60;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBooleanImpl <em>CG Boolean</em>}' class.
@@ -222,7 +222,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGInteger()
 	 * @generated
 	 */
-	int CG_INTEGER = 35;
+	int CG_INTEGER = 37;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGInvalidImpl <em>CG Invalid</em>}' class.
@@ -232,7 +232,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGInvalid()
 	 * @generated
 	 */
-	int CG_INVALID = 36;
+	int CG_INVALID = 38;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstantImpl <em>CG Constant</em>}' class.
@@ -292,7 +292,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryOperationCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP = 46;
+	int CG_LIBRARY_OPERATION_CALL_EXP = 48;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryPropertyCallExpImpl <em>CG Library Property Call Exp</em>}' class.
@@ -302,7 +302,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryPropertyCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP = 47;
+	int CG_LIBRARY_PROPERTY_CALL_EXP = 49;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNullImpl <em>CG Null</em>}' class.
@@ -312,7 +312,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNull()
 	 * @generated
 	 */
-	int CG_NULL = 51;
+	int CG_NULL = 54;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl <em>CG Operation Call Exp</em>}' class.
@@ -322,7 +322,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGOperationCallExp()
 	 * @generated
 	 */
-	int CG_OPERATION_CALL_EXP = 54;
+	int CG_OPERATION_CALL_EXP = 57;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyImpl <em>CG Property</em>}' class.
@@ -332,7 +332,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGProperty()
 	 * @generated
 	 */
-	int CG_PROPERTY = 57;
+	int CG_PROPERTY = 61;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyCallExpImpl <em>CG Property Call Exp</em>}' class.
@@ -342,7 +342,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGPropertyCallExp()
 	 * @generated
 	 */
-	int CG_PROPERTY_CALL_EXP = 58;
+	int CG_PROPERTY_CALL_EXP = 62;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGRealImpl <em>CG Real</em>}' class.
@@ -352,7 +352,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGReal()
 	 * @generated
 	 */
-	int CG_REAL = 59;
+	int CG_REAL = 63;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGStringImpl <em>CG String</em>}' class.
@@ -362,7 +362,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGString()
 	 * @generated
 	 */
-	int CG_STRING = 61;
+	int CG_STRING = 65;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl <em>CG Variable</em>}' class.
@@ -372,7 +372,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGVariable()
 	 * @generated
 	 */
-	int CG_VARIABLE = 74;
+	int CG_VARIABLE = 78;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLocalVariableImpl <em>CG Local Variable</em>}' class.
@@ -382,7 +382,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLocalVariable()
 	 * @generated
 	 */
-	int CG_LOCAL_VARIABLE = 48;
+	int CG_LOCAL_VARIABLE = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOperationCallExpImpl <em>CG Ecore Operation Call Exp</em>}' class.
@@ -402,7 +402,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcorePropertyCallExp()
 	 * @generated
 	 */
-	int CG_ECORE_PROPERTY_CALL_EXP = 20;
+	int CG_ECORE_PROPERTY_CALL_EXP = 21;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstantExpImpl <em>CG Constant Exp</em>}' class.
@@ -422,7 +422,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGFinalVariable()
 	 * @generated
 	 */
-	int CG_FINAL_VARIABLE = 32;
+	int CG_FINAL_VARIABLE = 34;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLetExpImpl <em>CG Let Exp</em>}' class.
@@ -432,7 +432,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLetExp()
 	 * @generated
 	 */
-	int CG_LET_EXP = 42;
+	int CG_LET_EXP = 44;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGSettableVariableImpl <em>CG Settable Variable</em>}' class.
@@ -442,7 +442,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGSettableVariable()
 	 * @generated
 	 */
-	int CG_SETTABLE_VARIABLE = 60;
+	int CG_SETTABLE_VARIABLE = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGThrowExpImpl <em>CG Throw Exp</em>}' class.
@@ -452,7 +452,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGThrowExp()
 	 * @generated
 	 */
-	int CG_THROW_EXP = 64;
+	int CG_THROW_EXP = 68;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTupleExpImpl <em>CG Tuple Exp</em>}' class.
@@ -462,7 +462,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTupleExp()
 	 * @generated
 	 */
-	int CG_TUPLE_EXP = 65;
+	int CG_TUPLE_EXP = 69;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartImpl <em>CG Tuple Part</em>}' class.
@@ -472,7 +472,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTuplePart()
 	 * @generated
 	 */
-	int CG_TUPLE_PART = 66;
+	int CG_TUPLE_PART = 70;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeExpImpl <em>CG Type Exp</em>}' class.
@@ -482,7 +482,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTypeExp()
 	 * @generated
 	 */
-	int CG_TYPE_EXP = 69;
+	int CG_TYPE_EXP = 73;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorExpImpl <em>CG Constructor Exp</em>}' class.
@@ -532,7 +532,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGElementId()
 	 * @generated
 	 */
-	int CG_ELEMENT_ID = 22;
+	int CG_ELEMENT_ID = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl <em>CG Iteration Call Exp</em>}' class.
@@ -542,7 +542,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIterationCallExp()
 	 * @generated
 	 */
-	int CG_ITERATION_CALL_EXP = 40;
+	int CG_ITERATION_CALL_EXP = 42;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBoxExpImpl <em>CG Box Exp</em>}' class.
@@ -562,7 +562,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryIterationCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP = 44;
+	int CG_LIBRARY_ITERATION_CALL_EXP = 46;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTextImpl <em>CG Text</em>}' class.
@@ -572,7 +572,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGText()
 	 * @generated
 	 */
-	int CG_TEXT = 62;
+	int CG_TEXT = 66;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeIdImpl <em>CG Type Id</em>}' class.
@@ -582,7 +582,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTypeId()
 	 * @generated
 	 */
-	int CG_TYPE_ID = 68;
+	int CG_TYPE_ID = 72;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -718,7 +718,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOperation()
 	 * @generated
 	 */
-	int CG_EXECUTOR_OPERATION = 27;
+	int CG_EXECUTOR_OPERATION = 28;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOperationCallExpImpl <em>CG Executor Operation Call Exp</em>}' class.
@@ -728,7 +728,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOperationCallExp()
 	 * @generated
 	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP = 28;
+	int CG_EXECUTOR_OPERATION_CALL_EXP = 29;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorPropertyImpl <em>CG Executor Property</em>}' class.
@@ -738,7 +738,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_PROPERTY = 29;
+	int CG_EXECUTOR_PROPERTY = 31;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorPropertyCallExpImpl <em>CG Executor Property Call Exp</em>}' class.
@@ -748,7 +748,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorPropertyCallExp()
 	 * @generated
 	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP = 30;
+	int CG_EXECUTOR_PROPERTY_CALL_EXP = 32;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorCompositionPropertyImpl <em>CG Executor Composition Property</em>}' class.
@@ -758,7 +758,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorCompositionProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY = 23;
+	int CG_EXECUTOR_COMPOSITION_PROPERTY = 24;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorConstructorPartImpl <em>CG Executor Constructor Part</em>}' class.
@@ -768,7 +768,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorConstructorPart()
 	 * @generated
 	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART = 24;
+	int CG_EXECUTOR_CONSTRUCTOR_PART = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorNavigationPropertyImpl <em>CG Executor Navigation Property</em>}' class.
@@ -778,7 +778,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorNavigationProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY = 25;
+	int CG_EXECUTOR_NAVIGATION_PROPERTY = 26;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorTypeImpl <em>CG Executor Type</em>}' class.
@@ -788,7 +788,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorType()
 	 * @generated
 	 */
-	int CG_EXECUTOR_TYPE = 31;
+	int CG_EXECUTOR_TYPE = 33;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGGuardExpImpl <em>CG Guard Exp</em>}' class.
@@ -798,7 +798,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGGuardExp()
 	 * @generated
 	 */
-	int CG_GUARD_EXP = 33;
+	int CG_GUARD_EXP = 35;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryIterateCallExpImpl <em>CG Library Iterate Call Exp</em>}' class.
@@ -808,7 +808,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryIterateCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP = 43;
+	int CG_LIBRARY_ITERATE_CALL_EXP = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstraintImpl <em>CG Constraint</em>}' class.
@@ -828,7 +828,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOppositeProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY = 26;
+	int CG_EXECUTOR_OPPOSITE_PROPERTY = 27;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIsInvalidExpImpl <em>CG Is Invalid Exp</em>}' class.
@@ -838,7 +838,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIsInvalidExp()
 	 * @generated
 	 */
-	int CG_IS_INVALID_EXP = 38;
+	int CG_IS_INVALID_EXP = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIsUndefinedExpImpl <em>CG Is Undefined Exp</em>}' class.
@@ -848,7 +848,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIsUndefinedExp()
 	 * @generated
 	 */
-	int CG_IS_UNDEFINED_EXP = 39;
+	int CG_IS_UNDEFINED_EXP = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBuiltInIterationCallExpImpl <em>CG Built In Iteration Call Exp</em>}' class.
@@ -878,7 +878,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIterator()
 	 * @generated
 	 */
-	int CG_ITERATOR = 41;
+	int CG_ITERATOR = 43;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOperationImpl <em>CG Ecore Operation</em>}' class.
@@ -3242,13 +3242,23 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNavigationCallExpImpl <em>CG Navigation Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNavigationCallExpImpl
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNavigationCallExp()
+	 * @generated
+	 */
+	int CG_NAVIGATION_CALL_EXP = 53;
+
+	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__AST = CG_CALL_EXP__AST;
+	int CG_NAVIGATION_CALL_EXP__AST = CG_CALL_EXP__AST;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3257,7 +3267,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__NAME = CG_CALL_EXP__NAME;
+	int CG_NAVIGATION_CALL_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3266,7 +3276,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
+	int CG_NAVIGATION_CALL_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -3275,7 +3285,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
+	int CG_NAVIGATION_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -3284,7 +3294,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
+	int CG_NAVIGATION_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
@@ -3293,7 +3303,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__OWNS = CG_CALL_EXP__OWNS;
+	int CG_NAVIGATION_CALL_EXP__OWNS = CG_CALL_EXP__OWNS;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -3302,7 +3312,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
+	int CG_NAVIGATION_CALL_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -3311,7 +3321,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
+	int CG_NAVIGATION_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -3320,7 +3330,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__SOURCE = CG_CALL_EXP__SOURCE;
+	int CG_NAVIGATION_CALL_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
@@ -3329,7 +3339,333 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_NAVIGATION_CALL_EXP__REFERRED_PROPERTY = CG_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>CG Navigation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_NAVIGATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOppositePropertyCallExpImpl <em>CG Opposite Property Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOppositePropertyCallExpImpl
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGOppositePropertyCallExp()
+	 * @generated
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP = 58;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__AST = CG_NAVIGATION_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__NAME = CG_NAVIGATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__TYPE_ID = CG_NAVIGATION_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__REQUIRED = CG_NAVIGATION_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__DEPENDS_ON = CG_NAVIGATION_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__OWNS = CG_NAVIGATION_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__INVALIDATING = CG_NAVIGATION_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__VALIDATING = CG_NAVIGATION_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__SOURCE = CG_NAVIGATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_NAVIGATION_CALL_EXP__REFERRED_PROPERTY;
+
+	/**
+	 * The number of structural features of the '<em>CG Opposite Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_NAVIGATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOppositePropertyCallExpImpl <em>CG Ecore Opposite Property Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOppositePropertyCallExpImpl
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcoreOppositePropertyCallExp()
+	 * @generated
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP = 20;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__AST = CG_OPPOSITE_PROPERTY_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__NAME = CG_OPPOSITE_PROPERTY_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__TYPE_ID = CG_OPPOSITE_PROPERTY_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__REQUIRED = CG_OPPOSITE_PROPERTY_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__DEPENDS_ON = CG_OPPOSITE_PROPERTY_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__OWNS = CG_OPPOSITE_PROPERTY_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__INVALIDATING = CG_OPPOSITE_PROPERTY_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__VALIDATING = CG_OPPOSITE_PROPERTY_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__SOURCE = CG_OPPOSITE_PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__ESTRUCTURAL_FEATURE = CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>CG Ecore Opposite Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__AST = CG_NAVIGATION_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__NAME = CG_NAVIGATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__TYPE_ID = CG_NAVIGATION_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__REQUIRED = CG_NAVIGATION_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__DEPENDS_ON = CG_NAVIGATION_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__OWNS = CG_NAVIGATION_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__INVALIDATING = CG_NAVIGATION_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__VALIDATING = CG_NAVIGATION_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__SOURCE = CG_NAVIGATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_NAVIGATION_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The number of structural features of the '<em>CG Property Call Exp</em>' class.
@@ -3338,7 +3674,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
+	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_NAVIGATION_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -4070,6 +4406,124 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOppositePropertyCallExpImpl <em>CG Executor Opposite Property Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOppositePropertyCallExpImpl
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOppositePropertyCallExp()
+	 * @generated
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP = 30;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__AST = CG_OPPOSITE_PROPERTY_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__NAME = CG_OPPOSITE_PROPERTY_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__TYPE_ID = CG_OPPOSITE_PROPERTY_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__REQUIRED = CG_OPPOSITE_PROPERTY_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__DEPENDS_ON = CG_OPPOSITE_PROPERTY_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__OWNS = CG_OPPOSITE_PROPERTY_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__INVALIDATING = CG_OPPOSITE_PROPERTY_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__VALIDATING = CG_OPPOSITE_PROPERTY_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__SOURCE = CG_OPPOSITE_PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__EXECUTOR_PROPERTY = CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>CG Executor Opposite Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4518,7 +4972,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNumber()
 	 * @generated
 	 */
-	int CG_NUMBER = 52;
+	int CG_NUMBER = 55;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -4753,7 +5207,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIsEqualExp()
 	 * @generated
 	 */
-	int CG_IS_EQUAL_EXP = 37;
+	int CG_IS_EQUAL_EXP = 39;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -5393,7 +5847,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryOperation()
 	 * @generated
 	 */
-	int CG_LIBRARY_OPERATION = 45;
+	int CG_LIBRARY_OPERATION = 47;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -6339,7 +6793,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTextParameter()
 	 * @generated
 	 */
-	int CG_TEXT_PARAMETER = 63;
+	int CG_TEXT_PARAMETER = 67;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -6682,7 +7136,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTuplePartCallExp()
 	 * @generated
 	 */
-	int CG_TUPLE_PART_CALL_EXP = 67;
+	int CG_TUPLE_PART_CALL_EXP = 71;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -6944,7 +7398,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGUnboxExp()
 	 * @generated
 	 */
-	int CG_UNBOX_EXP = 71;
+	int CG_UNBOX_EXP = 75;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -7044,7 +7498,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGUnlimited()
 	 * @generated
 	 */
-	int CG_UNLIMITED = 72;
+	int CG_UNLIMITED = 76;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -7117,7 +7571,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGVariableExp()
 	 * @generated
 	 */
-	int CG_VARIABLE_EXP = 75;
+	int CG_VARIABLE_EXP = 79;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -7199,7 +7653,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNameable()
 	 * @generated
 	 */
-	int NAMEABLE = 76;
+	int NAMEABLE = 80;
 
 	/**
 	 * The number of structural features of the '<em>Nameable</em>' class.
@@ -7218,7 +7672,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getElement()
 	 * @generated
 	 */
-	int ELEMENT = 77;
+	int ELEMENT = 81;
 
 	/**
 	 * The meta object id for the '<em>Element Id</em>' data type.
@@ -7228,7 +7682,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getElementId()
 	 * @generated
 	 */
-	int ELEMENT_ID = 78;
+	int ELEMENT_ID = 82;
 
 	/**
 	 * The meta object id for the '<em>Enumeration Literal Id</em>' data type.
@@ -7238,7 +7692,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getEnumerationLiteralId()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL_ID = 79;
+	int ENUMERATION_LITERAL_ID = 83;
 
 	/**
 	 * The meta object id for the '<em>Iteration</em>' data type.
@@ -7248,7 +7702,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getIteration()
 	 * @generated
 	 */
-	int ITERATION = 80;
+	int ITERATION = 84;
 
 	/**
 	 * The meta object id for the '<em>Library Iteration</em>' data type.
@@ -7258,7 +7712,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryIteration()
 	 * @generated
 	 */
-	int LIBRARY_ITERATION = 81;
+	int LIBRARY_ITERATION = 85;
 
 	/**
 	 * The meta object id for the '<em>Library Operation</em>' data type.
@@ -7268,7 +7722,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryOperation()
 	 * @generated
 	 */
-	int LIBRARY_OPERATION = 82;
+	int LIBRARY_OPERATION = 86;
 
 	/**
 	 * The meta object id for the '<em>Library Property</em>' data type.
@@ -7278,7 +7732,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryProperty()
 	 * @generated
 	 */
-	int LIBRARY_PROPERTY = 83;
+	int LIBRARY_PROPERTY = 87;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -7288,7 +7742,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 84;
+	int NUMBER = 88;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -7298,7 +7752,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 85;
+	int OBJECT = 89;
 
 	/**
 	 * The meta object id for the '<em>Operation</em>' data type.
@@ -7308,7 +7762,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 86;
+	int OPERATION = 90;
 
 	/**
 	 * The meta object id for the '<em>Property</em>' data type.
@@ -7318,7 +7772,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 87;
+	int PROPERTY = 91;
 
 	/**
 	 * The meta object id for the '<em>Tuple Part Id</em>' data type.
@@ -7328,7 +7782,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getTuplePartId()
 	 * @generated
 	 */
-	int TUPLE_PART_ID = 88;
+	int TUPLE_PART_ID = 92;
 
 	/**
 	 * The meta object id for the '<em>Type</em>' data type.
@@ -7338,7 +7792,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 89;
+	int TYPE = 93;
 
 	/**
 	 * The meta object id for the '<em>Type Id</em>' data type.
@@ -7348,7 +7802,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getTypeId()
 	 * @generated
 	 */
-	int TYPE_ID = 90;
+	int TYPE_ID = 94;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator <em>CG Accumulator</em>}'.
@@ -7708,6 +8162,27 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGEcoreOperationCallExp_EOperation();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp <em>CG Ecore Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Ecore Opposite Property Call Exp</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp
+	 * @generated
+	 */
+	EClass getCGEcoreOppositePropertyCallExp();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp#getEStructuralFeature <em>EStructural Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EStructural Feature</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp#getEStructuralFeature()
+	 * @see #getCGEcoreOppositePropertyCallExp()
+	 * @generated
+	 */
+	EReference getCGEcoreOppositePropertyCallExp_EStructuralFeature();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp <em>CG Ecore Property Call Exp</em>}'.
@@ -8361,6 +8836,27 @@ public interface CGModelPackage extends EPackage {
 	EReference getCGExecutorOperationCallExp_ExecutorOperation();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp <em>CG Executor Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Executor Opposite Property Call Exp</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp
+	 * @generated
+	 */
+	EClass getCGExecutorOppositePropertyCallExp();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp#getExecutorProperty <em>Executor Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Executor Property</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp#getExecutorProperty()
+	 * @see #getCGExecutorOppositePropertyCallExp()
+	 * @generated
+	 */
+	EReference getCGExecutorOppositePropertyCallExp_ExecutorProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty <em>CG Executor Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8499,6 +8995,27 @@ public interface CGModelPackage extends EPackage {
 	EAttribute getCGNamedElement_Name();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp <em>CG Navigation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Navigation Call Exp</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp
+	 * @generated
+	 */
+	EClass getCGNavigationCallExp();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp#getReferredProperty <em>Referred Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Referred Property</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp#getReferredProperty()
+	 * @see #getCGNavigationCallExp()
+	 * @generated
+	 */
+	EAttribute getCGNavigationCallExp_ReferredProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGNull <em>CG Null</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8603,6 +9120,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCGOperationCallExp_ReferredOperation();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp <em>CG Opposite Property Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Opposite Property Call Exp</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp
+	 * @generated
+	 */
+	EClass getCGOppositePropertyCallExp();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getArguments <em>Arguments</em>}'.
@@ -8731,17 +9258,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGPropertyCallExp();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getReferredProperty <em>Referred Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Referred Property</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getReferredProperty()
-	 * @see #getCGPropertyCallExp()
-	 * @generated
-	 */
-	EAttribute getCGPropertyCallExp_ReferredProperty();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGReal <em>CG Real</em>}'.
@@ -9543,6 +10059,24 @@ public interface CGModelPackage extends EPackage {
 		EReference CG_ECORE_OPERATION_CALL_EXP__EOPERATION = eINSTANCE.getCGEcoreOperationCallExp_EOperation();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOppositePropertyCallExpImpl <em>CG Ecore Opposite Property Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOppositePropertyCallExpImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcoreOppositePropertyCallExp()
+		 * @generated
+		 */
+		EClass CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP = eINSTANCE.getCGEcoreOppositePropertyCallExp();
+
+		/**
+		 * The meta object literal for the '<em><b>EStructural Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_ECORE_OPPOSITE_PROPERTY_CALL_EXP__ESTRUCTURAL_FEATURE = eINSTANCE.getCGEcoreOppositePropertyCallExp_EStructuralFeature();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcorePropertyCallExpImpl <em>CG Ecore Property Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10101,6 +10635,24 @@ public interface CGModelPackage extends EPackage {
 		EReference CG_EXECUTOR_OPERATION_CALL_EXP__EXECUTOR_OPERATION = eINSTANCE.getCGExecutorOperationCallExp_ExecutorOperation();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOppositePropertyCallExpImpl <em>CG Executor Opposite Property Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOppositePropertyCallExpImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOppositePropertyCallExp()
+		 * @generated
+		 */
+		EClass CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP = eINSTANCE.getCGExecutorOppositePropertyCallExp();
+
+		/**
+		 * The meta object literal for the '<em><b>Executor Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_EXECUTOR_OPPOSITE_PROPERTY_CALL_EXP__EXECUTOR_PROPERTY = eINSTANCE.getCGExecutorOppositePropertyCallExp_ExecutorProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorPropertyImpl <em>CG Executor Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10215,6 +10767,24 @@ public interface CGModelPackage extends EPackage {
 		EAttribute CG_NAMED_ELEMENT__NAME = eINSTANCE.getCGNamedElement_Name();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNavigationCallExpImpl <em>CG Navigation Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNavigationCallExpImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNavigationCallExp()
+		 * @generated
+		 */
+		EClass CG_NAVIGATION_CALL_EXP = eINSTANCE.getCGNavigationCallExp();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Property</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CG_NAVIGATION_CALL_EXP__REFERRED_PROPERTY = eINSTANCE.getCGNavigationCallExp_ReferredProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNullImpl <em>CG Null</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10301,6 +10871,16 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CG_OPERATION_CALL_EXP__REFERRED_OPERATION = eINSTANCE.getCGOperationCallExp_ReferredOperation();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOppositePropertyCallExpImpl <em>CG Opposite Property Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOppositePropertyCallExpImpl
+		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGOppositePropertyCallExp()
+		 * @generated
+		 */
+		EClass CG_OPPOSITE_PROPERTY_CALL_EXP = eINSTANCE.getCGOppositePropertyCallExp();
 
 		/**
 		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
@@ -10405,14 +10985,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_PROPERTY_CALL_EXP = eINSTANCE.getCGPropertyCallExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Referred Property</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY = eINSTANCE.getCGPropertyCallExp_ReferredProperty();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGRealImpl <em>CG Real</em>}' class.

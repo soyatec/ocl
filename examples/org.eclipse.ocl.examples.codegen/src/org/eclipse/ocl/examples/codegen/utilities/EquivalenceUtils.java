@@ -28,9 +28,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNumber;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -42,7 +42,10 @@ import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
+import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
@@ -384,6 +387,7 @@ public class EquivalenceUtils
 		if (((OperationCallExp)thisAST).getReferredOperation() != ((OperationCallExp)thatAST).getReferredOperation()) {
 			return null;			// Different operations do not guarantee different results
 		}
+		// FIXME non-conformant return types can be guaranteed to be different
 		CGValuedElement thisSource = thisValue.getSource();
 		CGValuedElement thatSource = thatValue.getSource();
 		if ((thisSource != null) || (thatSource != null)) {
@@ -417,18 +421,24 @@ public class EquivalenceUtils
 		return Boolean.TRUE;
 	}
 	
-	public static @Nullable Boolean isEquivalent(@NonNull CGPropertyCallExp thisValue, @NonNull CGPropertyCallExp thatValue) {
+	public static @Nullable Boolean isEquivalent(@NonNull CGNavigationCallExp thisValue, @NonNull CGNavigationCallExp thatValue) {
 		if (thisValue == thatValue) {
 			return Boolean.TRUE;
 		}
 		Element thisAST = thisValue.getAst();
 		Element thatAST = thatValue.getAst();
-		if (!(thisAST instanceof PropertyCallExp) || !(thatAST instanceof PropertyCallExp)) {
+		if (!(thisAST instanceof NavigationCallExp) || !(thatAST instanceof NavigationCallExp)) {
 			return null;			// Null ASTs should never happen
 		}
-		if (((PropertyCallExp)thisAST).getReferredProperty() != ((PropertyCallExp)thatAST).getReferredProperty()) {
+		if (thisAST.eClass() != thatAST.eClass()) {
+			return null;			// Different directions do not guarantee different results
+		}
+		Property thisProperty = thisAST instanceof PropertyCallExp ? ((PropertyCallExp)thisAST).getReferredProperty() : ((OppositePropertyCallExp)thisAST).getReferredProperty();
+		Property thatProperty = thatAST instanceof PropertyCallExp ? ((PropertyCallExp)thatAST).getReferredProperty() : ((OppositePropertyCallExp)thatAST).getReferredProperty();
+		if (thisProperty != thatProperty) {
 			return null;			// Different properties do not guarantee different results
 		}
+		// FIXME non-conformant return types can be guaranteed to be different
 		CGValuedElement thisSource = thisValue.getSource();
 		CGValuedElement thatSource = thatValue.getSource();
 		if ((thisSource != null) || (thatSource != null)) {

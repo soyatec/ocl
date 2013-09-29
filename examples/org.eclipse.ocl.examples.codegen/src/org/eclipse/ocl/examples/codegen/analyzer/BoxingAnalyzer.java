@@ -26,8 +26,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
@@ -40,10 +42,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
@@ -251,10 +253,30 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	}
 
 	@Override
+	public @Nullable Object visitCGEcoreOppositePropertyCallExp(@NonNull CGEcoreOppositePropertyCallExp cgElement) {
+		super.visitCGEcoreOppositePropertyCallExp(cgElement);
+		if (cgElement.getEStructuralFeature().isMany()) {
+			rewriteAsAssertNonNulled(cgElement);
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgElement) {
 		super.visitCGEcorePropertyCallExp(cgElement);
 		if (cgElement.getEStructuralFeature().isMany()) {
 			rewriteAsAssertNonNulled(cgElement);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGExecutorOppositePropertyCallExp(@NonNull CGExecutorOppositePropertyCallExp cgElement) {
+		super.visitCGExecutorOppositePropertyCallExp(cgElement);
+		rewriteAsUnboxed(cgElement.getSource());
+		CGTypedElement cgParent = (CGTypedElement) cgElement.getParent();
+		if (cgParent != null) {
+			rewriteAsBoxed(cgElement);
 		}
 		return null;
 	}
@@ -360,6 +382,13 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	}
 
 	@Override
+	public @Nullable Object visitCGNavigationCallExp(@NonNull CGNavigationCallExp cgElement) {
+		super.visitCGNavigationCallExp(cgElement);
+		rewriteAsGuarded(cgElement.getSource(), "source for '" + cgElement.getReferredProperty() + "'");
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitCGOperation(@NonNull CGOperation cgElement) {
 		super.visitCGOperation(cgElement);
 //		if ("isAttribute".equals(cgElement.getName())) {
@@ -383,13 +412,6 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 				rewriteAsGuarded(body, "body for '" + cgElement.getAst() + "'");
 			}
 		}
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGPropertyCallExp(@NonNull CGPropertyCallExp cgElement) {
-		super.visitCGPropertyCallExp(cgElement);
-		rewriteAsGuarded(cgElement.getSource(), "source for '" + cgElement.getReferredProperty() + "'");
 		return null;
 	}
 

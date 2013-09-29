@@ -79,6 +79,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.PackageableElement;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -1025,6 +1026,22 @@ public class PivotSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseTemplateParameter(operationTemplateParameter);
 				if (result == null) result = caseElement(operationTemplateParameter);
 				if (result == null) result = caseVisitable(operationTemplateParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.OPPOSITE_PROPERTY_CALL_EXP:
+			{
+				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)theEObject;
+				T1 result = caseOppositePropertyCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseNavigationCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseFeatureCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseCallExp(oppositePropertyCallExp);
+				if (result == null) result = caseOCLExpression(oppositePropertyCallExp);
+				if (result == null) result = caseTypedElement(oppositePropertyCallExp);
+				if (result == null) result = caseNamedElement(oppositePropertyCallExp);
+				if (result == null) result = caseElement(oppositePropertyCallExp);
+				if (result == null) result = caseNameable(oppositePropertyCallExp);
+				if (result == null) result = caseVisitable(oppositePropertyCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -3230,6 +3247,22 @@ public class PivotSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseOperationTemplateParameter(OperationTemplateParameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseOppositePropertyCallExp(OppositePropertyCallExp object)
+	{
 		return null;
 	}
 

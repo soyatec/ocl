@@ -18,24 +18,24 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>CG Ecore Property Call Exp</b></em>'.
+ * A representation of the model object '<em><b>CG Ecore Opposite Property Call Exp</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * CGEcorePropertyCallExp navigates a property using Ecore support.
+ * CGEcoreOppositePropertyCallExp navigates an inverse property using Ecore support.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp#getEStructuralFeature <em>EStructural Feature</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp#getEStructuralFeature <em>EStructural Feature</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcorePropertyCallExp()
+ * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreOppositePropertyCallExp()
  * @generated
  */
-public interface CGEcorePropertyCallExp extends CGPropertyCallExp {
+public interface CGEcoreOppositePropertyCallExp extends CGOppositePropertyCallExp {
 	/**
 	 * Returns the value of the '<em><b>EStructural Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -46,13 +46,13 @@ public interface CGEcorePropertyCallExp extends CGPropertyCallExp {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EStructural Feature</em>' reference.
 	 * @see #setEStructuralFeature(EStructuralFeature)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcorePropertyCallExp_EStructuralFeature()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGEcoreOppositePropertyCallExp_EStructuralFeature()
 	 * @generated
 	 */
 	EStructuralFeature getEStructuralFeature();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp#getEStructuralFeature <em>EStructural Feature</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp#getEStructuralFeature <em>EStructural Feature</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>EStructural Feature</em>' reference.
@@ -61,4 +61,4 @@ public interface CGEcorePropertyCallExp extends CGPropertyCallExp {
 	 */
 	void setEStructuralFeature(EStructuralFeature value);
 
-} // CGEcorePropertyCallExp
+} // CGEcoreOppositePropertyCallExp

@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StateExp;
@@ -223,6 +224,11 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
     @Override
     public @Nullable Object visitOperationCallExp(@NonNull OperationCallExp callExp) {
         return trace(callExp, delegate.visitOperationCallExp(callExp));
+    }
+
+    @Override
+    public @Nullable Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp callExp) {
+        return trace(callExp, delegate.visitOppositePropertyCallExp(callExp));
     }
 
     @Override

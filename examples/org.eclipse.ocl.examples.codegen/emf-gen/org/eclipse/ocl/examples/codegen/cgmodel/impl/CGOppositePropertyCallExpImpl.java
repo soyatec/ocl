@@ -15,25 +15,26 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOppositePropertyCallExp;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Property Call Exp</b></em>'.
+ * An implementation of the model object '<em><b>CG Opposite Property Call Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public abstract class CGPropertyCallExpImpl extends CGNavigationCallExpImpl implements CGPropertyCallExp {
+public abstract class CGOppositePropertyCallExpImpl extends CGNavigationCallExpImpl implements CGOppositePropertyCallExp {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGPropertyCallExpImpl() {
+	protected CGOppositePropertyCallExpImpl() {
 		super();
 	}
 
@@ -44,7 +45,8 @@ public abstract class CGPropertyCallExpImpl extends CGNavigationCallExpImpl impl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CGModelPackage.Literals.CG_PROPERTY_CALL_EXP;
+		return CGModelPackage.Literals.CG_OPPOSITE_PROPERTY_CALL_EXP;
 	}
 
-} //CGPropertyCallExpImpl
+
+} //CGOppositePropertyCallExpImpl

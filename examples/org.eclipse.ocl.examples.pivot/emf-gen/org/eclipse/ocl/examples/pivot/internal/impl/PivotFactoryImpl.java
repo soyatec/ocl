@@ -75,6 +75,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
+import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -219,6 +220,7 @@ public class PivotFactoryImpl
 			case PivotPackage.OPERATION: return (EObject)createOperation();
 			case PivotPackage.OPERATION_CALL_EXP: return (EObject)createOperationCallExp();
 			case PivotPackage.OPERATION_TEMPLATE_PARAMETER: return (EObject)createOperationTemplateParameter();
+			case PivotPackage.OPPOSITE_PROPERTY_CALL_EXP: return (EObject)createOppositePropertyCallExp();
 			case PivotPackage.ORDERED_SET_TYPE: return (EObject)createOrderedSetType();
 			case PivotPackage.PACKAGE: return (EObject)createPackage();
 			case PivotPackage.PARAMETER: return (EObject)createParameter();
@@ -512,6 +514,17 @@ public class PivotFactoryImpl
 	public OperationTemplateParameter createOperationTemplateParameter() {
 		OperationTemplateParameterImpl operationTemplateParameter = new OperationTemplateParameterImpl();
 		return operationTemplateParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OppositePropertyCallExp createOppositePropertyCallExp()
+	{
+		OppositePropertyCallExpImpl oppositePropertyCallExp = new OppositePropertyCallExpImpl();
+		return oppositePropertyCallExp;
 	}
 
 	/**

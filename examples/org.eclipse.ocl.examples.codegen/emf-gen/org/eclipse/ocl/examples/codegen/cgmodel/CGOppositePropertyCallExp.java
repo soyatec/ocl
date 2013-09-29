@@ -14,16 +14,15 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
-
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>CG Property Call Exp</b></em>'.
+ * A representation of the model object '<em><b>CG Opposite Property Call Exp</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPropertyCallExp()
+ * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOppositePropertyCallExp()
  * @generated
  */
-public interface CGPropertyCallExp extends CGNavigationCallExp {
+public interface CGOppositePropertyCallExp extends CGNavigationCallExp {
 
-} // CGPropertyCallExp
+} // CGOppositePropertyCallExp
