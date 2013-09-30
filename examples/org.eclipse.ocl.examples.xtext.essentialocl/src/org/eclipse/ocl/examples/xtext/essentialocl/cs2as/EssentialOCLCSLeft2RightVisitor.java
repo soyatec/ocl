@@ -283,6 +283,16 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 		return sourceType != null ? metaModelManager.getPrimaryType(sourceType) : null;
 	}
 
+	protected @Nullable OppositePropertyCallExp refreshOppositePropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull Property property) {
+		OppositePropertyCallExp callExp = context.refreshModelElement(OppositePropertyCallExp.class, PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP, csNameExp);
+		return callExp;
+	}
+
+	protected @Nullable PropertyCallExp refreshPropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull Property property) {
+		PropertyCallExp callExp = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
+		return callExp;
+	}
+
 	protected void resolveAtPre(@Nullable NameExpCS csNameExp, @NonNull FeatureCallExp featureCallExp) {
 		if (csNameExp != null) {
 			featureCallExp.setIsPre(csNameExp.isAtPre());
@@ -877,14 +887,14 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 		if (source != null) {
 			NavigationCallExp innerExpression;
 			if (property.isImplicit()) {
-				OppositePropertyCallExp callExp = context.refreshModelElement(OppositePropertyCallExp.class, PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP, csNameExp);
+				OppositePropertyCallExp callExp = refreshOppositePropertyCallExp(csNameExp, property);
 				if (callExp != null) {
 					callExp.setReferredProperty(property.getOpposite());
 				}
 				innerExpression = callExp;
 			}
 			else {
-				PropertyCallExp callExp = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
+				PropertyCallExp callExp = refreshPropertyCallExp(csNameExp, property);
 				if (callExp != null) {
 					callExp.setReferredProperty(property);
 				}
@@ -905,14 +915,7 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 					}
 				}
 				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
-				Type returnType = null;
-				Type behavioralType = PivotUtil.getType(property);
-				if (behavioralType != null) {
-					returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
-					if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
-						returnType = metaModelManager.getMetaclass(returnType);
-					}
-				}
+				Type returnType = resolvePropertyReturnType(csNameExp, property, templateBindings);
 				context.setType(innerExpression, returnType, property.isRequired());
 				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
 				if (outerExpression != innerExpression) {
@@ -941,6 +944,19 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 		else {
 			return context.addBadExpressionError(csNamedExp, "Property name expected");
 		}
+	}
+
+	protected Type resolvePropertyReturnType(@NonNull NameExpCS csNameExp, @NonNull Property property,
+			@NonNull Map<TemplateParameter, ParameterableElement> templateBindings) {
+		Type returnType = null;
+		Type behavioralType = PivotUtil.getType(property);
+		if (behavioralType != null) {
+			returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
+			if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
+				returnType = metaModelManager.getMetaclass(returnType);
+			}
+		}
+		return returnType;
 	}
 
 	protected StateExp resolveStateExp(@NonNull ExpCS csExp, @NonNull State state) {
