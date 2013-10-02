@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
 
-public class GenerateOCLstdlib extends GenerateOCLCommon
+public class GenerateOCLstdlib extends GenerateOCLCommonXtend
 {
 	protected def String defineConstantType(DataType type) {'''
 		«IF "Boolean".equals(type.name)»
@@ -349,7 +349,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommon
 		while (tit.hasNext()) {
 			var EObject eObject = tit.next();
 			if (eObject instanceof Library) {
-				return eObject as Library;
+				return eObject;
 			}
 		}
 		return null;

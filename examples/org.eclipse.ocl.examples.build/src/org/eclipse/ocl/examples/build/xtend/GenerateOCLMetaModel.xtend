@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
 
-public class GenerateOCLMetaModel extends GenerateOCLCommon
+public class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 {
 	protected override String declareEnumerations(Package pkg) {
 		var allEnumerations = pkg.getRootPackage().getSortedEnumerations();
@@ -95,7 +95,7 @@ public class GenerateOCLMetaModel extends GenerateOCLCommon
 			if ((type instanceof CollectionType) && (type.name.equals(name))) {
 				var unspecializedElement = type.unspecializedElement;
 				if (unspecializedElement instanceof CollectionType) {
-					return unspecializedElement as CollectionType;
+					return unspecializedElement;
 				}
 			}
 		}
