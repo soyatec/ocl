@@ -946,9 +946,10 @@ public class OCLinEcoreTablesUtils
 			return "null";
 		}
 		String qualifiedSignature = PrettyPrinter.printType(anOperation, (Namespace)owningType);	// FIXME cast
-		int index = qualifiedSignature.indexOf("::");
-		if (index > 0) {
-			@SuppressWarnings("null")@NonNull String substring = qualifiedSignature.substring(index+2);
+		int colonColonIndex = qualifiedSignature.indexOf("::");
+		int parenthesisIndex = qualifiedSignature.indexOf("(");
+		if ((parenthesisIndex < 0) ? (colonColonIndex > 0) : (colonColonIndex < parenthesisIndex)) {	// FIXME use a decent inherently right algorithm
+			@SuppressWarnings("null")@NonNull String substring = qualifiedSignature.substring(colonColonIndex+1);
 			return substring;
 		}
 		else {

@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
+import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -68,6 +70,12 @@ public class PrettyPrintVisitor extends AbstractExtendingVisitor<Object,PrettyPr
 	@Override
 	public String toString() {
 		return context.toString();
+	}
+
+	@Override
+	public @Nullable Object visitAnyType(@NonNull AnyType object) {
+		context.appendName(object);
+		return null;
 	}
 
 	@Override
@@ -172,6 +180,12 @@ public class PrettyPrintVisitor extends AbstractExtendingVisitor<Object,PrettyPr
 			}
 			context.append(")");
 		}
+		return null;
+	}
+
+	@Override
+	public Object visitPrimitiveType(@NonNull PrimitiveType object) {
+		context.appendName(object);
 		return null;
 	}
 
