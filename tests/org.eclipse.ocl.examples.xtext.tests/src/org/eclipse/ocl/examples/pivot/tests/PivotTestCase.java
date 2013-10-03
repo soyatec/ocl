@@ -117,7 +117,7 @@ public class PivotTestCase extends TestCase
 //		ResourceSetImpl.liveResourceSets = new WeakHashMap<ResourceSet,Object>();				// Requires edw-debug privater EMF branch
 	}	
 	
-	public static void assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
+	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
 		for (String message : messages) {
 			Integer count = expected.get(message);
@@ -153,10 +153,7 @@ public class PivotTestCase extends TestCase
 			}
 		}
 		if (s1 == null) {
-			if (s2 == null) {
-				return;
-			}
-			else {
+			if (s2 != null) {
 				fail(s2.toString());
 			}
 		}
@@ -168,6 +165,7 @@ public class PivotTestCase extends TestCase
 				fail(s1.toString() + s2.toString());
 			}
 		}
+		return diagnostics;
 	}
 
 	public static void assertNoDiagnosticErrors(@NonNull String message, @NonNull XtextResource xtextResource) {
@@ -289,14 +287,14 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
+	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
 		Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 		for (EObject eObject : resource.getContents()) {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
 			diagnostics.addAll(diagnostic.getChildren());
 		}
-		assertDiagnostics(prefix, diagnostics, messages);
+		return assertDiagnostics(prefix, diagnostics, messages);
 	}
 
 	/**

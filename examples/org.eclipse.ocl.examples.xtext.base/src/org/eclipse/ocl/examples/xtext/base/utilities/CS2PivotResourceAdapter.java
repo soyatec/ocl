@@ -83,6 +83,12 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 		return cs2asResourceMap;
 	}
 
+	@Override
+	public void dispose() {
+		super.dispose();
+		converter.dispose();
+	}
+
 	public ASResource getASResource(@NonNull BaseCSResource csResource) {
 		return converter.getPivotResource(csResource);
 	}

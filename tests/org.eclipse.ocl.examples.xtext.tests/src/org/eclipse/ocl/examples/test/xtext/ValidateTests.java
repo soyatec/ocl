@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -42,17 +43,23 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.commands.LoadCompleteOCLResourceHandler.Helper;
 import org.eclipse.ocl.examples.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
  * Tests that OCL for model validation works.
@@ -93,6 +100,20 @@ public class ValidateTests extends XtextTestCase
 		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 		Resource ecoreResource = pivot2ecore(ocl, asResource, ecoreURI, true);
 		return ecoreResource;
+	}
+
+	@SuppressWarnings("null")
+	public @NonNull List<Diagnostic> doValidateOCLinEcore(OCL ocl, String stem, String... validationDiagnostics) throws IOException {
+		MetaModelManager metaModelManager = ocl.getMetaModelManager();
+		String inputName = stem + ".oclinecore";
+		URI inputURI = getProjectFileURI(inputName);
+		BaseCSResource xtextResource = (BaseCSResource) metaModelManager.getExternalResourceSet().createResource(inputURI);
+		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		xtextResource.load(null);
+		assertNoResourceErrors("Load failed", xtextResource);
+		Resource asResource = ocl.cs2pivot(xtextResource);
+		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+		return assertValidationDiagnostics("Pivot validation errors", asResource, validationDiagnostics);
 	}
 
 	protected EObject eCreate(EPackage ePackage, String className) {
@@ -138,6 +159,35 @@ public class ValidateTests extends XtextTestCase
 		EValidator.Registry.INSTANCE.put(overloadsPackage, EObjectValidator.INSTANCE);
 		checkValidationDiagnostics(testInstance, Diagnostic.ERROR);
 		metaModelManager2.dispose();
+	}
+
+	public void testValidate_Bug418552_oclinecore() throws IOException, InterruptedException {
+		String testDocument = 
+				"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
+				"\n" +
+				"package temp : Test = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
+				"{\n" +
+				"	class Tester\n" +
+				"	{\n" +
+				"		attribute total : ecore::EDoubleObject { derived volatile }\n" +
+				"		{\n" +
+				"			derivation: true;\n" +
+				"		}\n" +
+				"	}\n" +
+				"}\n";
+		createOCLinEcoreFile("Bug418552.oclinecore", testDocument);
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		@NonNull List<Diagnostic> diagnostics = doValidateOCLinEcore(ocl1, "Bug418552",
+			"'Property::CompatibleDefaultExpression' constraint is not satisfied for 'temp::Tester.total'");
+		Object property = diagnostics.get(0).getData().get(0);
+		assertEquals(PivotPackage.Literals.PROPERTY, ((EObject)property).eClass());
+		ModelElementCS csElement = ElementUtil.getCsElement((Element) property);
+		ICompositeNode node = NodeModelUtils.getNode(csElement);
+		assert node != null;
+		assertEquals(7, node.getStartLine());
+		assertEquals(10, node.getEndLine());
+		metaModelManager1.dispose();
 	}
 
 	public void testValidate_Validate_completeocl() throws IOException, InterruptedException {

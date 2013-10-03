@@ -62,6 +62,8 @@ import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiPluginHelper;
 import org.eclipse.ui.IEditorInput;
@@ -338,7 +340,6 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 					}
 					throw new CoreException(new Status(IStatus.ERROR, OCLExamplesCommonPlugin.PLUGIN_ID, s.toString()));
 				}
-//				RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, "", ecoreResource);		
 				ASResource asResource = null;
 				EList<EObject> contents = xmiResource.getContents();
 				if (contents.size() > 0) {
@@ -388,23 +389,18 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 				//		OCLinEcore CS resource with *.ecore URI, in URIResourceMap as *.ecore.oclinecore
 				//
 				csResource.updateFrom(asResource, getMetaModelManager());
-//				csResource.save(null);
-				Resource xtextResource = csResource;		
-				
-				
-//				Resource xtextResource = documentCS.eResource();		
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 				try {
-					xtextResource.save(outputStream, null);
+					csResource.save(outputStream, null);
 				} catch (InvalidConcreteSyntaxException e) {
-					diagnoseErrors((XtextResource) xtextResource, e);
+					diagnoseErrors((XtextResource) csResource, e);
 				} catch (XtextSerializationException e) {
-					diagnoseErrors((XtextResource) xtextResource, e);
+					diagnoseErrors((XtextResource) csResource, e);
 				}
-				xtextResource.unload();
-				resourceSet.getResources().remove(xtextResource);
-//				resourceSet.getResources().remove(asResource);
-//				resourceSet.getResources().remove(xmiResource);
+				csResource.unload();
+				CS2PivotResourceAdapter resourceAdapter = ((BaseCSResource)csResource).getCS2ASAdapter(null);
+				resourceAdapter.dispose();
+				resourceSet.getResources().remove(csResource);
 				inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 			}
 			else if (inputStream.available() == 0) {		// Empty document
