@@ -64,6 +64,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.pivot.resource.ASResourceFactoryRegistry;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -1034,5 +1035,74 @@ public class LoadTests extends XtextTestCase
 		}
 		assertEquals(1, allPackages.size());
 		metaModelManager2.dispose();
+	}
+
+	public void testReload_As418412() throws Exception {
+		MetaModelManager metaModelManager1 = new MetaModelManager();
+		String oclinecoreFileXXX =
+				"package PackageXXX : nsPrefixXXX = 'http://XXX'{\n" +
+				"    class ClassXXX {\n" +
+				"    	property children: ClassXXX[*];\n" +
+				"    }\n" +
+				"}\n";
+		String ecoreFileXXX = createEcoreString(metaModelManager1, "Bug418412", oclinecoreFileXXX, true);
+		String ecoreFileName = "Bug418412.ecore";
+		metaModelManager1.dispose();
+		MetaModelManager metaModelManager2 = new MetaModelManager();
+		URI ecoreURI = URI.createURI(ecoreFileName);
+		XMLResource ecoreResource = (XMLResource) metaModelManager2.getExternalResourceSet().createResource(ecoreURI, null);
+		ecoreResource.load(new URIConverter.ReadableInputStream(ecoreFileXXX), null);
+		Ecore2Pivot conversion = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager2);
+		ASResource asResource = (ASResource) conversion.getPivotRoot().eResource();
+		//
+		//	Save the *.oclas and cache that the xmi:ids
+		//
+		URI asURI = getProjectFileURI(ecoreFileName + ".oclas");
+		asResource.setURI(asURI);
+		asResource.save(null);
+		Map<EObject, String> eObject2id = new HashMap<EObject, String>();
+		Map<String, EObject> id2eObject = new HashMap<String, EObject>();
+		int oldIdCount = 0;
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			String id = asResource.getID(eObject);
+			eObject2id.put(eObject, id);
+//			System.out.println(id + " ==> " + eObject);
+			if (id != null) {
+				id2eObject.put(id, eObject);
+				oldIdCount++;
+			}
+		}
+		assertEquals(10, oldIdCount);
+		assertEquals(oldIdCount, id2eObject.size());
+		//
+		//	Save the *.oclas again and check that the xmi:ids are consistent
+		//
+		asResource.save(null);		// Bug 418412 gave a duplicate xmi:id ISE failure here.		
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			String id = asResource.getID(eObject);
+//			System.out.println(id + " ==> " + eObject);
+			assertEquals(eObject2id.get(eObject), id);
+		}
+		metaModelManager2.dispose();
+		//
+		//	Load the *.oclas in a relatively standard EMF ResourceSet and check that the xmi:ids are consistent
+		//
+		ResourceSet resourceSet = new ResourceSetImpl();
+		ASResourceFactoryRegistry.INSTANCE.configureResourceSet(resourceSet);
+		ASResource reloadedAsResource = (ASResource)resourceSet.getResource(asURI, true);
+		int newIdCount = 0;
+		for (TreeIterator<EObject> tit = reloadedAsResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			String id = reloadedAsResource.getID(eObject);
+			if (id != null) {
+				EObject eObject2 = id2eObject.get(id);
+				assertNotNull(eObject2);
+				assertEquals(eObject2.getClass(), eObject.getClass());
+				newIdCount++;
+			}
+		}
+		assertEquals(oldIdCount, newIdCount);
 	}
 }

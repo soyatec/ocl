@@ -272,4 +272,99 @@ public class OCLstdlibTests extends XtextTestCase
 			}
 		}
 	}
+	
+	/**
+	 * Checks that the OCL 2.5 AS model is the same as the pre-compiled
+	 * Java implementation.
+	 */
+	public void testOCLstdlib_AS() throws Exception {
+		//
+		//	Load OCL stdlib as an AS file.
+		//
+		new ProjectMap().initializeResourceSet(resourceSet);
+		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas", true);
+		Resource asResource = resourceSet.getResource(libraryURI, true);
+		assertNoResourceErrors("Load failed", asResource);
+		assertNoUnresolvedProxies("File Model", asResource);
+		assertNoValidationErrors("File Model", asResource);
+		//
+		//	Load 'oclstdlib.oclstdlib' as pre-code-generated Java.
+		//
+		Resource javaResource = OCLstdlib.getDefault();
+//		PivotAliasCreator.refreshPackageAliases(javaResource);
+		assertNoResourceErrors("Java Model", javaResource);
+		assertNoUnresolvedProxies("Java Model", javaResource);
+		assertNoValidationErrors("Java Model", javaResource);
+		//
+		//	Check similar content
+		//
+		Map<String,Element> fileMoniker2PivotMap = computeMoniker2PivotMap(Collections.singletonList(asResource));
+//		for (String moniker : fileMoniker2PivotMap.keySet()) {
+//			System.out.println("File : " + moniker);
+//		}
+		Map<String,Element> javaMoniker2PivotMap = computeMoniker2PivotMap(Collections.singletonList(javaResource));
+//		for (String moniker : javaMoniker2PivotMap.keySet()) {
+//			System.out.println("Java : " + moniker);
+//		}
+//		assertEquals(fileMoniker2PivotMap.size(), javaMoniker2PivotMap.size());
+		for (String moniker : fileMoniker2PivotMap.keySet()) {
+			Element fileElement = fileMoniker2PivotMap.get(moniker);
+			Element javaElement = javaMoniker2PivotMap.get(moniker);
+			if (javaElement == null) {
+				boolean isExpression = false;
+				for (EObject eObject = fileElement; eObject != null; eObject = eObject.eContainer()) {
+					if ((eObject instanceof ExpressionInOCL) || (eObject instanceof Constraint) || (eObject instanceof Annotation)) {
+						isExpression = true;		// Embedded OCL not present in Java
+						break;
+					}
+				}
+				if (isExpression) {
+					continue;
+				}
+			}
+			assertNotNull("Missing java element for '" + moniker + "'", javaElement);
+//			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
+			Class<? extends Element> javaElementClass = javaElement.getClass();
+			assertEquals(fileElement.getClass(), javaElementClass);
+			if (fileElement instanceof TypedElement) {
+				Type fileType = ((TypedElement)fileElement).getType();
+				Type javaType = ((TypedElement)javaElement).getType();
+				assertEquals(fileType.getClass(), javaType.getClass());
+				String fileMoniker = AS2Moniker.toString(fileType);
+				String javaMoniker = AS2Moniker.toString(javaType);
+				assertEquals(fileMoniker, javaMoniker);
+			}
+			if (fileElement instanceof Feature) {
+				String fileClass = ((Feature)fileElement).getImplementationClass();
+				String javaClass = ((Feature)javaElement).getImplementationClass();
+				if (fileClass == null) {
+					LibraryFeature implementation = ((Feature)fileElement).getImplementation();
+					if (implementation != null) {
+						fileClass = implementation.getClass().getCanonicalName();
+					}
+				}
+				if (javaClass == null) {
+					LibraryFeature implementation = ((Feature)javaElement).getImplementation();
+					if (implementation != null) {
+						javaClass = implementation.getClass().getCanonicalName();
+					}
+				}
+				assertEquals(fileClass, javaClass);
+			}
+			if (fileElement instanceof Type) {
+				List<Element> fileTypes = new ArrayList<Element>(((Type)fileElement).getSuperClass());
+				List<Element> javaTypes = new ArrayList<Element>(((Type)javaElement).getSuperClass());
+				Collections.sort(fileTypes, MonikeredComparator.INSTANCE);
+				Collections.sort(javaTypes, MonikeredComparator.INSTANCE);
+				assertEquals(fileTypes.size(), javaTypes.size());
+				for (int i = 0; i < fileTypes.size(); i++) {
+					Element fileType = fileTypes.get(i);
+					Element javaType = javaTypes.get(i);
+					String fileMoniker = AS2Moniker.toString(fileType);
+					String javaMoniker = AS2Moniker.toString(javaType);
+					assertEquals(fileMoniker, javaMoniker);
+				}
+			}
+		}
+	}
 }

@@ -137,7 +137,10 @@ public class AS2XMIid
 				if (eObject instanceof Element) {
 					Element element = (Element)eObject;
 					AS2XMIidVisitor idVisitor = resourceFactory.createAS2XMIidVisitor(this);
-					String id = idVisitor.getID(element);
+					String id = asResource.getID(element);
+					if (id == null) {
+						id = idVisitor.getID(element);
+					}
 					if (id != null) {
 						assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
 						EObject oldElement = allIds.put(id, element);
@@ -240,9 +243,10 @@ public class AS2XMIid
 	public String getID(@NonNull Element element) {
 		String moniker = AS2Moniker.toString(element);
 		String id = moniker2id.get(moniker);
-		if (id != null) {
-			return id;
+		if (id == null) {
+			id = EcoreUtil.generateUUID();
+//			System.out.println(id + " for " + element + " " + DomainUtil.debugSimpleName(element));
 		}
-		return EcoreUtil.generateUUID();
+		return id;
 	}
 }
