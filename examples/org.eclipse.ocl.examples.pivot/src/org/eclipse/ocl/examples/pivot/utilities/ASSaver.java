@@ -117,7 +117,7 @@ public class ASSaver
 		if (orphanage2 == null) {
 			for (EObject eRoot : resource.getContents()) {
 				if ((orphanage2 == null) && (eRoot instanceof Root)) {
-					for (org.eclipse.ocl.examples.pivot.Package asPackage : ((Root)eRoot).getNestedPackage()) {
+					for (org.eclipse.ocl.examples.pivot.Package asPackage : ((Root)eRoot).getNestedPackage()) {		// FIXME Obsolete
 						if (Orphanage.isTypeOrphanage(asPackage)) {
 							orphanage = orphanage2 = asPackage;
 							for (Type asType : orphanage2.getOwnedType()) {
@@ -130,8 +130,19 @@ public class ASSaver
 							}
 							break;
 						}
+					}					
+				}
+				if ((eRoot instanceof org.eclipse.ocl.examples.pivot.Package) && Orphanage.isTypeOrphanage((org.eclipse.ocl.examples.pivot.Package)eRoot)) {
+					orphanage = orphanage2 = (org.eclipse.ocl.examples.pivot.Package)eRoot;
+					for (Type asType : orphanage2.getOwnedType()) {
+						if (PivotConstants.ORPHANAGE_NAME.equals(asType.getName())) {
+							orphanageClass = asType;
+						}
+						else {
+							specializations.put(asType, asType);
+						}
 					}
-					
+					break;
 				}
 			}
 		}

@@ -299,10 +299,21 @@ public class TypeImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public TemplateableElement getUnspecializedElement()
 	{
+		if (unspecializedElement == null) {
+			for (TemplateBinding templateBinding : getTemplateBinding()) {
+				TemplateSignature signature = templateBinding.getSignature();
+				if (signature != null) {
+					unspecializedElement = signature.getTemplate();
+					if (unspecializedElement != null) {
+						break;
+					}
+				}
+			}
+		}
 		return unspecializedElement;
 	}
 
@@ -1285,21 +1296,21 @@ public class TypeImpl
 	public DomainType specializeIn(@NonNull DomainCallExp expr, DomainType selfType) {
 		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
-			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager((EObject) expr);
+			MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(((EObject) expr).eResource());
 			TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(metaModelManager, (Type)selfType);
 			visitor.visit((CallExp)expr);
 			return visitor.specialize(owningTemplateParameter);
 		}
 		TemplateSignature templateSignature = getOwnedTemplateSignature();
 		if (templateSignature != null) {
-			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager((EObject) expr);
+			MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(((EObject) expr).eResource());
 			TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(metaModelManager, (Type)selfType);
 			visitor.visit((CallExp)expr);
 			return visitor.specialize(this);
 		}
 		List<TemplateBinding> templateBindings = getTemplateBinding();
 		if ((templateBindings != null) && !templateBindings.isEmpty()) {
-			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager((EObject) expr);
+			MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(((EObject) expr).eResource());
 			TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(metaModelManager, (Type)selfType);
 			visitor.visit((CallExp)expr);
 			return visitor.specialize(this);
