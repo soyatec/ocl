@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -40,13 +39,15 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-//import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil;
@@ -76,6 +77,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.osgi.framework.Bundle;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a
@@ -208,12 +210,43 @@ public class UsageTests
 		super.tearDown();
 	}
 
-	public void createGenModelFile(String fileName, String fileContent)
-			throws IOException {
-		File file = new File(getProjectFile(), fileName);
-		Writer writer = new FileWriter(file);
-		writer.append(fileContent);
-		writer.close();
+	protected @NonNull String createClassPath(@NonNull List<String> projectNames) {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		String pathSeparator = null;
+		StringBuilder s = new StringBuilder();
+		for (String projectName : projectNames) {
+			String projectPath = null;
+			IProject project = root.getProject(projectName);
+			if (project != null) {
+				IPath location = project.getLocation();
+				if (location != null) {
+					projectPath = location.toString() + "/";
+				}
+			}
+			if (projectPath == null) {
+				Bundle bundle = Platform.getBundle(projectName);
+				projectPath = bundle.getLocation();
+			}
+			
+			if (projectPath.startsWith("reference:")) {
+				projectPath = projectPath.substring(10);
+			}
+			if (projectPath.startsWith("file:/")) {
+				projectPath = projectPath.substring(6);
+			}
+			if (projectPath.endsWith("/")) {
+				projectPath = projectPath + "bin";
+			}
+			if (pathSeparator != null) {
+				s.append(pathSeparator);
+			}
+			else {
+				pathSeparator = System.getProperty("path.separator");
+			}
+			s.append(projectPath);
+		}
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 	
 	public @NonNull String createGenModelContent(@NonNull String testProjectPath, @NonNull String fileName, @Nullable String usedGenPackages) {
@@ -245,6 +278,14 @@ public class UsageTests
 			+ "\n";
 	}
 
+	public void createGenModelFile(String fileName, String fileContent)
+			throws IOException {
+		File file = new File(getProjectFile(), fileName);
+		Writer writer = new FileWriter(file);
+		writer.append(fileContent);
+		writer.close();
+	}
+
 	protected @NonNull URI createModels(@NonNull String testProjectName, @NonNull String testFileStem,
 			@NonNull String oclinecoreFile, @NonNull String genmodelFile)
 			throws CoreException, IOException {
@@ -266,10 +307,25 @@ public class UsageTests
 		return fileURI;
 	}
 
-	protected boolean doCompile(@NonNull String testProjectName)
-			throws Exception {
-		List<String> compilationOptions = Arrays.asList("-d", "bin", "-source",
-			"1.5", "-target", "1.5", "-g");;
+	protected boolean doCompile(@NonNull String testProjectName, @NonNull String... extraClasspathProjects) throws Exception {
+		List<String> classpathProjects = new ArrayList<String>();
+		classpathProjects.add("org.eclipse.jdt.annotation");
+		classpathProjects.add("org.eclipse.emf.common");
+		classpathProjects.add("org.eclipse.emf.ecore");
+		classpathProjects.add("org.eclipse.ocl.examples.domain");
+		classpathProjects.add("org.eclipse.ocl.examples.library");
+		classpathProjects.add("org.eclipse.ocl.examples.pivot");
+		for (String extraClasspathProject : extraClasspathProjects) {
+			classpathProjects.add(extraClasspathProject);
+		}
+		List<String> compilationOptions = new ArrayList<String>();
+		compilationOptions.add("-d");
+		compilationOptions.add("bin");
+		compilationOptions.add("-source");
+		compilationOptions.add("1.5");
+		compilationOptions.add("-target");
+		compilationOptions.add("1.5");
+		compilationOptions.add("-g");
 		List<JavaFileObject> compilationUnits = new ArrayList<JavaFileObject>();
 		Object context = null;
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -278,7 +334,15 @@ public class UsageTests
 			if (project != null) {
 				getCompilationUnits(compilationUnits, project);
 				java.net.URI locationURI = project.getLocationURI();
-				compilationOptions.set(1, locationURI + "/bin");
+				String binURI = locationURI + "/bin";
+				if (binURI.startsWith("file:/")) {
+					binURI = binURI.substring(6);
+				}
+				compilationOptions.set(1, binURI);
+				new File(locationURI.getPath() + "/bin").mkdirs();
+				compilationOptions.add("-cp");
+				String path = createClassPath(classpathProjects);
+				compilationOptions.add(path);
 			}
 			context = project;
 		} else {
@@ -300,21 +364,17 @@ public class UsageTests
 		// (System.currentTimeMillis()-base));
 		if (!compilerTask.call()) {
 			StringBuilder s = new StringBuilder();
-			for (javax.tools.Diagnostic<?> diagnostic : diagnostics
-				.getDiagnostics()) {
+			for (javax.tools.Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
 				s.append("\n" + diagnostic);
 			}
 			if (s.length() > 0) {
-				throw new IOException("Failed to compile " + context
-					+ s.toString());
+				throw new IOException("Failed to compile " + context + s.toString());
 			}
-			System.out.println("Compilation of " + context
-				+ " returned false but no diagnostics");
+			System.out.println("Compilation of " + context + " returned false but no diagnostics");
 		}
 		// System.out.printf("%6.3f close\n", 0.001 *
 		// (System.currentTimeMillis()-base));
-		stdFileManager.close(); // Close the file manager which re-opens
-								// automatically
+		stdFileManager.close(); // Close the file manager which re-opens automatically
 		// System.out.printf("%6.3f forName\n", 0.001 *
 		// (System.currentTimeMillis()-base));
 		// Class<?> testClass = Class.forName(qualifiedName);
@@ -808,6 +868,6 @@ public class UsageTests
 		doGenModel(testProjectPathB, fileURIB);
 		doGenModel(testProjectPathA, fileURIA);
 		doCompile(testProjectNameA);
-		doCompile(testProjectNameB);
+		doCompile(testProjectNameB, testProjectNameA);
 	}
 }
