@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -156,6 +157,16 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 			}
 		}
 		return csElement;
+	}
+
+	@Override
+	public ElementCS visitDataType(@NonNull DataType object) {
+		return visitType(object);
+	}
+
+	@Override
+	public ElementCS visitEnumeration(@NonNull org.eclipse.ocl.examples.pivot.Enumeration object) {
+		return visitType(object);
 	}
 
 	@Override
