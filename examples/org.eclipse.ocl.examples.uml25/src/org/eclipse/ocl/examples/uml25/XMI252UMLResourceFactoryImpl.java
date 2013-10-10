@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.uml2.uml.internal.resource.XMI2UMLResourceFactoryImpl;
+import org.eclipse.uml2.uml.resource.CMOF2UMLResourceHandler;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 
 /**
@@ -59,10 +60,10 @@ public class XMI252UMLResourceFactoryImpl extends XMI2UMLResourceFactoryImpl imp
 		Map<URI, URI> uriMap = uriConverter.getURIMap();
 		uriMap.put(URI.createURI("http://www.omg.org/spec/DD/20131001/"), uml25uri);
 		uriMap.put(URI.createURI("http://www.omg.org/spec/UML/20131001/"), uml25uri);
+//		resourceSet.getPackageRegistry().put("http://www.omg.org/spec/UML/20131001", UMLPackage.eINSTANCE);
 	}
 	
 	public XMI252UMLResourceFactoryImpl() {
-		
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class XMI252UMLResourceFactoryImpl extends XMI2UMLResourceFactoryImpl imp
 		Map<Object, Object> defaultLoadOptions = resource.getDefaultLoadOptions();
 
 		defaultLoadOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
-		defaultLoadOptions.put(XMLResource.OPTION_RESOURCE_HANDLER, new CMOF252UMLResourceHandler(null));
+		defaultLoadOptions.put(XMLResource.OPTION_RESOURCE_HANDLER, new CMOF2UMLResourceHandler(null));
 
 		return resource;
 	}

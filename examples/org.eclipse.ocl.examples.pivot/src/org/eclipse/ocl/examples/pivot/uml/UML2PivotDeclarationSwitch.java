@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.jdt.annotation.NonNull;
@@ -64,7 +66,9 @@ import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2PivotDeclarationSwitch;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.uml2.common.util.UML2Util;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 import org.eclipse.uml2.uml.util.UMLUtil;
 
@@ -270,7 +274,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	@Override
-	public PrimitiveType casePrimitiveType(org.eclipse.uml2.uml.PrimitiveType umlPrimitiveType) {
+	public DataType casePrimitiveType(org.eclipse.uml2.uml.PrimitiveType umlPrimitiveType) {
 		assert umlPrimitiveType != null;
 		PrimitiveType primaryElement = null;
 		String name = umlPrimitiveType.getName();
@@ -308,7 +312,14 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		if (pivotElement != null) {
 //			converter.addCreated(umlPrimitiveType, pivotElement);
 //		}
-		PrimitiveType pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
+		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPrimitiveType.getAppliedStereotype("Ecore::EDataType");
+		DataType pivotElement;
+		if (ecoreStereotype != null) {
+			pivotElement = converter.refreshNamedElement(DataType.class, PivotPackage.Literals.DATA_TYPE, umlPrimitiveType);
+		}
+		else {
+			pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
+		}
 		if (primaryElement != null) {
 //			@SuppressWarnings("unused")TypeServer typeServer1 = metaModelManager.getTypeServer(primaryElement);
 //			@SuppressWarnings("unused")TypeServer typeServer2 = metaModelManager.getTypeServer(pivotElement);
@@ -319,7 +330,6 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		}
 		copyClassifier(pivotElement, umlPrimitiveType);
 		String instanceClassName = null;
-		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPrimitiveType.getAppliedStereotype("Ecore::EDataType");
 		if (ecoreStereotype != null) {
 			Object object = umlPrimitiveType.getValue(ecoreStereotype, "instanceClassName");
 			if (object instanceof String) {
@@ -345,8 +355,10 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		System.out.println("Property " + ((org.eclipse.uml2.uml.NamedElement)umlProperty.eContainer()).getName() + "::" + umlProperty.getName() + " => " + DomainUtil.debugSimpleName(pivotElement));
 		copyProperty(pivotElement, umlProperty, null);
 		// NB MDT/UML2's base_XXX/extension_YYY are spurious composites
-		pivotElement.setIsComposite((umlProperty.getClass_() != null) && umlProperty.isComposite());			
-		pivotElement.setImplicit(umlProperty.getClass_() == null);
+		org.eclipse.uml2.uml.Element owner = umlProperty.getOwner();
+		boolean isComposer = (owner instanceof org.eclipse.uml2.uml.Classifier) && !(owner instanceof org.eclipse.uml2.uml.Association);
+		pivotElement.setIsComposite(isComposer && umlProperty.isComposite());			
+		pivotElement.setImplicit(!isComposer);
 //		pivotElement.setIsID(umlProperty.isID());			
 //		pivotElement.setIsResolveProxies(umlProperty.isResolveProxies());			
 		converter.queueReference(umlProperty);	// Defer
@@ -519,34 +531,45 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		converter.queueReference(umlNamespace);				// Defer for constraints
 	}
 
+	protected org.eclipse.uml2.uml.Profile getEcoreProfile(EObject eObject) {
+		Resource eResource = eObject.eResource();
+
+		if (eResource != null) {
+			ResourceSet resourceSet = eResource.getResourceSet();
+
+			if (resourceSet != null) {
+				return UML2Util.load(resourceSet, URI
+					.createURI(UMLResource.ECORE_PROFILE_URI),
+					UMLPackage.Literals.PROFILE);
+			}
+		}
+
+		return null;
+	}
+
+	protected org.eclipse.uml2.uml.Stereotype getEcoreStereotype(EObject eObject, String name) {
+		org.eclipse.uml2.uml.Profile ecoreProfile = getEcoreProfile(eObject);
+
+		return ecoreProfile != null
+			? ecoreProfile.getOwnedStereotype(name)
+			: null;
+	}
+
 	protected void copyPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotElement, @NonNull org.eclipse.uml2.uml.Package umlPackage) {
 //		EAnnotation eAnnotation = umlPackage.getEAnnotation(EcorePackage.eNS_URI);
 //		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
 		copyNamespace(pivotElement, umlPackage);
-		String nsPrefix = null;
-		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPackage.getAppliedStereotype("Ecore::EPackage");
-		if (ecoreStereotype != null) {
-			Object object = umlPackage.getValue(ecoreStereotype, "nsPrefix");
-			if (object instanceof String) {
-				nsPrefix = (String) object;
+		Object nsPrefix = null;
+		Object nsURI = umlPackage.getURI();
+		org.eclipse.uml2.uml.Stereotype ecoreStereotype = getEcoreStereotype(umlPackage, UMLUtil.STEREOTYPE__E_PACKAGE);
+		if ((ecoreStereotype != null) && umlPackage.isStereotypeApplied(ecoreStereotype)) {
+			nsPrefix = umlPackage.getValue(ecoreStereotype, UMLUtil.TAG_DEFINITION__NS_PREFIX);
+			if (nsURI == null) {
+				nsURI = umlPackage.getValue(ecoreStereotype, UMLUtil.TAG_DEFINITION__NS_URI);
 			}
 		}
-		pivotElement.setNsPrefix(nsPrefix);
-//		org.eclipse.uml2.uml.PrimitiveType umlStringType = getUMLPrimitiveType(umlPackage, "String");
-//		Object object = ecoreStereotype != null ? ecoreStereotype.getAttribute("nsPrefix", null) : null;
-//		if (umlPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_PREFIX)) {
-//			pivotElement.setNsPrefix(umlPackage.getNsPrefix());
-//		}
-//		if (umlPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)) {
-		String nsURI = umlPackage.getURI();
-		if ((nsURI == null) &&  (ecoreStereotype != null)) {
-			Object object = umlPackage.getValue(ecoreStereotype, "nsURI");
-			if (object instanceof String) {
-				nsPrefix = (String) object;
-			}
-		}
-		pivotElement.setNsURI(nsURI);
-//		}
+		pivotElement.setNsPrefix(nsPrefix != null ? nsPrefix.toString() : null);
+		pivotElement.setNsURI(nsURI != null ? nsURI.toString() : null);
 		doSwitchAll(pivotElement.getNestedPackage(), umlPackage.getNestedPackages(), null);
 		doSwitchAll(pivotElement.getOwnedType(), umlPackage.getOwnedTypes(), new UML2Pivot.Predicate<org.eclipse.uml2.uml.Type>()
 		{
@@ -652,7 +675,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		else if (ePackage == EcorePackage.eINSTANCE) {
 			return ecoreSwitch.doInPackageSwitch(eObject);
 		}
-		else if (ePackage.getNsURI().startsWith("http://www.omg.org/spec/MOF")) {
+		else if (ePackage.getNsURI().startsWith("http://www.omg.org/spec/MOF")) {		// Should never happen (removed by CMOF2UMLResourceHandler
 			if ((eObject instanceof org.eclipse.emf.ecore.xml.type.AnyType) && "Tag".equals(eClass.getName())) {
 				FeatureMap anyAttribute = ((org.eclipse.emf.ecore.xml.type.AnyType)eObject).getAnyAttribute();
 				Object name = null;
