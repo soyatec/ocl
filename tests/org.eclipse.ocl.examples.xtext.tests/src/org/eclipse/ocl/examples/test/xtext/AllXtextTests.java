@@ -86,7 +86,7 @@ public class AllXtextTests
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
 		LoadTests.getProjectMap().initializeResourceSet(resourceSet);
-		if (resourceSet.getURIConverter().exists(URI.createPlatformResourceURI("/UML-2.5/", true), null)) {
+		if (resourceSet.getURIConverter().exists(URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/", true), null)) {
 			result.addTestSuite(UML25LoadTests.class);
 		}
 		else {
