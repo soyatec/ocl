@@ -94,7 +94,7 @@ public class SerializeTests extends XtextTestCase
 			//
 			//	CS to Pivot
 			//	
-			String pivotName2 = stem + "2.ecore.pivot";
+			String pivotName2 = stem + "2.ecore.oclas";
 			URI pivotURI2 = getProjectFileURI(pivotName2);
 			Resource pivotResource2 = cs2pivot(ocl2, xtextResource2, pivotURI2);
 			//
@@ -156,7 +156,7 @@ public class SerializeTests extends XtextTestCase
 /*		//
 		//	CS to Pivot
 		//	
-		String pivotName2 = stem + "2.ecore.pivot";
+		String pivotName2 = stem + "2.ecore.oclas";
 		URI pivotURI2 = getProjectFileURI(pivotName2);
 		Resource pivotResource2 = cs2pivot(ocl, xtextResource2, pivotURI2);
 		//
