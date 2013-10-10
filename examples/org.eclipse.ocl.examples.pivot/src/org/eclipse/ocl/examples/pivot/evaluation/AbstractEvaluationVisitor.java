@@ -61,7 +61,7 @@ public abstract class AbstractEvaluationVisitor
 	protected final @NonNull MetaModelManager metaModelManager;	
 	protected final @NonNull DomainModelManager modelManager;
 
-    private @NonNull EvaluationVisitor undecoratedVisitor;
+    protected @NonNull EvaluationVisitor undecoratedVisitor;
 	
 	/**
 	 * Lazily-created cache of reusable regex patterns to avoid
