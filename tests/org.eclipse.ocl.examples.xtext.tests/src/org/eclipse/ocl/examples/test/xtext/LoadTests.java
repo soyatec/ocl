@@ -115,6 +115,10 @@ public class LoadTests extends XtextTestCase
 			System.out.println(key + "                              => " + value.eClass().getName()); // + " : " + value.toString());
 		}
 	} */
+	
+	protected MetaModelManager createMetaModelManager() {
+		return new MetaModelManager();
+	}
 
 	protected ResourceSet createResourceSet() {
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -268,7 +272,7 @@ public class LoadTests extends XtextTestCase
 //		return xmiResource;
 	}
 	
-	public void doLoadUML(@NonNull URI inputURI, boolean ignoreNonExistence, boolean validateEmbeddedOCL) throws IOException, ParserException {
+	public void doLoadUML(@NonNull URI inputURI, boolean ignoreNonExistence, boolean validateEmbeddedOCL, boolean validateCompleteOCL) throws IOException, ParserException {
 //		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = createResourceSet();
@@ -366,24 +370,33 @@ public class LoadTests extends XtextTestCase
 				assertNoValidationErrors("Overall validation", asResource);
 			}
 			assertEquals(s.toString(), 0, exceptions);
-
-		
-		
+			//
+			//	Split off any embedded OCL to a separate file
+			//		
 			ASResource oclResource = CompleteOCLSplitter.separate(metaModelManager, allResources.get(0));
 			if (oclResource != null) {
 				URI xtextURI = oclURI;// != null ? URI.createPlatformResourceURI(oclURI, true) : uri.trimFileExtension().appendFileExtension("ocl");
 				ResourceSetImpl csResourceSet = new ResourceSetImpl();
 				MetaModelManagerResourceSetAdapter.getAdapter(csResourceSet, metaModelManager);
 				BaseCSResource xtextResource = (BaseCSResource) csResourceSet.createResource(xtextURI, OCLinEcoreCSPackage.eCONTENT_TYPE);
-				if (oclResource != null) {
-					try {
-						xtextResource.updateFrom(oclResource, metaModelManager);
-						xtextResource.save(null);
-					}
-					catch (Exception e) {
-						System.out.println(e);
-						// FIXME fail
-					}
+				if (xtextResource != null) {
+					xtextResource.updateFrom(oclResource, metaModelManager);
+					xtextResource.save(null);
+				}
+				//
+				//	Check that the split off file is loadable
+				//		
+				MetaModelManager metaModelManager2 = createMetaModelManager();
+				ResourceSet resourceSet2 = metaModelManager2.getExternalResourceSet();
+				BaseCSResource reloadCS = (BaseCSResource) resourceSet2.createResource(oclURI);
+				MetaModelManagerResourceAdapter.getAdapter(reloadCS, metaModelManager2);
+				if (validateCompleteOCL) {
+					reloadCS.load(null);
+					assertNoResourceErrors("Load failed", reloadCS);
+					Resource reloadAS = reloadCS.getASResource(null);
+					assertNoUnresolvedProxies("Unresolved proxies", reloadAS);
+					assertNoValidationErrors("Reloading", reloadAS);
+					metaModelManager2.dispose();
 				}
 			}
 		}
@@ -867,7 +880,7 @@ public class LoadTests extends XtextTestCase
 //		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
 //		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.tests/model/Internationalized.profile.uml", true);
-		doLoadUML(uri, false, false);
+		doLoadUML(uri, false, false, false);
 	}
 
 	public void testReload_AsReload() throws Exception {
