@@ -38,12 +38,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
@@ -78,25 +76,19 @@ public class Pivot2EcoreReferenceVisitor
 		}
 	}
 
-	public <T extends EClassifier> void safeVisitAll(List<EGenericType> eGenericTypes, List<T> eTypes, List<? extends Type> superClasses) {
-		if (superClasses.size() > 0) {
-			List<EObject> superEClasses = new ArrayList<EObject>(superClasses.size());
-			typeRefVisitor.safeVisitAll(superEClasses, superClasses);
+	public <T extends EClassifier> void safeVisitAll(Class<?> javaClass, List<EGenericType> eGenericTypes, List<T> eTypes, List<? extends Type> asTypes) {
+		if (asTypes.size() > 0) {
+			List<EObject> eClasses = new ArrayList<EObject>(asTypes.size());
+			typeRefVisitor.safeVisitAll(eClasses, asTypes);
 			eTypes.clear();
 			eGenericTypes.clear();
-			for (EObject superEClass : superEClasses) {
+			for (EObject superEClass : eClasses) {
 				if (superEClass instanceof EGenericType) {
 					eGenericTypes.add((EGenericType)superEClass);
 				}
-				else {
-					@SuppressWarnings("unchecked")
-					T castSuperEClass = (T)superEClass;
-					try {
-						eTypes.add(castSuperEClass);
-					}
-					catch (ArrayStoreException e) {
-						// OclAny is EJavaObject
-					}
+				else if (javaClass.isAssignableFrom(superEClass.getClass())){
+					@SuppressWarnings("unchecked") T castSuperEClass = (T)superEClass;
+					eTypes.add(castSuperEClass);
 				}
 			}
 		}
@@ -128,9 +120,9 @@ public class Pivot2EcoreReferenceVisitor
 	}
 
 	@Override
-	public EObject visitClass(@NonNull Class pivotClass) {
+	public EObject visitClass(@NonNull org.eclipse.ocl.examples.pivot.Class pivotClass) {
 		EClass eClass = context.getCreated(EClass.class, pivotClass);
-		safeVisitAll(eClass.getEGenericSuperTypes(), eClass.getESuperTypes(), pivotClass.getSuperClass());
+		safeVisitAll(EClass.class, eClass.getEGenericSuperTypes(), eClass.getESuperTypes(), pivotClass.getSuperClass());
 		return eClass;
 	}
 
@@ -143,12 +135,12 @@ public class Pivot2EcoreReferenceVisitor
 	@Override
 	public EObject visitOperation(@NonNull Operation pivotOperation) {
 		EOperation eOperation = context.getCreated(EOperation.class, pivotOperation);
-		safeVisitAll(eOperation.getEGenericExceptions(), eOperation.getEExceptions(), pivotOperation.getRaisedException());
+		safeVisitAll(EClassifier.class, eOperation.getEGenericExceptions(), eOperation.getEExceptions(), pivotOperation.getRaisedException());
 		return super.visitOperation(pivotOperation);
 	}
 
 	@Override
-	public EObject visitPackage(@NonNull Package pivotPackage) {
+	public EObject visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
 		EPackage ePackage = context.getCreated(EPackage.class, pivotPackage);
 		if (ePackage == null) {
 			return null;
