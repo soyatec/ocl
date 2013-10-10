@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -126,8 +127,10 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 			Namespace namespace = PivotUtil.getNamespace(object);
 			OpaqueExpression specification = object.getSpecification();
 			if ((specification != null) && (namespace != null)) {
+				specification.accept(this);					// Deep search for references
 				ExpSpecificationCS csSpec = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, specification);
 				csElement.setSpecification(csSpec);
+				//
 				MetaModelManager metaModelManager = context.getMetaModelManager();
 				PrettyPrintOptions.Global prettyPrintOptions = PrettyPrinter.createOptions(null); //metaModelManager.getPrimaryElement(namespace));
 				@SuppressWarnings("null")@NonNull ArrayList<String> newArrayList = Lists.newArrayList("body", "context", "def", "endpackage", "inv", "package", "post", "inv");
@@ -140,13 +143,14 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 					for (@SuppressWarnings("null")@NonNull DomainPackage aliased : adapter.getAliases()) {
 						DomainPackage primary = metaModelManager.getPrimaryPackage(aliased);
 						if (primary instanceof Namespace) {
-							String alias = adapter.getAlias((Namespace) primary);
+							String alias = adapter.getAlias((Namespace) primary, null);
 							if (alias != null) {
 								prettyPrintOptions.addAliases((Namespace) primary, alias);
 							}
 						}
 					}
-				}	
+				}
+				// FIXME BUG 419132 Need to do this in a deferred pass
 				String expr = PrettyPrinter.print(specification, prettyPrintOptions);		
 				csSpec.setExprString("\t" + expr.trim().replaceAll("\\r", "").replaceAll("\\n", "\n\t\t"));
 			}
@@ -167,6 +171,12 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 	@Override
 	public ElementCS visitEnumeration(@NonNull org.eclipse.ocl.examples.pivot.Enumeration object) {
 		return visitType(object);
+	}
+
+	@Override
+	public ElementCS visitExpressionInOCL(@NonNull ExpressionInOCL object) {
+		safeVisit(object.getBodyExpression());
+		return super.visitExpressionInOCL(object);
 	}
 
 	@Override

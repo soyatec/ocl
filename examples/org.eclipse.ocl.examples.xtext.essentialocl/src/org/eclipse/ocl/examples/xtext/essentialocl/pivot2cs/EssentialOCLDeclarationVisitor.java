@@ -17,20 +17,35 @@ package org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.CallExp;
+import org.eclipse.ocl.examples.pivot.CollectionItem;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
+import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ConstructorExp;
+import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.IterateExp;
+import org.eclipse.ocl.examples.pivot.IteratorExp;
+import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
+import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
@@ -124,12 +139,54 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 	}
 
 	@Override
+	public @Nullable ElementCS visitCallExp(@NonNull CallExp object) {
+		safeVisit(object.getSource());
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitCollectionItem(@NonNull CollectionItem object) {
+		safeVisit(object.getItem());
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitCollectionLiteralExp(@NonNull CollectionLiteralExp object) {
+		for (CollectionLiteralPart asPart : object.getPart()) {
+			safeVisit(asPart);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitCollectionRange(@NonNull CollectionRange object) {
+		safeVisit(object.getFirst());
+		safeVisit(object.getLast());
+		return null;
+	}
+
+	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
 		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSPackage.Literals.CONSTRAINT_CS, object);
 		if (csElement != null) {
 			refreshConstraint(csElement, object);
 		}
 		return csElement;
+	}
+
+	@Override
+	public @Nullable ElementCS visitConstructorExp(@NonNull ConstructorExp object) {
+		for (ConstructorPart asPart : object.getPart()) {
+			safeVisit(asPart);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitConstructorPart(@NonNull ConstructorPart object) {
+		safeVisit(object.getType());
+		safeVisit(object.getInitExpression());
+		return null;
 	}
 
 	@Override
@@ -144,6 +201,45 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 	}
 
 	@Override
+	public @Nullable ElementCS visitIfExp(@NonNull IfExp object) {
+		safeVisit(object.getCondition());
+		safeVisit(object.getThenExpression());
+		safeVisit(object.getElseExpression());
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitLetExp(@NonNull LetExp object) {
+		safeVisit(object.getVariable());
+		safeVisit(object.getIn());
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitIterateExp(@NonNull IterateExp object) {
+		for (Variable asIterator : object.getIterator()) {
+			safeVisit(asIterator);
+		}
+		safeVisit(object.getResult());
+		safeVisit(object.getBody());
+		return super.visitIterateExp(object);
+	}
+
+	@Override
+	public @Nullable ElementCS visitIteratorExp(@NonNull IteratorExp object) {
+		for (Variable asIterator : object.getIterator()) {
+			safeVisit(asIterator);
+		}
+		safeVisit(object.getBody());
+		return super.visitIteratorExp(object);
+	}
+
+	@Override
+	public ElementCS visitOCLExpression(@NonNull OCLExpression object) {
+		return null;
+	}
+
+	@Override
 	public ElementCS visitOpaqueExpression(@NonNull OpaqueExpression object) {
 		String body = PivotUtil.getBody(object);
 		if (body == null) {
@@ -152,4 +248,41 @@ public class EssentialOCLDeclarationVisitor extends BaseDeclarationVisitor
 		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSPackage.Literals.EXP_SPECIFICATION_CS, object);
 		csElement.setExprString(body);
 		return csElement;
-	}	}
+	}
+
+	@Override
+	public @Nullable ElementCS visitOperationCallExp(@NonNull OperationCallExp object) {
+		for (OCLExpression asArgument : object.getArgument()) {
+			safeVisit(asArgument);
+		}
+		return super.visitOperationCallExp(object);
+	}
+
+	@Override
+	public @Nullable ElementCS visitTupleLiteralExp(@NonNull TupleLiteralExp object) {
+		for (TupleLiteralPart asPart : object.getPart()) {
+			safeVisit(asPart);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitTupleLiteralPart(@NonNull TupleLiteralPart object) {
+		safeVisit(object.getType());
+		safeVisit(object.getInitExpression());
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitTypeExp(@NonNull TypeExp object) {
+		safeVisit(object.getType());
+		return null;
+	}
+
+	@Override
+	public @Nullable ElementCS visitVariable(@NonNull Variable object) {
+		safeVisit(object.getType());
+		safeVisit(object.getInitExpression());
+		return null;
+	}
+}

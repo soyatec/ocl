@@ -183,7 +183,7 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 						if ((elementResource != csResource) && (elementResource != asResource)) {
 							AliasAnalysis adapter = csResource != null ? AliasAnalysis.getAdapter(csResource) : null;
 							if (adapter != null) {
-								String alias = adapter.getAlias(namedElement);
+								String alias = adapter.getAlias(namedElement, null);
 								if (alias != null) {
 									name = alias;
 								}

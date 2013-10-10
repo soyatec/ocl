@@ -116,6 +116,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		if (metaModelManager == null) {
 			throw new IllegalStateException("No MetaModelManager");
 		}
+		AliasAnalysis aliasAnalysis = null;
 		URI csURI = csResource.getURI();
 		RootCS documentCS = (RootCS) csResource.getContents().get(0);
 		List<ImportCS> imports = new ArrayList<ImportCS>();
@@ -133,8 +134,10 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				}
 				List<String> aliases = importedNamespaces.get(importedNamespace);
 				if ((aliases == null) || aliases.isEmpty()) {
-					AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
-					String alias = aliasAnalysis.getAlias(importedNamespace);
+					if (aliasAnalysis == null) {
+						aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
+					}
+					String alias = aliasAnalysis.getAlias(importedNamespace, null);
 					aliases = Collections.singletonList(alias);
 				}
 				EObject eObject = importedNamespace.getETarget();
@@ -152,6 +155,35 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 					csSimpleRef.setUri(deresolvedURI.toString());
 					importCS.setPivot(importedNamespace);
 					imports.add(importCS);
+				}
+			}
+		}
+		if (aliasAnalysis != null) {
+			aliasAnalysis.dispose();
+		}
+		aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
+		for (ImportCS csImport : imports) {
+			Namespace namespace = csImport.getNamespace();
+			String alias = csImport.getName();
+			if ((namespace != null) && (alias == null)) {
+				alias = aliasAnalysis.getAlias(namespace, null);
+				if (alias == null) {
+					String hint = null;
+					if (namespace instanceof org.eclipse.ocl.examples.pivot.Package) {
+						hint = ((org.eclipse.ocl.examples.pivot.Package)namespace).getNsPrefix();
+					}
+					if (hint == null) {
+						String name = namespace.getName();
+						if (name.length() > 0) {
+							hint = name.substring(0, 1).toLowerCase() + name.substring(1);
+						}
+					}
+					if (hint != null) {
+						alias = aliasAnalysis.getAlias(namespace, hint);
+					}
+				}
+				if (alias != null) {
+					csImport.setName(alias);
 				}
 			}
 		}

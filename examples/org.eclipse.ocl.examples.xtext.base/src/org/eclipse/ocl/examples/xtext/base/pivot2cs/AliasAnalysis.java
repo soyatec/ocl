@@ -245,9 +245,16 @@ public class AliasAnalysis extends AdapterImpl
 	}
 
 	/**
-	 * Return the alias for eObject.
+	 * Return the alias for eObject, or null if there is none.
 	 */
+	@Deprecated
 	public @Nullable String getAlias(@NonNull EObject eObject) {
+		return getAlias(eObject, null);
+	}
+	/**
+	 * Return the alias for eObject, using a non-null hint as a stem for auto-generation, or null if there is none.
+	 */
+	public @Nullable String getAlias(@NonNull EObject eObject, @Nullable String hint) {
 		EObject eObject2 = eObject;
 		if (eObject2 instanceof Pivotable) {
 			eObject2 = ((Pivotable)eObject2).getPivot();
@@ -263,6 +270,18 @@ public class AliasAnalysis extends AdapterImpl
 				eObject = metaModelManager.getPrimaryElement(eObject);
 				return allAliases.get(eObject);
 			} */
+			if (hint != null) {
+				if (allNames.get(hint) != null) {
+					int counter = 0;
+					while (allNames.get(hint + "_" + counter) != null) {
+						counter++;
+					}
+					hint = hint + "_" + counter;
+				}
+				allNames.put(hint, packageServer);
+				allAliases.put(packageServer, hint);				
+				return hint;
+			}
 		}
 		return null;
 	}
