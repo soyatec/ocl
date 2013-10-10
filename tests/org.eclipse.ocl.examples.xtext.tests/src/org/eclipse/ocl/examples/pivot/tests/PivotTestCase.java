@@ -512,6 +512,11 @@ public class PivotTestCase extends TestCase
 		return DomainUtil.nonNullState(projectURL);
 	}
 
+	public static boolean isWindows() {
+		String os = System.getProperty("os.name");
+		return (os != null) && os.startsWith("Windows");
+	}
+
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSPackage.eCONTENT_TYPE));
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();

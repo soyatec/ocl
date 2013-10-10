@@ -168,8 +168,7 @@ public class ImportTests extends XtextTestCase
 	}
 
 	protected String getNoSuchFileMessage() {
-		String os = System.getProperty("os.name");
-		if ((os != null) && os.startsWith("Windows")) {
+		if (isWindows()) {
 			return "{0} (The system cannot find the file specified)";
 		}
 		else {
