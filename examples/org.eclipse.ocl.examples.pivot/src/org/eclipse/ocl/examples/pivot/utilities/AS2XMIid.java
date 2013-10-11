@@ -115,13 +115,14 @@ public class AS2XMIid
 			for (Thread t : stableThreads) {
 				System.err.println("Stable thread : " + t);
 			}
+			int i = 0;
 			for (WeakReference<EObject> wr : debugOldEObjects) {
 				EObject eObject = wr.get();
 				if (eObject !=  null) {
-					System.err.println("Old object : " + DomainUtil.debugFullName(eObject));
+					System.err.println(i++ + " Old object : " + DomainUtil.debugSimpleName(eObject));
 				}
 				else {
-					System.err.println("Garbage collected object");
+					System.err.println(i++ + " Garbage collected object");
 				}
 			}
 		}
@@ -155,19 +156,19 @@ public class AS2XMIid
 			}
 		}
 		catch (NoSuchElementException e) {
-			System.err.println("Previous EObject : " + DomainUtil.debugFullName(debugEObject));		
+			System.err.println("Previous EObject : " + DomainUtil.debugSimpleName(debugEObject));		
 			int iSize = debugOldEObjects.size();
 			for (int i = 0; i < iSize; i++) {
 				EObject eObject = debugOldEObjects.get(i).get();
 				if (debugEObject == eObject) {
 					System.err.println("Previous EObject at " + i + "/" + iSize);
 					if (i + 1 < iSize) {
-						System.err.println("Next EObject : " + DomainUtil.debugFullName(debugOldEObjects.get(i+1)));
+						System.err.println("Next EObject : " + DomainUtil.debugSimpleName(debugOldEObjects.get(i+1)));
 					}
 					break;
 				}
 				else if (eObject == null) {
-					System.err.println("EObject at " + i + "has been garbage collected");
+					System.err.println("EObject at " + i + " has been garbage collected");
 				}
 			}
 			int i = 0;
@@ -177,7 +178,7 @@ public class AS2XMIid
 				EObject eObject = tit.next();
 				assert eObject != null;
 				if (eObject != oldEObject) {
-					System.err.println("At " + i + " now " + DomainUtil.debugFullName(eObject) + " was " + DomainUtil.debugFullName(oldEObject));
+					System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was " + DomainUtil.debugSimpleName(oldEObject));
 					messages++;
 					if (messages > 100) {
 						break;
@@ -187,7 +188,7 @@ public class AS2XMIid
 					System.err.println("Found previous EObject at " + i);
 					if (tit.hasNext()) {
 						eObject = tit.next();
-						System.err.println("Next EObject now : " + DomainUtil.debugFullName(eObject));
+						System.err.println("Next EObject now : " + DomainUtil.debugSimpleName(eObject));
 					}
 					else {
 						System.err.println("No next EObject ");
@@ -199,15 +200,21 @@ public class AS2XMIid
 		int i = 0;
 		int messages = 0;
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); i++) {
-			EObject oldEObject = debugOldEObjects.get(i).get();
 			EObject eObject = tit.next();
-			assert eObject != null;
-			if (eObject != oldEObject) {
-				System.err.println("At " + i + " now " + DomainUtil.debugFullName(eObject) + " was " + DomainUtil.debugFullName(oldEObject));
-				messages++;
-				if (messages > 100) {
-					break;
+			try {
+				EObject oldEObject = debugOldEObjects.get(i).get();
+				assert eObject != null;
+				if (eObject != oldEObject) {
+					System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was " + DomainUtil.debugSimpleName(oldEObject));
+					messages++;
+					if (messages > 100) {
+						break;
+					}
 				}
+			}
+			catch (IndexOutOfBoundsException e) {
+				System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was missing");
+				throw e;
 			}
 		}
 		for (String id : allIds.keySet()) {
