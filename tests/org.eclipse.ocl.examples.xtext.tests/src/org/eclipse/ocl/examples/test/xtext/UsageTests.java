@@ -368,18 +368,18 @@ public class UsageTests
 			diagnostics, compilationOptions, null, compilationUnits);
 		// System.out.printf("%6.3f call\n", 0.001 *
 		// (System.currentTimeMillis()-base));
-		StringBuilder s2 = new StringBuilder();
-		s2.append("javac");
-		for (String compilationOption : compilationOptions) {
-			s2.append(" ");
-			s2.append(compilationOption);
-		}
-		for (JavaFileObject compilationUnit : compilationUnits) {
-			s2.append("\n  ");
-			s2.append(compilationUnit);
-		}
-		System.out.println(s2.toString());
 		if (!compilerTask.call()) {
+			StringBuilder s2 = new StringBuilder();
+			s2.append("javac");
+			for (String compilationOption : compilationOptions) {
+				s2.append(" ");
+				s2.append(compilationOption);
+			}
+			for (JavaFileObject compilationUnit : compilationUnits) {
+				s2.append("\n  ");
+				s2.append(compilationUnit);
+			}
+			System.out.println(s2.toString());
 			StringBuilder s = new StringBuilder();
 			for (javax.tools.Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
 				s.append("\n" + diagnostic);
