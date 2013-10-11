@@ -464,7 +464,7 @@ public class OperationCallExpImpl
 		 * 
 		 * 
 		 */
-		@Nullable /*@Caught*/ Object CAUGHT_forAll;
+		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @Nullable /*@Thrown*/ DomainOperation operation = this.getReferredOperation();
 		    if (operation == null) {
@@ -481,7 +481,7 @@ public class OperationCallExpImpl
 		    final @NonNull /*@Thrown*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
 		    @NonNull /*@Thrown*/ Object accumulator = ValuesUtil.TRUE_VALUE;
 		    @Nullable Iterator<?> ITERATOR_i = Sequence.iterator();
-		    @Nullable /*@Thrown*/ Boolean forAll;
+		    /*@Thrown*/ boolean forAll;
 		    while (true) {
 		        if (!ITERATOR_i.hasNext()) {
 		            if (accumulator == ValuesUtil.TRUE_VALUE) {
@@ -550,7 +550,7 @@ public class OperationCallExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}

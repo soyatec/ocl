@@ -216,6 +216,15 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * @generated
 	 */
 	@Override
+	public boolean isNonNull() {
+		return nonNull || ((referredIteration != null) && referredIteration.isRequired());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isSettable() {
 		return true;
 	}
@@ -236,6 +245,20 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	@Override
 	public void setCaught(boolean isCaught) {
 		assert !isCaught;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	protected boolean nonNull = false;
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public void setNonNull() {
+		nonNull = true;
 	}
 
 } //CGBuiltInIterationCallExpImpl

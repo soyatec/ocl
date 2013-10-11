@@ -723,6 +723,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 //				cgAccumulator.setRequired(true);
 				if (asIteration.isRequired() || element.getBody().isRequired()) {
 					cgAccumulator.setNonNull();
+					cgBuiltInIterationCallExp.setNonNull();
 				}
 				if (!asIteration.isValidating()) {
 					cgAccumulator.setNonInvalid();

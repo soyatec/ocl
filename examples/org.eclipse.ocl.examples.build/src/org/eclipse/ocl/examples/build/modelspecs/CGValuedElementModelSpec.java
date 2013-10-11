@@ -1295,6 +1295,18 @@ public interface Log {
 			}
 		};
 
+		public static final @NonNull Nul ITER = new Nul() {
+			@Override public @NonNull String generateIsAssertedNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+			@Override public @NonNull String generateIsNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return nonNull || ((referredIteration != null) && referredIteration.isRequired());";
+			}
+			@Override public @NonNull String generateIsNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				return "return false;";
+			}
+		};
+
 		public static final @NonNull Nul MAYBE = new Nul() {
 			@Override public @NonNull String generateIsAssertedNonNull(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 				return "return false;";
@@ -1375,8 +1387,19 @@ public interface Log {
 				}
 			};
 		
-		public static MethodSpec setNonNull = new MyMethodSpec(CGVariable.class, "void setNonNull()", "boolean nonNull = false",
-			"Set the non-null status.")
+		public static MethodSpec setNonNull1 = new MyMethodSpec(CGVariable.class, "void setNonNull()", "boolean nonNull = false",
+				"Set the non-null status.")
+		{
+			@Override
+			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+				if (cgModelSpec.cgClass != rootClass) {
+					return null;
+				}
+				return "nonNull = true;";
+			}
+		};
+		public static MethodSpec setNonNull2 = new MyMethodSpec(CGBuiltInIterationCallExp.class, "void setNonNull()", "boolean nonNull = false",
+				"Set the non-null status.")
 		{
 			@Override
 			protected @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
@@ -1784,7 +1807,7 @@ public interface Log {
 		new CGValuedElementModelSpec(CGUnboxExp.class, "source",					Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , Con.FALSE, Val.DELVL, null     , null     , null     , null     , null     , null    );
 
 		new CGValuedElementModelSpec(CGIterationCallExp.class, "referredIteration",	null     , null     , null     , Nul.DELEG, null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.INNER, null     , null     , Eq.EQUIV);
-		new CGValuedElementModelSpec(CGBuiltInIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , Set.TRUE , Ct.FALSE, null     , null     , null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGBuiltInIterationCallExp.class, null,			Box.TRUE , null     , null     , Nul.ITER , null     , null     , null     , Set.TRUE , Ct.FALSE, null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryIterateCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryIterationCallExp.class, null,			Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
@@ -1921,7 +1944,8 @@ public interface Log {
 		Ct.setCaught.generate(s, this, genModel, isImplementation);
 		Inv.setNonInvalid.generate(s, this, genModel, isImplementation);
 		Inv.setNonInvalidValue.generate(s, this, genModel, isImplementation);
-		Nul.setNonNull.generate(s, this, genModel, isImplementation);
+		Nul.setNonNull1.generate(s, this, genModel, isImplementation);
+		Nul.setNonNull2.generate(s, this, genModel, isImplementation);
 		Val.setValueName.generate(s, this, genModel, isImplementation);
 	}
 }

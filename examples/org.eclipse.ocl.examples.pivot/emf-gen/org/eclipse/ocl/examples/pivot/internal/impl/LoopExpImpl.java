@@ -289,13 +289,13 @@ public abstract class LoopExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object CAUGHT_forAll;
+		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @NonNull /*@Thrown*/ List<Variable> iterator = this.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		    @NonNull /*@Thrown*/ Object accumulator = ValuesUtil.TRUE_VALUE;
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
-		    @Nullable /*@Thrown*/ Boolean forAll;
+		    /*@Thrown*/ boolean forAll;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
 		            if (accumulator == ValuesUtil.TRUE_VALUE) {
@@ -347,7 +347,7 @@ public abstract class LoopExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__NO_INITIALIZERS, message, new Object [] { this }));
 		}

@@ -56,4 +56,12 @@ public interface CGBuiltInIterationCallExp extends CGIterationCallExp {
 	 */
 	void setAccumulator(CGIterator value);
 
+	/**
+	 * Set the non-null status.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec$Nul$17
+	void setNonNull();
+
 } // CGWhileExp
