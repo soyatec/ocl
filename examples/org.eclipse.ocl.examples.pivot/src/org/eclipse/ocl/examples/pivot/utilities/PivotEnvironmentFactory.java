@@ -45,7 +45,7 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
      * A convenient shared instance of the environment factory, that creates
      * environments using the global package registry.
 	 */
-    private static PivotEnvironmentFactory globalRegistryInstance = null;
+    private static @Nullable PivotEnvironmentFactory globalRegistryInstance = null;
 	
     /**
      * Dispose of the global instance; this is intended for leakage detection in tests.
@@ -57,17 +57,17 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 		}
 	}
 	
-	@SuppressWarnings("null")
 	public static @NonNull PivotEnvironmentFactory getGlobalRegistryInstance() {
-		if (globalRegistryInstance == null) {
-			globalRegistryInstance = new PivotEnvironmentFactory();
+		PivotEnvironmentFactory globalRegistryInstance2 = globalRegistryInstance;
+		if (globalRegistryInstance2 == null) {
+			globalRegistryInstance = globalRegistryInstance2 = new PivotEnvironmentFactory();
 		}
-		return globalRegistryInstance;
+		return globalRegistryInstance2;
 	}
 	
-    protected final MetaModelManager metaModelManager;
+    protected final @NonNull MetaModelManager metaModelManager;
 
-	private final EPackage.Registry registry;
+	private final @Nullable EPackage.Registry registry;
 
 	/**
 	 * Initializes me.  Environments that I create will use the global package
@@ -81,10 +81,10 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 	 * Initializes me with an <code>EPackage.Registry</code> that the
      * environments I create will use to look up packages.
      * 
-     * @param reg my package registry (must not be <code>null</code>)
+     * @param reg my package registry
 	 * @param metaModelManager 
 	 */
-	public PivotEnvironmentFactory(EPackage.Registry reg, @Nullable MetaModelManager metaModelManager) {
+	public PivotEnvironmentFactory(@Nullable EPackage.Registry reg, @Nullable MetaModelManager metaModelManager) {
 		super();
 		this.registry = reg;
 		this.metaModelManager = metaModelManager != null ? metaModelManager : new MetaModelManager();
@@ -108,7 +108,7 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
      * 
      * @return my package registry
      */
-	public final EPackage.Registry getEPackageRegistry() {
+	public final @Nullable EPackage.Registry getEPackageRegistry() {
 		return registry;
 	}
 
@@ -139,7 +139,6 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 		return metaModelManager.getType(dType);
 	}
 	
-	@SuppressWarnings("null")
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}

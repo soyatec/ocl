@@ -82,7 +82,7 @@ public class OCL {
 	 * @return a failure reason, null if successful
 	 * 
 	 */
-	public static String initialize(ResourceSet resourceSet) {
+	public static String initialize(@Nullable ResourceSet resourceSet) {
 		Resource.Factory.Registry resourceFactoryRegistry = resourceSet != null
 			? resourceSet.getResourceFactoryRegistry()
 			: Resource.Factory.Registry.INSTANCE;
@@ -92,11 +92,13 @@ public class OCL {
 	}
 
     /**
-     * Creates a new <code>OCL</code> using the shared Ecore environment
-     * factory instance.
+     * Creates a new <code>OCL</code> using the shared Ecore environment factory instance.
+     * <p>
+     * Do not do this or you will share your Resouerces with other applications, which at best will just make for a very slow run-time.
      * 
      * @return the new <code>OCL</code>
      */
+	@Deprecated
 	public static @NonNull OCL newInstance() {
 		return newInstance(PivotEnvironmentFactory.getGlobalRegistryInstance());
 	}
@@ -121,7 +123,7 @@ public class OCL {
      *    (which may be empty for an initially empty environment)
      * @return the new <code>OCL</code>
      */
-	public static @NonNull OCL newInstance(EnvironmentFactory envFactory, @NonNull Resource resource) {	
+	public static @NonNull OCL newInstance(@NonNull EnvironmentFactory envFactory, @NonNull Resource resource) {	
 		return new OCL(envFactory, envFactory.loadEnvironment(resource));
 	}
 	
@@ -140,14 +142,14 @@ public class OCL {
 
 	private final @NonNull Environment rootEnvironment;
 
-	private EvaluationEnvironment evalEnv;
+	private /*@LazyNonNull*/ EvaluationEnvironment evalEnv;
 
 	private @Nullable DomainModelManager modelManager;
 
-	private List<Constraint> constraints = new java.util.ArrayList<Constraint>();
+	private @NonNull List<Constraint> constraints = new java.util.ArrayList<Constraint>();
 
-	private Diagnostic problems;
-	private Diagnostic evaluationProblems;	
+	private @Nullable Diagnostic problems;
+	private @Nullable Diagnostic evaluationProblems;	
 
 	private int parserRepairCount = 0;
 
@@ -191,7 +193,7 @@ public class OCL {
 	 * @see #check(Object, OCLExpression)
 	 * @see #evaluate(Object, OCLExpression)
 	 */
-	public boolean check(Object context, Constraint constraint) {
+	public boolean check(Object context, @NonNull Constraint constraint) {
 		ExpressionInOCL specification = (ExpressionInOCL) constraint.getSpecification();
 
 		return check(context, specification);
@@ -219,7 +221,7 @@ public class OCL {
 	 * @throws IllegalArgumentException
 	 *             if the constraint expression is not boolean-valued
 	 */
-	public boolean check(Object context, ExpressionInOCL specification) {
+	public boolean check(Object context, @NonNull ExpressionInOCL specification) {
 		DomainStandardLibrary stdlib = getEnvironment().getOCLStandardLibrary();
 		if (specification.getBodyExpression().getType() != stdlib.getBooleanType()) {
 			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
@@ -452,7 +454,7 @@ public class OCL {
 	 * 
 	 * @see #parse(OCLInput)
 	 */
-	public List<Constraint> getConstraints() {
+	public @NonNull List<Constraint> getConstraints() {
 		return constraints;
 	}
 
@@ -471,7 +473,7 @@ public class OCL {
 		return rootEnvironment;
 	}
 
-	public EnvironmentFactory getEnvironmentFactory() {
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
 
@@ -498,7 +500,7 @@ public class OCL {
 	 * 
 	 * @return evaluation problems or <code>null</code> if all was OK
 	 */
-	public Diagnostic getEvaluationProblems() {
+	public @Nullable Diagnostic getEvaluationProblems() {
 		return evaluationProblems;
 	}
 
@@ -544,7 +546,7 @@ public class OCL {
 	 * 
 	 * @return parsing problems or <code>null</code> if all was OK
 	 */
-	public Diagnostic getProblems() {
+	public @Nullable Diagnostic getProblems() {
 		return problems;
 	}
 

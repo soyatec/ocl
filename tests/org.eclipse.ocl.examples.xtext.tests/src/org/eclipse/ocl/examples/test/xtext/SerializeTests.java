@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -132,8 +133,8 @@ public class SerializeTests extends XtextTestCase
 		//
 		//	Ecore to Pivot
 		//
-		OCL ocl1 = OCL.newInstance();
-		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		MetaModelManager metaModelManager1 = new MetaModelManager();
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory(EPackage.Registry.INSTANCE, metaModelManager1));
 		XtextResource xtextResource = null;
 		try {
 			@SuppressWarnings("unused")

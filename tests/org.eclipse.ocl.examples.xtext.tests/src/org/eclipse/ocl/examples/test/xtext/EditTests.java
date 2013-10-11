@@ -75,17 +75,11 @@ public class EditTests extends XtextTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-//		metaModelManager = new MetaModelManager();
-		ocl = OCL.newInstance();
-//		ocl = OCL.newInstance(new PivotEnvironmentFactory(new MetaModelManager()));
+		ocl = OCL.newInstance(new PivotEnvironmentFactory(EPackage.Registry.INSTANCE, new MetaModelManager()));
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-//		if (metaModelManager != null) {
-//			metaModelManager.dispose();
-//			metaModelManager = null;
-//		}
 		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
 		ocl.dispose();		
 		ocl = null;		
