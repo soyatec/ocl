@@ -1073,7 +1073,7 @@ public class LoadTests extends XtextTestCase
 				oldIdCount++;
 			}
 		}
-		assertEquals(10, oldIdCount);
+		assertEquals(9, oldIdCount);
 		assertEquals(oldIdCount, id2eObject.size());
 		//
 		//	Save the *.oclas again and check that the xmi:ids are consistent
