@@ -395,6 +395,8 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	protected String text(CollectionType ele) {
 		StringBuilder s = new StringBuilder();
 		appendType(s, ele);
+		appendTemplateSignature(s, ele);
+		appendSuperTypes(s, ele.getSuperClass());
 		return s.toString();
 	}
 
@@ -803,6 +805,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	protected String text(TupleType ele) {
 		StringBuilder s = new StringBuilder();
 		appendType(s, ele);
+		appendSuperTypes(s, ele.getSuperClass());
 		return s.toString();
 	}
 
