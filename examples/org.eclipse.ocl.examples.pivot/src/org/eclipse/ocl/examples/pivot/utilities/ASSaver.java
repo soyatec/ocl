@@ -112,6 +112,16 @@ public class ASSaver
 		}
 	}
 
+	protected @NonNull Type getOrphanClass(@NonNull org.eclipse.ocl.examples.pivot.Package orphanagePackage) {
+		Type orphanageClass2 = orphanageClass;
+		if (orphanageClass2 == null) {
+			orphanageClass = orphanageClass2 = PivotFactory.eINSTANCE.createAnyType();		// No superclasses
+			orphanageClass2.setName(PivotConstants.ORPHANAGE_NAME);
+			orphanagePackage.getOwnedType().add(orphanageClass2);
+		}
+		return orphanageClass2;
+	}
+
 	protected @NonNull org.eclipse.ocl.examples.pivot.Package getOrphanPackage(@NonNull Resource resource) {
 		Package orphanage2 = orphanage;
 		if (orphanage2 == null) {
@@ -151,11 +161,6 @@ public class ASSaver
 			orphanage2.setName(PivotConstants.ORPHANAGE_NAME);
 			orphanage2.setNsURI(PivotConstants.ORPHANAGE_URI);
 			resource.getContents().add(orphanage2);
-		}
-		if (orphanageClass == null) {
-			orphanageClass = PivotFactory.eINSTANCE.createAnyType();		// No superclasses
-			orphanageClass.setName(PivotConstants.ORPHANAGE_NAME);
-			orphanage2.getOwnedType().add(orphanageClass);
 		}
 		return orphanage2;
 	}
@@ -231,6 +236,13 @@ public class ASSaver
 			return castOperation;
 		}
 		T resolvedOperation = DomainUtil.nonNullEMF(EcoreUtil.copy(referredOperation));
+		if (orphanageClass == null) {
+			Package orphanage2 = orphanage;
+			if (orphanage2 == null) {
+				orphanage2 = getOrphanPackage(resource);
+			}
+			orphanageClass = getOrphanClass(orphanage2);
+		}
 		orphanageClass.getOwnedOperation().add(resolvedOperation);
 		operations.put(moniker, resolvedOperation);
 		String newMoniker = AS2Moniker.toString(resolvedOperation);
