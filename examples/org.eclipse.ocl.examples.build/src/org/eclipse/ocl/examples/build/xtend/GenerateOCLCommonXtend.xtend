@@ -566,6 +566,9 @@ public abstract class GenerateOCLCommonXtend extends GenerateOCLCommon
 				«FOR superClass : superClasses»
 					superClasses.add(«superClass.getSymbolName()»);
 				«ENDFOR»
+			«ELSEIF (type instanceof CollectionType)»
+				superClasses = type.getSuperClass();
+				superClasses.add(_OclAny);
 			«ELSEIF !(type instanceof AnyType)»
 				superClasses = type.getSuperClass();
 				superClasses.add(_OclElement);
