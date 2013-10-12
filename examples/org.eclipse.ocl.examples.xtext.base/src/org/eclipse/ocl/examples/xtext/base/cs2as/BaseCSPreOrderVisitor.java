@@ -243,6 +243,9 @@ public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Contin
 			}
 			Type pivotType = csElement.getType();
 			if (pivotType != null) {
+				if (pivotType.getSuperClass().size() <= 0) {
+					return false;
+				}
 				TemplateBindingCS csTemplateBinding = csElement.getOwnedTemplateBinding();
 				if (csTemplateBinding != null)  {
 					for (TemplateParameterSubstitutionCS csTemplateParameterSubstitution : csTemplateBinding.getOwnedParameterSubstitution()) {
