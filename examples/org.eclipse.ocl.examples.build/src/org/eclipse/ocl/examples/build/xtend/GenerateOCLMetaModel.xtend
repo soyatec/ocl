@@ -224,6 +224,7 @@ public class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 					
 					«allTypes.definePrimitiveTypeName("Integer")»
 					
+					protected final @NonNull Class _OclAny = standardLibrary.getOclAnyType();
 					protected final @NonNull Class _OclElement = standardLibrary.getOclElementType();
 					
 					«allTypes.defineCollectionTypeName("OrderedSet")»

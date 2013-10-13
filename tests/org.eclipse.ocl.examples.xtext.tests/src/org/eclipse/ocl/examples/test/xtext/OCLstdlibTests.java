@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -281,7 +282,9 @@ public class OCLstdlibTests extends XtextTestCase
 		//
 		//	Load OCL stdlib as an AS file.
 		//
-		new ProjectMap().initializeResourceSet(resourceSet);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			
+			new ProjectMap().initializeResourceSet(resourceSet);
+		}
 		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.ocl.examples.library/model-gen/OCL-2.5.oclas", true);
 		Resource asResource = resourceSet.getResource(libraryURI, true);
 		assertNoResourceErrors("Load failed", asResource);
