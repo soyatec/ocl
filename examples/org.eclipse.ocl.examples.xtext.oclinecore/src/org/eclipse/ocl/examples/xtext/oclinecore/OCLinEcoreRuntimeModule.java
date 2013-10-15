@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.oclinecore;
 
 import org.antlr.runtime.TokenSource;
+import org.eclipse.ocl.examples.xtext.base.InjectorProvider;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
 import org.eclipse.ocl.examples.xtext.oclinecore.parser.antlr.OCLinEcoreParser;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreValueConverterService;
@@ -33,17 +34,6 @@ import com.google.inject.name.Names;
  */
 public class OCLinEcoreRuntimeModule extends AbstractOCLinEcoreRuntimeModule
 {
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
-	}
-	
-	@Override
-	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return RetokenizingOCLinEcoreParser.class;
-	}
-
 	public static class RetokenizingOCLinEcoreParser extends OCLinEcoreParser
 	{
 		@Override
@@ -51,7 +41,12 @@ public class OCLinEcoreRuntimeModule extends AbstractOCLinEcoreRuntimeModule
 			return super.createTokenStream(new RetokenizingTokenSource(tokenSource, getTokenDefProvider().getTokenDefMap()));
 		}
 	}
-
+	
+	@Override
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
+		return RetokenizingOCLinEcoreParser.class;
+	}
+	
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return OCLinEcoreValueConverterService.class;
@@ -60,5 +55,16 @@ public class OCLinEcoreRuntimeModule extends AbstractOCLinEcoreRuntimeModule
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return OCLinEcoreCSResource.class;
+	}
+	
+	/**
+	 * @return The language injector provider
+	 */
+	public Class<? extends InjectorProvider> bindInjectorProvider() {
+		return OCLinEcoreInjectorProvider.class;
+	}
+	
+	public void configureEObjectValidation(Binder binder) {
+		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
 }

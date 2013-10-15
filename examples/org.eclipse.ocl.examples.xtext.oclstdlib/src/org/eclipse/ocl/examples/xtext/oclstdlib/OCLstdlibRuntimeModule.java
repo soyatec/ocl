@@ -18,6 +18,7 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib;
 
 import org.antlr.runtime.TokenSource;
+import org.eclipse.ocl.examples.xtext.base.InjectorProvider;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
 import org.eclipse.ocl.examples.xtext.oclstdlib.parser.antlr.OCLstdlibParser;
 import org.eclipse.ocl.examples.xtext.oclstdlib.scoping.OCLstdlibScopeProvider;
@@ -39,12 +40,7 @@ import com.google.inject.name.Names;
  */
 @SuppressWarnings("restriction")
 public class OCLstdlibRuntimeModule extends org.eclipse.ocl.examples.xtext.oclstdlib.AbstractOCLstdlibRuntimeModule
-{	
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
-	}
+{
 
 	public Class<? extends CompositeEValidator> bindCompositeEValidator() {
 		return OCLstdlibCompositeEValidator.class;
@@ -80,5 +76,17 @@ public class OCLstdlibRuntimeModule extends org.eclipse.ocl.examples.xtext.oclst
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return OCLstdlibCSResource.class;
+	}
+	
+	/**
+	 * @return The language injector provider
+	 */
+	public Class<? extends InjectorProvider> bindInjectorProvider() {
+		return OCLstdlibInjectorProvider.class;
+	}
+	
+	
+	public void configureEObjectValidation(Binder binder) {
+		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
 }

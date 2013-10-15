@@ -33,8 +33,12 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 public interface BaseCSResource extends BaseResource
 {
 	/**
-	 * Create the CS2AS converter for the cs2asResourceMap conversions using metaModelManager.
+	 * @param cs2asResourceMap
+	 * @param metaModelManager
+	 * @return the CS2AS converter for the cs2asResourceMap conversions using metaModelManager.
+	 * @deprecated Google Injection use. It will removed to simplify API
 	 */
+	@Deprecated
 	@NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager);
 
 	/**

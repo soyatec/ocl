@@ -23,7 +23,9 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2ASRuntimeModule;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScoping;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLASResourceFactory;
@@ -41,7 +43,7 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 	public static void doSetup() {
 		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 382058 fix
 		if (injector == null) {
-			new EssentialOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
+			injector = new EssentialOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -62,7 +64,16 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 	/**
 	 * Return the Injector for this plugin.
 	 */
+	@SuppressWarnings("null")
+	@NonNull
 	public static final Injector getInjector() {
+		if (injector == null) {
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				injector =  new EssentialOCLStandaloneSetup().createInjector();
+			} else {
+				doSetup();
+			}
+		}
 		return injector;
 	}
 
@@ -73,7 +84,8 @@ public class EssentialOCLStandaloneSetup extends EssentialOCLStandaloneSetupGene
 			globalExtensionToFactoryMap.remove("xmi");
 		if (!globalExtensionToFactoryMap.containsKey(Resource.Factory.Registry.DEFAULT_EXTENSION))
 			globalExtensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		injector = super.createInjector();
+		injector = super.createInjector()
+				.createChildInjector(new EssentialOCLCS2ASRuntimeModule());
 		return injector;
 	}
 

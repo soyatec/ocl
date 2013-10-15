@@ -67,8 +67,14 @@ import org.eclipse.ocl.examples.xtext.base.basecs.util.AbstractExtendingBaseCSVi
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
+	@Inject
+	ICS2ASFactory cs2asFactory;
+	
 	protected static class ClassSupersContinuation extends SingleContinuation<ClassCS>
 	{
 		private static Dependency[] computeDependencies(@NonNull CS2PivotConversion context, @NonNull ClassCS csElement) {
@@ -377,8 +383,17 @@ public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Contin
 	}
 
 	public BaseCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
-		super(context);
+		super(context);	
+		getInjector().injectMembers(this); // FIXME workaround since this class is not injected by Guice yet.
 	}
+	
+	
+	// FIXME workaround since this class is not injected by guice yet
+	protected Injector getInjector() {
+		// overriden by derived classes
+		return null;
+	}
+	
 
 	public Continuation<?> visiting(@NonNull VisitableCS visitable) {
 		throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for CS2Pivot PreOrder pass");
@@ -395,7 +410,7 @@ public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Contin
 		if (pivotElement == null) {
 			return null;
 		}
-		Continuations continuations = new Continuations();
+		Continuations continuations = cs2asFactory.createContinuations();
 		if (csClass.getOwnedTemplateSignature() != null) {
 			continuations.add(new TemplateSignatureContinuation(context, pivotElement, csClass));
 		}

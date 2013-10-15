@@ -16,8 +16,11 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.completeocl.cs2as.CompleteOCLCS2ASRuntimeModule;
 import org.eclipse.ocl.examples.xtext.completeocl.scoping.CompleteOCLScoping;
 import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLASResourceFactory;
 
@@ -32,8 +35,9 @@ public class CompleteOCLStandaloneSetup extends CompleteOCLStandaloneSetupGenera
 	private static Injector injector = null;
 	
 	public static void doSetup() {
+		assert !EMFPlugin.IS_ECLIPSE_RUNNING;			// Enforces Bug 382058 fix
 		if (injector == null) {
-			new CompleteOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
+			injector = new CompleteOCLStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -50,14 +54,24 @@ public class CompleteOCLStandaloneSetup extends CompleteOCLStandaloneSetupGenera
 	/**
 	 * Return the Injector for this plugin.
 	 */
+	@SuppressWarnings("null")
+	@NonNull
 	public static final Injector getInjector() {
+		if (injector == null) {
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				injector =  new CompleteOCLStandaloneSetup().createInjector();
+			} else {
+				doSetup();
+			}
+		}
 		return injector;
 	}
 
 	@Override
 	public Injector createInjector() {
 		init();
-		injector = super.createInjector();
+		injector = super.createInjector()
+				.createChildInjector(new CompleteOCLCS2ASRuntimeModule());
 		return injector;
 	}
 }

@@ -32,7 +32,7 @@ public class MarkupStandaloneSetup extends MarkupStandaloneSetupGenerated
 	
 	public static void doSetup() {
 		if (injector == null) {
-			new MarkupStandaloneSetup().createInjectorAndDoEMFRegistration();
+			injector = new MarkupStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	

@@ -17,10 +17,12 @@
 
 package org.eclipse.ocl.examples.xtext.base;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSValidator;
@@ -38,7 +40,7 @@ public class BaseStandaloneSetup //implements ISetup
 	
 	public static void doSetup() {
 		if (injector == null) {
-			new BaseStandaloneSetup().createInjectorAndDoEMFRegistration();
+			injector = new BaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -56,10 +58,21 @@ public class BaseStandaloneSetup //implements ISetup
 	/**
 	 * Return the Injector for this plugin.
 	 */
+	@SuppressWarnings("null")
+	@NonNull
 	public static final Injector getInjector() {
+		if (injector == null) {
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				injector =  new BaseStandaloneSetup().createInjector();	
+			} else {
+				doSetup();
+			}
+		}
 		return injector;
 	}
 
+	@SuppressWarnings("null")
+	@NonNull
 	public Injector createInjector() {
 		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().remove("xmi");

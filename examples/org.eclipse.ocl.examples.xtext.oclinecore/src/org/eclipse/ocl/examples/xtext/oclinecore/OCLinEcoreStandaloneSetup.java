@@ -17,7 +17,10 @@
 
 package org.eclipse.ocl.examples.xtext.oclinecore;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.oclinecore.cs2as.OCLinEcoreCS2ASRuntimeModule;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreASResourceFactory;
 
@@ -33,7 +36,7 @@ public class OCLinEcoreStandaloneSetup extends OCLinEcoreStandaloneSetupGenerate
 	
 	public static void doSetup() {
 		if (injector == null) {
-			new OCLinEcoreStandaloneSetup().createInjectorAndDoEMFRegistration();
+			injector = new OCLinEcoreStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 	}
 	
@@ -50,14 +53,24 @@ public class OCLinEcoreStandaloneSetup extends OCLinEcoreStandaloneSetupGenerate
 	/**
 	 * Return the Injector for this plugin.
 	 */
+	@SuppressWarnings("null")
+	@NonNull
 	public static final Injector getInjector() {
+		if (injector == null) {
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				injector =  new OCLinEcoreStandaloneSetup().createInjector();
+			} else {
+				doSetup();
+			}
+		}
 		return injector;
 	}
 
 	@Override
 	public Injector createInjector() {
 		init();
-		injector = super.createInjector();
+		injector = super.createInjector()
+			.createChildInjector(new OCLinEcoreCS2ASRuntimeModule());
 		return injector;
 	}
 }

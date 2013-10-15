@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.essentialocl;
 
 import org.antlr.runtime.TokenSource;
+import org.eclipse.ocl.examples.xtext.base.InjectorProvider;
 import org.eclipse.ocl.examples.xtext.essentialocl.parser.antlr.EssentialOCLParser;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -30,13 +31,7 @@ import com.google.inject.name.Names;
 public class EssentialOCLRuntimeModule extends org.eclipse.ocl.examples.xtext.essentialocl.AbstractEssentialOCLRuntimeModule
 {	
 	public static final String LANGUAGE_ID = "org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCL";
-
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
-	}
-	
+		
 	@Override
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return RetokenizingEssentialOCLParser.class;
@@ -64,4 +59,19 @@ public class EssentialOCLRuntimeModule extends org.eclipse.ocl.examples.xtext.es
 			return super.createTokenStream(new RetokenizingTokenSource(tokenSource, getTokenDefProvider().getTokenDefMap()));
 		}
 	}
+	
+	/**
+	 * @return the language injector provider
+	 */
+	public Class<? extends InjectorProvider> bindInjectorProvider() {
+		return EssentialOCLInjectorProvider.class;
+	}
+	
+	public void configureEObjectValidation(Binder binder) {
+		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
+	}
+	
+//	public void configureCS2PivotResourceAdapter(Binder binder) {
+//		binder.bind(CS2PivotResourceAdapter.class);
+//	}
 }

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.completeocl;
 
 import org.antlr.runtime.TokenSource;
+import org.eclipse.ocl.examples.xtext.base.InjectorProvider;
 import org.eclipse.ocl.examples.xtext.completeocl.parser.antlr.CompleteOCLParser;
 import org.eclipse.ocl.examples.xtext.completeocl.scoping.CompleteOCLScopeProvider;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLHiddenTokenSequencer;
@@ -34,11 +35,6 @@ import com.google.inject.name.Names;
  */
 public class CompleteOCLRuntimeModule extends org.eclipse.ocl.examples.xtext.completeocl.AbstractCompleteOCLRuntimeModule
 {
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
-	}
 	
 	@SuppressWarnings("restriction")
 	@Override
@@ -67,5 +63,16 @@ public class CompleteOCLRuntimeModule extends org.eclipse.ocl.examples.xtext.com
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return CompleteOCLCSResource.class;
+	}
+	
+	/**
+	 * @return The language injector provider
+	 */
+	public Class<? extends InjectorProvider> bindInjectorProvider() {
+		return CompleteOCLInjectorProvider.class;
+	}
+	
+	public void configureEObjectValidation(Binder binder) {
+		binder.bindConstant().annotatedWith(Names.named(org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR)).to(false);
 	}
 }
