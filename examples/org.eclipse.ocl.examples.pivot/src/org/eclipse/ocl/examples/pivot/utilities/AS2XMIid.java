@@ -42,6 +42,12 @@ import org.eclipse.ocl.examples.pivot.resource.ASResourceFactoryRegistry;
 
 public class AS2XMIid
 {
+	private static boolean idAssignmentInProgress = false;		// FIXME BUG 417663
+	
+	public static boolean isIdAssignmentInProgress() {
+		return idAssignmentInProgress;
+	}
+
 	/**
 	 * Create an AS2ID conversion primed with the xmi:id values obtained by loading uri. 
 	 */
@@ -91,141 +97,147 @@ public class AS2XMIid
 	 * values read when this AS2ID was constructed.
 	 */
 	public void assignIds(@NonNull ASResource asResource) {
-		List<WeakReference<EObject>> debugOldEObjects = new ArrayList<WeakReference<EObject>>();
-		Map<Thread, StackTraceElement[]> oldStackTraces = Thread.getAllStackTraces();
+		assert idAssignmentInProgress == false;
+		idAssignmentInProgress = true;
 		try {
-			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				assert eObject != null;
-				debugOldEObjects.add(new WeakReference<EObject>(eObject));
-			}
-		}
-		catch (Throwable e) {	// Bug 417663 an Intermittent NoSuchElementException may occur in the above
-			Map<Thread, StackTraceElement[]> newStackTraces = Thread.getAllStackTraces();
-			Set<Thread> oldThreads = new HashSet<Thread>(oldStackTraces.keySet());
-			Set<Thread> newThreads = new HashSet<Thread>(newStackTraces.keySet());
-			Set<Thread> stableThreads = new HashSet<Thread>(oldThreads);
-			oldThreads.removeAll(stableThreads);
-			newThreads.removeAll(stableThreads);
-			for (Thread t : newThreads) {
-				System.err.println("New thread : " + t);
-			}
-			for (Thread t : oldThreads) {
-				System.err.println("Old thread : " + t);
-			}
-			for (Thread t : stableThreads) {
-				System.err.println("Stable thread : " + t);
-			}
-			int i = 0;
-			for (WeakReference<EObject> wr : debugOldEObjects) {
-				EObject eObject = wr.get();
-				if (eObject !=  null) {
-					System.err.println(i++ + " Old object : " + DomainUtil.debugSimpleName(eObject));
-				}
-				else {
-					System.err.println(i++ + " Garbage collected object");
+			List<WeakReference<EObject>> debugOldEObjects = new ArrayList<WeakReference<EObject>>();
+			Map<Thread, StackTraceElement[]> oldStackTraces = Thread.getAllStackTraces();
+			try {
+				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					assert eObject != null;
+					debugOldEObjects.add(new WeakReference<EObject>(eObject));
 				}
 			}
-		}
-		StringBuilder s = null;
-		Map<String, EObject> allIds = new HashMap<String, EObject>();
-		ASResourceFactory resourceFactory = asResource.getASResourceFactory();
-		EObject debugEObject = null;
-		try {
-			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				debugEObject = eObject;
-				if (eObject instanceof Element) {
-					Element element = (Element)eObject;
-					AS2XMIidVisitor idVisitor = resourceFactory.createAS2XMIidVisitor(this);
-					String id = asResource.getID(element);
-					if (id == null) {
-						id = idVisitor.getID(element);
+			catch (Throwable e) {	// Bug 417663 an Intermittent NoSuchElementException may occur in the above
+				Map<Thread, StackTraceElement[]> newStackTraces = Thread.getAllStackTraces();
+				Set<Thread> oldThreads = new HashSet<Thread>(oldStackTraces.keySet());
+				Set<Thread> newThreads = new HashSet<Thread>(newStackTraces.keySet());
+				Set<Thread> stableThreads = new HashSet<Thread>(oldThreads);
+				oldThreads.removeAll(stableThreads);
+				newThreads.removeAll(stableThreads);
+				for (Thread t : newThreads) {
+					System.err.println("New thread : " + t);
+				}
+				for (Thread t : oldThreads) {
+					System.err.println("Old thread : " + t);
+				}
+				for (Thread t : stableThreads) {
+					System.err.println("Stable thread : " + t);
+				}
+				int i = 0;
+				for (WeakReference<EObject> wr : debugOldEObjects) {
+					EObject eObject = wr.get();
+					if (eObject !=  null) {
+						System.err.println(i++ + " Old object : " + DomainUtil.debugSimpleName(eObject));
 					}
-					if (id != null) {
-						assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
-						EObject oldElement = allIds.put(id, element);
-						if (oldElement != null) {
-							if (s == null) {
-								s = new StringBuilder();
-								s.append("Duplicate xmi:id values generated for ");
-							}
-							s.append("\n '" + id + "' for '" + element.eClass().getName() + "'");
+					else {
+						System.err.println(i++ + " Garbage collected object");
+					}
+				}
+			}
+			StringBuilder s = null;
+			Map<String, EObject> allIds = new HashMap<String, EObject>();
+			ASResourceFactory resourceFactory = asResource.getASResourceFactory();
+			EObject debugEObject = null;
+			try {
+				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					debugEObject = eObject;
+					if (eObject instanceof Element) {
+						Element element = (Element)eObject;
+						AS2XMIidVisitor idVisitor = resourceFactory.createAS2XMIidVisitor(this);
+						String id = asResource.getID(element);
+						if (id == null) {
+							id = idVisitor.getID(element);
 						}
-						//						System.out.println(DomainUtil.debugSimpleName(element) + " => " + xmi);
-						// Move to separate pass to try to avoid intertmittent NoSuchElementException from TreeIterator
-	//					asResource.setID(element, id);
+						if (id != null) {
+							assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
+							EObject oldElement = allIds.put(id, element);
+							if (oldElement != null) {
+								if (s == null) {
+									s = new StringBuilder();
+									s.append("Duplicate xmi:id values generated for ");
+								}
+								s.append("\n '" + id + "' for '" + element.eClass().getName() + "'");
+							}
+							//						System.out.println(DomainUtil.debugSimpleName(element) + " => " + xmi);
+							// Move to separate pass to try to avoid intertmittent NoSuchElementException from TreeIterator
+		//					asResource.setID(element, id);
+						}
 					}
 				}
 			}
-		}
-		catch (NoSuchElementException e) {
-			System.err.println("Previous EObject : " + DomainUtil.debugSimpleName(debugEObject));		
-			int iSize = debugOldEObjects.size();
-			for (int i = 0; i < iSize; i++) {
-				EObject eObject = debugOldEObjects.get(i).get();
-				if (debugEObject == eObject) {
-					System.err.println("Previous EObject at " + i + "/" + iSize);
-					if (i + 1 < iSize) {
-						System.err.println("Next EObject : " + DomainUtil.debugSimpleName(debugOldEObjects.get(i+1)));
+			catch (NoSuchElementException e) {
+				System.err.println("Previous EObject : " + DomainUtil.debugSimpleName(debugEObject));		
+				int iSize = debugOldEObjects.size();
+				for (int i = 0; i < iSize; i++) {
+					EObject eObject = debugOldEObjects.get(i).get();
+					if (debugEObject == eObject) {
+						System.err.println("Previous EObject at " + i + "/" + iSize);
+						if (i + 1 < iSize) {
+							System.err.println("Next EObject : " + DomainUtil.debugSimpleName(debugOldEObjects.get(i+1)));
+						}
+						break;
 					}
-					break;
+					else if (eObject == null) {
+						System.err.println("EObject at " + i + " has been garbage collected");
+					}
 				}
-				else if (eObject == null) {
-					System.err.println("EObject at " + i + " has been garbage collected");
+				int i = 0;
+				int messages = 0;
+				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); i++) {
+					EObject oldEObject = debugOldEObjects.get(i).get();
+					EObject eObject = tit.next();
+					assert eObject != null;
+					if (eObject != oldEObject) {
+						System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was " + DomainUtil.debugSimpleName(oldEObject));
+						messages++;
+						if (messages > 100) {
+							break;
+						}
+					}
+					else if (debugEObject == eObject) {
+						System.err.println("Found previous EObject at " + i);
+						if (tit.hasNext()) {
+							eObject = tit.next();
+							System.err.println("Next EObject now : " + DomainUtil.debugSimpleName(eObject));
+						}
+						else {
+							System.err.println("No next EObject ");
+						}
+					}
 				}
+				throw e;
 			}
 			int i = 0;
 			int messages = 0;
 			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); i++) {
-				EObject oldEObject = debugOldEObjects.get(i).get();
 				EObject eObject = tit.next();
-				assert eObject != null;
-				if (eObject != oldEObject) {
-					System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was " + DomainUtil.debugSimpleName(oldEObject));
-					messages++;
-					if (messages > 100) {
-						break;
+				try {
+					EObject oldEObject = debugOldEObjects.get(i).get();
+					assert eObject != null;
+					if (eObject != oldEObject) {
+						System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was " + DomainUtil.debugSimpleName(oldEObject));
+						messages++;
+						if (messages > 100) {
+							break;
+						}
 					}
 				}
-				else if (debugEObject == eObject) {
-					System.err.println("Found previous EObject at " + i);
-					if (tit.hasNext()) {
-						eObject = tit.next();
-						System.err.println("Next EObject now : " + DomainUtil.debugSimpleName(eObject));
-					}
-					else {
-						System.err.println("No next EObject ");
-					}
+				catch (IndexOutOfBoundsException e) {
+					System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was missing");
+					throw e;
 				}
 			}
-			throw e;
-		}
-		int i = 0;
-		int messages = 0;
-		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); i++) {
-			EObject eObject = tit.next();
-			try {
-				EObject oldEObject = debugOldEObjects.get(i).get();
-				assert eObject != null;
-				if (eObject != oldEObject) {
-					System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was " + DomainUtil.debugSimpleName(oldEObject));
-					messages++;
-					if (messages > 100) {
-						break;
-					}
-				}
+			for (String id : allIds.keySet()) {
+				asResource.setID(allIds.get(id), id);
 			}
-			catch (IndexOutOfBoundsException e) {
-				System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was missing");
-				throw e;
+			if (s != null) {
+				throw new IllegalStateException(s.toString());
 			}
-		}
-		for (String id : allIds.keySet()) {
-			asResource.setID(allIds.get(id), id);
-		}
-		if (s != null) {
-			throw new IllegalStateException(s.toString());
+		} finally {
+			idAssignmentInProgress = false;
 		}
 	}
 
