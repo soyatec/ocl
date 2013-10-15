@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid
 
 public class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 {
@@ -405,10 +404,10 @@ public class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 			}
 			var EObject pivotModel = asResource.getContents().get(0);
 			var ASSaver saver = new ASSaver(asResource);
-			var Package orphanage = saver.localizeSpecializations();
-			if ((orphanage != null) && (pivotModel instanceof Root)) {
-				(pivotModel as Root).getNestedPackage().add(orphanage);
-			}
+			/*var Package orphanage =*/ saver.localizeSpecializations();
+//			if ((orphanage != null) && (pivotModel instanceof Root)) {
+//				(pivotModel as Root).getNestedPackage().add(orphanage);
+//			}
 			var String fileName = outputFolder + "/" + javaClassName + ".java";
 			log.info("Generating '" + fileName + "'");
 			var String metaModel = generateMetamodel(pivotModel as Root);
@@ -418,10 +417,10 @@ public class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("ecore", "oclas");
 			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
 			log.info("Loading '" + saveURI + "'");
-			var AS2XMIid as2id = AS2XMIid.load(saveURI);
+//			var AS2XMIid as2id = AS2XMIid.load(saveURI);
 			log.info("Saving '" + saveURI + "'");
 			asResource.setURI(saveURI);
-	    	as2id.assignIds(asResource.getResourceSet());
+//	    	as2id.assignIds(asResource.getResourceSet());
 			asResource.save(null);
 		} catch (RuntimeException e) {
 			throw e;

@@ -69,6 +69,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
+import org.eclipse.ocl.examples.pivot.manager.Orphanage;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
@@ -358,11 +359,13 @@ public class Pivot2EcoreDeclarationVisitor
 		EModelElement firstElement = null;
 		List<EObject> outputObjects = new ArrayList<EObject>();
 		for (org.eclipse.ocl.examples.pivot.Package pivotObject : pivotRoot.getNestedPackage()) {
-			Object ecoreObject = safeVisit(pivotObject);
-			if (ecoreObject instanceof EObject) {
-				outputObjects.add((EObject) ecoreObject);
-				if (ecoreObject instanceof EModelElement) {
-					firstElement = (EModelElement) ecoreObject;
+			if (!Orphanage.isTypeOrphanage(pivotObject)) {
+				Object ecoreObject = safeVisit(pivotObject);
+				if (ecoreObject instanceof EObject) {
+					outputObjects.add((EObject) ecoreObject);
+					if ((firstElement == null) && (ecoreObject instanceof EModelElement)) {
+						firstElement = (EModelElement) ecoreObject;
+					}
 				}
 			}
 		}

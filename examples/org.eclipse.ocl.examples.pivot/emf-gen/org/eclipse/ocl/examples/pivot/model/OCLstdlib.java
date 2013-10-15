@@ -179,7 +179,7 @@ public class OCLstdlib extends ASResourceImpl
 			return theRoot;
 		}
 	
-		protected final @NonNull Package orphans = createPackage("$$", null, "http://www.eclipse.org/ocl/3.1.0/orphanage");
+		protected final @NonNull Package orphans = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/3.1.0/orphanage");
 		
 		protected void installPackages() {
 			root.getNestedPackage().add(orphans);

@@ -122,6 +122,7 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactoryRegistry;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
@@ -587,6 +588,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				|| (pivotElement instanceof UnspecifiedType);
 		}
 		pivotElement.setPackage(getOrphanage());
+	}
+
+	/**
+	 * Assign xmi:id values to referenceable elements in the libraries.
+	 */
+	public void assignLibraryIds(@NonNull AS2XMIid as2xmIid) {
+		for (@SuppressWarnings("null")@NonNull Library asLibrary : asLibraries) {
+			Resource eResource = asLibrary.eResource();
+			if (eResource instanceof ASResource) {
+				as2xmIid.assignIds((ASResource) eResource);
+			}
+		}
 	}
 
 	/**

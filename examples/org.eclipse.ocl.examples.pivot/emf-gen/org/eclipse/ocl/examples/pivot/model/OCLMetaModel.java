@@ -132,7 +132,7 @@ public class OCLMetaModel extends ASResourceImpl
 			installComments();
 		}
 	
-		protected final @NonNull Package pk_$$ = createPackage("$$", null, "http://www.eclipse.org/ocl/3.1.0/orphanage");
+		protected final @NonNull Package pk_$$ = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/3.1.0/orphanage");
 		
 		protected void installPackages() {
 			root.getNestedPackage().add(pk_$$);

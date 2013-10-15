@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactoryRegistry;
@@ -237,6 +238,10 @@ public class AS2XMIid
 			if (resource instanceof ASResource) {
 				assignIds((ASResource)resource);
 			}
+		}
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(asResourceSet);
+		if (metaModelManager != null) {
+			metaModelManager.assignLibraryIds(this);
 		}
 	}
 

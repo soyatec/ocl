@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -125,42 +126,17 @@ public class ASSaver
 	protected @NonNull org.eclipse.ocl.examples.pivot.Package getOrphanPackage(@NonNull Resource resource) {
 		Package orphanage2 = orphanage;
 		if (orphanage2 == null) {
-			for (EObject eRoot : resource.getContents()) {
-				if ((orphanage2 == null) && (eRoot instanceof Root)) {
-					for (org.eclipse.ocl.examples.pivot.Package asPackage : ((Root)eRoot).getNestedPackage()) {		// FIXME Obsolete
-						if (Orphanage.isTypeOrphanage(asPackage)) {
-							orphanage = orphanage2 = asPackage;
-							for (Type asType : orphanage2.getOwnedType()) {
-								if (PivotConstants.ORPHANAGE_NAME.equals(asType.getName())) {
-									orphanageClass = asType;
-								}
-								else {
-									specializations.put(asType, asType);
-								}
-							}
-							break;
-						}
-					}					
-				}
-				if ((eRoot instanceof org.eclipse.ocl.examples.pivot.Package) && Orphanage.isTypeOrphanage((org.eclipse.ocl.examples.pivot.Package)eRoot)) {
-					orphanage = orphanage2 = (org.eclipse.ocl.examples.pivot.Package)eRoot;
-					for (Type asType : orphanage2.getOwnedType()) {
-						if (PivotConstants.ORPHANAGE_NAME.equals(asType.getName())) {
-							orphanageClass = asType;
-						}
-						else {
-							specializations.put(asType, asType);
-						}
-					}
-					break;
-				}
-			}
-		}
-		if (orphanage2 == null) {
 			orphanage = orphanage2 = PivotFactory.eINSTANCE.createPackage();
 			orphanage2.setName(PivotConstants.ORPHANAGE_NAME);
+			orphanage2.setNsPrefix(PivotConstants.ORPHANAGE_PREFIX);
 			orphanage2.setNsURI(PivotConstants.ORPHANAGE_URI);
-			resource.getContents().add(orphanage2);
+			EList<EObject> contents = resource.getContents();
+			if ((contents.size() > 0) && (contents.get(0) instanceof Root)) {
+				((Root)contents.get(0)).getNestedPackage().add(orphanage2);
+			}
+			else {
+				contents.add(orphanage2);
+			}
 		}
 		return orphanage2;
 	}
@@ -191,10 +167,10 @@ public class ASSaver
 	 * Prepare a pivot resource for save by redirecting all type references to
 	 * specializations to local copies of the specializations.
 	 */
-	public org.eclipse.ocl.examples.pivot.Package localizeSpecializations() {
+	public void localizeSpecializations() {
 		locateSpecializations(resource.getContents());
 		if (specializingElements.size() > 0) {
-			orphanage = getOrphanPackage(resource);
+			loadOrphanage(resource);
 			for (int i = 0; i < specializingElements.size(); i++) {	// Domain may grow
 				Element element = specializingElements.get(i);
 				if (element != null) {
@@ -207,7 +183,48 @@ public class ASSaver
 //			ownedTypes.clear();
 //			ownedTypes.addAll(sorted);
 		}
-		return orphanage;
+	}
+
+	protected void loadOrphanage(@NonNull Resource resource) {
+		Root root = null;
+		Package orphanage2 = orphanage;
+		if (orphanage2 == null) {
+			for (EObject eRoot : resource.getContents()) {
+				if (eRoot instanceof Root) {
+					if (root == null) {
+						root = (Root) eRoot;
+					}
+					if (orphanage2 == null) {
+						for (org.eclipse.ocl.examples.pivot.Package asPackage : ((Root)eRoot).getNestedPackage()) {
+							if (Orphanage.isTypeOrphanage(asPackage)) {
+								orphanage = orphanage2 = asPackage;
+								for (Type asType : orphanage2.getOwnedType()) {
+									if (PivotConstants.ORPHANAGE_NAME.equals(asType.getName())) {
+										orphanageClass = asType;
+									}
+									else {
+										specializations.put(asType, asType);
+									}
+								}
+								break;
+							}
+						}					
+					}
+				}
+				if ((eRoot instanceof org.eclipse.ocl.examples.pivot.Package) && Orphanage.isTypeOrphanage((org.eclipse.ocl.examples.pivot.Package)eRoot)) {	// FIXME Obsolete
+					orphanage = orphanage2 = (org.eclipse.ocl.examples.pivot.Package)eRoot;
+					for (Type asType : orphanage2.getOwnedType()) {
+						if (PivotConstants.ORPHANAGE_NAME.equals(asType.getName())) {
+							orphanageClass = asType;
+						}
+						else {
+							specializations.put(asType, asType);
+						}
+					}
+					break;
+				}
+			}
+		}
 	}
 
 	protected void locateSpecializations(/*@NonNull*/ List<? extends EObject> eObjects) {
@@ -265,7 +282,12 @@ public class ASSaver
 			resolvedType = DomainUtil.nonNullEMF(EcoreUtil.copy(referredType));
 			specializations.put(referredType, resolvedType);
 			specializations.put(resolvedType, resolvedType);
-			if (resolvedType.eContainer() != orphanage) {
+			EObject eContainer = resolvedType.eContainer();
+			if (eContainer == null) {
+				Package orphanage2 = orphanage;
+				if (orphanage2 == null) {
+					orphanage2 = getOrphanPackage(resource);
+				}
 				orphanage.getOwnedType().add(resolvedType);
 			}
 		}
