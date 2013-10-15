@@ -416,7 +416,7 @@ public class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 			fw.close();
 			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("ecore", "oclas");
 			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
-			log.info("Loading '" + saveURI + "'");
+//			log.info("Loading '" + saveURI + "'");
 //			var AS2XMIid as2id = AS2XMIid.load(saveURI);
 			log.info("Saving '" + saveURI + "'");
 			asResource.setURI(saveURI);
