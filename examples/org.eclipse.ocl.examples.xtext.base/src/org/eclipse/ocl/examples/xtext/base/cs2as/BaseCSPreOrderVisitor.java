@@ -68,12 +68,13 @@ import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 
 public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
 	@Inject
-	ICS2ASFactory cs2asFactory;
+	private ICS2ASFactory cs2asFactory;
 	
 	protected static class ClassSupersContinuation extends SingleContinuation<ClassCS>
 	{
@@ -382,17 +383,18 @@ public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Contin
 		}
 	}
 
-	public BaseCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	@AssistedInject
+	public BaseCSPreOrderVisitor(@Assisted @NonNull CS2PivotConversion context) {
 		super(context);	
-		getInjector().injectMembers(this); // FIXME workaround since this class is not injected by Guice yet.
+		// getInjector().injectMembers(this); // FIXME workaround since this class is not injected by Guice yet.
 	}
 	
 	
 	// FIXME workaround since this class is not injected by guice yet
-	protected Injector getInjector() {
-		// overriden by derived classes
-		return null;
-	}
+//	protected Injector getInjector() {
+//		// overriden by derived classes
+//		return null;
+//	}
 	
 
 	public Continuation<?> visiting(@NonNull VisitableCS visitable) {

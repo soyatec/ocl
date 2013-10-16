@@ -108,6 +108,8 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
+import com.google.inject.Inject;
+
 public class CS2PivotConversion extends AbstractBase2PivotConversion
 {	
 	private static final Logger logger = Logger.getLogger(CS2PivotConversion.class);
@@ -128,6 +130,9 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	protected final @NonNull CS2Pivot converter;
 	protected final @NonNull Collection<? extends Resource> csResources;
 	
+	@Inject
+	private ICS2ASFactory cs2asFactory;
+	
 	/**
 	 * The Visitors
 	 */
@@ -135,7 +140,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	private final @NonNull BaseCSVisitor<Element> left2RightVisitor;
 	private final @NonNull BaseCSVisitor<Continuation<?>> postOrderVisitor;
 	private final @NonNull BaseCSVisitor<Continuation<?>> preOrderVisitor;
-
+	
 	private @NonNull InterDependency<TemplateSignatureContinuation> typesHaveSignatures = new InterDependency<TemplateSignatureContinuation>("All unspecialized signatures defined", null);
 
 	/**
@@ -161,7 +166,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		this.containmentVisitor = converter.createContainmentVisitor(this);
 		this.left2RightVisitor = converter.createLeft2RightVisitor(this);
 		this.postOrderVisitor = converter.createPostOrderVisitor(this);
-		this.preOrderVisitor = converter.createPreOrderVisitor(this);
+		this.preOrderVisitor = cs2asFactory.createPreOrderVisitor(this);
 		List<Resource> mappedResources = new ArrayList<Resource>();
 		for (Resource csResource : csResources) {
 			if (csResource != null) {

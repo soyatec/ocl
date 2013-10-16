@@ -26,9 +26,13 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PackageDeclarati
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.AbstractCompleteOCLCSPreOrderVisitor;
 
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
+
 public class CompleteOCLCSPreOrderVisitor extends AbstractCompleteOCLCSPreOrderVisitor
 {	
-	public CompleteOCLCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	@AssistedInject
+	public CompleteOCLCSPreOrderVisitor(@Assisted @NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

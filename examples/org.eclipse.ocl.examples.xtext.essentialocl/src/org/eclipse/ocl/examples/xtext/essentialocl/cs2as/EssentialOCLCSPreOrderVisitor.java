@@ -53,6 +53,8 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.AbstractEssentialOCLCSPreOrderVisitor;
 
 import com.google.inject.Injector;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 
 public class EssentialOCLCSPreOrderVisitor extends AbstractEssentialOCLCSPreOrderVisitor
 {
@@ -138,7 +140,8 @@ public class EssentialOCLCSPreOrderVisitor extends AbstractEssentialOCLCSPreOrde
 		}
 	}
 
-	public EssentialOCLCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	@AssistedInject
+	public EssentialOCLCSPreOrderVisitor(@Assisted @NonNull CS2PivotConversion context) {
 		super(context);
 	}
 
@@ -214,8 +217,8 @@ public class EssentialOCLCSPreOrderVisitor extends AbstractEssentialOCLCSPreOrde
 		return null;
 	}
 	
-	@Override
-	protected Injector getInjector() {
-		return EssentialOCLStandaloneSetup.getInjector();
-	}	
+//	@Override
+//	protected Injector getInjector() {
+//		return EssentialOCLStandaloneSetup.getInjector();
+//	}	
 }

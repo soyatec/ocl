@@ -5,7 +5,8 @@ import org.eclipse.ocl.examples.xtext.base.InjectorProvider;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class BaseCS2ASFactory implements ICS2ASFactory {
+public class BaseCS2ASFactory // implements ICS2ASFactory 
+{
 	
 	private final InjectorProvider injectorProvider;
 	

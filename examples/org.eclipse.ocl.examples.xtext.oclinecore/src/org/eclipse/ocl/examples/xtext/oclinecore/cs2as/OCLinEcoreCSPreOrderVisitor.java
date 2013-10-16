@@ -20,9 +20,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.AbstractOCLinEcoreCSPreOrderVisitor;
 
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
+
 public class OCLinEcoreCSPreOrderVisitor extends AbstractOCLinEcoreCSPreOrderVisitor
 {
-	public OCLinEcoreCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	@AssistedInject
+	public OCLinEcoreCSPreOrderVisitor(@Assisted @NonNull CS2PivotConversion context) {
 		super(context);
 	}
 }
