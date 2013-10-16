@@ -45,6 +45,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
@@ -58,7 +59,8 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.context.EObjectContext;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
@@ -68,6 +70,7 @@ import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerListener;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
@@ -940,7 +943,12 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 			    	if (selectedObject instanceof IAdaptable) {
 			    		selectedObject = ((IAdaptable) selectedObject).getAdapter(EObject.class);
 		            }
-		            if (selectedObject instanceof EObject) {
+			    	if (selectedObject instanceof org.eclipse.uml2.uml.Element) {
+					    org.eclipse.uml2.uml.Element selectedElement = (org.eclipse.uml2.uml.Element)selectedObject;
+						MetaModelManager metaModelManager = getMetaModelManager(selectedElement);
+						contextObject = metaModelManager.getPivotOf(Element.class, selectedElement);
+		            }
+		            else if (selectedObject instanceof EObject) {
 		            	contextObject = (EObject) selectedObject;
 		            }
 		            else {
@@ -948,7 +956,16 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		            }
 			    }
 			    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
-		        parserContext = new EObjectContext(metaModelManager, null, contextObject);
+				PivotIdResolver idResolver = metaModelManager.getIdResolver();
+				DomainType staticType = idResolver.getStaticTypeOf(contextObject);
+				Type contextType = metaModelManager.getType(staticType);
+//				if (contextType != null) {
+					parserContext = new ClassContext(metaModelManager, null, contextType);
+//				}
+//				else {
+//					parserContext = new ModelContext(metaModelManager, null);
+//				}
+//		        parserContext = new EObjectContext(metaModelManager, null, contextObject);
 			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
 			    if (csResource != null) {
 					if (contextObject != null) {
