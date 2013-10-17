@@ -76,6 +76,7 @@ import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.context.AbstractBase2PivotConversion;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
@@ -98,7 +99,6 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCSPreOrderVisitor.TemplateSignatureContinuation;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.osgi.util.NLS;
@@ -1269,8 +1269,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		//
 		for (Resource csResource : csResources) {
 			for (EObject eObject : csResource.getContents()) {
-				if (eObject != null) {
-					visitContainment(eObject, continuations);
+				if (eObject instanceof ElementCS) {
+					visitContainment((ElementCS)eObject, continuations);
 				}
 			}
 		}
@@ -1299,8 +1299,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		//
 		for (Resource csResource : csResources) {
 			for (EObject eObject : csResource.getContents()) {
-				if (eObject != null) {
-					visitInPreOrder(eObject, continuations);
+				if (eObject instanceof ElementCS) {
+					visitInPreOrder((ElementCS)eObject, continuations);
 				}
 			}
 		}
@@ -1331,8 +1331,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		//
 		for (Resource csResource : csResources) {
 			for (EObject eObject : csResource.getContents()) {
-				if (eObject != null) {
-					visitInPostOrder(eObject, continuations);
+				if (eObject instanceof ElementCS) {
+					visitInPostOrder((ElementCS)eObject, continuations);
 				}
 			}
 		}
@@ -1401,45 +1401,68 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		return true;
 	}
 
-	protected void visitContainment(@NonNull EObject eObject, @NonNull List<BasicContinuation<?>> continuations) {
-		for (EObject eContent : eObject.eContents()) {
-			if (eContent != null) {
-				visitContainment(eContent, continuations);
+	protected void visitContainment(@NonNull ElementCS csElement, @NonNull List<BasicContinuation<?>> continuations) {
+		for (EObject eContent : csElement.eContents()) {
+			if (eContent instanceof ElementCS) {
+				visitContainment((ElementCS) eContent, continuations);
 			}
 		}
-		Continuation<?> continuation = ((VisitableCS)eObject).accept(containmentVisitor);
-		if (continuation != null) {
-			continuation.addTo(continuations);
+		try {
+			Continuation<?> continuation = csElement.accept(containmentVisitor);
+			if (continuation != null) {
+				continuation.addTo(continuations);
+			}
+		} catch (IllegalLibraryException e) {
+			@SuppressWarnings("null")@NonNull String message = e.getMessage();
+			addDiagnostic(csElement, message);
+		} catch (Throwable e) {
+			@SuppressWarnings("null")@NonNull String message = String.valueOf(e);
+			addDiagnostic(csElement, message);
 		}
 	}
 
-	protected void visitInPostOrder(@NonNull EObject eObject, @NonNull List<BasicContinuation<?>> continuations) {
-		for (EObject eContent : eObject.eContents()) {
-			if (eContent != null) {
-				visitInPostOrder(eContent, continuations);
+	protected void visitInPostOrder(@NonNull ElementCS csElement, @NonNull List<BasicContinuation<?>> continuations) {
+		for (EObject eContent : csElement.eContents()) {
+			if (eContent instanceof ElementCS) {
+				visitInPostOrder((ElementCS) eContent, continuations);
 			}
 		}
-		Continuation<?> continuation = ((VisitableCS)eObject).accept(postOrderVisitor);
-		if (continuation != null) {
-			continuation.addTo(continuations);
+		try {
+			Continuation<?> continuation = csElement.accept(postOrderVisitor);
+			if (continuation != null) {
+				continuation.addTo(continuations);
+			}
+		} catch (Throwable e) {
+			@SuppressWarnings("null")@NonNull String message = String.valueOf(e);
+			addDiagnostic(csElement, message);
 		}
 	}
 
-	protected void visitInPreOrder(@NonNull EObject eObject, @NonNull List<BasicContinuation<?>> continuations) {
-		Continuation<?> continuation = ((VisitableCS)eObject).accept(preOrderVisitor);
-		if (continuation != null) {
-			continuation.addTo(continuations);
+	protected void visitInPreOrder(@NonNull ElementCS csElement, @NonNull List<BasicContinuation<?>> continuations) {
+		try {
+			Continuation<?> continuation = csElement.accept(preOrderVisitor);
+			if (continuation != null) {
+				continuation.addTo(continuations);
+			}
+		} catch (Throwable e) {
+			@SuppressWarnings("null")@NonNull String message = String.valueOf(e);
+			addDiagnostic(csElement, message);
 		}
-		for (EObject eContent : eObject.eContents()) {
-			if (eContent != null) {
-				visitInPreOrder(eContent, continuations);
+		for (EObject eContent : csElement.eContents()) {
+			if (eContent instanceof ElementCS) {
+				visitInPreOrder((ElementCS) eContent, continuations);
 			}
 		}
 	}
 
-	public <T extends Element> T visitLeft2Right(@NonNull Class<T> pivotClass, @NonNull VisitableCS csObject) {
-		assert csObject != null;
-		Element element = csObject.accept(left2RightVisitor);
+	public <T extends Element> T visitLeft2Right(@NonNull Class<T> pivotClass, @NonNull ElementCS csElement) {
+		Element element = null;
+		try {
+			element = csElement.accept(left2RightVisitor);
+		} catch (Throwable e) {
+			@SuppressWarnings("null")@NonNull String message = String.valueOf(e);
+			addDiagnostic(csElement, message);
+		}
 		if (element == null) {
 			return null;
 		}
