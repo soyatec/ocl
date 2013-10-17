@@ -55,6 +55,9 @@ import org.eclipse.xtext.util.CancelIndicator;
 
 public class EssentialOCLCSResource extends LazyLinkingResource implements BaseCSResource
 {	
+	private static final String NO_VIABLE_ALTERNATIVE_AT_INPUT_EOF = "no viable alternative at input '<EOF>'";
+	private static final String NO_VIABLE_ALTERNATIVE_FOLLOWING = "no viable alternative following input ";
+	
 	private @Nullable ParserContext parserContext = null;
 	
 	public EssentialOCLCSResource() {
@@ -91,12 +94,13 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 			final SyntaxErrorMessage syntaxErrorMessage = error.getSyntaxErrorMessage();
 			if (syntaxErrorMessage != null) {
 				String message = syntaxErrorMessage.getMessage();
-				if (message != null) {
-					int index = message.indexOf("<EOF>");
+				// BUG 404438 "no viable alternative at input '<EOF>'" message is unhelpful.
+				if ((message != null) && message.contains(NO_VIABLE_ALTERNATIVE_AT_INPUT_EOF)){
+					int index = message.indexOf(NO_VIABLE_ALTERNATIVE_AT_INPUT_EOF);
 					if (index >= 0) {
 						String tokenText = NodeModelUtils.getTokenText(error);
 						if (tokenText != null) {
-							final String newMessage = message.substring(0, index) + tokenText + message.substring(index+5);
+							final String newMessage = message.substring(0, index) + NO_VIABLE_ALTERNATIVE_FOLLOWING + "'" + tokenText + "'" + message.substring(index+NO_VIABLE_ALTERNATIVE_AT_INPUT_EOF.length());
 							diagnostic = new AbstractDiagnostic()
 							{
 								public String getMessage() {

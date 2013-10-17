@@ -109,8 +109,8 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertSemanticErrorQuery("Type->Package()", OCLMessages.UnresolvedOperation_ERROR_, "Package", "Set(Metaclass(Type))");
 		assertSemanticErrorQuery("Set(Type)->Package", OCLMessages.UnresolvedProperty_ERROR_, "Package", "Set(Metaclass(Set(Type)))");
 		assertSemanticErrorQuery("Set(Type)->Package()", OCLMessages.UnresolvedOperation_ERROR_, "Package", "Set(Metaclass(Set(Type)))");
-		assertSemanticErrorQuery("let a : Type = null in a.if", "no viable alternative at input ''if''");
-		assertSemanticErrorQuery("let a : Type = null in a->if", "no viable alternative at input ''if''");
+		assertSemanticErrorQuery("let a : Type = null in a.if", "no viable alternative following input ''if''");
+		assertSemanticErrorQuery("let a : Type = null in a->if", "no viable alternative following input ''if''");
 	}
 
     @Test public void test_implicit_source() {

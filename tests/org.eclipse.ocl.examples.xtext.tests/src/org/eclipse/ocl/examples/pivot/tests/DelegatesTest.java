@@ -546,7 +546,7 @@ public class DelegatesTest extends PivotTestSuite
 		//
 		delegate = factory.createQueryDelegate(companyClass, null, "n=");
 		executeWithException(delegate, amy, null, getErrorsInMessage("'n='") + 
-			DomainUtil.bind("1: no viable alternative at input ''{0}''", "'='"));
+			DomainUtil.bind("1: no viable alternative following input ''{0}''", "'='"));
 		//
 		//	Undeclared variable
 		//
