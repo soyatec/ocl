@@ -1300,9 +1300,11 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 			if (csIn != null) {
 				OCLExpression in = context.visitLeft2Right(OCLExpression.class, csIn);
 				lastLetExp.setIn(in);
-				Type type = in.getType();
-				for (OCLExpression letExp = firstLetExp; (letExp != in) && (letExp != null); letExp = ((LetExp)letExp).getIn()) {
-					context.setType(letExp, type, in.isRequired());
+				if (in != null) {
+					Type type = in.getType();
+					for (OCLExpression letExp = firstLetExp; (letExp != in) && (letExp != null); letExp = ((LetExp)letExp).getIn()) {
+						context.setType(letExp, type, in.isRequired());
+					}
 				}
 			}
 		}
