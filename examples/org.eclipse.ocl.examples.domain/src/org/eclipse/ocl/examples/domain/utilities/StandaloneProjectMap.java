@@ -224,6 +224,8 @@ public class StandaloneProjectMap
 		 */
 		IProjectDescriptor getProjectDescriptor();
 
+		void installPackageDescription(@NonNull EPackage.Registry packageRegistry, @NonNull URI uri);
+
 		/**
 		 * Configure the package registry to load the Ecore Model rather than
 		 * the Java Class.
@@ -344,6 +346,27 @@ public class StandaloneProjectMap
 	 */
 	public static final class PackageDescriptor implements IPackageDescriptor.Internal
 	{
+/*		private static final class EPackageDescriptor implements EPackage.Descriptor
+		{
+			protected final @NonNull PackageDescriptor packageDescriptor;
+			protected final @NonNull URI uri;
+
+			public EPackageDescriptor(@NonNull PackageDescriptor packageDescriptor, @NonNull URI uri) {
+				this.packageDescriptor = packageDescriptor;
+				this.uri = uri;
+			}
+
+			public EPackage getEPackage() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			public EFactory getEFactory() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		} */
+
 		protected final @NonNull IProjectDescriptor projectDescriptor;
 
 		protected final @NonNull URI nsURI;
@@ -357,6 +380,8 @@ public class StandaloneProjectMap
 		private boolean useModel = false;
 
 		private@Nullable  EPackage ePackage = null;
+		
+//		private @NonNull Map<URI, EPackage.Descriptor> ePackageDescriptors = new HashMap<URI, EPackage.Descriptor>();
 
 		public PackageDescriptor(@NonNull IProjectDescriptor projectDescriptor, @NonNull URI nsURI, @NonNull URI genModelURI) {
 			this.projectDescriptor = projectDescriptor;
@@ -436,6 +461,19 @@ public class StandaloneProjectMap
 			return projectDescriptor;
 		}
 
+		public void installPackageDescription(@NonNull EPackage.Registry packageRegistry, @NonNull URI uri) {
+//			EPackage.Descriptor ePackageDescriptor = ePackageDescriptors.get(uri);
+//			if (ePackageDescriptor == null) {
+//				ePackageDescriptor = new EPackageDescriptor(this, uri);
+//				ePackageDescriptors.put(uri, ePackageDescriptor);
+//			}
+//			packageRegistry.put(uri.toString(), ePackageDescriptor);
+			String nsURIString = uri.toString();
+			if (packageRegistry.get(nsURIString) != this) {
+				packageRegistry.put(nsURIString, this);
+			}
+		}
+
 		public void setClassName(String className) {
 			this.className = className;
 		}
@@ -453,23 +491,14 @@ public class StandaloneProjectMap
 			// DomainUtil.debugSimpleName(packageRegistry));
 			// }
 			this.useModel = useModel;
-			String nsURIString = nsURI.toString();
-			if (packageRegistry.get(nsURIString) != this) {
-				packageRegistry.put(nsURIString, this);
-			}
+			installPackageDescription(packageRegistry, nsURI);
 			URI resourceURI = projectDescriptor.getPlatformResourceURI();
 			URI pluginURI = projectDescriptor.getPlatformPluginURI();
 			URI ecoreURI = ecorePackageURI.trimFragment();
-			String ecorePackageResourceURIString = ecoreURI
-				.resolve(resourceURI).toString();
-			String ecorePackagePluginURIString = ecoreURI.resolve(pluginURI)
-				.toString();
-			if (packageRegistry.get(ecorePackageResourceURIString) != this) {
-				packageRegistry.put(ecorePackageResourceURIString, this);
-			}
-			if (packageRegistry.get(ecorePackagePluginURIString) != this) {
-				packageRegistry.put(ecorePackagePluginURIString, this);
-			}
+			@SuppressWarnings("null")@NonNull URI ecorePackageResourceURI = ecoreURI.resolve(resourceURI);
+			@SuppressWarnings("null")@NonNull URI ecorePackagePluginURI = ecoreURI.resolve(pluginURI);
+			installPackageDescription(packageRegistry, ecorePackageResourceURI);
+			installPackageDescription(packageRegistry, ecorePackagePluginURI);
 		}
 
 		public void setUseModelAndPackage(final EPackage ePackage, EPackage.Registry packageRegistry) {
@@ -502,16 +531,10 @@ public class StandaloneProjectMap
 			URI resourceURI = projectDescriptor.getPlatformResourceURI();
 			URI pluginURI = projectDescriptor.getPlatformPluginURI();
 			URI ecoreURI = ecorePackageURI.trimFragment();
-			String ecorePackageResourceURIString = ecoreURI
-				.resolve(resourceURI).toString();
-			String ecorePackagePluginURIString = ecoreURI.resolve(pluginURI)
-				.toString();
-			if (packageRegistry.get(ecorePackageResourceURIString) != this) {
-				packageRegistry.put(ecorePackageResourceURIString, this);
-			}
-			if (packageRegistry.get(ecorePackagePluginURIString) != this) {
-				packageRegistry.put(ecorePackagePluginURIString, this);
-			}
+			@SuppressWarnings("null")@NonNull URI ecorePackageResourceURI = ecoreURI.resolve(resourceURI);
+			@SuppressWarnings("null")@NonNull URI ecorePackagePluginURI = ecoreURI.resolve(pluginURI);
+			installPackageDescription(packageRegistry, ecorePackageResourceURI);
+			installPackageDescription(packageRegistry, ecorePackagePluginURI);
 		}
 
 		public void setUsePackage(EPackage ePackage,
@@ -529,23 +552,14 @@ public class StandaloneProjectMap
 			// }
 			this.ePackage = ePackage;
 			this.useModel = false;
-			String nsURIString = nsURI.toString();
-			if (packageRegistry.get(nsURIString) != this) {
-				packageRegistry.put(nsURIString, this);
-			}
+			installPackageDescription(packageRegistry, nsURI);
 			URI resourceURI = projectDescriptor.getPlatformResourceURI();
 			URI pluginURI = projectDescriptor.getPlatformPluginURI();
 			URI ecoreURI = ecorePackageURI.trimFragment();
-			String ecorePackageResourceURIString = ecoreURI
-				.resolve(resourceURI).toString();
-			String ecorePackagePluginURIString = ecoreURI.resolve(pluginURI)
-				.toString();
-			if (packageRegistry.get(ecorePackageResourceURIString) != this) {
-				packageRegistry.put(ecorePackageResourceURIString, this);
-			}
-			if (packageRegistry.get(ecorePackagePluginURIString) != this) {
-				packageRegistry.put(ecorePackagePluginURIString, this);
-			}
+			@SuppressWarnings("null")@NonNull URI ecorePackageResourceURI = ecoreURI.resolve(resourceURI);
+			@SuppressWarnings("null")@NonNull URI ecorePackagePluginURI = ecoreURI.resolve(pluginURI);
+			installPackageDescription(packageRegistry, ecorePackageResourceURI);
+			installPackageDescription(packageRegistry, ecorePackagePluginURI);
 		}
 
 		@Override
@@ -554,10 +568,8 @@ public class StandaloneProjectMap
 			s.append(nsURI);
 			s.append(" => ");
 			s.append(className);
-//			if (genModelURI != null) {
-				s.append(", ");
-				s.append(genModelURI);
-//			}
+			s.append(", ");
+			s.append(genModelURI);
 			if (ecorePackageURI != null) {
 				s.append(", ");
 				s.append(ecorePackageURI);
@@ -567,12 +579,14 @@ public class StandaloneProjectMap
 
 		public void unload(@NonNull EPackage.Registry packageRegistry) {
 			ePackage = null;
-			packageRegistry.put(nsURI.toString(), this);
+			installPackageDescription(packageRegistry, nsURI);
 			URI resourceURI = projectDescriptor.getPlatformResourceURI();
 			URI pluginURI = projectDescriptor.getPlatformPluginURI();
 			URI ecoreURI = ecorePackageURI.trimFragment();
-			packageRegistry.put(ecoreURI.resolve(resourceURI).toString(), this);
-			packageRegistry.put(ecoreURI.resolve(pluginURI).toString(), this);
+			@SuppressWarnings("null")@NonNull URI ecorePackageResourceURI = ecoreURI.resolve(resourceURI);
+			@SuppressWarnings("null")@NonNull URI ecorePackagePluginURI = ecoreURI.resolve(pluginURI);
+			installPackageDescription(packageRegistry, ecorePackageResourceURI);
+			installPackageDescription(packageRegistry, ecorePackagePluginURI);
 		}
 	}
 
@@ -917,10 +931,10 @@ public class StandaloneProjectMap
 			if (ecoreModelURI != null) {
 				URI resourceURI = getPlatformResourceURI();
 				URI pluginURI = getPlatformPluginURI();
-				URI ecorePackageResourceURI = ecoreModelURI.resolve(resourceURI);
-				URI ecorePackagePluginURI = ecoreModelURI.resolve(pluginURI);
-				packageRegistry.put(ecorePackageResourceURI.toString(), packageDescriptor);
-				packageRegistry.put(ecorePackagePluginURI.toString(), packageDescriptor);
+				@SuppressWarnings("null")@NonNull URI ecorePackageResourceURI = ecoreModelURI.resolve(resourceURI);
+				@SuppressWarnings("null")@NonNull URI ecorePackagePluginURI = ecoreModelURI.resolve(pluginURI);
+				packageDescriptor.installPackageDescription(packageRegistry, ecorePackageResourceURI);
+				packageDescriptor.installPackageDescription(packageRegistry, ecorePackagePluginURI);
 			}
 		}
 
