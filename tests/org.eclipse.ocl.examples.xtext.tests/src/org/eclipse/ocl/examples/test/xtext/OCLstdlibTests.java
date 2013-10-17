@@ -46,7 +46,6 @@ import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.context.ModelContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -188,19 +187,6 @@ public class OCLstdlibTests extends XtextTestCase
 		}
 	}
 
-	protected Resource doLoadFromString(@NonNull String fileName, @NonNull String testFile) throws Exception {
-		URI libraryURI = getProjectFileURI(fileName);
-		ModelContext modelContext = new ModelContext(metaModelManager, libraryURI);
-		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
-		assertNoResourceErrors("Load failed", xtextResource);
-		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
-		Resource asResource = adapter.getASResource(xtextResource);
-		assertNoResourceErrors("File Model", asResource);
-		assertNoUnresolvedProxies("File Model", asResource);
-		assertNoValidationErrors("File Model", asResource);
-		return asResource;
-	}
-
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -254,7 +240,7 @@ public class OCLstdlibTests extends XtextTestCase
 			"       }\n"+
 			"    }\n"+
 			"}\n";		
-		Resource asResource = doLoadFromString("string.oclstdlib", testFile);
+		Resource asResource = doLoadASResourceFromString(metaModelManager, "string.oclstdlib", testFile);
 		MetaModelManager metaModelManager = MetaModelManager.getAdapter(asResource.getResourceSet());
 		AnyType oclAnyType = metaModelManager.getOclAnyType();
 		Iterable<? extends DomainOperation> ownedOperations = metaModelManager.getAllOperations(oclAnyType, false);

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.tests;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -47,6 +49,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
+import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -61,11 +64,14 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.context.ModelContext;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
@@ -160,7 +166,7 @@ public class XtextTestCase extends PivotTestCase
 		metaModelManager.dispose();
 	}
 	
-	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {
+	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
 		Set<Normalizer> normalizations = normalize(expectedResource);
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
@@ -168,6 +174,74 @@ public class XtextTestCase extends PivotTestCase
 		for (Normalizer normalizer : normalizations) {
 			normalizer.denormalize();
 		}
+	}
+
+	protected void doBadLoadFromString(@NonNull String fileName, @NonNull String testFile, @NonNull Bag<String> expectedErrorMessages) throws Exception {
+		MetaModelManager metaModelManager = new MetaModelManager();
+		metaModelManager.addClassLoader(DomainUtil.nonNullState(getClass().getClassLoader()));
+		try {
+			MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
+			URI libraryURI = getProjectFileURI(fileName);
+			BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
+			InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
+			xtextResource.load(inputStream, null);
+			Bag<String> actualErrorMessages = new BagImpl<String>();
+			for (Resource.Diagnostic actualError : xtextResource.getErrors()) {
+				actualErrorMessages.add(actualError.getMessage());
+			}
+			String s = formatMessageDifferences(expectedErrorMessages, actualErrorMessages);
+			if (s != null) {
+				fail("Inconsistent load errors (expected/actual) message" + s);
+			}
+		} finally {
+			metaModelManager.dispose();
+		}
+	}
+
+	protected void doLoadFromString(@NonNull String fileName, @NonNull String testFile) throws Exception {
+		URI libraryURI = getProjectFileURI(fileName);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		ResourceSet resourceSet = new ResourceSetImpl();
+		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
+		InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
+		xtextResource.load(inputStream, null);
+		assertNoResourceErrors("Load failed", xtextResource);
+		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(metaModelManager);
+		Resource asResource = adapter.getASResource(xtextResource);
+		assert asResource != null;
+		assertNoResourceErrors("File Model", asResource);
+		assertNoUnresolvedProxies("File Model", asResource);
+		assertNoValidationErrors("File Model", asResource);
+//		MetaModelManagerResourceSetAdapter adapter2 = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+//		if (adapter2 != null) {
+//			MetaModelManager metaModelManager2 = adapter2.getMetaModelManager();
+//			if (metaModelManager2 != null) {
+//				metaModelManager2.dispose();
+//				metaModelManager2 = null;
+//			}
+//			adapter2 = null;
+//		}
+		adapter.dispose();
+		metaModelManager.dispose();
+		metaModelManager = null;
+		resourceSet = null;
+		adapter = null;
+		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
+	}
+
+	protected ASResource doLoadASResourceFromString(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String testFile) throws Exception {
+		URI libraryURI = getProjectFileURI(fileName);
+		ModelContext modelContext = new ModelContext(metaModelManager, libraryURI);
+		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
+		assertNoResourceErrors("Load failed", xtextResource);
+		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
+		ASResource asResource = adapter.getASResource(xtextResource);
+		assert asResource != null;
+		assertNoResourceErrors("File Model", asResource);
+		assertNoUnresolvedProxies("File Model", asResource);
+		assertNoValidationErrors("File Model", asResource);
+		return asResource;
 	}
 
 	/**

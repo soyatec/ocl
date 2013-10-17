@@ -17,13 +17,7 @@
 package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
-import java.io.InputStream;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
@@ -36,10 +30,7 @@ import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 /**
@@ -110,62 +101,6 @@ public class ImportTests extends XtextTestCase
 		createEcoreFile(metaModelManager, "Bug353793F", testFileF);
 		metaModelManager.dispose();
 	}	
-
-	protected void doBadLoadFromString(String fileName, String testFile, Bag<String> expectedErrorMessages) throws Exception {
-		if (metaModelManager == null) {
-			metaModelManager = new MetaModelManager();
-		}
-		metaModelManager.addClassLoader(DomainUtil.nonNullState(getClass().getClassLoader()));
-		try {
-			MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
-			URI libraryURI = getProjectFileURI(fileName);
-			BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
-			InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
-			xtextResource.load(inputStream, null);
-			Bag<String> actualErrorMessages = new BagImpl<String>();
-			for (Resource.Diagnostic actualError : xtextResource.getErrors()) {
-				actualErrorMessages.add(actualError.getMessage());
-			}
-			String s = formatMessageDifferences(expectedErrorMessages, actualErrorMessages);
-			if (s != null) {
-				fail("Inconsistent load errors (expected/actual) message" + s);
-			}
-		} finally {
-			metaModelManager.dispose();
-		}
-	}
-
-	protected void doLoadFromString(String fileName, String testFile) throws Exception {
-		URI libraryURI = getProjectFileURI(fileName);
-		MetaModelManager metaModelManager = new MetaModelManager();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
-		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
-		InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
-		xtextResource.load(inputStream, null);
-		assertNoResourceErrors("Load failed", xtextResource);
-		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(metaModelManager);
-		Resource fileResource = adapter.getASResource(xtextResource);
-		assert fileResource != null;
-		assertNoResourceErrors("File Model", fileResource);
-		assertNoUnresolvedProxies("File Model", fileResource);
-		assertNoValidationErrors("File Model", fileResource);
-//		MetaModelManagerResourceSetAdapter adapter2 = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
-//		if (adapter2 != null) {
-//			MetaModelManager metaModelManager2 = adapter2.getMetaModelManager();
-//			if (metaModelManager2 != null) {
-//				metaModelManager2.dispose();
-//				metaModelManager2 = null;
-//			}
-//			adapter2 = null;
-//		}
-		adapter.dispose();
-		metaModelManager.dispose();
-		metaModelManager = null;
-		resourceSet = null;
-		adapter = null;
-		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
-	}
 
 	protected String getNoSuchFileMessage() {
 		if (isWindows()) {

@@ -24,27 +24,20 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.Bag;
+import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
-import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 /**
  * Tests for OclAny operations.
  */
 @SuppressWarnings("nls")
-public class ErrorTests extends PivotTestCase
+public class ErrorTests extends XtextTestCase
 {
-
-	@Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        OCLstdlib.install();
-		doOCLinEcoreSetup();
-    }
-
 	/**
 	 * Test a bad operation for bad iterate arguments. Inspired by Bug 352386.
 	 */
@@ -95,5 +88,18 @@ public class ErrorTests extends PivotTestCase
 			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "iterate", "Set(OclInvalid)", "w, h, String| true"));
         //
 		metaModelManager.dispose();
+	}
+	
+	public void testBadEOF_419683() throws Exception {
+		testCaseAppender.uninstall();
+		String testFile =
+			"import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'\n" +
+			"package ecore\n" +
+			"context EPackage\n" +
+			"inv test:\n" +
+			"	let classifiers:Set(EClassifier) = self.eClassifiers in let filtered";
+		Bag<String> bag = new BagImpl<String>();
+		bag.add("mismatched input '<EOF>' expecting '='");
+		doBadLoadFromString("string.ocl", testFile, bag);
 	}
 }
