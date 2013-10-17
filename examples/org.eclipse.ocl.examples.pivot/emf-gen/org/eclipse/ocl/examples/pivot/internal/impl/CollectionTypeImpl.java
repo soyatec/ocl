@@ -131,6 +131,12 @@ public class CollectionTypeImpl
 		assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
 	}
 
+	@Override
+	protected void eBasicSetContainer(InternalEObject newContainer, int newContainerFeatureID) {
+		super.eBasicSetContainer(newContainer, newContainerFeatureID);
+		assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

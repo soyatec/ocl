@@ -97,6 +97,8 @@ public class AS2XMIid
 	 * values read when this AS2ID was constructed.
 	 */
 	public void assignIds(@NonNull ASResource asResource) {
+//		org.eclipse.ocl.examples.pivot.Package bomb1 = PivotFactory.eINSTANCE.createPackage();
+//		SetType bomb2 = PivotFactory.eINSTANCE.createSetType();
 		assert idAssignmentInProgress == false;
 		idAssignmentInProgress = true;
 		try {
@@ -136,6 +138,7 @@ public class AS2XMIid
 					}
 				}
 			}
+//			bomb1.getOwnedType().add(bomb2);
 			StringBuilder s = null;
 			Map<String, EObject> allIds = new HashMap<String, EObject>();
 			ASResourceFactory resourceFactory = asResource.getASResourceFactory();
@@ -226,7 +229,11 @@ public class AS2XMIid
 					}
 				}
 				catch (IndexOutOfBoundsException e) {
-					System.err.println("At " + i + " now " + DomainUtil.debugSimpleName(eObject) + " was missing");
+					System.err.println(i + " New object : " + DomainUtil.debugSimpleName(eObject));
+					for ( ; tit.hasNext(); i++) {
+						eObject = tit.next();
+						System.err.println(i + " New object : " + DomainUtil.debugSimpleName(eObject));
+					}
 					throw e;
 				}
 			}
