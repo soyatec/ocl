@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 
 /**
@@ -189,7 +190,7 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 
 	@Override
-	protected void scanClassPath(Map<String, IProjectDescriptor.Internal> projectDescriptors, SAXParser saxParser) {
+	protected void scanClassPath(@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors, @NonNull SAXParser saxParser) {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			super.scanClassPath(projectDescriptors, saxParser);
 		}
@@ -212,7 +213,7 @@ public class ProjectMap extends StandaloneProjectMap
 		}
 	} */
 
-	protected void scanGenModels(SAXParser saxParser) {
+	protected void scanGenModels(@NonNull SAXParser saxParser) {
 		URIConverter uriConverter = new ExtensibleURIConverterImpl();
 		Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
 		for (String ePackageNsURI : ePackageNsURIToGenModelLocationMap.keySet()) {
@@ -220,10 +221,11 @@ public class ProjectMap extends StandaloneProjectMap
 //			System.out.println(ePackageNsURI + " -> " + genModelURI);
 			if (genModelURI.isPlatformPlugin()) {
 				IProjectDescriptor.Internal projectDescriptor = getProjectDescriptorInternal(genModelURI);
-				URI nsURI = URI.createURI(ePackageNsURI);
+				@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(ePackageNsURI);
 				IPackageDescriptor.Internal packageDescriptor = (IPackageDescriptor.Internal) projectDescriptor.getPackageDescriptor(nsURI);
 				if (packageDescriptor == null) {
-					packageDescriptor = projectDescriptor.createPackageDescriptor(nsURI, genModelURI.deresolve(projectDescriptor.getLocationURI(), true, true, true));
+					@SuppressWarnings("null")@NonNull URI deresolvedGenModelURI = genModelURI.deresolve(projectDescriptor.getLocationURI(), true, true, true);
+					packageDescriptor = projectDescriptor.createPackageDescriptor(nsURI, deresolvedGenModelURI);
 				}
 				GenModelEcorePackageHandler genModelEcorePackageHandler = packageDescriptor.createGenModelEcorePackageHandler();
 		        InputStream inputStream = null;
