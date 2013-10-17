@@ -191,7 +191,7 @@ public class StandaloneProjectMap
 			 * Internal callback from Ecore model pre-parse to register the
 			 * Ecore Package URI.
 			 */
-			void addEcorePackage(String ecorePackage);
+			void addEcorePackage(@NonNull String ecorePackage);
 
 			/**
 			 * Internal preparation for Ecore model pre-parse.
@@ -246,7 +246,7 @@ public class StandaloneProjectMap
 		/**
 		 * Unload the package registry to force a reload.
 		 */
-		void unload(EPackage.Registry packageRegistry);
+		void unload(@NonNull EPackage.Registry packageRegistry);
 	}
 
 	/**
@@ -254,15 +254,13 @@ public class StandaloneProjectMap
 	 */
 	public static interface IProjectDescriptor {
 
-		public static interface Internal
-				extends IProjectDescriptor {
-
+		public static interface Internal extends IProjectDescriptor
+		{
 			/**
 			 * Internal callback from Ecore model pre-parse to register the
 			 * Ecore Package URI.
 			 */
-			IPackageDescriptor.Internal createPackageDescriptor(URI nsURI,
-					URI deresolve);
+			IPackageDescriptor.Internal createPackageDescriptor(@NonNull URI nsURI, @NonNull URI deresolve);
 		}
 
 		/**
@@ -315,8 +313,8 @@ public class StandaloneProjectMap
 
 		void initializeGenModelLocationMap();
 
-		void initializePackageRegistration(EPackage.Registry packageRegistry,
-				IPackageDescriptor packageDescriptor);
+		void initializePackageRegistration(@NonNull EPackage.Registry packageRegistry,
+				@NonNull IPackageDescriptor packageDescriptor);
 
 		void initializePlatformResourceMap();
 
@@ -344,37 +342,34 @@ public class StandaloneProjectMap
 	 * If a PackageDescriptor is set to useModel, the *.ecore file is loaded to
 	 * provide the EPackage, rather than the Java className.
 	 */
-	public static final class PackageDescriptor
-			implements IPackageDescriptor.Internal {
+	public static final class PackageDescriptor implements IPackageDescriptor.Internal
+	{
+		protected final @NonNull IProjectDescriptor projectDescriptor;
 
-		protected final IProjectDescriptor projectDescriptor;
+		protected final @NonNull URI nsURI;
 
-		protected final URI nsURI;
+		protected final @NonNull URI genModelURI;
 
-		protected final URI genModelURI;
+		protected @Nullable String className = null;
 
-		protected String className = null;
-
-		private URI ecorePackageURI = null;
+		private /*@Nullable*/ URI ecorePackageURI = null;
 
 		private boolean useModel = false;
 
-		private EPackage ePackage = null;
+		private@Nullable  EPackage ePackage = null;
 
-		public PackageDescriptor(IProjectDescriptor projectDescriptor,
-				URI nsURI, URI genModelURI) {
+		public PackageDescriptor(@NonNull IProjectDescriptor projectDescriptor, @NonNull URI nsURI, @NonNull URI genModelURI) {
 			this.projectDescriptor = projectDescriptor;
 			this.nsURI = nsURI;
 			this.genModelURI = genModelURI;
 		}
 
-		public void addEcorePackage(String ecorePackage) {
+		public void addEcorePackage(@NonNull String ecorePackage) {
 			URI uri = URI.createURI(ecorePackage);
 			URI locationURI = projectDescriptor.getLocationURI();
 			URI absoluteGenModelURI = genModelURI.resolve(locationURI);
 			URI absolutePackageURI = uri.resolve(absoluteGenModelURI);
-			ecorePackageURI = absolutePackageURI.deresolve(locationURI, true,
-				true, true);
+			ecorePackageURI = absolutePackageURI.deresolve(locationURI, true, true, true);
 			// System.out.println(nsURI + " = " + ecorePackage + " : " +
 			// className);
 		}
@@ -390,8 +385,7 @@ public class StandaloneProjectMap
 		public EPackage getEPackage() {
 			if (ePackage == null) {
 				if (useModel) {
-					URI uri = ecorePackageURI.resolve(projectDescriptor
-						.getLocationURI());
+					URI uri = ecorePackageURI.resolve(projectDescriptor.getLocationURI());
 					ResourceSet resourceSet = new ResourceSetImpl();
 					ePackage = (EPackage) resourceSet.getEObject(uri, true);
 					EcoreUtil.resolveAll(resourceSet);
@@ -430,15 +424,15 @@ public class StandaloneProjectMap
 				: null;
 		}
 
-		public URI getGenModelURI() {
+		public @NonNull URI getGenModelURI() {
 			return genModelURI;
 		}
 
-		public URI getNsURI() {
+		public @NonNull URI getNsURI() {
 			return nsURI;
 		}
 
-		public IProjectDescriptor getProjectDescriptor() {
+		public @NonNull IProjectDescriptor getProjectDescriptor() {
 			return projectDescriptor;
 		}
 
@@ -446,8 +440,7 @@ public class StandaloneProjectMap
 			this.className = className;
 		}
 
-		public void setUseModel(boolean useModel,
-				EPackage.Registry packageRegistry) {
+		public void setUseModel(boolean useModel, EPackage.Registry packageRegistry) {
 			if (packageRegistry == null) {
 				packageRegistry = getPackageRegistry(null);
 				// System.out.println(DomainUtil.debugSimpleName(this) +
@@ -479,8 +472,7 @@ public class StandaloneProjectMap
 			}
 		}
 
-		public void setUseModelAndPackage(final EPackage ePackage,
-				EPackage.Registry packageRegistry) {
+		public void setUseModelAndPackage(final EPackage ePackage, EPackage.Registry packageRegistry) {
 			if (packageRegistry == null) {
 				packageRegistry = getPackageRegistry(null);
 				// System.out.println(DomainUtil.debugSimpleName(this) +
@@ -562,10 +554,10 @@ public class StandaloneProjectMap
 			s.append(nsURI);
 			s.append(" => ");
 			s.append(className);
-			if (genModelURI != null) {
+//			if (genModelURI != null) {
 				s.append(", ");
 				s.append(genModelURI);
-			}
+//			}
 			if (ecorePackageURI != null) {
 				s.append(", ");
 				s.append(ecorePackageURI);
@@ -573,7 +565,7 @@ public class StandaloneProjectMap
 			return s.toString();
 		}
 
-		public void unload(EPackage.Registry packageRegistry) {
+		public void unload(@NonNull EPackage.Registry packageRegistry) {
 			ePackage = null;
 			packageRegistry.put(nsURI.toString(), this);
 			URI resourceURI = projectDescriptor.getPlatformResourceURI();
@@ -693,8 +685,7 @@ public class StandaloneProjectMap
 		}
 
 		@Override
-		public void startElement(String uri, String localName, String qName,
-				Attributes attributes) {
+		public void startElement(String uri, String localName, String qName, Attributes attributes) {
 			if (pluginCount == 0) {
 				if (pluginTag.equals(qName)) {
 					pluginCount++;
@@ -702,35 +693,24 @@ public class StandaloneProjectMap
 			} else if (pluginCount == 1) {
 				if ((extensionCount == 0) && extensionTag.equals(qName)) {
 					extensionCount++;
-					inPoint = extensionPointAttribute.equals(attributes
-						.getValue(pointTag));
+					inPoint = extensionPointAttribute.equals(attributes.getValue(pointTag));
 				} else if ((extensionCount == 1) && inPoint) {
 					if ((packageCount == 0) && packageTag.equals(qName)) {
 						packageCount++;
 						String className = attributes.getValue(classAttribute);
-						URI nsURI = URI.createURI(attributes
-							.getValue(uriAttribute));
-						String genModel = attributes
-							.getValue(genModelAttribute);
+						@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(attributes.getValue(uriAttribute));
+						String genModel = attributes.getValue(genModelAttribute);
 						if (genModel != null) {
-							URI locationURI = projectDescriptor
-								.getLocationURI();
-							URI absoluteGenModelURI = URI.createURI(genModel)
-								.resolve(locationURI);
-							URI projectGenModelURI = absoluteGenModelURI
-								.deresolve(locationURI, true, true, true);
-							IPackageDescriptor.Internal packageDescriptor = (IPackageDescriptor.Internal) projectDescriptor
-								.getPackageDescriptor(nsURI);
+							URI locationURI = projectDescriptor.getLocationURI();
+							URI absoluteGenModelURI = URI.createURI(genModel).resolve(locationURI);
+							@SuppressWarnings("null")@NonNull URI projectGenModelURI = absoluteGenModelURI.deresolve(locationURI, true, true, true);
+							IPackageDescriptor.Internal packageDescriptor = (IPackageDescriptor.Internal) projectDescriptor.getPackageDescriptor(nsURI);
 							if (packageDescriptor == null) {
-								packageDescriptor = projectDescriptor
-									.createPackageDescriptor(nsURI,
-										projectGenModelURI);
+								packageDescriptor = projectDescriptor.createPackageDescriptor(nsURI, projectGenModelURI);
 							}
 							packageDescriptor.setClassName(className);
-							GenModelEcorePackageHandler genModelEcorePackageHandler = packageDescriptor
-								.createGenModelEcorePackageHandler();
-							genModelEcorePackageHandlers.put(genModel,
-								genModelEcorePackageHandler);
+							GenModelEcorePackageHandler genModelEcorePackageHandler = packageDescriptor.createGenModelEcorePackageHandler();
+							genModelEcorePackageHandlers.put(genModel,genModelEcorePackageHandler);
 						}
 					}
 				}
@@ -809,7 +789,9 @@ public class StandaloneProjectMap
 					&& ecorePackageTag.equals(qName)) {
 					ecorePackageCount++;
 					String ecorePackage = attributes.getValue(hrefAttribute);
-					packageDescriptor.addEcorePackage(ecorePackage);
+					if (ecorePackage != null) {
+						packageDescriptor.addEcorePackage(ecorePackage);
+					}
 				}
 			}
 		}
@@ -839,10 +821,8 @@ public class StandaloneProjectMap
 			this.locationURI = locationURI;
 		}
 
-		public IPackageDescriptor.Internal createPackageDescriptor(URI nsURI,
-				URI genModelURI) {
-			IPackageDescriptor.Internal packageDescriptor = new PackageDescriptor(
-				this, nsURI, genModelURI);
+		public IPackageDescriptor.Internal createPackageDescriptor(@NonNull URI nsURI, @NonNull URI genModelURI) {
+			IPackageDescriptor.Internal packageDescriptor = new PackageDescriptor(this, nsURI, genModelURI);
 			if (nsURI2packageDescriptor == null) {
 				nsURI2packageDescriptor = new HashMap<URI, IPackageDescriptor>();
 			}
@@ -932,20 +912,15 @@ public class StandaloneProjectMap
 			}
 		}
 
-		public void initializePackageRegistration(
-				EPackage.Registry packageRegistry,
-				IPackageDescriptor packageDescriptor) {
+		public void initializePackageRegistration(@NonNull EPackage.Registry packageRegistry, @NonNull IPackageDescriptor packageDescriptor) {
 			URI ecoreModelURI = packageDescriptor.getEcoreModelURI();
 			if (ecoreModelURI != null) {
 				URI resourceURI = getPlatformResourceURI();
 				URI pluginURI = getPlatformPluginURI();
-				URI ecorePackageResourceURI = ecoreModelURI
-					.resolve(resourceURI);
+				URI ecorePackageResourceURI = ecoreModelURI.resolve(resourceURI);
 				URI ecorePackagePluginURI = ecoreModelURI.resolve(pluginURI);
-				packageRegistry.put(ecorePackageResourceURI.toString(),
-					packageDescriptor);
-				packageRegistry.put(ecorePackagePluginURI.toString(),
-					packageDescriptor);
+				packageRegistry.put(ecorePackageResourceURI.toString(), packageDescriptor);
+				packageRegistry.put(ecorePackagePluginURI.toString(), packageDescriptor);
 			}
 		}
 
@@ -1178,17 +1153,21 @@ public class StandaloneProjectMap
 	 * problem may be attributed to the null file.
 	 */
 	protected synchronized Map<String, ? extends IProjectDescriptor> getProjectDescriptors() {
-		if (project2descriptor == null) {
-			project2descriptor = new HashMap<String, IProjectDescriptor.Internal>();
+		Map<String, org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor.Internal> project2descriptor2 = project2descriptor;
+		if (project2descriptor2 == null) {
+			project2descriptor = project2descriptor2 = new HashMap<String, IProjectDescriptor.Internal>();
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			try {
-				scanClassPath(project2descriptor, factory.newSAXParser());
+				SAXParser saxParser = factory.newSAXParser();
+				if (saxParser != null) {
+					scanClassPath(project2descriptor2, saxParser);
+				}
 			} catch (Exception e) {
 				logException(null, e);
 				return null;
 			}
 		}
-		return project2descriptor;
+		return project2descriptor2;
 	}
 
 	/**
@@ -1221,12 +1200,11 @@ public class StandaloneProjectMap
 		EPackage.Registry packageRegistry = getPackageRegistry(resourceSet);
 		getProjectDescriptors();
 		for (IProjectDescriptor projectDescriptor : project2descriptor.values()) {
-			Collection<IPackageDescriptor> packageDescriptors = projectDescriptor
-				.getPackageDescriptors();
+			Collection<IPackageDescriptor> packageDescriptors = projectDescriptor.getPackageDescriptors();
 			if (packageDescriptors != null) {
 				for (IPackageDescriptor packageDescriptor : packageDescriptors) {
-					projectDescriptor.initializePackageRegistration(
-						packageRegistry, packageDescriptor);
+					assert packageDescriptor != null;
+					projectDescriptor.initializePackageRegistration(packageRegistry, packageDescriptor);
 				}
 			}
 		}
@@ -1380,8 +1358,8 @@ public class StandaloneProjectMap
 	}
 
 	protected void scanClassPath(
-			Map<String, IProjectDescriptor.Internal> projectDescriptors,
-			SAXParser saxParser) {
+			@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors,
+			@NonNull SAXParser saxParser) {
 		String property = System.getProperty("java.class.path");
 		String separator = System.getProperty("path.separator");
 		if (property != null) {
