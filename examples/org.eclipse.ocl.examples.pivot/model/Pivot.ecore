@@ -6,6 +6,7 @@
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/OCL/ASMetamodel"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Boolean type is used for logical expression, consisting of the predefined values true and false."/>

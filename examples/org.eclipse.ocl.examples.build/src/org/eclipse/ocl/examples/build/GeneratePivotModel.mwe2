@@ -83,6 +83,9 @@ Workflow {
     component = PruneSuperClasses { skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }
+    component = SetASMetamodel { skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    }
 //    component = OCLDelegateActivator { skipOnErrors = true
 //    	modelSlot = "${pivotSlot}"
 //    }
