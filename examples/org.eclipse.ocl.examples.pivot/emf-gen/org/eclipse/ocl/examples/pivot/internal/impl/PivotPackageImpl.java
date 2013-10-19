@@ -7049,6 +7049,8 @@ public class PivotPackageImpl
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.eclipse.org/OCL/ASMetamodel
+		createASMetamodelAnnotations();
 		// duplicates
 		createDuplicatesAnnotations();
 		// subsets
@@ -7064,6 +7066,23 @@ public class PivotPackageImpl
 	protected void createEcoreAnnotations()
 	{
 		String source = "http://www.eclipse.org/emf/2002/Ecore"; //$NON-NLS-1$	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] 
+		   {
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/ASMetamodel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createASMetamodelAnnotations()
+	{
+		String source = "http://www.eclipse.org/OCL/ASMetamodel"; //$NON-NLS-1$	
 		addAnnotation
 		  (this, 
 		   source, 

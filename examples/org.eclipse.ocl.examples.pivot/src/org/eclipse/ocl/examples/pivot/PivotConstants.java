@@ -44,8 +44,18 @@ public interface PivotConstants
 	static final @SuppressWarnings("null")@NonNull String DOCUMENTATION_ANNOTATION_SOURCE = GenModelPackage.eNS_URI;
 	static final @NonNull String DOCUMENTATION_ANNOTATION_KEY = "documentation";
 
+	/**
+	 * EPackage annotation identifying models that must be imported.
+	 * Each detail is an alias-name, import uri pair.
+	 */
 	static final @NonNull String IMPORT_ANNOTATION_SOURCE = "http://www.eclipse.org/OCL/Import";
 	static final @NonNull String SYSML_ANNOTATION_SOURCE = "http://www.omg.org/spec/SysML";
+	
+	/**
+	 * EPackage annotation indicating that the EPackage is an Ecore serialisation of an OCL AS Metamodel.
+	 * No details are defined for this EAnnotation.
+	 */
+	static final @NonNull String AS_METAMODEL_ANNOTATION_SOURCE = "http://www.eclipse.org/OCL/ASMetamodel";
 
 	@Deprecated // Tuples are now used for rich invariants
 	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
