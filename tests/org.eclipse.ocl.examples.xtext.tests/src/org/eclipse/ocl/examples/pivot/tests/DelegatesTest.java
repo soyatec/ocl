@@ -79,6 +79,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateDomain;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateEPackageAdapter;
+import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.delegate.InvocationBehavior;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomainFactory;
@@ -88,7 +89,6 @@ import org.eclipse.ocl.examples.pivot.delegate.OCLQueryDelegateFactory;
 import org.eclipse.ocl.examples.pivot.delegate.OCLSettingDelegate;
 import org.eclipse.ocl.examples.pivot.delegate.OCLSettingDelegateFactory;
 import org.eclipse.ocl.examples.pivot.delegate.OCLValidationDelegateFactory;
-import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.delegate.ValidationDelegate;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -106,6 +106,7 @@ import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectVal
 import codegen.company.CodegencompanyFactory;
 import codegen.company.CodegencompanyPackage;
 import codegen.company.util.CodegencompanyValidator;
+
 import company.CompanyFactory;
 import company.CompanyPackage;
 import company.util.CompanyValidator;
@@ -1472,14 +1473,21 @@ public class DelegatesTest extends PivotTestSuite
 		List<Diagnostic> diagnostics = validation.getChildren();
 		assertEquals("Validation of '" + constraintName + "' child count:", 1, diagnostics.size());
 		Diagnostic diagnostic = diagnostics.get(0);
-		assertEquals("Validation of '" + constraintName + "' data count:", 1, diagnostic.getData().size());
-		assertEquals("Validation of '" + constraintName + "' data object:", eObject, diagnostic.getData().get(0));
-		String messageTemplate1 = EcorePlugin.INSTANCE.getString("_UI_ConstraintDelegateException_diagnostic");
+		List<?> data = diagnostic.getData();
+		String ecoreMessageTemplate = EcorePlugin.INSTANCE.getString("_UI_ConstraintDelegateException_diagnostic");
 		String objectLabel = DomainUtil.getLabel(eObject);
-		String message1 = DomainUtil.bind(messageTemplate1, constraintName, objectLabel, "");
-		String message2 = getErrorsInMessage(source);
-		String message3 = DomainUtil.bind(messageTemplate, bindings);
-		String message = message1 + message2 + message3;
+		String message = DomainUtil.bind(ecoreMessageTemplate, constraintName, objectLabel, "");
+		int size = data.size();
+		if (size == 2)	{				// EMF 2.10.0M3 and later
+			assertEquals("Validation of '" + constraintName + "' exception:", org.eclipse.ocl.common.internal.delegate.OCLDelegateException.class, data.get(1).getClass());
+			message += org.eclipse.ocl.common.internal.delegate.OCLDelegateException.class.getName() + ": ";
+		}
+		else if (size != 1) {			// EMF 2.10.0M2 and earlier
+			fail("Validation of '" + constraintName + "' child count: " + size);
+		}
+		message += getErrorsInMessage(source);
+		message += DomainUtil.bind(messageTemplate, bindings);
+		assertEquals("Validation of '" + constraintName + "' data object:", eObject, data.get(0));
 		assertEquals("Validation of '" + constraintName + "' message:", message, diagnostic.getMessage());
 	}
 

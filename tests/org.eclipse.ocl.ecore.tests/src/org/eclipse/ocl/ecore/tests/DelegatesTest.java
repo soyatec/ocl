@@ -998,7 +998,8 @@ public class DelegatesTest extends AbstractTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationEvaluatingToInvalid"), null);
 		String message = NLS.bind(OCLMessages.ValidationResultIsInvalid_ERROR_, "evaluatingToInvalid");
 		validateWithError("evaluatingToInvalid", "_UI_ConstraintDelegateException_diagnostic", badClassInstance,
-			"evaluatingToInvalid", EObjectValidator.getObjectLabel(badClassInstance, context), message);
+			"evaluatingToInvalid", EObjectValidator.getObjectLabel(badClassInstance, context), message,
+			org.eclipse.ocl.ecore.delegate.OCLDelegateException.class.getName());
 	}
 	
 	public void test_validationEvaluatingToNull() {
@@ -1006,7 +1007,8 @@ public class DelegatesTest extends AbstractTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationEvaluatingToNull"), null);
 		String message = NLS.bind(OCLMessages.ValidationResultIsNull_ERROR_, "evaluatingToNull");
 		validateWithError("evaluatingToNull", "_UI_ConstraintDelegateException_diagnostic", badClassInstance,
-			"evaluatingToNull", EObjectValidator.getObjectLabel(badClassInstance, context), message);
+			"evaluatingToNull", EObjectValidator.getObjectLabel(badClassInstance, context), message,
+			org.eclipse.ocl.ecore.delegate.OCLDelegateException.class.getName());
 	}
 	
 	public void test_validationEvaluatingToWrongType() {
@@ -1014,7 +1016,8 @@ public class DelegatesTest extends AbstractTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationEvaluatingToWrongType"), null);
 		String message = NLS.bind(OCLMessages.InvariantConstraintBoolean_ERROR_, "ValidationEvaluatingToWrongType");
 		validateWithError("evaluatingToWrongType", "_UI_ConstraintDelegateException_diagnostic", badClassInstance,
-			"evaluatingToWrongType", EObjectValidator.getObjectLabel(badClassInstance, context), message);
+			"evaluatingToWrongType", EObjectValidator.getObjectLabel(badClassInstance, context), message,
+			org.eclipse.ocl.ecore.delegate.OCLDelegateException.class.getName());
 	}
 	
 	public void test_validationParsingToLexicalError() {
@@ -1022,7 +1025,8 @@ public class DelegatesTest extends AbstractTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationParsingToLexicalError"), null);
 		String message = NLS.bind(OCLMessages.OCLParseErrorCodes_INVALID_TOKEN, "1:4", "\"'part\"");
 		validateWithError("parsingToLexicalError", "_UI_ConstraintDelegateException_diagnostic", badClassInstance,
-			"parsingToLexicalError", EObjectValidator.getObjectLabel(badClassInstance, context), message);
+			"parsingToLexicalError", EObjectValidator.getObjectLabel(badClassInstance, context), message,
+			org.eclipse.ocl.ecore.delegate.OCLDelegateException.class.getName());
 	}
 	
 	public void test_validationParsingToSemanticError() {
@@ -1030,7 +1034,8 @@ public class DelegatesTest extends AbstractTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationParsingToSemanticError"), null);
 		String message = NLS.bind(OCLMessages.OperationNotFound_ERROR_, "not()", "String");
 		validateWithError("parsingToSemanticError", "_UI_ConstraintDelegateException_diagnostic", badClassInstance,
-			"parsingToSemanticError", EObjectValidator.getObjectLabel(badClassInstance, context), message);
+			"parsingToSemanticError", EObjectValidator.getObjectLabel(badClassInstance, context), message,
+			org.eclipse.ocl.ecore.delegate.OCLDelegateException.class.getName());
 	}
 	
 	public void test_validationParsingToSyntacticError() {
@@ -1038,7 +1043,8 @@ public class DelegatesTest extends AbstractTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationParsingToSyntacticError"), null);
 		String message = NLS.bind(OCLMessages.OCLParseErrorCodes_INVALID_TOKEN, "2:1:2:4", "\"else\"");
 		validateWithError("parsingToSyntacticError", "_UI_ConstraintDelegateException_diagnostic", badClassInstance,
-			"parsingToSyntacticError", EObjectValidator.getObjectLabel(badClassInstance, context), message);
+			"parsingToSyntacticError", EObjectValidator.getObjectLabel(badClassInstance, context), message,
+			org.eclipse.ocl.ecore.delegate.OCLDelegateException.class.getName());
 	}
 
 	void add(EObject owner, EStructuralFeature feature, Object value) {
@@ -1243,9 +1249,19 @@ public class DelegatesTest extends AbstractTestSuite
 		List<Diagnostic> diagnostics = validation.getChildren();
 		assertEquals("Validation of '" + constraintName + "' child count:", 1, diagnostics.size());
 		Diagnostic diagnostic = diagnostics.get(0);
-		assertEquals("Validation of '" + constraintName + "' data count:", 1, diagnostic.getData().size());
+		List<?> data = diagnostic.getData();
+		int size = data.size();
+		if (size == 2)	{				// EMF 2.10.0M3 and later
+			assertEquals("Validation of '" + constraintName + "' exception:", org.eclipse.ocl.ecore.delegate.OCLDelegateException.class, data.get(1).getClass());
+		}
+		else if (size != 1) {			// EMF 2.10.0M2 and earlier
+			fail("Validation of '" + constraintName + "' child count: " + size);
+		}
 		assertEquals("Validation of '" + constraintName + "' data object:", eObject, diagnostic.getData().get(0));
 		String messageTemplate = EcorePlugin.INSTANCE.getString(errorKey);
+		if (diagnostics.get(0).getData().size() >= 2) {			// EMF 2.10.0M3 and later
+			messageTemplate = messageTemplate.replaceAll("\\{2\\}", "{3}: {2}");
+		}
 		String message = NLS.bind(messageTemplate, bindings);
 		assertEquals("Validation of '" + constraintName + "' message:", message, diagnostic.getMessage());
 	}
