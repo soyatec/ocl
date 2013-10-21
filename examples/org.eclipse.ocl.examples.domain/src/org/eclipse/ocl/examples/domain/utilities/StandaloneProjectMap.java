@@ -55,6 +55,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 import org.w3c.dom.Document;
 import org.xml.sax.Attributes;
@@ -173,20 +174,35 @@ import org.xml.sax.helpers.DefaultHandler;
  * install the ProjectMap as a ResourceSet adapter allowing an invocation of
  * {@link #findAdapter(ResourceSet)} to find it for subsequent re-use.
  */
-public class StandaloneProjectMap
-		extends SingletonAdapterImpl {
+public class StandaloneProjectMap extends SingletonAdapterImpl
+{
+	private static final String PLUGIN_ID = "org.eclipse.ocl.examples.domain";;
+
+	public static final @NonNull TracingOption PROJECT_MAP_ADD_EPACKAGE = new TracingOption(PLUGIN_ID, "projectMap/addEPackage");
+	public static final @NonNull TracingOption PROJECT_MAP_ADD_GEN_MODEL = new TracingOption(PLUGIN_ID, "projectMap/addGenModel");
+	public static final @NonNull TracingOption PROJECT_MAP_ADD_URI_MAP = new TracingOption(PLUGIN_ID, "projectMap/addURIMap");
+	public static final @NonNull TracingOption PROJECT_MAP_CONFIGURE = new TracingOption(PLUGIN_ID, "projectMap/configure");
+	public static final @NonNull TracingOption PROJECT_MAP_INSTALL = new TracingOption(PLUGIN_ID, "projectMap/install");
+	public static final @NonNull TracingOption PROJECT_MAP_RESOLVE = new TracingOption(PLUGIN_ID, "projectMap/resolve");
+	
+	{
+		PROJECT_MAP_ADD_EPACKAGE.setState(true);
+		PROJECT_MAP_ADD_GEN_MODEL.setState(true);
+		PROJECT_MAP_ADD_URI_MAP.setState(true);
+		PROJECT_MAP_CONFIGURE.setState(true);
+		PROJECT_MAP_INSTALL.setState(true);
+		PROJECT_MAP_RESOLVE.setState(true);
+	}
 
 	/**
 	 * An IPackageDescriptor describes the modeling capabilities of a known
-	 * model package and may be installed under av variety of synonyms in an
+	 * model package and may be installed under a variety of synonyms in an
 	 * EPackage.Registry to map multiple URIs to a single EPackage.
 	 */
 	public static interface IPackageDescriptor
-			extends EPackage.Descriptor {
-
-		public static interface Internal
-				extends IPackageDescriptor {
-
+	{
+		public static interface Internal extends IPackageDescriptor
+		{
 			/**
 			 * Internal callback from Ecore model pre-parse to register the
 			 * Ecore Package URI.
@@ -346,7 +362,7 @@ public class StandaloneProjectMap
 	 */
 	public static final class PackageDescriptor implements IPackageDescriptor.Internal
 	{
-/*		private static final class EPackageDescriptor implements EPackage.Descriptor
+		private static final class EPackageDescriptor implements EPackage.Descriptor
 		{
 			protected final @NonNull PackageDescriptor packageDescriptor;
 			protected final @NonNull URI uri;
@@ -357,15 +373,20 @@ public class StandaloneProjectMap
 			}
 
 			public EPackage getEPackage() {
-				// TODO Auto-generated method stub
-				return null;
+				EPackage ePackage = packageDescriptor.getEPackage();
+				PROJECT_MAP_RESOLVE.println(uri + " => " + ePackage);
+				return ePackage;
 			}
 
 			public EFactory getEFactory() {
-				// TODO Auto-generated method stub
-				return null;
+				throw new UnsupportedOperationException();
 			}
-		} */
+
+			@Override
+			public String toString() {
+				return uri + " => " + packageDescriptor;
+			}
+		}
 
 		protected final @NonNull IProjectDescriptor projectDescriptor;
 
@@ -381,7 +402,7 @@ public class StandaloneProjectMap
 
 		private@Nullable  EPackage ePackage = null;
 		
-//		private @NonNull Map<URI, EPackage.Descriptor> ePackageDescriptors = new HashMap<URI, EPackage.Descriptor>();
+		private @NonNull Map<URI, EPackage.Descriptor> ePackageDescriptors = new HashMap<URI, EPackage.Descriptor>();
 
 		public PackageDescriptor(@NonNull IProjectDescriptor projectDescriptor, @NonNull URI nsURI, @NonNull URI genModelURI) {
 			this.projectDescriptor = projectDescriptor;
@@ -395,8 +416,7 @@ public class StandaloneProjectMap
 			URI absoluteGenModelURI = genModelURI.resolve(locationURI);
 			URI absolutePackageURI = uri.resolve(absoluteGenModelURI);
 			ecorePackageURI = absolutePackageURI.deresolve(locationURI, true, true, true);
-			// System.out.println(nsURI + " = " + ecorePackage + " : " +
-			// className);
+			PROJECT_MAP_ADD_EPACKAGE.println(nsURI + " => " + ecorePackage + " : " + className);
 		}
 
 		public GenModelEcorePackageHandler createGenModelEcorePackageHandler() {
@@ -437,9 +457,8 @@ public class StandaloneProjectMap
 					}
 				}
 			}
-			// System.out.println("GetEPackage " + nsURI);
-			// System.out.println(DomainUtil.debugSimpleName(this) + " " + nsURI
-			// + " " + DomainUtil.debugSimpleName(ePackage));
+			PROJECT_MAP_RESOLVE.println("GetEPackage " + nsURI);
+			PROJECT_MAP_RESOLVE.println(DomainUtil.debugSimpleName(this) + " " + nsURI + " " + DomainUtil.debugSimpleName(ePackage));
 			return ePackage;
 		}
 
@@ -462,16 +481,13 @@ public class StandaloneProjectMap
 		}
 
 		public void installPackageDescription(@NonNull EPackage.Registry packageRegistry, @NonNull URI uri) {
-//			EPackage.Descriptor ePackageDescriptor = ePackageDescriptors.get(uri);
-//			if (ePackageDescriptor == null) {
-//				ePackageDescriptor = new EPackageDescriptor(this, uri);
-//				ePackageDescriptors.put(uri, ePackageDescriptor);
-//			}
-//			packageRegistry.put(uri.toString(), ePackageDescriptor);
-			String nsURIString = uri.toString();
-			if (packageRegistry.get(nsURIString) != this) {
-				packageRegistry.put(nsURIString, this);
+			EPackage.Descriptor ePackageDescriptor = ePackageDescriptors.get(uri);
+			if (ePackageDescriptor == null) {
+				ePackageDescriptor = new EPackageDescriptor(this, uri);
+				ePackageDescriptors.put(uri, ePackageDescriptor);
 			}
+			PROJECT_MAP_INSTALL.println("" + ePackageDescriptor.toString());
+			packageRegistry.put(uri.toString(), ePackageDescriptor);
 		}
 
 		public void setClassName(String className) {
@@ -481,15 +497,13 @@ public class StandaloneProjectMap
 		public void setUseModel(boolean useModel, EPackage.Registry packageRegistry) {
 			if (packageRegistry == null) {
 				packageRegistry = getPackageRegistry(null);
-				// System.out.println(DomainUtil.debugSimpleName(this) +
-				// " Use model " + useModel + " for " + nsURI + " in global " +
-				// DomainUtil.debugSimpleName(packageRegistry));
+				PROJECT_MAP_CONFIGURE.println(DomainUtil.debugSimpleName(this) + " Use model " + useModel + " for " + nsURI + " in global " +
+						DomainUtil.debugSimpleName(packageRegistry));
 			}
-			// else {
-			// System.out.println(DomainUtil.debugSimpleName(this) +
-			// " Use model " + useModel + " for " + nsURI + " in " +
-			// DomainUtil.debugSimpleName(packageRegistry));
-			// }
+			else {
+				PROJECT_MAP_CONFIGURE.println(DomainUtil.debugSimpleName(this) + " Use model " + useModel + " for " + nsURI + " in " +
+					DomainUtil.debugSimpleName(packageRegistry));
+			}
 			this.useModel = useModel;
 			installPackageDescription(packageRegistry, nsURI);
 			URI resourceURI = projectDescriptor.getPlatformResourceURI();
@@ -504,23 +518,21 @@ public class StandaloneProjectMap
 		public void setUseModelAndPackage(final EPackage ePackage, EPackage.Registry packageRegistry) {
 			if (packageRegistry == null) {
 				packageRegistry = getPackageRegistry(null);
-				// System.out.println(DomainUtil.debugSimpleName(this) +
-				// " Use distinct model and package for " + nsURI +
-				// " in global " + DomainUtil.debugSimpleName(packageRegistry));
+				PROJECT_MAP_CONFIGURE.println(DomainUtil.debugSimpleName(this) +  " Use distinct model and package for " + nsURI +
+				 " in global " + DomainUtil.debugSimpleName(packageRegistry));
 			}
-			// else {
-			// System.out.println(DomainUtil.debugSimpleName(this) +
-			// " Use distinct model and package for " + nsURI + " in " +
-			// DomainUtil.debugSimpleName(packageRegistry));
-			// }
-			this.ePackage = null;
+			else {
+				PROJECT_MAP_CONFIGURE.println(DomainUtil.debugSimpleName(this) + " Use distinct model and package for " + nsURI + " in " +
+						DomainUtil.debugSimpleName(packageRegistry));
+			}
 			this.useModel = true;
+			this.ePackage = getEPackage();
 			String nsURIString = nsURI.toString();
+			PROJECT_MAP_INSTALL.println(nsURIString + " => " + ePackage);
 			packageRegistry.put(nsURIString, new EPackage.Descriptor() {
 
 				public EPackage getEPackage() {
-					// System.out.println(DomainUtil.debugSimpleName(this) + " "
-					// + nsURI + " " + DomainUtil.debugSimpleName(ePackage));
+					PROJECT_MAP_RESOLVE.println(DomainUtil.debugSimpleName(this) + " " + nsURI + " " + DomainUtil.debugSimpleName(ePackage));
 					return ePackage;
 				}
 
@@ -541,15 +553,13 @@ public class StandaloneProjectMap
 				EPackage.Registry packageRegistry) {
 			if (packageRegistry == null) {
 				packageRegistry = getPackageRegistry(null);
-				// System.out.println(DomainUtil.debugSimpleName(this) +
-				// " Use package for " + nsURI + " in global " +
-				// DomainUtil.debugSimpleName(packageRegistry));
+				PROJECT_MAP_CONFIGURE.println(DomainUtil.debugSimpleName(this) + " Use package for " + nsURI + " in global " +
+						DomainUtil.debugSimpleName(packageRegistry));
 			}
-			// else {
-			// System.out.println(DomainUtil.debugSimpleName(this) +
-			// " Use package for " + nsURI + " in " +
-			// DomainUtil.debugSimpleName(packageRegistry));
-			// }
+			else {
+				PROJECT_MAP_CONFIGURE.println(DomainUtil.debugSimpleName(this) + " Use package for " + nsURI + " in " +
+						DomainUtil.debugSimpleName(packageRegistry));
+			}
 			this.ePackage = ePackage;
 			this.useModel = false;
 			installPackageDescription(packageRegistry, nsURI);
@@ -915,13 +925,13 @@ public class StandaloneProjectMap
 		public void initializeGenModelLocationMap() {
 			Collection<IPackageDescriptor> packageDescriptors = getPackageDescriptors();
 			if (packageDescriptors != null) {
-				Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin
-					.getEPackageNsURIToGenModelLocationMap(false);
+				Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
 				for (IPackageDescriptor packageDescriptor : packageDescriptors) {
 					URI nsURI = packageDescriptor.getNsURI();
 					URI genModelURI = packageDescriptor.getGenModelURI();
-					ePackageNsURIToGenModelLocationMap.put(nsURI.toString(),
-						genModelURI.resolve(locationURI));
+					URI resolvedURI = genModelURI.resolve(locationURI);
+					ePackageNsURIToGenModelLocationMap.put(nsURI.toString(), resolvedURI);
+					PROJECT_MAP_ADD_GEN_MODEL.println(nsURI + " => " + resolvedURI);
 				}
 			}
 		}
@@ -949,6 +959,8 @@ public class StandaloneProjectMap
 			URI pluginURI = getPlatformPluginURI();
 			uriMap.put(resourceURI, locationURI);
 			uriMap.put(pluginURI, locationURI);
+			PROJECT_MAP_ADD_URI_MAP.println(resourceURI + " => " + locationURI);
+			PROJECT_MAP_ADD_URI_MAP.println(pluginURI + " => " + locationURI);
 		}
 
 		@Override
@@ -1197,8 +1209,7 @@ public class StandaloneProjectMap
 		if (force || !initializedGenModelLocationMap) {
 			initializedGenModelLocationMap = true;
 			getProjectDescriptors();
-			for (IProjectDescriptor projectDescriptor : project2descriptor
-				.values()) {
+			for (IProjectDescriptor projectDescriptor : project2descriptor.values()) {
 				projectDescriptor.initializeGenModelLocationMap();
 			}
 		}
@@ -1239,8 +1250,7 @@ public class StandaloneProjectMap
 		if (force || !initializedPlatformResourceMap) {
 			initializedPlatformResourceMap = true;
 			getProjectDescriptors();
-			for (IProjectDescriptor projectDescriptor : project2descriptor
-				.values()) {
+			for (IProjectDescriptor projectDescriptor : project2descriptor.values()) {
 				projectDescriptor.initializePlatformResourceMap();
 			}
 		}
@@ -1279,8 +1289,7 @@ public class StandaloneProjectMap
 		getProjectDescriptors();
 		Map<URI, URI> uriMap = getURIMap(resourceSet);
 		for (String project : project2descriptor.keySet()) {
-			IProjectDescriptor projectDescriptor = project2descriptor
-				.get(project);
+			IProjectDescriptor projectDescriptor = project2descriptor.get(project);
 			projectDescriptor.initializeURIMap(uriMap);
 		}
 	}
@@ -1371,8 +1380,7 @@ public class StandaloneProjectMap
 		}
 	}
 
-	protected void scanClassPath(
-			@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors,
+	protected void scanClassPath(@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors,
 			@NonNull SAXParser saxParser) {
 		String property = System.getProperty("java.class.path");
 		String separator = System.getProperty("path.separator");
@@ -1384,8 +1392,7 @@ public class StandaloneProjectMap
 					File f = fileEntry.getCanonicalFile();
 					if (f.getPath().endsWith(".jar")) {
 						registerBundle(f, saxParser);
-					} else if (!scanFolder(f, saxParser, new HashSet<String>(),
-						0)) {
+					} else if (!scanFolder(f, saxParser, new HashSet<String>(), 0)) {
 						// eclipse bin folder?
 						File parentFile = f.getParentFile();
 						File dotProject = new File(parentFile, ".project");
@@ -1394,12 +1401,9 @@ public class StandaloneProjectMap
 							if (projectDescriptor != null) {
 								File plugIn = new File(parentFile, "plugin.xml");
 								if (plugIn.exists()) {
-									PluginGenModelHandler pluginGenModelHandler = new PluginGenModelHandler(
-										projectDescriptor);
-									saxParser.parse(plugIn,
-										pluginGenModelHandler);
-									pluginGenModelHandler
-										.scanContents(saxParser);
+									PluginGenModelHandler pluginGenModelHandler = new PluginGenModelHandler(projectDescriptor);
+									saxParser.parse(plugIn, pluginGenModelHandler);
+									pluginGenModelHandler.scanContents(saxParser);
 								}
 							}
 						}
@@ -1411,8 +1415,7 @@ public class StandaloneProjectMap
 		}
 	}
 
-	protected boolean scanFolder(File f, SAXParser saxParser,
-			Set<String> alreadyVisited, int depth) {
+	protected boolean scanFolder(File f, SAXParser saxParser, Set<String> alreadyVisited, int depth) {
 		try {
 			if (!alreadyVisited.add(f.getCanonicalPath()))
 				return true;
@@ -1427,8 +1430,7 @@ public class StandaloneProjectMap
 			for (File file : files) {
 				if (file.exists() && file.isDirectory() && (depth < 2)
 					&& !file.getName().startsWith(".")) {
-					containsProject |= scanFolder(file, saxParser,
-						alreadyVisited, depth + 1);
+					containsProject |= scanFolder(file, saxParser, alreadyVisited, depth + 1);
 				} else if (".project".equals(file.getName())) {
 					dotProject = file;
 				} else if (file.getName().endsWith(".jar")) {
@@ -1445,8 +1447,7 @@ public class StandaloneProjectMap
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		if (project2descriptor != null) {
-			List<String> projectNames = new ArrayList<String>(
-				project2descriptor.keySet());
+			List<String> projectNames = new ArrayList<String>(project2descriptor.keySet());
 			Collections.sort(projectNames);
 			for (String projectName : projectNames) {
 				if (s.length() > 0) {
