@@ -105,7 +105,7 @@ public class RoundTripTests extends XtextTestCase
 	}
 	public BaseCSResource createXtextFromURI(MetaModelManager metaModelManager, URI xtextURI) throws IOException {
 		ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
-		ProjectMap.initializeURIResourceMap(resourceSet2);
+//		ProjectMap.initializeURIResourceMap(resourceSet2);
 		ProjectMap.initializeURIResourceMap(null);
 //		UMLUtils.initializeContents(resourceSet2);
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(xtextURI, true);
