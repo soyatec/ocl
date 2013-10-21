@@ -7,6 +7,12 @@
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
   </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+    <details key="pivot" value="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#/"/>
+    <details key="basecs" value="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#/"/>
+    <details key="essentialoclcs" value="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#/"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="JavaImplementationCS" abstract="true"
       interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>

@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -124,11 +125,16 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 
 	public static Ecore2Pivot loadFromEcore(@NonNull ASResource ecoreASResource, @NonNull URI ecoreURI) {
 		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(ecoreASResource);
-		Resource ecoreResource = metaModelManager.getExternalResourceSet().getResource(ecoreURI, true);
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
+		Resource ecoreResource = resourceSet.getResource(ecoreURI, true);
+		if (ecoreResource == null) {
+			return null;
+		}
 		Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
+		conversion.loadImports(ecoreResource);
 		
 		conversion.pivotRoot = metaModelManager.createRoot(ecoreURI.lastSegment(), ecoreASResource.getURI().toString());
-		conversion.update(ecoreASResource, ecoreResource.getContents());
+		conversion.update(ecoreASResource, DomainUtil.nonNullEMF(ecoreResource.getContents()));
 		
 		AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
 		if (ecoreAdapter != null) {
@@ -198,7 +204,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	
 	private List<Resource.Diagnostic> errors = null;
 	
-	protected final Resource ecoreResource;					// Set via eAdapters.add()
+	protected final @NonNull Resource ecoreResource;
 	
 	protected Root pivotRoot = null;						// Set by importResource
 	protected final Ecore2PivotDeclarationSwitch declarationPass = new Ecore2PivotDeclarationSwitch(this);	
@@ -206,7 +212,17 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	private HashMap<EClassifier, Type> ecore2PivotMap = null;
 	private URI ecoreURI = null;
 	
-	public Ecore2Pivot(@Nullable Resource ecoreResource, @Nullable MetaModelManager metaModelManager) {
+	/**
+	 * All imported EPackages identified by AS_METAMODEL_ANNOTATION_SOURCE annotations.
+	 */
+	private Set<EPackage> asMetamodels = null;
+
+	/**
+	 * All imported EObjects identified as IMPORT_ANNOTATION_SOURCE annotations.
+	 */
+	private Set<EObject> importedEObjects = null;
+	
+	public Ecore2Pivot(@NonNull Resource ecoreResource, @Nullable MetaModelManager metaModelManager) {
 		super(metaModelManager != null ? metaModelManager : new MetaModelManager());
 		this.ecoreResource = ecoreResource;
 		this.metaModelManager.addExternalResource(this);
@@ -371,6 +387,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	public @NonNull Root getPivotRoot() {
 		Root pivotRoot2 = pivotRoot;
 		if (pivotRoot2 == null) {
+			loadImports(ecoreResource);
 			pivotRoot2 = pivotRoot = importObjects(DomainUtil.nonNullEMF(ecoreResource.getContents()), createPivotURI());
 			@SuppressWarnings("null") @NonNull Resource asResource = pivotRoot2.eResource();
 			AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
@@ -514,6 +531,82 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Load all transitively referenced *.ecore files and identify any EPackages identified
+	 * as OCL AS Metamodels.
+	 */
+	protected void loadImports(@NonNull Resource ecoreResource) {
+		URI baseURI = null;
+		if (ecoreResource.getResourceSet() == null) {
+			baseURI = URI.createURI("platform:/resource/x.y.z.z.y/");
+		}
+		else {
+			baseURI = getURI();
+			if (!baseURI.isHierarchical() || baseURI.isRelative()) {
+				baseURI = null;
+			}
+		}
+		for (EObject eContent : ecoreResource.getContents()) {
+			if (eContent instanceof EPackage) {
+				loadImports((EPackage)eContent, baseURI);
+			}
+		}
+	}
+	protected void loadImports(@NonNull EPackage ePackage, @Nullable URI baseURI) {
+		EAnnotation asMetamodelAnnotation = ePackage.getEAnnotation(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
+		if (asMetamodelAnnotation != null) {
+			if (asMetamodels == null) {
+				asMetamodels = new HashSet<EPackage>();
+			}
+			asMetamodels.add(ePackage);
+		}
+		EAnnotation importAnnotation = ePackage.getEAnnotation(PivotConstants.IMPORT_ANNOTATION_SOURCE);
+		if (importAnnotation != null) {
+			EMap<String, String> details = importAnnotation.getDetails();
+			for (String key : details.keySet()) {
+				URI uri = URI.createURI(details.get(key));
+				if (baseURI != null) {
+					uri = uri.resolve(baseURI);
+				}
+				assert uri != null;
+				ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
+				EObject importedEObject = null;
+				String fragment = uri.fragment();
+				if (fragment == null) {
+					importedEObject = resourceSet.getPackageRegistry().getEPackage(uri.toString());
+					importedEObject = null;
+				}
+				else {
+					importedEObject = resourceSet.getEObject(uri, true);
+				}
+				if (importedEObject != null) {
+					if (importedEObjects == null) {
+						importedEObjects = new HashSet<EObject>();
+					}
+					if (importedEObjects.add(importedEObject) && (importedEObject instanceof EPackage)) {
+						Resource importedResource = importedEObject.eResource();
+						URI baseURI2 = null;
+						if (importedResource.getResourceSet() == null) {
+							baseURI2 = URI.createURI("platform:/resource/x.y.z.z.y/");
+						}
+						else {
+							baseURI2 = importedResource.getURI();
+							if (!baseURI2.isHierarchical() || baseURI2.isRelative()) {
+								baseURI2 = null;
+							}
+						}
+						loadImports((EPackage)importedEObject, baseURI2);
+					}
+				}
+			}
+		}
+		for (EPackage eSubPackage : ePackage.getESubpackages()) {
+			if (eSubPackage != null) {
+				loadImports(eSubPackage, baseURI);
+			}
+		}
 	}
 
 	public void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager) {

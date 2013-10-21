@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -190,7 +191,7 @@ public class UML2Ecore2Pivot extends Ecore2Pivot
 	private Map<String, String> options = null;
 
 	public UML2Ecore2Pivot(@NonNull Resource umlResource, @NonNull MetaModelManager metaModelManager) {
-		super(metaModelManager.getExternalResourceSet().createResource(umlResource.getURI().appendFileExtension("ecore")), metaModelManager);
+		super(DomainUtil.nonNullState(metaModelManager.getExternalResourceSet().createResource(umlResource.getURI().appendFileExtension("ecore"))), metaModelManager);
 		this.umlResource = umlResource;
 	}
 
