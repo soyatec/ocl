@@ -42,12 +42,15 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.options.OCLinEcoreOptions;
@@ -294,6 +297,26 @@ public class Pivot2Ecore extends AbstractConversion
 
 	public String getPrimitiveTypesUriPrefix() {
 		return primitiveTypesUriPrefix;
+	}
+
+	/**
+	 * Return tre if asPackage is a Pivot Metamodel.
+	 */
+	public boolean isPivot(@NonNull org.eclipse.ocl.examples.pivot.Package asPackage) {
+		List<Type> asTypes = asPackage.getOwnedType();
+		if (DomainUtil.getNamedElement(asTypes, PivotPackage.Literals.ENUMERATION_LITERAL.getName()) == null) {
+			return false;
+		}
+		if (DomainUtil.getNamedElement(asTypes, PivotPackage.Literals.EXPRESSION_IN_OCL.getName()) == null) {
+			return false;
+		}
+		if (DomainUtil.getNamedElement(asTypes, PivotPackage.Literals.OPERATION_CALL_EXP.getName()) == null) {
+			return false;
+		}
+		if (DomainUtil.getNamedElement(asTypes, PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION.getName()) == null) {
+			return false;
+		}
+		return true;
 	}
 
 	public void putCreated(@NonNull Element pivotElement, @NonNull EModelElement eModelElement) {

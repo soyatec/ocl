@@ -132,8 +132,11 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		}
 		Ecore2Pivot conversion = getAdapter(ecoreResource, metaModelManager);
 		conversion.loadImports(ecoreResource);
-		
+//		if (asMetamodels != null) {
+//			
+//		}
 		conversion.pivotRoot = metaModelManager.createRoot(ecoreURI.lastSegment(), ecoreASResource.getURI().toString());
+//		conversion.installImports();
 		conversion.update(ecoreASResource, DomainUtil.nonNullEMF(ecoreResource.getContents()));
 		
 		AliasAdapter ecoreAdapter = AliasAdapter.findAdapter(ecoreResource);
@@ -443,6 +446,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				pivotRoot2 = pivotRoot = metaModelManager.createRoot(PivotUtil.getNonASURI(pivotURI).lastSegment(), uri.toString());
 			}
 			pivotRoot = pivotRoot2;
+//			installImports();
 			update(asResource, ecoreContents);
 //		}
 //		catch (Exception e) {
@@ -477,7 +481,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 					EMap<String, String> details = importAnnotation.getDetails();
 					for (String key : details.keySet()) {
 						URI uri = URI.createURI(details.get(key));
-						if (ecoreResource.getResourceSet() == null) {
+						if (DomainUtil.isRegistered(ecoreResource)) {
 							uri = uri.resolve(URI.createURI("platform:/resource/x.y.z.z.y/"));
 						}
 						else if (baseURI != null) {
@@ -518,6 +522,11 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			return false;
 		}
 		EPackage ecorePackage = (EPackage) ecoreRoot;
+		EAnnotation asMetamodelAnnotation = ecorePackage.getEAnnotation(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
+		if (asMetamodelAnnotation != null) {
+			return true;
+		}
+		// FIXME Following code should be redundant
 		if (ecorePackage.getEClassifier(PivotPackage.Literals.ENUMERATION_LITERAL.getName()) == null) {
 			return false;
 		}
@@ -539,7 +548,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	 */
 	protected void loadImports(@NonNull Resource ecoreResource) {
 		URI baseURI = null;
-		if (ecoreResource.getResourceSet() == null) {
+		if (DomainUtil.isRegistered(ecoreResource)) {
 			baseURI = URI.createURI("platform:/resource/x.y.z.z.y/");
 		}
 		else {
@@ -551,6 +560,15 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		for (EObject eContent : ecoreResource.getContents()) {
 			if (eContent instanceof EPackage) {
 				loadImports((EPackage)eContent, baseURI);
+			}
+		}
+		if ((asMetamodels != null) && (metaModelManager.getLibraryResource() == null)) {
+			String nsURI = asMetamodels.iterator().next().getNsURI();
+			if (nsURI != null) {
+				String stdlibASUri = OCLstdlib.STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
+				OCLstdlib library = OCLstdlib.create(stdlibASUri, "ocl", "ocl", nsURI);
+				metaModelManager.installResource(library);
+//				metaModelManager.installAs(nsURI, OCLstdlibTables.PACKAGE);
 			}
 		}
 	}
@@ -588,7 +606,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 					if (importedEObjects.add(importedEObject) && (importedEObject instanceof EPackage)) {
 						Resource importedResource = importedEObject.eResource();
 						URI baseURI2 = null;
-						if (importedResource.getResourceSet() == null) {
+						if (DomainUtil.isRegistered(importedResource)) {
 							baseURI2 = URI.createURI("platform:/resource/x.y.z.z.y/");
 						}
 						else {

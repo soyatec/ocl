@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.ocl.examples.build.utilities;
+package org.eclipse.ocl.examples.build.xtend;
 
 import com.google.common.base.Objects;
 
@@ -32,8 +32,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.build.xtend.GenerateMetamodelWorkflowComponent;
-import org.eclipse.ocl.examples.build.xtend.NameQueries;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;

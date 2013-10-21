@@ -42,9 +42,12 @@ public class SetASMetamodel extends WorkflowComponentWithModelSlot
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof EPackage) {
 				EPackage ePackage = (EPackage) eObject;
-				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-				eAnnotation.setSource(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
-				ePackage.getEAnnotations().add(eAnnotation);
+				EAnnotation eAnnotation = ePackage.getEAnnotation(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
+				if (eAnnotation == null) {
+					eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+					eAnnotation.setSource(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
+					ePackage.getEAnnotations().add(eAnnotation);
+				}
 			}
 		}
 	}

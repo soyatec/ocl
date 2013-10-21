@@ -1421,7 +1421,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return converter.getCreated(ecoreClass, element);
 	}
 
-	public ResourceSet getExternalResourceSet() {
+	public @NonNull ResourceSet getExternalResourceSet() {
 		ResourceSetImpl externalResourceSet2 = externalResourceSet;
 		if (externalResourceSet2 == null) {
 			externalResourceSet2 = externalResourceSet = new ResourceSetImpl();
@@ -1431,8 +1431,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 			else {
 				externalResourceSet2.eAdapters().add(projectMap);
+				projectMap.initializeResourceSet(externalResourceSet2);			
 			}
-			projectMap.initializeResourceSet(externalResourceSet2);			
 			externalResourceSet2.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl()); //$NON-NLS-1$
 			MetaModelManagerResourceSetAdapter.getAdapter(externalResourceSet2, this);
 			ASResourceFactoryRegistry.INSTANCE.configureResourceSet(externalResourceSet2);
@@ -2575,97 +2575,101 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public @Nullable Element loadResource(@NonNull URI uri, String alias, ResourceSet resourceSet) throws ParserException {
+	public @Nullable Element loadResource(@NonNull URI uri, String alias, @Nullable ResourceSet resourceSet) throws ParserException {
 		// if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
 		// return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
-		Resource resource;
-		URI resourceURI = uri.trimFragment();
-		String resourceURIstring = resourceURI.toString();
-		if (resourceURIstring.equals(defaultStandardLibraryURI)) {
-			if (asLibraryResource != null) {
-				resource = asLibraryResource;
+		Resource resource = null;
+		String fragment = uri.fragment();
+		if (fragment == null) {
+			String uriString = uri.toString();
+			EPackage.Registry packageRegistry = (resourceSet != null ? resourceSet : getExternalResourceSet()).getPackageRegistry();
+			EPackage ePackage = packageRegistry.getEPackage(uriString);
+			if (ePackage != null) {
+				return getPivotOf(Element.class, ePackage);
+			}
+			if (uriString.equals(defaultStandardLibraryURI)) {
+				if (asLibraryResource != null) {
+					resource = asLibraryResource;
+				}
+				else {
+					resource = loadDefaultLibrary(uriString);
+				}
+				if (resource instanceof XMLResource) {
+					EObject eObject = ((XMLResource)resource).getEObject(fragment);
+					if (eObject instanceof Element) {
+						return (Element) eObject;
+					}
+				}
 			}
 			else {
-				resource = loadDefaultLibrary(resourceURIstring);
-			}
-			if (resource instanceof XMLResource) {
-				String fragment = uri.fragment();
-				if (fragment == null) {
-					fragment = "/";
-				}
-				EObject eObject = ((XMLResource)resource).getEObject(fragment);
-				if (eObject instanceof Element) {
-					return (Element) eObject;
+				StandardLibraryContribution contribution = StandardLibraryContribution.REGISTRY.get(uriString);
+				if (contribution != null) {
+					resource = contribution.getResource();
 				}
 			}
 		}
-		else {
-			StandardLibraryContribution contribution = StandardLibraryContribution.REGISTRY.get(resourceURIstring);
-			if (contribution != null) {
-				resource = contribution.getResource();
+		URI resourceURI = uri.trimFragment();
+		if (resource == null) {
+			External2Pivot external2Pivot = external2PivotMap.get(uri);
+			if (external2Pivot != null) {
+				resource = external2Pivot.getResource();
 			}
 			else {
-				External2Pivot external2Pivot = external2PivotMap.get(uri);
-				if (external2Pivot != null) {
-					resource = external2Pivot.getResource();
+				if (resourceSet == null) {
+					resourceSet = getExternalResourceSet();
 				}
-				else {
-					if (resourceSet == null) {
-						resourceSet = getExternalResourceSet();
+				
+				try {
+					resource = resourceSet.getResource(resourceURI, true);
+				}
+				catch (RuntimeException e) {
+					resource = resourceSet.getResource(resourceURI, false);
+					if (resource != null) {
+						resourceSet.getResources().remove(resource);
+						resource = null;
 					}
-					
-					try {
-						resource = resourceSet.getResource(resourceURI, true);
-					}
-					catch (RuntimeException e) {
-						resource = resourceSet.getResource(resourceURI, false);
-						if (resource != null) {
-							resourceSet.getResources().remove(resource);
-							resource = null;
-						}
-						throw e;
-					}
-//					if (resource != null) {
-//						if (externalResources == null) {
-//							externalResources = new HashMap<URI, Resource>();
-//						}
-//						externalResources.put(uri, resource);
+					throw e;
+				}
+//				if (resource != null) {
+//					if (externalResources == null) {
+//						externalResources = new HashMap<URI, Resource>();
 //					}
-					//
-					//	If this resource already loaded under its internal URI reuse old one
-					//
-					if (resource != null) { 
-						List<EObject> contents = resource.getContents();
-						if (contents.size() > 0) {
-							EObject firstContent = contents.get(0);
-							if (firstContent != null) {
-								for (ASResourceFactory resourceHelper : ASResourceFactoryRegistry.INSTANCE.getResourceFactories()) {
-									URI packageURI = resourceHelper.getPackageURI(firstContent);
-									if (packageURI != null) {
-										External2Pivot external2Pivot2 = external2PivotMap.get(packageURI);
-										if (external2Pivot2 != null) {
-											Resource knownResource = external2Pivot2.getResource();
-											if ((knownResource != null) && (knownResource != resource)) {
-												for (EObject eContent : resource.getContents()) {
-													if (eContent instanceof Pivotable) {
-														Element pivot = ((Pivotable)firstContent).getPivot();
-														if (pivot instanceof Root) {
-															Root root = (Root)pivot;
-															packageManager.removeRoot(root);
-															Resource asResource = root.eResource();
-															if (asResource != null) {
-																asResourceSet.getResources().remove(asResource);
-																asResource.unload();
-															}
+//					externalResources.put(uri, resource);
+//				}
+				//
+				//	If this resource already loaded under its internal URI reuse old one
+				//
+				if (resource != null) { 
+					List<EObject> contents = resource.getContents();
+					if (contents.size() > 0) {
+						EObject firstContent = contents.get(0);
+						if (firstContent != null) {
+							for (ASResourceFactory resourceHelper : ASResourceFactoryRegistry.INSTANCE.getResourceFactories()) {
+								URI packageURI = resourceHelper.getPackageURI(firstContent);
+								if (packageURI != null) {
+									External2Pivot external2Pivot2 = external2PivotMap.get(packageURI);
+									if (external2Pivot2 != null) {
+										Resource knownResource = external2Pivot2.getResource();
+										if ((knownResource != null) && (knownResource != resource)) {
+											for (EObject eContent : resource.getContents()) {
+												if (eContent instanceof Pivotable) {
+													Element pivot = ((Pivotable)firstContent).getPivot();
+													if (pivot instanceof Root) {
+														Root root = (Root)pivot;
+														packageManager.removeRoot(root);
+														Resource asResource = root.eResource();
+														if (asResource != null) {
+															asResourceSet.getResources().remove(asResource);
+															asResource.unload();
 														}
 													}
 												}
-												resource.unload();
 											}
-											resource = knownResource;
+											resource.unload();
 										}
-										break;
+										resource = knownResource;
 									}
+									break;
 								}
 							}
 						}
@@ -2681,9 +2685,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public @Nullable Element loadResource(@NonNull Resource resource, @Nullable URI uri) throws ParserException {
-		ASResourceFactory bestHelper = ASResourceFactoryRegistry.INSTANCE.getResourceFactory(resource);
-		if (bestHelper != null) {
-			return bestHelper.importFromResource(this, resource, uri);
+		ASResourceFactory bestFactory = ASResourceFactoryRegistry.INSTANCE.getResourceFactory(resource);
+		if (bestFactory != null) {
+			return bestFactory.importFromResource(this, resource, uri);
 		}
 		throw new ParserException("Cannot create pivot from '" + uri + "'");
 //		logger.warn("Cannot convert to pivot for package with URI '" + uri + "'");

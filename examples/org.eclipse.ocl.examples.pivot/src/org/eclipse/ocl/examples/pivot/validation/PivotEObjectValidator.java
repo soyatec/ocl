@@ -93,11 +93,9 @@ public class PivotEObjectValidator extends EObjectValidator
 			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(resourceSet);
 			if (metaModelManager != null) {
 				ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
-				if (externalResourceSet != null) {
-					for (Adapter adapter : externalResourceSet.eAdapters()) {
-						if (adapter instanceof ValidationAdapter) {
-							return (ValidationAdapter)adapter;
-						}
+				for (Adapter adapter : externalResourceSet.eAdapters()) {
+					if (adapter instanceof ValidationAdapter) {
+						return (ValidationAdapter)adapter;
 					}
 				}
 			}

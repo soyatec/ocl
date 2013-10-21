@@ -16,6 +16,8 @@
 package org.eclipse.ocl.examples.pivot.ecore;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -42,6 +44,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -355,7 +358,6 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public Object visitRoot(@NonNull Root pivotRoot) {
-		EAnnotation importAnnotation = null;
 		EModelElement firstElement = null;
 		List<EObject> outputObjects = new ArrayList<EObject>();
 		for (org.eclipse.ocl.examples.pivot.Package pivotObject : pivotRoot.getNestedPackage()) {
@@ -369,29 +371,57 @@ public class Pivot2EcoreDeclarationVisitor
 				}
 			}
 		}
-		for (Import anImport : pivotRoot.getImports()) {
-			Namespace importedNamespace = anImport.getImportedNamespace();
-			if (importedNamespace != null) {
-				if (importAnnotation == null) {
-					importAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-					importAnnotation.setSource(PivotConstants.IMPORT_ANNOTATION_SOURCE);
-				}
-				EObject eTarget = importedNamespace.getETarget();
-				if (eTarget != null) {
-					URI uri = EcoreUtil.getURI(eTarget);
-					URI uri2 = uri.deresolve(context.getEcoreURI());
-					importAnnotation.getDetails().put(anImport.getName(), uri2.toString());
-				}
-				else if (importedNamespace instanceof org.eclipse.ocl.examples.pivot.Package) {
-					importAnnotation.getDetails().put(anImport.getName(), ((org.eclipse.ocl.examples.pivot.Package)importedNamespace).getNsURI());
-				}
-				else {
-					importAnnotation.getDetails().put(anImport.getName(), importedNamespace.toString());
+		List<Import> imports = pivotRoot.getImports();
+		if (imports.size() > 0) {
+			if (imports.size() > 0) {
+				imports = new ArrayList<Import>(imports);
+				Collections.sort(imports, new Comparator<Import>()
+						{
+						public int compare(Import o1, Import o2) {
+							String n1 = o1.getName();
+							String n2 = o2.getName();
+							if (n1 == null) n1 = "";
+							if (n2 == null) n1 = "";
+							return n1.compareTo(n2);
+						}
+					}
+				);
+			}
+			EAnnotation importAnnotation = null;
+			URI ecoreURI = context.getEcoreURI();
+			for (Import anImport : imports) {
+				Namespace importedNamespace = anImport.getImportedNamespace();
+				if (importedNamespace != null) {
+					if (importAnnotation == null) {
+						importAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+						importAnnotation.setSource(PivotConstants.IMPORT_ANNOTATION_SOURCE);
+					}
+					EObject eTarget = importedNamespace.getETarget();
+					if (eTarget != null) {
+						URI uri = null;
+						if ((eTarget instanceof EPackage) && DomainUtil.isRegistered(eTarget.eResource())) {
+	 						String nsURI = ((EPackage)eTarget).getNsURI();
+							if (nsURI != null) {
+								uri = URI.createURI(nsURI);
+							}
+						}
+						if (uri == null) {
+							uri = EcoreUtil.getURI(eTarget);
+						}
+						URI uri2 = uri.deresolve(ecoreURI, true, true, true);
+						importAnnotation.getDetails().put(anImport.getName(), uri2.toString());
+					}
+					else if (importedNamespace instanceof org.eclipse.ocl.examples.pivot.Package) {
+						importAnnotation.getDetails().put(anImport.getName(), ((org.eclipse.ocl.examples.pivot.Package)importedNamespace).getNsURI());
+					}
+					else {
+						importAnnotation.getDetails().put(anImport.getName(), importedNamespace.toString());
+					}
 				}
 			}
-		}
-		if ((firstElement != null) && (importAnnotation != null)) {
-			firstElement.getEAnnotations().add(importAnnotation);
+			if ((firstElement != null) && (importAnnotation != null)) {
+				firstElement.getEAnnotations().add(importAnnotation);
+			}
 		}
 		return outputObjects;
 	}

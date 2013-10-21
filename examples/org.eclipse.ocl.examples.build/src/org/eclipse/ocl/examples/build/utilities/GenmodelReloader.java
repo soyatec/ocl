@@ -36,8 +36,10 @@ import org.eclipse.emf.importer.ModelImporter;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -83,8 +85,9 @@ public class GenmodelReloader extends AbstractProjectComponent
 		log.info("Reloading '" + genModelURI + "'");
 		Monitor monitor = showProgress ? new LoggerMonitor(log) : new BasicMonitor();
 		IProjectDescriptor projectDescriptor = DomainUtil.nonNullState(getProjectDescriptor());
-		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(URI.createURI(PivotPackage.eNS_URI));
-		packageDescriptor.setUseModel(true, null);
+		@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(PivotPackage.eNS_URI);
+		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
+		packageDescriptor.configure(null, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
 		ModelImporter modelImporterInstance = new UMLImporter()
 		{
 			@Override
@@ -120,7 +123,7 @@ public class GenmodelReloader extends AbstractProjectComponent
 		    	List<EPackage> ePackages = modelImporterInstance.getEPackages();
 		    	ecoreResource.getContents().clear();
 		    	ecoreResource.getContents().addAll(ePackages);
-				projectDescriptor.useModelsAndPackages(ecoreResource);
+				projectDescriptor.configure(genModelResourceSet, StandaloneProjectMap.LoadBothStrategy.INSTANCE, null);
 		    }
 			
 			modelImporterInstance.prepareGenModelAndEPackages(monitor);
@@ -187,7 +190,7 @@ public class GenmodelReloader extends AbstractProjectComponent
 	protected Map<?, ?> getGenModelSaveOptions() {
 		Map<Object, Object> result = new HashMap<Object, Object>();
 		result.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-		result.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
+//		result.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
 		result.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
 		return result;
 	}

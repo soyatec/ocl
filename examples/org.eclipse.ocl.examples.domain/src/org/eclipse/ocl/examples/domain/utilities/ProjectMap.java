@@ -28,13 +28,13 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 
 /**
@@ -81,12 +81,12 @@ public class ProjectMap extends StandaloneProjectMap
 {	
 	public static class ProjectDescriptor extends StandaloneProjectMap.ProjectDescriptor
 	{
-		public ProjectDescriptor(String name, URI locationURI) {
+		public ProjectDescriptor(@NonNull String name, @NonNull URI locationURI) {
 			super(name, locationURI);
 		}
 
 		@Override
-		public void initializeURIMap(Map<URI, URI> uriMap) {
+		public void initializeURIMap(@NonNull Map<URI, URI> uriMap) {
 			if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 				super.initializeURIMap(uriMap);
 			}
@@ -96,16 +96,20 @@ public class ProjectMap extends StandaloneProjectMap
 					URI pluginURI = getPlatformPluginURI();
 					uriMap.put(resourceURI, resourceURI);
 					uriMap.put(pluginURI, resourceURI);
+					if (PROJECT_MAP_ADD_URI_MAP.isActive()) {
+						PROJECT_MAP_ADD_URI_MAP.println(resourceURI + " => " + resourceURI);
+						PROJECT_MAP_ADD_URI_MAP.println(pluginURI + " => " + resourceURI);
+					}
 				}
 			}
 		}
 	}
 
-	public static ProjectMap findAdapter(ResourceSet resourceSet) {
+	public static @Nullable ProjectMap findAdapter(@NonNull ResourceSet resourceSet) {
 		return (ProjectMap) EcoreUtil.getAdapter(resourceSet.eAdapters(), ProjectMap.class);
 	}
 
-	public static synchronized ProjectMap getAdapter(ResourceSet resourceSet) {
+	public static synchronized @NonNull ProjectMap getAdapter(@NonNull ResourceSet resourceSet) {
 		ProjectMap adapter = findAdapter(resourceSet);
 		if (adapter == null) {
 			adapter = new ProjectMap();
@@ -116,12 +120,12 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 
 	@Override
-	protected IProjectDescriptor.Internal createProjectDescriptor(String projectName, URI locationURI) {
+	protected @NonNull IProjectDescriptor.Internal createProjectDescriptor(@NonNull String projectName, @NonNull URI locationURI) {
 		return new ProjectDescriptor(projectName, locationURI);
 	}
 	
 	@Override
-	public URI getLocation(String projectName) {
+	public URI getLocation(@NonNull String projectName) {
 		URI uri = super.getLocation(projectName);
 		if ((uri == null) && EMFPlugin.IS_ECLIPSE_RUNNING) {
 			uri = URI.createPlatformPluginURI("/" + projectName + "/", true);
@@ -137,10 +141,10 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 	
 	@Override
-	public synchronized void initializePackageRegistry(ResourceSet resourceSet) {
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+	public synchronized void initializePackageRegistry(@Nullable ResourceSet resourceSet) {
+//		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			super.initializePackageRegistry(resourceSet);
-		}
+/*		}
 		else {
 			EPackage.Registry packageRegistry = getPackageRegistry(resourceSet);
 			Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
@@ -150,7 +154,9 @@ public class ProjectMap extends StandaloneProjectMap
 					IProjectDescriptor.Internal projectDescriptor = getProjectDescriptorInternal(genModelURI);
 					Object ePackageDescriptor = EPackage.Registry.INSTANCE.get(ePackageNsURI);
 					packageRegistry.put(ePackageNsURI, ePackageDescriptor);
-					IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(URI.createURI(ePackageNsURI));
+					@SuppressWarnings("null")
+					@NonNull URI nsURI = URI.createURI(ePackageNsURI);
+					IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
 //					System.out.println(key + " ==> ");
 					URI localModelURI = packageDescriptor.getEcoreModelURI();
 					if (localModelURI != null) {
@@ -163,7 +169,7 @@ public class ProjectMap extends StandaloneProjectMap
 					}
 				}
 			}
-		}
+		} */
 	}
 	
 	@Override
@@ -174,7 +180,7 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 
 	@Override
-	public synchronized void initializeURIMap(ResourceSet resourceSet) {
+	public synchronized void initializeURIMap(@Nullable ResourceSet resourceSet) {
 		super.initializeURIMap(resourceSet);
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			Map<URI, URI> uriMap = getURIMap(resourceSet);
@@ -245,13 +251,14 @@ public class ProjectMap extends StandaloneProjectMap
 		}
 	}
 
-	protected void scanProjects(Map<String, IProjectDescriptor.Internal> projectDescriptors) {
+	protected void scanProjects(@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		for (IProject project : root.getProjects()) {
 			if (project.isOpen()) {
-				String projectName = project.getName();
+				@SuppressWarnings("null")@NonNull String projectName = project.getName();
 				String projectKey = "/" + projectName + "/";
-				projectDescriptors.put(projectName, createProjectDescriptor(projectName, URI.createPlatformResourceURI(projectKey, true)));
+				@SuppressWarnings("null")@NonNull URI platformResourceURI = URI.createPlatformResourceURI(projectKey, true);
+				projectDescriptors.put(projectName, createProjectDescriptor(projectName, platformResourceURI));
 			}
 		}
 	}

@@ -350,7 +350,10 @@ public class SerializeTests extends XtextTestCase
 	}
 
 	public void testSerialize_OCLinEcoreCST() throws Exception {
-		doSerialize("OCLinEcoreCST");
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCS.ecore", true);
+		String stem = uri.trimFileExtension().lastSegment();
+		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
+//		doSerialize("OCLinEcoreCST");
 	}
 
 	public void testSerialize_OCLstdlib() throws Exception {

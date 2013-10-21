@@ -180,6 +180,10 @@ public class TypeTemplateParameterImpl
 	@Override
 	public NotificationChain basicSetParameteredElement(
 			ParameterableElement newParameteredElement, NotificationChain msgs) {
+		if (newParameteredElement != null && !(newParameteredElement instanceof Type))
+		{
+			throw new IllegalArgumentException("newParameteredElement must be an instance of Type"); //$NON-NLS-1$
+		}
 		ParameterableElement oldParameteredElement = parameteredElement;
 		parameteredElement = newParameteredElement;
 		if (eNotificationRequired())
@@ -197,6 +201,10 @@ public class TypeTemplateParameterImpl
 	 */
 	@Override
 	public void setParameteredElement(ParameterableElement newParameteredElement) {
+		if (newParameteredElement != null && !(newParameteredElement instanceof Type))
+		{
+			throw new IllegalArgumentException("newParameteredElement must be an instance of Type"); //$NON-NLS-1$
+		}
 		if (newParameteredElement != parameteredElement)
 		{
 			NotificationChain msgs = null;

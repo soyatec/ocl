@@ -34,6 +34,7 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -81,6 +82,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues arg2) {
 		IProjectDescriptor projectDescriptor = DomainUtil.nonNullState(getProjectDescriptor());
+		assert uri != null;
 		URI inputURI = projectDescriptor.getPlatformResourceURI(uri);
 		log.info("Merging '" + inputURI + "'");
 		Resource ecoreResource = (Resource) ctx.get(getModelSlot());
@@ -164,7 +166,7 @@ public class ConstraintMerger extends AbstractProjectComponent
 //				System.out.println("Pivot2Ecore " + asResource.getURI());
 			Resource ecoreResource2 = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, null);
 			ctx.set(getModelSlot(), ecoreResource2);
-			projectDescriptor.useModelsAndPackages(ecoreResource2);
+			projectDescriptor.configure(ecoreResource2.getResourceSet(), StandaloneProjectMap.LoadBothStrategy.INSTANCE, null);
 			
 //			for (EObject eObject : oclResource.getContents()) {
 //				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
