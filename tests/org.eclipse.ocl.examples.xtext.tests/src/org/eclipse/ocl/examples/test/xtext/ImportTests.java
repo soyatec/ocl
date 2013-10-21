@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.xtext.tests.TestCaseAppender;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 /**
@@ -112,7 +113,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_CompleteOCL_Ecore() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'Names.ecore'\n" +
 			"package names\n" +
@@ -123,7 +124,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_CompleteOCL_OCLinEcore() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'Names.oclinecore'\n" +
 			"package EMOF\n" +
@@ -134,7 +135,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_CompleteOCL_OCLstdlib() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"library 'minimal.oclstdlib'\n" +
 			"import 'Names.ecore'\n" +
@@ -151,7 +152,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_CompleteOCL_custom_OCLstdlib() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String customLibrary =
 			"library lib {\n" +
 			"type Real : PrimitiveType {\n" +
@@ -174,7 +175,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_CompleteOCL_UML() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'Names.uml'\n" +
 			"package unames\n" +
@@ -185,7 +186,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_CompleteOCL_NoSuchFile() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'NoSuchFile1'\n" + 
 			"import 'NoSuchFile2.ocl'\n" +
@@ -270,7 +271,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLinEcore_Ecore() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'Names.ecore';\n" +
 			"import nnnn : 'Names.ecore#/';\n" +
@@ -289,7 +290,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLinEcore_OCLinEcore() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'Names.oclinecore';\n" +
 //FIXME			"import nnnn : 'Names.oclinecore#/';\n" +
@@ -309,7 +310,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLinEcore_NoSuchFile() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'NoSuchFile1';\n" + 
 			"import 'NoSuchFile2.ecore';\n" +
@@ -323,7 +324,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLstdlib_OCLstdlib() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String customLibrary =
 			"library ocl {\n" +
 			"type Complex : PrimitiveType {\n" +
@@ -346,7 +347,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLstdlib_NoSuchFile() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
 			"import 'NoSuchFile1';\n" + 
@@ -362,7 +363,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLstdlib_NoURI() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"library anotherOne{}\n";
 		Bag<String> bag = new BagImpl<String>();
@@ -371,7 +372,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testImport_OCLstdlib_WrongURI() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
 			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
 			"library anotherOne : xxx = 'http://www.eclipse.org/ocl/3.1/OCL.oclstdlib'{}\n";
@@ -383,7 +384,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testInclude_CompleteOCL() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String moreCompleteOCL =
 			"package ocl\n" +
 			"context _'Integer'\n" +
@@ -402,7 +403,7 @@ public class ImportTests extends XtextTestCase
 	}
 	
 	public void testInclude_CompleteOCL_UnresolvedOperation() throws Exception {
-		testCaseAppender.uninstall();
+		TestCaseAppender.INSTANCE.uninstall();
 		String moreCompleteOCL =
 			"package ocl\n" +
 			"context _'Integer'\n" +

@@ -20,22 +20,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
-import org.apache.log4j.spi.LoggingEvent;
-import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -97,6 +97,68 @@ public class XtextTestCase extends PivotTestCase
 		void denormalize();
 	}
 	
+/*	public static class EAnnotationsNormalizer implements Normalizer
+	{
+		protected final @NonNull EAnnotation eAnnotation;
+		protected final List<Entry<String, String>> oldOrder;
+		
+		public EAnnotationsNormalizer(@NonNull EAnnotation eAnnotation) {
+			this.eAnnotation = eAnnotation;
+			List<Entry<String, String>> eDetails = eAnnotation.getDetails();
+			this.oldOrder = new ArrayList<Entry<String, String>>(eDetails);
+			List<Entry<String, String>> newOrder = new ArrayList<Entry<String, String>>(eDetails);
+			Collections.sort(newOrder, new Comparator<Entry<String, String>>()
+				{
+					public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+						String n1 = o1.getKey();
+						String n2 = o2.getKey();
+						return n1.compareTo(n2);
+					}
+				}
+			);
+			eDetails.clear();
+			eDetails.addAll(newOrder);
+		}
+		
+		@Override
+		public void denormalize() {
+			EList<Entry<String, String>> eDetails = eAnnotation.getDetails();
+			eDetails.clear();
+			eDetails.addAll(oldOrder);
+		}
+	} */
+	
+	public static class EOperationsNormalizer implements Normalizer
+	{
+		protected final @NonNull EClass eClass;
+		protected final List<EOperation> oldOrder;
+		
+		public EOperationsNormalizer(@NonNull EClass eClass) {
+			this.eClass = eClass;
+			EList<EOperation> eOperations = eClass.getEOperations();
+			this.oldOrder = new ArrayList<EOperation>(eOperations);
+			List<EOperation> newOrder = new ArrayList<EOperation>(eOperations);
+			Collections.sort(newOrder, new Comparator<EOperation>()
+				{
+					public int compare(EOperation o1, EOperation o2) {
+						String n1 = o1.getName();
+						String n2 = o2.getName();
+						return n1.compareTo(n2);
+					}
+				}
+			);
+			eOperations.clear();
+			eOperations.addAll(newOrder);
+		}
+		
+		@Override
+		public void denormalize() {
+			EList<EOperation> eOperations = eClass.getEOperations();
+			eOperations.clear();
+			eOperations.addAll(oldOrder);
+		}
+	}
+	
 	public static class ETypedElementNormalizer implements Normalizer
 	{
 		protected final @NonNull ETypedElement eTypedElement;
@@ -118,43 +180,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 
-	public static final class TestCaseAppender extends ConsoleAppender
-	{
-		private static Logger rootLogger = Logger.getRootLogger();
-
-		private boolean installed = false;
-		
-		public TestCaseAppender() {
-			super(new SimpleLayout(), SYSTEM_OUT); 
-			setName("TestHarness");
-		}
-		
-		@Override
-		public void append(LoggingEvent event) {
-			if (event.getLevel().isGreaterOrEqual(Level.INFO)) {
-				String renderedMessage = event.getRenderedMessage();
-				ThrowableInformation throwableInformation = event.getThrowableInformation();
-				Throwable throwable = throwableInformation != null ? throwableInformation.getThrowable() : null;
-				throw new Error(renderedMessage, throwable);
-			}
-//			super.append(event);
-		}
-		
-		public void install() {
-			if (!installed) {
-				rootLogger.addAppender(this);
-				installed = true;
-			}
-		}
-		
-		public void uninstall() {
-			rootLogger.removeAppender(this);
-			installed = false;
-		}
-	}
-	
-	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
-
 	@SuppressWarnings("null")
 	protected void assertPivotIsValid(URI pivotURI) {
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
@@ -167,11 +192,15 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
-		Set<Normalizer> normalizations = normalize(expectedResource);
+		Set<Normalizer> expectedNormalizations = normalize(expectedResource);
+		Set<Normalizer> actualNormalizations = normalize(actualResource);
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
 		assertEquals(expected, actual);
-		for (Normalizer normalizer : normalizations) {
+		for (Normalizer normalizer : expectedNormalizations) {
+			normalizer.denormalize();
+		}
+		for (Normalizer normalizer : actualNormalizations) {
 			normalizer.denormalize();
 		}
 	}
@@ -406,6 +435,19 @@ public class XtextTestCase extends PivotTestCase
 					}
 				}
 			}
+			if (eObject instanceof EClass) {
+				EClass eClass = (EClass) eObject;
+				if (eClass.getEOperations().size() >= 2) {
+					normalizers.add(new EOperationsNormalizer(eClass));		// FIXME Until Pivot2Ecore has consistent ops/inv ordering
+				}
+			}
+/*			if (eObject instanceof EAnnotation) {
+				EAnnotation eAnnotation = (EAnnotation) eObject;
+				if (eAnnotation.getDetails().size() >= 2) {
+					normalizers.add(new EAnnotationsNormalizer(eAnnotation));
+				}
+				tit.prune();				// Avoid CME
+			} */
 		}
 		return normalizers;
 	}
@@ -487,7 +529,7 @@ public class XtextTestCase extends PivotTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-    	testCaseAppender.install();
+    	TestCaseAppender.INSTANCE.install();
     	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
     		OCL.initialize(null);
     	}

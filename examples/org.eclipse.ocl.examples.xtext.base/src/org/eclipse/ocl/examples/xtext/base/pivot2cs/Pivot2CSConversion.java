@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -141,8 +142,19 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 					aliases = Collections.singletonList(alias);
 				}
 				EObject eObject = importedNamespace.getETarget();
-				URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : importedNamespace);
-				URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
+				String importURI = null;
+				if (eObject instanceof EPackage) {
+					EPackage ePackage = (EPackage)eObject;
+					Resource resource = ePackage.eResource();
+					if ((resource != null) && (resource.getResourceSet() == null)) {	// If installed
+						importURI = ePackage.getNsURI();
+					}
+				}
+				if (importURI == null) {
+					URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : importedNamespace);
+					URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
+					importURI = deresolvedURI.toString();
+				}
 				for (String alias : aliases) {
 					ImportCS importCS = BaseCSFactory.eINSTANCE.createImportCS();
 					importCS.setName(alias);
@@ -152,7 +164,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 					PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
 					csPath.add(csSimpleRef);
 					csSimpleRef.setElement(importedNamespace);
-					csSimpleRef.setUri(deresolvedURI.toString());
+					csSimpleRef.setUri(importURI);
 					importCS.setPivot(importedNamespace);
 					imports.add(importCS);
 				}

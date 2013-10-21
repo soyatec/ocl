@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -172,21 +174,22 @@ public class RoundTripTests extends XtextTestCase
 	public void doRoundTripFromEcore(String stem, String reference) throws IOException, InterruptedException {
 		String inputName = stem + ".ecore";
 		URI inputURI = getProjectFileURI(inputName);
-		doRoundTripFromEcore(inputURI, reference);
-	}
-	protected void doRoundTripFromEcore(URI inputURI, String reference) throws IOException, InterruptedException {
-		String stem = inputURI.trimFileExtension().lastSegment();
-		String pivotName = stem + ".ecore.pivot";
-		String outputName = stem + ".regenerated.ecore";
 		String referenceName = reference + ".ecore";
+		URI referenceURI = getProjectFileURI(referenceName);
+		doRoundTripFromEcore(inputURI, referenceURI);
+	}
+	protected void doRoundTripFromEcore(URI inputURI, URI referenceURI) throws IOException, InterruptedException {
+		String stem = inputURI.trimFileExtension().lastSegment();
+		String pivotName = stem + ".ecore.oclas";
+		String outputName = stem + ".regenerated.ecore";
 		URI pivotURI = getProjectFileURI(pivotName);
 		URI outputURI = getProjectFileURI(outputName);
-		URI referenceURI = getProjectFileURI(referenceName);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		Resource inputResource = resourceSet.getResource(inputURI, true);
 		assertNoResourceErrors("Ecore load", inputResource);
 		assertNoValidationErrors("Ecore load", inputResource);
 		
-		MetaModelManager metaModelManager = new MetaModelManager();
 		try {
 			Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(inputResource, metaModelManager);
 			Root pivotRoot = ecore2Pivot.getPivotRoot();
@@ -196,9 +199,11 @@ public class RoundTripTests extends XtextTestCase
 			asResource.save(null);
 			assertNoValidationErrors("Ecore2Pivot invalid", asResource);
 			
-			Resource outputResource = Pivot2Ecore.createResource(metaModelManager, asResource, outputURI, null);
+			Resource outputResource = Pivot2Ecore.createResource(metaModelManager, asResource, inputURI, null);
 			assertNoResourceErrors("Ecore2Pivot failed", outputResource);
-			outputResource.save(null);
+			OutputStream outputStream = resourceSet.getURIConverter().createOutputStream(outputURI);
+			outputResource.save(outputStream, null);
+			outputStream.close();
 			assertNoValidationErrors("Ecore2Pivot invalid", outputResource);
 			
 	//		RootPackageCS csDocument = null; // FIXME Ecore2OCLinEcore.importFromEcore(resourceSet, null, leftResource);
@@ -214,8 +219,12 @@ public class RoundTripTests extends XtextTestCase
 	//		assertNoResourceErrors("To Ecore errors", rightResource);
 	//		rightResource.save(null);
 	//		resourceSet.getResources().add(rightResource);
-			Resource referenceResource = new ResourceSetImpl().getResource(referenceURI, true);
-			assertSameModel(referenceResource, outputResource);
+			if (referenceURI != null) {
+				ResourceSetImpl resourceSet2 = new ResourceSetImpl();
+				StandaloneProjectMap.getAdapter(resourceSet).initializeResourceSet(resourceSet2);
+				Resource referenceResource = resourceSet2.getResource(referenceURI, true);
+				assertSameModel(referenceResource, outputResource);
+			}
 		} finally {
 			metaModelManager.dispose();
 		}
@@ -485,7 +494,14 @@ public class RoundTripTests extends XtextTestCase
 	}
 
 	public void testOCLinEcoreCSTRoundTrip() throws IOException, InterruptedException {
-		doRoundTripFromEcore("OCLinEcoreCST");
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCS.ecore", true);
+//		String stem = uri.trimFileExtension().lastSegment();
+		doRoundTripFromEcore(uri, uri); //null);				// FIXME Compare is not quite right
+	}
+
+	public void testPivotRoundTrip() throws IOException, InterruptedException {
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.pivot/model/Pivot.ecore", true);
+		doRoundTripFromEcore(uri, uri);
 	}
 
 //	public void testEssentialOCLCSTRoundTrip() throws IOException, InterruptedException {
@@ -536,6 +552,7 @@ public class RoundTripTests extends XtextTestCase
 
 	public void testTypes_oclinecore() throws IOException, InterruptedException {
 //		BaseScopeProvider.LOOKUP.setState(true);
+//		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		MetaModelManager metaModelManager = new MetaModelManager();
 		doRoundTripFromOCLinEcore(metaModelManager, "Types");
 		metaModelManager.dispose();

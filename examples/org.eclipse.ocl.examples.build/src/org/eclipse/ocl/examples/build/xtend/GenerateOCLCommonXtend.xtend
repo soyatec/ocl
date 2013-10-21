@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.build.xtend
 import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.ocl.examples.build.utilities.GenerateOCLCommon
 import org.eclipse.ocl.examples.pivot.AnyType
 import org.eclipse.ocl.examples.pivot.CollectionType
 import org.eclipse.ocl.examples.pivot.Comment

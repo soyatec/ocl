@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -108,6 +109,10 @@ public class OperationTemplateParameterImpl
 	@Override
 	public NotificationChain basicSetParameteredElement(
 			ParameterableElement newParameteredElement, NotificationChain msgs) {
+		if (newParameteredElement != null && !(newParameteredElement instanceof Operation))
+		{
+			throw new IllegalArgumentException("newParameteredElement must be an instance of Operation"); //$NON-NLS-1$
+		}
 		ParameterableElement oldParameteredElement = parameteredElement;
 		parameteredElement = newParameteredElement;
 		if (eNotificationRequired())
@@ -125,6 +130,10 @@ public class OperationTemplateParameterImpl
 	 */
 	@Override
 	public void setParameteredElement(ParameterableElement newParameteredElement) {
+		if (newParameteredElement != null && !(newParameteredElement instanceof Operation))
+		{
+			throw new IllegalArgumentException("newParameteredElement must be an instance of Operation"); //$NON-NLS-1$
+		}
 		if (newParameteredElement != parameteredElement)
 		{
 			NotificationChain msgs = null;

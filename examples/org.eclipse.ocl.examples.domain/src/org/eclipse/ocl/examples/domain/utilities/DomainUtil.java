@@ -26,6 +26,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -428,7 +429,17 @@ public class DomainUtil
 		}
 		return name;
 	}
-	
+
+	/**
+	 * Return true if resource is a registered resource; hosting a compile Java model.
+	 */
+	public static boolean isRegistered(Resource resource) {
+		if (resource == null) {
+			return false;
+		}
+		return resource.getResourceSet() == null;
+	}
+
 	/**
 	 * Return aT, checking the assertion that this call would not be necessary if EMF had comprehensive @NonNull annotations.
 	 */

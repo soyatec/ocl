@@ -81,7 +81,6 @@ import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.ocl.examples.xtext.markup.MarkupStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
@@ -102,7 +101,7 @@ import org.osgi.framework.Bundle;
 @SuppressWarnings("nls")
 public class PivotTestCase extends TestCase
 {
-	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
 	private static ProjectMap projectMap = null;
 
 	/*
@@ -610,7 +609,7 @@ public class PivotTestCase extends TestCase
 
 	@Override
 	protected void setUp() throws Exception {
-		EssentialOCLLinkingService.DEBUG_RETRY = true;
+//		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		if (DEBUG_GC) {
 			XMLNamespacePackage.eINSTANCE.getClass();
 			makeCopyOfGlobalState = new GlobalStateMemento();

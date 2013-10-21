@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
@@ -148,6 +149,11 @@ public class Pivot2EcoreReferenceVisitor
 		boolean needsDelegates = DelegateInstaller.needsDelegates(ePackage);
 		if (needsDelegates) {
 			context.getDelegateInstaller().installDelegates(ePackage);
+		}
+		if (context.isPivot(pivotPackage)) {
+			EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			eAnnotation.setSource(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
+			ePackage.getEAnnotations().add(eAnnotation);
 		}
 		return null;
 	}

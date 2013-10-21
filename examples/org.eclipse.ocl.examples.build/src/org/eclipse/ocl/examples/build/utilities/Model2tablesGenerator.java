@@ -23,7 +23,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -82,7 +81,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			projectMap.initializeResourceSet(resourceSet);
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 			Resource genModelResource = resourceSet.getResource(genModelURI, true);
-			EList<Diagnostic> genModelErrors = DomainUtil.nonNullEMF(genModelResource.getErrors());
+			List<Diagnostic> genModelErrors = DomainUtil.nonNullEMF(genModelResource.getErrors());
 			String errorsString = PivotUtil.formatResourceDiagnostics(genModelErrors, "Loading " + genModelURI, "\n");
 			if (errorsString != null) {
 				issues.addError(this, errorsString, null, null, null);
@@ -91,9 +90,13 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			GenModel genModel = (GenModel) genModelResource.getContents().get(0);
 			String modelDirectory = genModel.getModelDirectory();
 			String modelProjectDirectory = genModel.getModelProjectDirectory();
-			String modelProject = modelProjectDirectory.substring(1);
+			@SuppressWarnings("null")@NonNull String modelProject = modelProjectDirectory.substring(1);
 			String folderPath = modelDirectory.substring(modelProjectDirectory.length());
 			URI locationURI = projectMap.getLocation(modelProject);
+			if (locationURI == null) {
+				issues.addError(this, "NO location URI for " + modelProjectDirectory, null, null, null);
+				return;
+			}
 			URL url = new URL(locationURI.toString());
 			java.net.URI uri = url.toURI();
 			File targetFolder = new File(uri.getRawPath() + folderPath);

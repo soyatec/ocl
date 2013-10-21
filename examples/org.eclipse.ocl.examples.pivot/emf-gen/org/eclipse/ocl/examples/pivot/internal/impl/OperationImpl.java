@@ -71,6 +71,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -367,6 +368,10 @@ public class OperationImpl
 	 */
 	public NotificationChain basicSetTemplateParameter(
 			TemplateParameter newTemplateParameter, NotificationChain msgs) {
+		if (newTemplateParameter != null && !(newTemplateParameter instanceof OperationTemplateParameter))
+		{
+			throw new IllegalArgumentException("newTemplateParameter must be an instance of OperationTemplateParameter"); //$NON-NLS-1$
+		}
 		TemplateParameter oldTemplateParameter = templateParameter;
 		templateParameter = newTemplateParameter;
 		if (eNotificationRequired())
@@ -383,6 +388,10 @@ public class OperationImpl
 	 * @generated
 	 */
 	public void setTemplateParameter(TemplateParameter newTemplateParameter) {
+		if (newTemplateParameter != null && !(newTemplateParameter instanceof OperationTemplateParameter))
+		{
+			throw new IllegalArgumentException("newTemplateParameter must be an instance of OperationTemplateParameter"); //$NON-NLS-1$
+		}
 		if (newTemplateParameter != templateParameter)
 		{
 			NotificationChain msgs = null;

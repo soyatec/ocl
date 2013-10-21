@@ -35,12 +35,6 @@ import java.util.ListIterator;
 
 import junit.framework.TestSuite;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
-import org.apache.log4j.spi.LoggingEvent;
-import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -114,6 +108,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.tests.TestCaseAppender;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 
 /**
@@ -144,7 +139,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	        addTest(suite);
 		}
 	}
-	private static final class TestCaseAppender extends ConsoleAppender {
+/*	private static final class TestCaseAppender extends ConsoleAppender {
 
 		public TestCaseAppender() {
 			super(new SimpleLayout(), SYSTEM_OUT); 
@@ -161,13 +156,13 @@ public abstract class PivotTestSuite extends PivotTestCase
 			}
 //			super.append(event);
 		}
-	}
+	} */
 	
-	protected static Logger rootLogger = Logger.getRootLogger();
-	protected static TestCaseAppender testCaseAppender = new TestCaseAppender();
-	{
-		rootLogger.addAppender(testCaseAppender);
-	}
+//	protected static Logger rootLogger = Logger.getRootLogger();
+//	protected static TestCaseAppender testCaseAppender = new TestCaseAppender();
+//	{
+//		rootLogger.addAppender(testCaseAppender);
+//	}
     
 	protected static boolean noDebug = false;
 	protected static ResourceSet resourceSet;
@@ -1495,6 +1490,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	@Override
     protected void setUp() throws Exception {
 		super.setUp();
+		TestCaseAppender.INSTANCE.install();
  		OCLstdlib.install();
  		doEssentialOCLSetup();
 		metaModelManager = new MetaModelManager();

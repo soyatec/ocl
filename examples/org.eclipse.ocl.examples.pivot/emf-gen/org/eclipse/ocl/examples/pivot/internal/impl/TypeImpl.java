@@ -81,6 +81,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -522,6 +523,10 @@ public class TypeImpl
 	 */
 	public NotificationChain basicSetTemplateParameter(
 			TemplateParameter newTemplateParameter, NotificationChain msgs) {
+		if (newTemplateParameter != null && !(newTemplateParameter instanceof TypeTemplateParameter))
+		{
+			throw new IllegalArgumentException("newTemplateParameter must be an instance of TypeTemplateParameter"); //$NON-NLS-1$
+		}
 		TemplateParameter oldTemplateParameter = templateParameter;
 		templateParameter = newTemplateParameter;
 		if (eNotificationRequired())
@@ -538,6 +543,10 @@ public class TypeImpl
 	 * @generated
 	 */
 	public void setTemplateParameter(TemplateParameter newTemplateParameter) {
+		if (newTemplateParameter != null && !(newTemplateParameter instanceof TypeTemplateParameter))
+		{
+			throw new IllegalArgumentException("newTemplateParameter must be an instance of TypeTemplateParameter"); //$NON-NLS-1$
+		}
 		if (newTemplateParameter != templateParameter)
 		{
 			NotificationChain msgs = null;

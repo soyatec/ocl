@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -71,7 +72,6 @@ import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
 import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -246,6 +246,7 @@ public class LoadTests extends XtextTestCase
 		try {
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
 			ecoreResource = resourceSet.getResource(inputURI, true);
+			EcoreUtil.resolveAll(ecoreResource);
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
 			assertNoResourceErrors("Load failed", ecoreResource);
 	//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
@@ -612,7 +613,7 @@ public class LoadTests extends XtextTestCase
 	}	
 
 	public void testLoad_Overloads_oclinecore() throws IOException, InterruptedException {
-		EssentialOCLLinkingService.DEBUG_RETRY = true;
+//		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		doLoad_Concrete("Overloads", "oclinecore");
 	}	
 

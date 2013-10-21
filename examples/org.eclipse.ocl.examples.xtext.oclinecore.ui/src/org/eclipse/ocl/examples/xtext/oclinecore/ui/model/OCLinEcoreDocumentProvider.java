@@ -49,6 +49,8 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
+import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -312,6 +314,9 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 			String persistAs = PERSIST_AS_OCLINECORE;
 			if (isXML) {
 				ResourceSet resourceSet = getMetaModelManager().getExternalResourceSet();
+				ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
+				StandaloneProjectMap.IConflictHandler conflictHandler = null; 			// FIXME
+				projectMap.configure(resourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, conflictHandler);	
 				URI uri = uriMap.get(document);
 				XMLResource xmiResource = (XMLResource) resourceSet.getResource(uri, false);
 				if ((xmiResource == null) || (xmiResource.getResourceSet() == null)) {	// Skip built-ins and try again as a file read.
