@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 
 /**
  * An Orphanage provides a Package that weakly contains elements such as type specializations that
@@ -121,6 +122,7 @@ public class Orphanage extends PackageImpl
 		}
 
 		public NotificationChain basicAdd(T object, NotificationChain notifications) {
+			assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
 			weakList = null;
 			weakMap.put(object, Integer.valueOf(counter++));
 			return notifications;
@@ -208,6 +210,7 @@ public class Orphanage extends PackageImpl
 		}
 
 		public void dispose() {
+			assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
 			weakList = null;
 			weakMap.clear();
 		}

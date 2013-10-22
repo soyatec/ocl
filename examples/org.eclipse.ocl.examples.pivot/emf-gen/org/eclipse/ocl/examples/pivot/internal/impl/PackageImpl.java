@@ -841,12 +841,4 @@ public class PackageImpl
 		}
 		return packageId2;
 	}
-
-	@Override
-	public void setName(String newName) {
-		if ("qvtbase".equals(name)) {
-			System.out.println("Got it");
-		}
-		super.setName(newName);
-	}
 } //PackageImpl
