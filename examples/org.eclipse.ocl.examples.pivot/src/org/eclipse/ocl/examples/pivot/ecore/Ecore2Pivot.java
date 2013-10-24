@@ -793,6 +793,11 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		assert (newTarget == null) || (newTarget == ecoreResource);
 	}
 
+	@Override
+	public String toString() {
+		return String.valueOf(ecoreResource.getURI());
+	}
+
 	public void unsetTarget(Notifier oldTarget) {
 		assert (oldTarget == ecoreResource);
 	}

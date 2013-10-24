@@ -154,6 +154,10 @@ public abstract class AbstractASResourceFactory extends ResourceFactoryImpl impl
 		throw new UnsupportedOperationException(getClass().getName() + ".importFromResource");
 	}
 
+	public boolean isCompatibleResource(@NonNull Resource newResource, @NonNull Resource oldResource) {
+		return false;
+	}
+
 	@Override
 	public @NonNull String toString() {
 		return contentType;

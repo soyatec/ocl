@@ -674,6 +674,25 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return 0;
 	}
 
+	/**
+	 * Configure the PackageRegistry associated with the externalResourceSet to use a load strategy that uses whichever of
+	 * the namespace or platform URI is firtst encounterted and which suppresses diagnostics about subsequent use of the
+	 * other form of URI.
+	 */
+	public void configureLoadFirstStrategy() {
+		configureLoadStrategy(StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+	}
+
+	/**
+	 * Configure the PackageRegistry associated with the externalResourceSet to use a packageLoadStrategy and conflictHandler when
+	 * resolving namespace ansd platform URIs.
+	 */
+	public void configureLoadStrategy(@NonNull StandaloneProjectMap.IPackageLoadStrategy packageLoadStrategy, @Nullable StandaloneProjectMap.IConflictHandler conflictHandler) {
+		ResourceSet externalResourceSet = getExternalResourceSet();
+		StandaloneProjectMap projectMap = getProjectMap();
+		projectMap.configure(externalResourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+	}
+
 	public boolean conformsTo(@NonNull Type firstType, @NonNull Type secondType, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		if (bindings != null) {
 			TemplateParameter firstTemplateParameter = firstType.getOwningTemplateParameter();
@@ -2062,6 +2081,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	/**
+	 * Return the ProjectMap used to resolve EPackages for the extertnalResourceSet.
+	 */
+	public @NonNull StandaloneProjectMap getProjectMap() {
+		return StandaloneProjectMap.getAdapter(getExternalResourceSet());
+	}
+
+	/**
 	 * Lookup a primary type.
 	 *
 	public @Nullable Type getPrimaryType(@NonNull PackageServer parentPackage, @NonNull String typeName) {
@@ -2644,8 +2670,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 					if (contents.size() > 0) {
 						EObject firstContent = contents.get(0);
 						if (firstContent != null) {
-							for (ASResourceFactory resourceHelper : ASResourceFactoryRegistry.INSTANCE.getResourceFactories()) {
-								URI packageURI = resourceHelper.getPackageURI(firstContent);
+							for (ASResourceFactory resourceFactory : ASResourceFactoryRegistry.INSTANCE.getResourceFactories()) {
+								URI packageURI = resourceFactory.getPackageURI(firstContent);
 								if (packageURI != null) {
 									External2Pivot external2Pivot2 = external2PivotMap.get(packageURI);
 									if (external2Pivot2 != null) {
@@ -2665,9 +2691,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 													}
 												}
 											}
+											if (!resourceFactory.isCompatibleResource(resource, knownResource)) {
+												logger.error("Resource '" + resource.getURI() + "' already loaded as '" + knownResource.getURI() + "'");
+											}
 											resource.unload();
+											resource = knownResource;
 										}
-										resource = knownResource;
 									}
 									break;
 								}
@@ -2682,6 +2711,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		logger.warn("Cannot load package with URI '" + uri + "'");
 		return null;
+	}
+
+	/**
+	 * Ensure that EPackage has been loaded in the externalResourceSet PackageRegistry.
+	 */
+	public EPackage loadEPackage(@NonNull EPackage ePackage) {
+		ResourceSet externalResourceSet = getExternalResourceSet();
+		return externalResourceSet.getPackageRegistry().getEPackage(ePackage.getNsURI());
 	}
 
 	public @Nullable Element loadResource(@NonNull Resource resource, @Nullable URI uri) throws ParserException {
