@@ -45,10 +45,15 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.impl.SingletonAdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -230,17 +235,93 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public final @Nullable EPackage getEPackage() {
 			EPackage ePackage = resolveEPackage();
-			if ((ePackage != null) && DomainUtil.isRegistered(ePackage.eResource())) {
-				if (PROJECT_MAP_RESOLVE.isActive()) {
-					PROJECT_MAP_RESOLVE.println(getURI() + " => " + ePackage.getNsURI() + " : " + DomainUtil.debugSimpleName(ePackage));
+			if (ePackage != null) {
+				Resource eResource = ePackage.eResource();
+				if (DomainUtil.isRegistered(eResource)) {
+					if (PROJECT_MAP_RESOLVE.isActive()) {
+						PROJECT_MAP_RESOLVE.println(getURI() + " => " + ePackage.getNsURI() + " : " + DomainUtil.debugSimpleName(ePackage));
+					}
+					Set<EPackage> allEPackages = new HashSet<EPackage>();
+					for (EObject eObject : eResource.getContents()) {
+						if (eObject instanceof EPackage) {
+							allEPackages.add((EPackage)eObject);
+							locateTransitiveEPackages((EPackage)eObject, allEPackages);
+						}
+					}
+					EPackage.Registry packageRegistry = packageLoadStatus.getPackageRegistry();
+					for (EPackage transitiveEPackage : allEPackages) {
+						if ((transitiveEPackage != null) && (transitiveEPackage != ePackage)) {
+							Object entry = packageRegistry.get(transitiveEPackage.getNsURI());
+							if (entry instanceof AbstractEPackageDescriptor) {
+								AbstractEPackageDescriptor referencedEPackageDescriptor = (AbstractEPackageDescriptor)entry;
+								referencedEPackageDescriptor.packageLoadStatus.setTransitivelyLoadedBy(transitiveEPackage, ePackage);
+								if (PROJECT_MAP_RESOLVE.isActive()) {
+									PROJECT_MAP_RESOLVE.println(referencedEPackageDescriptor.getURI() + " => " + transitiveEPackage.getNsURI() + " : " + DomainUtil.debugSimpleName(transitiveEPackage));
+								}
+								packageRegistry.put(transitiveEPackage.getNsURI(), transitiveEPackage);
+							}
+						}
+					}
+					return ePackage;
 				}
-				return ePackage;
 			}
 			if (PROJECT_MAP_RESOLVE.isActive()) {
 				URI uri = ePackage != null ? EcoreUtil.getURI(ePackage) : null;
 				PROJECT_MAP_RESOLVE.println(getURI() + " => " + uri);
 			}
 			return ePackage;
+		}
+
+		/**
+		 * Update allEPackages to 
+		 * @param ePackage
+		 * @param allEPackages
+		 */
+		private void locateTransitiveEPackages(@NonNull EPackage ePackage, @NonNull Set<EPackage> allEPackages) {
+			EPackage.Registry packageRegistry = packageLoadStatus.getPackageRegistry();
+			for (EClassifier eClassifier : ePackage.getEClassifiers()) {
+				if (eClassifier instanceof EClass) {
+					EClass eClass = (EClass)eClassifier;
+					EPackage referencedEPackage;
+					EClassifier referencedEClassifier;
+					for (EClass eSuperclass : eClass.getESuperTypes()) {
+						referencedEPackage = eSuperclass.getEPackage();
+						if ((referencedEPackage != null) && allEPackages.add(referencedEPackage) && (packageRegistry.get(referencedEPackage) instanceof IPackageDescriptor)) {
+							locateTransitiveEPackages(referencedEPackage, allEPackages);
+						}
+						for (EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {
+							referencedEClassifier = eFeature.getEType();
+							referencedEPackage = referencedEClassifier.getEPackage();
+							if ((referencedEPackage != null) && allEPackages.add(referencedEPackage)) {
+								locateTransitiveEPackages(referencedEPackage, allEPackages);
+							}
+						}
+						for (EOperation eOperation : eClass.getEOperations()) {
+							referencedEClassifier = eOperation.getEType();
+							if (referencedEClassifier != null) {
+								referencedEPackage = referencedEClassifier.getEPackage();
+								if ((referencedEPackage != null) && allEPackages.add(referencedEPackage) && (packageRegistry.get(referencedEPackage) instanceof IPackageDescriptor)) {
+									locateTransitiveEPackages(referencedEPackage, allEPackages);
+								}
+							}
+							for (EParameter eParameter : eOperation.getEParameters()) {
+								referencedEClassifier = eParameter.getEType();
+								if (referencedEClassifier != null) {
+									referencedEPackage = referencedEClassifier.getEPackage();
+									if ((referencedEPackage != null) && allEPackages.add(referencedEPackage) && (packageRegistry.get(referencedEPackage) instanceof IPackageDescriptor)) {
+										locateTransitiveEPackages(referencedEPackage, allEPackages);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			for (EPackage eSubpackage : ePackage.getESubpackages()) {
+				if (eSubpackage != null) {
+					locateTransitiveEPackages(eSubpackage, allEPackages);
+				}
+			}
 		}
 
 		protected abstract @NonNull URI getURI();
@@ -332,7 +413,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Dispose of all facilities used by the PackageLoadStatus, and remove all EPackageDescriptor entries.
 		 */
 		void dispose();
-		
+
 		/**
 		 * Return the EPackage to be used for a platform-resource/plugin URI after a namespace URI has already been loaded.
 		 */
@@ -358,6 +439,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Return the current package loading strategy.
 		 */
 		@NonNull IPackageLoadStrategy getPackageLoadStrategy();
+		
+		/**
+		 * Return the package registry maintained by this package load status
+		 */
+		@NonNull EPackage.Registry getPackageRegistry();
 
 		/**
 		 * Load and return the EPackage appropriate to the platform resource or plugin URI.
@@ -374,10 +460,17 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 */
 		void setConflictHandler(@Nullable IConflictHandler conflictHandler);
 
+		void setEPackage(@NonNull EPackage ePackage);
+
 		/**
 		 * Define a new package load strategy.
 		 */
 		void setPackageLoadStrategy(@NonNull IPackageLoadStrategy packageLoadStrategy);
+
+		/**
+		 * Update the status to accommodate the parasitic loading of loadedEPackage as a consequence of a reference from loadingEPackage.
+		 */
+		void setTransitivelyLoadedBy(@NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage);
 	}
 
 	/**
@@ -399,6 +492,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Load and return the EPackage appropriate to the platform resource URI.
 		 */
 		@Nullable EPackage getEPackageByPlatformResourceURI(@NonNull IPackageLoadStatus packageLoadStatus);
+
+		/**
+		 * Update the packageLoadStatus to accommodate the parasitic loading of loadedEPackage as a consequence of a reference from loadingEPackage.
+		 */
+		void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage);
 	}
 
 	protected static abstract class AbstractPackageLoadStrategy implements IPackageLoadStrategy
@@ -427,6 +525,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public @Nullable EPackage getEPackageByPlatformResourceURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			return packageLoadStatus.getFirstEPackage();
 		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			logger.error("Should have already loaded + '" + loadedEPackage + "'");
+		}
 	}
 	
 	/**
@@ -447,6 +549,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public @Nullable EPackage getEPackageByPlatformResourceURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			return packageLoadStatus.getConflictingModelURI();
+		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			logger.error("Should have already loaded + '" + loadedEPackage + "'");
 		}
 	}
 	
@@ -469,6 +575,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public @Nullable EPackage getEPackageByPlatformResourceURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			return packageLoadStatus.getFirstEPackage();
 		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			logger.error("Should not load + '" + loadedEPackage + "' when a Model load strategy specified");
+		}
 	}
 
 	/**
@@ -489,6 +599,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public @Nullable EPackage getEPackageByPlatformResourceURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			return packageLoadStatus.loadEPackageByModelURI();
+		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			packageLoadStatus.setEPackage(loadedEPackage);
 		}
 	}
 
@@ -516,6 +630,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			EPackage ePackage = packageLoadStatus.loadEPackageByNamespaceURI();
 			packageLoadStatus.setPackageLoadStrategy(LoadedStrategy.INSTANCE);
 			return ePackage;
+		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			packageLoadStatus.setEPackage(loadedEPackage);
+			packageLoadStatus.setPackageLoadStrategy(LoadedStrategy.INSTANCE);
 		}
 	}
 
@@ -545,6 +664,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			packageLoadStatus.setPackageLoadStrategy(LoadedAsModelStrategy.INSTANCE);
 			return ePackage;
 		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			packageLoadStatus.setEPackage(loadedEPackage);
+			packageLoadStatus.setPackageLoadStrategy(LoadedAsEPackageStrategy.INSTANCE);
+		}
 	}
 
 	/**
@@ -571,6 +695,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			EPackage ePackage = packageLoadStatus.loadEPackageByModelURI();
 			packageLoadStatus.setPackageLoadStrategy(LoadedStrategy.INSTANCE);
 			return ePackage;
+		}
+
+		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			logger.error("Should not load + '" + loadedEPackage + "' when a Model load strategy specified");
+			packageLoadStatus.setPackageLoadStrategy(LoadedStrategy.INSTANCE);
 		}
 	}
 	
@@ -794,7 +923,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public PackageLoadStatus(@NonNull IPackageDescriptor.Internal packageDescriptor, @Nullable ResourceSet resourceSet) {
 			this.packageDescriptor = packageDescriptor;
 			this.resourceSet = resourceSet;
-			this.packageRegistry = getPackageRegistry(resourceSet);
+			this.packageRegistry = StandaloneProjectMap.getPackageRegistry(resourceSet);
 			this.namespaceURIDescriptor = new NamespaceURIDescriptor(this, packageRegistry);
 			this.platformPluginURIDescriptor = new PlatformPluginURIDescriptor(this, packageRegistry);
 			this.platformResourceURIDescriptor = new PlatformResourceURIDescriptor(this, packageRegistry);
@@ -901,6 +1030,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return packageLoadStrategy;
 		}
 
+		public @NonNull EPackage.Registry getPackageRegistry() {
+			return packageRegistry;
+		}
+
 		protected void handleLoadException(Resource resource, final @NonNull String location, Exception exception) throws RuntimeException {
 			class DiagnosticWrappedException extends WrappedException implements Resource.Diagnostic
 			{
@@ -954,6 +1087,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			this.conflictHandler = conflictHandler;
 		}
 
+		public void setEPackage(@NonNull EPackage ePackage) {
+			assert firstEPackage == null;
+			firstEPackage = ePackage;
+			this.ePackage = ePackage;
+		}
+
 		public void setPackageLoadStrategy(@NonNull IPackageLoadStrategy packageLoadStrategy) {
 			this.packageLoadStrategy = packageLoadStrategy;
 			if (PROJECT_MAP_CONFIGURE.isActive()) {
@@ -974,6 +1113,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			s.append(DomainUtil.debugSimpleName(packageRegistry));
 			@SuppressWarnings("null")@NonNull String string = s.toString();
 			return string;
+		}
+
+		public void setTransitivelyLoadedBy(@NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			packageLoadStrategy.setTransitivelyLoadedBy(this, loadedEPackage, loadingEPackage);
 		}
 	}
 
@@ -1723,6 +1866,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 	protected boolean initializedPlatformResourceMap = false;
 
+	/**
+	 * Configure the PackageRegistry associated with ResourceSet to use a packageLoadStrategy and conflictHandler when
+	 * resolving namespace ansd platform URIs.
+	 */
 	public void configure(@Nullable ResourceSet resourceSet, @NonNull IPackageLoadStrategy packageLoadStrategy, @Nullable IConflictHandler conflictHandler) {
 		Map<String, IProjectDescriptor.Internal> projectDescriptors = getProjectDescriptors();
 		if (projectDescriptors != null) {

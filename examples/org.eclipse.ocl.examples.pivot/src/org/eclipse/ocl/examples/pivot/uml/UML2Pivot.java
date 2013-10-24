@@ -1182,6 +1182,11 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		this.umlURI  = umlURI;
 	}
 
+	@Override
+	public String toString() {
+		return String.valueOf(umlResource.getURI());
+	}
+
 	public void unsetTarget(Notifier oldTarget) {
 		assert (oldTarget == umlResource);
 	}

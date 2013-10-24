@@ -124,4 +124,10 @@ public interface ASResourceFactory extends Resource.Factory
 	 * @throws ParserException 
 	 */
 	@Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable URI uri) throws ParserException;
+
+	/**
+	 * Return true if newResource can be ignored in favour of an already loaded oldResource.
+	 * Return false if an error message is required
+	 */
+	boolean isCompatibleResource(@NonNull Resource newResource, @NonNull Resource oldResource);
 }

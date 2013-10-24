@@ -68,4 +68,16 @@ public final class OCLinEcoreASResourceFactory extends AbstractASResourceFactory
 			throw new UnsupportedOperationException();	// FIXME
 		}
 	}
+
+	@Override
+	public boolean isCompatibleResource(@NonNull Resource newResource, @NonNull Resource oldResource) {
+		URI newURI = newResource.getURI();
+		URI oldURI = oldResource.getURI();
+		if ((newURI == null) || (oldURI == null)) {
+			return false;
+		}
+		URI newStem = newURI.trimFileExtension();
+		URI oldStem = oldURI.trimFileExtension();
+		return newStem.equals(oldStem);
+	}
 }
