@@ -500,6 +500,9 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		setAst(cgConstraint, element);
 		OpaqueExpression specification = element.getSpecification();
 		if (specification != null) {
+			if (specification.toString().startsWith("result.")) {
+//				System.out.println("Got it");
+			}
 			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
 			if (expressionInOCL != null) {
 				Variable contextVariable = expressionInOCL.getContextVariable();

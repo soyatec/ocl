@@ -33,6 +33,7 @@ public interface RegisteredContribution<C extends RegisteredContribution<C>> {
 		@Nullable C get(@NonNull String key);
 		@Nullable C put(@NonNull String key, @NonNull C contribution);
 		@Nullable C remove(@NonNull String key);
+		int size();
 	}
 	/**
 	 * A <code>Factory</code> wrapper that is used by the
@@ -80,6 +81,10 @@ public interface RegisteredContribution<C extends RegisteredContribution<C>> {
 
 		public C remove(@NonNull String key) {
 			return map.remove(key);
+		}
+
+		public int size() {
+			return map.size();
 		}
 	}
 

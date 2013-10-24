@@ -220,7 +220,9 @@ public class PivotUtil extends DomainUtil
 	public static @NonNull ExpressionInOCL createExpressionInOCLError(@NonNull String string) {
 		@SuppressWarnings("null")@NonNull ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
-		stringLiteral.setStringSymbol(createTupleValuedConstraint("false", null, string));
+		stringLiteral.setStringSymbol(string); //createTupleValuedConstraint("false", null, string));
+		expressionInOCL.setBodyExpression(stringLiteral);
+		expressionInOCL.setType(stringLiteral.getType());
 		return expressionInOCL;
 	}
 
@@ -614,6 +616,25 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 
+	/**
+	 * Trim a surrounding "result=(...)" to convert a UML BodyCondition to an OCL BodyExpression.
+	 */
+	@SuppressWarnings("null")
+	public static @NonNull String getBodyExpression(@NonNull String umlBody) {
+		String s = umlBody.trim();
+		if (s.startsWith("result")) {
+			s = s.substring(6).trim();
+			if (s.startsWith("=")) {
+				s = s.substring(1).trim();
+				if (s.startsWith("(") && s.endsWith(")")) {
+					s = s.substring(1, s.length()-1).trim();
+				}
+				return s;
+			}
+		}
+		return umlBody;
+	}
+
 	public static CollectionKind getCollectionKind(CollectionType collectionType) {
 		if (collectionType instanceof OrderedSetType) {
 			return CollectionKind.ORDERED_SET;
@@ -838,7 +859,7 @@ public class PivotUtil extends DomainUtil
 			return createExpressionInOCLError("Missing expression");
 		}
 		ExpressionInOCL expressionInOCL = null;
-		try {				
+		try {
 			expressionInOCL = parserContext.parse(expression);
 		} catch (Exception e) {
 			String message = e.getMessage();

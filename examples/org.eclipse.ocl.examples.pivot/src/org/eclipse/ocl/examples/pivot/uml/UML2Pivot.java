@@ -1111,13 +1111,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				return metaModelManager.getStringType();
 			}
 			else if (UMLUtil.isReal(umlType)) {
-				return metaModelManager.getStringType();
+				return metaModelManager.getRealType();
 			}
 			else if (UMLUtil.isString(umlType)) {
 				return metaModelManager.getStringType();
 			}
 			else if (UMLUtil.isUnlimitedNatural(umlType)) {
-				return metaModelManager.getStringType();
+				return metaModelManager.getUnlimitedNaturalType();
 			}
 //			org.eclipse.uml2.uml.Package umlPackage = umlType.getPackage();
 //			Resource umlResource = umlType.eResource();

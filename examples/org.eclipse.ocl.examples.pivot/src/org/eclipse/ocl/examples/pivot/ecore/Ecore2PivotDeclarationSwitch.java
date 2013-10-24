@@ -383,6 +383,9 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					continue;
 				}
 				String value = entry.getValue();
+				if (value != null) {
+					value = PivotUtil.getBodyExpression(value);	// Workaround Bug 419324
+				}
 				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 				specification.getBody().add(value);
 				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);

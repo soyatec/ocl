@@ -723,6 +723,10 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 			}
 			return null;
 		}
+		else if (ePackage.getNsURI().startsWith("http://www.eclipse.org/uml2/schemas/Ecore")) {
+			// FIXME
+			return null;
+		}
 		else {
 			converter.addStereotypeApplication(eObject);
 			return null;
