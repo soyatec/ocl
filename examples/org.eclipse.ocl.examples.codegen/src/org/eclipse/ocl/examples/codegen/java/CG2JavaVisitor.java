@@ -2026,7 +2026,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			js.append("final ");
 //			js.appendIsRequired(true);
 //			js.append(" ");
-			collectionDescriptor.append(js, false);
+			collectionDescriptor.append(js, true);
 //			js.appendClassReference(List.class, false, unboxedTypeDescriptor.getJavaClass());
 			js.append(" ");
 			js.appendValueName(cgUnboxExp);
@@ -2035,7 +2035,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			js.append(".asEcoreObjects(");
 			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
 			js.append(", ");
-			collectionDescriptor.appendElement(js, false);
+			collectionDescriptor.appendElement(js, true);
 			js.append(".class);\n");
 			//
 			js.append("assert ");
