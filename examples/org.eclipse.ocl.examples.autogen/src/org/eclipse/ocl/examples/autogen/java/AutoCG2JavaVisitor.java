@@ -176,6 +176,7 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 
 	@Override
 	public @NonNull Boolean visitCGEcoreOperation(@NonNull CGEcoreOperation object) {
+		String visitName = object.getName();
 		Type csType = (Type) object.getAst();
 		TypeDescriptor typeDescriptor = context.getTypeDescriptor(csType.getTypeId(), false);
 		js.append("public ");
@@ -190,7 +191,10 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		js.append("self");
 		js.append(") {\n");
 		js.pushIndentation(null);
-		js.append("throw new UnsupportedOperationException();\n");
+		js.append("throw new UnsupportedOperationException(\"");
+		js.append(visitName);
+		js.append(" is not supported by \" + getClass().getName()");
+		js.append(");\n");
 		js.popIndentation();
 		js.append("}\n");
 		return true;

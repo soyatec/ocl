@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
@@ -249,9 +250,15 @@ public class BaseCSPostOrderVisitor extends AbstractExtendingBaseCSVisitor<Conti
 
 	@Override
 	public Continuation<?> visitPackageCS(@NonNull PackageCS csPackage) {
-		org.eclipse.ocl.examples.pivot.Package pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, csPackage);
+		return visitAbstractPackageCS(csPackage);
+	}
+	
+	@Override
+	public @Nullable
+	Continuation<?> visitAbstractPackageCS(@NonNull AbstractPackageCS object) {
+		org.eclipse.ocl.examples.pivot.Package pivotElement = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Package.class, object);
 		if (pivotElement != null) {
-			context.handleVisitNamedElement(csPackage, pivotElement);
+			context.handleVisitNamedElement(object, pivotElement);
 		}
 		return null;
 	}

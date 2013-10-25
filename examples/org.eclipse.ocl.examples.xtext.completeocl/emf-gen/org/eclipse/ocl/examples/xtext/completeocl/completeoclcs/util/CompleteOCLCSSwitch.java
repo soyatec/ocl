@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
@@ -115,6 +116,7 @@ public class CompleteOCLCSSwitch<T>
 				T result = caseCompleteOCLDocumentCS(completeOCLDocumentCS);
 				if (result == null) result = casePackageCS(completeOCLDocumentCS);
 				if (result == null) result = caseRootCS(completeOCLDocumentCS);
+				if (result == null) result = caseAbstractPackageCS(completeOCLDocumentCS);
 				if (result == null) result = caseNamespaceCS(completeOCLDocumentCS);
 				if (result == null) result = caseNamedElementCS(completeOCLDocumentCS);
 				if (result == null) result = caseModelElementCS(completeOCLDocumentCS);
@@ -621,6 +623,22 @@ public class CompleteOCLCSSwitch<T>
 	 * @generated
 	 */
 	public T caseNamespaceCS(NamespaceCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractPackageCS(AbstractPackageCS object)
+	{
 		return null;
 	}
 

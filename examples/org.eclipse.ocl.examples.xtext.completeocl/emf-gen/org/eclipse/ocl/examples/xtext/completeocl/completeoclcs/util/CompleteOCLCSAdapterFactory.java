@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
@@ -204,6 +205,11 @@ public class CompleteOCLCSAdapterFactory
 			public Adapter caseNamespaceCS(NamespaceCS object)
 			{
 				return createNamespaceCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractPackageCS(AbstractPackageCS object)
+			{
+				return createAbstractPackageCSAdapter();
 			}
 			@Override
 			public Adapter casePackageCS(PackageCS object)
@@ -550,6 +556,21 @@ public class CompleteOCLCSAdapterFactory
 	 * @generated
 	 */
 	public Adapter createNamespaceCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS <em>Abstract Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS
+	 * @generated
+	 */
+	public Adapter createAbstractPackageCSAdapter()
+	{
 		return null;
 	}
 

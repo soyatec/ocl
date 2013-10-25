@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
@@ -477,6 +478,11 @@ public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Contin
 		return null;
 	}
 
+	@Override
+	public Continuation<?> visitAbstractPackageCS(@NonNull AbstractPackageCS object) {
+		return null;
+	};
+	
 	@Override
 	public Continuation<?> visitPackageCS(@NonNull PackageCS csPackage) {
 		return null;

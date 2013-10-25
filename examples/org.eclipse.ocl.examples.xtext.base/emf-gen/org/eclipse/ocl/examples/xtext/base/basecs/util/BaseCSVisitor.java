@@ -44,6 +44,7 @@ public interface BaseCSVisitor<R>
 	 */
 	@Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitable);
 
+	@Nullable R visitAbstractPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS object);
 	@Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS object);
 	@Nullable R visitAnnotationElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS object);
 	@Nullable R visitAttributeCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS object);

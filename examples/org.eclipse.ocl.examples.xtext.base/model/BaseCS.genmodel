@@ -123,11 +123,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//OperationCS/ownedBodyExpression"/>
       <genOperations ecoreOperation="BaseCS.ecore#//OperationCS/ast"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="BaseCS.ecore#//AbstractPackageCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//AbstractPackageCS/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//AbstractPackageCS/ownedNestedPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//AbstractPackageCS/nsPrefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//AbstractPackageCS/nsURI"/>
+    </genClasses>
     <genClasses ecoreClass="BaseCS.ecore#//PackageCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PackageCS/ownedType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BaseCS.ecore#//PackageCS/ownedNestedPackage"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PackageCS/nsPrefix"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BaseCS.ecore#//PackageCS/nsURI"/>
       <genOperations ecoreOperation="BaseCS.ecore#//PackageCS/ast"/>
       <genOperations ecoreOperation="BaseCS.ecore#//PackageCS/getClassifier">
         <genParameters ecoreParameter="BaseCS.ecore#//PackageCS/getClassifier/name"/>
