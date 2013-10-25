@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
@@ -233,6 +234,11 @@ public class OCLstdlibCSAdapterFactory
 			public Adapter caseOperationCS(OperationCS object)
 			{
 				return createOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractPackageCS(AbstractPackageCS object)
+			{
+				return createAbstractPackageCSAdapter();
 			}
 			@Override
 			public Adapter casePackageCS(PackageCS object)
@@ -600,6 +606,21 @@ public class OCLstdlibCSAdapterFactory
 	 * @generated
 	 */
 	public Adapter createOperationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS <em>Abstract Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS
+	 * @generated
+	 */
+	public Adapter createAbstractPackageCSAdapter()
+	{
 		return null;
 	}
 
