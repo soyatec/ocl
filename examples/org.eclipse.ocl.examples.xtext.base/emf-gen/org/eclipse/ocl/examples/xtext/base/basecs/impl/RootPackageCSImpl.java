@@ -49,7 +49,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
  *
  * @generated
  */
-public class RootPackageCSImpl extends PackageCSImpl implements RootPackageCS
+public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPackageCS
 {
 	/**
 	 * The cached value of the '{@link #getOwnedImport() <em>Owned Import</em>}' containment reference list.

@@ -24,7 +24,60 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
-import org.eclipse.ocl.examples.xtext.base.basecs.*;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.DataTypeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.DetailCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.DocumentationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.EnumerationLiteralCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.FeatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.IteratorKind;
+import org.eclipse.ocl.examples.xtext.base.basecs.LambdaTypeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityBoundsCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityStringCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ReferenceCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TuplePartCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TupleTypeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -153,6 +206,8 @@ public class BaseCSValidator extends EObjectValidator
 				return validateNamespaceCS((NamespaceCS)value, diagnostics, context);
 			case BaseCSPackage.OPERATION_CS:
 				return validateOperationCS((OperationCS)value, diagnostics, context);
+			case BaseCSPackage.ABSTRACT_PACKAGE_CS:
+				return validateAbstractPackageCS((AbstractPackageCS)value, diagnostics, context);
 			case BaseCSPackage.PACKAGE_CS:
 				return validatePackageCS((PackageCS)value, diagnostics, context);
 			case BaseCSPackage.PARAMETER_CS:
@@ -464,6 +519,16 @@ public class BaseCSValidator extends EObjectValidator
 	public boolean validateOperationCS(OperationCS operationCS, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return validate_EveryDefaultConstraint(operationCS, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractPackageCS(AbstractPackageCS abstractPackageCS, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return validate_EveryDefaultConstraint(abstractPackageCS, diagnostics, context);
 	}
 
 	/**

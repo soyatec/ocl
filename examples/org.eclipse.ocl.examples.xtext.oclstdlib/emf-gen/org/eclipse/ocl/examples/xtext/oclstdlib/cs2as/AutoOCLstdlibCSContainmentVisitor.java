@@ -48,42 +48,42 @@ public class AutoOCLstdlibCSContainmentVisitor
     }
     
     public @Nullable Continuation<?> visitJavaImplementationCS(@NonNull JavaImplementationCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitJavaImplementationCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibClassCS(@NonNull LibClassCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibClassCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibConstraintCS(@NonNull LibConstraintCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibConstraintCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibIterationCS(@NonNull LibIterationCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibIterationCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibOperationCS(@NonNull LibOperationCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibOperationCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibPackageCS(@NonNull LibPackageCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibPackageCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibPropertyCS(@NonNull LibPropertyCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibPropertyCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitLibRootPackageCS(@NonNull LibRootPackageCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitLibRootPackageCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitMetaTypeName(@NonNull MetaTypeName self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitMetaTypeName is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitPrecedenceCS(@NonNull PrecedenceCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitPrecedenceCS is not supported by " + getClass().getName());
     }
 }

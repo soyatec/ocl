@@ -211,6 +211,11 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createOperationCSAdapter();
 			}
 			@Override
+			public Adapter caseAbstractPackageCS(AbstractPackageCS object)
+			{
+				return createAbstractPackageCSAdapter();
+			}
+			@Override
 			public Adapter casePackageCS(PackageCS object)
 			{
 				return createPackageCSAdapter();
@@ -735,6 +740,21 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS <em>Abstract Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS
+	 * @generated
+	 */
+	public Adapter createAbstractPackageCSAdapter()
+	{
 		return null;
 	}
 

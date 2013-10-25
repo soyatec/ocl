@@ -432,10 +432,26 @@ public class BaseCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BaseCSPackage.ABSTRACT_PACKAGE_CS:
+			{
+				AbstractPackageCS abstractPackageCS = (AbstractPackageCS)theEObject;
+				T result = caseAbstractPackageCS(abstractPackageCS);
+				if (result == null) result = caseNamespaceCS(abstractPackageCS);
+				if (result == null) result = caseNamedElementCS(abstractPackageCS);
+				if (result == null) result = caseModelElementCS(abstractPackageCS);
+				if (result == null) result = caseNameable(abstractPackageCS);
+				if (result == null) result = casePivotableElementCS(abstractPackageCS);
+				if (result == null) result = caseElementCS(abstractPackageCS);
+				if (result == null) result = casePivotable(abstractPackageCS);
+				if (result == null) result = caseVisitableCS(abstractPackageCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BaseCSPackage.PACKAGE_CS:
 			{
 				PackageCS packageCS = (PackageCS)theEObject;
 				T result = casePackageCS(packageCS);
+				if (result == null) result = caseAbstractPackageCS(packageCS);
 				if (result == null) result = caseNamespaceCS(packageCS);
 				if (result == null) result = caseNamedElementCS(packageCS);
 				if (result == null) result = caseModelElementCS(packageCS);
@@ -551,7 +567,7 @@ public class BaseCSSwitch<T> extends Switch<T> {
 			{
 				RootPackageCS rootPackageCS = (RootPackageCS)theEObject;
 				T result = caseRootPackageCS(rootPackageCS);
-				if (result == null) result = casePackageCS(rootPackageCS);
+				if (result == null) result = caseAbstractPackageCS(rootPackageCS);
 				if (result == null) result = caseRootCS(rootPackageCS);
 				if (result == null) result = caseNamespaceCS(rootPackageCS);
 				if (result == null) result = caseNamedElementCS(rootPackageCS);
@@ -1170,6 +1186,22 @@ public class BaseCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperationCS(OperationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractPackageCS(AbstractPackageCS object)
+	{
 		return null;
 	}
 

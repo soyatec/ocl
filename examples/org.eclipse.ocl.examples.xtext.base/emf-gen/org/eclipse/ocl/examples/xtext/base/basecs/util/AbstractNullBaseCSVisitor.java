@@ -38,6 +38,10 @@ public abstract class AbstractNullBaseCSVisitor<R, C>
 		super(context);
 	}	
 
+	public @Nullable R visitAbstractPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS object) {
+		return null;
+	}
+
 	public @Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS object) {
 		return null;
 	}

@@ -40,10 +40,10 @@ public class AutoOCLinEcoreCSContainmentVisitor
     }
     
     public @Nullable Continuation<?> visitOCLinEcoreConstraintCS(@NonNull OCLinEcoreConstraintCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitOCLinEcoreConstraintCS is not supported by " + getClass().getName());
     }
     
     public @Nullable Continuation<?> visitSysMLCS(@NonNull SysMLCS self) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("visitSysMLCS is not supported by " + getClass().getName());
     }
 }
