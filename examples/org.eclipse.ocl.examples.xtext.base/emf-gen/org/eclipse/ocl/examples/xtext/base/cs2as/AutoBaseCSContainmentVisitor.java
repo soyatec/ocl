@@ -11,10 +11,10 @@ package org.eclipse.ocl.examples.xtext.base.cs2as;
 
 import java.util.Iterator;
 import java.util.List;
-
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -89,6 +89,9 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.AbstractBaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
 public class AutoBaseCSContainmentVisitor
 	extends AbstractBaseCSVisitor<Continuation<?>, CS2PivotConversion>
@@ -368,7 +371,7 @@ public class AutoBaseCSContainmentVisitor
             if (_1 == null) {
                 throw new InvalidValueException("Null source for \'null\'");
             }
-            final @Nullable /*@Thrown*/ Package ast = (Package)_1.getPivot();
+            final @Nullable /*@Thrown*/ DomainPackage ast = (DomainPackage)_1.getPivot();
             //
             accumulator.add(ast);
         }
