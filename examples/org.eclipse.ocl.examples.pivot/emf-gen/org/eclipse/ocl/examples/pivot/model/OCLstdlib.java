@@ -105,6 +105,16 @@ public class OCLstdlib extends ASResourceImpl
 	}
 
 	/**
+	 * Install this library in the {@link StandardLibraryContribution#REGISTRY}
+	 * unless some other library contribution has already been installed.
+	 */
+	public static void lazyInstall() {
+		if (StandardLibraryContribution.REGISTRY.size() == 0) {
+			install();
+		}
+	}
+
+	/**
 	 * Unnstall this library from the {@link StandardLibraryContribution#REGISTRY}.
 	 * This method may be invoked by standalone applications to release the library
 	 * resources for garbage collection and memory leakage detection. 

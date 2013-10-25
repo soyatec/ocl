@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.ecore.EcoreASResourceFactory;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.scoping.PivotScoping;
 import org.eclipse.ocl.examples.pivot.uml.UMLASResourceFactory;
@@ -51,6 +52,8 @@ public class PivotStandaloneSetup //implements ISetup
 	}
 
 	public static void init() {
+//		OCLDelegateDomain.initialize(null);
+		OCLstdlib.lazyInstall();
 		EcoreASResourceFactory.INSTANCE.getClass();
 		UMLASResourceFactory.INSTANCE.getClass();
 		OCLASResourceFactory.INSTANCE.getClass();
