@@ -312,16 +312,9 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			}
 			pivotElement.getLanguage().add(asLanguage);
 			String umlBody = umlBodies.get(i);
-			if (asLanguage.equals(PivotConstants.OCL_LANGUAGE)) {
-				String s = umlBody.trim();		// Trim a leading 'result=' to convert UML BodyCondition to Pivot BodyExpression
-				if ((umlExpression.eContainer() instanceof org.eclipse.uml2.uml.Constraint) && s.startsWith("result")) {
-					s = s.substring(6);
-					s = s.trim();
-					if (s.startsWith("=")) {
-						s = s.substring(1);
-						umlBody = s.trim();
-					}
-				}
+			if ((umlBody != null) && asLanguage.equals(PivotConstants.OCL_LANGUAGE)
+			 && (umlExpression.eContainmentFeature() == org.eclipse.uml2.uml.UMLPackage.Literals.OPERATION__BODY_CONDITION)) {
+				umlBody = PivotUtil.getBodyExpression(umlBody);
 			}
 			pivotElement.getBody().add(umlBody);
 		}

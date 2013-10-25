@@ -359,8 +359,12 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				String preName = null;
 				String postName = null;
 				String key = entry.getKey();
+				String value = entry.getValue();
 				if (key.equals("body")) {
 					bodyName = "";
+					if (value != null) {
+						value = PivotUtil.getBodyExpression(value);	// Workaround Bug 419324
+					}
 				}
 				else if (key.startsWith("body_")) {
 					bodyName = key.substring(5);
@@ -382,7 +386,6 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					converter.error("Unsupported operation constraint " + key);
 					continue;
 				}
-				String value = entry.getValue();
 				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 				specification.getBody().add(value);
 				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
