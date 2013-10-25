@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
@@ -187,6 +188,7 @@ public class OCLstdlibCSSwitch<T>
 				LibPackageCS libPackageCS = (LibPackageCS)theEObject;
 				T result = caseLibPackageCS(libPackageCS);
 				if (result == null) result = casePackageCS(libPackageCS);
+				if (result == null) result = caseAbstractPackageCS(libPackageCS);
 				if (result == null) result = caseNamespaceCS(libPackageCS);
 				if (result == null) result = caseNamedElementCS(libPackageCS);
 				if (result == null) result = caseModelElementCS(libPackageCS);
@@ -222,7 +224,7 @@ public class OCLstdlibCSSwitch<T>
 				LibRootPackageCS libRootPackageCS = (LibRootPackageCS)theEObject;
 				T result = caseLibRootPackageCS(libRootPackageCS);
 				if (result == null) result = caseRootPackageCS(libRootPackageCS);
-				if (result == null) result = casePackageCS(libRootPackageCS);
+				if (result == null) result = caseAbstractPackageCS(libRootPackageCS);
 				if (result == null) result = caseRootCS(libRootPackageCS);
 				if (result == null) result = caseNamespaceCS(libRootPackageCS);
 				if (result == null) result = caseNamedElementCS(libRootPackageCS);
@@ -609,6 +611,22 @@ public class OCLstdlibCSSwitch<T>
 	 * @generated
 	 */
 	public T caseOperationCS(OperationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractPackageCS(AbstractPackageCS object)
+	{
 		return null;
 	}
 
