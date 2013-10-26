@@ -1108,7 +1108,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 				return metaModelManager.getBooleanType();
 			}
 			else if (UMLUtil.isInteger(umlType)) {
-				return metaModelManager.getStringType();
+				return metaModelManager.getIntegerType();
 			}
 			else if (UMLUtil.isReal(umlType)) {
 				return metaModelManager.getRealType();
