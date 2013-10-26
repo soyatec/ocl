@@ -143,6 +143,28 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCL -->
+    <extension
+            id="essentialocl.check.fast"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="essentialocl.check.normal"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="essentialocl.check.expensive"
+            name="%MF_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 
 	<!-- Quick Outline -->
@@ -178,11 +200,32 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
+    <!-- quickfix marker resolution generator for org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCL -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.ocl.examples.xtext.essentialocl.ui.EssentialOCLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.ocl.examples.xtext.essentialocl.ui.EssentialOCLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.ocl.examples.xtext.essentialocl.ui.essentialocl.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.ocl.examples.xtext.essentialocl.ui.EssentialOCLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.ocl.examples.xtext.essentialocl.ui.essentialocl.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.ocl.examples.xtext.essentialocl.ui.EssentialOCLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.ocl.examples.xtext.essentialocl.ui.essentialocl.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
       </markerResolutionGenerator>
    </extension>
 
