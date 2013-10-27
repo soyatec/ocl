@@ -36,13 +36,13 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -76,6 +76,9 @@ import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.ui.utilities.BaseUIUtil;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.console.actions.CloseAction;
 import org.eclipse.ocl.examples.xtext.console.actions.LoadExpressionAction;
 import org.eclipse.ocl.examples.xtext.console.actions.SaveExpressionAction;
@@ -99,21 +102,16 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.actions.ClearOutputAction;
 import org.eclipse.ui.part.IPage;
-import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
@@ -122,7 +120,6 @@ import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
-import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -553,7 +550,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		
 		// get current selection
 //		ISelection selection = selectionService.getSelection();			// Doesn't have a value preceding console start
-		ISelection selection = getActiveSelection();
+		ISelection selection = BaseUIUtil.getActiveSelection(getSite());
 		selectionChanged(selection);
 		
 		((SashForm) page).setWeights(new int[] {2, 1});
@@ -776,39 +773,6 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		while (workbench.getDisplay().readAndDispatch());
 	}
-
-	protected ISelection getActiveSelection() {
-		try {
-			IPageSite site = getSite();
-			if (site == null) {
-				return null;
-			}
-			IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
-			if (workbenchWindow == null) {
-				return null;
-			}
-			IWorkbenchPage activePage = workbenchWindow.getActivePage();
-			if (activePage == null) {
-				return null;
-			}
-			IEditorPart activeEditor = activePage.getActiveEditor();
-			if (activeEditor == null) {
-				return null;
-			}
-			IEditorSite editorSite = activeEditor.getEditorSite();
-			if (editorSite == null) {
-				return null;
-			}
-			ISelectionProvider selectionProvider = editorSite.getSelectionProvider();
-			if (selectionProvider == null) {
-				return null;
-			}
-			return selectionProvider.getSelection();
-		}
-		catch (Exception e) {
-			return  null;
-		}
-	}
     
 	@Override
     public Control getControl() {
@@ -925,36 +889,30 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		{
 			public Value exec(XtextResource resource) throws Exception {
 				Object selectedObject = selected;
-			    if (selectedObject instanceof IOutlineNode) {
-		    	    if (selectedObject instanceof EObjectNode) {
-		                EObjectNode selectedObjectNode = (EObjectNode) selectedObject;
-		                @SuppressWarnings("unused")
-						URI eObjectURI = selectedObjectNode.getEObjectURI();
-		        		contextObject = null; // FIXME metaModelManager.loadResource(eObjectURI, null, null);
-		    	    }
-		    	    else if (selectedObject instanceof EStructuralFeatureNode) {
-		            	contextObject = null;
-		    	    }
-		    	    else {
-		            	contextObject = null;
-		    	    }
-			    }
-			    else {
-			    	if (selectedObject instanceof IAdaptable) {
-			    		selectedObject = ((IAdaptable) selectedObject).getAdapter(EObject.class);
-		            }
-			    	if (selectedObject instanceof org.eclipse.uml2.uml.Element) {
-					    org.eclipse.uml2.uml.Element selectedElement = (org.eclipse.uml2.uml.Element)selectedObject;
-						MetaModelManager metaModelManager = getMetaModelManager(selectedElement);
-						contextObject = metaModelManager.getPivotOf(Element.class, selectedElement);
-		            }
-		            else if (selectedObject instanceof EObject) {
-		            	contextObject = (EObject) selectedObject;
-		            }
-		            else {
-		            	contextObject = null;
-		            }
-			    }
+		    	if (selectedObject instanceof IAdaptable) {
+		    		Object adapted = ((IAdaptable) selectedObject).getAdapter(EObject.class);
+					if (adapted != null){
+						selectedObject = adapted;
+					}
+	            }
+		    	if (selectedObject instanceof org.eclipse.uml2.uml.Element) {
+				    org.eclipse.uml2.uml.Element selectedElement = (org.eclipse.uml2.uml.Element)selectedObject;
+					MetaModelManager metaModelManager = getMetaModelManager(selectedElement);
+					contextObject = metaModelManager.getPivotOf(Element.class, selectedElement);
+	            }
+	            else if (selectedObject instanceof EObject) {
+	            	contextObject = (EObject) selectedObject;
+	            }
+	            else {
+	            	contextObject = null;
+	            }
+		    	if (resource instanceof BaseCSResource) {
+		    		CS2PivotResourceAdapter cs2PivotAdapter = ((BaseCSResource)resource).findCS2ASAdapter();
+		    		if (cs2PivotAdapter != null) {
+		    			cs2PivotAdapter.dispose();
+		    		}
+		    	}
+		    	
 			    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
 				PivotIdResolver idResolver = metaModelManager.getIdResolver();
 				DomainType staticType = idResolver.getStaticTypeOf(contextObject);
@@ -1030,12 +988,19 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 	
 	private void selectionChanged(ISelection sel) {
 		Object selectedObject = null;
-	    if (sel instanceof IStructuredSelection) {
-            IStructuredSelection ssel = (IStructuredSelection) sel;
-            
-            if (!ssel.isEmpty()) {
-                selectedObject = ssel.getFirstElement();
-            }
+		if (sel instanceof ITextSelection) {
+	    	selectedObject = BaseUIUtil.getXtextTextSelection((ITextSelection)sel, getSite());
+	    }
+	    else {
+	    	if (sel instanceof IStructuredSelection) {
+	            IStructuredSelection ssel = (IStructuredSelection) sel;
+	            if (!ssel.isEmpty()) {
+	                selectedObject = ssel.getFirstElement();
+	            }
+		    }
+		    if (selectedObject instanceof IOutlineNode) {
+	    	    selectedObject = BaseUIUtil.getXtextOutlineSelection((IOutlineNode)selectedObject, getSite());
+		    }
 	    }
         refreshSelection(selectedObject);
 	}
