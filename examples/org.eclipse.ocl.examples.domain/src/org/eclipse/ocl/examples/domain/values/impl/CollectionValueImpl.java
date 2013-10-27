@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -276,7 +277,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
     @Override
 	public @NonNull OrderedSetValue asOrderedSetValue() {
-        return new SparseOrderedSetValueImpl(getOrderedSetTypeId(), elements);
+		OrderedSet<Object> uniqueElements = new OrderedSetImpl<Object>();
+		for (Object element : elements) {
+			uniqueElements.add(element);
+		}
+        return new SparseOrderedSetValueImpl(getOrderedSetTypeId(), uniqueElements);
     }
 
     @Override
@@ -286,7 +291,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
     @Override
     public @NonNull SetValue asSetValue() {
-        return new SetValueImpl(getSetTypeId(), elements);
+		Set<Object> uniqueElements = new HashSet<Object>();
+		for (Object element : elements) {
+			uniqueElements.add(element);
+		}
+		return new SetValueImpl(getSetTypeId(), uniqueElements);
     }
 
     /**

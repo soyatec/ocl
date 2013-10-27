@@ -170,6 +170,11 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		 */
 		assertResultContainsAll(null, "OrderedSet{1, 2.0, '3'}", "Set{1, 2.0, '3'}->asOrderedSet()");
 		assertResultContainsAll(null, "OrderedSet{1, 2.0, '3'}", "Bag{1, 2.0, '3'}->asOrderedSet()");
+
+		assertQueryResults(null, "OrderedSet{'a', 'b', 'c'}", "Sequence{'a', 'b', 'c', 'b'}->asOrderedSet()");
+		assertResultContainsAll(null, "OrderedSet{'a', 'b', 'c'}", "Bag{'a', 'b', 'c', 'b'}->asOrderedSet()");
+		assertResultContainsAll(null, "OrderedSet{'a', 'b', 'c'}", "Set{'a', 'b', 'c', 'b'}->asOrderedSet()");
+		assertQueryResults(null, "OrderedSet{'a', 'b', 'c'}", "OrderedSet{'a', 'b', 'c', 'b'}->asOrderedSet()");
 		// invalid collection
 		assertQueryInvalid(null, "let s : Sequence(Integer) = invalid in s->asOrderedSet()");
 		assertQueryInvalid(null, "let b : Bag(Integer) = invalid in b->asOrderedSet()");
@@ -221,6 +226,11 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertResultContainsAll(null, "Set{1, 2.0, '3'}", "Bag{1, 2.0, '3'}->asSet()");
 		assertResultContainsAll(null, "Set{1, 2.0, '3'}", "Set{1, 2.0, '3'}->asSet()");
 		assertQueryResults(null, "Set{1, 2.0, '3'}", "OrderedSet{1, 2.0, '3'}->asSet()");
+
+		assertQueryResults(null, "Set{'a', 'b', 'c'}", "Sequence{'a', 'b', 'c', 'b'}->asSet()");
+		assertQueryResults(null, "Set{'a', 'b', 'c'}", "Bag{'a', 'b', 'c', 'b'}->asSet()");
+		assertQueryResults(null, "Set{'a', 'b', 'c'}", "Set{'a', 'b', 'c', 'b'}->asSet()");
+		assertQueryResults(null, "Set{'a', 'b', 'c'}", "OrderedSet{'a', 'b', 'c', 'b'}->asSet()");
 		// invalid collection
 		assertQueryInvalid(null, "let s : Sequence(Integer) = invalid in s->asSet()");
 		assertQueryInvalid(null, "let b : Bag(Integer) = invalid in b->asSet()");
