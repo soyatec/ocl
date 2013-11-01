@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
@@ -33,6 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
@@ -188,12 +188,12 @@ public class OCLstdlibCSSwitch<T>
 				LibPackageCS libPackageCS = (LibPackageCS)theEObject;
 				T result = caseLibPackageCS(libPackageCS);
 				if (result == null) result = casePackageCS(libPackageCS);
-				if (result == null) result = caseAbstractPackageCS(libPackageCS);
+				if (result == null) result = casePackageOwnerCS(libPackageCS);
 				if (result == null) result = caseNamespaceCS(libPackageCS);
 				if (result == null) result = caseNamedElementCS(libPackageCS);
 				if (result == null) result = caseModelElementCS(libPackageCS);
-				if (result == null) result = caseNameable(libPackageCS);
 				if (result == null) result = casePivotableElementCS(libPackageCS);
+				if (result == null) result = caseNameable(libPackageCS);
 				if (result == null) result = caseElementCS(libPackageCS);
 				if (result == null) result = casePivotable(libPackageCS);
 				if (result == null) result = caseVisitableCS(libPackageCS);
@@ -224,13 +224,12 @@ public class OCLstdlibCSSwitch<T>
 				LibRootPackageCS libRootPackageCS = (LibRootPackageCS)theEObject;
 				T result = caseLibRootPackageCS(libRootPackageCS);
 				if (result == null) result = caseRootPackageCS(libRootPackageCS);
-				if (result == null) result = caseAbstractPackageCS(libRootPackageCS);
+				if (result == null) result = casePackageOwnerCS(libRootPackageCS);
 				if (result == null) result = caseRootCS(libRootPackageCS);
-				if (result == null) result = caseNamespaceCS(libRootPackageCS);
 				if (result == null) result = caseNamedElementCS(libRootPackageCS);
 				if (result == null) result = caseModelElementCS(libRootPackageCS);
-				if (result == null) result = caseNameable(libRootPackageCS);
 				if (result == null) result = casePivotableElementCS(libRootPackageCS);
+				if (result == null) result = caseNameable(libRootPackageCS);
 				if (result == null) result = caseElementCS(libRootPackageCS);
 				if (result == null) result = casePivotable(libRootPackageCS);
 				if (result == null) result = caseVisitableCS(libRootPackageCS);
@@ -615,17 +614,17 @@ public class OCLstdlibCSSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractPackageCS(AbstractPackageCS object)
+	public T casePackageOwnerCS(PackageOwnerCS object)
 	{
 		return null;
 	}

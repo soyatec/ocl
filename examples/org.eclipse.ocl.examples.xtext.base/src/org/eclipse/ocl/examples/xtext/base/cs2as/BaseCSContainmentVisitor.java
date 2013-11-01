@@ -46,7 +46,6 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
@@ -73,6 +72,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.StructuralFeatureCS;
@@ -199,7 +199,15 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 		return pivotElement;
 	}
 
-	protected <T extends Root> T refreshRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull AbstractPackageCS csElement) {
+	/**
+	 * Method used to refresh every {@link RootCS} element.
+	 * 
+	 * @param pivotClass
+	 * @param pivotEClass
+	 * @param csElement
+	 * @return
+	 */
+	protected <T extends Root> T refreshRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull RootCS csElement) {
 		assert pivotEClass != null;
 		Resource csResource = csElement.eResource();
 		if (csResource == null) {
@@ -230,7 +238,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 		}
 		T pivotElement;
 		if (pivotObject == null) {
-			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, name, csElement.getNsURI());
+			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, name, null);
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {
@@ -248,6 +256,21 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 		if ((newNsURI != oldNsURI) && ((newNsURI == null) || !newNsURI.equals(oldNsURI))) {
 			pivotElement.setExternalURI(newNsURI);
 		}
+		return pivotElement;
+	}
+	
+	/**
+	 * Method used to refresh every {@link RootPackageCS} element.
+	 * 
+	 * There are some Roots which may own packages like those created in OCLinEcore or StdLin documents 
+	 * 
+	 * @param pivotClass
+	 * @param pivotEClass
+	 * @param csElement
+	 * @return
+	 */
+	protected <T extends Root> T refreshRootPackage(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull RootPackageCS csElement) {
+		T pivotElement = refreshRoot(pivotClass, pivotEClass,  csElement);
 		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return pivotElement;
 	}
@@ -442,7 +465,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitRootPackageCS(@NonNull RootPackageCS csElement) {
 		importPackages(csElement);
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.ROOT;
-		Root root = refreshRoot(Root.class, eClass, csElement);
+		Root root = refreshRootPackage(Root.class, eClass, csElement);
 		EList<ImportCS> csImports = csElement.getOwnedImport();
 		if (csImports.size() > 0) {
 			List<Import> newImports = new ArrayList<Import>(csImports.size());

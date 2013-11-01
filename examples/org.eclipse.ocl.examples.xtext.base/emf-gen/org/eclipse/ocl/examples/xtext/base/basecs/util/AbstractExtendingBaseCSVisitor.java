@@ -42,10 +42,6 @@ public abstract class AbstractExtendingBaseCSVisitor<R, C>
 		super(context);
 	}	
 
-	public @Nullable R visitAbstractPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS object) {
-		return visitNamedElementCS(object);
-	}
-
 	public @Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS object) {
 		return visitAnnotationElementCS(object);
 	}
@@ -135,7 +131,11 @@ public abstract class AbstractExtendingBaseCSVisitor<R, C>
 	}
 
 	public @Nullable R visitPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageCS object) {
-		return visitAbstractPackageCS(object);
+		return visitPackageOwnerCS(object);
+	}
+
+	public @Nullable R visitPackageOwnerCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS object) {
+		return visitModelElementCS(object);
 	}
 
 	public @Nullable R visitParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS object) {
@@ -167,7 +167,7 @@ public abstract class AbstractExtendingBaseCSVisitor<R, C>
 	}
 
 	public @Nullable R visitRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS object) {
-		return visitAbstractPackageCS(object);
+		return visitPackageOwnerCS(object);
 	}
 
 	public @Nullable R visitSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS object) {

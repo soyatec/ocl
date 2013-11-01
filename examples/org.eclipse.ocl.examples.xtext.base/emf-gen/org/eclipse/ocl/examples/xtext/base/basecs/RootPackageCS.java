@@ -28,7 +28,7 @@ package org.eclipse.ocl.examples.xtext.base.basecs;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL TestConstraint='true'"
  * @generated
  */
-public interface RootPackageCS extends AbstractPackageCS, RootCS
+public interface RootPackageCS extends PackageOwnerCS, RootCS
 {
 
 } // RootPackageCS

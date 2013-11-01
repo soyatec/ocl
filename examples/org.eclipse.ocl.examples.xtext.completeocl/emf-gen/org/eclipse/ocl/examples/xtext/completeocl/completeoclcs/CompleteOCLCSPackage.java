@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCS
  * <!-- end-user-doc -->
  * @see org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore' pivot='../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#/' basecs='../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#/' essentialoclcs='../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#/'"
  * @generated
  */
 public interface CompleteOCLCSPackage
@@ -384,7 +385,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__LOGICAL_PARENT = BaseCSPackage.PACKAGE_CS__LOGICAL_PARENT;
+	int COMPLETE_OCL_DOCUMENT_CS__LOGICAL_PARENT = BaseCSPackage.NAMESPACE_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -393,7 +394,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__PIVOT = BaseCSPackage.PACKAGE_CS__PIVOT;
+	int COMPLETE_OCL_DOCUMENT_CS__PIVOT = BaseCSPackage.NAMESPACE_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -402,7 +403,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__OWNED_ANNOTATION = BaseCSPackage.PACKAGE_CS__OWNED_ANNOTATION;
+	int COMPLETE_OCL_DOCUMENT_CS__OWNED_ANNOTATION = BaseCSPackage.NAMESPACE_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -411,7 +412,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__ORIGINAL_XMI_ID = BaseCSPackage.PACKAGE_CS__ORIGINAL_XMI_ID;
+	int COMPLETE_OCL_DOCUMENT_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMESPACE_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -420,7 +421,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__CSI = BaseCSPackage.PACKAGE_CS__CSI;
+	int COMPLETE_OCL_DOCUMENT_CS__CSI = BaseCSPackage.NAMESPACE_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -429,43 +430,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__NAME = BaseCSPackage.PACKAGE_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLETE_OCL_DOCUMENT_CS__OWNED_TYPE = BaseCSPackage.PACKAGE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLETE_OCL_DOCUMENT_CS__OWNED_NESTED_PACKAGE = BaseCSPackage.PACKAGE_CS__OWNED_NESTED_PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLETE_OCL_DOCUMENT_CS__NS_PREFIX = BaseCSPackage.PACKAGE_CS__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLETE_OCL_DOCUMENT_CS__NS_URI = BaseCSPackage.PACKAGE_CS__NS_URI;
+	int COMPLETE_OCL_DOCUMENT_CS__NAME = BaseCSPackage.NAMESPACE_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.
@@ -474,7 +439,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 0;
+	int COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT = BaseCSPackage.NAMESPACE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Library</b></em>' containment reference list.
@@ -483,7 +448,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 1;
+	int COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY = BaseCSPackage.NAMESPACE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
@@ -492,7 +457,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__PACKAGES = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 2;
+	int COMPLETE_OCL_DOCUMENT_CS__PACKAGES = BaseCSPackage.NAMESPACE_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Contexts</b></em>' containment reference list.
@@ -501,7 +466,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__CONTEXTS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 3;
+	int COMPLETE_OCL_DOCUMENT_CS__CONTEXTS = BaseCSPackage.NAMESPACE_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Include</b></em>' containment reference list.
@@ -510,7 +475,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 4;
+	int COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE = BaseCSPackage.NAMESPACE_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Complete OCL Document CS</em>' class.
@@ -519,7 +484,7 @@ public interface CompleteOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS_FEATURE_COUNT = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 5;
+	int COMPLETE_OCL_DOCUMENT_CS_FEATURE_COUNT = BaseCSPackage.NAMESPACE_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.

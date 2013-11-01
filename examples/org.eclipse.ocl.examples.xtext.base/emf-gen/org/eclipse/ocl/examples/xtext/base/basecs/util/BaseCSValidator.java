@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
-import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
@@ -53,6 +52,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
@@ -206,10 +206,10 @@ public class BaseCSValidator extends EObjectValidator
 				return validateNamespaceCS((NamespaceCS)value, diagnostics, context);
 			case BaseCSPackage.OPERATION_CS:
 				return validateOperationCS((OperationCS)value, diagnostics, context);
-			case BaseCSPackage.ABSTRACT_PACKAGE_CS:
-				return validateAbstractPackageCS((AbstractPackageCS)value, diagnostics, context);
 			case BaseCSPackage.PACKAGE_CS:
 				return validatePackageCS((PackageCS)value, diagnostics, context);
+			case BaseCSPackage.PACKAGE_OWNER_CS:
+				return validatePackageOwnerCS((PackageOwnerCS)value, diagnostics, context);
 			case BaseCSPackage.PARAMETER_CS:
 				return validateParameterCS((ParameterCS)value, diagnostics, context);
 			case BaseCSPackage.PATH_ELEMENT_CS:
@@ -526,9 +526,9 @@ public class BaseCSValidator extends EObjectValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAbstractPackageCS(AbstractPackageCS abstractPackageCS, DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validatePackageCS(PackageCS packageCS, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint(abstractPackageCS, diagnostics, context);
+		return validate_EveryDefaultConstraint(packageCS, diagnostics, context);
 	}
 
 	/**
@@ -536,9 +536,9 @@ public class BaseCSValidator extends EObjectValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePackageCS(PackageCS packageCS, DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validatePackageOwnerCS(PackageOwnerCS packageOwnerCS, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint(packageCS, diagnostics, context);
+		return validate_EveryDefaultConstraint(packageOwnerCS, diagnostics, context);
 	}
 
 	/**

@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 public interface ClassifierCS extends NamedElementCS, TypeCS, TemplateableElementCS {
 	/**
 	 * Returns the value of the '<em><b>Owner</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS#getOwnedType <em>Owned Type</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageCS#getOwnedType <em>Owned Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owner</em>' container reference isn't clear,
@@ -50,13 +50,13 @@ public interface ClassifierCS extends NamedElementCS, TypeCS, TemplateableElemen
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owner</em>' container reference.
-	 * @see #setOwner(AbstractPackageCS)
+	 * @see #setOwner(PackageCS)
 	 * @see org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage#getClassifierCS_Owner()
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS#getOwnedType
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageCS#getOwnedType
 	 * @model opposite="ownedType" transient="false"
 	 * @generated
 	 */
-	AbstractPackageCS getOwner();
+	PackageCS getOwner();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS#getOwner <em>Owner</em>}' container reference.
@@ -66,7 +66,7 @@ public interface ClassifierCS extends NamedElementCS, TypeCS, TemplateableElemen
 	 * @see #getOwner()
 	 * @generated
 	 */
-	void setOwner(AbstractPackageCS value);
+	void setOwner(PackageCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Instance Class Name</b></em>' attribute.

@@ -44,7 +44,6 @@ public interface BaseCSVisitor<R>
 	 */
 	@Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitable);
 
-	@Nullable R visitAbstractPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS object);
 	@Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS object);
 	@Nullable R visitAnnotationElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationElementCS object);
 	@Nullable R visitAttributeCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS object);
@@ -68,6 +67,7 @@ public interface BaseCSVisitor<R>
 	@Nullable R visitNamedElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS object);
 	@Nullable R visitOperationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.OperationCS object);
 	@Nullable R visitPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageCS object);
+	@Nullable R visitPackageOwnerCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS object);
 	@Nullable R visitParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS object);
 	@Nullable R visitPathElementCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS object);
 	@Nullable R visitPathElementWithURICS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS object);

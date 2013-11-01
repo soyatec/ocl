@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
  * <!-- end-user-doc -->
  * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import basecs='../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' essentialoclcs='../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#/' pivot='../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#/'"
  * @generated
  */
 public interface OCLinEcoreCSPackage extends EPackage {

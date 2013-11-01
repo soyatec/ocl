@@ -262,8 +262,6 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	@Override
 	public ElementCS visitRoot(@NonNull Root object) {
 		RootPackageCS csElement = context.refreshElement(RootPackageCS.class, BaseCSPackage.Literals.ROOT_PACKAGE_CS, object);
-//		csElement.setNsURI(object.getExternalURI());
-		csElement.setNsURI(null);
 		context.refreshList(csElement.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
 		context.visitDeclarations(ImportCS.class, object.getImports(), null);
 		return csElement;

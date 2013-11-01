@@ -50,7 +50,7 @@ public abstract class AbstractCompleteOCLCSContainmentVisitor
 	}
 
 	public @Nullable Continuation<?> visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS csElement) {
-		return visitPackageCS(csElement);
+		return visitNamedElementCS(csElement);
 	}
 
 	public @Nullable Continuation<?> visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS csElement) {

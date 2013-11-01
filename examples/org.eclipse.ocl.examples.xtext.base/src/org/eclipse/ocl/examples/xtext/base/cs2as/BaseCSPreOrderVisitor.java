@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
@@ -50,6 +49,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityBoundsCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.MultiplicityStringCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
@@ -477,16 +477,16 @@ public class BaseCSPreOrderVisitor extends AbstractExtendingBaseCSVisitor<Contin
 	public Continuation<?> visitOperationCS(@NonNull OperationCS csOperation) {
 		return null;
 	}
-
-	@Override
-	public Continuation<?> visitAbstractPackageCS(@NonNull AbstractPackageCS object) {
-		return null;
-	};
 	
 	@Override
 	public Continuation<?> visitPackageCS(@NonNull PackageCS csPackage) {
 		return null;
 	}
+	
+	@Override
+	public Continuation<?> visitPackageOwnerCS(@NonNull PackageOwnerCS object) {
+		return null;
+	};
 
 	@Override
 	public Continuation<?> visitParameterCS(@NonNull ParameterCS csParameter) {
