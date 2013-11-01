@@ -51,7 +51,7 @@ public abstract class AbstractExtendingDelegatingCompleteOCLCSVisitor<R, C, D ex
 	}
 
 	public @Nullable R visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS object) {
-		return delegate.visitPackageCS(object);
+		return delegate.visitNamedElementCS(object);
 	}
 
 	public @Nullable R visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS object) {

@@ -38,8 +38,8 @@
         <details key="body" value="pivot"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//AbstractPackageCS"
-        eOpposite="#//AbstractPackageCS/ownedType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//PackageCS"
+        eOpposite="#//PackageCS/ownedType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -167,15 +167,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBodyExpression" upperBound="-1"
         eType="#//SpecificationCS" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractPackageCS" abstract="true" eSuperTypes="#//NamespaceCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
-        eType="#//ClassifierCS" containment="true" eOpposite="#//ClassifierCS/owner"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedNestedPackage" upperBound="-1"
-        eType="#//PackageCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//AbstractPackageCS">
+  <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//PackageOwnerCS #//NamespaceCS">
     <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="ocl::Package{&#xA;&#x9;&#x9;&#x9;&#x9;-- TODO&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;nestedPackage = ownedNestedPackage.ast()&#xA;&#x9;&#x9;&#x9;}"/>
@@ -184,6 +176,14 @@
     <eOperations name="getClassifier" eType="#//ClassifierCS">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
+        eType="#//ClassifierCS" containment="true" eOpposite="#//ClassifierCS/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageOwnerCS" abstract="true" eSuperTypes="#//ModelElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedNestedPackage" upperBound="-1"
+        eType="#//PackageCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterCS" eSuperTypes="#//TypedElementCS">
     <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Parameter">
@@ -230,7 +230,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="keys" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RootCS" abstract="true" interface="true"
-      eSuperTypes="#//ModelElementCS">
+      eSuperTypes="#//NamedElementCS">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="TestConstraint"/>
     </eAnnotations>
@@ -242,7 +242,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLibrary" upperBound="-1"
         eType="#//LibraryCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RootPackageCS" eSuperTypes="#//AbstractPackageCS #//RootCS">
+  <eClassifiers xsi:type="ecore:EClass" name="RootPackageCS" eSuperTypes="#//PackageOwnerCS #//RootCS">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="TestConstraint"/>
     </eAnnotations>

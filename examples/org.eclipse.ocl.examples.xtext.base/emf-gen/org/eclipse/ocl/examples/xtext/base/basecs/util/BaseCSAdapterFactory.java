@@ -211,14 +211,14 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createOperationCSAdapter();
 			}
 			@Override
-			public Adapter caseAbstractPackageCS(AbstractPackageCS object)
-			{
-				return createAbstractPackageCSAdapter();
-			}
-			@Override
 			public Adapter casePackageCS(PackageCS object)
 			{
 				return createPackageCSAdapter();
+			}
+			@Override
+			public Adapter casePackageOwnerCS(PackageOwnerCS object)
+			{
+				return createPackageOwnerCSAdapter();
 			}
 			@Override
 			public Adapter caseParameterCS(ParameterCS object)
@@ -744,21 +744,6 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS <em>Abstract Package CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS
-	 * @generated
-	 */
-	public Adapter createAbstractPackageCSAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageCS <em>Package CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -769,6 +754,21 @@ public class BaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS <em>Package Owner CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS
+	 * @generated
+	 */
+	public Adapter createPackageOwnerCSAdapter()
+	{
 		return null;
 	}
 

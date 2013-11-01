@@ -432,34 +432,31 @@ public class BaseCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BaseCSPackage.ABSTRACT_PACKAGE_CS:
-			{
-				AbstractPackageCS abstractPackageCS = (AbstractPackageCS)theEObject;
-				T result = caseAbstractPackageCS(abstractPackageCS);
-				if (result == null) result = caseNamespaceCS(abstractPackageCS);
-				if (result == null) result = caseNamedElementCS(abstractPackageCS);
-				if (result == null) result = caseModelElementCS(abstractPackageCS);
-				if (result == null) result = caseNameable(abstractPackageCS);
-				if (result == null) result = casePivotableElementCS(abstractPackageCS);
-				if (result == null) result = caseElementCS(abstractPackageCS);
-				if (result == null) result = casePivotable(abstractPackageCS);
-				if (result == null) result = caseVisitableCS(abstractPackageCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case BaseCSPackage.PACKAGE_CS:
 			{
 				PackageCS packageCS = (PackageCS)theEObject;
 				T result = casePackageCS(packageCS);
-				if (result == null) result = caseAbstractPackageCS(packageCS);
+				if (result == null) result = casePackageOwnerCS(packageCS);
 				if (result == null) result = caseNamespaceCS(packageCS);
 				if (result == null) result = caseNamedElementCS(packageCS);
 				if (result == null) result = caseModelElementCS(packageCS);
-				if (result == null) result = caseNameable(packageCS);
 				if (result == null) result = casePivotableElementCS(packageCS);
+				if (result == null) result = caseNameable(packageCS);
 				if (result == null) result = caseElementCS(packageCS);
 				if (result == null) result = casePivotable(packageCS);
 				if (result == null) result = caseVisitableCS(packageCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BaseCSPackage.PACKAGE_OWNER_CS:
+			{
+				PackageOwnerCS packageOwnerCS = (PackageOwnerCS)theEObject;
+				T result = casePackageOwnerCS(packageOwnerCS);
+				if (result == null) result = caseModelElementCS(packageOwnerCS);
+				if (result == null) result = casePivotableElementCS(packageOwnerCS);
+				if (result == null) result = caseElementCS(packageOwnerCS);
+				if (result == null) result = casePivotable(packageOwnerCS);
+				if (result == null) result = caseVisitableCS(packageOwnerCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -555,7 +552,9 @@ public class BaseCSSwitch<T> extends Switch<T> {
 			{
 				RootCS rootCS = (RootCS)theEObject;
 				T result = caseRootCS(rootCS);
+				if (result == null) result = caseNamedElementCS(rootCS);
 				if (result == null) result = caseModelElementCS(rootCS);
+				if (result == null) result = caseNameable(rootCS);
 				if (result == null) result = casePivotableElementCS(rootCS);
 				if (result == null) result = caseElementCS(rootCS);
 				if (result == null) result = casePivotable(rootCS);
@@ -567,13 +566,12 @@ public class BaseCSSwitch<T> extends Switch<T> {
 			{
 				RootPackageCS rootPackageCS = (RootPackageCS)theEObject;
 				T result = caseRootPackageCS(rootPackageCS);
-				if (result == null) result = caseAbstractPackageCS(rootPackageCS);
+				if (result == null) result = casePackageOwnerCS(rootPackageCS);
 				if (result == null) result = caseRootCS(rootPackageCS);
-				if (result == null) result = caseNamespaceCS(rootPackageCS);
 				if (result == null) result = caseNamedElementCS(rootPackageCS);
 				if (result == null) result = caseModelElementCS(rootPackageCS);
-				if (result == null) result = caseNameable(rootPackageCS);
 				if (result == null) result = casePivotableElementCS(rootPackageCS);
+				if (result == null) result = caseNameable(rootPackageCS);
 				if (result == null) result = caseElementCS(rootPackageCS);
 				if (result == null) result = casePivotable(rootPackageCS);
 				if (result == null) result = caseVisitableCS(rootPackageCS);
@@ -1190,22 +1188,6 @@ public class BaseCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Package CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractPackageCS(AbstractPackageCS object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Package CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1217,6 +1199,22 @@ public class BaseCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePackageCS(PackageCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageOwnerCS(PackageOwnerCS object)
+	{
 		return null;
 	}
 

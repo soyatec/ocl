@@ -22,7 +22,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
@@ -34,6 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
@@ -236,9 +236,9 @@ public class OCLstdlibCSAdapterFactory
 				return createOperationCSAdapter();
 			}
 			@Override
-			public Adapter caseAbstractPackageCS(AbstractPackageCS object)
+			public Adapter casePackageOwnerCS(PackageOwnerCS object)
 			{
-				return createAbstractPackageCSAdapter();
+				return createPackageOwnerCSAdapter();
 			}
 			@Override
 			public Adapter casePackageCS(PackageCS object)
@@ -610,16 +610,16 @@ public class OCLstdlibCSAdapterFactory
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS <em>Abstract Package CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS <em>Package Owner CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS
 	 * @generated
 	 */
-	public Adapter createAbstractPackageCSAdapter()
+	public Adapter createPackageOwnerCSAdapter()
 	{
 		return null;
 	}

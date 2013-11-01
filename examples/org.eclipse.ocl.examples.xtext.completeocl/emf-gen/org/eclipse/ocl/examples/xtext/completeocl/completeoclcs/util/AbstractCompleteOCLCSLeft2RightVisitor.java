@@ -50,7 +50,7 @@ public abstract class AbstractCompleteOCLCSLeft2RightVisitor
 	}
 
 	public @Nullable Element visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS csElement) {
-		return visitPackageCS(csElement);
+		return visitNamedElementCS(csElement);
 	}
 
 	public @Nullable Element visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ContextDeclCS csElement) {

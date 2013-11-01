@@ -18,18 +18,22 @@ package org.eclipse.ocl.examples.xtext.base.basecs.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
@@ -42,6 +46,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.basecs.impl.RootPackageCSImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.basecs.impl.RootPackageCSImpl#getOwnedImport <em>Owned Import</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.basecs.impl.RootPackageCSImpl#getOwnedLibrary <em>Owned Library</em>}</li>
  * </ul>
@@ -49,8 +54,28 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
  *
  * @generated
  */
-public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPackageCS
+public class RootPackageCSImpl extends PackageOwnerCSImpl implements RootPackageCS
 {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOwnedImport() <em>Owned Import</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -97,6 +122,29 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName)
+	{
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BaseCSPackage.ROOT_PACKAGE_CS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ImportCS> getOwnedImport()
 	{
 		if (ownedImport == null)
@@ -118,6 +166,16 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 			ownedLibrary = new EObjectContainmentEList<LibraryCS>(LibraryCS.class, this, BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARY);
 		}
 		return ownedLibrary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString()
+	{
+		return super.toString();
 	}
 
 	/**
@@ -148,6 +206,8 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	{
 		switch (featureID)
 		{
+			case BaseCSPackage.ROOT_PACKAGE_CS__NAME:
+				return getName();
 			case BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORT:
 				return getOwnedImport();
 			case BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARY:
@@ -167,6 +227,9 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	{
 		switch (featureID)
 		{
+			case BaseCSPackage.ROOT_PACKAGE_CS__NAME:
+				setName((String)newValue);
+				return;
 			case BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORT:
 				getOwnedImport().clear();
 				getOwnedImport().addAll((Collection<? extends ImportCS>)newValue);
@@ -189,6 +252,9 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	{
 		switch (featureID)
 		{
+			case BaseCSPackage.ROOT_PACKAGE_CS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORT:
 				getOwnedImport().clear();
 				return;
@@ -209,6 +275,8 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	{
 		switch (featureID)
 		{
+			case BaseCSPackage.ROOT_PACKAGE_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORT:
 				return ownedImport != null && !ownedImport.isEmpty();
 			case BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARY:
@@ -225,6 +293,21 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
+		if (baseClass == Nameable.class)
+		{
+			switch (derivedFeatureID)
+			{
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElementCS.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case BaseCSPackage.ROOT_PACKAGE_CS__NAME: return BaseCSPackage.NAMED_ELEMENT_CS__NAME;
+				default: return -1;
+			}
+		}
 		if (baseClass == RootCS.class)
 		{
 			switch (derivedFeatureID)
@@ -245,6 +328,21 @@ public class RootPackageCSImpl extends AbstractPackageCSImpl implements RootPack
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
+		if (baseClass == Nameable.class)
+		{
+			switch (baseFeatureID)
+			{
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElementCS.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BaseCSPackage.NAMED_ELEMENT_CS__NAME: return BaseCSPackage.ROOT_PACKAGE_CS__NAME;
+				default: return -1;
+			}
+		}
 		if (baseClass == RootCS.class)
 		{
 			switch (baseFeatureID)

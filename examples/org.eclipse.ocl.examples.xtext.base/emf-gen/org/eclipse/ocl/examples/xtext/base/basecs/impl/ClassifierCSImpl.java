@@ -33,10 +33,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassifierCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
@@ -181,9 +181,9 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractPackageCS getOwner() {
+	public PackageCS getOwner() {
 		if (eContainerFeatureID() != BaseCSPackage.CLASSIFIER_CS__OWNER) return null;
-		return (AbstractPackageCS)eInternalContainer();
+		return (PackageCS)eInternalContainer();
 	}
 
 	/**
@@ -191,7 +191,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwner(AbstractPackageCS newOwner, NotificationChain msgs)
+	public NotificationChain basicSetOwner(PackageCS newOwner, NotificationChain msgs)
 	{
 		msgs = eBasicSetContainer((InternalEObject)newOwner, BaseCSPackage.CLASSIFIER_CS__OWNER, msgs);
 		return msgs;
@@ -202,7 +202,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwner(AbstractPackageCS newOwner)
+	public void setOwner(PackageCS newOwner)
 	{
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != BaseCSPackage.CLASSIFIER_CS__OWNER && newOwner != null))
 		{
@@ -212,7 +212,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, BaseCSPackage.ABSTRACT_PACKAGE_CS__OWNED_TYPE, AbstractPackageCS.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, BaseCSPackage.PACKAGE_CS__OWNED_TYPE, PackageCS.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -360,7 +360,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 			case BaseCSPackage.CLASSIFIER_CS__OWNER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwner((AbstractPackageCS)otherEnd, msgs);
+				return basicSetOwner((PackageCS)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -394,7 +394,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 		switch (eContainerFeatureID())
 		{
 			case BaseCSPackage.CLASSIFIER_CS__OWNER:
-				return eInternalContainer().eInverseRemove(this, BaseCSPackage.ABSTRACT_PACKAGE_CS__OWNED_TYPE, AbstractPackageCS.class, msgs);
+				return eInternalContainer().eInverseRemove(this, BaseCSPackage.PACKAGE_CS__OWNED_TYPE, PackageCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -436,7 +436,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 				setOwnedTemplateSignature((TemplateSignatureCS)newValue);
 				return;
 			case BaseCSPackage.CLASSIFIER_CS__OWNER:
-				setOwner((AbstractPackageCS)newValue);
+				setOwner((PackageCS)newValue);
 				return;
 			case BaseCSPackage.CLASSIFIER_CS__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
@@ -466,7 +466,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 				setOwnedTemplateSignature((TemplateSignatureCS)null);
 				return;
 			case BaseCSPackage.CLASSIFIER_CS__OWNER:
-				setOwner((AbstractPackageCS)null);
+				setOwner((PackageCS)null);
 				return;
 			case BaseCSPackage.CLASSIFIER_CS__INSTANCE_CLASS_NAME:
 				unsetInstanceClassName();

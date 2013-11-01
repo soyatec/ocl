@@ -59,10 +59,6 @@ public abstract class AbstractDelegatingBaseCSVisitor<R, C, D extends BaseCSVisi
 		return delegate.visiting(visitable);
 	}
 
-	public @Nullable R visitAbstractPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AbstractPackageCS object) {
-		return delegate.visitAbstractPackageCS(object);
-	}
-
 	public @Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.AnnotationCS object) {
 		return delegate.visitAnnotationCS(object);
 	}
@@ -153,6 +149,10 @@ public abstract class AbstractDelegatingBaseCSVisitor<R, C, D extends BaseCSVisi
 
 	public @Nullable R visitPackageCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageCS object) {
 		return delegate.visitPackageCS(object);
+	}
+
+	public @Nullable R visitPackageOwnerCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS object) {
+		return delegate.visitPackageOwnerCS(object);
 	}
 
 	public @Nullable R visitParameterCS(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.ParameterCS object) {

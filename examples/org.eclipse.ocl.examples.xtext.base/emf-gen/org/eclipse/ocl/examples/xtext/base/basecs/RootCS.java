@@ -37,7 +37,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL TestConstraint='true'"
  * @generated
  */
-public interface RootCS extends ModelElementCS
+public interface RootCS extends NamedElementCS
 {
 	/**
 	 * Returns the value of the '<em><b>Owned Import</b></em>' containment reference list.

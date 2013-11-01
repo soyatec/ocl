@@ -210,8 +210,8 @@ public class EssentialOCLCSSwitch<T>
 			{
 				ContextCS contextCS = (ContextCS)theEObject;
 				T result = caseContextCS(contextCS);
-				if (result == null) result = caseNamedElementCS(contextCS);
 				if (result == null) result = caseRootCS(contextCS);
+				if (result == null) result = caseNamedElementCS(contextCS);
 				if (result == null) result = caseModelElementCS(contextCS);
 				if (result == null) result = caseNameable(contextCS);
 				if (result == null) result = casePivotableElementCS(contextCS);

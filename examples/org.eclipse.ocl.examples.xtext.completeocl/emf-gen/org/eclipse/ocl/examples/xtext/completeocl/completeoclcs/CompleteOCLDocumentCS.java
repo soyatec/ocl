@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.xtext.completeocl.completeoclcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 
 /**
@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
  * @generated
  */
 public interface CompleteOCLDocumentCS
-		extends PackageCS, RootCS {
+		extends NamespaceCS, RootCS {
 
 	/**
 	 * Returns the value of the '<em><b>Packages</b></em>' containment reference list.

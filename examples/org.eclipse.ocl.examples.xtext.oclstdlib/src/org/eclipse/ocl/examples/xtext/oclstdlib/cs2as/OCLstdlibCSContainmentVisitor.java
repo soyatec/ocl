@@ -102,7 +102,7 @@ public class OCLstdlibCSContainmentVisitor extends AbstractOCLstdlibCSContainmen
 	public Continuation<?> visitLibRootPackageCS(@NonNull LibRootPackageCS csElement) {
 		Resource eResource = csElement.eResource();
 		if (eResource != null) {
-			Root pivotElement = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);		
+			Root pivotElement = refreshRootPackage(Root.class, PivotPackage.Literals.ROOT, csElement);		
 			if (pivotElement != null) {
 				context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
 				importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc

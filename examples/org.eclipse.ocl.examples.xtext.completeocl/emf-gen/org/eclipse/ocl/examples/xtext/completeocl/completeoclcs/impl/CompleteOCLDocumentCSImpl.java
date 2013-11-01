@@ -31,7 +31,9 @@ import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.PackageCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.RootPackageCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLCSPackage;
@@ -59,7 +61,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.util.CompleteOCL
  * @generated
  */
 public class CompleteOCLDocumentCSImpl
-		extends PackageCSImpl
+		extends NamedElementCSImpl
 		implements CompleteOCLDocumentCS {
 
 	/**
@@ -136,7 +138,8 @@ public class CompleteOCLDocumentCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ImportCS> getOwnedImport() {
+	public EList<ImportCS> getOwnedImport()
+	{
 		if (ownedImport == null)
 		{
 			ownedImport = new EObjectContainmentEList<ImportCS>(ImportCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_IMPORT);
@@ -149,7 +152,8 @@ public class CompleteOCLDocumentCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<LibraryCS> getOwnedLibrary() {
+	public EList<LibraryCS> getOwnedLibrary()
+	{
 		if (ownedLibrary == null)
 		{
 			ownedLibrary = new EObjectContainmentEList<LibraryCS>(LibraryCS.class, this, CompleteOCLCSPackage.COMPLETE_OCL_DOCUMENT_CS__OWNED_LIBRARY);
@@ -334,7 +338,8 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+	{
 		if (baseClass == RootCS.class)
 		{
 			switch (derivedFeatureID)
@@ -353,7 +358,8 @@ public class CompleteOCLDocumentCSImpl
 	 * @generated
 	 */
 	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+	{
 		if (baseClass == RootCS.class)
 		{
 			switch (baseFeatureID)

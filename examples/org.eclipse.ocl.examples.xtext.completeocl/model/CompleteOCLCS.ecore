@@ -18,7 +18,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
         eType="#//DefCS" containment="true" eOpposite="#//DefCS/classifierContextDecl"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompleteOCLDocumentCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//PackageCS ../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//RootCS">
+  <eClassifiers xsi:type="ecore:EClass" name="CompleteOCLDocumentCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//NamespaceCS ../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//RootCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="#//PackageDeclarationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contexts" upperBound="-1"
