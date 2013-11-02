@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.resource;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -56,11 +57,11 @@ public class OCLASResourceFactory extends AbstractASResourceFactory
 		if (uri.isFile() && URIConverter.INSTANCE.exists(uri, null)) {
 			return super.createResource(uri);
 		}
-		if (uri.isPlatform()) {
+		else if (uri.isPlatform()) {
 			if (URIConverter.INSTANCE.exists(uri, null)) {
 				return super.createResource(uri);
 			}
-			if (uri.isPlatformResource() /*&& EMFPlugin.IS_ECLIPSE_RUNNING*/) {
+			if (uri.isPlatformResource() && EMFPlugin.IS_ECLIPSE_RUNNING) {
 				URI deresolvedURI = uri.deresolve(URI.createPlatformResourceURI("/", true));
 				URI pluginURI = deresolvedURI.resolve(URI.createPlatformPluginURI("/", true));
 				if (URIConverter.INSTANCE.exists(pluginURI, null)) {

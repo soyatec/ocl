@@ -135,7 +135,7 @@ public class ProjectMap extends StandaloneProjectMap
 	
 	@Override
 	public synchronized void initializeGenModelLocationMap(boolean force) {
-		if (force || (!initializedGenModelLocationMap && !EMFPlugin.IS_ECLIPSE_RUNNING)) {
+		if (force || ((nsURI2package == null) && !EMFPlugin.IS_ECLIPSE_RUNNING)) {
 			super.initializeGenModelLocationMap(force);
 		}
 	}

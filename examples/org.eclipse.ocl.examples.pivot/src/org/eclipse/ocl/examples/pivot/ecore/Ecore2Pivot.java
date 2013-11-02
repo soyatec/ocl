@@ -51,6 +51,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -296,6 +297,30 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		errors.add(new XMIException(message));
 	}
 
+	/**
+	 * Return the baseURI of ecoreResource against which its imports should be resolved.
+	 */
+	protected @Nullable URI getBaseURI(@NonNull Resource ecoreResource) {
+		URI ecoreURI = ecoreResource.getURI();
+		if (ecoreURI == null) {
+			return null;
+		}
+		if (DomainUtil.isRegistered(ecoreResource)) {
+			StandaloneProjectMap projectMap = metaModelManager.getProjectMap();
+			StandaloneProjectMap.IPackageDescriptor packageDescriptor = projectMap.getPackageDescriptor(ecoreURI);
+			if (packageDescriptor == null) {
+				return null;
+			}
+			return packageDescriptor.getPlatformPluginURI();
+		}
+		else {
+			if (!ecoreURI.isHierarchical() || ecoreURI.isRelative()) {
+				return null;
+			}
+			return ecoreURI;
+		}
+	}
+
 	public @Nullable <T extends Element> T getCreated(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
 		return getPivotOfEcore(requiredClass, eObject);
 	}
@@ -469,10 +494,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	protected void installImports() {
-		URI baseURI = getURI();
-		if (!baseURI.isHierarchical() || baseURI.isRelative()) {
-			baseURI = null;
-		}
+		URI baseURI = getBaseURI(ecoreResource);
 		List<Import> allImports = pivotRoot.getImports();
 		for (EObject eContent : ecoreResource.getContents()) {
 			if (eContent instanceof EModelElement) {
@@ -481,10 +503,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 					EMap<String, String> details = importAnnotation.getDetails();
 					for (String key : details.keySet()) {
 						URI uri = URI.createURI(details.get(key));
-						if (DomainUtil.isRegistered(ecoreResource)) {
-							uri = uri.resolve(URI.createURI("platform:/resource/x.y.z.z.y/"));
-						}
-						else if (baseURI != null) {
+						if (baseURI != null) {
 							uri = uri.resolve(baseURI);
 						}
 						try {
@@ -547,16 +566,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	 * as OCL AS Metamodels.
 	 */
 	protected void loadImports(@NonNull Resource ecoreResource) {
-		URI baseURI = null;
-		if (DomainUtil.isRegistered(ecoreResource)) {
-			baseURI = URI.createURI("platform:/resource/x.y.z.z.y/");
-		}
-		else {
-			baseURI = getURI();
-			if (!baseURI.isHierarchical() || baseURI.isRelative()) {
-				baseURI = null;
-			}
-		}
+		URI baseURI = getBaseURI(ecoreResource);
 		for (EObject eContent : ecoreResource.getContents()) {
 			if (eContent instanceof EPackage) {
 				loadImports((EPackage)eContent, baseURI);
@@ -605,17 +615,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 					}
 					if (importedEObjects.add(importedEObject) && (importedEObject instanceof EPackage)) {
 						Resource importedResource = importedEObject.eResource();
-						URI baseURI2 = null;
-						if (DomainUtil.isRegistered(importedResource)) {
-							baseURI2 = URI.createURI("platform:/resource/x.y.z.z.y/");
+						if (importedResource != null) {
+							URI baseURI2 = getBaseURI(importedResource);
+							loadImports((EPackage)importedEObject, baseURI2);
 						}
-						else {
-							baseURI2 = importedResource.getURI();
-							if (!baseURI2.isHierarchical() || baseURI2.isRelative()) {
-								baseURI2 = null;
-							}
-						}
-						loadImports((EPackage)importedEObject, baseURI2);
 					}
 				}
 			}

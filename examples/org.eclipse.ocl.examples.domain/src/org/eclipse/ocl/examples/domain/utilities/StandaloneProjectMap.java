@@ -863,7 +863,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 */
 		@Nullable Collection<IPackageDescriptor> getPackageDescriptors();
 
-		void initializeGenModelLocationMap();
+		void initializeGenModelLocationMap(@NonNull Map<URI, IPackageDescriptor> nsURI2package);
 
 //		void initializePackageRegistration(@NonNull EPackage.Registry packageRegistry, @NonNull IPackageDescriptor packageDescriptor);
 
@@ -1626,7 +1626,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 		} */
 
-		public void initializeGenModelLocationMap() {
+		public void initializeGenModelLocationMap(@NonNull Map<URI, IPackageDescriptor> nsURI2package) {
 			Collection<IPackageDescriptor> packageDescriptors = getPackageDescriptors();
 			if (packageDescriptors != null) {
 				Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
@@ -1634,7 +1634,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 					URI nsURI = packageDescriptor.getNamespaceURI();
 					URI genModelURI = packageDescriptor.getGenModelURI();
 					URI resolvedURI = genModelURI.resolve(locationURI);
-					ePackageNsURIToGenModelLocationMap.put(nsURI.toString(), resolvedURI);
+					String nsURIstring = nsURI.toString();
+					ePackageNsURIToGenModelLocationMap.put(nsURIstring, resolvedURI);
+					nsURI2package.put(nsURI, packageDescriptor);
 					if (PROJECT_MAP_ADD_GEN_MODEL.isActive()) {
 						PROJECT_MAP_ADD_GEN_MODEL.println(nsURI + " => " + resolvedURI);
 					}
@@ -1862,9 +1864,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 */
 	private Map<String, IProjectDescriptor.Internal> project2descriptor = null;
 
-	protected boolean initializedGenModelLocationMap = false;
-
 	protected boolean initializedPlatformResourceMap = false;
+
+	/**
+	 * The map of package nsURI to package descriptor.
+	 */
+	protected @Nullable Map<URI, IPackageDescriptor> nsURI2package = null;
 
 	/**
 	 * Configure the PackageRegistry associated with ResourceSet to use a packageLoadStrategy and conflictHandler when
@@ -1881,6 +1886,13 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 	protected @NonNull IProjectDescriptor.Internal createProjectDescriptor(@NonNull String projectName, @NonNull URI locationURI) {
 		return new ProjectDescriptor(projectName, locationURI);
+	}
+
+	/**
+	 * Return the IPackageDescriptor for a given nsURI.
+	 */
+	public @Nullable IPackageDescriptor getPackageDescriptor(@NonNull URI nsURI) {
+		return nsURI2package != null ? nsURI2package.get(nsURI) : null;
 	}
 
 	/**
@@ -1973,12 +1985,13 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * may be forced.
 	 */
 	public synchronized void initializeGenModelLocationMap(boolean force) {
-		if (force || !initializedGenModelLocationMap) {
-			initializedGenModelLocationMap = true;
+		if (force || (nsURI2package == null)) {
+			Map<URI, IPackageDescriptor> nsURI2package2 = new HashMap<URI, IPackageDescriptor> ();
+			nsURI2package = nsURI2package2;
 			Map<String, IProjectDescriptor.Internal> projectDescriptors = getProjectDescriptors();
 			if (projectDescriptors != null) {
 				for (IProjectDescriptor projectDescriptor : projectDescriptors.values()) {
-					projectDescriptor.initializeGenModelLocationMap();
+					projectDescriptor.initializeGenModelLocationMap(nsURI2package2);
 				}
 			}
 		}
