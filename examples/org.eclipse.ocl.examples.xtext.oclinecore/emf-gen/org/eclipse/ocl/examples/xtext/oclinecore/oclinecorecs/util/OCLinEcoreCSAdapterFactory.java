@@ -26,7 +26,10 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.*;
 
@@ -104,6 +107,11 @@ public class OCLinEcoreCSAdapterFactory extends AdapterFactoryImpl
 				return createSysMLCSAdapter();
 			}
 			@Override
+			public Adapter caseTopLevelCS(TopLevelCS object)
+			{
+				return createTopLevelCSAdapter();
+			}
+			@Override
 			public Adapter caseVisitableCS(VisitableCS object)
 			{
 				return createVisitableCSAdapter();
@@ -147,6 +155,21 @@ public class OCLinEcoreCSAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseAnnotationElementCS(AnnotationElementCS object)
 			{
 				return createAnnotationElementCSAdapter();
+			}
+			@Override
+			public Adapter casePackageOwnerCS(PackageOwnerCS object)
+			{
+				return createPackageOwnerCSAdapter();
+			}
+			@Override
+			public Adapter caseRootCS(RootCS object)
+			{
+				return createRootCSAdapter();
+			}
+			@Override
+			public Adapter caseRootPackageCS(RootPackageCS object)
+			{
+				return createRootPackageCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -196,6 +219,21 @@ public class OCLinEcoreCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createSysMLCSAdapter()
+	{
+		return null;
+	}
+
+/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS <em>Top Level CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS
+	 * @generated
+	 */
+	public Adapter createTopLevelCSAdapter()
 	{
 		return null;
 	}
@@ -331,6 +369,51 @@ public class OCLinEcoreCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createAnnotationElementCSAdapter()
+	{
+		return null;
+	}
+
+/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS <em>Package Owner CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS
+	 * @generated
+	 */
+	public Adapter createPackageOwnerCSAdapter()
+	{
+		return null;
+	}
+
+/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.RootCS <em>Root CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.RootCS
+	 * @generated
+	 */
+	public Adapter createRootCSAdapter()
+	{
+		return null;
+	}
+
+/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS <em>Root Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS
+	 * @generated
+	 */
+	public Adapter createRootPackageCSAdapter()
 	{
 		return null;
 	}

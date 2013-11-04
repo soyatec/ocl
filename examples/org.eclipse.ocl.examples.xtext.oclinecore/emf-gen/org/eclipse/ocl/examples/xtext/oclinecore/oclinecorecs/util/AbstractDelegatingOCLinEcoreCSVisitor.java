@@ -45,4 +45,8 @@ public abstract class AbstractDelegatingOCLinEcoreCSVisitor<R, C, D extends OCLi
 	public @Nullable R visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS object) {
 		return delegate.visitSysMLCS(object);
 	}
+
+	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS object) {
+		return delegate.visitTopLevelCS(object);
+	}
 }

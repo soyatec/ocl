@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ReferenceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
@@ -70,6 +69,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.serializer.EssentialOCLSemant
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -253,12 +253,6 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 				   context == grammarAccess.getReferenceCSRule() ||
 				   context == grammarAccess.getStructuralFeatureCSRule()) {
 					sequence_ReferenceCS(context, (ReferenceCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case BaseCSPackage.ROOT_PACKAGE_CS:
-				if(context == grammarAccess.getRootPackageCSRule()) {
-					sequence_RootPackageCS(context, (RootPackageCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -676,6 +670,12 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 					return; 
 				}
 				else break;
+			case OCLinEcoreCSPackage.TOP_LEVEL_CS:
+				if(context == grammarAccess.getTopLevelCSRule()) {
+					sequence_TopLevelCS(context, (TopLevelCS) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -1000,15 +1000,6 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     (name=UnrestrictedName? ownedLibrary+=LibraryCS* ownedImport+=ImportCS* ownedNestedPackage+=PackageCS*)
-	 */
-	protected void sequence_RootPackageCS(EObject context, RootPackageCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (ownedExpression=ExpCS | exprString=UNQUOTED_STRING)
 	 */
 	protected void sequence_SpecificationCS(EObject context, ExpSpecificationCS semanticObject) {
@@ -1054,6 +1045,15 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	 *     )
 	 */
 	protected void sequence_TemplateSignatureCS(EObject context, TemplateSignatureCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=UnrestrictedName? ownedLibrary+=LibraryCS* ownedImport+=ImportCS* ownedNestedPackage+=PackageCS*)
+	 */
+	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

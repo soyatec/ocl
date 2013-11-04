@@ -139,6 +139,16 @@ public interface OCLinEcoreCSPackage extends EPackage {
 	EAttribute getSysMLCS_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS <em>Top Level CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Top Level CS</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS
+	 * @generated
+	 */
+	EClass getTopLevelCS();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -329,6 +339,106 @@ public interface OCLinEcoreCSPackage extends EPackage {
 	int SYS_MLCS_FEATURE_COUNT = BaseCSPackage.ANNOTATION_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl.TopLevelCSImpl
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl.OCLinEcoreCSPackageImpl#getTopLevelCS()
+	 * @generated
+	 */
+	int TOP_LEVEL_CS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__LOGICAL_PARENT = BaseCSPackage.ROOT_PACKAGE_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__PIVOT = BaseCSPackage.ROOT_PACKAGE_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__OWNED_ANNOTATION = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__ORIGINAL_XMI_ID = BaseCSPackage.ROOT_PACKAGE_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__CSI = BaseCSPackage.ROOT_PACKAGE_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__OWNED_NESTED_PACKAGE = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__NAME = BaseCSPackage.ROOT_PACKAGE_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__OWNED_IMPORT = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Library</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__OWNED_LIBRARY = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARY;
+
+	/**
+	 * The number of structural features of the '<em>Top Level CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS_FEATURE_COUNT = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * Defines literals for the meta objects that represent
 	 * <ul>
@@ -373,6 +483,15 @@ public interface OCLinEcoreCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SYS_MLCS__VALUE = eINSTANCE.getSysMLCS_Value();
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl.TopLevelCSImpl
+		 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.impl.OCLinEcoreCSPackageImpl#getTopLevelCS()
+		 * @generated
+		 */
+		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
 
 	}
 

@@ -106,8 +106,8 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives(), "rule__PrimaryExpCS__Alternatives");
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives_7_2(), "rule__PrimaryExpCS__Alternatives_7_2");
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives_7_2_1_2(), "rule__PrimaryExpCS__Alternatives_7_2_1_2");
-					put(grammarAccess.getRootPackageCSAccess().getGroup(), "rule__RootPackageCS__Group__0");
-					put(grammarAccess.getRootPackageCSAccess().getGroup_1(), "rule__RootPackageCS__Group_1__0");
+					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
+					put(grammarAccess.getTopLevelCSAccess().getGroup_0(), "rule__TopLevelCS__Group_0__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup(), "rule__InvariantConstraintCS__Group__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2(), "rule__InvariantConstraintCS__Group_2__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2_1(), "rule__InvariantConstraintCS__Group_2_1__0");
@@ -286,10 +286,10 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLetVariableCSAccess().getGroup_1(), "rule__LetVariableCS__Group_1__0");
 					put(grammarAccess.getNestedExpCSAccess().getGroup(), "rule__NestedExpCS__Group__0");
 					put(grammarAccess.getSelfExpCSAccess().getGroup(), "rule__SelfExpCS__Group__0");
-					put(grammarAccess.getRootPackageCSAccess().getNameAssignment_1_1(), "rule__RootPackageCS__NameAssignment_1_1");
-					put(grammarAccess.getRootPackageCSAccess().getOwnedLibraryAssignment_2(), "rule__RootPackageCS__OwnedLibraryAssignment_2");
-					put(grammarAccess.getRootPackageCSAccess().getOwnedImportAssignment_3(), "rule__RootPackageCS__OwnedImportAssignment_3");
-					put(grammarAccess.getRootPackageCSAccess().getOwnedNestedPackageAssignment_4(), "rule__RootPackageCS__OwnedNestedPackageAssignment_4");
+					put(grammarAccess.getTopLevelCSAccess().getNameAssignment_0_1(), "rule__TopLevelCS__NameAssignment_0_1");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedLibraryAssignment_1(), "rule__TopLevelCS__OwnedLibraryAssignment_1");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedImportAssignment_2(), "rule__TopLevelCS__OwnedImportAssignment_2");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedNestedPackageAssignment_3(), "rule__TopLevelCS__OwnedNestedPackageAssignment_3");
 					put(grammarAccess.getInvariantConstraintCSAccess().getCallableAssignment_0(), "rule__InvariantConstraintCS__CallableAssignment_0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getStereotypeAssignment_1(), "rule__InvariantConstraintCS__StereotypeAssignment_1");
 					put(grammarAccess.getInvariantConstraintCSAccess().getNameAssignment_2_0(), "rule__InvariantConstraintCS__NameAssignment_2_0");
@@ -568,7 +568,7 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			org.eclipse.ocl.examples.xtext.oclinecore.ui.contentassist.antlr.internal.InternalOCLinEcoreParser typedParser = (org.eclipse.ocl.examples.xtext.oclinecore.ui.contentassist.antlr.internal.InternalOCLinEcoreParser) parser;
-			typedParser.entryRuleRootPackageCS();
+			typedParser.entryRuleTopLevelCS();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

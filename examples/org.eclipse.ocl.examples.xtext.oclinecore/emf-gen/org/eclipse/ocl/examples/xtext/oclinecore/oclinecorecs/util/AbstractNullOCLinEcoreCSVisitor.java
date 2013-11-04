@@ -45,4 +45,8 @@ public abstract class AbstractNullOCLinEcoreCSVisitor<R, C>
 	public @Nullable R visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS object) {
 		return null;
 	}
+
+	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS object) {
+		return null;
+	}
 }

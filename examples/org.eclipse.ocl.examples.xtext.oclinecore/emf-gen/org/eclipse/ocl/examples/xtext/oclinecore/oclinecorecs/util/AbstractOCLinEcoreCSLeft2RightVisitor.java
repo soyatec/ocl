@@ -52,4 +52,8 @@ public abstract class AbstractOCLinEcoreCSLeft2RightVisitor
 	public @Nullable Element visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS csElement) {
 		return visitAnnotationElementCS(csElement);
 	}
+
+	public @Nullable Element visitTopLevelCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS csElement) {
+		return visitRootPackageCS(csElement);
+	}
 }

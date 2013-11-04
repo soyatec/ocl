@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSFactor
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,6 +47,13 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 	 * @generated
 	 */
 	private EClass sysMLCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass topLevelCSEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -156,6 +164,16 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTopLevelCS()
+	{
+		return topLevelCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OCLinEcoreCSFactory getOCLinEcoreCSFactory()
 	{
 		return (OCLinEcoreCSFactory)getEFactoryInstance();
@@ -185,6 +203,8 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 
 		sysMLCSEClass = createEClass(SYS_MLCS);
 		createEAttribute(sysMLCSEClass, SYS_MLCS__VALUE);
+
+		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
 	}
 
 	/**
@@ -220,6 +240,7 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 		// Add supertypes to classes
 		ocLinEcoreConstraintCSEClass.getESuperTypes().add(theBaseCSPackage.getConstraintCS());
 		sysMLCSEClass.getESuperTypes().add(theBaseCSPackage.getAnnotationElementCS());
+		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(ocLinEcoreConstraintCSEClass, OCLinEcoreConstraintCS.class, "OCLinEcoreConstraintCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -227,6 +248,8 @@ public class OCLinEcoreCSPackageImpl extends EPackageImpl implements OCLinEcoreC
 
 		initEClass(sysMLCSEClass, SysMLCS.class, "SysMLCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSysMLCS_Value(), ecorePackage.getEString(), "value", null, 0, 1, SysMLCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

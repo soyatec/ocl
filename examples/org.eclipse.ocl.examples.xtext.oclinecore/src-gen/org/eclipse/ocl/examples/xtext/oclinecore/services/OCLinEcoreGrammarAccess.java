@@ -18,64 +18,57 @@ import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarA
 public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class RootPackageCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RootPackageCS");
+	public class TopLevelCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TopLevelCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cRootPackageCSAction_0 = (Action)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cModuleKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cNameAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_1_0 = (RuleCall)cNameAssignment_1_1.eContents().get(0);
-		private final Assignment cOwnedLibraryAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOwnedLibraryLibraryCSParserRuleCall_2_0 = (RuleCall)cOwnedLibraryAssignment_2.eContents().get(0);
-		private final Assignment cOwnedImportAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOwnedImportImportCSParserRuleCall_3_0 = (RuleCall)cOwnedImportAssignment_3.eContents().get(0);
-		private final Assignment cOwnedNestedPackageAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cOwnedNestedPackagePackageCSParserRuleCall_4_0 = (RuleCall)cOwnedNestedPackageAssignment_4.eContents().get(0);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cModuleKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
+		private final Assignment cOwnedLibraryAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOwnedLibraryLibraryCSParserRuleCall_1_0 = (RuleCall)cOwnedLibraryAssignment_1.eContents().get(0);
+		private final Assignment cOwnedImportAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOwnedImportImportCSParserRuleCall_2_0 = (RuleCall)cOwnedImportAssignment_2.eContents().get(0);
+		private final Assignment cOwnedNestedPackageAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOwnedNestedPackagePackageCSParserRuleCall_3_0 = (RuleCall)cOwnedNestedPackageAssignment_3.eContents().get(0);
 		
 		////generate oclinEcore2 "http://www.eclipse.org/ocl/examples/xtext/oclinecore/OCLinEcore"
-		// RootPackageCS returns
-		//base::RootPackageCS:
-		//	{base::RootPackageCS} ("module" name=UnrestrictedName)? ownedLibrary+=LibraryCS* ownedImport+=ImportCS*
-		//	ownedNestedPackage+=PackageCS*;
+		// TopLevelCS:
+		//	("module" name=UnrestrictedName)? ownedLibrary+=LibraryCS* ownedImport+=ImportCS* ownedNestedPackage+=PackageCS*;
 		public ParserRule getRule() { return rule; }
 
-		//{base::RootPackageCS} ("module" name=UnrestrictedName)? ownedLibrary+=LibraryCS* ownedImport+=ImportCS*
-		//ownedNestedPackage+=PackageCS*
+		//("module" name=UnrestrictedName)? ownedLibrary+=LibraryCS* ownedImport+=ImportCS* ownedNestedPackage+=PackageCS*
 		public Group getGroup() { return cGroup; }
 
-		//{base::RootPackageCS}
-		public Action getRootPackageCSAction_0() { return cRootPackageCSAction_0; }
-
 		//("module" name=UnrestrictedName)?
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_0() { return cGroup_0; }
 
 		//"module"
-		public Keyword getModuleKeyword_1_0() { return cModuleKeyword_1_0; }
+		public Keyword getModuleKeyword_0_0() { return cModuleKeyword_0_0; }
 
 		//name=UnrestrictedName
-		public Assignment getNameAssignment_1_1() { return cNameAssignment_1_1; }
+		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_1_1_0() { return cNameUnrestrictedNameParserRuleCall_1_1_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_0_1_0() { return cNameUnrestrictedNameParserRuleCall_0_1_0; }
 
 		//ownedLibrary+=LibraryCS*
-		public Assignment getOwnedLibraryAssignment_2() { return cOwnedLibraryAssignment_2; }
+		public Assignment getOwnedLibraryAssignment_1() { return cOwnedLibraryAssignment_1; }
 
 		//LibraryCS
-		public RuleCall getOwnedLibraryLibraryCSParserRuleCall_2_0() { return cOwnedLibraryLibraryCSParserRuleCall_2_0; }
+		public RuleCall getOwnedLibraryLibraryCSParserRuleCall_1_0() { return cOwnedLibraryLibraryCSParserRuleCall_1_0; }
 
 		//ownedImport+=ImportCS*
-		public Assignment getOwnedImportAssignment_3() { return cOwnedImportAssignment_3; }
+		public Assignment getOwnedImportAssignment_2() { return cOwnedImportAssignment_2; }
 
 		//ImportCS
-		public RuleCall getOwnedImportImportCSParserRuleCall_3_0() { return cOwnedImportImportCSParserRuleCall_3_0; }
+		public RuleCall getOwnedImportImportCSParserRuleCall_2_0() { return cOwnedImportImportCSParserRuleCall_2_0; }
 
 		//ownedNestedPackage+=PackageCS*
-		public Assignment getOwnedNestedPackageAssignment_4() { return cOwnedNestedPackageAssignment_4; }
+		public Assignment getOwnedNestedPackageAssignment_3() { return cOwnedNestedPackageAssignment_3; }
 
 		//PackageCS
-		public RuleCall getOwnedNestedPackagePackageCSParserRuleCall_4_0() { return cOwnedNestedPackagePackageCSParserRuleCall_4_0; }
+		public RuleCall getOwnedNestedPackagePackageCSParserRuleCall_3_0() { return cOwnedNestedPackagePackageCSParserRuleCall_3_0; }
 	}
 
 	public class INTEGERElements extends AbstractParserRuleElementFinder {
@@ -3461,7 +3454,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private RootPackageCSElements pRootPackageCS;
+	private TopLevelCSElements pTopLevelCS;
 	private TerminalRule tUNQUOTED_STRING;
 	private INTEGERElements pINTEGER;
 	private EnumerationLiteralNameElements pEnumerationLiteralName;
@@ -3541,16 +3534,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	////generate oclinEcore2 "http://www.eclipse.org/ocl/examples/xtext/oclinecore/OCLinEcore"
-	// RootPackageCS returns
-	//base::RootPackageCS:
-	//	{base::RootPackageCS} ("module" name=UnrestrictedName)? ownedLibrary+=LibraryCS* ownedImport+=ImportCS*
-	//	ownedNestedPackage+=PackageCS*;
-	public RootPackageCSElements getRootPackageCSAccess() {
-		return (pRootPackageCS != null) ? pRootPackageCS : (pRootPackageCS = new RootPackageCSElements());
+	// TopLevelCS:
+	//	("module" name=UnrestrictedName)? ownedLibrary+=LibraryCS* ownedImport+=ImportCS* ownedNestedPackage+=PackageCS*;
+	public TopLevelCSElements getTopLevelCSAccess() {
+		return (pTopLevelCS != null) ? pTopLevelCS : (pTopLevelCS = new TopLevelCSElements());
 	}
 	
-	public ParserRule getRootPackageCSRule() {
-		return getRootPackageCSAccess().getRule();
+	public ParserRule getTopLevelCSRule() {
+		return getTopLevelCSAccess().getRule();
 	}
 
 	//// Never forward parsed; just provides a placeholder

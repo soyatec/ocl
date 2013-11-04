@@ -25,7 +25,7 @@ public class OCLinEcoreParser extends org.eclipse.xtext.parser.antlr.AbstractAnt
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "RootPackageCS";
+		return "TopLevelCS";
 	}
 	
 	public OCLinEcoreGrammarAccess getGrammarAccess() {
