@@ -52,4 +52,8 @@ public abstract class AbstractOCLinEcoreCSContainmentVisitor
 	public @Nullable Continuation<?> visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS csElement) {
 		return visitAnnotationElementCS(csElement);
 	}
+
+	public @Nullable Continuation<?> visitTopLevelCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS csElement) {
+		return visitRootPackageCS(csElement);
+	}
 }

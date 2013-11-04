@@ -25,7 +25,10 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.*;
 
@@ -122,6 +125,23 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OCLinEcoreCSPackage.TOP_LEVEL_CS:
+			{
+				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
+				T result = caseTopLevelCS(topLevelCS);
+				if (result == null) result = caseRootPackageCS(topLevelCS);
+				if (result == null) result = casePackageOwnerCS(topLevelCS);
+				if (result == null) result = caseRootCS(topLevelCS);
+				if (result == null) result = caseNamedElementCS(topLevelCS);
+				if (result == null) result = caseModelElementCS(topLevelCS);
+				if (result == null) result = casePivotableElementCS(topLevelCS);
+				if (result == null) result = caseNameable(topLevelCS);
+				if (result == null) result = caseElementCS(topLevelCS);
+				if (result == null) result = casePivotable(topLevelCS);
+				if (result == null) result = caseVisitableCS(topLevelCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -154,6 +174,22 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @generated
 	 */
 	public T caseSysMLCS(SysMLCS object)
+	{
+		return null;
+	}
+
+/**
+	 * Returns the result of interpreting the object as an instance of '<em>Top Level CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Top Level CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTopLevelCS(TopLevelCS object)
 	{
 		return null;
 	}
@@ -298,6 +334,54 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @generated
 	 */
 	public T caseAnnotationElementCS(AnnotationElementCS object)
+	{
+		return null;
+	}
+
+/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageOwnerCS(PackageOwnerCS object)
+	{
+		return null;
+	}
+
+/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootCS(RootCS object)
+	{
+		return null;
+	}
+
+/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootPackageCS(RootPackageCS object)
 	{
 		return null;
 	}

@@ -49,4 +49,8 @@ public abstract class AbstractExtendingOCLinEcoreCSVisitor<R, C>
 	public @Nullable R visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS object) {
 		return visitAnnotationElementCS(object);
 	}
+
+	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS object) {
+		return visitRootPackageCS(object);
+	}
 }

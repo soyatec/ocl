@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.*;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSFactory;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
@@ -75,6 +76,7 @@ public class OCLinEcoreCSFactoryImpl extends EFactoryImpl implements OCLinEcoreC
 		{
 			case OCLinEcoreCSPackage.OC_LIN_ECORE_CONSTRAINT_CS: return createOCLinEcoreConstraintCS();
 			case OCLinEcoreCSPackage.SYS_MLCS: return createSysMLCS();
+			case OCLinEcoreCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -100,6 +102,17 @@ public class OCLinEcoreCSFactoryImpl extends EFactoryImpl implements OCLinEcoreC
 	{
 		SysMLCSImpl sysMLCS = new SysMLCSImpl();
 		return sysMLCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TopLevelCS createTopLevelCS()
+	{
+		TopLevelCSImpl topLevelCS = new TopLevelCSImpl();
+		return topLevelCS;
 	}
 
 	/**

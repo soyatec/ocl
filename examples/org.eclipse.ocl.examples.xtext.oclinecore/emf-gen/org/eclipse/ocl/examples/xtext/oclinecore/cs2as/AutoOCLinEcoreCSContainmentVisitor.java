@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.NewEssentialOCLCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.util.OCLinEcoreCSVisitor;
 
 public class AutoOCLinEcoreCSContainmentVisitor
@@ -45,5 +46,9 @@ public class AutoOCLinEcoreCSContainmentVisitor
     
     public @Nullable Continuation<?> visitSysMLCS(@NonNull SysMLCS self) {
         throw new UnsupportedOperationException("visitSysMLCS is not supported by " + getClass().getName());
+    }
+    
+    public @Nullable Continuation<?> visitTopLevelCS(@NonNull TopLevelCS self) {
+        throw new UnsupportedOperationException("visitTopLevelCS is not supported by " + getClass().getName());
     }
 }

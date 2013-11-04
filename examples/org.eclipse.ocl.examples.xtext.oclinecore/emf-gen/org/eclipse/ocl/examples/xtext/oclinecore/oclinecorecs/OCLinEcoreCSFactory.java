@@ -53,6 +53,15 @@ public interface OCLinEcoreCSFactory extends EFactory {
 	SysMLCS createSysMLCS();
 
 	/**
+	 * Returns a new object of class '<em>Top Level CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Top Level CS</em>'.
+	 * @generated
+	 */
+	TopLevelCS createTopLevelCS();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -26,5 +26,6 @@
     <genClasses ecoreClass="OCLinEcoreCS.ecore#//SysMLCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute OCLinEcoreCS.ecore#//SysMLCS/value"/>
     </genClasses>
+    <genClasses ecoreClass="OCLinEcoreCS.ecore#//TopLevelCS"/>
   </genPackages>
 </genmodel:GenModel>
