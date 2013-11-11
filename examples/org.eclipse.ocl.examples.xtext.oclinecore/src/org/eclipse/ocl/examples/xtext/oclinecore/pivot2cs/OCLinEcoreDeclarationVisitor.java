@@ -19,13 +19,17 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.xtext.base.basecs.DetailCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.SysMLCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.TopLevelCS;
 
 public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 {
@@ -53,6 +57,14 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 			csElement.setCallable(object.isCallable());
 			refreshConstraint(csElement, object);
 		}
+		return csElement;
+	}
+	
+	@Override
+	public ElementCS visitRoot(@NonNull Root object) {
+		TopLevelCS csElement = context.refreshElement(TopLevelCS.class, OCLinEcoreCSPackage.Literals.TOP_LEVEL_CS, object);
+		context.refreshList(csElement.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
+		context.visitDeclarations(ImportCS.class, object.getImports(), null);
 		return csElement;
 	}
 }
