@@ -24,10 +24,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseReferenceVisitor;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLPivot2CS;
+import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLReferenceVisitor;
 
 public class OCLinEcorePivot2CS extends EssentialOCLPivot2CS
 {	
@@ -60,5 +62,15 @@ public class OCLinEcorePivot2CS extends EssentialOCLPivot2CS
 			assert csResource != null;
 			MetaModelManagerResourceAdapter.getAdapter(csResource, metaModelManager);
 		}
+	}
+	
+	@Override
+	public @NonNull BaseDeclarationVisitor createDefaultDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
+		return new OCLinEcoreDeclarationVisitor(converter);
+	}
+
+	@Override
+	public @NonNull BaseReferenceVisitor createDefaultReferenceVisitor(@NonNull Pivot2CSConversion converter) {
+		return new EssentialOCLReferenceVisitor(converter);
 	}
 }
