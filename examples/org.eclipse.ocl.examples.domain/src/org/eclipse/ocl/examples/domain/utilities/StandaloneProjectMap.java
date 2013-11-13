@@ -42,6 +42,9 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.SingletonAdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -217,10 +220,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		protected AbstractEPackageDescriptor(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage.Registry packageRegistry) {
 			this.packageLoadStatus = packageLoadStatus;
-			if (PROJECT_MAP_INSTALL.isActive()) {
-				PROJECT_MAP_INSTALL.println("" + toString());
-			}
-			packageRegistry.put(getURI().toString(), this);
+			install(packageRegistry);
 		}
 
 		public EFactory getEFactory() {
@@ -325,6 +325,13 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		protected abstract @NonNull URI getURI();
+
+		public void install(@NonNull Registry packageRegistry) {
+			if (PROJECT_MAP_INSTALL.isActive()) {
+				PROJECT_MAP_INSTALL.println("" + toString());
+			}
+			packageRegistry.put(getURI().toString(), this);
+		}
 
 		protected abstract @Nullable EPackage resolveEPackage();
 
@@ -471,6 +478,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Update the status to accommodate the parasitic loading of loadedEPackage as a consequence of a reference from loadingEPackage.
 		 */
 		void setTransitivelyLoadedBy(@NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage);
+
+		/**
+		 * Reset the status following notiofication that the model has been unloaded.
+		 */
+		void unloadModel();
 	}
 
 	/**
@@ -497,6 +509,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Update the packageLoadStatus to accommodate the parasitic loading of loadedEPackage as a consequence of a reference from loadingEPackage.
 		 */
 		void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage);
+
+		/**
+		 * Unload any loaded model.
+		 */
+		void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus);
 	}
 
 	protected static abstract class AbstractPackageLoadStrategy implements IPackageLoadStrategy
@@ -529,6 +546,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
 			logger.error("Should have already loaded + '" + loadedEPackage + "'");
 		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {}
 	}
 	
 	/**
@@ -554,15 +573,17 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
 			logger.error("Should have already loaded + '" + loadedEPackage + "'");
 		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {}
 	}
 	
 	/**
 	 * The LoadedAsModelStrategy re-uses the already loaded EPackage for platform URI accesses, and invokes the conflict handler for
 	 * namespace URI accesses.
 	 */
-	private static final class LoadedAsModelStrategy extends AbstractPackageLoadStrategy
+	private static final class LoadedFirstAsModelStrategy extends AbstractPackageLoadStrategy
 	{
-		public static final @NonNull IPackageLoadStrategy INSTANCE = new LoadedAsModelStrategy();
+		public static final @NonNull IPackageLoadStrategy INSTANCE = new LoadedFirstAsModelStrategy();
 		
 		public @Nullable EPackage getEPackageByNamespaceURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			return packageLoadStatus.getConflictingNamespaceURI();
@@ -578,6 +599,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
 			logger.error("Should not load + '" + loadedEPackage + "' when a Model load strategy specified");
+		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {
+			packageLoadStatus.unloadModel();
+			packageLoadStatus.setPackageLoadStrategy(LoadFirstStrategy.INSTANCE);
 		}
 	}
 
@@ -603,6 +629,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public void setTransitivelyLoadedBy(@NonNull PackageLoadStatus packageLoadStatus, @NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
 			packageLoadStatus.setEPackage(loadedEPackage);
+		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {
+			packageLoadStatus.unloadModel();
 		}
 	}
 
@@ -636,6 +666,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			packageLoadStatus.setEPackage(loadedEPackage);
 			packageLoadStatus.setPackageLoadStrategy(LoadedStrategy.INSTANCE);
 		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {}
 	}
 
 	/**
@@ -655,13 +687,13 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public @Nullable EPackage getEPackageByPlatformPluginURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			EPackage ePackage = packageLoadStatus.loadEPackageByModelURI();
-			packageLoadStatus.setPackageLoadStrategy(LoadedAsModelStrategy.INSTANCE);
+			packageLoadStatus.setPackageLoadStrategy(LoadedFirstAsModelStrategy.INSTANCE);
 			return ePackage;
 		}
 
 		public @Nullable EPackage getEPackageByPlatformResourceURI(@NonNull IPackageLoadStatus packageLoadStatus) {
 			EPackage ePackage = packageLoadStatus.loadEPackageByModelURI();
-			packageLoadStatus.setPackageLoadStrategy(LoadedAsModelStrategy.INSTANCE);
+			packageLoadStatus.setPackageLoadStrategy(LoadedFirstAsModelStrategy.INSTANCE);
 			return ePackage;
 		}
 
@@ -669,6 +701,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			packageLoadStatus.setEPackage(loadedEPackage);
 			packageLoadStatus.setPackageLoadStrategy(LoadedAsEPackageStrategy.INSTANCE);
 		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {}
 	}
 
 	/**
@@ -701,6 +735,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			logger.error("Should not load + '" + loadedEPackage + "' when a Model load strategy specified");
 			packageLoadStatus.setPackageLoadStrategy(LoadedStrategy.INSTANCE);
 		}
+
+		public void unloadModel(@NonNull IPackageLoadStatus packageLoadStatus) {}
 	}
 	
 	/**
@@ -880,7 +916,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 //		void usePackages(@NonNull Resource ecoreResource);
 	}
 	
-	public static final class PackageLoadStatus implements IPackageLoadStatus
+	public static final class PackageLoadStatus implements IPackageLoadStatus, Adapter
 	{
 		protected final @NonNull IPackageDescriptor.Internal packageDescriptor;
 		private @Nullable ResourceSet resourceSet;
@@ -896,7 +932,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		private @Nullable IConflictHandler conflictHandler = MapToFirstConflictHandlerWithLog.INSTANCE;
 		
 		/**
-		 * The strategy to be be used to resolve further URI to EPackage mappings.
+		 * The strategy to be used to resolve further URI to EPackage mappings.
 		 */
 		protected @NonNull IPackageLoadStrategy packageLoadStrategy = LoadFirstStrategy.INSTANCE;
 		
@@ -920,6 +956,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 */
 		private boolean modelLoadInProgress = false;
 
+		/**
+		 * Target of unload watching Adapter.
+		 */
+		private @Nullable Notifier target = null;
+
 		public PackageLoadStatus(@NonNull IPackageDescriptor.Internal packageDescriptor, @Nullable ResourceSet resourceSet) {
 			this.packageDescriptor = packageDescriptor;
 			this.resourceSet = resourceSet;
@@ -937,6 +978,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			platformPluginURIDescriptor.uninstall(packageRegistry);
 			platformResourceURIDescriptor.uninstall(packageRegistry);
 			resourceSet = null;
+			if (target != null) {
+				target.eAdapters().remove(this);
+				target = null;
+			}
 		}
 
 		public @Nullable EPackage getConflictingModelURI() {
@@ -1009,6 +1054,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 							String fragment = ecorePackageURI.fragment();
 							EObject eObject = resource.getEObject(fragment != null ? fragment : "/");
 							eModel = (EPackage) eObject;
+							List<Adapter> eAdapters = resource.eAdapters();
+							if (!eAdapters.contains(this)) {
+								eAdapters.add(this);
+							}
 						} catch (Exception exception) {
 							handleLoadException(resource, DomainUtil.nonNullEMF(physicalURI.toString()), exception);
 						} 
@@ -1032,6 +1081,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public @NonNull EPackage.Registry getPackageRegistry() {
 			return packageRegistry;
+		}
+
+		public @Nullable Notifier getTarget() {
+			return target;
 		}
 
 		protected void handleLoadException(Resource resource, final @NonNull String location, Exception exception) throws RuntimeException {
@@ -1063,6 +1116,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			throw wrappedException;
 		}
 
+		public boolean isAdapterForType(Object type) {
+			return false;
+		}
+
 		public synchronized @Nullable EPackage loadEPackageByModelURI() {
 			if (modelLoadInProgress) {					// Recursive load
 				logger.error("Attempt to load self-referential '" + packageDescriptor.getNamespaceURI() + "' as model replaced by registered EPackage");
@@ -1082,6 +1139,22 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 			return ePackage;
 		}
+		
+		public void notifyChanged(Notification notification) {
+			if (notification.getNotifier() == target) {
+				int id = notification.getFeatureID(Resource.class);
+				if (id == Resource.RESOURCE__IS_LOADED) {
+					int eventType = notification.getEventType();
+					if (eventType == Notification.SET) {
+						boolean wasLoaded = notification.getOldBooleanValue();
+						boolean isLoaded = notification.getNewBooleanValue();
+						if (!isLoaded && wasLoaded) {
+							packageLoadStrategy.unloadModel(this);
+						}
+					}
+				}
+			}
+		}
 
 		public void setConflictHandler(@Nullable IConflictHandler conflictHandler) {
 			this.conflictHandler = conflictHandler;
@@ -1100,6 +1173,14 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 		}
 
+		public void setTarget(Notifier newTarget) {
+			this.target = newTarget;
+		}
+
+		public void setTransitivelyLoadedBy(@NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
+			packageLoadStrategy.setTransitivelyLoadedBy(this, loadedEPackage, loadingEPackage);
+		}
+
 		@Override
 		public @NonNull String toString() {
 			StringBuilder s = new StringBuilder();
@@ -1115,8 +1196,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return string;
 		}
 
-		public void setTransitivelyLoadedBy(@NonNull EPackage loadedEPackage, @NonNull EPackage loadingEPackage) {
-			packageLoadStrategy.setTransitivelyLoadedBy(this, loadedEPackage, loadingEPackage);
+		public void unloadModel() {
+			eModel = null;
+			platformPluginURIDescriptor.install(packageRegistry);
+			platformResourceURIDescriptor.install(packageRegistry);
 		}
 	}
 
