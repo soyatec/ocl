@@ -133,12 +133,12 @@ public class ProjectMap extends StandaloneProjectMap
 		return uri;
 	}
 	
-	@Override
+/*	@Override
 	public synchronized void initializeGenModelLocationMap(boolean force) {
 		if (force || ((nsURI2package == null) && !EMFPlugin.IS_ECLIPSE_RUNNING)) {
 			super.initializeGenModelLocationMap(force);
 		}
-	}
+	} */
 	
 	@Override
 	public synchronized void initializePackageRegistry(@Nullable ResourceSet resourceSet) {
