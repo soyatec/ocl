@@ -2604,15 +2604,23 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public @Nullable Element loadResource(@NonNull URI uri, String alias, @Nullable ResourceSet resourceSet) throws ParserException {
 		// if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
 		// return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
-		Resource resource = null;
+		ResourceSet externalResourceSet = resourceSet != null ? resourceSet : getExternalResourceSet();
+		EPackage.Registry packageRegistry = externalResourceSet.getPackageRegistry();
+		URI resourceURI = uri.trimFragment();
+		String uriString = resourceURI.toString();
 		String fragment = uri.fragment();
+		Resource resource = null;
 		if (fragment == null) {
-			String uriString = uri.toString();
-			EPackage.Registry packageRegistry = (resourceSet != null ? resourceSet : getExternalResourceSet()).getPackageRegistry();
+			//
+			//	fragment-less URI may be explicit namespaace URI
+			//
 			EPackage ePackage = packageRegistry.getEPackage(uriString);
 			if (ePackage != null) {
 				return getPivotOf(Element.class, ePackage);
 			}
+			//
+			//	fragment-less URI may be an OCL Standard Library
+			//
 			if (uriString.equals(defaultStandardLibraryURI)) {
 				if (asLibraryResource != null) {
 					resource = asLibraryResource;
@@ -2634,24 +2642,37 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				}
 			}
 		}
-		URI resourceURI = uri.trimFragment();
+		else {
+			//
+			//	fragment-full URI may have a registered package to mark the unfragmented name
+			//
+			EPackage ePackage = packageRegistry.getEPackage(uriString);
+			if (ePackage != null) {
+				Resource eResource = ePackage.eResource();
+				if (eResource instanceof XMLResource) {
+					EObject eObject = ((XMLResource)eResource).getEObject(fragment);
+					if (eObject != null) {
+						Element asElement = getPivotOf(Element.class, eObject);
+						if (asElement != null) {
+							return asElement;
+						}
+					}
+				}
+			}
+		}
 		if (resource == null) {
 			External2Pivot external2Pivot = external2PivotMap.get(uri);
 			if (external2Pivot != null) {
 				resource = external2Pivot.getResource();
 			}
 			else {
-				if (resourceSet == null) {
-					resourceSet = getExternalResourceSet();
-				}
-				
 				try {
-					resource = resourceSet.getResource(resourceURI, true);
+					resource = externalResourceSet.getResource(resourceURI, true);
 				}
 				catch (RuntimeException e) {
-					resource = resourceSet.getResource(resourceURI, false);
+					resource = externalResourceSet.getResource(resourceURI, false);
 					if (resource != null) {
-						resourceSet.getResources().remove(resource);
+						externalResourceSet.getResources().remove(resource);
 						resource = null;
 					}
 					throw e;
