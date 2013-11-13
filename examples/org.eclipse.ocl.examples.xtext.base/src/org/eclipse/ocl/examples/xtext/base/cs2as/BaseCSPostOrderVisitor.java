@@ -300,10 +300,6 @@ public class BaseCSPostOrderVisitor extends AbstractExtendingBaseCSVisitor<Conti
 
 	@Override
 	public Continuation<?> visitRootPackageCS(@NonNull RootPackageCS csPackage) {
-		Root pivotElement = PivotUtil.getPivot(Root.class, csPackage);
-		if (pivotElement != null) {
-			context.handleVisitNamedElement(csPackage, pivotElement);
-		}
 		return null;
 	}
 

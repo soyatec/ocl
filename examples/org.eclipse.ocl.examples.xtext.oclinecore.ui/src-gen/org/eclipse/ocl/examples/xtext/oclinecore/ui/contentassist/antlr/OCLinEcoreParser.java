@@ -107,7 +107,7 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives_7_2(), "rule__PrimaryExpCS__Alternatives_7_2");
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives_7_2_1_2(), "rule__PrimaryExpCS__Alternatives_7_2_1_2");
 					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
-					put(grammarAccess.getTopLevelCSAccess().getGroup_0(), "rule__TopLevelCS__Group_0__0");
+					put(grammarAccess.getTopLevelCSAccess().getGroup_1(), "rule__TopLevelCS__Group_1__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup(), "rule__InvariantConstraintCS__Group__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2(), "rule__InvariantConstraintCS__Group_2__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2_1(), "rule__InvariantConstraintCS__Group_2_1__0");
@@ -286,10 +286,9 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLetVariableCSAccess().getGroup_1(), "rule__LetVariableCS__Group_1__0");
 					put(grammarAccess.getNestedExpCSAccess().getGroup(), "rule__NestedExpCS__Group__0");
 					put(grammarAccess.getSelfExpCSAccess().getGroup(), "rule__SelfExpCS__Group__0");
-					put(grammarAccess.getTopLevelCSAccess().getNameAssignment_0_1(), "rule__TopLevelCS__NameAssignment_0_1");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedLibraryAssignment_1(), "rule__TopLevelCS__OwnedLibraryAssignment_1");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedImportAssignment_2(), "rule__TopLevelCS__OwnedImportAssignment_2");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedNestedPackageAssignment_3(), "rule__TopLevelCS__OwnedNestedPackageAssignment_3");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedLibraryAssignment_2(), "rule__TopLevelCS__OwnedLibraryAssignment_2");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedImportAssignment_3(), "rule__TopLevelCS__OwnedImportAssignment_3");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedNestedPackageAssignment_4(), "rule__TopLevelCS__OwnedNestedPackageAssignment_4");
 					put(grammarAccess.getInvariantConstraintCSAccess().getCallableAssignment_0(), "rule__InvariantConstraintCS__CallableAssignment_0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getStereotypeAssignment_1(), "rule__InvariantConstraintCS__StereotypeAssignment_1");
 					put(grammarAccess.getInvariantConstraintCSAccess().getNameAssignment_2_0(), "rule__InvariantConstraintCS__NameAssignment_2_0");

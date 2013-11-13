@@ -552,9 +552,7 @@ public class BaseCSSwitch<T> extends Switch<T> {
 			{
 				RootCS rootCS = (RootCS)theEObject;
 				T result = caseRootCS(rootCS);
-				if (result == null) result = caseNamedElementCS(rootCS);
 				if (result == null) result = caseModelElementCS(rootCS);
-				if (result == null) result = caseNameable(rootCS);
 				if (result == null) result = casePivotableElementCS(rootCS);
 				if (result == null) result = caseElementCS(rootCS);
 				if (result == null) result = casePivotable(rootCS);
@@ -568,10 +566,8 @@ public class BaseCSSwitch<T> extends Switch<T> {
 				T result = caseRootPackageCS(rootPackageCS);
 				if (result == null) result = casePackageOwnerCS(rootPackageCS);
 				if (result == null) result = caseRootCS(rootPackageCS);
-				if (result == null) result = caseNamedElementCS(rootPackageCS);
 				if (result == null) result = caseModelElementCS(rootPackageCS);
 				if (result == null) result = casePivotableElementCS(rootPackageCS);
-				if (result == null) result = caseNameable(rootPackageCS);
 				if (result == null) result = caseElementCS(rootPackageCS);
 				if (result == null) result = casePivotable(rootPackageCS);
 				if (result == null) result = caseVisitableCS(rootPackageCS);

@@ -2223,7 +2223,7 @@ public class BaseCSPackageImpl extends EPackageImpl implements BaseCSPackage {
 		primitiveTypeRefCSEClass.getESuperTypes().add(this.getTypedRefCS());
 		primitiveTypeRefCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		referenceCSEClass.getESuperTypes().add(this.getStructuralFeatureCS());
-		rootCSEClass.getESuperTypes().add(this.getNamedElementCS());
+		rootCSEClass.getESuperTypes().add(this.getModelElementCS());
 		rootPackageCSEClass.getESuperTypes().add(this.getPackageOwnerCS());
 		rootPackageCSEClass.getESuperTypes().add(this.getRootCS());
 		specificationCSEClass.getESuperTypes().add(this.getModelElementCS());

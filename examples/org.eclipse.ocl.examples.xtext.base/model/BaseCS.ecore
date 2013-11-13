@@ -230,7 +230,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="keys" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RootCS" abstract="true" interface="true"
-      eSuperTypes="#//NamedElementCS">
+      eSuperTypes="#//ModelElementCS">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="TestConstraint"/>
     </eAnnotations>

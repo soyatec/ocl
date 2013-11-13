@@ -225,21 +225,11 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 				}
 			}
 		}
-		URI csURI = null;
-		String name = csElement.getName();
-		if ((name == null) && (csElement.eContainer() == null)) {
-			csURI = csResource.getURI();
-			if (csURI != null) {
-				name = csURI.lastSegment();
-			}
-		}
-		if (name == null) {
-			throw new IllegalStateException("Null name for root package");
-		}
+		URI csURI = csResource.getURI();
 		String newExternalURI = csURI != null ? csURI.toString() : null;
 		T pivotElement;
 		if (pivotObject == null) {
-			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, name, newExternalURI);
+			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, "xyzzy", newExternalURI);
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {
@@ -248,7 +238,6 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 			@SuppressWarnings("unchecked")
 			T pivotElement2 = (T) pivotObject;
 			pivotElement = pivotElement2;
-			context.refreshName(pivotElement, name);
 			String oldExternalURI = pivotElement.getExternalURI();
 			if ((newExternalURI != oldExternalURI) && ((newExternalURI == null) || !newExternalURI.equals(oldExternalURI))) {
 				pivotElement.setExternalURI(newExternalURI);

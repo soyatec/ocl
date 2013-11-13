@@ -71,7 +71,17 @@ public class LibraryCSAttribution extends AbstractAttribution implements Unresol
 				Resource importedResource = importedElement2.eResource();
 				List<Resource.Diagnostic> errors = importedResource.getErrors();
 				if (errors.size() == 0) {
-					if (importedElement2 instanceof DomainNamedElement) {
+					if (importedElement2 instanceof Root) {
+						String name = ((Root)importedElement2).getExternalURI();
+						if (name != null) {
+							int lastIndex = name.lastIndexOf("/");
+							if (lastIndex > 0) {
+								name = name.substring(lastIndex+1);
+							}
+							environmentView.addElement(name, importedElement2);
+						}
+					}
+					else if (importedElement2 instanceof DomainNamedElement) {
 						String name = ((DomainNamedElement)importedElement2).getName();
 						if (name != null) {
 							environmentView.addElement(name, importedElement2);

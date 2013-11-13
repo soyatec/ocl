@@ -82,7 +82,7 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    c.setLinewrap(2).before(f.getML_COMMENTRule());
 	    c.setLinewrap(1).after(f.getML_COMMENTRule());
 
-	    c.setLinewrap(1).after(f.getTopLevelCSAccess().getNameAssignment_0_1());
+//	    c.setLinewrap(1).after(f.getTopLevelCSAccess().getNameAssignment_0_1());
 
 	    c.setLinewrap(2).between(f.getImportCSRule(), f.getPackageCSRule());
 	    c.setLinewrap(2).between(f.getPackageCSRule(), f.getPackageCSRule());

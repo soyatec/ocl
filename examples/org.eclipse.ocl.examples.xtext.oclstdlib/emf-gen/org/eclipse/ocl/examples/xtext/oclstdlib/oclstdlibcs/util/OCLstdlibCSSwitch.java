@@ -226,10 +226,8 @@ public class OCLstdlibCSSwitch<T>
 				if (result == null) result = caseRootPackageCS(libRootPackageCS);
 				if (result == null) result = casePackageOwnerCS(libRootPackageCS);
 				if (result == null) result = caseRootCS(libRootPackageCS);
-				if (result == null) result = caseNamedElementCS(libRootPackageCS);
 				if (result == null) result = caseModelElementCS(libRootPackageCS);
 				if (result == null) result = casePivotableElementCS(libRootPackageCS);
-				if (result == null) result = caseNameable(libRootPackageCS);
 				if (result == null) result = caseElementCS(libRootPackageCS);
 				if (result == null) result = casePivotable(libRootPackageCS);
 				if (result == null) result = caseVisitableCS(libRootPackageCS);

@@ -51,7 +51,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
@@ -316,7 +318,11 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 				ResourceSet resourceSet = getMetaModelManager().getExternalResourceSet();
 				ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
 				StandaloneProjectMap.IConflictHandler conflictHandler = null; 			// FIXME
-				projectMap.configure(resourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, conflictHandler);	
+				projectMap.configure(resourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, conflictHandler);
+				IProjectDescriptor pivotPackageDescriptor = projectMap.getProjectDescriptor(PivotConstants.PLUGIN_ID);
+				if (pivotPackageDescriptor != null) {
+					pivotPackageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadBothStrategy.INSTANCE, conflictHandler);	
+				}
 				URI uri = uriMap.get(document);
 				XMLResource xmiResource = (XMLResource) resourceSet.getResource(uri, false);
 				if ((xmiResource == null) || (xmiResource.getResourceSet() == null)) {	// Skip built-ins and try again as a file read.

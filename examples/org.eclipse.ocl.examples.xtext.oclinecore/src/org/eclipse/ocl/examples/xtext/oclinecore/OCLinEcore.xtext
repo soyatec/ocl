@@ -23,7 +23,7 @@ import "http://www.eclipse.org/ocl/3.1.0/OCLinEcoreCST"
 //generate oclinEcore2 "http://www.eclipse.org/ocl/examples/xtext/oclinecore/OCLinEcore"
 
 TopLevelCS :
-	('module' name=UnrestrictedName)?
+	{TopLevelCS} ('module' UnrestrictedName)?
 	(ownedLibrary+=LibraryCS)*
 	(ownedImport+=ImportCS)*
 	(ownedNestedPackage+=PackageCS)*

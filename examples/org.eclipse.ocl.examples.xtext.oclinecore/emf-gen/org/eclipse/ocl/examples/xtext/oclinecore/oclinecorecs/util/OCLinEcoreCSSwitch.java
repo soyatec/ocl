@@ -132,10 +132,8 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = caseRootPackageCS(topLevelCS);
 				if (result == null) result = casePackageOwnerCS(topLevelCS);
 				if (result == null) result = caseRootCS(topLevelCS);
-				if (result == null) result = caseNamedElementCS(topLevelCS);
 				if (result == null) result = caseModelElementCS(topLevelCS);
 				if (result == null) result = casePivotableElementCS(topLevelCS);
-				if (result == null) result = caseNameable(topLevelCS);
 				if (result == null) result = caseElementCS(topLevelCS);
 				if (result == null) result = casePivotable(topLevelCS);
 				if (result == null) result = caseVisitableCS(topLevelCS);

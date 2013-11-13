@@ -3387,7 +3387,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__LOGICAL_PARENT = NAMED_ELEMENT_CS__LOGICAL_PARENT;
+	int ROOT_CS__LOGICAL_PARENT = MODEL_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -3396,7 +3396,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__PIVOT = NAMED_ELEMENT_CS__PIVOT;
+	int ROOT_CS__PIVOT = MODEL_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -3405,7 +3405,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__OWNED_ANNOTATION = NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+	int ROOT_CS__OWNED_ANNOTATION = MODEL_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -3414,7 +3414,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__ORIGINAL_XMI_ID = NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int ROOT_CS__ORIGINAL_XMI_ID = MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3423,16 +3423,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__CSI = NAMED_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_CS__NAME = NAMED_ELEMENT_CS__NAME;
+	int ROOT_CS__CSI = MODEL_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.
@@ -3441,7 +3432,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__OWNED_IMPORT = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int ROOT_CS__OWNED_IMPORT = MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Library</b></em>' containment reference list.
@@ -3450,7 +3441,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__OWNED_LIBRARY = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int ROOT_CS__OWNED_LIBRARY = MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Root CS</em>' class.
@@ -3459,7 +3450,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int ROOT_CS_FEATURE_COUNT = MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.basecs.impl.RootPackageCSImpl <em>Root Package CS</em>}' class.
@@ -3526,22 +3517,13 @@ public interface BaseCSPackage extends EPackage {
 	int ROOT_PACKAGE_CS__OWNED_NESTED_PACKAGE = PACKAGE_OWNER_CS__OWNED_NESTED_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_PACKAGE_CS__NAME = PACKAGE_OWNER_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Import</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE_CS__OWNED_IMPORT = PACKAGE_OWNER_CS_FEATURE_COUNT + 1;
+	int ROOT_PACKAGE_CS__OWNED_IMPORT = PACKAGE_OWNER_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Library</b></em>' containment reference list.
@@ -3550,7 +3532,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE_CS__OWNED_LIBRARY = PACKAGE_OWNER_CS_FEATURE_COUNT + 2;
+	int ROOT_PACKAGE_CS__OWNED_LIBRARY = PACKAGE_OWNER_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Root Package CS</em>' class.
@@ -3559,7 +3541,7 @@ public interface BaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PACKAGE_CS_FEATURE_COUNT = PACKAGE_OWNER_CS_FEATURE_COUNT + 3;
+	int ROOT_PACKAGE_CS_FEATURE_COUNT = PACKAGE_OWNER_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.base.basecs.impl.SpecificationCSImpl <em>Specification CS</em>}' class.
