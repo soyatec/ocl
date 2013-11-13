@@ -194,9 +194,8 @@ public class OCL {
 	 * @see #evaluate(Object, OCLExpression)
 	 */
 	public boolean check(Object context, @NonNull Constraint constraint) {
-		ExpressionInOCL specification = (ExpressionInOCL) constraint.getSpecification();
-
-		return check(context, specification);
+		OpaqueExpression specification =  constraint.getSpecification();
+		return (specification instanceof ExpressionInOCL) && check(context, (ExpressionInOCL)specification);
 	}
 
 	/**
@@ -373,7 +372,7 @@ public class OCL {
 		// forget the constraints
 		getConstraints().clear();
 
-		if (environmentFactory != PivotEnvironmentFactory.getGlobalRegistryInstance()) { // dispose of my environment
+		if (environmentFactory != PivotEnvironmentFactory.basicGetGlobalRegistryInstance()) { // dispose of my environment
 			getEnvironment().dispose();
 			getMetaModelManager().dispose();
 		}

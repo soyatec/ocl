@@ -46,7 +46,11 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
      * environments using the global package registry.
 	 */
     private static @Nullable PivotEnvironmentFactory globalRegistryInstance = null;
-	
+
+	public static @Nullable PivotEnvironmentFactory basicGetGlobalRegistryInstance() {
+		return globalRegistryInstance;
+	}
+
     /**
      * Dispose of the global instance; this is intended for leakage detection in tests.
      */
