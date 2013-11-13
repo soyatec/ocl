@@ -604,7 +604,6 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				String fragment = uri.fragment();
 				if (fragment == null) {
 					importedEObject = resourceSet.getPackageRegistry().getEPackage(uri.toString());
-					importedEObject = null;
 				}
 				else {
 					importedEObject = resourceSet.getEObject(uri, true);
