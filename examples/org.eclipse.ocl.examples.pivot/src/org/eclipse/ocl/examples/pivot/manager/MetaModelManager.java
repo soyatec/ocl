@@ -458,9 +458,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * The resource of the first of the asLibraries. Set once actually loaded.
 	 */
-	protected Resource asLibraryResource = null;
+	protected @Nullable Resource asLibraryResource = null;
 
-	protected ResourceSetImpl externalResourceSet = null;
+	protected @Nullable ResourceSetImpl externalResourceSet = null;
 	
 	private final @NonNull Map<String, DomainNamespace> globalNamespaces = new HashMap<String, DomainNamespace>();
 	private final @NonNull Set<Type> globalTypes = new HashSet<Type>();
@@ -1076,13 +1076,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //		asResourceSet.setURIResourceMap(null);
 		asLibraries.clear();	
 		asLibraryResource = null;
-		if (externalResourceSet != null) {
+		ResourceSetImpl externalResourceSet2 = externalResourceSet;
+		if (externalResourceSet2 != null) {
 //			System.out.println("dispose CS " + DomainUtil.debugSimpleName(externalResourceSet));
-			externalResourceSet.setPackageRegistry(null);
-			externalResourceSet.setResourceFactoryRegistry(null);
-			externalResourceSet.setURIConverter(null);
-			externalResourceSet.setURIResourceMap(null);
-			for (Resource resource : externalResourceSet.getResources()) {
+			externalResourceSet2.setPackageRegistry(null);
+			externalResourceSet2.setResourceFactoryRegistry(null);
+			externalResourceSet2.setURIConverter(null);
+			externalResourceSet2.setURIResourceMap(null);
+			for (Resource resource : externalResourceSet2.getResources()) {
 				resource.unload();
 			}
 			externalResourceSet = null;
@@ -1564,8 +1565,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return lambdaManager.getLambdaType(typeName, contextType, parameterTypes, resultType, bindings);
 	}
 	
-	public List<Library> getLibraries() { return asLibraries; }
-	public Resource getLibraryResource() { return asLibraryResource; }
+	public @NonNull List<Library> getLibraries() { return asLibraries; }
+	public @Nullable Resource getLibraryResource() { return asLibraryResource; }
 
 	public @Nullable Type getLibraryType(@NonNull String string, @NonNull List<? extends ParameterableElement> templateArguments) {
 		Type libraryType = getRequiredLibraryType(string);
@@ -2402,6 +2403,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			if (eObject instanceof Root) {
 				installRoot((Root)eObject);
 			}
+		}
+		if (!libraryLoadInProgress && (asLibraryResource == null) && (asResource instanceof OCLstdlib) && (asLibraries.size() > 0)) {
+			getOclAnyType();
 		}
 	}
 
