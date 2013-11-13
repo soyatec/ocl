@@ -191,7 +191,7 @@ public class GenerateOCLMetaModelXtend extends GenerateOCLMetaModel
 
 					protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 						super(standardLibrary);
-						«root.getSymbolName()» = createRoot("«pkg.name»", "«pkg.nsURI»");
+						«root.getSymbolName()» = createRoot("«pkg.nsURI»");
 						«pkg.getSymbolName()» = createPackage(name, nsPrefix, nsURI);
 						installPackages();
 						installOclTypes();

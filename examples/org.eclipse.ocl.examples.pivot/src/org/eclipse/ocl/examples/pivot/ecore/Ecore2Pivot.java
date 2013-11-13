@@ -136,7 +136,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 //		if (asMetamodels != null) {
 //			
 //		}
-		conversion.pivotRoot = metaModelManager.createRoot(ecoreURI.lastSegment(), ecoreASResource.getURI().toString());
+		conversion.pivotRoot = metaModelManager.createRoot(ecoreASResource.getURI().toString());
 //		conversion.installImports();
 		conversion.update(ecoreASResource, DomainUtil.nonNullEMF(ecoreResource.getContents()));
 		
@@ -468,7 +468,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				}
 			}
 			if (pivotRoot2 == null) {
-				pivotRoot2 = pivotRoot = metaModelManager.createRoot(PivotUtil.getNonASURI(pivotURI).lastSegment(), uri.toString());
+				pivotRoot2 = pivotRoot = metaModelManager.createRoot(uri.toString());
 			}
 			pivotRoot = pivotRoot2;
 //			installImports();

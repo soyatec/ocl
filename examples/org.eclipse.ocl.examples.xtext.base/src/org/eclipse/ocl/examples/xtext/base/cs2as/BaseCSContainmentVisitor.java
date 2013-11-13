@@ -229,7 +229,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 		String newExternalURI = csURI != null ? csURI.toString() : null;
 		T pivotElement;
 		if (pivotObject == null) {
-			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, "xyzzy", newExternalURI);
+			pivotElement = metaModelManager.createRoot(pivotClass, pivotEClass, newExternalURI);
 		}
 		else {
 			if (!pivotClass.isAssignableFrom(pivotObject.getClass())) {

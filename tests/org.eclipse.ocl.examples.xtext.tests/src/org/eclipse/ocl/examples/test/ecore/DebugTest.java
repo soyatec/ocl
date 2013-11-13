@@ -32,7 +32,7 @@ public class DebugTest extends GenericDebugTest {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Root root = metaModelManager.createRoot("root", null);
+        Root root = metaModelManager.createRoot(null);
         pkg1 = createPackage(root, "pkg1");
         helper.setContext(getMetaclass("Model"));
     }

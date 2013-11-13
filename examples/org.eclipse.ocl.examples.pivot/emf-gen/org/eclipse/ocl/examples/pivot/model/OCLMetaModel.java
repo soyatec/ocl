@@ -117,7 +117,7 @@ public class OCLMetaModel extends ASResourceImpl
 
 		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
-			root = createRoot("pivot", "http://www.eclipse.org/ocl/3.1.0/Pivot");
+			root = createRoot("http://www.eclipse.org/ocl/3.1.0/Pivot");
 			metamodel = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();

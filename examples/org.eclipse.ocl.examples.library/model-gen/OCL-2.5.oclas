@@ -17,7 +17,7 @@
         <value>The primitive types defined in the OCL standard library are UnlimitedNatural, Integer, Real, String, and Boolean. They are all instances of the metaclass Primitive from the UML core package.</value>
       </ownedDetail>
     </ownedAnnotation>
-    <ownedType xsi:type="pivot:BagType" xmi:id="Bag" name="Bag" superClass="#_74GxczswEeOGM4rnlUsTxw"
+    <ownedType xsi:type="pivot:BagType" xmi:id="Bag" name="Bag" superClass="#_yH1fIE0NEeOK2NercnDSnA"
         elementType="#T.ocl..BagT">
       <ownedComment body="A bag is a collection with duplicates allowed. That is, one object can be an element of a bag many times.&#xA;There is no ordering defined on the elements in a bag.&#xA;Bag is itself an instance of the metatype BagType.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
@@ -33,13 +33,13 @@
         </ownedParameter>
       </ownedTemplateSignature>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.closure..T" name="closure"
-          type="#_74GxdDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
+          type="#_yH1fIU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
         <ownedComment body="The closure of applying body transitively to every distinct element of the source collection.&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Bag.closure..T" name="lambda" type="#_74GxdTswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Bag.closure..T" name="lambda" type="#_yH1fIk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.closure..T" name="i" type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.collect..T" name="collect"
-          type="#_74GxdjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
+          type="#_yH1fI00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
         <ownedTemplateSignature xmi:id="s.i.ocl.Bag.collect..T" parameter="#t.ocl.Bag..collectV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..collectV"
               parameteredElement="#T.ocl.Bag..collectV">
@@ -48,7 +48,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Bag.collect..T" name="lambda" isRequired="false"
-            type="#_74GxdzswEeOGM4rnlUsTxw"/>
+            type="#_yH1fJE0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.collect..T" name="i" isRequired="false"
             type="#T.ocl..BagT"/>
       </ownedOperation>
@@ -63,28 +63,28 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Bag.collectNested..T" name="lambda" isRequired="false"
-            type="#_74GxeDswEeOGM4rnlUsTxw"/>
+            type="#_yH1fJU0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.collectNested..T" name="i" isRequired="false"
             type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.reject..T" name="reject"
           type="#Bag" implementationClass="org.eclipse.ocl.examples.library.iterator.RejectIteration">
         <ownedComment body="The sub-bag of the source bag for which body is oclText[false].&#xA;&#xA;oclCode[self->reject(iterator | body) = self->select(iterator | not body)].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Bag.reject..T" name="lambda" type="#_74GxeTswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Bag.reject..T" name="lambda" type="#_yH1fJk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.reject..T" name="i" isRequired="false"
             type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.select..T" name="select"
           type="#Bag" implementationClass="org.eclipse.ocl.examples.library.iterator.SelectIteration">
         <ownedComment body="The sub-bag of the source bag for which body is oclText[true].&#xA;&#xA;oclCode[self->select(iterator | body) =&#xA;self->iterate(iterator; result : Bag(T) = Bag{} |&#xA;if body then result->including(iterator)&#xA;else result&#xA;endif)]&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Bag.select..T" name="lambda" type="#_74GxeTswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Bag.select..T" name="lambda" type="#_yH1fJk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.select..T" name="i" isRequired="false"
             type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.sortedBy..T" name="sortedBy"
-          type="#_74GxejswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          type="#_yH1fJ00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the Sequence containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c then a &lt; c).&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Bag.sortedBy..T" name="lambda" type="#_74GxezswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Bag.sortedBy..T" name="lambda" type="#_yH1fKE0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.sortedBy..T" name="i" isRequired="false"
             type="#T.ocl..BagT"/>
       </ownedOperation>
@@ -110,9 +110,9 @@
           type="#Bag" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The bag containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Bag.excludingAll..$$.Collection" name="objects"
-            type="#_74GxfDswEeOGM4rnlUsTxw"/>
+            type="#_yH1fKU0NEeOK2NercnDSnA"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Bag.flatten" name="flatten" type="#_74GxfTswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Bag.flatten" name="flatten" type="#_yH1fKk0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="Redefines the Collection operation. If the element type is not a collection type, this results in the same bag as oclText[self].&#xA;If the element type is a collection type, the result is the bag containing all the elements of all the recursively flattened elements of oclText[self].&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Bag.flatten" parameter="#t.ocl.Bag..flattenT2">
@@ -133,10 +133,10 @@
           type="#Bag" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation">
         <ownedComment body="The bag containing all elements of oclText[self] and objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Bag.includingAll..$$.Collection" name="objects"
-            type="#_74GxczswEeOGM4rnlUsTxw"/>
+            type="#_yH1fIE0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Bag.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#_74GxfjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#_yH1fK00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Bag.selectByKind..$$.Metaclass" parameter="#t.ocl.Bag..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..selectByKindTT"
               parameteredElement="#T.ocl.Bag..selectByKindTT">
@@ -145,10 +145,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Bag.selectByKind..$$.Metaclass" name="type"
-            type="#_74GxfzswEeOGM4rnlUsTxw"/>
+            type="#_yH1fLE0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Bag.selectByType..$$.Metaclass" name="selectByType"
-          type="#_74GxgDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#_yH1fLU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Bag.selectByType..$$.Metaclass" parameter="#t.ocl.Bag..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..selectByTypeTT"
               parameteredElement="#T.ocl.Bag..selectByTypeTT">
@@ -157,7 +157,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Bag.selectByType..$$.Metaclass" name="type"
-            type="#_74GxgTswEeOGM4rnlUsTxw"/>
+            type="#_yH1fLk0NEeOK2NercnDSnA"/>
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:PrimitiveType" xmi:id="Boolean" name="Boolean" superClass="#T.ocl.OclAny">
@@ -182,7 +182,7 @@
             type="#OclSelf"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Boolean.allInstances" isStatic="true" name="allInstances"
-          type="#_74GxgjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation">
+          type="#_yH1fL00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation">
         <ownedComment body="Returns oclText[Set{false, true}]."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Boolean.and..ocl.Boolean" name="and" isRequired="false"
@@ -205,35 +205,35 @@
           <language>OCL</language>
           <bodyExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
             <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUDswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHxNsE0NEeOK2NercnDSnA"/>
             </condition>
             <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUDswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHxNsE0NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="false"/>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                 <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUTswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wE0NEeOK2NercnDSnA"/>
                 </condition>
                 <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                   <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                       referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                    <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUTswEeOGM4rnlUsTxw"/>
+                    <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wE0NEeOK2NercnDSnA"/>
                     <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="false"/>
                   </condition>
                   <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                     <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                         referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                      <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUDswEeOGM4rnlUsTxw"/>
+                      <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHxNsE0NEeOK2NercnDSnA"/>
                       <argument xsi:type="pivot:NullLiteralExp" isRequired="false"
                           type="#T.ocl.OclVoid"/>
                     </condition>
                     <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                       <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                           referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                        <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUTswEeOGM4rnlUsTxw"/>
+                        <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wE0NEeOK2NercnDSnA"/>
                         <argument xsi:type="pivot:NullLiteralExp" isRequired="false"
                             type="#T.ocl.OclVoid"/>
                       </condition>
@@ -248,29 +248,29 @@
                   <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                       booleanSymbol="false"/>
                 </elseExpression>
-                <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUTswEeOGM4rnlUsTxw"/>
+                <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wE0NEeOK2NercnDSnA"/>
               </elseExpression>
               <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="false"/>
             </elseExpression>
             <thenExpression xsi:type="pivot:IfExp" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUTswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wE0NEeOK2NercnDSnA"/>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" type="#Boolean">
                 <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                     referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUTswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wE0NEeOK2NercnDSnA"/>
                   <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="false"/>
                 </condition>
-                <elseExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUDswEeOGM4rnlUsTxw"/>
+                <elseExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHxNsE0NEeOK2NercnDSnA"/>
                 <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                     booleanSymbol="false"/>
               </elseExpression>
-              <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUDswEeOGM4rnlUsTxw"/>
+              <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHxNsE0NEeOK2NercnDSnA"/>
             </thenExpression>
           </bodyExpression>
-          <contextVariable xmi:id="_74GxUDswEeOGM4rnlUsTxw" name="self" type="#Boolean"/>
-          <parameterVariable xmi:id="_74GxUTswEeOGM4rnlUsTxw" name="b" type="#Boolean"
+          <contextVariable xmi:id="_yHxNsE0NEeOK2NercnDSnA" name="self" type="#Boolean"/>
+          <parameterVariable xmi:id="_yHx0wE0NEeOK2NercnDSnA" name="b" type="#Boolean"
               representedParameter="#p0o.ocl.Boolean.and..ocl.Boolean"/>
         </bodyExpression>
         <ownedParameter xmi:id="p0o.ocl.Boolean.and..ocl.Boolean" name="b" isRequired="false"
@@ -296,42 +296,42 @@
           <language>OCL</language>
           <bodyExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
             <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUjswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wU0NEeOK2NercnDSnA"/>
             </condition>
             <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUjswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wU0NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="false"/>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                 <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
                 </condition>
                 <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                   <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                       referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                    <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                    <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
                     <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
                   </condition>
                   <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                     <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                         referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                      <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUjswEeOGM4rnlUsTxw"/>
+                      <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wU0NEeOK2NercnDSnA"/>
                       <argument xsi:type="pivot:NullLiteralExp" isRequired="false"
                           type="#T.ocl.OclVoid"/>
                     </condition>
                     <elseExpression xsi:type="pivot:IfExp" type="#Boolean">
                       <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                           referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                        <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                        <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
                         <argument xsi:type="pivot:NullLiteralExp" isRequired="false"
                             type="#T.ocl.OclVoid"/>
                       </condition>
                       <elseExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                           booleanSymbol="false"/>
                       <thenExpression xsi:type="pivot:VariableExp" type="#Boolean"
-                          referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                          referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
                     </elseExpression>
                     <thenExpression xsi:type="pivot:NullLiteralExp" isRequired="false"
                         type="#T.ocl.OclVoid"/>
@@ -339,29 +339,29 @@
                   <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                       booleanSymbol="true"/>
                 </elseExpression>
-                <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
               </elseExpression>
               <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
             </elseExpression>
             <thenExpression xsi:type="pivot:IfExp" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" type="#Boolean">
                 <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                     referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUzswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wk0NEeOK2NercnDSnA"/>
                   <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
                 </condition>
-                <elseExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUjswEeOGM4rnlUsTxw"/>
+                <elseExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wU0NEeOK2NercnDSnA"/>
                 <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                     booleanSymbol="true"/>
               </elseExpression>
-              <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxUjswEeOGM4rnlUsTxw"/>
+              <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0wU0NEeOK2NercnDSnA"/>
             </thenExpression>
           </bodyExpression>
-          <contextVariable xmi:id="_74GxUjswEeOGM4rnlUsTxw" name="self" type="#Boolean"/>
-          <parameterVariable xmi:id="_74GxUzswEeOGM4rnlUsTxw" name="b" type="#Boolean"
+          <contextVariable xmi:id="_yHx0wU0NEeOK2NercnDSnA" name="self" type="#Boolean"/>
+          <parameterVariable xmi:id="_yHx0wk0NEeOK2NercnDSnA" name="b" type="#Boolean"
               representedParameter="#p0o.ocl.Boolean.implies..ocl.Boolean"/>
         </bodyExpression>
         <ownedParameter xmi:id="p0o.ocl.Boolean.implies..ocl.Boolean" name="b" isRequired="false"
@@ -379,24 +379,24 @@
           <language>OCL</language>
           <bodyExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
             <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVDswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0w00NEeOK2NercnDSnA"/>
             </condition>
             <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVDswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0w00NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:NullLiteralExp" isRequired="false" type="#T.ocl.OclVoid"/>
               </condition>
               <elseExpression xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVDswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0w00NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="false"/>
               </elseExpression>
               <thenExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="#T.ocl.OclVoid"/>
             </elseExpression>
-            <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVDswEeOGM4rnlUsTxw"/>
+            <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0w00NEeOK2NercnDSnA"/>
           </bodyExpression>
-          <contextVariable xmi:id="_74GxVDswEeOGM4rnlUsTxw" name="self" type="#Boolean"/>
+          <contextVariable xmi:id="_yHx0w00NEeOK2NercnDSnA" name="self" type="#Boolean"/>
         </bodyExpression>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Boolean.or..ocl.Boolean" name="or" isRequired="false"
@@ -419,35 +419,35 @@
           <language>OCL</language>
           <bodyExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
             <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVTswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xE0NEeOK2NercnDSnA"/>
             </condition>
             <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVTswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xE0NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                 <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVjswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xU0NEeOK2NercnDSnA"/>
                 </condition>
                 <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                   <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                       referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                    <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVjswEeOGM4rnlUsTxw"/>
+                    <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xU0NEeOK2NercnDSnA"/>
                     <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
                   </condition>
                   <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                     <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                         referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                      <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVTswEeOGM4rnlUsTxw"/>
+                      <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xE0NEeOK2NercnDSnA"/>
                       <argument xsi:type="pivot:NullLiteralExp" isRequired="false"
                           type="#T.ocl.OclVoid"/>
                     </condition>
                     <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
                       <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                           referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                        <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVjswEeOGM4rnlUsTxw"/>
+                        <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xU0NEeOK2NercnDSnA"/>
                         <argument xsi:type="pivot:NullLiteralExp" isRequired="false"
                             type="#T.ocl.OclVoid"/>
                       </condition>
@@ -462,29 +462,29 @@
                   <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                       booleanSymbol="true"/>
                 </elseExpression>
-                <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVjswEeOGM4rnlUsTxw"/>
+                <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xU0NEeOK2NercnDSnA"/>
               </elseExpression>
               <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
             </elseExpression>
             <thenExpression xsi:type="pivot:IfExp" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsInvalid">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVjswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xU0NEeOK2NercnDSnA"/>
               </condition>
               <elseExpression xsi:type="pivot:IfExp" type="#Boolean">
                 <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                     referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVjswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xU0NEeOK2NercnDSnA"/>
                   <argument xsi:type="pivot:BooleanLiteralExp" type="#Boolean" booleanSymbol="true"/>
                 </condition>
-                <elseExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVTswEeOGM4rnlUsTxw"/>
+                <elseExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xE0NEeOK2NercnDSnA"/>
                 <thenExpression xsi:type="pivot:BooleanLiteralExp" type="#Boolean"
                     booleanSymbol="true"/>
               </elseExpression>
-              <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVTswEeOGM4rnlUsTxw"/>
+              <thenExpression xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xE0NEeOK2NercnDSnA"/>
             </thenExpression>
           </bodyExpression>
-          <contextVariable xmi:id="_74GxVTswEeOGM4rnlUsTxw" name="self" type="#Boolean"/>
-          <parameterVariable xmi:id="_74GxVjswEeOGM4rnlUsTxw" name="b" type="#Boolean"
+          <contextVariable xmi:id="_yHx0xE0NEeOK2NercnDSnA" name="self" type="#Boolean"/>
+          <parameterVariable xmi:id="_yHx0xU0NEeOK2NercnDSnA" name="b" type="#Boolean"
               representedParameter="#p0o.ocl.Boolean.or..ocl.Boolean"/>
         </bodyExpression>
         <ownedParameter xmi:id="p0o.ocl.Boolean.or..ocl.Boolean" name="b" isRequired="false"
@@ -507,26 +507,26 @@
           <bodyExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
             <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                 referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVzswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xk0NEeOK2NercnDSnA"/>
               <argument xsi:type="pivot:NullLiteralExp" isRequired="false" type="#T.ocl.OclVoid"/>
             </condition>
             <elseExpression xsi:type="pivot:IfExp" isRequired="false" type="#Boolean">
               <condition xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxWDswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0x00NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:NullLiteralExp" isRequired="false" type="#T.ocl.OclVoid"/>
               </condition>
               <elseExpression xsi:type="pivot:OperationCallExp" name="&lt;>" type="#Boolean"
                   referredOperation="#o.ocl.Boolean.%60%%62%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxVzswEeOGM4rnlUsTxw"/>
-                <argument xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxWDswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0xk0NEeOK2NercnDSnA"/>
+                <argument xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHx0x00NEeOK2NercnDSnA"/>
               </elseExpression>
               <thenExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="#T.ocl.OclVoid"/>
             </elseExpression>
             <thenExpression xsi:type="pivot:NullLiteralExp" isRequired="false" type="#T.ocl.OclVoid"/>
           </bodyExpression>
-          <contextVariable xmi:id="_74GxVzswEeOGM4rnlUsTxw" name="self" type="#Boolean"/>
-          <parameterVariable xmi:id="_74GxWDswEeOGM4rnlUsTxw" name="b" type="#Boolean"
+          <contextVariable xmi:id="_yHx0xk0NEeOK2NercnDSnA" name="self" type="#Boolean"/>
+          <parameterVariable xmi:id="_yHx0x00NEeOK2NercnDSnA" name="b" type="#Boolean"
               representedParameter="#p0o.ocl.Boolean.xor..ocl.Boolean"/>
         </bodyExpression>
         <ownedParameter xmi:id="p0o.ocl.Boolean.xor..ocl.Boolean" name="b" isRequired="false"
@@ -565,12 +565,12 @@
           name="any" isRequired="false" type="#T.ocl..CollectionT" implementationClass="org.eclipse.ocl.examples.library.iterator.AnyIteration"
           isInvalidating="true">
         <ownedComment body="Returns any element in the source collection for which body evaluates to oclText[true].&#xA;If there is more than one element for which body is oclText[true], one of them is returned.&#xA;There must be at least one element fulfilling body, otherwise the result of this IteratorExp is oclText[null].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Collection.any..T" name="lambda" type="#_74GxgzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Collection.any..T" name="lambda" type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.any..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.collect..T"
-          name="collect" type="#_74GxhDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
+          name="collect" type="#_yH1fMU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
         <ownedComment body="The Collection of elements that results from applying body to every member of the source set.&#xA;The result is flattened. Notice that this is based on collectNested, which can be of different type depending on the type of source.&#xA;collectNested is defined individually for each subclass of CollectionType.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.i.ocl.Collection.collect..T" parameter="#t.ocl.Collection..collectV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..collectV"
@@ -580,7 +580,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Collection.collect..T" name="lambda" isRequired="false"
-            type="#_74GxhTswEeOGM4rnlUsTxw"/>
+            type="#_yH1fMk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.collect..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
@@ -595,7 +595,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Collection.collectNested..T" name="lambda"
-            isRequired="false" type="#_74GxhjswEeOGM4rnlUsTxw"/>
+            isRequired="false" type="#_yH2GME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.collectNested..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
@@ -604,7 +604,7 @@
           isValidating="true">
         <ownedComment body="Results in oclText[true] if body evaluates to oclText[true] for at least one element in the source collection.&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Collection.exists..T" name="lambda" isRequired="false"
-            type="#_74GxgzswEeOGM4rnlUsTxw"/>
+            type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.exists..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
@@ -612,7 +612,7 @@
           name="exists" isRequired="false" type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.iterator.ExistsIteration"
           isValidating="true">
         <ownedParameter xmi:id="p0i.ocl.Collection.exists..T..T" name="lambda" isRequired="false"
-            type="#_74GxgzswEeOGM4rnlUsTxw"/>
+            type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.exists..T..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
         <ownedIterator xmi:id="i1i.ocl.Collection.exists..T..T" name="j" isRequired="false"
@@ -623,7 +623,7 @@
           isValidating="true">
         <ownedComment body="Results in oclText[true] if the body expression evaluates to oclText[true] for each element in the source collection; otherwise, result is oclText[false].&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Collection.forAll..T" name="lambda" isRequired="false"
-            type="#_74GxgzswEeOGM4rnlUsTxw"/>
+            type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.forAll..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
@@ -631,7 +631,7 @@
           name="forAll" isRequired="false" type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.iterator.ForAllIteration"
           isValidating="true">
         <ownedParameter xmi:id="p0i.ocl.Collection.forAll..T..T" name="lambda" isRequired="false"
-            type="#_74GxgzswEeOGM4rnlUsTxw"/>
+            type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.forAll..T..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
         <ownedIterator xmi:id="i1i.ocl.Collection.forAll..T..T" name="j" isRequired="false"
@@ -641,7 +641,7 @@
           name="isUnique" type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.iterator.IsUniqueIteration">
         <ownedComment body="Results in oclText[true] if body evaluates to a different value for each element in the source collection; otherwise, result is oclText[false].&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Collection.isUnique..T" name="lambda" isRequired="false"
-            type="#_74GxhzswEeOGM4rnlUsTxw"/>
+            type="#_yH2GMU0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.isUnique..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
@@ -656,7 +656,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Collection.iterate..T" name="lambda" isRequired="false"
-            type="#_74GxiDswEeOGM4rnlUsTxw"/>
+            type="#_yH2GMk0NEeOK2NercnDSnA"/>
         <ownedAccumulator xmi:id="a0i.ocl.Collection.iterate..T" name="acc" isRequired="false"
             type="#T.ocl.Collection..iterateTacc"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.iterate..T" name="i" isRequired="false"
@@ -665,28 +665,28 @@
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.one..T"
           name="one" type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.iterator.OneIteration">
         <ownedComment body="Results in oclText[true] if there is exactly one element in the source collection for which body is oclText[true].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Collection.one..T" name="lambda" type="#_74GxgzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Collection.one..T" name="lambda" type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.one..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.reject..T"
           name="reject" type="#Collection" implementationClass="org.eclipse.ocl.examples.library.iterator.RejectIteration">
         <ownedComment body="The sub-collection of the source collection for which body is oclText[false].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Collection.reject..T" name="lambda" type="#_74GxgzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Collection.reject..T" name="lambda" type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.reject..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.select..T"
           name="select" type="#Collection" implementationClass="org.eclipse.ocl.examples.library.iterator.SelectIteration">
         <ownedComment body="The sub-collection of the source collection for which body is oclText[true].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Collection.select..T" name="lambda" type="#_74GxgzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Collection.select..T" name="lambda" type="#_yH1fME0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.select..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.sortedBy..T"
-          name="sortedBy" type="#_74GxiTswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          name="sortedBy" type="#_yH2GM00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the Collection containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c then a &lt; c).&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Collection.sortedBy..T" name="lambda" type="#_74GxhzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Collection.sortedBy..T" name="lambda" type="#_yH2GMU0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.sortedBy..T" name="i" isRequired="false"
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
@@ -704,19 +704,19 @@
         <ownedParameter xmi:id="p0o.ocl.Collection.%60%%62%..ocl.OclSelf" name="object2"
             type="#OclSelf"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asBag" name="asBag" type="#_74GxijswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Collection.asBag" name="asBag" type="#_yH2GNE0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation">
         <ownedComment body="The Bag that contains all the elements from oclText[self].&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asOrderedSet" name="asOrderedSet" type="#_74GxizswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Collection.asOrderedSet" name="asOrderedSet" type="#_yH2GNU0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsOrderedSetOperation">
         <ownedComment body="An OrderedSet that contains all the elements from oclText[self], with duplicates removed,&#xA;in an order dependent on the particular concrete collection type.&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asSequence" name="asSequence" type="#_74GxiTswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Collection.asSequence" name="asSequence" type="#_yH2GM00NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsSequenceOperation">
         <ownedComment body="A Sequence that contains all the elements from oclText[self], in an order dependent on the particular concrete collection type.&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asSet" name="asSet" type="#_74GxjDswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Collection.asSet" name="asSet" type="#_yH2GNk0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsSetOperation">
         <ownedComment body="The Set containing all the elements from oclText[self], with duplicates removed.&#xA;"/>
       </ownedOperation>
@@ -744,7 +744,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.excludesAll..$$.Collection" name="c2"
-            type="#_74GxjTswEeOGM4rnlUsTxw"/>
+            type="#_yH2GN00NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.excluding..ocl.OclAny" name="excluding"
           type="#Collection" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation">
@@ -756,9 +756,9 @@
           type="#Collection" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The collection containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.excludingAll..$$.Collection" name="objects"
-            type="#_74GxfDswEeOGM4rnlUsTxw"/>
+            type="#_yH1fKU0NEeOK2NercnDSnA"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.flatten" name="flatten" type="#_74GxjjswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Collection.flatten" name="flatten" type="#_yH2GOE0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="If the element type is not a collection type, this results in the same collection as oclText[self].&#xA;If the element type is a collection type, the result is a collection containing all the elements of all the recursively flattened elements of oclText[self].&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.flatten" parameter="#t.ocl.Collection..flattenT2">
@@ -787,7 +787,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.includesAll..$$.Collection" name="c2"
-            type="#_74GxjzswEeOGM4rnlUsTxw"/>
+            type="#_yH2GOU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.including..T" name="including" type="#Collection"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation">
@@ -802,16 +802,16 @@
             type="#Collection"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.intersection..ocl.Collection" name="intersection"
-          type="#_74GxijswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
+          type="#_yH2GNE0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
         <ownedComment body="The intersection of oclText[self] and bag; the bag of all elements that are in both oclText[self] and c.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.intersection..ocl.Collection" name="c"
             type="#Collection"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.intersection..$$.UniqueCollection"
-          name="intersection" type="#_74GxjDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
+          name="intersection" type="#_yH2GNk0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
         <ownedComment body="The intersection of oclText[self] and a unique collection; the set of all elements that are in both oclText[self] and u.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.intersection..$$.UniqueCollection"
-            name="u" type="#_74GxkDswEeOGM4rnlUsTxw"/>
+            name="u" type="#_yH2GOk0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.isEmpty" name="isEmpty" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation">
@@ -830,7 +830,7 @@
         <ownedComment body="Is oclText[self] not the empty collection?&#xA;&#xA;oclText[null->notEmpty()] returns oclText[false] in virtue of the implicit casting from oclText[null] to oclText[Bag{}].&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.product..$$.Collection" name="product"
-          type="#_74GxkTswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionProductOperation">
+          type="#_yH2GO00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionProductOperation">
         <ownedComment body="The cartesian product operation of oclText[self] and c2.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.product..$$.Collection"
             parameter="#t.ocl.Collection..productT2">
@@ -841,10 +841,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.product..$$.Collection" name="c2"
-            type="#_74GxkjswEeOGM4rnlUsTxw"/>
+            type="#_yH2GPE0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#_74GxkzswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#_yH2GPU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.selectByKind..$$.Metaclass"
             parameter="#t.ocl.Collection..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..selectByKindTT"
@@ -854,10 +854,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.selectByKind..$$.Metaclass" name="type"
-            type="#_74GxlDswEeOGM4rnlUsTxw"/>
+            type="#_yH2GPk0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.selectByType..$$.Metaclass" name="selectByType"
-          type="#_74GxlTswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#_yH2GP00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.selectByType..$$.Metaclass"
             parameter="#t.ocl.Collection..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..selectByTypeTT"
@@ -867,7 +867,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.selectByType..$$.Metaclass" name="type"
-            type="#_74GxljswEeOGM4rnlUsTxw"/>
+            type="#_yH2GQE0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.size" name="size" type="#Integer" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSizeOperation">
         <ownedComment body="The number of elements in the collection oclText[self].&#xA;"/>
@@ -877,7 +877,7 @@
         <ownedComment body="The addition of all elements in oclText[self].&#xA;Elements must be of an oclText[OclSummable] type to provide the zero() and sum() operations.&#xA;The e[sum] operation must be both associative: a.sum(b).sum(c) = a.sum(b.sum(c)), and commutative: a.sum(b) = b.sum(a).&#xA;UnlimitedNatural, Integer and Real fulfill this condition.&#xA;&#xA;If the e[sum] operation is not both associative and commutative, the e[sum] expression is not well-formed,&#xA;which may result in unpredictable results during evaluation.&#xA;If an implementation is able to detect a lack of associativity or commutativity,&#xA;the implementation may bypass the evaluation and return an oclText[invalid] result.&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.union..ocl.Collection" name="union"
-          type="#_74GxijswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
+          type="#_yH2GNE0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
         <ownedComment body="The bag consisting of all elements in oclText[self] and all elements in c.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.union..ocl.Collection" name="c"
             type="#Collection"/>
@@ -892,11 +892,11 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedAttribute xmi:id="p.ocl.Enumeration.allLiterals" isStatic="true" name="allLiterals"
-          type="#_74GxlzswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty">
+          type="#_yH2GQU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty">
         <ownedComment body="Evaluates to the literals of the enumeration.&#xA;"/>
       </ownedAttribute>
       <ownedOperation xmi:id="o.ocl.Enumeration.allInstances" isStatic="true" name="allInstances"
-          type="#_74GxgjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation">
+          type="#_yH1fL00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation">
         <ownedComment body="Return a set of all enumeration values of oclText[self]."/>
       </ownedOperation>
     </ownedType>
@@ -1015,17 +1015,17 @@
             <language>OCL</language>
             <bodyExpression xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                 referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxWzswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHzC4k0NEeOK2NercnDSnA"/>
               <argument xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                   referredOperation="#o.ocl.OclAny.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxWTswEeOGM4rnlUsTxw"/>
-                <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxWjswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC4E0NEeOK2NercnDSnA"/>
+                <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC4U0NEeOK2NercnDSnA"/>
               </argument>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxWTswEeOGM4rnlUsTxw" name="self" type="#T.ocl.OclAny"/>
-            <parameterVariable xmi:id="_74GxWjswEeOGM4rnlUsTxw" name="object2" type="#T.ocl.OclAny"
+            <contextVariable xmi:id="_yHzC4E0NEeOK2NercnDSnA" name="self" type="#T.ocl.OclAny"/>
+            <parameterVariable xmi:id="_yHzC4U0NEeOK2NercnDSnA" name="object2" type="#T.ocl.OclAny"
                 representedParameter="#p0o.ocl.OclAny.%61%..ocl.OclSelf"/>
-            <resultVariable xmi:id="_74GxWzswEeOGM4rnlUsTxw" name="result" type="#Boolean"/>
+            <resultVariable xmi:id="_yHzC4k0NEeOK2NercnDSnA" name="result" type="#Boolean"/>
           </specification>
         </postcondition>
       </ownedOperation>
@@ -1041,24 +1041,24 @@
             <language>OCL</language>
             <bodyExpression xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                 referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxXjswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHzC5U0NEeOK2NercnDSnA"/>
               <argument xsi:type="pivot:OperationCallExp" name="not" isRequired="false"
                   type="#Boolean" referredOperation="#o.ocl.Boolean.not">
                 <source xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                     referredOperation="#o.ocl.OclAny.%61%..ocl.OclSelf">
-                  <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxXDswEeOGM4rnlUsTxw"/>
-                  <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxXTswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC400NEeOK2NercnDSnA"/>
+                  <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC5E0NEeOK2NercnDSnA"/>
                 </source>
               </argument>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxXDswEeOGM4rnlUsTxw" name="self" type="#T.ocl.OclAny"/>
-            <parameterVariable xmi:id="_74GxXTswEeOGM4rnlUsTxw" name="object2" type="#T.ocl.OclAny"
+            <contextVariable xmi:id="_yHzC400NEeOK2NercnDSnA" name="self" type="#T.ocl.OclAny"/>
+            <parameterVariable xmi:id="_yHzC5E0NEeOK2NercnDSnA" name="object2" type="#T.ocl.OclAny"
                 representedParameter="#p0o.ocl.OclAny.%60%%62%..ocl.OclSelf"/>
-            <resultVariable xmi:id="_74GxXjswEeOGM4rnlUsTxw" name="result" type="#Boolean"/>
+            <resultVariable xmi:id="_yHzC5U0NEeOK2NercnDSnA" name="result" type="#Boolean"/>
           </specification>
         </postcondition>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclAny.oclAsSet" name="oclAsSet" type="#_74GxgjswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.OclAny.oclAsSet" name="oclAsSet" type="#_yH1fL00NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation">
         <ownedComment body="Returns a Set with oclText[self] as the sole content, unless oclText[self] is oclText[null] in which case returns an empty set,"/>
       </ownedOperation>
@@ -1073,7 +1073,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclAsType..$$.Metaclass" name="type"
-            type="#_74GxmDswEeOGM4rnlUsTxw"/>
+            type="#_yH2GQk0NEeOK2NercnDSnA"/>
         <postcondition name="IsSelf">
           <specification xsi:type="pivot:ExpressionInOCL" type="#Boolean">
             <body>result = self</body>
@@ -1081,13 +1081,13 @@
             <bodyExpression xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                 referredOperation="#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny..oclAsTypeTT"
-                  referredVariable="#_74GxYTswEeOGM4rnlUsTxw"/>
-              <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxXzswEeOGM4rnlUsTxw"/>
+                  referredVariable="#_yHzC6E0NEeOK2NercnDSnA"/>
+              <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC5k0NEeOK2NercnDSnA"/>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxXzswEeOGM4rnlUsTxw" name="self" type="#T.ocl.OclAny"/>
-            <parameterVariable xmi:id="_74GxYDswEeOGM4rnlUsTxw" name="type" type="#_74GxmDswEeOGM4rnlUsTxw"
+            <contextVariable xmi:id="_yHzC5k0NEeOK2NercnDSnA" name="self" type="#T.ocl.OclAny"/>
+            <parameterVariable xmi:id="_yHzC500NEeOK2NercnDSnA" name="type" type="#_yH2GQk0NEeOK2NercnDSnA"
                 representedParameter="#p0o.ocl.OclAny.oclAsType..$$.Metaclass"/>
-            <resultVariable xmi:id="_74GxYTswEeOGM4rnlUsTxw" name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
+            <resultVariable xmi:id="_yHzC6E0NEeOK2NercnDSnA" name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
           </specification>
         </postcondition>
         <postcondition name="IsType">
@@ -1096,14 +1096,14 @@
             <language>OCL</language>
             <bodyExpression xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsKindOf..$$.Metaclass">
               <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny..oclAsTypeTT"
-                  referredVariable="#_74GxZDswEeOGM4rnlUsTxw"/>
-              <argument xsi:type="pivot:VariableExp" type="#_74GxmDswEeOGM4rnlUsTxw"
-                  referredVariable="#_74GxYzswEeOGM4rnlUsTxw"/>
+                  referredVariable="#_yHzC600NEeOK2NercnDSnA"/>
+              <argument xsi:type="pivot:VariableExp" type="#_yH2GQk0NEeOK2NercnDSnA"
+                  referredVariable="#_yHzC6k0NEeOK2NercnDSnA"/>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxYjswEeOGM4rnlUsTxw" name="self" type="#T.ocl.OclAny"/>
-            <parameterVariable xmi:id="_74GxYzswEeOGM4rnlUsTxw" name="type" type="#_74GxmDswEeOGM4rnlUsTxw"
+            <contextVariable xmi:id="_yHzC6U0NEeOK2NercnDSnA" name="self" type="#T.ocl.OclAny"/>
+            <parameterVariable xmi:id="_yHzC6k0NEeOK2NercnDSnA" name="type" type="#_yH2GQk0NEeOK2NercnDSnA"
                 representedParameter="#p0o.ocl.OclAny.oclAsType..$$.Metaclass"/>
-            <resultVariable xmi:id="_74GxZDswEeOGM4rnlUsTxw" name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
+            <resultVariable xmi:id="_yHzC600NEeOK2NercnDSnA" name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
           </specification>
         </postcondition>
       </ownedOperation>
@@ -1123,15 +1123,15 @@
             <language>OCL</language>
             <bodyExpression xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                 referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxZjswEeOGM4rnlUsTxw"/>
+              <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHzC7U0NEeOK2NercnDSnA"/>
               <argument xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
-                <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxZTswEeOGM4rnlUsTxw"/>
-                <argument xsi:type="pivot:TypeExp" type="#_74GxmTswEeOGM4rnlUsTxw"
+                <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC7E0NEeOK2NercnDSnA"/>
+                <argument xsi:type="pivot:TypeExp" type="#_yH2GQ00NEeOK2NercnDSnA"
                     referredType="#T.ocl.OclInvalid"/>
               </argument>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxZTswEeOGM4rnlUsTxw" name="self" type="#T.ocl.OclAny"/>
-            <resultVariable xmi:id="_74GxZjswEeOGM4rnlUsTxw" name="result" type="#Boolean"/>
+            <contextVariable xmi:id="_yHzC7E0NEeOK2NercnDSnA" name="self" type="#T.ocl.OclAny"/>
+            <resultVariable xmi:id="_yHzC7U0NEeOK2NercnDSnA" name="result" type="#Boolean"/>
           </specification>
         </postcondition>
       </ownedOperation>
@@ -1147,7 +1147,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclIsKindOf..$$.Metaclass" name="type"
-            type="#_74GxmjswEeOGM4rnlUsTxw"/>
+            type="#_yH2GRE0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclAny.oclIsNew" name="oclIsNew" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation">
@@ -1165,7 +1165,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclIsTypeOf..$$.Metaclass" name="type"
-            type="#_74GxmzswEeOGM4rnlUsTxw"/>
+            type="#_yH2GRU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclAny.oclIsUndefined" name="oclIsUndefined" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation"
@@ -1178,21 +1178,21 @@
             <bodyExpression xsi:type="pivot:OperationCallExp" name="or" isRequired="false"
                 type="#Boolean" referredOperation="#o.ocl.Boolean.or..ocl.Boolean">
               <source xsi:type="pivot:OperationCallExp" name="=" type="#Boolean" referredOperation="#o.ocl.Boolean.%61%..ocl.OclSelf">
-                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_74GxaDswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#_yHzC700NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
-                  <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxZzswEeOGM4rnlUsTxw"/>
-                  <argument xsi:type="pivot:TypeExp" type="#_74GxnDswEeOGM4rnlUsTxw"
+                  <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC7k0NEeOK2NercnDSnA"/>
+                  <argument xsi:type="pivot:TypeExp" type="#_yH2GRk0NEeOK2NercnDSnA"
                       referredType="#T.ocl.OclVoid"/>
                 </argument>
               </source>
               <argument xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
-                <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_74GxZzswEeOGM4rnlUsTxw"/>
-                <argument xsi:type="pivot:TypeExp" type="#_74GxmTswEeOGM4rnlUsTxw"
+                <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#_yHzC7k0NEeOK2NercnDSnA"/>
+                <argument xsi:type="pivot:TypeExp" type="#_yH2GQ00NEeOK2NercnDSnA"
                     referredType="#T.ocl.OclInvalid"/>
               </argument>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxZzswEeOGM4rnlUsTxw" name="self" type="#T.ocl.OclAny"/>
-            <resultVariable xmi:id="_74GxaDswEeOGM4rnlUsTxw" name="result" type="#Boolean"/>
+            <contextVariable xmi:id="_yHzC7k0NEeOK2NercnDSnA" name="self" type="#T.ocl.OclAny"/>
+            <resultVariable xmi:id="_yHzC700NEeOK2NercnDSnA" name="result" type="#Boolean"/>
           </specification>
         </postcondition>
       </ownedOperation>
@@ -1205,7 +1205,7 @@
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclLog..ocl.String" name="message"
             type="#String"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclAny.oclType" name="oclType" type="#_74GxnTswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.OclAny.oclType" name="oclType" type="#_yH2GR00NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation">
         <ownedComment body="Evaluates to the type of which oclText[self] is an instance.&#xA;"/>
       </ownedOperation>
@@ -1266,14 +1266,14 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedOperation xmi:id="o.ocl.OclElement.allInstances" isStatic="true" name="allInstances"
-          type="#_74GxgjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation">
+          type="#_yH1fL00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation">
         <ownedComment body="Return a set of all instances of the type and derived types of self."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclElement.oclContainer" name="oclContainer" isRequired="false"
           type="#T.ocl.OclElement" implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation">
         <ownedComment body="Returns the object for which self is a composed content or null if there is no such object."/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclElement.oclContents" name="oclContents" type="#_74GxnjswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.OclElement.oclContents" name="oclContents" type="#_yH2GSE0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation">
         <ownedComment body="Returns the composed contents of self."/>
       </ownedOperation>
@@ -1287,7 +1287,7 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.allInstances" isStatic="true" name="allInstances"
-          type="#_74GxgjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation">
+          type="#_yH1fL00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation">
         <ownedComment body="Returns oclText[invalid]."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.%61%..ocl.OclSelf" name="=" type="#Boolean"
@@ -1322,7 +1322,7 @@
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.or..ocl.Boolean" name="b" isRequired="false"
             type="#Boolean"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclInvalid.oclAsSet" name="oclAsSet" type="#_74GxgjswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.OclInvalid.oclAsSet" name="oclAsSet" type="#_yH1fL00NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation"/>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclAsType..$$.Metaclass" name="oclAsType"
           type="#T.ocl.OclInvalid..oclAsTypeTT" implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation">
@@ -1335,7 +1335,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.oclAsType..$$.Metaclass" name="type"
-            type="#_74GxnzswEeOGM4rnlUsTxw"/>
+            type="#_yH2GSU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclIsInvalid" name="oclIsInvalid" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation"
@@ -1351,7 +1351,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.oclIsKindOf..$$.Metaclass" name="type"
-            type="#_74GxoDswEeOGM4rnlUsTxw"/>
+            type="#_yH2GSk0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclIsTypeOf..$$.Metaclass" name="oclIsTypeOf"
           type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation">
@@ -1364,12 +1364,12 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.oclIsTypeOf..$$.Metaclass" name="type"
-            type="#_74GxoTswEeOGM4rnlUsTxw"/>
+            type="#_yH2GS00NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclIsUndefined" name="oclIsUndefined"
           type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation"
           isValidating="true"/>
-      <ownedOperation xmi:id="o.ocl.OclInvalid.oclType" name="oclType" type="#_74GxnTswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.OclInvalid.oclType" name="oclType" type="#_yH2GR00NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation"/>
       <ownedOperation xmi:id="o.ocl.OclInvalid.toString" name="toString" type="#String"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation">
@@ -1483,7 +1483,7 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedOperation xmi:id="o.ocl.OclVoid.allInstances" isStatic="true" name="allInstances"
-          type="#_74GxgjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation">
+          type="#_yH1fL00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation">
         <ownedComment body="Returns oclText[Set{null}]."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclVoid.%61%..ocl.OclSelf" name="=" type="#Boolean"
@@ -1529,7 +1529,7 @@
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:OrderedSetType" xmi:id="OrderedSet" name="OrderedSet"
-        superClass="#_74GxojswEeOGM4rnlUsTxw #_74GxozswEeOGM4rnlUsTxw" elementType="#T.ocl..OrderedSetT">
+        superClass="#_yH2GTE0NEeOK2NercnDSnA #_yH2GTU0NEeOK2NercnDSnA" elementType="#T.ocl..OrderedSetT">
       <ownedComment body="The OrderedSet is a Set, the elements of which are ordered.&#xA;It contains no duplicates. OrderedSet is itself an instance of the metatype OrderedSetType.&#xA;An OrderedSet is not a subtype of Set, neither a subtype of Sequence.&#xA;The common supertype of Sets and OrderedSets is Collection.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
         <ownedDetail name="ClassGroup">
@@ -1546,21 +1546,21 @@
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.OrderedSet.reject..T"
           name="reject" type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.iterator.RejectIteration">
         <ownedComment body="The ordered set of the source ordered set for which body is oclText[false].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.OrderedSet.reject..T" name="lambda" type="#_74GxpDswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.OrderedSet.reject..T" name="lambda" type="#_yH2GTk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.OrderedSet.reject..T" name="i" isRequired="false"
             type="#T.ocl..OrderedSetT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.OrderedSet.select..T"
           name="select" type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.iterator.SelectIteration">
         <ownedComment body="The ordered set of the source ordered set for which body is oclText[true]&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.OrderedSet.select..T" name="lambda" type="#_74GxpDswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.OrderedSet.select..T" name="lambda" type="#_yH2GTk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.OrderedSet.select..T" name="i" isRequired="false"
             type="#T.ocl..OrderedSetT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.OrderedSet.sortedBy..T"
           name="sortedBy" type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the ordered set containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c, then a &lt; c).&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.OrderedSet.sortedBy..T" name="lambda" type="#_74GxpTswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.OrderedSet.sortedBy..T" name="lambda" type="#_yH2tQE0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.OrderedSet.sortedBy..T" name="i" isRequired="false"
             type="#T.ocl..OrderedSetT"/>
       </ownedOperation>
@@ -1581,7 +1581,7 @@
           precedence="#Z.ADDITIVE">
         <ownedComment body="The elements of oclText[self], which are not in s.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.%45%..$$.UniqueCollection" name="s"
-            type="#_74GxpjswEeOGM4rnlUsTxw"/>
+            type="#_yH2tQU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.append..T" name="append" type="#OrderedSet"
           implementationClass="org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation">
@@ -1605,9 +1605,9 @@
           type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The ordered set containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.excludingAll..$$.Collection" name="objects"
-            type="#_74GxfDswEeOGM4rnlUsTxw"/>
+            type="#_yH1fKU0NEeOK2NercnDSnA"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OrderedSet.flatten" name="flatten" type="#_74GxpzswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.OrderedSet.flatten" name="flatten" type="#_yH2tQk0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.OrderedSet.flatten" parameter="#t.ocl.OrderedSet..flattenT2">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.OrderedSet..flattenT2"
@@ -1644,21 +1644,21 @@
             <bodyExpression xsi:type="pivot:OperationCallExp" name="=" type="#Boolean"
                 referredOperation="#o.ocl.Real.%61%..ocl.OclSelf">
               <source xsi:type="pivot:OperationCallExp" type="#Integer" referredOperation="#o.ocl.Collection.size">
-                <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_74GxazswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_yH0RAk0NEeOK2NercnDSnA"/>
               </source>
               <argument xsi:type="pivot:OperationCallExp" name="+" type="#Integer"
                   referredOperation="#o.ocl.Integer.%43%..ocl.OclSelf">
                 <source xsi:type="pivot:OperationCallExp" type="#Integer" referredOperation="#o.ocl.Collection.size">
-                  <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_74GxaTswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_yH0RAE0NEeOK2NercnDSnA"/>
                 </source>
                 <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" type="#UnlimitedNatural"
                     unlimitedNaturalSymbol="1"/>
               </argument>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxaTswEeOGM4rnlUsTxw" name="self" type="#OrderedSet"/>
-            <parameterVariable xmi:id="_74GxajswEeOGM4rnlUsTxw" name="object" type="#T.ocl..OrderedSetT"
+            <contextVariable xmi:id="_yH0RAE0NEeOK2NercnDSnA" name="self" type="#OrderedSet"/>
+            <parameterVariable xmi:id="_yH0RAU0NEeOK2NercnDSnA" name="object" type="#T.ocl..OrderedSetT"
                 representedParameter="#p0o.ocl.OrderedSet.prepend..T"/>
-            <resultVariable xmi:id="_74GxazswEeOGM4rnlUsTxw" name="result" type="#OrderedSet"/>
+            <resultVariable xmi:id="_yH0RAk0NEeOK2NercnDSnA" name="result" type="#OrderedSet"/>
           </specification>
         </postcondition>
         <postcondition name="IsAtStart">
@@ -1669,16 +1669,16 @@
                 referredOperation="#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:OperationCallExp" isRequired="false" type="#T.ocl..OrderedSetT"
                   referredOperation="#o.ocl.Sequence.at..ocl.Integer">
-                <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_74GxbjswEeOGM4rnlUsTxw"/>
+                <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_yH0RBU0NEeOK2NercnDSnA"/>
                 <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" type="#UnlimitedNatural"
                     unlimitedNaturalSymbol="1"/>
               </source>
-              <argument xsi:type="pivot:VariableExp" type="#T.ocl..OrderedSetT" referredVariable="#_74GxbTswEeOGM4rnlUsTxw"/>
+              <argument xsi:type="pivot:VariableExp" type="#T.ocl..OrderedSetT" referredVariable="#_yH0RBE0NEeOK2NercnDSnA"/>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxbDswEeOGM4rnlUsTxw" name="self" type="#OrderedSet"/>
-            <parameterVariable xmi:id="_74GxbTswEeOGM4rnlUsTxw" name="object" type="#T.ocl..OrderedSetT"
+            <contextVariable xmi:id="_yH0RA00NEeOK2NercnDSnA" name="self" type="#OrderedSet"/>
+            <parameterVariable xmi:id="_yH0RBE0NEeOK2NercnDSnA" name="object" type="#T.ocl..OrderedSetT"
                 representedParameter="#p0o.ocl.OrderedSet.prepend..T"/>
-            <resultVariable xmi:id="_74GxbjswEeOGM4rnlUsTxw" name="result" type="#OrderedSet"/>
+            <resultVariable xmi:id="_yH0RBU0NEeOK2NercnDSnA" name="result" type="#OrderedSet"/>
           </specification>
         </postcondition>
         <postcondition name="IsShiftedAlong">
@@ -1687,42 +1687,42 @@
             <language>OCL</language>
             <bodyExpression xsi:type="pivot:IteratorExp" isRequired="false" type="#Boolean"
                 referredIteration="#i.ocl.Collection.forAll..T">
-              <source xsi:type="pivot:CollectionLiteralExp" type="#_74GxqDswEeOGM4rnlUsTxw"
+              <source xsi:type="pivot:CollectionLiteralExp" type="#_yH2tQ00NEeOK2NercnDSnA"
                   kind="Sequence">
                 <part xsi:type="pivot:CollectionRange" type="#Integer">
                   <first xsi:type="pivot:UnlimitedNaturalLiteralExp" type="#UnlimitedNatural"
                       unlimitedNaturalSymbol="1"/>
                   <last xsi:type="pivot:OperationCallExp" type="#Integer" referredOperation="#o.ocl.Collection.size">
-                    <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_74GxcDswEeOGM4rnlUsTxw"/>
+                    <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_yH0RB00NEeOK2NercnDSnA"/>
                   </last>
                 </part>
               </source>
               <body xsi:type="pivot:OperationCallExp" name="=" type="#Boolean" referredOperation="#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <source xsi:type="pivot:OperationCallExp" isRequired="false" type="#T.ocl..OrderedSetT"
                     referredOperation="#o.ocl.Sequence.at..ocl.Integer">
-                  <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_74GxcDswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_yH0RB00NEeOK2NercnDSnA"/>
                   <argument xsi:type="pivot:VariableExp" isRequired="false" type="#Integer"
-                      referredVariable="#_74GxbzswEeOGM4rnlUsTxw"/>
+                      referredVariable="#_yH0RBk0NEeOK2NercnDSnA"/>
                 </source>
                 <argument xsi:type="pivot:OperationCallExp" isRequired="false" type="#T.ocl..OrderedSetT"
                     referredOperation="#o.ocl.Sequence.at..ocl.Integer">
-                  <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_74GxcjswEeOGM4rnlUsTxw"/>
+                  <source xsi:type="pivot:VariableExp" type="#OrderedSet" referredVariable="#_yH0RCU0NEeOK2NercnDSnA"/>
                   <argument xsi:type="pivot:OperationCallExp" name="+" type="#Integer"
                       referredOperation="#o.ocl.Integer.%43%..ocl.OclSelf">
                     <source xsi:type="pivot:VariableExp" isRequired="false" type="#Integer"
-                        referredVariable="#_74GxbzswEeOGM4rnlUsTxw"/>
+                        referredVariable="#_yH0RBk0NEeOK2NercnDSnA"/>
                     <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" type="#UnlimitedNatural"
                         unlimitedNaturalSymbol="1"/>
                   </argument>
                 </argument>
               </body>
-              <iterator xmi:id="_74GxbzswEeOGM4rnlUsTxw" name="index" isRequired="false"
+              <iterator xmi:id="_yH0RBk0NEeOK2NercnDSnA" name="index" isRequired="false"
                   type="#Integer" representedParameter="#i0i.ocl.Collection.forAll..T"/>
             </bodyExpression>
-            <contextVariable xmi:id="_74GxcDswEeOGM4rnlUsTxw" name="self" type="#OrderedSet"/>
-            <parameterVariable xmi:id="_74GxcTswEeOGM4rnlUsTxw" name="object" type="#T.ocl..OrderedSetT"
+            <contextVariable xmi:id="_yH0RB00NEeOK2NercnDSnA" name="self" type="#OrderedSet"/>
+            <parameterVariable xmi:id="_yH0RCE0NEeOK2NercnDSnA" name="object" type="#T.ocl..OrderedSetT"
                 representedParameter="#p0o.ocl.OrderedSet.prepend..T"/>
-            <resultVariable xmi:id="_74GxcjswEeOGM4rnlUsTxw" name="result" type="#OrderedSet"/>
+            <resultVariable xmi:id="_yH0RCU0NEeOK2NercnDSnA" name="result" type="#OrderedSet"/>
           </specification>
         </postcondition>
       </ownedOperation>
@@ -1737,7 +1737,7 @@
         <ownedComment body="The ordered set of elements with same elements but with the opposite order.&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#_74GxqTswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#_yH2tRE0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.OrderedSet.selectByKind..$$.Metaclass"
             parameter="#t.ocl.OrderedSet..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.OrderedSet..selectByKindTT"
@@ -1747,10 +1747,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.selectByKind..$$.Metaclass" name="type"
-            type="#_74GxqjswEeOGM4rnlUsTxw"/>
+            type="#_yH2tRU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.selectByType..$$.Metaclass" name="selectByType"
-          type="#_74GxqzswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#_yH2tRk0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.OrderedSet.selectByType..$$.Metaclass"
             parameter="#t.ocl.OrderedSet..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.OrderedSet..selectByTypeTT"
@@ -1760,7 +1760,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.selectByType..$$.Metaclass" name="type"
-            type="#_74GxrDswEeOGM4rnlUsTxw"/>
+            type="#_yH2tR00NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.subOrderedSet..ocl.Integer..ocl.Integer"
           name="subOrderedSet" type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation"
@@ -1873,7 +1873,7 @@
         <ownedComment body="Converts oclText[self] to a string value.&#xA;"/>
       </ownedOperation>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="Sequence" name="Sequence" superClass="#_74GxrTswEeOGM4rnlUsTxw"
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="Sequence" name="Sequence" superClass="#_yH2tSE0NEeOK2NercnDSnA"
         elementType="#T.ocl..SequenceT">
       <ownedComment body="A sequence is a collection where the elements are ordered.&#xA;An element may be part of a sequence more than once.&#xA;Sequence is itself an instance of the metatype SequenceType.&#xA;A Sentence is not a subtype of Bag.&#xA;The common supertype of Sentence and Bags is Collection.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
@@ -1889,13 +1889,13 @@
         </ownedParameter>
       </ownedTemplateSignature>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.closure..T"
-          name="closure" type="#_74GxrjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
+          name="closure" type="#_yH2tSU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
         <ownedComment body="The closure of applying body transitively to every distinct element of the source collection.&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Sequence.closure..T" name="lambda" type="#_74GxrzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Sequence.closure..T" name="lambda" type="#_yH2tSk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.closure..T" name="i" type="#T.ocl..SequenceT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.collect..T"
-          name="collect" type="#_74GxsDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
+          name="collect" type="#_yH2tS00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
         <ownedTemplateSignature xmi:id="s.i.ocl.Sequence.collect..T" parameter="#t.ocl.Sequence..collectV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..collectV"
               parameteredElement="#T.ocl.Sequence..collectV">
@@ -1904,7 +1904,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Sequence.collect..T" name="lambda" isRequired="false"
-            type="#_74P7QDswEeOGM4rnlUsTxw"/>
+            type="#_yH2tTE0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.collect..T" name="i" isRequired="false"
             type="#T.ocl..SequenceT"/>
       </ownedOperation>
@@ -1919,28 +1919,28 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0i.ocl.Sequence.collectNested..T" name="lambda" isRequired="false"
-            type="#_74P7QTswEeOGM4rnlUsTxw"/>
+            type="#_yH2tTU0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.collectNested..T" name="i" isRequired="false"
             type="#T.ocl..SequenceT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.reject..T"
           name="reject" type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.iterator.RejectIteration">
         <ownedComment body="The subsequence of the source sequence for which body is oclText[false].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Sequence.reject..T" name="lambda" type="#_74P7QjswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Sequence.reject..T" name="lambda" type="#_yH2tTk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.reject..T" name="i" isRequired="false"
             type="#T.ocl..SequenceT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.select..T"
           name="select" type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.iterator.SelectIteration">
         <ownedComment body="The subsequence of the source sequence for which body is oclText[true].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Sequence.select..T" name="lambda" type="#_74P7QjswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Sequence.select..T" name="lambda" type="#_yH2tTk0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.select..T" name="i" isRequired="false"
             type="#T.ocl..SequenceT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.sortedBy..T"
           name="sortedBy" type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the Sequence containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c then a &lt; c).&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Sequence.sortedBy..T" name="lambda" type="#_74P7QzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Sequence.sortedBy..T" name="lambda" type="#_yH2tT00NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.sortedBy..T" name="i" isRequired="false"
             type="#T.ocl..SequenceT"/>
       </ownedOperation>
@@ -1985,14 +1985,14 @@
           type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The sequence containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Sequence.excludingAll..$$.Collection" name="objects"
-            type="#_74GxfDswEeOGM4rnlUsTxw"/>
+            type="#_yH1fKU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.first" name="first" isRequired="false"
           type="#T.ocl..SequenceT" implementationClass="org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation"
           isInvalidating="true">
         <ownedComment body="The first element in oclText[self].&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Sequence.flatten" name="flatten" type="#_74P7RDswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Sequence.flatten" name="flatten" type="#_yH2tUE0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="Redefines the Collection operation. If the element type is not a collection type, this results in the same sequence as oclText[self].&#xA;If the element type is a collection type, the result is the sequence containing all the elements&#xA;of all the recursively flattened elements of oclText[self]. The order of the elements is partial.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Sequence.flatten" parameter="#t.ocl.Sequence..flattenT2">
@@ -2046,7 +2046,7 @@
         <ownedComment body="The sequence containing the same elements but with the opposite order.&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#_74P7RTswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#_yH2tUU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Sequence.selectByKind..$$.Metaclass"
             parameter="#t.ocl.Sequence..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..selectByKindTT"
@@ -2056,10 +2056,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Sequence.selectByKind..$$.Metaclass" name="type"
-            type="#_74P7RjswEeOGM4rnlUsTxw"/>
+            type="#_yH2tUk0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.selectByType..$$.Metaclass" name="selectByType"
-          type="#_74P7RzswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#_yH2tU00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Sequence.selectByType..$$.Metaclass"
             parameter="#t.ocl.Sequence..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..selectByTypeTT"
@@ -2069,7 +2069,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Sequence.selectByType..$$.Metaclass" name="type"
-            type="#_74P7SDswEeOGM4rnlUsTxw"/>
+            type="#_yH2tVE0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.subSequence..ocl.Integer..ocl.Integer"
           name="subSequence" type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation"
@@ -2081,7 +2081,7 @@
             name="upper" type="#Integer"/>
       </ownedOperation>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="Set" name="Set" superClass="#_74P7STswEeOGM4rnlUsTxw #_74P7SjswEeOGM4rnlUsTxw"
+    <ownedType xsi:type="pivot:SetType" xmi:id="Set" name="Set" superClass="#_yH2tVU0NEeOK2NercnDSnA #_yH2tVk0NEeOK2NercnDSnA"
         elementType="#T.ocl..SetT">
       <ownedAnnotation name="http://www.omg.org/ocl">
         <ownedDetail name="ClassGroup">
@@ -2098,21 +2098,21 @@
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Set.reject..T" name="reject"
           type="#Set" implementationClass="org.eclipse.ocl.examples.library.iterator.RejectIteration">
         <ownedComment body="The subset of the source set for which body is oclText[false].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Set.reject..T" name="lambda" type="#_74P7SzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Set.reject..T" name="lambda" type="#_yH2tV00NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Set.reject..T" name="i" isRequired="false"
             type="#T.ocl..SetT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Set.select..T" name="select"
           type="#Set" implementationClass="org.eclipse.ocl.examples.library.iterator.SelectIteration">
         <ownedComment body="The subset of set for which expr is oclText[true].&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Set.select..T" name="lambda" type="#_74P7SzswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Set.select..T" name="lambda" type="#_yH2tV00NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Set.select..T" name="i" isRequired="false"
             type="#T.ocl..SetT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Set.sortedBy..T" name="sortedBy"
-          type="#_74P7TDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          type="#_yH2tWE0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the ordered set containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c, then a &lt; c).&#xA;"/>
-        <ownedParameter xmi:id="p0i.ocl.Set.sortedBy..T" name="lambda" type="#_74P7TTswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0i.ocl.Set.sortedBy..T" name="lambda" type="#_yH2tWU0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.Set.sortedBy..T" name="i" isRequired="false"
             type="#T.ocl..SetT"/>
       </ownedOperation>
@@ -2132,7 +2132,7 @@
           implementationClass="org.eclipse.ocl.examples.library.collection.SetMinusOperation"
           precedence="#Z.ADDITIVE">
         <ownedComment body="The elements of oclText[self], which are not in s.&#xA;"/>
-        <ownedParameter xmi:id="p0o.ocl.Set.%45%..$$.UniqueCollection" name="s" type="#_74GxpjswEeOGM4rnlUsTxw"/>
+        <ownedParameter xmi:id="p0o.ocl.Set.%45%..$$.UniqueCollection" name="s" type="#_yH2tQU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Set.excluding..ocl.OclAny" name="excluding" type="#Set"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation">
@@ -2144,9 +2144,9 @@
           type="#Set" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The set containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Set.excludingAll..$$.Collection" name="objects"
-            type="#_74GxfDswEeOGM4rnlUsTxw"/>
+            type="#_yH1fKU0NEeOK2NercnDSnA"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Set.flatten" name="flatten" type="#_74P7TjswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.Set.flatten" name="flatten" type="#_yH2tWk0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="Redefines the Collection operation. If the element type is not a collection type, this results in the same set as oclText[self].&#xA;If the element type is a collection type, the result is the set containing all the elements of all the recursively flattened elements of oclText[self].&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Set.flatten" parameter="#t.ocl.Set..flattenT2">
@@ -2167,10 +2167,10 @@
           type="#Set" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation">
         <ownedComment body="The set containing all elements of oclText[self] and objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Set.includingAll..$$.Collection" name="objects"
-            type="#_74P7TzswEeOGM4rnlUsTxw"/>
+            type="#_yH2tW00NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Set.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#_74P7UDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#_yH2tXE0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Set.selectByKind..$$.Metaclass" parameter="#t.ocl.Set..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Set..selectByKindTT"
               parameteredElement="#T.ocl.Set..selectByKindTT">
@@ -2179,10 +2179,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Set.selectByKind..$$.Metaclass" name="type"
-            type="#_74P7UTswEeOGM4rnlUsTxw"/>
+            type="#_yH2tXU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Set.selectByType..$$.Metaclass" name="selectByType"
-          type="#_74P7UjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#_yH2tXk0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Set.selectByType..$$.Metaclass" parameter="#t.ocl.Set..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Set..selectByTypeTT"
               parameteredElement="#T.ocl.Set..selectByTypeTT">
@@ -2191,7 +2191,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Set.selectByType..$$.Metaclass" name="type"
-            type="#_74P7UzswEeOGM4rnlUsTxw"/>
+            type="#_yH3UUE0NEeOK2NercnDSnA"/>
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.ocl.State" name="State" superClass="#T.ocl.OclState">
@@ -2231,7 +2231,7 @@
         <ownedComment body="Queries the character at position i in oclText[self].&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.String.at..ocl.Integer" name="i" type="#Integer"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.String.characters" name="characters" type="#_74P7VDswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.String.characters" name="characters" type="#_yH3UUU0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.string.StringCharactersOperation">
         <ownedComment body="Obtains the characters of oclText[self] as a sequence.&#xA;"/>
       </ownedOperation>
@@ -2357,18 +2357,18 @@
           implementationClass="org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation">
         <ownedComment body="Converts oclText[self] to upper case, using the locale defined by looking up oclLocale in the current environment.&#xA;Otherwise, returns the same string as oclText[self].&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.String.tokenize" name="tokenize" type="#_74P7VDswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.String.tokenize" name="tokenize" type="#_yH3UUU0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
         <ownedComment body="Partition oclText[self] into a sequence substrings separated by any of space, line-feed, carriage-return, form-feed and horizontal-tab delimiters.&#xA;The delimiters are omitted from the return.&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.String.tokenize..ocl.String" name="tokenize" type="#_74P7VDswEeOGM4rnlUsTxw"
+      <ownedOperation xmi:id="o.ocl.String.tokenize..ocl.String" name="tokenize" type="#_yH3UUU0NEeOK2NercnDSnA"
           implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
         <ownedComment body="Partition oclText[self] into a sequence substrings separated by characters in the delimiters. The delimiters are omitted from the return.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.String.tokenize..ocl.String" name="delimiters"
             type="#String"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.String.tokenize..ocl.String..ocl.Boolean" name="tokenize"
-          type="#_74P7VDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
+          type="#_yH3UUU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
         <ownedComment body="Partition oclText[self] into a sequence substrings separated by characters in the delimiters. If returnDelimeters is&#xA;true the returned sequence includes the delimiters, otherwise the delimiters are omitted.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.String.tokenize..ocl.String..ocl.Boolean"
             name="delimiters" type="#String"/>
@@ -2405,7 +2405,7 @@
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.ocl.Type" name="Type" superClass="#T.ocl.OclType"/>
     <ownedType xsi:type="pivot:CollectionType" xmi:id="UniqueCollection" name="UniqueCollection"
-        superClass="#_74P7VTswEeOGM4rnlUsTxw" elementType="#T.ocl..UniqueCollectionT">
+        superClass="#_yH3UUk0NEeOK2NercnDSnA" elementType="#T.ocl..UniqueCollectionT">
       <ownedComment body="The UniqueCollection type provides the shared functionality of the OrderedSet and Set&#xA;collections for which the elements are unique.&#xA;The common supertype of UniqueCollection is Collection.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
         <ownedDetail name="ClassGroup">
@@ -2420,10 +2420,10 @@
         </ownedParameter>
       </ownedTemplateSignature>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.UniqueCollection.sortedBy..T"
-          name="sortedBy" type="#_74P7VjswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          name="sortedBy" type="#_yH3UU00NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the ordered set containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c, then a &lt; c).&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.UniqueCollection.sortedBy..T" name="lambda"
-            type="#_74P7VzswEeOGM4rnlUsTxw"/>
+            type="#_yH3UVE0NEeOK2NercnDSnA"/>
         <ownedIterator xmi:id="i0i.ocl.UniqueCollection.sortedBy..T" name="i" isRequired="false"
             type="#T.ocl..UniqueCollectionT"/>
       </ownedOperation>
@@ -2432,22 +2432,22 @@
           precedence="#Z.ADDITIVE">
         <ownedComment body="The elements of oclText[self], which are not in s.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.%45%..$$.UniqueCollection"
-            name="s" type="#_74GxpjswEeOGM4rnlUsTxw"/>
+            name="s" type="#_yH2tQU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.UniqueCollection.intersection..$$.Collection"
-          name="intersection" type="#_74P7WDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
+          name="intersection" type="#_yH3UVU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
         <ownedComment body="The intersection of oclText[self] and c (i.e., the set of all elements that are in both oclText[self] and c).&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.intersection..$$.Collection"
-            name="c" type="#_74P7VTswEeOGM4rnlUsTxw"/>
+            name="c" type="#_yH3UUk0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.UniqueCollection.symmetricDifference..$$.UniqueCollection"
-          name="symmetricDifference" type="#_74P7WDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation">
+          name="symmetricDifference" type="#_yH3UVU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation">
         <ownedComment body="The set containing all the elements that are in oclText[self] or s, but not in both.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.symmetricDifference..$$.UniqueCollection"
-            name="s" type="#_74GxpjswEeOGM4rnlUsTxw"/>
+            name="s" type="#_yH2tQU0NEeOK2NercnDSnA"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.UniqueCollection.union..ocl.UniqueCollection"
-          name="union" type="#_74P7WDswEeOGM4rnlUsTxw" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
+          name="union" type="#_yH3UVU0NEeOK2NercnDSnA" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
         <ownedComment body="The set consisting of all elements in oclText[self] and all elements in s.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.union..ocl.UniqueCollection"
             name="s" type="#UniqueCollection"/>
@@ -2473,7 +2473,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.UnlimitedNatural.oclAsType..$$.Metaclass"
-            name="type" type="#_74P7WTswEeOGM4rnlUsTxw"/>
+            name="type" type="#_yH3UVk0NEeOK2NercnDSnA"/>
       </ownedOperation>
     </ownedType>
     <ownedPrecedence xmi:id="Z.NAVIGATION" name="NAVIGATION"/>
@@ -2488,754 +2488,754 @@
     <ownedPrecedence xmi:id="Z.IMPLIES" name="IMPLIES" order="9"/>
   </nestedPackage>
   <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxczswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH1fIE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74GxdDswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7WjswEeOGM4rnlUsTxw #_74P7WzswEeOGM4rnlUsTxw" elementType="#T.ocl..BagT">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH1fIU0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH3UV00NEeOK2NercnDSnA #_yH3UWE0NEeOK2NercnDSnA" elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxdTswEeOGM4rnlUsTxw" name="Lambda"
-        superClass="#T.ocl.OclLambda" contextType="#T.ocl..BagT" resultType="#_74GxdDswEeOGM4rnlUsTxw"/>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74GxdjswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7XDswEeOGM4rnlUsTxw" elementType="#T.ocl.Bag..collectV">
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fIk0NEeOK2NercnDSnA" name="Lambda"
+        superClass="#T.ocl.OclLambda" contextType="#T.ocl..BagT" resultType="#_yH1fIU0NEeOK2NercnDSnA"/>
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH1fI00NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH3UWU0NEeOK2NercnDSnA" elementType="#T.ocl.Bag..collectV">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..collectV" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxdzswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fJE0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..BagT" resultType="#T.ocl.Bag..collectV"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxeDswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fJU0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..BagT" resultType="#T.ocl.Bag..collectNestedV"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxeTswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fJk0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..BagT" resultType="#Boolean"/>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74GxejswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74GxczswEeOGM4rnlUsTxw" elementType="#T.ocl..BagT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH1fJ00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH1fIE0NEeOK2NercnDSnA" elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxezswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fKE0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..BagT" resultType="#T.ocl.OclAny"/>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxfDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH1fKU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.OclAny">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.OclAny" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74GxfTswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7XTswEeOGM4rnlUsTxw" elementType="#T.ocl.Bag..flattenT2">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH1fKk0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH3UWk0NEeOK2NercnDSnA" elementType="#T.ocl.Bag..flattenT2">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..flattenT2" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74GxfjswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7XjswEeOGM4rnlUsTxw" elementType="#T.ocl.Bag..selectByKindTT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH1fK00NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH3UW00NEeOK2NercnDSnA" elementType="#T.ocl.Bag..selectByKindTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..selectByKindTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxfzswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH1fLE0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Bag..selectByKindTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Bag..selectByKindTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74GxgDswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7XzswEeOGM4rnlUsTxw" elementType="#T.ocl.Bag..selectByTypeTT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH1fLU0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH3UXE0NEeOK2NercnDSnA" elementType="#T.ocl.Bag..selectByTypeTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..selectByTypeTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxgTswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH1fLk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Bag..selectByTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Bag..selectByTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74GxgjswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7YDswEeOGM4rnlUsTxw #_74P7YTswEeOGM4rnlUsTxw" elementType="#OclSelf">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH1fL00NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH3UXU0NEeOK2NercnDSnA #_yH3UXk0NEeOK2NercnDSnA" elementType="#OclSelf">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxgzswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fME0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..CollectionT" resultType="#Boolean"/>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxhDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH1fMU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..collectV">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..collectV" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxhTswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH1fMk0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..CollectionT" resultType="#T.ocl.Collection..collectV"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxhjswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2GME0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..CollectionT" resultType="#T.ocl.Collection..collectNestedV"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxhzswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2GMU0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..CollectionT" resultType="#T.ocl.OclAny"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxiDswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2GMk0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..CollectionT" resultType="#T.ocl.Collection..iterateTacc"/>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74GxiTswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7YjswEeOGM4rnlUsTxw" elementType="#T.ocl..CollectionT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2GM00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH3UX00NEeOK2NercnDSnA" elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74GxijswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7YjswEeOGM4rnlUsTxw" elementType="#T.ocl..CollectionT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH2GNE0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH3UX00NEeOK2NercnDSnA" elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74GxizswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74GxiTswEeOGM4rnlUsTxw #_74GxkDswEeOGM4rnlUsTxw" elementType="#T.ocl..CollectionT">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2GNU0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH2GM00NEeOK2NercnDSnA #_yH2GOk0NEeOK2NercnDSnA" elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74GxjDswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74GxijswEeOGM4rnlUsTxw #_74GxkDswEeOGM4rnlUsTxw" elementType="#T.ocl..CollectionT">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH2GNk0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH2GNE0NEeOK2NercnDSnA #_yH2GOk0NEeOK2NercnDSnA" elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxjTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GN00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..excludesAllT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..excludesAllT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxjjswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GOE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..flattenT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..flattenT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxjzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GOU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..includesAllT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..includesAllT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxkDswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7YjswEeOGM4rnlUsTxw" elementType="#T.ocl..CollectionT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GOk0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH3UX00NEeOK2NercnDSnA" elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74GxkTswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7ZjswEeOGM4rnlUsTxw #_74P7ZzswEeOGM4rnlUsTxw" elementType="#_74P7YzswEeOGM4rnlUsTxw">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH2GO00NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH3UY00NEeOK2NercnDSnA #_yH3UZE0NEeOK2NercnDSnA" elementType="#_yH3UYE0NEeOK2NercnDSnA">
       <templateBinding signature="#s.Set">
-        <parameterSubstitution actual="#_74P7YzswEeOGM4rnlUsTxw" formal="#t.ocl..SetT"/>
+        <parameterSubstitution actual="#_yH3UYE0NEeOK2NercnDSnA" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxkjswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GPE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..productT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..productT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxkzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GPU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..selectByKindTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..selectByKindTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxlDswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GPk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Collection..selectByKindTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Collection..selectByKindTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxlTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GP00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Collection..selectByTypeTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Collection..selectByTypeTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxljswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GQE0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Collection..selectByTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Collection..selectByTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74GxlzswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7aDswEeOGM4rnlUsTxw #_74P7aTswEeOGM4rnlUsTxw" elementType="#T.ocl.EnumerationLiteral">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2GQU0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH3UZU0NEeOK2NercnDSnA #_yH3UZk0NEeOK2NercnDSnA" elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxmDswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GQk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclAny..oclAsTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclAny..oclAsTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxmTswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GQ00NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclInvalid">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclInvalid" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxmjswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GRE0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclAny..oclIsKindOfT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclAny..oclIsKindOfT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxmzswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GRU0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclAny..oclIsTypeOfT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclAny..oclIsTypeOfT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxnDswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GRk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclVoid">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclVoid" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxnTswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GR00NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#OclSelf">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74GxnjswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7ajswEeOGM4rnlUsTxw #_74P7azswEeOGM4rnlUsTxw" elementType="#T.ocl.OclElement">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH2GSE0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH3UZ00NEeOK2NercnDSnA #_yH3UaE0NEeOK2NercnDSnA" elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxnzswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GSU0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclInvalid..oclAsTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclInvalid..oclAsTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxoDswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GSk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclInvalid..oclIsKindOfT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclInvalid..oclIsKindOfT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxoTswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2GS00NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OclInvalid..oclIsTypeOfT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OclInvalid..oclIsTypeOfT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74GxojswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7bDswEeOGM4rnlUsTxw" elementType="#T.ocl..OrderedSetT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2GTE0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH3UaU0NEeOK2NercnDSnA" elementType="#T.ocl..OrderedSetT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..OrderedSetT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxozswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7bDswEeOGM4rnlUsTxw" elementType="#T.ocl..OrderedSetT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2GTU0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH3UaU0NEeOK2NercnDSnA" elementType="#T.ocl..OrderedSetT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..OrderedSetT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxpDswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2GTk0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..OrderedSetT" resultType="#Boolean"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxpTswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tQE0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..OrderedSetT" resultType="#T.ocl.OclAny"/>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxpjswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74GxfDswEeOGM4rnlUsTxw" elementType="#T.ocl.OclAny">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2tQU0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH1fKU0NEeOK2NercnDSnA" elementType="#T.ocl.OclAny">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OclAny" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74GxpzswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7bTswEeOGM4rnlUsTxw #_74P7bjswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..flattenT2">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2tQk0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH3Uak0NEeOK2NercnDSnA #_yH3Ua00NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74GxqDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7bzswEeOGM4rnlUsTxw" elementType="#Integer">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2tQ00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH3UbE0NEeOK2NercnDSnA" elementType="#Integer">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#Integer" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74GxqTswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7cDswEeOGM4rnlUsTxw #_74P7cTswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..selectByKindTT">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2tRE0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH3UbU0NEeOK2NercnDSnA #_yH3Ubk0NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxqjswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2tRU0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74GxqzswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7cjswEeOGM4rnlUsTxw #_74P7czswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..selectByTypeTT">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2tRk0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH3Ub00NEeOK2NercnDSnA #_yH37YE0NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74GxrDswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2tR00NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74GxrTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2tSE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74GxrjswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7dDswEeOGM4rnlUsTxw #_74P7dTswEeOGM4rnlUsTxw" elementType="#T.ocl..SequenceT">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2tSU0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH37YU0NEeOK2NercnDSnA #_yH37Yk0NEeOK2NercnDSnA" elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74GxrzswEeOGM4rnlUsTxw" name="Lambda"
-        superClass="#T.ocl.OclLambda" contextType="#T.ocl..SequenceT" resultType="#_74GxrjswEeOGM4rnlUsTxw"/>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74GxsDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7djswEeOGM4rnlUsTxw" elementType="#T.ocl.Sequence..collectV">
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tSk0NEeOK2NercnDSnA" name="Lambda"
+        superClass="#T.ocl.OclLambda" contextType="#T.ocl..SequenceT" resultType="#_yH2tSU0NEeOK2NercnDSnA"/>
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2tS00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37Y00NEeOK2NercnDSnA" elementType="#T.ocl.Sequence..collectV">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..collectV" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7QDswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tTE0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..SequenceT" resultType="#T.ocl.Sequence..collectV"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7QTswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tTU0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..SequenceT" resultType="#T.ocl.Sequence..collectNestedV"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7QjswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tTk0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..SequenceT" resultType="#Boolean"/>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7QzswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tT00NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..SequenceT" resultType="#T.ocl.OclAny"/>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7RDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7dzswEeOGM4rnlUsTxw" elementType="#T.ocl.Sequence..flattenT2">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2tUE0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37ZE0NEeOK2NercnDSnA" elementType="#T.ocl.Sequence..flattenT2">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..flattenT2" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7RTswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7eDswEeOGM4rnlUsTxw" elementType="#T.ocl.Sequence..selectByKindTT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2tUU0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37ZU0NEeOK2NercnDSnA" elementType="#T.ocl.Sequence..selectByKindTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByKindTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74P7RjswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2tUk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Sequence..selectByKindTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByKindTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7RzswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7eTswEeOGM4rnlUsTxw" elementType="#T.ocl.Sequence..selectByTypeTT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH2tU00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37Zk0NEeOK2NercnDSnA" elementType="#T.ocl.Sequence..selectByTypeTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByTypeTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74P7SDswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2tVE0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Sequence..selectByTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7STswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7TzswEeOGM4rnlUsTxw" elementType="#T.ocl..SetT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH2tVU0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH2tW00NEeOK2NercnDSnA" elementType="#T.ocl..SetT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7SjswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7TzswEeOGM4rnlUsTxw" elementType="#T.ocl..SetT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2tVk0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH2tW00NEeOK2NercnDSnA" elementType="#T.ocl..SetT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7SzswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tV00NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..SetT" resultType="#Boolean"/>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74P7TDswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7ejswEeOGM4rnlUsTxw #_74P7SjswEeOGM4rnlUsTxw" elementType="#T.ocl..SetT">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH2tWE0NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH37Z00NEeOK2NercnDSnA #_yH2tVk0NEeOK2NercnDSnA" elementType="#T.ocl..SetT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7TTswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH2tWU0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..SetT" resultType="#T.ocl.OclAny"/>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74P7TjswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7ezswEeOGM4rnlUsTxw #_74P7fDswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..flattenT2">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH2tWk0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH37aE0NEeOK2NercnDSnA #_yH37aU0NEeOK2NercnDSnA" elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7TzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH2tW00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl..SetT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74P7UDswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7fTswEeOGM4rnlUsTxw #_74P7fjswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..selectByKindTT">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH2tXE0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH37ak0NEeOK2NercnDSnA #_yH37a00NEeOK2NercnDSnA" elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74P7UTswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH2tXU0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74P7UjswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7fzswEeOGM4rnlUsTxw #_74P7gDswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..selectByTypeTT">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH2tXk0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH37bE0NEeOK2NercnDSnA #_yH37bU0NEeOK2NercnDSnA" elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74P7UzswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH3UUE0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7VDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7gTswEeOGM4rnlUsTxw" elementType="#String">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH3UUU0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37bk0NEeOK2NercnDSnA" elementType="#String">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#String" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7VTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UUk0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_74P7VjswEeOGM4rnlUsTxw" name="OrderedSet"
-        superClass="#_74P7gjswEeOGM4rnlUsTxw #_74P7gzswEeOGM4rnlUsTxw" elementType="#T.ocl..UniqueCollectionT">
+    <ownedType xsi:type="pivot:OrderedSetType" xmi:id="_yH3UU00NEeOK2NercnDSnA" name="OrderedSet"
+        superClass="#_yH37b00NEeOK2NercnDSnA #_yH37cE0NEeOK2NercnDSnA" elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:LambdaType" xmi:id="_74P7VzswEeOGM4rnlUsTxw" name="Lambda"
+    <ownedType xsi:type="pivot:LambdaType" xmi:id="_yH3UVE0NEeOK2NercnDSnA" name="Lambda"
         superClass="#T.ocl.OclLambda" contextType="#T.ocl..UniqueCollectionT" resultType="#T.ocl.OclAny"/>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_74P7WDswEeOGM4rnlUsTxw" name="Set"
-        superClass="#_74P7hDswEeOGM4rnlUsTxw #_74P7gzswEeOGM4rnlUsTxw" elementType="#T.ocl..UniqueCollectionT">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_yH3UVU0NEeOK2NercnDSnA" name="Set"
+        superClass="#_yH37cU0NEeOK2NercnDSnA #_yH37cE0NEeOK2NercnDSnA" elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:Metaclass" xmi:id="_74P7WTswEeOGM4rnlUsTxw" name="Metaclass"
+    <ownedType xsi:type="pivot:Metaclass" xmi:id="_yH3UVk0NEeOK2NercnDSnA" name="Metaclass"
         superClass="#T.ocl.Class #T.ocl.OclType" instanceType="#T.ocl.UnlimitedNatural..oclAsTypeTT">
       <templateBinding signature="#s.Metaclass">
         <parameterSubstitution actual="#T.ocl.UnlimitedNatural..oclAsTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7WjswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74GxczswEeOGM4rnlUsTxw" elementType="#T.ocl..BagT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH3UV00NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH1fIE0NEeOK2NercnDSnA" elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7WzswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74GxczswEeOGM4rnlUsTxw" elementType="#T.ocl..BagT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UWE0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH1fIE0NEeOK2NercnDSnA" elementType="#T.ocl..BagT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7XDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UWU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Bag..collectV">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Bag..collectV" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7XTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UWk0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Bag..flattenT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Bag..flattenT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7XjswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UW00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Bag..selectByKindTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Bag..selectByKindTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7XzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UXE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Bag..selectByTypeTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Bag..selectByTypeTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7YDswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7hTswEeOGM4rnlUsTxw" elementType="#OclSelf">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH3UXU0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH37ck0NEeOK2NercnDSnA" elementType="#OclSelf">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7YTswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7hTswEeOGM4rnlUsTxw" elementType="#OclSelf">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UXk0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37ck0NEeOK2NercnDSnA" elementType="#OclSelf">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7YjswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UX00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:TupleType" xmi:id="_74P7YzswEeOGM4rnlUsTxw" name="Tuple"
+    <ownedType xsi:type="pivot:TupleType" xmi:id="_yH3UYE0NEeOK2NercnDSnA" name="Tuple"
         superClass="#T.ocl.OclTuple">
-      <ownedAttribute xmi:id="_74P7ZDswEeOGM4rnlUsTxw" name="first" type="#T.ocl..CollectionT"/>
-      <ownedAttribute xmi:id="_74P7ZTswEeOGM4rnlUsTxw" name="second" type="#T.ocl.Collection..productT2"/>
+      <ownedAttribute xmi:id="_yH3UYU0NEeOK2NercnDSnA" name="first" type="#T.ocl..CollectionT"/>
+      <ownedAttribute xmi:id="_yH3UYk0NEeOK2NercnDSnA" name="second" type="#T.ocl.Collection..productT2"/>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7ZjswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7hjswEeOGM4rnlUsTxw" elementType="#_74P7YzswEeOGM4rnlUsTxw">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH3UY00NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH37c00NEeOK2NercnDSnA" elementType="#_yH3UYE0NEeOK2NercnDSnA">
       <templateBinding signature="#s.Bag">
-        <parameterSubstitution actual="#_74P7YzswEeOGM4rnlUsTxw" formal="#t.ocl..BagT"/>
+        <parameterSubstitution actual="#_yH3UYE0NEeOK2NercnDSnA" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7ZzswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7hjswEeOGM4rnlUsTxw" elementType="#_74P7YzswEeOGM4rnlUsTxw">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UZE0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37c00NEeOK2NercnDSnA" elementType="#_yH3UYE0NEeOK2NercnDSnA">
       <templateBinding signature="#s.UniqueCollection">
-        <parameterSubstitution actual="#_74P7YzswEeOGM4rnlUsTxw" formal="#t.ocl..UniqueCollectionT"/>
+        <parameterSubstitution actual="#_yH3UYE0NEeOK2NercnDSnA" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7aDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7hzswEeOGM4rnlUsTxw" elementType="#T.ocl.EnumerationLiteral">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH3UZU0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37dE0NEeOK2NercnDSnA" elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7aTswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7hzswEeOGM4rnlUsTxw" elementType="#T.ocl.EnumerationLiteral">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UZk0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37dE0NEeOK2NercnDSnA" elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7ajswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7iDswEeOGM4rnlUsTxw" elementType="#T.ocl.OclElement">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH3UZ00NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH37dU0NEeOK2NercnDSnA" elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7azswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7iDswEeOGM4rnlUsTxw" elementType="#T.ocl.OclElement">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UaE0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37dU0NEeOK2NercnDSnA" elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7bDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UaU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl..OrderedSetT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..OrderedSetT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7bTswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7iTswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..flattenT2">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH3Uak0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37dk0NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7bjswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7iTswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..flattenT2">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3Ua00NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37dk0NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7bzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3UbE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#Integer">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#Integer" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7cDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7ijswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..selectByKindTT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH3UbU0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37d00NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7cTswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7ijswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..selectByKindTT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH3Ubk0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37d00NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7cjswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7izswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..selectByTypeTT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH3Ub00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH37eE0NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7czswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7izswEeOGM4rnlUsTxw" elementType="#T.ocl.OrderedSet..selectByTypeTT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37YE0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37eE0NEeOK2NercnDSnA" elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7dDswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74GxrTswEeOGM4rnlUsTxw" elementType="#T.ocl..SequenceT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH37YU0NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH2tSE0NEeOK2NercnDSnA" elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7dTswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74GxrTswEeOGM4rnlUsTxw" elementType="#T.ocl..SequenceT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37Yk0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH2tSE0NEeOK2NercnDSnA" elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7djswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37Y00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Sequence..collectV">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Sequence..collectV" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7dzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37ZE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Sequence..flattenT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Sequence..flattenT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7eDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37ZU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Sequence..selectByKindTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByKindTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7eTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37Zk0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Sequence..selectByTypeTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByTypeTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7ejswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7TzswEeOGM4rnlUsTxw" elementType="#T.ocl..SetT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH37Z00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH2tW00NEeOK2NercnDSnA" elementType="#T.ocl..SetT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7ezswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7jDswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..flattenT2">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH37aE0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH37eU0NEeOK2NercnDSnA" elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7fDswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7jDswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..flattenT2">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37aU0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37eU0NEeOK2NercnDSnA" elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7fTswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7jTswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..selectByKindTT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH37ak0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH37ek0NEeOK2NercnDSnA" elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7fjswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7jTswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..selectByKindTT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37a00NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37ek0NEeOK2NercnDSnA" elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7fzswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7jjswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..selectByTypeTT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH37bE0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH37e00NEeOK2NercnDSnA" elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7gDswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7jjswEeOGM4rnlUsTxw" elementType="#T.ocl.Set..selectByTypeTT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37bU0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH37e00NEeOK2NercnDSnA" elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7gTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37bk0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#String">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#String" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="_74P7gjswEeOGM4rnlUsTxw" name="Sequence"
-        superClass="#_74P7VTswEeOGM4rnlUsTxw" elementType="#T.ocl..UniqueCollectionT">
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="_yH37b00NEeOK2NercnDSnA" name="Sequence"
+        superClass="#_yH3UUk0NEeOK2NercnDSnA" elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7gzswEeOGM4rnlUsTxw" name="UniqueCollection"
-        superClass="#_74P7VTswEeOGM4rnlUsTxw" elementType="#T.ocl..UniqueCollectionT">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37cE0NEeOK2NercnDSnA" name="UniqueCollection"
+        superClass="#_yH3UUk0NEeOK2NercnDSnA" elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_74P7hDswEeOGM4rnlUsTxw" name="Bag"
-        superClass="#_74P7VTswEeOGM4rnlUsTxw" elementType="#T.ocl..UniqueCollectionT">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_yH37cU0NEeOK2NercnDSnA" name="Bag"
+        superClass="#_yH3UUk0NEeOK2NercnDSnA" elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7hTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37ck0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#OclSelf">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7hjswEeOGM4rnlUsTxw" name="Collection"
-        superClass="#T.ocl.OclAny" elementType="#_74P7YzswEeOGM4rnlUsTxw">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37c00NEeOK2NercnDSnA" name="Collection"
+        superClass="#T.ocl.OclAny" elementType="#_yH3UYE0NEeOK2NercnDSnA">
       <templateBinding signature="#s.Collection">
-        <parameterSubstitution actual="#_74P7YzswEeOGM4rnlUsTxw" formal="#t.ocl..CollectionT"/>
+        <parameterSubstitution actual="#_yH3UYE0NEeOK2NercnDSnA" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7hzswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37dE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7iDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37dU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7iTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37dk0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7ijswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37d00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7izswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37eE0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7jDswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37eU0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7jTswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37ek0NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_74P7jjswEeOGM4rnlUsTxw" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_yH37e00NEeOK2NercnDSnA" name="Collection"
         superClass="#T.ocl.OclAny" elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..CollectionT"/>

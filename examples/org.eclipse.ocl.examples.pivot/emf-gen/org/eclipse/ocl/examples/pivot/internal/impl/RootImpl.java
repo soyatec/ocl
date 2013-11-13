@@ -140,7 +140,7 @@ public class RootImpl extends NamespaceImpl implements Root
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExternalURI(String newExternalURI)
+	public void setExternalURIGen(String newExternalURI)
 	{
 		String oldExternalURI = externalURI;
 		externalURI = newExternalURI;
@@ -356,5 +356,29 @@ public class RootImpl extends NamespaceImpl implements Root
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitRoot(this);
+	}
+	
+	public void setExternalURI(String newExternalURI)
+	{
+		setExternalURIGen(newExternalURI);
+		String newName;
+		if (externalURI != null) {
+			int lastIndex = externalURI.lastIndexOf("/");
+			if (lastIndex > 0) {
+				newName = externalURI.substring(lastIndex+1);
+			}
+			else {
+				newName = externalURI;
+			}
+		}
+		else {
+			newName = null;
+		}
+		super.setName(newName);
+	}
+
+	@Override
+	public void setName(String newName) {		// FIXME BUG 421716 remove Namedspace/NamedElement inheritance
+		// name is a cached optimization of externalURI
 	}
 } //RootImpl

@@ -1028,15 +1028,24 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return getResource(uri, contentType);
 	}
 
-	public @NonNull Root createRoot(String name, String externalURI) {
-		return createRoot(Root.class, PivotPackage.Literals.ROOT, name, externalURI);
+	public @NonNull Root createRoot(String externalURI) {
+		return createRoot(Root.class, PivotPackage.Literals.ROOT, externalURI);
 	}
 
+	@Deprecated // Since Luna M3
+	public @NonNull Root createRoot(String name, String externalURI) {
+		return createRoot(Root.class, PivotPackage.Literals.ROOT, externalURI);
+	}
+
+	@Deprecated // Since Luna M3
 	public @NonNull <T extends Root> T createRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, String name, String externalURI) {
+		return createRoot(pivotClass, pivotEClass, externalURI);
+	}
+
+	public @NonNull <T extends Root> T createRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, String externalURI) {
 		assert pivotEClass != null;
 		@SuppressWarnings("unchecked")
 		T pivotRoot = (T) pivotEClass.getEPackage().getEFactoryInstance().create(pivotEClass);
-		pivotRoot.setName(name);
 		pivotRoot.setExternalURI(externalURI);
 		return pivotRoot;
 	}

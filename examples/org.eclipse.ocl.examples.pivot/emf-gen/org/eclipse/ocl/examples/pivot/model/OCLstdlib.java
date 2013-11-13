@@ -169,7 +169,7 @@ public class OCLstdlib extends ASResourceImpl
 
 		protected @NonNull Root create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 		{
-			Root theRoot = root = createRoot("OCL-2.5.oclstdlib", asURI);
+			Root theRoot = root = createRoot(asURI);
 			library = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();

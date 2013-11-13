@@ -1120,8 +1120,13 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return resourceSet;
 	}
 
+	@Deprecated // Since Luna M3
 	protected @NonNull Root createRoot(@NonNull String name) {
-		Root aRoot = metaModelManager.createRoot(name, null);
+		return createRoot();
+	}
+
+	protected @NonNull Root createRoot() {
+		Root aRoot = metaModelManager.createRoot(null);
 		return aRoot;
 	}
 

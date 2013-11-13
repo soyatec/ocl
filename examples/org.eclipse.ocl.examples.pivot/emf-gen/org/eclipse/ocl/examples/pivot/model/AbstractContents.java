@@ -268,11 +268,15 @@ public class AbstractContents
 		return pivotProperty;
 	}
 
-	protected @NonNull Root createRoot(@NonNull String name, @NonNull String externalURI) {
+	protected @NonNull Root createRoot(@NonNull String externalURI) {
 		Root pivotRoot = PivotFactory.eINSTANCE.createRoot();
-		pivotRoot.setName(name);
 		pivotRoot.setExternalURI(externalURI);
 		return pivotRoot;
+	}
+
+	@Deprecated // since Luna M3
+	protected @NonNull Root createRoot(@NonNull String name, @NonNull String externalURI) {
+		return createRoot(externalURI);
 	}
 
 	protected @NonNull SelfType createSelfType(@NonNull String name) {

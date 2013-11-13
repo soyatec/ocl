@@ -156,6 +156,16 @@ public class GenerateOCLstdlib extends GenerateOCLCommonXtend
 				}
 			
 				/**
+				 * Install this library in the {@link StandardLibraryContribution#REGISTRY}
+				 * unless some other library contribution has already been installed.
+				 */
+				public static void lazyInstall() {
+					if (StandardLibraryContribution.REGISTRY.size() == 0) {
+						install();
+					}
+				}
+			
+				/**
 				 * Unnstall this library from the {@link StandardLibraryContribution#REGISTRY}.
 				 * This method may be invoked by standalone applications to release the library
 				 * resources for garbage collection and memory leakage detection. 
@@ -210,7 +220,7 @@ public class GenerateOCLstdlib extends GenerateOCLCommonXtend
 			
 					protected @NonNull Root create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 					{
-						Root theRoot = «root.getSymbolName()» = createRoot("«root.name»", asURI);
+						Root theRoot = «root.getSymbolName()» = createRoot(asURI);
 						«lib.getSymbolName()» = createLibrary(name, nsPrefix, nsURI);
 						installPackages();
 						installOclTypes();

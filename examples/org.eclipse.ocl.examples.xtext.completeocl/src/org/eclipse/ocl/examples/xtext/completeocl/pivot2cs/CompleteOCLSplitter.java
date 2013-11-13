@@ -213,7 +213,6 @@ public class CompleteOCLSplitter
 			Root separateObject = (Root) getElementByName(separateSiblings, name);
 			if (separateObject == null) {
 				separateObject = PivotFactory.eINSTANCE.createRoot();
-				separateObject.setName(name);
 				separateObject.setExternalURI(separateResource.getURI().toString());
 				separateSiblings.add(separateObject);
 //				metaModelManager.addRoot(separateObject);

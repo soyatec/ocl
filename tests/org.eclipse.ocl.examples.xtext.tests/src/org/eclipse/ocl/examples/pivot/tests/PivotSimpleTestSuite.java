@@ -62,7 +62,7 @@ public abstract class PivotSimpleTestSuite extends PivotTestSuite
         //   pkg5
         //    george
 
-        root = createRoot("model");
+        root = createRoot();
         pkg1 = createPackage(root, "pkg1");
         pkg2 = createPackage(pkg1, "pkg2");
         jim = createPackage(pkg2, "jim");

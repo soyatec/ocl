@@ -127,7 +127,7 @@ public class IteratorsTest4 extends PivotTestSuite
         // pkg1::pkg3::pkg5
         // pkg1::pkg3::pkg5::george
 
-        root = createRoot("model");
+        root = createRoot();
         pkg1 = createPackage(root, "pkg1");
         pkg2 = createPackage(pkg1, "pkg2");
         jim = createPackage(pkg2, "jim");
@@ -499,7 +499,7 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_closure_operations() {
     	Resource fakeResource = new XMIResourceFactoryImpl().createResource(URI.createURI("fake"));
-    	Root fakeRoot = metaModelManager.createRoot("root", null);
+    	Root fakeRoot = metaModelManager.createRoot(null);
     	org.eclipse.ocl.examples.pivot.Package fakePkg = createPackage(fakeRoot, "fake");
     	fakeResource.getContents().add(fakePkg);
         org.eclipse.ocl.examples.pivot.Class fake = createOwnedClass(fakePkg, "Fake", false);
@@ -527,7 +527,7 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_closureValidation_typeConformance_154695() {
     	Resource fakeResource = new XMIResourceFactoryImpl().createResource(URI.createURI("fake"));
-    	Root fakeRoot = metaModelManager.createRoot("root", null);
+    	Root fakeRoot = metaModelManager.createRoot(null);
     	org.eclipse.ocl.examples.pivot.Package fakePkg = createPackage(fakeRoot, "fake");
     	fakeResource.getContents().add(fakePkg);
         org.eclipse.ocl.examples.pivot.Class fake = createOwnedClass(fakePkg, "Fake", false);

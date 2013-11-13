@@ -973,7 +973,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 
 	protected @NonNull Root installDeclarations(@NonNull Resource asResource) {
 		URI pivotURI = asResource.getURI();
-		Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), umlURI != null ? umlURI.toString() : pivotURI.toString());
+		Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(umlURI != null ? umlURI.toString() : pivotURI.toString());
 		asResource.getContents().add(pivotRoot2);
 		UML2PivotDeclarationSwitch declarationPass = getDeclarationPass();
 		List<org.eclipse.ocl.examples.pivot.Package> rootPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
