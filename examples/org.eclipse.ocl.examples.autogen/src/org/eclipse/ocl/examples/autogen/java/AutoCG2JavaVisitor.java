@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.autogen.java;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,7 +33,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -264,25 +267,29 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 		}
 		else {
 			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
-//	        if (name != null ? !name.equals(result.getName()) : (null != result.getName())) { -> It doesn't works with primitive types
-//			if ((exists != result.isComposite()) && ((exists == null) || !exists.equals(result.isComposite())))
-			js.append("if ((");
-			js.appendValueName(cgInit);
-			js.append(" != result.");
+			String gotName = getSymbolName(null, getAccessor);
+			TypeDescriptor initTypeDescriptor = context.getTypeDescriptor(cgInit);
+			EClassifier eType = eStructuralFeature.getEType();
+			Class<?> instanceClass = eType != null ? eType.getInstanceClass() : null;
+			TypeId javaTypeId = instanceClass != null ? JavaConstants.getJavaTypeId(instanceClass) : TypeId.OCL_VOID;
+			TypeDescriptor getTypeDescriptor = context.getTypeDescriptor(javaTypeId, false, false);
+			//
+			js.appendIsRequired(cgInit.isRequired());
+			js.append(" ");
+			js.appendClassReference(initTypeDescriptor);
+			js.append(" " + gotName + " = result.");
 			js.append(getAccessor);
-			js.append("()) && (");
-			js.appendValueName(cgInit);
-			js.append(" == null || !");
-			js.appendValueName(cgInit);
-			js.append(".equals(result.");
-			js.append(getAccessor);
-			js.append("()))) {\n");
+			js.append("();\n");
+			//
+			js.append("if (");
+			initTypeDescriptor.appendNotEqualsTerm(js, cgInit, getTypeDescriptor, gotName);
+			js.append(") {\n");
 			js.pushIndentation(null);
-			js.append("result.");
-			js.append(setAccessor);
-			js.append("(");
-			js.appendValueName(cgInit);
-			js.append(");\n");
+				js.append("result.");
+				js.append(setAccessor);
+				js.append("(");
+				js.appendValueName(cgInit);
+				js.append(");\n");
 			js.popIndentation();
 			js.append("}\n");
 		}

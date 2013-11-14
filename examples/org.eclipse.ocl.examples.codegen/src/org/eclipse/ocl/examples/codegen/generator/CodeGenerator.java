@@ -56,7 +56,25 @@ public interface CodeGenerator
 	@NonNull ReferencesVisitor createReferencesVisitor();
 	@NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement);
 	@NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed);
+	@NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed, boolean maybePrimitive);
 	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
+
+	/**
+	 * Return true if asOperationCallExp may return a nonNull value,
+	 * false if asOperationCallExp may return a null value,
+	 * null if no determination can be made.
+	 */
 	@Nullable Boolean isNonNull(@NonNull OperationCallExp asOperationCallExp);
+
+	/**
+	 * Return true if asProperty may provide a nonNull value,
+	 * false if asOperationCallExp may provide a null value,
+	 * null if no determination can be made.
+	 */
 	@Nullable Boolean isNonNull(@NonNull Property asProperty);
+
+	/**
+	 * Return true if cgValue could be represented by a primitive value. i.e. if it cannot convey a null or invalid value.
+	 */
+	boolean maybePrimitive(@NonNull CGValuedElement cgValue);
 }

@@ -52,6 +52,8 @@ import org.eclipse.ocl.examples.codegen.java.iteration.IterateIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.types.BooleanObjectDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.BooleanPrimitiveDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedValueDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
@@ -432,11 +434,16 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement) {
 		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
+		boolean maybePrimitive = maybePrimitive(cgElement);
 		boolean isBoxed = cgElement.isBoxed();
-		return getTypeDescriptor(elementId, isBoxed);
+		return getTypeDescriptor(elementId, isBoxed, maybePrimitive);
 	}
 
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed) {
+		return getTypeDescriptor(elementId, isBoxed, false);
+	}
+
+	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed, boolean maybePrimitive) {
 		SimpleDescriptor simpleDescriptor = simpleDescriptors.get(elementId);
 		if (simpleDescriptor != null) {
 			return simpleDescriptor;
@@ -491,6 +498,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		if (boxedClass == unboxedClass) {
 			if (boxedClass == Object.class) {
 				simpleDescriptor = new RootObjectDescriptor(elementId);
+			}
+			else if (boxedClass == Boolean.class) {
+				simpleDescriptor = maybePrimitive ? new BooleanPrimitiveDescriptor(elementId) : new BooleanObjectDescriptor(elementId);
+			}
+			else if (boxedClass == boolean.class) {
+				simpleDescriptor = new BooleanPrimitiveDescriptor(elementId);
 			}
 			else {
 				simpleDescriptor = new SimpleValueDescriptor(elementId, boxedClass);
@@ -582,6 +595,15 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			return null;
 		}
 		return getIsNonNull(leastDerivedMethod) == Boolean.TRUE;
+	}
+
+	public boolean maybePrimitive(@NonNull CGValuedElement cgValue) {
+		if (cgValue.getNamedValue().isCaught()) {
+			return false;
+		}
+		else {
+			return cgValue.isNonNull();
+		}
 	}
 
 	/**

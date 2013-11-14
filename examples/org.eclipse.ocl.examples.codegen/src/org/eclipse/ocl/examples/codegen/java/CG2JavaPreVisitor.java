@@ -59,7 +59,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.JavaTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -267,7 +266,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	public @Nullable Object visitCGConstructorPart(@NonNull CGConstructorPart cgConstructorPart) {
 		CGExecutorConstructorPart cgExecutorConstructorPart = cgConstructorPart.getExecutorPart();
 		cgExecutorConstructorPart.accept(this);
-		JavaTypeId javaPropertyTypeId = JavaConstants.DOMAIN_PROPERTY_TYPE_ID;
+		TypeId javaPropertyTypeId = JavaConstants.DOMAIN_PROPERTY_TYPE_ID;
 		cgExecutorConstructorPart.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
 //		localContext.addLocalVariable(cgExecutorConstructorPart);
 		installIdResolverVariable(cgExecutorConstructorPart);
@@ -293,7 +292,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		Property asProperty = (Property) cgExecutorProperty.getAst();
 		Property asOppositeProperty = asProperty.getOpposite();
 		if ((asOppositeProperty != null) && asOppositeProperty.isComposite()) {
-			JavaTypeId javaPropertyTypeId = JavaConstants.UNBOXED_COMPOSITION_PROPERTY_TYPE_ID;
+			TypeId javaPropertyTypeId = JavaConstants.UNBOXED_COMPOSITION_PROPERTY_TYPE_ID;
 			cgExecutorProperty.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
 		}
 		return super.visitCGExecutorCompositionProperty(cgExecutorProperty);
@@ -301,7 +300,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 
 	@Override
 	public @Nullable Object visitCGExecutorNavigationProperty(@NonNull CGExecutorNavigationProperty cgExecutorProperty) {
-		JavaTypeId javaPropertyTypeId = JavaConstants.UNBOXED_EXPLICIT_NAVIGATION_PROPERTY_TYPE_ID;
+		TypeId javaPropertyTypeId = JavaConstants.UNBOXED_EXPLICIT_NAVIGATION_PROPERTY_TYPE_ID;
 		cgExecutorProperty.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
 		return super.visitCGExecutorNavigationProperty(cgExecutorProperty);
 	}
@@ -328,7 +327,7 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 
 	@Override
 	public @Nullable Object visitCGExecutorOppositeProperty(@NonNull CGExecutorOppositeProperty cgExecutorProperty) {
-		JavaTypeId javaPropertyTypeId = JavaConstants.UNBOXED_OPPOSITE_NAVIGATION_PROPERTY_TYPE_ID;
+		TypeId javaPropertyTypeId = JavaConstants.UNBOXED_OPPOSITE_NAVIGATION_PROPERTY_TYPE_ID;
 		cgExecutorProperty.setTypeId(analyzer.getTypeId(javaPropertyTypeId));
 		return super.visitCGExecutorOppositeProperty(cgExecutorProperty);
 	}

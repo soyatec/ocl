@@ -48,21 +48,27 @@ public class JavaConstants
 	public static final @NonNull String TYPE_ID_NAME = "typeId";
 	
 
-	public static final @NonNull JavaTypeId DOMAIN_PROPERTY_TYPE_ID = getJavaTypeId(DomainProperty.class);
-	public static final @NonNull JavaTypeId DOMAIN_TYPE_TYPE_ID = getJavaTypeId(DomainType.class);
-	public static final @NonNull JavaTypeId EVALUATOR_TYPE_ID = getJavaTypeId(DomainEvaluator.class);
-	public static final @NonNull JavaTypeId ID_RESOLVER_TYPE_ID = getJavaTypeId(IdResolver.class);
-//	public static final @NonNull JavaTypeId SELF_TYPE_ID = getJavaTypeId(Object.class);
-	public static final @NonNull JavaTypeId STANDARD_LIBRARY_TYPE_ID = getJavaTypeId(DomainStandardLibrary.class);
-	public static final @NonNull JavaTypeId TYPE_ID_TYPE_ID = getJavaTypeId(TypeId.class);
-	public static final @NonNull JavaTypeId UNBOXED_COMPOSITION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedCompositionProperty.class);
-	public static final @NonNull JavaTypeId UNBOXED_EXPLICIT_NAVIGATION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedExplicitNavigationProperty.class);
-	public static final @NonNull JavaTypeId UNBOXED_OPPOSITE_NAVIGATION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedOppositeNavigationProperty.class);
+	public static final @NonNull TypeId DOMAIN_PROPERTY_TYPE_ID = getJavaTypeId(DomainProperty.class);
+	public static final @NonNull TypeId DOMAIN_TYPE_TYPE_ID = getJavaTypeId(DomainType.class);
+	public static final @NonNull TypeId EVALUATOR_TYPE_ID = getJavaTypeId(DomainEvaluator.class);
+	public static final @NonNull TypeId ID_RESOLVER_TYPE_ID = getJavaTypeId(IdResolver.class);
+//	public static final @NonNull TypeId SELF_TYPE_ID = getJavaTypeId(Object.class);
+	public static final @NonNull TypeId STANDARD_LIBRARY_TYPE_ID = getJavaTypeId(DomainStandardLibrary.class);
+	public static final @NonNull TypeId TYPE_ID_TYPE_ID = getJavaTypeId(TypeId.class);
+	public static final @NonNull TypeId UNBOXED_COMPOSITION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedCompositionProperty.class);
+	public static final @NonNull TypeId UNBOXED_EXPLICIT_NAVIGATION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedExplicitNavigationProperty.class);
+	public static final @NonNull TypeId UNBOXED_OPPOSITE_NAVIGATION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedOppositeNavigationProperty.class);
 	
 	/**
 	 * Return the named Java typeId.
 	 */
-	public static @NonNull JavaTypeId getJavaTypeId(@NonNull Class<?> javaClass) {
+	public static @NonNull TypeId getJavaTypeId(@NonNull Class<?> javaClass) {
+		if (javaClass == Boolean.class) {
+			return TypeId.BOOLEAN;
+		}
+		else if (javaClass == String.class) {
+			return TypeId.STRING;
+		}
 		return javaTypes.getId(javaClass);
 	}
 }

@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.generator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
 
@@ -31,6 +32,8 @@ public interface TypeDescriptor
 	 * Append the declaration of this type to a JavaStream.
 	 */
 	void append(@NonNull JavaStream javaStream);
+
+	void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName);
 
 	/**
 	 * Return a non-null Collection type descriptor if this type descriptor dedescribes a Collection.

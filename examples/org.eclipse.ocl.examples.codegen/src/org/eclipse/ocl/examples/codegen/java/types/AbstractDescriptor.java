@@ -17,7 +17,9 @@ package org.eclipse.ocl.examples.codegen.java.types;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
@@ -93,6 +95,20 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 	
 	public AbstractDescriptor(@NonNull ElementId elementId) {
 		this.elementId = elementId;
+	}
+
+	public void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName) {
+		js.append("(");
+		js.appendValueName(thisValue);
+		js.append(" != ");
+		js.append(thatName);
+		js.append(") && (");
+		js.appendValueName(thisValue);
+		js.append(" == null || !");
+		js.appendValueName(thisValue);
+		js.append(".equals(");
+		js.append(thatName);
+		js.append("))");
 	}
 
 	public @Nullable CollectionDescriptor asCollectionDescriptor() {

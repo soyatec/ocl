@@ -1444,7 +1444,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 	}
 
 	@Override
-	public @NonNull Boolean visitCGIsEqualExp(@NonNull CGIsEqualExp cgIsEqualExp) {
+	public @NonNull Boolean visitCGIsEqualExp(@NonNull CGIsEqualExp cgIsEqualExp) {		// FIXME BUG 421738 move irregulaties to e.g. BooleanPrimitiveDescriptor
 		if (cgIsEqualExp.isTrue()) {
 			js.appendDeclaration(cgIsEqualExp);
 			js.append(" = ");

@@ -189,8 +189,9 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
 		if (elementId != null) {
-			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true);
-			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false);
+			boolean maybePrimitive = codeGenerator.maybePrimitive(cgChild);
+			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true, maybePrimitive);
+			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false, maybePrimitive);
 			if (boxedTypeDescriptor == unboxedTypeDescriptor) {
 				return cgChild;
 			}
