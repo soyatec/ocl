@@ -94,7 +94,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			String folderPath = modelDirectory.substring(modelProjectDirectory.length());
 			URI locationURI = projectMap.getLocation(modelProject);
 			if (locationURI == null) {
-				issues.addError(this, "NO location URI for " + modelProjectDirectory, null, null, null);
+				issues.addError(this, "No location URI for " + modelProjectDirectory, null, null, null);
 				return;
 			}
 			URL url = new URL(locationURI.toString());

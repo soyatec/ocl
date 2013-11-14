@@ -35,7 +35,7 @@ Workflow {
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
     }
-    component = GenerateOCLstdlib { resourceSet = resourceSet
+    component = GenerateOCLstdlibXtend { resourceSet = resourceSet
     	projectName = "${sourceName}"
     	modelFile = "model/OCL-2.5.oclstdlib"
     	uri = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib"

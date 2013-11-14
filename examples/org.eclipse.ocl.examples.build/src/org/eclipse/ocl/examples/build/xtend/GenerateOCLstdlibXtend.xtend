@@ -14,25 +14,12 @@
  */
 package org.eclipse.ocl.examples.build.xtend
 
-import java.io.File
-import org.eclipse.emf.common.util.TreeIterator
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.mwe.core.WorkflowContext
-import org.eclipse.emf.mwe.core.issues.Issues
-import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
-import org.eclipse.emf.mwe.utils.StandaloneSetup
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil
 import org.eclipse.ocl.examples.pivot.DataType
-import org.eclipse.ocl.examples.pivot.Library
 import org.eclipse.ocl.examples.pivot.Root
-import org.eclipse.ocl.examples.pivot.resource.ASResource
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource
-import org.eclipse.ocl.examples.pivot.utilities.ASSaver
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil
+import org.eclipse.jdt.annotation.NonNull
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil
 
-public class GenerateOCLstdlib extends GenerateOCLCommonXtend
+public class GenerateOCLstdlibXtend extends GenerateOCLstdlib
 {
 	protected def String defineConstantType(DataType type) {'''
 		«IF "Boolean".equals(type.name)»
@@ -45,8 +32,8 @@ public class GenerateOCLstdlib extends GenerateOCLCommonXtend
 			protected final DataType «type.getPrefixedSymbolName("_"+type.partialName())» = createDataType("«type.name»");«ENDIF»
 	'''}
 
-	protected def String generateMetamodel(Root root) {
-		var lib = root.getLibrary();
+	@NonNull protected override String generateMetamodel(@NonNull Root root) {
+		var lib = DomainUtil.nonNullState(root.getLibrary());
 		var allEnumerations = root.getSortedEnumerations();
 		'''
 			/**
@@ -350,63 +337,5 @@ public class GenerateOCLstdlib extends GenerateOCLCommonXtend
 				} */
 			}
 		'''
-	}
-
-	protected def Library getLibrary(Root root) {
-		var TreeIterator<EObject> tit = root.eAllContents;
-		while (tit.hasNext()) {
-			var EObject eObject = tit.next();
-			if (eObject instanceof Library) {
-				return eObject;
-			}
-		}
-		return null;
-	}
-
-	override protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		var String rootPath = StandaloneSetup.getPlatformRootPath();
-		var File folder = new File(rootPath + javaFolder + "/" + javaPackageName.replace(".", "/"));
-		try {
-			sourceFile = "/" + projectName + "/" + modelFile;
-			var URI fileURI = URI.createPlatformResourceURI(sourceFile, true);
-			log.info("Loading OCL library '" + fileURI);
-			var ResourceSet resourceSet = getResourceSet();
-			var BaseCSResource xtextResource = resourceSet.getResource(fileURI, true) as BaseCSResource;
-			var String message = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(xtextResource.getErrors()), "OCLstdlib parse failure", "\n");
-			if (message != null) {
-				issues.addError(this, message, null, null, null);
-				return;
-			}
-			var ASResource asResource = xtextResource.getASResource(null);
-			if (asResource == null) {
-				return;
-			}
-			var EObject pivotModel = asResource.getContents().get(0);
-			var ASSaver saver = new ASSaver(asResource);
-			saver.localizeSpecializations();
-			var String fileName = folder + "/" + javaClassName + ".java";
-			log.info("Generating '" + fileName + "'");
-			var String metaModel = generateMetamodel(pivotModel as Root);
-			var MergeWriter fw = new MergeWriter(fileName);
-			fw.append(metaModel);
-			fw.close();
-			var String saveFile = "/" + projectName + "/" + modelFile.replace("model", "model-gen").replace("oclstdlib", "oclas");
-			var URI saveURI = URI.createPlatformResourceURI(saveFile, true);
-			log.info("Loading '" + saveURI + "'");
-			log.info("Saving '" + saveURI + "'");
-			asResource.setURI(saveURI);
-			asResource.save(null);
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
-		}
-	}
-
-	/**
-	 * The platform relative path to the Java generated source folder (e.g. "/org.eclipse.ocl.examples.pivot/emf-src")
-	 */
-	public def void setJavaFolder(String javaFolder) {
-		this.javaFolder = javaFolder;
 	}
 }
