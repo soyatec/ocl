@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -104,6 +105,19 @@ public class ASSaver
 		Resource resource = eObject.eResource();
 		if (resource instanceof ASResource) {
 			return ((ASResource)resource).getASResourceFactory().createASSaverLocateVisitor(this);
+		}
+		else if (resource == null) {
+			throw new IllegalStateException("Cannot locate " + ASSaverLocateVisitor.class.getName() + " for resource-less " + eObject.eClass().getName());
+		}
+		else {
+			throw new IllegalStateException("Cannot locate " + ASSaverLocateVisitor.class.getName() + " for non-OCL " + resource.getClass().getName());
+		}
+	}
+
+	protected @NonNull ASSaverNormalizeVisitor getNormalizeVisitor(@NonNull EObject eObject) {
+		Resource resource = eObject.eResource();
+		if (resource instanceof ASResource) {
+			return ((ASResource)resource).getASResourceFactory().createASSaverNormalizeVisitor(this);
 		}
 		else if (resource == null) {
 			throw new IllegalStateException("Cannot locate " + ASSaverLocateVisitor.class.getName() + " for resource-less " + eObject.eClass().getName());
@@ -234,6 +248,16 @@ public class ASSaver
 				locateVisitor.safeVisit((Visitable) eObject);
 			}
 			locateSpecializations(eObject.eContents());
+		}
+	}
+
+	public void normalizeContents() {
+		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+			@SuppressWarnings("null")@NonNull EObject eObject = tit.next();
+			ASSaverNormalizeVisitor normalizeVisitor = getNormalizeVisitor(eObject);
+			if (eObject instanceof Visitable) {
+				normalizeVisitor.safeVisit((Visitable) eObject);
+			}
 		}
 	}
 

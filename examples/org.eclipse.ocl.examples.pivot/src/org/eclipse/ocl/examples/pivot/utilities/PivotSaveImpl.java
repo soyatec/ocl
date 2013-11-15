@@ -45,6 +45,7 @@ public final class PivotSaveImpl extends XMISaveImpl
 		ASSaver asSaver = new ASSaver(asResource);
 		AS2XMIid as2xmIid = new AS2XMIid();
 		asSaver.localizeSpecializations();
+		asSaver.normalizeContents();
 		as2xmIid.assignIds(asResourceSet);
 		super.init(asResource, options);
 	}

@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaverLocateVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 
@@ -66,6 +67,11 @@ public interface ASResourceFactory extends Resource.Factory
 	 * Create a visitor to locate orphan specializations. 
 	 */
 	@NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver asSaver);
+
+	/**
+	 * Create a visitor to normalize content. 
+	 */
+	@NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull ASSaver asSaver);
 
 	/**
 	 * Create a visitor to resolve orphan specializations. 

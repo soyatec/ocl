@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaverLocateVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 
@@ -99,6 +100,10 @@ public abstract class AbstractASResourceFactory extends ResourceFactoryImpl impl
 
 	public @NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver saver) {
 		return new ASSaverLocateVisitor(saver);
+	}
+
+	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull ASSaver saver) {
+		return new ASSaverNormalizeVisitor(saver);
 	}
 
 	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver saver) {

@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -268,7 +267,7 @@ public class AS2XMIid
 		String moniker = AS2Moniker.toString(element);
 		String id = moniker2id.get(moniker);
 		if (id == null) {
-			id = EcoreUtil.generateUUID();
+//			id = EcoreUtil.generateUUID();
 //			System.out.println(id + " for " + element + " " + DomainUtil.debugSimpleName(element));
 		}
 		return id;
