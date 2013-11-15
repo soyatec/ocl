@@ -31,7 +31,7 @@ public class BooleanPrimitiveDescriptor extends SimpleValueDescriptor implements
 
 	@Override
 	public void append(@NonNull JavaStream js) {
-		js.append("boolean");
+		js.append("boolean");			// Override avoids registration of boolean as an import
 	}
 
 	@Override
