@@ -272,7 +272,7 @@ public class AS2XMIid
 		}
 		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(asResourceSet);
 		if (metaModelManager != null) {
-			metaModelManager.assignLibraryIds(this);
+			metaModelManager.assignLibraryIds(this, options);
 		}
 	}
 

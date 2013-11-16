@@ -81,7 +81,6 @@ public class GenerateOCLstdlibXtend extends GenerateOCLstdlib
 			import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 			import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
 			import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
-			import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 			import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 			
 			/**
@@ -120,7 +119,6 @@ public class GenerateOCLstdlibXtend extends GenerateOCLstdlib
 						Contents contents = new Contents();
 						Root libraryModel = contents.create("«lib.nsURI»", "«lib.name»", "«lib.nsPrefix»", "«lib.nsURI»");
 						oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, libraryModel);
-						new AS2XMIid().assignIds(oclstdlib, null);
 					}
 					return oclstdlib;
 				}

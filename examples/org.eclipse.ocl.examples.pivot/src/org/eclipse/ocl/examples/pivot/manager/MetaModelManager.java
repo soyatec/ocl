@@ -590,14 +590,19 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		pivotElement.setPackage(getOrphanage());
 	}
 
+	@Deprecated // Since Luna M3
+	public void assignLibraryIds(@NonNull AS2XMIid as2xmIid) {
+		assignLibraryIds(as2xmIid, null);
+	}
+
 	/**
 	 * Assign xmi:id values to referenceable elements in the libraries.
 	 */
-	public void assignLibraryIds(@NonNull AS2XMIid as2xmIid) {
+	public void assignLibraryIds(@NonNull AS2XMIid as2xmIid, @Nullable Map<?, ?> options) {
 		for (@SuppressWarnings("null")@NonNull Library asLibrary : asLibraries) {
 			Resource eResource = asLibrary.eResource();
 			if (eResource instanceof ASResource) {
-//				as2xmIid.assignIds((ASResource) eResource, null);
+				as2xmIid.assignIds((ASResource) eResource, options);
 			}
 		}
 	}
