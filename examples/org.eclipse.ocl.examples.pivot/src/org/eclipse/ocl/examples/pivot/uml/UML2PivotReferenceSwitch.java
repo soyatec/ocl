@@ -395,7 +395,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			else {				
 				OpaqueExpression pivotExpression = (OpaqueExpression) doSwitch(umlValue);
 				Type requiredType = pivotElement.getType();
-				Type defaultValueType = pivotExpression.getType();
+				Type defaultValueType = pivotExpression != null ? pivotExpression.getType() : null;
 				if ((requiredType != null) && (defaultValueType != null) && !defaultValueType.conformsTo(metaModelManager, requiredType)) {
 					converter.error("Incompatible '" + defaultValueType + "' initializer for " + pivotElement + " when '" + requiredType + "' required");
 				}
