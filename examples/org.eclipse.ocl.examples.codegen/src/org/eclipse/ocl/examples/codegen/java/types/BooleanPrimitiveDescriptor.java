@@ -35,6 +35,13 @@ public class BooleanPrimitiveDescriptor extends SimpleValueDescriptor implements
 	}
 
 	@Override
+	public void appendCast(@NonNull JavaStream js) {
+		js.append("(");
+		js.appendClassReference(Boolean.class);
+		js.append(")");
+	}
+
+	@Override
 	public void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName) {
 		if (thatTypeDescriptor instanceof BooleanPrimitiveDescriptor) {
 			js.appendValueName(thisValue);

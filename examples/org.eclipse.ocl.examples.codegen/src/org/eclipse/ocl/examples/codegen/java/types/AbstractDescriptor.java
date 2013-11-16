@@ -97,6 +97,12 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		this.elementId = elementId;
 	}
 
+	public void appendCast(@NonNull JavaStream js) {
+		js.append("(");
+		append(js);
+		js.append(")");
+	}
+
 	public void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName) {
 		js.append("(");
 		js.appendValueName(thisValue);

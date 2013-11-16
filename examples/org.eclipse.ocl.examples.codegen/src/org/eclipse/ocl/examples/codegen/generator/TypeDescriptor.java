@@ -29,10 +29,18 @@ import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
 public interface TypeDescriptor
 {
 	/**
-	 * Append the declaration of this type to a JavaStream.
+	 * Append the declaration of this type to a JavaStream. e.g. "typename"
 	 */
-	void append(@NonNull JavaStream javaStream);
+	void append(@NonNull JavaStream js);
 
+	/**
+	 * Append the declaration of this type as a cast to a JavaStream. e.g. "(typename)"
+	 */
+	void appendCast(@NonNull JavaStream js);
+
+	/**
+	 * Append an expression term that evaluaties whether (this Typedescriptor and )thisValue is not equal to thatTypeDescriptor and thatName.
+	 */
 	void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName);
 
 	/**

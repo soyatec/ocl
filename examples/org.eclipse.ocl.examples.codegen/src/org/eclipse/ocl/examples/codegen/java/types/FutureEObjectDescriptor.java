@@ -39,8 +39,8 @@ public class FutureEObjectDescriptor extends AbstractDescriptor implements Simpl
 		this.className = className;
 	}
 
-	public void append(@NonNull JavaStream javaStream) {
-		javaStream.appendClassReference(className);
+	public void append(@NonNull JavaStream js) {
+		js.appendClassReference(className);
 	}
 
 	@Override
