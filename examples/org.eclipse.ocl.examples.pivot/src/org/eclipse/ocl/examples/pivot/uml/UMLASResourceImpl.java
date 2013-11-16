@@ -18,9 +18,11 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactory;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 
 public class UMLASResourceImpl extends ASResourceImpl
 {
@@ -29,11 +31,18 @@ public class UMLASResourceImpl extends ASResourceImpl
 	}
 
 	@Override
+	public EObject getEObject(String uriFragment) {
+		if (idToEObjectMap == null) {
+			AS2XMIid as2id = new AS2XMIid();
+			as2id.assignIds(this, null);
+		}
+		return super.getEObject(uriFragment);
+	}
+
+	@Override
 	public void load(Map<?, ?> options) throws IOException {
 		@SuppressWarnings("null")@NonNull URI umlURI = uri.trimFileExtension();
 		UML2Pivot.loadFromUML(this, umlURI);
-//		AS2XMIid as2id = new AS2XMIid();
-//		as2id.assignIds(this, null);
 		super.load(options);
 	}
 }
