@@ -161,8 +161,26 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			return pivotElement;
 		}
 		else {
-			converter.error("Unknown InstanceValue " + umlInstance.getClass() + " for UML2PivotReferenceSwitch");
-			return null;
+//			converter.error("Unknown InstanceValue " + umlInstance.getClass() + " for UML2PivotReferenceSwitch");
+//			return null;
+			ExpressionInOCL pivotElement = converter.refreshNamedElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, umlInstanceValue);
+			OCLExpression body = pivotElement.getBodyExpression();
+			if (!(body instanceof UMLInstanceExp)) {
+				body = new UMLInstanceExpImpl();
+				pivotElement.setBodyExpression(body);
+			}
+			((UMLInstanceExp)body).setReferredInstance(umlInstance);
+			for (org.eclipse.uml2.uml.Classifier umlClassifier : umlInstance.getClassifiers()) {
+				if (umlClassifier != null) {
+					Type pivotType = converter.getCreated(Type.class, umlClassifier);
+					if (pivotType != null) {
+						body.setType(pivotType);
+						pivotElement.setType(pivotType);
+						break;		// FIXME multi-classification
+					}
+				}
+			}
+			return pivotElement;
 		}
 	}
 
@@ -394,14 +412,14 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			}
 			else {				
 				OpaqueExpression pivotExpression = (OpaqueExpression) doSwitch(umlValue);
-				Type requiredType = pivotElement.getType();
-				Type defaultValueType = pivotExpression != null ? pivotExpression.getType() : null;
-				if ((requiredType != null) && (defaultValueType != null) && !defaultValueType.conformsTo(metaModelManager, requiredType)) {
-					converter.error("Incompatible '" + defaultValueType + "' initializer for " + pivotElement + " when '" + requiredType + "' required");
-				}
-				else {
+				@SuppressWarnings("unused") Type requiredType = pivotElement.getType();
+				@SuppressWarnings("unused") Type defaultValueType = pivotExpression != null ? pivotExpression.getType() : null;
+//				if ((requiredType != null) && (defaultValueType != null) && !defaultValueType.conformsTo(metaModelManager, requiredType)) {
+//					converter.error("Incompatible '" + defaultValueType + "' initializer for " + pivotElement + " when '" + requiredType + "' required");
+//				}
+//				else {		// too soon to check conformance
 					pivotElement.setDefaultExpression(pivotExpression);
-				}
+//				}
 			}
 		}
 		return pivotElement;
