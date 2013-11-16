@@ -30,8 +30,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -95,7 +97,16 @@ public class AS2XMIid
 	 * Assign xmi:id values to referenceable elements in asResource re-using the xmi:id
 	 * values read when this AS2ID was constructed.
 	 */
+	@Deprecated // Since Luna M3
 	public void assignIds(@NonNull ASResource asResource) {
+		assignIds(asResource, null);
+	}
+
+	/**
+	 * Assign xmi:id values to referenceable elements in asResource re-using the xmi:id
+	 * values read when this AS2ID was constructed.
+	 */
+	public void assignIds(@NonNull ASResource asResource, @Nullable Map<?, ?> options) {
 //		org.eclipse.ocl.examples.pivot.Package bomb1 = PivotFactory.eINSTANCE.createPackage();
 //		SetType bomb2 = PivotFactory.eINSTANCE.createSetType();
 		assert idAssignmentInProgress == false;
@@ -141,6 +152,8 @@ public class AS2XMIid
 			StringBuilder s = null;
 			Map<String, EObject> allIds = new HashMap<String, EObject>();
 			ASResourceFactory resourceFactory = asResource.getASResourceFactory();
+			Object optionInternalUUIDs = options != null ? options.get(ASResource.OPTION_INTERNAL_UUIDS) : null;
+			boolean internalUUIDs = (optionInternalUUIDs != null) && Boolean.valueOf(optionInternalUUIDs.toString());
 			EObject debugEObject = null;
 			try {
 				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
@@ -151,7 +164,7 @@ public class AS2XMIid
 						AS2XMIidVisitor idVisitor = resourceFactory.createAS2XMIidVisitor(this);
 						String id = asResource.getID(element);
 						if (id == null) {
-							id = idVisitor.getID(element);
+							id = idVisitor.getID(element, internalUUIDs);
 						}
 						if (id != null) {
 							assert id.length() > 0 : "Zero length id for '" + element.eClass().getName() + "'";
@@ -251,10 +264,10 @@ public class AS2XMIid
 	 * Assign xmi:id values to referenceable elements in asResourceSet re-using the xmi:id
 	 * values read when this AS2ID was constructed.
 	 */
-	public void assignIds(@NonNull ResourceSet asResourceSet) {
+	public void assignIds(@NonNull ResourceSet asResourceSet, @Nullable Map<?, ?> options) {
 		for (@SuppressWarnings("null")@NonNull Resource resource : asResourceSet.getResources()) {
 			if (resource instanceof ASResource) {
-				assignIds((ASResource)resource);
+				assignIds((ASResource)resource, options);
 			}
 		}
 		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(asResourceSet);
@@ -263,11 +276,11 @@ public class AS2XMIid
 		}
 	}
 
-	public String getID(@NonNull Element element) {
+	public String getID(@NonNull Element element, boolean internalUUIDs) {
 		String moniker = AS2Moniker.toString(element);
 		String id = moniker2id.get(moniker);
-		if (id == null) {
-//			id = EcoreUtil.generateUUID();
+		if ((id == null) && internalUUIDs) {
+			id = EcoreUtil.generateUUID();
 //			System.out.println(id + " for " + element + " " + DomainUtil.debugSimpleName(element));
 		}
 		return id;

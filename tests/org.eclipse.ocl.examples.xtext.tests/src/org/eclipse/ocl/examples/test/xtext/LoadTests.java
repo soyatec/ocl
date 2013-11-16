@@ -1060,7 +1060,9 @@ public class LoadTests extends XtextTestCase
 		//
 		URI asURI = getProjectFileURI(ecoreFileName + ".oclas");
 		asResource.setURI(asURI);
-		asResource.save(null);
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put(ASResource.OPTION_INTERNAL_UUIDS, Boolean.TRUE);
+		asResource.save(options);
 		Map<EObject, String> eObject2id = new HashMap<EObject, String>();
 		Map<String, EObject> id2eObject = new HashMap<String, EObject>();
 		int oldIdCount = 0;

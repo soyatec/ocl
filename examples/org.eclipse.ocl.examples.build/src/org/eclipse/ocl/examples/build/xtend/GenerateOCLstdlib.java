@@ -15,6 +15,8 @@
 package org.eclipse.ocl.examples.build.xtend;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -96,7 +98,9 @@ public abstract class GenerateOCLstdlib extends GenerateOCLCommonXtend
 			log.info("Loading '" + saveURI + "'");
 			log.info("Saving '" + saveURI + "'");
 			asResource.setURI(saveURI);
-			asResource.save(null);
+			Map<String, Object> options = new HashMap<String, Object>();
+			options.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
+			asResource.save(options);
 			MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(asResource);
 			@SuppressWarnings("null")@NonNull URI ecoreURI = saveURI.trimFileExtension().appendFileExtension("ecore");
 			Pivot2Ecore converter = new Pivot2Ecore(metaModelManager, ecoreURI, null);

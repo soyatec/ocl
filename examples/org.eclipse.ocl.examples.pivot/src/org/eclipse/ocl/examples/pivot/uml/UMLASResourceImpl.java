@@ -34,7 +34,7 @@ public class UMLASResourceImpl extends ASResourceImpl
 		@SuppressWarnings("null")@NonNull URI umlURI = uri.trimFileExtension();
 		UML2Pivot.loadFromUML(this, umlURI);
 		AS2XMIid as2id = new AS2XMIid();
-		as2id.assignIds(this);
+		as2id.assignIds(this, null);
 		super.load(options);
 	}
 }

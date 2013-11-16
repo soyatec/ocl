@@ -15,6 +15,8 @@
 package org.eclipse.ocl.examples.build.xtend;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -41,6 +43,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -149,7 +152,9 @@ public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 			log.info("Saving '" + saveURI + "'");
 			asResource.setURI(saveURI);
 //	    	as2id.assignIds(asResource.getResourceSet());
-			asResource.save(null);
+			Map<String, Object> options = new HashMap<String, Object>();
+			options.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
+			asResource.save(options);
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {

@@ -167,7 +167,7 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 		}
 	}
 
-	public @Nullable String getID(@NonNull Element element) {
+	public @Nullable String getID(@NonNull Element element, boolean internalUUIDs) {
 		Boolean status = element.accept(this);
 		if (status == null) {
 			return null;
@@ -176,7 +176,7 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 			return s.toString();
 		}
 		else {
-			return context.getID(element);
+			return context.getID(element, internalUUIDs);
 		}
 	}	
 

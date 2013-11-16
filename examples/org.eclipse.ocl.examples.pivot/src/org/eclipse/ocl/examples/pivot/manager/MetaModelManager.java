@@ -597,7 +597,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		for (@SuppressWarnings("null")@NonNull Library asLibrary : asLibraries) {
 			Resource eResource = asLibrary.eResource();
 			if (eResource instanceof ASResource) {
-				as2xmIid.assignIds((ASResource) eResource);
+//				as2xmIid.assignIds((ASResource) eResource, null);
 			}
 		}
 	}

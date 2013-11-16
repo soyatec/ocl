@@ -82,7 +82,7 @@ public class OCLstdlib extends ASResourceImpl
 			Contents contents = new Contents();
 			Root libraryModel = contents.create("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
 			oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, libraryModel);
-			new AS2XMIid().assignIds(oclstdlib);
+			new AS2XMIid().assignIds(oclstdlib, null);
 		}
 		return oclstdlib;
 	}

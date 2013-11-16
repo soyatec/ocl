@@ -120,7 +120,7 @@ public class GenerateOCLstdlibXtend extends GenerateOCLstdlib
 						Contents contents = new Contents();
 						Root libraryModel = contents.create("«lib.nsURI»", "«lib.name»", "«lib.nsPrefix»", "«lib.nsURI»");
 						oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, libraryModel);
-						new AS2XMIid().assignIds(oclstdlib);
+						new AS2XMIid().assignIds(oclstdlib, null);
 					}
 					return oclstdlib;
 				}

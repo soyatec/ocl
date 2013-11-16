@@ -34,7 +34,7 @@ public class EcoreASResourceImpl extends ASResourceImpl
 		@SuppressWarnings("null")@NonNull URI ecoreURI = uri.trimFileExtension();
 		Ecore2Pivot.loadFromEcore(this, ecoreURI);
 		AS2XMIid as2id = new AS2XMIid();
-		as2id.assignIds(this);
+		as2id.assignIds(this, null);
 		super.load(options);
 	}
 }

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMISaveImpl;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 
 /**
  * PivotSaveImpl ensures that all references to specialized types are terminated
@@ -45,8 +46,11 @@ public final class PivotSaveImpl extends XMISaveImpl
 		ASSaver asSaver = new ASSaver(asResource);
 		AS2XMIid as2xmIid = new AS2XMIid();
 		asSaver.localizeSpecializations();
-		asSaver.normalizeContents();
-		as2xmIid.assignIds(asResourceSet);
+		Object optionNormalizeContents = options != null ? options.get(ASResource.OPTION_NORMALIZE_CONTENTS) : null;
+		if ((optionNormalizeContents != null) && Boolean.valueOf(optionNormalizeContents.toString())) {
+			asSaver.normalizeContents();
+		}
+		as2xmIid.assignIds(asResourceSet, options);
 		super.init(asResource, options);
 	}
 }

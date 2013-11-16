@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.pivot.resource;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -24,6 +26,30 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
  */
 public interface ASResource extends XMIResource
 {
+	/**
+	 * {@link Resource#save(Map)} option.
+	 * <p>
+	 * Use UUIDs as the xmi:id of each element, such as a specialization, that cannot be referenced externally.
+	 * The default behavior is to leave such elements without an explicit xmi:id so that they are
+	 * referenced using the default EMF referencing scheme of e.g. #//@nestedPackage.1/@ownedType.106.
+	 * <p>
+	 * If UUIDs are used, the XMI file may be safely edited manually without disrupting references, but
+	 * regeneration will produce a new set of UUIDs resulting in unstable content for the purposes
+	 * of configuration management.
+	 * <p>
+	 * More pragmatically UUIDs may be specified to assist in debugging the correct generation of stable
+	 * xmi:ids for externally referenceable elements: no @'s should remain.
+	 */
+	String OPTION_INTERNAL_UUIDS = "INTERNAL_UUIDS";
+
+	/**
+	 * {@link Resource#save(Map)} option.
+	 * <p>
+	 * Rearrange the contents to enforce alphabetic ordering and so ensure stable contents after
+	 * regeneration.
+	 */
+	String OPTION_NORMALIZE_CONTENTS = "NORMALIZE_CONTENTS";
+
 	/**
 	 * The file extension for OCL Abstract Syntax resources.
 	 */
