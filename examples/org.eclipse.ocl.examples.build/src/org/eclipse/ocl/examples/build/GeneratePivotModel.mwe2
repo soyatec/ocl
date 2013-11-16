@@ -55,6 +55,9 @@ Workflow {
     component = ConstraintRemover { skipOnErrors = true
     	modelSlot = "${umlSlot}"
     }
+    component = UMLIDAssigner { skipOnErrors = true
+    	modelSlot = "${umlSlot}"
+    }
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${umlSlot}"
     	uri = "/${projectName}/model/Pivot.merged.uml"

@@ -105,60 +105,6 @@
       </profileApplication>
     </xmi:Extension>
   </cmof:Package>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_5mpFcIdyEd-N4tjuug6Vsw" base_Package="_0" nsPrefix="pivot" nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot" basePackage=""/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_TPVhdod0Ed-N4tjuug6Vsw" base_Package="_0" nsPrefix="uml" nsURI="http://www.omg.org/spec/UML/20090901"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_U-GB8Id3Ed-N4tjuug6Vsw" base_Package="_0" nsPrefix="pivot" nsURI="http://org.eclipse.ocl/Pivot/20100704"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_q3AqoIemEd-N4tjuug6Vsw" nsPrefix="oclpivot" nsURI="http://org.eclipse.ocl/OCL/20100704/Pivot"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_sWEpoIemEd-N4tjuug6Vsw" nsPrefix="oclexp" nsURI="http://org.eclipse.ocl/OCL/20100704/Expression"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_n_43EIenEd-N4tjuug6Vsw" nsPrefix="ocltyp" nsURI="http://org.eclipse.ocl/OCL/20100704/Types"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_m7YDwIkgEd-C9fe6N-G3qw" nsPrefix="oclprim" nsURI="http://org.eclipse.ocl/OCL/20100704/Primitives"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EAttribute xmi:id="_2pU6sJv1Ed-z3OwhWUwlQQ" isTransient="true"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EClass xmi:id="_E-3sIJ0jEd-JkelcPbiG5Q" instanceClassName="org.eclipse.ocl.examples.pivot.utilities.INameableElement" className="INameableElement"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EClass xmi:id="_MO684J0kEd-JkelcPbiG5Q" instanceClassName="org.eclipse.ocl.examples.pivot.utilities.INameableElement" className="INameableElement"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EClass xmi:id="_LkkGYJ0mEd-JkelcPbiG5Q" instanceClassName="org.eclipse.ocl.examples.pivot.utilities.INameableElement"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EDataType xmi:id="_leEVYKd2Ed-p0fyBXlv83w" instanceClassName="java.lang.Class"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EReference xmi:id="_U0BTwKeTEd-p0fyBXlv83w" isTransient="true" isResolveProxies="false"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EReference xmi:id="_kot7kKeTEd-p0fyBXlv83w" isResolveProxies="false"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EDataType xmi:id="_mHEcALjCEd-IDaWL0FHlwg" instanceClassName="java.lang.Class&lt;?>"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EAttribute xmi:id="_yqM3UL2iEd-nQufuYygZtQ" isTransient="true"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_hn2o4sinEd-sJIf4tYBt-g" base_Package="_0" nsPrefix="pivot" nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot"/>
-  </xmi:Extension>
-  <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EPackage xmi:id="_6wkKcMknEd-bx742yyafXQ" base_Package="_0" nsPrefix="pivot" nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot"/>
-  </xmi:Extension>
   <cmof:Tag xmi:id="_19" name="org.omg.xmi.nsPrefix" value="pivot" element="_0"/>
   <cmof:Tag xmi:id="_20" name="org.omg.xmi.nsURI" value="http://www.eclipse.org/ocl/3.1.0/Pivot" element="_0"/>
 </xmi:XMI>
