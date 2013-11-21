@@ -291,7 +291,7 @@ public abstract class AbstractEvaluationVisitor
 //			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
 //		}
 		
-		Object result = body.accept(getUndecoratedVisitor());
+		Object result = body.accept(undecoratedVisitor);
 //		try {
 //			if (result == null) {
 //				return evaluationEnvironment.throwInvalidEvaluation("null constraint result");
