@@ -192,6 +192,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_EPACKAGE = new TracingOption(PLUGIN_ID, "projectMap/addEPackage");
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_GEN_MODEL = new TracingOption(PLUGIN_ID, "projectMap/addGenModel");
+	public static final @NonNull TracingOption PROJECT_MAP_ADD_PROJECT = new TracingOption(PLUGIN_ID, "projectMap/addProject");
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_URI_MAP = new TracingOption(PLUGIN_ID, "projectMap/addURIMap");
 	public static final @NonNull TracingOption PROJECT_MAP_CONFIGURE = new TracingOption(PLUGIN_ID, "projectMap/configure");
 	public static final @NonNull TracingOption PROJECT_MAP_INSTALL = new TracingOption(PLUGIN_ID, "projectMap/install");
@@ -750,7 +751,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		{
 			/**
 			 * Internal callback from Ecore model pre-parse to register the
-			 * Ecore Package URI.
+			 * Ecore Package URI. For a GenModel for multi-packages, this
+			 * is called for each registered package.
 			 */
 			void addEcorePackage(@NonNull String ecorePackage);
 
@@ -1248,6 +1250,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		protected @Nullable String className = null;
 
 		/**
+		 * The URI of each registered EPackage in the defining GenModel. Only one of these should have the correcrt URI.
+		 * Resoplution of which one is delayed until loading the references is required.
+		 */
+		protected @NonNull List<String> ecorePackages = new ArrayList<String>();
+
+		/**
 		 * The project-relative URI of the model for the EPackage (e.g. model/Ecore.ecore#/). 
 		 */
 		private @Nullable URI ecorePackageURI = null;
@@ -1279,21 +1287,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		public void addEcorePackage(@NonNull String ecorePackage) {
-			URI uri = URI.createURI(ecorePackage);
-			URI projectLocationURI = projectDescriptor.getLocationURI();
-			URI absoluteGenModelURI = genModelURI.resolve(projectLocationURI);
-			URI absolutePackageURI = uri.resolve(absoluteGenModelURI);
-			@SuppressWarnings("null")@NonNull URI ecorePackageURI2 = absolutePackageURI.deresolve(projectLocationURI, true, true, true);
-			ecorePackageURI = ecorePackageURI2;
-			URI resourceURI = projectDescriptor.getPlatformResourceURI();
-			URI pluginURI = projectDescriptor.getPlatformPluginURI();
-			URI ecoreURI = ecorePackageURI2.trimFragment();
-			platformResourceURI = ecoreURI.resolve(resourceURI);
-			platformPluginURI = ecoreURI.resolve(pluginURI);
-			locationURI = ecoreURI.resolve(projectDescriptor.getLocationURI());
-			if (PROJECT_MAP_ADD_EPACKAGE.isActive()) {
-				PROJECT_MAP_ADD_EPACKAGE.println(namespaceURI + " => " + ecorePackage + " : " + className);
-			}
+			ecorePackages.add(ecorePackage);
 		}
 
 		public void configure(@Nullable ResourceSet resourceSet, @NonNull IPackageLoadStrategy packageLoadStrategy, @Nullable IConflictHandler conflictHandler) {
@@ -1316,10 +1310,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		public @Nullable URI getEcoreModelURI() {
+			resolveEcorePackage();
 			return ecorePackageURI != null ? ecorePackageURI.trimFragment() : null;
 		}
 
 		public @Nullable URI getEcorePackageURI() {
+			resolveEcorePackage();
 			return ecorePackageURI;
 		}
 
@@ -1328,6 +1324,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		public @NonNull URI getLocationURI() {
+			resolveEcorePackage();
 			return DomainUtil.nonNullState(locationURI);
 		}
 
@@ -1352,15 +1349,49 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 		
 		public @NonNull URI getPlatformPluginURI() {
+			resolveEcorePackage();
 			return DomainUtil.nonNullState(platformPluginURI);
 		}
 
 		public @NonNull URI getPlatformResourceURI() {
+			resolveEcorePackage();
 			return DomainUtil.nonNullState(platformResourceURI);
 		}
 
 		public @NonNull IProjectDescriptor getProjectDescriptor() {
 			return projectDescriptor;
+		}
+
+		protected void resolveEcorePackage() {
+			if (ecorePackages.size() <= 0) {
+				return;
+			}
+			String ecorePackage;
+			if (ecorePackages.size() == 1) {
+				ecorePackage = ecorePackages.get(0);
+			}
+			else {
+				for (String anEcorePackage : ecorePackages) {
+					URI aURI = URI.createURI(anEcorePackage);
+					
+				}
+				ecorePackage = ecorePackages.get(0);
+			}
+			URI uri = URI.createURI(ecorePackage);
+			URI projectLocationURI = projectDescriptor.getLocationURI();
+			URI absoluteGenModelURI = genModelURI.resolve(projectLocationURI);
+			URI absolutePackageURI = uri.resolve(absoluteGenModelURI);
+			@SuppressWarnings("null")@NonNull URI ecorePackageURI2 = absolutePackageURI.deresolve(projectLocationURI, true, true, true);
+			ecorePackageURI = ecorePackageURI2;
+			URI resourceURI = projectDescriptor.getPlatformResourceURI();
+			URI pluginURI = projectDescriptor.getPlatformPluginURI();
+			URI ecoreURI = ecorePackageURI2.trimFragment();
+			platformResourceURI = ecoreURI.resolve(resourceURI);
+			platformPluginURI = ecoreURI.resolve(pluginURI);
+			locationURI = ecoreURI.resolve(projectDescriptor.getLocationURI());
+			if (PROJECT_MAP_ADD_EPACKAGE.isActive()) {
+				PROJECT_MAP_ADD_EPACKAGE.println(namespaceURI + " => " + ecorePackage + " : " + className);
+			}
 		}
 
 		public void setClassName(@NonNull String className) {
@@ -1517,11 +1548,20 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 							@SuppressWarnings("null")@NonNull URI projectGenModelURI = absoluteGenModelURI.deresolve(locationURI, true, true, true);
 							IPackageDescriptor.Internal packageDescriptor = (IPackageDescriptor.Internal) projectDescriptor.getPackageDescriptor(nsURI);
 							if (packageDescriptor == null) {
+								if (PROJECT_MAP_ADD_PROJECT.isActive()) {
+									PROJECT_MAP_ADD_PROJECT.println(nsURI + " : " + projectGenModelURI);
+								}
 								packageDescriptor = projectDescriptor.createPackageDescriptor(nsURI, projectGenModelURI);
 							}
 							packageDescriptor.setClassName(className);
-							GenModelEcorePackageHandler genModelEcorePackageHandler = packageDescriptor.createGenModelEcorePackageHandler();
-							genModelEcorePackageHandlers.put(genModel,genModelEcorePackageHandler);
+							GenModelEcorePackageHandler genModelEcorePackageHandler = genModelEcorePackageHandlers.get(genModel);
+							if (genModelEcorePackageHandler == null) {
+								genModelEcorePackageHandler = packageDescriptor.createGenModelEcorePackageHandler();
+								genModelEcorePackageHandlers.put(genModel,genModelEcorePackageHandler);
+							}
+							else {
+								genModelEcorePackageHandler.add(packageDescriptor);
+							}
 						}
 					}
 				}
@@ -1546,7 +1586,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public static final String hrefAttribute = "href";
 
-		protected final IPackageDescriptor.Internal packageDescriptor;
+		protected final List<IPackageDescriptor.Internal> packageDescriptors = new ArrayList<IPackageDescriptor.Internal>();
 
 		private int genmodelCount = 0;
 
@@ -1554,14 +1594,24 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		private int ecorePackageCount = 0;
 
-		public GenModelEcorePackageHandler(
-				IPackageDescriptor.Internal packageDescriptor) {
-			this.packageDescriptor = packageDescriptor;
+		public GenModelEcorePackageHandler() {}
+
+		public GenModelEcorePackageHandler(@NonNull IPackageDescriptor.Internal packageDescriptor) {
+			packageDescriptors.add(packageDescriptor);
+		}
+
+		public void add(@NonNull IPackageDescriptor.Internal packageDescriptor) {
+			packageDescriptors.add(packageDescriptor);
+		}
+
+		protected void addEcorePackage(@NonNull String ecorePackage) {
+			for (IPackageDescriptor.Internal packageDescriptor : packageDescriptors) {
+				packageDescriptor.addEcorePackage(ecorePackage);
+			}
 		}
 
 		@Override
-		public void endElement(String uri, String localName, String qName)
-				throws SAXException {
+		public void endElement(String uri, String localName, String qName) throws SAXException {
 			if (genmodelCount == 1) {
 				if (genmodelTag.equals(qName)) {
 					genmodelCount--;
@@ -1580,8 +1630,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		@Override
-		public void startElement(String uri, String localName, String qName,
-				Attributes attributes)
+		public void startElement(String uri, String localName, String qName, Attributes attributes)
 				throws SAXException {
 			if (genmodelCount == 0) {
 				if (genmodelTag.equals(qName)) {
@@ -1590,17 +1639,16 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			} else if (genmodelCount == 1) {
 				if ((genPackagesCount == 0) && genPackagesTag.equals(qName)) {
 					genPackagesCount++;
-					String ecorePackage = attributes
-						.getValue(ecorePackageAttribute);
+					String ecorePackage = attributes.getValue(ecorePackageAttribute);
 					if (ecorePackage != null) {
-						packageDescriptor.addEcorePackage(ecorePackage);
+						addEcorePackage(ecorePackage);
 					}
 				} else if ((genPackagesCount == 1)
 					&& ecorePackageTag.equals(qName)) {
 					ecorePackageCount++;
 					String ecorePackage = attributes.getValue(hrefAttribute);
 					if (ecorePackage != null) {
-						packageDescriptor.addEcorePackage(ecorePackage);
+						addEcorePackage(ecorePackage);
 					}
 				}
 			}
@@ -1925,7 +1973,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * initialization.
 	 */
 	public static void initStatics() {
-		new GenModelEcorePackageHandler(null);
+		new GenModelEcorePackageHandler();
 		new PluginGenModelHandler(null);
 	}
 

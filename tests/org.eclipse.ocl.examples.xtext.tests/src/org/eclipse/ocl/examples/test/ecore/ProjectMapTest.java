@@ -101,6 +101,13 @@ public class ProjectMapTest extends TestCase
 
 	@Override
 	protected void setUp() throws Exception {
+//		StandaloneProjectMap.PROJECT_MAP_ADD_EPACKAGE.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_ADD_GEN_MODEL.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_ADD_PROJECT.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_ADD_URI_MAP.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_CONFIGURE.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_INSTALL.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_RESOLVE.setState(true);
 		super.setUp();
     	TestCaseAppender.INSTANCE.install();
 	}

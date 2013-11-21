@@ -204,11 +204,11 @@ public class RoundTripTests extends XtextTestCase
 			assertNoResourceErrors("Ecore2Pivot failed", asResource);
 			asResource.save(null);
 			assertNoValidationErrors("Ecore2Pivot invalid", asResource);
-			int i = 0;
+//			int i = 0;
 			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof OpaqueExpression) {
-					System.out.println(++i + ": " + eObject);
+//					System.out.println(++i + ": " + eObject);
 					((OpaqueExpression) eObject).getExpressionInOCL();
 					tit.prune();
 				}
