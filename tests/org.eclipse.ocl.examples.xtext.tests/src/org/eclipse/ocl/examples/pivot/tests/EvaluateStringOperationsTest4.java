@@ -569,11 +569,12 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testStringTokenize() {
-//		assertQueryResults(null, "Sequence{'', 'a','b','c','d', ''}", "'\na b\tc\fd\r'.tokenize()");
 		assertQueryResults(null, "Sequence{'a','b','c','d'}", "'\na b\tc\fd\r'.tokenize()");
 		assertQueryResults(null, "Sequence{'a','b','c','d'}", "' \t\n\r\fa b\tc\fd \t\n\r\f'.tokenize()");
 		assertQueryResults(null, "Sequence{' ','\t','\n','\r','\f','a',' ','b','\t','c','\f','d',' ','\t','\n','\r','\f'}", "' \t\n\r\fa b\tc\fd \t\n\r\f'.tokenize(' \t\n\r\f', true)");
 		assertQueryResults(null, "Sequence{'\na',' ', 'b\tc\fd\r'}", "'\na b\tc\fd\r'.tokenize(' ', true)");
+		assertQueryResults(null, "Sequence{'\na','b\tc\fd\r'}", "'\na b\tc\fd\r'.tokenize(' ')");
+		assertQueryResults(null, "Sequence{'1','2','3','4'}", "'1.2.3.4'.tokenize('.')");					// BUG 422296
 		assertQueryResults(null, "Sequence{}", "''.tokenize(' ', true)");
 		assertQueryResults(null, "Sequence{' \t\n\r\f'}", "' \t\n\r\f'.tokenize('', true)");
 		assertQueryResults(null, "Sequence{}", "''.tokenize('', true)");

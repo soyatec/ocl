@@ -45,8 +45,8 @@ public class StringTokenizeOperation extends AbstractPolyOperation
 	}
 
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) {
-		boolean returnDelims = asBoolean(argumentValue);
-		return evaluate(evaluator, (CollectionTypeId)returnTypeId, sourceValue, DELIMS, returnDelims);
+		String delims = asString(argumentValue);
+		return evaluate(evaluator, (CollectionTypeId)returnTypeId, sourceValue, delims, false);
 	}
 
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
