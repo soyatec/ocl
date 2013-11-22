@@ -16,6 +16,7 @@
   <rm:locator pattern="^org\.eclipse\.emf\.validation.*" searchPathRef="emf-validation"/>
   <rm:locator pattern="^org\.eclipse\.emf\.examples\.library.*$" searchPathRef="emf-source-code"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
+  <rm:locator pattern="^org\.eclipse\.mylyn\.wikitext.*" searchPathRef="mylyn-wikitext"/>
   <rm:locator pattern="^org\.eclipse\.ocl.*$" searchPathRef="ocl-source-code"/>
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
   <rm:locator pattern="^org\.eclipse\.xpand.*" searchPathRef="xpand"/>
@@ -204,6 +205,29 @@
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emft/mwe/updates/releases">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="mylyn-wikitext">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(&amp;(resolve.n4s=true)(build.type=S))))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/mylyn/snapshots/nightly/docs">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/mylyn/snapshots/luna">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=M)(build.type=N)(build.type=R)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/mylyn/releases/luna">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
