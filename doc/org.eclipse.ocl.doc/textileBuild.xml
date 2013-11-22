@@ -60,7 +60,7 @@
 	</target>
 	
 	<target name="install-wikitext" depends="get-wikitext">
-		<taskdef resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties">
+		<taskdef resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties">
 			<classpath>
 				<!--fileset dir="${basedir}/lib/plugins">
 					<include name="org.eclipse.xtext.wikitext.core*.jar"/>
