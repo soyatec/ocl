@@ -8,7 +8,7 @@
   <rm:property key="resolve.n4s" value="false"/>
   <rm:property key="build.type" value="I"/>
   <rm:property key="ocl.core.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-ocl-core-luna-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository"/>
-  <rm:locator pattern="^com\.google.(inject|guava)$" searchPathRef="xtext"/>
+  <!--rm:locator pattern="^com\.google.(inject|guava)$" searchPathRef="xtext"/-->
   <rm:locator pattern="^org\.eclipse\.acceleo.*" searchPathRef="acceleo"/>
   <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
