@@ -122,7 +122,6 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 		writer.close();
 	}
 
-	
 	/*
 	 * AbstractDelegatingVisitor
 	 */
@@ -192,7 +191,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	}
 
 	/*
-	 * AbstractDelegatingVisitor
+	 * AbstractExtendingDelegatingVisitor
 	 */
 	protected def void generateAbstractExtendingDelegatingVisitor(@NonNull EPackage ePackage) {
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractExtendingDelegating" + visitorClassName + ".java");
@@ -507,6 +506,84 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				//		return null;
 				//	}
 				«ENDIF»
+			}
+		''');
+		writer.close();
+	}
+	
+	/*
+	 * AbstractWrappingVisitor
+	 */
+	protected def void generateAbstractWrappingVisitor(@NonNull EPackage ePackage) {
+		var boolean isDerived = isDerived();
+		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractWrapping" + visitorClassName + ".java");
+		writer.append('''
+			«ePackage.generateHeader(visitorPackageName)»
+			
+			import org.eclipse.jdt.annotation.NonNull;
+			import org.eclipse.jdt.annotation.Nullable;
+			
+			/**
+			 * An AbstractWrapping«visitorClassName» delegates all visits wrapping the delegation in a call to a preVisit function and a postVisit function.
+			 */
+			public abstract class AbstractWrapping«visitorClassName»<R, C, D extends «visitorClassName»<R>, P>
+				extends «IF isDerived»«superVisitorPackageName».AbstractWrapping«superVisitorClassName»<R, C, D, P>«ELSE»«IF isDerived»«superVisitorClassName»«ELSE»Abstract«visitorClassName»«ENDIF»<R, C>«ENDIF»
+				implements «visitorClassName»<R>
+			{
+				«IF isDerived»
+				protected AbstractWrapping«visitorClassName»(@NonNull D delegate, @NonNull C context) {
+					super(delegate, context);
+				}
+				«ELSE»
+				protected final D delegate;
+				
+				protected AbstractWrapping«visitorClassName»(@NonNull D delegate, @NonNull C context) {
+					super(context);
+					this.delegate = delegate;		
+				//	delegate.setUndecoratedVisitor(this);
+				}
+
+				/**
+				 * Obtains the visitor that I wrap.
+				 * 
+				 * @return my wrapped visitor
+				 */
+				@SuppressWarnings("null")
+				protected @NonNull D getDelegate() {
+					return delegate;
+				}
+
+				/**
+				 * Intercept the result of the delegated visit to perform some post-functionality that may use the visitable object,
+				 * the result of preVisit and the result of the delegated visit to determine the overall wrapped result.
+				 * 
+				 * @return the epilogue result, which defaults to the delegated result.
+				 */
+				protected @Nullable R postVisit(@NonNull «visitablePackageName».«visitableClassName» visitable, @Nullable P prologue, @Nullable R result) {
+					return result;
+				}
+
+				/**
+				 * Compute and return some value before performing the delegated visit.
+				 * 
+				 * @return the prologue result, which defauilts to null.
+				 */
+				protected @Nullable P preVisit(@NonNull «visitablePackageName».«visitableClassName» visitable) {
+					return null;
+				}
+
+				public @Nullable R visiting(@NonNull «visitablePackageName».«visitableClassName» visitable) {
+					throw new UnsupportedOperationException();		// Cannot happen since all methods delegate.
+				}
+				«ENDIF»
+				«FOR eClass : getSortedEClasses(ePackage)»
+
+				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
+					P prologue = preVisit(object);
+					R result = delegate.visit«eClass.name»(object);
+					return postVisit(object, prologue, result);
+				}
+				«ENDFOR»
 			}
 		''');
 		writer.close();
