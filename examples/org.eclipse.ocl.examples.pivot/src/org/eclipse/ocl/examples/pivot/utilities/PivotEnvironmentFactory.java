@@ -128,12 +128,12 @@ public class PivotEnvironmentFactory extends AbstractEnvironmentFactory {
 	}
 
     // implements the inherited specification
-	public @NonNull PivotEvaluationEnvironment createEvaluationEnvironment() {
+	public @NonNull EvaluationEnvironment createEvaluationEnvironment() {
 		return new PivotEvaluationEnvironment(getMetaModelManager());
 	}
 
     // implements the inherited specification
-	public @NonNull PivotEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
+	public @NonNull EvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
 		return new PivotEvaluationEnvironment(parent);
 	}
 

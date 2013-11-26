@@ -65,7 +65,6 @@ import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
-import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerListener;
@@ -218,7 +217,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 				monitor.subTask(ConsoleMessages.Progress_Extent);
 				PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
 				PivotEnvironment environment = envFactory.createEnvironment();
-				PivotEvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
+				EvaluationEnvironment evaluationEnvironment = envFactory.createEvaluationEnvironment();
 				Object contextValue = metaModelManager.getIdResolver().boxedValueOf(contextObject);
 				evaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), contextValue);
 	//			if (modelManager == null) {
