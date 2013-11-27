@@ -18,6 +18,7 @@
 package org.eclipse.ocl.examples.pivot.evaluation;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -33,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.OCLUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
@@ -64,7 +64,13 @@ public interface EvaluationEnvironment extends DomainEvaluationEnvironment, Basi
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	Object getValueOf(@NonNull VariableDeclaration referredVariable);
+	Object getValueOf(@NonNull DomainTypedElement referredVariable);
+
+	/**
+	 * Return the set of all locally registered variables.
+	 * @return
+	 */
+	@NonNull Set<DomainTypedElement> getVariables();
 
     /**
      * Replaces the current value of the supplied variable declaration with the supplied value.

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -28,7 +29,6 @@ import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.Customizable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.osgi.util.NLS;
@@ -77,7 +77,7 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      *            the name whose value is to be returned
      * @return the value associated with the name
      */
-	public @Nullable Object getValueOf(@NonNull VariableDeclaration referredVariable) {
+	public @Nullable Object getValueOf(@NonNull DomainTypedElement referredVariable) {
     	Object object = variableValues.get(referredVariable);
         if (object == null) {
             EvaluationEnvironment parent2 = parent;
@@ -86,6 +86,11 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
             }
         }
         return object;
+	}
+    
+	@SuppressWarnings("null")
+	public @NonNull Set<DomainTypedElement> getVariables() {
+		return variableValues.keySet();
 	}
 
     /**
