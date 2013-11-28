@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all.sdk-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.build-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.capabilities"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.common"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.common.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.sdk-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.tests-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,doc/org.eclipse.ocl.doc"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.doc-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.ecore"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.ecore.edit"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.ecore.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.edit"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.edit-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.examples-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.autogen"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.build"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.codegen"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.codegen.dynamic"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.common"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.domain"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.eventmanager"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.eventmanager.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.impactanalyzer"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.impactanalyzer.testmodel.company"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.impactanalyzer.testmodel.ngpm"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.impactanalyzer.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.impactanalyzer.testutils"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.impactanalyzer.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.impactanalyzer.util"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.interpreter"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.library"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.modelregistry"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.modelregistry.edit"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.modelregistry.editor"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.modelregistry.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.pivot"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.project.completeocltutorial"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.project.empty"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.project.oclinecoretutorial"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.project.royalandloyal"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.examples.tests-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.testutils"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.ui.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.uml25"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.base"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.base.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.completeocl"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.completeocl.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.console"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.essentialocl"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.essentialocl.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.markup"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.markup.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.oclinecore"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.oclinecore.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.oclstdlib"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,examples/org.eclipse.ocl.examples.xtext.oclstdlib.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.examples.xtext.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.license-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.master-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.buckminster"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.core.build-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.tools.build-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tests-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tools.tests-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.ui"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.ui-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.uml"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.uml-feature"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.uml.edit"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,tests/org.eclipse.ocl.uml.tests"/>
+<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.uml.ui"/>
+</provider>
+<provider id="org.eclipse.team.cvs.core.cvsnature">
+<project reference="1.0,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.generator,lpg.generator,v2_0_17"/>
+<project reference="1.0,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.generator.linux_x86,lpg.generator.linux_x86,v2_0_17"/>
+<project reference="1.0,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.generator.linux_x86_64,lpg.generator.linux_x86_64,v2_0_17"/>
+<project reference="1.0,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.generator.macosx_x86,lpg.generator.macosx_x86,v2_0_17"/>
+<project reference="1.0,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.generator.macosx_x86_64,lpg.generator.macosx_x86_64,v2_0_17"/>
+<project reference="1.0,:pserver:anonymous@lpg.cvs.sourceforge.net:/cvsroot/lpg,lpg.generator.win32_x86,lpg.generator.win32_x86,v2_0_17"/>
+<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,org.eclipse.orbit/lpg.runtime.java,lpg.runtime.java,v2_0_17"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1346923257292_4" label="OCL Classic" name="OCL Classic">
+<item elementID="=org.eclipse.ocl.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.uml" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.ecore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.uml.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.ecore.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.common.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.uml.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.ecore.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.uml.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1346923163412_2" label="OCL Examples" name="OCL Examples">
+<item elementID="=org.eclipse.ocl.examples.modelregistry.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.modelregistry.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.interpreter" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.project.royalandloyal" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.examples.project.completeocltutorial" type="4"/>
+<item elementID="=org.eclipse.ocl.examples.project.empty" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.modelregistry.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.examples" type="4"/>
+<item elementID="=org.eclipse.ocl.examples.modelregistry" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.examples.project.oclinecoretutorial" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.examples.ui.tests" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1369071027417_106" label="OCL Impact Analyzer" name="OCL Impact Analyzer">
+<item elementID="=org.eclipse.ocl.examples.testutils" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer.testmodel.ngpm" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.eventmanager.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer.testmodel.company" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.eventmanager" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer.testutils" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.impactanalyzer" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1346923266231_5" label="OCL Pivot" name="OCL Pivot">
+<item elementID="=org.eclipse.ocl.examples.uml25" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.essentialocl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.oclstdlib" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.domain" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.pivot" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.markup.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.oclinecore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.base" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.markup" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.autogen" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.oclstdlib.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.oclinecore.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.codegen" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.completeocl.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.build" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.base.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.library" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.codegen.dynamic" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.completeocl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.console" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.ocl.examples.xtext.essentialocl.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1346923220102_3" label="OCL Releng" name="OCL Releng">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.releng.buckminster" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.releng.tools.build-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.releng" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.core.tests-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.releng.core.build-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.all.sdk-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.master-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.examples-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.license-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.core.sdk-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.edit-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.tools.tests-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.build-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.doc-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.tests-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.doc" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.capabilities" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.ui-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.uml-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.all-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.examples.tests-feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="org.eclipse.ocl.thirdparty" label="OCL Tools" name="OCL Tools">
+<item elementID="=lpg.runtime.java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/lpg.generator.macosx_x86" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/lpg.generator.win32_x86" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/lpg.generator.linux_x86_64" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/lpg.generator.macosx_x86_64" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/lpg.generator" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/lpg.generator.linux_x86" type="4"/>
+</workingSets>
+</psf>
