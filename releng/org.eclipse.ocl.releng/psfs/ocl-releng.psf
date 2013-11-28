@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all.sdk-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.build-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.capabilities"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.sdk-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.tests-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,doc/org.eclipse.ocl.doc"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.doc-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.edit-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.examples-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.examples.tests-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.license-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.master-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.buckminster"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.core.build-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.tools.build-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tests-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tools.tests-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.ui-feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.uml-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all.sdk-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.build-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.capabilities"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.sdk-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.tests-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,doc/org.eclipse.ocl.doc"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.doc-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.edit-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.examples-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.examples.tests-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.license-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.master-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.buckminster"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.core.build-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.tools.build-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tests-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tools.tests-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.ui-feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.uml-feature"/>
 </provider>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1346923220102_3" label="OCL Releng" name="OCL Releng">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.releng.buckminster" type="4"/>
