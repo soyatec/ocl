@@ -40,10 +40,13 @@ import org.eclipse.ocl.examples.xtext.essentialocl.ui.syntaxcoloring.EssentialOC
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.syntaxcoloring.EssentialOCLSemanticHighlightingCalculator;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
+import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.NamingAware;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
@@ -55,6 +58,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -68,8 +72,14 @@ import org.eclipse.xtext.validation.IResourceValidator;
 /**
  * Provide the standard EssentialOCL bindings as Abstract defaults
  */
-public class EssentialOCLFragment extends DefaultGeneratorFragment
+public class EssentialOCLFragment extends DefaultGeneratorFragment implements NamingAware
 {
+	public static String getQualifiedName(Grammar grammar, Naming n) {
+		return n.basePackageUi(grammar) + "." + GrammarUtil.getName(grammar) + "Editor";
+	}
+
+	private Naming naming;
+
 	@SuppressWarnings("restriction")
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
@@ -112,6 +122,15 @@ public class EssentialOCLFragment extends DefaultGeneratorFragment
 		bindFactory.addTypeToType(IURIEditorOpener.class.getName(), BaseURIEditorOpener.class.getName());
 		bindFactory.addTypeToType(IXtextEditorCallback.class.getName(), ValidatingEditorCallback.class.getName());
 		bindFactory.addTypeToType(XtextDocument.class.getName(), BaseDocument.class.getName());
+		bindFactory.addTypeToType(XtextEditor.class.getName(), getQualifiedName(grammar, getNaming()));
 		return bindFactory.getBindings();
+	}
+
+	public Naming getNaming() {
+		return naming;
+	}
+
+	public void registerNaming(Naming naming) {
+		this.naming = naming;
 	}
 }
