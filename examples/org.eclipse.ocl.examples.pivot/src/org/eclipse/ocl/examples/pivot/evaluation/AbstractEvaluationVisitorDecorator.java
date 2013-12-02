@@ -94,7 +94,7 @@ public abstract class AbstractEvaluationVisitorDecorator<EV extends EvaluationVi
     /**
      * Obtains my delegate's environment.
      */
-    public Environment getEnvironment() {
+    public @NonNull Environment getEnvironment() {
         return delegate.getEnvironment();
     }
 

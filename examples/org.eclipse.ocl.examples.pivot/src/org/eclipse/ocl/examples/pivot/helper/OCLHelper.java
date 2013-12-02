@@ -234,7 +234,7 @@ public interface OCLHelper
      * @see #setOperationContext(Object, Object)
      * @see #setPropertyContext(Object, Object)
      */
-    Environment getEnvironment();
+    @NonNull Environment getEnvironment();
     
 	/**
 	 * Queries whether I validate the expressions that I parse.  Validation

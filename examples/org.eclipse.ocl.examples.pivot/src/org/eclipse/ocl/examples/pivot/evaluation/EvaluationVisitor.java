@@ -51,7 +51,7 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
      *  
 	 * @return the environment
 	 */
-	Environment getEnvironment();
+	@NonNull Environment getEnvironment();
 
 	/**
      * Obtains the evaluation environment that keeps track of variable values

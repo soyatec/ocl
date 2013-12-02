@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -37,7 +38,7 @@ public class EnvironmentResourceAdapter implements Adapter
 		return PivotUtil.getAdapter(EnvironmentResourceAdapter.class, resource);
 	}
 	
-	public static EnvironmentResourceAdapter getAdapter(Resource resource, PivotEnvironment environment) {
+	public static EnvironmentResourceAdapter getAdapter(@NonNull Resource resource, @NonNull PivotEnvironment environment) {
 		List<Adapter> eAdapters = DomainUtil.nonNullEMF(resource.eAdapters());
 		EnvironmentResourceAdapter adapter = PivotUtil.getAdapter(EnvironmentResourceAdapter.class, eAdapters);
 		if (adapter == null) {
@@ -47,10 +48,10 @@ public class EnvironmentResourceAdapter implements Adapter
 		return adapter;
 	}
 	
-	protected final Resource resource;
-	protected final PivotEnvironment environment;
+	protected final @NonNull Resource resource;
+	protected final @NonNull PivotEnvironment environment;
 	
-	public EnvironmentResourceAdapter(Resource resource, PivotEnvironment environment) {
+	public EnvironmentResourceAdapter(@NonNull Resource resource, @NonNull PivotEnvironment environment) {
 		this.resource = resource;
 		this.environment = environment;
 	}
@@ -59,11 +60,11 @@ public class EnvironmentResourceAdapter implements Adapter
 		return new MetaModelManager();
 	}
 
-	public Resource getTarget() {
+	public @NonNull Resource getTarget() {
 		return resource;
 	}
 
-	public PivotEnvironment getEnvironment() {
+	public @NonNull PivotEnvironment getEnvironment() {
 		return environment;
 	}
 	
