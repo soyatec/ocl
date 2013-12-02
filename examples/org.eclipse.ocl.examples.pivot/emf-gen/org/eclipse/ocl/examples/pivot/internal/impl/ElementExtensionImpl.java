@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -537,6 +538,6 @@ public class ElementExtensionImpl extends TypeImpl implements ElementExtension
 
 	@Override
 	public org.eclipse.ocl.examples.pivot.Package getPackage() {
-		return ((Type)eContainer()).getPackage();
+		return PivotUtil.getContainingPackage(eContainer());
 	}
 } //ElementExtensionImpl

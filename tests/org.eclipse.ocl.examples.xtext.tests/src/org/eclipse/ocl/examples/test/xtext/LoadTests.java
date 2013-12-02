@@ -275,11 +275,57 @@ public class LoadTests extends XtextTestCase
 	}
 	
 	public void doLoadUML(@NonNull URI inputURI, boolean ignoreNonExistence, boolean validateEmbeddedOCL, boolean validateCompleteOCL) throws IOException, ParserException {
+		doLoadUML(inputURI, new AbstractLoadCallBack(ignoreNonExistence, validateCompleteOCL, validateEmbeddedOCL));
+	}
+	
+	private static class AbstractLoadCallBack implements ILoadCallBack
+	{
+		private final boolean ignoreNonExistence;
+		private final boolean validateCompleteOCL;
+		private final boolean validateEmbeddedOCL;
+
+		private AbstractLoadCallBack(boolean ignoreNonExistence, boolean validateCompleteOCL, boolean validateEmbeddedOCL) {
+			this.ignoreNonExistence = ignoreNonExistence;
+			this.validateCompleteOCL = validateCompleteOCL;
+			this.validateEmbeddedOCL = validateEmbeddedOCL;
+		}
+
+		public boolean ignoreNonExistence() {
+			return ignoreNonExistence;
+		}
+
+		public void postLoad(@NonNull MetaModelManager metaModelManager, @NonNull ASResource asResource) {}
+
+		public void validateCompleteOCL(@NonNull MetaModelManager metaModelManager, @NonNull BaseCSResource reloadCS) throws IOException {
+			if (validateCompleteOCL) {
+				reloadCS.load(null);
+				assertNoResourceErrors("Load failed", reloadCS);
+				Resource reloadAS = reloadCS.getASResource(null);
+				assertNoUnresolvedProxies("Unresolved proxies", reloadAS);
+				assertNoValidationErrors("Reloading", reloadAS);
+			}
+		}
+
+		public void validateEmbeddedOCL(@NonNull OCL ocl, @NonNull Constraint constraint) throws ParserException {
+			if (validateEmbeddedOCL) {
+				validateConstraint(ocl, constraint);
+			}
+		}
+	}
+
+	public static interface ILoadCallBack {
+		boolean ignoreNonExistence();
+		void postLoad(@NonNull MetaModelManager metaModelManager, @NonNull ASResource asResource);
+		void validateCompleteOCL(@NonNull MetaModelManager metaModelManager, @NonNull BaseCSResource reloadCS) throws IOException;
+		void validateEmbeddedOCL(@NonNull OCL ocl, @NonNull Constraint eObject) throws ParserException;
+	}
+	
+	public void doLoadUML(@NonNull URI inputURI, ILoadCallBack loadCallBacks) throws IOException, ParserException {
 //		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = createResourceSet();
 		if (!resourceSet.getURIConverter().exists(inputURI, null)) {
-			if (ignoreNonExistence) {
+			if (loadCallBacks.ignoreNonExistence()) {
 				return;
 			}
 			TestCase.fail("No such resource + '" + inputURI + "'");			
@@ -340,7 +386,7 @@ public class LoadTests extends XtextTestCase
 			for (Resource asResource : allResources) {
 				assertNoResourceErrors("Load failed", asResource);
 			}
-			Resource asResource = allResources.get(0); {
+			ASResource asResource = (ASResource) allResources.get(0); {
 				@SuppressWarnings("unused") URI savedURI = asResource.getURI();
 //				asResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 //				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
@@ -349,12 +395,12 @@ public class LoadTests extends XtextTestCase
 //				asResource.setURI(savedURI);
 				for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
-					if (validateEmbeddedOCL && (eObject instanceof Constraint)) {
+					if (eObject instanceof Constraint) {
 						Constraint constraint = (Constraint)eObject;
 //						boolean donePrint = false;
 						try {
+							loadCallBacks.validateEmbeddedOCL(ocl, constraint);
 //							parses++;
-							validateConstraint(ocl, constraint);
 						} catch (ParserException e) {
 //							if (!donePrint) {
 								System.out.println("\n" + constraint);
@@ -372,6 +418,7 @@ public class LoadTests extends XtextTestCase
 				assertNoValidationErrors("Overall validation", asResource);
 			}
 			assertEquals(s.toString(), 0, exceptions);
+			loadCallBacks.postLoad(metaModelManager, asResource);
 			//
 			//	Split off any embedded OCL to a separate file
 			//		
@@ -392,14 +439,8 @@ public class LoadTests extends XtextTestCase
 				ResourceSet resourceSet2 = metaModelManager2.getExternalResourceSet();
 				BaseCSResource reloadCS = (BaseCSResource) resourceSet2.createResource(oclURI);
 				MetaModelManagerResourceAdapter.getAdapter(reloadCS, metaModelManager2);
-				if (validateCompleteOCL) {
-					reloadCS.load(null);
-					assertNoResourceErrors("Load failed", reloadCS);
-					Resource reloadAS = reloadCS.getASResource(null);
-					assertNoUnresolvedProxies("Unresolved proxies", reloadAS);
-					assertNoValidationErrors("Reloading", reloadAS);
-					metaModelManager2.dispose();
-				}
+				loadCallBacks.validateCompleteOCL(metaModelManager2, reloadCS);
+				metaModelManager2.dispose();
 			}
 		}
 		finally {
@@ -415,7 +456,7 @@ public class LoadTests extends XtextTestCase
 //		return xmiResource;
 	}
 
-	private void validateConstraint(@NonNull OCL ocl, @NonNull Constraint constraint) throws ParserException {
+	private static void validateConstraint(@NonNull OCL ocl, @NonNull Constraint constraint) throws ParserException {
 //		if ("base_property_upper_bound".equals(constraint.getName())) {
 //			System.out.println("Got it");
 //		}
@@ -883,6 +924,25 @@ public class LoadTests extends XtextTestCase
 //		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.tests/model/Internationalized.profile.uml", true);
 		doLoadUML(uri, false, false, false);
+	}
+	
+	public void testLoad_StereotypeApplications_uml() throws IOException, InterruptedException, ParserException {
+//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/MOF/20110701", UMLPackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+		URI uri = getProjectFileURI("StereotypeApplications.uml");
+		doLoadUML(uri, new AbstractLoadCallBack(false, false, false) {
+			@Override
+			public void postLoad(@NonNull MetaModelManager metaModelManager, @NonNull ASResource asResource) {
+		        for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+		            EObject obj = tit.next();
+		            if (obj instanceof Type) {
+		                metaModelManager.getAllInvariants((Type) obj);		// This gives the Bug 422938 CCE
+		            }
+		        }
+			}
+			
+		});
 	}
 
 	public void testReload_AsReload() throws Exception {
