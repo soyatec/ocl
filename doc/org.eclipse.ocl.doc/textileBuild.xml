@@ -23,8 +23,9 @@
 	<!--  
 		WikiText Toolchain 
 	<property name="wikitext.url" value="http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/mylyn/update/weekly/mylyn-wikitext-standalone-latest.zip"/>
-	-->
 	<property name="wikitext.url" value="http://download.eclipse.org/mylyn/snapshots/nightly/docs/wikitext-standalone-latest.zip"/>
+	-->
+	<property name="wikitext.url" value="http://download.eclipse.org/mylyn/drops/3.10.0/v20131025-2037/mylyn-3.10.0.v20131025-2037.zip"/>
 	<property name="wikitext.dir" value="${download.dir}${file.separator}wikitext"/>
 
 	<!-- adolfosbh: We expect to receive a target.location to provide some jars to the xslt ant tasks 
@@ -38,7 +39,7 @@
 		<pathelement path="${java.class.path}"/>
 		<pathelement path="${target.location}/plugins/org.apache.xalan_2.7.1.v201005080400.jar"/>
 		<pathelement path="${target.location}/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar"/>
-		<pathelement path="${target.location}/plugins/com.google.guava_10.0.1.v201203051515.jar"/>
+		<!--pathelement path="${target.location}/plugins/com.google.guava_10.0.1.v201203051515.jar"/-->
 	</path>
 
 	
@@ -61,7 +62,8 @@
 	</target>
 	
 	<target name="install-wikitext" depends="get-wikitext">
-		<taskdef resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties">
+		<!-- Mylyn Wikitext 2.0 taskdef resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties"-->
+		<taskdef resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties">
 			<classpath>
 				<!--fileset dir="${basedir}/lib/plugins">
 					<include name="org.eclipse.xtext.wikitext.core*.jar"/>
