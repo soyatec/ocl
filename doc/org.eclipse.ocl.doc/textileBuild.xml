@@ -54,7 +54,7 @@
 	
 	<!--target name="get-wikitext" description="Downloads WikiText" depends="check-wikitext" unless="hasWikiText"-->
 	<target name="get-wikitext" description="Downloads WikiText">
-		<echoProperties/>
+		<echoproperties/>
 		<echo>Downloading WikiText from ${wikitext.url} to ${wikitext.dir}</echo>
 		<get dest="${download.dir}${file.separator}wikitext.zip" src="${wikitext.url}"/>
 		<unzip src="${download.dir}${file.separator}wikitext.zip" dest="${wikitext.dir}">
