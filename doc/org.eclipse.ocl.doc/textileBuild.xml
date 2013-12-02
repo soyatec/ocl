@@ -52,8 +52,10 @@
 		</condition>
 	</target>
 	
-	<target name="get-wikitext" description="Downloads WikiText" depends="check-wikitext" unless="hasWikiText">
-		<echo>Downloading WikiText...</echo>
+	<!--target name="get-wikitext" description="Downloads WikiText" depends="check-wikitext" unless="hasWikiText"-->
+	<target name="get-wikitext" description="Downloads WikiText">
+		<echoProperties/>
+		<echo>Downloading WikiText from ${wikitext.url} to ${wikitext.dir}</echo>
 		<get dest="${download.dir}${file.separator}wikitext.zip" src="${wikitext.url}"/>
 		<unzip src="${download.dir}${file.separator}wikitext.zip" dest="${wikitext.dir}">
 			<patternset includes="**/*.jar"/>
