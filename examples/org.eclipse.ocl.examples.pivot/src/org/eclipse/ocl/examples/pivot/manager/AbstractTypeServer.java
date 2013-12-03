@@ -131,18 +131,83 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			if (isResolved) {
 				return resolution;
 			}
+			resolve();
+			if (isResolved) {
+				return resolution;
+			}
+			List<DomainProperty> values = new ArrayList<DomainProperty>(partials);
+			MetaModelManager metaModelManager = getStandardLibrary();
+			Map<DomainType, DomainProperty> primaryProperties = new HashMap<DomainType, DomainProperty>();
+			for (DomainProperty property : values) {
+				if (property != null) {
+					DomainType owningType = property.getOwningType();
+					if (owningType != null) {
+						DomainType domainType = metaModelManager.getPrimaryType(owningType);
+						if (!primaryProperties.containsKey(domainType)) {
+							primaryProperties.put(domainType, property);	// FIXME something more deterministic than first
+						}
+					}
+				}
+			}
+			if (primaryProperties.size() == 1) {
+				resolution = primaryProperties.values().iterator().next();
+				isResolved = true;
+				return resolution;
+			}
+			isResolved = true;
+			resolution = null;
+			return resolution;
+		}
+
+		public synchronized boolean isEmpty() {
+			if (resolution != null) {
+				return false;
+			}
 			List<DomainProperty> partials2 = partials;
 			if (partials2 == null) {
-				return null;
+				return true;
+			}
+			return partials2.size() <= 0;
+		}
+
+		@SuppressWarnings("null")
+		public @NonNull Iterator<DomainProperty> iterator() {
+			if (!isResolved) {
+				resolve();
+			}
+			if (resolution != null) {
+				return Iterators.singletonIterator(resolution);
+			}
+			else if (partials != null) {
+				return partials.iterator();
+			}
+			else {
+				return Iterators.emptyIterator();
+			}
+		}
+		
+		public synchronized void remove(@NonNull DomainProperty pivotProperty) {
+			if (pivotProperty == resolution) {
+				resolution = null;
+			}
+			if (partials != null) {
+				partials.remove(pivotProperty);
+			}
+		}
+
+		private void resolve() {
+			assert !isResolved;
+			List<DomainProperty> partials2 = partials;
+			if (partials2 == null) {
+				return;
 			}
 			int size = partials2.size();
 			if (size <= 0) {
-				return null;
+				return;
 			}
 			if (size == 1) {
 				isResolved = true;
 				resolution = partials2.get(0);
-				return resolution;
 			}
 			List<DomainProperty> values = new ArrayList<DomainProperty>(partials);
 			for (int i = 0; i < values.size()-1;) {
@@ -186,59 +251,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			if (values.size() == 1) {
 				resolution = values.get(0);
 				isResolved = true;
-				return resolution;
-			}
-			MetaModelManager metaModelManager = getStandardLibrary();
-			Map<DomainType, DomainProperty> primaryProperties = new HashMap<DomainType, DomainProperty>();
-			for (DomainProperty property : values) {
-				if (property != null) {
-					DomainType owningType = property.getOwningType();
-					if (owningType != null) {
-						DomainType domainType = metaModelManager.getPrimaryType(owningType);
-						if (!primaryProperties.containsKey(domainType)) {
-							primaryProperties.put(domainType, property);	// FIXME something more deterministic than first
-						}
-					}
-				}
-			}
-			if (primaryProperties.size() == 1) {
-				resolution = primaryProperties.values().iterator().next();
-				isResolved = true;
-				return resolution;
-			}
-			isResolved = true;
-			resolution = null;
-			return resolution;
-		}
-
-		public synchronized boolean isEmpty() {
-			if (resolution != null) {
-				return false;
-			}
-			List<DomainProperty> partials2 = partials;
-			if (partials2 == null) {
-				return true;
-			}
-			return partials2.size() <= 0;
-		}
-
-		@SuppressWarnings("null")
-		public @NonNull Iterator<DomainProperty> iterator() {
-			DomainProperty property = get();
-			if (property == null) {
-				return Iterators.emptyIterator();
-			}
-			else {
-				return Iterators.singletonIterator(property);
-			}
-		}
-		
-		public synchronized void remove(@NonNull DomainProperty pivotProperty) {
-			if (pivotProperty == resolution) {
-				resolution = null;
-			}
-			if (partials != null) {
-				partials.remove(pivotProperty);
+				return;
 			}
 		}
 	}
