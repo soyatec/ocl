@@ -1232,6 +1232,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 				File dir = new File(targetFolder, packageName);
 				dir.mkdir();
 				LibraryOperation testInstance = genModelHelper.loadClass(expr, targetFolder, packageName, className, true);
+				assert testInstance != null;
 				DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 				OperationCallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();
 				callExp.setType(expr.getType());

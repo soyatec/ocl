@@ -41,6 +41,7 @@ public abstract class AbstractAccumulation2Java extends AbstractIteration2Java
 		js.append(")");
 	}
 	
+	@Override
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 		return js.appendAssignment(cgIterationCallExp, cgAccumulator);

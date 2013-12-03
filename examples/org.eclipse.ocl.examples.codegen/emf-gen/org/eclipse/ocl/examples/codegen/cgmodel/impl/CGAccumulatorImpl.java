@@ -94,6 +94,7 @@ public class CGAccumulatorImpl extends CGIteratorImpl implements CGAccumulator
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public void setNonInvalid(boolean nonInvalid) {
 		this.nonInvalid = nonInvalid;
 	}

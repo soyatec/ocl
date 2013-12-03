@@ -33,6 +33,7 @@ public class AbstractCGModelResourceFactory extends ResourceFactoryImpl implemen
 		return new CGModelResourceImpl(DomainUtil.nonNullState(uri), this);
 	}
 
+	@Override
 	public @NonNull CG2StringVisitor createToStringVisitor() {
 		return new CG2StringVisitor();
 	}

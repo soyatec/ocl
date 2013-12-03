@@ -121,6 +121,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull List<CGParameter> getParameters() {
 		if (parameters == null) {
@@ -134,6 +135,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -158,6 +160,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(CGValuedElement newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -177,6 +180,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGConstraint> getPreconditions() {
 		if (preconditions == null) {
 			preconditions = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_OPERATION__PRECONDITIONS);
@@ -189,6 +193,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGConstraint> getPostconditions() {
 		if (postconditions == null) {
 			postconditions = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_OPERATION__POSTCONDITIONS);
@@ -201,6 +206,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGClass getContainingClass() {
 		if (eContainerFeatureID() != CGModelPackage.CG_OPERATION__CONTAINING_CLASS) return null;
 		return (CGClass)eInternalContainer();
@@ -221,6 +227,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainingClass(CGClass newContainingClass) {
 		if (newContainingClass != eInternalContainer() || (eContainerFeatureID() != CGModelPackage.CG_OPERATION__CONTAINING_CLASS && newContainingClass != null)) {
 			if (EcoreUtil.isAncestor(this, newContainingClass))
@@ -413,6 +420,7 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
 	}

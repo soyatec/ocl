@@ -84,6 +84,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTextValue() {
 		return textValue;
 	}
@@ -93,6 +94,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTextValue(String newTextValue) {
 		String oldTextValue = textValue;
 		textValue = newTextValue;
@@ -190,6 +192,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(textValue);
 	}
@@ -207,6 +210,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (!thatValue.isNonInvalid()) {
 			return null;

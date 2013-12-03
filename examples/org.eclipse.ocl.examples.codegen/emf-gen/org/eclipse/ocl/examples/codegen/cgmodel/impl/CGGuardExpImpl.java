@@ -81,6 +81,7 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}
@@ -90,6 +91,7 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMessage(String newMessage) {
 		String oldMessage = message;
 		message = newMessage;

@@ -76,6 +76,7 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTypeId getUnderlyingTypeId() {
 		return underlyingTypeId;
 	}
@@ -85,6 +86,7 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnderlyingTypeId(CGTypeId newUnderlyingTypeId) {
 		CGTypeId oldUnderlyingTypeId = underlyingTypeId;
 		underlyingTypeId = newUnderlyingTypeId;
@@ -199,6 +201,7 @@ public class CGExecutorTypeImpl extends CGValuedElementImpl implements CGExecuto
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (!thatValue.isNonInvalid()) {
 			return null;

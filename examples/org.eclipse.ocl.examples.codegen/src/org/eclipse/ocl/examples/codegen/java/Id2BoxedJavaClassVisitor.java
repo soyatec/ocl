@@ -39,6 +39,7 @@ public class Id2BoxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		super(genModelHelper);
 	}
 	
+	@Override
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		CollectionTypeId generalizedId = id.getGeneralizedId();
 		if (generalizedId == TypeId.BAG) {
@@ -59,18 +60,22 @@ public class Id2BoxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		return CollectionValue.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {
 		return ObjectValue.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {
 		return EnumerationLiteralId.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 		return EnumerationLiteralId.class;
 	}
 	
+	@Override
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
 		if (id.getElementId() instanceof EnumerationLiteralId) {
 			return EnumerationLiteralId.class;

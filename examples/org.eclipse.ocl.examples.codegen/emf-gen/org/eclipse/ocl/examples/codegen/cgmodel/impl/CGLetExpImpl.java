@@ -92,6 +92,7 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGVariable getInit() {
 		return init;
 	}
@@ -116,6 +117,7 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInit(CGVariable newInit) {
 		if (newInit != init) {
 			NotificationChain msgs = null;
@@ -135,6 +137,7 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getIn() {
 		return in;
 	}
@@ -159,6 +162,7 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIn(CGValuedElement newIn) {
 		if (newIn != in) {
 			NotificationChain msgs = null;
@@ -333,6 +337,7 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGLetExp)thatValue) : null;
 	}

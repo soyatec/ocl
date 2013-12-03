@@ -216,10 +216,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		super(metaModelManager);
 	}
 
+	@Override
 	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
 		return new BoxingAnalyzer(getAnalyzer());
 	}
 
+	@Override
 	public @NonNull CommonSubexpressionEliminator createCommonSubexpressionEliminator() {
 		return new CommonSubexpressionEliminator(this);
 	}
@@ -228,10 +230,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new CG2JavaPreVisitor(getGlobalContext());
 	}
 
+	@Override
 	public @NonNull DependencyVisitor createDependencyVisitor() {
 		return new JavaDependencyVisitor(getAnalyzer(), getGlobalContext(), getGlobalPlace());
 	}
 
+	@Override
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
 		return new FieldingAnalyzer(getAnalyzer());
 	}
@@ -262,6 +266,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new NameManager();
 	}
 
+	@Override
 	@NonNull
 	public ReferencesVisitor createReferencesVisitor() {
 		return ReferencesVisitor.INSTANCE;
@@ -271,6 +276,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return CG_RESOURCE_FACTORY;
 	}
 
+	@Override
 	public @Nullable String getConstantsClass() {
 		return null;
 	}
@@ -292,6 +298,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return null;
 	}
 	
+	@Override
 	public @NonNull JavaGlobalContext getGlobalContext() {
 		JavaGlobalContext globalContext2 = globalContext;
 		if (globalContext2 == null) {
@@ -300,6 +307,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return globalContext2;
 	}
 
+	@Override
 	public @NonNull GlobalPlace getGlobalPlace() {
 		GlobalPlace globalPlace2 = globalPlace;
 		if (globalPlace2 == null) {
@@ -346,6 +354,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return (annotationReader2 != null) ? annotationReader2.getIsNonNull(method) : null;
 	}
 
+	@Override
 	public @Nullable Iteration2Java getIterationHelper(@NonNull Iteration asIteration) {
 		LibraryIteration libraryIteration = (LibraryIteration) asIteration.getImplementation();
 		if (asIteration.getOwnedIterator().size() != 1) {
@@ -431,6 +440,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return null;
 	}
 
+	@Override
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement) {
 		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
@@ -439,10 +449,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return getTypeDescriptor(elementId, isBoxed, maybePrimitive);
 	}
 
+	@Override
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed) {
 		return getTypeDescriptor(elementId, isBoxed, false);
 	}
 
+	@Override
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed, boolean maybePrimitive) {
 		SimpleDescriptor simpleDescriptor = simpleDescriptors.get(elementId);
 		if (simpleDescriptor != null) {
@@ -556,6 +568,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 	}
 
+	@Override
 	public @Nullable Boolean isNonNull(@NonNull OperationCallExp asOperationCallExp) {
 		Operation asOperation = asOperationCallExp.getReferredOperation();
 		EObject eOperation = asOperation.getETarget();
@@ -577,6 +590,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return getIsNonNull(leastDerivedMethod) == Boolean.TRUE;
 	}
 
+	@Override
 	public @Nullable Boolean isNonNull(@NonNull Property asProperty) {
 		EObject eStructuralFeature = asProperty.getETarget();
 		if (!(eStructuralFeature instanceof EStructuralFeature)) {
@@ -597,6 +611,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return getIsNonNull(leastDerivedMethod) == Boolean.TRUE;
 	}
 
+	@Override
 	public boolean maybePrimitive(@NonNull CGValuedElement cgValue) {
 		if (cgValue.getNamedValue().isCaught()) {
 			return false;

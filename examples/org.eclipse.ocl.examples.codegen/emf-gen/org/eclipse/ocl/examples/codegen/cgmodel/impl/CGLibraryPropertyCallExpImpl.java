@@ -82,6 +82,7 @@ public class CGLibraryPropertyCallExpImpl extends CGPropertyCallExpImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LibraryProperty getLibraryProperty() {
 		return libraryProperty;
 	}
@@ -91,6 +92,7 @@ public class CGLibraryPropertyCallExpImpl extends CGPropertyCallExpImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLibraryProperty(LibraryProperty newLibraryProperty) {
 		LibraryProperty oldLibraryProperty = libraryProperty;
 		libraryProperty = newLibraryProperty;

@@ -104,6 +104,7 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 		return getOwned(cgValuedElement, JavaConstants.ID_RESOLVER_NAME);
 	}
 	
+	@Override
 	public @NonNull NameManager.Context getNameManagerContext() {
 		return nameManagerContext;
 	}
@@ -171,6 +172,7 @@ public class JavaLocalContext extends AbstractJavaContext implements LocalContex
 		return valueName;
 	}
 
+	@Override
 	public void setNames(@NonNull CGValuedElement cgValueElement, @NonNull CGValuedElement cgExpression) {
 		String name = cgExpression.getName();
 		if (name == null) {

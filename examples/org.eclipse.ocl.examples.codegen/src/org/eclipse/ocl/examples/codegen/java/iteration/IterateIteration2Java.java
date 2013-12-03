@@ -30,6 +30,7 @@ public class IterateIteration2Java extends AbstractAccumulation2Java
 		js.appendValueName(cgAccumulator.getInit());
 	}
 
+	@Override
 	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);

@@ -77,6 +77,7 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getInit() {
 		return init;
 	}
@@ -101,6 +102,7 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInit(CGValuedElement newInit) {
 		if (newInit != init) {
 			NotificationChain msgs = null;
@@ -120,6 +122,7 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTupleExp getTupleExp() {
 		if (eContainerFeatureID() != CGModelPackage.CG_TUPLE_PART__TUPLE_EXP) return null;
 		return (CGTupleExp)eInternalContainer();
@@ -309,6 +312,7 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGTuplePart)thatValue) : null;
 	}

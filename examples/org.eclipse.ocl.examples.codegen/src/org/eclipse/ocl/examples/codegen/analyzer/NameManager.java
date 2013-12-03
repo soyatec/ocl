@@ -202,10 +202,12 @@ public class NameManager
 
 	public static @NonNull IdVisitor<String> idVisitor = new IdVisitor<String>()
 	{
+		@Override
 		public @NonNull String visitClassId(@NonNull ClassId id) {
 			return "CLSSid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitCollectionTypeId(@NonNull CollectionTypeId id) {
 			CollectionTypeId generalizedId = id.getGeneralizedId();
 			String idPrefix;
@@ -232,78 +234,97 @@ public class NameManager
 			}
 		}
 
+		@Override
 		public @NonNull String visitDataTypeId(@NonNull DataTypeId id) {
 			return "DATAid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitEnumerationId(@NonNull EnumerationId id) {
 			return "ENUMid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 			return "ELITid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitInvalidId(@NonNull OclInvalidTypeId id) {
 			return "INVid";
 		}
 
+		@Override
 		public @NonNull String visitLambdaTypeId(@NonNull LambdaTypeId id) {
 			return "LAMBid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitMetaclassId(@NonNull MetaclassId id) {
 			return "METAid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitNestedPackageId(@NonNull NestedPackageId id) {
 			return "PACKid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitNsURIPackageId(@NonNull NsURIPackageId id) {
 			return "PACKid_" + id.getNsURI();
 		}
 
+		@Override
 		public @NonNull String visitNullId(@NonNull OclVoidTypeId id) {
 			return "NULLid";
 		}
 
+		@Override
 		public @NonNull String visitOperationId(@NonNull OperationId id) {
 			return "OPid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 			return "PRIMid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitPropertyId(@NonNull PropertyId id) {
 			return "PROPid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitRootPackageId(@NonNull RootPackageId id) {
 			return "PACKid_" + id.getName();
 		}
 
+		@Override
 		public @NonNull String visitTemplateBinding(@NonNull TemplateBinding id) {
 			return "BINDid_";
 		}
 
+		@Override
 		public @NonNull String visitTemplateParameterId(@NonNull TemplateParameterId id) {
 			return "TMPLid_";
 		}
 
+		@Override
 		public @NonNull String visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
 			return "TYPEid_";
 		}
 
+		@Override
 		public @NonNull String visitTuplePartId(@NonNull TuplePartId id) {
 			return "PARTid_";
 		}
 
+		@Override
 		public @NonNull String visitTupleTypeId(@NonNull TupleTypeId id) {
 			return "TUPLid_";
 		}
 
+		@Override
 		public @NonNull String visitUnspecifiedId(@NonNull UnspecifiedId id) {
 			return "UNSPid_";
 		}

@@ -60,6 +60,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		this.metaModelManager = js.getCodeGenerator().getMetaModelManager();
 	}
 
+	@Override
 	public @Nullable Object visitClassId(@NonNull ClassId id) {
 		js.appendIdReference(id.getParent());
 		js.append(".getClassId(");
@@ -68,6 +69,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 	
+	@Override
 	public @Nullable Object visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		js.appendClassReference(TypeId.class);
 		CollectionTypeId generalizedId = id.getGeneralizedId();
@@ -91,6 +93,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitDataTypeId(@NonNull DataTypeId id) {
 		js.appendIdReference(id.getParent());
 		js.append(".getDataTypeId(");
@@ -99,6 +102,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitEnumerationId(@NonNull EnumerationId id) {
 		js.appendIdReference(id.getParent());
 		js.append(".getEnumerationId(");
@@ -107,6 +111,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 		js.appendIdReference(id.getParentId());
 		js.append(".getEnumerationLiteralId(");
@@ -115,6 +120,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitInvalidId(@NonNull OclInvalidTypeId id) {
 		js.appendClassReference(TypeId.class);
 		js.append(".");
@@ -122,11 +128,13 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		// TODO Auto-generated method stub
 		return visiting(id);
 	}
 	
+	@Override
 	public @Nullable Object visitMetaclassId(@NonNull MetaclassId id) {
 		js.appendClassReference(TypeId.class);
 		js.append(".METACLASS");
@@ -138,6 +146,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitNestedPackageId(@NonNull NestedPackageId id) {
 		js.appendIdReference(id.getParent());
 		js.append(".getNestedPackageId(");
@@ -146,6 +155,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitNsURIPackageId(@NonNull NsURIPackageId id) {
 		String nsURI = id.getNsURI();
 		String nsPrefix = id.getNsPrefix();
@@ -172,6 +182,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitNullId(@NonNull OclVoidTypeId id) {
 		js.appendClassReference(TypeId.class);
 		js.append(".");
@@ -179,6 +190,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitOperationId(@NonNull OperationId id) {
 		js.appendIdReference(id.getParent());
 		js.append(".getOperationId(" + id.getTemplateParameters() + ", ");
@@ -198,6 +210,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 		js.appendClassReference(TypeId.class);
 		js.append(".");
@@ -205,6 +218,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitPropertyId(@NonNull PropertyId id) {
 		js.appendIdReference(id.getParent());
 		js.append(".getPropertyId(");
@@ -213,6 +227,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitRootPackageId(@NonNull RootPackageId id) {
 		js.appendClassReference(IdManager.class);
 		js.append(".getRootPackageId(");
@@ -221,21 +236,25 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitTemplateBinding(@NonNull TemplateBinding id) {
 		// TODO Auto-generated method stub
 		return visiting(id);
 	}
 
+	@Override
 	public @Nullable Object visitTemplateParameterId(@NonNull TemplateParameterId id) {
 		js.append("visitTemplateParameterId");
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
 		// TODO Auto-generated method stub
 		return visiting(id);
 	}
 
+	@Override
 	public @Nullable Object visitTuplePartId(@NonNull TuplePartId id) {
 		js.appendClassReference(IdManager.class);
 		js.append(".getTuplePartId(" + id.getIndex() + ", ");
@@ -246,6 +265,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitTupleTypeId(@NonNull TupleTypeId id) {
 		js.appendClassReference(IdManager.class);
 		js.append(".getTupleTypeId(");
@@ -258,6 +278,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitUnspecifiedId(@NonNull UnspecifiedId id) {
 		// TODO Auto-generated method stub
 		return visiting(id);

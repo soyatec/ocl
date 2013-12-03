@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
  */
 public interface CGModelResourceFactory extends Resource.Factory
 {
+	@Override
 	@NonNull CGModelResource createResource(URI uri);
 
     /**

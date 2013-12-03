@@ -41,6 +41,7 @@ public class PropertyInliners
 			// FIXME static attempt at eFeature
 		}
 		
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 			assert sourceValue != null;
 			EObject eObject = (EObject)sourceValue; 
@@ -77,6 +78,7 @@ public class PropertyInliners
 			this.containmentFeatureName = containmentFeatureName;
 		}
 		
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 			assert sourceValue != null;
 			EObject eObject = (EObject)sourceValue; 
@@ -103,6 +105,7 @@ public class PropertyInliners
 			// FIXME static attempt at eFeature
 		}
 		
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 			assert sourceValue != null;
 			EObject eObject = (EObject)sourceValue; 

@@ -32,19 +32,23 @@ public abstract class AbstractValueDescriptor extends AbstractDescriptor
 		this.javaClass = javaClass;
 	}
 
+	@Override
 	public void append(@NonNull JavaStream js) {
 		js.appendClassReference(javaClass);
 	}
 
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull String getClassName() {
 		return javaClass.getName();
 	}
 
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return javaClass;
 	}
 
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return javaClass;
 	}

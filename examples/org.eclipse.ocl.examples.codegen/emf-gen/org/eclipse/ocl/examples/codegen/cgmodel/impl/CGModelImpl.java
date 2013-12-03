@@ -90,6 +90,7 @@ public class CGModelImpl extends CGNamedElementImpl implements CGModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGConstant> getGlobals() {
 		if (globals == null) {
 			globals = new EObjectContainmentEList<CGConstant>(CGConstant.class, this, CGModelPackage.CG_MODEL__GLOBALS);
@@ -102,6 +103,7 @@ public class CGModelImpl extends CGNamedElementImpl implements CGModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGPackage> getPackages() {
 		if (packages == null) {
 			packages = new EObjectContainmentEList<CGPackage>(CGPackage.class, this, CGModelPackage.CG_MODEL__PACKAGES);

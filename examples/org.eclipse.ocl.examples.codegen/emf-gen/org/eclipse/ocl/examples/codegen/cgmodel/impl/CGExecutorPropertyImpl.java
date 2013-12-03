@@ -73,6 +73,7 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGElementId getUnderlyingPropertyId() {
 		return underlyingPropertyId;
 	}
@@ -82,6 +83,7 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnderlyingPropertyId(CGElementId newUnderlyingPropertyId) {
 		CGElementId oldUnderlyingPropertyId = underlyingPropertyId;
 		underlyingPropertyId = newUnderlyingPropertyId;
@@ -196,6 +198,7 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
 	}

@@ -30,10 +30,12 @@ public abstract class AbstractCollectionDescriptor extends AbstractDescriptor im
 		super(collectionTypeId);
 	}
 
+	@Override
 	public void append(@NonNull JavaStream javaStream, boolean reClass) {
 		append(javaStream);
 	}
 
+	@Override
 	public void appendElement(@NonNull JavaStream javaStream, boolean reClass) {
 		javaStream.append(getClassName());
 	}

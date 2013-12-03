@@ -116,6 +116,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInvalidating() {
 		return invalidating;
 	}
@@ -125,6 +126,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInvalidating(boolean newInvalidating) {
 		boolean oldInvalidating = invalidating;
 		invalidating = newInvalidating;
@@ -137,6 +139,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isValidating() {
 		return validating;
 	}
@@ -146,6 +149,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValidating(boolean newValidating) {
 		boolean oldValidating = validating;
 		validating = newValidating;
@@ -158,6 +162,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getSource() {
 		return source;
 	}
@@ -182,6 +187,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(CGValuedElement newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
@@ -302,6 +308,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGCallExp)thatValue) : null;
 	}

@@ -26,6 +26,7 @@ public class UnboxedCompositionProperty extends AbstractProperty
 		this.containmentFeatureName = containmentFeatureName;
 	}
 	
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		assert sourceValue != null;
 		EObject eObject = (EObject)sourceValue; 

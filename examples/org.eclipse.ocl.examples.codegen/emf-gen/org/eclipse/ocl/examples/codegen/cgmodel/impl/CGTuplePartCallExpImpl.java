@@ -83,6 +83,7 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TuplePartId getAstTuplePartId() {
 		return astTuplePartId;
 	}
@@ -92,6 +93,7 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAstTuplePartId(TuplePartId newAstTuplePartId) {
 		TuplePartId oldAstTuplePartId = astTuplePartId;
 		astTuplePartId = newAstTuplePartId;

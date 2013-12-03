@@ -95,6 +95,7 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getArgument() {
 		return argument;
 	}
@@ -119,6 +120,7 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArgument(CGValuedElement newArgument) {
 		if (newArgument != argument) {
 			NotificationChain msgs = null;
@@ -138,6 +140,7 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isNotEquals() {
 		return notEquals;
 	}
@@ -147,6 +150,7 @@ public class CGIsEqualExpImpl extends CGCallExpImpl implements CGIsEqualExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNotEquals(boolean newNotEquals) {
 		boolean oldNotEquals = notEquals;
 		notEquals = newNotEquals;

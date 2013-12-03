@@ -88,6 +88,7 @@ public class OCLinEcoreTablesUtils
 {	
 	public Comparator<DomainParameterTypes> templateBindingNameComparator = new Comparator<DomainParameterTypes>()
 	{
+		@Override
 		public int compare(DomainParameterTypes o1, DomainParameterTypes o2) {
 			assert o1 != null && o2 != null;
 			String n1 = getTemplateBindingsName(o1);
@@ -98,6 +99,7 @@ public class OCLinEcoreTablesUtils
 
 	public static Comparator<Nameable> nameComparator = new Comparator<Nameable>()
 	{
+		@Override
 		public int compare(Nameable o1, Nameable o2) {
 			String n1 = String.valueOf(o1.getName());
 			String n2 = String.valueOf(o2.getName());
@@ -107,6 +109,7 @@ public class OCLinEcoreTablesUtils
 
 	public static Comparator<Property> propertyComparator = new Comparator<Property>()
 	{
+		@Override
 		public int compare(Property p1, Property p2) {
 			String n1 = String.valueOf(p1.getName());
 			String n2 = String.valueOf(p2.getName());
@@ -139,6 +142,7 @@ public class OCLinEcoreTablesUtils
 	
 	public static Comparator<Operation> signatureComparator = new Comparator<Operation>()
 	{
+		@Override
 		public int compare(Operation o1, Operation o2) {
 			assert o1 != null && o2 != null;
 			String n1 = String.valueOf(getSignature(o1));
@@ -319,6 +323,7 @@ public class OCLinEcoreTablesUtils
 			super(context);
 		}
 
+		@Override
 		public @Nullable Object visiting(@NonNull Visitable visitable) {
 			throw new UnsupportedOperationException("Unsupported DeclareParameterTypeVisitor for " + visitable.eClass().getName());
 		}
@@ -429,6 +434,7 @@ public class OCLinEcoreTablesUtils
 			super(context);
 		}
 
+		@Override
 		public @Nullable Object visiting(@NonNull Visitable visitable) {
 			throw new UnsupportedOperationException("Unsupported EmitLiteralVisitor for " + visitable.eClass().getName());
 		}
@@ -504,6 +510,7 @@ public class OCLinEcoreTablesUtils
 			super(context);
 		}
 
+		@Override
 		public @Nullable Object visiting(@NonNull Visitable visitable) {
 			throw new UnsupportedOperationException("Unsupported EmitQualifiedLiteralVisitor for " + visitable.eClass().getName());
 		}

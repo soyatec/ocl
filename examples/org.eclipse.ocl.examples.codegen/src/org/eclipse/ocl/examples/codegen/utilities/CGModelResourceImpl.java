@@ -33,6 +33,7 @@ public class CGModelResourceImpl extends XMIResourceImpl implements CGModelResou
 		this.resourceFactory = resourceFactory;
 	}
 
+	@Override
 	public @NonNull CGModelResourceFactory getResourceFactory() {
 		return resourceFactory;
 	}

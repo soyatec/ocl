@@ -44,6 +44,7 @@ public class EObjectsDescriptor extends AbstractCollectionDescriptor implements 
 		this.oldJavaClass = reClass(javaClass);
 	}
 
+	@Override
 	public void append(@NonNull JavaStream javaStream) {
 		javaStream.appendClassReference(List.class, javaClass != oldJavaClass, oldJavaClass);
 	}
@@ -58,19 +59,23 @@ public class EObjectsDescriptor extends AbstractCollectionDescriptor implements 
 		javaStream.appendClassReference(reClass ? javaClass : oldJavaClass);
 	}
 
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull String getClassName() {
 		return javaClass.getName();
 	}
 
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return javaClass;
 	}
 
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return javaClass;
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof EObjectsDescriptor)) {
 			return false;

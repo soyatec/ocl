@@ -40,6 +40,7 @@ public abstract class AbstractAnalysis implements Comparable<AbstractAnalysis>
 	 */
 	public abstract @NonNull CommonAnalysis addSimpleAnalysis(@NonNull SimpleAnalysis simpleAnalysis);
 
+	@Override
 	public int compareTo(AbstractAnalysis o2) {
 		int h1 = this.getStructuralHashCode();
 		int h2 = o2.getStructuralHashCode();

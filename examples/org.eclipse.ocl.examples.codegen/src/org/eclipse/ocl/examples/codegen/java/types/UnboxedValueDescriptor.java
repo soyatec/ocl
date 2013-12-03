@@ -29,6 +29,7 @@ public class UnboxedValueDescriptor extends AbstractValueDescriptor implements U
 		super(elementId, javaClass);
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof UnboxedValueDescriptor)) {
 			return false;

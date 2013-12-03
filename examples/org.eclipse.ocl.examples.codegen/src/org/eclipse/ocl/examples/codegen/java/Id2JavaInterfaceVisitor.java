@@ -44,86 +44,107 @@ import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
  */
 public class Id2JavaInterfaceVisitor implements IdVisitor<Class<? extends ElementId>>
 {
+	@Override
 	public Class<? extends ElementId> visitClassId(@NonNull ClassId id) {
 		return ClassId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		return CollectionTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitDataTypeId(@NonNull DataTypeId id) {
 		return DataTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitEnumerationId(@NonNull EnumerationId id) {
 		return EnumerationId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 		return EnumerationLiteralId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitInvalidId(@NonNull OclInvalidTypeId id) {
 		return OclInvalidTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		return LambdaTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitMetaclassId(@NonNull MetaclassId id) {
 		return MetaclassId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitNestedPackageId(@NonNull NestedPackageId id) {
 		return NestedPackageId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitNsURIPackageId(@NonNull NsURIPackageId id) {
 		return NsURIPackageId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitNullId(@NonNull OclVoidTypeId id) {
 		return OclVoidTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitOperationId(@NonNull OperationId id) {
 		return OperationId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 		return PrimitiveTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitPropertyId(@NonNull PropertyId id) {
 		return PropertyId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitRootPackageId(@NonNull RootPackageId id) {
 		return RootPackageId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitTemplateBinding(@NonNull TemplateBinding id) {
 		return TemplateBinding.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitTemplateParameterId(@NonNull TemplateParameterId id) {
 		return TemplateParameterId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
 		return TemplateableTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitTuplePartId(@NonNull TuplePartId id) {
 		return TuplePartId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitTupleTypeId(@NonNull TupleTypeId id) {
 		return TupleTypeId.class;
 	}
 
+	@Override
 	public Class<? extends ElementId> visitUnspecifiedId(@NonNull UnspecifiedId id) {
 		return UnspecifiedId.class;
 	}

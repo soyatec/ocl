@@ -85,6 +85,7 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGCollectionPart> getParts() {
 		if (parts == null) {
 			parts = new EObjectContainmentWithInverseEList<CGCollectionPart>(CGCollectionPart.class, this, CGModelPackage.CG_COLLECTION_EXP__PARTS, CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP);
@@ -256,6 +257,7 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGCollectionExp)thatValue) : null;
 	}

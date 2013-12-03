@@ -42,6 +42,7 @@ public class OperationInliners
 			// FIXME static attempt at eFeature
 		}
 
+		@Override
 		@Nullable
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues)  {
 			assert sourceValue != null;
@@ -58,6 +59,7 @@ public class OperationInliners
 			}
 		}
 		
+		@Override
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 			assert sourceValue != null;
 			EObject eObject = (EObject)sourceValue; 
@@ -73,6 +75,7 @@ public class OperationInliners
 			}
 		}
 
+		@Override
 		@Nullable
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) {
 			assert sourceValue != null;
@@ -89,6 +92,7 @@ public class OperationInliners
 			}
 		}
 
+		@Override
 		@Nullable
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 			assert sourceValue != null;

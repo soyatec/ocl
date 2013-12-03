@@ -26,6 +26,7 @@ public class CollectIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull CollectIteration2Java INSTANCE = new CollectIteration2Java();
 	
+	@Override
 	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);

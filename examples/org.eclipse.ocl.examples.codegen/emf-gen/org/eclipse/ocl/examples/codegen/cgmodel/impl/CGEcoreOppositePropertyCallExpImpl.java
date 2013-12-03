@@ -77,6 +77,7 @@ public class CGEcoreOppositePropertyCallExpImpl extends CGOppositePropertyCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EStructuralFeature getEStructuralFeature() {
 		return eStructuralFeature;
 	}
@@ -86,6 +87,7 @@ public class CGEcoreOppositePropertyCallExpImpl extends CGOppositePropertyCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEStructuralFeature(EStructuralFeature newEStructuralFeature) {
 		EStructuralFeature oldEStructuralFeature = eStructuralFeature;
 		eStructuralFeature = newEStructuralFeature;

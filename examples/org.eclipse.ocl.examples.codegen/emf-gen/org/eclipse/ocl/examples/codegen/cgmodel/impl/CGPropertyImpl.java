@@ -82,6 +82,7 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGClass getContainingClass() {
 		if (eContainerFeatureID() != CGModelPackage.CG_PROPERTY__CONTAINING_CLASS) return null;
 		return (CGClass)eInternalContainer();
@@ -102,6 +103,7 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainingClass(CGClass newContainingClass) {
 		if (newContainingClass != eInternalContainer() || (eContainerFeatureID() != CGModelPackage.CG_PROPERTY__CONTAINING_CLASS && newContainingClass != null)) {
 			if (EcoreUtil.isAncestor(this, newContainingClass))
@@ -123,6 +125,7 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -147,6 +150,7 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(CGValuedElement newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -315,6 +319,7 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
 	}

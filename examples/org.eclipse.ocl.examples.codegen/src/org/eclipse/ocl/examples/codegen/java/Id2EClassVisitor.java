@@ -51,87 +51,108 @@ public class Id2EClassVisitor implements IdVisitor<EClass>
 		this.metaModelManager = metaModelManager;
 	}
 
+	@Override
 	public @Nullable EClass visitClassId(@NonNull ClassId id) {
 		Type type = metaModelManager.getIdResolver().getType(id, null);
 		return (EClass) type.getETarget();
 	}
 
+	@Override
 	public @Nullable EClass visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitDataTypeId(@NonNull DataTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitEnumerationId(@NonNull EnumerationId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitInvalidId(@NonNull OclInvalidTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitMetaclassId(@NonNull MetaclassId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitNestedPackageId(@NonNull NestedPackageId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitNsURIPackageId(@NonNull NsURIPackageId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitNullId(@NonNull OclVoidTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitOperationId(@NonNull OperationId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitPropertyId(@NonNull PropertyId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitRootPackageId(@NonNull RootPackageId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitTemplateBinding(@NonNull TemplateBinding id) {
 		return visiting(id);
 	}
 
+	@Override
 	public @Nullable EClass visitTemplateParameterId(@NonNull TemplateParameterId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitTuplePartId(@NonNull TuplePartId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitTupleTypeId(@NonNull TupleTypeId id) {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClass visitUnspecifiedId(@NonNull UnspecifiedId id) {
 		return visiting(id);
 	}

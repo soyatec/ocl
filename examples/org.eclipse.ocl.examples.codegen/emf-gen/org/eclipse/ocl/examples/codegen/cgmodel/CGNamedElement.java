@@ -48,6 +48,7 @@ public interface CGNamedElement extends CGElement, Nameable {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGNamedElement_Name()
 	 * @generated
 	 */
+	@Override
 	String getName();
 
 	/**

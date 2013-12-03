@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class JavaGenModelCodeGenHelper implements CodeGenHelper
-{
+{	// FIXME Isn't all this functionality available elsewhere?
 	protected final @NonNull MetaModelManager metaModelManager;
 	private @NonNull Map<EPackage, GenPackage> ePackageMap = new HashMap<EPackage, GenPackage>();
 	private @NonNull Map<String, GenPackage> uriMap = new HashMap<String, GenPackage>();
@@ -78,6 +78,7 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		}
 	}
 
+	@Override
 	public @NonNull String getCopyright(@NonNull String indentation) {
 		return "";
 	}
@@ -93,6 +94,7 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		return null;
 	}
 
+	@Override
 	public @NonNull GenPackage getGenPackage(@NonNull Type type) {
 		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
 		String nsURI = pPackage.getNsURI();
@@ -101,17 +103,17 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 			if (genPackage != null) {
 				return genPackage;
 			}
-		}
-		if (OCLstdlibPackage.eNS_URI.equals(nsURI)) {		// FIXME regularize
-			genPackage = uriMap.get(PivotPackage.eNS_URI);
+			if (OCLstdlibPackage.eNS_URI.equals(nsURI)) {		// FIXME regularize
+				genPackage = uriMap.get(PivotPackage.eNS_URI);
+				if (genPackage != null) {
+					return genPackage;
+				}
+			}
+			genPackage = metaModelManager.getGenPackage(nsURI);
 			if (genPackage != null) {
+				install(genPackage);
 				return genPackage;
 			}
-		}
-		genPackage = metaModelManager.getGenPackage(nsURI);
-		if (genPackage != null) {
-			install(genPackage);
-			return genPackage;
 		}
 /*		ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
 		projectMap = ProjectMap.getAdapter(externalResourceSet);
@@ -140,7 +142,8 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 		throw new IllegalArgumentException("Unknown package '" + nsURI + "'");
 	}
 
-	public LibraryOperation loadClass(@NonNull ExpressionInOCL query, @NonNull File targetFolder,
+	@Override
+	public @Nullable LibraryOperation loadClass(@NonNull ExpressionInOCL query, @NonNull File targetFolder,
 			@NonNull String packageName, @NonNull String className, boolean saveSource) throws Exception {
 		String qualifiedName = packageName + "." + className;
 		String javaCodeSource = JUnitCodeGenerator.generateClassFile(metaModelManager, query, packageName, className);

@@ -141,6 +141,7 @@ public class OCLinEcoreCodeGenerator extends JavaCodeGenerator
 		constantsTexts.put(genPackage, constantsText);
 	}
 
+	@Override
 	public @NonNull CodeGenAnalyzer getAnalyzer() {
 		return cgAnalyzer;
 	}

@@ -93,6 +93,7 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull List<CGConstructorPart> getParts() {
 		if (parts == null) {
@@ -106,6 +107,7 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorType getExecutorType() {
 		return executorType;
 	}
@@ -115,6 +117,7 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorType(CGExecutorType newExecutorType) {
 		CGExecutorType oldExecutorType = executorType;
 		executorType = newExecutorType;

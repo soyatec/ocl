@@ -100,6 +100,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -109,6 +110,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -121,6 +123,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Element getAst() {
 		return ast;
 	}
@@ -130,6 +133,7 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAst(Element newAst) {
 		Element oldAst = ast;
 		ast = newAst;

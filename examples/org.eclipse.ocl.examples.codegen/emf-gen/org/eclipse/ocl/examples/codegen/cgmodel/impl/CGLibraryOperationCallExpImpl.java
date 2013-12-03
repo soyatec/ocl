@@ -82,6 +82,7 @@ public class CGLibraryOperationCallExpImpl extends CGOperationCallExpImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LibraryOperation getLibraryOperation() {
 		return libraryOperation;
 	}
@@ -91,6 +92,7 @@ public class CGLibraryOperationCallExpImpl extends CGOperationCallExpImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLibraryOperation(LibraryOperation newLibraryOperation) {
 		LibraryOperation oldLibraryOperation = libraryOperation;
 		libraryOperation = newLibraryOperation;

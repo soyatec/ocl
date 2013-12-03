@@ -89,6 +89,7 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getInit() {
 		return init;
 	}
@@ -113,6 +114,7 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInit(CGValuedElement newInit) {
 		if (newInit != init) {
 			NotificationChain msgs = null;
@@ -132,6 +134,7 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGConstructorExp getConstructorExp() {
 		if (eContainerFeatureID() != CGModelPackage.CG_CONSTRUCTOR_PART__CONSTRUCTOR_EXP) return null;
 		return (CGConstructorExp)eInternalContainer();
@@ -142,6 +145,7 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorConstructorPart getExecutorPart() {
 		return executorPart;
 	}
@@ -151,6 +155,7 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorPart(CGExecutorConstructorPart newExecutorPart) {
 		CGExecutorConstructorPart oldExecutorPart = executorPart;
 		executorPart = newExecutorPart;
@@ -316,6 +321,7 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGConstructorPart)thatValue) : null;
 	}

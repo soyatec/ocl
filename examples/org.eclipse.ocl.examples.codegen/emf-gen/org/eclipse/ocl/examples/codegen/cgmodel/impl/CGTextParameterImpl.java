@@ -87,6 +87,7 @@ public class CGTextParameterImpl extends CGParameterImpl implements CGTextParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTextValue() {
 		return textValue;
 	}
@@ -96,6 +97,7 @@ public class CGTextParameterImpl extends CGParameterImpl implements CGTextParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTextValue(String newTextValue) {
 		String oldTextValue = textValue;
 		textValue = newTextValue;

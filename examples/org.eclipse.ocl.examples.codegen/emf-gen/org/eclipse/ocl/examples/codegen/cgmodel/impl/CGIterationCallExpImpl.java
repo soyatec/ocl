@@ -118,6 +118,7 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Iteration getReferredIteration() {
 		return referredIteration;
 	}
@@ -127,6 +128,7 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredIteration(Iteration newReferredIteration) {
 		Iteration oldReferredIteration = referredIteration;
 		referredIteration = newReferredIteration;
@@ -139,6 +141,7 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull List<CGIterator> getIterators() {
 		if (iterators == null) {
@@ -152,6 +155,7 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -176,6 +180,7 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(CGValuedElement newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;

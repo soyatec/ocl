@@ -34,22 +34,27 @@ public class Id2UnboxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		super(genModelHelper);
 	}
 	
+	@Override
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		return List.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {
 		return Object.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {
 		return Enumerator.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 		return Enumerator.class;
 	}
 	
+	@Override
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
 		if (id.getElementId() instanceof EnumerationLiteralId) {
 			return Enumerator.class;

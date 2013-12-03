@@ -83,6 +83,7 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getStringValue() {
 		return stringValue;
 	}
@@ -92,6 +93,7 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStringValue(String newStringValue) {
 		String oldStringValue = stringValue;
 		stringValue = newStringValue;
@@ -180,6 +182,7 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(stringValue);
 	}
@@ -197,6 +200,7 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (!thatValue.isNonInvalid()) {
 			return null;

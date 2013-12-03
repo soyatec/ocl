@@ -28,6 +28,7 @@ public class AnyIteration2Java extends AbstractIteration2Java
 {
 	public static final @NonNull AnyIteration2Java INSTANCE = new AnyIteration2Java();
 	
+	@Override
 	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		if (cgBody.getASTypeId() == TypeId.BOOLEAN) { 
@@ -52,6 +53,7 @@ public class AnyIteration2Java extends AbstractIteration2Java
 		}
 	}
 	
+	@Override
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		js.append("throw new ");
 		js.appendClassReference(InvalidValueException.class);

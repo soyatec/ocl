@@ -720,6 +720,7 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			List<Type> superTypes = new ArrayList<Type>(allSuperTypes.keySet());
 			Collections.sort(superTypes, new Comparator<Type>()
 			{
+				@Override
 				public int compare(Type o1, Type o2) {
 					Integer d1 = allSuperTypes.get(o1);
 					Integer d2 = allSuperTypes.get(o2);

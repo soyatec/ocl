@@ -93,6 +93,7 @@ public class JavaGlobalContext extends AbstractJavaContext implements GlobalCont
 		return instanceName;
 	}
 
+	@Override
 	public @Nullable JavaLocalContext getLocalContext(@NonNull CGElement cgElement) {
 		JavaLocalContext localContext = localContexts.get(cgElement);
 		if (localContext == null) {

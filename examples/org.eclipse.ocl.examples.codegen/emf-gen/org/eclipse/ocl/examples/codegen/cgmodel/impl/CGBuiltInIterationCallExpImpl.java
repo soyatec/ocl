@@ -74,6 +74,7 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGIterator getAccumulator() {
 		return accumulator;
 	}
@@ -98,6 +99,7 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAccumulator(CGIterator newAccumulator) {
 		if (newAccumulator != accumulator) {
 			NotificationChain msgs = null;
@@ -257,6 +259,7 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public void setNonNull() {
 		nonNull = true;
 	}

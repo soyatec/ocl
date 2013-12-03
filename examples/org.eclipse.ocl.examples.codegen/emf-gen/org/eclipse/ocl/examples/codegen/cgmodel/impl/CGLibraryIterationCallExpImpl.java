@@ -82,6 +82,7 @@ public class CGLibraryIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LibraryIteration getLibraryIteration() {
 		return libraryIteration;
 	}
@@ -91,6 +92,7 @@ public class CGLibraryIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLibraryIteration(LibraryIteration newLibraryIteration) {
 		LibraryIteration oldLibraryIteration = libraryIteration;
 		libraryIteration = newLibraryIteration;

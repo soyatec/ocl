@@ -29,6 +29,7 @@ public class SimpleValueDescriptor extends AbstractValueDescriptor implements Si
 		super(elementId, javaClass);
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof SimpleValueDescriptor)) {
 			return false;

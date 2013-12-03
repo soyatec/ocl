@@ -137,10 +137,12 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 			CG2StringVisitor.addFactory(this);
 		}
 
+		@Override
 		public @NonNull CG2StringVisitor createToStringVisitor() {
 			return new CG2StringVisitor();
 		}
 
+		@Override
 		public @NonNull EPackage getEPackage() {
 			CGModelPackage eInstance = CGModelPackage.eINSTANCE;
 			assert eInstance != null;
@@ -667,6 +669,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		return null;
 	}
 
+	@Override
 	public @Nullable String visiting(@NonNull CGElement visitable) {
 		append(visitable.getClass().getName());
 		return null;

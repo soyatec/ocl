@@ -72,6 +72,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getReferredConstant() {
 		return referredConstant;
 	}
@@ -81,6 +82,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredConstant(CGValuedElement newReferredConstant) {
 		CGValuedElement oldReferredConstant = referredConstant;
 		referredConstant = newReferredConstant;
@@ -249,6 +251,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return referredConstant != null ? thatValue.isEquivalentToInternal(referredConstant) : null;
 	}

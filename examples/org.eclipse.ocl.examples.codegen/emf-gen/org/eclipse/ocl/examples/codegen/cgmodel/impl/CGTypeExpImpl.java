@@ -72,6 +72,7 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorType getExecutorType() {
 		return executorType;
 	}
@@ -81,6 +82,7 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorType(CGExecutorType newExecutorType) {
 		CGExecutorType oldExecutorType = executorType;
 		executorType = newExecutorType;
@@ -222,6 +224,7 @@ public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return executorType != null ? thatValue.isEquivalentToInternal(executorType) : null;
 	}

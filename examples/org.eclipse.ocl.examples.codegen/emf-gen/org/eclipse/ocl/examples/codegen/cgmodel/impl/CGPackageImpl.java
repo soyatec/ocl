@@ -93,6 +93,7 @@ public class CGPackageImpl extends CGNamedElementImpl implements CGPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGClass> getClasses() {
 		if (classes == null) {
 			classes = new EObjectContainmentWithInverseEList<CGClass>(CGClass.class, this, CGModelPackage.CG_PACKAGE__CLASSES, CGModelPackage.CG_CLASS__CONTAINING_PACKAGE);
@@ -105,6 +106,7 @@ public class CGPackageImpl extends CGNamedElementImpl implements CGPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGPackage> getPackages() {
 		if (packages == null) {
 			packages = new EObjectContainmentWithInverseEList<CGPackage>(CGPackage.class, this, CGModelPackage.CG_PACKAGE__PACKAGES, CGModelPackage.CG_PACKAGE__CONTAINING_PACKAGE);
@@ -117,6 +119,7 @@ public class CGPackageImpl extends CGNamedElementImpl implements CGPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGPackage getContainingPackage() {
 		if (eContainerFeatureID() != CGModelPackage.CG_PACKAGE__CONTAINING_PACKAGE) return null;
 		return (CGPackage)eInternalContainer();
@@ -137,6 +140,7 @@ public class CGPackageImpl extends CGNamedElementImpl implements CGPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainingPackage(CGPackage newContainingPackage) {
 		if (newContainingPackage != eInternalContainer() || (eContainerFeatureID() != CGModelPackage.CG_PACKAGE__CONTAINING_PACKAGE && newContainingPackage != null)) {
 			if (EcoreUtil.isAncestor(this, newContainingPackage))

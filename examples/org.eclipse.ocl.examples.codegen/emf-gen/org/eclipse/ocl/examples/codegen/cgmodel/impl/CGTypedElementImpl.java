@@ -93,6 +93,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTypeId getTypeId() {
 		return typeId;
 	}
@@ -102,6 +103,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeId(CGTypeId newTypeId) {
 		CGTypeId oldTypeId = typeId;
 		typeId = newTypeId;
@@ -114,6 +116,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isRequired() {
 		return required;
 	}
@@ -123,6 +126,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRequired(boolean newRequired) {
 		boolean oldRequired = required;
 		required = newRequired;
@@ -212,6 +216,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable TypeId getASTypeId() {
 		return ast instanceof DomainTypedElement ? ((DomainTypedElement) ast).getTypeId() : null;
 	}

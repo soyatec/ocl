@@ -71,6 +71,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGElement(this);
 	}
@@ -79,6 +80,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Iterable<? extends CGElement> getChildren() {
 		@SuppressWarnings({"null", "unchecked"}) @NonNull Iterable<? extends CGElement> eContents = (Iterable<? extends CGElement>) eContents();
 		return eContents;
@@ -88,6 +90,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable CGElement getParent() {
 		return (CGElement)eContainer();
 	}
@@ -96,6 +99,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
 		return GlobalPlace.createGlobalPlace(element2place, this);
 	}
@@ -104,6 +108,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isContext() {
 		return true;
 	}
@@ -112,6 +117,7 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean rewriteAs(@NonNull CGValuedElement oldValue, @NonNull CGValuedElement newValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".rewriteAs()");
 	}

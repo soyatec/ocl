@@ -573,6 +573,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		return string;
 	}
 	
+	@Override
 	public @NonNull Boolean visiting(@NonNull CGElement visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 	}

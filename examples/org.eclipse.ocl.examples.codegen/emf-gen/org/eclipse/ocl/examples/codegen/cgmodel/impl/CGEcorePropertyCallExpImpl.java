@@ -72,6 +72,7 @@ public class CGEcorePropertyCallExpImpl extends CGPropertyCallExpImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EStructuralFeature getEStructuralFeature() {
 		return eStructuralFeature;
 	}
@@ -81,6 +82,7 @@ public class CGEcorePropertyCallExpImpl extends CGPropertyCallExpImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEStructuralFeature(EStructuralFeature newEStructuralFeature) {
 		EStructuralFeature oldEStructuralFeature = eStructuralFeature;
 		eStructuralFeature = newEStructuralFeature;

@@ -92,6 +92,7 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -116,6 +117,7 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(CGValuedElement newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -136,6 +138,7 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@Deprecated
 	public CGValuedElement getMessage() {
 		return message;
@@ -164,6 +167,7 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@Deprecated
 	public void setMessage(CGValuedElement newMessage) {
 		if (newMessage != message) {

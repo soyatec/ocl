@@ -102,6 +102,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGValuedElement> getDependsOn()
 	{
 		if (dependsOn == null) {
@@ -115,6 +116,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGValuedElement> getOwns()
 	{
 		if (owns == null) {
@@ -218,6 +220,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable CGInvalid getInvalidValue() {
 		CGValuedElement sourceValue = getReferredValue();
 		return sourceValue != this ? sourceValue.getInvalidValue() : null;
@@ -236,6 +239,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGValuedElement getReferredValue() {
 		return getThisValue();
 	}
@@ -244,6 +248,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGValuedElement getSourceValue() {
 		CGValuedElement value = getThisValue();
 		return value != this ? value.getSourceValue() : value;
@@ -253,6 +258,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGValuedElement getThisValue() {
 		return this;
 	}
@@ -261,6 +267,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGValuedElement getNamedValue() {
 		CGValuedElement value = getThisValue();
 		return value != this ? value.getNamedValue() : value;
@@ -270,6 +277,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGValuedElement getTypedValue() {
 		CGValuedElement value = getThisValue();
 		return value != this ? value.getTypedValue() : value;
@@ -279,6 +287,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable String getValueName() {
 		CGValuedElement value = getThisValue();
 		return value != this ? value.getValueName() : valueName;
@@ -288,6 +297,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isAssertedNonNull() {
 		return false;
 	}
@@ -296,6 +306,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isBoxed() {
 		CGValuedElement referredValue = getReferredValue();
 //		CGValuedElement value = getNamedValue();
@@ -307,6 +318,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isCaught() {
 		return caught;
 	}
@@ -315,6 +327,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isCommonable() {
 		return true;
 	}
@@ -323,6 +336,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isConstant() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isConstant();
@@ -341,6 +355,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentTo(@NonNull CGValuedElement thatValue) {
 		return thatValue.isEquivalentToInternal(this);
 	}
@@ -349,6 +364,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isFalse() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isFalse();
@@ -358,6 +374,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isGlobal() {
 		for (CGValuedElement cgElement : getDependsOn()) {
 			if (!cgElement.isGlobal()) {
@@ -372,6 +389,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isInlined() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isInlined();
@@ -381,6 +399,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isInvalid() {
 		return getInvalidValue() != null;
 	}
@@ -389,6 +408,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isNonInvalid() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isNonInvalid();
@@ -398,6 +418,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isNonNull() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isNonNull();
@@ -407,6 +428,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isNull() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isNull();
@@ -416,6 +438,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isSettable() {
 		return false;
 	}
@@ -424,6 +447,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isTrue() {
 		CGValuedElement referredValue = getReferredValue();
 		return (referredValue != this) && referredValue.isTrue();
@@ -433,6 +457,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUnboxed() {
 		CGValuedElement referredValue = getReferredValue();
 //		CGValuedElement value = getNamedValue();
@@ -444,6 +469,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isUncommonable() {
 		return true;
 	}
@@ -467,6 +493,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public void setCaught(boolean isCaught) {
 		caught = isCaught;
 	}
@@ -481,6 +508,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public void setValueName(@NonNull String valueName) {
 		this.valueName = valueName;
 	}

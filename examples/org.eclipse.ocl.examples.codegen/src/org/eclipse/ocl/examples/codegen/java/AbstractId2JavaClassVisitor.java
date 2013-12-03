@@ -62,6 +62,7 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 		return DomainUtil.nonNullState(elementId.accept(this));
 	}
 
+	@Override
 	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
 		MetaModelManager metaModelManager = genModelHelper.getMetaModelManager();
 		Type type = metaModelManager.getIdResolver().getType(id, null);
@@ -75,30 +76,37 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 		return Object.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitInvalidId(@NonNull OclInvalidTypeId id) {
 		return InvalidValueException.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		return DomainLambdaType.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {
 		return DomainPackage.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitNsURIPackageId(@NonNull NsURIPackageId id) {
 		return DomainPackage.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitNullId(@NonNull OclVoidTypeId id) {
 		return Object.class;		// NullValue is never used
 	}
 
+	@Override
 	public @NonNull Class<?> visitOperationId(@NonNull OperationId id) {
 		return DomainOperation.class;
 	}
 
+	@Override
 	public @Nullable Class<?> visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 		if (id instanceof JavaTypeId) {
 			return ((JavaTypeId)id).getJavaClass();
@@ -124,34 +132,42 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 		return null;
 	}
 
+	@Override
 	public @NonNull Class<?> visitPropertyId(@NonNull PropertyId id) {
 		return DomainProperty.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitRootPackageId(@NonNull RootPackageId id) {
 		return DomainPackage.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitTemplateBinding(@NonNull TemplateBinding id) {
 		return visiting(id);
 	}
 
+	@Override
 	public @NonNull Class<?> visitTemplateParameterId(@NonNull TemplateParameterId id) {
 		return Object.class;				// FIXME
 	}
 
+	@Override
 	public @NonNull Class<?> visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
 		return DomainType.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitTuplePartId(@NonNull TuplePartId id) {
 		return DomainProperty.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitTupleTypeId(@NonNull TupleTypeId id) {
 		return TupleValue.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitUnspecifiedId(@NonNull UnspecifiedId id) {
 		return visiting(id);
 	}

@@ -42,6 +42,7 @@ public class UnboxedElementsDescriptor extends AbstractCollectionDescriptor impl
 		this.type = type;
 	}
 
+	@Override
 	public void append(@NonNull JavaStream javaStream) {
 		javaStream.appendClassReference(List.class, true, Object.class);
 	}
@@ -51,20 +52,24 @@ public class UnboxedElementsDescriptor extends AbstractCollectionDescriptor impl
 		javaStream.appendClassReference(getJavaClass());
 	}
 
+	@Override
 	public @NonNull String getClassName() {
 		return DomainUtil.nonNullModel(type.getName());
 	}
 
+	@Override
 	@NonNull
 	public Class<?> getJavaClass() {
 		return Object.class;
 	}
 
+	@Override
 	@Nullable
 	public Class<?> hasJavaClass() {
 		return null;
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof UnboxedElementsDescriptor)) {
 			return false;

@@ -14,9 +14,15 @@
  */
 package org.eclipse.ocl.examples.codegen.dynamic;
 
+import org.eclipse.jdt.annotation.NonNull;
+
+/**
+ * @deprecated Jva 5 support is discontinued in Luna, so OCL2JavaFileObject can be invoked directly.
+ */
+@Deprecated
 public class Java5Facade
 {
-	public static Class<?> loadClass(String qualifiedName, String javaCodeSource) throws Exception {
+	public static Class<?> loadClass(@NonNull String qualifiedName, @NonNull String javaCodeSource) throws Exception {
 		return OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
 	}
 }

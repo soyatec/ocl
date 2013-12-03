@@ -29,6 +29,7 @@ public class BoxedValueDescriptor extends AbstractValueDescriptor implements Box
 		super(elementId, javaClass);
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof BoxedDescriptor)) {
 			return false;

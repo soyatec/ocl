@@ -74,6 +74,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getInit() {
 		return init;
 	}
@@ -98,6 +99,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInit(CGValuedElement newInit) {
 		if (newInit != init) {
 			NotificationChain msgs = null;
@@ -260,6 +262,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return init != null ? thatValue.isEquivalentToInternal(init) : null;
 	}
@@ -310,6 +313,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public void setNonInvalid() {
 		nonInvalid = true;
 	}
@@ -324,6 +328,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public void setNonNull() {
 		nonNull = true;
 	}

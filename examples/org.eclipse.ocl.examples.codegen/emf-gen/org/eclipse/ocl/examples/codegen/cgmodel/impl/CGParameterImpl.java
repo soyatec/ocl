@@ -78,6 +78,7 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGOperation getOperation() {
 		return operation;
 	}
@@ -87,6 +88,7 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperation(CGOperation newOperation) {
 		CGOperation oldOperation = operation;
 		operation = newOperation;

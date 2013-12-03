@@ -95,6 +95,7 @@ public class CGEcoreDataTypeConstructorExpImpl extends CGConstructorExpImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEDataType() {
 		return eDataType;
 	}
@@ -104,6 +105,7 @@ public class CGEcoreDataTypeConstructorExpImpl extends CGConstructorExpImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEDataType(EDataType newEDataType) {
 		EDataType oldEDataType = eDataType;
 		eDataType = newEDataType;
@@ -116,6 +118,7 @@ public class CGEcoreDataTypeConstructorExpImpl extends CGConstructorExpImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getString() {
 		return string;
 	}
@@ -125,6 +128,7 @@ public class CGEcoreDataTypeConstructorExpImpl extends CGConstructorExpImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setString(String newString) {
 		String oldString = string;
 		string = newString;
@@ -232,6 +236,7 @@ public class CGEcoreDataTypeConstructorExpImpl extends CGConstructorExpImpl impl
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGEcoreDataTypeConstructorExp)thatValue) : null;
 	}

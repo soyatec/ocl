@@ -73,6 +73,7 @@ public class CGEcoreOperationImpl extends CGOperationImpl implements CGEcoreOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEOperation() {
 		if (eOperation != null && eOperation.eIsProxy()) {
 			InternalEObject oldEOperation = (InternalEObject)eOperation;
@@ -99,6 +100,7 @@ public class CGEcoreOperationImpl extends CGOperationImpl implements CGEcoreOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEOperation(EOperation newEOperation) {
 		EOperation oldEOperation = eOperation;
 		eOperation = newEOperation;

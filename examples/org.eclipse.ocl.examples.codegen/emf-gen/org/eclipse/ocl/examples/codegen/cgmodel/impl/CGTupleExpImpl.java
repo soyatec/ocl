@@ -81,6 +81,7 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGTuplePart> getParts() {
 		if (parts == null) {
 			parts = new EObjectContainmentWithInverseEList<CGTuplePart>(CGTuplePart.class, this, CGModelPackage.CG_TUPLE_EXP__PARTS, CGModelPackage.CG_TUPLE_PART__TUPLE_EXP);
@@ -243,6 +244,7 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGTupleExp)thatValue) : null;
 	}

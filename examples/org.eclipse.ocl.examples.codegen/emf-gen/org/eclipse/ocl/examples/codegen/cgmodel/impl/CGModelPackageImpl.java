@@ -854,6 +854,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGAccumulator() {
 		return cgAccumulatorEClass;
 	}
@@ -863,6 +864,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGAssertNonNullExp() {
 		return cgAssertNonNullExpEClass;
 	}
@@ -872,6 +874,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGBoolean() {
 		return cgBooleanEClass;
 	}
@@ -881,6 +884,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGBoolean_BooleanValue() {
 		return (EAttribute)cgBooleanEClass.getEStructuralFeatures().get(0);
 	}
@@ -890,6 +894,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGBoxExp() {
 		return cgBoxExpEClass;
 	}
@@ -899,6 +904,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGBuiltInIterationCallExp() {
 		return cgBuiltInIterationCallExpEClass;
 	}
@@ -908,6 +914,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGBuiltInIterationCallExp_Accumulator() {
 		return (EReference)cgBuiltInIterationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -917,6 +924,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGCallExp() {
 		return cgCallExpEClass;
 	}
@@ -926,6 +934,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGCallExp_Invalidating() {
 		return (EAttribute)cgCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -935,6 +944,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGCallExp_Validating() {
 		return (EAttribute)cgCallExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -944,6 +954,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGCallExp_Source() {
 		return (EReference)cgCallExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -953,6 +964,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGCastExp() {
 		return cgCastExpEClass;
 	}
@@ -962,6 +974,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGCastExp_ExecutorType() {
 		return (EReference)cgCastExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -971,6 +984,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGCatchExp() {
 		return cgCatchExpEClass;
 	}
@@ -980,6 +994,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGClass() {
 		return cgClassEClass;
 	}
@@ -989,6 +1004,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGClass_ContainingPackage() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -998,6 +1014,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGClass_Operations() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(1);
 	}
@@ -1007,6 +1024,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGClass_Properties() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(2);
 	}
@@ -1016,6 +1034,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGClass_Invariants() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(3);
 	}
@@ -1025,6 +1044,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGClass_SuperTypes() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(4);
 	}
@@ -1034,6 +1054,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGClass_Interface() {
 		return (EAttribute)cgClassEClass.getEStructuralFeatures().get(5);
 	}
@@ -1043,6 +1064,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGClass_TemplateParameters() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(6);
 	}
@@ -1052,6 +1074,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGCollectionExp() {
 		return cgCollectionExpEClass;
 	}
@@ -1061,6 +1084,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGCollectionExp_Parts() {
 		return (EReference)cgCollectionExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1070,6 +1094,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGCollectionPart() {
 		return cgCollectionPartEClass;
 	}
@@ -1079,6 +1104,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGCollectionPart_First() {
 		return (EReference)cgCollectionPartEClass.getEStructuralFeatures().get(0);
 	}
@@ -1088,6 +1114,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGCollectionPart_Last() {
 		return (EReference)cgCollectionPartEClass.getEStructuralFeatures().get(1);
 	}
@@ -1097,6 +1124,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGCollectionPart_CollectionExp() {
 		return (EReference)cgCollectionPartEClass.getEStructuralFeatures().get(2);
 	}
@@ -1106,6 +1134,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGConstant() {
 		return cgConstantEClass;
 	}
@@ -1115,6 +1144,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGConstantExp() {
 		return cgConstantExpEClass;
 	}
@@ -1124,6 +1154,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstantExp_ReferredConstant() {
 		return (EReference)cgConstantExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1133,6 +1164,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGConstraint() {
 		return cgConstraintEClass;
 	}
@@ -1142,6 +1174,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstraint_Body() {
 		return (EReference)cgConstraintEClass.getEStructuralFeatures().get(0);
 	}
@@ -1151,6 +1184,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstraint_Message() {
 		return (EReference)cgConstraintEClass.getEStructuralFeatures().get(1);
 	}
@@ -1160,6 +1194,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGConstructorExp() {
 		return cgConstructorExpEClass;
 	}
@@ -1169,6 +1204,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstructorExp_Parts() {
 		return (EReference)cgConstructorExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1178,6 +1214,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstructorExp_ExecutorType() {
 		return (EReference)cgConstructorExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1187,6 +1224,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGConstructorPart() {
 		return cgConstructorPartEClass;
 	}
@@ -1196,6 +1234,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstructorPart_Init() {
 		return (EReference)cgConstructorPartEClass.getEStructuralFeatures().get(0);
 	}
@@ -1205,6 +1244,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstructorPart_ConstructorExp() {
 		return (EReference)cgConstructorPartEClass.getEStructuralFeatures().get(1);
 	}
@@ -1214,6 +1254,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGConstructorPart_ExecutorPart() {
 		return (EReference)cgConstructorPartEClass.getEStructuralFeatures().get(2);
 	}
@@ -1223,6 +1264,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcoreClassConstructorExp() {
 		return cgEcoreClassConstructorExpEClass;
 	}
@@ -1232,6 +1274,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcoreClassConstructorExp_EClass() {
 		return (EReference)cgEcoreClassConstructorExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1241,6 +1284,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcoreDataTypeConstructorExp() {
 		return cgEcoreDataTypeConstructorExpEClass;
 	}
@@ -1250,6 +1294,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcoreDataTypeConstructorExp_EDataType() {
 		return (EReference)cgEcoreDataTypeConstructorExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1259,6 +1304,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGEcoreDataTypeConstructorExp_String() {
 		return (EAttribute)cgEcoreDataTypeConstructorExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1268,6 +1314,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcoreOperation() {
 		return cgEcoreOperationEClass;
 	}
@@ -1277,6 +1324,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcoreOperation_EOperation() {
 		return (EReference)cgEcoreOperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1286,6 +1334,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcoreOperationCallExp() {
 		return cgEcoreOperationCallExpEClass;
 	}
@@ -1295,6 +1344,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcoreOperationCallExp_EOperation() {
 		return (EReference)cgEcoreOperationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1304,6 +1354,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcoreOppositePropertyCallExp() {
 		return cgEcoreOppositePropertyCallExpEClass;
 	}
@@ -1313,6 +1364,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcoreOppositePropertyCallExp_EStructuralFeature() {
 		return (EReference)cgEcoreOppositePropertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1322,6 +1374,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcorePropertyCallExp() {
 		return cgEcorePropertyCallExpEClass;
 	}
@@ -1331,6 +1384,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcorePropertyCallExp_EStructuralFeature() {
 		return (EReference)cgEcorePropertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1340,6 +1394,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGElement() {
 		return cgElementEClass;
 	}
@@ -1349,6 +1404,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGElementId() {
 		return cgElementIdEClass;
 	}
@@ -1358,6 +1414,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGElementId_ElementId() {
 		return (EAttribute)cgElementIdEClass.getEStructuralFeatures().get(0);
 	}
@@ -1367,6 +1424,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorCompositionProperty() {
 		return cgExecutorCompositionPropertyEClass;
 	}
@@ -1376,6 +1434,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorConstructorPart() {
 		return cgExecutorConstructorPartEClass;
 	}
@@ -1385,6 +1444,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorNavigationProperty() {
 		return cgExecutorNavigationPropertyEClass;
 	}
@@ -1394,6 +1454,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorOppositeProperty() {
 		return cgExecutorOppositePropertyEClass;
 	}
@@ -1403,6 +1464,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorOperation() {
 		return cgExecutorOperationEClass;
 	}
@@ -1412,6 +1474,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGExecutorOperation_UnderlyingOperationId() {
 		return (EReference)cgExecutorOperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1421,6 +1484,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorOperationCallExp() {
 		return cgExecutorOperationCallExpEClass;
 	}
@@ -1430,6 +1494,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGExecutorOperationCallExp_ExecutorOperation() {
 		return (EReference)cgExecutorOperationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1439,6 +1504,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorOppositePropertyCallExp() {
 		return cgExecutorOppositePropertyCallExpEClass;
 	}
@@ -1448,6 +1514,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGExecutorOppositePropertyCallExp_ExecutorProperty() {
 		return (EReference)cgExecutorOppositePropertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1457,6 +1524,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorProperty() {
 		return cgExecutorPropertyEClass;
 	}
@@ -1466,6 +1534,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGExecutorProperty_UnderlyingPropertyId() {
 		return (EReference)cgExecutorPropertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -1475,6 +1544,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorPropertyCallExp() {
 		return cgExecutorPropertyCallExpEClass;
 	}
@@ -1484,6 +1554,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGExecutorPropertyCallExp_ExecutorProperty() {
 		return (EReference)cgExecutorPropertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1493,6 +1564,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGExecutorType() {
 		return cgExecutorTypeEClass;
 	}
@@ -1502,6 +1574,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGExecutorType_UnderlyingTypeId() {
 		return (EReference)cgExecutorTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -1511,6 +1584,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGFinalVariable() {
 		return cgFinalVariableEClass;
 	}
@@ -1520,6 +1594,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGGuardExp() {
 		return cgGuardExpEClass;
 	}
@@ -1529,6 +1604,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGGuardExp_Message() {
 		return (EAttribute)cgGuardExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1538,6 +1614,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGIfExp() {
 		return cgIfExpEClass;
 	}
@@ -1547,6 +1624,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGIfExp_Condition() {
 		return (EReference)cgIfExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1556,6 +1634,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGIfExp_ThenExpression() {
 		return (EReference)cgIfExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1565,6 +1644,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGIfExp_ElseExpression() {
 		return (EReference)cgIfExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -1574,6 +1654,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGInteger() {
 		return cgIntegerEClass;
 	}
@@ -1583,6 +1664,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGInvalid() {
 		return cgInvalidEClass;
 	}
@@ -1592,6 +1674,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGInvalid_MessageTemplate() {
 		return (EAttribute)cgInvalidEClass.getEStructuralFeatures().get(0);
 	}
@@ -1601,6 +1684,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGInvalid_Bindings() {
 		return (EAttribute)cgInvalidEClass.getEStructuralFeatures().get(1);
 	}
@@ -1610,6 +1694,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGIsEqualExp() {
 		return cgIsEqualExpEClass;
 	}
@@ -1619,6 +1704,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGIsEqualExp_Argument() {
 		return (EReference)cgIsEqualExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1628,6 +1714,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGIsEqualExp_NotEquals() {
 		return (EAttribute)cgIsEqualExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1637,6 +1724,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGIsInvalidExp() {
 		return cgIsInvalidExpEClass;
 	}
@@ -1646,6 +1734,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGIsUndefinedExp() {
 		return cgIsUndefinedExpEClass;
 	}
@@ -1655,6 +1744,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGIterationCallExp() {
 		return cgIterationCallExpEClass;
 	}
@@ -1664,6 +1754,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGIterationCallExp_ReferredIteration() {
 		return (EAttribute)cgIterationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1673,6 +1764,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGIterationCallExp_Iterators() {
 		return (EReference)cgIterationCallExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1682,6 +1774,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGIterationCallExp_Body() {
 		return (EReference)cgIterationCallExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -1691,6 +1784,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGIterator() {
 		return cgIteratorEClass;
 	}
@@ -1700,6 +1794,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLetExp() {
 		return cgLetExpEClass;
 	}
@@ -1709,6 +1804,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGLetExp_Init() {
 		return (EReference)cgLetExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1718,6 +1814,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGLetExp_In() {
 		return (EReference)cgLetExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1727,6 +1824,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLibraryIterateCallExp() {
 		return cgLibraryIterateCallExpEClass;
 	}
@@ -1736,6 +1834,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGLibraryIterateCallExp_Result() {
 		return (EReference)cgLibraryIterateCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1745,6 +1844,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLibraryIterationCallExp() {
 		return cgLibraryIterationCallExpEClass;
 	}
@@ -1754,6 +1854,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGLibraryIterationCallExp_LibraryIteration() {
 		return (EAttribute)cgLibraryIterationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1763,6 +1864,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLibraryOperation() {
 		return cgLibraryOperationEClass;
 	}
@@ -1772,6 +1874,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLibraryOperationCallExp() {
 		return cgLibraryOperationCallExpEClass;
 	}
@@ -1781,6 +1884,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGLibraryOperationCallExp_LibraryOperation() {
 		return (EAttribute)cgLibraryOperationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1790,6 +1894,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLibraryPropertyCallExp() {
 		return cgLibraryPropertyCallExpEClass;
 	}
@@ -1799,6 +1904,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGLibraryPropertyCallExp_LibraryProperty() {
 		return (EAttribute)cgLibraryPropertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1808,6 +1914,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLocalVariable() {
 		return cgLocalVariableEClass;
 	}
@@ -1817,6 +1924,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGModel() {
 		return cgModelEClass;
 	}
@@ -1826,6 +1934,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGModel_Globals() {
 		return (EReference)cgModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -1835,6 +1944,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGModel_Packages() {
 		return (EReference)cgModelEClass.getEStructuralFeatures().get(1);
 	}
@@ -1844,6 +1954,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGNamedElement() {
 		return cgNamedElementEClass;
 	}
@@ -1853,6 +1964,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGNamedElement_Ast() {
 		return (EAttribute)cgNamedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -1862,6 +1974,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGNamedElement_Name() {
 		return (EAttribute)cgNamedElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -1871,6 +1984,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGNavigationCallExp() {
 		return cgNavigationCallExpEClass;
 	}
@@ -1880,6 +1994,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGNavigationCallExp_ReferredProperty() {
 		return (EAttribute)cgNavigationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1889,6 +2004,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGNull() {
 		return cgNullEClass;
 	}
@@ -1898,6 +2014,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGNumber() {
 		return cgNumberEClass;
 	}
@@ -1907,6 +2024,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGNumber_NumericValue() {
 		return (EAttribute)cgNumberEClass.getEStructuralFeatures().get(0);
 	}
@@ -1916,6 +2034,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGOperation() {
 		return cgOperationEClass;
 	}
@@ -1925,6 +2044,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGOperation_Parameters() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1934,6 +2054,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGOperation_Body() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1943,6 +2064,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGOperation_Preconditions() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -1952,6 +2074,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGOperation_Postconditions() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(3);
 	}
@@ -1961,6 +2084,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGOperation_ContainingClass() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(4);
 	}
@@ -1970,6 +2094,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGOperationCallExp() {
 		return cgOperationCallExpEClass;
 	}
@@ -1979,6 +2104,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGOperationCallExp_Arguments() {
 		return (EReference)cgOperationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1988,6 +2114,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGOperationCallExp_ReferredOperation() {
 		return (EAttribute)cgOperationCallExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1997,6 +2124,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGOppositePropertyCallExp() {
 		return cgOppositePropertyCallExpEClass;
 	}
@@ -2006,6 +2134,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGPackage() {
 		return cgPackageEClass;
 	}
@@ -2015,6 +2144,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPackage_Classes() {
 		return (EReference)cgPackageEClass.getEStructuralFeatures().get(0);
 	}
@@ -2024,6 +2154,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPackage_Packages() {
 		return (EReference)cgPackageEClass.getEStructuralFeatures().get(1);
 	}
@@ -2033,6 +2164,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPackage_ContainingPackage() {
 		return (EReference)cgPackageEClass.getEStructuralFeatures().get(2);
 	}
@@ -2042,6 +2174,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGParameter() {
 		return cgParameterEClass;
 	}
@@ -2051,6 +2184,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGParameter_Operation() {
 		return (EReference)cgParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -2060,6 +2194,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGProperty() {
 		return cgPropertyEClass;
 	}
@@ -2069,6 +2204,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGProperty_ContainingClass() {
 		return (EReference)cgPropertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -2078,6 +2214,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGProperty_Body() {
 		return (EReference)cgPropertyEClass.getEStructuralFeatures().get(1);
 	}
@@ -2087,6 +2224,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGPropertyCallExp() {
 		return cgPropertyCallExpEClass;
 	}
@@ -2096,6 +2234,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGReal() {
 		return cgRealEClass;
 	}
@@ -2105,6 +2244,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGSettableVariable() {
 		return cgSettableVariableEClass;
 	}
@@ -2114,6 +2254,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGString() {
 		return cgStringEClass;
 	}
@@ -2123,6 +2264,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGString_StringValue() {
 		return (EAttribute)cgStringEClass.getEStructuralFeatures().get(0);
 	}
@@ -2132,6 +2274,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGText() {
 		return cgTextEClass;
 	}
@@ -2141,6 +2284,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGText_TextValue() {
 		return (EAttribute)cgTextEClass.getEStructuralFeatures().get(0);
 	}
@@ -2150,6 +2294,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTextParameter() {
 		return cgTextParameterEClass;
 	}
@@ -2159,6 +2304,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGTextParameter_TextValue() {
 		return (EAttribute)cgTextParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -2168,6 +2314,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGThrowExp() {
 		return cgThrowExpEClass;
 	}
@@ -2177,6 +2324,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTupleExp() {
 		return cgTupleExpEClass;
 	}
@@ -2186,6 +2334,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTupleExp_Parts() {
 		return (EReference)cgTupleExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2195,6 +2344,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTuplePart() {
 		return cgTuplePartEClass;
 	}
@@ -2204,6 +2354,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTuplePart_Init() {
 		return (EReference)cgTuplePartEClass.getEStructuralFeatures().get(0);
 	}
@@ -2213,6 +2364,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTuplePart_TupleExp() {
 		return (EReference)cgTuplePartEClass.getEStructuralFeatures().get(1);
 	}
@@ -2222,6 +2374,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTuplePartCallExp() {
 		return cgTuplePartCallExpEClass;
 	}
@@ -2231,6 +2384,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGTuplePartCallExp_AstTuplePartId() {
 		return (EAttribute)cgTuplePartCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2240,6 +2394,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTypeId() {
 		return cgTypeIdEClass;
 	}
@@ -2249,6 +2404,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTypeExp() {
 		return cgTypeExpEClass;
 	}
@@ -2258,6 +2414,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTypeExp_ExecutorType() {
 		return (EReference)cgTypeExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2267,6 +2424,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTypedElement() {
 		return cgTypedElementEClass;
 	}
@@ -2276,6 +2434,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTypedElement_TypeId() {
 		return (EReference)cgTypedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -2285,6 +2444,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGTypedElement_Required() {
 		return (EAttribute)cgTypedElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -2294,6 +2454,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGUnboxExp() {
 		return cgUnboxExpEClass;
 	}
@@ -2303,6 +2464,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGUnlimited() {
 		return cgUnlimitedEClass;
 	}
@@ -2312,6 +2474,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGValuedElement() {
 		return cgValuedElementEClass;
 	}
@@ -2321,6 +2484,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGValuedElement_DependsOn() {
 		return (EReference)cgValuedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -2330,6 +2494,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGValuedElement_Owns() {
 		return (EReference)cgValuedElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -2339,6 +2504,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGVariable() {
 		return cgVariableEClass;
 	}
@@ -2348,6 +2514,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGVariable_Init() {
 		return (EReference)cgVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -2357,6 +2524,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGVariableExp() {
 		return cgVariableExpEClass;
 	}
@@ -2366,6 +2534,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGVariableExp_ReferredVariable() {
 		return (EReference)cgVariableExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2375,6 +2544,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNameable() {
 		return nameableEClass;
 	}
@@ -2384,6 +2554,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getElement() {
 		return elementEDataType;
 	}
@@ -2393,6 +2564,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getElementId() {
 		return elementIdEDataType;
 	}
@@ -2402,6 +2574,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEnumerationLiteralId() {
 		return enumerationLiteralIdEDataType;
 	}
@@ -2411,6 +2584,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getIteration() {
 		return iterationEDataType;
 	}
@@ -2420,6 +2594,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLibraryIteration() {
 		return libraryIterationEDataType;
 	}
@@ -2429,6 +2604,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLibraryOperation() {
 		return libraryOperationEDataType;
 	}
@@ -2438,6 +2614,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getLibraryProperty() {
 		return libraryPropertyEDataType;
 	}
@@ -2447,6 +2624,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getNumber() {
 		return numberEDataType;
 	}
@@ -2456,6 +2634,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getObject() {
 		return objectEDataType;
 	}
@@ -2465,6 +2644,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getOperation() {
 		return operationEDataType;
 	}
@@ -2474,6 +2654,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getProperty() {
 		return propertyEDataType;
 	}
@@ -2483,6 +2664,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getTuplePartId() {
 		return tuplePartIdEDataType;
 	}
@@ -2492,6 +2674,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getType() {
 		return typeEDataType;
 	}
@@ -2501,6 +2684,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getTypeId() {
 		return typeIdEDataType;
 	}
@@ -2510,6 +2694,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGModelFactory getCGModelFactory() {
 		return (CGModelFactory)getEFactoryInstance();
 	}

@@ -42,9 +42,14 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 	private static @Nullable StandardJavaFileManager stdFileManager = compiler != null ? compiler.getStandardFileManager(null, Locale.getDefault(), null) : null;
 	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-source", "1.5", "-target", "1.5", "-g");
 
-	public static Class<?> loadClass(String qualifiedName, String javaCodeSource) throws Exception {
-		if (compiler == null) {
-			throw new IllegalStateException("No Java Compiler provided by the Java platform - you need to use a JDK rather than a JRE");
+	public static Class<?> loadClass(@NonNull String qualifiedName, @NonNull String javaCodeSource) throws Exception {
+		JavaCompiler compiler2 = compiler;
+		if (compiler2 == null) {
+			throw new IllegalStateException("No JavaCompiler provided by the Java platform - you need to use a JDK rather than a JRE");
+		}
+		StandardJavaFileManager stdFileManager2 = stdFileManager;
+		if (stdFileManager2 == null) {
+			throw new IllegalStateException("No StandardJavaFileManager provided by the Java platform");
 		}
 //		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
 		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
@@ -52,7 +57,7 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
 		
 //		System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
-		CompilationTask compilerTask = compiler.getTask(null, stdFileManager,
+		CompilationTask compilerTask = compiler2.getTask(null, stdFileManager2,
 				diagnostics, compilationOptions, null, compilationUnits);
 //		System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
 		if (!compilerTask.call()) {
@@ -66,13 +71,13 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 			System.out.println("Compilation of " + qualifiedName + " returned false but no diagnostics");
 		}
 //		System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
-		stdFileManager.close();		// Close the file manager which re-opens automatically
+		stdFileManager2.close();		// Close the file manager which re-opens automatically
 //		System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
 		Class<?> testClass = Class.forName(qualifiedName);
 		return testClass;
 	}
 	
-	public static LibraryOperation loadLibraryOperationClass(@NonNull String qualifiedName, @NonNull String javaCodeSource) throws Exception {
+	public static @Nullable LibraryOperation loadLibraryOperationClass(@NonNull String qualifiedName, @NonNull String javaCodeSource) throws Exception {
 		Class<?> testClass = loadClass(qualifiedName, javaCodeSource);
 		Field testField = testClass.getField("INSTANCE");
 //		System.out.printf("%6.3f get\n", 0.001 * (System.currentTimeMillis()-base));

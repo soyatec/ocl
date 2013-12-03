@@ -26,8 +26,10 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 
 public abstract class AbstractIteration2Java implements Iteration2Java
 {
+	@Override
 	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {}	
 
+	@Override
 	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		return null;
 	}

@@ -73,6 +73,7 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGVariable getReferredVariable() {
 		return referredVariable;
 	}
@@ -82,6 +83,7 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredVariable(CGVariable newReferredVariable) {
 		CGVariable oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
@@ -232,6 +234,7 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return referredVariable != null ? thatValue.isEquivalentToInternal(referredVariable) : null;
 	}

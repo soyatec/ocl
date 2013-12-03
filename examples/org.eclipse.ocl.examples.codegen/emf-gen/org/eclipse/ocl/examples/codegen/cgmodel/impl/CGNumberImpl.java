@@ -83,6 +83,7 @@ public abstract class CGNumberImpl extends CGConstantImpl implements CGNumber {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getNumericValue() {
 		return numericValue;
 	}
@@ -92,6 +93,7 @@ public abstract class CGNumberImpl extends CGConstantImpl implements CGNumber {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNumericValue(Number newNumericValue) {
 		Number oldNumericValue = numericValue;
 		numericValue = newNumericValue;
@@ -171,6 +173,7 @@ public abstract class CGNumberImpl extends CGConstantImpl implements CGNumber {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(numericValue);
 	}
@@ -188,6 +191,7 @@ public abstract class CGNumberImpl extends CGConstantImpl implements CGNumber {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (!thatValue.isNonInvalid()) {
 			return null;

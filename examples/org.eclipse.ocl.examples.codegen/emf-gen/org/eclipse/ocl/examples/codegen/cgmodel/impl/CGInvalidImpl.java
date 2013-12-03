@@ -99,6 +99,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMessageTemplate() {
 		return messageTemplate;
 	}
@@ -108,6 +109,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMessageTemplate(String newMessageTemplate) {
 		String oldMessageTemplate = messageTemplate;
 		messageTemplate = newMessageTemplate;
@@ -120,6 +122,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<Object> getBindings() {
 		if (bindings == null) {
 			bindings = new EDataTypeUniqueEList<Object>(Object.class, this, CGModelPackage.CG_INVALID__BINDINGS);
@@ -220,6 +223,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return ValuesUtil.INVALID_VALUE;
 	}
@@ -237,6 +241,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (thatValue.isInvalid()) {
 			return Boolean.TRUE;

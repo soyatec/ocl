@@ -53,6 +53,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		this.genModelHelper = genModelHelper;
 	}
 	
+	@Override
 	public void addProblem(@NonNull Exception problem) {
 		List<Exception> problems2 = problems;
 		if (problems2 == null) {
@@ -61,6 +62,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		problems2.add(problem);
 	}
 
+	@Override
 	public @NonNull AnalysisVisitor createAnalysisVisitor() {
 		return new AnalysisVisitor(getAnalyzer());
 	}
@@ -73,22 +75,27 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		return new CodeGenOptions();
 	}
 
+	@Override
 	public @NonNull String getDefaultIndent() {
 		return defaultIndent;
 	}
 
+	@Override
 	public @NonNull GenModelHelper getGenModelHelper() {
 		return genModelHelper;
 	}
 
+	@Override
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
+	@Override
 	public @NonNull NameManager getNameManager() {
 		return nameManager;
 	}
 
+	@Override
 	public @NonNull CodeGenOptions getOptions() {
 		CodeGenOptions options2 = options;
 		if (options2 == null) {
@@ -97,6 +104,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		return options2;
 	}
 
+	@Override
 	public @Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType) {
 		FinalAnalysis finalAnalysis = metaModelManager.getPackageManager().getFinalAnalysis();
 		return finalAnalysis.isFinal(anOperation, metaModelManager.getInheritance(staticType));

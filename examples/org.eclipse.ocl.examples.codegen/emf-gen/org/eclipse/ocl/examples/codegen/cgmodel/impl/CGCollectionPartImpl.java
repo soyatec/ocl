@@ -89,6 +89,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getFirst() {
 		return first;
 	}
@@ -113,6 +114,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFirst(CGValuedElement newFirst) {
 		if (newFirst != first) {
 			NotificationChain msgs = null;
@@ -132,6 +134,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getLast() {
 		return last;
 	}
@@ -156,6 +159,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLast(CGValuedElement newLast) {
 		if (newLast != last) {
 			NotificationChain msgs = null;
@@ -175,6 +179,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGCollectionExp getCollectionExp() {
 		if (eContainerFeatureID() != CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP) return null;
 		return (CGCollectionExp)eInternalContainer();
@@ -372,6 +377,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGCollectionPart)thatValue) : null;
 	}
@@ -425,6 +431,7 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isRange() {
 		return last != null;
 	}

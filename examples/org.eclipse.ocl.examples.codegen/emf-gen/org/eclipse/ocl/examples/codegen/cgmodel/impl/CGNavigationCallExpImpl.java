@@ -87,6 +87,7 @@ public abstract class CGNavigationCallExpImpl extends CGCallExpImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getReferredProperty() {
 		return referredProperty;
 	}
@@ -96,6 +97,7 @@ public abstract class CGNavigationCallExpImpl extends CGCallExpImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredProperty(Property newReferredProperty) {
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;

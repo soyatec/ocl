@@ -78,6 +78,7 @@ public class CGExecutorOppositePropertyCallExpImpl extends CGOppositePropertyCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorProperty getExecutorProperty() {
 		return executorProperty;
 	}
@@ -87,6 +88,7 @@ public class CGExecutorOppositePropertyCallExpImpl extends CGOppositePropertyCal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorProperty(CGExecutorProperty newExecutorProperty) {
 		CGExecutorProperty oldExecutorProperty = executorProperty;
 		executorProperty = newExecutorProperty;

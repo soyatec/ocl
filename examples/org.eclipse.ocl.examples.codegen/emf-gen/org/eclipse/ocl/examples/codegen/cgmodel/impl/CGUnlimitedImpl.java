@@ -65,6 +65,7 @@ public class CGUnlimitedImpl extends CGConstantImpl implements CGUnlimited {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return ValuesUtil.UNLIMITED_VALUE;
 	}
@@ -73,6 +74,7 @@ public class CGUnlimitedImpl extends CGConstantImpl implements CGUnlimited {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (!thatValue.isNonInvalid()) {
 			return null;

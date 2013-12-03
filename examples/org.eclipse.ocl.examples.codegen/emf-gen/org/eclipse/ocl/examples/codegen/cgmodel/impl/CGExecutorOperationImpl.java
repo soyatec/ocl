@@ -77,6 +77,7 @@ public class CGExecutorOperationImpl extends CGValuedElementImpl implements CGEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGElementId getUnderlyingOperationId() {
 		return underlyingOperationId;
 	}
@@ -86,6 +87,7 @@ public class CGExecutorOperationImpl extends CGValuedElementImpl implements CGEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnderlyingOperationId(CGElementId newUnderlyingOperationId) {
 		CGElementId oldUnderlyingOperationId = underlyingOperationId;
 		underlyingOperationId = newUnderlyingOperationId;
@@ -200,6 +202,7 @@ public class CGExecutorOperationImpl extends CGValuedElementImpl implements CGEx
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
 	}

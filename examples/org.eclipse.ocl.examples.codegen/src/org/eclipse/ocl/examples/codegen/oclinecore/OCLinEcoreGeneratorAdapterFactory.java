@@ -37,6 +37,7 @@ public class OCLinEcoreGeneratorAdapterFactory extends GenModelGeneratorAdapterF
 	 */
 	public static final GeneratorAdapterFactory.Descriptor DESCRIPTOR = new GeneratorAdapterFactory.Descriptor()
 	{
+		@Override
 		public GeneratorAdapterFactory createAdapterFactory() {
 			return new OCLinEcoreGeneratorAdapterFactory();
 		}

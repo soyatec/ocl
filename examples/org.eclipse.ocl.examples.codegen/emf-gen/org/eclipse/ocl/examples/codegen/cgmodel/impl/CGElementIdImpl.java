@@ -84,6 +84,7 @@ public class CGElementIdImpl extends CGConstantImpl implements CGElementId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ElementId getElementId() {
 		return elementId;
 	}
@@ -93,6 +94,7 @@ public class CGElementIdImpl extends CGConstantImpl implements CGElementId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElementId(ElementId newElementId) {
 		ElementId oldElementId = elementId;
 		elementId = newElementId;
@@ -181,6 +183,7 @@ public class CGElementIdImpl extends CGConstantImpl implements CGElementId {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(elementId);
 	}
@@ -198,6 +201,7 @@ public class CGElementIdImpl extends CGConstantImpl implements CGElementId {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (!thatValue.isNonInvalid()) {
 			return null;

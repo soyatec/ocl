@@ -72,6 +72,7 @@ public class CGExecutorOperationCallExpImpl extends CGOperationCallExpImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorOperation getExecutorOperation() {
 		return executorOperation;
 	}
@@ -81,6 +82,7 @@ public class CGExecutorOperationCallExpImpl extends CGOperationCallExpImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorOperation(CGExecutorOperation newExecutorOperation) {
 		CGExecutorOperation oldExecutorOperation = executorOperation;
 		executorOperation = newExecutorOperation;

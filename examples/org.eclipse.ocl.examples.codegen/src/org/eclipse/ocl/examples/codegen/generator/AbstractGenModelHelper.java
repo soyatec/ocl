@@ -143,6 +143,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		this.metaModelManager = metaModelManager;
 	}
 	
+	@Override
 	public @NonNull Class<?> getAbstractOperationClass(@NonNull List<?> parameters) {
 		switch (parameters.size()) {
 			case 0: return AbstractUnaryOperation.class;
@@ -152,6 +153,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	@Override
 	public @Nullable Class<?> getEcoreFactoryClass(@NonNull EPackage ePackage) {
 		GenPackage genPackage = getGenPackage(ePackage);
 		if (genPackage == null) {
@@ -168,6 +170,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	@Override
 	public @NonNull Class<?> getEcoreInterfaceClass(@NonNull Type type) throws GenModelException {
 		GenClassifier genClassifier = getGenClassifier(type);
 		String qualifiedInterfaceName;
@@ -191,6 +194,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	@Override
 	public @Nullable String getEcoreInterfaceClassName(@NonNull EClass eClass) throws GenModelException {
 		try {
 			GenClassifier genClassifier = getGenClass(eClass);
@@ -212,6 +216,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	@Override
 	public @NonNull Class<?> getEcoreInterfaceClassifier(@NonNull EClassifier eClassifier) throws GenModelException {
 		GenClassifier genClassifier = getGenClassifier(eClassifier);
 		String qualifiedInterfaceName;
@@ -235,6 +240,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	@Override
 	public @Nullable String getEcoreInterfaceClassifierName(@NonNull EClassifier eClassifier) throws GenModelException {
 		try {
 			GenClassifier genClassifier = getGenClassifier(eClassifier);
@@ -256,6 +262,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 	
+	@Override
 	public @Nullable String getEcoreInterfaceName(@NonNull Type type) {
 		try {
 			GenClassifier genClassifier = getGenClassifier(type);
@@ -267,6 +274,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 	
+	@Override
 	public @Nullable String getEcoreClassName(@NonNull Type type) {
 		try {
 			GenClassifier genClassifier = getGenClassifier(type);
@@ -331,6 +339,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	} */
 	
+	@Override
 	public @NonNull GenClassifier getGenClassifier(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);
 		if (genPackage != null) {
@@ -410,6 +419,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	} */
 	
+	@Override
 	public @NonNull GenOperation getGenOperation(@NonNull Operation operation) throws GenModelException {
 		Type owningType = operation.getOwningType();
 		if (owningType != null) {
@@ -426,6 +436,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + operation);
 	}
 
+	@Override
 	public @Nullable GenPackage getGenPackage(@NonNull org.eclipse.ocl.examples.pivot.Package asPackage) {
 		EObject eContainer = asPackage.eContainer();
 		if (eContainer instanceof Root) {
@@ -444,6 +455,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return metaModelManager.getGenPackage(nsURI);
 	}
 
+	@Override
 	public @Nullable GenPackage getGenPackage(@NonNull Type type) {
 		org.eclipse.ocl.examples.pivot.Package asPackage = type.getPackage();
 		if (asPackage == null) {
@@ -468,6 +480,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return metaModelManager.getGenPackage(nsURI);
 	}
 	
+	@Override
 	public @Nullable GenParameter getGenParameter(@NonNull Parameter parameter) throws GenModelException {
 		Operation operation = parameter.getOperation();
 		if (operation != null) {
@@ -481,6 +494,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenParameter for " + parameter);
 	}
 	
+	@Override
 	public @NonNull String getGetAccessor(@NonNull Property aProperty) throws GenModelException {
 		GenFeature genFeature = getGenFeature(aProperty);
 		String getAccessor = genFeature.getGetAccessor();
@@ -490,6 +504,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + aProperty);
 	}
 	
+	@Override
 	public @NonNull String getGetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException {
 		GenFeature genFeature = getGenFeature(eStructuralFeature);
 		String getAccessor = genFeature.getGetAccessor();
@@ -499,6 +514,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + eStructuralFeature);
 	}
 
+	@Override
 	public @Nullable String getImplementationClassName(@NonNull EClassifier eClassifier) throws GenModelException {
 		try {
 			GenClassifier genClassifier = getGenClassifier(eClassifier);
@@ -514,16 +530,19 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull String getLiteralName(@NonNull EClassifier eClassifier) {
 		String name = eClassifier.getName();
 		return CodeGenUtil.upperName(name != null ? name : "");
 	}
 
+	@Override
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
 
+	@Override
 	public @NonNull String getOperationAccessor(@NonNull Operation anOperation) throws GenModelException {
 		GenOperation genOperation = getGenOperation(anOperation);
 		String operationAccessor = genOperation.getName();
@@ -533,6 +552,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenOperation for " + anOperation);
 	}
 
+	@Override
 	public @NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters) {
 		switch (parameters.size()) {
 			case 0: return LibraryUnaryOperation.class;
@@ -542,6 +562,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 	
+	@Override
 	public @NonNull String getOperationReturnType(@NonNull Operation operation) throws GenModelException {
 		Type owningType = operation.getOwningType();
 		if (owningType == null) {
@@ -556,6 +577,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return returnType;
 	}
 	
+	@Override
 	public @NonNull String getPropertyResultType(@NonNull Property property) throws GenModelException {
 		Type owningType = property.getOwningType();
 		if (owningType == null) {
@@ -570,6 +592,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return resultType;
 	}
 
+	@Override
 	public @Nullable String getQualifiedFactoryInterfaceName(@NonNull EPackage ePackage) {
 		GenPackage genPackage = getGenPackage(ePackage);
 		if (genPackage == null) {
@@ -578,6 +601,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return genPackage.getQualifiedFactoryInterfaceName();
 	}
 	
+	@Override
 	public @Nullable String getQualifiedFactoryInterfaceName(@NonNull Type type) {
 		GenPackage genPackage = getGenPackage(type);
 		if (genPackage == null) {
@@ -586,6 +610,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return genPackage.getQualifiedFactoryInterfaceName();
 	}
 
+	@Override
 	public @Nullable String getQualifiedFactoryInstanceAccessor(@NonNull EPackage ePackage) {
 		GenPackage genPackage = getGenPackage(ePackage);
 		if (genPackage == null) {
@@ -594,6 +619,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return genPackage.getQualifiedFactoryInstanceAccessor();
 	}
 	
+	@Override
 	public @Nullable String getQualifiedFactoryInstanceAccessor(@NonNull Type type) {
 		GenPackage genPackage = getGenPackage(type);
 		if (genPackage == null) {
@@ -602,6 +628,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return genPackage.getQualifiedFactoryInstanceAccessor();
 	}
 	
+	@Override
 	public @Nullable String getQualifiedPackageInterfaceName(@NonNull EPackage ePackage) {
 		GenPackage genPackage = getGenPackage(ePackage);
 		if (genPackage == null) {
@@ -610,10 +637,12 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return genPackage.getQualifiedPackageInterfaceName();
 	}
 
+	@Override
 	public @NonNull String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
 		return DomainUtil.nonNullEMF(genPackage.getQualifiedValidatorClassName());
 	}
 	
+	@Override
 	public @NonNull String getSetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException {
 		GenFeature genFeature = getGenFeature(eStructuralFeature);
 		String setAccessor = genFeature.getAccessorName();
@@ -623,6 +652,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + eStructuralFeature);
 	}
 
+	@Override
 	public @NonNull String getTablesClassName(@NonNull GenPackage genPackage) {
 		return ImportUtils.getAffixedName(genPackage.getQualifiedPackageName() + "." + genPackage.getPrefix() + TABLES_CLASS_SUFFIX);
 	}

@@ -103,6 +103,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getCondition() {
 		return condition;
 	}
@@ -127,6 +128,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCondition(CGValuedElement newCondition) {
 		if (newCondition != condition) {
 			NotificationChain msgs = null;
@@ -146,6 +148,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getThenExpression() {
 		return thenExpression;
 	}
@@ -170,6 +173,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThenExpression(CGValuedElement newThenExpression) {
 		if (newThenExpression != thenExpression) {
 			NotificationChain msgs = null;
@@ -189,6 +193,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getElseExpression() {
 		return elseExpression;
 	}
@@ -213,6 +218,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElseExpression(CGValuedElement newElseExpression) {
 		if (newElseExpression != elseExpression) {
 			NotificationChain msgs = null;
@@ -378,6 +384,7 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGIfExp)thatValue) : null;
 	}

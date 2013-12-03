@@ -82,6 +82,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isBooleanValue() {
 		return booleanValue;
 	}
@@ -91,6 +92,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBooleanValue(boolean newBooleanValue) {
 		boolean oldBooleanValue = booleanValue;
 		booleanValue = newBooleanValue;
@@ -179,6 +181,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @NonNull Object getConstantValue() {
 		return booleanValue == true;
 	}
@@ -187,6 +190,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (this == thatValue) {
 			return Boolean.TRUE;

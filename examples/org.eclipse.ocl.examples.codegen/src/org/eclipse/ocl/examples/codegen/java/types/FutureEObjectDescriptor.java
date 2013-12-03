@@ -39,6 +39,7 @@ public class FutureEObjectDescriptor extends AbstractDescriptor implements Simpl
 		this.className = className;
 	}
 
+	@Override
 	public void append(@NonNull JavaStream js) {
 		js.appendClassReference(className);
 	}
@@ -48,19 +49,23 @@ public class FutureEObjectDescriptor extends AbstractDescriptor implements Simpl
 		return eClassifier;
 	}
 
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return NamedFuture.class;
 	}
 
+	@Override
 	@NonNull
 	public String getClassName() {
 		return className;
 	}
 
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return null;
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		return typeDescriptor == this;
 	}

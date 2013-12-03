@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  */
 public class JUnitCodeGenerator extends JavaCodeGenerator
 {
-	public static String generateClassFile(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL query,
+	public static @NonNull String generateClassFile(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL query,
 			@NonNull String packageName, @NonNull String className) {
 		JUnitCodeGenerator expressionInOCL2Class = new JUnitCodeGenerator(metaModelManager, true);
 		return expressionInOCL2Class.generate(query, packageName, className);
@@ -101,6 +101,7 @@ public class JUnitCodeGenerator extends JavaCodeGenerator
 		return ImportUtils.resolveImports(cg2JavaClassVisitor.toString(), long2ShortImportNames);
 	}
 
+	@Override
 	public @NonNull CodeGenAnalyzer getAnalyzer() {
 		return cgAnalyzer;
 	}

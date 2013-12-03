@@ -18,6 +18,7 @@ import java.io.File;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -32,8 +33,8 @@ public interface CodeGenHelper
 	/**
 	 * Return the <%...%> escaped name for a type.
 	 */
-	LibraryOperation loadClass(ExpressionInOCL query, File targetFolder,
-			String packageName, String className, boolean saveSource) throws Exception;
+	@Nullable LibraryOperation loadClass(@NonNull ExpressionInOCL query, @NonNull File targetFolder,
+			@NonNull String packageName, @NonNull String className, boolean saveSource) throws Exception;
 	
 	/**
 	 * Return the GenPackage for a type.

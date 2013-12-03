@@ -74,6 +74,7 @@ public class CGLibraryIterateCallExpImpl extends CGLibraryIterationCallExpImpl i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGIterator getResult() {
 		return result;
 	}
@@ -98,6 +99,7 @@ public class CGLibraryIterateCallExpImpl extends CGLibraryIterationCallExpImpl i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResult(CGIterator newResult) {
 		if (newResult != result) {
 			NotificationChain msgs = null;

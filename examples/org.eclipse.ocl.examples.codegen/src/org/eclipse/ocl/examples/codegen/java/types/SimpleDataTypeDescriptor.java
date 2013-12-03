@@ -38,23 +38,28 @@ public class SimpleDataTypeDescriptor extends AbstractDescriptor implements Simp
 		this.className = className;
 	}
 
+	@Override
 	public void append(@NonNull JavaStream javaStream) {
 		javaStream.appendClassReference(className);
 	}
 
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return NamedFuture.class;
 	}
 
+	@Override
 	@NonNull
 	public String getClassName() {
 		return className;
 	}
 
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return null;
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		return typeDescriptor == this;
 	}

@@ -73,6 +73,7 @@ public class CGCastExpImpl extends CGCallExpImpl implements CGCastExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorType getExecutorType() {
 		return executorType;
 	}
@@ -82,6 +83,7 @@ public class CGCastExpImpl extends CGCallExpImpl implements CGCastExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorType(CGExecutorType newExecutorType) {
 		CGExecutorType oldExecutorType = executorType;
 		executorType = newExecutorType;

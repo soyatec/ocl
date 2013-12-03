@@ -38,6 +38,7 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 		js.append(".TRUE_VALUE");
 	}
 	
+	@Override
 	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
@@ -78,6 +79,7 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 		return true;
 	}
 	
+	@Override
 	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGInvalid cgInvalidValue;
 		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();

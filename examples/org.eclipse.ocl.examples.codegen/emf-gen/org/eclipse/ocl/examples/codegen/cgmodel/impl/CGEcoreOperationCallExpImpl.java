@@ -72,6 +72,7 @@ public class CGEcoreOperationCallExpImpl extends CGOperationCallExpImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEOperation() {
 		return eOperation;
 	}
@@ -81,6 +82,7 @@ public class CGEcoreOperationCallExpImpl extends CGOperationCallExpImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEOperation(EOperation newEOperation) {
 		EOperation oldEOperation = eOperation;
 		eOperation = newEOperation;

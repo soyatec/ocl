@@ -152,6 +152,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGPackage getContainingPackage() {
 		if (eContainerFeatureID() != CGModelPackage.CG_CLASS__CONTAINING_PACKAGE) return null;
 		return (CGPackage)eInternalContainer();
@@ -172,6 +173,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContainingPackage(CGPackage newContainingPackage) {
 		if (newContainingPackage != eInternalContainer() || (eContainerFeatureID() != CGModelPackage.CG_CLASS__CONTAINING_PACKAGE && newContainingPackage != null)) {
 			if (EcoreUtil.isAncestor(this, newContainingPackage))
@@ -193,6 +195,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull List<CGOperation> getOperations() {
 		if (operations == null) {
@@ -206,6 +209,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull List<CGProperty> getProperties() {
 		if (properties == null) {
@@ -219,6 +223,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGConstraint> getInvariants() {
 		if (invariants == null) {
 			invariants = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_CLASS__INVARIANTS);
@@ -231,6 +236,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGClass> getSuperTypes() {
 		if (superTypes == null) {
 			superTypes = new EObjectEList<CGClass>(CGClass.class, this, CGModelPackage.CG_CLASS__SUPER_TYPES);
@@ -243,6 +249,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInterface() {
 		return interface_;
 	}
@@ -252,6 +259,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInterface(boolean newInterface) {
 		boolean oldInterface = interface_;
 		interface_ = newInterface;
@@ -264,6 +272,7 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGClass> getTemplateParameters() {
 		if (templateParameters == null) {
 			templateParameters = new EObjectEList<CGClass>(CGClass.class, this, CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS);

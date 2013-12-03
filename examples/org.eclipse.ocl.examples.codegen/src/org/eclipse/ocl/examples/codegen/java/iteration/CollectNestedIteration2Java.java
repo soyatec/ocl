@@ -24,6 +24,7 @@ public class CollectNestedIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull CollectNestedIteration2Java INSTANCE = new CollectNestedIteration2Java();
 	
+	@Override
 	public boolean appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);

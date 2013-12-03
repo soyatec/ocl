@@ -97,12 +97,14 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		this.elementId = elementId;
 	}
 
+	@Override
 	public void appendCast(@NonNull JavaStream js) {
 		js.append("(");
 		append(js);
 		js.append(")");
 	}
 
+	@Override
 	public void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName) {
 		js.append("(");
 		js.appendValueName(thisValue);
@@ -117,10 +119,12 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		js.append("))");
 	}
 
+	@Override
 	public @Nullable CollectionDescriptor asCollectionDescriptor() {
 		return null;
 	}
 
+	@Override
 	public @Nullable EClassifier getEClassifier() {
 		return null;
 	}
@@ -129,6 +133,7 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		return elementId;
 	}
 
+	@Override
 	public boolean isAssignableTo(@NonNull Class<?> javaClass) {
 		return javaClass == Object.class;
 	}

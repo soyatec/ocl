@@ -42,22 +42,27 @@ public class FutureEObjectsDescriptor extends AbstractCollectionDescriptor imple
 		this.className = className;
 	}
 
+	@Override
 	public void append(@NonNull JavaStream javaStream) {
 		javaStream.appendClassReference(List.class, false, className);
 	}
 	
+	@Override
 	public @NonNull String getClassName() {
 		return className;
 	}
 
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return NamedFuture.class;
 	}
 
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return null;
 	}
 
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof FutureEObjectsDescriptor)) {
 			return false;

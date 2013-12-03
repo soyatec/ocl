@@ -30,23 +30,28 @@ public class RootObjectDescriptor extends AbstractDescriptor implements SimpleDe
 		super(elementId);
 	}
 
+	@Override
 	public void append(@NonNull JavaStream javaStream) {
 		javaStream.appendClassReference(Object.class);
 	}
 
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull String getClassName() {
 		return Object.class.getName();
 	}
 
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return Object.class;
 	}
 
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return Object.class;
 	}
 
+	@Override
 	public boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		return true;
 	}

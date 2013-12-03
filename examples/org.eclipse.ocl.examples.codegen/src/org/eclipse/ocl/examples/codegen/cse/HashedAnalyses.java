@@ -134,6 +134,7 @@ public class HashedAnalyses implements Iterable<AbstractAnalysis>
 		return map.size() <= 0;
 	}
 
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull Iterator<AbstractAnalysis> iterator() {
 		return map.values().iterator();

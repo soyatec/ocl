@@ -73,6 +73,7 @@ public class CGEcoreClassConstructorExpImpl extends CGConstructorExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEClass() {
 		return eClass;
 	}
@@ -82,6 +83,7 @@ public class CGEcoreClassConstructorExpImpl extends CGConstructorExpImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEClass(EClass newEClass) {
 		EClass oldEClass = eClass;
 		eClass = newEClass;
@@ -178,6 +180,7 @@ public class CGEcoreClassConstructorExpImpl extends CGConstructorExpImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? EquivalenceUtils.isEquivalent(this, (CGEcoreClassConstructorExp)thatValue) : null;
 	}
