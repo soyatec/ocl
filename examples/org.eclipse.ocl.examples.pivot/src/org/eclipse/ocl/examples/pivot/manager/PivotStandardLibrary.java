@@ -26,8 +26,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
+<<<<<<< Upstream, based on edw/423490a
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
+=======
+import org.eclipse.ocl.examples.library.LibraryConstants;
+>>>>>>> 9c8f4d0 [356243] Trim OCLstdlibPackage to manual dummy
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -58,7 +62,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	 * constant is repeated in GenersateOCLstdlibModel.mwe2 an in
 	 * org.eclipse.ocl.examples.library/plugin.xml.
 	 */
-	public static final @NonNull String DEFAULT_OCL_STDLIB_URI = OCLstdlib.STDLIB_URI;
+	public static final @NonNull String DEFAULT_OCL_STDLIB_URI = LibraryConstants.STDLIB_URI;
 
 	/**
 	 * The URI to provide the default Standard Library. This value may be

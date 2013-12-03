@@ -26,5 +26,10 @@ public interface LibraryConstants
 	@SuppressWarnings("null")
 	static final @NonNull URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/oclstdlib.genmodel", true); //$NON-NLS-1$ //$NON-NLS-2$
 
+	/**
+	 *	The URI of this Standard Library.
+	 */
+	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib"; //$NON-NLS-1$
+
 	static final @NonNull String COMPARE_TO = "compareTo"; //$NON-NLS-1$
 }

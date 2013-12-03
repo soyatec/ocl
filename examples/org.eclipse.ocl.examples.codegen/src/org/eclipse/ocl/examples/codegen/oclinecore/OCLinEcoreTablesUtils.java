@@ -52,7 +52,6 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.executor.ExecutorLambdaType;
 import org.eclipse.ocl.examples.library.executor.ExecutorSpecializedType;
 import org.eclipse.ocl.examples.library.executor.ExecutorTupleType;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -881,7 +880,7 @@ public class OCLinEcoreTablesUtils
 		if (asPackage == null) {
 			return null;
 		}
-		if (asPackage.getNsURI().equals(OCLstdlibPackage.eNS_URI)) {				// If generating OCLstdlibTables ...
+		if (asPackage.getNsURI().equals(LibraryConstants.STDLIB_URI)) {				// If generating OCLstdlibTables ...
 			mergeLibrary(asPackage);			// FIXME: redundant once M2T scans all partial types
 		}
 		return asPackage;

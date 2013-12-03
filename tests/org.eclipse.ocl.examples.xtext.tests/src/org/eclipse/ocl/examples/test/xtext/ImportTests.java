@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -333,9 +334,9 @@ public class ImportTests extends XtextTestCase
 			"}\n";
 		createOCLinEcoreFile("custom.oclstdlib", customLibrary);
 		String testFile =
-			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
+			"import '" + LibraryConstants.STDLIB_URI + "';\n" + 
 			"import 'custom.oclstdlib';\n" +
-			"library ocl : ocl = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {\n" +
+			"library ocl : ocl = '" + LibraryConstants.STDLIB_URI + "' {\n" +
 			"type MyType conformsTo OclAny{\n" +
 			"operation mixIn(r : Real, z : Complex, t : MyType) : Boolean;\n" +
 			"operation mixOut(q : WhatsThis) : Boolean;\n" +
@@ -349,11 +350,11 @@ public class ImportTests extends XtextTestCase
 	public void testImport_OCLstdlib_NoSuchFile() throws Exception {
 		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
-			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
+			"import '" + LibraryConstants.STDLIB_URI + "';\n" + 
 			"import 'NoSuchFile1';\n" + 
 			"import 'NoSuchFile2.oclstdlib';\n" +
 			"import 'NoSuchFile1';\n" +
-			"library anotherOne : xxx = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib'{}\n";
+			"library anotherOne : xxx = '" + LibraryConstants.STDLIB_URI + "'{}\n";
 		Bag<String> bag = new BagImpl<String>();
 		String template2 = getNoSuchFileMessage();
 		bag.add(DomainUtil.bind(OCLMessages.UnresolvedLibrary_ERROR_, "NoSuchFile1", DomainUtil.bind(template2, getProjectFileURI("NoSuchFile1").toFileString())));
@@ -374,12 +375,12 @@ public class ImportTests extends XtextTestCase
 	public void testImport_OCLstdlib_WrongURI() throws Exception {
 		TestCaseAppender.INSTANCE.uninstall();
 		String testFile =
-			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
-			"library anotherOne : xxx = 'http://www.eclipse.org/ocl/3.1/OCL.oclstdlib'{}\n";
+			"import '" + LibraryConstants.STDLIB_URI + "';\n" + 
+			"library anotherOne : xxx = 'http://www.eclipse.org/ocl/3.1/OCL.oclstdlib'{}\n";		// NB 3.1 rather than 3.1.0
 		Bag<String> bag = new BagImpl<String>();
 		bag.add(OCLMessages.EmptyLibrary_ERROR_);
-		bag.add(DomainUtil.bind(OCLMessages.UnresolvedLibrary_ERROR_, "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib",
-			DomainUtil.bind(OCLMessages.ImportedLibraryURI_ERROR_, "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "http://www.eclipse.org/ocl/3.1/OCL.oclstdlib")));
+		bag.add(DomainUtil.bind(OCLMessages.UnresolvedLibrary_ERROR_, LibraryConstants.STDLIB_URI,
+			DomainUtil.bind(OCLMessages.ImportedLibraryURI_ERROR_, LibraryConstants.STDLIB_URI, "http://www.eclipse.org/ocl/3.1/OCL.oclstdlib")));
 		doBadLoadFromString("string.oclstdlib", testFile, bag);
 	}
 	

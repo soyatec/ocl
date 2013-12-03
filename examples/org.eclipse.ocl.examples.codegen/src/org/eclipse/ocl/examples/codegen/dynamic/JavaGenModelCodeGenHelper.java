@@ -32,7 +32,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.oclinjunit.JUnitCodeGenerator;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -103,7 +103,7 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 			if (genPackage != null) {
 				return genPackage;
 			}
-			if (OCLstdlibPackage.eNS_URI.equals(nsURI)) {		// FIXME regularize
+			if (LibraryConstants.STDLIB_URI.equals(nsURI)) {		// FIXME regularize
 				genPackage = uriMap.get(PivotPackage.eNS_URI);
 				if (genPackage != null) {
 					return genPackage;

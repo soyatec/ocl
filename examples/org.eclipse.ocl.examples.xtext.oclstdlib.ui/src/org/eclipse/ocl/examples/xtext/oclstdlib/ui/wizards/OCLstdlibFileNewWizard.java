@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileDialog;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileNewWizard;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileNewWizardPage;
@@ -43,10 +44,10 @@ public class OCLstdlibFileNewWizard extends AbstractFileNewWizard
 	public @NonNull String getInitialContentsAsString(@NonNull IFile newFile, @NonNull AbstractFileDialog dialog) {
 		StringBuilder s = new StringBuilder();
 		s.append("-- import an existing library to be extended\n");
-		s.append("import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n");
+		s.append("import '" + LibraryConstants.STDLIB_URI + "';\n");
 		s.append("\n");
 		s.append("-- import an extension library re-using the imported library nsURI\n");
-		s.append("library lib : lib = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {\n");
+		s.append("library lib : lib = '" + LibraryConstants.STDLIB_URI + "' {\n");
 		s.append("    type String : PrimitiveType {\n");
 		s.append("    	-- define an additional operation accessed by my.strings.ExtraOperation.INSTANCE.evaluate\n");
 		s.append("    	operation extraOperation(elem : Boolean) : Boolean => 'my.strings.ExtraOperation';\n");

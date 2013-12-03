@@ -52,6 +52,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -453,7 +454,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				String nsURI = ((EPackage)ecoreContents.iterator().next()).getNsURI();
 				if (nsURI != null) {
-					String stdlibASUri = OCLstdlib.STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
+					String stdlibASUri = LibraryConstants.STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
 					OCLstdlib library = OCLstdlib.create(stdlibASUri, "ocl", "ocl", nsURI);
 					metaModelManager.installResource(library);
 //					metaModelManager.installAs(nsURI, OCLstdlibTables.PACKAGE);
@@ -575,7 +576,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		if ((asMetamodels != null) && (metaModelManager.getLibraryResource() == null)) {
 			String nsURI = asMetamodels.iterator().next().getNsURI();
 			if (nsURI != null) {
-				String stdlibASUri = OCLstdlib.STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
+				String stdlibASUri = LibraryConstants.STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION;
 				OCLstdlib library = OCLstdlib.create(stdlibASUri, "ocl", "ocl", nsURI);
 				metaModelManager.installResource(library);
 //				metaModelManager.installAs(nsURI, OCLstdlibTables.PACKAGE);

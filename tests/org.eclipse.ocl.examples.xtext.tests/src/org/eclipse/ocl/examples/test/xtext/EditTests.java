@@ -41,6 +41,7 @@ import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -648,8 +649,8 @@ public class EditTests extends XtextTestCase
 
 	public void testEdit_StaleSpecialization() throws Exception {
 		String testDocument = 
-			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
-			"library ocl : ocl = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {\n" +
+			"import '" + LibraryConstants.STDLIB_URI + "';\n" + 
+			"library ocl : ocl = '" + LibraryConstants.STDLIB_URI + "' {\n" +
 			"type MyType conformsTo OclAny{\n" +
 			"operation testFunction() : Boolean;\n" +
 			"}\n" +
@@ -662,7 +663,7 @@ public class EditTests extends XtextTestCase
 		assertResourceErrors("Loading input", xtextResource);
 		assertNoResourceErrors("Loading input", asResource);
 		//
-		Type myType = metaModelManager.getPrimaryType("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "MyType");
+		Type myType = metaModelManager.getPrimaryType(LibraryConstants.STDLIB_URI, "MyType");
 		SequenceType sequenceType = metaModelManager.getSequenceType();
 		CollectionTypeServer.TemplateArguments templateArguments = new CollectionTypeServer.TemplateArguments(myType, ValuesUtil.ZERO_VALUE, ValuesUtil.UNLIMITED_VALUE);
 		CollectionTypeServer sequenceTypeServer = (CollectionTypeServer) metaModelManager.getTypeServer(sequenceType);

@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -37,7 +38,6 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManageable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
-import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 
 public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary implements MetaModelManageable
 {
@@ -56,7 +56,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 	public PivotExecutorStandardLibrary(EcoreExecutorPackage... execPackages) {
 		OCLstdlibTables.PACKAGE.getClass();
 		this.metaModelManager = new MetaModelManager();
-		metaModelManager.setDefaultStandardLibraryURI(OCLstdlib.STDLIB_URI);
+		metaModelManager.setDefaultStandardLibraryURI(LibraryConstants.STDLIB_URI);
 		PivotTables.PACKAGE.getClass();
 	}
 

@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -271,8 +272,8 @@ public class EditorTests extends XtextTestCase
 	
 	public void testEditor_OpenOCLStdLibEditor() throws Exception {
 		doTestEditor(OCLstdlibUiModule.EDITOR_ID, "test.oclstdlib",
-			"import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';\n" + 
-			"library test : xxx = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' { }");
+			"import '" + LibraryConstants.STDLIB_URI + "';\n" + 
+			"library test : xxx = '" + LibraryConstants.STDLIB_URI + "' { }");
 	}	
 	
 	public void testEditor_OpenOCLStdLibEditor4OCL_OCLstdlib() throws Exception {
