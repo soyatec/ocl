@@ -31,18 +31,21 @@ import javax.tools.ToolProvider;
 import javax.tools.JavaCompiler.CompilationTask;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 
 public class OCL2JavaFileObject extends SimpleJavaFileObject
 {
 //	public static long base = System.currentTimeMillis();
 	
-	private static JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-	private static StandardJavaFileManager stdFileManager = compiler
-			.getStandardFileManager(null, Locale.getDefault(), null);
+	private static @Nullable JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+	private static @Nullable StandardJavaFileManager stdFileManager = compiler != null ? compiler.getStandardFileManager(null, Locale.getDefault(), null) : null;
 	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-source", "1.5", "-target", "1.5", "-g");
 
 	public static Class<?> loadClass(String qualifiedName, String javaCodeSource) throws Exception {
+		if (compiler == null) {
+			throw new IllegalStateException("No Java Compiler provided by the Java platform - you need to use a JDK rather than a JRE");
+		}
 //		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
 		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
 				new OCL2JavaFileObject(qualifiedName, javaCodeSource));
