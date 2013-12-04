@@ -397,7 +397,15 @@ public class PackageManager implements PackageServerParent
 	public @NonNull PackageTracker getPackageTracker(@NonNull DomainPackage pivotPackage) {	// FIXME Review wrt getMemberPackageServer()
 		PackageTracker packageTracker = package2tracker.get(pivotPackage);
 		if (packageTracker == null) {
-			PackageServer packageServer = createRootPackageServer(pivotPackage);
+			DomainPackage nestingPackage = pivotPackage.getNestingPackage();
+			PackageServer packageServer;
+			if (nestingPackage != null) {
+				PackageServer nestingPackageServer = getPackageServer(nestingPackage);
+				packageServer = nestingPackageServer.getMemberPackageServer(pivotPackage);
+			}
+			else {
+				packageServer = createRootPackageServer(pivotPackage);
+			}
 			packageServer.assertSamePackage(pivotPackage);
 			packageTracker = packageServer.getPackageTracker(pivotPackage);
 		}

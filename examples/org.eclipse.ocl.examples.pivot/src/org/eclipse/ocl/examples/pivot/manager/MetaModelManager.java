@@ -1351,7 +1351,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (isUnspecialized) {
 			return containerType;	
 		}
-		CollectionTypeServer typeServer = (CollectionTypeServer) getTypeServer(containerType);
+		TypeServer typeServer2 = getTypeServer(containerType);
+		CollectionTypeServer typeServer = (CollectionTypeServer) typeServer2;
 		@SuppressWarnings("unchecked")
 		T specializedType = (T) typeServer.getSpecializedType(elementType, lower, upper);
 		return specializedType;
@@ -1604,10 +1605,25 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (isUnspecialized) {
 			return libraryType;	
 		}
-		TemplateableTypeServer typeServer = (TemplateableTypeServer) getTypeServer(libraryType);
-		@SuppressWarnings("unchecked")
-		T specializedType = (T) typeServer.getSpecializedType(templateArguments);
-		return specializedType;
+		TypeServer libraryTypeServer = getTypeServer(libraryType);
+		if (libraryTypeServer instanceof TemplateableTypeServer) {
+			TemplateableTypeServer typeServer = (TemplateableTypeServer) libraryTypeServer;
+			@SuppressWarnings("unchecked")
+			T specializedType = (T) typeServer.getSpecializedType(templateArguments);
+			return specializedType;
+		}
+		else if (libraryTypeServer instanceof MetaclassServer) {
+			MetaclassServer typeServer = (MetaclassServer) libraryTypeServer;
+			assert templateArguments.size() == 1;
+			ParameterableElement parameterableElement = templateArguments.get(0);
+			assert parameterableElement instanceof Type;
+			@SuppressWarnings("unchecked")
+			T specializedType = (T) typeServer.getMetaclass((Type) parameterableElement);
+			return specializedType;
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	public @NonNull Iterable<TypeServer> getLocalClasses(@NonNull org.eclipse.ocl.examples.pivot.Package pkg) {
@@ -1741,6 +1757,50 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 //		throw new UnsupportedOperationException();
 		return getMetaclass(instanceType);
+	}
+
+	protected @NonNull Type getMutable(@NonNull Type asType) {
+		Resource asResource = asType.eResource();
+		if (DomainUtil.isRegistered(asResource)) {
+			for (DomainType domainType : getPartialTypes(asType)) {
+				if ((domainType != asType) && (domainType instanceof Type)) {
+					Type asPartialType = (Type)domainType;
+					if (!DomainUtil.isRegistered(asPartialType.eResource())) {
+						return asPartialType;
+					}
+				}
+			}
+			Resource clonedResource = null;
+			org.eclipse.ocl.examples.pivot.Package asPackage = asType.getPackage();
+			String name = DomainUtil.nonNullModel(asPackage.getName());
+			String nsPrefix = DomainUtil.nonNullModel(asPackage.getNsPrefix());
+			String nsURI = DomainUtil.nonNullModel(asPackage.getNsURI());
+			if (asPackage instanceof Library) {
+				String uriString = DomainUtil.nonNullModel(asResource.getURI().toString());
+				clonedResource = OCLstdlib.create(uriString, name, nsPrefix, nsURI);
+			}
+			else if (asResource instanceof OCLMetaModel) {
+				org.eclipse.ocl.examples.pivot.Package mutableMetamodel = OCLMetaModel.create(this, name, nsPrefix, nsURI);
+				clonedResource = mutableMetamodel.eResource();
+			}
+			if (clonedResource != null) {
+				installResource(clonedResource);
+				asResourceSet.getResources().add(clonedResource);
+			}
+			else {
+				throw new UnsupportedOperationException("No cloned type");
+			}
+			for (DomainType domainType : getPartialTypes(asType)) {
+				if ((domainType != asType) && (domainType instanceof Type)) {
+					Type asPartialType = (Type)domainType;
+					if (!DomainUtil.isRegistered(asPartialType.eResource())) {
+						return asPartialType;
+					}
+				}
+			}
+			throw new UnsupportedOperationException("No cloned library type");
+		}
+		return asType;
 	}
 
 	@Override
@@ -2360,6 +2420,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return null;
 		}
 		String name = thisType.getName();
+		if (name == null) {
+			return null;
+		}
 		// If there is an explicit property with the implicit name do nothing.
 		List<Property> ambiguousOpposites = null;
 		for (Property thatProperty : thatType.getOwnedAttribute()) {
@@ -2404,6 +2467,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			newOpposite.setType(getSetType(thisType, null, null));
 			newOpposite.setIsRequired(true);
 		}
+		thatType = getMutable(thatType);
 		thatType.getOwnedAttribute().add(newOpposite);		// WIP moved for debugging
 		newOpposite.setOpposite(thisProperty);
 		thisProperty.setOpposite(newOpposite);
