@@ -18,8 +18,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -42,6 +44,7 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -125,6 +128,22 @@ public abstract class GenerateOCLstdlib extends GenerateOCLCommonXtend
 					eClass.getEOperations().clear();
 					eClass.getEStructuralFeatures().clear();
 				}
+				EAnnotation eAnnotation = eClassifier.getEAnnotation(PivotConstants.OMG_OCL_ANNOTATION_SOURCE);
+				if (eAnnotation != null) {
+					eClassifier.getEAnnotations().remove(eAnnotation);
+				}
+				eAnnotation = eClassifier.getEAnnotation(GenModelPackage.eNS_URI);
+				if (eAnnotation != null) {
+					eClassifier.getEAnnotations().remove(eAnnotation);
+				}
+			}
+			EAnnotation eAnnotation = ePackage.getEAnnotation(PivotConstants.OMG_OCL_ANNOTATION_SOURCE);
+			if (eAnnotation != null) {
+				ePackage.getEAnnotations().remove(eAnnotation);
+			}
+			eAnnotation = ePackage.getEAnnotation(GenModelPackage.eNS_URI);
+			if (eAnnotation != null) {
+				ePackage.getEAnnotations().remove(eAnnotation);
 			}
 			log.info("Saving '" + ecoreURI + "'");
 			eResource.save(null);

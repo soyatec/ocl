@@ -37,8 +37,11 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -342,7 +345,8 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 			"		property parent#children2 : Parent[?] { ordered };\n" +
 			"	}\n" +
 			"}\n";
-		Resource metaModel = cs2ecore(getOCL(), metaModelText, null);
+		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory(null, new MetaModelManager()));
+		Resource metaModel = cs2ecore(ocl1, metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
 		EClass parentClass = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Parent"));
 		EClass child1Class = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Child1"));
@@ -410,6 +414,7 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		assertSemanticErrorQuery2(children2Type, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", children2Type);
 		//
 		assertQueryTrue(parent, "child1 = child1");
+		ocl1.dispose();
 	}
 
 	/**

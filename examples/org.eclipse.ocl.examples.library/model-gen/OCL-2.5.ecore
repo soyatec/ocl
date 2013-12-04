@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="oclstdlib" nsURI="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib"
+    nsPrefix="oclstdlib">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="org.eclipse.ocl.examples.domain.values.IntegerValue"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="org.eclipse.ocl.examples.domain.values.RealValue"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="org.eclipse.ocl.examples.domain.values.IntegerValue"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Bag" instanceClassName="org.eclipse.ocl.examples.domain.values.BagValue">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Collection" instanceClassName="org.eclipse.ocl.examples.domain.values.CollectionValue">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Metaclass" eSuperTypes="#//Class #//OclType">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OclAny"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclComparable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclInvalid" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclLambda"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclMessage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclSelf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclSummable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclTuple"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclType" eSuperTypes="#//OclElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OclVoid"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="OrderedSet" instanceClassName="org.eclipse.ocl.examples.domain.values.OrderedSetValue">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Sequence" instanceClassName="org.eclipse.ocl.examples.domain.values.SequenceValue">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Set" instanceClassName="org.eclipse.ocl.examples.domain.values.SetValue">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//OclState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//OclType"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="UniqueCollection" instanceClassName="org.eclipse.ocl.examples.domain.values.UniqueCollectionValue">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+</ecore:EPackage>

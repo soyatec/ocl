@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 
 /**
  * An EInvokeOperation supports evaluation of an operation call by using eInvoke on the underlying eObject.
@@ -63,6 +64,15 @@ public class EInvokeOperation extends AbstractPolyOperation
 		EObject eObject = asNavigableObject(sourceValue);
 		EList<Object> arguments = evaluator.getIdResolver().unboxedValuesOfEach();
 		try {
+			if (eObject instanceof PivotObjectImpl) {		// FIXME use variant EInvokeOperation
+				EObject eTarget = ((PivotObjectImpl)eObject).getETarget();
+				if (eTarget != null) {
+					eObject = eTarget;
+					Object eResult = eObject.eInvoke(eOperation, arguments);
+					Object resultValue = getResultValue(evaluator, returnTypeId, eResult);
+					return evaluator.getIdResolver().boxedValueOf(resultValue);
+				}
+			}
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);
 		} catch (InvocationTargetException e) {

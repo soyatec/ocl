@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -146,7 +147,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 				if (eObject instanceof EPackage) {
 					EPackage ePackage = (EPackage)eObject;
 					Resource resource = ePackage.eResource();
-					if ((resource != null) && (resource.getResourceSet() == null)) {	// If installed
+					if (DomainUtil.isRegistered(resource)) {
 						importURI = ePackage.getNsURI();
 					}
 				}
