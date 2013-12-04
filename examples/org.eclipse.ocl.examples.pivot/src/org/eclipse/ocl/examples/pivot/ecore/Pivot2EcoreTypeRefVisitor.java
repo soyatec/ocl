@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -56,6 +57,12 @@ public class Pivot2EcoreTypeRefVisitor
 		super(context);
 		this.metaModelManager = context.getMetaModelManager();
 	}
+
+	protected EObject getOCLstdlibType(@NonNull String typeName, @NonNull Type object) {
+		URI resourceURI = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.library/model-gen/OCL-2.5.ecore", true);
+		URI objectURI = resourceURI.appendFragment("//" + typeName);
+		return metaModelManager.getExternalResourceSet().getEObject(objectURI, true);
+	}	
 
 	public EGenericType resolveEGenericType(Type type) {
 		EObject eType = safeVisit(type);
@@ -94,8 +101,8 @@ public class Pivot2EcoreTypeRefVisitor
 
 	@Override
 	public EObject visitAnyType(@NonNull AnyType object) {
-		return EcorePackage.Literals.EJAVA_OBJECT;			// FIXME Something more reversible
-	}	
+		return getOCLstdlibType(TypeId.OCL_ANY_NAME, object);
+	}
 
 	@Override
 	public EObject visitCollectionType(@NonNull CollectionType object) {
@@ -105,7 +112,7 @@ public class Pivot2EcoreTypeRefVisitor
 
 	@Override
 	public EObject visitInvalidType(@NonNull InvalidType object) {
-		return EcorePackage.Literals.EOBJECT;			// FIXME Something more reversible
+		return getOCLstdlibType(TypeId.OCL_INVALID_NAME, object);
 	}	
 
 	@Override
@@ -212,6 +219,6 @@ public class Pivot2EcoreTypeRefVisitor
 
 	@Override
 	public EObject visitVoidType(@NonNull VoidType object) {
-		return EcorePackage.Literals.EOBJECT;			// FIXME Something more reversible
+		return getOCLstdlibType(TypeId.OCL_VOID_NAME, object);
 	}	
 }

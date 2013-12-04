@@ -342,12 +342,20 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager2.dispose();
 	}
 
-/* BUG 356243
 	public void testBug356243_oclinecore() throws IOException, InterruptedException {
+		String testFile = 
+			"package any : any = 'http:/any'\n" +
+			"{\n" +
+			"	class Bug356243\n" +
+			"	{\n" +
+			"		property is_always_typed : OclAny { ordered };\n" +
+			"	}\n" +
+			"}\n";
+		createOCLinEcoreFile("Bug356243.oclinecore", testFile);
 		MetaModelManager metaModelManager = new MetaModelManager();
 		doRoundTripFromOCLinEcore(metaModelManager, "Bug356243");
 		metaModelManager.dispose();
-	} */
+	}
 
 	public void testAggregatesRoundTrip() throws IOException, InterruptedException {
 		String testFile = 

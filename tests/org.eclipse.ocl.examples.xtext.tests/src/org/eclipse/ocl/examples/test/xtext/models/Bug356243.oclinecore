@@ -1,7 +1,0 @@
-package any : any = 'http:/any'
-{
-	class Bug356243
-	{
-		property is_always_typed : OclAny { ordered };
-	}
-}
