@@ -43,6 +43,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -300,6 +301,19 @@ public class Pivot2Ecore extends AbstractConversion
 	}
 
 	/**
+	 * Return the non-Null CollectionType if asType can use Ecore multiplicities to express the (outer) collection.
+	 */
+	public @Nullable CollectionType isEcoreCollection(@Nullable Type asType) {
+		if (!(asType instanceof CollectionType)) {
+			return null;
+		}
+		if (asType.getUnspecializedElement() == metaModelManager.getCollectionType()) {
+			return null;		// Collection(T) cannot be distinguished from concrete Ecore collections
+		}
+		return (CollectionType)asType;
+	}
+
+	/**
 	 * Return tre if asPackage is a Pivot Metamodel.
 	 */
 	public boolean isPivot(@NonNull org.eclipse.ocl.examples.pivot.Package asPackage) {
@@ -330,4 +344,5 @@ public class Pivot2Ecore extends AbstractConversion
 			assert oldPrimary == null;
 		}
 	}
+
 }

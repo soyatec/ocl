@@ -365,14 +365,17 @@ public class RoundTripTests extends XtextTestCase
 				"{\n" +
 				"property bag1 : B[*] {!unique};\n" +
 				"property bag2 : Bag(B);\n" +
-//				"property collection2 : Collection(B);\n" +		FIXME should be a validation warning
+				"property bag3 : B[3..5] {!unique};\n" +
+//				"property bag4 : Bag(B)[4..6];\n" +
+				"property setCollection : Set(Collection(B));\n" +
+				"property collection2 : Collection(B);\n" +
 				"property orderedset1 : B[*] {ordered};\n" +
 				"property orderedset2 : OrderedSet(B);\n" +
 				"property sequence1 : B[*] {ordered, !unique};\n" +
 				"property sequence2 : Sequence(B);\n" +
 				"property set1 : B[*];\n" +
 				"property set2 : Set(B);\n" +
-//				"property tuple : Tuple(b : B);\n" +
+//				"property tuple : Tuple(b : B);\n" +		// Bug 401938
 				"}\n" +
 				"}\n";
 		createOCLinEcoreFile("Aggregates.oclinecore", testFile);

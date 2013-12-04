@@ -1590,7 +1590,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public @NonNull <T extends Type> T getLibraryType(@NonNull T libraryType, @NonNull List<? extends ParameterableElement> templateArguments) {
-		assert !(libraryType instanceof CollectionType);
+//		assert !(libraryType instanceof CollectionType);
 		assert !(libraryType instanceof Metaclass<?>);
 		assert libraryType == PivotUtil.getUnspecializedTemplateableElement(libraryType);
 		TemplateSignature templateSignature = libraryType.getOwnedTemplateSignature();
@@ -1619,6 +1619,15 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			assert parameterableElement instanceof Type;
 			@SuppressWarnings("unchecked")
 			T specializedType = (T) typeServer.getMetaclass((Type) parameterableElement);
+			return specializedType;
+		}
+		else if (libraryTypeServer instanceof CollectionTypeServer) {
+			CollectionTypeServer typeServer = (CollectionTypeServer) libraryTypeServer;
+			assert templateArguments.size() == 1;
+			ParameterableElement parameterableElement = templateArguments.get(0);
+			assert parameterableElement instanceof Type;
+			@SuppressWarnings("unchecked")
+			T specializedType = (T) typeServer.getSpecializedType((Type) parameterableElement, null, null);
 			return specializedType;
 		}
 		else {

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.AnyType;
@@ -95,14 +96,17 @@ public class Pivot2EcoreTypeRefVisitor
 
 	@Override
 	public EObject visitAnyType(@NonNull AnyType object) {
-//		return EcorePackage.Literals.EJAVA_OBJECT;
 		return OCLstdlibPackage.Literals.OCL_ANY;
 	}
 
 	@Override
 	public EObject visitCollectionType(@NonNull CollectionType object) {
-		// TODO Auto-generated method stub
-		return super.visitCollectionType(object);
+		EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
+		EClassifier eClassifier = EcoreUtils.getNamedElement(OCLstdlibPackage.eINSTANCE.getEClassifiers(), object.getName());
+		eGenericType.setEClassifier(eClassifier);
+		safeVisitAll(eGenericType.getETypeArguments(), object.getTemplateBinding().get(0).getParameterSubstitution());
+		// FIXME bounds, supers
+		return eGenericType;
 	}
 
 	@Override
@@ -211,6 +215,11 @@ public class Pivot2EcoreTypeRefVisitor
 		safeVisitAll(eGenericType.getETypeArguments(), templateBindings.get(0).getParameterSubstitution());
 		return eGenericType;
 	}
+
+//	@Override
+//	public EObject visitTupleType(@NonNull TupleType object) {
+//		return getOCLstdlibType(/*TypeId.OCL_VOID_NAME*/"OclTuple", object);
+//	}	
 
 	@Override
 	public EObject visitVoidType(@NonNull VoidType object) {

@@ -320,8 +320,9 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 		EStructuralFeature eStructuralFeature;
 		Type type = pivotProperty.getType();
-		if (type instanceof CollectionType) {					// One level of unified collection types gets unwrapped.
-			type = ((CollectionType)type).getElementType();
+		CollectionType ecoreCollectionType = context.isEcoreCollection(type);
+		if (ecoreCollectionType != null) {
+			type = ecoreCollectionType.getElementType();
 		}
 		if (type instanceof DataType) {
 			EAttribute eAttribute = EcoreFactory.eINSTANCE.createEAttribute();
