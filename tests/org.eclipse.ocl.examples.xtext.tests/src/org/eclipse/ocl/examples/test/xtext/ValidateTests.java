@@ -270,6 +270,52 @@ public class ValidateTests extends XtextTestCase
 			"'Member::UniqueLoans' constraint is not satisfied for 'Member m3'",
 			"'Book::ExactlyOneCopy' constraint is not satisfied for 'Book b2'");
 	}
+	public void testValidate_Validate_completeocl_Bug422583() throws IOException, InterruptedException {		
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		ResourceSet resourceSet2 = DomainUtil.nonNullState(resourceSet);
+		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet2);			
+		OCLDelegateDomain.initialize(resourceSet2, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
+		//
+		URI umlURI = getProjectFileURI("Names.uml");
+		URI oclURI = getProjectFileURI("Bug422583.ocl");
+		String testDocument = 
+				"import uml : 'http://www.eclipse.org/uml2/4.0.0/UML#/'\n" +
+				"package uml\n" +
+				"  context Element\n" +
+				"  def: alwaysTrue() : Boolean = true\n" +
+				"  def: rootFalse() : Boolean = false\n" +
+				"  inv IsElement: self.alwaysTrue()\n" +
+				"  context Classifier\n" +
+				"  def: rootFalse() : Boolean = true\n" +
+				"  def: leafFalse() : Boolean = true\n" +
+				"  inv IsClassifier: self.alwaysTrue()\n" +
+				"  inv IsClassifierWrtLeaf: self.leafFalse()\n" +
+				"  context Class\n" +
+				"  def: leafFalse() : Boolean = false\n" +
+				"  inv IsClass: self.alwaysTrue()\n" +
+				"  inv IsClassWrtRoot: self.rootFalse()\n" +
+				"  inv IsClassWrtLeaf: self.leafFalse()\n" +
+				"endpackage\n";
+		createOCLinEcoreFile("Bug422583.ocl", testDocument);
+		//
+		Resource resource = DomainUtil.nonNullState(resourceSet2.getResource(umlURI, true));
+		assertValidationDiagnostics("Without Complete OCL", resource);
+		//
+		Helper helper = new Helper(resourceSet2) {
+			@Override
+			protected boolean error(@NonNull String primaryMessage, @Nullable String detailMessage) {
+				TestCase.fail(primaryMessage + "\n\t" + detailMessage);
+				return false;
+			}
+		};
+		assertTrue(helper.loadMetaModels());
+		assertTrue(helper.loadDocument(oclURI));
+		helper.installPackages();
+		
+		assertValidationDiagnostics("Without Complete OCL", resource,
+			"'Classifier::IsClassifierWrtLeaf' constraint is not satisfied for 'Class UNamed'",
+			"'Class::IsClassWrtLeaf' constraint is not satisfied for 'Class UNamed'");
+	}
 
 	@SuppressWarnings("null")
 	public void testValidate_Validate_oclinecore() throws IOException, InterruptedException {
