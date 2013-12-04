@@ -290,8 +290,7 @@ public class BaseCSPostOrderVisitor extends AbstractExtendingBaseCSVisitor<Conti
 			BasicContinuation<?> continuation = visitTypedElementCS(csReference);
 			assert continuation == null;
 			if (pivotOpposite == null) {
-				List<Property> ambiguousOpposites = metaModelManager.installPropertyDeclaration(pivotElement);
-				// FIXME accumulate, prune ambiguousOpposites
+				metaModelManager.installPropertyDeclaration(pivotElement);
 			}
 		}
 		return super.visitReferenceCS(csReference);
