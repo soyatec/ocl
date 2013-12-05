@@ -1,0 +1,1 @@
+The formatting of delegation failure diagnostics changes in EMF 2.10M2 so 2.10.0 upper bound is imposed.

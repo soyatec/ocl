@@ -22,6 +22,7 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -299,6 +300,16 @@ public class ValidateTests extends XtextTestCase
 		createOCLinEcoreFile("Bug422583.ocl", testDocument);
 		//
 		Resource resource = DomainUtil.nonNullState(resourceSet2.getResource(umlURI, true));
+		org.eclipse.uml2.uml.NamedElement uNamed = null;
+		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof org.eclipse.uml2.uml.Class) {
+				if ("UNamed".equals(((org.eclipse.uml2.uml.Class)eObject).getName())) {
+					uNamed = (org.eclipse.uml2.uml.NamedElement)eObject;
+					break;
+				}
+			}
+		}
 		assertValidationDiagnostics("Without Complete OCL", resource);
 		//
 		Helper helper = new Helper(resourceSet2) {
@@ -311,10 +322,10 @@ public class ValidateTests extends XtextTestCase
 		assertTrue(helper.loadMetaModels());
 		assertTrue(helper.loadDocument(oclURI));
 		helper.installPackages();
-		
+		String objectLabel = DomainUtil.getLabel(uNamed);
 		assertValidationDiagnostics("Without Complete OCL", resource,
-			"'Classifier::IsClassifierWrtLeaf' constraint is not satisfied for 'Class UNamed'",
-			"'Class::IsClassWrtLeaf' constraint is not satisfied for 'Class UNamed'");
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Classifier", "IsClassifierWrtLeaf", objectLabel),
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Class", "IsClassWrtLeaf", objectLabel));
 	}
 
 	@SuppressWarnings("null")
