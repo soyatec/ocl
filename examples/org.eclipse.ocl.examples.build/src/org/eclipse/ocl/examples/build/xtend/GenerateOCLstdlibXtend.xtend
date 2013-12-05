@@ -65,12 +65,14 @@ public class GenerateOCLstdlibXtend extends GenerateOCLstdlib
 			import java.util.Set;
 			import java.util.WeakHashMap;
 			
+			import org.eclipse.emf.common.notify.NotificationChain;
 			import org.eclipse.emf.common.util.TreeIterator;
 			import org.eclipse.emf.common.util.URI;
 			import org.eclipse.emf.ecore.EObject;
 			import org.eclipse.emf.ecore.EReference;
 			import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 			import org.eclipse.emf.ecore.resource.Resource;
+			import org.eclipse.emf.ecore.resource.ResourceSet;
 			import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 			import org.eclipse.jdt.annotation.NonNull;
 			import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -195,6 +197,29 @@ public class GenerateOCLstdlibXtend extends GenerateOCLstdlib
 					getContents().add(libraryModel);
 			//		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
 			//		liveOCLstdlibs.put(this, null);
+				}
+			
+				/**
+				 * Overridden to inhibit entry of the static shared instance in any ResourceSet.
+				 */
+				@Override
+				public NotificationChain basicSetResourceSet(ResourceSet resourceSet, NotificationChain notifications) {
+					if (this != INSTANCE) {
+						return super.basicSetResourceSet(resourceSet, notifications);
+					}
+					else {
+						return notifications;
+					}
+				}
+			
+				/**
+				 * Overridden to inhibit unloading of the static shared instance.
+				 */
+				@Override
+				protected void doUnload() {
+					if (this != INSTANCE) {
+						super.doUnload();
+					}
 				}
 			
 				protected static class Contents extends AbstractContents
