@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -401,7 +402,8 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryEquals(redApple, "RedApple", "self.name");
 		assertQueryEquals(redApple, "RedApple", "self.Fruit::name");
 		assertQueryEquals(redApple, "RedApple", "self.Apple::name");
-		assertValidationErrorQuery2(appleType, "self.Tree::name", "''PropertyCallExp::NonStaticSourceTypeIsConformant'' constraint is not satisfied for ''self.name''");
+		assertValidationErrorQuery2(appleType, "self.Tree::name",
+			EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "PropertyCallExp", "NonStaticSourceTypeIsConformant", "self.name");
 		assertQueryEquals(redApple, redApple, "self.oclAsType(Apple)");
 		assertQueryEquals(redApple, redApple, "self.oclAsType(fruit::Apple)");
 		assertQueryEquals(redApple, idResolver.createSetOfEach(null, redApple), "self->oclAsType(Set(Fruit))");

@@ -23,6 +23,7 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
@@ -179,7 +180,7 @@ public class ValidateTests extends XtextTestCase
 		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		@NonNull List<Diagnostic> diagnostics = doValidateOCLinEcore(ocl1, "Bug418552",
-			"'Property::CompatibleDefaultExpression' constraint is not satisfied for 'temp::Tester.total'");
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Property", "CompatibleDefaultExpression", "temp::Tester.total"));
 		Object property = diagnostics.get(0).getData().get(0);
 		assertEquals(PivotPackage.Literals.PROPERTY, ((EObject)property).eClass());
 		ModelElementCS csElement = ElementUtil.getCsElement((Element) property);
@@ -315,12 +316,12 @@ public class ValidateTests extends XtextTestCase
 		helper.installPackages();
 		
 		assertValidationDiagnostics("Without Complete OCL", resource, 
-			"'Book::SufficientCopies' constraint is not satisfied for 'Book b2'",
-			"'Member::AtMostTwoLoans' constraint is not satisfied for 'Member m3'",
-			"'Member::UniqueLoans' constraint is not satisfied for 'Member m3'",
-			"'Book::ExactlyOneCopy' constraint is not satisfied for 'Book b2'");
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Book", "SufficientCopies", "Book b2"),
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Member", "AtMostTwoLoans", "Member m3"),
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Member", "UniqueLoans", "Member m3"),
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Book", "ExactlyOneCopy", "Book b2"));
 	}
-	public void testValidate_Validate_completeocl_Bug422583() throws IOException, InterruptedException {		
+	public void testValidate_Validate_completeocl_Bug422583() throws IOException, InterruptedException {
 		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		ResourceSet resourceSet2 = DomainUtil.nonNullState(resourceSet);
 		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet2);			
@@ -349,6 +350,16 @@ public class ValidateTests extends XtextTestCase
 		createOCLinEcoreFile("Bug422583.ocl", testDocument);
 		//
 		Resource resource = DomainUtil.nonNullState(resourceSet2.getResource(umlURI, true));
+		org.eclipse.uml2.uml.NamedElement uNamed = null;
+		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof org.eclipse.uml2.uml.Class) {
+				if ("UNamed".equals(((org.eclipse.uml2.uml.Class)eObject).getName())) {
+					uNamed = (org.eclipse.uml2.uml.NamedElement)eObject;
+					break;
+				}
+			}
+		}
 		assertValidationDiagnostics("Without Complete OCL", resource);
 		//
 		Helper helper = new Helper(resourceSet2) {
@@ -361,10 +372,10 @@ public class ValidateTests extends XtextTestCase
 		assertTrue(helper.loadMetaModels());
 		assertTrue(helper.loadDocument(oclURI));
 		helper.installPackages();
-		
+		String objectLabel = DomainUtil.getLabel(uNamed);
 		assertValidationDiagnostics("Without Complete OCL", resource,
-			"'Classifier::IsClassifierWrtLeaf' constraint is not satisfied for '<<EClass>> <Class> UNamed'",
-			"'Class::IsClassWrtLeaf' constraint is not satisfied for '<<EClass>> <Class> UNamed'");
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Classifier", "IsClassifierWrtLeaf", objectLabel),
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Class", "IsClassWrtLeaf", objectLabel));
 	}
 
 	@SuppressWarnings("null")

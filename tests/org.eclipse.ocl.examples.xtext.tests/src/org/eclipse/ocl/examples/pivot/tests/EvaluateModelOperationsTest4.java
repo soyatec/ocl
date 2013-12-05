@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -454,7 +455,9 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		assertQueryTrue(null, "let x : Collection(Type) = Set{Integer,Real} in x->forAll(x : Type | x.name.indexOf('e') > 0)");
 		assertQueryTrue(null, "let x : Type[*] = Set{Integer,Real} in x->forAll(x : Type | x.name.indexOf('e') > 0)");
 		assertQueryTrue(null, "let x : Collection(Type[*]) = Set{Set{Integer,Real},Set{Boolean}} in x->forAll(x : Type[*] | x->size() > 0)");
-		assertValidationErrorQuery2(null, "let x : Collection(Type[*]) = Set{Set{Integer,Real},Set{Boolean}} in x->forAll(x : Type | x->size() > 0)", "''{0}'' constraint is not satisfied for ''{1}''", "IteratorExp::IteratorTypeIsSourceElementType", "x->forAll(x : Type[?] | x.oclAsSet()->size().>(0))");
-		assertValidationErrorQuery2(null, "let x : Collection(Type) = Set{Integer,Real} in x->forAll(x : Type[*] | x->size() > 0)", "''{0}'' constraint is not satisfied for ''{1}''", "IteratorExp::IteratorTypeIsSourceElementType", "x->forAll(x : Bag(Type)[?] | x->size().>(0))");
+		assertValidationErrorQuery2(null, "let x : Collection(Type[*]) = Set{Set{Integer,Real},Set{Boolean}} in x->forAll(x : Type | x->size() > 0)",
+			EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "IteratorExp", "IteratorTypeIsSourceElementType", "x->forAll(x : Type[?] | x.oclAsSet()->size().>(0))");
+		assertValidationErrorQuery2(null, "let x : Collection(Type) = Set{Integer,Real} in x->forAll(x : Type[*] | x->size() > 0)",
+			EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "IteratorExp", "IteratorTypeIsSourceElementType", "x->forAll(x : Bag(Type)[?] | x->size().>(0))");
 	}
 }
