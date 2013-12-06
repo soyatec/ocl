@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.commands.LoadCompleteOCLResourceHandler.Helper;
@@ -274,6 +275,7 @@ public class ValidateTests extends XtextTestCase
 	public void testValidate_Validate_completeocl_Bug422583() throws IOException, InterruptedException {		
 		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		ResourceSet resourceSet2 = DomainUtil.nonNullState(resourceSet);
+		UML2Pivot.initialize(resourceSet2);
 		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet2);			
 		OCLDelegateDomain.initialize(resourceSet2, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
 		//
