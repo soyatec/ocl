@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -40,8 +39,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
@@ -67,12 +69,14 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.osgi.framework.Bundle;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a
@@ -105,6 +109,12 @@ public class UsageTests
 			}
 			return s.toString();
 		}
+	}
+
+	public static boolean isWindows() {
+		String os = System.getProperty("os.name");
+		boolean isWindows = (os != null) && os.startsWith("Windows");
+		return isWindows;
 	}
 
 	public Logger log;
@@ -205,6 +215,77 @@ public class UsageTests
 		super.tearDown();
 	}
 
+	protected @NonNull String createClassPath(@NonNull List<String> projectNames) {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		String pathSeparator = null;
+		StringBuilder s = new StringBuilder();
+		for (String projectName : projectNames) {
+			String projectPath = null;
+			IProject project = root.getProject(projectName);
+			if (project != null) {
+				IPath location = project.getLocation();
+				if (location != null) {
+					projectPath = location.toString() + "/";
+				}
+			}
+			if (projectPath == null) {
+				Bundle bundle = Platform.getBundle(projectName);
+				projectPath = bundle.getLocation();
+			}
+			
+			if (projectPath.startsWith("reference:")) {
+				projectPath = projectPath.substring(10);
+			}
+			if (projectPath.startsWith("file:")) {
+				projectPath = projectPath.substring(5);
+			}
+			if (isWindows() && projectPath.startsWith("/")) {
+				projectPath = projectPath.substring(1);
+			}
+			if (projectPath.endsWith("/")) {
+				projectPath = projectPath + "bin";
+			}
+			if (pathSeparator != null) {
+				s.append(pathSeparator);
+			}
+			else {
+				pathSeparator = System.getProperty("path.separator");
+			}
+			s.append(projectPath);
+		}
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
+	}
+	
+	public @NonNull String createGenModelContent(@NonNull String testProjectPath, @NonNull String fileName, @Nullable String usedGenPackages) {
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			+ "<genmodel:GenModel xmi:version=\"2.0\"\n"
+			+ "    xmlns:xmi=\"http://www.omg.org/XMI\"\n"
+			+ "    xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
+			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\"\n"
+			+ "    modelDirectory=\"/" + testProjectPath + "/src-gen\"\n"
+			+ "    modelPluginID=\"" + fileName + "." + fileName + "\"\n"
+			+ "    modelName=\"" + fileName + "\"\n"
+			+ "    importerID=\"org.eclipse.emf.importer.ecore\"\n"
+			+ "    complianceLevel=\"6.0\"\n"
+			+ "    operationReflection=\"true\"\n"
+			+ "    copyrightFields=\"false\"\n"
+			+ "    bundleManifest=\"false\"\n"
+			+ (usedGenPackages != null ? "    usedGenPackages=\"" + usedGenPackages + "\"\n" : "")
+			+ "    updateClasspath=\"false\">\n"
+			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
+			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
+			+ "    <details key=\"Use Null Annotations\" value=\"true\"/>\n"
+			+ "  </genAnnotations>\n"
+			+ "  <foreignModel>" + fileName + ".ecore</foreignModel>\n"
+			+ "  <genPackages prefix=\"" + fileName + "\"\n"
+			+ "    disposableProviderFactory=\"true\"\n"
+			+ "    ecorePackage=\"" + fileName + ".ecore#/\">\n"
+			+ "  </genPackages>\n"
+			+ "</genmodel:GenModel>\n"
+			+ "\n";
+	}
+
 	public void createGenModelFile(String fileName, String fileContent)
 			throws IOException {
 		File file = new File(getProjectFile(), fileName);
@@ -216,8 +297,24 @@ public class UsageTests
 	protected boolean doCompile(@NonNull String testProjectName,
 			@NonNull String testFileStem)
 			throws Exception {
-		List<String> compilationOptions = Arrays.asList("-d", "bin", "-source",
-			"1.5", "-target", "1.5", "-g");;
+		List<String> classpathProjects = new ArrayList<String>();
+		classpathProjects.add("org.eclipse.jdt.annotation");
+		classpathProjects.add("org.eclipse.emf.common");
+		classpathProjects.add("org.eclipse.emf.ecore");
+		classpathProjects.add("org.eclipse.ocl.examples.domain");
+		classpathProjects.add("org.eclipse.ocl.examples.library");
+		classpathProjects.add("org.eclipse.ocl.examples.pivot");
+//		for (String extraClasspathProject : extraClasspathProjects) {
+//			classpathProjects.add(extraClasspathProject);
+//		}
+		List<String> compilationOptions = new ArrayList<String>();
+		compilationOptions.add("-d");
+		compilationOptions.add("bin");
+		compilationOptions.add("-source");
+		compilationOptions.add("1.5");
+		compilationOptions.add("-target");
+		compilationOptions.add("1.5");
+		compilationOptions.add("-g");
 		List<JavaFileObject> compilationUnits = new ArrayList<JavaFileObject>();
 		Object context = null;
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -226,7 +323,19 @@ public class UsageTests
 			if (project != null) {
 				getCompilationUnits(compilationUnits, project);
 				java.net.URI locationURI = project.getLocationURI();
-				compilationOptions.set(1, locationURI + "/bin");
+				String binURI = locationURI + "/bin";
+				if (binURI.startsWith("file:")) {
+					binURI = binURI.substring(5);
+				}
+				boolean isWindows = isWindows();
+				if (isWindows && binURI.startsWith("/")) {
+					binURI = binURI.substring(1);
+				}
+				compilationOptions.set(1, binURI);
+				new File(locationURI.getPath() + "/bin").mkdirs();
+				compilationOptions.add("-cp");
+				String path = createClassPath(classpathProjects);
+				compilationOptions.add(path);
 			}
 			context = project;
 		} else {
