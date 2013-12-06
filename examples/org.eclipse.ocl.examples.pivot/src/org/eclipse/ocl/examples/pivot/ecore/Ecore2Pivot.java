@@ -449,6 +449,21 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	public @NonNull Root importObjects(@NonNull Collection<EObject> ecoreContents, @NonNull URI pivotURI) {
+		EPackage libraryEPackage = isLibrary(ecoreContents);
+		if (libraryEPackage != null) {
+			newCreateMap = new HashMap<EObject, Element>();
+			org.eclipse.ocl.examples.pivot.Package asLibrary = metaModelManager.getOclAnyType().getPackage();
+			newCreateMap.put(libraryEPackage, asLibrary);
+			List<Type> ownedType = asLibrary.getOwnedType();
+//			int prefix = LibraryConstants.ECORE_STDLIB_PREFIX.length();
+			for (EClassifier eClassifier : libraryEPackage.getEClassifiers()) {
+				String name = eClassifier.getName(); //.substring(prefix);
+				Type asType = DomainUtil.getNamedElement(ownedType, name);
+				newCreateMap.put(eClassifier, asType);
+			}
+			Root containingRoot = PivotUtil.getContainingRoot(asLibrary);
+			return DomainUtil.nonNullModel(containingRoot);
+		}
 		@NonNull ASResource asResource = metaModelManager.getResource(pivotURI, ASResource.ECORE_CONTENT_TYPE);
 //		try {
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
@@ -531,6 +546,19 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 
 	public boolean isAdapterForType(Object type) {
 		return type == Ecore2Pivot.class;
+	}
+
+	protected EPackage isLibrary(@NonNull Collection<EObject> ecoreContents) {
+		if (ecoreContents.size() != 1) {
+			return null;
+		}
+		EObject ecoreRoot = ecoreContents.iterator().next();
+		if (!(ecoreRoot instanceof EPackage)) {
+			return null;
+		}
+		EPackage ecorePackage = (EPackage) ecoreRoot;
+		EAnnotation asLibraryAnnotation = ecorePackage.getEAnnotation(PivotConstants.AS_LIBRARY_ANNOTATION_SOURCE);
+		return asLibraryAnnotation != null ? ecorePackage : null;
 	}
 
 	protected boolean isPivot(@NonNull Collection<EObject> ecoreContents) {

@@ -30,6 +30,10 @@ public class GenModelSetup
 {
 	private ResourceSet resourceSet = null;
 
+	public GenModelSetup() {
+		System.setProperty("line.separator", "\n");
+	}
+
 	public ResourceSet getResourceSet() {
 		if (resourceSet == null) {
 			resourceSet = new ResourceSetImpl();

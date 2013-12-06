@@ -19,6 +19,7 @@ Export-Package: org.eclipse.ocl.examples.library,
  org.eclipse.ocl.examples.library.oclany,
  org.eclipse.ocl.examples.library.oclinvalid,
  org.eclipse.ocl.examples.library.oclstdlib,
+ org.eclipse.ocl.examples.library.oclstdlib.util,
  org.eclipse.ocl.examples.library.oclvoid,
  org.eclipse.ocl.examples.library.real,
  org.eclipse.ocl.examples.library.string

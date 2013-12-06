@@ -35,6 +35,7 @@ Workflow {
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
     }
+    bean = GenModelSetup { resourceSet = resourceSet }
     component = GenerateOCLstdlibXtend { resourceSet = resourceSet
     	projectName = "${sourceName}"
     	modelFile = "model/OCL-2.5.oclstdlib"
@@ -43,9 +44,12 @@ Workflow {
     	javaPackageName = "${targetName}.model"
     	javaClassName = "OCLstdlib"
     }
-    component = Model2tablesGenerator { resourceSet = resourceSet
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/${sourceName}/model/oclstdlib.genmodel"
+    }
+/*    component = Model2tablesGenerator { resourceSet = resourceSet
     	genModelFile = "/${sourceName}/model/oclstdlib.genmodel"
     	genOCLstdlib = true
-    }
+    } */
 }
 

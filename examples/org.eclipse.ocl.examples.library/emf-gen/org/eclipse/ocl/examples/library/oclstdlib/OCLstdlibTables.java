@@ -1,7 +1,7 @@
 /**
  *************************************************************************
  * This code is 100% auto-generated
- * from: oclstdlib
+ * from: ocl
  * using: org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 /**
- * OCLstdlibTables provides the dispatch tables for the oclstdlib for use by the OCL dispatcher.
+ * OCLstdlibTables provides the dispatch tables for the ocl for use by the OCL dispatcher.
  *
  * In order to ensure correct static initialization, a top level class element must be accessed
  * before any nested class element. Therefore an access to PACKAGE.getClass() is recommended.

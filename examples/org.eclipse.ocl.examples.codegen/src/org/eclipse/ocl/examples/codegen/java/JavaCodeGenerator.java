@@ -403,7 +403,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		else {
 			try {
 				return requiredClass.getMethod(getAccessor);
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				return null;
 			}
 		}
@@ -421,7 +421,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				if (method != null) {
 					return method;
 				}
-			} catch (Exception e) {
+			} catch (Throwable e) {
 			}
 		}
 		for (@SuppressWarnings("null")@NonNull Class<?> superInterface : requiredClass.getInterfaces()) {
@@ -434,7 +434,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				if (method != null) {
 					return method;
 				}
-			} catch (Exception e) {
+			} catch (Throwable e) {
 			}
 		}
 		return null;

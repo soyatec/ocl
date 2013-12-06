@@ -26,12 +26,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
-<<<<<<< Upstream, based on edw/423490a
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
-=======
 import org.eclipse.ocl.examples.library.LibraryConstants;
->>>>>>> 9c8f4d0 [356243] Trim OCLstdlibPackage to manual dummy
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -49,7 +46,6 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
-import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.osgi.util.NLS;
 
@@ -58,8 +54,8 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	private static final Logger logger = Logger.getLogger(PivotStandardLibrary.class);
 
 	/**
-	 * The URI used by default for the MDT/OCL Standard Library. NB. This
-	 * constant is repeated in GenersateOCLstdlibModel.mwe2 an in
+	 * The URI used by default for the OCL Standard Library. NB. This
+	 * constant is repeated in GenerateOCLstdlibModel.mwe2 an in
 	 * org.eclipse.ocl.examples.library/plugin.xml.
 	 */
 	public static final @NonNull String DEFAULT_OCL_STDLIB_URI = LibraryConstants.STDLIB_URI;

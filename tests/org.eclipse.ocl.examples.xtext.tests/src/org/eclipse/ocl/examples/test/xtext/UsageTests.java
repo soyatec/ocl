@@ -255,32 +255,39 @@ public class UsageTests
 	}
 	
 	public @NonNull String createGenModelContent(@NonNull String testProjectPath, @NonNull String fileName, @Nullable String usedGenPackages) {
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-			+ "<genmodel:GenModel xmi:version=\"2.0\"\n"
-			+ "    xmlns:xmi=\"http://www.omg.org/XMI\"\n"
-			+ "    xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
-			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\"\n"
-			+ "    modelDirectory=\"/" + testProjectPath + "/src-gen\"\n"
-			+ "    modelPluginID=\"" + fileName + "." + fileName + "\"\n"
-			+ "    modelName=\"" + fileName + "\"\n"
-			+ "    importerID=\"org.eclipse.emf.importer.ecore\"\n"
-			+ "    complianceLevel=\"6.0\"\n"
-			+ "    operationReflection=\"true\"\n"
-			+ "    copyrightFields=\"false\"\n"
-			+ "    bundleManifest=\"false\"\n"
-			+ (usedGenPackages != null ? "    usedGenPackages=\"" + usedGenPackages + "\"\n" : "")
-			+ "    updateClasspath=\"false\">\n"
-			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
-			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
-			+ "    <details key=\"Use Null Annotations\" value=\"true\"/>\n"
-			+ "  </genAnnotations>\n"
-			+ "  <foreignModel>" + fileName + ".ecore</foreignModel>\n"
-			+ "  <genPackages prefix=\"" + fileName + "\"\n"
-			+ "    disposableProviderFactory=\"true\"\n"
-			+ "    ecorePackage=\"" + fileName + ".ecore#/\">\n"
-			+ "  </genPackages>\n"
-			+ "</genmodel:GenModel>\n"
-			+ "\n";
+		StringBuilder s = new StringBuilder();
+		s.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		s.append("<genmodel:GenModel xmi:version=\"2.0\"\n");
+		s.append("    xmlns:xmi=\"http://www.omg.org/XMI\"\n");
+		s.append("    xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n");
+		s.append("    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\"\n");
+		s.append("    modelDirectory=\"/" + testProjectPath + "/src-gen\"\n");
+		s.append("    modelPluginID=\"" + fileName + "." + fileName + "\"\n");
+		s.append("    modelName=\"" + fileName + "\"\n");
+		s.append("    importerID=\"org.eclipse.emf.importer.ecore\"\n");
+		s.append("    complianceLevel=\"6.0\"\n");
+		s.append("    operationReflection=\"true\"\n");
+		s.append("    copyrightFields=\"false\"\n");
+		s.append("    bundleManifest=\"false\"\n");
+		s.append("    usedGenPackages=\"");
+		if (usedGenPackages != null) {
+			s.append(usedGenPackages + " ");
+		}
+		s.append("platform:/resource/org.eclipse.ocl.examples.library/model/oclstdlib.genmodel#//oclstdlib\"\n");
+		s.append("    updateClasspath=\"false\">\n");
+		s.append("  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n");
+		s.append("    <details key=\"Use Delegates\" value=\"false\"/>\n");
+		s.append("    <details key=\"Use Null Annotations\" value=\"true\"/>\n");
+		s.append("  </genAnnotations>\n");
+		s.append("  <foreignModel>" + fileName + ".ecore</foreignModel>\n");
+		s.append("  <genPackages prefix=\"" + fileName + "\"\n");
+		s.append("    disposableProviderFactory=\"true\"\n");
+		s.append("    ecorePackage=\"" + fileName + ".ecore#/\">\n");
+		s.append("  </genPackages>\n");
+		s.append("</genmodel:GenModel>\n");
+		s.append("\n");;
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 
 	public void createGenModelFile(String fileName, String fileContent)
