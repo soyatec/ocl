@@ -39,7 +39,7 @@
             type="#OclSelf"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Boolean.allInstances" isStatic="true" name="allInstances"
-          type="#//@nestedPackage.1/@ownedType.117" implementationClass="org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation">
+          type="#//@nestedPackage.1/@ownedType.122" implementationClass="org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation">
         <ownedComment body="Returns oclText[Set{false, true}]."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Boolean.and..ocl.Boolean" name="and" isRequired="false"
@@ -586,7 +586,7 @@
         <ownedComment body="Queries the character at position i in oclText[self].&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.String.at..ocl.Integer" name="i" type="#Integer"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.String.characters" name="characters" type="#//@nestedPackage.1/@ownedType.98"
+      <ownedOperation xmi:id="o.ocl.String.characters" name="characters" type="#//@nestedPackage.1/@ownedType.102"
           implementationClass="org.eclipse.ocl.examples.library.string.StringCharactersOperation">
         <ownedComment body="Obtains the characters of oclText[self] as a sequence.&#xA;"/>
       </ownedOperation>
@@ -712,18 +712,18 @@
           implementationClass="org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation">
         <ownedComment body="Converts oclText[self] to upper case, using the locale defined by looking up oclLocale in the current environment.&#xA;Otherwise, returns the same string as oclText[self].&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.String.tokenize" name="tokenize" type="#//@nestedPackage.1/@ownedType.98"
+      <ownedOperation xmi:id="o.ocl.String.tokenize" name="tokenize" type="#//@nestedPackage.1/@ownedType.102"
           implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
         <ownedComment body="Partition oclText[self] into a sequence substrings separated by any of space, line-feed, carriage-return, form-feed and horizontal-tab delimiters.&#xA;The delimiters are omitted from the return.&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.String.tokenize..ocl.String" name="tokenize" type="#//@nestedPackage.1/@ownedType.98"
+      <ownedOperation xmi:id="o.ocl.String.tokenize..ocl.String" name="tokenize" type="#//@nestedPackage.1/@ownedType.102"
           implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
         <ownedComment body="Partition oclText[self] into a sequence substrings separated by characters in the delimiters. The delimiters are omitted from the return.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.String.tokenize..ocl.String" name="delimiters"
             type="#String"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.String.tokenize..ocl.String..ocl.Boolean" name="tokenize"
-          type="#//@nestedPackage.1/@ownedType.98" implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
+          type="#//@nestedPackage.1/@ownedType.102" implementationClass="org.eclipse.ocl.examples.library.string.StringTokenizeOperation">
         <ownedComment body="Partition oclText[self] into a sequence substrings separated by characters in the delimiters. If returnDelimeters is&#xA;true the returned sequence includes the delimiters, otherwise the delimiters are omitted.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.String.tokenize..ocl.String..ocl.Boolean"
             name="delimiters" type="#String"/>
@@ -778,10 +778,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.UnlimitedNatural.oclAsType..$$.Metaclass"
-            name="type" type="#//@nestedPackage.1/@ownedType.69"/>
+            name="type" type="#//@nestedPackage.1/@ownedType.73"/>
       </ownedOperation>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="Bag" name="Bag" superClass="#//@nestedPackage.1/@ownedType.42"
+    <ownedType xsi:type="pivot:BagType" xmi:id="Bag" name="Bag" superClass="#//@nestedPackage.1/@ownedType.44"
         elementType="#T.ocl..BagT">
       <ownedComment body="A bag is a collection with duplicates allowed. That is, one object can be an element of a bag many times.&#xA;There is no ordering defined on the elements in a bag.&#xA;Bag is itself an instance of the metatype BagType.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
@@ -797,13 +797,13 @@
         </ownedParameter>
       </ownedTemplateSignature>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.closure..T" name="closure"
-          type="#//@nestedPackage.1/@ownedType.114" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
+          type="#//@nestedPackage.1/@ownedType.119" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
         <ownedComment body="The closure of applying body transitively to every distinct element of the source collection.&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Bag.closure..T" name="lambda" type="#//@nestedPackage.1/@ownedType.4"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.closure..T" name="i" type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.collect..T" name="collect"
-          type="#//@nestedPackage.1/@ownedType.22" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
+          type="#//@nestedPackage.1/@ownedType.23" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
         <ownedTemplateSignature xmi:id="s.i.ocl.Bag.collect..T" parameter="#t.ocl.Bag..collectV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..collectV"
               parameteredElement="#T.ocl.Bag..collectV">
@@ -817,7 +817,7 @@
             type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.collectNested..T"
-          name="collectNested" type="#Bag" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectNestedIteration">
+          name="collectNested" type="#//@nestedPackage.1/@ownedType.22" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectNestedIteration">
         <ownedComment body="The Bag of elements which results from applying body to every member of the source nonordered collection.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.i.ocl.Bag.collectNested..T" parameter="#t.ocl.Bag..collectNestedV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..collectNestedV"
@@ -846,7 +846,7 @@
             type="#T.ocl..BagT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Bag.sortedBy..T" name="sortedBy"
-          type="#//@nestedPackage.1/@ownedType.99" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          type="#//@nestedPackage.1/@ownedType.103" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the Sequence containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c then a &lt; c).&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Bag.sortedBy..T" name="lambda" type="#//@nestedPackage.1/@ownedType.3"/>
         <ownedIterator xmi:id="i0i.ocl.Bag.sortedBy..T" name="i" isRequired="false"
@@ -874,9 +874,9 @@
           type="#Bag" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The bag containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Bag.excludingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.52"/>
+            type="#//@nestedPackage.1/@ownedType.55"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Bag.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.23"
+      <ownedOperation xmi:id="o.ocl.Bag.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.24"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="Redefines the Collection operation. If the element type is not a collection type, this results in the same bag as oclText[self].&#xA;If the element type is a collection type, the result is the bag containing all the elements of all the recursively flattened elements of oclText[self].&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Bag.flatten" parameter="#t.ocl.Bag..flattenT2">
@@ -897,10 +897,10 @@
           type="#Bag" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation">
         <ownedComment body="The bag containing all elements of oclText[self] and objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Bag.includingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.42"/>
+            type="#//@nestedPackage.1/@ownedType.44"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Bag.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#//@nestedPackage.1/@ownedType.24" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#//@nestedPackage.1/@ownedType.25" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Bag.selectByKind..$$.Metaclass" parameter="#t.ocl.Bag..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..selectByKindTT"
               parameteredElement="#T.ocl.Bag..selectByKindTT">
@@ -909,10 +909,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Bag.selectByKind..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.70"/>
+            type="#//@nestedPackage.1/@ownedType.74"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Bag.selectByType..$$.Metaclass" name="selectByType"
-          type="#//@nestedPackage.1/@ownedType.25" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#//@nestedPackage.1/@ownedType.26" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Bag.selectByType..$$.Metaclass" parameter="#t.ocl.Bag..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Bag..selectByTypeTT"
               parameteredElement="#T.ocl.Bag..selectByTypeTT">
@@ -921,7 +921,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Bag.selectByType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.71"/>
+            type="#//@nestedPackage.1/@ownedType.75"/>
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.ocl.Class" name="Class" superClass="#T.ocl.OclAny"/>
@@ -961,7 +961,7 @@
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.collect..T"
-          name="collect" type="#//@nestedPackage.1/@ownedType.43" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
+          name="collect" type="#//@nestedPackage.1/@ownedType.46" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
         <ownedComment body="The Collection of elements that results from applying body to every member of the source set.&#xA;The result is flattened. Notice that this is based on collectNested, which can be of different type depending on the type of source.&#xA;collectNested is defined individually for each subclass of CollectionType.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.i.ocl.Collection.collect..T" parameter="#t.ocl.Collection..collectV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..collectV"
@@ -976,7 +976,7 @@
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.collectNested..T"
-          name="collectNested" type="#Collection" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectNestedIteration">
+          name="collectNested" type="#//@nestedPackage.1/@ownedType.45" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectNestedIteration">
         <ownedComment body="The Collection of elements which results from applying body to every member of the source collection.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.i.ocl.Collection.collectNested..T" parameter="#t.ocl.Collection..collectNestedV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..collectNestedV"
@@ -1075,7 +1075,7 @@
             type="#T.ocl..CollectionT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Collection.sortedBy..T"
-          name="sortedBy" type="#//@nestedPackage.1/@ownedType.100" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          name="sortedBy" type="#//@nestedPackage.1/@ownedType.104" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the Collection containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c then a &lt; c).&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Collection.sortedBy..T" name="lambda" type="#//@nestedPackage.1/@ownedType.9"/>
         <ownedIterator xmi:id="i0i.ocl.Collection.sortedBy..T" name="i" isRequired="false"
@@ -1095,19 +1095,19 @@
         <ownedParameter xmi:id="p0o.ocl.Collection.%60%%62%..ocl.OclSelf" name="object2"
             type="#OclSelf"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asBag" name="asBag" type="#//@nestedPackage.1/@ownedType.27"
+      <ownedOperation xmi:id="o.ocl.Collection.asBag" name="asBag" type="#//@nestedPackage.1/@ownedType.28"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation">
         <ownedComment body="The Bag that contains all the elements from oclText[self].&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asOrderedSet" name="asOrderedSet" type="#//@nestedPackage.1/@ownedType.89"
+      <ownedOperation xmi:id="o.ocl.Collection.asOrderedSet" name="asOrderedSet" type="#//@nestedPackage.1/@ownedType.93"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsOrderedSetOperation">
         <ownedComment body="An OrderedSet that contains all the elements from oclText[self], with duplicates removed,&#xA;in an order dependent on the particular concrete collection type.&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asSequence" name="asSequence" type="#//@nestedPackage.1/@ownedType.100"
+      <ownedOperation xmi:id="o.ocl.Collection.asSequence" name="asSequence" type="#//@nestedPackage.1/@ownedType.104"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsSequenceOperation">
         <ownedComment body="A Sequence that contains all the elements from oclText[self], in an order dependent on the particular concrete collection type.&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.asSet" name="asSet" type="#//@nestedPackage.1/@ownedType.115"
+      <ownedOperation xmi:id="o.ocl.Collection.asSet" name="asSet" type="#//@nestedPackage.1/@ownedType.120"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionAsSetOperation">
         <ownedComment body="The Set containing all the elements from oclText[self], with duplicates removed.&#xA;"/>
       </ownedOperation>
@@ -1135,7 +1135,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.excludesAll..$$.Collection" name="c2"
-            type="#//@nestedPackage.1/@ownedType.44"/>
+            type="#//@nestedPackage.1/@ownedType.47"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.excluding..ocl.OclAny" name="excluding"
           type="#Collection" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation">
@@ -1147,9 +1147,9 @@
           type="#Collection" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The collection containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.excludingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.52"/>
+            type="#//@nestedPackage.1/@ownedType.55"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Collection.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.45"
+      <ownedOperation xmi:id="o.ocl.Collection.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.48"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="If the element type is not a collection type, this results in the same collection as oclText[self].&#xA;If the element type is a collection type, the result is a collection containing all the elements of all the recursively flattened elements of oclText[self].&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.flatten" parameter="#t.ocl.Collection..flattenT2">
@@ -1178,7 +1178,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.includesAll..$$.Collection" name="c2"
-            type="#//@nestedPackage.1/@ownedType.46"/>
+            type="#//@nestedPackage.1/@ownedType.49"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.including..T" name="including" type="#Collection"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation">
@@ -1193,16 +1193,16 @@
             type="#Collection"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.intersection..ocl.Collection" name="intersection"
-          type="#//@nestedPackage.1/@ownedType.27" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
+          type="#//@nestedPackage.1/@ownedType.28" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
         <ownedComment body="The intersection of oclText[self] and bag; the bag of all elements that are in both oclText[self] and c.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.intersection..ocl.Collection" name="c"
             type="#Collection"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.intersection..$$.UniqueCollection"
-          name="intersection" type="#//@nestedPackage.1/@ownedType.115" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
+          name="intersection" type="#//@nestedPackage.1/@ownedType.120" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
         <ownedComment body="The intersection of oclText[self] and a unique collection; the set of all elements that are in both oclText[self] and u.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.intersection..$$.UniqueCollection"
-            name="u" type="#//@nestedPackage.1/@ownedType.124"/>
+            name="u" type="#//@nestedPackage.1/@ownedType.129"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.isEmpty" name="isEmpty" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation">
@@ -1221,7 +1221,7 @@
         <ownedComment body="Is oclText[self] not the empty collection?&#xA;&#xA;oclText[null->notEmpty()] returns oclText[false] in virtue of the implicit casting from oclText[null] to oclText[Bag{}].&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.product..$$.Collection" name="product"
-          type="#//@nestedPackage.1/@ownedType.113" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionProductOperation">
+          type="#//@nestedPackage.1/@ownedType.118" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionProductOperation">
         <ownedComment body="The cartesian product operation of oclText[self] and c2.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.product..$$.Collection"
             parameter="#t.ocl.Collection..productT2">
@@ -1232,10 +1232,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.product..$$.Collection" name="c2"
-            type="#//@nestedPackage.1/@ownedType.47"/>
+            type="#//@nestedPackage.1/@ownedType.50"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#//@nestedPackage.1/@ownedType.48" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#//@nestedPackage.1/@ownedType.51" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.selectByKind..$$.Metaclass"
             parameter="#t.ocl.Collection..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..selectByKindTT"
@@ -1245,10 +1245,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.selectByKind..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.72"/>
+            type="#//@nestedPackage.1/@ownedType.76"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.selectByType..$$.Metaclass" name="selectByType"
-          type="#//@nestedPackage.1/@ownedType.49" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#//@nestedPackage.1/@ownedType.52" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Collection.selectByType..$$.Metaclass"
             parameter="#t.ocl.Collection..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Collection..selectByTypeTT"
@@ -1258,7 +1258,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Collection.selectByType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.73"/>
+            type="#//@nestedPackage.1/@ownedType.77"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.size" name="size" type="#Integer" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSizeOperation">
         <ownedComment body="The number of elements in the collection oclText[self].&#xA;"/>
@@ -1268,7 +1268,7 @@
         <ownedComment body="The addition of all elements in oclText[self].&#xA;Elements must be of an oclText[OclSummable] type to provide the zero() and sum() operations.&#xA;The e[sum] operation must be both associative: a.sum(b).sum(c) = a.sum(b.sum(c)), and commutative: a.sum(b) = b.sum(a).&#xA;UnlimitedNatural, Integer and Real fulfill this condition.&#xA;&#xA;If the e[sum] operation is not both associative and commutative, the e[sum] expression is not well-formed,&#xA;which may result in unpredictable results during evaluation.&#xA;If an implementation is able to detect a lack of associativity or commutativity,&#xA;the implementation may bypass the evaluation and return an oclText[invalid] result.&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Collection.union..ocl.Collection" name="union"
-          type="#//@nestedPackage.1/@ownedType.27" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
+          type="#//@nestedPackage.1/@ownedType.28" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
         <ownedComment body="The bag consisting of all elements in oclText[self] and all elements in c.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Collection.union..ocl.Collection" name="c"
             type="#Collection"/>
@@ -1283,11 +1283,11 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedAttribute xmi:id="p.ocl.Enumeration.allLiterals" isStatic="true" name="allLiterals"
-          type="#//@nestedPackage.1/@ownedType.90" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty">
+          type="#//@nestedPackage.1/@ownedType.94" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty">
         <ownedComment body="Evaluates to the literals of the enumeration.&#xA;"/>
       </ownedAttribute>
       <ownedOperation xmi:id="o.ocl.Enumeration.allInstances" isStatic="true" name="allInstances"
-          type="#//@nestedPackage.1/@ownedType.117" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation">
+          type="#//@nestedPackage.1/@ownedType.122" implementationClass="org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation">
         <ownedComment body="Return a set of all enumeration values of oclText[self]."/>
       </ownedOperation>
     </ownedType>
@@ -1378,7 +1378,7 @@
           </specification>
         </postcondition>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclAny.oclAsSet" name="oclAsSet" type="#//@nestedPackage.1/@ownedType.117"
+      <ownedOperation xmi:id="o.ocl.OclAny.oclAsSet" name="oclAsSet" type="#//@nestedPackage.1/@ownedType.122"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation">
         <ownedComment body="Returns a Set with oclText[self] as the sole content, unless oclText[self] is oclText[null] in which case returns an empty set,"/>
       </ownedOperation>
@@ -1393,7 +1393,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclAsType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.74"/>
+            type="#//@nestedPackage.1/@ownedType.78"/>
         <postcondition name="IsSelf">
           <specification xsi:type="pivot:ExpressionInOCL" type="#Boolean">
             <body>result = self</body>
@@ -1405,7 +1405,7 @@
               <argument xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.3/@postcondition.0/@specification/@contextVariable"/>
             </bodyExpression>
             <contextVariable name="self" type="#T.ocl.OclAny"/>
-            <parameterVariable name="type" type="#//@nestedPackage.1/@ownedType.74"
+            <parameterVariable name="type" type="#//@nestedPackage.1/@ownedType.78"
                 representedParameter="#p0o.ocl.OclAny.oclAsType..$$.Metaclass"/>
             <resultVariable name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
           </specification>
@@ -1417,11 +1417,11 @@
             <bodyExpression xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsKindOf..$$.Metaclass">
               <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny..oclAsTypeTT"
                   referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.3/@postcondition.1/@specification/@resultVariable"/>
-              <argument xsi:type="pivot:VariableExp" type="#//@nestedPackage.1/@ownedType.74"
+              <argument xsi:type="pivot:VariableExp" type="#//@nestedPackage.1/@ownedType.78"
                   referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.3/@postcondition.1/@specification/@parameterVariable.0"/>
             </bodyExpression>
             <contextVariable name="self" type="#T.ocl.OclAny"/>
-            <parameterVariable name="type" type="#//@nestedPackage.1/@ownedType.74"
+            <parameterVariable name="type" type="#//@nestedPackage.1/@ownedType.78"
                 representedParameter="#p0o.ocl.OclAny.oclAsType..$$.Metaclass"/>
             <resultVariable name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
           </specification>
@@ -1446,7 +1446,7 @@
               <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.5/@postcondition.0/@specification/@resultVariable"/>
               <argument xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
                 <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.5/@postcondition.0/@specification/@contextVariable"/>
-                <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.80"
+                <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.84"
                     referredType="#T.ocl.OclInvalid"/>
               </argument>
             </bodyExpression>
@@ -1467,7 +1467,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclIsKindOf..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.75"/>
+            type="#//@nestedPackage.1/@ownedType.79"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclAny.oclIsNew" name="oclIsNew" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation">
@@ -1485,7 +1485,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclIsTypeOf..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.76"/>
+            type="#//@nestedPackage.1/@ownedType.80"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclAny.oclIsUndefined" name="oclIsUndefined" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation"
@@ -1501,13 +1501,13 @@
                 <source xsi:type="pivot:VariableExp" type="#Boolean" referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.9/@postcondition.0/@specification/@resultVariable"/>
                 <argument xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
                   <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.9/@postcondition.0/@specification/@contextVariable"/>
-                  <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.82"
+                  <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.86"
                       referredType="#T.ocl.OclVoid"/>
                 </argument>
               </source>
               <argument xsi:type="pivot:OperationCallExp" type="#Boolean" referredOperation="#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
                 <source xsi:type="pivot:VariableExp" type="#T.ocl.OclAny" referredVariable="#//@nestedPackage.0/@ownedType.11/@ownedOperation.9/@postcondition.0/@specification/@contextVariable"/>
-                <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.80"
+                <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.84"
                     referredType="#T.ocl.OclInvalid"/>
               </argument>
             </bodyExpression>
@@ -1525,7 +1525,7 @@
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclLog..ocl.String" name="message"
             type="#String"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclAny.oclType" name="oclType" type="#//@nestedPackage.1/@ownedType.81"
+      <ownedOperation xmi:id="o.ocl.OclAny.oclType" name="oclType" type="#//@nestedPackage.1/@ownedType.85"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation">
         <ownedComment body="Evaluates to the type of which oclText[self] is an instance.&#xA;"/>
       </ownedOperation>
@@ -1586,14 +1586,14 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedOperation xmi:id="o.ocl.OclElement.allInstances" isStatic="true" name="allInstances"
-          type="#//@nestedPackage.1/@ownedType.117" implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation">
+          type="#//@nestedPackage.1/@ownedType.122" implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation">
         <ownedComment body="Return a set of all instances of the type and derived types of self."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclElement.oclContainer" name="oclContainer" isRequired="false"
           type="#T.ocl.OclElement" implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation">
         <ownedComment body="Returns the object for which self is a composed content or null if there is no such object."/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclElement.oclContents" name="oclContents" type="#//@nestedPackage.1/@ownedType.116"
+      <ownedOperation xmi:id="o.ocl.OclElement.oclContents" name="oclContents" type="#//@nestedPackage.1/@ownedType.121"
           implementationClass="org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation">
         <ownedComment body="Returns the composed contents of self."/>
       </ownedOperation>
@@ -1607,7 +1607,7 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.allInstances" isStatic="true" name="allInstances"
-          type="#//@nestedPackage.1/@ownedType.117" implementationClass="org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation">
+          type="#//@nestedPackage.1/@ownedType.122" implementationClass="org.eclipse.ocl.examples.library.oclinvalid.OclInvalidAllInstancesOperation">
         <ownedComment body="Returns oclText[invalid]."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.%61%..ocl.OclSelf" name="=" type="#Boolean"
@@ -1642,7 +1642,7 @@
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.or..ocl.Boolean" name="b" isRequired="false"
             type="#Boolean"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OclInvalid.oclAsSet" name="oclAsSet" type="#//@nestedPackage.1/@ownedType.117"
+      <ownedOperation xmi:id="o.ocl.OclInvalid.oclAsSet" name="oclAsSet" type="#//@nestedPackage.1/@ownedType.122"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation"/>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclAsType..$$.Metaclass" name="oclAsType"
           type="#T.ocl.OclInvalid..oclAsTypeTT" implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation">
@@ -1655,7 +1655,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.oclAsType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.77"/>
+            type="#//@nestedPackage.1/@ownedType.81"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclIsInvalid" name="oclIsInvalid" type="#Boolean"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation"
@@ -1671,7 +1671,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.oclIsKindOf..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.78"/>
+            type="#//@nestedPackage.1/@ownedType.82"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclIsTypeOf..$$.Metaclass" name="oclIsTypeOf"
           type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation">
@@ -1684,12 +1684,12 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclInvalid.oclIsTypeOf..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.79"/>
+            type="#//@nestedPackage.1/@ownedType.83"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclInvalid.oclIsUndefined" name="oclIsUndefined"
           type="#Boolean" implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation"
           isValidating="true"/>
-      <ownedOperation xmi:id="o.ocl.OclInvalid.oclType" name="oclType" type="#//@nestedPackage.1/@ownedType.81"
+      <ownedOperation xmi:id="o.ocl.OclInvalid.oclType" name="oclType" type="#//@nestedPackage.1/@ownedType.85"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation"/>
       <ownedOperation xmi:id="o.ocl.OclInvalid.toString" name="toString" type="#String"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation">
@@ -1803,7 +1803,7 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedOperation xmi:id="o.ocl.OclVoid.allInstances" isStatic="true" name="allInstances"
-          type="#//@nestedPackage.1/@ownedType.117" implementationClass="org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation">
+          type="#//@nestedPackage.1/@ownedType.122" implementationClass="org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation">
         <ownedComment body="Returns oclText[Set{null}]."/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OclVoid.%61%..ocl.OclSelf" name="=" type="#Boolean"
@@ -1849,7 +1849,7 @@
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:OrderedSetType" xmi:id="OrderedSet" name="OrderedSet"
-        superClass="#//@nestedPackage.1/@ownedType.105 #//@nestedPackage.1/@ownedType.132"
+        superClass="#//@nestedPackage.1/@ownedType.109 #//@nestedPackage.1/@ownedType.137"
         elementType="#T.ocl..OrderedSetT">
       <ownedComment body="The OrderedSet is a Set, the elements of which are ordered.&#xA;It contains no duplicates. OrderedSet is itself an instance of the metatype OrderedSetType.&#xA;An OrderedSet is not a subtype of Set, neither a subtype of Sequence.&#xA;The common supertype of Sets and OrderedSets is Collection.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
@@ -1902,7 +1902,7 @@
           precedence="#Z.ADDITIVE">
         <ownedComment body="The elements of oclText[self], which are not in s.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.%45%..$$.UniqueCollection" name="s"
-            type="#//@nestedPackage.1/@ownedType.126"/>
+            type="#//@nestedPackage.1/@ownedType.131"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.append..T" name="append" type="#OrderedSet"
           implementationClass="org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation">
@@ -1926,9 +1926,9 @@
           type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The ordered set containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.excludingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.52"/>
+            type="#//@nestedPackage.1/@ownedType.55"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.OrderedSet.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.91"
+      <ownedOperation xmi:id="o.ocl.OrderedSet.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.95"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.OrderedSet.flatten" parameter="#t.ocl.OrderedSet..flattenT2">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.OrderedSet..flattenT2"
@@ -2006,7 +2006,7 @@
             <language>OCL</language>
             <bodyExpression xsi:type="pivot:IteratorExp" isRequired="false" type="#Boolean"
                 referredIteration="#i.ocl.Collection.forAll..T">
-              <source xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.97"
+              <source xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.101"
                   kind="Sequence">
                 <part xsi:type="pivot:CollectionRange" type="#Integer">
                   <first xsi:type="pivot:UnlimitedNaturalLiteralExp" type="#UnlimitedNatural"
@@ -2054,7 +2054,7 @@
         <ownedComment body="The ordered set of elements with same elements but with the opposite order.&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#//@nestedPackage.1/@ownedType.92" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#//@nestedPackage.1/@ownedType.96" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.OrderedSet.selectByKind..$$.Metaclass"
             parameter="#t.ocl.OrderedSet..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.OrderedSet..selectByKindTT"
@@ -2064,10 +2064,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.selectByKind..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.83"/>
+            type="#//@nestedPackage.1/@ownedType.87"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.selectByType..$$.Metaclass" name="selectByType"
-          type="#//@nestedPackage.1/@ownedType.93" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#//@nestedPackage.1/@ownedType.97" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.OrderedSet.selectByType..$$.Metaclass"
             parameter="#t.ocl.OrderedSet..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.OrderedSet..selectByTypeTT"
@@ -2077,7 +2077,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.selectByType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.84"/>
+            type="#//@nestedPackage.1/@ownedType.88"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.OrderedSet.subOrderedSet..ocl.Integer..ocl.Integer"
           name="subOrderedSet" type="#OrderedSet" implementationClass="org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation"
@@ -2089,7 +2089,7 @@
             name="upper" type="#Integer"/>
       </ownedOperation>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" xmi:id="Sequence" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.63"
+    <ownedType xsi:type="pivot:SequenceType" xmi:id="Sequence" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.67"
         elementType="#T.ocl..SequenceT">
       <ownedComment body="A sequence is a collection where the elements are ordered.&#xA;An element may be part of a sequence more than once.&#xA;Sequence is itself an instance of the metatype SequenceType.&#xA;A Sentence is not a subtype of Bag.&#xA;The common supertype of Sentence and Bags is Collection.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
@@ -2105,13 +2105,13 @@
         </ownedParameter>
       </ownedTemplateSignature>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.closure..T"
-          name="closure" type="#//@nestedPackage.1/@ownedType.94" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
+          name="closure" type="#//@nestedPackage.1/@ownedType.98" implementationClass="org.eclipse.ocl.examples.library.iterator.ClosureIteration">
         <ownedComment body="The closure of applying body transitively to every distinct element of the source collection.&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Sequence.closure..T" name="lambda" type="#//@nestedPackage.1/@ownedType.14"/>
         <ownedIterator xmi:id="i0i.ocl.Sequence.closure..T" name="i" type="#T.ocl..SequenceT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.collect..T"
-          name="collect" type="#//@nestedPackage.1/@ownedType.106" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
+          name="collect" type="#//@nestedPackage.1/@ownedType.111" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectIteration">
         <ownedTemplateSignature xmi:id="s.i.ocl.Sequence.collect..T" parameter="#t.ocl.Sequence..collectV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..collectV"
               parameteredElement="#T.ocl.Sequence..collectV">
@@ -2125,7 +2125,7 @@
             type="#T.ocl..SequenceT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Sequence.collectNested..T"
-          name="collectNested" type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectNestedIteration">
+          name="collectNested" type="#//@nestedPackage.1/@ownedType.110" implementationClass="org.eclipse.ocl.examples.library.iterator.CollectNestedIteration">
         <ownedComment body="The sequence of elements that results from applying body to every member of the source ordered collection.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.i.ocl.Sequence.collectNested..T" parameter="#t.ocl.Sequence..collectNestedV">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..collectNestedV"
@@ -2201,14 +2201,14 @@
           type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The sequence containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Sequence.excludingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.52"/>
+            type="#//@nestedPackage.1/@ownedType.55"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.first" name="first" isRequired="false"
           type="#T.ocl..SequenceT" implementationClass="org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation"
           isInvalidating="true">
         <ownedComment body="The first element in oclText[self].&#xA;"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Sequence.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.107"
+      <ownedOperation xmi:id="o.ocl.Sequence.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.112"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="Redefines the Collection operation. If the element type is not a collection type, this results in the same sequence as oclText[self].&#xA;If the element type is a collection type, the result is the sequence containing all the elements&#xA;of all the recursively flattened elements of oclText[self]. The order of the elements is partial.&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Sequence.flatten" parameter="#t.ocl.Sequence..flattenT2">
@@ -2262,7 +2262,7 @@
         <ownedComment body="The sequence containing the same elements but with the opposite order.&#xA;"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#//@nestedPackage.1/@ownedType.108" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#//@nestedPackage.1/@ownedType.113" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Sequence.selectByKind..$$.Metaclass"
             parameter="#t.ocl.Sequence..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..selectByKindTT"
@@ -2272,10 +2272,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Sequence.selectByKind..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.85"/>
+            type="#//@nestedPackage.1/@ownedType.89"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.selectByType..$$.Metaclass" name="selectByType"
-          type="#//@nestedPackage.1/@ownedType.109" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#//@nestedPackage.1/@ownedType.114" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Sequence.selectByType..$$.Metaclass"
             parameter="#t.ocl.Sequence..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Sequence..selectByTypeTT"
@@ -2285,7 +2285,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Sequence.selectByType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.86"/>
+            type="#//@nestedPackage.1/@ownedType.90"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Sequence.subSequence..ocl.Integer..ocl.Integer"
           name="subSequence" type="#Sequence" implementationClass="org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation"
@@ -2297,7 +2297,7 @@
             name="upper" type="#Integer"/>
       </ownedOperation>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="Set" name="Set" superClass="#//@nestedPackage.1/@ownedType.33 #//@nestedPackage.1/@ownedType.137"
+    <ownedType xsi:type="pivot:SetType" xmi:id="Set" name="Set" superClass="#//@nestedPackage.1/@ownedType.34 #//@nestedPackage.1/@ownedType.142"
         elementType="#T.ocl..SetT">
       <ownedAnnotation name="http://www.omg.org/ocl">
         <ownedDetail name="ClassGroup">
@@ -2326,7 +2326,7 @@
             type="#T.ocl..SetT"/>
       </ownedOperation>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.Set.sortedBy..T" name="sortedBy"
-          type="#//@nestedPackage.1/@ownedType.95" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          type="#//@nestedPackage.1/@ownedType.99" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the ordered set containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c, then a &lt; c).&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.Set.sortedBy..T" name="lambda" type="#//@nestedPackage.1/@ownedType.18"/>
         <ownedIterator xmi:id="i0i.ocl.Set.sortedBy..T" name="i" isRequired="false"
@@ -2348,7 +2348,7 @@
           implementationClass="org.eclipse.ocl.examples.library.collection.SetMinusOperation"
           precedence="#Z.ADDITIVE">
         <ownedComment body="The elements of oclText[self], which are not in s.&#xA;"/>
-        <ownedParameter xmi:id="p0o.ocl.Set.%45%..$$.UniqueCollection" name="s" type="#//@nestedPackage.1/@ownedType.126"/>
+        <ownedParameter xmi:id="p0o.ocl.Set.%45%..$$.UniqueCollection" name="s" type="#//@nestedPackage.1/@ownedType.131"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Set.excluding..ocl.OclAny" name="excluding" type="#Set"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation">
@@ -2360,9 +2360,9 @@
           type="#Set" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation">
         <ownedComment body="The set containing all elements of oclText[self] apart from all occurrences of all objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Set.excludingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.52"/>
+            type="#//@nestedPackage.1/@ownedType.55"/>
       </ownedOperation>
-      <ownedOperation xmi:id="o.ocl.Set.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.118"
+      <ownedOperation xmi:id="o.ocl.Set.flatten" name="flatten" type="#//@nestedPackage.1/@ownedType.123"
           implementationClass="org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation">
         <ownedComment body="Redefines the Collection operation. If the element type is not a collection type, this results in the same set as oclText[self].&#xA;If the element type is a collection type, the result is the set containing all the elements of all the recursively flattened elements of oclText[self].&#xA;"/>
         <ownedTemplateSignature xmi:id="s.o.ocl.Set.flatten" parameter="#t.ocl.Set..flattenT2">
@@ -2383,10 +2383,10 @@
           type="#Set" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation">
         <ownedComment body="The set containing all elements of oclText[self] and objects.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.Set.includingAll..$$.Collection" name="objects"
-            type="#//@nestedPackage.1/@ownedType.67"/>
+            type="#//@nestedPackage.1/@ownedType.71"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Set.selectByKind..$$.Metaclass" name="selectByKind"
-          type="#//@nestedPackage.1/@ownedType.119" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
+          type="#//@nestedPackage.1/@ownedType.124" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Set.selectByKind..$$.Metaclass" parameter="#t.ocl.Set..selectByKindTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Set..selectByKindTT"
               parameteredElement="#T.ocl.Set..selectByKindTT">
@@ -2395,10 +2395,10 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Set.selectByKind..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.87"/>
+            type="#//@nestedPackage.1/@ownedType.91"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.Set.selectByType..$$.Metaclass" name="selectByType"
-          type="#//@nestedPackage.1/@ownedType.120" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
+          type="#//@nestedPackage.1/@ownedType.125" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation">
         <ownedTemplateSignature xmi:id="s.o.ocl.Set.selectByType..$$.Metaclass" parameter="#t.ocl.Set..selectByTypeTT">
           <ownedParameter xsi:type="pivot:TypeTemplateParameter" xmi:id="t.ocl.Set..selectByTypeTT"
               parameteredElement="#T.ocl.Set..selectByTypeTT">
@@ -2407,7 +2407,7 @@
           </ownedParameter>
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.Set.selectByType..$$.Metaclass" name="type"
-            type="#//@nestedPackage.1/@ownedType.88"/>
+            type="#//@nestedPackage.1/@ownedType.92"/>
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.ocl.State" name="State" superClass="#T.ocl.OclState">
@@ -2419,7 +2419,7 @@
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.ocl.Type" name="Type" superClass="#T.ocl.OclType"/>
     <ownedType xsi:type="pivot:CollectionType" xmi:id="UniqueCollection" name="UniqueCollection"
-        superClass="#//@nestedPackage.1/@ownedType.68" elementType="#T.ocl..UniqueCollectionT">
+        superClass="#//@nestedPackage.1/@ownedType.72" elementType="#T.ocl..UniqueCollectionT">
       <ownedComment body="The UniqueCollection type provides the shared functionality of the OrderedSet and Set&#xA;collections for which the elements are unique.&#xA;The common supertype of UniqueCollection is Collection.&#xA;"/>
       <ownedAnnotation name="http://www.omg.org/ocl">
         <ownedDetail name="ClassGroup">
@@ -2434,7 +2434,7 @@
         </ownedParameter>
       </ownedTemplateSignature>
       <ownedOperation xsi:type="pivot:Iteration" xmi:id="i.ocl.UniqueCollection.sortedBy..T"
-          name="sortedBy" type="#//@nestedPackage.1/@ownedType.96" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
+          name="sortedBy" type="#//@nestedPackage.1/@ownedType.100" implementationClass="org.eclipse.ocl.examples.library.iterator.SortedByIteration">
         <ownedComment body="Results in the ordered set containing all elements of the source collection.&#xA;The element for which body has the lowest value comes first, and so on.&#xA;The type of the body expression must have the &lt; operation defined.&#xA;The &lt; operation must return a Boolean value and must be transitive (i.e., if a &lt; b and b &lt; c, then a &lt; c).&#xA;"/>
         <ownedParameter xmi:id="p0i.ocl.UniqueCollection.sortedBy..T" name="lambda"
             type="#//@nestedPackage.1/@ownedType.19"/>
@@ -2446,22 +2446,22 @@
           precedence="#Z.ADDITIVE">
         <ownedComment body="The elements of oclText[self], which are not in s.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.%45%..$$.UniqueCollection"
-            name="s" type="#//@nestedPackage.1/@ownedType.126"/>
+            name="s" type="#//@nestedPackage.1/@ownedType.131"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.UniqueCollection.intersection..$$.Collection"
-          name="intersection" type="#//@nestedPackage.1/@ownedType.121" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
+          name="intersection" type="#//@nestedPackage.1/@ownedType.126" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation">
         <ownedComment body="The intersection of oclText[self] and c (i.e., the set of all elements that are in both oclText[self] and c).&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.intersection..$$.Collection"
-            name="c" type="#//@nestedPackage.1/@ownedType.68"/>
+            name="c" type="#//@nestedPackage.1/@ownedType.72"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.UniqueCollection.symmetricDifference..$$.UniqueCollection"
-          name="symmetricDifference" type="#//@nestedPackage.1/@ownedType.121" implementationClass="org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation">
+          name="symmetricDifference" type="#//@nestedPackage.1/@ownedType.126" implementationClass="org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation">
         <ownedComment body="The set containing all the elements that are in oclText[self] or s, but not in both.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.symmetricDifference..$$.UniqueCollection"
-            name="s" type="#//@nestedPackage.1/@ownedType.126"/>
+            name="s" type="#//@nestedPackage.1/@ownedType.131"/>
       </ownedOperation>
       <ownedOperation xmi:id="o.ocl.UniqueCollection.union..ocl.UniqueCollection"
-          name="union" type="#//@nestedPackage.1/@ownedType.121" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
+          name="union" type="#//@nestedPackage.1/@ownedType.126" implementationClass="org.eclipse.ocl.examples.library.collection.CollectionUnionOperation">
         <ownedComment body="The set consisting of all elements in oclText[self] and all elements in s.&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.UniqueCollection.union..ocl.UniqueCollection"
             name="s" type="#UniqueCollection"/>
@@ -2488,7 +2488,7 @@
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
         contextType="#T.ocl..BagT" resultType="#T.ocl.OclAny"/>
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
-        contextType="#T.ocl..BagT" resultType="#//@nestedPackage.1/@ownedType.114"/>
+        contextType="#T.ocl..BagT" resultType="#//@nestedPackage.1/@ownedType.119"/>
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
         contextType="#T.ocl..CollectionT" resultType="#Boolean"/>
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
@@ -2508,7 +2508,7 @@
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
         contextType="#T.ocl..SequenceT" resultType="#T.ocl.OclAny"/>
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
-        contextType="#T.ocl..SequenceT" resultType="#//@nestedPackage.1/@ownedType.94"/>
+        contextType="#T.ocl..SequenceT" resultType="#//@nestedPackage.1/@ownedType.98"/>
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
         contextType="#T.ocl..SequenceT" resultType="#T.ocl.Sequence..collectNestedV"/>
     <ownedType xsi:type="pivot:LambdaType" name="Lambda" superClass="#T.ocl.OclLambda"
@@ -2523,85 +2523,91 @@
       <ownedAttribute name="first" type="#T.ocl..CollectionT"/>
       <ownedAttribute name="second" type="#T.ocl.Collection..productT2"/>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.37"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.38"
         elementType="#//@nestedPackage.1/@ownedType.20">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#//@nestedPackage.1/@ownedType.20" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.38"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.39"
+        elementType="#T.ocl.Bag..collectNestedV">
+      <templateBinding signature="#s.Bag">
+        <parameterSubstitution actual="#T.ocl.Bag..collectNestedV" formal="#t.ocl..BagT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.40"
         elementType="#T.ocl.Bag..collectV">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..collectV" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.39"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.41"
         elementType="#T.ocl.Bag..flattenT2">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..flattenT2" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.40"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.42"
         elementType="#T.ocl.Bag..selectByKindTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..selectByKindTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.41"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.43"
         elementType="#T.ocl.Bag..selectByTypeTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Bag..selectByTypeTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.42"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.44"
         elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.50"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.53"
         elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.53"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.56"
         elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.54"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.57"
         elementType="#OclSelf">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.64"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.68"
         elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.65"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.69"
         elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.66"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.70"
         elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.67"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.71"
         elementType="#T.ocl..SetT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.68"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.72"
         elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Bag">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..BagT"/>
@@ -2623,6 +2629,12 @@
         elementType="#//@nestedPackage.1/@ownedType.20">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#//@nestedPackage.1/@ownedType.20" formal="#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="#T.ocl.OclAny"
+        elementType="#T.ocl.Bag..collectNestedV">
+      <templateBinding signature="#s.Collection">
+        <parameterSubstitution actual="#T.ocl.Bag..collectNestedV" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
     <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="#T.ocl.OclAny"
@@ -2653,6 +2665,12 @@
         elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="#T.ocl.OclAny"
+        elementType="#T.ocl.Collection..collectNestedV">
+      <templateBinding signature="#s.Collection">
+        <parameterSubstitution actual="#T.ocl.Collection..collectNestedV" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
     <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="#T.ocl.OclAny"
@@ -2749,6 +2767,12 @@
         elementType="#T.ocl..OrderedSetT">
       <templateBinding signature="#s.Collection">
         <parameterSubstitution actual="#T.ocl..OrderedSetT" formal="#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="#T.ocl.OclAny"
+        elementType="#T.ocl.Sequence..collectNestedV">
+      <templateBinding signature="#s.Collection">
+        <parameterSubstitution actual="#T.ocl.Sequence..collectNestedV" formal="#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
     <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="#T.ocl.OclAny"
@@ -2931,301 +2955,307 @@
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..MetaclassT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.100 #//@nestedPackage.1/@ownedType.124"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.104 #//@nestedPackage.1/@ownedType.129"
         elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.101 #//@nestedPackage.1/@ownedType.125"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.105 #//@nestedPackage.1/@ownedType.130"
         elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.102 #//@nestedPackage.1/@ownedType.129"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.106 #//@nestedPackage.1/@ownedType.134"
         elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.103 #//@nestedPackage.1/@ownedType.130"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.107 #//@nestedPackage.1/@ownedType.135"
         elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.104 #//@nestedPackage.1/@ownedType.131"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.108 #//@nestedPackage.1/@ownedType.136"
         elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.110 #//@nestedPackage.1/@ownedType.133"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.115 #//@nestedPackage.1/@ownedType.138"
         elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.111 #//@nestedPackage.1/@ownedType.137"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.116 #//@nestedPackage.1/@ownedType.142"
         elementType="#T.ocl..SetT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.112 #//@nestedPackage.1/@ownedType.138"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.117 #//@nestedPackage.1/@ownedType.143"
         elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.OrderedSet">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.35"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.36"
         elementType="#Integer">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#Integer" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.36"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.37"
         elementType="#String">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#String" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.42"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.44"
         elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.50"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.53"
         elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.51"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.54"
         elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.55"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.58"
         elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.56"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.59"
         elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.57"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.60"
         elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.58"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.61"
         elementType="#T.ocl..OrderedSetT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..OrderedSetT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.59"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.62"
+        elementType="#T.ocl.Sequence..collectNestedV">
+      <templateBinding signature="#s.Sequence">
+        <parameterSubstitution actual="#T.ocl.Sequence..collectNestedV" formal="#t.ocl..SequenceT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.63"
         elementType="#T.ocl.Sequence..collectV">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..collectV" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.60"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.64"
         elementType="#T.ocl.Sequence..flattenT2">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..flattenT2" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.61"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.65"
         elementType="#T.ocl.Sequence..selectByKindTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByKindTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.62"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.66"
         elementType="#T.ocl.Sequence..selectByTypeTT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl.Sequence..selectByTypeTT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.63"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.67"
         elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.67"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.71"
         elementType="#T.ocl..SetT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.68"
+    <ownedType xsi:type="pivot:SequenceType" name="Sequence" superClass="#//@nestedPackage.1/@ownedType.72"
         elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Sequence">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..SequenceT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.21 #//@nestedPackage.1/@ownedType.122"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.21 #//@nestedPackage.1/@ownedType.127"
         elementType="#//@nestedPackage.1/@ownedType.20">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#//@nestedPackage.1/@ownedType.20" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.26 #//@nestedPackage.1/@ownedType.123"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.27 #//@nestedPackage.1/@ownedType.128"
         elementType="#T.ocl..BagT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.27 #//@nestedPackage.1/@ownedType.124"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.28 #//@nestedPackage.1/@ownedType.129"
         elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.28 #//@nestedPackage.1/@ownedType.127"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.29 #//@nestedPackage.1/@ownedType.132"
         elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.29 #//@nestedPackage.1/@ownedType.128"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.30 #//@nestedPackage.1/@ownedType.133"
         elementType="#OclSelf">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.30 #//@nestedPackage.1/@ownedType.134"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.31 #//@nestedPackage.1/@ownedType.139"
         elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.31 #//@nestedPackage.1/@ownedType.135"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.32 #//@nestedPackage.1/@ownedType.140"
         elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.32 #//@nestedPackage.1/@ownedType.136"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.33 #//@nestedPackage.1/@ownedType.141"
         elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.34 #//@nestedPackage.1/@ownedType.138"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.35 #//@nestedPackage.1/@ownedType.143"
         elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.Set">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.37"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.38"
         elementType="#//@nestedPackage.1/@ownedType.20">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#//@nestedPackage.1/@ownedType.20" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.42"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.44"
         elementType="#T.ocl..BagT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..BagT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.50"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.53"
         elementType="#T.ocl..CollectionT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..CollectionT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.51"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.54"
         elementType="#T.ocl.EnumerationLiteral">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.EnumerationLiteral" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.52"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.55"
         elementType="#T.ocl.OclAny">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OclAny" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.53"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.56"
         elementType="#T.ocl.OclElement">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OclElement" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.54"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.57"
         elementType="#OclSelf">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#OclSelf" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.55"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.58"
         elementType="#T.ocl.OrderedSet..flattenT2">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..flattenT2" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.56"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.59"
         elementType="#T.ocl.OrderedSet..selectByKindTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByKindTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.57"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.60"
         elementType="#T.ocl.OrderedSet..selectByTypeTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.OrderedSet..selectByTypeTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.58"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.61"
         elementType="#T.ocl..OrderedSetT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..OrderedSetT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.63"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.67"
         elementType="#T.ocl..SequenceT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..SequenceT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.64"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.68"
         elementType="#T.ocl.Set..flattenT2">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.Set..flattenT2" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.65"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.69"
         elementType="#T.ocl.Set..selectByKindTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.Set..selectByKindTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.66"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.70"
         elementType="#T.ocl.Set..selectByTypeTT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl.Set..selectByTypeTT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.67"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.71"
         elementType="#T.ocl..SetT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..SetT" formal="#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.68"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.72"
         elementType="#T.ocl..UniqueCollectionT">
       <templateBinding signature="#s.UniqueCollection">
         <parameterSubstitution actual="#T.ocl..UniqueCollectionT" formal="#t.ocl..UniqueCollectionT"/>

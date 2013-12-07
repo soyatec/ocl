@@ -259,6 +259,7 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull Class _UniqueCollection_T = createClass("T");
 
 		protected final @NonNull BagType _Bag_Tuple = createBagType("Bag"/*Tuple*/, "0", "*");
+		protected final @NonNull BagType _Bag_Bag_collectNested_V = createBagType("Bag"/*V*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_collect_V = createBagType("Bag"/*V*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_flatten_T2 = createBagType("Bag"/*T2*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_selectByKind_TT = createBagType("Bag"/*TT*/, "0", "*");
@@ -276,11 +277,13 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_Integer = createCollectionType("Collection"/*Integer*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_String = createCollectionType("Collection"/*String*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Tuple = createCollectionType("Collection"/*Tuple*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Bag_collectNested_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Bag_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Bag_flatten_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Bag_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Bag_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Bag_T = createCollectionType("Collection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Collection_collectNested_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_excludesAll_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_flatten_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
@@ -297,6 +300,7 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_OrderedSet_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OrderedSet_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OrderedSet_T = createCollectionType("Collection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Sequence_collectNested_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Sequence_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Sequence_flatten_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Sequence_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
@@ -326,6 +330,7 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull SequenceType _Sequence_OrderedSet_selectByKind_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_OrderedSet_selectByType_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_OrderedSet_T = createSequenceType("Sequence"/*T*/, "0", "*");
+		protected final @NonNull SequenceType _Sequence_Sequence_collectNested_V = createSequenceType("Sequence"/*V*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_collect_V = createSequenceType("Sequence"/*V*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_flatten_T2 = createSequenceType("Sequence"/*T2*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_selectByKind_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
@@ -474,6 +479,11 @@ public class OCLstdlib extends ASResourceImpl
 			type.setElementType(_Tuple);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Tuple);
+			orphanTypes.add(type = _Bag_Bag_collectNested_V);
+			type.setUnspecializedElement(_Bag_Bag_T_1);
+			type.setElementType(_Bag_collectNested_V);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Bag_collectNested_V);
 			orphanTypes.add(type = _Bag_Bag_collect_V);
 			type.setUnspecializedElement(_Bag_Bag_T_1);
 			type.setElementType(_Bag_collect_V);
@@ -558,6 +568,11 @@ public class OCLstdlib extends ASResourceImpl
 			type.setElementType(_Tuple);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Bag_collectNested_V);
+			type.setUnspecializedElement(_Collection_Collection_T_1);
+			type.setElementType(_Bag_collectNested_V);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Bag_collect_V);
 			type.setUnspecializedElement(_Collection_Collection_T_1);
 			type.setElementType(_Bag_collect_V);
@@ -581,6 +596,11 @@ public class OCLstdlib extends ASResourceImpl
 			orphanTypes.add(type = _Collection_Bag_T);
 			type.setUnspecializedElement(_Collection_Collection_T_1);
 			type.setElementType(_Bag_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Collection_collectNested_V);
+			type.setUnspecializedElement(_Collection_Collection_T_1);
+			type.setElementType(_Collection_collectNested_V);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Collection_collect_V);
@@ -661,6 +681,11 @@ public class OCLstdlib extends ASResourceImpl
 			orphanTypes.add(type = _Collection_OrderedSet_T);
 			type.setUnspecializedElement(_Collection_Collection_T_1);
 			type.setElementType(_OrderedSet_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Sequence_collectNested_V);
+			type.setUnspecializedElement(_Collection_Collection_T_1);
+			type.setElementType(_Sequence_collectNested_V);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Sequence_collect_V);
@@ -815,6 +840,11 @@ public class OCLstdlib extends ASResourceImpl
 			type.setElementType(_OrderedSet_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_OrderedSet_T);
+			orphanTypes.add(type = _Sequence_Sequence_collectNested_V);
+			type.setUnspecializedElement(_Sequence_Sequence_T_1);
+			type.setElementType(_Sequence_collectNested_V);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Sequence_collectNested_V);
 			orphanTypes.add(type = _Sequence_Sequence_collect_V);
 			type.setUnspecializedElement(_Sequence_Sequence_T_1);
 			type.setElementType(_Sequence_collect_V);
@@ -2095,13 +2125,13 @@ public class OCLstdlib extends ASResourceImpl
 		}
 
 		protected final @NonNull Iteration it_Bag_Bag_T_closure = createIteration("closure", _Set_Bag_T, "org.eclipse.ocl.examples.library.iterator.ClosureIteration", org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
-		protected final @NonNull Iteration it_Bag_Bag_T_collectNested = createIteration("collectNested", _Bag_Bag_T_1, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+		protected final @NonNull Iteration it_Bag_Bag_T_collectNested = createIteration("collectNested", _Bag_Bag_collectNested_V, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		protected final @NonNull Iteration it_Bag_Bag_T_collect = createIteration("collect", _Bag_Bag_collect_V, "org.eclipse.ocl.examples.library.iterator.CollectIteration", org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		protected final @NonNull Iteration it_Bag_Bag_T_reject = createIteration("reject", _Bag_Bag_T_1, "org.eclipse.ocl.examples.library.iterator.RejectIteration", org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		protected final @NonNull Iteration it_Bag_Bag_T_select = createIteration("select", _Bag_Bag_T_1, "org.eclipse.ocl.examples.library.iterator.SelectIteration", org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		protected final @NonNull Iteration it_Bag_Bag_T_sortedBy = createIteration("sortedBy", _Sequence_Bag_T, "org.eclipse.ocl.examples.library.iterator.SortedByIteration", org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		protected final @NonNull Iteration it_Collection_Collection_T_any = createIteration("any", _Collection_T, "org.eclipse.ocl.examples.library.iterator.AnyIteration", org.eclipse.ocl.examples.library.iterator.AnyIteration.INSTANCE);
-		protected final @NonNull Iteration it_Collection_Collection_T_collectNested = createIteration("collectNested", _Collection_Collection_T_1, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+		protected final @NonNull Iteration it_Collection_Collection_T_collectNested = createIteration("collectNested", _Collection_Collection_collectNested_V, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		protected final @NonNull Iteration it_Collection_Collection_T_collect = createIteration("collect", _Collection_Collection_collect_V, "org.eclipse.ocl.examples.library.iterator.CollectIteration", org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		protected final @NonNull Iteration it_Collection_Collection_T_exists = createIteration("exists", _Boolean, "org.eclipse.ocl.examples.library.iterator.ExistsIteration", org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE);
 		protected final @NonNull Iteration it_Collection_Collection_T_exists_1 = createIteration("exists", _Boolean, "org.eclipse.ocl.examples.library.iterator.ExistsIteration", org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE);
@@ -2117,7 +2147,7 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull Iteration it_OrderedSet_OrderedSet_T_select = createIteration("select", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.iterator.SelectIteration", org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		protected final @NonNull Iteration it_OrderedSet_OrderedSet_T_sortedBy = createIteration("sortedBy", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.iterator.SortedByIteration", org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		protected final @NonNull Iteration it_Sequence_Sequence_T_closure = createIteration("closure", _OrderedSet_Sequence_T, "org.eclipse.ocl.examples.library.iterator.ClosureIteration", org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
-		protected final @NonNull Iteration it_Sequence_Sequence_T_collectNested = createIteration("collectNested", _Sequence_Sequence_T_1, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+		protected final @NonNull Iteration it_Sequence_Sequence_T_collectNested = createIteration("collectNested", _Sequence_Sequence_collectNested_V, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		protected final @NonNull Iteration it_Sequence_Sequence_T_collect = createIteration("collect", _Sequence_Sequence_collect_V, "org.eclipse.ocl.examples.library.iterator.CollectIteration", org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		protected final @NonNull Iteration it_Sequence_Sequence_T_reject = createIteration("reject", _Sequence_Sequence_T_1, "org.eclipse.ocl.examples.library.iterator.RejectIteration", org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		protected final @NonNull Iteration it_Sequence_Sequence_T_select = createIteration("select", _Sequence_Sequence_T_1, "org.eclipse.ocl.examples.library.iterator.SelectIteration", org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
@@ -2485,6 +2515,8 @@ public class OCLstdlib extends ASResourceImpl
 		protected void installTemplateBindings() {
 			_Bag_Tuple.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Tuple)));
+			_Bag_Bag_collectNested_V.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Bag_collectNested_V)));
 			_Bag_Bag_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Bag_collect_V)));
 			_Bag_Bag_flatten_T2.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
@@ -2517,6 +2549,8 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _String)));
 			_Collection_Tuple.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Tuple)));
+			_Collection_Bag_collectNested_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_collectNested_V)));
 			_Collection_Bag_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_collect_V)));
 			_Collection_Bag_flatten_T2.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2527,6 +2561,8 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_selectByType_TT)));
 			_Collection_Bag_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_T)));
+			_Collection_Collection_collectNested_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_collectNested_V)));
 			_Collection_Collection_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_collect_V)));
 			_Collection_Collection_excludesAll_T2.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2559,6 +2595,8 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OrderedSet_selectByType_TT)));
 			_Collection_OrderedSet_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OrderedSet_T)));
+			_Collection_Sequence_collectNested_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Sequence_collectNested_V)));
 			_Collection_Sequence_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Sequence_collect_V)));
 			_Collection_Sequence_flatten_T2.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2653,6 +2691,8 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _OrderedSet_selectByType_TT)));
 			_Sequence_OrderedSet_T.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _OrderedSet_T)));
+			_Sequence_Sequence_collectNested_V.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
+				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Sequence_collectNested_V)));
 			_Sequence_Sequence_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Sequence_collect_V)));
 			_Sequence_Sequence_flatten_T2.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,

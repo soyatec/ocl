@@ -350,6 +350,7 @@ public class IteratorsTest4 extends PivotTestSuite
         // nestedPackage->collectNested(nestedPackage) is Bag<Set<Package>>
         // nestedPackage->collectNested(nestedPackage)->flatten() is Bag<Package>
         assertQueryEquals(pkg1, expected2, "nestedPackage.nestedPackage");
+        assertQueryResults(pkg1, "Sequence{1,2}", "let s:Sequence(OclAny) = Sequence{'a','bb'} in s->collect(oclAsType(String)).size()");
     }
 
 	/**
@@ -419,6 +420,9 @@ public class IteratorsTest4 extends PivotTestSuite
 		CollectionValue expected2 = idResolver.createBagOfEach(typeId, e1, e2, e3);
 
         assertQueryEquals(pkg1, expected2, "nestedPackage->collectNested(nestedPackage)");
+        // Bug 423489 - ensure return is collection of body type not source type
+        assertQueryResults(pkg1, "Sequence{1,2}", "let s:Sequence(OclAny) = Sequence{'a','bb'} in s->collectNested(oclAsType(String)).size()");
+        assertQueryResults(pkg1, "Sequence{Sequence{1,2},Sequence{3,4}}", "let s:Sequence(Sequence(OclAny)) = Sequence{Sequence{'a','bb'},Sequence{'ccc','dddd'}} in s->collectNested(oclAsType(Sequence(String)))->collectNested(s | s.size())");
     }
 
     /**

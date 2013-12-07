@@ -106,7 +106,7 @@ type Bag(T) : BagType conformsTo Collection(T) {
 	/**
 	The Bag of elements which results from applying body to every member of the source nonordered collection.
 	**/
-	iteration collectNested(V)(i : T[?] | lambda : Lambda T() : V[?]) : Bag(T) => 'org.eclipse.ocl.examples.library.iterator.CollectNestedIteration';
+	iteration collectNested(V)(i : T[?] | lambda : Lambda T() : V[?]) : Bag(V) => 'org.eclipse.ocl.examples.library.iterator.CollectNestedIteration';
 	/**
 	The sub-bag of the source bag for which body is oclText[false].
 	
@@ -317,7 +317,7 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	/**
 	The Collection of elements which results from applying body to every member of the source collection.
 	**/
-	iteration collectNested(V)(i : T[?] | lambda : Lambda T() : V[?]) : Collection(T) => 'org.eclipse.ocl.examples.library.iterator.CollectNestedIteration';
+	iteration collectNested(V)(i : T[?] | lambda : Lambda T() : V[?]) : Collection(V) => 'org.eclipse.ocl.examples.library.iterator.CollectNestedIteration';
 	/**
 	Results in oclText[true] if body evaluates to oclText[true] for at least one element in the source collection.
 	**/
@@ -1097,7 +1097,7 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	/**
 	The sequence of elements that results from applying body to every member of the source ordered collection.
 	**/
-	iteration collectNested(V)(i : T[?] | lambda : Lambda T() : V[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.iterator.CollectNestedIteration';
+	iteration collectNested(V)(i : T[?] | lambda : Lambda T() : V[?]) : Sequence(V) => 'org.eclipse.ocl.examples.library.iterator.CollectNestedIteration';
 	/**
 	The subsequence of the source sequence for which body is oclText[false].
 	**/
