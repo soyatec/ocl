@@ -17,20 +17,27 @@
 package org.eclipse.ocl.examples.pivot.manager;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Metaclass;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.SetType;
@@ -61,44 +68,47 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	 */
 	protected @NonNull String defaultStandardLibraryURI = DEFAULT_OCL_STDLIB_URI;
 
-	private BagType bagType = null;
-	private PrimitiveType booleanType = null;
-	private org.eclipse.ocl.examples.pivot.Class classType = null;
-	private CollectionType collectionType = null;
-	private org.eclipse.ocl.examples.pivot.Class enumerationType = null;
-	private PrimitiveType integerType = null;
-	private Metaclass<?> metaclassType = null;
-	private AnyType oclAnyType = null;
-	private org.eclipse.ocl.examples.pivot.Class oclComparableType = null;
-	private org.eclipse.ocl.examples.pivot.Class oclElementType = null;
-	private InvalidType oclInvalidType = null;
-	private org.eclipse.ocl.examples.pivot.Class oclLambdaType = null;
-	private SelfType oclSelfType = null;
-	private org.eclipse.ocl.examples.pivot.Class oclSummableType = null;
-	private org.eclipse.ocl.examples.pivot.Class oclTupleType = null;
-	private org.eclipse.ocl.examples.pivot.Class oclTypeType = null;
-	private VoidType oclVoidType = null;
-	private OrderedSetType orderedSetType = null;
-	private PrimitiveType realType = null;
-	private SequenceType sequenceType = null;
-	private SetType setType = null;
-	private PrimitiveType stringType = null;
-	private CollectionType uniqueCollectionType = null;
-	private PrimitiveType unlimitedNaturalType = null;
+	private @Nullable BagType bagType = null;
+	private @Nullable PrimitiveType booleanType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class classType = null;
+	private @Nullable CollectionType collectionType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class enumerationType = null;
+	private @Nullable PrimitiveType integerType = null;
+	private @Nullable Metaclass<?> metaclassType = null;
+	private @Nullable AnyType oclAnyType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class oclComparableType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class oclElementType = null;
+	private @Nullable Operation oclInvalidOperation = null;
+	private @Nullable Property oclInvalidProperty = null;
+	private @Nullable InvalidType oclInvalidType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class oclLambdaType = null;
+	private @Nullable SelfType oclSelfType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class oclSummableType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class oclTupleType = null;
+	private @Nullable org.eclipse.ocl.examples.pivot.Class oclTypeType = null;
+	private @Nullable VoidType oclVoidType = null;
+	private @Nullable OrderedSetType orderedSetType = null;
+	private @Nullable PrimitiveType realType = null;
+	private @Nullable SequenceType sequenceType = null;
+	private @Nullable SetType setType = null;
+	private @Nullable PrimitiveType stringType = null;
+	private @Nullable CollectionType uniqueCollectionType = null;
+	private @Nullable PrimitiveType unlimitedNaturalType = null;
 	
-	private Map<String, Type> nameToLibraryTypeMap = null;
+	private @Nullable Map<String, Type> nameToLibraryTypeMap = null;
 
 	/**
 	 * Names of all iterations in the libraries.
 	 */
 //	private Set<String> iterationNames = new HashSet<String>();
 
-	protected void defineLibraryType(Type pivotType) {
-		if (nameToLibraryTypeMap == null) {
-			nameToLibraryTypeMap = new HashMap<String, Type>();
+	protected void defineLibraryType(@NonNull Type pivotType) {
+		Map<String, Type> nameToLibraryTypeMap2 = nameToLibraryTypeMap;
+		if (nameToLibraryTypeMap2 == null) {
+			nameToLibraryTypeMap = nameToLibraryTypeMap2 = new HashMap<String, Type>();
 		}
 		String name = pivotType.getName();
-		Type oldType = nameToLibraryTypeMap.put(name, pivotType);
+		Type oldType = nameToLibraryTypeMap2.put(name, pivotType);
 		if ((oldType != null) && (oldType != pivotType)) {
 			logger.warn("Conflicting pivot type '" + name + "'");
 		}
@@ -107,6 +117,18 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 //				iterationNames.add(operation.getName());
 //			}
 //		}
+	}
+
+	public @Nullable Operation basicGetOclInvalidOperation() {
+		return oclInvalidOperation;
+	}
+
+	public @Nullable Property basicGetOclInvalidProperty() {
+		return oclInvalidProperty;
+	}
+
+	public @Nullable InvalidType basicGetOclInvalidType() {
+		return oclInvalidType;
 	}
 
 	@Override
@@ -164,11 +186,12 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	}
 
 	public Type getLibraryType(@NonNull String typeName) {
-		if (nameToLibraryTypeMap == null) {
-			nameToLibraryTypeMap = new HashMap<String, Type>();
+		Map<String, Type> nameToLibraryTypeMap2 = nameToLibraryTypeMap;
+		if (nameToLibraryTypeMap2 == null) {
+			nameToLibraryTypeMap = nameToLibraryTypeMap2 = new HashMap<String, Type>();
 			loadDefaultLibrary(defaultStandardLibraryURI);
 		}
-		return nameToLibraryTypeMap.get(typeName);
+		return nameToLibraryTypeMap2.get(typeName);
 	}
 
 	public @NonNull Metaclass<?> getMetaclassType() {
@@ -201,6 +224,44 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 			oclElementType2 = oclElementType = resolveRequiredSimpleType(org.eclipse.ocl.examples.pivot.Class.class, "OclElement");		
 		}
 		return oclElementType2;
+	}
+
+	public @NonNull Operation getOclInvalidOperation() {
+		Operation oclInvalidOperation2 = oclInvalidOperation;
+		if (oclInvalidOperation2 == null) {
+			InvalidType invalidType = getOclInvalidType();
+			List<Operation> invalidOperations = invalidType.getOwnedOperation();
+			String invalidName = "oclBadOperation";
+			oclInvalidOperation2 = DomainUtil.getNamedElement(invalidOperations, invalidName);
+			if (oclInvalidOperation2 == null) {
+				oclInvalidOperation2 = PivotFactory.eINSTANCE.createOperation();
+				oclInvalidOperation2.setName(invalidName);
+				oclInvalidOperation2.setType(invalidType);
+				oclInvalidOperation2.setImplementation(OclAnyUnsupportedOperation.INSTANCE);
+				invalidOperations.add(oclInvalidOperation2);
+			}
+			oclInvalidOperation = oclInvalidOperation2;
+		}
+		return oclInvalidOperation2;
+	}
+
+	public @NonNull Property getOclInvalidProperty() {
+		Property oclInvalidProperty2 = oclInvalidProperty;
+		if (oclInvalidProperty2 == null) {
+			InvalidType invalidType = getOclInvalidType();
+			List<Property> invalidProperties = invalidType.getOwnedAttribute();
+			String invalidName = "oclBadProperty";
+			oclInvalidProperty2 = DomainUtil.getNamedElement(invalidProperties, invalidName);
+			if (oclInvalidProperty2 == null) {
+				oclInvalidProperty2 = PivotFactory.eINSTANCE.createProperty();
+				oclInvalidProperty2.setName(invalidName);
+				oclInvalidProperty2.setType(invalidType);
+				oclInvalidProperty2.setImplementation(OclAnyUnsupportedOperation.INSTANCE);
+				invalidProperties.add(oclInvalidProperty2);
+			}
+			oclInvalidProperty = oclInvalidProperty2;
+		}
+		return oclInvalidProperty2;
 	}
 
 	public @NonNull InvalidType getOclInvalidType() {
@@ -284,7 +345,8 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		if (type == null) {
 //			nameToLibraryTypeMap = null;
 			type = getLibraryType(typeName);	// FIXME just a debug retry
-			if ((nameToLibraryTypeMap == null) || nameToLibraryTypeMap.isEmpty()) {
+			Map<String, Type> nameToLibraryTypeMap2 = nameToLibraryTypeMap;
+			if ((nameToLibraryTypeMap2 == null) || nameToLibraryTypeMap2.isEmpty()) {
 				throw new IllegalLibraryException(OCLMessages.EmptyLibrary_ERROR_);
 			}
 			else {
@@ -333,10 +395,6 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		}
 		return unlimitedNaturalType2;
 	}
-
-//	public boolean isIteration(String name) {
-//		return iterationNames.contains(name);
-//	}
 
 	public boolean isOrdered(Type sourceType) {
 		if (sourceType instanceof OrderedSetType) {
