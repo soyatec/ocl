@@ -423,6 +423,8 @@ public class IteratorsTest4 extends PivotTestSuite
         // Bug 423489 - ensure return is collection of body type not source type
         assertQueryResults(pkg1, "Sequence{1,2}", "let s:Sequence(OclAny) = Sequence{'a','bb'} in s->collectNested(oclAsType(String)).size()");
         assertQueryResults(pkg1, "Sequence{Sequence{1,2},Sequence{3,4}}", "let s:Sequence(Sequence(OclAny)) = Sequence{Sequence{'a','bb'},Sequence{'ccc','dddd'}} in s->collectNested(oclAsType(Sequence(String)))->collectNested(s | s.size())");
+        // Bug 423490 - ensure nested iteration uses iterator as implicit source
+        assertQueryResults(pkg1, "Sequence{2,1}", "let s:Sequence(Sequence(OclAny)) = Sequence{Sequence{'a','bb'},Sequence{'ccc'}} in s->collectNested(size())");
     }
 
     /**

@@ -791,7 +791,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	@Override
 	public boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {
-		return conformsToCollectionType((CollectionType)firstCollectionType, (CollectionType)secondCollectionType, null);	// FIXME cast
+		Map<TemplateParameter, ParameterableElement> bindings = secondCollectionType instanceof EObject ? PivotUtil.getAllTemplateParametersAsBindings((EObject) secondCollectionType) : null;
+		return conformsToCollectionType((CollectionType)firstCollectionType, (CollectionType)secondCollectionType, bindings);	// FIXME cast
 	}
 
 	protected boolean conformsToCollectionType(@NonNull CollectionType firstType, @NonNull CollectionType secondType,

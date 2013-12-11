@@ -115,6 +115,8 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	}
 
     @Test public void test_implicit_source() {
+        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "nestedPackage->select(oclIsKindOf(Package))->isEmpty()");	// Fails unless implicit Package diambiguated away
+//
         assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "ownedType->select(name = 'Integer') = Set{Integer}");
         assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "let name : String = 'String' in ownedType->select(name = 'Integer') = Set{Integer}");
         assertQueryTrue(metaModelManager.getIntegerType(), "package.ownedType->select(name = self.name) = Set{Integer}");
