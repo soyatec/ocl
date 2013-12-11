@@ -133,19 +133,15 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 
 	@Override
 	public Continuation<?> visitBooleanLiteralExpCS(@NonNull BooleanLiteralExpCS csElement) {
-		BooleanLiteralExp pivotElement = context.refreshModelElement(BooleanLiteralExp.class, PivotPackage.Literals.BOOLEAN_LITERAL_EXP, csElement);
-		if (pivotElement != null) {
-			pivotElement.setBooleanSymbol(Boolean.valueOf(csElement.getName()));
-		}
+		@NonNull BooleanLiteralExp pivotElement = context.refreshModelElement(BooleanLiteralExp.class, PivotPackage.Literals.BOOLEAN_LITERAL_EXP, csElement);
+		pivotElement.setBooleanSymbol(Boolean.valueOf(csElement.getName()));
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitCollectionLiteralExpCS(@NonNull CollectionLiteralExpCS csElement) {
-		CollectionLiteralExp pivotElement = context.refreshModelElement(CollectionLiteralExp.class, PivotPackage.Literals.COLLECTION_LITERAL_EXP, csElement);
-		if (pivotElement != null) {
-			context.refreshPivotList(CollectionLiteralPart.class, pivotElement.getPart(), csElement.getOwnedParts());
-		}
+		@NonNull CollectionLiteralExp pivotElement = context.refreshModelElement(CollectionLiteralExp.class, PivotPackage.Literals.COLLECTION_LITERAL_EXP, csElement);
+		context.refreshPivotList(CollectionLiteralPart.class, pivotElement.getPart(), csElement.getOwnedParts());
 		return null;
 	}
 
@@ -167,64 +163,62 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 
 	@Override
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csElement) {
-		Constraint asConstraint = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
-		if (asConstraint != null) {
-			ExpSpecificationCS csStatusSpecification = (ExpSpecificationCS)csElement.getSpecification();
-			ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS)csElement.getMessageSpecification();
-			if (csMessageSpecification == null) {
-				OpaqueExpression asSpecification = PivotUtil.getPivot(OpaqueExpression.class, csStatusSpecification);
-				asConstraint.setSpecification(asSpecification);
+		@NonNull Constraint asConstraint = refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, csElement);
+		ExpSpecificationCS csStatusSpecification = (ExpSpecificationCS)csElement.getSpecification();
+		ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS)csElement.getMessageSpecification();
+		if (csMessageSpecification == null) {
+			OpaqueExpression asSpecification = PivotUtil.getPivot(OpaqueExpression.class, csStatusSpecification);
+			asConstraint.setSpecification(asSpecification);
+		}
+		else {
+			Map<String, Type> tupleParts = new HashMap<String, Type>();
+			tupleParts.put(PivotConstants.MESSAGE_PART_NAME, metaModelManager.getStringType());
+			tupleParts.put(PivotConstants.STATUS_PART_NAME, metaModelManager.getBooleanType());
+			TupleType tupleType = metaModelManager.getTupleManager().getTupleType("Tuple", tupleParts);
+			Property statusProperty = DomainUtil.getNamedElement(tupleType.getOwnedAttribute(), PivotConstants.STATUS_PART_NAME);
+			OpaqueExpression asSpecification = asConstraint.getSpecification();
+			//
+			ExpressionInOCL asExpressionInOCL;
+			if (asSpecification instanceof ExpressionInOCL) {
+				asExpressionInOCL = (ExpressionInOCL) asSpecification;	
 			}
 			else {
-				Map<String, Type> tupleParts = new HashMap<String, Type>();
-				tupleParts.put(PivotConstants.MESSAGE_PART_NAME, metaModelManager.getStringType());
-				tupleParts.put(PivotConstants.STATUS_PART_NAME, metaModelManager.getBooleanType());
-				TupleType tupleType = metaModelManager.getTupleManager().getTupleType("Tuple", tupleParts);
-				Property statusProperty = DomainUtil.getNamedElement(tupleType.getOwnedAttribute(), PivotConstants.STATUS_PART_NAME);
-				OpaqueExpression asSpecification = asConstraint.getSpecification();
-				//
-				ExpressionInOCL asExpressionInOCL;
-				if (asSpecification instanceof ExpressionInOCL) {
-					asExpressionInOCL = (ExpressionInOCL) asSpecification;	
-				}
-				else {
-					asExpressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
-					asConstraint.setSpecification(asExpressionInOCL);
-				}
-				OCLExpression asExpression = asExpressionInOCL.getBodyExpression();
-				//
-				PropertyCallExp asTuplePartExp;
-				if (asExpression instanceof PropertyCallExp) {
-					asTuplePartExp = (PropertyCallExp) asExpression;	
-				}
-				else {
-					asTuplePartExp = PivotFactory.eINSTANCE.createPropertyCallExp();
-					asExpressionInOCL.setBodyExpression(asTuplePartExp);
-				}
-				asTuplePartExp.setReferredProperty(statusProperty);
-				asTuplePartExp.setType(statusProperty.getType());
-				asTuplePartExp.setIsRequired(true);
-				asExpression = asTuplePartExp.getSource();
-				//
-				TupleLiteralExp asTupleLiteralExp;
-				if (asExpression instanceof TupleLiteralExp) {
-					asTupleLiteralExp = (TupleLiteralExp) asExpression;	
-				}
-				else {
-					asTupleLiteralExp = PivotFactory.eINSTANCE.createTupleLiteralExp();
-					asTuplePartExp.setSource(asTupleLiteralExp);
-				}
-				asTupleLiteralExp.setType(tupleType);
-				asTupleLiteralExp.setIsRequired(true);
-				List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>();
-				TupleLiteralPart asStatusPart = PivotUtil.getPivot(TupleLiteralPart.class, csStatusSpecification);
-				TupleLiteralPart asMessagePart = PivotUtil.getPivot(TupleLiteralPart.class, csMessageSpecification);
-				if ((asMessagePart != null) && (asStatusPart != null)) {
-					parts.add(asMessagePart);
-					parts.add(asStatusPart);
-				}
-				context.refreshList(asTupleLiteralExp.getPart(), parts);
+				asExpressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+				asConstraint.setSpecification(asExpressionInOCL);
 			}
+			OCLExpression asExpression = asExpressionInOCL.getBodyExpression();
+			//
+			PropertyCallExp asTuplePartExp;
+			if (asExpression instanceof PropertyCallExp) {
+				asTuplePartExp = (PropertyCallExp) asExpression;	
+			}
+			else {
+				asTuplePartExp = PivotFactory.eINSTANCE.createPropertyCallExp();
+				asExpressionInOCL.setBodyExpression(asTuplePartExp);
+			}
+			asTuplePartExp.setReferredProperty(statusProperty);
+			asTuplePartExp.setType(statusProperty.getType());
+			asTuplePartExp.setIsRequired(true);
+			asExpression = asTuplePartExp.getSource();
+			//
+			TupleLiteralExp asTupleLiteralExp;
+			if (asExpression instanceof TupleLiteralExp) {
+				asTupleLiteralExp = (TupleLiteralExp) asExpression;	
+			}
+			else {
+				asTupleLiteralExp = PivotFactory.eINSTANCE.createTupleLiteralExp();
+				asTuplePartExp.setSource(asTupleLiteralExp);
+			}
+			asTupleLiteralExp.setType(tupleType);
+			asTupleLiteralExp.setIsRequired(true);
+			List<TupleLiteralPart> parts = new ArrayList<TupleLiteralPart>();
+			TupleLiteralPart asStatusPart = PivotUtil.getPivot(TupleLiteralPart.class, csStatusSpecification);
+			TupleLiteralPart asMessagePart = PivotUtil.getPivot(TupleLiteralPart.class, csMessageSpecification);
+			if ((asMessagePart != null) && (asStatusPart != null)) {
+				parts.add(asMessagePart);
+				parts.add(asStatusPart);
+			}
+			context.refreshList(asTupleLiteralExp.getPart(), parts);
 		}
 		return null;
 	}
@@ -235,11 +229,9 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 		if (pathName != null) {
 			CS2Pivot.setElementType(pathName, PivotPackage.Literals.TYPE, csElement, null);
 		}
-		ConstructorExp pivotElement = context.refreshModelElement(ConstructorExp.class, PivotPackage.Literals.CONSTRUCTOR_EXP, csElement);
-		if (pivotElement != null) {
-			pivotElement.setValue(csElement.getValue());
-			context.refreshPivotList(ConstructorPart.class, pivotElement.getPart(), csElement.getOwnedParts());
-		}
+		@NonNull ConstructorExp pivotElement = context.refreshModelElement(ConstructorExp.class, PivotPackage.Literals.CONSTRUCTOR_EXP, csElement);
+		pivotElement.setValue(csElement.getValue());
+		context.refreshPivotList(ConstructorPart.class, pivotElement.getPart(), csElement.getOwnedParts());
 		return null;
 	}
 
@@ -251,15 +243,13 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 
 	@Override
 	public Continuation<?> visitContextCS(@NonNull ContextCS csElement) {
-		ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
-		if (pivotElement != null) {
-			PivotUtil.setBody(pivotElement, null, null);
-			Resource resource = csElement.eResource();
-			if (resource instanceof BaseResource) {	
-				ParserContext parserContext = ((BaseResource)resource).getParserContext();
-				if (parserContext != null) {
-					parserContext.initialize(context, pivotElement);
-				}
+		@NonNull ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
+		PivotUtil.setBody(pivotElement, null, null);
+		Resource resource = csElement.eResource();
+		if (resource instanceof BaseResource) {	
+			ParserContext parserContext = ((BaseResource)resource).getParserContext();
+			if (parserContext != null) {
+				parserContext.initialize(context, pivotElement);
 			}
 		}
 		return null;
@@ -278,20 +268,18 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 			SpecificationCS csStatusSpecification = csConstraint.getSpecification();
 			SpecificationCS csMessageSpecification = csConstraint.getMessageSpecification();
 			if ((csStatusSpecification != null) && (csMessageSpecification != null)) {
-				TupleLiteralPart csTupleLiteralPart = context.refreshModelElement(TupleLiteralPart.class, PivotPackage.Literals.TUPLE_LITERAL_PART, csElement);
-				if (csTupleLiteralPart != null) {
-					EStructuralFeature eContainingFeature = csElement.eContainingFeature();
-					if (eContainingFeature == BaseCSPackage.Literals.CONSTRAINT_CS__SPECIFICATION) {
-						csTupleLiteralPart.setName(PivotConstants.STATUS_PART_NAME);
-						csTupleLiteralPart.setType(metaModelManager.getBooleanType());
-					}
-					else if (eContainingFeature == BaseCSPackage.Literals.CONSTRAINT_CS__MESSAGE_SPECIFICATION) {
-						csTupleLiteralPart.setName(PivotConstants.MESSAGE_PART_NAME);
-						csTupleLiteralPart.setType(metaModelManager.getStringType());
-					}
-					else {
-						logger.error("unknown ExpSpecificationCS.eContainingFeature" + eContainingFeature);
-					}
+				@NonNull TupleLiteralPart csTupleLiteralPart = context.refreshModelElement(TupleLiteralPart.class, PivotPackage.Literals.TUPLE_LITERAL_PART, csElement);
+				EStructuralFeature eContainingFeature = csElement.eContainingFeature();
+				if (eContainingFeature == BaseCSPackage.Literals.CONSTRAINT_CS__SPECIFICATION) {
+					csTupleLiteralPart.setName(PivotConstants.STATUS_PART_NAME);
+					csTupleLiteralPart.setType(metaModelManager.getBooleanType());
+				}
+				else if (eContainingFeature == BaseCSPackage.Literals.CONSTRAINT_CS__MESSAGE_SPECIFICATION) {
+					csTupleLiteralPart.setName(PivotConstants.MESSAGE_PART_NAME);
+					csTupleLiteralPart.setType(metaModelManager.getStringType());
+				}
+				else {
+					logger.error("unknown ExpSpecificationCS.eContainingFeature" + eContainingFeature);
 				}
 				return null;
 			}
@@ -367,10 +355,8 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 	public Continuation<?> visitNumberLiteralExpCS(@NonNull NumberLiteralExpCS csElement) {
 		Number number = csElement.getName();
 		if ((number instanceof BigDecimal) || (number instanceof Double) || (number instanceof Float)) {
-			RealLiteralExp pivotElement = context.refreshModelElement(RealLiteralExp.class, PivotPackage.Literals.REAL_LITERAL_EXP, csElement);
-			if (pivotElement != null) {
-				pivotElement.setRealSymbol(number);
-			}
+			@NonNull RealLiteralExp pivotElement = context.refreshModelElement(RealLiteralExp.class, PivotPackage.Literals.REAL_LITERAL_EXP, csElement);
+			pivotElement.setRealSymbol(number);
 		}
 		else {
 			boolean isNegative;
@@ -415,16 +401,12 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 				}
 			}				
 			if (isNegative) {
-				IntegerLiteralExp pivotElement = context.refreshModelElement(IntegerLiteralExp.class, PivotPackage.Literals.INTEGER_LITERAL_EXP, csElement);
-				if (pivotElement != null) {
-					pivotElement.setIntegerSymbol(number);
-				}
+				@NonNull IntegerLiteralExp pivotElement = context.refreshModelElement(IntegerLiteralExp.class, PivotPackage.Literals.INTEGER_LITERAL_EXP, csElement);
+				pivotElement.setIntegerSymbol(number);
 			}
 			else {
-				UnlimitedNaturalLiteralExp pivotElement = context.refreshModelElement(UnlimitedNaturalLiteralExp.class, PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, csElement);
-				if (pivotElement != null) {
-					pivotElement.setUnlimitedNaturalSymbol(number);
-				}
+				@NonNull UnlimitedNaturalLiteralExp pivotElement = context.refreshModelElement(UnlimitedNaturalLiteralExp.class, PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, csElement);
+				pivotElement.setUnlimitedNaturalSymbol(number);
 			}
 		}
 		return null;
@@ -453,32 +435,28 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 
 	@Override
 	public Continuation<?> visitStringLiteralExpCS(@NonNull StringLiteralExpCS csElement) {
-		StringLiteralExp pivotElement = context.refreshModelElement(StringLiteralExp.class, PivotPackage.Literals.STRING_LITERAL_EXP, csElement);
-		if (pivotElement != null) {
-			List<String> names = csElement.getName();
-			if (names.size() == 0) {
-				pivotElement.setStringSymbol("");
+		@NonNull StringLiteralExp pivotElement = context.refreshModelElement(StringLiteralExp.class, PivotPackage.Literals.STRING_LITERAL_EXP, csElement);
+		List<String> names = csElement.getName();
+		if (names.size() == 0) {
+			pivotElement.setStringSymbol("");
+		}
+		else if (names.size() == 1) {
+			pivotElement.setStringSymbol(names.get(0));
+		}
+		else {
+			StringBuilder s = new StringBuilder();
+			for (String name : names) {
+				s.append(name);
 			}
-			else if (names.size() == 1) {
-				pivotElement.setStringSymbol(names.get(0));
-			}
-			else {
-				StringBuilder s = new StringBuilder();
-				for (String name : names) {
-					s.append(name);
-				}
-				pivotElement.setStringSymbol(s.toString());
-			}
+			pivotElement.setStringSymbol(s.toString());
 		}
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitTupleLiteralExpCS(@NonNull TupleLiteralExpCS csElement) {
-		TupleLiteralExp pivotElement = context.refreshModelElement(TupleLiteralExp.class, PivotPackage.Literals.TUPLE_LITERAL_EXP, csElement);	
-		if (pivotElement != null) {
-			context.refreshPivotList(TupleLiteralPart.class, pivotElement.getPart(), csElement.getOwnedParts());
-		}
+		@NonNull TupleLiteralExp pivotElement = context.refreshModelElement(TupleLiteralExp.class, PivotPackage.Literals.TUPLE_LITERAL_EXP, csElement);	
+		context.refreshPivotList(TupleLiteralPart.class, pivotElement.getPart(), csElement.getOwnedParts());
 		return null;
 	}
 
@@ -503,11 +481,9 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 
 	@Override
 	public Continuation<?> visitUnlimitedNaturalLiteralExpCS(@NonNull UnlimitedNaturalLiteralExpCS csElement) {
-		UnlimitedNaturalLiteralExp pivotElement = context.refreshModelElement(UnlimitedNaturalLiteralExp.class, PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, csElement);
-		if (pivotElement != null) {
-			pivotElement.setName("*");
-			pivotElement.setUnlimitedNaturalSymbol(Unlimited.INSTANCE);
-		}
+		@NonNull UnlimitedNaturalLiteralExp pivotElement = context.refreshModelElement(UnlimitedNaturalLiteralExp.class, PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, csElement);
+		pivotElement.setName("*");
+		pivotElement.setUnlimitedNaturalSymbol(Unlimited.INSTANCE);
 		return null;
 	}
 

@@ -480,7 +480,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		// Do nothing.
 	}
 	
-	public @Nullable <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @Nullable ModelElementCS csElement) {
+	public @NonNull <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, @NonNull EClass pivotEClass, @Nullable ModelElementCS csElement) {
 		Element pivotElement = csElement != null ? getPivotElement(csElement) : null;
 		@NonNull Element pivotElement2;
 		if ((pivotElement == null) || (pivotEClass != pivotElement.eClass())) {
@@ -494,7 +494,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 			installPivotDefinition(csElement, pivotElement2);
 		}
 		@SuppressWarnings("unchecked")
-		T castElement = (T) pivotElement2;
+		@NonNull T castElement = (T) pivotElement2;
 		return castElement;
 	}
 

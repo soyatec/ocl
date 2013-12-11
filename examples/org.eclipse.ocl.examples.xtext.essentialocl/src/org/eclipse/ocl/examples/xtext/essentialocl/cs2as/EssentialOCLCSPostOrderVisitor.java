@@ -341,20 +341,18 @@ public class EssentialOCLCSPostOrderVisitor extends AbstractEssentialOCLCSPostOr
 		ExpCS csName = csArgument.getName();
 		if (csName instanceof NameExpCS) {
 			PathNameCS csPathName = ((NameExpCS)csName).getPathName();
-			Variable parameter = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, csName);
-			if (parameter != null) {
-				ICompositeNode node = NodeModelUtils.getNode(csName);
-				if (node != null) {
-					ILeafNode leafNode = ElementUtil.getLeafNode(node);
-					if (leafNode != null) {
-						String varName = leafNode.getText();
-						assert varName != null;
-						context.refreshName(parameter, varName);
-						List<PathElementCS> path = csPathName.getPath();
-						PathElementCS csPathElement = path.get(path.size()-1);
-						csPathElement.setElement(parameter);	// Resolve the reference that is actually a definition
-						csPathElement.setElementType(null);		// Indicate a definition to the syntax colouring
-					}
+			@NonNull Variable parameter = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, csName);
+			ICompositeNode node = NodeModelUtils.getNode(csName);
+			if (node != null) {
+				ILeafNode leafNode = ElementUtil.getLeafNode(node);
+				if (leafNode != null) {
+					String varName = leafNode.getText();
+					assert varName != null;
+					context.refreshName(parameter, varName);
+					List<PathElementCS> path = csPathName.getPath();
+					PathElementCS csPathElement = path.get(path.size()-1);
+					csPathElement.setElement(parameter);	// Resolve the reference that is actually a definition
+					csPathElement.setElementType(null);		// Indicate a definition to the syntax colouring
 				}
 			}
 		}

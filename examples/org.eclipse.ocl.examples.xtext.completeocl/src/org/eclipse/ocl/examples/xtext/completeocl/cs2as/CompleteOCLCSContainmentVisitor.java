@@ -264,26 +264,28 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 		if (modelPackage.eIsProxy()) {
 			return null;
 		}
-		org.eclipse.ocl.examples.pivot.Package contextPackage = modelPackage2contextPackage.get(modelPackage);
-		if (contextPackage == null) {
+		org.eclipse.ocl.examples.pivot.Package contextPackage1 = modelPackage2contextPackage.get(modelPackage);
+		@NonNull org.eclipse.ocl.examples.pivot.Package contextPackage;
+		if (contextPackage1 == null) {
 			contextPackage = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, csElement);
-			if (contextPackage != null) {
-				String newName = modelPackage.getName();
-				if (csElement != null) {
-					List<PathElementCS> newPath = csElement.getPathName().getPath();
-					PathElementCS lastPathElement = newPath.get(newPath.size() - 1);
-					newName = lastPathElement.toString();
-				}
-				context.refreshName(contextPackage, DomainUtil.nonNullModel(newName));
-				context.refreshNsURI(contextPackage, modelPackage.getNsURI());
-				modelPackage2contextPackage.put(modelPackage, contextPackage);
-				org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-				if (parentModelPackage != null) {
-					refreshContextPackage(parentModelPackage, null);
-				}
+			String newName = modelPackage.getName();
+			if (csElement != null) {
+				List<PathElementCS> newPath = csElement.getPathName().getPath();
+				PathElementCS lastPathElement = newPath.get(newPath.size() - 1);
+				newName = lastPathElement.toString();
+			}
+			context.refreshName(contextPackage, DomainUtil.nonNullModel(newName));
+			context.refreshNsURI(contextPackage, modelPackage.getNsURI());
+			modelPackage2contextPackage.put(modelPackage, contextPackage);
+			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
+			if (parentModelPackage != null) {
+				refreshContextPackage(parentModelPackage, null);
 			}
 		}
-		if ((csElement != null) && (contextPackage != null)) {
+		else {
+			contextPackage = contextPackage1;
+		}
+		if (csElement != null) {
 			context.refreshComments(contextPackage, csElement);
 			context.installPivotUsage(csElement, contextPackage);
 		}
@@ -294,28 +296,26 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 		if (modelClassifier.eIsProxy()) {
 			return null;
 		}
-		Type contextClassifier = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, csElement);
-		if (contextClassifier != null) {
-			List<Type> contextClassifiers = modelType2contextTypes.get(modelClassifier);
-			if (contextClassifiers == null) {
-				contextClassifiers = new ArrayList<Type>();
-				modelType2contextTypes.put(modelClassifier, contextClassifiers);
-			}
-			context.refreshName(contextClassifier, DomainUtil.nonNullModel(modelClassifier.getName()));
-			contextClassifiers.add(contextClassifier);
-			org.eclipse.ocl.examples.pivot.Package modelPackage = modelClassifier.getPackage();
-			if (modelPackage != null) {
-				PackageDeclarationCS csPackage = null;
-				if (csElement != null) {
-					EObject eContainer = csElement.eContainer();
-					if (eContainer instanceof PackageDeclarationCS) {
-						csPackage = (PackageDeclarationCS)eContainer;
-					}
-				}
-				refreshContextPackage(modelPackage, csPackage);
-			}
+		@NonNull Type contextClassifier = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, csElement);
+		List<Type> contextClassifiers = modelType2contextTypes.get(modelClassifier);
+		if (contextClassifiers == null) {
+			contextClassifiers = new ArrayList<Type>();
+			modelType2contextTypes.put(modelClassifier, contextClassifiers);
 		}
-		if ((csElement != null) && (contextClassifier != null)) {
+		context.refreshName(contextClassifier, DomainUtil.nonNullModel(modelClassifier.getName()));
+		contextClassifiers.add(contextClassifier);
+		org.eclipse.ocl.examples.pivot.Package modelPackage = modelClassifier.getPackage();
+		if (modelPackage != null) {
+			PackageDeclarationCS csPackage = null;
+			if (csElement != null) {
+				EObject eContainer = csElement.eContainer();
+				if (eContainer instanceof PackageDeclarationCS) {
+					csPackage = (PackageDeclarationCS)eContainer;
+				}
+			}
+			refreshContextPackage(modelPackage, csPackage);
+		}
+		if (csElement != null) {
 			context.refreshComments(contextClassifier, csElement);
 			context.installPivotUsage(csElement, contextClassifier);
 		}
@@ -370,54 +370,48 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 		for (IncludeCS csInclude : csElement.getOwnedInclude()) {
 			csInclude.getNamespace();					// Resolve the proxy to perform the import.
 		}
-		Root contextRoot = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);
-		if (contextRoot != null) {
-			List<Root> modelRoots = new ArrayList<Root>();
-			for (org.eclipse.ocl.examples.pivot.Package modelPackage : modelPackage2contextPackage.keySet()) {
-				org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
-				if (parentModelPackage == null) {
-					modelRoots.add((Root) modelPackage.eContainer());
-				}
+		@NonNull Root contextRoot = refreshRoot(Root.class, PivotPackage.Literals.ROOT, csElement);
+		List<Root> modelRoots = new ArrayList<Root>();
+		for (org.eclipse.ocl.examples.pivot.Package modelPackage : modelPackage2contextPackage.keySet()) {
+			org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
+			if (parentModelPackage == null) {
+				modelRoots.add((Root) modelPackage.eContainer());
 			}
-			installTypeContainment();
-			installPackageContainment(contextRoot);
 		}
+		installTypeContainment();
+		installPackageContainment(contextRoot);
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitDefOperationCS(@NonNull DefOperationCS csElement) {
-		Operation contextOperation = refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
-		if (contextOperation != null) {
-			ClassifierContextDeclCS csClassifierContextDecl = csElement.getClassifierContextDecl();
-			Type modelClassifier = csClassifierContextDecl.getClassifier();
-			if (modelClassifier != null) {
-				registerOperation(modelClassifier, contextOperation);
-			}
-			context.refreshPivotList(Parameter.class, contextOperation.getOwnedParameter(), csElement.getParameters());
-			ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csElement.getSpecification());
-			contextOperation.setBodyExpression(pivotSpecification);
+		@NonNull Operation contextOperation = refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
+		ClassifierContextDeclCS csClassifierContextDecl = csElement.getClassifierContextDecl();
+		Type modelClassifier = csClassifierContextDecl.getClassifier();
+		if (modelClassifier != null) {
+			registerOperation(modelClassifier, contextOperation);
 		}
+		context.refreshPivotList(Parameter.class, contextOperation.getOwnedParameter(), csElement.getParameters());
+		ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csElement.getSpecification());
+		contextOperation.setBodyExpression(pivotSpecification);
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitDefPropertyCS(@NonNull DefPropertyCS csElement) {
-		Property contextProperty = refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
-		if (contextProperty != null) {
-			ClassifierContextDeclCS csClassifierContextDecl = csElement.getClassifierContextDecl();
-			Type modelClassifier = csClassifierContextDecl.getClassifier();
-			if (modelClassifier != null) {
-				registerProperty(modelClassifier, contextProperty);
-			}
-			contextProperty.setIsDerived(true);
-			contextProperty.setIsReadOnly(true);
-			contextProperty.setIsTransient(true);
-			contextProperty.setIsVolatile(true);
-			contextProperty.setIsResolveProxies(false);
-			ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csElement.getSpecification());
-			contextProperty.setDefaultExpression(pivotSpecification);
+		@NonNull Property contextProperty = refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
+		ClassifierContextDeclCS csClassifierContextDecl = csElement.getClassifierContextDecl();
+		Type modelClassifier = csClassifierContextDecl.getClassifier();
+		if (modelClassifier != null) {
+			registerProperty(modelClassifier, contextProperty);
 		}
+		contextProperty.setIsDerived(true);
+		contextProperty.setIsReadOnly(true);
+		contextProperty.setIsTransient(true);
+		contextProperty.setIsVolatile(true);
+		contextProperty.setIsResolveProxies(false);
+		ExpressionInOCL pivotSpecification = PivotUtil.getPivot(ExpressionInOCL.class, csElement.getSpecification());
+		contextProperty.setDefaultExpression(pivotSpecification);
 		return null;
 	}
 
@@ -460,54 +454,52 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 		List<PathElementCS> path = pathName.getPath();
 		int pathSize = path.size();
 		Element modelParent = pathSize >= 2 ? path.get(pathSize-2).getElement() : null;
-		Operation contextOperation = context.refreshModelElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
-		if (contextOperation != null) {
-			if (modelParent instanceof Type) {
-				Type modelClassifier = (Type) modelParent;
-				refreshContextType(modelClassifier, null);
-				registerOperation(modelClassifier, contextOperation);
-			}
-			context.refreshPivotList(Parameter.class, contextOperation.getOwnedParameter(), csParameters);
-			context.refreshComments(contextOperation, csElement);
-			for (ConstraintCS csPrecondition : csElement.getPreconditions()) {
-				Constraint precondition = PivotUtil.getPivot(Constraint.class, csPrecondition);
-				if (precondition != null) {
-					List<Element> constrainedElements = precondition.getConstrainedElement();
-					constrainedElements.clear();
-					constrainedElements.add(contextOperation);
-					List<Constraint> preconditions = operation2preconditions.get(contextOperation);
-					if (preconditions == null) {
-						preconditions = new ArrayList<Constraint>();
-						operation2preconditions.put(contextOperation, preconditions);
-					}
-					preconditions.add(precondition);
-				}
-			}
-			for (ConstraintCS csPostcondition : csElement.getPostconditions()) {
-				Constraint postcondition = PivotUtil.getPivot(Constraint.class, csPostcondition);
-				if (postcondition != null) {
-					List<Element> constrainedElements = postcondition.getConstrainedElement();
-					constrainedElements.clear();
-					constrainedElements.add(contextOperation);
-					List<Constraint> postconditions = operation2postconditions.get(contextOperation);
-					if (postconditions == null) {
-						postconditions = new ArrayList<Constraint>();
-						operation2postconditions.put(contextOperation, postconditions);
-					}
-					postconditions.add(postcondition);
-				}
-			}
-			List<ExpSpecificationCS> csBodies = csElement.getBodies();
-			int iMax = csBodies.size();
-			for (int i = 1; i < iMax; i++) {
-				SpecificationCS csBody = csBodies.get(i);
-				if (csBody != null) {
-					context.addDiagnostic(csBody, "Multiple body expression ignored");
-				}
-			}
-			SpecificationCS csBody = (iMax > 0) ? csBodies.get(0) : null;
-			contextOperation.setBodyExpression(PivotUtil.getPivot(ExpressionInOCL.class, csBody));
+		@NonNull Operation contextOperation = context.refreshModelElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
+		if (modelParent instanceof Type) {
+			Type modelClassifier = (Type) modelParent;
+			refreshContextType(modelClassifier, null);
+			registerOperation(modelClassifier, contextOperation);
 		}
+		context.refreshPivotList(Parameter.class, contextOperation.getOwnedParameter(), csParameters);
+		context.refreshComments(contextOperation, csElement);
+		for (ConstraintCS csPrecondition : csElement.getPreconditions()) {
+			Constraint precondition = PivotUtil.getPivot(Constraint.class, csPrecondition);
+			if (precondition != null) {
+				List<Element> constrainedElements = precondition.getConstrainedElement();
+				constrainedElements.clear();
+				constrainedElements.add(contextOperation);
+				List<Constraint> preconditions = operation2preconditions.get(contextOperation);
+				if (preconditions == null) {
+					preconditions = new ArrayList<Constraint>();
+					operation2preconditions.put(contextOperation, preconditions);
+				}
+				preconditions.add(precondition);
+			}
+		}
+		for (ConstraintCS csPostcondition : csElement.getPostconditions()) {
+			Constraint postcondition = PivotUtil.getPivot(Constraint.class, csPostcondition);
+			if (postcondition != null) {
+				List<Element> constrainedElements = postcondition.getConstrainedElement();
+				constrainedElements.clear();
+				constrainedElements.add(contextOperation);
+				List<Constraint> postconditions = operation2postconditions.get(contextOperation);
+				if (postconditions == null) {
+					postconditions = new ArrayList<Constraint>();
+					operation2postconditions.put(contextOperation, postconditions);
+				}
+				postconditions.add(postcondition);
+			}
+		}
+		List<ExpSpecificationCS> csBodies = csElement.getBodies();
+		int iMax = csBodies.size();
+		for (int i = 1; i < iMax; i++) {
+			SpecificationCS csBody = csBodies.get(i);
+			if (csBody != null) {
+				context.addDiagnostic(csBody, "Multiple body expression ignored");
+			}
+		}
+		SpecificationCS csBody = (iMax > 0) ? csBodies.get(0) : null;
+		contextOperation.setBodyExpression(PivotUtil.getPivot(ExpressionInOCL.class, csBody));
 		return null;
 	}
 
@@ -523,43 +515,41 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 	@Override
 	public Continuation<?> visitPropertyContextDeclCS(@NonNull PropertyContextDeclCS csElement) {
 		Property modelProperty = csElement.getProperty();
-		Property contextProperty = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
-		if (contextProperty != null) {
-			if ((modelProperty != null) && !modelProperty.eIsProxy()) {
-				context.refreshName(contextProperty, DomainUtil.nonNullModel(modelProperty.getName()));
-				contextProperty.setType(modelProperty.getType());
-				Type modelClassifier = modelProperty.getOwningType();
-				if (modelClassifier != null) {
-					refreshContextType(modelClassifier, null);
-					registerProperty(modelClassifier, contextProperty);
-				}
+		@NonNull Property contextProperty = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
+		if ((modelProperty != null) && !modelProperty.eIsProxy()) {
+			context.refreshName(contextProperty, DomainUtil.nonNullModel(modelProperty.getName()));
+			contextProperty.setType(modelProperty.getType());
+			Type modelClassifier = modelProperty.getOwningType();
+			if (modelClassifier != null) {
+				refreshContextType(modelClassifier, null);
+				registerProperty(modelClassifier, contextProperty);
 			}
-			context.refreshComments(contextProperty, csElement);
-			for (ConstraintCS csInvariant : csElement.getDerivedInvariants()) {
-				Constraint invariant = PivotUtil.getPivot(Constraint.class, csInvariant);
-				if (invariant != null) {
-					List<Element> constrainedElements = invariant.getConstrainedElement();
-					constrainedElements.clear();
-					constrainedElements.add(contextProperty);
-					List<Constraint> invariants = property2invariants.get(contextProperty);
-					if (invariants == null) {
-						invariants = new ArrayList<Constraint>();
-						property2invariants.put(contextProperty, invariants);
-					}
-					invariants.add(invariant);
-				}
-			}
-			List<ExpSpecificationCS> csDefaults = csElement.getDefaultExpressions();
-			int iMax = csDefaults.size();
-			for (int i = 1; i < iMax; i++) {
-				SpecificationCS csDefault = csDefaults.get(i);
-				if (csDefault != null) {
-					context.addDiagnostic(csDefault, "Multiple default expression ignored");
-				}
-			}
-			SpecificationCS csDefault = (iMax > 0) ? csDefaults.get(0) : null;
-			contextProperty.setDefaultExpression(PivotUtil.getPivot(ExpressionInOCL.class, csDefault));
 		}
+		context.refreshComments(contextProperty, csElement);
+		for (ConstraintCS csInvariant : csElement.getDerivedInvariants()) {
+			Constraint invariant = PivotUtil.getPivot(Constraint.class, csInvariant);
+			if (invariant != null) {
+				List<Element> constrainedElements = invariant.getConstrainedElement();
+				constrainedElements.clear();
+				constrainedElements.add(contextProperty);
+				List<Constraint> invariants = property2invariants.get(contextProperty);
+				if (invariants == null) {
+					invariants = new ArrayList<Constraint>();
+					property2invariants.put(contextProperty, invariants);
+				}
+				invariants.add(invariant);
+			}
+		}
+		List<ExpSpecificationCS> csDefaults = csElement.getDefaultExpressions();
+		int iMax = csDefaults.size();
+		for (int i = 1; i < iMax; i++) {
+			SpecificationCS csDefault = csDefaults.get(i);
+			if (csDefault != null) {
+				context.addDiagnostic(csDefault, "Multiple default expression ignored");
+			}
+		}
+		SpecificationCS csDefault = (iMax > 0) ? csDefaults.get(0) : null;
+		contextProperty.setDefaultExpression(PivotUtil.getPivot(ExpressionInOCL.class, csDefault));
 		return null;
 	}
 }

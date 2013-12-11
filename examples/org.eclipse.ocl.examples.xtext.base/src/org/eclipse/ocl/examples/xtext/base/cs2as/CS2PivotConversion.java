@@ -982,7 +982,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	 * @param csElement
 	 * @return
 	 */
-	public @Nullable <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @Nullable ModelElementCS csElement) {
+	public @NonNull <T extends Element> T refreshModelElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @Nullable ModelElementCS csElement) {
 		assert pivotEClass != null;
 		return converter.refreshModelElement(pivotClass, pivotEClass, csElement);
 	}

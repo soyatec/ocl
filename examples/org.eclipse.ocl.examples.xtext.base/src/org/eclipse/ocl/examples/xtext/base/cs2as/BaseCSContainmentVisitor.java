@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -137,10 +136,10 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 		return pivotElement;
 	}
 
-	protected @Nullable <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull NamedElementCS csElement) {
+	protected @NonNull <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull NamedElementCS csElement) {
 		T pivotElement = context.refreshModelElement(pivotClass, pivotEClass, csElement);
 		String name = csElement.getName();
-		if ((pivotElement != null) && (name != null)) {
+		if (name != null) {
 			context.refreshName(pivotElement, name);
 			context.refreshComments(pivotElement, csElement);
 		}
@@ -207,7 +206,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	 * @param csElement
 	 * @return
 	 */
-	protected <T extends Root> T refreshRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull RootCS csElement) {
+	protected @NonNull <T extends Root> T refreshRoot(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull RootCS csElement) {
 		assert pivotEClass != null;
 		Resource csResource = csElement.eResource();
 		if (csResource == null) {
@@ -258,8 +257,8 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	 * @param csElement
 	 * @return
 	 */
-	protected <T extends Root> T refreshRootPackage(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull RootPackageCS csElement) {
-		T pivotElement = refreshRoot(pivotClass, pivotEClass,  csElement);
+	protected @NonNull <T extends Root> T refreshRootPackage(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull RootPackageCS csElement) {
+		@NonNull T pivotElement = refreshRoot(pivotClass, pivotEClass,  csElement);
 		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return pivotElement;
 	}
@@ -285,9 +284,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitClassCS(@NonNull ClassCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CLASS;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, eClass, csElement);
-		if (pivotElement != null) {
-			refreshClass(pivotElement, csElement);
-		}
+		refreshClass(pivotElement, csElement);
 		return null;
 	}
 
@@ -295,9 +292,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CONSTRAINT;
 		Constraint pivotElement = refreshNamedElement(Constraint.class, eClass, csElement);
-		if (pivotElement != null) {
-			pivotElement.setSpecification(PivotUtil.getPivot(OpaqueExpression.class, csElement.getSpecification()));
-		}
+		pivotElement.setSpecification(PivotUtil.getPivot(OpaqueExpression.class, csElement.getSpecification()));
 		return null;
 	}
 
@@ -305,10 +300,8 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitDataTypeCS(@NonNull DataTypeCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.DATA_TYPE;
 		DataType pivotElement = refreshNamedElement(DataType.class, eClass, csElement);
-		if (pivotElement != null) {
-			refreshSerializable(pivotElement, csElement);
-			refreshClassifier(pivotElement, csElement);
-		}
+		refreshSerializable(pivotElement, csElement);
+		refreshClassifier(pivotElement, csElement);
 		return null;
 	}
 
@@ -342,11 +335,9 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitEnumerationCS(@NonNull EnumerationCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.ENUMERATION;
 		org.eclipse.ocl.examples.pivot.Enumeration pivotElement = refreshNamedElement(org.eclipse.ocl.examples.pivot.Enumeration.class, eClass, csElement);
-		if (pivotElement != null) {
-			context.refreshPivotList(EnumerationLiteral.class, pivotElement.getOwnedLiteral(), csElement.getOwnedLiterals());
-			refreshSerializable(pivotElement, csElement);
-			refreshClassifier(pivotElement, csElement);
-		}
+		context.refreshPivotList(EnumerationLiteral.class, pivotElement.getOwnedLiteral(), csElement.getOwnedLiterals());
+		refreshSerializable(pivotElement, csElement);
+		refreshClassifier(pivotElement, csElement);
 		return null;
 	}
 
@@ -354,23 +345,20 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitEnumerationLiteralCS(@NonNull EnumerationLiteralCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.ENUMERATION_LITERAL;
 		EnumerationLiteral pivotElement = refreshNamedElement(EnumerationLiteral.class, eClass, csElement);
-		if (pivotElement != null) {
-			pivotElement.setValue(BigInteger.valueOf(csElement.getValue()));
-		}
+		pivotElement.setValue(BigInteger.valueOf(csElement.getValue()));
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
+		@SuppressWarnings("unused")
 		Import pivotElement = refreshNamedElement(Import.class, PivotPackage.Literals.IMPORT, csElement);
-		if (pivotElement != null) {
-			PathNameCS pathName = csElement.getPathName();
-			if (pathName != null) {
-				CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
-			}
-			if (csElement.isAll() && (csElement.getName() != null)) {
-				context.addDiagnostic(csElement, "An all-package import cannot have an associated alias name");
-			}
+		PathNameCS pathName = csElement.getPathName();
+		if (pathName != null) {
+			CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+		}
+		if (csElement.isAll() && (csElement.getName() != null)) {
+			context.addDiagnostic(csElement, "An all-package import cannot have an associated alias name");
 		}
 		return null;								// FIXME: CS2Pivot.computeRootContainmentFeatures may allow the above now
 	}
@@ -409,15 +397,13 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitOperationCS(@NonNull OperationCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.OPERATION;
 		Operation pivotElement = refreshNamedElement(Operation.class, eClass, csElement);
-		if (pivotElement != null) {
-			context.refreshTemplateSignature(csElement, pivotElement);
-			context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
-			context.refreshPivotList(Constraint.class, pivotElement.getPrecondition(), csElement.getOwnedPrecondition());
-			context.refreshPivotList(Constraint.class, pivotElement.getPostcondition(), csElement.getOwnedPostcondition());
-			List<SpecificationCS> csBodyExpressions = csElement.getOwnedBodyExpression();
-			SpecificationCS csBodyExpression = csBodyExpressions.size() > 0 ? csBodyExpressions.get(0) : null;
-			pivotElement.setBodyExpression(PivotUtil.getPivot(OpaqueExpression.class, csBodyExpression));
-		}
+		context.refreshTemplateSignature(csElement, pivotElement);
+		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
+		context.refreshPivotList(Constraint.class, pivotElement.getPrecondition(), csElement.getOwnedPrecondition());
+		context.refreshPivotList(Constraint.class, pivotElement.getPostcondition(), csElement.getOwnedPostcondition());
+		List<SpecificationCS> csBodyExpressions = csElement.getOwnedBodyExpression();
+		SpecificationCS csBodyExpression = csBodyExpressions.size() > 0 ? csBodyExpressions.get(0) : null;
+		pivotElement.setBodyExpression(PivotUtil.getPivot(OpaqueExpression.class, csBodyExpression));
 		return null;
 	}
 
@@ -477,10 +463,8 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitSpecificationCS(@NonNull SpecificationCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.OPAQUE_EXPRESSION;
 		OpaqueExpression pivotElement = context.refreshModelElement(OpaqueExpression.class, eClass, csElement);
-		if (pivotElement != null) {
-			pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-			pivotElement.getBody().add(csElement.getExprString());
-		}
+		pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		pivotElement.getBody().add(csElement.getExprString());
 		return null;
 	}
 
@@ -488,27 +472,25 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitStructuralFeatureCS(@NonNull StructuralFeatureCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.PROPERTY;
 		Property pivotElement = refreshNamedElement(Property.class, eClass, csElement);
-		if (pivotElement != null) {
-			List<String> qualifiers = csElement.getQualifier();
-			pivotElement.setIsComposite(qualifiers.contains("composes"));
-			pivotElement.setIsDerived(qualifiers.contains("derived"));
-			pivotElement.setIsID(qualifiers.contains("id"));
-			pivotElement.setIsReadOnly(qualifiers.contains("readonly"));
-			pivotElement.setIsResolveProxies(ElementUtil.getQualifier(qualifiers, "resolve", "!resolve", true));
-			pivotElement.setIsStatic(qualifiers.contains("static"));
-			pivotElement.setIsTransient(qualifiers.contains("transient"));
-			pivotElement.setIsUnsettable(qualifiers.contains("unsettable"));
-			pivotElement.setIsVolatile(qualifiers.contains("volatile"));
-			if (csElement.eIsSet(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT)) {
-				pivotElement.setDefault(csElement.getDefault());
-			}
-			else {
-				pivotElement.eUnset(PivotPackage.Literals.PROPERTY__DEFAULT);
-			}
-			List<SpecificationCS> csDefaultExpressions = csElement.getOwnedDefaultExpression();
-			SpecificationCS csDefaultExpression = csDefaultExpressions.size() > 0 ? csDefaultExpressions.get(0) : null;
-			pivotElement.setDefaultExpression(PivotUtil.getPivot(OpaqueExpression.class, csDefaultExpression));
+		List<String> qualifiers = csElement.getQualifier();
+		pivotElement.setIsComposite(qualifiers.contains("composes"));
+		pivotElement.setIsDerived(qualifiers.contains("derived"));
+		pivotElement.setIsID(qualifiers.contains("id"));
+		pivotElement.setIsReadOnly(qualifiers.contains("readonly"));
+		pivotElement.setIsResolveProxies(ElementUtil.getQualifier(qualifiers, "resolve", "!resolve", true));
+		pivotElement.setIsStatic(qualifiers.contains("static"));
+		pivotElement.setIsTransient(qualifiers.contains("transient"));
+		pivotElement.setIsUnsettable(qualifiers.contains("unsettable"));
+		pivotElement.setIsVolatile(qualifiers.contains("volatile"));
+		if (csElement.eIsSet(BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS__DEFAULT)) {
+			pivotElement.setDefault(csElement.getDefault());
 		}
+		else {
+			pivotElement.eUnset(PivotPackage.Literals.PROPERTY__DEFAULT);
+		}
+		List<SpecificationCS> csDefaultExpressions = csElement.getOwnedDefaultExpression();
+		SpecificationCS csDefaultExpression = csDefaultExpressions.size() > 0 ? csDefaultExpressions.get(0) : null;
+		pivotElement.setDefaultExpression(PivotUtil.getPivot(OpaqueExpression.class, csDefaultExpression));
 		return null;
 	}
 
@@ -521,12 +503,10 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitTemplateParameterCS(@NonNull TemplateParameterCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CLASS;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, eClass, csElement);
-		if (pivotElement != null) {
-			TemplateParameter pivotTemplateParameter = pivotElement.getOwningTemplateParameter();
-			if (pivotTemplateParameter == null) {
-				pivotTemplateParameter = PivotFactory.eINSTANCE.createTypeTemplateParameter();
-				pivotTemplateParameter.setOwnedParameteredElement(pivotElement);
-			}
+		TemplateParameter pivotTemplateParameter = pivotElement.getOwningTemplateParameter();
+		if (pivotTemplateParameter == null) {
+			pivotTemplateParameter = PivotFactory.eINSTANCE.createTypeTemplateParameter();
+			pivotTemplateParameter.setOwnedParameteredElement(pivotElement);
 		}
 		return null;
 	}
@@ -540,18 +520,16 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitTemplateSignatureCS(@NonNull TemplateSignatureCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.TEMPLATE_SIGNATURE;
 		TemplateSignature pivotElement = context.refreshModelElement(TemplateSignature.class, eClass, csElement);
-		if (pivotElement != null) {
-			List<TemplateParameter> newPivotTemplateParameters = new ArrayList<TemplateParameter>();
-			List<TemplateParameterCS> csTemplateParameters = csElement.getOwnedTemplateParameter();
-			for (TemplateParameterCS csTemplateParameter : csTemplateParameters) {
-				org.eclipse.ocl.examples.pivot.Class pivotTemplateParameterClass = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, csTemplateParameter);
-				if (pivotTemplateParameterClass != null) {
-					TemplateParameter pivotTemplateParameter = pivotTemplateParameterClass.getOwningTemplateParameter();
-					newPivotTemplateParameters.add(pivotTemplateParameter);
-				}
+		List<TemplateParameter> newPivotTemplateParameters = new ArrayList<TemplateParameter>();
+		List<TemplateParameterCS> csTemplateParameters = csElement.getOwnedTemplateParameter();
+		for (TemplateParameterCS csTemplateParameter : csTemplateParameters) {
+			org.eclipse.ocl.examples.pivot.Class pivotTemplateParameterClass = PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, csTemplateParameter);
+			if (pivotTemplateParameterClass != null) {
+				TemplateParameter pivotTemplateParameter = pivotTemplateParameterClass.getOwningTemplateParameter();
+				newPivotTemplateParameters.add(pivotTemplateParameter);
 			}
-			PivotUtil.refreshList(pivotElement.getOwnedParameter(), newPivotTemplateParameters);
 		}
+		PivotUtil.refreshList(pivotElement.getOwnedParameter(), newPivotTemplateParameters);
 		return null;
 	}
 
@@ -589,9 +567,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 	public Continuation<?> visitWildcardTypeRefCS(@NonNull WildcardTypeRefCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CLASS;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Class.class, eClass, null);
-		if (pivotElement != null) {
-			context.installPivotReference(csElement, pivotElement, BaseCSPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
-		}
+		context.installPivotReference(csElement, pivotElement, BaseCSPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 		return null;
 	}
 

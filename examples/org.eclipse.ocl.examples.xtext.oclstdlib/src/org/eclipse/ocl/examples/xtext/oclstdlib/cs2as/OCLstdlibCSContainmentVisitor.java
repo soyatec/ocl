@@ -59,35 +59,29 @@ public class OCLstdlibCSContainmentVisitor extends AbstractOCLstdlibCSContainmen
 		Class<org.eclipse.ocl.examples.pivot.Class> instanceClass = (Class<org.eclipse.ocl.examples.pivot.Class>)eClass.getInstanceClass();
 		if (instanceClass != null) {
 			org.eclipse.ocl.examples.pivot.Class pivotElement = refreshNamedElement(instanceClass, eClass, csElement);
-			if (pivotElement != null) {
-				refreshClass(pivotElement, csElement);
-			}
+			refreshClass(pivotElement, csElement);
 		}
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitLibIterationCS(@NonNull LibIterationCS csElement) {
-		Iteration pivotElement = refreshNamedElement(Iteration.class, PivotPackage.Literals.ITERATION, csElement);
-		if (pivotElement != null) {
-			pivotElement.setIsInvalidating(csElement.isInvalidating());
-			pivotElement.setIsValidating(csElement.isValidating());
-			context.refreshTemplateSignature(csElement, pivotElement);
-			context.refreshPivotList(Parameter.class, pivotElement.getOwnedIterator(), csElement.getOwnedIterator());
-			context.refreshPivotList(Parameter.class, pivotElement.getOwnedAccumulator(), csElement.getOwnedAccumulator());
-			context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
-		}
+		@NonNull Iteration pivotElement = refreshNamedElement(Iteration.class, PivotPackage.Literals.ITERATION, csElement);
+		pivotElement.setIsInvalidating(csElement.isInvalidating());
+		pivotElement.setIsValidating(csElement.isValidating());
+		context.refreshTemplateSignature(csElement, pivotElement);
+		context.refreshPivotList(Parameter.class, pivotElement.getOwnedIterator(), csElement.getOwnedIterator());
+		context.refreshPivotList(Parameter.class, pivotElement.getOwnedAccumulator(), csElement.getOwnedAccumulator());
+		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitLibOperationCS(@NonNull LibOperationCS csElement) {
 		Continuation<?> cont = super.visitLibOperationCS(csElement);
-		Operation pivotElement = refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
-		if (pivotElement != null) {
-			pivotElement.setIsInvalidating(csElement.isInvalidating());
-			pivotElement.setIsValidating(csElement.isValidating());
-		}
+		@NonNull Operation pivotElement = refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, csElement);
+		pivotElement.setIsInvalidating(csElement.isInvalidating());
+		pivotElement.setIsValidating(csElement.isValidating());
 		return cont;
 	}
 
@@ -102,21 +96,17 @@ public class OCLstdlibCSContainmentVisitor extends AbstractOCLstdlibCSContainmen
 	public Continuation<?> visitLibRootPackageCS(@NonNull LibRootPackageCS csElement) {
 		Resource eResource = csElement.eResource();
 		if (eResource != null) {
-			Root pivotElement = refreshRootPackage(Root.class, PivotPackage.Literals.ROOT, csElement);		
-			if (pivotElement != null) {
-				context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
-				importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
-			}
+			@NonNull Root pivotElement = refreshRootPackage(Root.class, PivotPackage.Literals.ROOT, csElement);		
+			context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
+			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitPrecedenceCS(@NonNull PrecedenceCS csElement) {
-		Precedence pivotElement = refreshNamedElement(Precedence.class, PivotPackage.Literals.PRECEDENCE, csElement);
-		if (pivotElement != null) {
-			pivotElement.setAssociativity(csElement.isRightAssociative() ? AssociativityKind.RIGHT : AssociativityKind.LEFT);
-		}
+		@NonNull Precedence pivotElement = refreshNamedElement(Precedence.class, PivotPackage.Literals.PRECEDENCE, csElement);
+		pivotElement.setAssociativity(csElement.isRightAssociative() ? AssociativityKind.RIGHT : AssociativityKind.LEFT);
 		return null;
 	}
 }

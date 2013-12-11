@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -47,10 +49,10 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class SerializeTests extends XtextTestCase
 {
-	public XtextResource doSerialize(String stem) throws Exception {
+	public XtextResource doSerialize(@NonNull String stem) throws Exception {
 		return doSerialize(stem, stem, null, true, true);
 	}
-	public XtextResource doSerialize(String stem, String referenceStem, Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
+	public XtextResource doSerialize(@NonNull String stem, @NonNull String referenceStem, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		String inputName = stem + ".ecore";
 		URI inputURI = getProjectFileURI(inputName);
 		String referenceName = referenceStem + ".ecore";
@@ -58,7 +60,7 @@ public class SerializeTests extends XtextTestCase
 		return doSerialize(inputURI, stem, referenceURI, options, doCompare, validateSaved);
 	}
 	@SuppressWarnings("null")
-	public XtextResource doSerialize(URI inputURI, String stem, URI referenceURI, Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
+	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getProjectMap().initializeResourceSet(resourceSet);
 		String outputName = stem + ".serialized.oclinecore";
@@ -93,7 +95,7 @@ public class SerializeTests extends XtextTestCase
 			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(outputURI);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource2, metaModelManager2);
 			xtextResource2.load(null);
-			Object cs2asErrors = options.get("cs2asErrors");
+			Object cs2asErrors = options != null ? options.get("cs2asErrors") : null;
 			if (cs2asErrors != null) {
 				assertResourceErrors("Reload failed", xtextResource2, cs2asErrors.toString());
 			}
@@ -348,19 +350,19 @@ public class SerializeTests extends XtextTestCase
 
 	public void testSerialize_BaseCST() throws Exception {
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore", true);
-		String stem = uri.trimFileExtension().lastSegment();
+		@SuppressWarnings("null")@NonNull String stem = uri.trimFileExtension().lastSegment();
 		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
 	}
 
 	public void testSerialize_EssentialOCLCST() throws Exception {
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore", true);
-		String stem = uri.trimFileExtension().lastSegment();
+		@SuppressWarnings("null")@NonNull String stem = uri.trimFileExtension().lastSegment();
 		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
 	}
 
 	public void testSerialize_OCLinEcoreCST() throws Exception {
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCS.ecore", true);
-		String stem = uri.trimFileExtension().lastSegment();
+		@SuppressWarnings("null")@NonNull String stem = uri.trimFileExtension().lastSegment();
 		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
 //		doSerialize("OCLinEcoreCST");
 	}
