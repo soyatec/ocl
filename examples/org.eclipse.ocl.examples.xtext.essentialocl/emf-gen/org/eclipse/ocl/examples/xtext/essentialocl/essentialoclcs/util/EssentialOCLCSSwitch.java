@@ -111,8 +111,8 @@ public class EssentialOCLCSSwitch<T>
 				BinaryOperatorCS binaryOperatorCS = (BinaryOperatorCS)theEObject;
 				T result = caseBinaryOperatorCS(binaryOperatorCS);
 				if (result == null) result = caseOperatorCS(binaryOperatorCS);
-				if (result == null) result = caseNamedElementCS(binaryOperatorCS);
 				if (result == null) result = caseExpCS(binaryOperatorCS);
+				if (result == null) result = caseNamedElementCS(binaryOperatorCS);
 				if (result == null) result = caseModelElementCS(binaryOperatorCS);
 				if (result == null) result = caseNameable(binaryOperatorCS);
 				if (result == null) result = casePivotableElementCS(binaryOperatorCS);
@@ -405,8 +405,8 @@ public class EssentialOCLCSSwitch<T>
 				T result = caseNavigationOperatorCS(navigationOperatorCS);
 				if (result == null) result = caseBinaryOperatorCS(navigationOperatorCS);
 				if (result == null) result = caseOperatorCS(navigationOperatorCS);
-				if (result == null) result = caseNamedElementCS(navigationOperatorCS);
 				if (result == null) result = caseExpCS(navigationOperatorCS);
+				if (result == null) result = caseNamedElementCS(navigationOperatorCS);
 				if (result == null) result = caseModelElementCS(navigationOperatorCS);
 				if (result == null) result = caseNameable(navigationOperatorCS);
 				if (result == null) result = casePivotableElementCS(navigationOperatorCS);
@@ -463,8 +463,8 @@ public class EssentialOCLCSSwitch<T>
 			{
 				OperatorCS operatorCS = (OperatorCS)theEObject;
 				T result = caseOperatorCS(operatorCS);
-				if (result == null) result = caseNamedElementCS(operatorCS);
 				if (result == null) result = caseExpCS(operatorCS);
+				if (result == null) result = caseNamedElementCS(operatorCS);
 				if (result == null) result = caseModelElementCS(operatorCS);
 				if (result == null) result = caseNameable(operatorCS);
 				if (result == null) result = casePivotableElementCS(operatorCS);
@@ -591,8 +591,8 @@ public class EssentialOCLCSSwitch<T>
 				UnaryOperatorCS unaryOperatorCS = (UnaryOperatorCS)theEObject;
 				T result = caseUnaryOperatorCS(unaryOperatorCS);
 				if (result == null) result = caseOperatorCS(unaryOperatorCS);
-				if (result == null) result = caseNamedElementCS(unaryOperatorCS);
 				if (result == null) result = caseExpCS(unaryOperatorCS);
+				if (result == null) result = caseNamedElementCS(unaryOperatorCS);
 				if (result == null) result = caseModelElementCS(unaryOperatorCS);
 				if (result == null) result = caseNameable(unaryOperatorCS);
 				if (result == null) result = casePivotableElementCS(unaryOperatorCS);

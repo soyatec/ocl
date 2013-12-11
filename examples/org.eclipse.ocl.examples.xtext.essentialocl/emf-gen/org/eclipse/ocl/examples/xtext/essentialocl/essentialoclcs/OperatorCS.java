@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
  * @generated
  */
 public interface OperatorCS
-		extends NamedElementCS, ExpCS {
+		extends ExpCS, NamedElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.

@@ -192,17 +192,6 @@ public class LetVariableCSImpl
 	 * @generated
 	 */
 	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
@@ -375,5 +364,13 @@ public class LetVariableCSImpl
 	@Override
 	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitLetVariableCS(this);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //VariableCSImpl

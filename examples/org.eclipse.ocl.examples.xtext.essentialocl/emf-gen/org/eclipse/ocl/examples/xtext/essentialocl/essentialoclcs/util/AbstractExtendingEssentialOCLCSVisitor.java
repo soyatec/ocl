@@ -143,7 +143,7 @@ public abstract class AbstractExtendingEssentialOCLCSVisitor<R, C>
 	}
 
 	public @Nullable R visitOperatorCS(@NonNull org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS object) {
-		return visitNamedElementCS(object);
+		return visitExpCS(object);
 	}
 
 	public @Nullable R visitPrefixExpCS(@NonNull org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS object) {

@@ -1465,8 +1465,8 @@ public class EssentialOCLCSPackageImpl
 		nestedExpCSEClass.getESuperTypes().add(this.getExpCS());
 		nullLiteralExpCSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpCS());
 		numberLiteralExpCSEClass.getESuperTypes().add(this.getPrimitiveLiteralExpCS());
-		operatorCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		operatorCSEClass.getESuperTypes().add(this.getExpCS());
+		operatorCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		prefixExpCSEClass.getESuperTypes().add(this.getExpCS());
 		primitiveLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
 		selfExpCSEClass.getESuperTypes().add(this.getExpCS());

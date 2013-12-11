@@ -54,6 +54,7 @@ public abstract class NamedExpCSImpl
 	 * @ordered
 	 */
 	protected Type sourceType;
+
 	/**
 	 * The cached value of the '{@link #getNameExp() <em>Name Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -81,29 +82,6 @@ public abstract class NamedExpCSImpl
 	@Override
 	protected EClass eStaticClass() {
 		return EssentialOCLCSPackage.Literals.NAMED_EXP_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type getSourceType()
-	{
-		return sourceType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSourceType(Type newSourceType)
-	{
-		Type oldSourceType = sourceType;
-		sourceType = newSourceType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE, oldSourceType, sourceType));
 	}
 
 	/**
@@ -150,6 +128,29 @@ public abstract class NamedExpCSImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP, newNameExp, newNameExp));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getSourceType()
+	{
+		return sourceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceType(Type newSourceType)
+	{
+		Type oldSourceType = sourceType;
+		sourceType = newSourceType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE, oldSourceType, sourceType));
 	}
 
 	/**

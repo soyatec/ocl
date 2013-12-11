@@ -146,7 +146,7 @@ public abstract class AbstractEssentialOCLCSContainmentVisitor
 	}
 
 	public @Nullable Continuation<?> visitOperatorCS(@NonNull org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS csElement) {
-		return visitNamedElementCS(csElement);
+		return visitExpCS(csElement);
 	}
 
 	public @Nullable Continuation<?> visitPrefixExpCS(@NonNull org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS csElement) {

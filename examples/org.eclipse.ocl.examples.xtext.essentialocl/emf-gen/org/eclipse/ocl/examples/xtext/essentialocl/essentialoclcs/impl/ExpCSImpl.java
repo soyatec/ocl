@@ -145,17 +145,6 @@ public class ExpCSImpl
 	 * @generated
 	 */
 	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
@@ -253,5 +242,14 @@ public class ExpCSImpl
 	public void resetPivot() {
 		super.resetPivot();
 		setParent(null);
+		setHasError(false);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //ExpCSImpl

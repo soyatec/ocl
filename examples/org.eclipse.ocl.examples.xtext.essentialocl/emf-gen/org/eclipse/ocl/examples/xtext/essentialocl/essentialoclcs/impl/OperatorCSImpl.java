@@ -19,7 +19,9 @@ package org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.xtext.base.basecs.impl.NamedElementCSImpl;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
@@ -31,8 +33,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#isHasError <em>Has Error</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
@@ -40,38 +41,28 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
  * @generated
  */
 public abstract class OperatorCSImpl
-		extends NamedElementCSImpl
+		extends ExpCSImpl
 		implements OperatorCS {
 
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParent()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected OperatorCS parent;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasError()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean HAS_ERROR_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isHasError()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean hasError = HAS_ERROR_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
@@ -107,30 +98,9 @@ public abstract class OperatorCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperatorCS getParent() {
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParent(OperatorCS newParent) {
-		OperatorCS oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.OPERATOR_CS__PARENT, oldParent, parent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isHasError()
+	public String getName()
 	{
-		return hasError;
+		return name;
 	}
 
 	/**
@@ -138,12 +108,12 @@ public abstract class OperatorCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHasError(boolean newHasError)
+	public void setName(String newName)
 	{
-		boolean oldHasError = hasError;
-		hasError = newHasError;
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR, oldHasError, hasError));
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.OPERATOR_CS__NAME, oldName, name));
 	}
 
 	/**
@@ -173,24 +143,11 @@ public abstract class OperatorCSImpl
 	 * @generated
 	 */
 	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
-				return getParent();
-			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
-				return isHasError();
+			case EssentialOCLCSPackage.OPERATOR_CS__NAME:
+				return getName();
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				return getSource();
 		}
@@ -206,11 +163,8 @@ public abstract class OperatorCSImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
-				setParent((OperatorCS)newValue);
-				return;
-			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
-				setHasError((Boolean)newValue);
+			case EssentialOCLCSPackage.OPERATOR_CS__NAME:
+				setName((String)newValue);
 				return;
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				setSource((ExpCS)newValue);
@@ -228,11 +182,8 @@ public abstract class OperatorCSImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
-				setParent((OperatorCS)null);
-				return;
-			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
-				setHasError(HAS_ERROR_EDEFAULT);
+			case EssentialOCLCSPackage.OPERATOR_CS__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				setSource((ExpCS)null);
@@ -250,10 +201,8 @@ public abstract class OperatorCSImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
-				return parent != null;
-			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
-				return hasError != HAS_ERROR_EDEFAULT;
+			case EssentialOCLCSPackage.OPERATOR_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				return source != null;
 		}
@@ -267,12 +216,18 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class)
+		if (baseClass == Nameable.class)
 		{
 			switch (derivedFeatureID)
 			{
-				case EssentialOCLCSPackage.OPERATOR_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
-				case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR: return EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElementCS.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case EssentialOCLCSPackage.OPERATOR_CS__NAME: return BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 				default: return -1;
 			}
 		}
@@ -286,12 +241,18 @@ public abstract class OperatorCSImpl
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class)
+		if (baseClass == Nameable.class)
 		{
 			switch (baseFeatureID)
 			{
-				case EssentialOCLCSPackage.EXP_CS__PARENT: return EssentialOCLCSPackage.OPERATOR_CS__PARENT;
-				case EssentialOCLCSPackage.EXP_CS__HAS_ERROR: return EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElementCS.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BaseCSPackage.NAMED_ELEMENT_CS__NAME: return EssentialOCLCSPackage.OPERATOR_CS__NAME;
 				default: return -1;
 			}
 		}
@@ -303,10 +264,20 @@ public abstract class OperatorCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@SuppressWarnings("cast")
 	@Override
 	public void resetPivot() {
+		assert this instanceof ExpCSImpl;	// Enforce correct ordering of base classes
 		super.resetPivot();
 		setParent(null);
 		setSource(null);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //OperatorCSImpl

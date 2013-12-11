@@ -146,7 +146,7 @@ public abstract class AbstractEssentialOCLCSLeft2RightVisitor
 	}
 
 	public @Nullable Element visitOperatorCS(@NonNull org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS csElement) {
-		return visitNamedElementCS(csElement);
+		return visitExpCS(csElement);
 	}
 
 	public @Nullable Element visitPrefixExpCS(@NonNull org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS csElement) {

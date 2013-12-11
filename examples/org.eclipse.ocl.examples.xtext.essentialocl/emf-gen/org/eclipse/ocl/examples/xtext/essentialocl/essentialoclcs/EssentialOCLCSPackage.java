@@ -464,7 +464,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__LOGICAL_PARENT = BaseCSPackage.NAMED_ELEMENT_CS__LOGICAL_PARENT;
+	int OPERATOR_CS__LOGICAL_PARENT = EXP_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -473,7 +473,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__PIVOT = BaseCSPackage.NAMED_ELEMENT_CS__PIVOT;
+	int OPERATOR_CS__PIVOT = EXP_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -482,7 +482,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__OWNED_ANNOTATION = BaseCSPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATION;
+	int OPERATOR_CS__OWNED_ANNOTATION = EXP_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -491,7 +491,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int OPERATOR_CS__ORIGINAL_XMI_ID = EXP_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -500,16 +500,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__CSI = BaseCSPackage.NAMED_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATOR_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
+	int OPERATOR_CS__CSI = EXP_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -518,7 +509,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__PARENT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int OPERATOR_CS__PARENT = EXP_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
@@ -527,7 +518,16 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__HAS_ERROR = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int OPERATOR_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATOR_CS__NAME = EXP_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -536,7 +536,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__SOURCE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int OPERATOR_CS__SOURCE = EXP_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Operator CS</em>' class.
@@ -545,7 +545,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int OPERATOR_CS_FEATURE_COUNT = EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -593,15 +593,6 @@ public interface EssentialOCLCSPackage
 	int BINARY_OPERATOR_CS__CSI = OPERATOR_CS__CSI;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINARY_OPERATOR_CS__NAME = OPERATOR_CS__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -618,6 +609,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int BINARY_OPERATOR_CS__HAS_ERROR = OPERATOR_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_OPERATOR_CS__NAME = OPERATOR_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -2618,15 +2618,6 @@ public interface EssentialOCLCSPackage
 	int NAVIGATION_OPERATOR_CS__CSI = BINARY_OPERATOR_CS__CSI;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAVIGATION_OPERATOR_CS__NAME = BINARY_OPERATOR_CS__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2643,6 +2634,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int NAVIGATION_OPERATOR_CS__HAS_ERROR = BINARY_OPERATOR_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_OPERATOR_CS__NAME = BINARY_OPERATOR_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -3550,15 +3550,6 @@ public interface EssentialOCLCSPackage
 	int UNARY_OPERATOR_CS__CSI = OPERATOR_CS__CSI;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNARY_OPERATOR_CS__NAME = OPERATOR_CS__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3575,6 +3566,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int UNARY_OPERATOR_CS__HAS_ERROR = OPERATOR_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNARY_OPERATOR_CS__NAME = OPERATOR_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
