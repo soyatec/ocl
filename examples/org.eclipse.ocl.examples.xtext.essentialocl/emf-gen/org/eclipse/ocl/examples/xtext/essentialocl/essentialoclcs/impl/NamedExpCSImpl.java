@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NamedExpCS;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NamedExpCSImpl#getSourceType <em>Source Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NamedExpCSImpl#getNameExp <em>Name Exp</em>}</li>
  * </ul>
  * </p>
@@ -43,6 +45,15 @@ public abstract class NamedExpCSImpl
 		extends ExpCSImpl
 		implements NamedExpCS {
 
+	/**
+	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type sourceType;
 	/**
 	 * The cached value of the '{@link #getNameExp() <em>Name Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -70,6 +81,29 @@ public abstract class NamedExpCSImpl
 	@Override
 	protected EClass eStaticClass() {
 		return EssentialOCLCSPackage.Literals.NAMED_EXP_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getSourceType()
+	{
+		return sourceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceType(Type newSourceType)
+	{
+		Type oldSourceType = sourceType;
+		sourceType = newSourceType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE, oldSourceType, sourceType));
 	}
 
 	/**
@@ -143,6 +177,8 @@ public abstract class NamedExpCSImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE:
+				return getSourceType();
 			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				return getNameExp();
 		}
@@ -158,6 +194,9 @@ public abstract class NamedExpCSImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE:
+				setSourceType((Type)newValue);
+				return;
 			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				setNameExp((NameExpCS)newValue);
 				return;
@@ -174,6 +213,9 @@ public abstract class NamedExpCSImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE:
+				setSourceType((Type)null);
+				return;
 			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				setNameExp((NameExpCS)null);
 				return;
@@ -190,6 +232,8 @@ public abstract class NamedExpCSImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAMED_EXP_CS__SOURCE_TYPE:
+				return sourceType != null;
 			case EssentialOCLCSPackage.NAMED_EXP_CS__NAME_EXP:
 				return nameExp != null;
 		}

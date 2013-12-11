@@ -434,6 +434,16 @@ public class EssentialOCLCSPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractNameExpCS_SourceType()
+	{
+		return (EReference)abstractNameExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBinaryOperatorCS() {
 		return binaryOperatorCSEClass;
 	}
@@ -1250,6 +1260,7 @@ public class EssentialOCLCSPackageImpl
 
 		// Create classes and their features
 		abstractNameExpCSEClass = createEClass(ABSTRACT_NAME_EXP_CS);
+		createEReference(abstractNameExpCSEClass, ABSTRACT_NAME_EXP_CS__SOURCE_TYPE);
 
 		binaryOperatorCSEClass = createEClass(BINARY_OPERATOR_CS);
 		createEReference(binaryOperatorCSEClass, BINARY_OPERATOR_CS__ARGUMENT);
@@ -1459,6 +1470,7 @@ public class EssentialOCLCSPackageImpl
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractNameExpCSEClass, AbstractNameExpCS.class, "AbstractNameExpCS", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getAbstractNameExpCS_SourceType(), thePivotPackage.getType(), null, "sourceType", null, 0, 1, AbstractNameExpCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		addEOperation(abstractNameExpCSEClass, thePivotPackage.getNamedElement(), "getNamedElement", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 

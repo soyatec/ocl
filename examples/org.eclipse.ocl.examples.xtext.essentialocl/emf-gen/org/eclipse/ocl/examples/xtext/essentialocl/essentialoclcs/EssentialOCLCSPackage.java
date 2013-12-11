@@ -422,13 +422,22 @@ public interface EssentialOCLCSPackage
 	int ABSTRACT_NAME_EXP_CS__PARENT = EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NAME_EXP_CS__SOURCE_TYPE = EXP_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Name Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NAME_EXP_CS_FEATURE_COUNT = EXP_CS_FEATURE_COUNT + 0;
+	int ABSTRACT_NAME_EXP_CS_FEATURE_COUNT = EXP_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1111,6 +1120,15 @@ public interface EssentialOCLCSPackage
 	int NAMED_EXP_CS__PARENT = ABSTRACT_NAME_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_EXP_CS__SOURCE_TYPE = ABSTRACT_NAME_EXP_CS__SOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1191,6 +1209,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_EXP_CS__PARENT = NAMED_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_EXP_CS__SOURCE_TYPE = NAMED_EXP_CS__SOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
@@ -1617,6 +1644,15 @@ public interface EssentialOCLCSPackage
 	int INDEX_EXP_CS__PARENT = NAMED_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX_EXP_CS__SOURCE_TYPE = NAMED_EXP_CS__SOURCE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1868,6 +1904,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int INVOCATION_EXP_CS__PARENT = NAMED_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_EXP_CS__SOURCE_TYPE = NAMED_EXP_CS__SOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
@@ -2210,6 +2255,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int NAME_EXP_CS__PARENT = ABSTRACT_NAME_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS__SOURCE_TYPE = ABSTRACT_NAME_EXP_CS__SOURCE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
@@ -3392,6 +3446,17 @@ public interface EssentialOCLCSPackage
 	EClass getAbstractNameExpCS();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS#getSourceType <em>Source Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source Type</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS#getSourceType()
+	 * @see #getAbstractNameExpCS()
+	 * @generated
+	 */
+	EReference getAbstractNameExpCS_SourceType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS <em>Binary Operator CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4353,6 +4418,14 @@ public interface EssentialOCLCSPackage
 		 * @generated
 		 */
 		EClass ABSTRACT_NAME_EXP_CS = eINSTANCE.getAbstractNameExpCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_NAME_EXP_CS__SOURCE_TYPE = eINSTANCE.getAbstractNameExpCS_SourceType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.BinaryOperatorCSImpl <em>Binary Operator CS</em>}' class.

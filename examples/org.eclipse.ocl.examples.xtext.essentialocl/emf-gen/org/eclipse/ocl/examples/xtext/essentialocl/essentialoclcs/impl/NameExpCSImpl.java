@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.Essential
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NameExpCSImpl#getSourceType <em>Source Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NameExpCSImpl#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.NameExpCSImpl#isAtPre <em>At Pre</em>}</li>
  * </ul>
@@ -49,6 +51,16 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.Essential
 public class NameExpCSImpl
 		extends ExpCSImpl
 		implements NameExpCS {
+
+	/**
+	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type sourceType;
 
 	/**
 	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
@@ -97,6 +109,29 @@ public class NameExpCSImpl
 	@Override
 	protected EClass eStaticClass() {
 		return EssentialOCLCSPackage.Literals.NAME_EXP_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getSourceType()
+	{
+		return sourceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceType(Type newSourceType)
+	{
+		Type oldSourceType = sourceType;
+		sourceType = newSourceType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.NAME_EXP_CS__SOURCE_TYPE, oldSourceType, sourceType));
 	}
 
 	/**
@@ -222,6 +257,8 @@ public class NameExpCSImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAME_EXP_CS__SOURCE_TYPE:
+				return getSourceType();
 			case EssentialOCLCSPackage.NAME_EXP_CS__PATH_NAME:
 				return getPathName();
 			case EssentialOCLCSPackage.NAME_EXP_CS__AT_PRE:
@@ -239,6 +276,9 @@ public class NameExpCSImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAME_EXP_CS__SOURCE_TYPE:
+				setSourceType((Type)newValue);
+				return;
 			case EssentialOCLCSPackage.NAME_EXP_CS__PATH_NAME:
 				setPathName((PathNameCS)newValue);
 				return;
@@ -258,6 +298,9 @@ public class NameExpCSImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAME_EXP_CS__SOURCE_TYPE:
+				setSourceType((Type)null);
+				return;
 			case EssentialOCLCSPackage.NAME_EXP_CS__PATH_NAME:
 				setPathName((PathNameCS)null);
 				return;
@@ -277,6 +320,8 @@ public class NameExpCSImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
+			case EssentialOCLCSPackage.NAME_EXP_CS__SOURCE_TYPE:
+				return sourceType != null;
 			case EssentialOCLCSPackage.NAME_EXP_CS__PATH_NAME:
 				return pathName != null;
 			case EssentialOCLCSPackage.NAME_EXP_CS__AT_PRE:
