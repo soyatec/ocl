@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
@@ -133,16 +134,19 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 	}
 
 	protected void reuseValidation(IAcceptor<Issue> acceptor, Resource asResource, CancelIndicator monitor) {
-		for (Resource pResource : asResource.getResourceSet().getResources()) {
-//			System.out.println(" reuseValidation " + pResource.getURI() + " on " + Thread.currentThread().getName());
-			for (Resource.Diagnostic diagnostic : pResource.getErrors()) {
-				if (diagnostic instanceof ValidationDiagnostic) {
-					issueFromDiagnostics(acceptor, (ValidationDiagnostic)diagnostic);
+		ResourceSet resourceSet = asResource.getResourceSet();
+		if (resourceSet != null) {
+			for (Resource pResource : resourceSet.getResources()) {
+	//			System.out.println(" reuseValidation " + pResource.getURI() + " on " + Thread.currentThread().getName());
+				for (Resource.Diagnostic diagnostic : pResource.getErrors()) {
+					if (diagnostic instanceof ValidationDiagnostic) {
+						issueFromDiagnostics(acceptor, (ValidationDiagnostic)diagnostic);
+					}
 				}
-			}
-			for (Resource.Diagnostic diagnostic : pResource.getWarnings()) {
-				if (diagnostic instanceof ValidationDiagnostic) {
-					issueFromDiagnostics(acceptor, (ValidationDiagnostic)diagnostic);
+				for (Resource.Diagnostic diagnostic : pResource.getWarnings()) {
+					if (diagnostic instanceof ValidationDiagnostic) {
+						issueFromDiagnostics(acceptor, (ValidationDiagnostic)diagnostic);
+					}
 				}
 			}
 		}
