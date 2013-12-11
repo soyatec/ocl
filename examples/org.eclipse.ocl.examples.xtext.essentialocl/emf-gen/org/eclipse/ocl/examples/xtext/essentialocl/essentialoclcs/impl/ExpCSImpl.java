@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.Essential
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpCSImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpCSImpl#isHasError <em>Has Error</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,6 +56,25 @@ public class ExpCSImpl
 	 * @ordered
 	 */
 	protected OperatorCS parent;
+
+	/**
+	 * The default value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HAS_ERROR_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hasError = HAS_ERROR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,12 +121,48 @@ public class ExpCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHasError()
+	{
+		return hasError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasError(boolean newHasError)
+	{
+		boolean oldHasError = hasError;
+		hasError = newHasError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.EXP_CS__HAS_ERROR, oldHasError, hasError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
 			case EssentialOCLCSPackage.EXP_CS__PARENT:
 				return getParent();
+			case EssentialOCLCSPackage.EXP_CS__HAS_ERROR:
+				return isHasError();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -122,6 +178,9 @@ public class ExpCSImpl
 		{
 			case EssentialOCLCSPackage.EXP_CS__PARENT:
 				setParent((OperatorCS)newValue);
+				return;
+			case EssentialOCLCSPackage.EXP_CS__HAS_ERROR:
+				setHasError((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +198,9 @@ public class ExpCSImpl
 			case EssentialOCLCSPackage.EXP_CS__PARENT:
 				setParent((OperatorCS)null);
 				return;
+			case EssentialOCLCSPackage.EXP_CS__HAS_ERROR:
+				setHasError(HAS_ERROR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -154,6 +216,8 @@ public class ExpCSImpl
 		{
 			case EssentialOCLCSPackage.EXP_CS__PARENT:
 				return parent != null;
+			case EssentialOCLCSPackage.EXP_CS__HAS_ERROR:
+				return hasError != HAS_ERROR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

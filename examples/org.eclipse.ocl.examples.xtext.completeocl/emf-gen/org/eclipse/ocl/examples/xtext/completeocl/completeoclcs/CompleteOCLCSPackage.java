@@ -1104,6 +1104,15 @@ public interface CompleteOCLCSPackage
 	int OCL_MESSAGE_ARG_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCL_MESSAGE_ARG_CS__HAS_ERROR = EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

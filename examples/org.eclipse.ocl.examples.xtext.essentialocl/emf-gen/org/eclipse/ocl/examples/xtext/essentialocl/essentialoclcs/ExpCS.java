@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS#isHasError <em>Has Error</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,4 +63,31 @@ public interface ExpCS
 	 * @generated
 	 */
 	void setParent(OperatorCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Has Error</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Has Error</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Has Error</em>' attribute.
+	 * @see #setHasError(boolean)
+	 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage#getExpCS_HasError()
+	 * @model default="false" transient="true"
+	 * @generated
+	 */
+	boolean isHasError();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS#isHasError <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Has Error</em>' attribute.
+	 * @see #isHasError()
+	 * @generated
+	 */
+	void setHasError(boolean value);
 } // ExpCS

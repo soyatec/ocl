@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#isHasError <em>Has Error</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.OperatorCSImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
@@ -51,6 +52,26 @@ public abstract class OperatorCSImpl
 	 * @ordered
 	 */
 	protected OperatorCS parent;
+
+	/**
+	 * The default value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HAS_ERROR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hasError = HAS_ERROR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
@@ -107,6 +128,29 @@ public abstract class OperatorCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHasError()
+	{
+		return hasError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasError(boolean newHasError)
+	{
+		boolean oldHasError = hasError;
+		hasError = newHasError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR, oldHasError, hasError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpCS getSource() {
 		return source;
 	}
@@ -129,11 +173,24 @@ public abstract class OperatorCSImpl
 	 * @generated
 	 */
 	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
 			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
 				return getParent();
+			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
+				return isHasError();
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				return getSource();
 		}
@@ -151,6 +208,9 @@ public abstract class OperatorCSImpl
 		{
 			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
 				setParent((OperatorCS)newValue);
+				return;
+			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
+				setHasError((Boolean)newValue);
 				return;
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				setSource((ExpCS)newValue);
@@ -171,6 +231,9 @@ public abstract class OperatorCSImpl
 			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
 				setParent((OperatorCS)null);
 				return;
+			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
+				setHasError(HAS_ERROR_EDEFAULT);
+				return;
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				setSource((ExpCS)null);
 				return;
@@ -189,6 +252,8 @@ public abstract class OperatorCSImpl
 		{
 			case EssentialOCLCSPackage.OPERATOR_CS__PARENT:
 				return parent != null;
+			case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR:
+				return hasError != HAS_ERROR_EDEFAULT;
 			case EssentialOCLCSPackage.OPERATOR_CS__SOURCE:
 				return source != null;
 		}
@@ -207,6 +272,7 @@ public abstract class OperatorCSImpl
 			switch (derivedFeatureID)
 			{
 				case EssentialOCLCSPackage.OPERATOR_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
+				case EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR: return EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
 				default: return -1;
 			}
 		}
@@ -225,6 +291,7 @@ public abstract class OperatorCSImpl
 			switch (baseFeatureID)
 			{
 				case EssentialOCLCSPackage.EXP_CS__PARENT: return EssentialOCLCSPackage.OPERATOR_CS__PARENT;
+				case EssentialOCLCSPackage.EXP_CS__HAS_ERROR: return EssentialOCLCSPackage.OPERATOR_CS__HAS_ERROR;
 				default: return -1;
 			}
 		}

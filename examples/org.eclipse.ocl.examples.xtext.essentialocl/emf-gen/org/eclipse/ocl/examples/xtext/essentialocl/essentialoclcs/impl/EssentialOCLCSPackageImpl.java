@@ -606,6 +606,16 @@ public class EssentialOCLCSPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExpCS_HasError()
+	{
+		return (EAttribute)expCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExpSpecificationCS() {
 		return expSpecificationCSEClass;
 	}
@@ -1293,6 +1303,7 @@ public class EssentialOCLCSPackageImpl
 
 		expCSEClass = createEClass(EXP_CS);
 		createEReference(expCSEClass, EXP_CS__PARENT);
+		createEAttribute(expCSEClass, EXP_CS__HAS_ERROR);
 
 		expSpecificationCSEClass = createEClass(EXP_SPECIFICATION_CS);
 		createEReference(expSpecificationCSEClass, EXP_SPECIFICATION_CS__OWNED_EXPRESSION);
@@ -1509,6 +1520,7 @@ public class EssentialOCLCSPackageImpl
 
 		initEClass(expCSEClass, ExpCS.class, "ExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getExpCS_Parent(), this.getOperatorCS(), null, "parent", null, 0, 1, ExpCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getExpCS_HasError(), ecorePackage.getEBoolean(), "hasError", "false", 0, 1, ExpCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEClass(expSpecificationCSEClass, ExpSpecificationCS.class, "ExpSpecificationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getExpSpecificationCS_OwnedExpression(), this.getExpCS(), null, "ownedExpression", null, 0, 1, ExpSpecificationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

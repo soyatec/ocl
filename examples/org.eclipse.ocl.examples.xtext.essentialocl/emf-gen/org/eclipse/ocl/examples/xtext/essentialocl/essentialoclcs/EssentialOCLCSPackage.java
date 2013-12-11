@@ -349,13 +349,22 @@ public interface EssentialOCLCSPackage
 	int EXP_CS__PARENT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXP_CS__HAS_ERROR = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXP_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int EXP_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS <em>Abstract Name Exp CS</em>}' class.
@@ -420,6 +429,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int ABSTRACT_NAME_EXP_CS__PARENT = EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NAME_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
@@ -503,13 +521,22 @@ public interface EssentialOCLCSPackage
 	int OPERATOR_CS__PARENT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATOR_CS__HAS_ERROR = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS__SOURCE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int OPERATOR_CS__SOURCE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Operator CS</em>' class.
@@ -518,7 +545,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATOR_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int OPERATOR_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -582,6 +609,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int BINARY_OPERATOR_CS__PARENT = OPERATOR_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_OPERATOR_CS__HAS_ERROR = OPERATOR_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -665,6 +701,15 @@ public interface EssentialOCLCSPackage
 	int LITERAL_EXP_CS__PARENT = EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
+
+	/**
 	 * The number of structural features of the '<em>Literal Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -728,6 +773,15 @@ public interface EssentialOCLCSPackage
 	int PRIMITIVE_LITERAL_EXP_CS__PARENT = LITERAL_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR = LITERAL_EXP_CS__HAS_ERROR;
+
+	/**
 	 * The number of structural features of the '<em>Primitive Literal Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -789,6 +843,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL_EXP_CS__PARENT = PRIMITIVE_LITERAL_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL_EXP_CS__HAS_ERROR = PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -861,6 +924,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_EXP_CS__PARENT = LITERAL_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_EXP_CS__HAS_ERROR = LITERAL_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -1120,6 +1192,15 @@ public interface EssentialOCLCSPackage
 	int NAMED_EXP_CS__PARENT = ABSTRACT_NAME_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_EXP_CS__HAS_ERROR = ABSTRACT_NAME_EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1209,6 +1290,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_EXP_CS__PARENT = NAMED_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_EXP_CS__HAS_ERROR = NAMED_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
@@ -1554,6 +1644,15 @@ public interface EssentialOCLCSPackage
 	int IF_EXP_CS__PARENT = EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1642,6 +1741,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int INDEX_EXP_CS__PARENT = NAMED_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX_EXP_CS__HAS_ERROR = NAMED_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
@@ -1752,6 +1860,15 @@ public interface EssentialOCLCSPackage
 	int INFIX_EXP_CS__PARENT = EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INFIX_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1833,6 +1950,15 @@ public interface EssentialOCLCSPackage
 	int INVALID_LITERAL_EXP_CS__PARENT = PRIMITIVE_LITERAL_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_LITERAL_EXP_CS__HAS_ERROR = PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR;
+
+	/**
 	 * The number of structural features of the '<em>Invalid Literal Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1904,6 +2030,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int INVOCATION_EXP_CS__PARENT = NAMED_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_EXP_CS__HAS_ERROR = NAMED_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
@@ -1994,6 +2129,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int LET_EXP_CS__PARENT = EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' containment reference list.
@@ -2185,13 +2329,22 @@ public interface EssentialOCLCSPackage
 	int LET_VARIABLE_CS__PARENT = VARIABLE_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_VARIABLE_CS__HAS_ERROR = VARIABLE_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Let Expression</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LET_VARIABLE_CS__LET_EXPRESSION = VARIABLE_CS_FEATURE_COUNT + 1;
+	int LET_VARIABLE_CS__LET_EXPRESSION = VARIABLE_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Let Variable CS</em>' class.
@@ -2200,7 +2353,7 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LET_VARIABLE_CS_FEATURE_COUNT = VARIABLE_CS_FEATURE_COUNT + 2;
+	int LET_VARIABLE_CS_FEATURE_COUNT = VARIABLE_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -2255,6 +2408,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int NAME_EXP_CS__PARENT = ABSTRACT_NAME_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS__HAS_ERROR = ABSTRACT_NAME_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
@@ -2474,6 +2636,15 @@ public interface EssentialOCLCSPackage
 	int NAVIGATION_OPERATOR_CS__PARENT = BINARY_OPERATOR_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_OPERATOR_CS__HAS_ERROR = BINARY_OPERATOR_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2555,6 +2726,15 @@ public interface EssentialOCLCSPackage
 	int NESTED_EXP_CS__PARENT = EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2627,6 +2807,15 @@ public interface EssentialOCLCSPackage
 	int NULL_LITERAL_EXP_CS__PARENT = PRIMITIVE_LITERAL_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_EXP_CS__HAS_ERROR = PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR;
+
+	/**
 	 * The number of structural features of the '<em>Null Literal Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2688,6 +2877,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int NUMBER_LITERAL_EXP_CS__PARENT = PRIMITIVE_LITERAL_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMBER_LITERAL_EXP_CS__HAS_ERROR = PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2770,6 +2968,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int PREFIX_EXP_CS__PARENT = EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREFIX_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Owned Operator</b></em>' containment reference list.
@@ -2863,6 +3070,15 @@ public interface EssentialOCLCSPackage
 	int SELF_EXP_CS__PARENT = EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_EXP_CS__HAS_ERROR = EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2935,6 +3151,15 @@ public interface EssentialOCLCSPackage
 	int STRING_LITERAL_EXP_CS__PARENT = PRIMITIVE_LITERAL_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_EXP_CS__HAS_ERROR = PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3005,6 +3230,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_EXP_CS__PARENT = LITERAL_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_EXP_CS__HAS_ERROR = LITERAL_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The feature id for the '<em><b>Owned Parts</b></em>' containment reference list.
@@ -3180,6 +3414,15 @@ public interface EssentialOCLCSPackage
 	int TYPE_LITERAL_EXP_CS__PARENT = LITERAL_EXP_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL_EXP_CS__HAS_ERROR = LITERAL_EXP_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3325,6 +3568,15 @@ public interface EssentialOCLCSPackage
 	int UNARY_OPERATOR_CS__PARENT = OPERATOR_CS__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNARY_OPERATOR_CS__HAS_ERROR = OPERATOR_CS__HAS_ERROR;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3405,6 +3657,15 @@ public interface EssentialOCLCSPackage
 	 * @ordered
 	 */
 	int UNLIMITED_NATURAL_LITERAL_EXP_CS__PARENT = PRIMITIVE_LITERAL_EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLIMITED_NATURAL_LITERAL_EXP_CS__HAS_ERROR = PRIMITIVE_LITERAL_EXP_CS__HAS_ERROR;
 
 	/**
 	 * The number of structural features of the '<em>Unlimited Natural Literal Exp CS</em>' class.
@@ -3646,6 +3907,17 @@ public interface EssentialOCLCSPackage
 	 * @generated
 	 */
 	EReference getExpCS_Parent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS#isHasError <em>Has Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Has Error</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS#isHasError()
+	 * @see #getExpCS()
+	 * @generated
+	 */
+	EAttribute getExpCS_HasError();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpSpecificationCS <em>Exp Specification CS</em>}'.
@@ -4584,6 +4856,14 @@ public interface EssentialOCLCSPackage
 		 * @generated
 		 */
 		EReference EXP_CS__PARENT = eINSTANCE.getExpCS_Parent();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXP_CS__HAS_ERROR = eINSTANCE.getExpCS_HasError();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpSpecificationCSImpl <em>Exp Specification CS</em>}' class.

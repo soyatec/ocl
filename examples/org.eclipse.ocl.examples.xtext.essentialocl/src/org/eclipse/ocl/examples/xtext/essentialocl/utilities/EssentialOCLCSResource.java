@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -36,6 +38,9 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.LibraryDiagnostic;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
@@ -43,6 +48,9 @@ import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NamedExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLPivot2CS;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -52,6 +60,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Triple;
 
 public class EssentialOCLCSResource extends LazyLinkingResource implements BaseCSResource
 {	
@@ -130,6 +139,22 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 				diagnostic = new XtextSyntaxDiagnostic(error);
 			}
 			errors2.add(diagnostic);
+		}
+	}
+
+	@Override
+	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple) {
+		if (isValidationDisabled())
+			return;
+		EObject context = triple.getFirst();
+		if (context instanceof ElementCS) {
+			if (!hasError((ElementCS)context)) {
+				super.createAndAddDiagnostic(triple);
+				setHasError((ElementCS)context);
+			}
+		}
+		else {
+			super.createAndAddDiagnostic(triple);
 		}
 	}
 
@@ -234,6 +259,22 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 	@SuppressWarnings("null")
 	public @NonNull URI getASURI(@NonNull URI csURI) {
 		return csURI.appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION);
+	}
+
+	protected boolean hasError(ElementCS csElement) {
+		while ((csElement instanceof PathElementCS) || (csElement instanceof PathNameCS)) {
+			csElement = csElement.getLogicalParent();
+		}
+		while (csElement instanceof ExpCS) {
+			if (((ExpCS) csElement).isHasError()) {
+				return true;
+			}
+			csElement = csElement.getLogicalParent();
+			if (!(csElement instanceof NavigationOperatorCS) && !(csElement instanceof NamedExpCS)) {
+				break;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -358,6 +399,19 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 			}
 		}
 		super.resolveLazyCrossReferences(mon);
+	}
+
+	protected void setHasError(ElementCS csElement) {
+		while ((csElement instanceof PathElementCS) || (csElement instanceof PathNameCS)) {
+			csElement = csElement.getLogicalParent();
+		}
+		while (csElement instanceof ExpCS) {
+			((ExpCS) csElement).setHasError(true);
+			csElement = csElement.getLogicalParent();
+			if (!(csElement instanceof NavigationOperatorCS)) {
+				break;
+			}
+		}
 	}
 
 	public final void setParserContext(@Nullable ParserContext parserContext) {

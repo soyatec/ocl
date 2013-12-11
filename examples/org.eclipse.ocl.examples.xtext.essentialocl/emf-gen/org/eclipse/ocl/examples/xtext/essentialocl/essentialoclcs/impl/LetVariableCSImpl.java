@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.Essential
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.LetVariableCSImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.LetVariableCSImpl#isHasError <em>Has Error</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.LetVariableCSImpl#getLetExpression <em>Let Expression</em>}</li>
  * </ul>
  * </p>
@@ -59,6 +60,25 @@ public class LetVariableCSImpl
 	 * @ordered
 	 */
 	protected OperatorCS parent;
+
+	/**
+	 * The default value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HAS_ERROR_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasError()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hasError = HAS_ERROR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,6 +125,29 @@ public class LetVariableCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHasError()
+	{
+		return hasError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasError(boolean newHasError)
+	{
+		boolean oldHasError = hasError;
+		hasError = newHasError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR, oldHasError, hasError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LetExpCS getLetExpression() {
 		if (eContainerFeatureID() != EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION) return null;
 		return (LetExpCS)eInternalContainer();
@@ -141,6 +184,17 @@ public class LetVariableCSImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION, newLetExpression, newLetExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString();
 	}
 
 	/**
@@ -204,6 +258,8 @@ public class LetVariableCSImpl
 		{
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
 				return getParent();
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR:
+				return isHasError();
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				return getLetExpression();
 		}
@@ -221,6 +277,9 @@ public class LetVariableCSImpl
 		{
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
 				setParent((OperatorCS)newValue);
+				return;
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR:
+				setHasError((Boolean)newValue);
 				return;
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				setLetExpression((LetExpCS)newValue);
@@ -241,6 +300,9 @@ public class LetVariableCSImpl
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
 				setParent((OperatorCS)null);
 				return;
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR:
+				setHasError(HAS_ERROR_EDEFAULT);
+				return;
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				setLetExpression((LetExpCS)null);
 				return;
@@ -259,6 +321,8 @@ public class LetVariableCSImpl
 		{
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT:
 				return parent != null;
+			case EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR:
+				return hasError != HAS_ERROR_EDEFAULT;
 			case EssentialOCLCSPackage.LET_VARIABLE_CS__LET_EXPRESSION:
 				return getLetExpression() != null;
 		}
@@ -277,6 +341,7 @@ public class LetVariableCSImpl
 			switch (derivedFeatureID)
 			{
 				case EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
+				case EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR: return EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
 				default: return -1;
 			}
 		}
@@ -295,6 +360,7 @@ public class LetVariableCSImpl
 			switch (baseFeatureID)
 			{
 				case EssentialOCLCSPackage.EXP_CS__PARENT: return EssentialOCLCSPackage.LET_VARIABLE_CS__PARENT;
+				case EssentialOCLCSPackage.EXP_CS__HAS_ERROR: return EssentialOCLCSPackage.LET_VARIABLE_CS__HAS_ERROR;
 				default: return -1;
 			}
 		}
