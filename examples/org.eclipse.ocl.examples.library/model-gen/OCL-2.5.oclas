@@ -1693,7 +1693,7 @@
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation"/>
       <ownedOperation xmi:id="o.ocl.OclInvalid.toString" name="toString" type="#String"
           implementationClass="org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation">
-        <ownedComment body="operation oclBadOperation() : OclInvalid;&#xA;property oclBadProperty : OclInvalid;&#xA;/**&#xA;Returns 'invalid'."/>
+        <ownedComment body="Returns 'invalid'."/>
       </ownedOperation>
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.ocl.OclLambda" name="OclLambda" superClass="#T.ocl.OclAny">

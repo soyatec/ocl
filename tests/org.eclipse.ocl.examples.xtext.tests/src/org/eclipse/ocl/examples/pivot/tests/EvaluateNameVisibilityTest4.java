@@ -119,7 +119,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
         assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "let name : String = 'String' in ownedType->select(name = 'Integer') = Set{Integer}");
         assertQueryTrue(metaModelManager.getIntegerType(), "package.ownedType->select(name = self.name) = Set{Integer}");
         assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "nestedPackage->select(oclIsKindOf(Integer))->isEmpty()");
-        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "nestedPackage->select(oclIsKindOf(Package))->isEmpty()");	// Fails unless implicit Package diambiguated away
+        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "nestedPackage->select(oclIsKindOf(Package))->isEmpty()");	// Fails unless implicit Package disambiguated away by argument type expectation
     }
 
 	@Test public void test_iterator_scope() {
@@ -137,7 +137,9 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		CollectionLiteralExp coll = (CollectionLiteralExp) query.getBodyExpression();
 		CollectionItem item = (CollectionItem) coll.getPart().get(0);
 		assertQueryTrue(item, "type = item.type");
-		assertQueryInvalid(null, "type = item.type");		// A2.2 def'n of invalid = invalid
+//		assertQueryInvalid(null, "type = item.type");		// A2.2 def'n of invalid = invalid
+		assertQueryInvalid(null, "let item : CollectionItem = null in item.type = item");		// A2.2 def'n of invalid = invalid
+		assertQueryInvalid(null, "let item : CollectionItem = invalid in item.type = item");		// A2.2 def'n of invalid = invalid
 	}
 
 	@Test public void test_caught_and_uncaught() {

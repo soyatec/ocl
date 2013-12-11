@@ -540,7 +540,9 @@ public class EditTests extends XtextTestCase
 		//
 		doRename(xtextResource, asResource, "TestClass1", "Testing",
 //			DomainUtil.bind(OCLMessages.Unresolved_ERROR_, "Type", pivotTestClass1.getName()),
-			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()));
+			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()),
+			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "testOperation", "OclInvalid", "UnlimitedNatural"),
+			DomainUtil.bind(OCLMessages.UnresolvedProperty_ERROR_, "testProperty1", "OclInvalid"));
 		//
 		//	Changing "Testing" back to "TestClass1" restores the type and the invariant.
 		//
@@ -623,7 +625,9 @@ public class EditTests extends XtextTestCase
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the referredProperty/referredOperation.
 		//
 		doRename(xtextResource, asResource, "TestClass1", "Testing",
-			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()));
+			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()),
+			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "testOperation", "Set(OclInvalid)", ""),
+			DomainUtil.bind(OCLMessages.UnresolvedProperty_ERROR_, "testProperty1", "OclInvalid"));
 		//
 		//	Changing "Testing" back to "TestClass1" restores the type and the referredProperty/referredOperation.
 		//
@@ -633,7 +637,9 @@ public class EditTests extends XtextTestCase
 		//	Changing "TestClass1" to "Testing" renames a type and breaks the referredProperty/referredOperation.
 		//
 		doRename(xtextResource, asResource, "TestClass1", "Testing",
-			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()));
+			DomainUtil.bind(OCLMessages.UnresolvedType_ERROR_, pivotTestClass1.getName()),
+			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "testOperation", "Set(OclInvalid)", ""),
+			DomainUtil.bind(OCLMessages.UnresolvedProperty_ERROR_, "testProperty1", "OclInvalid"));
 		//
 		//	Changing "Testing" back to "TestClass1" restores the type and the referredProperty/referredOperation.
 		//

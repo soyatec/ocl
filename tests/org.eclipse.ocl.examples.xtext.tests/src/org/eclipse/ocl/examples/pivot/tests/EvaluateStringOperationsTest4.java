@@ -294,10 +294,10 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 		//
 		assertQueryInvalid(null, "'repla ce operation'.matches('a[b-')", null, PatternSyntaxException.class);
 		//
-		assertQueryInvalid(null, "null.matches('(\\\\w+)\\\\s*')");
+		assertQueryInvalid(null, "let s : String = null in s.matches('(\\\\w+)\\\\s*')");
 		assertQueryInvalid(null, "'repla ce operation'.matches(null)");
 		//
-		assertQueryInvalid(null, "invalid.matches('(\\\\w+)\\\\s*')");
+		assertQueryInvalid(null, "let s : String = invalid in s.matches('(\\\\w+)\\\\s*')");
 		assertQueryInvalid(null, "'repla ce operation'.matches(invalid)");
 		// -- visual inspection of println's demonstrates cache re-use; this test just conforms cache still ok once full
 		assertQueryEquals(null, 50, "let seq = Sequence{1..20}, rseq = seq->reverse(), seqs = Sequence{seq,rseq,seq,rseq,seq}->flatten() in seqs->iterate(i; acc : Integer = 0 | if '123456789'.matches('.*' + i.toString() + '.*') then acc + 1 else acc endif)");
@@ -373,11 +373,11 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll('a[b-', '$1')", null, PatternSyntaxException.class);
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll('', '$1')", "No group 1", IndexOutOfBoundsException.class);
 		//
-		assertQueryInvalid(null, "null.replaceAll('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = null in s.replaceAll('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll(null, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll('(\\\\w+)\\\\s*', null)");
 		//
-		assertQueryInvalid(null, "invalid.replaceAll('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = invalid in s.replaceAll('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll(invalid, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceAll('(\\\\w+)\\\\s*', invalid)");
 	}
@@ -394,11 +394,11 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst('a[b-', '$1')", null, PatternSyntaxException.class);
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst('', '$1')", "No group 1", IndexOutOfBoundsException.class);
 		//
-		assertQueryInvalid(null, "null.replaceFirst('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = null in s.replaceFirst('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst(null, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst('(\\\\w+)\\\\s*', null)");
 		//
-		assertQueryInvalid(null, "invalid.replaceFirst('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = invalid in s.replaceFirst('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst(invalid, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.replaceFirst('(\\\\w+)\\\\s*', invalid)");
 	}
@@ -440,11 +440,11 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 		assertQueryEquals(null, "repla ce operation", "'repla ce operation'.substituteAll('(\\\\w+)\\\\s*', '')");
 		assertQueryEquals(null, "repla ce operation", "'repla ce operation'.substituteAll('', '')");
 		//
-		assertQueryInvalid(null, "null.substituteAll('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = null in s.substituteAll('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteAll(null, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteAll('(\\\\w+)\\\\s*', null)");
 		//
-		assertQueryInvalid(null, "invalid.substituteAll('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = invalid in s.substituteAll('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteAll(invalid, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteAll('(\\\\w+)\\\\s*', invalid)");
 	}
@@ -464,11 +464,11 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "'repla ce operation'.substituteFirst('(\\\\w+)\\\\s*', '')",
 			DomainUtil.bind(EvaluatorMessages.MissingSubstring, "(\\w+)\\s*", "repla ce operation"), null);
 		//
-		assertQueryInvalid(null, "null.substituteFirst('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = null in s.substituteFirst('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteFirst(null, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteFirst('(\\\\w+)\\\\s*', null)");
 		//
-		assertQueryInvalid(null, "invalid.substituteFirst('(\\\\w+)\\\\s*', '$1')");
+		assertQueryInvalid(null, "let s : String = invalid in s.substituteFirst('(\\\\w+)\\\\s*', '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteFirst(invalid, '$1')");
 		assertQueryInvalid(null, "'repla ce operation'.substituteFirst('(\\\\w+)\\\\s*', invalid)");
 	}

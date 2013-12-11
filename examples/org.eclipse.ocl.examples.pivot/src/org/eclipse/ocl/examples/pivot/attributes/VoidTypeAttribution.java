@@ -18,14 +18,8 @@ package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.PackageServer;
-import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-
-import com.google.common.collect.Lists;
 
 public class VoidTypeAttribution extends ClassAttribution
 {
@@ -34,7 +28,7 @@ public class VoidTypeAttribution extends ClassAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		super.computeLookup(target, environmentView, scopeView);
-		if (!environmentView.hasFinalResult()) {
+/*		if (!environmentView.hasFinalResult()) {
 			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 			for (PackageServer packageServer : Lists.newArrayList(metaModelManager.getAllPackages())) {		// Avoid CME risk
 				for (TypeServer typeServer : packageServer.getMemberTypes()) {
@@ -43,7 +37,7 @@ public class VoidTypeAttribution extends ClassAttribution
 					environmentView.addAllProperties(primaryType, false);
 				}
 			}
-		}
+		} */
 		return scopeView.getParent();
 	}
 }

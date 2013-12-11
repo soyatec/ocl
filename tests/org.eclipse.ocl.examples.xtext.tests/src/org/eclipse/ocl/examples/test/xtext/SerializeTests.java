@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +25,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
@@ -90,8 +93,14 @@ public class SerializeTests extends XtextTestCase
 			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(outputURI);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource2, metaModelManager2);
 			xtextResource2.load(null);
-			assertNoResourceErrors("Reload failed", xtextResource2);
-			assertNoUnresolvedProxies("unresolved reload proxies", xtextResource2);
+			Object cs2asErrors = options.get("cs2asErrors");
+			if (cs2asErrors != null) {
+				assertResourceErrors("Reload failed", xtextResource2, cs2asErrors.toString());
+			}
+			else {
+				assertNoResourceErrors("Reload failed", xtextResource2);
+				assertNoUnresolvedProxies("unresolved reload proxies", xtextResource2);
+			}
 			//
 			//	CS to Pivot
 			//	
@@ -374,7 +383,10 @@ public class SerializeTests extends XtextTestCase
 	}	
 	
 	public void testSerialize_States() throws Exception {
-		doSerialize("States");
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put("cs2asErrors", 
+			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "substring", "OclInvalid", "UnlimitedNatural, UnlimitedNatural"));
+		doSerialize("States", "States", options, true, true);
 	}	
 
 	public void testSerialize_XMLNamespace() throws Exception {

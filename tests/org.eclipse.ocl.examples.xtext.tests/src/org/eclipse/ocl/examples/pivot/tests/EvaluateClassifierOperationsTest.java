@@ -82,8 +82,10 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 	 * Tests the oclContainer() operator.
 	 */
 	public void test_oclContainer() {
-		assertQueryInvalid(pkg2, "invalid.oclContainer()");
-		assertQueryInvalid(pkg2, "null.oclContainer()");
+		assertSemanticErrorQuery("invalid.oclContainer()", OCLMessages.UnresolvedOperation_ERROR_, "oclContainer", "OclInvalid");
+		assertQueryInvalid(pkg2, "let s : OclElement = invalid in s.oclContainer()");
+		assertSemanticErrorQuery("null.oclContainer()", OCLMessages.UnresolvedOperation_ERROR_, "oclContainer", "OclVoid");
+		assertQueryInvalid(pkg2, "let s : OclElement = null in s.oclContainer()");
 		assertQueryResults(root, "null", "oclContainer()");
 		assertQueryEquals(pkg2, pkg1, "oclContainer()");
 		assertSemanticErrorQuery("1.oclContainer()", OCLMessages.UnresolvedOperation_ERROR_, "oclContainer", "UnlimitedNatural");
@@ -95,8 +97,10 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 	public void test_oclContents() {
     	@SuppressWarnings("null") @NonNull Type packageType = metaModelManager.getPivotType("Package");
 		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageType.getTypeId());
-		assertQueryInvalid(pkg2, "invalid.oclContents()");
-		assertQueryInvalid(pkg2, "null.oclContents()");
+		assertSemanticErrorQuery("invalid.oclContents()", OCLMessages.UnresolvedOperation_ERROR_, "oclContents", "OclInvalid");
+		assertQueryInvalid(pkg2, "let s : OclElement = invalid in s.oclContents()");
+		assertSemanticErrorQuery("null.oclContents()", OCLMessages.UnresolvedOperation_ERROR_, "oclContents", "OclVoid");
+		assertQueryInvalid(pkg2, "let s : OclElement = null in s.oclContents()");
 		assertQueryEquals(pkg1, idResolver.createSetOfEach(typeId, bob, pkg2, pkg3), "oclContents()");
 		assertQueryEquals(pkg2, idResolver.createSetOfEach(typeId, jim), "oclContents()");
 		assertQueryEquals(george, idResolver.createSetOfEach(typeId), "oclContents()");
