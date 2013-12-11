@@ -298,20 +298,19 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		Object c2_value = idResolver.boxedValueOf(c2);
 		Value orderedSet_b1_b2 = idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_ANY), b1_value, b2_value);
 		Value sequence_c1_c2 = idResolver.createSequenceOfEach(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
-		Value bag_c1_c2 = idResolver.createBagOfEach(TypeId.BAG.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
 		//
 		helper.setContext(aType);
 		//
 		assertQueryEquals(a, orderedSet_b1_b2, "bs");
 		assertQueryEquals(a, sequence_c1_c2, "bs.c");
-		assertQueryEquals(a, bag_c1_c2, "bs.c.oclAsSet()");
+		assertQueryEquals(a, sequence_c1_c2, "bs.c.oclAsSet()");
 		assertQueryResults(a, "Sequence{'c1','c2'}", "bs.c.name");
 		assertQueryResults(a, "Sequence{'c1','c2'}", "self.bs.c.name");
-        assertQueryResults(a, "Bag{'c1','c2'}", "bs.c.oclAsSet().name");
-        assertQueryResults(a, "Bag{'c1','c2'}", "bs.c.oclAsSet()->collect(name)");	// Test for Bug 351512
-        assertQueryResults(a, "Bag{'c1','c2'}", "bs.c->collect(oclAsSet()).name");
-        assertQueryResults(a, "Bag{'c1','c2'}", "bs.c->collect(j : C | j.oclAsSet()).name");
-        assertQueryResults(a, "Bag{'c1','c2'}", "bs->collect(i : B | i.c)->collect(j : C | j.oclAsSet())->collect(k : C | k.name)");
+        assertQueryResults(a, "Sequence{'c1','c2'}", "bs.c.oclAsSet().name");
+        assertQueryResults(a, "Sequence{'c1','c2'}", "bs.c.oclAsSet()->collect(name)");	// Test for Bug 351512
+        assertQueryResults(a, "Sequence{'c1','c2'}", "bs.c->collect(oclAsSet()).name");
+        assertQueryResults(a, "Sequence{'c1','c2'}", "bs.c->collect(j : C | j.oclAsSet()).name");
+        assertQueryResults(a, "Sequence{'c1','c2'}", "bs->collect(i : B | i.c)->collect(j : C | j.oclAsSet())->collect(k : C | k.name)");
 	}
 
 	/**

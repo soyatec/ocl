@@ -839,6 +839,9 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 		}
 		Type behavioralType = PivotUtil.getType(operation);
 		Type returnType = behavioralType != null ? metaModelManager.getSpecializedType(behavioralType, templateBindings) : null;
+		//
+		//	The flattening of collect() and consequently implicit-collect is not modelled accurately so we need to code it.
+		//
 		if ((operation instanceof Iteration) && "collect".equals(operation.getName()) && (callExp instanceof LoopExp) && (returnType instanceof CollectionType)) {
 			OCLExpression body = ((LoopExp)callExp).getBody();
 			Type bodyType = PivotUtil.getType(body);
@@ -851,8 +854,7 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 							elementType = elementType2;
 						}
 					}
-					boolean isOrdered = ((CollectionType)bodyType).isOrdered() && ((CollectionType)returnType).isOrdered();
-	//				boolean isUnique = /*((CollectionType)bodyType).isUnique() &&*/ ((CollectionType)returnType).isUnique();
+					boolean isOrdered = ((CollectionType)returnType).isOrdered();
 					returnType = metaModelManager.getCollectionType(isOrdered, false, elementType, null, null);	// FIXME null, null
 				}
 			}
