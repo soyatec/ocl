@@ -937,7 +937,7 @@ public class DelegatesTest extends PivotTestSuite
 		initModelWithErrors();
 		EObject badClassInstance = create(acme, companyDetritus, badClassClass, null);
 		invokeWithException(badClassInstance, "operationParsingToSemanticError",
-			getErrorsInMessage("self->at(1)") + DomainUtil.bind("1: " + OCLMessages.UnresolvedOperationCall_ERROR_, "at", "Set(modelWithErrors::BadClass)", "UnlimitedNatural"));
+			getErrorsInMessage("self->at(1)") + DomainUtil.bind("1: " + OCLMessages.UnresolvedOperationCall_ERROR_, "at", "Set(modelWithErrors::BadClass)", "1"));
 	}
 
 	public void test_operationParsingToSyntacticError() {

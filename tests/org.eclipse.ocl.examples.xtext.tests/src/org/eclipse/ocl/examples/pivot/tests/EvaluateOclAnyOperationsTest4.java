@@ -759,7 +759,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
     	assertQueryEquals(null, getMetaclass(getMetaclass(metaModelManager.getUnlimitedNaturalType())), "3.oclType().oclType().oclType()");
     	assertQueryEquals(null, getMetaclass(metaModelManager.getBooleanType()), "Boolean.oclType()");
     	assertQueryEquals(null, "Metaclass", "Boolean.oclType().name");
-    	assertSemanticErrorQuery("3.oclType(OclAny)", OCLMessages.UnresolvedOperationCall_ERROR_, "oclType", "UnlimitedNatural", "Metaclass(OclAny)");
+    	assertSemanticErrorQuery("3.oclType(OclAny)", OCLMessages.UnresolvedOperationCall_ERROR_, "oclType", "UnlimitedNatural", "OclAny");
     }
 
 	@Test public void testMetaclassInstanceType() {

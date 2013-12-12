@@ -56,7 +56,8 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 		assertSemanticErrorQuery("OclAny.allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "Metaclass(OclAny)");
 		assertSemanticErrorQuery("4.allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "UnlimitedNatural");
 //		assertSemanticErrorQuery("true.allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "Boolean");
-		assertQueryResults(null, "Set{true,false}", "true.allInstances()");
+		assertQueryInvalid(null, "true.allInstances()");
+//		assertQueryResults(null, "Set{true,false}", "true.allInstances()");
 		assertSemanticErrorQuery("Set{1}.allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "Set(UnlimitedNatural)");
 		assertSemanticErrorQuery("Tuple{a:Integer=1}.allInstances()", OCLMessages.UnresolvedOperation_ERROR_, "allInstances", "Tuple(a:Integer)");
 		assertQueryInvalid(null, "OclInvalid.allInstances()");

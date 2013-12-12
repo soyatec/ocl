@@ -146,7 +146,7 @@ public class ImportTests extends XtextTestCase
 		Bag<String> bag = new BagImpl<String>();
 		bag.add(DomainUtil.bind(OCLMessages.UnresolvedOperation_ERROR_, "toString", "OclInvalid"));
 		bag.add(DomainUtil.bind(OCLMessages.UnresolvedOperation_ERROR_, "toString", "Real"));
-		// There are no precedences so =(s) ratherb than =(s.toString())
+		// There are no precedences so =(s) rather than =(s.toString())
 		bag.add(DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "and", "OclInvalid", "String"));
 		doBadLoadFromString("string.ocl", testFile, bag);
 	}

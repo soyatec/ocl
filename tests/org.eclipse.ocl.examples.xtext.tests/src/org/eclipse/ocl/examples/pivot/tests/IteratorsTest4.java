@@ -372,7 +372,7 @@ public class IteratorsTest4 extends PivotTestSuite
     @Test public void test_implicitCollect_unknownOperation_232669() {
     	assertBadInvariant(SemanticException.class, Diagnostic.ERROR,
     		"nestedPackage.unknownOperation(self)",
-        	OCLMessages.UnresolvedOperationCall_ERROR_, "unknownOperation", "Set(Package)", "Package");
+        	OCLMessages.UnresolvedOperationCall_ERROR_, "unknownOperation", "Set(Package)", "self");
    }
 
     /**

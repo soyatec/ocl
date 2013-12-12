@@ -52,11 +52,6 @@ public class OperationFilter extends AbstractOperationFilter
 	protected final int accumulators;
 	protected final int expressions;
 	
-	@Deprecated // Preserved only for QVTd API migration
-	public OperationFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType, @NonNull InvocationExpCS csNavigatingExp) {
-		this(sourceType, csNavigatingExp);
-	}
-	
 	public OperationFilter(@Nullable Type sourceType, @NonNull InvocationExpCS csNavigatingExp) {
 		super(sourceType);
 		int accumulators = 0;

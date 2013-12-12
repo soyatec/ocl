@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.AbstractUnresolvedProxyMessageProvider;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.MessageBinder;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ConstructorPartCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ContextCSAttribution;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ExpSpecificationCSAttribution;
@@ -182,12 +183,15 @@ public class EssentialOCLScoping
 					}
 				}
 			}
+			MessageBinder messageBinder = CS2Pivot.getMessageBinder();
+			String messageText;
 			if (argumentText == null) {
-				return CS2Pivot.getMessageBinder().bind(csContext, messageTemplate, linkText, typeText);
+				messageText = messageBinder.bind(csContext, messageTemplate, linkText, typeText);
 			}
 			else {
-				return CS2Pivot.getMessageBinder().bind(csContext, messageTemplate, linkText, typeText, argumentText);
+				messageText = messageBinder.bind(csContext, messageTemplate, linkText, typeText, argumentText);
 			}
+			return messageText;
 		}
 		
 		public String getOperationArguments(InvocationExpCS csNavigatingExp) {

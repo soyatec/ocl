@@ -23,7 +23,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
 
 public class NavigationOperatorCSAttribution extends AbstractAttribution
@@ -38,14 +39,12 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 		assert scopeView.getContainmentFeature() != PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT;		// Arguments must leapfrog to parent.
 		NavigationOperatorCS targetElement = (NavigationOperatorCS)target;
 		EObject child = scopeView.getChild();
-//		assert !(child instanceof InvocationExpCS);			// FIXME invocations should leapfrog over me
-		if (!(child instanceof InvocationExpCS)) {
-			if (child == targetElement.getArgument()) {
-				Type type = NavigationUtil.getNavigationSourceType(environmentView.getMetaModelManager(), targetElement);
-				if (type != null) {
-					environmentView.addElementsOfScope(type, scopeView);
-					return null;											// Explicit navigation must be resolved in source
-				}
+		ExpCS argument = targetElement.getArgument();
+		if ((child == argument) && (child instanceof AbstractNameExpCS)) {
+			Type type = ((AbstractNameExpCS)child).getSourceType();
+			if (type != null) {
+				environmentView.addElementsOfScope(type, scopeView);
+				return null;											// Explicit navigation must be resolved in source
 			}
 		}
 		return scopeView.getParent();

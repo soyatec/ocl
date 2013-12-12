@@ -60,7 +60,7 @@ public class ErrorTests extends XtextTestCase
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(inputStream, null);
 		assertResourceErrors("Loading Xtext", xtextResource,
-			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "iterate", "Set(test::Test)", "w, h, String| true"));
+			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "iterate", "Set(test::Test)", "w, h; acc : String = ''| true"));
         //
 		metaModelManager.dispose();
 	}

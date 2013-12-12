@@ -23,11 +23,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
@@ -62,46 +58,6 @@ public class NavigationUtil
 			}
 			else {														// e.g.    ... and X
 				return null;
-			}
-		}
-	}
-
-	/**
-	 * Return the source type of a navigation adjusting any implicit collect to the flattened source type, and
-	 * and implicit oclAsSet to the Set type.
-	 * 
-	 */
-	public static @Nullable Type getNavigationSourceType(@NonNull MetaModelManager metaModelManager, @NonNull NavigationOperatorCS csOperator) {
-		ExpCS csSource = csOperator.getSource();
-		if (csSource == null) {
-			return null;
-		}
-		OCLExpression source = PivotUtil.getPivot(OCLExpression.class, csSource);
-		if (source == null) {
-			return null;
-		}
-		Type type = source.getType();
-		if (type == null) {
-			return null;
-		}
-		String opName = csOperator.getName();
-		if (opName.equals(PivotConstants.COLLECTION_NAVIGATION_OPERATOR)) {
-			if (type instanceof CollectionType) {		// collection->collection-feature-name...
-				return type;
-			}
-			else {										// object.oclAsSet()->collection-feature-name...
-				return metaModelManager.getCollectionType(false, true, type, null, null);
-			}
-		}
-		else {
-			if (type instanceof CollectionType) {		// collection->implicit-collect(object-feature-name...)
-				while (type instanceof CollectionType) {	// implicit-collect flattens
-					type = ((CollectionType)type).getElementType();
-				}
-				return type;
-			}
-			else {										// object.object-feature-name...
-				return type;
 			}
 		}
 	}
