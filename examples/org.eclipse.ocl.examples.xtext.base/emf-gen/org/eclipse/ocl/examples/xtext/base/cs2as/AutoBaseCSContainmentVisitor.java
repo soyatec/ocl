@@ -198,7 +198,8 @@ public class AutoBaseCSContainmentVisitor
         // NamedElement::name
         //
         final @Nullable /*@Thrown*/ String name = self.getName();
-        if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
+        @Nullable String getName = result.getName();
+        if ((name != getName) && (name == null || !name.equals(getName))) {
             result.setName(name);
         }
         //
@@ -252,7 +253,8 @@ public class AutoBaseCSContainmentVisitor
         // NamedElement::name
         //
         final @Nullable /*@Thrown*/ String name = self.getName();
-        if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
+        @Nullable String getName = result.getName();
+        if ((name != getName) && (name == null || !name.equals(getName))) {
             result.setName(name);
         }
         // AS element comments update;
@@ -322,7 +324,8 @@ public class AutoBaseCSContainmentVisitor
         // NamedElement::name
         //
         final @Nullable /*@Thrown*/ String name = self.getName();
-        if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
+        @Nullable String getName = result.getName();
+        if ((name != getName) && (name == null || !name.equals(getName))) {
             result.setName(name);
         }
         // AS element comments update;
@@ -348,7 +351,8 @@ public class AutoBaseCSContainmentVisitor
         // NamedElement::name
         //
         final @Nullable /*@Thrown*/ String name = self.getName();
-        if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
+        @Nullable String getName = result.getName();
+        if ((name != getName) && (name == null || !name.equals(getName))) {
             result.setName(name);
         }
         //
@@ -406,7 +410,8 @@ public class AutoBaseCSContainmentVisitor
         // NamedElement::name
         //
         final @Nullable /*@Thrown*/ String name = self.getName();
-        if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
+        @Nullable String getName = result.getName();
+        if ((name != getName) && (name == null || !name.equals(getName))) {
             result.setName(name);
         }
         // AS element comments update;
@@ -468,7 +473,8 @@ public class AutoBaseCSContainmentVisitor
         // NamedElement::name
         //
         final @Nullable /*@Thrown*/ String name = self.getName();
-        if ((name != result.getName()) && (name == null || !name.equals(result.getName()))) {
+        @Nullable String getName = result.getName();
+        if ((name != getName) && (name == null || !name.equals(getName))) {
             result.setName(name);
         }
         // AS element comments update;
