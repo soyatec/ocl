@@ -8,7 +8,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink (CEA LIST) - initial API and implementation
+ *   E.D.Willink (CEA LIST) - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 424034
  *
  * </copyright>
  */
@@ -261,6 +262,12 @@ public class OCLinEcoreTablesUtils
 
 		public void appendName(@NonNull NamedElement namedElement) {
 			s.append(AbstractGenModelHelper.encodeName(namedElement));
+		}
+
+		public void appendPage(int i, int iMax) {
+			if (i < iMax) {
+				s.append(i);
+			}
 		}
 
 		public void appendParameterName(@NonNull NamedElement namedElement) {
