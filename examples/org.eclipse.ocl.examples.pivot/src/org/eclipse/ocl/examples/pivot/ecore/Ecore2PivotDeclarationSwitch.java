@@ -9,7 +9,8 @@
  *
  * Contributors:
  *   E.D.Willink - initial API and implementation
- * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
+ *   E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
+ *   E.D.Willink (CEA List) - Bug 424057 - UML 2.5 CG
  *
  * </copyright>
  */
@@ -65,6 +66,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
@@ -197,9 +199,22 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	@Override
 	public Object caseEDataType(EDataType eObject) {
 		@SuppressWarnings("null") @NonNull EDataType eObject2 = eObject;
-		DataType pivotElement = converter.refreshElement(DataType.class, PivotPackage.Literals.DATA_TYPE, eObject2);
-		String oldName = pivotElement.getName();
+		Class<?> instanceClass = eObject2.getInstanceClass();
 		String newName = eObject2.getName();
+		boolean isPrimitive = false;
+		if ("Boolean".equals(newName) && ((instanceClass == Boolean.class) || (instanceClass == boolean.class))) {
+			isPrimitive = true;
+		}
+		else if ("Integer".equals(newName) && ((instanceClass == Integer.class) || (instanceClass == int.class))) {
+			isPrimitive = true;
+		}
+		else if ("String".equals(newName) && (instanceClass == String.class)) {
+			isPrimitive = true;
+		} 
+		DataType pivotElement = isPrimitive
+				? converter.refreshElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, eObject2)
+				: converter.refreshElement(DataType.class, PivotPackage.Literals.DATA_TYPE, eObject2);
+		String oldName = pivotElement.getName();
 		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
 		if (nameChange) {
 			org.eclipse.ocl.examples.pivot.Package parentPackage = pivotElement.getPackage();
@@ -209,8 +224,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		}
 		pivotElement.setName(newName);
 		copyDataTypeOrEnum(pivotElement, eObject2);
-		Class<?> instanceClass = eObject2.getInstanceClass();
-		if (instanceClass != null) {
+		if (!isPrimitive && (instanceClass != null)) {
 			try {
 				MetaModelManager metaModelManager = converter.getMetaModelManager();
 				if (instanceClass == boolean.class) {

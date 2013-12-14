@@ -307,8 +307,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_Detail = createCollectionType("Collection"/*Detail*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_DynamicElement = createCollectionType("Collection"/*DynamicElement*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_DynamicProperty = createCollectionType("Collection"/*DynamicProperty*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_ElementExtension = createCollectionType("Collection"/*ElementExtension*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Element = createCollectionType("Collection"/*Element*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_ElementExtension = createCollectionType("Collection"/*ElementExtension*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_EnumLiteralExp = createCollectionType("Collection"/*EnumLiteralExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_EnumerationLiteral = createCollectionType("Collection"/*EnumerationLiteral*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Import = createCollectionType("Collection"/*Import*/, "0", "*");
@@ -318,36 +318,36 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_Metaclass = createCollectionType("Collection"/*Metaclass*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_NavigationCallExp = createCollectionType("Collection"/*NavigationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OCLExpression = createCollectionType("Collection"/*OCLExpression*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_OperationCallExp = createCollectionType("Collection"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Operation = createCollectionType("Collection"/*Operation*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_OperationCallExp = createCollectionType("Collection"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OppositePropertyCallExp = createCollectionType("Collection"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Package = createCollectionType("Collection"/*Package*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Parameter = createCollectionType("Collection"/*Parameter*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_ParameterableElement = createCollectionType("Collection"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Precedence = createCollectionType("Collection"/*Precedence*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_PropertyCallExp = createCollectionType("Collection"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Property = createCollectionType("Collection"/*Property*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_PropertyCallExp = createCollectionType("Collection"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Pseudostate = createCollectionType("Collection"/*Pseudostate*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Region = createCollectionType("Collection"/*Region*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_SendSignalAction = createCollectionType("Collection"/*SendSignalAction*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_State = createCollectionType("Collection"/*State*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_StateExp = createCollectionType("Collection"/*StateExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_StateMachine = createCollectionType("Collection"/*StateMachine*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_State = createCollectionType("Collection"/*State*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_String = createCollectionType("Collection"/*String*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateBinding = createCollectionType("Collection"/*TemplateBinding*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_TemplateParameterSubstitution = createCollectionType("Collection"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateParameter = createCollectionType("Collection"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_TemplateParameterSubstitution = createCollectionType("Collection"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateSignature = createCollectionType("Collection"/*TemplateSignature*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Transition = createCollectionType("Collection"/*Transition*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Trigger = createCollectionType("Collection"/*Trigger*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TupleLiteralPart = createCollectionType("Collection"/*TupleLiteralPart*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Type = createCollectionType("Collection"/*Type*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TypeExp = createCollectionType("Collection"/*TypeExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TypeTemplateParameter = createCollectionType("Collection"/*TypeTemplateParameter*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_Type = createCollectionType("Collection"/*Type*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TypedElement = createCollectionType("Collection"/*TypedElement*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_UnspecifiedType = createCollectionType("Collection"/*UnspecifiedType*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_VariableExp = createCollectionType("Collection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Variable = createCollectionType("Collection"/*Variable*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_VariableExp = createCollectionType("Collection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Vertex = createCollectionType("Collection"/*Vertex*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Annotation = createCollectionType("OrderedCollection"/*Annotation*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Class = createCollectionType("OrderedCollection"/*Class*/, "0", "*");
@@ -383,8 +383,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -403,8 +403,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull SetType _Set_DataType = createSetType("Set"/*DataType*/, "0", "*");
 		protected final @NonNull SetType _Set_DynamicElement = createSetType("Set"/*DynamicElement*/, "0", "*");
 		protected final @NonNull SetType _Set_DynamicProperty = createSetType("Set"/*DynamicProperty*/, "0", "*");
-		protected final @NonNull SetType _Set_ElementExtension = createSetType("Set"/*ElementExtension*/, "0", "*");
 		protected final @NonNull SetType _Set_Element = createSetType("Set"/*Element*/, "0", "*");
+		protected final @NonNull SetType _Set_ElementExtension = createSetType("Set"/*ElementExtension*/, "0", "*");
 		protected final @NonNull SetType _Set_EnumLiteralExp = createSetType("Set"/*EnumLiteralExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Import = createSetType("Set"/*Import*/, "0", "*");
 		protected final @NonNull SetType _Set_LambdaType = createSetType("Set"/*LambdaType*/, "0", "*");
@@ -412,34 +412,34 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull SetType _Set_MessageType = createSetType("Set"/*MessageType*/, "0", "*");
 		protected final @NonNull SetType _Set_Metaclass = createSetType("Set"/*Metaclass*/, "0", "*");
 		protected final @NonNull SetType _Set_NavigationCallExp = createSetType("Set"/*NavigationCallExp*/, "0", "*");
-		protected final @NonNull SetType _Set_OperationCallExp = createSetType("Set"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Operation = createSetType("Set"/*Operation*/, "0", "*");
+		protected final @NonNull SetType _Set_OperationCallExp = createSetType("Set"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_OppositePropertyCallExp = createSetType("Set"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Package = createSetType("Set"/*Package*/, "0", "*");
 		protected final @NonNull SetType _Set_ParameterableElement = createSetType("Set"/*ParameterableElement*/, "0", "*");
-		protected final @NonNull SetType _Set_PropertyCallExp = createSetType("Set"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Property = createSetType("Set"/*Property*/, "0", "*");
+		protected final @NonNull SetType _Set_PropertyCallExp = createSetType("Set"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Pseudostate = createSetType("Set"/*Pseudostate*/, "0", "*");
 		protected final @NonNull SetType _Set_Region = createSetType("Set"/*Region*/, "0", "*");
 		protected final @NonNull SetType _Set_Region_1 = createSetType("Set"/*Region*/, "1", "*");
 		protected final @NonNull SetType _Set_SendSignalAction = createSetType("Set"/*SendSignalAction*/, "0", "*");
+		protected final @NonNull SetType _Set_State = createSetType("Set"/*State*/, "0", "*");
 		protected final @NonNull SetType _Set_StateExp = createSetType("Set"/*StateExp*/, "0", "*");
 		protected final @NonNull SetType _Set_StateMachine = createSetType("Set"/*StateMachine*/, "0", "*");
-		protected final @NonNull SetType _Set_State = createSetType("Set"/*State*/, "0", "*");
 		protected final @NonNull SetType _Set_String = createSetType("Set"/*String*/, "1", "*");
 		protected final @NonNull SetType _Set_TemplateBinding = createSetType("Set"/*TemplateBinding*/, "0", "*");
-		protected final @NonNull SetType _Set_TemplateParameterSubstitution = createSetType("Set"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull SetType _Set_TemplateParameter = createSetType("Set"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull SetType _Set_TemplateParameterSubstitution = createSetType("Set"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull SetType _Set_TemplateSignature = createSetType("Set"/*TemplateSignature*/, "0", "*");
 		protected final @NonNull SetType _Set_Transition = createSetType("Set"/*Transition*/, "0", "*");
 		protected final @NonNull SetType _Set_Trigger = createSetType("Set"/*Trigger*/, "0", "*");
+		protected final @NonNull SetType _Set_Type = createSetType("Set"/*Type*/, "0", "*");
 		protected final @NonNull SetType _Set_TypeExp = createSetType("Set"/*TypeExp*/, "0", "*");
 		protected final @NonNull SetType _Set_TypeTemplateParameter = createSetType("Set"/*TypeTemplateParameter*/, "0", "*");
-		protected final @NonNull SetType _Set_Type = createSetType("Set"/*Type*/, "0", "*");
 		protected final @NonNull SetType _Set_TypedElement = createSetType("Set"/*TypedElement*/, "0", "*");
 		protected final @NonNull SetType _Set_UnspecifiedType = createSetType("Set"/*UnspecifiedType*/, "0", "*");
-		protected final @NonNull SetType _Set_VariableExp = createSetType("Set"/*VariableExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Variable = createSetType("Set"/*Variable*/, "0", "*");
+		protected final @NonNull SetType _Set_VariableExp = createSetType("Set"/*VariableExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Vertex = createSetType("Set"/*Vertex*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Annotation = createCollectionType("UniqueCollection"/*Annotation*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_AssociationClassCallExp = createCollectionType("UniqueCollection"/*AssociationClassCallExp*/, "0", "*");
@@ -456,8 +456,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Detail = createCollectionType("UniqueCollection"/*Detail*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_DynamicElement = createCollectionType("UniqueCollection"/*DynamicElement*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_DynamicProperty = createCollectionType("UniqueCollection"/*DynamicProperty*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_ElementExtension = createCollectionType("UniqueCollection"/*ElementExtension*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Element = createCollectionType("UniqueCollection"/*Element*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_ElementExtension = createCollectionType("UniqueCollection"/*ElementExtension*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_EnumLiteralExp = createCollectionType("UniqueCollection"/*EnumLiteralExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_EnumerationLiteral = createCollectionType("UniqueCollection"/*EnumerationLiteral*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Import = createCollectionType("UniqueCollection"/*Import*/, "0", "*");
@@ -467,36 +467,36 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Metaclass = createCollectionType("UniqueCollection"/*Metaclass*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_NavigationCallExp = createCollectionType("UniqueCollection"/*NavigationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OCLExpression = createCollectionType("UniqueCollection"/*OCLExpression*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_OperationCallExp = createCollectionType("UniqueCollection"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Operation = createCollectionType("UniqueCollection"/*Operation*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_OperationCallExp = createCollectionType("UniqueCollection"/*OperationCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OppositePropertyCallExp = createCollectionType("UniqueCollection"/*OppositePropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Package = createCollectionType("UniqueCollection"/*Package*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Parameter = createCollectionType("UniqueCollection"/*Parameter*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_ParameterableElement = createCollectionType("UniqueCollection"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Precedence = createCollectionType("UniqueCollection"/*Precedence*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_PropertyCallExp = createCollectionType("UniqueCollection"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Property = createCollectionType("UniqueCollection"/*Property*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_PropertyCallExp = createCollectionType("UniqueCollection"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Pseudostate = createCollectionType("UniqueCollection"/*Pseudostate*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Region = createCollectionType("UniqueCollection"/*Region*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_SendSignalAction = createCollectionType("UniqueCollection"/*SendSignalAction*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_State = createCollectionType("UniqueCollection"/*State*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_StateExp = createCollectionType("UniqueCollection"/*StateExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_StateMachine = createCollectionType("UniqueCollection"/*StateMachine*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_State = createCollectionType("UniqueCollection"/*State*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_String = createCollectionType("UniqueCollection"/*String*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateBinding = createCollectionType("UniqueCollection"/*TemplateBinding*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_TemplateParameterSubstitution = createCollectionType("UniqueCollection"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateParameter = createCollectionType("UniqueCollection"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_TemplateParameterSubstitution = createCollectionType("UniqueCollection"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateSignature = createCollectionType("UniqueCollection"/*TemplateSignature*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Transition = createCollectionType("UniqueCollection"/*Transition*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Trigger = createCollectionType("UniqueCollection"/*Trigger*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TupleLiteralPart = createCollectionType("UniqueCollection"/*TupleLiteralPart*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Type = createCollectionType("UniqueCollection"/*Type*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TypeExp = createCollectionType("UniqueCollection"/*TypeExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TypeTemplateParameter = createCollectionType("UniqueCollection"/*TypeTemplateParameter*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_Type = createCollectionType("UniqueCollection"/*Type*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TypedElement = createCollectionType("UniqueCollection"/*TypedElement*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_UnspecifiedType = createCollectionType("UniqueCollection"/*UnspecifiedType*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_VariableExp = createCollectionType("UniqueCollection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Variable = createCollectionType("UniqueCollection"/*Variable*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_VariableExp = createCollectionType("UniqueCollection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Vertex = createCollectionType("UniqueCollection"/*Vertex*/, "0", "*");
 
 		protected void installOclTypes() {
@@ -887,6 +887,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected void installPrimitiveTypes() {
 			final List<Type> ownedTypes = metamodel.getOwnedType();
 			PrimitiveType type;
+			ownedTypes.add(type = _Boolean);
+			ownedTypes.add(type = _String);
 		}
 
 		protected void installEnumerations() {
@@ -1010,14 +1012,14 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_DynamicProperty);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_ElementExtension);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_ElementExtension);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Element);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Element);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_ElementExtension);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_ElementExtension);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_EnumLiteralExp);
@@ -1065,14 +1067,14 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_OCLExpression);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_OperationCallExp);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_OperationCallExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Operation);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Operation);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_OperationCallExp);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_OperationCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_OppositePropertyCallExp);
@@ -1100,14 +1102,14 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Precedence);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_PropertyCallExp);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_PropertyCallExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Property);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Property);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_PropertyCallExp);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_PropertyCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Pseudostate);
@@ -1125,6 +1127,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_SendSignalAction);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_State);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_StateExp);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_StateExp);
@@ -1133,11 +1140,6 @@ public class OCLMetaModel extends ASResourceImpl
 			orphanTypes.add(type = _Collection_StateMachine);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_StateMachine);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_State);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_State);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_String);
@@ -1150,14 +1152,14 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TemplateBinding);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_TemplateParameterSubstitution);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_TemplateParameterSubstitution);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_TemplateParameter);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_TemplateParameter);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_TemplateParameterSubstitution);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_TemplateParameterSubstitution);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_TemplateSignature);
@@ -1180,6 +1182,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TupleLiteralPart);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Type);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Type);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_TypeExp);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_TypeExp);
@@ -1188,11 +1195,6 @@ public class OCLMetaModel extends ASResourceImpl
 			orphanTypes.add(type = _Collection_TypeTemplateParameter);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_TypeTemplateParameter);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_Type);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_Type);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_TypedElement);
@@ -1205,14 +1207,14 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_UnspecifiedType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_VariableExp);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_VariableExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Variable);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Variable);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_VariableExp);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_VariableExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Vertex);
@@ -1510,16 +1512,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_DynamicProperty);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_DynamicProperty);
-			orphanTypes.add(type = _Set_ElementExtension);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_ElementExtension);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_ElementExtension);
 			orphanTypes.add(type = _Set_Element);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Element);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_Element);
+			orphanTypes.add(type = _Set_ElementExtension);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_ElementExtension);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_ElementExtension);
 			orphanTypes.add(type = _Set_EnumLiteralExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_EnumLiteralExp);
@@ -1555,16 +1557,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_NavigationCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_NavigationCallExp);
-			orphanTypes.add(type = _Set_OperationCallExp);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_OperationCallExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_OperationCallExp);
 			orphanTypes.add(type = _Set_Operation);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Operation);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_Operation);
+			orphanTypes.add(type = _Set_OperationCallExp);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_OperationCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_OperationCallExp);
 			orphanTypes.add(type = _Set_OppositePropertyCallExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_OppositePropertyCallExp);
@@ -1580,16 +1582,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_ParameterableElement);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_ParameterableElement);
-			orphanTypes.add(type = _Set_PropertyCallExp);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_PropertyCallExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_PropertyCallExp);
 			orphanTypes.add(type = _Set_Property);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Property);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_Property);
+			orphanTypes.add(type = _Set_PropertyCallExp);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_PropertyCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_PropertyCallExp);
 			orphanTypes.add(type = _Set_Pseudostate);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Pseudostate);
@@ -1610,6 +1612,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_SendSignalAction);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_SendSignalAction);
+			orphanTypes.add(type = _Set_State);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_State);
 			orphanTypes.add(type = _Set_StateExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_StateExp);
@@ -1620,11 +1627,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_StateMachine);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_StateMachine);
-			orphanTypes.add(type = _Set_State);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_State);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_State);
 			orphanTypes.add(type = _Set_String);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_String);
@@ -1635,16 +1637,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TemplateBinding);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_TemplateBinding);
-			orphanTypes.add(type = _Set_TemplateParameterSubstitution);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_TemplateParameterSubstitution);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_TemplateParameterSubstitution);
 			orphanTypes.add(type = _Set_TemplateParameter);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_TemplateParameter);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_TemplateParameter);
+			orphanTypes.add(type = _Set_TemplateParameterSubstitution);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_TemplateParameterSubstitution);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_TemplateParameterSubstitution);
 			orphanTypes.add(type = _Set_TemplateSignature);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_TemplateSignature);
@@ -1660,6 +1662,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Trigger);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_Trigger);
+			orphanTypes.add(type = _Set_Type);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Type);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_Type);
 			orphanTypes.add(type = _Set_TypeExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_TypeExp);
@@ -1670,11 +1677,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TypeTemplateParameter);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_TypeTemplateParameter);
-			orphanTypes.add(type = _Set_Type);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_Type);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_Type);
 			orphanTypes.add(type = _Set_TypedElement);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_TypedElement);
@@ -1685,16 +1687,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_UnspecifiedType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_UnspecifiedType);
-			orphanTypes.add(type = _Set_VariableExp);
-			type.setUnspecializedElement(_Set);
-			type.setElementType(_VariableExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_UniqueCollection_VariableExp);
 			orphanTypes.add(type = _Set_Variable);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_Variable);
+			orphanTypes.add(type = _Set_VariableExp);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_VariableExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_UniqueCollection_VariableExp);
 			orphanTypes.add(type = _Set_Vertex);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Vertex);
@@ -1775,16 +1777,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_DynamicProperty);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_DynamicProperty);
-			orphanTypes.add(type = _UniqueCollection_ElementExtension);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_ElementExtension);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_ElementExtension);
 			orphanTypes.add(type = _UniqueCollection_Element);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Element);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Element);
+			orphanTypes.add(type = _UniqueCollection_ElementExtension);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_ElementExtension);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_ElementExtension);
 			orphanTypes.add(type = _UniqueCollection_EnumLiteralExp);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_EnumLiteralExp);
@@ -1830,16 +1832,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_OCLExpression);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_OCLExpression);
-			orphanTypes.add(type = _UniqueCollection_OperationCallExp);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_OperationCallExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_OperationCallExp);
 			orphanTypes.add(type = _UniqueCollection_Operation);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Operation);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Operation);
+			orphanTypes.add(type = _UniqueCollection_OperationCallExp);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_OperationCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OperationCallExp);
 			orphanTypes.add(type = _UniqueCollection_OppositePropertyCallExp);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_OppositePropertyCallExp);
@@ -1865,16 +1867,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Precedence);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Precedence);
-			orphanTypes.add(type = _UniqueCollection_PropertyCallExp);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_PropertyCallExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_PropertyCallExp);
 			orphanTypes.add(type = _UniqueCollection_Property);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Property);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Property);
+			orphanTypes.add(type = _UniqueCollection_PropertyCallExp);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_PropertyCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_PropertyCallExp);
 			orphanTypes.add(type = _UniqueCollection_Pseudostate);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Pseudostate);
@@ -1890,6 +1892,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_SendSignalAction);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_SendSignalAction);
+			orphanTypes.add(type = _UniqueCollection_State);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_State);
 			orphanTypes.add(type = _UniqueCollection_StateExp);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_StateExp);
@@ -1900,11 +1907,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_StateMachine);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_StateMachine);
-			orphanTypes.add(type = _UniqueCollection_State);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_State);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_State);
 			orphanTypes.add(type = _UniqueCollection_String);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_String);
@@ -1915,16 +1917,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TemplateBinding);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TemplateBinding);
-			orphanTypes.add(type = _UniqueCollection_TemplateParameterSubstitution);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_TemplateParameterSubstitution);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_TemplateParameterSubstitution);
 			orphanTypes.add(type = _UniqueCollection_TemplateParameter);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_TemplateParameter);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TemplateParameter);
+			orphanTypes.add(type = _UniqueCollection_TemplateParameterSubstitution);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_TemplateParameterSubstitution);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_TemplateParameterSubstitution);
 			orphanTypes.add(type = _UniqueCollection_TemplateSignature);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_TemplateSignature);
@@ -1945,6 +1947,11 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TupleLiteralPart);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TupleLiteralPart);
+			orphanTypes.add(type = _UniqueCollection_Type);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Type);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Type);
 			orphanTypes.add(type = _UniqueCollection_TypeExp);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_TypeExp);
@@ -1955,11 +1962,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TypeTemplateParameter);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TypeTemplateParameter);
-			orphanTypes.add(type = _UniqueCollection_Type);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_Type);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_Type);
 			orphanTypes.add(type = _UniqueCollection_TypedElement);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_TypedElement);
@@ -1970,16 +1972,16 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_UnspecifiedType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_UnspecifiedType);
-			orphanTypes.add(type = _UniqueCollection_VariableExp);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_VariableExp);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_VariableExp);
 			orphanTypes.add(type = _UniqueCollection_Variable);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Variable);
+			orphanTypes.add(type = _UniqueCollection_VariableExp);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_VariableExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_VariableExp);
 			orphanTypes.add(type = _UniqueCollection_Vertex);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Vertex);
@@ -2356,8 +2358,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_TemplateParameterSubstitution_ownedActual = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL, _ParameterableElement);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING, _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION, _String);
-		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter_1);
+		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter_1);
+		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__TEMPLATE, _TemplateableElement);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding_signature = createProperty("TemplateBinding", _Set_TemplateBinding);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty(PivotPackage.Literals.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE, _TemplateSignature);
@@ -3845,6 +3847,8 @@ public class OCLMetaModel extends ASResourceImpl
 		}
 
 		protected void installTemplateBindings() {
+			_Collection_String.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _String)));
 			_Collection_Annotation.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Annotation)));
 			_Collection_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3927,8 +3931,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _StateMachine)));
 			_Collection_State.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _State)));
-			_Collection_String.getTemplateBinding().add(createTemplateBinding(_Collection_,
-				createTemplateParameterSubstitution(_Collection_T, _String)));
 			_Collection_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _TemplateBinding)));
 			_Collection_TemplateParameterSubstitution.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3959,6 +3961,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _Variable)));
 			_Collection_Vertex.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Vertex)));
+			_OrderedCollection_String.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
+				createTemplateParameterSubstitution(_OrderedCollection_T, _String)));
 			_OrderedCollection_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Annotation)));
 			_OrderedCollection_Class.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
@@ -3987,8 +3991,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Precedence)));
 			_OrderedCollection_Property.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Property)));
-			_OrderedCollection_String.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
-				createTemplateParameterSubstitution(_OrderedCollection_T, _String)));
 			_OrderedCollection_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _TemplateParameter)));
 			_OrderedCollection_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
@@ -3997,6 +3999,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Type)));
 			_OrderedCollection_Variable.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Variable)));
+			_OrderedSet_String.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
+				createTemplateParameterSubstitution(_OrderedSet_T, _String)));
 			_OrderedSet_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Annotation)));
 			_OrderedSet_Class.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
@@ -4025,11 +4029,9 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedSet_T, _Precedence)));
 			_OrderedSet_Property.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Property)));
-			_OrderedSet_String.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _String)));
-			_OrderedSet_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TemplateParameter_1.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
+				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
+			_OrderedSet_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TupleLiteralPart)));
@@ -4041,6 +4043,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Sequence_T, _String)));
 			_Sequence_Type.getTemplateBinding().add(createTemplateBinding(_Sequence_,
 				createTemplateParameterSubstitution(_Sequence_T, _Type)));
+			_Set_String.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _String)));
 			_Set_Annotation.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Annotation)));
 			_Set_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -4113,8 +4117,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _StateMachine)));
 			_Set_State.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _State)));
-			_Set_String.getTemplateBinding().add(createTemplateBinding(_Set_,
-				createTemplateParameterSubstitution(_Set_T, _String)));
 			_Set_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _TemplateBinding)));
 			_Set_TemplateParameterSubstitution.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -4143,6 +4145,8 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Variable)));
 			_Set_Vertex.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Vertex)));
+			_UniqueCollection_String.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _String)));
 			_UniqueCollection_Annotation.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Annotation)));
 			_UniqueCollection_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
@@ -4225,8 +4229,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _StateMachine)));
 			_UniqueCollection_State.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _State)));
-			_UniqueCollection_String.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
-				createTemplateParameterSubstitution(_UniqueCollection_T, _String)));
 			_UniqueCollection_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _TemplateBinding)));
 			_UniqueCollection_TemplateParameterSubstitution.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,

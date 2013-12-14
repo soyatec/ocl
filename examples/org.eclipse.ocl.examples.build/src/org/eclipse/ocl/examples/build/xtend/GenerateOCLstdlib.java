@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.build.xtend;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -68,6 +70,13 @@ public abstract class GenerateOCLstdlib extends GenerateOCLCommonXtend
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	protected List<CollectionType> getSortedCollectionTypes(Root root) {
+		List<CollectionType> sortedElements = super.getSortedCollectionTypes(root);
+		Collections.sort(sortedElements, monikerComparator);
+		return sortedElements;
 	}
 
 	@Override

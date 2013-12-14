@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTablesUtils;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -63,6 +64,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -256,7 +258,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 	}
 
 	protected Collection<Type> getOclTypes(Root root) {
-		Map<String, Type> allElements = new HashMap<String, Type>();
+		Set<Type> allElements = new HashSet<Type>();
 		TreeIterator<EObject> tit = root.eAllContents();
 		while (tit.hasNext()) {
 			EObject eObject = tit.next();
@@ -264,18 +266,10 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 				!(eObject instanceof CollectionType) && !(eObject instanceof PrimitiveType) &&
 				!(eObject instanceof Metaclass<?>) && !(eObject instanceof TupleType) &&
 				(((Type)eObject).getOwningTemplateParameter() == null)) {
-				allElements.put(((Type)eObject).getName(), (Type)eObject);
+				allElements.add((Type)eObject);
 			}
 		}
-		if (allElements.containsKey("Boolean")) {
-			allElements.remove("Boolean");
-			allElements.remove("Integer");
-			allElements.remove("OclElement");
-			allElements.remove("Real");
-			allElements.remove("String");
-			allElements.remove("UnlimitedNatural");
-		}
-		return allElements.values();
+		return allElements;
 	}
 
 	protected org.eclipse.ocl.examples.pivot.Package getOrphanPackage(org.eclipse.ocl.examples.pivot.Package elem) {
@@ -358,9 +352,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 				allElements.add((CollectionType)eObject);
 			}
 		}
-		List<CollectionType> sortedElements = new ArrayList<CollectionType>(allElements);
-		Collections.sort(sortedElements, monikerComparator);
-		return sortedElements;
+		return new ArrayList<CollectionType>(allElements);
 	}
 
 	protected List<Element> getSortedCommentedElements(Root root) {

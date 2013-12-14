@@ -16,10 +16,13 @@ package org.eclipse.ocl.examples.build.xtend;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -31,6 +34,7 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTablesUtils;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
@@ -38,12 +42,17 @@ import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDe
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.LoadModelStrategy;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
+import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -54,7 +63,25 @@ import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
-{
+{	
+	protected final @NonNull Comparator<CollectionType> collectionTypeComparator = new Comparator<CollectionType>()
+	{
+		public int compare(CollectionType o1, CollectionType o2) {
+			if ((o1 == null) || (o2 == null)) {
+				return 0;
+			}
+			TypeId m1 = PivotUtil.getUnspecializedTemplateableElement(o1).getTypeId(); 
+			TypeId m2 = PivotUtil.getUnspecializedTemplateableElement(o2).getTypeId();
+			int i = m1.toString().compareTo(m2.toString());
+			if (i != 0) {
+				return i;
+			}
+			String n1 = o1.getElementType().getName(); 
+			String n2 = o2.getElementType().getName();
+			return n1.compareTo(n2);
+		}
+	};
+
 	protected CollectionType findCollectionType(Iterable<Type> types, String name) {
 		CollectionType collType = null;
 		for (Type type : types) {
@@ -111,6 +138,42 @@ public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 
 	protected String getEcorePropertyLiteral(@NonNull Property property) {
 		return NameQueries.getEcoreLiteral(property);
+	}
+
+	@Override
+	protected Set<PrimitiveType> getAllPrimitiveTypes(Root root) {
+		return Collections.emptySet();
+	}
+
+	@Override
+	protected Collection<Type> getOclTypes(Root root) {
+		Map<String, Type> allElements = new HashMap<String, Type>();
+		TreeIterator<EObject> tit = root.eAllContents();
+		while (tit.hasNext()) {
+			EObject eObject = tit.next();
+			if ((eObject instanceof Type) && !(eObject instanceof Enumeration) && !(eObject instanceof LambdaType) &&
+				!(eObject instanceof CollectionType) && !(eObject instanceof PrimitiveType) &&
+				!(eObject instanceof Metaclass<?>) && !(eObject instanceof TupleType) &&
+				(((Type)eObject).getOwningTemplateParameter() == null)) {
+				allElements.put(((Type)eObject).getName(), (Type)eObject);
+			}
+		}
+//		if (allElements.containsKey("Boolean")) {
+			allElements.remove("Boolean");
+			allElements.remove("Integer");
+			allElements.remove("OclElement");
+			allElements.remove("Real");
+			allElements.remove("String");
+			allElements.remove("UnlimitedNatural");
+//		}
+		return allElements.values();
+	}
+	
+	@Override
+	protected List<CollectionType> getSortedCollectionTypes(Root root) {
+		List<CollectionType> sortedElements = super.getSortedCollectionTypes(root);
+		Collections.sort(sortedElements, collectionTypeComparator);
+		return sortedElements;
 	}
 
 	@Override

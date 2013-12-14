@@ -8,11 +8,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA List) - Bug 424057 - UML 2.5 CG
  *
  * </copyright>
- *
- * $Id: Pivot2EcoreTypeRefVisitor.java,v 1.4 2011/04/20 19:02:46 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
@@ -116,21 +115,22 @@ public class Pivot2EcoreTypeRefVisitor
 
 	@Override
 	public EObject visitPrimitiveType(@NonNull PrimitiveType pivotType) {
+		EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
+		if (eClassifier != null) {
+			return eClassifier;
+		}
 		String uri = context.getPrimitiveTypesUriPrefix();
 		if (uri != null) {
-			EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
-			if (eClassifier == null) {
-				URI proxyURI = URI.createURI(uri + pivotType.getName());
-				eClassifier = EcoreFactory.eINSTANCE.createEDataType();
-				((InternalEObject) eClassifier).eSetProxyURI(proxyURI);
-				context.putCreated(pivotType, eClassifier);
-			}
+			URI proxyURI = URI.createURI(uri + pivotType.getName());
+			eClassifier = EcoreFactory.eINSTANCE.createEDataType();
+			((InternalEObject) eClassifier).eSetProxyURI(proxyURI);
+			context.putCreated(pivotType, eClassifier);
 			return eClassifier;
 		}
 		TypeServer typeServer = metaModelManager.getTypeServer(pivotType);
 		for (DomainType aType : typeServer.getPartialTypes()) {
 			if (!(aType instanceof PrimitiveType)) {
-				EDataType eClassifier = context.getCreated(EDataType.class, pivotType);
+				eClassifier = context.getCreated(EDataType.class, pivotType);
 				if (eClassifier != null) {
 					return eClassifier;
 				}
