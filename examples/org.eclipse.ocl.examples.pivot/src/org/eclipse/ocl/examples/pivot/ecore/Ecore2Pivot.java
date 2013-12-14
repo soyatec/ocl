@@ -8,11 +8,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA List) - Bug 424057 - UML 2.5 CG *
  * </copyright>
- *
- * $Id: Ecore2Pivot.java,v 1.13 2011/05/20 15:27:20 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
@@ -457,7 +455,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			List<Type> ownedType = asLibrary.getOwnedType();
 //			int prefix = LibraryConstants.ECORE_STDLIB_PREFIX.length();
 			for (EClassifier eClassifier : libraryEPackage.getEClassifiers()) {
-				String name = eClassifier.getName(); //.substring(prefix);
+				String name = getOriginalName(eClassifier); //.substring(prefix);
 				Type asType = DomainUtil.getNamedElement(ownedType, name);
 				newCreateMap.put(eClassifier, asType);
 			}

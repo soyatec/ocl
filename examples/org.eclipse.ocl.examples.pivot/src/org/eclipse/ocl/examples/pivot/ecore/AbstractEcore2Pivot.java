@@ -1,15 +1,15 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2012 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA List) - Bug 424057 - UML 2.5 CG *
  * </copyright>
  */
 package org.eclipse.ocl.examples.pivot.ecore;
@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.compatibility.UML_4_2;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -40,6 +42,10 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 	
 	public abstract void error(@NonNull String message);
 
+	public @Nullable String getOriginalName(ENamedElement eNamedElement) {
+		return eNamedElement != null ? UML_4_2.UMLUtil.getOriginalName(eNamedElement) : null;
+	}
+
 	public abstract void queueReference(@NonNull EObject eObject);
 
 	public @NonNull <T extends NamedElement> T refreshElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull EModelElement eModelElement) {
@@ -56,7 +62,7 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 
 	public @NonNull <T extends NamedElement> T refreshNamedElement(@NonNull Class<T> pivotClass, /*@NonNull*/ EClass pivotEClass, @NonNull ENamedElement eNamedElement) {
 		T castElement = refreshElement(pivotClass, pivotEClass, eNamedElement);
-		castElement.setName(eNamedElement.getName());
+		castElement.setName(getOriginalName(eNamedElement));
 		return castElement;
 	}
 }

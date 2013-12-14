@@ -141,7 +141,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null") @NonNull EClass eObject2 = eObject;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject2);
 		String oldName = pivotElement.getName();
-		String newName = eObject2.getName();
+		String newName = converter.getOriginalName(eObject2);
 		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
 		if (nameChange) {
 			org.eclipse.ocl.examples.pivot.Package parentPackage = pivotElement.getPackage();
@@ -156,10 +156,10 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		doSwitchAll(eObject2.getEGenericSuperTypes());
 		List<Operation> pivotOperations = pivotElement.getOwnedOperation();
 		List<Constraint> pivotInvariants = pivotElement.getOwnedInvariant();
-		for (EOperation eOperation : eObject2.getEOperations()) {
+		for (@SuppressWarnings("null")@NonNull EOperation eOperation : eObject2.getEOperations()) {
 			if (EcoreUtil.isInvariant(eOperation)) {
 				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-				constraint.setName(eOperation.getName());
+				constraint.setName(converter.getOriginalName(eOperation));
 				constraint.setIsCallable(true);
 				String value = null;
 				String commentBody = EcoreUtil.getAnnotation(eOperation, PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE, PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
@@ -200,7 +200,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	public Object caseEDataType(EDataType eObject) {
 		@SuppressWarnings("null") @NonNull EDataType eObject2 = eObject;
 		Class<?> instanceClass = eObject2.getInstanceClass();
-		String newName = eObject2.getName();
+		String newName = converter.getOriginalName(eObject2);
 		boolean isPrimitive = false;
 		if ("Boolean".equals(newName) && ((instanceClass == Boolean.class) || (instanceClass == boolean.class))) {
 			isPrimitive = true;
@@ -302,7 +302,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null") @NonNull EEnum eObject2 = eObject;
 		Enumeration pivotElement = converter.refreshElement(Enumeration.class, PivotPackage.Literals.ENUMERATION, eObject2);
 		String oldName = pivotElement.getName();
-		String newName = eObject2.getName();
+		String newName = converter.getOriginalName(eObject2);
 		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
 		if (nameChange) {
 			org.eclipse.ocl.examples.pivot.Package parentPackage = pivotElement.getPackage();
@@ -438,7 +438,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null") @NonNull EPackage eObject2 = eObject;
 		org.eclipse.ocl.examples.pivot.Package pivotElement = converter.refreshElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, eObject2);
 		String oldName = pivotElement.getName();
-		String newName = eObject2.getName();
+		String newName = converter.getOriginalName(eObject2);
 		String oldNsURI = pivotElement.getNsURI();
 		String newNsURI = eObject2.getNsURI();
 		boolean nameChange = (oldName != newName) || ((oldName != null) && !oldName.equals(newName));
@@ -522,7 +522,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null") @NonNull ETypeParameter eObject2 = eObject;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject2);
 		converter.addMapping(eObject2, pivotElement);
-		String name = eObject2.getName();
+		String name = converter.getOriginalName(eObject2);
 		pivotElement.setName(name);
 		TypeTemplateParameter typeTemplateParameter = (TypeTemplateParameter) pivotElement.getTemplateParameter();
 		if (typeTemplateParameter == null) {
@@ -611,7 +611,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	protected void copyNamedElement(@NonNull NamedElement pivotElement, @NonNull ENamedElement eNamedElement) {
 		converter.addMapping(eNamedElement, pivotElement);
-		String name = eNamedElement.getName();
+		String name = converter.getOriginalName(eNamedElement);
 		pivotElement.setName(name);
 	}
 
