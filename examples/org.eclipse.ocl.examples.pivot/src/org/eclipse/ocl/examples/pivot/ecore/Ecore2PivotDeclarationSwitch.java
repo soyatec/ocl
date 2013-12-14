@@ -150,48 +150,53 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 			}
 		}
 		pivotElement.setName(newName);
-		copyClassifier(pivotElement, eObject2);
+		List<EAnnotation> excludedAnnotations = null;
+		EAnnotation duplicatesAnnotation = eObject2.getEAnnotation("duplicates");
+		if (duplicatesAnnotation != null) {
+			excludedAnnotations = new ArrayList<EAnnotation>();
+			excludedAnnotations.add(duplicatesAnnotation);
+		}
+		copyClassifier(pivotElement, eObject2, excludedAnnotations);
 		pivotElement.setIsAbstract(eObject2.isAbstract());			
 		pivotElement.setIsInterface(eObject2.isInterface());			
 		doSwitchAll(eObject2.getEGenericSuperTypes());
 		List<Operation> pivotOperations = pivotElement.getOwnedOperation();
 		List<Constraint> pivotInvariants = pivotElement.getOwnedInvariant();
-		for (@SuppressWarnings("null")@NonNull EOperation eOperation : eObject2.getEOperations()) {
+		for (EOperation eOperation : eObject2.getEOperations()) {
 			if (EcoreUtil.isInvariant(eOperation)) {
-				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-				constraint.setName(converter.getOriginalName(eOperation));
-				constraint.setIsCallable(true);
-				String value = null;
-				String commentBody = EcoreUtil.getAnnotation(eOperation, PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE, PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
-				if (commentBody != null) {
-					Comment pivotComment = PivotFactory.eINSTANCE.createComment();
-					pivotComment.setBody(commentBody.replaceAll("\\r", ""));
-					constraint.getOwnedComment().add(pivotComment);
-				}				
-				EAnnotation eAnnotation = OCLCommon.getDelegateAnnotation(eOperation);
-				if (eAnnotation == null) {
-					eAnnotation = eOperation.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
-				}
-				if (eAnnotation == null) {
-					eAnnotation = eOperation.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
-				}
-				if (eAnnotation != null) {
-					value = eAnnotation.getDetails().get("body");
-					copyAnnotationComment(constraint, eAnnotation, "body");
-				}
-				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
-				specification.getBody().add(value);
-				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-				constraint.setSpecification(specification);
-				pivotInvariants.add(constraint);
-				converter.addMapping(eOperation, constraint);
+				Object pivotObject = doSwitch(eOperation);
+				pivotInvariants.add((Constraint) pivotObject);
 			}
 			else {
 				Object pivotObject = doSwitch(eOperation);
 				pivotOperations.add((Operation) pivotObject);
 			}
 		}
-		doSwitchAll(pivotElement.getOwnedAttribute(), eObject2.getEStructuralFeatures());
+		List<Property> pivotProperties = pivotElement.getOwnedAttribute();
+		doSwitchAll(pivotProperties, eObject2.getEStructuralFeatures());
+		if (duplicatesAnnotation != null) {
+			for (EObject eContent : duplicatesAnnotation.getContents()) {
+				if (eContent instanceof EOperation) {
+					if (EcoreUtil.isInvariant((EOperation) eContent)) {
+						Constraint pivotInvariant = (Constraint) doSwitch(eContent);
+						pivotInvariants.add(pivotInvariant);
+					}
+					else {
+						Operation pivotOperation = (Operation) doSwitch(eContent);
+						pivotOperations.add(pivotOperation);
+						converter.queueReference(eContent);				// For redefinition
+					}
+				}
+				else if (eContent instanceof EStructuralFeature) {
+					Property pivotProperty = (Property) doSwitch(eContent);
+					pivotProperties.add(pivotProperty);
+					converter.queueReference(eContent);				// For redefinition
+				}
+				else {
+					converter.error("Unsupported duplicate " + eContent.eClass().getName());
+				}
+			}
+		}
 		converter.queueReference(eObject2);				// For superclasses
 		return pivotElement;
 	}
@@ -354,83 +359,114 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEOperation(EOperation eObject) {
-		@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
-		Operation pivotElement = converter.refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, eObject2);
-		List<EAnnotation> excludedAnnotations =  null;
-		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eObject2);
-		if (oclAnnotation == null) {
-			oclAnnotation = eObject2.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
+		@SuppressWarnings("null") @NonNull EOperation eOperation = eObject;
+		if (EcoreUtil.isInvariant(eOperation)) {
+			Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
+			constraint.setName(converter.getOriginalName(eOperation));
+			constraint.setIsCallable(true);
+			String value = null;
+			String commentBody = EcoreUtil.getAnnotation(eOperation, PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE, PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
+			if (commentBody != null) {
+				Comment pivotComment = PivotFactory.eINSTANCE.createComment();
+				pivotComment.setBody(commentBody.replaceAll("\\r", ""));
+				constraint.getOwnedComment().add(pivotComment);
+			}				
+			EAnnotation eAnnotation = OCLCommon.getDelegateAnnotation(eOperation);
+			if (eAnnotation == null) {
+				eAnnotation = eOperation.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
+			}
+			if (eAnnotation == null) {
+				eAnnotation = eOperation.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
+			}
+			if (eAnnotation != null) {
+				value = eAnnotation.getDetails().get("body");
+				copyAnnotationComment(constraint, eAnnotation, "body");
+			}
+			OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
+			specification.getBody().add(value);
+			specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+			constraint.setSpecification(specification);
+			converter.addMapping(eOperation, constraint);
+			return constraint;
 		}
-		if (oclAnnotation == null) {
-			oclAnnotation = eObject2.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
-		}
-		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
-			excludedAnnotations.add(oclAnnotation);
-			for (Iterator<Map.Entry<String,String>> it = oclAnnotation.getDetails().listIterator(); it.hasNext(); ) {
-				Map.Entry<String,String> entry = it.next();
-				String bodyName = null;
-				String preName = null;
-				String postName = null;
-				String key = entry.getKey();
-				String value = entry.getValue();
-				if (key.equals("body")) {
-					bodyName = "";
-					if (value != null) {
-						value = PivotUtil.getBodyExpression(value);	// Workaround Bug 419324
+		else {
+			Operation pivotElement = converter.refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, eOperation);
+			List<EAnnotation> excludedAnnotations =  null;
+			EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eOperation);
+			if (oclAnnotation == null) {
+				oclAnnotation = eOperation.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
+			}
+			if (oclAnnotation == null) {
+				oclAnnotation = eOperation.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
+			}
+			if (oclAnnotation != null) {
+				excludedAnnotations = new ArrayList<EAnnotation>();
+				excludedAnnotations.add(oclAnnotation);
+				for (Iterator<Map.Entry<String,String>> it = oclAnnotation.getDetails().listIterator(); it.hasNext(); ) {
+					Map.Entry<String,String> entry = it.next();
+					String bodyName = null;
+					String preName = null;
+					String postName = null;
+					String key = entry.getKey();
+					String value = entry.getValue();
+					if (key.equals("body")) {
+						bodyName = "";
+						if (value != null) {
+							value = PivotUtil.getBodyExpression(value);	// Workaround Bug 419324
+						}
 					}
-				}
-				else if (key.startsWith("body_")) {
-					bodyName = key.substring(5);
-				}
-				else if (key.equals("pre")) {
-					preName = "";
-				}
-				else if (key.startsWith("pre_")) {
-					preName = key.substring(4);
-				}
-				else if (key.equals("post")) {
-					postName = "";
-				}
-				else if (key.startsWith("post_")) {
-					postName = key.substring(5);
-				}
-				else
-				{
-					converter.error("Unsupported operation constraint " + key);
-					continue;
-				}
-				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
-				specification.getBody().add(value);
-				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-//				constraint.setExprString(entry.getValue());
-//				constraint.setExprString(entry.getValue());
-				if (bodyName != null) {
-					pivotElement.setBodyExpression(specification);
-					pivotElement.setImplementation(new EObjectOperation(pivotElement, eObject2, specification));
-				}
-				else {
-					Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-					constraint.setSpecification(specification);
-					if (preName != null) {
-						pivotElement.getPrecondition().add(constraint);
-						constraint.setName(preName);
+					else if (key.startsWith("body_")) {
+						bodyName = key.substring(5);
+					}
+					else if (key.equals("pre")) {
+						preName = "";
+					}
+					else if (key.startsWith("pre_")) {
+						preName = key.substring(4);
+					}
+					else if (key.equals("post")) {
+						postName = "";
+					}
+					else if (key.startsWith("post_")) {
+						postName = key.substring(5);
+					}
+					else
+					{
+						converter.error("Unsupported operation constraint " + key);
+						continue;
+					}
+					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
+					specification.getBody().add(value);
+					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+	//				constraint.setExprString(entry.getValue());
+	//				constraint.setExprString(entry.getValue());
+					if (bodyName != null) {
+						pivotElement.setBodyExpression(specification);
+						pivotElement.setImplementation(new EObjectOperation(pivotElement, eOperation, specification));
 					}
 					else {
-						pivotElement.getPostcondition().add(constraint);
-						constraint.setName(postName);
+						Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
+						constraint.setSpecification(specification);
+						if (preName != null) {
+							pivotElement.getPrecondition().add(constraint);
+							constraint.setName(preName);
+						}
+						else {
+							pivotElement.getPostcondition().add(constraint);
+							constraint.setName(postName);
+						}
+						copyAnnotationComment(constraint, oclAnnotation, key);
 					}
-					copyAnnotationComment(constraint, oclAnnotation, key);
-				}
-			}				
+				}				
+			}
+			copyTypedMultiplicityElement(pivotElement, eOperation, excludedAnnotations);
+			doSwitchAll(pivotElement.getOwnedParameter(), eOperation.getEParameters());
+			@SuppressWarnings("null") @NonNull List<ETypeParameter> eTypeParameters = eOperation.getETypeParameters();
+			copyTemplateSignature(pivotElement,eTypeParameters);
+			doSwitchAll(eOperation.getEGenericExceptions());
+			converter.queueReference(eOperation);				// For superclasses
+			return pivotElement;
 		}
-		copyTypedMultiplicityElement(pivotElement, eObject2, excludedAnnotations);
-		doSwitchAll(pivotElement.getOwnedParameter(), eObject2.getEParameters());
-		@SuppressWarnings("null") @NonNull List<ETypeParameter> eTypeParameters = eObject2.getETypeParameters();
-		copyTemplateSignature(pivotElement,eTypeParameters);
-		doSwitchAll(eObject2.getEGenericExceptions());
-		converter.queueReference(eObject2);				// For superclasses
-		return pivotElement;
 	}
 
 	@Override
@@ -537,8 +573,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		return typeTemplateParameter;
 	}
 
-	protected void copyClassifier(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull EClassifier eClassifier) {
-		List<EAnnotation> excludedAnnotations = refreshTypeConstraints(pivotElement, eClassifier);
+	protected void copyClassifier(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull EClassifier eClassifier, @Nullable List<EAnnotation> excludedAnnotations) {
+		excludedAnnotations = refreshTypeConstraints(pivotElement, eClassifier, excludedAnnotations);
 		copyNamedElement(pivotElement, eClassifier);
 		copyAnnotatedElement(pivotElement, eClassifier, excludedAnnotations);
 		if (eClassifier.eIsSet(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME)) {
@@ -552,7 +588,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	protected void copyDataTypeOrEnum(@NonNull DataType pivotElement, @NonNull EDataType eDataType) {
-		copyClassifier(pivotElement, eDataType);
+		copyClassifier(pivotElement, eDataType, null);
 		pivotElement.setIsSerializable(eDataType.isSerializable());
 	}
 
@@ -713,8 +749,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		}
 	}
 
-	protected List<EAnnotation> refreshTypeConstraints(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull EClassifier eClassifier) {
-		List<EAnnotation> excludedAnnotations =  null;
+	protected List<EAnnotation> refreshTypeConstraints(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull EClassifier eClassifier, @Nullable List<EAnnotation> excludedAnnotations) {
 		EMap<String, String> oclAnnotationDetails = null;
 		Map<String, Constraint> newConstraintMap = null;
 		Map<String, Constraint> oldInvariantMap = null;
