@@ -524,7 +524,7 @@ public class RoundTripTests extends XtextTestCase
 	}
 
 	public void testOCLRoundTrip() throws IOException, InterruptedException {
-		doRoundTripFromEcore("OCL", "OCL.reference"); 
+		doRoundTripFromEcore("OCL"); // "OCL.reference"); 
 	}
 
 	public void testOCLCSTRoundTrip() throws IOException, InterruptedException {

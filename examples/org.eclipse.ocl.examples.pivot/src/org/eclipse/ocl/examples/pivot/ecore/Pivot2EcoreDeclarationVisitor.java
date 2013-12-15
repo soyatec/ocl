@@ -188,7 +188,7 @@ public class Pivot2EcoreDeclarationVisitor
 		safeVisitAll(eClass.getEStructuralFeatures(), pivotClass.getOwnedAttribute());
 		for (Constraint pivotInvariant : pivotClass.getOwnedInvariant()) {
 			if (pivotInvariant.isCallable()) {
-				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName());
+				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName(), context.isAddInvariantComments());
 				eClass.getEOperations().add(eOperation);
 				context.putCreated(pivotInvariant, eOperation);
 				copyConstraint(eOperation, pivotInvariant);

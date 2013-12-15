@@ -307,7 +307,7 @@ public class DelegateInstaller
 						}
 					}
 					if (eContext == null) {
-						@NonNull EOperation eOperation = Pivot2Ecore.createConstraintEOperation(constraint, name);
+						@NonNull EOperation eOperation = Pivot2Ecore.createConstraintEOperation(constraint, name, false);
 						((EClass) eClassifier).getEOperations().add(eOperation);
 						eContext = eOperation;
 					}

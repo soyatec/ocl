@@ -148,7 +148,7 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 					if (prefix == null) {
 						prefix = "";
 					}
-					EOperation eOperation = Pivot2Ecore.createConstraintEOperation(rule, prefix + ruleName);
+					EOperation eOperation = Pivot2Ecore.createConstraintEOperation(rule, prefix + ruleName, false);
 					((EClass)eClassifier).getEOperations().add(eOperation);
 					ecore2pivot.addMapping(eOperation, rule);
 					if (message != null) {

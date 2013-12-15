@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -62,6 +63,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class Pivot2Ecore extends AbstractConversion
 {
 	public static final Logger logger = Logger.getLogger(Pivot2Ecore.class);
+
+	public static final @NonNull String OPTION_ADD_INVARIANT_COMMENTS = "addInvariantComments";
 
 	public static void copyAnnotationComments(@NonNull EAnnotation eModelElement, @NonNull Constraint pivotConstraint) {
 		String key = DelegateInstaller.getAnnotationKey(pivotConstraint);
@@ -121,26 +124,46 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 	}
 
+	@Deprecated
 	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName) {
+		return createConstraintEOperation(pivotConstraint, operationName, false);
+	}
+	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName, boolean addInvariantComments) {
 		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
 		eOperation.setName(operationName != null ? operationName : "");
 		eOperation.setEType(EcorePackage.Literals.EBOOLEAN);
-		EParameter firstParameter = EcoreFactory.eINSTANCE.createEParameter();
-		firstParameter.setName("diagnostics");
-		firstParameter.setEType(EcorePackage.Literals.EDIAGNOSTIC_CHAIN);
-		eOperation.getEParameters().add(firstParameter);
-		EParameter secondParameter = EcoreFactory.eINSTANCE.createEParameter();
-		secondParameter.setName("context");
-		EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
-		eGenericType.setEClassifier(EcorePackage.Literals.EMAP);
-		EGenericType firstTypeArgument = EcoreFactory.eINSTANCE.createEGenericType();
-		firstTypeArgument.setEClassifier(EcorePackage.Literals.EJAVA_OBJECT);
-		eGenericType.getETypeArguments().add(firstTypeArgument);
-		EGenericType secondTypeArgument = EcoreFactory.eINSTANCE.createEGenericType();
-		secondTypeArgument.setEClassifier(EcorePackage.Literals.EJAVA_OBJECT);
-		eGenericType.getETypeArguments().add(secondTypeArgument);
-		secondParameter.setEGenericType(eGenericType);
-		eOperation.getEParameters().add(secondParameter);
+		{
+			EParameter firstParameter = EcoreFactory.eINSTANCE.createEParameter();
+			firstParameter.setName("diagnostics");
+			firstParameter.setEType(EcorePackage.Literals.EDIAGNOSTIC_CHAIN);
+			eOperation.getEParameters().add(firstParameter);
+			if (addInvariantComments) {
+				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				eAnnotation.setSource(GenModelPackage.eNS_URI);
+				eAnnotation.getDetails().put("documentation", "The chain of diagnostics to which problems are to be appended.");
+				firstParameter.getEAnnotations().add(eAnnotation);
+			}
+		}
+		{
+			EParameter secondParameter = EcoreFactory.eINSTANCE.createEParameter();
+			secondParameter.setName("context");
+			EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
+			eGenericType.setEClassifier(EcorePackage.Literals.EMAP);
+			EGenericType firstTypeArgument = EcoreFactory.eINSTANCE.createEGenericType();
+			firstTypeArgument.setEClassifier(EcorePackage.Literals.EJAVA_OBJECT);
+			eGenericType.getETypeArguments().add(firstTypeArgument);
+			EGenericType secondTypeArgument = EcoreFactory.eINSTANCE.createEGenericType();
+			secondTypeArgument.setEClassifier(EcorePackage.Literals.EJAVA_OBJECT);
+			eGenericType.getETypeArguments().add(secondTypeArgument);
+			secondParameter.setEGenericType(eGenericType);
+			eOperation.getEParameters().add(secondParameter);
+			if (addInvariantComments) {
+				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				eAnnotation.setSource(GenModelPackage.eNS_URI);
+				eAnnotation.getDetails().put("documentation", "The cache of context-specific information.");
+				secondParameter.getEAnnotations().add(eAnnotation);
+			}
+		}
 		OpaqueExpression specification = pivotConstraint.getSpecification();
 		if (specification != null) {
 			String body = PivotUtil.getBody(specification);
@@ -152,6 +175,7 @@ public class Pivot2Ecore extends AbstractConversion
 			}
 		}
 		copyComments(eOperation, pivotConstraint);
+//		if (pivotConstraint.get)
 		return eOperation;
 	}
 
@@ -298,6 +322,10 @@ public class Pivot2Ecore extends AbstractConversion
 
 	public String getPrimitiveTypesUriPrefix() {
 		return primitiveTypesUriPrefix;
+	}
+
+	public boolean isAddInvariantComments() {
+		return (options != null) && Boolean.valueOf(String.valueOf(options.get(OPTION_ADD_INVARIANT_COMMENTS)));
 	}
 
 	/**
