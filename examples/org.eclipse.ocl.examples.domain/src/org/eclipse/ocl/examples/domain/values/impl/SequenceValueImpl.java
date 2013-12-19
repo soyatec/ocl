@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -53,18 +54,8 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 	public SequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> values) {
 		super(typeId, values);
 	}
-	
-	@Override
-	public @NonNull List<? extends Object> asList() {
-		return getElements();
-	}
 
-    @Override
-	public @NonNull SequenceValue asSequenceValue() {
-        return this;
-    }
-
-    public @NonNull SequenceValue append(@Nullable Object object) {
+    public @NonNull OrderedCollectionValue append(@Nullable Object object) {
 		if (object instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
@@ -73,10 +64,25 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
-    public @NonNull SequenceValue appendAll(@NonNull SequenceValue objects) {
+    public @NonNull OrderedCollectionValue appendAll(@NonNull OrderedCollectionValue objects) {
     	List<Object> result = new ArrayList<Object>(elements);
         result.addAll(objects.getElements());
         return new SparseSequenceValueImpl(getTypeId(), result);
+    }
+	
+	@Override
+	public @NonNull List<? extends Object> asList() {
+		return getElements();
+	}
+
+    @Override
+	public @NonNull OrderedCollectionValue asOrderedCollectionValue() {
+		return this;
+	}
+
+    @Override
+	public @NonNull SequenceValue asSequenceValue() {
+        return this;
     }
 
     public @Nullable Object at(int index) {
@@ -255,7 +261,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
-    public @NonNull SequenceValue prependAll(@NonNull SequenceValue objects) {
+    public @NonNull SequenceValue prependAll(@NonNull OrderedCollectionValue objects) {
     	List<Object> result = new ArrayList<Object>(objects.getElements());
         result.addAll(elements);
         return new SparseSequenceValueImpl(getTypeId(), result);

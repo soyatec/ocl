@@ -117,6 +117,11 @@ public interface Value
 	/**
 	 * @generated NOT
 	 */
+	@NonNull OrderedCollectionValue asOrderedCollectionValue();
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull OrderedSetValue asOrderedSetValue();
 
 	/**

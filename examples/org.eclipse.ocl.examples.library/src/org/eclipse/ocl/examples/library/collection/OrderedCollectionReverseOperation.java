@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.library.collection;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 
 /**
  * OrderedCollectionReverseOperation realises the OrderedCollection::reverse() library operation.
@@ -29,8 +29,8 @@ public class OrderedCollectionReverseOperation extends AbstractSimpleUnaryOperat
 	public static final @NonNull OrderedCollectionReverseOperation INSTANCE = new OrderedCollectionReverseOperation();
 
 	@Override
-	public @NonNull SequenceValue evaluate(@Nullable Object argument) {
-		SequenceValue orderedCollectionValue = asSequenceValue(argument);
+	public @NonNull OrderedCollectionValue evaluate(@Nullable Object argument) {
+		OrderedCollectionValue orderedCollectionValue = asOrderedCollectionValue(argument);
 		return orderedCollectionValue.reverse();
 	}
 }

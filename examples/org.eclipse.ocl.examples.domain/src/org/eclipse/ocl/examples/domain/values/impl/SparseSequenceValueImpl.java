@@ -37,6 +37,11 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		}
 		return result;
 	}
+
+	public static @NonNull List<?> createSequenceOfEach(@NonNull Collection<? extends Object> elements) {
+		List<?> list = elements instanceof List<?> ? (List<?>)elements : new ArrayList<Object>(elements);
+		return list;
+	}
 	
 	public static class Accumulator extends SparseSequenceValueImpl implements SequenceValue.Accumulator
 	{

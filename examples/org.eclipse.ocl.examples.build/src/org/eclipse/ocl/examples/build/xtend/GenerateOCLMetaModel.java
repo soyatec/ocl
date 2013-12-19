@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.LoadModelS
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -55,11 +56,25 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 {
 	protected CollectionType findCollectionType(Iterable<Type> types, String name) {
+		CollectionType collType = null;
 		for (Type type : types) {
-			if ((type instanceof CollectionType) && (type.getName().equals(name))) {
+			if (type instanceof CollectionType) {
 				TemplateableElement unspecializedElement = type.getUnspecializedElement();
 				if (unspecializedElement instanceof CollectionType) {
-					return (CollectionType)unspecializedElement;
+					collType = (CollectionType) unspecializedElement;
+					if (collType.getName().equals(name)) {
+						return collType;
+					}
+				}
+			}
+		}
+		if (collType != null) {
+			EObject eContainer = collType.eContainer();
+			if (eContainer instanceof Library) {
+				for (Type type : ((Library)eContainer).getOwnedType()) {
+					if ((type instanceof CollectionType) && (type.getName().equals(name))) {
+						return (CollectionType)type;
+					}
 				}
 			}
 		}

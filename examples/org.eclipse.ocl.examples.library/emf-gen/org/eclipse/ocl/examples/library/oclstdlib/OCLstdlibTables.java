@@ -72,7 +72,11 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorTypeParameter __OclInvalid__oclIsKindOf_T = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "T");
 		public static final @NonNull ExecutorTypeParameter __OclInvalid__oclIsTypeOf_T = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "T");
 
+		public static final @NonNull ExecutorTypeParameter _OrderedCollection_T = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "T");
+
 		public static final @NonNull ExecutorTypeParameter _OrderedSet_T = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "T");
+		public static final @NonNull ExecutorTypeParameter __OrderedSet__collect_V = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "V");
+		public static final @NonNull ExecutorTypeParameter __OrderedSet__collectNested_V = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "V");
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__flatten_T2 = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "T2");
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__selectByKind_TT = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "TT");
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__selectByType_TT = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "TT");
@@ -85,6 +89,8 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorTypeParameter __Sequence__selectByType_TT = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "TT");
 
 		public static final @NonNull ExecutorTypeParameter _Set_T = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "T");
+		public static final @NonNull ExecutorTypeParameter __Set__collect_V = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "V");
+		public static final @NonNull ExecutorTypeParameter __Set__collectNested_V = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "V");
 		public static final @NonNull ExecutorTypeParameter __Set__flatten_T2 = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "T2");
 		public static final @NonNull ExecutorTypeParameter __Set__selectByKind_TT = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "TT");
 		public static final @NonNull ExecutorTypeParameter __Set__selectByType_TT = new ExecutorTypeParameter(TypeId.T_2, LIBRARY, "TT");
@@ -113,6 +119,7 @@ public class OCLstdlibTables
 		public static final @NonNull EcoreExecutorType _OclTuple = new EcoreExecutorType("OclTuple", PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _OclType = new EcoreExecutorType("OclType", PACKAGE, 0);
 		public static final @NonNull EcoreExecutorVoidType _OclVoid = new EcoreExecutorVoidType(TypeId.OCL_VOID, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _OrderedCollection = new EcoreExecutorType(TypeId.ORDERED_COLLECTION, PACKAGE, 0, TypeParameters._OrderedCollection_T);
 		public static final @NonNull EcoreExecutorType _OrderedSet = new EcoreExecutorType(TypeId.ORDERED_SET, PACKAGE, ExecutorType.ORDERED | ExecutorType.UNIQUE, TypeParameters._OrderedSet_T);
 		public static final @NonNull EcoreExecutorType _Real = new EcoreExecutorType(TypeId.REAL, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Sequence = new EcoreExecutorType(TypeId.SEQUENCE, PACKAGE, ExecutorType.ORDERED, TypeParameters._Sequence_T);
@@ -138,6 +145,7 @@ public class OCLstdlibTables
 			_OclTuple,
 			_OclType,
 			_OclVoid,
+			_OrderedCollection,
 			_OrderedSet,
 			_Real,
 			_Sequence,
@@ -217,10 +225,14 @@ public class OCLstdlibTables
 		private static final @NonNull ExecutorFragment _OclVoid__OclAny = new ExecutorFragment(Types._OclVoid, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _OclVoid__OclVoid = new ExecutorFragment(Types._OclVoid, OCLstdlibTables.Types._OclVoid);
 
+		private static final @NonNull ExecutorFragment _OrderedCollection__Collection = new ExecutorFragment(Types._OrderedCollection, OCLstdlibTables.Types._Collection);
+		private static final @NonNull ExecutorFragment _OrderedCollection__OclAny = new ExecutorFragment(Types._OrderedCollection, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _OrderedCollection__OrderedCollection = new ExecutorFragment(Types._OrderedCollection, OCLstdlibTables.Types._OrderedCollection);
+
 		private static final @NonNull ExecutorFragment _OrderedSet__Collection = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._Collection);
 		private static final @NonNull ExecutorFragment _OrderedSet__OclAny = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _OrderedSet__OrderedCollection = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._OrderedCollection);
 		private static final @NonNull ExecutorFragment _OrderedSet__OrderedSet = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._OrderedSet);
-		private static final @NonNull ExecutorFragment _OrderedSet__Sequence = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._Sequence);
 		private static final @NonNull ExecutorFragment _OrderedSet__UniqueCollection = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._UniqueCollection);
 
 		private static final @NonNull ExecutorFragment _Real__OclAny = new ExecutorFragment(Types._Real, OCLstdlibTables.Types._OclAny);
@@ -230,9 +242,9 @@ public class OCLstdlibTables
 
 		private static final @NonNull ExecutorFragment _Sequence__Collection = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._Collection);
 		private static final @NonNull ExecutorFragment _Sequence__OclAny = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _Sequence__OrderedCollection = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._OrderedCollection);
 		private static final @NonNull ExecutorFragment _Sequence__Sequence = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._Sequence);
 
-		private static final @NonNull ExecutorFragment _Set__Bag = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._Bag);
 		private static final @NonNull ExecutorFragment _Set__Collection = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._Collection);
 		private static final @NonNull ExecutorFragment _Set__OclAny = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Set__Set = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._Set);
@@ -294,6 +306,9 @@ public class OCLstdlibTables
 		public static final @NonNull DomainParameterTypes _Lambda_Collection_T_OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
 		public static final @NonNull DomainParameterTypes _Lambda_OrderedSet_T_Boolean = new DomainParameterTypes(OCLstdlibTables.Types._Boolean);
 		public static final @NonNull DomainParameterTypes _Lambda_OrderedSet_T_OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
+		public static final @NonNull DomainParameterTypes _Lambda_OrderedSet_T_OrderedSet = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "OrderedSet", OCLstdlibTables.TypeParameters._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _Lambda_OrderedSet_T_OrderedSet_collectNested_V = new DomainParameterTypes(OCLstdlibTables.TypeParameters.__OrderedSet__collectNested_V);
+		public static final @NonNull DomainParameterTypes _Lambda_OrderedSet_T_OrderedSet_collect_V = new DomainParameterTypes(OCLstdlibTables.TypeParameters.__OrderedSet__collect_V);
 		public static final @NonNull DomainParameterTypes _Lambda_Sequence_T_Boolean = new DomainParameterTypes(OCLstdlibTables.Types._Boolean);
 		public static final @NonNull DomainParameterTypes _Lambda_Sequence_T_OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
 		public static final @NonNull DomainParameterTypes _Lambda_Sequence_T_OrderedSet__Sequence_T__ = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "OrderedSet", OCLstdlibTables.TypeParameters._Sequence_T));
@@ -301,6 +316,9 @@ public class OCLstdlibTables
 		public static final @NonNull DomainParameterTypes _Lambda_Sequence_T_Sequence_collect_V = new DomainParameterTypes(OCLstdlibTables.TypeParameters.__Sequence__collect_V);
 		public static final @NonNull DomainParameterTypes _Lambda_Set_T_Boolean = new DomainParameterTypes(OCLstdlibTables.Types._Boolean);
 		public static final @NonNull DomainParameterTypes _Lambda_Set_T_OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
+		public static final @NonNull DomainParameterTypes _Lambda_Set_T_Set = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Set", OCLstdlibTables.TypeParameters._Set_T));
+		public static final @NonNull DomainParameterTypes _Lambda_Set_T_Set_collectNested_V = new DomainParameterTypes(OCLstdlibTables.TypeParameters.__Set__collectNested_V);
+		public static final @NonNull DomainParameterTypes _Lambda_Set_T_Set_collect_V = new DomainParameterTypes(OCLstdlibTables.TypeParameters.__Set__collect_V);
 		public static final @NonNull DomainParameterTypes _Lambda_UniqueCollection_T_OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
 		public static final @NonNull DomainParameterTypes _Metaclass__Bag_selectByKind_TT__ = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.TypeParameters.__Bag__selectByKind_TT));
 		public static final @NonNull DomainParameterTypes _Metaclass__Bag_selectByType_TT__ = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.TypeParameters.__Bag__selectByType_TT));
@@ -323,9 +341,9 @@ public class OCLstdlibTables
 		public static final @NonNull DomainParameterTypes _OclSelf = new DomainParameterTypes(OCLstdlibTables.Types._OclSelf);
 		public static final @NonNull DomainParameterTypes _OclState = new DomainParameterTypes(OCLstdlibTables.Types._OclState);
 		public static final @NonNull DomainParameterTypes _OclType = new DomainParameterTypes(OCLstdlibTables.Types._OclType);
-		public static final @NonNull DomainParameterTypes _OrderedSet = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "OrderedSet", OCLstdlibTables.TypeParameters._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _OrderedCollection__OrderedSet_T__ = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "OrderedCollection", OCLstdlibTables.TypeParameters._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _OrderedCollection__Sequence_T__ = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "OrderedCollection", OCLstdlibTables.TypeParameters._Sequence_T));
 		public static final @NonNull DomainParameterTypes _OrderedSet_T = new DomainParameterTypes(OCLstdlibTables.TypeParameters._OrderedSet_T);
-		public static final @NonNull DomainParameterTypes _Sequence = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Sequence", OCLstdlibTables.TypeParameters._Sequence_T));
 		public static final @NonNull DomainParameterTypes _Sequence_T = new DomainParameterTypes(OCLstdlibTables.TypeParameters._Sequence_T);
 		public static final @NonNull DomainParameterTypes _Set_T = new DomainParameterTypes(OCLstdlibTables.TypeParameters._Set_T);
 		public static final @NonNull DomainParameterTypes _String = new DomainParameterTypes(OCLstdlibTables.Types._String);
@@ -615,6 +633,15 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorOperation _OclVoid__toString = new ExecutorOperation("toString", Parameters._, Types._OclVoid,
 			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 
+		public static final @NonNull ExecutorOperation _OrderedCollection__at = new ExecutorOperation("at", Parameters._Integer, Types._OrderedCollection,
+			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedCollection__first = new ExecutorOperation("first", Parameters._, Types._OrderedCollection,
+			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedCollection__indexOf = new ExecutorOperation("indexOf", Parameters._OclAny, Types._OrderedCollection,
+			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionIndexOfOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedCollection__last = new ExecutorOperation("last", Parameters._, Types._OrderedCollection,
+			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation.INSTANCE);
+
 		public static final @NonNull ExecutorOperation _OrderedSet___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection__OclAny__, Types._OrderedSet,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OrderedSet,
@@ -623,36 +650,42 @@ public class OCLstdlibTables
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__append = new ExecutorOperation("append", Parameters._OrderedSet_T, Types._OrderedSet,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__appendAll = new ExecutorOperation("appendAll", Parameters._OrderedSet, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__appendAll = new ExecutorOperation("appendAll", Parameters._OrderedCollection__OrderedSet_T__, Types._OrderedSet,
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__closure = new ExecutorOperation("closure", Parameters._Lambda_OrderedSet_T_OrderedSet, Types._OrderedSet,
+			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__collect = new ExecutorOperation("collect", Parameters._Lambda_OrderedSet_T_OrderedSet_collect_V, Types._OrderedSet,
+			6, new DomainTypeParameters(TypeParameters.__OrderedSet__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_OrderedSet_T_OrderedSet_collectNested_V, Types._OrderedSet,
+			7, new DomainTypeParameters(TypeParameters.__OrderedSet__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._OrderedSet,
-			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__excludingAll = new ExecutorOperation("excludingAll", Parameters._Collection__OclAny__, Types._OrderedSet,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
+			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__flatten = new ExecutorOperation("flatten", Parameters._, Types._OrderedSet,
-			7, new DomainTypeParameters(TypeParameters.__OrderedSet__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+			10, new DomainTypeParameters(TypeParameters.__OrderedSet__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__including = new ExecutorOperation("including", Parameters._OrderedSet_T, Types._OrderedSet,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__insertAt = new ExecutorOperation("insertAt", Parameters._Integer___OrderedSet_T, Types._OrderedSet,
-			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
+			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__prepend = new ExecutorOperation("prepend", Parameters._OrderedSet_T, Types._OrderedSet,
-			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__prependAll = new ExecutorOperation("prependAll", Parameters._OrderedSet, Types._OrderedSet,
-			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation.INSTANCE);
+			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OrderedSet__prependAll = new ExecutorOperation("prependAll", Parameters._OrderedCollection__OrderedSet_T__, Types._OrderedSet,
+			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__reject = new ExecutorOperation("reject", Parameters._Lambda_OrderedSet_T_Boolean, Types._OrderedSet,
-			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__reverse = new ExecutorOperation("reverse", Parameters._, Types._OrderedSet,
-			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
+			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__select = new ExecutorOperation("select", Parameters._Lambda_OrderedSet_T_Boolean, Types._OrderedSet,
-			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
+			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass__OrderedSet_selectByKind_TT__, Types._OrderedSet,
-			15, new DomainTypeParameters(TypeParameters.__OrderedSet__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
+			18, new DomainTypeParameters(TypeParameters.__OrderedSet__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass__OrderedSet_selectByType_TT__, Types._OrderedSet,
-			16, new DomainTypeParameters(TypeParameters.__OrderedSet__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+			19, new DomainTypeParameters(TypeParameters.__OrderedSet__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_OrderedSet_T_OclAny, Types._OrderedSet,
-			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+			20, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__subOrderedSet = new ExecutorOperation("subOrderedSet", Parameters._Integer___Integer, Types._OrderedSet,
-			18, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation.INSTANCE);
+			21, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation.INSTANCE);
 
 		public static final @NonNull ExecutorOperation _Real___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Real,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
@@ -697,50 +730,42 @@ public class OCLstdlibTables
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__append = new ExecutorOperation("append", Parameters._Sequence_T, Types._Sequence,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__appendAll = new ExecutorOperation("appendAll", Parameters._Sequence, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__appendAll = new ExecutorOperation("appendAll", Parameters._OrderedCollection__Sequence_T__, Types._Sequence,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__at = new ExecutorOperation("at", Parameters._Integer, Types._Sequence,
-			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__closure = new ExecutorOperation("closure", Parameters._Lambda_Sequence_T_OrderedSet__Sequence_T__, Types._Sequence,
-			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
+			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__collect = new ExecutorOperation("collect", Parameters._Lambda_Sequence_T_Sequence_collect_V, Types._Sequence,
-			6, new DomainTypeParameters(TypeParameters.__Sequence__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
+			5, new DomainTypeParameters(TypeParameters.__Sequence__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_Sequence_T_Sequence_collectNested_V, Types._Sequence,
-			7, new DomainTypeParameters(TypeParameters.__Sequence__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
+			6, new DomainTypeParameters(TypeParameters.__Sequence__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Sequence,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__excludingAll = new ExecutorOperation("excludingAll", Parameters._Collection__OclAny__, Types._Sequence,
-			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__first = new ExecutorOperation("first", Parameters._, Types._Sequence,
-			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__flatten = new ExecutorOperation("flatten", Parameters._, Types._Sequence,
-			11, new DomainTypeParameters(TypeParameters.__Sequence__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+			9, new DomainTypeParameters(TypeParameters.__Sequence__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__including = new ExecutorOperation("including", Parameters._Sequence_T, Types._Sequence,
-			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__indexOf = new ExecutorOperation("indexOf", Parameters._OclAny, Types._Sequence,
-			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionIndexOfOperation.INSTANCE);
+			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__insertAt = new ExecutorOperation("insertAt", Parameters._Integer___Sequence_T, Types._Sequence,
-			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__last = new ExecutorOperation("last", Parameters._, Types._Sequence,
-			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation.INSTANCE);
+			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__prepend = new ExecutorOperation("prepend", Parameters._Sequence_T, Types._Sequence,
-			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__prependAll = new ExecutorOperation("prependAll", Parameters._Sequence, Types._Sequence,
-			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation.INSTANCE);
+			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Sequence__prependAll = new ExecutorOperation("prependAll", Parameters._OrderedCollection__Sequence_T__, Types._Sequence,
+			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__reject = new ExecutorOperation("reject", Parameters._Lambda_Sequence_T_Boolean, Types._Sequence,
-			18, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__reverse = new ExecutorOperation("reverse", Parameters._, Types._Sequence,
-			19, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
+			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__select = new ExecutorOperation("select", Parameters._Lambda_Sequence_T_Boolean, Types._Sequence,
-			20, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
+			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass__Sequence_selectByKind_TT__, Types._Sequence,
-			21, new DomainTypeParameters(TypeParameters.__Sequence__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
+			17, new DomainTypeParameters(TypeParameters.__Sequence__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass__Sequence_selectByType_TT__, Types._Sequence,
-			22, new DomainTypeParameters(TypeParameters.__Sequence__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+			18, new DomainTypeParameters(TypeParameters.__Sequence__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_Sequence_T_OclAny, Types._Sequence,
-			23, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+			19, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__subSequence = new ExecutorOperation("subSequence", Parameters._Integer___Integer, Types._Sequence,
-			24, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation.INSTANCE);
+			20, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation.INSTANCE);
 
 		public static final @NonNull ExecutorOperation _Set___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection__OclAny__, Types._Set,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
@@ -748,26 +773,32 @@ public class OCLstdlibTables
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Set,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__closure = new ExecutorOperation("closure", Parameters._Lambda_Set_T_Set, Types._Set,
+			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__collect = new ExecutorOperation("collect", Parameters._Lambda_Set_T_Set_collect_V, Types._Set,
+			4, new DomainTypeParameters(TypeParameters.__Set__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
+		public static final @NonNull ExecutorOperation _Set__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_Set_T_Set_collectNested_V, Types._Set,
+			5, new DomainTypeParameters(TypeParameters.__Set__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Set,
-			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__excludingAll = new ExecutorOperation("excludingAll", Parameters._Collection__OclAny__, Types._Set,
-			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__flatten = new ExecutorOperation("flatten", Parameters._, Types._Set,
-			5, new DomainTypeParameters(TypeParameters.__Set__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
+			8, new DomainTypeParameters(TypeParameters.__Set__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__including = new ExecutorOperation("including", Parameters._Set_T, Types._Set,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__includingAll = new ExecutorOperation("includingAll", Parameters._Collection__Set_T__, Types._Set,
-			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation.INSTANCE);
+			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__reject = new ExecutorOperation("reject", Parameters._Lambda_Set_T_Boolean, Types._Set,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
+			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__select = new ExecutorOperation("select", Parameters._Lambda_Set_T_Boolean, Types._Set,
-			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
+			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass__Set_selectByKind_TT__, Types._Set,
-			10, new DomainTypeParameters(TypeParameters.__Set__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
+			13, new DomainTypeParameters(TypeParameters.__Set__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass__Set_selectByType_TT__, Types._Set,
-			11, new DomainTypeParameters(TypeParameters.__Set__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
+			14, new DomainTypeParameters(TypeParameters.__Set__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_Set_T_OclAny, Types._Set,
-			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
+			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 
 		public static final @NonNull ExecutorOperation _String___add_ = new ExecutorOperation("+", Parameters._String, Types._String,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
@@ -990,11 +1021,19 @@ public class OCLstdlibTables
 		};
 		private static final @NonNull int[] __OclVoid = { 1,1 };
 
+		private static final @NonNull ExecutorFragment[] _OrderedCollection =
+		{
+			Fragments._OrderedCollection__OclAny /* 0 */,
+			Fragments._OrderedCollection__Collection /* 1 */,
+			Fragments._OrderedCollection__OrderedCollection /* 2 */
+		};
+		private static final @NonNull int[] __OrderedCollection = { 1,1,1 };
+
 		private static final @NonNull ExecutorFragment[] _OrderedSet =
 		{
 			Fragments._OrderedSet__OclAny /* 0 */,
 			Fragments._OrderedSet__Collection /* 1 */,
-			Fragments._OrderedSet__Sequence /* 2 */,
+			Fragments._OrderedSet__OrderedCollection /* 2 */,
 			Fragments._OrderedSet__UniqueCollection /* 2 */,
 			Fragments._OrderedSet__OrderedSet /* 3 */
 		};
@@ -1013,19 +1052,19 @@ public class OCLstdlibTables
 		{
 			Fragments._Sequence__OclAny /* 0 */,
 			Fragments._Sequence__Collection /* 1 */,
-			Fragments._Sequence__Sequence /* 2 */
+			Fragments._Sequence__OrderedCollection /* 2 */,
+			Fragments._Sequence__Sequence /* 3 */
 		};
-		private static final @NonNull int[] __Sequence = { 1,1,1 };
+		private static final @NonNull int[] __Sequence = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Set =
 		{
 			Fragments._Set__OclAny /* 0 */,
 			Fragments._Set__Collection /* 1 */,
-			Fragments._Set__Bag /* 2 */,
 			Fragments._Set__UniqueCollection /* 2 */,
 			Fragments._Set__Set /* 3 */
 		};
-		private static final @NonNull int[] __Set = { 1,1,2,1 };
+		private static final @NonNull int[] __Set = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _String =
 		{
@@ -1078,6 +1117,7 @@ public class OCLstdlibTables
 			Types._OclTuple.initFragments(_OclTuple, __OclTuple);
 			Types._OclType.initFragments(_OclType, __OclType);
 			Types._OclVoid.initFragments(_OclVoid, __OclVoid);
+			Types._OrderedCollection.initFragments(_OrderedCollection, __OrderedCollection);
 			Types._OrderedSet.initFragments(_OrderedSet, __OrderedSet);
 			Types._Real.initFragments(_Real, __Real);
 			Types._Sequence.initFragments(_Sequence, __Sequence);
@@ -1598,19 +1638,88 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._OclVoid__toString /* toString() */
 		};
 
+		private static final @NonNull ExecutorOperation[] _OrderedCollection__OrderedCollection = {
+			OCLstdlibTables.Operations._OrderedCollection__at /* at(Integer) */,
+			OCLstdlibTables.Operations._OrderedCollection__first /* first() */,
+			OCLstdlibTables.Operations._OrderedCollection__indexOf /* indexOf(OclAny[?]) */,
+			OCLstdlibTables.Operations._OrderedCollection__last /* last() */
+		};
+		private static final @NonNull ExecutorOperation[] _OrderedCollection__Collection = {
+			OCLstdlibTables.Operations._Collection___lt__gt_ /* _'<>'(OclSelf) */,
+			OCLstdlibTables.Operations._Collection___eq_ /* _'='(OclSelf) */,
+			OCLstdlibTables.Operations._Collection__any /* any(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__asBag /* asBag() */,
+			OCLstdlibTables.Operations._Collection__asOrderedSet /* asOrderedSet() */,
+			OCLstdlibTables.Operations._Collection__asSequence /* asSequence() */,
+			OCLstdlibTables.Operations._Collection__asSet /* asSet() */,
+			OCLstdlibTables.Operations._Collection__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._Collection__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._Collection__count /* count(OclAny[?]) */,
+			OCLstdlibTables.Operations._Collection__excludes /* excludes(OclAny[?]) */,
+			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
+			OCLstdlibTables.Operations._Collection__excluding /* excluding(OclAny[?]) */,
+			OCLstdlibTables.Operations._Collection__excludingAll /* excludingAll(Collection(OclAny)) */,
+			OCLstdlibTables.Operations._Collection__1_exists /* exists(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_exists /* exists(T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__flatten /* flatten(T2)() */,
+			OCLstdlibTables.Operations._Collection__1_forAll /* forAll(T[?],T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__0_forAll /* forAll(T[?]|Lambda T() : Boolean[?]) */,
+			OCLstdlibTables.Operations._Collection__includes /* includes(OclAny[?]) */,
+			OCLstdlibTables.Operations._Collection__includesAll /* includesAll(T2)(Collection(T2)) */,
+			OCLstdlibTables.Operations._Collection__including /* including(T[?]) */,
+			OCLstdlibTables.Operations._Collection__includingAll /* includingAll(Collection(T)) */,
+			OCLstdlibTables.Operations._Collection__0_intersection /* intersection(Collection(T)) */,
+			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
+			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
+			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
+			OCLstdlibTables.Operations._Collection__max /* max() */,
+			OCLstdlibTables.Operations._Collection__min /* min() */,
+			OCLstdlibTables.Operations._Collection__notEmpty /* notEmpty() */,
+			OCLstdlibTables.Operations._Collection__one /* one(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__product /* product(T2)(Collection(T2)) */,
+			OCLstdlibTables.Operations._Collection__reject /* reject(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__select /* select(T[?]|Lambda T() : Boolean) */,
+			OCLstdlibTables.Operations._Collection__selectByKind /* selectByKind(TT)(Metaclass(TT)) */,
+			OCLstdlibTables.Operations._Collection__selectByType /* selectByType(TT)(Metaclass(TT)) */,
+			OCLstdlibTables.Operations._Collection__size /* size() */,
+			OCLstdlibTables.Operations._Collection__sortedBy /* sortedBy(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__sum /* sum() */,
+			OCLstdlibTables.Operations._Collection__union /* union(Collection(T)) */
+		};
+		private static final @NonNull ExecutorOperation[] _OrderedCollection__OclAny = {
+			OCLstdlibTables.Operations._Collection___lt__gt_ /* _'<>'(OclSelf) */,
+			OCLstdlibTables.Operations._Collection___eq_ /* _'='(OclSelf) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+
 		private static final @NonNull ExecutorOperation[] _OrderedSet__OrderedSet = {
 			OCLstdlibTables.Operations._OrderedSet___sub_ /* _'-'(UniqueCollection(OclAny)) */,
 			OCLstdlibTables.Operations._OrderedSet___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._OrderedSet___eq_ /* _'='(OclSelf) */,
 			OCLstdlibTables.Operations._OrderedSet__append /* append(T[?]) */,
-			OCLstdlibTables.Operations._OrderedSet__appendAll /* appendAll(OrderedSet(T)) */,
+			OCLstdlibTables.Operations._OrderedSet__appendAll /* appendAll(OrderedCollection(T)) */,
+			OCLstdlibTables.Operations._OrderedSet__closure /* closure(T|Lambda T() : OrderedSet(T)) */,
+			OCLstdlibTables.Operations._OrderedSet__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._OrderedSet__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
 			OCLstdlibTables.Operations._OrderedSet__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._OrderedSet__excludingAll /* excludingAll(Collection(OclAny)) */,
 			OCLstdlibTables.Operations._OrderedSet__flatten /* flatten(T2)() */,
 			OCLstdlibTables.Operations._OrderedSet__including /* including(T[?]) */,
 			OCLstdlibTables.Operations._OrderedSet__insertAt /* insertAt(Integer,T[?]) */,
 			OCLstdlibTables.Operations._OrderedSet__prepend /* prepend(T[?]) */,
-			OCLstdlibTables.Operations._OrderedSet__prependAll /* prependAll(OrderedSet(T)) */,
+			OCLstdlibTables.Operations._OrderedSet__prependAll /* prependAll(OrderedCollection(T)) */,
 			OCLstdlibTables.Operations._OrderedSet__reject /* reject(T[?]|Lambda T() : Boolean) */,
 			OCLstdlibTables.Operations._OrderedSet__reverse /* reverse() */,
 			OCLstdlibTables.Operations._OrderedSet__select /* select(T[?]|Lambda T() : Boolean) */,
@@ -1627,8 +1736,8 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__asOrderedSet /* asOrderedSet() */,
 			OCLstdlibTables.Operations._Collection__asSequence /* asSequence() */,
 			OCLstdlibTables.Operations._Collection__asSet /* asSet() */,
-			OCLstdlibTables.Operations._Sequence__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
-			OCLstdlibTables.Operations._Sequence__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._OrderedSet__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._OrderedSet__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
 			OCLstdlibTables.Operations._Collection__count /* count(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__excludes /* excludes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
@@ -1678,32 +1787,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _OrderedSet__Sequence = {
-			OCLstdlibTables.Operations._OrderedSet___lt__gt_ /* _'<>'(OclSelf) */,
-			OCLstdlibTables.Operations._OrderedSet___eq_ /* _'='(OclSelf) */,
-			OCLstdlibTables.Operations._OrderedSet__append /* append(T[?]) */,
-			OCLstdlibTables.Operations._Sequence__appendAll /* appendAll(Sequence(T)) */,
-			OCLstdlibTables.Operations._Sequence__at /* at(Integer) */,
-			OCLstdlibTables.Operations._Sequence__closure /* closure(T|Lambda T() : OrderedSet(T)) */,
-			OCLstdlibTables.Operations._Sequence__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
-			OCLstdlibTables.Operations._Sequence__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
-			OCLstdlibTables.Operations._OrderedSet__excluding /* excluding(OclAny[?]) */,
-			OCLstdlibTables.Operations._OrderedSet__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Sequence__first /* first() */,
-			OCLstdlibTables.Operations._OrderedSet__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._OrderedSet__including /* including(T[?]) */,
-			OCLstdlibTables.Operations._Sequence__indexOf /* indexOf(OclAny[?]) */,
-			OCLstdlibTables.Operations._OrderedSet__insertAt /* insertAt(Integer,T[?]) */,
-			OCLstdlibTables.Operations._Sequence__last /* last() */,
-			OCLstdlibTables.Operations._OrderedSet__prepend /* prepend(T[?]) */,
-			OCLstdlibTables.Operations._Sequence__prependAll /* prependAll(Sequence(T)) */,
-			OCLstdlibTables.Operations._OrderedSet__reject /* reject(T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._OrderedSet__reverse /* reverse() */,
-			OCLstdlibTables.Operations._OrderedSet__select /* select(T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._OrderedSet__selectByKind /* selectByKind(TT)(Metaclass(TT)) */,
-			OCLstdlibTables.Operations._OrderedSet__selectByType /* selectByType(TT)(Metaclass(TT)) */,
-			OCLstdlibTables.Operations._OrderedSet__sortedBy /* sortedBy(T[?]|Lambda T() : OclAny) */,
-			OCLstdlibTables.Operations._Sequence__subSequence /* subSequence(Integer,Integer) */
+		private static final @NonNull ExecutorOperation[] _OrderedSet__OrderedCollection = {
+			OCLstdlibTables.Operations._OrderedCollection__at /* at(Integer) */,
+			OCLstdlibTables.Operations._OrderedCollection__first /* first() */,
+			OCLstdlibTables.Operations._OrderedCollection__indexOf /* indexOf(OclAny[?]) */,
+			OCLstdlibTables.Operations._OrderedCollection__last /* last() */
 		};
 		private static final @NonNull ExecutorOperation[] _OrderedSet__UniqueCollection = {
 			OCLstdlibTables.Operations._OrderedSet___sub_ /* _'-'(UniqueCollection(OclAny)) */,
@@ -1765,21 +1853,17 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Sequence___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._Sequence___eq_ /* _'='(OclSelf) */,
 			OCLstdlibTables.Operations._Sequence__append /* append(T[?]) */,
-			OCLstdlibTables.Operations._Sequence__appendAll /* appendAll(Sequence(T)) */,
-			OCLstdlibTables.Operations._Sequence__at /* at(Integer) */,
+			OCLstdlibTables.Operations._Sequence__appendAll /* appendAll(OrderedCollection(T)) */,
 			OCLstdlibTables.Operations._Sequence__closure /* closure(T|Lambda T() : OrderedSet(T)) */,
 			OCLstdlibTables.Operations._Sequence__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
 			OCLstdlibTables.Operations._Sequence__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
 			OCLstdlibTables.Operations._Sequence__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Sequence__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Sequence__first /* first() */,
 			OCLstdlibTables.Operations._Sequence__flatten /* flatten(T2)() */,
 			OCLstdlibTables.Operations._Sequence__including /* including(T[?]) */,
-			OCLstdlibTables.Operations._Sequence__indexOf /* indexOf(OclAny[?]) */,
 			OCLstdlibTables.Operations._Sequence__insertAt /* insertAt(Integer,T[?]) */,
-			OCLstdlibTables.Operations._Sequence__last /* last() */,
 			OCLstdlibTables.Operations._Sequence__prepend /* prepend(T[?]) */,
-			OCLstdlibTables.Operations._Sequence__prependAll /* prependAll(Sequence(T)) */,
+			OCLstdlibTables.Operations._Sequence__prependAll /* prependAll(OrderedCollection(T)) */,
 			OCLstdlibTables.Operations._Sequence__reject /* reject(T[?]|Lambda T() : Boolean) */,
 			OCLstdlibTables.Operations._Sequence__reverse /* reverse() */,
 			OCLstdlibTables.Operations._Sequence__select /* select(T[?]|Lambda T() : Boolean) */,
@@ -1847,28 +1931,20 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
+		private static final @NonNull ExecutorOperation[] _Sequence__OrderedCollection = {
+			OCLstdlibTables.Operations._OrderedCollection__at /* at(Integer) */,
+			OCLstdlibTables.Operations._OrderedCollection__first /* first() */,
+			OCLstdlibTables.Operations._OrderedCollection__indexOf /* indexOf(OclAny[?]) */,
+			OCLstdlibTables.Operations._OrderedCollection__last /* last() */
+		};
 
 		private static final @NonNull ExecutorOperation[] _Set__Set = {
 			OCLstdlibTables.Operations._Set___sub_ /* _'-'(UniqueCollection(OclAny)) */,
 			OCLstdlibTables.Operations._Set___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._Set___eq_ /* _'='(OclSelf) */,
-			OCLstdlibTables.Operations._Set__excluding /* excluding(OclAny[?]) */,
-			OCLstdlibTables.Operations._Set__excludingAll /* excludingAll(Collection(OclAny)) */,
-			OCLstdlibTables.Operations._Set__flatten /* flatten(T2)() */,
-			OCLstdlibTables.Operations._Set__including /* including(T[?]) */,
-			OCLstdlibTables.Operations._Set__includingAll /* includingAll(Collection(T)) */,
-			OCLstdlibTables.Operations._Set__reject /* reject(T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Set__select /* select(T[?]|Lambda T() : Boolean) */,
-			OCLstdlibTables.Operations._Set__selectByKind /* selectByKind(TT)(Metaclass(TT)) */,
-			OCLstdlibTables.Operations._Set__selectByType /* selectByType(TT)(Metaclass(TT)) */,
-			OCLstdlibTables.Operations._Set__sortedBy /* sortedBy(T[?]|Lambda T() : OclAny) */
-		};
-		private static final @NonNull ExecutorOperation[] _Set__Bag = {
-			OCLstdlibTables.Operations._Set___lt__gt_ /* _'<>'(OclSelf) */,
-			OCLstdlibTables.Operations._Set___eq_ /* _'='(OclSelf) */,
-			OCLstdlibTables.Operations._Bag__closure /* closure(T|Lambda T() : Set(T)) */,
-			OCLstdlibTables.Operations._Bag__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
-			OCLstdlibTables.Operations._Bag__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._Set__closure /* closure(T|Lambda T() : Set(T)) */,
+			OCLstdlibTables.Operations._Set__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._Set__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
 			OCLstdlibTables.Operations._Set__excluding /* excluding(OclAny[?]) */,
 			OCLstdlibTables.Operations._Set__excludingAll /* excludingAll(Collection(OclAny)) */,
 			OCLstdlibTables.Operations._Set__flatten /* flatten(T2)() */,
@@ -1888,8 +1964,8 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__asOrderedSet /* asOrderedSet() */,
 			OCLstdlibTables.Operations._Collection__asSequence /* asSequence() */,
 			OCLstdlibTables.Operations._Collection__asSet /* asSet() */,
-			OCLstdlibTables.Operations._Bag__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
-			OCLstdlibTables.Operations._Bag__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._Set__collect /* collect(V)(T[?]|Lambda T() : V[?]) */,
+			OCLstdlibTables.Operations._Set__collectNested /* collectNested(V)(T[?]|Lambda T() : V[?]) */,
 			OCLstdlibTables.Operations._Collection__count /* count(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__excludes /* excludes(OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__excludesAll /* excludesAll(T2)(Collection(T2)) */,
@@ -2203,10 +2279,14 @@ public class OCLstdlibTables
 			Fragments._OclVoid__OclAny.initOperations(_OclVoid__OclAny);
 			Fragments._OclVoid__OclVoid.initOperations(_OclVoid__OclVoid);
 
+			Fragments._OrderedCollection__Collection.initOperations(_OrderedCollection__Collection);
+			Fragments._OrderedCollection__OclAny.initOperations(_OrderedCollection__OclAny);
+			Fragments._OrderedCollection__OrderedCollection.initOperations(_OrderedCollection__OrderedCollection);
+
 			Fragments._OrderedSet__Collection.initOperations(_OrderedSet__Collection);
 			Fragments._OrderedSet__OclAny.initOperations(_OrderedSet__OclAny);
+			Fragments._OrderedSet__OrderedCollection.initOperations(_OrderedSet__OrderedCollection);
 			Fragments._OrderedSet__OrderedSet.initOperations(_OrderedSet__OrderedSet);
-			Fragments._OrderedSet__Sequence.initOperations(_OrderedSet__Sequence);
 			Fragments._OrderedSet__UniqueCollection.initOperations(_OrderedSet__UniqueCollection);
 
 			Fragments._Real__OclAny.initOperations(_Real__OclAny);
@@ -2216,9 +2296,9 @@ public class OCLstdlibTables
 
 			Fragments._Sequence__Collection.initOperations(_Sequence__Collection);
 			Fragments._Sequence__OclAny.initOperations(_Sequence__OclAny);
+			Fragments._Sequence__OrderedCollection.initOperations(_Sequence__OrderedCollection);
 			Fragments._Sequence__Sequence.initOperations(_Sequence__Sequence);
 
-			Fragments._Set__Bag.initOperations(_Set__Bag);
 			Fragments._Set__Collection.initOperations(_Set__Collection);
 			Fragments._Set__OclAny.initOperations(_Set__OclAny);
 			Fragments._Set__Set.initOperations(_Set__Set);
@@ -2278,6 +2358,8 @@ public class OCLstdlibTables
 
 		private static final @NonNull ExecutorProperty[] _OclVoid = {};
 
+		private static final @NonNull ExecutorProperty[] _OrderedCollection = {};
+
 		private static final @NonNull ExecutorProperty[] _OrderedSet = {};
 
 		private static final @NonNull ExecutorProperty[] _Real = {};
@@ -2314,6 +2396,7 @@ public class OCLstdlibTables
 			Fragments._OclTuple__OclTuple.initProperties(_OclTuple);
 			Fragments._OclType__OclType.initProperties(_OclType);
 			Fragments._OclVoid__OclVoid.initProperties(_OclVoid);
+			Fragments._OrderedCollection__OrderedCollection.initProperties(_OrderedCollection);
 			Fragments._OrderedSet__OrderedSet.initProperties(_OrderedSet);
 			Fragments._Real__Real.initProperties(_Real);
 			Fragments._Sequence__Sequence.initProperties(_Sequence);

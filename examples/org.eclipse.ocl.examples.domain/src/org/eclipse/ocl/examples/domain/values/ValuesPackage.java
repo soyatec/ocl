@@ -70,7 +70,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 15;
+	int VALUE = 14;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -127,26 +127,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getObjectValue()
 	 * @generated
 	 */
-	int OBJECT_VALUE = 6;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl <em>Enumeration Literal Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl
-	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getEnumerationLiteralValue()
-	 * @generated
-	 */
-	int ENUMERATION_LITERAL_VALUE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Enumeration Literal Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+	int OBJECT_VALUE = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.IntegerValueImpl <em>Integer Value</em>}' class.
@@ -156,7 +137,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getIntegerValue()
 	 * @generated
 	 */
-	int INTEGER_VALUE = 3;
+	int INTEGER_VALUE = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.NullValueImpl <em>Null Value</em>}' class.
@@ -166,17 +147,17 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getNullValue()
 	 * @generated
 	 */
-	int NULL_VALUE = 5;
+	int NULL_VALUE = 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.InvalidValueException <em>Invalid Value</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl <em>Invalid Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.InvalidValueException
+	 * @see org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getInvalidValue()
 	 * @generated
 	 */
-	int INVALID_VALUE = 4;
+	int INVALID_VALUE = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.SequenceValueImpl <em>Sequence Value</em>}' class.
@@ -254,13 +235,23 @@ public interface ValuesPackage extends EPackage {
 	int INVALID_VALUE_FEATURE_COUNT = NULL_VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Sequence Value</em>' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.OrderedCollectionValue <em>Ordered Collection Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.domain.values.OrderedCollectionValue
+	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedCollectionValue()
+	 * @generated
+	 */
+	int ORDERED_COLLECTION_VALUE = 6;
+
+	/**
+	 * The number of structural features of the '<em>Ordered Collection Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE_VALUE_FEATURE_COUNT = COLLECTION_VALUE_FEATURE_COUNT + 0;
+	int ORDERED_COLLECTION_VALUE_FEATURE_COUNT = COLLECTION_VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Ordered Set Value</em>' class.
@@ -269,7 +260,16 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_SET_VALUE_FEATURE_COUNT = SEQUENCE_VALUE_FEATURE_COUNT + 0;
+	int ORDERED_SET_VALUE_FEATURE_COUNT = ORDERED_COLLECTION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Sequence Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_VALUE_FEATURE_COUNT = ORDERED_COLLECTION_VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.SetValueImpl <em>Set Value</em>}' class.
@@ -282,15 +282,6 @@ public interface ValuesPackage extends EPackage {
 	int SET_VALUE = 10;
 
 	/**
-	 * The number of structural features of the '<em>Set Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SET_VALUE_FEATURE_COUNT = BAG_VALUE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.TupleValueImpl <em>Tuple Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,34 +292,6 @@ public interface ValuesPackage extends EPackage {
 	int TUPLE_VALUE = 11;
 
 	/**
-	 * The number of structural features of the '<em>Tuple Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TUPLE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.TypeValueImpl <em>Type Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.domain.values.impl.TypeValueImpl
-	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getTypeValue()
-	 * @generated
-	 */
-	int TYPE_VALUE = 12;
-
-	/**
-	 * The number of structural features of the '<em>Type Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.UniqueCollectionValue <em>Unique Collection Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -336,7 +299,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getUniqueCollectionValue()
 	 * @generated
 	 */
-	int UNIQUE_COLLECTION_VALUE = 13;
+	int UNIQUE_COLLECTION_VALUE = 12;
 
 	/**
 	 * The number of structural features of the '<em>Unique Collection Value</em>' class.
@@ -348,6 +311,24 @@ public interface ValuesPackage extends EPackage {
 	int UNIQUE_COLLECTION_VALUE_FEATURE_COUNT = COLLECTION_VALUE_FEATURE_COUNT + 0;
 
 	/**
+	 * The number of structural features of the '<em>Set Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_VALUE_FEATURE_COUNT = UNIQUE_COLLECTION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Tuple Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.values.impl.UnlimitedValueImpl <em>Unlimited Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -355,7 +336,7 @@ public interface ValuesPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getUnlimitedValue()
 	 * @generated
 	 */
-	int UNLIMITED_VALUE = 14;
+	int UNLIMITED_VALUE = 13;
 
 	/**
 	 * The number of structural features of the '<em>Unlimited Value</em>' class.
@@ -386,16 +367,6 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCollectionValue();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue <em>Enumeration Literal Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enumeration Literal Value</em>'.
-	 * @see org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue
-	 * @generated
-	 */
-	EClass getEnumerationLiteralValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.IntegerValue <em>Integer Value</em>}'.
@@ -436,6 +407,16 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getObjectValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.OrderedCollectionValue <em>Ordered Collection Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ordered Collection Value</em>'.
+	 * @see org.eclipse.ocl.examples.domain.values.OrderedCollectionValue
+	 * @generated
+	 */
+	EClass getOrderedCollectionValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.OrderedSetValue <em>Ordered Set Value</em>}'.
@@ -486,16 +467,6 @@ public interface ValuesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTupleValue();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.TypeValue <em>Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Value</em>'.
-	 * @see org.eclipse.ocl.examples.domain.values.TypeValue
-	 * @generated
-	 */
-	EClass getTypeValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.values.UniqueCollectionValue <em>Unique Collection Value</em>}'.
@@ -570,16 +541,6 @@ public interface ValuesPackage extends EPackage {
 		EClass COLLECTION_VALUE = eINSTANCE.getCollectionValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl <em>Enumeration Literal Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl
-		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getEnumerationLiteralValue()
-		 * @generated
-		 */
-		EClass ENUMERATION_LITERAL_VALUE = eINSTANCE.getEnumerationLiteralValue();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.IntegerValueImpl <em>Integer Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -590,10 +551,10 @@ public interface ValuesPackage extends EPackage {
 		EClass INTEGER_VALUE = eINSTANCE.getIntegerValue();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.InvalidValueException <em>Invalid Value</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl <em>Invalid Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.InvalidValueException
+		 * @see org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl
 		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getInvalidValue()
 		 * @generated
 		 */
@@ -618,6 +579,16 @@ public interface ValuesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass OBJECT_VALUE = eINSTANCE.getObjectValue();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.OrderedCollectionValue <em>Ordered Collection Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.domain.values.OrderedCollectionValue
+		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getOrderedCollectionValue()
+		 * @generated
+		 */
+		EClass ORDERED_COLLECTION_VALUE = eINSTANCE.getOrderedCollectionValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.OrderedSetValueImpl <em>Ordered Set Value</em>}' class.
@@ -668,16 +639,6 @@ public interface ValuesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TUPLE_VALUE = eINSTANCE.getTupleValue();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.impl.TypeValueImpl <em>Type Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.domain.values.impl.TypeValueImpl
-		 * @see org.eclipse.ocl.examples.domain.values.impl.ValuesPackageImpl#getTypeValue()
-		 * @generated
-		 */
-		EClass TYPE_VALUE = eINSTANCE.getTypeValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.values.UniqueCollectionValue <em>Unique Collection Value</em>}' class.

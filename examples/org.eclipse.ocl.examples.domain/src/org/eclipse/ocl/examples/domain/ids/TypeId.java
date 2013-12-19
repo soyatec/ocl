@@ -55,6 +55,7 @@ public interface TypeId extends ElementId
 	public static final @NonNull String OCL_SUMMABLE_NAME = "OclSummable";
 	public static final @NonNull String OCL_VOID_NAME = "OclVoid";
 	public static final @NonNull String OPERATION_NAME = "Operation";
+	public static final @NonNull String ORDERED_COLLECTION_NAME = "OrderedCollection";
 	public static final @NonNull String ORDERED_SET_NAME = "OrderedSet";
 	public static final @NonNull String PRIMITIVE_TYPE_NAME = "PrimitiveType";
 	public static final @NonNull String PROPERTY_NAME = "Property";
@@ -96,6 +97,7 @@ public interface TypeId extends ElementId
 	public static final @NonNull CollectionTypeId BAG = IdManager.getCollectionTypeId(BAG_NAME);
 	public static final @NonNull CollectionTypeId COLLECTION = IdManager.getCollectionTypeId(COLLECTION_NAME);
 	public static final @NonNull MetaclassId METACLASS = new GeneralizedMetaclassIdImpl();
+	public static final @NonNull CollectionTypeId ORDERED_COLLECTION = IdManager.getCollectionTypeId(ORDERED_COLLECTION_NAME);
 	public static final @NonNull CollectionTypeId ORDERED_SET = IdManager.getCollectionTypeId(ORDERED_SET_NAME);
 	public static final @NonNull CollectionTypeId SEQUENCE = IdManager.getCollectionTypeId(SEQUENCE_NAME);
 	public static final @NonNull CollectionTypeId SET = IdManager.getCollectionTypeId(SET_NAME);

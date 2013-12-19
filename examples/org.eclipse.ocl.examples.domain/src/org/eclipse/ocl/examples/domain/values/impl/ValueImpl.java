@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -115,6 +116,10 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 
 	public @NonNull ObjectValue asObjectValue() {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
+	}
+
+	public @NonNull OrderedCollectionValue asOrderedCollectionValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.ORDERED_COLLECTION_NAME, getTypeName());
 	}
 
 	public @NonNull OrderedSetValue asOrderedSetValue() {

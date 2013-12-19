@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -205,6 +206,15 @@ public abstract class ValuesUtil
 		}
 		else {
 			return value;			
+		}
+	}
+
+	public static @NonNull OrderedCollectionValue asOrderedCollectionValue(@Nullable Object value) {
+		if (value instanceof Value) {
+			return ((Value)value).asOrderedCollectionValue();
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.ORDERED_COLLECTION_NAME, getTypeName(value));
 		}
 	}
 

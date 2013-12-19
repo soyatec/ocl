@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.library.collection;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 
 /**
  * OrderedCollectionPrependOperation realises the OrderedCollection::prepend() library operation.
@@ -29,8 +29,8 @@ public class OrderedCollectionPrependOperation extends AbstractSimpleBinaryOpera
 	public static final @NonNull OrderedCollectionPrependOperation INSTANCE = new OrderedCollectionPrependOperation();
 
 	@Override
-	public @NonNull SequenceValue evaluate(@Nullable Object left, @Nullable Object right) {
-		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
+	public @NonNull OrderedCollectionValue evaluate(@Nullable Object left, @Nullable Object right) {
+		OrderedCollectionValue leftOrderedCollectionValue = asOrderedCollectionValue(left);
 		return leftOrderedCollectionValue.prepend(right);
 	}
 }

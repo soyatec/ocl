@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.domain.values;
 
-public interface SetValue extends BagValue, UniqueCollectionValue
+public interface SetValue extends UniqueCollectionValue
 {
 	/**
 	 * @generated NOT
 	 */
-	interface Accumulator extends BagValue.Accumulator, SetValue {}
+	interface Accumulator extends CollectionValue.Accumulator, SetValue {}
 }

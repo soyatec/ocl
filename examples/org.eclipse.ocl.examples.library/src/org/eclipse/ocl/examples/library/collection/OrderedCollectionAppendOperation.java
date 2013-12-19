@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.library.collection;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 
 /**
  * OrderedCollectionAppendOperation realises the OrderedCollection::append() library operation.
@@ -29,8 +29,8 @@ public class OrderedCollectionAppendOperation extends AbstractSimpleBinaryOperat
 	public static final @NonNull OrderedCollectionAppendOperation INSTANCE = new OrderedCollectionAppendOperation();
 
 	@Override
-	public @NonNull SequenceValue evaluate(@Nullable Object left, @Nullable Object right) {
-		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
+	public @NonNull OrderedCollectionValue evaluate(@Nullable Object left, @Nullable Object right) {
+		OrderedCollectionValue leftOrderedCollectionValue = asOrderedCollectionValue(left);
 		return leftOrderedCollectionValue.append(right);
 	}
 }

@@ -87,6 +87,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	private @Nullable org.eclipse.ocl.examples.pivot.Class oclTupleType = null;
 	private @Nullable org.eclipse.ocl.examples.pivot.Class oclTypeType = null;
 	private @Nullable VoidType oclVoidType = null;
+	private @Nullable CollectionType orderedCollectionType = null;
 	private @Nullable OrderedSetType orderedSetType = null;
 	private @Nullable PrimitiveType realType = null;
 	private @Nullable SequenceType sequenceType = null;
@@ -322,6 +323,14 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 			oclVoidType2 = oclVoidType = resolveRequiredSimpleType(VoidType.class, TypeId.OCL_VOID_NAME);		
 		}
 		return oclVoidType2;
+	}
+
+	public @NonNull CollectionType getOrderedCollectionType() {
+		CollectionType orderedCollectionType2 = orderedCollectionType;
+		if (orderedCollectionType2 == null) {
+			orderedCollectionType2 = orderedCollectionType = resolveRequiredTemplateableType(CollectionType.class, TypeId.ORDERED_COLLECTION_NAME, 1);
+		}
+		return orderedCollectionType2;
 	}
 
 	public @NonNull OrderedSetType getOrderedSetType() {

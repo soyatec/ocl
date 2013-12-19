@@ -612,7 +612,7 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 		s.append(" ");
 		s.appendScopedTypeName(pClass);
 		s.append(" = ");
-		if (!hasEcore(pClass)) {
+		if (!hasEcore(pClass) || (pClass instanceof VoidType) || (pClass instanceof InvalidType)) {
 			s.append("new ");
 			s.appendClassReference(typeClass);
 			s.append("(");

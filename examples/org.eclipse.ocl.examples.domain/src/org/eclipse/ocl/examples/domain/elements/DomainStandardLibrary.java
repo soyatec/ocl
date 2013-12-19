@@ -201,6 +201,14 @@ public interface DomainStandardLibrary
     DomainElement getOperationTemplateParameter(@NonNull DomainOperation anOperation, int index);
 
 	/**
+     * Obtains the generic instance of the {@link OrderedCollection} metatype, named
+     * <tt>OrderedCollection(T)</tt>.
+     * 
+     * @return the <tt>OrderedCollection(T)</tt> type (an instance of {@link CollectionType})
+     */
+	@NonNull DomainType getOrderedCollectionType();
+
+	/**
      * Obtains the generic instance of the {@link OrderedSetType} metatype, named
      * <tt>OrderedSet(T)</tt>.
      * 

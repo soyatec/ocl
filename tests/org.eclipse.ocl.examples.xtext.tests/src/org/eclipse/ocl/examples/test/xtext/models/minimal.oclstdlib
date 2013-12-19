@@ -15,6 +15,7 @@ library lib : lib = 'http://minimal.oclstdlib'
 	type OclLambda conformsTo OclAny {}	
 	type OclTuple conformsTo OclAny {}	
 	type OclVoid : VoidType conformsTo OclAny {}
+	type OrderedCollection(T) : CollectionType conformsTo Collection(T) {}
 	type OrderedSet(T) : OrderedSetType conformsTo Collection(T) {}
 	type Real : PrimitiveType conformsTo OclAny {}
 	type Sequence(T) : SequenceType conformsTo Collection(T) {}

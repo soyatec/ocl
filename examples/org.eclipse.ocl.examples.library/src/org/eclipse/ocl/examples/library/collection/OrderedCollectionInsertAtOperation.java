@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.library.collection;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 
 /**
  * OrderedCollectionInsertAtOperation realises the OrderedCollection::insertAt() library operation.
@@ -29,8 +29,8 @@ public class OrderedCollectionInsertAtOperation extends AbstractSimpleTernaryOpe
 	public static final @NonNull OrderedCollectionInsertAtOperation INSTANCE = new OrderedCollectionInsertAtOperation();
 
 	@Override
-	public @NonNull SequenceValue evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
-		SequenceValue selfValue = asSequenceValue(sourceValue);
+	public @NonNull OrderedCollectionValue evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		OrderedCollectionValue selfValue = asOrderedCollectionValue(sourceValue);
 		Integer indexValue = asInteger(firstArgumentValue);
 		return selfValue.insertAt(indexValue, secondArgumentValue);
 	}

@@ -32,9 +32,9 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -59,7 +59,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 		assert checkElementsAreUnique(this.elements);
 	}
 
-    public @NonNull OrderedSetValue appendAll(@NonNull SequenceValue objects) {
+    public @NonNull OrderedSetValue appendAll(@NonNull OrderedCollectionValue objects) {
     	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
         Collection<? extends Object> thoseElements = objects.getElements();
 		result.removeAll(thoseElements);  // appended objects must be last
@@ -67,13 +67,13 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
-	@Override
-	public @NonNull OrderedSetValueImpl asOrderedSetValue() {
+    @Override
+	public @NonNull OrderedCollectionValue asOrderedCollectionValue() {
 		return this;
 	}
 
 	@Override
-	public @NonNull SequenceValue asSequenceValue() {
+	public @NonNull OrderedSetValueImpl asOrderedSetValue() {
 		return this;
 	}
 
@@ -275,7 +275,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
-    public @NonNull OrderedSetValue prependAll(@NonNull SequenceValue objects) {
+    public @NonNull OrderedSetValue prependAll(@NonNull OrderedCollectionValue objects) {
     	OrderedSet<Object> result = new OrderedSetImpl<Object>(objects.getElements());
         result.addAll(elements);
         return new SparseOrderedSetValueImpl(getTypeId(), result);
@@ -321,9 +321,9 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
-	public @NonNull SequenceValue subSequence(int lower, int upper) {
-		return subOrderedSet(lower, upper);
-	}
+//	public @NonNull SequenceValue subSequence(int lower, int upper) {
+//		return subOrderedSet(lower, upper);
+//	}
 
     public @NonNull OrderedSetValue symmetricDifference(@NonNull UniqueCollectionValue set) {       
     	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);       
@@ -337,7 +337,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
-	public SequenceValue toSequenceValue() {
-		return this;
-	}
+//	public SequenceValue toSequenceValue() {
+//		return this;
+//	}
 }

@@ -29,7 +29,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -81,11 +80,6 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		super(typeId, boxedValues);
 		assert checkElementsAreUnique(elements);
 	}
-
-    @Override
-	public @NonNull BagValue asBagValue() {
-        return this;
-    }
 
     @Override
 	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {
@@ -140,7 +134,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}
 	}
 
-	public @NonNull BagValue excludingAll(@NonNull CollectionValue values) {
+	public @NonNull SetValue excludingAll(@NonNull CollectionValue values) {
 		Set<Object> result = new HashSet<Object>();
 		for (Object element : elements) {
 			boolean reject = false;
@@ -244,7 +238,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     }
     
 	public SequenceValue toSequenceValue() {
-		return new SparseOrderedSetValueImpl(getOrderedSetTypeId(), elements);
+		return new SparseSequenceValueImpl(getSequenceTypeId(), SparseSequenceValueImpl.createSequenceOfEach(elements));
 	}
 
 	@Override

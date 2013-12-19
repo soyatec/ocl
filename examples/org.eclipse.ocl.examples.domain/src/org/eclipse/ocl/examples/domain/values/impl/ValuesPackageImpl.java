@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -58,13 +59,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass enumerationLiteralValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass integerValueEClass = null;
 
 	/**
@@ -87,6 +81,13 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass objectValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass orderedCollectionValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,13 +123,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass tupleValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -235,15 +229,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEnumerationLiteralValue() {
-		return enumerationLiteralValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getIntegerValue() {
 		return integerValueEClass;
 	}
@@ -273,6 +258,15 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 */
 	public EClass getObjectValue() {
 		return objectValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOrderedCollectionValue() {
+		return orderedCollectionValueEClass;
 	}
 
 	/**
@@ -318,15 +312,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 */
 	public EClass getTupleValue() {
 		return tupleValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeValue() {
-		return typeValueEClass;
 	}
 
 	/**
@@ -388,8 +373,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		collectionValueEClass = createEClass(COLLECTION_VALUE);
 
-		enumerationLiteralValueEClass = createEClass(ENUMERATION_LITERAL_VALUE);
-
 		integerValueEClass = createEClass(INTEGER_VALUE);
 
 		invalidValueEClass = createEClass(INVALID_VALUE);
@@ -397,6 +380,8 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		nullValueEClass = createEClass(NULL_VALUE);
 
 		objectValueEClass = createEClass(OBJECT_VALUE);
+
+		orderedCollectionValueEClass = createEClass(ORDERED_COLLECTION_VALUE);
 
 		orderedSetValueEClass = createEClass(ORDERED_SET_VALUE);
 
@@ -407,8 +392,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		setValueEClass = createEClass(SET_VALUE);
 
 		tupleValueEClass = createEClass(TUPLE_VALUE);
-
-		typeValueEClass = createEClass(TYPE_VALUE);
 
 		uniqueCollectionValueEClass = createEClass(UNIQUE_COLLECTION_VALUE);
 
@@ -447,23 +430,23 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		// Add supertypes to classes
 		bagValueEClass.getESuperTypes().add(this.getCollectionValue());
 		collectionValueEClass.getESuperTypes().add(this.getValue());
-		enumerationLiteralValueEClass.getESuperTypes().add(this.getValue());
 		integerValueEClass.getESuperTypes().add(this.getRealValue());
 		invalidValueEClass.getESuperTypes().add(this.getNullValue());
 		nullValueEClass.getESuperTypes().add(this.getObjectValue());
+		nullValueEClass.getESuperTypes().add(this.getBagValue());
 		nullValueEClass.getESuperTypes().add(this.getOrderedSetValue());
+		nullValueEClass.getESuperTypes().add(this.getSequenceValue());
 		nullValueEClass.getESuperTypes().add(this.getSetValue());
 		nullValueEClass.getESuperTypes().add(this.getTupleValue());
 		nullValueEClass.getESuperTypes().add(this.getUnlimitedValue());
 		objectValueEClass.getESuperTypes().add(this.getValue());
-		orderedSetValueEClass.getESuperTypes().add(this.getSequenceValue());
+		orderedCollectionValueEClass.getESuperTypes().add(this.getCollectionValue());
+		orderedSetValueEClass.getESuperTypes().add(this.getOrderedCollectionValue());
 		orderedSetValueEClass.getESuperTypes().add(this.getUniqueCollectionValue());
 		realValueEClass.getESuperTypes().add(this.getValue());
-		sequenceValueEClass.getESuperTypes().add(this.getCollectionValue());
-		setValueEClass.getESuperTypes().add(this.getBagValue());
+		sequenceValueEClass.getESuperTypes().add(this.getOrderedCollectionValue());
 		setValueEClass.getESuperTypes().add(this.getUniqueCollectionValue());
 		tupleValueEClass.getESuperTypes().add(this.getValue());
-		typeValueEClass.getESuperTypes().add(this.getValue());
 		uniqueCollectionValueEClass.getESuperTypes().add(this.getCollectionValue());
 		unlimitedValueEClass.getESuperTypes().add(this.getIntegerValue());
 
@@ -479,6 +462,8 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(objectValueEClass, ObjectValue.class, "ObjectValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(orderedCollectionValueEClass, OrderedCollectionValue.class, "OrderedCollectionValue", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(orderedSetValueEClass, OrderedSetValue.class, "OrderedSetValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

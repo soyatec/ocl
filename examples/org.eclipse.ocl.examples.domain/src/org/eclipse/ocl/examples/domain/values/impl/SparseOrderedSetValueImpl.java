@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * @generated NOT
@@ -116,6 +117,10 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
         result.addAll(elements);
         return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
+
+	public SequenceValue toSequenceValue() {
+		return new SparseSequenceValueImpl(getSequenceTypeId(), SparseSequenceValueImpl.createSequenceOfEach(elements));
+	}
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int lengthLimit) {

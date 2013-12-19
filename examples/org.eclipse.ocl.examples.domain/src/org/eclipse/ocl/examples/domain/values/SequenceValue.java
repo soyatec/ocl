@@ -17,64 +17,13 @@
 package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
-public interface SequenceValue extends CollectionValue
+public interface SequenceValue extends OrderedCollectionValue
 {
 	/**
 	 * @generated NOT
 	 */
 	interface Accumulator extends CollectionValue.Accumulator, SequenceValue {}
-	
-	/**
-	 * @generated NOT
-	 */
-	@NonNull SequenceValue append(@Nullable Object object);
-
-	/**
-	 * @generated NOT
-	 */
-    @NonNull SequenceValue appendAll(@NonNull SequenceValue objects);
-
-	/**
-	 * @generated NOT
-	 */
-	@Nullable Object at(int index);
-
-	/**
-	 * @generated NOT
-	 */
-	@Nullable Object first();
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull SequenceValue insertAt(int index, @Nullable Object object);
-
-	/**
-	 * @generated NOT
-	 */
-	@NonNull IntegerValue indexOf(@Nullable Object object);
-
-	/**
-	 * @generated NOT
-	 */
-	@Nullable Object last();
-
-	/**
-	 * @generated NOT
-	 */
-    @NonNull SequenceValue prepend(@Nullable Object object);
-
-	/**
-	 * @generated NOT
-	 */
-    @NonNull SequenceValue prependAll(@NonNull SequenceValue objects);
-
-	/**
-	 * @generated NOT
-	 */
-    @NonNull SequenceValue reverse();
 
 	/**
 	 * @generated NOT

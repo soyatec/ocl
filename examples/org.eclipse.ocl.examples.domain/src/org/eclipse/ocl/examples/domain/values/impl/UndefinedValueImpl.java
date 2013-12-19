@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedCollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -86,11 +87,11 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 		return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue append(@Nullable Object object) {
+	public @NonNull OrderedCollectionValue append(@Nullable Object object) {
 		return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue appendAll(@NonNull SequenceValue objects) {
+	public @NonNull OrderedCollectionValue appendAll(@NonNull OrderedCollectionValue objects) {
 		return toInvalidValue();
 	}
 
@@ -140,6 +141,10 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 
 	public @NonNull ObjectValue asObjectValue() {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
+	}
+
+	public @NonNull OrderedCollectionValue asOrderedCollectionValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.ORDERED_COLLECTION_NAME, getTypeName());
 	}
 
 	public @NonNull OrderedSetValue asOrderedSetValue() {
@@ -462,11 +467,11 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
 
-	public @NonNull SequenceValue prepend(@Nullable Object object) {
+	public @NonNull OrderedCollectionValue prepend(@Nullable Object object) {
 		return toInvalidValue();
 	}
 
-	public @NonNull SequenceValue prependAll(@NonNull SequenceValue objects) {
+	public @NonNull OrderedCollectionValue prependAll(@NonNull OrderedCollectionValue objects) {
 		return toInvalidValue();
 	}
 
@@ -474,7 +479,7 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 		return null;
 	}
 
-	public @NonNull SequenceValue reverse() {
+	public @NonNull OrderedCollectionValue reverse() {
 		return toInvalidValue();
 	}
 

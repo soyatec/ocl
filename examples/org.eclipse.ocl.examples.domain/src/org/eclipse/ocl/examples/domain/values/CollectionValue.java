@@ -171,7 +171,7 @@ public interface CollectionValue extends Value, Iterable<Object>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull SequenceValue sort(@NonNull Comparator<Object> comparator);
+	@NonNull OrderedCollectionValue sort(@NonNull Comparator<Object> comparator);
 
 	/**
 	 * @generated NOT

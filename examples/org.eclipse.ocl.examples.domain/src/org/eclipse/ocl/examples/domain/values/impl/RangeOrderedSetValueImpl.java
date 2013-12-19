@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -129,6 +130,10 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 			elements.add(0, value);
 			return new SparseOrderedSetValueImpl(getTypeId(), elements);
 		}
+	}
+
+	public SequenceValue toSequenceValue() {
+		return new RangeSequenceValueImpl(getSequenceTypeId(), getElements());
 	}
 
 	@Override

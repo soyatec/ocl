@@ -146,6 +146,10 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		return OCLstdlibTables.Types._OclVoid;
 	}
 
+	public @NonNull DomainType getOrderedCollectionType() {
+		return OCLstdlibTables.Types._OrderedCollection;
+	}
+
 	public @NonNull DomainType getOrderedSetType() {
 		return OCLstdlibTables.Types._OrderedSet;
 	}

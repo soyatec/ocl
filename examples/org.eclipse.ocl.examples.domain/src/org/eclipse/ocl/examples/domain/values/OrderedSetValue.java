@@ -18,12 +18,12 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public interface OrderedSetValue extends SequenceValue, UniqueCollectionValue
+public interface OrderedSetValue extends OrderedCollectionValue, UniqueCollectionValue
 {
 	/**
 	 * @generated NOT
 	 */
-	interface Accumulator extends SequenceValue.Accumulator, OrderedSetValue {}
+	interface Accumulator extends CollectionValue.Accumulator, OrderedSetValue {}
 
 	/**
 	 * @generated NOT

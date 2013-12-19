@@ -15,6 +15,7 @@ package org.eclipse.ocl.examples.domain.values.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.ocl.examples.domain.values.*;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -116,13 +117,14 @@ public class ValuesSwitch<T> extends Switch<T> {
 				T result = caseInvalidValue(invalidValue);
 				if (result == null) result = caseNullValue(invalidValue);
 				if (result == null) result = caseObjectValue(invalidValue);
+				if (result == null) result = caseBagValue(invalidValue);
 				if (result == null) result = caseOrderedSetValue(invalidValue);
+				if (result == null) result = caseSequenceValue(invalidValue);
 				if (result == null) result = caseSetValue(invalidValue);
 				if (result == null) result = caseTupleValue(invalidValue);
 				if (result == null) result = caseUnlimitedValue(invalidValue);
-				if (result == null) result = caseSequenceValue(invalidValue);
+				if (result == null) result = caseOrderedCollectionValue(invalidValue);
 				if (result == null) result = caseUniqueCollectionValue(invalidValue);
-				if (result == null) result = caseBagValue(invalidValue);
 				if (result == null) result = caseIntegerValue(invalidValue);
 				if (result == null) result = caseCollectionValue(invalidValue);
 				if (result == null) result = caseRealValue(invalidValue);
@@ -134,13 +136,14 @@ public class ValuesSwitch<T> extends Switch<T> {
 				NullValue nullValue = (NullValue)theEObject;
 				T result = caseNullValue(nullValue);
 				if (result == null) result = caseObjectValue(nullValue);
+				if (result == null) result = caseBagValue(nullValue);
 				if (result == null) result = caseOrderedSetValue(nullValue);
+				if (result == null) result = caseSequenceValue(nullValue);
 				if (result == null) result = caseSetValue(nullValue);
 				if (result == null) result = caseTupleValue(nullValue);
 				if (result == null) result = caseUnlimitedValue(nullValue);
-				if (result == null) result = caseSequenceValue(nullValue);
+				if (result == null) result = caseOrderedCollectionValue(nullValue);
 				if (result == null) result = caseUniqueCollectionValue(nullValue);
-				if (result == null) result = caseBagValue(nullValue);
 				if (result == null) result = caseIntegerValue(nullValue);
 				if (result == null) result = caseCollectionValue(nullValue);
 				if (result == null) result = caseRealValue(nullValue);
@@ -155,10 +158,18 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ValuesPackage.ORDERED_COLLECTION_VALUE: {
+				OrderedCollectionValue orderedCollectionValue = (OrderedCollectionValue)theEObject;
+				T result = caseOrderedCollectionValue(orderedCollectionValue);
+				if (result == null) result = caseCollectionValue(orderedCollectionValue);
+				if (result == null) result = caseValue(orderedCollectionValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ValuesPackage.ORDERED_SET_VALUE: {
 				OrderedSetValue orderedSetValue = (OrderedSetValue)theEObject;
 				T result = caseOrderedSetValue(orderedSetValue);
-				if (result == null) result = caseSequenceValue(orderedSetValue);
+				if (result == null) result = caseOrderedCollectionValue(orderedSetValue);
 				if (result == null) result = caseUniqueCollectionValue(orderedSetValue);
 				if (result == null) result = caseCollectionValue(orderedSetValue);
 				if (result == null) result = caseValue(orderedSetValue);
@@ -175,6 +186,7 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.SEQUENCE_VALUE: {
 				SequenceValue sequenceValue = (SequenceValue)theEObject;
 				T result = caseSequenceValue(sequenceValue);
+				if (result == null) result = caseOrderedCollectionValue(sequenceValue);
 				if (result == null) result = caseCollectionValue(sequenceValue);
 				if (result == null) result = caseValue(sequenceValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -183,7 +195,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.SET_VALUE: {
 				SetValue setValue = (SetValue)theEObject;
 				T result = caseSetValue(setValue);
-				if (result == null) result = caseBagValue(setValue);
 				if (result == null) result = caseUniqueCollectionValue(setValue);
 				if (result == null) result = caseCollectionValue(setValue);
 				if (result == null) result = caseValue(setValue);
@@ -311,6 +322,21 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseObjectValue(ObjectValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ordered Collection Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ordered Collection Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrderedCollectionValue(OrderedCollectionValue object) {
 		return null;
 	}
 

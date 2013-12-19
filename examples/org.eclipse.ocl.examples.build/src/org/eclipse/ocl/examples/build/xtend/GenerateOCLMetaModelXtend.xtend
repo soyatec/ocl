@@ -178,6 +178,8 @@ public class GenerateOCLMetaModelXtend extends GenerateOCLMetaModel
 					protected final @NonNull Class _OclAny = standardLibrary.getOclAnyType();
 					protected final @NonNull Class _OclElement = standardLibrary.getOclElementType();
 					
+					«allTypes.defineCollectionTypeName("OrderedCollection")»
+					
 					«allTypes.defineCollectionTypeName("OrderedSet")»
 					
 					«allTypes.definePrimitiveTypeName("Real")»

@@ -102,6 +102,10 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createObjectValueAdapter();
 			}
 			@Override
+			public Adapter caseOrderedCollectionValue(OrderedCollectionValue object) {
+				return createOrderedCollectionValueAdapter();
+			}
+			@Override
 			public Adapter caseOrderedSetValue(OrderedSetValue object) {
 				return createOrderedSetValueAdapter();
 			}
@@ -182,20 +186,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue <em>Enumeration Literal Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue
-	 * @generated
-	 */
-	public Adapter createEnumerationLiteralValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.IntegerValue <em>Integer Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -248,6 +238,20 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createObjectValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.OrderedCollectionValue <em>Ordered Collection Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.domain.values.OrderedCollectionValue
+	 * @generated
+	 */
+	public Adapter createOrderedCollectionValueAdapter() {
 		return null;
 	}
 
@@ -318,20 +322,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTupleValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.TypeValue <em>Type Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.TypeValue
-	 * @generated
-	 */
-	public Adapter createTypeValueAdapter() {
 		return null;
 	}
 

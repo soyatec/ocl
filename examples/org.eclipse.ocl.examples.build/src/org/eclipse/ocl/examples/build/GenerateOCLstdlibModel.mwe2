@@ -47,9 +47,9 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/${sourceName}/model/oclstdlib.genmodel"
     }
-/*    component = Model2tablesGenerator { resourceSet = resourceSet
+    component = Model2tablesGenerator { resourceSet = resourceSet
     	genModelFile = "/${sourceName}/model/oclstdlib.genmodel"
     	genOCLstdlib = true
-    } */
+    }
 }
 
