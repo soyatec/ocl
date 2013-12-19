@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -66,6 +67,8 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 {	
 	private static final String NO_VIABLE_ALTERNATIVE_AT_INPUT_EOF = "no viable alternative at input '<EOF>'";
 	private static final String NO_VIABLE_ALTERNATIVE_FOLLOWING = "no viable alternative following input ";
+	
+	private static final Logger logger = Logger.getLogger(EssentialOCLCSResource.class);
 	
 	private @Nullable ParserContext parserContext = null;
 	
@@ -282,6 +285,16 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 	 * to be created satisfactorily.
 	 */
 	protected void initializeResourceFactory(@NonNull Resource.Factory.Registry resourceFactoryRegistry) {}
+
+	@Override
+	public void reparse(String newContent) throws IOException {
+		try {
+			super.reparse(newContent);
+		}
+		catch (IllegalArgumentException e) {
+			logger.error("Failed to reparse", e);
+		}
+	}
 
 	public final @NonNull URI resolve(@NonNull URI uri) {
 		URI csURI = getURI();
