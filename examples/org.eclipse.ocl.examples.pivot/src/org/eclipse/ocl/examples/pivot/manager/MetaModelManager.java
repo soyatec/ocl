@@ -579,6 +579,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //	}
 	
 	public void addOrphanClass(@NonNull Type pivotElement) {
+		assert !AS2XMIid.isIdAssignmentInProgress();
 		if (pivotElement.getUnspecializedElement() != null) {
 			assert pivotElement.getUnspecializedElement().getUnspecializedElement() == null;
 		}
