@@ -58,6 +58,11 @@ public class FutureEObjectsDescriptor extends AbstractCollectionDescriptor imple
 	}
 
 	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
+	}
+
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return null;
 	}

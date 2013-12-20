@@ -55,6 +55,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -131,8 +133,8 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
 		if (elementId != null) {
-			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true);
-			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false);
+			BoxedDescriptor boxedTypeDescriptor = codeGenerator.getBoxedDescriptor(elementId);
+			UnboxedDescriptor unboxedTypeDescriptor = boxedTypeDescriptor.getUnboxedDescriptor();
 			if (boxedTypeDescriptor == unboxedTypeDescriptor) {
 				return cgChild;
 			}
@@ -189,9 +191,11 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
 		if (elementId != null) {
-			boolean maybePrimitive = codeGenerator.maybePrimitive(cgChild);
-			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true, maybePrimitive);
-			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false, maybePrimitive);
+//			boolean maybePrimitive = codeGenerator.maybePrimitive(cgChild);
+//			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true, maybePrimitive);
+//			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false, maybePrimitive);
+			TypeDescriptor boxedTypeDescriptor = codeGenerator.getBoxedDescriptor(elementId);
+			TypeDescriptor unboxedTypeDescriptor = boxedTypeDescriptor.getUnboxedDescriptor();
 			if (boxedTypeDescriptor == unboxedTypeDescriptor) {
 				return cgChild;
 			}

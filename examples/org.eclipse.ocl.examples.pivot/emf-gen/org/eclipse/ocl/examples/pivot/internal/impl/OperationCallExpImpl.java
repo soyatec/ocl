@@ -520,7 +520,7 @@ public class OperationCallExpImpl
 		                throw new InvalidValueException("Null source for \'pivot::Type.specializeIn(pivot::OCLExpression,pivot::Type) : pivot::Type\'");
 		            }
 		            final @NonNull /*@Thrown*/ DomainType specializeIn = parameterType.specializeIn(this, (Type)selfType_1);
-		            final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
+		            final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn).booleanValue();
 		            CAUGHT_conformsTo = conformsTo;
 		        }
 		        catch (Exception e) {

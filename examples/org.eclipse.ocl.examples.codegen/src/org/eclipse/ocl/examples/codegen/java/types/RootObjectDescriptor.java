@@ -47,6 +47,11 @@ public class RootObjectDescriptor extends AbstractDescriptor implements SimpleDe
 	}
 
 	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
+	}
+
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return Object.class;
 	}

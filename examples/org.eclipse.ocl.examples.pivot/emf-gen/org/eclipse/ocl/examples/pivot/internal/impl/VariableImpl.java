@@ -251,7 +251,7 @@ public class VariableImpl
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = initExpression_0.getType();
 		        final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
-		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
+		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {

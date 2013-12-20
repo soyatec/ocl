@@ -30,6 +30,11 @@ public class UnboxedValueDescriptor extends AbstractValueDescriptor implements U
 	}
 
 	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
+	}
+
+	@Override
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {
 		if (!(typeDescriptor instanceof UnboxedValueDescriptor)) {
 			return false;

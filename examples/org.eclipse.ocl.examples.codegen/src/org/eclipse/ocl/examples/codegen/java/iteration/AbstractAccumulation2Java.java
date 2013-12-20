@@ -54,7 +54,7 @@ public abstract class AbstractAccumulation2Java extends AbstractIteration2Java
 
 	protected @NonNull Class<?> getAccumulatorClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CollectionTypeId typeId) {
 		JavaCodeGenerator codeGenerator = (JavaCodeGenerator)analyzer.getCodeGenerator();
-		TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(typeId, true);
+		TypeDescriptor boxedTypeDescriptor = codeGenerator.getBoxedDescriptor(typeId);
 		Class<?> boxedClass = boxedTypeDescriptor.getJavaClass();
 		for (Class<?> nestedClass : boxedClass.getClasses()) {
 			if ("Accumulator".equals(nestedClass.getSimpleName())) {

@@ -504,7 +504,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		        throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
-		    final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
+		    final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0).booleanValue();
 		    CAUGHT_conformsTo = conformsTo;
 		}
 		catch (Exception e) {

@@ -19,7 +19,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 
 /**
  * TypeDescriptor captures the characteristics of a Java type and supports serialization to a javaStream.
@@ -34,9 +36,9 @@ public interface TypeDescriptor
 	void append(@NonNull JavaStream js);
 
 	/**
-	 * Append the declaration of this type as a cast to a JavaStream. e.g. "(typename)"
+	 * Append the actualJavaClass subStream to js wrapped in a cast to this typee.g. "(typename)subStream"
 	 */
-	void appendCast(@NonNull JavaStream js);
+	void appendCast(@NonNull JavaStream js, @Nullable Class<?> actualJavaClass, @Nullable SubStream subStream);
 
 	/**
 	 * Append an expression term that evaluaties whether (this Typedescriptor and )thisValue is not equal to thatTypeDescriptor and thatName.
@@ -65,6 +67,18 @@ public interface TypeDescriptor
 	 * Return the basic Java class for this descriptor. e.g. List<?> for an unboxed collection.
 	 */
 	@NonNull Class<?> getJavaClass();
+
+	/**
+	 * Return the type descriptor for use when a primitive type would be appropriate.
+	 * Returns this when there is no distinction for primitive types.
+	 */
+	@NonNull TypeDescriptor getPrimitiveDescriptor();
+
+	/**
+	 * Return the type descriptor for use when an unboxed type would be appropriate.
+	 * Returns this when this is an unboxed descriptor.
+	 */
+	@NonNull UnboxedDescriptor getUnboxedDescriptor();
 
 	/**
 	 * Return the basic Java class for this descriptor. e.g. List<?> for an unboxed collection.

@@ -1064,7 +1064,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		Operation pOperation = cgOperationCallExp.getReferredOperation();
 		CGTypeId cgTypeId = analyzer.getTypeId(pOperation.getOwningType().getTypeId());
 //		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(cgTypeId.getElementId()), false);
+		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(DomainUtil.nonNullState(cgTypeId.getElementId()));
 		CGValuedElement source = getExpression(cgOperationCallExp.getSource());
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameter();
@@ -1109,7 +1109,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			}
 			else {	// ? never happens
 				CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-				TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(cgParameterTypeId.getElementId()), false);
+				TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(DomainUtil.nonNullState(cgParameterTypeId.getElementId()));
 				js.appendReferenceTo(parameterTypeDescriptor, argument);
 				
 			}
@@ -1123,7 +1123,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 		Property asProperty = cgPropertyCallExp.getReferredProperty();
 		CGTypeId cgTypeId = analyzer.getTypeId(asProperty.getOwningType().getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = context.getTypeDescriptor(elementId, false);
+		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(elementId);
 		EStructuralFeature eStructuralFeature = DomainUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
@@ -1267,7 +1267,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			CGValuedElement cgArgument = cgArguments.get(i);
 			Parameter pParameter = pParameters.get(i);
 			CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(DomainUtil.nonNullState(cgTypeId.getElementId()), false);
+			TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(DomainUtil.nonNullState(cgTypeId.getElementId()));
 			CGValuedElement argument = getExpression(cgArgument);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
@@ -1688,14 +1688,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 
 	@Override
 	public @NonNull Boolean visitCGLibraryOperationCallExp(@NonNull CGLibraryOperationCallExp cgOperationCallExp) {
-		CGValuedElement source = getExpression(cgOperationCallExp.getSource());
-		List<CGValuedElement> arguments = cgOperationCallExp.getArguments();
-		LibraryOperation libraryOperation = DomainUtil.nonNullState(cgOperationCallExp.getLibraryOperation());
+		final CGValuedElement source = getExpression(cgOperationCallExp.getSource());
+		final List<CGValuedElement> arguments = cgOperationCallExp.getArguments();
+		final LibraryOperation libraryOperation = DomainUtil.nonNullState(cgOperationCallExp.getLibraryOperation());
 		Method actualMethod = getJavaMethod(libraryOperation, arguments.size());
 		Class<?> actualReturnClass = actualMethod != null ? actualMethod.getReturnType() : null;
 		boolean actualIsNonNull = (actualMethod != null) && (context.getIsNonNull(actualMethod) == Boolean.TRUE);
 		boolean expectedIsNonNull = cgOperationCallExp.isNonNull();
-		CGTypeId resultType = cgOperationCallExp.getTypeId();
+		final CGTypeId resultType = cgOperationCallExp.getTypeId();
 		if (!js.appendLocalStatements(source)) {
 			return false;
 		}
@@ -1710,28 +1710,34 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 			js.appendClassReference(DomainUtil.class);
 			js.append(".nonNullState(");
 		}
-		js.appendClassCast(cgOperationCallExp, actualReturnClass);
-		js.appendClassReference(libraryOperation.getClass());
-		js.append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
-		if (!(libraryOperation instanceof LibrarySimpleOperation)) {
-//			js.append(getValueName(localContext.getEvaluatorParameter(cgOperationCallExp)));
-			js.append(JavaConstants.EVALUATOR_NAME);
-			js.append(", ");
-			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
-//				CGTypeVariable typeVariable = localContext.getTypeVariable(resultType);
-				js.appendValueName(resultType);
-				js.append(", ");
+		js.appendClassCast(cgOperationCallExp, actualReturnClass, new JavaStream.SubStream()
+		{
+			@Override
+			public void append() {
+				js.appendClassReference(libraryOperation.getClass());
+				js.append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
+				if (!(libraryOperation instanceof LibrarySimpleOperation)) {
+//					js.append(getValueName(localContext.getEvaluatorParameter(cgOperationCallExp)));
+					js.append(JavaConstants.EVALUATOR_NAME);
+					js.append(", ");
+					if (!(libraryOperation instanceof LibraryUntypedOperation)) {
+//						CGTypeVariable typeVariable = localContext.getTypeVariable(resultType);
+						js.appendValueName(resultType);
+						js.append(", ");
+					}
+				}
+				js.appendValueName(source);
+				for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : arguments) {
+					js.append(", ");
+					js.appendValueName(cgArgument);		// FIXME cast
+				}
+				js.append(")");
 			}
-		}
-		js.appendValueName(source);
-		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : arguments) {
-			js.append(", ");
-			js.appendValueName(cgArgument);		// FIXME cast
-		}
+		});
 		if (expectedIsNonNull && !actualIsNonNull) {
 			js.append(")");
 		}
-		js.append(");\n");
+		js.append(";\n");
 		return true;
 	}
 

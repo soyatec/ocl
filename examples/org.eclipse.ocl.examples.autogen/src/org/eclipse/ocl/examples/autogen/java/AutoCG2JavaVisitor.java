@@ -181,7 +181,7 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 	public @NonNull Boolean visitCGEcoreOperation(@NonNull CGEcoreOperation object) {
 		String visitName = object.getName();
 		Type csType = (Type) object.getAst();
-		TypeDescriptor typeDescriptor = context.getTypeDescriptor(csType.getTypeId(), false);
+		TypeDescriptor typeDescriptor = context.getUnboxedDescriptor(csType.getTypeId());
 		js.append("public ");
 		js.appendIsRequired(false);
 		js.append(" ");
@@ -272,7 +272,7 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 			EClassifier eType = eStructuralFeature.getEType();
 			Class<?> instanceClass = eType != null ? eType.getInstanceClass() : null;
 			TypeId javaTypeId = instanceClass != null ? JavaConstants.getJavaTypeId(instanceClass) : TypeId.OCL_VOID;
-			TypeDescriptor getTypeDescriptor = context.getTypeDescriptor(javaTypeId, false, false);
+			TypeDescriptor getTypeDescriptor = context.getUnboxedDescriptor(javaTypeId);
 			//
 			js.appendIsRequired(cgInit.isRequired());
 			js.append(" ");
@@ -303,7 +303,7 @@ public class AutoCG2JavaVisitor extends CG2JavaVisitor implements AutoCGModelVis
 			try {
 				CGValuedElement cgContainmentBody = DomainUtil.nonNullState(object.getBody());
 				Type csType = (Type) object.getAst();
-				TypeDescriptor typeDescriptor = context.getTypeDescriptor(csType.getTypeId(), false);
+				TypeDescriptor typeDescriptor = context.getUnboxedDescriptor(csType.getTypeId());
 				js.append("public ");
 				js.appendIsRequired(false);
 				js.append(" ");

@@ -1088,7 +1088,7 @@ public class PropertyImpl
 		 */
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = PivotUtil.getEvaluator(this);
 		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, this);
-		final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType).booleanValue();
 		return oclIsKindOf;
 	}
 
@@ -1123,7 +1123,7 @@ public class PropertyImpl
 		    if (CAUGHT_container instanceof InvalidValueException) {
 		        throw (InvalidValueException)CAUGHT_container;
 		    }
-		    final /*@Thrown*/ boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_0);
+		    final /*@Thrown*/ boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type_0).booleanValue();
 		    CAUGHT_self_71 = self_71;
 		}
 		catch (Exception e) {
@@ -1141,7 +1141,7 @@ public class PropertyImpl
 		    }
 		    final @NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
-		    final /*@Thrown*/ boolean b = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, this);
+		    final /*@Thrown*/ boolean b = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, this).booleanValue();
 		    CAUGHT_b = b;
 		}
 		catch (Exception e) {
@@ -1245,7 +1245,7 @@ public class PropertyImpl
 		        try {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL_0 = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
 		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = this.getDefaultExpression();
-		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL_0);
+		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL_0).booleanValue();
 		            CAUGHT_b = b;
 		        }
 		        catch (Exception e) {

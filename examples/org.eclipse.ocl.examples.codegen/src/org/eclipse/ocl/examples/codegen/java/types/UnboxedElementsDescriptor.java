@@ -64,6 +64,11 @@ public class UnboxedElementsDescriptor extends AbstractCollectionDescriptor impl
 	}
 
 	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
+	}
+
+	@Override
 	@Nullable
 	public Class<?> hasJavaClass() {
 		return null;

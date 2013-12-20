@@ -53,7 +53,6 @@ import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.types.BooleanObjectDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.BooleanPrimitiveDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedValueDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
@@ -195,7 +194,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter.class,
 		org.eclipse.ocl.examples.pivot.PivotPackage.class,
 		org.eclipse.ocl.examples.pivot.utilities.PivotUtil.class,
-		org.eclipse.osgi.util.NLS.class};
+		org.eclipse.osgi.util.NLS.class
+	};
 
 	public static void initPrimitive(Class<?> class1, Class<?> class2) {
 		javaPrimitiveClasses.put(class1, class2);
@@ -208,9 +208,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	private /*@LazyNonNull*/ Id2UnboxedJavaClassVisitor id2UnboxedJavaClassVisitor = null;
 	private /*@LazyNonNull*/ JavaGlobalContext globalContext = null;
 	private /*@LazyNonNull*/ GlobalPlace globalPlace = null;
-	private @NonNull Map<ElementId, SimpleDescriptor> simpleDescriptors = new HashMap<ElementId, SimpleDescriptor>();
 	private @NonNull Map<ElementId, BoxedDescriptor> boxedDescriptors = new HashMap<ElementId, BoxedDescriptor>();
-	private @NonNull Map<ElementId, UnboxedDescriptor> unboxedDescriptors = new HashMap<ElementId, UnboxedDescriptor>();
 	private /*@LazyNonNull*/ JavaAnnotationReader annotationReader = null;
 	
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
@@ -273,13 +271,137 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return ReferencesVisitor.INSTANCE;
 	}
 
+	@Override
+	public @NonNull BoxedDescriptor getBoxedDescriptor(@NonNull ElementId elementId) {
+		BoxedDescriptor boxedDescriptor = boxedDescriptors.get(elementId);
+		if (boxedDescriptor != null) {
+			return boxedDescriptor;
+		}
+		if (elementId instanceof ClassId) {
+			SimpleDescriptor simpleDescriptor = getClassDescriptor((ClassId) elementId);
+			if (simpleDescriptor != null) {
+				boxedDescriptors.put(elementId, simpleDescriptor);
+				return simpleDescriptor;
+			}
+//			return Object.class;
+		}
+		else if (elementId instanceof DataTypeId) {
+			SimpleDescriptor simpleDescriptor = getDataTypeDescriptor((DataTypeId) elementId);
+			if (simpleDescriptor != null) {
+				boxedDescriptors.put(elementId, simpleDescriptor);
+				return simpleDescriptor;
+			}
+		}
+		Class<?> boxedClass = getId2BoxedClassVisitor().doVisit(elementId);
+		Class<?> unboxedClass = getId2UnboxedClassVisitor().doVisit(elementId);
+		if (boxedClass == unboxedClass) {
+			BoxedDescriptor simpleDescriptor;
+			if (boxedClass == Object.class) {
+				simpleDescriptor = new RootObjectDescriptor(elementId);
+			}
+			else if (boxedClass == Boolean.class) {
+				simpleDescriptor = new BooleanObjectDescriptor(elementId);
+			}
+			else if (boxedClass == boolean.class) {
+				simpleDescriptor = new BooleanObjectDescriptor(elementId);
+//				maybePrimitive = true;
+			}
+			else {
+				simpleDescriptor = new SimpleValueDescriptor(elementId, boxedClass);
+			}
+			boxedDescriptors.put(elementId, simpleDescriptor);
+//			if (maybePrimitive) {
+//				return simpleDescriptor.getPrimitiveDescriptor();
+//			}
+//			else {
+				return simpleDescriptor;
+//			}
+		}
+		{
+			UnboxedDescriptor unboxedDescriptor = null;
+			if (unboxedClass == Object.class) {
+				unboxedDescriptor = new RootObjectDescriptor(elementId);
+			}
+			else if (elementId instanceof CollectionTypeId) {
+				CollectionTypeId collectionTypeId = (CollectionTypeId)elementId;
+				TypeId generalizedId = collectionTypeId.getGeneralizedId();
+				Type type;
+				if (generalizedId == collectionTypeId) {
+					type = metaModelManager.getIdResolver().getType(collectionTypeId, null);
+				}
+				else {
+					TypeId typeId = collectionTypeId.getElementTypeId();
+					type = metaModelManager.getIdResolver().getType(typeId, null);
+				}
+				EClassifier eClassifier = getEClassifier(type);
+				if (eClassifier != null) {
+					try {
+						Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
+						unboxedDescriptor = new EObjectsDescriptor(collectionTypeId, eClassifier, javaClass);
+					}
+					catch (Exception e) {
+						String instanceClassName = type.getInstanceClassName();
+						if (instanceClassName == null) {
+							instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
+						}
+						if (instanceClassName != null) {
+							unboxedDescriptor = new FutureEObjectsDescriptor(collectionTypeId, eClassifier, instanceClassName);
+						}
+//						else {
+//							unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClassifier);
+//						}
+					}
+				}
+				if (unboxedDescriptor == null) {
+					unboxedDescriptor = new UnboxedElementsDescriptor(collectionTypeId, metaModelManager, type);
+				}
+			}
+			else {
+				unboxedDescriptor = new UnboxedValueDescriptor(elementId, unboxedClass);
+			}
+			boxedDescriptor = new BoxedValueDescriptor(elementId, boxedClass, unboxedDescriptor);
+			boxedDescriptors.put(elementId, boxedDescriptor);
+			return boxedDescriptor;
+		}
+	}
+
 	public @NonNull CGModelResourceFactory getCGResourceFactory() {
 		return CG_RESOURCE_FACTORY;
+	}
+
+	protected @Nullable SimpleDescriptor getClassDescriptor(@NonNull ClassId elementId) {
+		Type type = metaModelManager.getIdResolver().getType(elementId, null);
+		EClassifier eClassifier = getEClassifier(type);
+		if (eClassifier != null) {
+			try {
+				Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
+				return new EObjectDescriptor(elementId, eClassifier, javaClass);
+			}
+			catch (Exception e) {
+				String instanceClassName = type.getInstanceClassName();
+				if (instanceClassName == null) {
+					instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
+				}
+				if (instanceClassName != null) {
+					return new FutureEObjectDescriptor(elementId, eClassifier, instanceClassName);
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public @Nullable String getConstantsClass() {
 		return null;
+	}
+
+	protected @Nullable SimpleDescriptor getDataTypeDescriptor(@NonNull DataTypeId elementId) {
+		Type type = metaModelManager.getIdResolver().getType(elementId, null);
+		String instanceClassName = type.getInstanceClassName();
+		if (instanceClassName == null) {
+			return null;
+		}
+		return new SimpleDataTypeDescriptor(elementId, instanceClassName);
 	}
 
 	protected EClass getEClass(@NonNull Type type) {
@@ -445,128 +567,43 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement) {
 		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
-		boolean maybePrimitive = maybePrimitive(cgElement);
-		boolean isBoxed = cgElement.isBoxed();
-		return getTypeDescriptor(elementId, isBoxed, maybePrimitive);
+		TypeDescriptor typeDescriptor = getBoxedDescriptor(elementId);
+		if (!cgElement.isBoxed()) {
+			typeDescriptor = typeDescriptor.getUnboxedDescriptor();
+		}
+		if (maybePrimitive(cgElement)) {
+			typeDescriptor = typeDescriptor.getPrimitiveDescriptor();
+		}
+		return typeDescriptor;
 	}
 
+	@Deprecated // Use getBoxed/UnboxedDescriptor
 	@Override
 	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed) {
-		return getTypeDescriptor(elementId, isBoxed, false);
+		TypeDescriptor typeDescriptor = getBoxedDescriptor(elementId);
+		if (!isBoxed) {
+			typeDescriptor = typeDescriptor.getUnboxedDescriptor();
+		}
+		return typeDescriptor;
+	}
+
+	@Deprecated // Use getBoxed/UnboxedDescriptor and then getPrimitive()
+	@Override
+	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed, boolean maybePrimitive) {
+		TypeDescriptor typeDescriptor = getBoxedDescriptor(elementId);
+		if (!isBoxed) {
+			typeDescriptor = typeDescriptor.getUnboxedDescriptor();
+		}
+		if (maybePrimitive) {
+			typeDescriptor = typeDescriptor.getPrimitiveDescriptor();
+		}
+		return typeDescriptor;
 	}
 
 	@Override
-	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed, boolean maybePrimitive) {
-		SimpleDescriptor simpleDescriptor = simpleDescriptors.get(elementId);
-		if (simpleDescriptor != null) {
-			return simpleDescriptor;
-		}
-		if (isBoxed) {
-			BoxedDescriptor boxedDescriptor = boxedDescriptors.get(elementId);
-			if (boxedDescriptor != null) {
-				return boxedDescriptor;
-			}
-		}
-		else {
-			UnboxedDescriptor unboxedDescriptor = unboxedDescriptors.get(elementId);
-			if (unboxedDescriptor != null) {
-				return unboxedDescriptor;
-			}
-		}
-		if (elementId instanceof ClassId) {
-			Type type = metaModelManager.getIdResolver().getType((ClassId)elementId, null);
-			EClassifier eClassifier = getEClassifier(type);
-			if (eClassifier != null) {
-				try {
-					Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
-					simpleDescriptor = new EObjectDescriptor(elementId, eClassifier, javaClass);
-					simpleDescriptors.put(elementId, simpleDescriptor);
-					return simpleDescriptor;
-				}
-				catch (Exception e) {
-					String instanceClassName = type.getInstanceClassName();
-					if (instanceClassName == null) {
-						instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
-					}
-					if (instanceClassName != null) {
-						simpleDescriptor = new FutureEObjectDescriptor(elementId, eClassifier, instanceClassName);
-						simpleDescriptors.put(elementId, simpleDescriptor);
-						return simpleDescriptor;
-					}
-				}
-			}
-//			return Object.class;
-		}
-		else if (elementId instanceof DataTypeId) {
-			Type type = metaModelManager.getIdResolver().getType((DataTypeId)elementId, null);
-			String instanceClassName = type.getInstanceClassName();
-			if (instanceClassName != null) {
-				simpleDescriptor = new SimpleDataTypeDescriptor(elementId, instanceClassName);
-				simpleDescriptors.put(elementId, simpleDescriptor);
-				return simpleDescriptor;
-			}
-		}
-		Class<?> boxedClass = getId2BoxedClassVisitor().doVisit(elementId);
-		Class<?> unboxedClass = getId2UnboxedClassVisitor().doVisit(elementId);
-		if (boxedClass == unboxedClass) {
-			if (boxedClass == Object.class) {
-				simpleDescriptor = new RootObjectDescriptor(elementId);
-			}
-			else if (boxedClass == Boolean.class) {
-				simpleDescriptor = maybePrimitive ? new BooleanPrimitiveDescriptor(elementId) : new BooleanObjectDescriptor(elementId);
-			}
-			else if (boxedClass == boolean.class) {
-				simpleDescriptor = new BooleanPrimitiveDescriptor(elementId);
-			}
-			else {
-				simpleDescriptor = new SimpleValueDescriptor(elementId, boxedClass);
-			}
-			simpleDescriptors.put(elementId, simpleDescriptor);
-			return simpleDescriptor;
-		}
-		if (isBoxed) {
-			BoxedDescriptor boxedDescriptor = new BoxedValueDescriptor(elementId, boxedClass);
-			boxedDescriptors.put(elementId, boxedDescriptor);
-			return boxedDescriptor;
-		}
-		else {
-			UnboxedDescriptor unboxedDescriptor = null;
-			if (unboxedClass == Object.class) {
-				unboxedDescriptor = new RootObjectDescriptor(elementId);
-			}
-			else if (elementId instanceof CollectionTypeId) {
-				CollectionTypeId collectionTypeId = (CollectionTypeId)elementId;
-				TypeId typeId = collectionTypeId.getElementTypeId();
-				Type type = metaModelManager.getIdResolver().getType(typeId, null);
-				EClassifier eClassifier = getEClassifier(type);
-				if (eClassifier != null) {
-					try {
-						Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
-						unboxedDescriptor = new EObjectsDescriptor(collectionTypeId, eClassifier, javaClass);
-					}
-					catch (Exception e) {
-						String instanceClassName = type.getInstanceClassName();
-						if (instanceClassName == null) {
-							instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
-						}
-						if (instanceClassName != null) {
-							unboxedDescriptor = new FutureEObjectsDescriptor(collectionTypeId, eClassifier, instanceClassName);
-						}
-//						else {
-//							unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClassifier);
-//						}
-					}
-				}
-				if (unboxedDescriptor == null) {
-					unboxedDescriptor = new UnboxedElementsDescriptor(collectionTypeId, metaModelManager, type);
-				}
-			}
-			else {
-				unboxedDescriptor = new UnboxedValueDescriptor(elementId, unboxedClass);
-			}
-			unboxedDescriptors.put(elementId, unboxedDescriptor);
-			return unboxedDescriptor;
-		}
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor(@NonNull ElementId elementId) {
+		BoxedDescriptor typeDescriptor = getBoxedDescriptor(elementId);
+		return typeDescriptor.getUnboxedDescriptor();
 	}
 
 	@Override
@@ -578,7 +615,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 		CGTypeId cgTypeId = getAnalyzer().getTypeId(asOperation.getOwningType().getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = getTypeDescriptor(elementId, false);
+		TypeDescriptor requiredTypeDescriptor = getUnboxedDescriptor(elementId);
 		String getAccessor = genModelHelper.getOperationAccessor(asOperation);
 		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
 		if (requiredJavaClass == null) {
@@ -599,7 +636,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 		CGTypeId cgTypeId = getAnalyzer().getTypeId(asProperty.getOwningType().getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = getTypeDescriptor(elementId, false);
+		TypeDescriptor requiredTypeDescriptor = getUnboxedDescriptor(elementId);
 		String getAccessor = genModelHelper.getGetAccessor((EStructuralFeature)eStructuralFeature);
 		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
 		if (requiredJavaClass == null) {

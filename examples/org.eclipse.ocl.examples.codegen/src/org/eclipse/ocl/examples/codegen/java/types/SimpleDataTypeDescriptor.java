@@ -44,14 +44,19 @@ public class SimpleDataTypeDescriptor extends AbstractDescriptor implements Simp
 	}
 
 	@Override
+	@NonNull
+	public String getClassName() {
+		return className;
+	}
+
+	@Override
 	public @NonNull Class<?> getJavaClass() {
 		return NamedFuture.class;
 	}
 
 	@Override
-	@NonNull
-	public String getClassName() {
-		return className;
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
 	}
 
 	@Override

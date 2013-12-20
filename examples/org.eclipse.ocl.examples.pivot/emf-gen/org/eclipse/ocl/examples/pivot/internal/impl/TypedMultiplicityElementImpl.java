@@ -84,7 +84,7 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = PivotUtil.getEvaluator(this);
 		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
 		final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
-		final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
+		final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0).booleanValue();
 		return conformsTo;
 	}
 

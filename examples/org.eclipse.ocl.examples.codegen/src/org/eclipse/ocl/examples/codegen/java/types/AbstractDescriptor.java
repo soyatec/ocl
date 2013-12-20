@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
@@ -98,10 +99,13 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 	}
 
 	@Override
-	public void appendCast(@NonNull JavaStream js) {
+	public void appendCast(@NonNull JavaStream js, @Nullable Class<?> actualJavaClass, @Nullable SubStream subStream) {
 		js.append("(");
 		append(js);
 		js.append(")");
+		if (subStream != null) {
+			subStream.append();
+		}
 	}
 
 	@Override
@@ -131,6 +135,11 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 	
 	public @NonNull ElementId getElementId() {
 		return elementId;
+	}
+
+	@Override
+	public  @NonNull TypeDescriptor getPrimitiveDescriptor() {
+		return this;
 	}
 
 	@Override

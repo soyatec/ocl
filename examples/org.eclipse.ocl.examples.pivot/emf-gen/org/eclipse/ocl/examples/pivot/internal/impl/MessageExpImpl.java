@@ -358,7 +358,7 @@ public class MessageExpImpl
 		            throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = target.getType();
-		        final /*@Thrown*/ boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0);
+		        final /*@Thrown*/ boolean self_71 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType_0).booleanValue();
 		        CAUGHT_self_71 = self_71;
 		    }
 		    catch (Exception e) {

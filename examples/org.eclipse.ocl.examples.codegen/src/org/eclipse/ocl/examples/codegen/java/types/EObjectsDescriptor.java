@@ -71,6 +71,11 @@ public class EObjectsDescriptor extends AbstractCollectionDescriptor implements 
 	}
 
 	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
+	}
+
+	@Override
 	public @Nullable Class<?> hasJavaClass() {
 		return javaClass;
 	}

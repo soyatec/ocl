@@ -15,9 +15,11 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 /**
@@ -35,10 +37,19 @@ public class BooleanPrimitiveDescriptor extends SimpleValueDescriptor implements
 	}
 
 	@Override
-	public void appendCast(@NonNull JavaStream js) {
-		js.append("(");
-		js.appendClassReference(Boolean.class);
-		js.append(")");
+	public void appendCast(@NonNull JavaStream js, @Nullable Class<?> actualJavaClass, @Nullable SubStream subStream) {
+		if ((subStream != null) && (actualJavaClass == Boolean.class)) {
+			subStream.append();
+			js.append(".booleanValue()");
+		}
+		else {
+			js.append("(");
+			js.appendClassReference(Boolean.class);
+			js.append(")");
+			if (subStream != null) {
+				subStream.append();
+			}
+		}
 	}
 
 	@Override

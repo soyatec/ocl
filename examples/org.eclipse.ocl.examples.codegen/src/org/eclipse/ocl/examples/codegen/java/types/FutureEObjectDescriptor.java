@@ -45,6 +45,12 @@ public class FutureEObjectDescriptor extends AbstractDescriptor implements Simpl
 	}
 
 	@Override
+	@NonNull
+	public String getClassName() {
+		return className;
+	}
+
+	@Override
 	public @Nullable EClassifier getEClassifier() {
 		return eClassifier;
 	}
@@ -55,9 +61,8 @@ public class FutureEObjectDescriptor extends AbstractDescriptor implements Simpl
 	}
 
 	@Override
-	@NonNull
-	public String getClassName() {
-		return className;
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
 	}
 
 	@Override

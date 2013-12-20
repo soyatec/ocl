@@ -505,7 +505,7 @@ public class PropertyCallExpImpl
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
 		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = this.getSpecializedReferredPropertyOwningType();
-		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
+		        final /*@Thrown*/ boolean b = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {

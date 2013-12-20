@@ -97,6 +97,11 @@ public class JavaStream
 		return createOptions;
 	}
 	
+	public static interface SubStream
+	{
+		void append();
+	}
+	
 	protected @NonNull JavaCodeGenerator codeGenerator;
 	protected @NonNull CG2JavaVisitor cg2java;
 	protected @NonNull CodeGenAnalyzer analyzer;
@@ -194,7 +199,7 @@ public class JavaStream
 			TypeDescriptor actualTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
 			if (cgValue.getNamedValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor)) {
 				append("(");
-				requiredTypeDescriptor.appendCast(this);
+				requiredTypeDescriptor.appendCast(this, null, null);
 				appendValueName(cgValue);
 				append(")");
 			}
@@ -212,7 +217,7 @@ public class JavaStream
 			TypeDescriptor actualTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
 			if (cgValue.getNamedValue().isCaught()) {
 				append("(");
-				actualTypeDescriptor.appendCast(this);
+				actualTypeDescriptor.appendCast(this, null, null);
 				appendValueName(cgValue);
 				append(")");
 			}
@@ -243,7 +248,7 @@ public class JavaStream
 		}
 		else {
 			@NonNull TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
-			typeDescriptor.appendCast(this);
+			typeDescriptor.appendCast(this, null, null);
 		}
 	}
 
@@ -255,8 +260,19 @@ public class JavaStream
 			@NonNull TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
 			Class<?> requiredJavaClass = typeDescriptor.getJavaClass();
 			if ((actualJavaClass == null) || !requiredJavaClass.isAssignableFrom(actualJavaClass)) {
-				typeDescriptor.appendCast(this);
+				typeDescriptor.appendCast(this, null, null);
 			}
+		}
+	}
+
+	public void appendClassCast(@NonNull CGValuedElement cgValue, @Nullable Class<?> actualJavaClass, @NonNull SubStream subStream) {
+		@NonNull TypeDescriptor typeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
+		Class<?> requiredJavaClass = typeDescriptor.getJavaClass();
+		if ((actualJavaClass == null) || !requiredJavaClass.isAssignableFrom(actualJavaClass)) {
+			typeDescriptor.appendCast(this, actualJavaClass, subStream);
+		}
+		else {
+			subStream.append();
 		}
 	}
 
@@ -668,7 +684,7 @@ public class JavaStream
 		else {
 			TypeDescriptor actualTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
 			if (!cgValue.isNull() && (cgValue.getNamedValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor))) {
-				requiredTypeDescriptor.appendCast(this);
+				requiredTypeDescriptor.appendCast(this, null, null);
 			}
 			appendValueName(cgValue);
 		}

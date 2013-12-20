@@ -685,7 +685,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		            final /*@Thrown*/ boolean self_72 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
+		            final /*@Thrown*/ boolean self_72 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0).booleanValue();
 		            CAUGHT_self_72 = self_72;
 		        }
 		        catch (Exception e) {
@@ -699,7 +699,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type_0 = source_0.getType();
-		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_OrderedSetType_0);
+		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_OrderedSetType_0).booleanValue();
 		            CAUGHT_b = b;
 		        }
 		        catch (Exception e) {
@@ -762,12 +762,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        /*@Thrown*/ boolean b_0;
 		        if (symbol_8) {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType_1 = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
-		            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_OrderedSetType_1);
+		            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_OrderedSetType_1).booleanValue();
 		            b_0 = oclIsKindOf;
 		        }
 		        else {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType_0 = idResolver.getType(PivotTables.CLSSid_SetType, null);
-		            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_SetType_0);
+		            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_SetType_0).booleanValue();
 		            b_0 = oclIsKindOf_0;
 		        }
 		        CAUGHT_b_0 = b_0;
@@ -898,7 +898,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            throw new InvalidValueException("Null source for \'pivot::CollectionType.elementType\'");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType elementType = oclAsType.getElementType();
-		        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_CollectionType_1);
+		        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_CollectionType_1).booleanValue();
 		        @Nullable /*@Thrown*/ DomainType symbol_0;
 		        if (oclIsKindOf) {
 		            final @Nullable /*@Thrown*/ CollectionType oclAsType_0 = (CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_CollectionType_1);
@@ -1272,7 +1272,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		            final /*@Thrown*/ boolean self_72 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
+		            final /*@Thrown*/ boolean self_72 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0).booleanValue();
 		            CAUGHT_self_72 = self_72;
 		        }
 		        catch (Exception e) {
@@ -1286,7 +1286,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type_0 = source_0.getType();
-		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_OrderedSetType_0);
+		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_OrderedSetType_0).booleanValue();
 		            CAUGHT_b = b;
 		        }
 		        catch (Exception e) {
@@ -1349,12 +1349,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        /*@Thrown*/ boolean b_0;
 		        if (symbol_8) {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType_1 = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
-		            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_SequenceType_1);
+		            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_SequenceType_1).booleanValue();
 		            b_0 = oclIsKindOf;
 		        }
 		        else {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType_0 = idResolver.getType(PivotTables.CLSSid_BagType, null);
-		            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_BagType_0);
+		            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_BagType_0).booleanValue();
 		            b_0 = oclIsKindOf_0;
 		        }
 		        CAUGHT_b_0 = b_0;
@@ -1705,7 +1705,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType_0 = idResolver.getType(PivotTables.CLSSid_BagType, null);
 		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType_0);
+		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType_0).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {
@@ -3597,7 +3597,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		            final /*@Thrown*/ boolean self_72 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
+		            final /*@Thrown*/ boolean self_72 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0).booleanValue();
 		            CAUGHT_self_72 = self_72;
 		        }
 		        catch (Exception e) {
@@ -3611,7 +3611,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type_0 = source_0.getType();
-		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_BagType_0);
+		            final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_0, TYP_pivot_c_c_BagType_0).booleanValue();
 		            CAUGHT_b = b;
 		        }
 		        catch (Exception e) {
@@ -3674,12 +3674,12 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        /*@Thrown*/ boolean b_0;
 		        if (symbol_8) {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType_1 = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
-		            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_SequenceType_1);
+		            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_SequenceType_1).booleanValue();
 		            b_0 = oclIsKindOf;
 		        }
 		        else {
 		            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType_0 = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
-		            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_OrderedSetType_0);
+		            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type_2, TYP_pivot_c_c_OrderedSetType_0).booleanValue();
 		            b_0 = oclIsKindOf_0;
 		        }
 		        CAUGHT_b_0 = b_0;
@@ -3944,7 +3944,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		                throw new InvalidValueException("Null source for \'pivot::TypedElement.type\'");
 		            }
 		            final @Nullable /*@Thrown*/ DomainType type_0 = _1.getType();
-		            final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, elementType, type_0);
+		            final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, elementType, type_0).booleanValue();
 		            CAUGHT_conformsTo = conformsTo;
 		        }
 		        catch (Exception e) {

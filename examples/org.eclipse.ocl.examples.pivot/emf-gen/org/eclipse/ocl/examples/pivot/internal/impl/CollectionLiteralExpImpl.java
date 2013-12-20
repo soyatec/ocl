@@ -251,7 +251,7 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType_0 = idResolver.getType(PivotTables.CLSSid_SetType, null);
 		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType_0);
+		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType_0).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {
@@ -361,7 +361,7 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType_0 = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
 		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType_0);
+		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType_0).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {
@@ -471,7 +471,7 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType_0 = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
 		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0);
+		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType_0).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {
@@ -580,7 +580,7 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType_0 = idResolver.getType(PivotTables.CLSSid_BagType, null);
 		        final @Nullable /*@Thrown*/ DomainType type = this.getType();
-		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType_0);
+		        final /*@Thrown*/ boolean b = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType_0).booleanValue();
 		        CAUGHT_b = b;
 		    }
 		    catch (Exception e) {

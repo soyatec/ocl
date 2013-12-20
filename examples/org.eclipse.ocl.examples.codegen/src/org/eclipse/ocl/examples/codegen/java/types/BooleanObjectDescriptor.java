@@ -25,8 +25,11 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
  */
 public class BooleanObjectDescriptor extends SimpleValueDescriptor implements SimpleDescriptor
 {
+	protected final @NonNull BooleanPrimitiveDescriptor primitiveTypeDescriptor;
+	
 	public BooleanObjectDescriptor(@NonNull ElementId elementId) {
 		super(elementId, Boolean.class);
+		primitiveTypeDescriptor = new BooleanPrimitiveDescriptor(elementId);
 	}
 
 	@Override
@@ -45,5 +48,10 @@ public class BooleanObjectDescriptor extends SimpleValueDescriptor implements Si
 			js.append(" != ");
 			js.append(thatName);
 		}
+	}
+
+	@Override
+	public @NonNull TypeDescriptor getPrimitiveDescriptor() {
+		return primitiveTypeDescriptor;
 	}
 }

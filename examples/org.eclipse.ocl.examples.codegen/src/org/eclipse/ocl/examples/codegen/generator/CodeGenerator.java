@@ -26,6 +26,8 @@ import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cse.CommonSubexpressionEliminator;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
+import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -44,6 +46,7 @@ public interface CodeGenerator
 	@NonNull DependencyVisitor createDependencyVisitor();
 	@NonNull FieldingAnalyzer createFieldingAnalyzer();
 	@NonNull CodeGenAnalyzer getAnalyzer();
+	@NonNull BoxedDescriptor getBoxedDescriptor(@NonNull ElementId elementId);
 	@Nullable String getConstantsClass();
 	@NonNull String getDefaultIndent();
 	@NonNull GenModelHelper getGenModelHelper();
@@ -55,8 +58,11 @@ public interface CodeGenerator
 	@NonNull CodeGenOptions getOptions();
 	@NonNull ReferencesVisitor createReferencesVisitor();
 	@NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement);
+	@Deprecated // Use getBoxed/UnboxedDescriptor
 	@NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed);
+	@Deprecated // Use getBoxed/UnboxedDescriptor and then getPrimitive()
 	@NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed, boolean maybePrimitive);
+	@NonNull UnboxedDescriptor getUnboxedDescriptor(@NonNull ElementId elementId);
 	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
 
 	/**

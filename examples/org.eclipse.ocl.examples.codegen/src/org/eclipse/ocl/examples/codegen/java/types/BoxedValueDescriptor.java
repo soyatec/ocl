@@ -25,8 +25,16 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
  */
 public class BoxedValueDescriptor extends AbstractValueDescriptor implements BoxedDescriptor
 {
-	public BoxedValueDescriptor(@NonNull ElementId elementId, @NonNull Class<?> javaClass) {
+	protected final @NonNull UnboxedDescriptor unboxedDescriptor;
+	
+	public BoxedValueDescriptor(@NonNull ElementId elementId, @NonNull Class<?> javaClass, @NonNull UnboxedDescriptor unboxedDescriptor) {
 		super(elementId, javaClass);
+		this.unboxedDescriptor = unboxedDescriptor;
+	}
+
+	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return unboxedDescriptor;
 	}
 
 	@Override

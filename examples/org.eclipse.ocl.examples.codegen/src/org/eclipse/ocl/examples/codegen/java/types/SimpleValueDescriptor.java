@@ -36,4 +36,9 @@ public class SimpleValueDescriptor extends AbstractValueDescriptor implements Si
 		}
 		return javaClass.isAssignableFrom(typeDescriptor.getJavaClass());
 	}
+
+	@Override
+	public @NonNull UnboxedDescriptor getUnboxedDescriptor() {
+		return this;
+	}
 }
