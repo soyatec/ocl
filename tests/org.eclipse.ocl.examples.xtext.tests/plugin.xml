@@ -68,12 +68,6 @@ The actual constraints are lazily loaded by the first validation run that uses t
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Bug412685 NOT -->
-      <!-- package uri="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib" class="oclstdlib.OclstdlibPackage"/-->
-      <package uri="dummy-protocol://dummy-nsuri/bug412685" class="codegen.company.CodegencompanyPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Bug412736 NOT -->
       <!--package uri="http://bug412736" class="bug412736.Bug412736Package"/-->
       <package uri="dummy-protocol://dummy-nsuri/bug412736" class="codegen.company.CodegencompanyPackage"/>
