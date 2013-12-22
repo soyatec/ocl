@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.dynamic;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,11 +23,11 @@ import java.util.Locale;
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
+import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject;
 import javax.tools.SimpleJavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
-import javax.tools.JavaCompiler.CompilationTask;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -79,9 +78,10 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 	
 	public static @Nullable LibraryOperation loadLibraryOperationClass(@NonNull String qualifiedName, @NonNull String javaCodeSource) throws Exception {
 		Class<?> testClass = loadClass(qualifiedName, javaCodeSource);
-		Field testField = testClass.getField("INSTANCE");
+		return (LibraryOperation) testClass.newInstance();
+//		Field testField = testClass.getField("INSTANCE");
 //		System.out.printf("%6.3f get\n", 0.001 * (System.currentTimeMillis()-base));
-		return (LibraryOperation) testField.get(null);
+//		return (LibraryOperation) testField.get(null);
 	}
 	
     private String javaCode ;

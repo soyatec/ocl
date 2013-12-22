@@ -58,9 +58,6 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		js.append("\n");
 		js.append("{\n");
 		js.pushIndentation(null);
-		js.append("public static final ");
-		js.appendIsRequired(true);
-		js.append(" " + className + " " + globalContext.getInstanceName() + " = new " + className + "();\n");
 		if (sortedGlobals != null) {
 			generateGlobals(sortedGlobals);
 		}

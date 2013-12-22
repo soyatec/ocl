@@ -1139,13 +1139,20 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 	
 	protected void disposeResourceSet() {
-        for (Resource res : resourceSet.getResources()) {
-            res.unload();
-            res.eAdapters().clear();
-        }
-        resourceSet.getResources().clear();
-        resourceSet.eAdapters().clear();
-        resourceSet = null;
+		ResourceSet resourceSet2 = resourceSet;
+		if (resourceSet2 != null) {
+			ProjectMap projectMap = basicGetProjectMap();
+			if (projectMap != null) {
+				projectMap.unload(resourceSet2);
+			}
+	        for (Resource res : resourceSet2.getResources()) {
+	            res.unload();
+	            res.eAdapters().clear();
+	        }
+	        resourceSet2.getResources().clear();
+	        resourceSet2.eAdapters().clear();
+	        resourceSet = null;
+		}
 		standardResources = null;
 	}
 	
@@ -1499,7 +1506,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		TestCaseAppender.INSTANCE.install();
  		OCLstdlib.install();
  		doEssentialOCLSetup();
-		metaModelManager = new MetaModelManager();
+		metaModelManager = new MetaModelManager(getProjectMap());
 		idResolver = metaModelManager.getIdResolver();
 		if ((resourceSet != null) && DISPOSE_RESOURCE_SET) {
         	disposeResourceSet();
@@ -1578,8 +1585,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 				}
 			}
 		}
-		unloadResourceSet(resourceSet);
-		resourceSet = null;
+		disposeResourceSet();
+//		unloadResourceSet(resourceSet);
+//		resourceSet = null;
 		super.tearDown();
 	}
 

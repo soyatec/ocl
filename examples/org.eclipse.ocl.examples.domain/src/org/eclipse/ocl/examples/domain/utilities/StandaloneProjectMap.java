@@ -827,7 +827,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		/**
 		 * Unload the package registry to force a reload.
 		 */
-		void unload(@NonNull EPackage.Registry packageRegistry);
+		void unload(@NonNull ResourceSet resourceSet);
 	}
 
 	/**
@@ -978,6 +978,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			platformPluginURIDescriptor.uninstall(packageRegistry);
 			platformResourceURIDescriptor.uninstall(packageRegistry);
 			resourceSet = null;
+			firstEPackage = null;
+			ePackage = null;
+			eModel = null;
 			if (target != null) {
 				target.eAdapters().remove(this);
 				target = null;
@@ -1388,10 +1391,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 		}
 
-		public void unload(@NonNull EPackage.Registry packageRegistry) {
+		public void unload(@NonNull ResourceSet resourceSet) {
 			if (ecorePackageURI != null) {
 				synchronized (resourceSet2packageLoadStatus) {
-					IPackageLoadStatus packageLoadStatus = resourceSet2packageLoadStatus.remove(packageRegistry);
+					IPackageLoadStatus packageLoadStatus = resourceSet2packageLoadStatus.remove(resourceSet);
 					if (packageLoadStatus != null) {
 						packageLoadStatus.dispose();
 					}
@@ -1863,6 +1866,13 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		return adapter;
 	}
 
+	public static void dispose(@NonNull ResourceSet resourceSet) {
+		StandaloneProjectMap projectMap = findAdapter(resourceSet);
+		if (projectMap != null) {
+			projectMap.unload(resourceSet);
+		}
+	}
+
 	/**
 	 * Return the EPackage.Registry for a resourceSet or the Global
 	 * {@link EPackage.Registry.INSTANCE} if resourceSet is null.
@@ -2318,5 +2328,19 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 		}
 		return s.toString();
+	}
+
+	public void unload(@NonNull ResourceSet resourceSet) {
+		if (project2descriptor != null) {
+			for (IProjectDescriptor projectDescriptor : project2descriptor.values()) {
+				Collection<IPackageDescriptor> packageDescriptors = projectDescriptor.getPackageDescriptors();
+				if (packageDescriptors != null) {
+					for (IPackageDescriptor packageDescriptor : packageDescriptors) {
+						assert packageDescriptor != null;
+						packageDescriptor.unload(resourceSet);
+					}
+				}
+			}
+		}
 	}
 }

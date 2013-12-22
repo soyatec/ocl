@@ -296,6 +296,10 @@ public class PivotTestCase extends TestCase
 		return assertDiagnostics(prefix, diagnostics, messages);
 	}
 
+	public static @Nullable ProjectMap basicGetProjectMap() {
+		return projectMap;
+	}
+
 	/**
 	 * Install a platform:/resource/project... mapping for all folders in
 	 * $WORKSPACE_LOC/* if defined, or $user.dir/../* otherwise.
