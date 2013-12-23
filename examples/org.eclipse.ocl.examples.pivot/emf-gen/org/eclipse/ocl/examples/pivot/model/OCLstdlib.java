@@ -291,6 +291,9 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull BagType _Bag_Bag_selectByType_TT = createBagType("Bag"/*TT*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_T = createBagType("Bag"/*T*/, "0", "*");
 		protected final @NonNull BagType _Bag_Collection_T = createBagType("Bag"/*T*/, "0", "*");
+		protected final @NonNull BagType _Bag_Collection_Collection_T = createBagType("Bag"/*Collection*/, "0", "*");
+		protected final @NonNull BagType _Bag_Enumeration = createBagType("Bag"/*Enumeration*/, "0", "*");
+		protected final @NonNull BagType _Bag_Metaclass = createBagType("Bag"/*Metaclass*/, "0", "*");
 		protected final @NonNull BagType _Bag_OclElement = createBagType("Bag"/*OclElement*/, "0", "*");
 		protected final @NonNull BagType _Bag_OclSelf = createBagType("Bag"/*OclSelf*/, "0", "*");
 		protected final @NonNull BagType _Bag_Set_flatten_T2 = createBagType("Bag"/*T2*/, "0", "*");
@@ -317,7 +320,10 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_Collection_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_T = createCollectionType("Collection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Collection_Collection_T = createCollectionType("Collection"/*Collection*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_EnumerationLiteral = createCollectionType("Collection"/*EnumerationLiteral*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Enumeration = createCollectionType("Collection"/*Enumeration*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Metaclass = createCollectionType("Collection"/*Metaclass*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OclAny = createCollectionType("Collection"/*OclAny*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OclElement = createCollectionType("Collection"/*OclElement*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OclSelf = createCollectionType("Collection"/*OclSelf*/, "0", "*");
@@ -367,6 +373,9 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull SetType _Set_Tuple = createSetType("Set"/*Tuple*/, "0", "*");
 		protected final @NonNull SetType _Set_Bag_T = createSetType("Set"/*T*/, "0", "*");
 		protected final @NonNull SetType _Set_Collection_T = createSetType("Set"/*T*/, "0", "*");
+		protected final @NonNull SetType _Set_Collection_Collection_T = createSetType("Set"/*Collection*/, "0", "*");
+		protected final @NonNull SetType _Set_Enumeration = createSetType("Set"/*Enumeration*/, "0", "*");
+		protected final @NonNull SetType _Set_Metaclass = createSetType("Set"/*Metaclass*/, "0", "*");
 		protected final @NonNull SetType _Set_OclElement = createSetType("Set"/*OclElement*/, "0", "*");
 		protected final @NonNull SetType _Set_OclSelf = createSetType("Set"/*OclSelf*/, "0", "*");
 		protected final @NonNull SetType _Set_Set_flatten_T2 = createSetType("Set"/*T2*/, "0", "*");
@@ -377,7 +386,10 @@ public class OCLstdlib extends ASResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Tuple = createCollectionType("UniqueCollection"/*Tuple*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Bag_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Collection_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Collection_Collection_T = createCollectionType("UniqueCollection"/*Collection*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_EnumerationLiteral = createCollectionType("UniqueCollection"/*EnumerationLiteral*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Enumeration = createCollectionType("UniqueCollection"/*Enumeration*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Metaclass = createCollectionType("UniqueCollection"/*Metaclass*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OclAny = createCollectionType("UniqueCollection"/*OclAny*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OclElement = createCollectionType("UniqueCollection"/*OclElement*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OclSelf = createCollectionType("UniqueCollection"/*OclSelf*/, "0", "*");
@@ -539,6 +551,21 @@ public class OCLstdlib extends ASResourceImpl
 			type.setElementType(_Collection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Collection_T);
+			orphanTypes.add(type = _Bag_Collection_Collection_T);
+			type.setUnspecializedElement(_Bag_Bag_T_1);
+			type.setElementType(_Collection_Collection_T_1);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Collection_Collection_T);
+			orphanTypes.add(type = _Bag_Enumeration);
+			type.setUnspecializedElement(_Bag_Bag_T_1);
+			type.setElementType(_Enumeration);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Enumeration);
+			orphanTypes.add(type = _Bag_Metaclass);
+			type.setUnspecializedElement(_Bag_Bag_T_1);
+			type.setElementType(_Metaclass);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Metaclass);
 			orphanTypes.add(type = _Bag_OclElement);
 			type.setUnspecializedElement(_Bag_Bag_T_1);
 			type.setElementType(_OclElement);
@@ -668,9 +695,24 @@ public class OCLstdlib extends ASResourceImpl
 			type.setElementType(_Collection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Collection_Collection_T);
+			type.setUnspecializedElement(_Collection_Collection_T_1);
+			type.setElementType(_Collection_Collection_T_1);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_EnumerationLiteral);
 			type.setUnspecializedElement(_Collection_Collection_T_1);
 			type.setElementType(_EnumerationLiteral);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Enumeration);
+			type.setUnspecializedElement(_Collection_Collection_T_1);
+			type.setElementType(_Enumeration);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Metaclass);
+			type.setUnspecializedElement(_Collection_Collection_T_1);
+			type.setElementType(_Metaclass);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_OclAny);
@@ -927,6 +969,24 @@ public class OCLstdlib extends ASResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_Collection_T);
 			superClasses.add(_UniqueCollection_Collection_T);
+			orphanTypes.add(type = _Set_Collection_Collection_T);
+			type.setUnspecializedElement(_Set_Set_T);
+			type.setElementType(_Collection_Collection_T_1);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Collection_Collection_T);
+			superClasses.add(_UniqueCollection_Collection_Collection_T);
+			orphanTypes.add(type = _Set_Enumeration);
+			type.setUnspecializedElement(_Set_Set_T);
+			type.setElementType(_Enumeration);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Enumeration);
+			superClasses.add(_UniqueCollection_Enumeration);
+			orphanTypes.add(type = _Set_Metaclass);
+			type.setUnspecializedElement(_Set_Set_T);
+			type.setElementType(_Metaclass);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Metaclass);
+			superClasses.add(_UniqueCollection_Metaclass);
 			orphanTypes.add(type = _Set_OclElement);
 			type.setUnspecializedElement(_Set_Set_T);
 			type.setElementType(_OclElement);
@@ -983,11 +1043,26 @@ public class OCLstdlib extends ASResourceImpl
 			type.setElementType(_Collection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Collection_T);
+			orphanTypes.add(type = _UniqueCollection_Collection_Collection_T);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_Collection_Collection_T_1);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Collection_Collection_T);
 			orphanTypes.add(type = _UniqueCollection_EnumerationLiteral);
 			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_EnumerationLiteral);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_EnumerationLiteral);
+			orphanTypes.add(type = _UniqueCollection_Enumeration);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_Enumeration);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Enumeration);
+			orphanTypes.add(type = _UniqueCollection_Metaclass);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_Metaclass);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Metaclass);
 			orphanTypes.add(type = _UniqueCollection_OclAny);
 			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_OclAny);
@@ -2415,10 +2490,13 @@ public class OCLstdlib extends ASResourceImpl
 			ownedParameters.add(parameter = createParameter("lambda", _Lambda_UniqueCollection_T, true));
 		}
 
+		protected final @NonNull Property pr_Collection_T_Collection_elementType = createProperty("Collection", _Set_Collection_Collection_T);
 		protected final @NonNull Property pr_Collection_Collection_T_elementType = createProperty("elementType", _Collection_T);
 		protected final @NonNull Property pr_Collection_Collection_T_lower = createProperty("lower", _Integer);
 		protected final @NonNull Property pr_Collection_Collection_T_upper = createProperty("upper", _Integer);
 		protected final @NonNull Property pr_Enumeration_allLiterals = createProperty("allLiterals", _OrderedSet_EnumerationLiteral);
+		protected final @NonNull Property pr_EnumerationLiteral_Enumeration_allLiterals = createProperty("Enumeration", _Set_Enumeration);
+		protected final @NonNull Property pr_Metaclass_T_Metaclass_instanceType = createProperty("Metaclass", _Set_Metaclass);
 		protected final @NonNull Property pr_Metaclass_instanceType = createProperty("instanceType", _Metaclass_T);
 
 		protected void installProperties() {
@@ -2428,6 +2506,7 @@ public class OCLstdlib extends ASResourceImpl
 			ownedProperties.add(property = pr_Collection_Collection_T_elementType);
 			property.setIsResolveProxies(true);
 			property.setIsStatic(true);
+			property.setOpposite(pr_Collection_T_Collection_elementType);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionElementTypeProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionElementTypeProperty.INSTANCE);
 			ownedProperties.add(property = pr_Collection_Collection_T_lower);
@@ -2440,18 +2519,34 @@ public class OCLstdlib extends ASResourceImpl
 			property.setIsStatic(true);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.collection.CollectionUpperProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.collection.CollectionUpperProperty.INSTANCE);
+			ownedProperties = _Collection_T.getOwnedAttribute();
+			ownedProperties.add(property = pr_Collection_T_Collection_elementType);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Collection_Collection_T_elementType);
 			ownedProperties = _Enumeration.getOwnedAttribute();
 			ownedProperties.add(property = pr_Enumeration_allLiterals);
 			property.setIsResolveProxies(true);
 			property.setIsStatic(true);
+			property.setOpposite(pr_EnumerationLiteral_Enumeration_allLiterals);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty.INSTANCE);
+			ownedProperties = _EnumerationLiteral.getOwnedAttribute();
+			ownedProperties.add(property = pr_EnumerationLiteral_Enumeration_allLiterals);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Enumeration_allLiterals);
 			ownedProperties = _Metaclass.getOwnedAttribute();
 			ownedProperties.add(property = pr_Metaclass_instanceType);
 			property.setIsResolveProxies(true);
-			property.setIsStatic(true);
+			property.setOpposite(pr_Metaclass_T_Metaclass_instanceType);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty.INSTANCE);
+			ownedProperties = _Metaclass_T.getOwnedAttribute();
+			ownedProperties.add(property = pr_Metaclass_T_Metaclass_instanceType);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Metaclass_instanceType);
 		}
 
 		protected final @NonNull TypeTemplateParameter tp_UnlimitedNatural_oclAsType = createTypeTemplateParameter(_UnlimitedNatural_oclAsType_TT);
@@ -2554,6 +2649,12 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Bag_T)));
 			_Bag_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Collection_T)));
+			_Bag_Collection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Collection_Collection_T_1)));
+			_Bag_Enumeration.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Enumeration)));
+			_Bag_Metaclass.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Metaclass)));
 			_Bag_OclElement.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _OclElement)));
 			_Bag_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
@@ -2604,8 +2705,14 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_selectByType_TT)));
 			_Collection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_T)));
+			_Collection_Collection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_Collection_T_1)));
 			_Collection_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _EnumerationLiteral)));
+			_Collection_Enumeration.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Enumeration)));
+			_Collection_Metaclass.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Metaclass)));
 			_Collection_OclAny.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OclAny)));
 			_Collection_OclElement.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2738,6 +2845,12 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_Set_Set_T, _Bag_T)));
 			_Set_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
 				createTemplateParameterSubstitution(tp_Set_Set_T, _Collection_T)));
+			_Set_Collection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
+				createTemplateParameterSubstitution(tp_Set_Set_T, _Collection_Collection_T_1)));
+			_Set_Enumeration.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
+				createTemplateParameterSubstitution(tp_Set_Set_T, _Enumeration)));
+			_Set_Metaclass.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
+				createTemplateParameterSubstitution(tp_Set_Set_T, _Metaclass)));
 			_Set_OclElement.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
 				createTemplateParameterSubstitution(tp_Set_Set_T, _OclElement)));
 			_Set_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
@@ -2756,8 +2869,14 @@ public class OCLstdlib extends ASResourceImpl
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Bag_T)));
 			_UniqueCollection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Collection_T)));
+			_UniqueCollection_Collection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Collection_Collection_T_1)));
 			_UniqueCollection_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _EnumerationLiteral)));
+			_UniqueCollection_Enumeration.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Enumeration)));
+			_UniqueCollection_Metaclass.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Metaclass)));
 			_UniqueCollection_OclAny.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _OclAny)));
 			_UniqueCollection_OclElement.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,

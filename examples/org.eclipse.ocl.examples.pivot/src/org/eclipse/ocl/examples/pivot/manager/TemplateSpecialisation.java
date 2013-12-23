@@ -139,6 +139,14 @@ public class TemplateSpecialisation
 			DomainType containerType = DomainUtil.nonNullState(collectionType.getContainerType());
 			return standardLibrary.getCollectionType(containerType, elementType, collectionType.getLowerValue(), collectionType.getUpperValue());
 		}
+		if (referencedType instanceof DomainMetaclass) {
+			DomainMetaclass metaclass = (DomainMetaclass)referencedType;
+			DomainType instanceType = getResolution(metaclass.getInstanceType());
+			if (instanceType == null) {
+				instanceType = standardLibrary.getOclAnyType();
+			}
+			return standardLibrary.getMetaclass(instanceType);
+		}
 		if (referencedType instanceof DomainTupleType) {
 //			DomainTupleType tupleType = (DomainTupleType)referencedType;
 			throw new UnsupportedOperationException();

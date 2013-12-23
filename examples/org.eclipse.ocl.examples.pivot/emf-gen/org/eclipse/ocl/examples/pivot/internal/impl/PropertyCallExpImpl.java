@@ -412,9 +412,9 @@ public class PropertyCallExpImpl
 		}
 		TemplateSpecialisation templateSpecialization = new TemplateSpecialisation(PivotTables.LIBRARY);
 		DomainType resultType = getType();
-		if (resultType instanceof DomainMetaclass) {
-			resultType = ((DomainMetaclass)resultType).getInstanceType();
-		}
+//		if (resultType instanceof DomainMetaclass) {
+//			resultType = ((DomainMetaclass)resultType).getInstanceType();
+//		}
 		templateSpecialization.installEquivalence(resultType, referredProperty.getType());
 		return templateSpecialization.getSpecialisation(referencedType);
 	}

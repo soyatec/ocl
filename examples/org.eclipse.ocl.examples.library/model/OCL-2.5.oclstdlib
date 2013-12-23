@@ -580,7 +580,7 @@ type Metaclass(T) : Metaclass conformsTo Class, OclType {
 	/**
 	Evaluates to the type of instances.
 	**/
-	static property instanceType : T => 'org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty';
+	property instanceType : T => 'org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty';
 }
 
 /**

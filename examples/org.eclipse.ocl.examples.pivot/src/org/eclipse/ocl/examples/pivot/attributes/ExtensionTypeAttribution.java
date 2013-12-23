@@ -28,6 +28,7 @@ public class ExtensionTypeAttribution extends ClassAttribution
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
+		// An ElementExtension is a static object so static and non-static features can be used equally
 		ElementExtension targetClass = (ElementExtension) target;
 		Type stereotype = targetClass.getStereotype();
 		if (stereotype != null) {
@@ -35,6 +36,8 @@ public class ExtensionTypeAttribution extends ClassAttribution
 		}
 		environmentView.addAllProperties(targetClass, false);		// AbstractTypeServer.initStereotypePropertiesFrom creates local properties
 		if (!environmentView.hasFinalResult()) {
+//			Metaclass<?> metaclass = environmentView.getMetaModelManager().getMetaclass(targetClass);
+//			environmentView.addAllProperties(metaclass, false);
 			if (stereotype != null) {
 				environmentView.addAllOperations(stereotype, true);
 			}

@@ -1092,9 +1092,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //		asResourceSet.setURIResourceMap(null);
 		asLibraries.clear();	
 		asLibraryResource = null;
+		StandaloneProjectMap.dispose(asResourceSet);
 		ResourceSetImpl externalResourceSet2 = externalResourceSet;
 		if (externalResourceSet2 != null) {
 //			System.out.println("dispose CS " + DomainUtil.debugSimpleName(externalResourceSet));
+			StandaloneProjectMap.dispose(externalResourceSet2);
 			externalResourceSet2.setPackageRegistry(null);
 			externalResourceSet2.setResourceFactoryRegistry(null);
 			externalResourceSet2.setURIConverter(null);

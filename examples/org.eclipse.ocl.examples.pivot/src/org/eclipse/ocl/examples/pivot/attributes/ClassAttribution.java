@@ -21,8 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -36,8 +34,9 @@ public class ClassAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		org.eclipse.ocl.examples.pivot.Class targetClass = (org.eclipse.ocl.examples.pivot.Class) target;
-		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+		assert !(target instanceof Metaclass<?>);
 		if (targetClass.getOwningTemplateParameter() != null) {
+			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 			org.eclipse.ocl.examples.pivot.Class type = metaModelManager.getOclAnyType(); // WIP use lowerbound
 			environmentView.addAllOperations(type, false);
 			environmentView.addAllProperties(type, false);
@@ -57,29 +56,8 @@ public class ClassAttribution extends AbstractAttribution
 		environmentView.addAllProperties(targetClass, false);
 		environmentView.addAllStates(targetClass);
 		if (!environmentView.hasFinalResult()) {
-			if (!(target instanceof Metaclass<?>)) {
-				environmentView.addAllOperations(targetClass, true);
-				environmentView.addAllProperties(targetClass, true);
-			}
-			if (target instanceof Metaclass<?>) {	// FIXME MetaclassAttribution
-				environmentView.addAllProperties(targetClass, true);
-				Type instanceType = ((Metaclass<?>)target).getInstanceType();
-				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
-					environmentView.addAllOperations(instanceType, true);
-					environmentView.addAllProperties(instanceType, true);
-					if (!environmentView.hasFinalResult()) {
-						EObject eTarget = instanceType.getETarget();
-						if (eTarget != null) {
-							try {
-								Element element = environmentView.getMetaModelManager().getPivotOf(Element.class, eTarget.eClass());
-								environmentView.addElementsOfScope(element, scopeView);
-							} catch (ParserException e) {
-								// Ignore parse failure; could be systemic and prolific
-							}
-						}
-					}
-				}
-			}
+			environmentView.addAllOperations(targetClass, true);
+			environmentView.addAllProperties(targetClass, true);
 		}
 		return scopeView.getParent();
 	}
