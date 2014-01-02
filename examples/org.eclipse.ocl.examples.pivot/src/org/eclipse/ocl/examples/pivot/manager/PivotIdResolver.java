@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.DomainInvalidTypeImpl;
@@ -68,5 +70,19 @@ public class PivotIdResolver extends AbstractIdResolver
 		}
 		assert type != null;
 		return (Type)type;
+	}
+
+	@Override
+	public @NonNull DomainPackage visitNsURIPackageId(@NonNull NsURIPackageId id) {
+		String nsURI = id.getNsURI();
+		DomainPackage nsURIPackage = metaModelManager.getNsURIPackage(nsURI);
+		if (nsURIPackage == null) {
+			metaModelManager.getASMetamodel();
+			nsURIPackage = metaModelManager.getNsURIPackage(nsURI);
+			if (nsURIPackage == null) {
+				throw new UnsupportedOperationException();
+			}
+		}
+		return nsURIPackage;
 	}
 }
