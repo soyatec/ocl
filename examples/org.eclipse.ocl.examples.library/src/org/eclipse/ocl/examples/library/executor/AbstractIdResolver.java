@@ -81,6 +81,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -493,8 +494,12 @@ public abstract class AbstractIdResolver implements IdResolver
 	}
 
 	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {
+		return getCollectionType(typeId, null, null);
+	}
+
+	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		CollectionTypeId generalizedId = typeId.getGeneralizedId();
-		if (typeId == generalizedId) {
+		if ((typeId == generalizedId) && (lower == null) && (upper == null)) {
 			if (generalizedId == TypeId.BAG) {
 				return standardLibrary.getBagType();
 			}
@@ -521,19 +526,19 @@ public abstract class AbstractIdResolver implements IdResolver
 			TypeId elementTypeId = typeId.getElementTypeId();
 			DomainType elementType = getType(elementTypeId, null);
 			if (generalizedId == TypeId.BAG) {
-				return standardLibrary.getBagType(elementType, null, null);
+				return standardLibrary.getBagType(elementType, lower, upper);
 			}
 			else if (generalizedId == TypeId.COLLECTION) {
-				return standardLibrary.getCollectionType(standardLibrary.getCollectionType(), elementType, null, null);
+				return standardLibrary.getCollectionType(standardLibrary.getCollectionType(), elementType, lower, upper);
 			}
 			else if (generalizedId == TypeId.ORDERED_SET) {
-				return standardLibrary.getOrderedSetType(elementType, null, null);
+				return standardLibrary.getOrderedSetType(elementType, lower, upper);
 			}
 			else if (generalizedId == TypeId.SEQUENCE) {
-				return standardLibrary.getSequenceType(elementType, null, null);
+				return standardLibrary.getSequenceType(elementType, lower, upper);
 			}
 			else if (generalizedId == TypeId.SET) {
-				return standardLibrary.getSetType(elementType, null, null);
+				return standardLibrary.getSetType(elementType, lower, upper);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -552,7 +557,8 @@ public abstract class AbstractIdResolver implements IdResolver
 			CollectionTypeId collectionId = collectedId.getGeneralizedId();
 			TypeId elementTypeId = elementType.getTypeId();
 			collectedId = collectionId.getSpecializedId(elementTypeId);
-			return getCollectionType(collectedId);
+			final IntegerValue size = collectionValue.size();
+			return getCollectionType(collectedId, size, size);
 		}
 		else {
 			return getStaticTypeOf(value);
