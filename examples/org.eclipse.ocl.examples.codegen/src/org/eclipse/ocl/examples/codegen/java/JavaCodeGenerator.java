@@ -194,6 +194,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		org.eclipse.ocl.examples.library.executor.ExecutorType.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter.class,
 		org.eclipse.ocl.examples.pivot.PivotPackage.class,
+		org.eclipse.ocl.examples.pivot.utilities.PivotUtil.class,
 		org.eclipse.osgi.util.NLS.class};
 
 	public static void initPrimitive(Class<?> class1, Class<?> class2) {

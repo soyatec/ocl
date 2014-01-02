@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
-import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * A JavaLocalContext maintains the Java-specific context for generation of coide from a CGOperation.
@@ -63,8 +63,8 @@ public class OCLinEcoreLocalContext extends JavaLocalContext
 	public @Nullable CGValuedElement createEvaluatorVariable() {
 		CGText evaluator = CGModelFactory.eINSTANCE.createCGText();
 		setNames2(evaluator, JavaConstants.EVALUATOR_NAME, JavaConstants.EVALUATOR_TYPE_ID);
-		String managerClassName = ImportUtils.getAffixedName(EcoreExecutorManager.class);
-		evaluator.setTextValue("new " + managerClassName + "(this, " + getGlobalContext().getTablesClassName() + ".LIBRARY)");
+		String utilClassName = ImportUtils.getAffixedName(PivotUtil.class);
+		evaluator.setTextValue(utilClassName + ".getEvaluator(this)");
 		return evaluator;
 	}
 

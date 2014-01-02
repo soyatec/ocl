@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
-import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -38,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +81,7 @@ public abstract class TypedMultiplicityElementImpl
 		/**
 		 * bodySpecification.type.conformsTo(self.type)
 		 */
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = PivotUtil.getEvaluator(this);
 		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
 		final @Nullable /*@Thrown*/ DomainType type_0 = this.getType();
 		final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
@@ -98,7 +98,7 @@ public abstract class TypedMultiplicityElementImpl
 		/**
 		 * Parameter{name = 'name'}
 		 */
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = PivotUtil.getEvaluator(this);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainProperty CTORid_name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter_0 = idResolver.getType(PivotTables.CLSSid_Parameter, null);
