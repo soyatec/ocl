@@ -481,16 +481,16 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * Elements protected from garbage collection
 	 */
-	private EAnnotation lockingAnnotation = null;
+	private @Nullable EAnnotation lockingAnnotation = null;
 	
 	/**
 	 * MetaModelManagerListener instances to be notified of significant state changes; most notably disposal.
 	 */
-	private List<MetaModelManagerListener> listeners = null;
+	private @Nullable List<MetaModelManagerListener> listeners = null;
 
 	private boolean autoLoadASMetamodel = true;
 	
-	private Map<String, GenPackage> genPackageMap = null;
+	private @Nullable Map<String, GenPackage> genPackageMap = null;
 	
 	public MetaModelManager() {
 		this(new ResourceSetImpl());
@@ -540,10 +540,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public void addGenPackage(@NonNull GenPackage genPackage) {
-		if (genPackageMap == null) {
-			genPackageMap = new HashMap<String, GenPackage>();
+		Map<String, GenPackage> genPackageMap2 = genPackageMap;
+		if (genPackageMap2 == null) {
+			genPackageMap = genPackageMap2 = new HashMap<String, GenPackage>();
 		}
-		genPackageMap.put(genPackage.getNSURI(), genPackage);
+		genPackageMap2.put(genPackage.getNSURI(), genPackage);
 	}
 
 	public @Nullable DomainNamespace addGlobalNamespace(@NonNull String name, @NonNull DomainNamespace namespace) {
@@ -555,20 +556,22 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public void addListener(@NonNull MetaModelManagerListener listener) {
-		if (listeners == null) {
-			listeners = new ArrayList<MetaModelManagerListener>();
+		List<MetaModelManagerListener> listeners2 = listeners;
+		if (listeners2 == null) {
+			listeners = listeners2 = new ArrayList<MetaModelManagerListener>();
 		}
-		if (!listeners.contains(listener)) {
-			listeners.add(listener);
+		if (!listeners2.contains(listener)) {
+			listeners2.add(listener);
 		}
 	}
 	
 	public void addLockedElement(@NonNull Object lockedElement) {
 		if (lockedElement instanceof EObject) {
-			if (lockingAnnotation == null) {
-				lockingAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			EAnnotation lockingAnnotation2 = lockingAnnotation;
+			if (lockingAnnotation2 == null) {
+				lockingAnnotation = lockingAnnotation2 = EcoreFactory.eINSTANCE.createEAnnotation();
 			}
-			List<EObject> lockingReferences = lockingAnnotation.getReferences();
+			List<EObject> lockingReferences = lockingAnnotation2.getReferences();
 			if (!lockingReferences.contains(lockedElement)) {
 				lockingReferences.add((EObject) lockedElement);
 			}
