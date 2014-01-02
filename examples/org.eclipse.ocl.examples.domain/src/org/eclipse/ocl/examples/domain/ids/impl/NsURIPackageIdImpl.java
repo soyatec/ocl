@@ -70,11 +70,6 @@ public class NsURIPackageIdImpl extends PackageIdImpl implements NsURIPackageId
 
 	@Override
 	public String toString() {
-		if (nsPrefix != null) {
-			return nsPrefix;
-		}
-		else {
-			return "'" + nsURI + "'";
-		}
+		return "'" + nsURI + "'";
 	}
 }
