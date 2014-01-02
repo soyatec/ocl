@@ -809,12 +809,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		IntegerValue firstLower = firstType.getLowerValue();
 		IntegerValue secondLower = secondType.getLowerValue();
-		if (firstLower.compareTo(secondLower) > 0) {
+		if (firstLower.compareTo(secondLower) < 0) {
 			return false;
 		}
 		IntegerValue firstUpper = firstType.getUpperValue();
 		IntegerValue secondUpper = secondType.getUpperValue();
-		if (firstUpper.compareTo(secondUpper) < 0) {
+		if (firstUpper.compareTo(secondUpper) > 0) {
 			return false;
 		}
 		if (bindings != null) {
