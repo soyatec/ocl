@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
+import java.util.Iterator;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -43,6 +45,7 @@ public interface TypeServer extends DomainInheritance
 	@Nullable DomainOperation getMemberOperation(@NonNull DomainOperation pivotOperation);
 	@Nullable Iterable<? extends DomainOperation> getMemberOperations(@NonNull DomainOperation pivotOperation);
 	@Nullable Iterable<? extends DomainProperty> getMemberProperties(@NonNull DomainProperty pivotProperty);
+	@Nullable Iterator<DomainProperty> getMemberProperties(@NonNull String propertyName);
 	@Nullable DomainProperty getMemberProperty(@NonNull String propertyName);
 	@NonNull Iterable<? extends DomainType> getPartialTypes();
 	

@@ -44,10 +44,13 @@ public class GenerateOCLMetaModelXtend extends GenerateOCLMetaModel
 	'''}
 	
 	protected override String declareProperties(Package pkg) {
+		var allProperties = getAllProperties(pkg.getRootPackage());
 	'''
-		«FOR property : pkg.getRootPackage().getSortedProperties()»
-		protected final @NonNull Property «property.getPrefixedSymbolName("pr_"+property.partialName())» = createProperty(«getEcorePropertyLiteral(property)», «property.type.getSymbolName()»);
-		«ENDFOR»
+			«FOR type : allProperties.getSortedOwningTypes2()»
+				«FOR property : type.getSortedProperties(allProperties)»
+					protected final @NonNull Property «property.getPrefixedSymbolName("pr_"+property.partialName())» = createProperty(«getEcorePropertyLiteral(property)», «property.type.getSymbolName()»);
+				«ENDFOR»
+			«ENDFOR»
 	'''}
 	
 	protected def String defineCollectionTypeName(Set<Type> allTypes, String typeName) {

@@ -715,6 +715,18 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return name2properties2.get(propertyName);
 	}
 
+	public @Nullable Iterator<DomainProperty> getMemberProperties(@NonNull String propertyName) {
+		Map<String, PartialProperties> name2properties2 = name2properties;
+		if (name2properties2 == null) {
+			name2properties2 = initMemberProperties();
+		}
+		PartialProperties partials = name2properties2.get(propertyName);
+		if (partials == null) {
+			return null;
+		}
+		return partials.iterator();
+	}
+
 	public @Nullable DomainProperty getMemberProperty(@NonNull String propertyName) {
 		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 == null) {

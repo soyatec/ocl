@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -2110,10 +2111,21 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		DomainInheritance owningInheritance = pivotProperty.getInheritance(this);
 		if (owningInheritance != null) {
 			@NonNull String name = DomainUtil.nonNullModel(pivotProperty.getName());
+			DomainProperty opposite = pivotProperty.getOpposite();
+			String oppositeName = opposite != null ? opposite.getName() : null;
 			TypeServer typeServer = packageManager.getTypeServer(owningInheritance);
-			DomainProperty memberProperty = typeServer.getMemberProperty(name);
-			if (memberProperty != null) {
-				return memberProperty;
+			Iterator<? extends DomainProperty> memberProperties = typeServer.getMemberProperties(name);
+			if (memberProperties != null) {
+				while (memberProperties.hasNext()) {
+					DomainProperty memberProperty = memberProperties.next();
+					if ((memberProperty != null) && (memberProperty.isStatic() == pivotProperty.isStatic())) {
+						DomainProperty memberOpposite = memberProperty.getOpposite();
+						String memberOppositeName = memberOpposite != null ? memberOpposite.getName() : null;
+						if ((oppositeName == null) || oppositeName.equals(memberOppositeName)) {
+							return memberProperty;
+						}
+					}
+				}
 			}
 		}
 		return pivotProperty;

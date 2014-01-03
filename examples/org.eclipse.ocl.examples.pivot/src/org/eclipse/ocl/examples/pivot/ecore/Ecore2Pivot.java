@@ -867,13 +867,13 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		}
 		for (EObject eObject : referencers) {
 			if (eObject instanceof EReference) {
-				Property pivotElement = getCreated(Property.class, eObject);		
+				Property pivotElement = getCreated(Property.class, eObject);
 				if (pivotElement != null) {
 					Property oppositeProperty = pivotElement.getOpposite();
 					if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
 						metaModelManager.installPropertyDeclaration(pivotElement);
 					}
-				}				
+				}
 			}
 		}
 		referencers = null;

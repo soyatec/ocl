@@ -110,6 +110,11 @@ public class OCLinEcoreTablesUtils
 	{
 		@Override
 		public int compare(Property p1, Property p2) {
+			boolean b1 = p1.isImplicit();
+			boolean b2 = p2.isImplicit();
+			if (b1 != b2) {
+				return b1 ? 1 : -1;
+			}
 			String n1 = String.valueOf(p1.getName());
 			String n2 = String.valueOf(p2.getName());
 			int diff = n1.compareTo(n2);
@@ -487,6 +492,13 @@ public class OCLinEcoreTablesUtils
 			s.appendScopedTypeName(DomainUtil.nonNullModel(property.getOwningType()));
 			s.append("__");
 			s.appendName(property);
+			if (property.isImplicit()) {
+				Property opposite = property.getOpposite();
+				if (opposite != null) {
+					s.append("__");
+					s.appendName(opposite);
+				}
+			}
 			return null;
 		}
 
@@ -503,7 +515,7 @@ public class OCLinEcoreTablesUtils
 		}		
 	}
 	
-	public class EmitQualifiedLiteralVisitor extends AbstractExtendingVisitor<Object, Object>
+	public class EmitQualifiedLiteralVisitor extends EmitLiteralVisitor
 	{
 		protected EmitQualifiedLiteralVisitor(@NonNull Object context) {
 			super(context);
@@ -539,10 +551,7 @@ public class OCLinEcoreTablesUtils
 			Type type = DomainUtil.nonNullModel(operation.getOwningType());
 			s.appendClassReference(getQualifiedTablesClassName(type));
 			s.append(".Operations.");
-			s.appendScopedTypeName(type);
-			s.append("__");
-			s.appendName(operation);
-			return null;
+			return super.visitOperation(operation);
 		}
 
 		@Override
@@ -550,10 +559,7 @@ public class OCLinEcoreTablesUtils
 			Type type = DomainUtil.nonNullModel(property.getOwningType());
 			s.appendClassReference(getQualifiedTablesClassName(type));
 			s.append(".Properties.");
-			s.appendScopedTypeName(type);
-			s.append("__");
-			s.appendName(property);
-			return null;
+			return super.visitProperty(property);
 		}
 
 		@Override
@@ -835,7 +841,7 @@ public class OCLinEcoreTablesUtils
 				sortedProperties.add(property);
 			}
 		}
-		Collections.sort(sortedProperties, nameComparator);
+		Collections.sort(sortedProperties, propertyComparator);
 		return sortedProperties;
 	}
 	
@@ -887,14 +893,16 @@ public class OCLinEcoreTablesUtils
 	}
 	
 	protected @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
+		Set<String> names = new HashSet<String>();
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
-		for (Property property : metaModelManager.getMemberProperties(type, false)) {
+		for (Property property : metaModelManager.getMemberProperties(type, true)) {
 			if (property != null) {
+				names.add(property.getName());
 				properties.add((Property) metaModelManager.getPrimaryProperty(property));
 			}
 		}
-		for (Property property : metaModelManager.getMemberProperties(type, true)) {
-			if (property != null) {
+		for (Property property : metaModelManager.getMemberProperties(type, false)) {
+			if ((property != null) && !names.contains(property.getName())) {
 				properties.add((Property) metaModelManager.getPrimaryProperty(property));
 			}
 		}

@@ -15,9 +15,13 @@
 package org.eclipse.ocl.examples.build.xtend;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,6 +30,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTablesUtils;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
@@ -150,6 +155,16 @@ public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 //			log.info("Loading '" + saveURI + "'");
 //			AS2XMIid as2id = AS2XMIid.load(saveURI);
 			log.info("Saving '" + saveURI + "'");
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof Type) {
+					List<Property> ownedAttribute = ((Type)eObject).getOwnedAttribute();
+					List<Property> properties = new ArrayList<Property>(ownedAttribute);
+					Collections.sort(properties, OCLinEcoreTablesUtils.propertyComparator);
+					ownedAttribute.clear();
+					ownedAttribute.addAll(properties);
+				}
+			}
 			asResource.setURI(saveURI);
 //	    	as2id.assignIds(asResource.getResourceSet());
 			Map<String, Object> options = new HashMap<String, Object>();

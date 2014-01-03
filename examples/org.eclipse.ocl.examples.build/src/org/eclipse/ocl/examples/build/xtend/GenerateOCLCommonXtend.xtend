@@ -575,7 +575,7 @@ public abstract class GenerateOCLCommonXtend extends GenerateOCLCommon
 		'''
 	}
 
-	protected def String partialName(EObject element) {
+	protected override String partialName(EObject element) {
 		switch element {
 			CollectionType case element.elementType == null: return element.javaName()
 			CollectionType: return element.javaName() + "_" + element.elementType.partialName()
@@ -596,8 +596,7 @@ public abstract class GenerateOCLCommonXtend extends GenerateOCLCommon
 			Parameter case element.eContainer() == null: return "null_" + element.javaName()
 			Parameter: return element.eContainer().partialName() + "_" + element.javaName()
 			Precedence: return element.javaName()
-			Property case element.owningType == null: return "null_" + element.javaName()
-			Property: return element.owningType.partialName() + "_" + element.javaName()
+			Property: return getPartialName(element)
 			TemplateBinding case element.signature.template == null: return "null"
 			TemplateBinding: return element.boundElement.partialName()
 			TemplateParameter case element.signature.template == null: return "[" + element.signature.partialName() + "]"

@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTablesUtils;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
@@ -290,6 +291,35 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 		return null;
 	}
 
+	protected @NonNull String getPartialName(Property property) {
+		Type owningType = property.getOwningType();
+		if (owningType == null) {
+			return "null_" + javaName(property);
+		}
+		String simpleName = partialName(owningType) + "_" + javaName(property);
+		if (!property.isImplicit()) {
+			return simpleName;
+		}
+		Property opposite = property.getOpposite();
+		if (opposite == null) {
+			return simpleName;
+		}
+		else {
+			return simpleName + "_" + javaName(opposite);
+		}
+	}
+
+	protected String getPrefixedSymbolName(EObject elem, String prefix) {
+		return NameQueries.getPrefixedSymbolName(prefix, elem);
+	}
+
+	protected ResourceSet getResourceSet() {
+		if (resourceSet == null) {
+			resourceSet = new ResourceSetImpl();
+		}
+		return resourceSet;
+	}
+
 	protected Root getRootPackage(org.eclipse.ocl.examples.pivot.Package elem) {
 		EObject eObject = elem;
 		while (eObject != null) {
@@ -318,18 +348,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 			return elem.getName() + "()";
 		}
 	}
-
-	protected String getPrefixedSymbolName(EObject elem, String prefix) {
-		return NameQueries.getPrefixedSymbolName(prefix, elem);
-	}
-
-	protected ResourceSet getResourceSet() {
-		if (resourceSet == null) {
-			resourceSet = new ResourceSetImpl();
-		}
-		return resourceSet;
-	}
-
+	
 	protected List<CollectionType> getSortedCollectionTypes(Root root) {
 		Set<CollectionType> allElements = new HashSet<CollectionType>();
 		TreeIterator<EObject> tit = root.eAllContents();
@@ -596,13 +615,13 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 			}
 		}
 		List<Property> sortedElements = new ArrayList<Property>(allElements);
-		Collections.sort(sortedElements, monikerComparator);
+		Collections.sort(sortedElements, OCLinEcoreTablesUtils.propertyComparator);
 		return sortedElements;
 	}
 
 	protected List<Property> getSortedProperties(Type type) {
 		List<Property> sortedElements = new ArrayList<Property>(type.getOwnedAttribute());
-		Collections.sort(sortedElements, nameableComparator);
+		Collections.sort(sortedElements, OCLinEcoreTablesUtils.propertyComparator);
 		return sortedElements;
 	}
 
@@ -614,7 +633,10 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 			}
 		}
 		List<Property> sortedElements = new ArrayList<Property>(allElements);
-		Collections.sort(sortedElements, monikerComparator);
+		Collections.sort(sortedElements, OCLinEcoreTablesUtils.propertyComparator);
+		if ("OCLExpression".equals(type.getName())) {
+			Collections.sort(sortedElements, OCLinEcoreTablesUtils.propertyComparator);
+		}
 		return sortedElements;
 	}
 
@@ -727,4 +749,6 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 	protected String javaString(OpaqueExpression anExpression) {
 		return Strings.convertToJavaString(anExpression.getBody().get(0).trim());
 	}
+
+	protected abstract /*@NonNull*/ String partialName(EObject element);
 }
