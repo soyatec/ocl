@@ -68,7 +68,7 @@
       </ownedLiteral>
       <ownedLiteral xmi:id="Ppivot.TPseudostateKind.Lfork" name="fork">
         <ownedComment xmi:id="Ppivot.TPseudostateKind.Lfork.oC0" annotatedElement="Ppivot.TPseudostateKind.Lfork">
-          <body>Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xD;
+          <body>Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices
 (i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers.</body>
         </ownedComment>
       </ownedLiteral>
@@ -1354,7 +1354,7 @@
       <ownedAttribute xmi:id="Ppivot.TState.PstateInvariant" name="stateInvariant"
           type="Ppivot.TConstraint" aggregation="composite">
         <ownedComment xmi:id="Ppivot.TState.PstateInvariant.oC0" annotatedElement="Ppivot.TState.PstateInvariant">
-          <body>Specifies conditions that are always true when this state is the current state. In protocol state machines, state invariants are additional conditions to the preconditions of the outgoing transitions, and to the postcondition of the incoming transitions.&#xD;
+          <body>Specifies conditions that are always true when this state is the current state. In protocol state machines, state invariants are additional conditions to the preconditions of the outgoing transitions, and to the postcondition of the incoming transitions.
 </body>
         </ownedComment>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TState.PstateInvariant.lV"/>
@@ -1362,7 +1362,7 @@
       <ownedAttribute xmi:id="Ppivot.TState.Pentry" name="entry" type="Ppivot.TBehavior"
           aggregation="composite">
         <ownedComment xmi:id="Ppivot.TState.Pentry.oC0" annotatedElement="Ppivot.TState.Pentry">
-          <body>An optional behavior that is executed whenever this state is entered regardless of the transition taken to reach the state. If defined, entry actions are always executed to completion prior to any internal behavior or transitions performed within the state.&#xD;
+          <body>An optional behavior that is executed whenever this state is entered regardless of the transition taken to reach the state. If defined, entry actions are always executed to completion prior to any internal behavior or transitions performed within the state.
 </body>
         </ownedComment>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TState.Pentry.lV"/>
@@ -1393,7 +1393,7 @@
       <ownedAttribute xmi:id="Ppivot.TState.PdeferrableTrigger" name="deferrableTrigger"
           type="Ppivot.TTrigger" aggregation="composite">
         <ownedComment xmi:id="Ppivot.TState.PdeferrableTrigger.oC0" annotatedElement="Ppivot.TState.PdeferrableTrigger">
-          <body>A list of triggers that are candidates to be retained by the state machine if they trigger no transitions out of the state (not consumed). A deferred trigger is retained until the state machine reaches a state configuration where it is no longer deferred.&#xD;
+          <body>A list of triggers that are candidates to be retained by the state machine if they trigger no transitions out of the state (not consumed). A deferred trigger is retained until the state machine reaches a state configuration where it is no longer deferred.
 </body>
         </ownedComment>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TState.PdeferrableTrigger.lV"/>

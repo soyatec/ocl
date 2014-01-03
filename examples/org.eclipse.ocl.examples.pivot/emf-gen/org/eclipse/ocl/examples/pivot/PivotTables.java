@@ -1947,7 +1947,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _AssociationClassCallExp__referredAssociationClass = new EcoreExecutorProperty(PivotPackage.Literals.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS, Types._AssociationClassCallExp, 0);
 
 		public static final @NonNull ExecutorProperty _Behavior__Class = new ExecutorPropertyWithImplementation("Class", Types._Behavior, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CLASS__OWNED_BEHAVIOR));
-		public static final @NonNull ExecutorProperty _Behavior__State = new ExecutorPropertyWithImplementation("State", Types._Behavior, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__DO_ACTIVITY));
+		public static final @NonNull ExecutorProperty _Behavior__State = new ExecutorPropertyWithImplementation("State", Types._Behavior, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__EXIT));
 		public static final @NonNull ExecutorProperty _Behavior__Transition = new ExecutorPropertyWithImplementation("Transition", Types._Behavior, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TRANSITION__EFFECT));
 
 		public static final @NonNull ExecutorProperty _BooleanLiteralExp__booleanSymbol = new EcoreExecutorProperty(PivotPackage.Literals.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL, Types._BooleanLiteralExp, 0);
@@ -2018,7 +2018,7 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _DynamicType__ownedProperty = new EcoreExecutorProperty(PivotPackage.Literals.DYNAMIC_TYPE__OWNED_PROPERTY, Types._DynamicType, 0);
 
-		public static final @NonNull ExecutorProperty _Element__Annotation = new ExecutorPropertyWithImplementation("Annotation", Types._Element, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ANNOTATION__REFERENCE));
+		public static final @NonNull ExecutorProperty _Element__Annotation = new ExecutorPropertyWithImplementation("Annotation", Types._Element, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ANNOTATION__OWNED_CONTENT));
 		public static final @NonNull ExecutorProperty _Element__Comment = new ExecutorPropertyWithImplementation("Comment", Types._Element, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.COMMENT__ANNOTATED_ELEMENT));
 		public static final @NonNull ExecutorProperty _Element__Constraint = new ExecutorPropertyWithImplementation("Constraint", Types._Element, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT));
 		public static final @NonNull ExecutorProperty _Element__extension = new EcoreExecutorProperty(PivotPackage.Literals.ELEMENT__EXTENSION, Types._Element, 3);
@@ -2097,13 +2097,13 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _OCLExpression__CallExp = new ExecutorPropertyWithImplementation("CallExp", Types._OCLExpression, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CALL_EXP__SOURCE));
 		public static final @NonNull ExecutorProperty _OCLExpression__CollectionItem = new ExecutorPropertyWithImplementation("CollectionItem", Types._OCLExpression, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.COLLECTION_ITEM__ITEM));
-		public static final @NonNull ExecutorProperty _OCLExpression__CollectionRange = new ExecutorPropertyWithImplementation("CollectionRange", Types._OCLExpression, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.COLLECTION_RANGE__FIRST));
+		public static final @NonNull ExecutorProperty _OCLExpression__CollectionRange = new ExecutorPropertyWithImplementation("CollectionRange", Types._OCLExpression, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.COLLECTION_RANGE__LAST));
 		public static final @NonNull ExecutorProperty _OCLExpression__ConstructorPart = new ExecutorPropertyWithImplementation("ConstructorPart", Types._OCLExpression, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRUCTOR_PART__INIT_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__ExpressionInOCL = new ExecutorPropertyWithImplementation("ExpressionInOCL", Types._OCLExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__IfExp = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__THEN_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OCLExpression__ExpressionInOCL = new ExecutorPropertyWithImplementation("ExpressionInOCL", Types._OCLExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OCLExpression__IfExp = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__ELSE_EXPRESSION));
 		public static final @NonNull ExecutorProperty _OCLExpression__LetExp = new ExecutorPropertyWithImplementation("LetExp", Types._OCLExpression, 6, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LET_EXP__IN));
 		public static final @NonNull ExecutorProperty _OCLExpression__LoopExp = new ExecutorPropertyWithImplementation("LoopExp", Types._OCLExpression, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LOOP_EXP__BODY));
-		public static final @NonNull ExecutorProperty _OCLExpression__MessageExp = new ExecutorPropertyWithImplementation("MessageExp", Types._OCLExpression, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__TARGET));
+		public static final @NonNull ExecutorProperty _OCLExpression__MessageExp = new ExecutorPropertyWithImplementation("MessageExp", Types._OCLExpression, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__ARGUMENT));
 		public static final @NonNull ExecutorProperty _OCLExpression__NavigationCallExp = new ExecutorPropertyWithImplementation("NavigationCallExp", Types._OCLExpression, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER));
 		public static final @NonNull ExecutorProperty _OCLExpression__OperationCallExp = new ExecutorPropertyWithImplementation("OperationCallExp", Types._OCLExpression, 10, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT));
 		public static final @NonNull ExecutorProperty _OCLExpression__TupleLiteralPart = new ExecutorPropertyWithImplementation("TupleLiteralPart", Types._OCLExpression, 11, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TUPLE_LITERAL_PART__INIT_EXPRESSION));
@@ -2151,7 +2151,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Parameter__operation = new EcoreExecutorProperty(PivotPackage.Literals.PARAMETER__OPERATION, Types._Parameter, 2);
 
 		public static final @NonNull ExecutorProperty _ParameterableElement__TemplateParameter = new ExecutorPropertyWithImplementation("TemplateParameter", Types._ParameterableElement, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__DEFAULT));
-		public static final @NonNull ExecutorProperty _ParameterableElement__TemplateParameterSubstitution = new ExecutorPropertyWithImplementation("TemplateParameterSubstitution", Types._ParameterableElement, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL));
+		public static final @NonNull ExecutorProperty _ParameterableElement__TemplateParameterSubstitution = new ExecutorPropertyWithImplementation("TemplateParameterSubstitution", Types._ParameterableElement, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL));
 		public static final @NonNull ExecutorProperty _ParameterableElement__owningTemplateParameter = new EcoreExecutorProperty(PivotPackage.Literals.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER, Types._ParameterableElement, 2);
 		public static final @NonNull ExecutorProperty _ParameterableElement__templateParameter = new EcoreExecutorProperty(PivotPackage.Literals.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, Types._ParameterableElement, 3);
 
@@ -2164,7 +2164,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Property__DynamicProperty = new ExecutorPropertyWithImplementation("DynamicProperty", Types._Property, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.DYNAMIC_PROPERTY__REFERRED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__NavigationCallExp = new ExecutorPropertyWithImplementation("NavigationCallExp", Types._Property, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE));
 		public static final @NonNull ExecutorProperty _Property__OppositePropertyCallExp = new ExecutorPropertyWithImplementation("OppositePropertyCallExp", Types._Property, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY));
-		public static final @NonNull ExecutorProperty _Property__Property = new ExecutorPropertyWithImplementation("Property", Types._Property, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__OPPOSITE));
+		public static final @NonNull ExecutorProperty _Property__Property = new ExecutorPropertyWithImplementation("Property", Types._Property, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__REDEFINED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__PropertyCallExp = new ExecutorPropertyWithImplementation("PropertyCallExp", Types._Property, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__association = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__ASSOCIATION, Types._Property, 6);
 		public static final @NonNull ExecutorProperty _Property__class = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__CLASS, Types._Property, 7);
@@ -2303,7 +2303,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Type__TypeExp = new ExecutorPropertyWithImplementation("TypeExp", Types._Type, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE_EXP__REFERRED_TYPE));
 		public static final @NonNull ExecutorProperty _Type__TypeTemplateParameter = new ExecutorPropertyWithImplementation("TypeTemplateParameter", Types._Type, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER__CONSTRAINING_TYPE));
 		public static final @NonNull ExecutorProperty _Type__TypedElement = new ExecutorPropertyWithImplementation("TypedElement", Types._Type, 10, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPED_ELEMENT__TYPE));
-		public static final @NonNull ExecutorProperty _Type__UnspecifiedType = new ExecutorPropertyWithImplementation("UnspecifiedType", Types._Type, 11, new EcoreLibraryOppositeProperty(PivotPackage.Literals.UNSPECIFIED_TYPE__UPPER_BOUND));
+		public static final @NonNull ExecutorProperty _Type__UnspecifiedType = new ExecutorPropertyWithImplementation("UnspecifiedType", Types._Type, 11, new EcoreLibraryOppositeProperty(PivotPackage.Literals.UNSPECIFIED_TYPE__LOWER_BOUND));
 		public static final @NonNull ExecutorProperty _Type__instanceClassName = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__INSTANCE_CLASS_NAME, Types._Type, 12);
 		public static final @NonNull ExecutorProperty _Type__ownedAttribute = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_ATTRIBUTE, Types._Type, 13);
 		public static final @NonNull ExecutorProperty _Type__ownedInvariant = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT, Types._Type, 14);
@@ -10677,8 +10677,8 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Detail = {
-			PivotTables.Properties._Detail__Annotation,
 			PivotTables.Properties._Element__Annotation,
+			PivotTables.Properties._Detail__Annotation,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,

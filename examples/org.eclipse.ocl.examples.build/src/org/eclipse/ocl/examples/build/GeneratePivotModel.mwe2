@@ -58,6 +58,9 @@ Workflow {
     component = NonAbstractTypeZapper { skipOnErrors = true
     	modelSlot = "${umlSlot}"
     }
+    component = CommentNormalizer { skipOnErrors = true
+    	modelSlot = "${umlSlot}"
+    }
     component = UMLIDAssigner { skipOnErrors = true
     	modelSlot = "${umlSlot}"
     }

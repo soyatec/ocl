@@ -68,7 +68,7 @@
     </eLiterals>
     <eLiterals name="fork" value="4">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xD;&#xA;(i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers."/>
+        <details key="documentation" value="Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xA;(i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="junction" value="5">
@@ -1132,7 +1132,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//Namespace #//TemplateableElement #//ParameterableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An operation is owned by a class and may be invoked in the context of objects that are instances of that class. It is a typed element and a multiplicity element.&#xD;&#xA;Operation specializes TemplateableElement in order to support specification of template operations and bound operations. Operation specializes ParameterableElement to specify that an operation can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
+      <details key="documentation" value="An operation is owned by a class and may be invoked in the context of objects that are instances of that class. It is a typed element and a multiplicity element.&#xA;Operation specializes TemplateableElement in order to support specification of template operations and bound operations. Operation specializes ParameterableElement to specify that an operation can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
     </eAnnotations>
     <eAnnotations source="duplicates">
       <eAnnotations source="templateParameter">
@@ -1280,7 +1280,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="OrderedSetType" eSuperTypes="#//CollectionType"/>
   <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//Namespace #//TemplateableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A package is a container for types and other packages.&#xD;&#xA;Package specializes TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used as a template and a PackageableElement as a template parameter."/>
+      <details key="documentation" value="A package is a container for types and other packages.&#xA;Package specializes TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used as a template and a PackageableElement as a template parameter."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackage" ordered="false"
         upperBound="-1" eType="#//Package"/>
@@ -1370,7 +1370,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Profile" eSuperTypes="#//Package"/>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Feature #//ParameterableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A property is a typed element that represents an attribute of a class.&#xD;&#xA;Property specializes ParameterableElement to specify that a property can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
+      <details key="documentation" value="A property is a typed element that represents an attribute of a class.&#xA;Property specializes ParameterableElement to specify that a property can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
     </eAnnotations>
     <eOperations name="CompatibleDefaultExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
@@ -1589,7 +1589,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="deferrableTrigger" ordered="false"
         upperBound="-1" eType="#//Trigger" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A list of triggers that are candidates to be retained by the state machine if they trigger no transitions out of the state (not consumed). A deferred trigger is retained until the state machine reaches a state configuration where it is no longer deferred.&#xD;&#xA;"/>
+        <details key="documentation" value="A list of triggers that are candidates to be retained by the state machine if they trigger no transitions out of the state (not consumed). A deferred trigger is retained until the state machine reaches a state configuration where it is no longer deferred.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="doActivity" eType="#//Behavior"
@@ -1601,7 +1601,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="entry" eType="#//Behavior"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="An optional behavior that is executed whenever this state is entered regardless of the transition taken to reach the state. If defined, entry actions are always executed to completion prior to any internal behavior or transitions performed within the state.&#xD;&#xA;"/>
+        <details key="documentation" value="An optional behavior that is executed whenever this state is entered regardless of the transition taken to reach the state. If defined, entry actions are always executed to completion prior to any internal behavior or transitions performed within the state.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exit" eType="#//Behavior"
@@ -1651,7 +1651,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateInvariant" eType="#//Constraint"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Specifies conditions that are always true when this state is the current state. In protocol state machines, state invariants are additional conditions to the preconditions of the outgoing transitions, and to the postcondition of the incoming transitions.&#xD;&#xA;"/>
+        <details key="documentation" value="Specifies conditions that are always true when this state is the current state. In protocol state machines, state invariants are additional conditions to the preconditions of the outgoing transitions, and to the postcondition of the incoming transitions.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="submachine" eType="#//StateMachine"
@@ -1904,7 +1904,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="TupleType" eSuperTypes="#//DataType"/>
   <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//NamedElement #//TemplateableElement #//ParameterableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A type is a named element that is used as the type for a typed element. A type can be contained in a package.&#xD;&#xA;Type is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter."/>
+      <details key="documentation" value="A type is a named element that is used as the type for a typed element. A type can be contained in a package.&#xA;Type is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter."/>
     </eAnnotations>
     <eAnnotations source="duplicates">
       <eAnnotations source="templateParameter">
@@ -2031,7 +2031,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ValueSpecification" abstract="true"
       eSuperTypes="#//TypedElement #//ParameterableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A value specification is the specification of a (possibly empty) set of instances, including both objects and data values.&#xD;&#xA;ValueSpecification specializes ParameterableElement to specify that a value specification can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
+      <details key="documentation" value="A value specification is the specification of a (possibly empty) set of instances, including both objects and data values.&#xA;ValueSpecification specializes ParameterableElement to specify that a value specification can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
     </eAnnotations>
     <eOperations name="booleanValue" lowerBound="1" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

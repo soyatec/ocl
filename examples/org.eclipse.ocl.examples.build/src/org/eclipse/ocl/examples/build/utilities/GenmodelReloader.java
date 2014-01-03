@@ -22,12 +22,16 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.Monitor;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.UniqueEList;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -123,6 +127,22 @@ public class GenmodelReloader extends AbstractProjectComponent
 		    	List<EPackage> ePackages = modelImporterInstance.getEPackages();
 		    	ecoreResource.getContents().clear();
 		    	ecoreResource.getContents().addAll(ePackages);
+		    	for (TreeIterator<EObject> tit = ecoreResource.getAllContents(); tit.hasNext(); ) {
+		    		EObject eObject = tit.next();
+		    		if (eObject instanceof EAnnotation) {
+		    			EAnnotation eAnnotation = (EAnnotation)eObject;
+						if (GenModelPackage.eNS_URI.equals(eAnnotation.getSource())) {
+		    				String string = eAnnotation.getDetails().get("documentation");
+		    				if (string != null) {
+		    					String normalizedString = string.replaceAll("\\r\\n", "\n");
+		    					if (!string.equals(normalizedString)) {
+		    						eAnnotation.getDetails().put("documentation", normalizedString);
+		    					}
+		    				}
+		    			}
+		    		}
+		    		
+		    	}
 				projectDescriptor.configure(genModelResourceSet, StandaloneProjectMap.LoadBothStrategy.INSTANCE, null);
 		    }
 			
