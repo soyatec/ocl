@@ -230,7 +230,7 @@ public class ConsoleTests extends PivotTestCase
 
 	public void testConsole_UML() throws Exception {
 		assertConsoleResult(consolePage, englishClass, "self.name", "'EnglishClass'\n");
-		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.oclType().instanceType.name", "'EnglishClass$InEnglish'\n");
+//		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.oclType().instanceType.name", "'EnglishClass$InEnglish'\n");
 	}
 
 	public void testConsole_oclLog() throws Exception {

@@ -173,7 +173,7 @@ public class StereotypesTest extends PivotTestSuite
      */
     public void test_stereotypeM2Navigation() throws Exception {
     	assertQueryEquals(mm.englishClass, "EnglishClass", "self.NamedElement::name");
-    	assertQueryEquals(mm.englishClass, "EnglishClass", "self.name");
+//    	assertQueryEquals(mm.englishClass, "EnglishClass", "self.name");
     	assertQueryEquals(mm.englishClass, mm.englishClassInEnglish, "self.extension_InEnglish");
     	assertQueryEquals(mm.englishClassInEnglish, mm.englishClass, "self.base_Class");
 //    	assertQueryEquals(mm.englishClass, "EnglishClass$InEnglish", "self.extension_InEnglish.oclType().instanceType.name");
