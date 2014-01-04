@@ -81,6 +81,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 {
+
 	public static boolean hasDocumentationKey(@Nullable String source, @NonNull EMap<String, String> details) {
 		return PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE.equals(source)
 			&& details.containsKey(PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
@@ -138,7 +139,10 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEClass(EClass eObject) {
-		@SuppressWarnings("null") @NonNull EClass eObject2 = eObject;
+		if ("DynamicType".equals(eObject.getName())) {
+			System.out.println("Got it");
+		}
+		@NonNull EClass eObject2 = eObject;
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, eObject2);
 		String oldName = pivotElement.getName();
 		String newName = converter.getOriginalName(eObject2);
@@ -151,7 +155,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		}
 		pivotElement.setName(newName);
 		List<EAnnotation> excludedAnnotations = null;
-		EAnnotation duplicatesAnnotation = eObject2.getEAnnotation("duplicates");
+		EAnnotation duplicatesAnnotation = eObject2.getEAnnotation(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
 		if (duplicatesAnnotation != null) {
 			excludedAnnotations = new ArrayList<EAnnotation>();
 			excludedAnnotations.add(duplicatesAnnotation);
@@ -191,6 +195,12 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					Property pivotProperty = (Property) doSwitch(eContent);
 					pivotProperties.add(pivotProperty);
 					converter.queueReference(eContent);				// For redefinition
+				}
+				else if (eContent instanceof EAnnotation) {
+					EAnnotation eAnnotation = (EAnnotation)eContent;
+//					Property pivotProperty = (Property) doSwitch(eContent);
+//					pivotProperties.add(pivotProperty);
+//					converter.queueReference(eContent);				// For redefinition
 				}
 				else {
 					converter.error("Unsupported duplicate " + eContent.eClass().getName());

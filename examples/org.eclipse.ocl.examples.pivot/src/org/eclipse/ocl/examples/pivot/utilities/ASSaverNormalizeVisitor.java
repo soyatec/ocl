@@ -70,7 +70,7 @@ public class ASSaverNormalizeVisitor extends AbstractExtendingVisitor<Object, AS
 
 	@Override
 	public Object visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package object) {
-		@SuppressWarnings("null")@NonNull List<Type> ownedTypes = object.getOwnedType();
+		@NonNull List<Type> ownedTypes = object.getOwnedType();
 		sort(ownedTypes, TypeComparator.INSTANCE);
 		return null;
 	}

@@ -71,6 +71,14 @@ public interface PivotConstants
 
 	static final @NonNull String OMG_OCL_ANNOTATION_SOURCE = "http://www.omg.org/ocl";
 
+	/**
+	 * Ecore encoding of a UML redefines
+	 */
+	static final @NonNull String DUPLICATES_ANNOTATION_SOURCE = "duplicates"; // UMLUtil.ANNOTATION__DUPLICATES
+//	static final @NonNull String REDEFINES_ANNOTATION_SOURCE = "redefines"; // UMLUtil.ANNOTATION__REDEFINES
+//	static final @NonNull String SUBSETS_ANNOTATION_SOURCE = "subsets"; // UMLUtil.ANNOTATION__SUBSETS
+//	static final @NonNull String UNION_ANNOTATION_SOURCE = "union"; // UMLUtil.ANNOTATION__UNION
+
 	@Deprecated // Tuples are now used for rich invariants
 	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
 

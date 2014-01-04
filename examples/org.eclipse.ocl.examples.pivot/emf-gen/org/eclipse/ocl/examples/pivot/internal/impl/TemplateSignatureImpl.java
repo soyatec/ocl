@@ -106,7 +106,8 @@ public class TemplateSignatureImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<TemplateParameter> getParameter()
+	@SuppressWarnings("null")
+	public @NonNull List<TemplateParameter> getParameter()
 	{
 		if (parameter == null)
 		{

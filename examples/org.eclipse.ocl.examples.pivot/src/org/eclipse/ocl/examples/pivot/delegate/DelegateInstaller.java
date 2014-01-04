@@ -187,13 +187,7 @@ public class DelegateInstaller
 	}
 
 	protected @NonNull EAnnotation createAnnotation(@NonNull EModelElement eModelElement) {
-		EAnnotation oclAnnotation = removeDelegateAnnotations(eModelElement, exportDelegateURI);
-		if (oclAnnotation == null) {
-			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			oclAnnotation.setSource(exportDelegateURI);
-			eModelElement.getEAnnotations().add(oclAnnotation);
-		}
-		return oclAnnotation;
+		return DomainUtil.getEAnnotation(eModelElement, exportDelegateURI);
 	}
 	
 	public @Nullable EAnnotation createConstraintDelegate(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint, @Nullable URI ecoreURI) {
@@ -473,12 +467,7 @@ public class DelegateInstaller
 	}
 
 	public void installDelegates(@NonNull EPackage ePackage) {
-		EAnnotation packageAnnotation = ePackage.getEAnnotation(EcorePackage.eNS_URI);
-		if (packageAnnotation == null) {
-			packageAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			packageAnnotation.setSource(EcorePackage.eNS_URI);
-			ePackage.getEAnnotations().add(packageAnnotation);
-		}
+		EAnnotation packageAnnotation = DomainUtil.getEAnnotation(ePackage, EcorePackage.eNS_URI);
 		EMap<String, String> details = packageAnnotation.getDetails();
 		details.put(InvocationBehavior.NAME, exportDelegateURI);
 		details.put(SettingBehavior.NAME, exportDelegateURI);

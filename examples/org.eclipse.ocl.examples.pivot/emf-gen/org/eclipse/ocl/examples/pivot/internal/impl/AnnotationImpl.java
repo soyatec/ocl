@@ -108,7 +108,8 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Element> getOwnedContent()
+	@SuppressWarnings("null") 
+	public @NonNull List<Element> getOwnedContent()
 	{
 		if (ownedContent == null)
 		{
@@ -122,7 +123,8 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Detail> getOwnedDetail()
+	@SuppressWarnings("null")
+	public @NonNull List<Detail> getOwnedDetail()
 	{
 		if (ownedDetail == null)
 		{
@@ -136,7 +138,8 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Element> getReference()
+	@SuppressWarnings("null")
+	public @NonNull List<Element> getReference()
 	{
 		if (reference == null)
 		{

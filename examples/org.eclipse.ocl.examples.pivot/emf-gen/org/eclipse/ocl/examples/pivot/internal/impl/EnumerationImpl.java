@@ -97,7 +97,8 @@ public class EnumerationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<EnumerationLiteral> getOwnedLiteral()
+	@SuppressWarnings("null")
+	public @NonNull List<EnumerationLiteral> getOwnedLiteral()
 	{
 		if (ownedLiteral == null)
 		{

@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Enumeration</b></em>'.
@@ -55,6 +57,6 @@ public interface Enumeration
 	 * @see org.eclipse.ocl.examples.pivot.EnumerationLiteral#getEnumeration
 	 * @generated
 	 */
-	List<EnumerationLiteral> getOwnedLiteral();
+	@NonNull List<EnumerationLiteral> getOwnedLiteral();
 
 } // Enumeration

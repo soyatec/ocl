@@ -554,7 +554,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 					oldPackagesByName.put(name, pkg);
 				}
 			}
-			@SuppressWarnings("null") @NonNull List<org.eclipse.ocl.examples.pivot.Package> nestedPackage = pkg.getNestedPackage();
+			@NonNull List<org.eclipse.ocl.examples.pivot.Package> nestedPackage = pkg.getNestedPackage();
 			gatherOldPackages(nestedPackage);
 		}
 	}

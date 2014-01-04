@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Package</b></em>'.
@@ -61,7 +63,7 @@ public interface Package
 	 * @see org.eclipse.ocl.examples.pivot.Package#getNestingPackage
 	 * @generated
 	 */
-	List<Package> getNestedPackage();
+	@NonNull List<Package> getNestedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Ns Prefix</b></em>' attribute.
@@ -142,7 +144,7 @@ public interface Package
 	 * @see org.eclipse.ocl.examples.pivot.Type#getPackage
 	 * @generated
 	 */
-	List<Type> getOwnedType();
+	@NonNull List<Type> getOwnedType();
 
 	/**
 	 * Returns the value of the '<em><b>Nesting Package</b></em>' container reference.

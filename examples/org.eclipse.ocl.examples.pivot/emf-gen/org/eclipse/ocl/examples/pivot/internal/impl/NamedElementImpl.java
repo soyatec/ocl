@@ -170,7 +170,8 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Annotation> getOwnedAnnotation()
+	@SuppressWarnings("null")
+	public @NonNull List<Annotation> getOwnedAnnotation()
 	{
 		if (ownedAnnotation == null)
 		{

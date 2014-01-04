@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Annotation</b></em>'.
@@ -51,7 +53,7 @@ public interface Annotation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getAnnotation_OwnedContent()
 	 * @generated
 	 */
-	List<Element> getOwnedContent();
+	@NonNull List<Element> getOwnedContent();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Detail</b></em>' containment reference list.
@@ -66,7 +68,7 @@ public interface Annotation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getAnnotation_OwnedDetail()
 	 * @generated
 	 */
-	List<Detail> getOwnedDetail();
+	@NonNull List<Detail> getOwnedDetail();
 
 	/**
 	 * Returns the value of the '<em><b>Reference</b></em>' reference list.
@@ -81,6 +83,6 @@ public interface Annotation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getAnnotation_Reference()
 	 * @generated
 	 */
-	List<Element> getReference();
+	@NonNull List<Element> getReference();
 
 } // Annotation

@@ -76,9 +76,45 @@ import org.eclipse.ocl.examples.pivot.manager.Orphanage;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 public class Pivot2EcoreDeclarationVisitor
 	extends AbstractExtendingVisitor<Object, Pivot2Ecore>
 {
+	public static final @NonNull DuplicateOperationsFilter duplicateOperationsFilter = new DuplicateOperationsFilter();
+	public static final @NonNull DuplicatePropertiesFilter duplicatePropertiesFilter = new DuplicatePropertiesFilter();
+	public static final @NonNull NonDuplicateOperationsFilter nonDuplicateOperationsFilter = new NonDuplicateOperationsFilter();
+	public static final @NonNull NonDuplicatePropertiesFilter nonDuplicatePropertiesFilter = new NonDuplicatePropertiesFilter();
+
+	protected static class DuplicateOperationsFilter implements Predicate<Operation>
+	{
+		public boolean apply(@Nullable Operation anOperation) {
+			return (anOperation != null) && (anOperation.getRedefinedOperation().size() != 0);
+		}
+	}
+
+	protected static class DuplicatePropertiesFilter implements Predicate<Property>
+	{
+		public boolean apply(@Nullable Property aProperty) {
+			return (aProperty != null) && (aProperty.getRedefinedProperty().size() != 0);
+		}
+	}
+
+	protected static class NonDuplicateOperationsFilter implements Predicate<Operation>
+	{
+		public boolean apply(@Nullable Operation anOperation) {
+			return (anOperation != null) && (anOperation.getRedefinedOperation().size() == 0);
+		}
+	}
+
+	protected static class NonDuplicatePropertiesFilter implements Predicate<Property>
+	{
+		public boolean apply(@Nullable Property aProperty) {
+			return (aProperty != null) && (aProperty.getRedefinedProperty().size() == 0);
+		}
+	}
+
 	protected final @NonNull DelegateInstaller delegateInstaller;
 	
 	public Pivot2EcoreDeclarationVisitor(@NonNull Pivot2Ecore context) {
@@ -88,8 +124,10 @@ public class Pivot2EcoreDeclarationVisitor
 
 	protected void copyClassifier(@NonNull EClassifier eClassifier, @NonNull Type pivotType) {
 		copyNamedElement(eClassifier, pivotType);
-		copyTemplateSignature(eClassifier.getETypeParameters(), pivotType);
-		safeVisitAll(eClassifier.getEAnnotations(), pivotType.getOwnedAnnotation());
+		@SuppressWarnings("null")@NonNull List<ETypeParameter> eTypeParameters = eClassifier.getETypeParameters();
+		copyTemplateSignature(eTypeParameters, pivotType);
+		@SuppressWarnings("null")@NonNull List<EAnnotation> eAnnotations = eClassifier.getEAnnotations();
+		safeVisitAll(eAnnotations, pivotType.getOwnedAnnotation());
 		if (pivotType.eIsSet(PivotPackage.Literals.TYPE__INSTANCE_CLASS_NAME)) {
 			eClassifier.setInstanceClassName(pivotType.getInstanceClassName());
 		}
@@ -113,7 +151,8 @@ public class Pivot2EcoreDeclarationVisitor
 
 	protected void copyDetails(@NonNull EAnnotation eAnnotation, @NonNull Annotation pivotAnnotation) {
 		copyModelElement(eAnnotation, pivotAnnotation);
-		safeVisitAll(eAnnotation.getEAnnotations(), pivotAnnotation.getOwnedAnnotation());
+		@SuppressWarnings("null")@NonNull List<EAnnotation> eAnnotations = eAnnotation.getEAnnotations();
+		safeVisitAll(eAnnotations, pivotAnnotation.getOwnedAnnotation());
 		for (Detail pivotDetail : pivotAnnotation.getOwnedDetail()) {
 			String name = pivotDetail.getName();
 			String value = StringUtils.splice(pivotDetail.getValue(), "");
@@ -131,7 +170,7 @@ public class Pivot2EcoreDeclarationVisitor
 		eNamedElement.setName(pivotNamedElement.getName());
 	}
 
-	protected void copyTemplateSignature(List<ETypeParameter> eTypeParameters, TemplateableElement pivotElement) {
+	protected void copyTemplateSignature(@NonNull List<ETypeParameter> eTypeParameters, TemplateableElement pivotElement) {
 		TemplateSignature templateSignature = pivotElement.getOwnedTemplateSignature();
 		if (templateSignature != null) {
 			List<TemplateParameter> parameters = templateSignature.getParameter();
@@ -141,12 +180,13 @@ public class Pivot2EcoreDeclarationVisitor
 
 	protected void copyTypedElement(@NonNull ETypedElement eTypedElement, @NonNull TypedMultiplicityElement pivotTypedElement) {
 		copyNamedElement(eTypedElement, pivotTypedElement);
-		safeVisitAll(eTypedElement.getEAnnotations(), pivotTypedElement.getOwnedAnnotation());
+		@SuppressWarnings("null")@NonNull List<EAnnotation> eAnnotations = eTypedElement.getEAnnotations();
+		safeVisitAll(eAnnotations, pivotTypedElement.getOwnedAnnotation());
 		context.defer(pivotTypedElement);		// Defer type/multiplicity setting
 	}
 
-	public <T extends EObject> void safeVisitAll(List<T> eObjects, List<? extends Element> pivotObjects) {
-		for (Element pivotObject : pivotObjects) {
+	public <T extends EObject> void safeVisitAll(@NonNull List<T> eObjects, @NonNull Iterable<? extends Element> pivotObjects) {
+	for (Element pivotObject : pivotObjects) {
 			@SuppressWarnings("unchecked")
 			T eObject = (T) safeVisit(pivotObject);
 			if (eObject != null) {
@@ -166,7 +206,8 @@ public class Pivot2EcoreDeclarationVisitor
 		@NonNull EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 		copyDetails(eAnnotation, pivotAnnotation);
 		eAnnotation.setSource(pivotAnnotation.getName());
-		safeVisitAll(eAnnotation.getContents(), pivotAnnotation.getOwnedContent());
+		@SuppressWarnings("null")@NonNull List<EObject> contents = eAnnotation.getContents();
+		safeVisitAll(contents, pivotAnnotation.getOwnedContent());
 		if (!pivotAnnotation.getReference().isEmpty()) {
 			context.defer(pivotAnnotation);
 		}
@@ -175,6 +216,9 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitClass(@NonNull Class pivotClass) {
+		if ("DynamicType".equals(pivotClass.getName())) {
+			System.out.println("Got it");
+		}
 		if (pivotClass.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -184,16 +228,47 @@ public class Pivot2EcoreDeclarationVisitor
 		eClass.setAbstract(pivotClass.isAbstract());
 		eClass.setInterface(pivotClass.isInterface());
 		context.defer(pivotClass);		// Defer superclass resolution
-		safeVisitAll(eClass.getEOperations(), pivotClass.getOwnedOperation());
-		safeVisitAll(eClass.getEStructuralFeatures(), pivotClass.getOwnedAttribute());
+		@SuppressWarnings("null")@NonNull List<EOperation> eOperations = eClass.getEOperations();
+		@SuppressWarnings("null")@NonNull Iterable<Operation> nonDuplicateOperations = Iterables.filter(pivotClass.getOwnedOperation(), nonDuplicateOperationsFilter);
+		safeVisitAll(eOperations, nonDuplicateOperations);
+		@SuppressWarnings("null")@NonNull List<EStructuralFeature> eStructuralFeatures = eClass.getEStructuralFeatures();
+		@SuppressWarnings("null")@NonNull Iterable<Property> nonDuplicateProperties = Iterables.filter(pivotClass.getOwnedAttribute(), nonDuplicatePropertiesFilter);
+		safeVisitAll(eStructuralFeatures, nonDuplicateProperties);
 		for (Constraint pivotInvariant : pivotClass.getOwnedInvariant()) {
 			if (pivotInvariant.isCallable()) {
 				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName(), context.isAddInvariantComments());
-				eClass.getEOperations().add(eOperation);
+				eOperations.add(eOperation);
 				context.putCreated(pivotInvariant, eOperation);
 				copyConstraint(eOperation, pivotInvariant);
 			}
 		}
+		List<ETypedElement> eDuplicates = null;
+		@SuppressWarnings("null")@NonNull Iterable<Operation> duplicateOperations = Iterables.filter(pivotClass.getOwnedOperation(), duplicateOperationsFilter);
+		for (Operation asOperation : duplicateOperations) {
+			if (eDuplicates == null) {
+				eDuplicates = new ArrayList<ETypedElement>();
+			}
+			Object eOperation = safeVisit(asOperation);
+			if (eOperation instanceof EOperation) {
+				eDuplicates.add((EOperation)eOperation);
+			}
+		}
+		@SuppressWarnings("null")@NonNull Iterable<Property> duplicateProperties = Iterables.filter(pivotClass.getOwnedAttribute(), duplicatePropertiesFilter);
+		for (Property asProperty : duplicateProperties) {
+			if (eDuplicates == null) {
+				eDuplicates = new ArrayList<ETypedElement>();
+			}
+			Object eStructuralFeature = safeVisit(asProperty);
+			if (eStructuralFeature instanceof EStructuralFeature) {
+				eDuplicates.add((EStructuralFeature) eStructuralFeature);
+			}
+		}
+		EAnnotation eAnnotation = eClass.getEAnnotation(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
+		if (eAnnotation == null) {
+			eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			eAnnotation.setSource(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
+		}
+		context.refreshList(eAnnotation.getContents(), eDuplicates);
 		return eClass;
 	}
 
@@ -242,7 +317,8 @@ public class Pivot2EcoreDeclarationVisitor
 		@SuppressWarnings("null")
 		@NonNull EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
 		copyDataTypeOrEnum(eEnum, pivotEnumeration);
-		safeVisitAll(eEnum.getELiterals(), pivotEnumeration.getOwnedLiteral());
+		@SuppressWarnings("null")@NonNull List<EEnumLiteral> eLiterals = eEnum.getELiterals();
+		safeVisitAll(eLiterals, pivotEnumeration.getOwnedLiteral());
 		return eEnum;
 	}
 
@@ -268,8 +344,10 @@ public class Pivot2EcoreDeclarationVisitor
 		@SuppressWarnings("null")
 		@NonNull EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
 		copyTypedElement(eOperation, pivotOperation);
-		copyTemplateSignature(eOperation.getETypeParameters(), pivotOperation);
-		safeVisitAll(eOperation.getEParameters(), pivotOperation.getOwnedParameter());
+		@SuppressWarnings("null")@NonNull List<ETypeParameter> eTypeParameters = eOperation.getETypeParameters();
+		copyTemplateSignature(eTypeParameters, pivotOperation);
+		@SuppressWarnings("null")@NonNull List<EParameter> eParameters = eOperation.getEParameters();
+		safeVisitAll(eParameters, pivotOperation.getOwnedParameter());
 //		safeVisitAll(eOperation.getEGenericExceptions(), pivotOperation.getRaisedException());
 		OpaqueExpression bodyExpression = pivotOperation.getBodyExpression();
 		if (bodyExpression != null) {
@@ -292,7 +370,8 @@ public class Pivot2EcoreDeclarationVisitor
 		@SuppressWarnings("null")
 		@NonNull EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		copyNamedElement(ePackage, pivotPackage);
-		safeVisitAll(ePackage.getEAnnotations(), pivotPackage.getOwnedAnnotation());
+		@SuppressWarnings("null")@NonNull List<EAnnotation> eAnnotations = ePackage.getEAnnotations();
+		safeVisitAll(eAnnotations, pivotPackage.getOwnedAnnotation());
 		context.defer(pivotPackage);		// Defer delegate annotation analysis
 		if (pivotPackage.eIsSet(PivotPackage.Literals.PACKAGE__NS_PREFIX)) {
 			ePackage.setNsPrefix(pivotPackage.getNsPrefix());
@@ -300,8 +379,10 @@ public class Pivot2EcoreDeclarationVisitor
 		if (pivotPackage.eIsSet(PivotPackage.Literals.PACKAGE__NS_URI)) {
 			ePackage.setNsURI(pivotPackage.getNsURI());
 		}
-		safeVisitAll(ePackage.getESubpackages(), pivotPackage.getNestedPackage());
-		safeVisitAll(ePackage.getEClassifiers(), pivotPackage.getOwnedType());
+		@SuppressWarnings("null")@NonNull List<EPackage> eSubpackages = ePackage.getESubpackages();
+		safeVisitAll(eSubpackages, pivotPackage.getNestedPackage());
+		@SuppressWarnings("null")@NonNull List<EClassifier> eClassifiers = ePackage.getEClassifiers();
+		safeVisitAll(eClassifiers, pivotPackage.getOwnedType());
 		return ePackage;
 	}
 

@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Template Signature</b></em>'.
@@ -54,7 +56,7 @@ public interface TemplateSignature
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature_Parameter()
 	 * @generated
 	 */
-	List<TemplateParameter> getParameter();
+	@NonNull List<TemplateParameter> getParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.

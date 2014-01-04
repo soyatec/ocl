@@ -283,7 +283,8 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage()
+	@SuppressWarnings("null")
+	public @NonNull List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage()
 	{
 		if (nestedPackage == null)
 		{
@@ -353,7 +354,8 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Type> getOwnedType()
+	@SuppressWarnings("null")
+	public @NonNull List<Type> getOwnedType()
 	{
 		if (ownedType == null)
 		{

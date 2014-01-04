@@ -103,7 +103,9 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 				else {
 					partials = partials2 = new ArrayList<DomainProperty>();
 					partials2.add(resolution);
-					partials2.add(pivotProperty);
+					if (resolution != pivotProperty) {
+						partials2.add(pivotProperty);
+					}
 					resolution = null;
 					isResolved = false;
 				}
@@ -115,13 +117,17 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 				}
 				else {
 					partials2.add(resolution);
-					partials2.add(pivotProperty);
+					if (resolution != pivotProperty) {
+						partials2.add(pivotProperty);
+					}
 					resolution = null;
 					isResolved = false;
 				}
 			}
 			else {
-				partials2.add(pivotProperty);
+				if (!partials2.contains(pivotProperty)) {
+					partials2.add(pivotProperty);
+				}
 				resolution = null;
 				isResolved = false;
 			}

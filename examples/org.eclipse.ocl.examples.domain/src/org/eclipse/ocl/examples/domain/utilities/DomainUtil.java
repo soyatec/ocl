@@ -23,9 +23,12 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -322,6 +325,19 @@ public class DomainUtil
 			}
 		}
 		s.append("]");
+	}
+
+	/**
+	 * Return the sourceURI annotation of eModelElement, creating and installing it if required.
+	 */
+	public static @NonNull EAnnotation getEAnnotation(@NonNull EModelElement eModelElement, String sourceURI) {
+		EAnnotation eAnnotation = eModelElement.getEAnnotation(sourceURI);
+		if (eAnnotation == null) {
+			eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			eAnnotation.setSource(sourceURI);
+			eModelElement.getEAnnotations().add(eAnnotation);
+		}
+		return eAnnotation;
 	}
 
 	/**
