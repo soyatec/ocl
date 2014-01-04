@@ -42,6 +42,7 @@ import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
+import org.eclipse.ocl.examples.library.executor.CollectionTypeParameters;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.SequenceType;
@@ -665,18 +666,18 @@ public class EditTests extends XtextTestCase
 		//
 		Type myType = metaModelManager.getPrimaryType(LibraryConstants.STDLIB_URI, "MyType");
 		SequenceType sequenceType = metaModelManager.getSequenceType();
-		CollectionTypeServer.TemplateArguments templateArguments = new CollectionTypeServer.TemplateArguments(myType, ValuesUtil.ZERO_VALUE, ValuesUtil.UNLIMITED_VALUE);
+		CollectionTypeParameters<Type> typeParameters = new CollectionTypeParameters<Type>(myType, ValuesUtil.ZERO_VALUE, ValuesUtil.UNLIMITED_VALUE);
 		CollectionTypeServer sequenceTypeServer = (CollectionTypeServer) metaModelManager.getTypeServer(sequenceType);
-		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
+		WeakReference<Type> sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(typeParameters));
 		assertNull(sequenceMyType.get()); 
 		//
 		doRename(xtextResource, asResource, "Boolean", "Sequence(MyType)");
-		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
+		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(typeParameters));
 		assertNotNull(sequenceMyType.get()); 
 		//		
 		doRename(xtextResource, asResource, "Sequence(MyType)", "Set(MyType)");
 		System.gc();
-		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(templateArguments));
+		sequenceMyType = new WeakReference<Type>(sequenceTypeServer.findSpecializedType(typeParameters));
 		assertNull(sequenceMyType.get()); 
 	}
 

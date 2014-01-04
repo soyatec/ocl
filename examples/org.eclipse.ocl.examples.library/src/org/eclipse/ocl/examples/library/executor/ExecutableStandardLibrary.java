@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.types.AbstractTupleType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
@@ -46,7 +47,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	/**
 	 * Shared cache of the lazily created lazily deleted specializations of each type. 
 	 */
-	private @NonNull Map<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>> specializations = new WeakHashMap<DomainType, Map<DomainType, WeakReference<AbstractCollectionType>>>();
+	private @NonNull Map<DomainType, Map<CollectionTypeParameters<DomainType>, WeakReference<AbstractCollectionType>>> specializations = new WeakHashMap<DomainType, Map<CollectionTypeParameters<DomainType>, WeakReference<AbstractCollectionType>>>();
 	
 	/**
 	 * Shared cache of the lazily created lazily deleted tuples. 
@@ -81,18 +82,27 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 
 	@Override
 	public synchronized @NonNull DomainCollectionType getCollectionType(@NonNull DomainType genericType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+		IntegerValue lower2 = lower;
+		IntegerValue upper2 = upper;
+		if (lower2 == null) {
+			lower2 = ValuesUtil.ZERO_VALUE;
+		}
+		if (upper2 == null) {
+			upper2 = ValuesUtil.UNLIMITED_VALUE;
+		}
+		CollectionTypeParameters<DomainType> typeParameters = new CollectionTypeParameters<DomainType>(elementType, lower2, upper2);
 		AbstractCollectionType specializedType = null;
-		Map<DomainType, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
+		Map<CollectionTypeParameters<DomainType>, WeakReference<AbstractCollectionType>> map = specializations.get(genericType);
 		if (map == null) {
-			map = new WeakHashMap<DomainType, WeakReference<AbstractCollectionType>>();
+			map = new WeakHashMap<CollectionTypeParameters<DomainType>, WeakReference<AbstractCollectionType>>();
 			specializations.put(genericType, map);
 		}
 		else {
-			specializedType = weakGet(map, elementType);
+			specializedType = weakGet(map, typeParameters);
 		}
 		if (specializedType == null) {
 			specializedType = new AbstractCollectionType(this, DomainUtil.nonNullModel(genericType.getName()), genericType, elementType, lower, upper);
-			map.put(elementType, new WeakReference<AbstractCollectionType>(specializedType));
+			map.put(typeParameters, new WeakReference<AbstractCollectionType>(specializedType));
 		}
 		return specializedType;
 	}

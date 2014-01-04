@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011, 2013 E.D.Willink and others.
+ * Copyright (c) 2011, 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
@@ -20,7 +18,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
@@ -31,6 +28,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.executor.CollectionTypeParameters;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -48,105 +46,6 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 {
 	private static final Logger logger = Logger.getLogger(CollectionTypeServer.class);
 
-	public static class TemplateArguments implements Iterable<Object>
-	{
-		protected class Iterator implements java.util.Iterator<Object>
-		{
-			private int position = 0;
-			
-			public boolean hasNext() {
-				return position < 3;
-			}
-
-			public Object next() {
-				switch (position++) {
-					case 0: return elementType;
-					case 1: return lower;
-					case 2: return upper;
-				}
-				throw new NoSuchElementException();
-			}
-
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-		}
-		
-		private final int hashCode;
-		private final @NonNull Type elementType;
-		private final @NonNull IntegerValue lower;
-		private final @NonNull IntegerValue upper;
-
-		public TemplateArguments(@NonNull Type elementType, @NonNull IntegerValue lower, @NonNull IntegerValue upper) {
-			this.elementType = elementType;
-			this.lower = lower;
-			this.upper = upper;
-			int hash = elementType.hashCode();
-			hash = 111 * hash + lower.hashCode();
-			hash = 111 * hash + upper.hashCode();
-			hashCode = hash;
-		}
-		
-		@Override
-		public boolean equals(Object o) {
-			if (!(o instanceof TemplateArguments)) {
-				return false;
-			}
-			TemplateArguments that = (TemplateArguments)o;
-			if (this.hashCode != that.hashCode){
-				return false;
-			}
-			if (!this.elementType.equals(that.elementType)) {
-				return false;
-			}
-			if (!this.lower.equals(that.lower)) {
-				return false;
-			}
-			if (!this.upper.equals(that.upper)) {
-				return false;
-			}
-			return true;
-		}
-
-		public @NonNull Type getElementType() {
-			return elementType;
-		}
-
-		public @NonNull IntegerValue getLower() {
-			return lower;
-		}
-
-		public @NonNull IntegerValue getUpper() {
-			return upper;
-		}
-
-		@Override
-		public int hashCode() {
-			return hashCode;
-		}
-
-		public @NonNull Iterator iterator() {
-			return new Iterator();
-		}		
-
-		public int parametersSize() {
-			return 1;
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder s = new StringBuilder();
-			s.append('(');
-			s.append(elementType);
-			s.append(',');
-			s.append(lower);
-			s.append(',');
-			s.append(upper);
-			s.append(')');
-			return s.toString();
-		}
-	}
-	
 	/**
 	 * Map from actual types to specialization.
 	 * <br>
@@ -155,13 +54,13 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 	// FIXME tests fail if keys are weak since GC is too aggressive across tests
 	// The actual types are weak keys so that parameterizations using stale types are garbage collected. 
 	//
-	private @Nullable /*WeakHash*/Map<TemplateArguments, WeakReference<Type>> specializations = null;
+	private @Nullable /*WeakHash*/Map<CollectionTypeParameters<Type>, WeakReference<Type>> specializations = null;
 
 	protected CollectionTypeServer(@NonNull PackageServer packageServer, @NonNull DomainCollectionType domainType) {
 		super(packageServer, domainType);
 	}
 	
-	protected @NonNull Type createSpecialization(@NonNull TemplateArguments templateArguments) {
+	protected @NonNull Type createSpecialization(@NonNull CollectionTypeParameters<Type> typeParameters) {
 		Type unspecializedType = getPivotType();
 		String typeName = unspecializedType.getName();
 		TemplateSignature templateSignature = unspecializedType.getOwnedTemplateSignature();
@@ -175,21 +74,21 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		Map<TemplateParameter, ParameterableElement> allBindings = new HashMap<TemplateParameter, ParameterableElement>();
 		TemplateParameter formalParameter = templateParameters.get(0);
 		assert formalParameter != null;
-		Type elementType = templateArguments.getElementType();
+		Type elementType = typeParameters.getElementType();
 		allBindings.put(formalParameter, elementType);
 		TemplateParameterSubstitution templateParameterSubstitution = createTemplateParameterSubstitution(formalParameter, elementType);
 		templateBinding.getParameterSubstitution().add(templateParameterSubstitution);
 		specializedType.getTemplateBinding().add(templateBinding);
 		packageManager.resolveSuperClasses(specializedType, unspecializedType, allBindings);
 		CollectionType specializedCollectionType = specializedType;
-		specializedCollectionType.setElementType(templateArguments.getElementType());
+		specializedCollectionType.setElementType(typeParameters.getElementType());
 		try {
-			specializedCollectionType.setLowerValue(templateArguments.getLower());
+			specializedCollectionType.setLowerValue(typeParameters.getLower());
 		} catch (InvalidValueException e) {
 			logger.error("Out of range lower bound", e);
 		}
 		try {
-			specializedCollectionType.setUpperValue(templateArguments.getUpper());
+			specializedCollectionType.setUpperValue(typeParameters.getUpper());
 		} catch (InvalidValueException e) {
 			logger.error("Out of range upper bound", e);
 		}
@@ -200,17 +99,17 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		return specializedType;
 	}
 
-	public synchronized @Nullable Type findSpecializedType(@NonNull TemplateArguments templateArguments) {
+	public synchronized @Nullable Type findSpecializedType(@NonNull CollectionTypeParameters<Type> typeParameters) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		if (templateParameters.size() != 1) {
 			return null;
 		}
-		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;
+		Map<CollectionTypeParameters<Type>, WeakReference<Type>> specializations2 = specializations;
 		if (specializations2 == null) {
 			return null;
 		}
-		WeakReference<Type> weakReference = specializations2.get(templateArguments);
+		WeakReference<Type> weakReference = specializations2.get(typeParameters);
 		if (weakReference == null) {
 			return null;
 		}
@@ -219,7 +118,7 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 			synchronized (specializations2) {
 				type = weakReference.get();
 				if (type == null) {
-					specializations2.remove(templateArguments);
+					specializations2.remove(typeParameters);
 				}
 			}
 		}
@@ -236,25 +135,25 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		if (upper2 == null) {
 			upper2 = ValuesUtil.UNLIMITED_VALUE;
 		}
-		TemplateArguments templateArguments = new TemplateArguments(elementType, lower2, upper2);
-		Map<TemplateArguments, WeakReference<Type>> specializations2 = specializations;
+		CollectionTypeParameters<Type> typeParameters = new CollectionTypeParameters<Type>(elementType, lower2, upper2);
+		Map<CollectionTypeParameters<Type>, WeakReference<Type>> specializations2 = specializations;
 		if (specializations2 == null) {
 			synchronized(this) {
 				specializations2 = specializations;
 				if (specializations2 == null) {
-					specializations2 = specializations = new /*Weak*/HashMap<TemplateArguments, WeakReference<Type>>();
+					specializations2 = specializations = new /*Weak*/HashMap<CollectionTypeParameters<Type>, WeakReference<Type>>();
 				}
 			}
 		}
 		synchronized (specializations2) {
 			Type specializedType = null;
-			WeakReference<Type> weakReference = specializations2.get(templateArguments);
+			WeakReference<Type> weakReference = specializations2.get(typeParameters);
 			if (weakReference != null) {
 				specializedType = weakReference.get();
 			}
 			if (specializedType == null) {
-				specializedType = createSpecialization(templateArguments);
-				specializations2.put(templateArguments, new WeakReference<Type>(specializedType));
+				specializedType = createSpecialization(typeParameters);
+				specializations2.put(typeParameters, new WeakReference<Type>(specializedType));
 			}
 			return specializedType;
 		}
