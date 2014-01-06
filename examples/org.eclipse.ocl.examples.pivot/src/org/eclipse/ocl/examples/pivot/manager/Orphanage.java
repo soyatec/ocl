@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011, 2012 E.D.Willink and others.
+ * Copyright (c) 2011, 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
@@ -22,8 +20,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -43,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.internal.impl.PackageImpl;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 
 /**
  * An Orphanage provides a Package that weakly contains elements such as type specializations that
@@ -73,21 +71,93 @@ public class Orphanage extends PackageImpl
 	}
 
 	/**
-	 * WeakEList makes a WeakHashMap look like an EList for use as Package.ownedType.
+	 * WeakEList enables a WeakHashMap to be used as a Package.ownedType. The weakness allows stale synthesized types to vanish.
+	 * The Map ensures that duplicates are avoided.
 	 * <br>
 	 * Only the minimal suupport necessary to make aType.setPackage() and subsequent usage is provided.
-	 * Additional list functionality could be provided exploiting the weakList cache.
+	 * <br>
+	 * A cached sorted list copy of the map is created on demand and may be shared by multiple iterators. However it must not be modified
+	 * since its staleness is detectesd by a simple size comparison with the map.
 	 */
 	private static class WeakEList<T> extends AbstractEList<T> implements InternalEList<T>
 	{
-		private final @NonNull WeakHashMap<T, Integer> weakMap = new WeakHashMap<T, Integer>();
-		private int counter = 0;
-		private @Nullable List<Entry<T, Integer>> weakList = null;
+		/**
+		 * A simple immutable iterator that caches the list image on construction to avoid changes.
+		 */
+		protected static class ListIterator<T> implements java.util.ListIterator<T>
+		{
+			protected final @NonNull List<Map.Entry<T,Integer>> list;
+			private final int size;
+			private int cursor;
 
-//		@Override
-//		public boolean add(T o) {
-//			return weakList.put(o, null) == null;
-//		}
+			public ListIterator(@NonNull List<Map.Entry<T,Integer>> list, int index) {
+				this.list = list;
+				this.size = list.size();
+				this.cursor = index;
+				if ((cursor < 0) || (size < cursor)) {
+					throw new NoSuchElementException(cursor + "/" + size);
+				}
+			}
+
+			public void add(T o) {
+				throw new UnsupportedOperationException();
+			}
+
+			public boolean hasNext() {
+				return cursor < size;
+			}
+
+			public boolean hasPrevious() {
+				return 0 < cursor;
+			}
+
+			public T next() {
+				if ((cursor < 0) || (size <= cursor)) {
+					throw new NoSuchElementException(cursor + "/" + size);
+				}
+				return list.get(cursor++).getKey();
+			}
+
+			public int nextIndex() {
+				return cursor;
+			}
+
+			public T previous() {
+				int previousCursor = cursor - 1;
+				if ((previousCursor < 0) || (size <= previousCursor)) {
+					throw new NoSuchElementException(previousCursor + "/" + size);
+				}
+				cursor = previousCursor;
+				return list.get(previousCursor).getKey();
+			}
+
+			public int previousIndex() {
+				return cursor - 1;
+			}
+
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+
+			public void set(T o) {
+				throw new UnsupportedOperationException();
+			}
+		}
+		
+		/**
+		 * Map of content-value to list-index.
+		 */
+		private final @NonNull WeakHashMap<T, Integer> weakMap = new WeakHashMap<T, Integer>();
+		
+		/**
+		 * Incrermenting counter used to sort the list into a predictable order.
+		 */
+		private int counter = 0;
+		
+		/**
+		 * The most recent ordered view of the weakMap.
+		 */
+		private @Nullable List<Entry<T, Integer>> weakList = null;
 
 		@Override
 		public boolean addAllUnique(Object[] objects, int start, int end) {
@@ -112,8 +182,6 @@ public class Orphanage extends PackageImpl
 		@Override
 		public void addUnique(T object) {
 			throw new UnsupportedOperationException();
-//			weakList = null;
-//			weakMap.put(object, Integer.valueOf(counter++));
 		}
 
 		@Override
@@ -122,27 +190,13 @@ public class Orphanage extends PackageImpl
 		}
 
 		public NotificationChain basicAdd(T object, NotificationChain notifications) {
-			assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
-			weakList = null;
-			weakMap.put(object, Integer.valueOf(counter++));
-			return notifications;
-		}
-
-		@Override
-		public ListIterator<T> basicListIterator() {
-			return Collections.<T>emptyList().listIterator();
-//			throw new UnsupportedOperationException();
-/*			List<Entry<T, Integer>> weakList2 = weakList;
-			if (weakList2 != null) {
-				List<T> list = new ArrayList<T>(weakList2.size());
-				for (Entry<T, Integer> entry : weakList2) {
-					list.add(entry.getKey());
+			synchronized (weakMap) {
+				if (!weakMap.containsKey(object)) {
+					weakMap.put(object, Integer.valueOf(counter++));
+					weakList = null;
 				}
-				return list.listIterator();
 			}
-			else {
-				return Collections.<T>emptyList().listIterator();
-			} */
+			return notifications;
 		}
 
 		public boolean basicContains(Object object) {
@@ -177,8 +231,13 @@ public class Orphanage extends PackageImpl
 		}
 
 		@Override
+		public ListIterator<T> basicListIterator() {
+			return listIterator();
+		}
+
+		@Override
 		public ListIterator<T> basicListIterator(int index) {
-			throw new UnsupportedOperationException();
+			return listIterator(index);
 		}
 
 		public NotificationChain basicRemove(Object object, NotificationChain notifications) {
@@ -193,40 +252,65 @@ public class Orphanage extends PackageImpl
 			throw new UnsupportedOperationException();
 		}
 
-//		@Override
-//		protected boolean isUnique() {
-//			return true;		-- imp[l;ementing this makes things really really slow.
-//		}
-		
-		private List<Entry<T, Integer>> createList() {
-			List<Entry<T, Integer>> weakList2 = weakList = new ArrayList<Entry<T, Integer>>(weakMap.entrySet());
-			Collections.sort(weakList2, new Comparator<Entry<T, Integer>>()
-			{
-				public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
-					return o1.getValue().compareTo(o2.getValue());
-				}
-			});
-			return weakList2;
-		}
-
 		public void dispose() {
-			assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
-			weakList = null;
-			weakMap.clear();
+			synchronized (weakMap) {
+				weakMap.clear();
+				weakList = null;
+			}
 		}
 
 		@Override
 		public T get(int index) {
-			List<Entry<T, Integer>> weakList2 = weakList;
-			if (weakList2 == null) {
-				weakList2 = createList();
-			}
+			List<Entry<T, Integer>> weakList2 = getList();
 			return weakList2.get(index).getKey();
 		}
 
-//		public void move(int newPosition, T object) {
-//			throw new UnsupportedOperationException();
+		private @NonNull List<Entry<T, Integer>> getList() {
+			List<Entry<T, Integer>> weakList2;
+			synchronized (weakMap) {
+				weakList2 = weakList;
+				if (weakList2 == null) {
+					weakList2 = weakList = new ArrayList<Entry<T, Integer>>(weakMap.entrySet());
+					Collections.sort(weakList2, new Comparator<Entry<T, Integer>>()
+					{
+						public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
+							return o1.getValue().intValue() - o2.getValue().intValue();
+						}
+					});
+				}
+			}
+			return weakList2;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return weakMap.size() == 0;
+		}
+
+//		@Override
+//		protected boolean isUnique() {
+//			return true;		-- implementing this makes things really really slow.
 //		}
+
+		@Override
+		public Iterator<T> iterator() {
+			return listIterator();
+		}
+
+		@Override
+		public @NonNull ListIterator<T> listIterator() {
+			return new ListIterator<T>(getList(), 0);
+		}
+
+		@Override
+		public @NonNull ListIterator<T> listIterator(int index) {
+			return new ListIterator<T>(getList(), index);
+		}
+		  
+		@Override
+		public void move(int newPosition, T object) {
+			throw new UnsupportedOperationException();
+		}
 
 		@Override
 		public T move(int newPosition, int oldPosition) {
@@ -234,9 +318,9 @@ public class Orphanage extends PackageImpl
 		}
 
 		@Override
-			protected T primitiveGet(int index) {
-				throw new UnsupportedOperationException();
-			}
+		protected T primitiveGet(int index) {
+			throw new UnsupportedOperationException();
+		}
 
 		@Override
 		public T remove(int index) {

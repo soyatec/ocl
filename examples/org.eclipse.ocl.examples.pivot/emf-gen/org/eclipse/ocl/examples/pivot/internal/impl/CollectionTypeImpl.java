@@ -53,7 +53,6 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 
 /**
  * <!-- begin-user-doc -->
@@ -124,17 +123,9 @@ public class CollectionTypeImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	protected CollectionTypeImpl() {
 		super();
-		assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
-	}
-
-	@Override
-	protected void eBasicSetContainer(InternalEObject newContainer, int newContainerFeatureID) {
-		super.eBasicSetContainer(newContainer, newContainerFeatureID);
-		assert !AS2XMIid.isIdAssignmentInProgress();		// FIXME BUG 417663
 	}
 
 	/**
