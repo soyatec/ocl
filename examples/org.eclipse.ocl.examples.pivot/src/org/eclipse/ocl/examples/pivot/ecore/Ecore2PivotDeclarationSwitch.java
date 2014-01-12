@@ -81,7 +81,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 {
 	public static boolean hasDocumentationKey(@Nullable String source, @NonNull EMap<String, String> details) {
-		return PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE.equals(source)
+		return (details.size() == 1) && PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE.equals(source)
 			&& details.containsKey(PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
 	}
 	
@@ -113,7 +113,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		doSwitchAll(pivotElement.getOwnedContent(), eObject.getContents());
 		for (Map.Entry<String, String> entry : details) {
 			String key = entry.getKey();
-			if (!isDocumentationKey(source, key)) {
+			if ((details.size() != 1) || !isDocumentationKey(source, key)) {
 				Detail pivotDetail = PivotFactory.eINSTANCE.createDetail();
 				pivotDetail.setName(key);
 				pivotDetail.getValue().add(entry.getValue());

@@ -307,6 +307,24 @@ public class SerializeTests extends XtextTestCase
 		doSerialize("Bug404493", "Bug404493", null, false, true);
 	}
 
+	public void testSerialize_Bug425506() throws Exception {
+		String testFile = 
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+			"<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" + 
+			"   xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"p\" nsURI=\"p\" nsPrefix=\"p\">\n" + 
+			" <eClassifiers xsi:type=\"ecore:EClass\" name=\"A\">\n" + 
+			"   <eOperations name=\"f\">\n" + 
+			"     <eAnnotations source=\"http://www.eclipse.org/emf/2002/GenModel\">\n" + 
+			"       <details key=\"documentation\" value=\"function doc\"/>\n" + 
+			"       <details key=\"body\" value=\"return 1;\"/>\n" + 
+			"     </eAnnotations>\n" + 
+			"   </eOperations>\n" + 
+			" </eClassifiers>\n" + 
+			"</ecore:EPackage>\n" ;
+		createOCLinEcoreFile("Bug425506.ecore", testFile);
+		doSerialize("Bug425506", "Bug425506", null, false, true);
+	}
+
 	public void testSerialize_Company() throws Exception {
 //		Logger logger = Logger.getLogger(AbstractParseTreeConstructor.class);
 //		logger.setLevel(Level.TRACE);
