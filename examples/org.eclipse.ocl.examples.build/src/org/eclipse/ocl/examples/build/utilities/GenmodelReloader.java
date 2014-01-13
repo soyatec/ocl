@@ -40,13 +40,10 @@ import org.eclipse.emf.importer.ModelImporter;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.uml2.uml.ecore.importer.UMLImporter;
 
 /**

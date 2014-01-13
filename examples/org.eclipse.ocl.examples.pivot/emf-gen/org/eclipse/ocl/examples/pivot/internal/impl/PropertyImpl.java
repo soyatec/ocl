@@ -1783,7 +1783,7 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PROPERTY__IS_STATIC:
-				return isSetIsStatic();
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PROPERTY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:

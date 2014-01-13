@@ -80,7 +80,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -522,16 +521,20 @@ public class TypeImpl
 	 */
 	public NotificationChain basicSetTemplateParameter(
 			TemplateParameter newTemplateParameter, NotificationChain msgs) {
-		if (newTemplateParameter != null && !(newTemplateParameter instanceof TypeTemplateParameter))
-		{
-			throw new IllegalArgumentException("newTemplateParameter must be an instance of TypeTemplateParameter"); //$NON-NLS-1$
-		}
 		TemplateParameter oldTemplateParameter = templateParameter;
 		templateParameter = newTemplateParameter;
 		if (eNotificationRequired())
 		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.TYPE__TEMPLATE_PARAMETER, oldTemplateParameter, newTemplateParameter);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		Resource.Internal eInternalResource = eInternalResource();
+		if (eInternalResource == null || !eInternalResource.isLoading()) {
+			TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+			if (owningTemplateParameter != null && owningTemplateParameter != newTemplateParameter)
+			{
+				setOwningTemplateParameter(null);
+			}
 		}
 		return msgs;
 	}
@@ -542,10 +545,6 @@ public class TypeImpl
 	 * @generated
 	 */
 	public void setTemplateParameter(TemplateParameter newTemplateParameter) {
-		if (newTemplateParameter != null && !(newTemplateParameter instanceof TypeTemplateParameter))
-		{
-			throw new IllegalArgumentException("newTemplateParameter must be an instance of TypeTemplateParameter"); //$NON-NLS-1$
-		}
 		if (newTemplateParameter != templateParameter)
 		{
 			NotificationChain msgs = null;
@@ -558,15 +557,6 @@ public class TypeImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPE__TEMPLATE_PARAMETER, newTemplateParameter, newTemplateParameter));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetTemplateParameter() {
-		return templateParameter != null;
 	}
 
 	/**
@@ -629,9 +619,7 @@ public class TypeImpl
 	 * @generated
 	 */
 	public boolean isTemplate() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!isTemplate()
 	}
 
 	/**
@@ -932,7 +920,7 @@ public class TypeImpl
 			case PivotPackage.TYPE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.TYPE__OWNED_ATTRIBUTE:

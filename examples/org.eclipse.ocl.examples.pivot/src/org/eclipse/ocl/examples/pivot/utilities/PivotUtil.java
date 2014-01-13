@@ -631,7 +631,7 @@ public class PivotUtil extends DomainUtil
 			if (s.startsWith("=")) {
 				s = s.substring(1).trim();
 				if (s.startsWith("(") && s.endsWith(")")) {
-					s = s.substring(1, s.length()-1).trim();
+					s = s.substring(1, s.length()-1); //.trim();
 				}
 				return s;
 			}
@@ -871,7 +871,7 @@ public class PivotUtil extends DomainUtil
 		}
 		String expression = PivotUtil.getBody(specification);
 		if (expression == null) {
-			return createExpressionInOCLError("Missing expression");
+			return null; //createExpressionInOCLError("Missing expression");
 		}
 		ExpressionInOCL expressionInOCL = null;
 		try {

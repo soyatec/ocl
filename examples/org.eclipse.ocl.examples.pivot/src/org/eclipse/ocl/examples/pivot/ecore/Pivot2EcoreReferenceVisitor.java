@@ -20,12 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -35,8 +37,11 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -54,9 +59,19 @@ import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 
-public class Pivot2EcoreReferenceVisitor
-	extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
+public class Pivot2EcoreReferenceVisitor extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
 {
+	protected static class OptionalType
+	{
+		public final @Nullable Type type;
+		public final boolean isRequired;
+		
+		public OptionalType(@Nullable Type type, boolean isRequired) {
+			this.type = type;
+			this.isRequired = isRequired;
+		}
+	}
+	
 	private static final Logger logger = Logger.getLogger(Pivot2EcoreReferenceVisitor.class);
 
 	protected final @NonNull Pivot2EcoreTypeRefVisitor typeRefVisitor;
@@ -64,6 +79,103 @@ public class Pivot2EcoreReferenceVisitor
 	public Pivot2EcoreReferenceVisitor(@NonNull Pivot2Ecore context) {
 		super(context);
 		typeRefVisitor = new Pivot2EcoreTypeRefVisitor(context);
+	}
+
+	protected @Nullable OptionalType addPropertyRedefinitionEAnnotations(@NonNull EStructuralFeature eStructuralFeature, @NonNull Property pivotProperty) {
+		@Nullable OptionalType optionalType = null;
+		Type redefiningType = pivotProperty.getType();
+		EAnnotation eRedefinesAnnotation = null;
+		String changedEType = null;
+		String changedLower = null;
+		String changedUpper = null;
+		for (@SuppressWarnings("null")@NonNull Property redefinedProperty : pivotProperty.getRedefinedProperty()) {
+			EStructuralFeature eRedefined = context.getCreated(EStructuralFeature.class, redefinedProperty);
+			if (eRedefined != null) {
+				if (eRedefinesAnnotation == null) {
+					eRedefinesAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+					eRedefinesAnnotation.setSource(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+					eStructuralFeature.getEAnnotations().add(eRedefinesAnnotation);
+				}
+				eRedefinesAnnotation.getReferences().add(eRedefined);
+				//
+				IntegerValue redefinedLower = redefinedProperty.isRequired() ? ValuesUtil.ONE_VALUE :  ValuesUtil.ZERO_VALUE;
+				IntegerValue redefinedUpper = ValuesUtil.ONE_VALUE;
+				Type redefinedType = redefinedProperty.getType();
+				Type redefinedElementType = redefinedType;
+				if (redefinedElementType instanceof CollectionType) {
+					CollectionType redefinedCollectionType = (CollectionType)redefinedElementType;
+					redefinedLower = redefinedCollectionType.getLowerValue();
+					redefinedUpper = redefinedCollectionType.getUpperValue();
+					redefinedElementType = redefinedCollectionType.getElementType();
+				}
+				//
+				IntegerValue redefiningLower = pivotProperty.isRequired() ? ValuesUtil.ONE_VALUE :  ValuesUtil.ZERO_VALUE;
+				IntegerValue redefiningUpper = ValuesUtil.ONE_VALUE;
+				Type redefiningElementType = redefiningType;
+				if (redefiningElementType instanceof CollectionType) {
+					CollectionType redefiningCollectionType = (CollectionType)redefiningElementType;
+					redefiningLower = redefiningCollectionType.getLowerValue();
+					redefiningUpper = redefiningCollectionType.getUpperValue();
+					redefiningElementType = redefiningCollectionType.getElementType();
+				}
+				//
+				if (!(redefinedType instanceof CollectionType) && (redefinedElementType != redefiningElementType)) {
+					changedEType = redefiningElementType.toString();
+				}
+				if (!redefinedLower.equals(redefiningLower)) {
+					changedLower = redefiningLower.toString();
+				}
+				if (!redefinedUpper.equals(redefiningUpper)) {
+					changedUpper = redefiningUpper.equals(ValuesUtil.UNLIMITED_VALUE) ? "-1" : redefiningUpper.toString();
+				}
+				//
+				if (!(redefiningType instanceof CollectionType)) {
+					if (!(redefinedType instanceof CollectionType)) {
+						optionalType = new OptionalType(redefinedElementType, redefinedProperty.isRequired());
+					}
+					else if (redefiningType != null) {
+						CollectionType redefinedCollectionType = (CollectionType)redefinedType;
+						optionalType = new OptionalType(context.getMetaModelManager().getCollectionType(redefinedCollectionType.isOrdered(), redefinedCollectionType.isUnique(),
+							redefiningType, redefinedCollectionType.getLowerValue(), redefinedCollectionType.getUpperValue()), redefinedProperty.isRequired());
+					}
+				}
+			}
+		}
+		if ((changedEType != null) || (changedLower != null) || (changedUpper != null)) {
+			EAnnotation eCorrection = EcoreFactory.eINSTANCE.createEAnnotation();
+			eCorrection.setSource(eStructuralFeature.getName());
+			EMap<String, String> eDetails = eCorrection.getDetails();
+			if (changedEType != null) {
+				eDetails.put("eType", changedEType);
+			}
+			if (changedLower != null) {
+				eDetails.put("lowerBound", changedLower);
+			}
+			if (changedUpper != null) {
+				eDetails.put("upperBound", changedUpper);
+			}
+			EModelElement eContainer = (EModelElement) eStructuralFeature.eContainer();
+			eContainer.getEAnnotations().add(eCorrection);
+		}
+		return optionalType;
+	}
+
+	protected boolean addPropertyRenameEAnnotations(@NonNull EStructuralFeature eStructuralFeature, @NonNull Property pivotProperty) {
+		for (@SuppressWarnings("null")@NonNull Property redefinedProperty1 :  pivotProperty.getRedefinedProperty()) {
+			if (!DomainUtil.safeEquals(pivotProperty.getName(), redefinedProperty1.getName())) {
+				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				eAnnotation.setSource(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+				for (@SuppressWarnings("null")@NonNull Property redefinedProperty2 :  pivotProperty.getRedefinedProperty()) {
+					EStructuralFeature eRedefined = context.getCreated(EStructuralFeature.class, redefinedProperty2);
+					if (eRedefined != null) {
+						eAnnotation.getReferences().add(eRedefined);
+					}
+				}
+				eStructuralFeature.getEAnnotations().add(eAnnotation);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public <T extends EObject> void safeVisitAll(List<T> eObjects, List<? extends Element> pivotObjects) {
@@ -95,6 +207,73 @@ public class Pivot2EcoreReferenceVisitor
 		}
 		else {
 			eGenericTypes.clear();
+		}
+	}
+
+	protected void setEType(@NonNull ETypedElement eTypedElement, @NonNull Type pivotType) {
+		EObject eObject = typeRefVisitor.safeVisit(pivotType);
+		if (eObject instanceof EGenericType) {
+			eTypedElement.setEGenericType((EGenericType)eObject);
+		}
+		else if (eObject instanceof EClassifier) {
+			eTypedElement.setEType((EClassifier)eObject);
+		}
+		else if (eObject instanceof ETypeParameter) {
+			EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
+			eGenericType.setETypeParameter((ETypeParameter)eObject);
+			eTypedElement.setEGenericType(eGenericType);
+		}
+		else {
+			@SuppressWarnings("unused")
+			EObject eObject2 = typeRefVisitor.safeVisit(pivotType);
+//			throw new IllegalArgumentException("Unsupported pivot type '" + pivotType + "' in Pivot2Ecore Reference pass");
+		}
+	}
+
+	protected void setETypeAndMultiplicity(@NonNull ETypedElement eTypedElement, @Nullable Type pivotType, boolean isRequired) {
+		if ((pivotType == null) || (pivotType instanceof VoidType)) {				// Occurs for Operation return type
+			eTypedElement.setLowerBound(0);
+			eTypedElement.setUpperBound(1);
+			eTypedElement.setOrdered(true);
+			eTypedElement.setUnique(true);
+		}
+		else if ((pivotType instanceof CollectionType) && (pivotType.getUnspecializedElement() != context.getMetaModelManager().getCollectionType())) {		// Collection(T) cannot be distinguished from concrete Ecore collections
+			CollectionType collectionType = (CollectionType)pivotType;
+			Type elementType = collectionType.getElementType();
+			EObject eObject = typeRefVisitor.safeVisit(elementType);
+			if (eObject instanceof EGenericType) {
+				eTypedElement.setEGenericType((EGenericType)eObject);
+			}
+			else {
+				eTypedElement.setEType((EClassifier)eObject);
+			}
+			eTypedElement.setOrdered(collectionType.isOrdered());
+			eTypedElement.setUnique(collectionType.isUnique());
+			IntegerValue lower = collectionType.getLowerValue();
+			IntegerValue upper = collectionType.getUpperValue();
+			try {
+				eTypedElement.setLowerBound(lower.intValue());
+			} catch (InvalidValueException e) {
+				logger.error("Illegal lower bound", e);
+			}
+			try {
+				eTypedElement.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
+			} catch (InvalidValueException e) {
+				logger.error("Illegal upper bound", e);
+			}
+		}
+		else {
+			if (isRequired) {
+				eTypedElement.setLowerBound(1);
+				eTypedElement.setUpperBound(1);
+			}
+			else {
+				eTypedElement.setLowerBound(0);
+				eTypedElement.setUpperBound(1);
+			}
+			eTypedElement.setUnique(true);
+			eTypedElement.setOrdered(true);		// Ecore default
+			setEType(eTypedElement, pivotType);
 		}
 	}
 
@@ -137,6 +316,20 @@ public class Pivot2EcoreReferenceVisitor
 	public EObject visitOperation(@NonNull Operation pivotOperation) {
 		EOperation eOperation = context.getCreated(EOperation.class, pivotOperation);
 		safeVisitAll(EClassifier.class, eOperation.getEGenericExceptions(), eOperation.getEExceptions(), pivotOperation.getRaisedException());
+		EAnnotation eRedefinesAnnotation = null;
+		for (@SuppressWarnings("null")@NonNull Operation redefinedOperation : pivotOperation.getRedefinedOperation()) {
+			EOperation eRedefined = context.getCreated(EOperation.class, redefinedOperation);
+			if (eRedefined != null) {
+				if (eRedefinesAnnotation == null) {
+					eRedefinesAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+					eRedefinesAnnotation.setSource(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+				}
+				eRedefinesAnnotation.getReferences().add(eRedefined);
+			}
+		}
+		if (eRedefinesAnnotation != null) {
+			eOperation.getEAnnotations().add(eRedefinesAnnotation);
+		}
 		return super.visitOperation(pivotOperation);
 	}
 
@@ -164,6 +357,9 @@ public class Pivot2EcoreReferenceVisitor
 			return null;
 		}
 		EStructuralFeature eStructuralFeature = context.getCreated(EStructuralFeature.class, pivotProperty);
+		if (eStructuralFeature == null) {
+			return null;
+		}
 		if (eStructuralFeature instanceof EReference) {
 			EReference eReference = (EReference) eStructuralFeature;
 			Property pivotOpposite = pivotProperty.getOpposite();
@@ -187,7 +383,17 @@ public class Pivot2EcoreReferenceVisitor
 				}
 			}
 		}
-		return super.visitProperty(pivotProperty);
+		Type pivotType = pivotProperty.getType();
+		boolean pivotIsRequired = pivotProperty.isRequired();
+		if (!addPropertyRenameEAnnotations(eStructuralFeature, pivotProperty)) {
+			OptionalType optionalType = addPropertyRedefinitionEAnnotations(eStructuralFeature, pivotProperty);
+			if (optionalType != null) {
+				pivotType = optionalType.type;
+				pivotIsRequired = optionalType.isRequired;
+			}
+		}
+		setETypeAndMultiplicity(eStructuralFeature, pivotType, pivotIsRequired);
+		return null;
 	}
 
 	@Override
@@ -203,26 +409,12 @@ public class Pivot2EcoreReferenceVisitor
 	@Override
 	public EObject visitTypedElement(@NonNull TypedElement pivotTypedElement) {
 		ETypedElement eTypedElement = context.getCreated(ETypedElement.class, pivotTypedElement);
-		Type pivotType = pivotTypedElement.getType();
-		if (pivotType == null) {
-			return null;				// Occurs for Operation return type
-		}
-		EObject eObject = typeRefVisitor.safeVisit(pivotType);
-		if (eObject instanceof EGenericType) {
-			eTypedElement.setEGenericType((EGenericType)eObject);
-		}
-		else if (eObject instanceof EClassifier) {
-			eTypedElement.setEType((EClassifier)eObject);
-		}
-		else if (eObject instanceof ETypeParameter) {
-			EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
-			eGenericType.setETypeParameter((ETypeParameter)eObject);
-			eTypedElement.setEGenericType(eGenericType);
-		}
-		else {
-			@SuppressWarnings("unused")
-			EObject eObject2 = typeRefVisitor.safeVisit(pivotType);
-//			throw new IllegalArgumentException("Unsupported pivot type '" + pivotType + "' in Pivot2Ecore Reference pass");
+		if (eTypedElement != null) {
+			Type pivotType = pivotTypedElement.getType();
+			if (pivotType == null) {
+				return null;				// Occurs for Operation return type
+			}
+			setEType(eTypedElement, pivotType);
 		}
 		return null;
 	}
@@ -230,53 +422,11 @@ public class Pivot2EcoreReferenceVisitor
 	@Override
 	public EObject visitTypedMultiplicityElement(@NonNull TypedMultiplicityElement pivotTypedElement) {
 		ETypedElement eTypedElement = context.getCreated(ETypedElement.class, pivotTypedElement);
-		Type pivotType = pivotTypedElement.getType();
-		if ((pivotType == null) || (pivotType instanceof VoidType)) {				// Occurs for Operation return type
-			eTypedElement.setLowerBound(0);
-			eTypedElement.setUpperBound(1);
-			eTypedElement.setOrdered(true);
-			eTypedElement.setUnique(true);
-			return null;
+		if (eTypedElement != null) {
+			Type pivotType = pivotTypedElement.getType();
+			setETypeAndMultiplicity(eTypedElement, pivotType, pivotTypedElement.isRequired());
 		}
-		else if ((pivotType instanceof CollectionType) && (pivotType.getUnspecializedElement() != context.getMetaModelManager().getCollectionType())) {		// Collection(T) cannot be distinguished from concrete Ecore collections
-			CollectionType collectionType = (CollectionType)pivotType;
-			Type elementType = collectionType.getElementType();
-			EObject eObject = typeRefVisitor.safeVisit(elementType);
-			if (eObject instanceof EGenericType) {
-				eTypedElement.setEGenericType((EGenericType)eObject);
-			}
-			else {
-				eTypedElement.setEType((EClassifier)eObject);
-			}
-			eTypedElement.setOrdered(collectionType.isOrdered());
-			eTypedElement.setUnique(collectionType.isUnique());
-			IntegerValue lower = collectionType.getLowerValue();
-			IntegerValue upper = collectionType.getUpperValue();
-			try {
-				eTypedElement.setLowerBound(lower.intValue());
-			} catch (InvalidValueException e) {
-				logger.error("Illegal lower bound", e);
-			}
-			try {
-				eTypedElement.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
-			} catch (InvalidValueException e) {
-				logger.error("Illegal upper bound", e);
-			}
-			return null;
-		}
-		else {
-			if (pivotTypedElement.isRequired()) {
-				eTypedElement.setLowerBound(1);
-				eTypedElement.setUpperBound(1);
-			}
-			else {
-				eTypedElement.setLowerBound(0);
-				eTypedElement.setUpperBound(1);
-			}
-			eTypedElement.setUnique(true);
-			eTypedElement.setOrdered(true);		// Ecore default
-			return visitTypedElement(pivotTypedElement);
-		}
+		return null;
 	}
 	
 /*	@Override

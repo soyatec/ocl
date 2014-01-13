@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -57,10 +56,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isInterface <em>Is Interface</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getNestedType <em>Nested Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedBehavior <em>Owned Behavior</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedOperation <em>Owned Operation</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getInstanceClassName <em>Instance Class Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  * </ul>
  * </p>
  *
@@ -216,104 +211,6 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
-	public String getInstanceClassName() {
-		return instanceClassName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setInstanceClassName(String newInstanceClassName) {
-		String oldInstanceClassName = instanceClassName;
-		instanceClassName = newInstanceClassName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CLASS__INSTANCE_CLASS_NAME, oldInstanceClassName, instanceClassName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetInstanceClassName()
-	{
-		return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings("null")
-	@NonNull public List<Property> getOwnedAttribute()
-	{
-		if (ownedAttribute == null)
-		{
-			ownedAttribute = new EObjectContainmentWithInverseEList<Property>(Property.class, this, PivotPackage.CLASS__OWNED_ATTRIBUTE, PivotPackage.PROPERTY__OWNING_TYPE);
-		}
-		return ownedAttribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetOwnedAttribute()
-	{
-		return ownedAttribute != null && !ownedAttribute.isEmpty();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case PivotPackage.CLASS__EXTENSION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
-				if (ownedTemplateSignature != null)
-					msgs = ((InternalEObject)ownedTemplateSignature).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE, null, msgs);
-				return basicSetOwnedTemplateSignature((TemplateSignature)otherEnd, msgs);
-			case PivotPackage.CLASS__TEMPLATE_BINDING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningTemplateParameter((TemplateParameter)otherEnd, msgs);
-			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
-				if (templateParameter != null)
-					msgs = ((InternalEObject)templateParameter).eInverseRemove(this, PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
-				return basicSetTemplateParameter((TemplateParameter)otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_ATTRIBUTE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAttribute()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_OPERATION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperation()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CLASS__PACKAGE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetPackage((org.eclipse.ocl.examples.pivot.Package)otherEnd, msgs);
-		}
-		return eDynamicInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
@@ -353,32 +250,12 @@ public class ClassImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetOwnedOperation()
-	{
-		return ownedOperation != null && !ownedOperation.isEmpty();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
 	public @NonNull List<Type> getSuperClass()
 	{		// The UML JET templates give a bad type for the duplicates
 		return super.getSuperClass();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetSuperClass()
-	{
-		return superClass != null && !superClass.isEmpty();
 	}
 
 	/**
@@ -416,22 +293,6 @@ public class ClassImpl
 			nestedType = new EObjectContainmentEList<org.eclipse.ocl.examples.pivot.Class>(org.eclipse.ocl.examples.pivot.Class.class, this, PivotPackage.CLASS__NESTED_TYPE);
 		}
 		return nestedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull List<Operation> getOwnedOperation()
-	{
-		if (ownedOperation == null)
-		{
-			ownedOperation = new EObjectContainmentWithInverseEList<Operation>(Operation.class, this, PivotPackage.CLASS__OWNED_OPERATION, PivotPackage.OPERATION__OWNING_TYPE);
-		}
-		return ownedOperation;
 	}
 
 	/**
@@ -682,19 +543,19 @@ public class ClassImpl
 			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.CLASS__INSTANCE_CLASS_NAME:
-				return isSetInstanceClassName();
+				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.CLASS__OWNED_ATTRIBUTE:
-				return isSetOwnedAttribute();
+				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case PivotPackage.CLASS__OWNED_INVARIANT:
 				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.CLASS__OWNED_OPERATION:
-				return isSetOwnedOperation();
+				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.CLASS__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.CLASS__SUPER_CLASS:
-				return isSetSuperClass();
+				return superClass != null && !superClass.isEmpty();
 			case PivotPackage.CLASS__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CLASS__IS_ABSTRACT:

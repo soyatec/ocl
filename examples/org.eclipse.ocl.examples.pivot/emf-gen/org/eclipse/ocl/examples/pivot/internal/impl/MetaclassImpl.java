@@ -398,19 +398,19 @@ public class MetaclassImpl<T> extends ClassImpl implements Metaclass<T>
 			case PivotPackage.METACLASS__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.METACLASS__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.METACLASS__INSTANCE_CLASS_NAME:
-				return isSetInstanceClassName();
+				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.METACLASS__OWNED_ATTRIBUTE:
-				return isSetOwnedAttribute();
+				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case PivotPackage.METACLASS__OWNED_INVARIANT:
 				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.METACLASS__OWNED_OPERATION:
-				return isSetOwnedOperation();
+				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.METACLASS__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.METACLASS__SUPER_CLASS:
-				return isSetSuperClass();
+				return superClass != null && !superClass.isEmpty();
 			case PivotPackage.METACLASS__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.METACLASS__IS_ABSTRACT:

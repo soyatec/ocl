@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementationClass <em>Implementation Class</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#isStatic <em>Is Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -150,38 +149,6 @@ public abstract class FeatureImpl
 		implementation = newImplementation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.FEATURE__IMPLEMENTATION, oldImplementation, implementation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isStatic() {
-		return (eFlags & IS_STATIC_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsStatic(boolean newIsStatic) {
-		boolean oldIsStatic = (eFlags & IS_STATIC_EFLAG) != 0;
-		if (newIsStatic) eFlags |= IS_STATIC_EFLAG; else eFlags &= ~IS_STATIC_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.FEATURE__IS_STATIC, oldIsStatic, newIsStatic));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetIsStatic() {
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 	}
 
 	/**
@@ -318,7 +285,7 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.FEATURE__IS_STATIC:
-				return isSetIsStatic();
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.FEATURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:

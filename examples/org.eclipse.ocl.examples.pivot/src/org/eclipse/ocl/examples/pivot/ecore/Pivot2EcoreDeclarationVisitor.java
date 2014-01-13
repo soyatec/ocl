@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -41,10 +42,13 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -90,28 +94,61 @@ public class Pivot2EcoreDeclarationVisitor
 	protected static class DuplicateOperationsFilter implements Predicate<Operation>
 	{
 		public boolean apply(@Nullable Operation anOperation) {
-			return (anOperation != null) && (anOperation.getRedefinedOperation().size() != 0);
+			if (anOperation == null) {
+				return false;
+			}
+			if (anOperation.getRedefinedOperation().size() == 0) {
+				return false;
+			}
+			if ("containingActivity".equals(anOperation.getName()) && "ActivityNode".equals(anOperation.getOwningType().getName())) {
+				return false;		// FIXME Bug 405061 workaround
+			}
+			return true;
+//			return (anOperation != null) && (anOperation.getRedefinedOperation().size() != 0);
 		}
 	}
 
 	protected static class DuplicatePropertiesFilter implements Predicate<Property>
 	{
 		public boolean apply(@Nullable Property aProperty) {
-			return (aProperty != null) && (aProperty.getRedefinedProperty().size() != 0);
+			if (aProperty == null) {
+				return false;
+			}
+			if (aProperty.getRedefinedProperty().size() == 0) {
+				return false;
+			}
+			return DomainUtil.safeEquals(aProperty.getName(), aProperty.getRedefinedProperty().get(0).getName());
 		}
 	}
 
 	protected static class NonDuplicateOperationsFilter implements Predicate<Operation>
 	{
 		public boolean apply(@Nullable Operation anOperation) {
-			return (anOperation != null) && (anOperation.getRedefinedOperation().size() == 0);
+			if (anOperation == null) {
+				return false;
+			}
+			if (anOperation.getRedefinedOperation().size() == 0) {
+				return true;
+			}
+			if ("containingActivity".equals(anOperation.getName()) && "ActivityNode".equals(anOperation.getOwningType().getName())) {
+				return true;		// FIXME Bug 405061 workaround
+			}
+			return false;
+//			return (anOperation != null) && (anOperation.getRedefinedOperation().size() == 0);
 		}
 	}
 
 	protected static class NonDuplicatePropertiesFilter implements Predicate<Property>
 	{
 		public boolean apply(@Nullable Property aProperty) {
-			return (aProperty != null) && (aProperty.getRedefinedProperty().size() == 0);
+			if (aProperty == null) {
+				return false;
+			}
+			if (aProperty.getRedefinedProperty().size() == 0) {
+				return true;
+			}
+			return !DomainUtil.safeEquals(aProperty.getName(), aProperty.getRedefinedProperty().get(0).getName());
+//			return (aProperty != null) && (aProperty.getRedefinedProperty().size() == 0);
 		}
 	}
 
@@ -135,12 +172,12 @@ public class Pivot2EcoreDeclarationVisitor
 			eClassifier.eUnset(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME);
 		}
 //		visitAll(eClassifier.getETypeParameters(), pivotType.getTypeParameters());
+		delegateInstaller.installDelegates(eClassifier, pivotType);
 		for (Constraint pivotInvariant : pivotType.getOwnedInvariant()) {
 			if (!pivotInvariant.isCallable()) {
 				safeVisit(pivotInvariant);		// Results are inserted directly
 			}
 		}
-		delegateInstaller.installDelegates(eClassifier, pivotType);
 	}
 
 	protected @Nullable EAnnotation copyConstraint(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint) {
@@ -179,7 +216,20 @@ public class Pivot2EcoreDeclarationVisitor
 
 	protected void copyNamedElement(@NonNull ENamedElement eNamedElement, @NonNull NamedElement pivotNamedElement) {
 		copyModelElement(eNamedElement, pivotNamedElement);
-		eNamedElement.setName(pivotNamedElement.getName());
+		String name = pivotNamedElement.getName();
+		if ("containingActivity".equals(name)) {		// FIXME Bug 405061 workaround
+			EObject eContainer = pivotNamedElement.eContainer();
+			if ((eContainer instanceof Type) && "ActivityNode".equals(((Type)eContainer).getName())) {
+				name = "ActivityNode_" + name;
+			}
+		}
+		else if ("inActivity".equals(name)) {		// FIXME Bug 420330 workaround
+			EObject eContainer = pivotNamedElement.eContainer();
+			if ((eContainer instanceof Type) && "StructuredActivityNode".equals(((Type)eContainer).getName())) {
+				name = "activity";
+			}
+		}
+		eNamedElement.setName(name);
 	}
 
 	protected void copyTemplateSignature(@NonNull List<ETypeParameter> eTypeParameters, TemplateableElement pivotElement) {
@@ -195,6 +245,80 @@ public class Pivot2EcoreDeclarationVisitor
 		@SuppressWarnings("null")@NonNull List<EAnnotation> eAnnotations = eTypedElement.getEAnnotations();
 		safeVisitAll(eAnnotations, pivotTypedElement.getOwnedAnnotation());
 		context.defer(pivotTypedElement);		// Defer type/multiplicity setting
+	}
+
+	protected @Nullable EAnnotation createOppositeEAnnotation(@NonNull Property property) {
+		String lower = null;
+		String ordered = null;
+		String unique = null;
+		String upper = null;
+		IntegerValue lowerValue;
+		IntegerValue upperValue;
+		Type propertyType = property.getType();
+		Type type;
+		if (propertyType instanceof CollectionType) {
+			CollectionType collectionType = (CollectionType)propertyType;
+			type = collectionType.getElementType();
+			lowerValue = collectionType.getLowerValue();
+			upperValue = collectionType.getUpperValue();
+			if (collectionType.isOrdered() != PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_ORDERED) {
+				ordered = Boolean.toString(collectionType.isOrdered());
+			}
+			if (collectionType.isUnique() != PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UNIQUE) {
+				unique = Boolean.toString(collectionType.isUnique());
+			}
+		}
+		else {
+			type = propertyType;
+			lowerValue = property.isRequired() ? ValuesUtil.ONE_VALUE : ValuesUtil.ZERO_VALUE;
+			upperValue = ValuesUtil.ONE_VALUE;
+		}
+		if (!PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_LOWER_VALUE.equals(lowerValue)) {
+			lower = lowerValue.toString();
+		}
+		if (!PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UPPER_VALUE.equals(upperValue)) {
+			upper = upperValue.toString();
+		}
+		String name = property.getName();
+		if (name.equals(type.getName()) && (lower == null) && (ordered == null) && (unique == null) && (upper == null)) {
+			return null;
+		}
+		lower = null;
+		ordered = null;
+		unique = null;
+		upper = null;
+		if (propertyType instanceof CollectionType) {
+			CollectionType collectionType = (CollectionType)propertyType;
+			if (collectionType.isOrdered() != PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_ORDERED) {
+				ordered = Boolean.toString(collectionType.isOrdered());
+			}
+			if (collectionType.isUnique() != PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE) {
+				unique = Boolean.toString(collectionType.isUnique());
+			}
+		}
+		if (!PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE.equals(lowerValue)) {
+			lower = lowerValue.toString();
+		}
+		if (!PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE.equals(upperValue)) {
+			upper = upperValue.toString();
+		}
+		EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+		eAnnotation.setSource(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+		EMap<String, String> details = eAnnotation.getDetails();
+		details.put(EMOFExtendedMetaData.EMOF_COMMENT_BODY, name);
+		if (lower != null) {
+			details.put("lower", lower);
+		}
+		if (ordered != null) {
+			details.put("ordered", ordered);
+		}
+		if (unique != null) {
+			details.put("unique", unique);
+		}
+		if (upper != null) {
+			details.put("upper", upper);
+		}
+		return eAnnotation;
 	}
 
 	public <T extends EObject> void safeVisitAll(@NonNull List<T> eObjects, @NonNull Iterable<? extends Element> pivotObjects) {
@@ -251,33 +375,38 @@ public class Pivot2EcoreDeclarationVisitor
 //				copyConstraint(eOperation, pivotInvariant);
 			}
 		}
-		List<ETypedElement> eDuplicates = null;
-		@SuppressWarnings("null")@NonNull Iterable<Operation> duplicateOperations = Iterables.filter(pivotClass.getOwnedOperation(), duplicateOperationsFilter);
-		for (Operation asOperation : duplicateOperations) {
-			if (eDuplicates == null) {
-				eDuplicates = new ArrayList<ETypedElement>();
+		if (!context.isSuppressDuplicates()) {
+			List<ETypedElement> eDuplicates = null;
+			@SuppressWarnings("null")@NonNull Iterable<Operation> duplicateOperations = Iterables.filter(pivotClass.getOwnedOperation(), duplicateOperationsFilter);
+			for (Operation asOperation : duplicateOperations) {
+				if (eDuplicates == null) {
+					eDuplicates = new ArrayList<ETypedElement>();
+				}
+				Object eOperation = safeVisit(asOperation);
+				if (eOperation instanceof EOperation) {
+					eDuplicates.add((EOperation)eOperation);
+				}
 			}
-			Object eOperation = safeVisit(asOperation);
-			if (eOperation instanceof EOperation) {
-				eDuplicates.add((EOperation)eOperation);
+			@SuppressWarnings("null")@NonNull Iterable<Property> duplicateProperties = Iterables.filter(pivotClass.getOwnedAttribute(), duplicatePropertiesFilter);
+			for (Property asProperty : duplicateProperties) {
+				if (eDuplicates == null) {
+					eDuplicates = new ArrayList<ETypedElement>();
+				}
+				Object eStructuralFeature = safeVisit(asProperty);
+				if (eStructuralFeature instanceof EStructuralFeature) {
+					eDuplicates.add((EStructuralFeature) eStructuralFeature);
+				}
+			}
+			if (eDuplicates != null) {
+				EAnnotation eAnnotation = eClass.getEAnnotation(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
+				if (eAnnotation == null) {
+					eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+					eAnnotation.setSource(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
+					eClass.getEAnnotations().add(eAnnotation);
+				}
+				context.refreshList(eAnnotation.getContents(), eDuplicates);
 			}
 		}
-		@SuppressWarnings("null")@NonNull Iterable<Property> duplicateProperties = Iterables.filter(pivotClass.getOwnedAttribute(), duplicatePropertiesFilter);
-		for (Property asProperty : duplicateProperties) {
-			if (eDuplicates == null) {
-				eDuplicates = new ArrayList<ETypedElement>();
-			}
-			Object eStructuralFeature = safeVisit(asProperty);
-			if (eStructuralFeature instanceof EStructuralFeature) {
-				eDuplicates.add((EStructuralFeature) eStructuralFeature);
-			}
-		}
-		EAnnotation eAnnotation = eClass.getEAnnotation(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
-		if (eAnnotation == null) {
-			eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			eAnnotation.setSource(PivotConstants.DUPLICATES_ANNOTATION_SOURCE);
-		}
-		context.refreshList(eAnnotation.getContents(), eDuplicates);
 		return eClass;
 	}
 
@@ -415,6 +544,13 @@ public class Pivot2EcoreDeclarationVisitor
 			eReference.setResolveProxies(pivotProperty.isResolveProxies());
 			eStructuralFeature = eReference;
 		}
+		Property opposite = pivotProperty.getOpposite();
+		if ((opposite != null) && opposite.isImplicit()) {
+			EAnnotation eAnnotation = createOppositeEAnnotation(opposite);
+			if (eAnnotation != null) {
+				eStructuralFeature.getEAnnotations().add(eAnnotation);
+			}
+		}
 		copyTypedElement(eStructuralFeature, pivotProperty);
 		eStructuralFeature.setChangeable(!pivotProperty.isReadOnly());
 		eStructuralFeature.setDerived(pivotProperty.isDerived());
@@ -431,6 +567,11 @@ public class Pivot2EcoreDeclarationVisitor
 		if (defaultExpression != null) {
 			delegateInstaller.createPropertyDelegate(eStructuralFeature, defaultExpression, context.getEcoreURI());
 		}
+/*		for (Property redefinedProperty : pivotProperty.getRedefinedProperty()) {
+			EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			eAnnotation.setSource(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+			eStructuralFeature.getEAnnotations().add(eAnnotation);
+		} */
 		return eStructuralFeature;
 	}
 

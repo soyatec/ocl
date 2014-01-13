@@ -72,7 +72,13 @@ public class Pivot2Ecore extends AbstractConversion
 	/**
 	 * True to apply result = () wrapper to invariant body.
 	 */
-	public static final @NonNull String OPTION_BOOLEAN_INVARIANTS = "booleanInvariants";
+	public static final @NonNull String OPTION_BOOLEAN_INVARIANTS = DelegateInstaller.OPTION_BOOLEAN_INVARIANTS;
+
+	/**
+	 * True to suppress the UML2Ecore duplicates EAnnotation. This is an experimental internal option used during
+	 * the auto-generation of Pivot.ecore..
+	 */
+	public static final @NonNull String OPTION_SUPPRESS_DUPLICATES = "suppressDuplicates";
 
 	public static void copyAnnotationComments(@NonNull EAnnotation eModelElement, @NonNull Constraint pivotConstraint) {
 		String key = DelegateInstaller.getAnnotationKey(pivotConstraint);
@@ -137,6 +143,9 @@ public class Pivot2Ecore extends AbstractConversion
 		return createConstraintEOperation(pivotConstraint, operationName, null);
 	}
 	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName, @Nullable Map<String, Object> options) {
+		if (options == null) {
+			options = new HashMap<String, Object>();
+		}
 		boolean addInvariantComments = Pivot2Ecore.isAddInvariantComments(options);
 		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
 		eOperation.setName(operationName != null ? operationName : "");
@@ -179,7 +188,7 @@ public class Pivot2Ecore extends AbstractConversion
 			if (body != null) {
 				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 				eAnnotation.setSource(getExportDelegateURI(options));
-				if (isBooleanInvariants(options)) {
+				if (DelegateInstaller.isBooleanInvariants(options)) {
 					body = "result = (" + body + ")";
 				}
 				eAnnotation.getDetails().put("body", body);
@@ -210,7 +219,8 @@ public class Pivot2Ecore extends AbstractConversion
 	}
 
 	public static @Nullable String getExportDelegateURI(@Nullable Map<String, Object> options) {
-		return options != null ? (String)options.get(OCLConstants.OCL_DELEGATE_URI) : OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue();
+		String exportDelegateURI = options != null ? (String)options.get(OCLConstants.OCL_DELEGATE_URI) : null;
+		return exportDelegateURI != null ? exportDelegateURI : OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue();
 	}
 	
 	public static @Nullable String getString(@Nullable Map<String, Object> options, @NonNull String key) {
@@ -227,12 +237,12 @@ public class Pivot2Ecore extends AbstractConversion
 		return null;
 	}
 
-	public static boolean isAddInvariantComments(@Nullable Map<String,Object> options) {
-		return (options != null) && Boolean.valueOf(String.valueOf(options.get(OPTION_ADD_INVARIANT_COMMENTS)));
+	public static boolean isAddInvariantComments(@NonNull Map<String,Object> options) {
+		return Boolean.valueOf(String.valueOf(options.get(OPTION_ADD_INVARIANT_COMMENTS)));
 	}
 
-	public static boolean isBooleanInvariants(@Nullable Map<String,Object> options) {
-		return (options != null) && Boolean.valueOf(String.valueOf(options.get(OPTION_BOOLEAN_INVARIANTS)));
+	public static boolean isBooleanInvariants(@NonNull Map<String,Object> options) {
+		return Boolean.valueOf(String.valueOf(options.get(OPTION_BOOLEAN_INVARIANTS)));
 	}
 
 	/**
@@ -248,20 +258,20 @@ public class Pivot2Ecore extends AbstractConversion
 	
 	private @Nullable List<Resource.Diagnostic> errors = null;
 	
+	protected final @NonNull Map<String,Object> options;
 	protected final @NonNull DelegateInstaller delegateInstaller;
 	protected final @NonNull Pivot2EcoreDeclarationVisitor pass1;	
 	protected final @NonNull Pivot2EcoreReferenceVisitor pass2;
 	protected final @NonNull URI ecoreURI;
-	protected final @Nullable Map<String,Object> options;
 	protected final @Nullable String primitiveTypesUriPrefix;
 	
 	public Pivot2Ecore(@NonNull MetaModelManager metaModelManager, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
 		super(metaModelManager);
-		this.delegateInstaller = new DelegateInstaller(metaModelManager, getExportDelegateURI(options));
+		this.options = options != null ? options : new HashMap<String,Object>();
+		this.delegateInstaller = new DelegateInstaller(metaModelManager, options);
 		this.pass1 = new Pivot2EcoreDeclarationVisitor(this);	
 		this.pass2 = new Pivot2EcoreReferenceVisitor(this);
 		this.ecoreURI = ecoreURI;
-		this.options = options;
 		this.primitiveTypesUriPrefix = getString(options, PivotConstants.PRIMITIVE_TYPES_URI_PREFIX);
 	}
 
@@ -338,7 +348,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return ecoreURI;
 	}
 
-	public @Nullable Map<String, Object> getOptions() {
+	public @NonNull Map<String, Object> getOptions() {
 		return options;
 	}
 
@@ -379,6 +389,10 @@ public class Pivot2Ecore extends AbstractConversion
 		return true;
 	}
 
+	public boolean isSuppressDuplicates() {
+		return Boolean.valueOf(String.valueOf(options.get(OPTION_SUPPRESS_DUPLICATES)));
+	}
+
 	public void putCreated(@NonNull Element pivotElement, @NonNull EModelElement eModelElement) {
 		Element primaryElement = metaModelManager.getPrimaryElement(pivotElement);
 //		System.out.println("Put1 " + PivotUtil.debugSimpleName(pivotElement) + " " + PivotUtil.debugSimpleName(eModelElement));
@@ -390,5 +404,4 @@ public class Pivot2Ecore extends AbstractConversion
 			assert oldPrimary == null;
 		}
 	}
-
 }

@@ -118,7 +118,9 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 		try {
 			resource = createBaseResource(expression);
 			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), resource);
-			return getExpression(resource);
+			ExpressionInOCL expressionInOCL = getExpression(resource);
+			PivotUtil.setBody(expressionInOCL, expression);
+			return expressionInOCL;
 		} catch (IOException e) {
 //				throw new ParserException("Failed to load expression", e);
 			@SuppressWarnings("null")@NonNull ExpressionInOCL specification = PivotFactory.eINSTANCE.createExpressionInOCL();

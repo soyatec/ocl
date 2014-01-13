@@ -149,16 +149,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isSetMetaType()
-	{
-		return metaType != null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<DynamicProperty> getOwnedProperty()
 	{
 		if (ownedProperty == null)
@@ -433,7 +423,7 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.DYNAMIC_TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ATTRIBUTE:
@@ -447,7 +437,7 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 			case PivotPackage.DYNAMIC_TYPE__SUPER_CLASS:
 				return superClass != null && !superClass.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__META_TYPE:
-				return isSetMetaType();
+				return metaType != null;
 			case PivotPackage.DYNAMIC_TYPE__OWNED_PROPERTY:
 				return ownedProperty != null && !ownedProperty.isEmpty();
 		}

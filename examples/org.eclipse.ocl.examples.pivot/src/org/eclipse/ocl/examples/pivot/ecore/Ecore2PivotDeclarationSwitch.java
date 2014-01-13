@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot.ecore;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -155,6 +154,11 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		if (duplicatesAnnotation != null) {
 			excludedAnnotations = new ArrayList<EAnnotation>();
 			excludedAnnotations.add(duplicatesAnnotation);
+		}
+		EAnnotation redefinesAnnotation = eObject2.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+		if (redefinesAnnotation != null) {
+			excludedAnnotations = new ArrayList<EAnnotation>();
+			excludedAnnotations.add(redefinesAnnotation);
 		}
 		copyClassifier(pivotElement, eObject2, excludedAnnotations);
 		pivotElement.setIsAbstract(eObject2.isAbstract());			
@@ -409,8 +413,15 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				adapter.getAliasMap().put(eObject2, moniker);
 			}
 		}
+		List<EAnnotation> exclusions = new ArrayList<EAnnotation>();
 		EAnnotation eAnnotation = eObject2.getEAnnotation(EcorePackage.eNS_URI);
-		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
+		if (eAnnotation != null) {
+			exclusions.add(eAnnotation);		
+		}
+		 eAnnotation = eObject2.getEAnnotation(PivotConstants.AS_METAMODEL_ANNOTATION_SOURCE);
+		if (eAnnotation != null) {
+			exclusions.add(eAnnotation);		
+		}
 		copyNamedElement(pivotElement, eObject2);
 		copyAnnotatedElement(pivotElement, eObject2, exclusions);
 		doSwitchAll(pivotElement.getNestedPackage(), eObject2.getESubpackages());
@@ -517,6 +528,13 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 
 	protected @Nullable List<EAnnotation> convertEOperationEAnnotations(@NonNull Operation pivotElement, @NonNull EOperation eOperation) {
 		List<EAnnotation> excludedAnnotations = null;
+		EAnnotation redefinesAnnotation = eOperation.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+		if (redefinesAnnotation != null) {
+//			if (excludedAnnotations == null) {
+				excludedAnnotations = new ArrayList<EAnnotation>();
+//			}
+			excludedAnnotations.add(redefinesAnnotation);
+		}
 		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eOperation);
 		if (oclAnnotation == null) {
 			oclAnnotation = eOperation.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
@@ -525,7 +543,9 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 			oclAnnotation = eOperation.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
 		}
 		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
+			if (excludedAnnotations == null) {
+				excludedAnnotations = new ArrayList<EAnnotation>();
+			}
 			excludedAnnotations.add(oclAnnotation);
 			for (Iterator<Map.Entry<String,String>> it = oclAnnotation.getDetails().listIterator(); it.hasNext(); ) {
 				Map.Entry<String,String> entry = it.next();
@@ -633,10 +653,10 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				}				
 				else if (hasImportKey(source, details)) {
 				}				
-				else if (!eAnnotation.getContents().isEmpty()
+				else /*if (!eAnnotation.getContents().isEmpty()
 				 || !eAnnotation.getReferences().isEmpty()
 				 || (details.size() > 1)
-				 || ((details.size() == 1) && !hasDocumentationKey(source, details))) {
+				 || ((details.size() == 1) && !hasDocumentationKey(source, details)))*/ {
 					Annotation pivotAnnotation = (Annotation) doSwitch(eAnnotation);
 					pivotAnnotations.add(pivotAnnotation);
 				}
@@ -666,9 +686,18 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	protected void copyStructuralFeature(@NonNull Property pivotElement, @NonNull EStructuralFeature eObject, List<EAnnotation> excludedAnnotations) {
+		EAnnotation redefinesAnnotation = eObject.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+		if (redefinesAnnotation != null) {
+			if (excludedAnnotations == null) {
+				excludedAnnotations = new ArrayList<EAnnotation>();
+			}
+			excludedAnnotations.add(redefinesAnnotation);
+		}
 		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eObject);
 		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
+			if (excludedAnnotations == null) {
+				excludedAnnotations = new ArrayList<EAnnotation>();
+			}
 			excludedAnnotations.add(oclAnnotation);
 			Map.Entry<String,String> bestEntry = null;
 			for (Map.Entry<String,String> entry : oclAnnotation.getDetails().entrySet()) {

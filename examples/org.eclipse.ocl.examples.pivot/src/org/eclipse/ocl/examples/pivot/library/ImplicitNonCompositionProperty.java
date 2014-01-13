@@ -29,10 +29,10 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 
 /**
  * The static instance of ImplicitNonCompositionProperty supports evaluation of
@@ -59,11 +59,21 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 				EClass eClass = eObject.eClass();
 				EStructuralFeature eFeature = eClass.getEStructuralFeature(thatProperty.getName());
 				Object eGet = eObject.eGet(eFeature);
-				if (eGet == sourceValue) {
-					results.add(eObject);
+				if (eFeature.isMany()) {
+					for (Object eReference : (List<?>)eGet) {
+						if (eReference == sourceValue) {
+							results.add(eObject);
+						}
+					}
+				}
+				else {
+					if (eGet == sourceValue) {
+						results.add(eObject);
+					}
 				}
 			}
 		}
-		return evaluator.getIdResolver().createSetOfAll((CollectionTypeId)returnTypeId, results);
+		return evaluator.getIdResolver().createCollectionOfAll(PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_ORDERED,
+			PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UNIQUE, returnTypeId, results);
 	}
 }

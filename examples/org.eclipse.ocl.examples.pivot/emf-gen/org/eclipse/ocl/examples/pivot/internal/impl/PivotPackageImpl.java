@@ -7051,8 +7051,6 @@ public class PivotPackageImpl
 		createEcoreAnnotations();
 		// http://www.eclipse.org/OCL/ASMetamodel
 		createASMetamodelAnnotations();
-		// duplicates
-		createDuplicatesAnnotations();
 		// subsets
 		createSubsetsAnnotations();
 	}
@@ -7088,91 +7086,6 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>duplicates</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createDuplicatesAnnotations()
-	{
-		String source = "duplicates"; //$NON-NLS-1$	
-		addAnnotation
-		  (classEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });	
-		addAnnotation
-		  (dynamicTypeEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });	
-		addAnnotation
-		  (featureEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });	
-		addAnnotation
-		  (operationEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });
-		addAnnotation
-		  (operationEClass, 
-		   1,
-		   "templateParameter", //$NON-NLS-1$
-		   new String[] 
-		   {
-			 "eType", "pivot::OperationTemplateParameter" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
-		addAnnotation
-		  (operationTemplateParameterEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });
-		addAnnotation
-		  (operationTemplateParameterEClass, 
-		   1,
-		   "parameteredElement", //$NON-NLS-1$
-		   new String[] 
-		   {
-			 "eType", "pivot::Operation" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
-		addAnnotation
-		  (typeEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });
-		addAnnotation
-		  (typeEClass, 
-		   1,
-		   "templateParameter", //$NON-NLS-1$
-		   new String[] 
-		   {
-			 "eType", "pivot::TypeTemplateParameter" //$NON-NLS-1$ //$NON-NLS-2$
-		   });	
-		addAnnotation
-		  (typeTemplateParameterEClass, 
-		   source, 
-		   new String[] 
-		   {
-		   });
-		addAnnotation
-		  (typeTemplateParameterEClass, 
-		   1,
-		   "parameteredElement", //$NON-NLS-1$
-		   new String[] 
-		   {
-			 "eType", "pivot::Type" //$NON-NLS-1$ //$NON-NLS-2$
 		   });
 	}
 

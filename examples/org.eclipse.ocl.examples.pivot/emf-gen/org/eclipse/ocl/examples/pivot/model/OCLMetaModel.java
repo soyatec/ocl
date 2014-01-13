@@ -350,7 +350,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_VariableExp = createCollectionType("Collection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Vertex = createCollectionType("Collection"/*Vertex*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Annotation = createCollectionType("OrderedCollection"/*Annotation*/, "0", "*");
-		protected final @NonNull CollectionType _OrderedCollection_Class = createCollectionType("OrderedCollection"/*Class*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_CollectionLiteralPart = createCollectionType("OrderedCollection"/*CollectionLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Constraint = createCollectionType("OrderedCollection"/*Constraint*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_ConstructorPart = createCollectionType("OrderedCollection"/*ConstructorPart*/, "0", "*");
@@ -369,7 +368,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _OrderedCollection_Type = createCollectionType("OrderedCollection"/*Type*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Variable = createCollectionType("OrderedCollection"/*Variable*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Annotation = createOrderedSetType("OrderedSet"/*Annotation*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_Class = createOrderedSetType("OrderedSet"/*Class*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_CollectionLiteralPart = createOrderedSetType("OrderedSet"/*CollectionLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Constraint = createOrderedSetType("OrderedSet"/*Constraint*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_ConstructorPart = createOrderedSetType("OrderedSet"/*ConstructorPart*/, "0", "*");
@@ -383,8 +381,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -420,8 +418,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull SetType _Set_Property = createSetType("Set"/*Property*/, "0", "*");
 		protected final @NonNull SetType _Set_PropertyCallExp = createSetType("Set"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Pseudostate = createSetType("Set"/*Pseudostate*/, "0", "*");
-		protected final @NonNull SetType _Set_Region = createSetType("Set"/*Region*/, "0", "*");
-		protected final @NonNull SetType _Set_Region_1 = createSetType("Set"/*Region*/, "1", "*");
+		protected final @NonNull SetType _Set_Region = createSetType("Set"/*Region*/, "1", "*");
+		protected final @NonNull SetType _Set_Region_1 = createSetType("Set"/*Region*/, "0", "*");
 		protected final @NonNull SetType _Set_SendSignalAction = createSetType("Set"/*SendSignalAction*/, "0", "*");
 		protected final @NonNull SetType _Set_State = createSetType("Set"/*State*/, "0", "*");
 		protected final @NonNull SetType _Set_StateExp = createSetType("Set"/*StateExp*/, "0", "*");
@@ -1227,11 +1225,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Annotation);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Annotation);
-			orphanTypes.add(type = _OrderedCollection_Class);
-			type.setUnspecializedElement(_OrderedCollection);
-			type.setElementType(_Class);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_Class);
 			orphanTypes.add(type = _OrderedCollection_CollectionLiteralPart);
 			type.setUnspecializedElement(_OrderedCollection);
 			type.setElementType(_CollectionLiteralPart);
@@ -1323,12 +1316,6 @@ public class OCLMetaModel extends ASResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_OrderedCollection_Annotation);
 			superClasses.add(_UniqueCollection_Annotation);
-			orphanTypes.add(type = _OrderedSet_Class);
-			type.setUnspecializedElement(_OrderedSet);
-			type.setElementType(_Class);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OrderedCollection_Class);
-			superClasses.add(_UniqueCollection_Class);
 			orphanTypes.add(type = _OrderedSet_CollectionLiteralPart);
 			type.setUnspecializedElement(_OrderedSet);
 			type.setElementType(_CollectionLiteralPart);
@@ -2000,7 +1987,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Operation op_SelfType_specializeIn = createOperation("specializeIn", _Type, null, null);
 		protected final @NonNull Operation op_TemplateableElement_isTemplate = createOperation("isTemplate", _Boolean, null, null);
 		protected final @NonNull Operation op_TemplateableElement_parameterableElements = createOperation("parameterableElements", _Set_ParameterableElement, null, null);
-		protected final @NonNull Operation op_null_isTemplate = createOperation("isTemplate", _Boolean, null, null);
 		protected final @NonNull Operation op_Type_specializeIn = createOperation("specializeIn", _Type, null, null);
 		protected final @NonNull Operation op_TypedMultiplicityElement_CompatibleBody = createOperation("CompatibleBody", _Boolean, null, null);
 		protected final @NonNull Operation op_TypedMultiplicityElement_makeParameter = createOperation("makeParameter", _Parameter, null, null);
@@ -2305,7 +2291,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_Region_stateMachine = createProperty(PivotPackage.Literals.REGION__STATE_MACHINE, _StateMachine);
 		protected final @NonNull Property pr_Region_subvertex = createProperty(PivotPackage.Literals.REGION__SUBVERTEX, _Set_Vertex);
 		protected final @NonNull Property pr_Region_transition = createProperty(PivotPackage.Literals.REGION__TRANSITION, _Set_Transition);
-		protected final @NonNull Property pr_Region_Region_extendedRegion = createProperty("Region", _Set_Region);
+		protected final @NonNull Property pr_Region_Region_extendedRegion = createProperty("Region", _Set_Region_1);
 		protected final @NonNull Property pr_Region_State_region = createProperty("State", _State);
 		protected final @NonNull Property pr_Region_StateMachine_region = createProperty("StateMachine", _StateMachine);
 		protected final @NonNull Property pr_Root_externalURI = createProperty(PivotPackage.Literals.ROOT__EXTERNAL_URI, _String);
@@ -2326,21 +2312,21 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_State_isSimple = createProperty(PivotPackage.Literals.STATE__IS_SIMPLE, _Boolean);
 		protected final @NonNull Property pr_State_isSubmachineState = createProperty(PivotPackage.Literals.STATE__IS_SUBMACHINE_STATE, _Boolean);
 		protected final @NonNull Property pr_State_redefinedState = createProperty(PivotPackage.Literals.STATE__REDEFINED_STATE, _State);
-		protected final @NonNull Property pr_State_region = createProperty(PivotPackage.Literals.STATE__REGION, _Set_Region);
+		protected final @NonNull Property pr_State_region = createProperty(PivotPackage.Literals.STATE__REGION, _Set_Region_1);
 		protected final @NonNull Property pr_State_stateInvariant = createProperty(PivotPackage.Literals.STATE__STATE_INVARIANT, _Constraint);
 		protected final @NonNull Property pr_State_submachine = createProperty(PivotPackage.Literals.STATE__SUBMACHINE, _StateMachine);
 		protected final @NonNull Property pr_State_ConnectionPointReference_state = createProperty("ConnectionPointReference", _Set_ConnectionPointReference);
 		protected final @NonNull Property pr_State_Pseudostate_state = createProperty("Pseudostate", _Set_Pseudostate);
-		protected final @NonNull Property pr_State_Region_state = createProperty("Region", _Set_Region);
+		protected final @NonNull Property pr_State_Region_state = createProperty("Region", _Set_Region_1);
 		protected final @NonNull Property pr_State_State_redefinedState = createProperty("State", _Set_State);
 		protected final @NonNull Property pr_State_StateExp_referredState = createProperty("StateExp", _Set_StateExp);
 		protected final @NonNull Property pr_StateExp_referredState = createProperty(PivotPackage.Literals.STATE_EXP__REFERRED_STATE, _State);
 		protected final @NonNull Property pr_StateMachine_connectionPoint = createProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT, _Set_Pseudostate);
 		protected final @NonNull Property pr_StateMachine_extendedStateMachine = createProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE, _Set_StateMachine);
-		protected final @NonNull Property pr_StateMachine_region = createProperty(PivotPackage.Literals.STATE_MACHINE__REGION, _Set_Region_1);
+		protected final @NonNull Property pr_StateMachine_region = createProperty(PivotPackage.Literals.STATE_MACHINE__REGION, _Set_Region);
 		protected final @NonNull Property pr_StateMachine_submachineState = createProperty(PivotPackage.Literals.STATE_MACHINE__SUBMACHINE_STATE, _Set_State);
 		protected final @NonNull Property pr_StateMachine_Pseudostate_stateMachine = createProperty("Pseudostate", _Set_Pseudostate);
-		protected final @NonNull Property pr_StateMachine_Region_stateMachine = createProperty("Region", _Set_Region);
+		protected final @NonNull Property pr_StateMachine_Region_stateMachine = createProperty("Region", _Set_Region_1);
 		protected final @NonNull Property pr_StateMachine_StateMachine_extendedStateMachine = createProperty("StateMachine", _Set_StateMachine);
 		protected final @NonNull Property pr_StringLiteralExp_stringSymbol = createProperty(PivotPackage.Literals.STRING_LITERAL_EXP__STRING_SYMBOL, _String);
 		protected final @NonNull Property pr_TemplateBinding_boundElement = createProperty(PivotPackage.Literals.TEMPLATE_BINDING__BOUND_ELEMENT, _TemplateableElement);
@@ -2358,8 +2344,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_TemplateParameterSubstitution_ownedActual = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL, _ParameterableElement);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING, _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION, _String);
-		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter_1);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter);
+		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter);
+		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter_1);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__TEMPLATE, _TemplateableElement);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding_signature = createProperty("TemplateBinding", _Set_TemplateBinding);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty(PivotPackage.Literals.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE, _TemplateSignature);
@@ -3965,8 +3951,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedCollection_T, _String)));
 			_OrderedCollection_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Annotation)));
-			_OrderedCollection_Class.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
-				createTemplateParameterSubstitution(_OrderedCollection_T, _Class)));
 			_OrderedCollection_CollectionLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _CollectionLiteralPart)));
 			_OrderedCollection_Constraint.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
@@ -4003,8 +3987,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedSet_T, _String)));
 			_OrderedSet_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Annotation)));
-			_OrderedSet_Class.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _Class)));
 			_OrderedSet_CollectionLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _CollectionLiteralPart)));
 			_OrderedSet_Constraint.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
@@ -4029,9 +4011,9 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedSet_T, _Precedence)));
 			_OrderedSet_Property.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Property)));
-			_OrderedSet_TemplateParameter_1.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
+				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
+			_OrderedSet_TemplateParameter_1.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TupleLiteralPart)));
@@ -4105,9 +4087,9 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Property)));
 			_Set_Pseudostate.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Pseudostate)));
-			_Set_Region.getTemplateBinding().add(createTemplateBinding(_Set_,
-				createTemplateParameterSubstitution(_Set_T, _Region)));
 			_Set_Region_1.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Region)));
+			_Set_Region.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Region)));
 			_Set_SendSignalAction.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _SendSignalAction)));
@@ -4387,7 +4369,6 @@ public class OCLMetaModel extends ASResourceImpl
 			installComment(el__TransitionKind_internal, "Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.");
 			installComment(el__TransitionKind_local, "Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.");
 			installComment(_Type, "A type is a named element that is used as the type for a typed element. A type can be contained in a package.\nType is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter.");
-			installComment(op_null_isTemplate, "The query isTemplate() returns whether this templateable element is actually a template.");
 			installComment(pr_Type_package, "Specifies the owning package of this classifier, if any.");
 			installComment(_TypeTemplateParameter, "A type template parameter exposes a type as a formal template parameter.");
 			installComment(pr_TypeTemplateParameter_allowSubstitutable, "Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.");

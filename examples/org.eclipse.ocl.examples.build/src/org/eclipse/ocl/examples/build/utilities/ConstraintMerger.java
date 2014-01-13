@@ -18,7 +18,9 @@ package org.eclipse.ocl.examples.build.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -164,7 +166,9 @@ public class ConstraintMerger extends AbstractProjectComponent
 //				}
 //			}
 //				System.out.println("Pivot2Ecore " + asResource.getURI());
-			Resource ecoreResource2 = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, null);
+			Map<String,Object> options = new HashMap<String,Object>();
+			options.put(Pivot2Ecore.OPTION_SUPPRESS_DUPLICATES,  true);
+			Resource ecoreResource2 = Pivot2Ecore.createResource(metaModelManager, asResource, ecoreURI, options);
 			ctx.set(getModelSlot(), ecoreResource2);
 			projectDescriptor.configure(ecoreResource2.getResourceSet(), StandaloneProjectMap.LoadBothStrategy.INSTANCE, null);
 			

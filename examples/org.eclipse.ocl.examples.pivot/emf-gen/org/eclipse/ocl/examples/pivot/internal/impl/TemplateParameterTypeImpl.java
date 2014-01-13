@@ -327,7 +327,7 @@ public class TemplateParameterTypeImpl
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_ATTRIBUTE:

@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -31,13 +32,17 @@ import java.util.Set;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,6 +51,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
@@ -92,24 +98,94 @@ import org.eclipse.xtext.util.EmfFormatter;
 
 public class XtextTestCase extends PivotTestCase
 {	
-	
 	public static interface Normalizer {
 		void denormalize();
+		void normalize();
 	}
 	
-/*	public static class EAnnotationsNormalizer implements Normalizer
+	public static class EAnnotationsNormalizer implements Normalizer
+	{
+		protected final @NonNull EModelElement eModelElement;
+		protected final List<EAnnotation> oldOrder;
+		
+		public EAnnotationsNormalizer(@NonNull EModelElement eModelElement) {
+			this.eModelElement = eModelElement;
+			this.oldOrder = new ArrayList<EAnnotation>(eModelElement.getEAnnotations());
+		}
+		
+		@Override
+		public void denormalize() {
+			EList<EAnnotation> eList = eModelElement.getEAnnotations();
+			eList.clear();
+			eList.addAll(oldOrder);
+		}
+		
+		@Override
+		public void normalize() {
+			EList<EAnnotation> eList = eModelElement.getEAnnotations();
+			List<EAnnotation> newOrder = new ArrayList<EAnnotation>(eList);
+			Collections.sort(newOrder, DomainUtil.EAnnotationComparator.INSTANCE);
+			eList.clear();
+			eList.addAll(newOrder);
+		}
+	}
+	
+	public static class EAnnotationConstraintsNormalizer implements Normalizer
 	{
 		protected final @NonNull EAnnotation eAnnotation;
-		protected final List<Entry<String, String>> oldOrder;
+		protected final @Nullable String oldConstraints;
 		
-		public EAnnotationsNormalizer(@NonNull EAnnotation eAnnotation) {
+		public EAnnotationConstraintsNormalizer(@NonNull EAnnotation eAnnotation) {
 			this.eAnnotation = eAnnotation;
-			List<Entry<String, String>> eDetails = eAnnotation.getDetails();
-			this.oldOrder = new ArrayList<Entry<String, String>>(eDetails);
-			List<Entry<String, String>> newOrder = new ArrayList<Entry<String, String>>(eDetails);
-			Collections.sort(newOrder, new Comparator<Entry<String, String>>()
+			this.oldConstraints = eAnnotation.getDetails().get("constraints");
+		}
+		
+		@Override
+		public void denormalize() {
+			eAnnotation.getDetails().put("constraints", oldConstraints);
+		}
+		
+		@Override
+		public void normalize() {
+			StringBuilder s1 = new StringBuilder();
+			if (oldConstraints != null) {
+				String[] s = oldConstraints.split(" ");
+				Arrays.sort(s);
+				for (int i = 0; i < s.length; i++) {
+					if (i > 0) {
+						s1.append(" ");
+					}
+					s1.append(s[i]);
+				}
+			}
+			eAnnotation.getDetails().put("constraints", s1.toString());
+		}
+	}
+	
+	public static class EDetailsNormalizer implements Normalizer
+	{
+		protected final @NonNull EAnnotation eAnnotation;
+		protected final List<Map.Entry<String, String>> oldOrder;
+		
+		public EDetailsNormalizer(@NonNull EAnnotation eAnnotation) {
+			this.eAnnotation = eAnnotation;
+			this.oldOrder = new ArrayList<Map.Entry<String, String>>(eAnnotation.getDetails());
+		}
+		
+		@Override
+		public void denormalize() {
+			EList<Map.Entry<String, String>> eDetails = eAnnotation.getDetails();
+			eDetails.clear();
+			eDetails.addAll(oldOrder);
+		}
+		
+		@Override
+		public void normalize() {
+			List<Map.Entry<String, String>> eDetails = eAnnotation.getDetails();
+			List<Map.Entry<String, String>> newOrder = new ArrayList<Map.Entry<String, String>>(eDetails);
+			Collections.sort(newOrder, new Comparator<Map.Entry<String, String>>()
 				{
-					public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+					public int compare(Map.Entry<String, String> o1, Map.Entry<String, String> o2) {
 						String n1 = o1.getKey();
 						String n2 = o2.getKey();
 						return n1.compareTo(n2);
@@ -119,12 +195,24 @@ public class XtextTestCase extends PivotTestCase
 			eDetails.clear();
 			eDetails.addAll(newOrder);
 		}
+	}
+	
+/*	public static class ENamedElementNormalizer implements Normalizer
+	{
+		protected final @NonNull ENamedElement eNamedElement;
+		
+		public ENamedElementNormalizer(@NonNull ENamedElement eNamedElement) {
+			this.eNamedElement = eNamedElement;
+		}
 		
 		@Override
 		public void denormalize() {
-			EList<Entry<String, String>> eDetails = eAnnotation.getDetails();
-			eDetails.clear();
-			eDetails.addAll(oldOrder);
+			eNamedElement.setName(eNamedElement.getName().substring(1));
+		}
+		
+		@Override
+		public void normalize() {
+			eNamedElement.setName("#" + eNamedElement.getName());
 		}
 	} */
 	
@@ -135,8 +223,19 @@ public class XtextTestCase extends PivotTestCase
 		
 		public EOperationsNormalizer(@NonNull EClass eClass) {
 			this.eClass = eClass;
+			this.oldOrder = new ArrayList<EOperation>(eClass.getEOperations());
+		}
+		
+		@Override
+		public void denormalize() {
 			EList<EOperation> eOperations = eClass.getEOperations();
-			this.oldOrder = new ArrayList<EOperation>(eOperations);
+			eOperations.clear();
+			eOperations.addAll(oldOrder);
+		}
+		
+		@Override
+		public void normalize() {
+			EList<EOperation> eOperations = eClass.getEOperations();
 			List<EOperation> newOrder = new ArrayList<EOperation>(eOperations);
 			Collections.sort(newOrder, new Comparator<EOperation>()
 				{
@@ -150,13 +249,6 @@ public class XtextTestCase extends PivotTestCase
 			eOperations.clear();
 			eOperations.addAll(newOrder);
 		}
-		
-		@Override
-		public void denormalize() {
-			EList<EOperation> eOperations = eClass.getEOperations();
-			eOperations.clear();
-			eOperations.addAll(oldOrder);
-		}
 	}
 	
 	public static class ETypedElementNormalizer implements Normalizer
@@ -169,14 +261,18 @@ public class XtextTestCase extends PivotTestCase
 			this.eTypedElement = eTypedElement;
 			this.wasOrdered = eTypedElement.isOrdered();
 			this.wasUnique = eTypedElement.isUnique();
-			eTypedElement.setOrdered(true);
-			eTypedElement.setUnique(true);
 		}
 		
 		@Override
 		public void denormalize() {
 			eTypedElement.setOrdered(wasOrdered);
 			eTypedElement.setUnique(wasUnique);
+		}
+		
+		@Override
+		public void normalize() {
+			eTypedElement.setOrdered(true);
+			eTypedElement.setUnique(true);
 		}
 	}
 
@@ -192,8 +288,10 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
-		Set<Normalizer> expectedNormalizations = normalize(expectedResource);
-		Set<Normalizer> actualNormalizations = normalize(actualResource);
+		System.out.println("============================" + expectedResource.getURI());
+		List<Normalizer> expectedNormalizations = normalize(expectedResource);
+		System.out.println("============================" + actualResource.getURI());
+		List<Normalizer> actualNormalizations = normalize(actualResource);
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
 		assertEquals(expected, actual);
@@ -423,8 +521,8 @@ public class XtextTestCase extends PivotTestCase
 		return true;
 	}
 	
-	public static Set<Normalizer> normalize(Resource resource) {
-		Set<Normalizer> normalizers = new HashSet<Normalizer>();
+	public static List<Normalizer> normalize(Resource resource) {
+		List<Normalizer> normalizers = new ArrayList<Normalizer>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof ETypedElement) {
@@ -437,17 +535,50 @@ public class XtextTestCase extends PivotTestCase
 			}
 			if (eObject instanceof EClass) {
 				EClass eClass = (EClass) eObject;
+//				if ("ActivityEdge".equals(eClass.getName())) {
+//					System.out.println("Got it " + eClass.getName() + " " + DomainUtil.debugSimpleName(eClass));
+//				}
 				if (eClass.getEOperations().size() >= 2) {
 					normalizers.add(new EOperationsNormalizer(eClass));		// FIXME Until Pivot2Ecore has consistent ops/inv ordering
 				}
 			}
-/*			if (eObject instanceof EAnnotation) {
-				EAnnotation eAnnotation = (EAnnotation) eObject;
-				if (eAnnotation.getDetails().size() >= 2) {
-					normalizers.add(new EAnnotationsNormalizer(eAnnotation));
+/*			if (eObject instanceof ENamedElement) {
+				ENamedElement eNamedElement = (ENamedElement) eObject;
+				if ("isConsistentWith".equals(eNamedElement.getName())) {
+					EObject eContainer = eNamedElement.eContainer();
+					for (; eContainer != null; eContainer = eContainer.eContainer()) {
+						if (eContainer instanceof ENamedElement) {
+							break;
+						}
+					}
+					System.out.println("Got it " + ((ENamedElement)eContainer).getName() + "::" + eNamedElement.getName() + " " + DomainUtil.debugSimpleName(eNamedElement));
 				}
-				tit.prune();				// Avoid CME
+				normalizers.add(new ENamedElementNormalizer(eNamedElement));
 			} */
+			if (eObject instanceof EModelElement) {
+				EModelElement eModelElement = (EModelElement) eObject;
+				if (eModelElement.getEAnnotations().size() >= 2) {
+//					if (eModelElement instanceof EOperation) {
+//						if ("isConsistentWith".equals(((EOperation)eModelElement).getName())) {
+//							System.out.println("Got it");
+//						}
+//					}
+					normalizers.add(new EAnnotationsNormalizer(eModelElement));
+				}
+			}
+			if (eObject instanceof EAnnotation) {
+				EAnnotation eAnnotation = (EAnnotation) eObject;
+				EMap<String, String> eDetails = eAnnotation.getDetails();
+				if (eDetails.size() > 1) {
+					normalizers.add(new EDetailsNormalizer(eAnnotation));
+				}
+				if (EcorePackage.eNS_URI.equals(eAnnotation.getSource()) && eDetails.containsKey("constraints")) {
+					normalizers.add(new EAnnotationConstraintsNormalizer(eAnnotation));
+				}
+			}
+		}
+		for (Normalizer normalizer : normalizers) {
+			normalizer.normalize();
 		}
 		return normalizers;
 	}

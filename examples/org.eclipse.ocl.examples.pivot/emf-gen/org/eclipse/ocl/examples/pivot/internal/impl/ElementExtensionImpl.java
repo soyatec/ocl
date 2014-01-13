@@ -505,7 +505,7 @@ public class ElementExtensionImpl extends TypeImpl implements ElementExtension
 			case PivotPackage.ELEMENT_EXTENSION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.ELEMENT_EXTENSION__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.ELEMENT_EXTENSION__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.ELEMENT_EXTENSION__OWNED_ATTRIBUTE:

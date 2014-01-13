@@ -59,7 +59,6 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 					EObject eObject = eReferences.get(0);
 					if (eObject instanceof ENamedElement) {
 						String originalName = getOriginalName((ENamedElement) eObject);
-						System.out.println(eObject + " ===> " + originalName);
 						return originalName;
 					}
 				}
@@ -70,17 +69,10 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 				if (originalName.startsWith(prefix)) {
 					originalName = originalName.substring(prefix.length());
 				}
-				System.out.println(eNamedElement + " ==> " + originalName);
-				return originalName;
-			}
-			else {
-				String originalName = UML_4_2.UMLUtil.getOriginalName(eNamedElement);
-				System.out.println(eNamedElement + " ==> " + originalName);
 				return originalName;
 			}
 		}
 		String originalName = UML_4_2.UMLUtil.getOriginalName(eNamedElement);
-//		System.out.println(eNamedElement + " => " + originalName);
 		return originalName;
 	}
 

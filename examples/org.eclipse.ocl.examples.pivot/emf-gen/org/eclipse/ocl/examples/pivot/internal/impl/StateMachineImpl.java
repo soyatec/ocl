@@ -557,19 +557,19 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.STATE_MACHINE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
-				return isSetInstanceClassName();
+				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
-				return isSetOwnedAttribute();
+				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
 				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
-				return isSetOwnedOperation();
+				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.STATE_MACHINE__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
-				return isSetSuperClass();
+				return superClass != null && !superClass.isEmpty();
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.STATE_MACHINE__IS_ABSTRACT:

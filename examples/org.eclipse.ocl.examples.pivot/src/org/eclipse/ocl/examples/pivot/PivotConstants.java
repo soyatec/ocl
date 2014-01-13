@@ -22,6 +22,8 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public interface PivotConstants
 {
@@ -78,6 +80,34 @@ public interface PivotConstants
 	static final @NonNull String REDEFINES_ANNOTATION_SOURCE = "redefines"; // UMLUtil.ANNOTATION__REDEFINES
 //	static final @NonNull String SUBSETS_ANNOTATION_SOURCE = "subsets"; // UMLUtil.ANNOTATION__SUBSETS
 //	static final @NonNull String UNION_ANNOTATION_SOURCE = "union"; // UMLUtil.ANNOTATION__UNION
+
+	/**
+	 * The default values for a totally blind implicit opposite are determined by what it is safe to use for a fully deduced opposite.
+	 * <br>
+	 * [0..*] since we have no idea how many objects may be pointing at an object.
+	 * <br>
+	 * !ordered since we cannot hope to reconstruct order
+	 * <br>
+	 * !unique since we cannot know how many times an object can reference another once by a given relationship.
+	 */
+	static final @NonNull IntegerValue DEFAULT_IMPLICIT_OPPOSITE_LOWER_VALUE = ValuesUtil.ZERO_VALUE;
+	static final boolean DEFAULT_IMPLICIT_OPPOSITE_ORDERED = false;
+	static final boolean DEFAULT_IMPLICIT_OPPOSITE_UNIQUE = false;
+	static final @NonNull IntegerValue DEFAULT_IMPLICIT_OPPOSITE_UPPER_VALUE = ValuesUtil.UNLIMITED_VALUE;
+
+	/**
+	 * The default values for annotated implicit opposites are determined by what is pragmatic.
+	 * <br>
+	 * [0..1] which is usually correct for non-collections and half correct for collections.
+	 * <br>
+	 * !ordered is common
+	 * <br>
+	 * unique is common
+	 */
+	static final @NonNull IntegerValue ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE = ValuesUtil.ZERO_VALUE;
+	static final boolean ANNOTATED_IMPLICIT_OPPOSITE_ORDERED = false;
+	static final boolean ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE = true;
+	static final @NonNull IntegerValue ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE = ValuesUtil.ONE_VALUE;
 
 	@Deprecated // Tuples are now used for rich invariants
 	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";

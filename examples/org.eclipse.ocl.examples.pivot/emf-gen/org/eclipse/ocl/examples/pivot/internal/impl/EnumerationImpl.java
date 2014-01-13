@@ -466,19 +466,19 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.ENUMERATION__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.ENUMERATION__INSTANCE_CLASS_NAME:
-				return isSetInstanceClassName();
+				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.ENUMERATION__OWNED_ATTRIBUTE:
-				return isSetOwnedAttribute();
+				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case PivotPackage.ENUMERATION__OWNED_INVARIANT:
 				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.ENUMERATION__OWNED_OPERATION:
-				return isSetOwnedOperation();
+				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.ENUMERATION__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.ENUMERATION__SUPER_CLASS:
-				return isSetSuperClass();
+				return superClass != null && !superClass.isEmpty();
 			case PivotPackage.ENUMERATION__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ENUMERATION__IS_ABSTRACT:

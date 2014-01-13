@@ -70,7 +70,6 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -367,16 +366,20 @@ public class OperationImpl
 	 */
 	public NotificationChain basicSetTemplateParameter(
 			TemplateParameter newTemplateParameter, NotificationChain msgs) {
-		if (newTemplateParameter != null && !(newTemplateParameter instanceof OperationTemplateParameter))
-		{
-			throw new IllegalArgumentException("newTemplateParameter must be an instance of OperationTemplateParameter"); //$NON-NLS-1$
-		}
 		TemplateParameter oldTemplateParameter = templateParameter;
 		templateParameter = newTemplateParameter;
 		if (eNotificationRequired())
 		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__TEMPLATE_PARAMETER, oldTemplateParameter, newTemplateParameter);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		Resource.Internal eInternalResource = eInternalResource();
+		if (eInternalResource == null || !eInternalResource.isLoading()) {
+			TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+			if (owningTemplateParameter != null && owningTemplateParameter != newTemplateParameter)
+			{
+				setOwningTemplateParameter(null);
+			}
 		}
 		return msgs;
 	}
@@ -387,10 +390,6 @@ public class OperationImpl
 	 * @generated
 	 */
 	public void setTemplateParameter(TemplateParameter newTemplateParameter) {
-		if (newTemplateParameter != null && !(newTemplateParameter instanceof OperationTemplateParameter))
-		{
-			throw new IllegalArgumentException("newTemplateParameter must be an instance of OperationTemplateParameter"); //$NON-NLS-1$
-		}
 		if (newTemplateParameter != templateParameter)
 		{
 			NotificationChain msgs = null;
@@ -403,15 +402,6 @@ public class OperationImpl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__TEMPLATE_PARAMETER, newTemplateParameter, newTemplateParameter));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetTemplateParameter() {
-		return templateParameter != null;
 	}
 
 	/**
@@ -1538,7 +1528,7 @@ public class OperationImpl
 			case PivotPackage.OPERATION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.OPERATION__IS_STATIC:
-				return isSetIsStatic();
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.OPERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
@@ -1562,7 +1552,7 @@ public class OperationImpl
 			case PivotPackage.OPERATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.OPERATION__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.OPERATION__BODY_EXPRESSION:
 				return bodyExpression != null;
 			case PivotPackage.OPERATION__CLASS:

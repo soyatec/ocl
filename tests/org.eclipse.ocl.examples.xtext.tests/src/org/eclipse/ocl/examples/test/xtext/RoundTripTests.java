@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -569,8 +570,9 @@ public class RoundTripTests extends XtextTestCase
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/UML.ecore", true);
 		Map<String,Object> options = new HashMap<String, Object>();
 		options.put(Pivot2Ecore.OPTION_ADD_INVARIANT_COMMENTS, true);
-		options.put(Pivot2Ecore.OPTION_BOOLEAN_INVARIANTS, true);
+		options.put(DelegateInstaller.OPTION_BOOLEAN_INVARIANTS, true);
 		options.put(OCLConstants.OCL_DELEGATE_URI, OCLConstants.OCL_DELEGATE_URI);
+		options.put(DelegateInstaller.OPTION_OMIT_SETTING_DELEGATES, true);
 		doRoundTripFromEcore(uri, uri, options);
 	}
 

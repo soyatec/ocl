@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -61,16 +62,40 @@ public class DomainUtil
 	private static final String maxLongValue = Long.toString(Long.MAX_VALUE);
 	private static final int maxLongSize = maxLongValue.length();	
 
-	public static final NameableComparator NAMEABLE_COMPARATOR = new NameableComparator();
-	
-	private static final class NameableComparator implements Comparator<Nameable>
+	public static final class EAnnotationComparator implements Comparator<EAnnotation>
+	{
+		public static final @NonNull EAnnotationComparator INSTANCE = new EAnnotationComparator();
+
+		public int compare(EAnnotation o1, EAnnotation o2) {
+			String n1 = o1.getSource();
+			String n2 = o2.getSource();
+			return DomainUtil.safeCompareTo(n1, n2);
+		}
+	}
+
+	public static final class NameableComparator implements Comparator<Nameable>
 	{	
+		public static final @NonNull NameableComparator INSTANCE = new NameableComparator();
+
 		public int compare(Nameable o1, Nameable o2) {
 			String n1 = DomainUtil.getSafeName(o1);
 			String n2 = DomainUtil.getSafeName(o2);
-			return n1.compareTo(n2);
+			return DomainUtil.safeCompareTo(n1, n2);
 		}
 	}
+
+	public static final class ENamedElementComparator implements Comparator<ENamedElement>
+	{
+		public static final @NonNull ENamedElementComparator INSTANCE = new ENamedElementComparator();
+
+		public int compare(ENamedElement o1, ENamedElement o2) {
+			String n1 = o1.getName();
+			String n2 = o2.getName();
+			return DomainUtil.safeCompareTo(n1, n2);
+		}
+	}
+
+	public static final NameableComparator NAMEABLE_COMPARATOR = NameableComparator.INSTANCE;
 
 	public static @NonNull String bind(String messageTemplate, Object... bindings) {
 		@SuppressWarnings("null") @NonNull String result = NLS.bind(messageTemplate, bindings);
@@ -497,6 +522,38 @@ public class DomainUtil
 			throw new IllegalStateException();
 		}
 		return aT;
+	}
+
+	/**
+	 * Safely determines the relative order of <code>object</code> and
+	 * <code>otherObject</code>, i.e. without throwing an exception if
+	 * <code>object</code> is <code>null</code>.
+	 */
+	public static <T extends Comparable<T>> int safeCompareTo(@Nullable T object, @Nullable T otherObject) {
+		if (object == null) {
+			return otherObject == null ? 1 : 0;
+		}
+		else {
+			return otherObject == null ? -1 : object.compareTo(otherObject);
+		}
+	}
+
+	/**
+	 * Safely determines whether <code>object</code> equals
+	 * <code>otherObject</code>, i.e. without throwing an exception if
+	 * <code>object</code> is <code>null</code>.
+	 * 
+	 * @param object
+	 *            The first object to compare.
+	 * @param otherObject
+	 *            The second object to compare.
+	 * @return <code>true</code> if <code>object</code> equals
+	 *         <code>otherObject</code>; <code>false</code> otherwise.
+	 */
+	public static boolean safeEquals(@Nullable Object object, @Nullable Object otherObject) {
+		return object == null
+			? otherObject == null
+			: object.equals(otherObject);
 	}
 
 	/**

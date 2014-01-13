@@ -400,7 +400,7 @@ public class MessageTypeImpl
 			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.MESSAGE_TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.MESSAGE_TYPE__OWNED_ATTRIBUTE:

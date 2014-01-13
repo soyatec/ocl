@@ -467,7 +467,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.ITERATION__IS_STATIC:
-				return isSetIsStatic();
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ITERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.ITERATION__OWNED_ANNOTATION:
@@ -491,7 +491,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.ITERATION__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.ITERATION__BODY_EXPRESSION:
 				return bodyExpression != null;
 			case PivotPackage.ITERATION__CLASS:

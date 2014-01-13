@@ -514,19 +514,19 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 			case PivotPackage.LAMBDA_TYPE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.LAMBDA_TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
+				return templateParameter != null;
 			case PivotPackage.LAMBDA_TYPE__INSTANCE_CLASS_NAME:
-				return isSetInstanceClassName();
+				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.LAMBDA_TYPE__OWNED_ATTRIBUTE:
-				return isSetOwnedAttribute();
+				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__OWNED_INVARIANT:
 				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__OWNED_OPERATION:
-				return isSetOwnedOperation();
+				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.LAMBDA_TYPE__SUPER_CLASS:
-				return isSetSuperClass();
+				return superClass != null && !superClass.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__IS_ABSTRACT:

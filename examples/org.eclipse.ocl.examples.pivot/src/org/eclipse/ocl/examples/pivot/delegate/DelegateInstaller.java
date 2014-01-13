@@ -15,8 +15,10 @@
  */
 package org.eclipse.ocl.examples.pivot.delegate;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EMap;
@@ -59,6 +61,16 @@ import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class DelegateInstaller
 {	
+	/**
+	 * True to apply result = () wrapper to invariant body.
+	 */
+	public static final @NonNull String OPTION_BOOLEAN_INVARIANTS = "booleanInvariants";
+
+	/**
+	 * True to omit the setting delegates declaration. Useful for matching UML2Ecore behaviour.
+	 */
+	public static final @NonNull String OPTION_OMIT_SETTING_DELEGATES = "omitSettingDelegates";
+
 	public static @Nullable String getAnnotationKey(@NonNull Constraint pivotConstraint) {
 		String name = pivotConstraint.getName();
 		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
@@ -143,6 +155,15 @@ public class DelegateInstaller
 		return null;
 	}
 
+	public static @Nullable String getExportDelegateURI(@NonNull Map<String, Object> options) {
+		String exportDelegateURI = (String)options.get(OCLConstants.OCL_DELEGATE_URI);
+		return exportDelegateURI != null ? exportDelegateURI : OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue();
+	}
+
+	public static boolean isBooleanInvariants(@NonNull Map<String,Object> options) {
+		return Boolean.valueOf(String.valueOf(options.get(OPTION_BOOLEAN_INVARIANTS)));
+	}
+
 	public static boolean needsDelegates(@NonNull EPackage ePackage) {
 		boolean needsDelegates = false;
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
@@ -179,11 +200,13 @@ public class DelegateInstaller
 	}
 
 	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull Map<String, Object> options;
 	protected final @Nullable String exportDelegateURI;
 
-	public DelegateInstaller(@NonNull MetaModelManager metaModelManager, @Nullable String exportDelegateURI) {
+	public DelegateInstaller(@NonNull MetaModelManager metaModelManager, @Nullable Map<String, Object> options) {
 		this.metaModelManager = metaModelManager;
-		this.exportDelegateURI = exportDelegateURI != null ? exportDelegateURI : OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue();
+		this.options = options != null ? options : new HashMap<String,Object>();
+		this.exportDelegateURI = getExportDelegateURI(this.options);
 	}
 
 	protected @NonNull EAnnotation createAnnotation(@NonNull EModelElement eModelElement) {
@@ -233,6 +256,9 @@ public class DelegateInstaller
 		String exprString = createExpression(bodyExpression, ecoreURI);
 		if (exprString == null) {
 			return null;
+		}
+		if (isBooleanInvariants(options)) {
+			exprString = "result = (" + exprString + ")";
 		}
 		EAnnotation oclAnnotation = createAnnotation(eOperation);
 		oclAnnotation.getDetails().put(InvocationBehavior.BODY_CONSTRAINT_KEY, exprString);
@@ -463,7 +489,7 @@ public class DelegateInstaller
 			if (eAnnotation == null) {
 				eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 				eAnnotation.setSource(EcorePackage.eNS_URI);
-				eClassifier.getEAnnotations().add(0, eAnnotation);
+				eClassifier.getEAnnotations().add(/*0,*/ eAnnotation);
 			}
 			eAnnotation.getDetails().put("constraints", s.toString());
 		}
@@ -476,7 +502,9 @@ public class DelegateInstaller
 		EAnnotation packageAnnotation = DomainUtil.getEAnnotation(ePackage, EcorePackage.eNS_URI);
 		EMap<String, String> details = packageAnnotation.getDetails();
 		details.put(InvocationBehavior.NAME, exportDelegateURI);
-		details.put(SettingBehavior.NAME, exportDelegateURI);
+		if (!Boolean.valueOf(String.valueOf(options.get(OPTION_OMIT_SETTING_DELEGATES)))) {
+			details.put(SettingBehavior.NAME, exportDelegateURI);
+		}
 		details.put(ValidationBehavior.NAME, exportDelegateURI);
 	}
 	

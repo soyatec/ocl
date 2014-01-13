@@ -90,6 +90,7 @@ import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
@@ -2452,18 +2453,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Property newOpposite = PivotFactory.eINSTANCE.createProperty();
 		newOpposite.setImplicit(true);
 		newOpposite.setName(name);
-//		newOpposite.setType(thisType);
-//		newOpposite.setLower(BigInteger.valueOf(0));
-		if (thisProperty.isComposite()) {
-//			newOpposite.setUpper(BigInteger.valueOf(1));
-			newOpposite.setType(thisType);
-			newOpposite.setIsRequired(false);
-		}
-		else {
-//			newOpposite.setUpper(BigInteger.valueOf(-1));
-			newOpposite.setType(getSetType(thisType, null, null));
-			newOpposite.setIsRequired(true);
-		}
+		newOpposite.setType(getCollectionType(
+			PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_ORDERED,
+			PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UNIQUE,
+			thisType,
+			PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_LOWER_VALUE,
+			PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UPPER_VALUE));
+		newOpposite.setIsRequired(false);
 		thatType = getMutable(thatType);
 		thatType.getOwnedAttribute().add(newOpposite);		// WIP moved for debugging
 		newOpposite.setOpposite(thisProperty);

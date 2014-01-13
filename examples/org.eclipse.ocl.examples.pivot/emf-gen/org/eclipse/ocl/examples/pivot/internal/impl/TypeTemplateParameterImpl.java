@@ -20,14 +20,10 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -47,7 +43,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeTemplateParameterImpl#isAllowSubstitutable <em>Allow Substitutable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeTemplateParameterImpl#getConstrainingType <em>Constraining Type</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypeTemplateParameterImpl#getParameteredElement <em>Parametered Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -140,147 +135,6 @@ public class TypeTemplateParameterImpl
 			constrainingType = new EObjectResolvingEList<Type>(Type.class, this, PivotPackage.TYPE_TEMPLATE_PARAMETER__CONSTRAINING_TYPE);
 		}
 		return constrainingType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ParameterableElement getParameteredElement() {
-		if (parameteredElement != null && ((EObject)parameteredElement).eIsProxy())
-		{
-			InternalEObject oldParameteredElement = (InternalEObject)parameteredElement;
-			parameteredElement = (ParameterableElement)eResolveProxy(oldParameteredElement);
-			if (parameteredElement != oldParameteredElement)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, oldParameteredElement, parameteredElement));
-			}
-		}
-		return parameteredElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ParameterableElement basicGetParameteredElement() {
-		return parameteredElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain basicSetParameteredElement(
-			ParameterableElement newParameteredElement, NotificationChain msgs) {
-		if (newParameteredElement != null && !(newParameteredElement instanceof Type))
-		{
-			throw new IllegalArgumentException("newParameteredElement must be an instance of Type"); //$NON-NLS-1$
-		}
-		ParameterableElement oldParameteredElement = parameteredElement;
-		parameteredElement = newParameteredElement;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, oldParameteredElement, newParameteredElement);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setParameteredElement(ParameterableElement newParameteredElement) {
-		if (newParameteredElement != null && !(newParameteredElement instanceof Type))
-		{
-			throw new IllegalArgumentException("newParameteredElement must be an instance of Type"); //$NON-NLS-1$
-		}
-		if (newParameteredElement != parameteredElement)
-		{
-			NotificationChain msgs = null;
-			if (parameteredElement != null)
-				msgs = ((InternalEObject)parameteredElement).eInverseRemove(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
-			if (newParameteredElement != null)
-				msgs = ((InternalEObject)newParameteredElement).eInverseAdd(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
-			msgs = basicSetParameteredElement(newParameteredElement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, newParameteredElement, newParameteredElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetParameteredElement() {
-		return parameteredElement != null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				if (ownedParameteredElement != null)
-					msgs = ((InternalEObject)ownedParameteredElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT, null, msgs);
-				return basicSetOwnedParameteredElement((ParameterableElement)otherEnd, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				if (parameteredElement != null)
-					msgs = ((InternalEObject)parameteredElement).eInverseRemove(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
-				return basicSetParameteredElement((ParameterableElement)otherEnd, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSignature((TemplateSignature)otherEnd, msgs);
-		}
-		return eDynamicInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
-				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_DEFAULT:
-				return basicSetOwnedDefault(null, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				return basicSetOwnedParameteredElement(null, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				return basicSetParameteredElement(null, msgs);
-			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
-				return basicSetSignature(null, msgs);
-		}
-		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -420,7 +274,7 @@ public class TypeTemplateParameterImpl
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
 				return ownedParameteredElement != null;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				return isSetParameteredElement();
+				return parameteredElement != null;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
 				return getSignature() != null;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__ALLOW_SUBSTITUTABLE:

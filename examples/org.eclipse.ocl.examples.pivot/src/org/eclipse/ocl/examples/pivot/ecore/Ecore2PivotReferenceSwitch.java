@@ -228,23 +228,25 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 							if (remoteType instanceof CollectionType) {
 								remoteType = ((CollectionType)remoteType).getElementType();
 							}
-							String uniqueValue = details.get("unique");
-							String orderedValue = details.get("ordered");
+							//
+							//
 							String lowerValue = details.get("lower");
-							String upperValue = details.get("upper");
-							boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : false;
-							boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : true;
-							IntegerValue lower = lowerValue != null ? ValuesUtil.integerValueOf(lowerValue) :  ValuesUtil.ZERO_VALUE;
+							IntegerValue lower = lowerValue != null ? ValuesUtil.integerValueOf(lowerValue) :  PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE;
 							if (lower.isInvalid()) {
 								logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
-								lower = ValuesUtil.ZERO_VALUE;
+								lower = PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE;
 							}
-							IntegerValue upper = upperValue != null ? ValuesUtil.integerValueOf(upperValue) : ValuesUtil.UNLIMITED_VALUE;
+							String upperValue = details.get("upper");
+							IntegerValue upper = upperValue != null ? ValuesUtil.integerValueOf(upperValue) : PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
 							if (upper.isInvalid()) {
 								logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
-								upper = ValuesUtil.UNLIMITED_VALUE;
+								upper = PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
 							}
 							if (!upper.equals(ValuesUtil.ONE_VALUE)) {
+								String uniqueValue = details.get("unique");
+								boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE;
+								String orderedValue = details.get("ordered");
+								boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : PivotConstants.ANNOTATED_IMPLICIT_OPPOSITE_ORDERED;
 								oppositeProperty.setType(metaModelManager.getCollectionType(isOrdered, isUnique, localType, lower, upper));
 								oppositeProperty.setIsRequired(true);
 							}

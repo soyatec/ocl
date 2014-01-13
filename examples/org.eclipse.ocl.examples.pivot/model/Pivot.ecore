@@ -166,31 +166,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A class is a type that has objects as its instances."/>
     </eAnnotations>
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
-          eType="#//Operation" containment="true" eOpposite="#//Operation/class">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The operations owned by a class. These do not include the inherited operations."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//Type/ownedOperation"/>
-      </contents>
-      <contents xsi:type="ecore:EReference" name="superClass" upperBound="-1" eType="#//Class">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The immediate superclasses of a class, from which the class inherits."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//Type/superClass"/>
-      </contents>
-      <contents xsi:type="ecore:EAttribute" name="instanceClassName" eType="#//String">
-        <eAnnotations source="redefines" references="#//Type/instanceClassName"/>
-      </contents>
-      <contents xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-          eType="#//Property" containment="true" eOpposite="#//Property/class">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The attributes owned by a class. These do not include the inherited attributes. Attributes are represented by instances of Property."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//Type/ownedAttribute"/>
-      </contents>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
         eType="#//Boolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -405,11 +380,6 @@
         eType="#//Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicType" eSuperTypes="#//Type #//DynamicElement">
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EReference" name="metaType" lowerBound="1" eType="#//Type">
-        <eAnnotations source="redefines" references="#//DynamicElement/metaType"/>
-      </contents>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperty" ordered="false"
         upperBound="-1" eType="#//DynamicProperty" containment="true"/>
   </eClassifiers>
@@ -496,11 +466,6 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//TypedMultiplicityElement">
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EAttribute" name="isStatic" lowerBound="1" eType="#//Boolean">
-        <eAnnotations source="redefines" references="#//NamedElement/isStatic"/>
-      </contents>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementation" eType="#//LibraryFeature"
         transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementationClass" eType="#//String"/>
@@ -1134,18 +1099,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An operation is owned by a class and may be invoked in the context of objects that are instances of that class. It is a typed element and a multiplicity element.&#xA;Operation specializes TemplateableElement in order to support specification of template operations and bound operations. Operation specializes ParameterableElement to specify that an operation can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template."/>
     </eAnnotations>
-    <eAnnotations source="duplicates">
-      <eAnnotations source="templateParameter">
-        <details key="eType" value="pivot::OperationTemplateParameter"/>
-      </eAnnotations>
-      <contents xsi:type="ecore:EReference" name="templateParameter" eType="#//TemplateParameter"
-          eOpposite="#//OperationTemplateParameter/%duplicates%/parameteredElement">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The template parameter that exposes this element as a formal parameter."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
-      </contents>
-    </eAnnotations>
     <eOperations name="CompatibleReturn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="bodyExpression &lt;> null and bodyExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression)&#xA;"/>
@@ -1260,18 +1213,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="OperationTemplateParameter" eSuperTypes="#//TemplateParameter">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An operation template parameter exposes an operation as a formal parameter for a template."/>
-    </eAnnotations>
-    <eAnnotations source="duplicates">
-      <eAnnotations source="parameteredElement">
-        <details key="eType" value="pivot::Operation"/>
-      </eAnnotations>
-      <contents xsi:type="ecore:EReference" name="parameteredElement" lowerBound="1"
-          eType="#//ParameterableElement" eOpposite="#//Operation/%duplicates%/templateParameter">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The operation for this template parameter."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//TemplateParameter/parameteredElement"/>
-      </contents>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OppositePropertyCallExp" eSuperTypes="#//NavigationCallExp">
@@ -1906,24 +1847,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A type is a named element that is used as the type for a typed element. A type can be contained in a package.&#xA;Type is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter."/>
     </eAnnotations>
-    <eAnnotations source="duplicates">
-      <eAnnotations source="templateParameter">
-        <details key="eType" value="pivot::TypeTemplateParameter"/>
-      </eAnnotations>
-      <contents xsi:type="ecore:EOperation" name="isTemplate" lowerBound="1" eType="#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isTemplate() returns whether this templateable element is actually a template."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//TemplateableElement/isTemplate"/>
-      </contents>
-      <contents xsi:type="ecore:EReference" name="templateParameter" eType="#//TemplateParameter"
-          eOpposite="#//TypeTemplateParameter/%duplicates%/parameteredElement">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The template parameter that exposes this element as a formal parameter."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
-      </contents>
-    </eAnnotations>
     <eOperations name="UniqueInvariantName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="ownedInvariant->isUnique(name)&#xA;&#xA;"/>
@@ -1965,18 +1888,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeTemplateParameter" eSuperTypes="#//TemplateParameter">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A type template parameter exposes a type as a formal template parameter."/>
-    </eAnnotations>
-    <eAnnotations source="duplicates">
-      <eAnnotations source="parameteredElement">
-        <details key="eType" value="pivot::Type"/>
-      </eAnnotations>
-      <contents xsi:type="ecore:EReference" name="parameteredElement" lowerBound="1"
-          eType="#//ParameterableElement" eOpposite="#//Type/%duplicates%/templateParameter">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The parameterable classifier for this template parameter."/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//TemplateParameter/parameteredElement"/>
-      </contents>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowSubstitutable" lowerBound="1"
         eType="#//Boolean" defaultValueLiteral="true">
