@@ -89,9 +89,9 @@ public class GenmodelReloader extends AbstractProjectComponent
 		log.info("Reloading '" + genModelURI + "'");
 		Monitor monitor = showProgress ? new LoggerMonitor(log) : new BasicMonitor();
 		IProjectDescriptor projectDescriptor = DomainUtil.nonNullState(getProjectDescriptor());
-		@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(PivotPackage.eNS_URI);
-		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
-		packageDescriptor.configure(null, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
+//		@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(PivotPackage.eNS_URI);
+//		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
+//		packageDescriptor.configure(null, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
 		ModelImporter modelImporterInstance = new UMLImporter()
 		{
 			@Override

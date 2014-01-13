@@ -187,7 +187,13 @@ public class DelegateInstaller
 	}
 
 	protected @NonNull EAnnotation createAnnotation(@NonNull EModelElement eModelElement) {
-		return DomainUtil.getEAnnotation(eModelElement, exportDelegateURI);
+		EAnnotation oclAnnotation = removeDelegateAnnotations(eModelElement, exportDelegateURI);
+		if (oclAnnotation == null) {
+			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			oclAnnotation.setSource(exportDelegateURI);
+			eModelElement.getEAnnotations().add(oclAnnotation);
+		}
+		return oclAnnotation;
 	}
 	
 	public @Nullable EAnnotation createConstraintDelegate(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint, @Nullable URI ecoreURI) {
@@ -301,7 +307,7 @@ public class DelegateInstaller
 						}
 					}
 					if (eContext == null) {
-						@NonNull EOperation eOperation = Pivot2Ecore.createConstraintEOperation(constraint, name, false);
+						@NonNull EOperation eOperation = Pivot2Ecore.createConstraintEOperation(constraint, name, null);
 						((EClass) eClassifier).getEOperations().add(eOperation);
 						eContext = eOperation;
 					}

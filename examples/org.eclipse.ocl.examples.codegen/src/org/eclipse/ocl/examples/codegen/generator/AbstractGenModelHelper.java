@@ -421,7 +421,11 @@ public class AbstractGenModelHelper implements GenModelHelper
 	
 	@Override
 	public @NonNull GenOperation getGenOperation(@NonNull Operation operation) throws GenModelException {
-		Type owningType = operation.getOwningType();
+		Operation baseOperation = operation;
+		for ( ; baseOperation.getRedefinedOperation().size() > 0; baseOperation = baseOperation.getRedefinedOperation().get(0)) {
+			;
+		}
+		Type owningType = baseOperation.getOwningType();
 		if (owningType != null) {
 			GenClass genClass = getGenClass(owningType);
 			String name = operation.getName();
@@ -433,7 +437,11 @@ public class AbstractGenModelHelper implements GenModelHelper
 				}
 			}
 		}
-		throw new GenModelException("No GenFeature for " + operation);
+		Operation baseOperation2 = operation;
+		for ( ; baseOperation2.getRedefinedOperation().size() > 0; baseOperation2 = baseOperation2.getRedefinedOperation().get(0)) {
+			;
+		}
+		throw new GenModelException("No GenFeature for " + baseOperation);
 	}
 
 	@Override

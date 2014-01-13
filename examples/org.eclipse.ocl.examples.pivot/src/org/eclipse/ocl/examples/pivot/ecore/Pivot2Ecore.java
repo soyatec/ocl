@@ -64,7 +64,15 @@ public class Pivot2Ecore extends AbstractConversion
 {
 	public static final Logger logger = Logger.getLogger(Pivot2Ecore.class);
 
+	/**
+	 * True to add comments to the invariant context and doagnostics parameters.
+	 */
 	public static final @NonNull String OPTION_ADD_INVARIANT_COMMENTS = "addInvariantComments";
+
+	/**
+	 * True to apply result = () wrapper to invariant body.
+	 */
+	public static final @NonNull String OPTION_BOOLEAN_INVARIANTS = "booleanInvariants";
 
 	public static void copyAnnotationComments(@NonNull EAnnotation eModelElement, @NonNull Constraint pivotConstraint) {
 		String key = DelegateInstaller.getAnnotationKey(pivotConstraint);
@@ -126,9 +134,10 @@ public class Pivot2Ecore extends AbstractConversion
 
 	@Deprecated
 	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName) {
-		return createConstraintEOperation(pivotConstraint, operationName, false);
+		return createConstraintEOperation(pivotConstraint, operationName, null);
 	}
-	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName, boolean addInvariantComments) {
+	public static @NonNull EOperation createConstraintEOperation(Constraint pivotConstraint, String operationName, @Nullable Map<String, Object> options) {
+		boolean addInvariantComments = Pivot2Ecore.isAddInvariantComments(options);
 		EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
 		eOperation.setName(operationName != null ? operationName : "");
 		eOperation.setEType(EcorePackage.Literals.EBOOLEAN);
@@ -169,13 +178,15 @@ public class Pivot2Ecore extends AbstractConversion
 			String body = PivotUtil.getBody(specification);
 			if (body != null) {
 				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-				eAnnotation.setSource(OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue());
+				eAnnotation.setSource(getExportDelegateURI(options));
+				if (isBooleanInvariants(options)) {
+					body = "result = (" + body + ")";
+				}
 				eAnnotation.getDetails().put("body", body);
 				eOperation.getEAnnotations().add(eAnnotation);
 			}
 		}
 		copyComments(eOperation, pivotConstraint);
-//		if (pivotConstraint.get)
 		return eOperation;
 	}
 
@@ -197,6 +208,10 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 		return false;
 	}
+
+	public static @Nullable String getExportDelegateURI(@Nullable Map<String, Object> options) {
+		return options != null ? (String)options.get(OCLConstants.OCL_DELEGATE_URI) : OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue();
+	}
 	
 	public static @Nullable String getString(@Nullable Map<String, Object> options, @NonNull String key) {
 		if (options == null) {
@@ -210,6 +225,14 @@ public class Pivot2Ecore extends AbstractConversion
 			logger.error("Non-String '" + key + "' for '" + value + "'");
 		}
 		return null;
+	}
+
+	public static boolean isAddInvariantComments(@Nullable Map<String,Object> options) {
+		return (options != null) && Boolean.valueOf(String.valueOf(options.get(OPTION_ADD_INVARIANT_COMMENTS)));
+	}
+
+	public static boolean isBooleanInvariants(@Nullable Map<String,Object> options) {
+		return (options != null) && Boolean.valueOf(String.valueOf(options.get(OPTION_BOOLEAN_INVARIANTS)));
 	}
 
 	/**
@@ -234,8 +257,7 @@ public class Pivot2Ecore extends AbstractConversion
 	
 	public Pivot2Ecore(@NonNull MetaModelManager metaModelManager, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
 		super(metaModelManager);
-		String exportDelegateURI = options != null ? (String)options.get(OCLConstants.OCL_DELEGATE_URI) : null;
-		this.delegateInstaller = new DelegateInstaller(metaModelManager, exportDelegateURI);
+		this.delegateInstaller = new DelegateInstaller(metaModelManager, getExportDelegateURI(options));
 		this.pass1 = new Pivot2EcoreDeclarationVisitor(this);	
 		this.pass2 = new Pivot2EcoreReferenceVisitor(this);
 		this.ecoreURI = ecoreURI;
@@ -322,10 +344,6 @@ public class Pivot2Ecore extends AbstractConversion
 
 	public String getPrimitiveTypesUriPrefix() {
 		return primitiveTypesUriPrefix;
-	}
-
-	public boolean isAddInvariantComments() {
-		return (options != null) && Boolean.valueOf(String.valueOf(options.get(OPTION_ADD_INVARIANT_COMMENTS)));
 	}
 
 	/**

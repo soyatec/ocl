@@ -457,9 +457,6 @@ public class LoadTests extends XtextTestCase
 	}
 
 	private static void validateConstraint(@NonNull OCL ocl, @NonNull Constraint constraint) throws ParserException {
-//		if ("base_property_upper_bound".equals(constraint.getName())) {
-//			System.out.println("Got it");
-//		}
 		ExpressionInOCL specification;
 //		long startParseTime = System.currentTimeMillis();
 		specification = ocl.getSpecification(constraint);

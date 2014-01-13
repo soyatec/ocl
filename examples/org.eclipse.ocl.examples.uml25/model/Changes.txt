@@ -3,3 +3,5 @@ a) The OMG issue
 b) many result.is(1, 1) => result.is(1, 1.oclAsType(UnlimitedNatural))
 
 c) many constraints have no leading result=
+
+d) TypeElement/TypedElement typo

@@ -14,7 +14,11 @@
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
@@ -43,7 +47,41 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 	public abstract void error(@NonNull String message);
 
 	public @Nullable String getOriginalName(ENamedElement eNamedElement) {
-		return eNamedElement != null ? UML_4_2.UMLUtil.getOriginalName(eNamedElement) : null;
+		if (eNamedElement == null) {
+			return null;
+		}
+		EAnnotation eAnnotation = eNamedElement.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+		if (eAnnotation != null) {
+			EObject eContainer = eNamedElement.eContainer();
+			if (eContainer instanceof EAnnotation) {   // duplicates ... redefines
+				List<EObject> eReferences = eAnnotation.getReferences();
+				if ((eReferences != null) && (eReferences.size() > 0)) {
+					EObject eObject = eReferences.get(0);
+					if (eObject instanceof ENamedElement) {
+						String originalName = getOriginalName((ENamedElement) eObject);
+						System.out.println(eObject + " ===> " + originalName);
+						return originalName;
+					}
+				}
+			}
+			else if (eContainer instanceof EClassifier) {
+				String prefix = ((EClassifier)eContainer).getName() + "_";		// FIXME Bug 405061 workaround
+				String originalName = UML_4_2.UMLUtil.getOriginalName(eNamedElement);
+				if (originalName.startsWith(prefix)) {
+					originalName = originalName.substring(prefix.length());
+				}
+				System.out.println(eNamedElement + " ==> " + originalName);
+				return originalName;
+			}
+			else {
+				String originalName = UML_4_2.UMLUtil.getOriginalName(eNamedElement);
+				System.out.println(eNamedElement + " ==> " + originalName);
+				return originalName;
+			}
+		}
+		String originalName = UML_4_2.UMLUtil.getOriginalName(eNamedElement);
+//		System.out.println(eNamedElement + " => " + originalName);
+		return originalName;
 	}
 
 	public abstract void queueReference(@NonNull EObject eObject);

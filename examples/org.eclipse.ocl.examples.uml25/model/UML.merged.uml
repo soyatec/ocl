@@ -6561,7 +6561,7 @@ implies (templateParameterSubstitution->forAll(ts |&#xD;
         <ownedRule xmi:id="_3_c8cDRAEeOwrbY5tZBAMQ" name="spec" constrainedElement="_3_c8bjRAEeOwrbY5tZBAMQ">
           <specification xmi:type="uml:OpaqueExpression" xmi:id="_3_c8cTRAEeOwrbY5tZBAMQ">
             <language>OCL</language>
-            <body>result = (self.oclIsKindOf(p.oclType()) and (p.oclIsKindOf(TypeElement) implies&#xD;
+            <body>result = (self.oclIsKindOf(p.oclType()) and (p.oclIsKindOf(TypedElement) implies&#xD;
 self.type.conformsTo(p.oclAsType(TypedElement).type)))</body>
           </specification>
         </ownedRule>

@@ -20,20 +20,28 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -45,11 +53,13 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.MessageBinder;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
+import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -168,16 +178,16 @@ public class RoundTripTests extends XtextTestCase
 	}
 	
 	public void doRoundTripFromEcore(String stem) throws IOException, InterruptedException {
-		doRoundTripFromEcore(stem, stem);
+		doRoundTripFromEcore(stem, stem, null);
 	}
-	public void doRoundTripFromEcore(String stem, String reference) throws IOException, InterruptedException {
+	public void doRoundTripFromEcore(String stem, String reference, Map<String,Object> saveOptions) throws IOException, InterruptedException {
 		String inputName = stem + ".ecore";
 		URI inputURI = getProjectFileURI(inputName);
 		String referenceName = reference + ".ecore";
 		URI referenceURI = getProjectFileURI(referenceName);
-		doRoundTripFromEcore(inputURI, referenceURI);
+		doRoundTripFromEcore(inputURI, referenceURI, saveOptions);
 	}
-	protected void doRoundTripFromEcore(URI inputURI, URI referenceURI) throws IOException, InterruptedException {
+	protected void doRoundTripFromEcore(URI inputURI, URI referenceURI, Map<String,Object> saveOptions) throws IOException, InterruptedException {
 		String stem = inputURI.trimFileExtension().lastSegment();
 		String pivotName = stem + ".ecore.oclas";
 		String outputName = stem + ".regenerated.ecore";
@@ -197,8 +207,22 @@ public class RoundTripTests extends XtextTestCase
 			assertNoResourceErrors("Ecore2Pivot failed", asResource);
 			asResource.save(null);
 			assertNoValidationErrors("Ecore2Pivot invalid", asResource);
+			int i = 0;
+			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof OpaqueExpression) {
+					EObject eContainer = eObject.eContainer();
+					System.out.println(++i + ": " + eObject);
+					ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL((NamedElement)eContainer, (OpaqueExpression) eObject);
+					if (expressionInOCL != null) {
+						EcoreUtil.replace(eContainer, eObject.eContainmentFeature(), eObject, expressionInOCL);
+					}
+					tit.prune();
+				}
+			}
 			
-			Resource outputResource = Pivot2Ecore.createResource(metaModelManager, asResource, inputURI, null);
+			
+			Resource outputResource = Pivot2Ecore.createResource(metaModelManager, asResource, inputURI, saveOptions);
 			assertNoResourceErrors("Ecore2Pivot failed", outputResource);
 			OutputStream outputStream = resourceSet.getURIConverter().createOutputStream(outputURI);
 			outputResource.save(outputStream, null);
@@ -465,7 +489,7 @@ public class RoundTripTests extends XtextTestCase
 	}
 
 	public void testCompanyRoundTrip() throws IOException, InterruptedException {
-		doRoundTripFromEcore("Company", "Company.reference");
+		doRoundTripFromEcore("Company", "Company.reference", null);
 	}
 
 	public void testEcoreRoundTrip() throws IOException, InterruptedException {
@@ -505,12 +529,12 @@ public class RoundTripTests extends XtextTestCase
 	public void testOCLinEcoreCSTRoundTrip() throws IOException, InterruptedException {
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCS.ecore", true);
 //		String stem = uri.trimFileExtension().lastSegment();
-		doRoundTripFromEcore(uri, uri); //null);				// FIXME Compare is not quite right
+		doRoundTripFromEcore(uri, uri, null); //null);				// FIXME Compare is not quite right
 	}
 
 	public void testPivotRoundTrip() throws IOException, InterruptedException {
 		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.pivot/model/Pivot.ecore", true);
-		doRoundTripFromEcore(uri, uri);
+		doRoundTripFromEcore(uri, uri, null);
 	}
 
 //	public void testEssentialOCLCSTRoundTrip() throws IOException, InterruptedException {
@@ -539,6 +563,16 @@ public class RoundTripTests extends XtextTestCase
 	public void testQVTRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("QVT");
 	} */
+
+	public void testUML25RoundTrip() throws IOException, InterruptedException {
+		EssentialOCLLinkingService.DEBUG_RETRY = true;
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.uml25/model/UML.ecore", true);
+		Map<String,Object> options = new HashMap<String, Object>();
+		options.put(Pivot2Ecore.OPTION_ADD_INVARIANT_COMMENTS, true);
+		options.put(Pivot2Ecore.OPTION_BOOLEAN_INVARIANTS, true);
+		options.put(OCLConstants.OCL_DELEGATE_URI, OCLConstants.OCL_DELEGATE_URI);
+		doRoundTripFromEcore(uri, uri, options);
+	}
 
 	public void testSysMLRoundTrip() throws IOException, InterruptedException {
 		String testFile = 

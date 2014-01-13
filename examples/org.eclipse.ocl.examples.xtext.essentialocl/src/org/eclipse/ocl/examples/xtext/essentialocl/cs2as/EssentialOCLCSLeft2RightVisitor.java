@@ -320,6 +320,11 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 			return Collections.singletonList((NamedElement)asElement);
 		}
 		String name = ElementUtil.getText(csLastPathElement);
+		int length = name.length();
+		if ((length >= 3) && name.startsWith("_'") && name.endsWith("'")) {
+			name = name.substring(2, length-1);
+		}
+
 		if (name == null) {
 			return null;
 		}
@@ -334,7 +339,7 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 			}
 		}
 		if (pathSize > 1) {											// Search for B::b() or a.B::b() candidates in B
-			Element asScope = csPathElements.get(pathSize - 1).getElement();
+			Element asScope = csPathElements.get(pathSize - 2).getElement();
 			if (!(asScope instanceof Type)) {
 				return null;
 			}

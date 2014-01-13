@@ -23,11 +23,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
@@ -36,6 +38,7 @@ import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
@@ -46,6 +49,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -140,7 +144,7 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 			@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
 	//		Operation pivotElement = converter.getCreated(Operation.class, eObject2);
 			if (pivotElement != null) {
-				EAnnotation redefinesAnnotation = eObject2.getEAnnotation("redefines");
+				EAnnotation redefinesAnnotation = eObject2.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
 				if (redefinesAnnotation != null) {
 					for (EObject eReference : redefinesAnnotation.getReferences()) {
 						if (eReference != null) {
@@ -224,7 +228,30 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 							if (remoteType instanceof CollectionType) {
 								remoteType = ((CollectionType)remoteType).getElementType();
 							}
-							oppositeProperty.setType(localType);
+							String uniqueValue = details.get("unique");
+							String orderedValue = details.get("ordered");
+							String lowerValue = details.get("lower");
+							String upperValue = details.get("upper");
+							boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : false;
+							boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : true;
+							IntegerValue lower = lowerValue != null ? ValuesUtil.integerValueOf(lowerValue) :  ValuesUtil.ZERO_VALUE;
+							if (lower.isInvalid()) {
+								logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
+								lower = ValuesUtil.ZERO_VALUE;
+							}
+							IntegerValue upper = upperValue != null ? ValuesUtil.integerValueOf(upperValue) : ValuesUtil.UNLIMITED_VALUE;
+							if (upper.isInvalid()) {
+								logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
+								upper = ValuesUtil.UNLIMITED_VALUE;
+							}
+							if (!upper.equals(ValuesUtil.ONE_VALUE)) {
+								oppositeProperty.setType(metaModelManager.getCollectionType(isOrdered, isUnique, localType, lower, upper));
+								oppositeProperty.setIsRequired(true);
+							}
+							else {
+								oppositeProperty.setType(localType);
+								oppositeProperty.setIsRequired(lower.equals(ValuesUtil.ONE_VALUE));
+							}
 							remoteType.getOwnedAttribute().add(oppositeProperty);
 							oppositeProperty.setOpposite(pivotElement);
 						}
@@ -246,13 +273,114 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null")@NonNull EStructuralFeature eObject2 = eObject;
 		Property pivotElement = (Property) caseETypedElement(eObject2);
 		if (pivotElement != null) {
-			EAnnotation redefinesAnnotation = eObject2.getEAnnotation("redefines");
+			EAnnotation redefinesAnnotation = eObject2.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
 			if (redefinesAnnotation != null) {
 				for (EObject eReference : redefinesAnnotation.getReferences()) {
 					if (eReference != null) {
 						Property redefinedProperty = converter.getCreated(Property.class, eReference);
 						pivotElement.getRedefinedProperty().add(redefinedProperty);
 					}
+				}
+			}
+			EObject eContainer = eObject2.eContainer();
+			if (eContainer instanceof EAnnotation) {
+				EAnnotation duplicatesAnnotation = (EAnnotation) eContainer;
+				if (PivotConstants.DUPLICATES_ANNOTATION_SOURCE.equals(duplicatesAnnotation.getSource())) {
+					EAnnotation eAnnotation = duplicatesAnnotation.getEAnnotation(eObject.getName());
+					if (eAnnotation != null) {
+						String newLowerBound = null;
+						Boolean newOrdered = null;
+						Boolean newUnique = null;
+						String newUpperBound = null;
+						Type newType = null;
+						boolean changedType = false;
+						EMap<String, String> details = eAnnotation.getDetails();
+						for (String key : details.keySet()) {
+							Object value = details.get(key);
+							if (value != null) {
+								if ("lowerBound".equals(key)) {
+									newLowerBound = value.toString();
+									changedType = true;
+								}
+								else if ("ordered".equals(key)) {
+									newOrdered = Boolean.valueOf(value.toString());
+									changedType = true;
+								}
+								else  if ("unique".equals(key)) {
+									newUnique = Boolean.valueOf(value.toString());
+									changedType = true;
+								}
+								else if ("upperBound".equals(key)) {
+									newUpperBound = value.toString();
+									changedType = true;
+								}
+								else if ("eType".equals(key)) {
+									String[] path = value.toString().split("::");
+									EObject eRoot = EcoreUtil.getRootContainer(eObject);
+									int iSize = path.length;
+									if ((iSize >= 2) && (eRoot instanceof EPackage)) {
+										EPackage ePackage = (EPackage)eRoot;
+										if (path[0].equals(ePackage.getName())) {
+											for (int i = 1; (ePackage != null) && (i < iSize-1); i++) {
+												ePackage = EcoreUtils.getNamedElement(ePackage.getESubpackages(), path[i]);
+											}
+											if (ePackage != null) {
+												EClassifier eClassifier = EcoreUtils.getNamedElement(ePackage.getEClassifiers(), path[iSize-1]);
+												if (eClassifier != null) {
+													newType = converter.getPivotType(eClassifier);
+													changedType = true;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						if (changedType) {
+							IntegerValue oldLowerValue;
+							boolean oldOrdered;
+							boolean oldUnique;
+							IntegerValue oldUpperValue;
+							Type oldType = pivotElement.getType();
+							if (oldType instanceof CollectionType) {
+								CollectionType oldCollectionType = (CollectionType)oldType;
+								oldType = oldCollectionType.getElementType();
+								oldLowerValue = oldCollectionType.getLowerValue();
+								oldOrdered = oldCollectionType.isOrdered();
+								oldUnique = oldCollectionType.isUnique();
+								oldUpperValue = oldCollectionType.getUpperValue();
+							}
+							else {
+								oldLowerValue = pivotElement.isRequired() ? ValuesUtil.ONE_VALUE : ValuesUtil.ZERO_VALUE;
+								oldOrdered = false;
+								oldUnique = false;
+								oldUpperValue = ValuesUtil.ONE_VALUE;
+							}
+							boolean isOrdered = newOrdered != null ? newOrdered.booleanValue() : oldOrdered;
+							IntegerValue lowerValue = newLowerBound != null ? ValuesUtil.integerValueOf(newLowerBound) : oldLowerValue;
+							boolean isUnique = newUnique != null ? newUnique.booleanValue() : oldUnique;
+							IntegerValue upperValue = newUpperBound != null ? ValuesUtil.integerValueOf(newUpperBound) : oldUpperValue;
+							Type type = newType != null ? newType : oldType;
+							boolean isRequired;
+							Type pivotType;
+							if (type != null) {
+								pivotType = type;
+								if (upperValue.equals(ValuesUtil.ONE_VALUE)) {
+									isRequired = lowerValue.equals(ValuesUtil.ONE_VALUE);
+								}
+								else {
+									isRequired = true;
+									pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
+								}
+							}
+							else {
+								isRequired = false;
+								pivotType = metaModelManager.getOclVoidType();
+							}
+							pivotElement.setType(pivotType);
+							pivotElement.setIsRequired(isRequired);
+						}
+					}	
 				}
 			}
 		}
@@ -264,10 +392,11 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null") @NonNull ETypedElement eObject2 = eObject;
 		TypedElement pivotElement = converter.getCreated(TypedElement.class, eObject2);
 		if (pivotElement != null) {
-			boolean isRequired = false;
+			boolean isRequired;
+			Type pivotType;
 			EGenericType eType = eObject2.getEGenericType();
 			if (eType != null) {
-				Type pivotType = converter.getPivotType(eType);
+				pivotType = converter.getPivotType(eType);
 				int lower = eObject.getLowerBound();
 				int upper = eObject.getUpperBound();
 				if (upper == 1) {
@@ -283,17 +412,12 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 					}
 				}
-				if (upper == 1) {
-					isRequired = lower == 1;
-				}
-				else {
-					isRequired = true;
-				}
-				pivotElement.setType(pivotType);
 			}
 			else {
-				pivotElement.setType(metaModelManager.getOclVoidType());
+				isRequired = false;
+				pivotType = metaModelManager.getOclVoidType();
 			}
+			pivotElement.setType(pivotType);
 			pivotElement.setIsRequired(isRequired);
 		}
 		return pivotElement;

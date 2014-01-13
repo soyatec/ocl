@@ -89,7 +89,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	@Override
 	public Object caseAssociation(org.eclipse.uml2.uml.Association umlAssociation) {
 		assert umlAssociation != null;
-//		System.out.println("Association " + umlAssociation.getName());
+		System.out.println("Association " + umlAssociation.getName());
 		@SuppressWarnings("null") @NonNull List<org.eclipse.uml2.uml.Property> memberEnds = umlAssociation.getMemberEnds();
 //		boolean isSubsetted = false;
 		boolean isUnnamed = false;

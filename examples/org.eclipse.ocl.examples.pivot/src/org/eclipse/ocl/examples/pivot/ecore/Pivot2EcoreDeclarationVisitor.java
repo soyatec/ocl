@@ -143,6 +143,18 @@ public class Pivot2EcoreDeclarationVisitor
 		delegateInstaller.installDelegates(eClassifier, pivotType);
 	}
 
+	protected @Nullable EAnnotation copyConstraint(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint) {
+		EAnnotation eAnnotation = delegateInstaller.createConstraintDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
+		if (eAnnotation != null) {
+			if (eModelElement instanceof EOperation) {
+				Pivot2Ecore.copyAnnotationComments(eAnnotation, pivotConstraint);
+			}
+			else {
+				Pivot2Ecore.copyComments(eAnnotation, pivotConstraint);
+			}
+		}
+		return eAnnotation;
+	}
 
 	protected void copyDataTypeOrEnum(@NonNull EDataType eDataType, @NonNull DataType pivotDataType) {
 		copyClassifier(eDataType, pivotDataType);
@@ -216,9 +228,6 @@ public class Pivot2EcoreDeclarationVisitor
 
 	@Override
 	public EObject visitClass(@NonNull Class pivotClass) {
-		if ("DynamicType".equals(pivotClass.getName())) {
-			System.out.println("Got it");
-		}
 		if (pivotClass.getTemplateBinding().size() > 0) {
 			return null;
 		}
@@ -236,10 +245,10 @@ public class Pivot2EcoreDeclarationVisitor
 		safeVisitAll(eStructuralFeatures, nonDuplicateProperties);
 		for (Constraint pivotInvariant : pivotClass.getOwnedInvariant()) {
 			if (pivotInvariant.isCallable()) {
-				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName(), context.isAddInvariantComments());
+				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName(), context.getOptions());
 				eOperations.add(eOperation);
 				context.putCreated(pivotInvariant, eOperation);
-				copyConstraint(eOperation, pivotInvariant);
+//				copyConstraint(eOperation, pivotInvariant);
 			}
 		}
 		List<ETypedElement> eDuplicates = null;
@@ -283,19 +292,6 @@ public class Pivot2EcoreDeclarationVisitor
 			}
 		}
 		return null;
-	}
-
-	protected @Nullable EAnnotation copyConstraint(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint) {
-		EAnnotation eAnnotation = delegateInstaller.createConstraintDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
-		if (eAnnotation != null) {
-			if (eModelElement instanceof EOperation) {
-				Pivot2Ecore.copyAnnotationComments(eAnnotation, pivotConstraint);
-			}
-			else {
-				Pivot2Ecore.copyComments(eAnnotation, pivotConstraint);
-			}
-		}
-		return eAnnotation;
 	}
 
 	@Override

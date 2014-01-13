@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 import org.eclipse.uml2.uml.resource.XMI2UMLResource
 
 var projectName = "org.eclipse.ocl.examples.uml25"
+var ecoreSlot = "ecore"
 
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package
@@ -36,6 +37,40 @@ Workflow {
     bean = OCLStandaloneSetup {}
 //    bean = GenModelSetup { resourceSet = resourceSet }
     bean = UML25GenModelSetup { resourceSet = resourceSet }
+
+    component = GenmodelReloader { resourceSet = resourceSet skipOnErrors = true
+    	projectName = "${projectName}"
+    	modelSlot = "${ecoreSlot}"
+    	genModel = "/${projectName}/model/UML.genmodel"
+    	ecoreFile = "/${projectName}/model/UML.ecore"
+//    	modelImporter = "org.eclipse.uml2.uml.ecore.importer.UMLImporter"
+//    	modelImporter = "org.eclipse.ocl.examples.build.utilities.UMLImporterWithDelegates"	
+    }
+    
+    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    	uri = "/${projectName}/model/UML.ecore"
+    }
+//    component = ConstraintMerger { resourceSet = resourceSet skipOnErrors = true
+//    	projectName = "${projectName}"
+//    	modelSlot = "${ecoreSlot}"
+//    	uri = "model/Pivot.ocl"
+//    }
+    component = EPackageAlphabetizer { skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    }
+//    component = PruneSuperClasses { skipOnErrors = true
+//    	modelSlot = "${ecoreSlot}"
+//    }
+//    component = SetASMetamodel { skipOnErrors = true
+//    	modelSlot = "${ecoreSlot}"
+//    }
+//    component = OCLDelegateActivator { skipOnErrors = true
+//    	modelSlot = "${pivotSlot}"
+//    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    }
 
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 //    	projectName = "${projectName}"

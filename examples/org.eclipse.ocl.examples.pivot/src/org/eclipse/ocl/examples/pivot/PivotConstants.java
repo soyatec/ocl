@@ -75,7 +75,7 @@ public interface PivotConstants
 	 * Ecore encoding of a UML redefines
 	 */
 	static final @NonNull String DUPLICATES_ANNOTATION_SOURCE = "duplicates"; // UMLUtil.ANNOTATION__DUPLICATES
-//	static final @NonNull String REDEFINES_ANNOTATION_SOURCE = "redefines"; // UMLUtil.ANNOTATION__REDEFINES
+	static final @NonNull String REDEFINES_ANNOTATION_SOURCE = "redefines"; // UMLUtil.ANNOTATION__REDEFINES
 //	static final @NonNull String SUBSETS_ANNOTATION_SOURCE = "subsets"; // UMLUtil.ANNOTATION__SUBSETS
 //	static final @NonNull String UNION_ANNOTATION_SOURCE = "union"; // UMLUtil.ANNOTATION__UNION
 
