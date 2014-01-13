@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.pivot.utilities;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -72,12 +74,15 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 	public static final @NonNull String FRAGMENT_SEPARATOR = "#"; //$NON-NLS-1$
 	
 	public static final @NonNull String ACCUMULATOR_PREFIX = "a"; //$NON-NLS-1$
-	public static final @NonNull String CONSTRAINT_PREFIX = "c"; //$NON-NLS-1$
+	public static final @NonNull String BODYCONDITION_PREFIX = "c="; //$NON-NLS-1$
+	public static final @NonNull String INVARIANT_PREFIX = "ci"; //$NON-NLS-1$
 	public static final @NonNull String ITERATION_PREFIX = "i."; //$NON-NLS-1$
 	public static final @NonNull String ITERATOR_PREFIX = "i"; //$NON-NLS-1$
 	public static final @NonNull String OPERATION_PREFIX = "o."; //$NON-NLS-1$
 	public static final @NonNull String PARAMETER_PREFIX = "p"; //$NON-NLS-1$
 	public static final @NonNull String PACKAGE_PREFIX = "P."; //$NON-NLS-1$
+	public static final @NonNull String POSTCONDITION_PREFIX = "c+"; //$NON-NLS-1$
+	public static final @NonNull String PRECONDITION_PREFIX = "c-"; //$NON-NLS-1$
 	public static final @NonNull String PRECEDENCE_PREFIX = "Z."; //$NON-NLS-1$
 	public static final @NonNull String PROPERTY_PREFIX = "p."; //$NON-NLS-1$
 	public static final @NonNull String TEMPLATE_PARAMETER_PREFIX = "t."; //$NON-NLS-1$
@@ -233,15 +238,25 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 	@Override
 	public @Nullable Boolean visitConstraint(@NonNull Constraint object) {
 		String name = object.getName();
-		if (name != null) {
-			s.append(CONSTRAINT_PREFIX);
+		if ((name != null) && !"".equals(name)) {
+			EReference eContainmentFeature = object.eContainmentFeature();
+			if (eContainmentFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
+				s.append(PRECONDITION_PREFIX);
+			}
+			else if (eContainmentFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
+				s.append(BODYCONDITION_PREFIX);
+			}
+			else if (eContainmentFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
+				s.append(POSTCONDITION_PREFIX);
+			}
+			else {
+				s.append(INVARIANT_PREFIX);
+			}
 			appendParent(object);
 			appendName(name);
 			return true;
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 
