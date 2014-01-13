@@ -37,6 +37,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -254,23 +255,33 @@ public class XtextTestCase extends PivotTestCase
 	public static class ETypedElementNormalizer implements Normalizer
 	{
 		protected final @NonNull ETypedElement eTypedElement;
+		protected final EClassifier wasType;
+		protected final int wasLower;
 		protected final boolean wasOrdered;
 		protected final boolean wasUnique;
 		
 		public ETypedElementNormalizer(@NonNull ETypedElement eTypedElement) {
 			this.eTypedElement = eTypedElement;
+			this.wasType = eTypedElement.getEType();
+			this.wasLower = eTypedElement.getLowerBound();
 			this.wasOrdered = eTypedElement.isOrdered();
 			this.wasUnique = eTypedElement.isUnique();
 		}
 		
 		@Override
 		public void denormalize() {
+			if (wasType == null) {
+				eTypedElement.setLowerBound(wasLower);
+			}
 			eTypedElement.setOrdered(wasOrdered);
 			eTypedElement.setUnique(wasUnique);
 		}
 		
 		@Override
 		public void normalize() {
+			if (wasType == null) {
+				eTypedElement.setLowerBound(0);
+			}
 			eTypedElement.setOrdered(true);
 			eTypedElement.setUnique(true);
 		}
@@ -288,9 +299,7 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
-		System.out.println("============================" + expectedResource.getURI());
 		List<Normalizer> expectedNormalizations = normalize(expectedResource);
-		System.out.println("============================" + actualResource.getURI());
 		List<Normalizer> actualNormalizations = normalize(actualResource);
 		String expected = EmfFormatter.listToStr(expectedResource.getContents());
 		String actual = EmfFormatter.listToStr(actualResource.getContents());
@@ -535,34 +544,13 @@ public class XtextTestCase extends PivotTestCase
 			}
 			if (eObject instanceof EClass) {
 				EClass eClass = (EClass) eObject;
-//				if ("ActivityEdge".equals(eClass.getName())) {
-//					System.out.println("Got it " + eClass.getName() + " " + DomainUtil.debugSimpleName(eClass));
-//				}
 				if (eClass.getEOperations().size() >= 2) {
 					normalizers.add(new EOperationsNormalizer(eClass));		// FIXME Until Pivot2Ecore has consistent ops/inv ordering
 				}
 			}
-/*			if (eObject instanceof ENamedElement) {
-				ENamedElement eNamedElement = (ENamedElement) eObject;
-				if ("isConsistentWith".equals(eNamedElement.getName())) {
-					EObject eContainer = eNamedElement.eContainer();
-					for (; eContainer != null; eContainer = eContainer.eContainer()) {
-						if (eContainer instanceof ENamedElement) {
-							break;
-						}
-					}
-					System.out.println("Got it " + ((ENamedElement)eContainer).getName() + "::" + eNamedElement.getName() + " " + DomainUtil.debugSimpleName(eNamedElement));
-				}
-				normalizers.add(new ENamedElementNormalizer(eNamedElement));
-			} */
 			if (eObject instanceof EModelElement) {
 				EModelElement eModelElement = (EModelElement) eObject;
 				if (eModelElement.getEAnnotations().size() >= 2) {
-//					if (eModelElement instanceof EOperation) {
-//						if ("isConsistentWith".equals(((EOperation)eModelElement).getName())) {
-//							System.out.println("Got it");
-//						}
-//					}
 					normalizers.add(new EAnnotationsNormalizer(eModelElement));
 				}
 			}

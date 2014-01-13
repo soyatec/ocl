@@ -188,8 +188,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					else {
 						Operation pivotOperation = (Operation) doSwitch(eContent);
 						pivotOperations.add(pivotOperation);
-						converter.queueReference(eContent);				// For redefinition
 					}
+					converter.queueReference(eContent);				// For redefinition
 				}
 				else if (eContent instanceof EStructuralFeature) {
 					Property pivotProperty = (Property) doSwitch(eContent);

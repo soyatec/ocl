@@ -44,6 +44,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -139,10 +140,26 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEOperation(EOperation eObject) {
-		if (!EcoreUtil.isInvariant(eObject)) {
-			Operation pivotElement = (Operation) caseETypedElement(eObject);
-			@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
-	//		Operation pivotElement = converter.getCreated(Operation.class, eObject2);
+		@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
+		if (EcoreUtil.isInvariant(eObject)) {
+			Constraint pivotElement = converter.getCreated(Constraint.class, eObject2);
+			if (pivotElement != null) {
+				EAnnotation redefinesAnnotation = eObject2.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+				if (redefinesAnnotation != null) {
+					for (EObject eReference : redefinesAnnotation.getReferences()) {
+						if (eReference != null) {
+							NamedElement redefinedConstraint = converter.getCreated(NamedElement.class, eReference);
+							if (redefinedConstraint instanceof Constraint) {
+								pivotElement.getRedefinedConstraint().add((Constraint)redefinedConstraint);
+							}
+						}
+					}
+				}
+			}
+			return pivotElement;
+		}
+		else {
+			Operation pivotElement = (Operation) caseETypedElement(eObject2);
 			if (pivotElement != null) {
 				EAnnotation redefinesAnnotation = eObject2.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
 				if (redefinesAnnotation != null) {
@@ -157,8 +174,8 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 				}
 				doSwitchAll(Type.class, pivotElement.getRaisedException(), eObject2.getEGenericExceptions());
 			}
+			return pivotElement;
 		}
-		return null;
 	}
 
 	@Override

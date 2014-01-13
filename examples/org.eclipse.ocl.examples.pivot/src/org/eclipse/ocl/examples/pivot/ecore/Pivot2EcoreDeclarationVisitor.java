@@ -86,10 +86,25 @@ import com.google.common.collect.Iterables;
 public class Pivot2EcoreDeclarationVisitor
 	extends AbstractExtendingVisitor<Object, Pivot2Ecore>
 {
+	public static final @NonNull DuplicateConstraintsFilter duplicateConstraintsFilter = new DuplicateConstraintsFilter();
 	public static final @NonNull DuplicateOperationsFilter duplicateOperationsFilter = new DuplicateOperationsFilter();
 	public static final @NonNull DuplicatePropertiesFilter duplicatePropertiesFilter = new DuplicatePropertiesFilter();
+	public static final @NonNull NonDuplicateConstraintsFilter nonDuplicateConstraintsFilter = new NonDuplicateConstraintsFilter();
 	public static final @NonNull NonDuplicateOperationsFilter nonDuplicateOperationsFilter = new NonDuplicateOperationsFilter();
 	public static final @NonNull NonDuplicatePropertiesFilter nonDuplicatePropertiesFilter = new NonDuplicatePropertiesFilter();
+
+	protected static class DuplicateConstraintsFilter implements Predicate<Constraint>
+	{
+		public boolean apply(@Nullable Constraint aConstraint) {
+			if (aConstraint == null) {
+				return false;
+			}
+			if (aConstraint.getRedefinedConstraint().size() == 0) {
+				return false;
+			}
+			return true;
+		}
+	}
 
 	protected static class DuplicateOperationsFilter implements Predicate<Operation>
 	{
@@ -118,6 +133,19 @@ public class Pivot2EcoreDeclarationVisitor
 				return false;
 			}
 			return DomainUtil.safeEquals(aProperty.getName(), aProperty.getRedefinedProperty().get(0).getName());
+		}
+	}
+
+	protected static class NonDuplicateConstraintsFilter implements Predicate<Constraint>
+	{
+		public boolean apply(@Nullable Constraint aConstraint) {
+			if (aConstraint == null) {
+				return false;
+			}
+			if (aConstraint.getRedefinedConstraint().size() == 0) {
+				return true;
+			}
+			return false;
 		}
 	}
 
@@ -362,21 +390,38 @@ public class Pivot2EcoreDeclarationVisitor
 		eClass.setInterface(pivotClass.isInterface());
 		context.defer(pivotClass);		// Defer superclass resolution
 		@SuppressWarnings("null")@NonNull List<EOperation> eOperations = eClass.getEOperations();
+		@SuppressWarnings("null")@NonNull Iterable<Constraint> nonDuplicateConstraints = Iterables.filter(pivotClass.getOwnedInvariant(), nonDuplicateConstraintsFilter);
+//		safeVisitAll(eOperations, nonDuplicateConstraints);
 		@SuppressWarnings("null")@NonNull Iterable<Operation> nonDuplicateOperations = Iterables.filter(pivotClass.getOwnedOperation(), nonDuplicateOperationsFilter);
 		safeVisitAll(eOperations, nonDuplicateOperations);
 		@SuppressWarnings("null")@NonNull List<EStructuralFeature> eStructuralFeatures = eClass.getEStructuralFeatures();
 		@SuppressWarnings("null")@NonNull Iterable<Property> nonDuplicateProperties = Iterables.filter(pivotClass.getOwnedAttribute(), nonDuplicatePropertiesFilter);
 		safeVisitAll(eStructuralFeatures, nonDuplicateProperties);
-		for (Constraint pivotInvariant : pivotClass.getOwnedInvariant()) {
+		for (Constraint pivotInvariant : nonDuplicateConstraints) {
 			if (pivotInvariant.isCallable()) {
 				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName(), context.getOptions());
 				eOperations.add(eOperation);
 				context.putCreated(pivotInvariant, eOperation);
-//				copyConstraint(eOperation, pivotInvariant);
+				copyConstraint(eOperation, pivotInvariant);
 			}
 		}
 		if (!context.isSuppressDuplicates()) {
 			List<ETypedElement> eDuplicates = null;
+			@SuppressWarnings("null")@NonNull Iterable<Constraint> duplicateConstraints = Iterables.filter(pivotClass.getOwnedInvariant(), duplicateConstraintsFilter);
+			for (Constraint asConstraint : duplicateConstraints) {
+				if (eDuplicates == null) {
+					eDuplicates = new ArrayList<ETypedElement>();
+				}
+//				Object eOperation = safeVisit(asConstraint);
+				if (asConstraint.isCallable()) {
+					EOperation eOperation = Pivot2Ecore.createConstraintEOperation(asConstraint, asConstraint.getName(), context.getOptions());
+					eOperations.add(eOperation);
+					context.putCreated(asConstraint, eOperation);
+					copyConstraint(eOperation, asConstraint);
+					eDuplicates.add(eOperation);
+					context.defer(asConstraint);		// Defer references
+				}
+			}
 			@SuppressWarnings("null")@NonNull Iterable<Operation> duplicateOperations = Iterables.filter(pivotClass.getOwnedOperation(), duplicateOperationsFilter);
 			for (Operation asOperation : duplicateOperations) {
 				if (eDuplicates == null) {

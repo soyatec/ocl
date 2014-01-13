@@ -549,7 +549,9 @@ public class RoundTripTests extends XtextTestCase
 	}
 
 	public void testOCLRoundTrip() throws IOException, InterruptedException {
-		doRoundTripFromEcore("OCL"); // "OCL.reference"); 
+		Map<String,Object> options = new HashMap<String, Object>();
+		options.put(Pivot2Ecore.OPTION_ADD_INVARIANT_COMMENTS, true);
+		doRoundTripFromEcore("OCL", "OCL", options); // "OCL.reference"); 
 	}
 
 	public void testOCLCSTRoundTrip() throws IOException, InterruptedException {

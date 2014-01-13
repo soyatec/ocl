@@ -1406,7 +1406,7 @@
         </ownedTemplateSignature>
         <ownedParameter xmi:id="p0o.ocl.OclAny.oclAsType..$$.Metaclass" name="type"
             type="#//@nestedPackage.1/@ownedType.88"/>
-        <postcondition name="IsSelf">
+        <postcondition xmi:id="cocl.OclAny.oclAsType.IsSelf" name="IsSelf">
           <specification xsi:type="pivot:ExpressionInOCL" type="#Boolean">
             <body>result = self</body>
             <language>OCL</language>
@@ -1422,7 +1422,7 @@
             <resultVariable name="result" type="#T.ocl.OclAny..oclAsTypeTT"/>
           </specification>
         </postcondition>
-        <postcondition name="IsType">
+        <postcondition xmi:id="cocl.OclAny.oclAsType.IsType" name="IsType">
           <specification xsi:type="pivot:ExpressionInOCL" type="#Boolean">
             <body>result.oclIsKindOf(type)</body>
             <language>OCL</language>
@@ -2044,7 +2044,7 @@
         <ownedComment body="The sequence consisting of object, followed by all elements in oclText[self].&#xA;"/>
         <ownedParameter xmi:id="p0o.ocl.OrderedSet.prepend..T" name="object" isRequired="false"
             type="#T.ocl..OrderedSetT"/>
-        <postcondition name="IsSizePlusOne">
+        <postcondition xmi:id="cocl.OrderedSet.prepend.IsSizePlusOne" name="IsSizePlusOne">
           <specification xsi:type="pivot:ExpressionInOCL" type="#Boolean">
             <body>result->size() = self->size() + 1</body>
             <language>OCL</language>
@@ -2067,7 +2067,7 @@
             <resultVariable name="result" type="#OrderedSet"/>
           </specification>
         </postcondition>
-        <postcondition name="IsAtStart">
+        <postcondition xmi:id="cocl.OrderedSet.prepend.IsAtStart" name="IsAtStart">
           <specification xsi:type="pivot:ExpressionInOCL" type="#Boolean">
             <body>result->at(1) = object</body>
             <language>OCL</language>
@@ -2086,7 +2086,7 @@
             <resultVariable name="result" type="#OrderedSet"/>
           </specification>
         </postcondition>
-        <postcondition name="IsShiftedAlong">
+        <postcondition xmi:id="cocl.OrderedSet.prepend.IsShiftedAlong" name="IsShiftedAlong">
           <specification xsi:type="pivot:ExpressionInOCL" isRequired="false" type="#Boolean">
             <body>Sequence{1..self->size()}->forAll(index : Integer | self->at(index) = result->at(index + 1))</body>
             <language>OCL</language>

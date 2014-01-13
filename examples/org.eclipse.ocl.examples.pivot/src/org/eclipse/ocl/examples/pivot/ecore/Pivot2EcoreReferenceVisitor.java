@@ -44,6 +44,7 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -304,6 +305,26 @@ public class Pivot2EcoreReferenceVisitor extends AbstractExtendingVisitor<EObjec
 		EClass eClass = context.getCreated(EClass.class, pivotClass);
 		safeVisitAll(EClass.class, eClass.getEGenericSuperTypes(), eClass.getESuperTypes(), pivotClass.getSuperClass());
 		return eClass;
+	}
+
+	@Override
+	public EObject visitConstraint(@NonNull Constraint pivotConstraint) {
+		EOperation eOperation = context.getCreated(EOperation.class, pivotConstraint);
+		EAnnotation eRedefinesAnnotation = null;
+		for (@SuppressWarnings("null")@NonNull Constraint redefinedConstraint : pivotConstraint.getRedefinedConstraint()) {
+			EOperation eRedefined = context.getCreated(EOperation.class, redefinedConstraint);
+			if (eRedefined != null) {
+				if (eRedefinesAnnotation == null) {
+					eRedefinesAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+					eRedefinesAnnotation.setSource(PivotConstants.REDEFINES_ANNOTATION_SOURCE);
+				}
+				eRedefinesAnnotation.getReferences().add(eRedefined);
+			}
+		}
+		if (eRedefinesAnnotation != null) {
+			eOperation.getEAnnotations().add(eRedefinesAnnotation);
+		}
+		return eOperation;
 	}
 
 	@Override

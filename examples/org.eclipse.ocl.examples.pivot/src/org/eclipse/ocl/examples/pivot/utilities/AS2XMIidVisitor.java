@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -71,6 +72,7 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 	public static final @NonNull String FRAGMENT_SEPARATOR = "#"; //$NON-NLS-1$
 	
 	public static final @NonNull String ACCUMULATOR_PREFIX = "a"; //$NON-NLS-1$
+	public static final @NonNull String CONSTRAINT_PREFIX = "c"; //$NON-NLS-1$
 	public static final @NonNull String ITERATION_PREFIX = "i."; //$NON-NLS-1$
 	public static final @NonNull String ITERATOR_PREFIX = "i"; //$NON-NLS-1$
 	public static final @NonNull String OPERATION_PREFIX = "o."; //$NON-NLS-1$
@@ -228,42 +230,20 @@ public class AS2XMIidVisitor extends AbstractExtendingVisitor<Boolean, AS2XMIid>
 		}
 	}
 
-/*	@Override
-	public Boolean visitConstraint(@NonNull Constraint object) {
-		appendParent(object, SCOPE_SEPARATOR);
-		context.append(PivotUtil.getStereotype(object));
-		Object container = object.eContainer().eGet(object.eContainingFeature());
-		if (container instanceof List<?>) {		
-			int index = 0;
-			String name2 = object.getName();
-			for (Object content : (List<?>)container) {
-				if (content == object) {
-					break;
-				}
-				if (content instanceof Constraint) {
-					Constraint sibling = (Constraint) content;
-					if (PivotUtil.getStereotype(sibling).equals(PivotUtil.getStereotype(object))) {
-						String name1 = sibling.getName();
-						if (name1 != name2) {
-							if ((name1 == null) || !name1.equals(name2)) {
-								break;
-							}
-						}
-						index++;
-					}
-				}
-			}
-			context.append(MONIKER_OPERATOR_SEPARATOR);
-			if (name2 != null) {
-				context.append(name2);
-			}
-			if (index != 0) {
-				context.append(MONIKER_OPERATOR_SEPARATOR);
-				context.append(index);
-			}
+	@Override
+	public @Nullable Boolean visitConstraint(@NonNull Constraint object) {
+		String name = object.getName();
+		if (name != null) {
+			s.append(CONSTRAINT_PREFIX);
+			appendParent(object);
+			appendName(name);
+			return true;
 		}
-		return true;
-	} */
+		else {
+			return null;
+		}
+	}
+
 
 	@Override
 	public @Nullable Boolean visitElement(@NonNull Element object) {
