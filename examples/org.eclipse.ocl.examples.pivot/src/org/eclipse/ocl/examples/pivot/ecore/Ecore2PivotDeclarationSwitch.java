@@ -166,8 +166,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		doSwitchAll(eObject2.getEGenericSuperTypes());
 		List<Operation> pivotOperations = pivotElement.getOwnedOperation();
 		List<Constraint> pivotInvariants = pivotElement.getOwnedInvariant();
-		for (EOperation eOperation : eObject2.getEOperations()) {
-			if (EcoreUtil.isInvariant(eOperation)) {
+		for (@SuppressWarnings("null")@NonNull EOperation eOperation : eObject2.getEOperations()) {
+			if (converter.isInvariant(eOperation)) {
 				Object pivotObject = doSwitch(eOperation);
 				pivotInvariants.add((Constraint) pivotObject);
 			}
@@ -181,7 +181,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		if (duplicatesAnnotation != null) {
 			for (EObject eContent : duplicatesAnnotation.getContents()) {
 				if (eContent instanceof EOperation) {
-					if (EcoreUtil.isInvariant((EOperation) eContent)) {
+					if (converter.isInvariant((EOperation) eContent)) {
 						Constraint pivotInvariant = (Constraint) doSwitch(eContent);
 						pivotInvariants.add(pivotInvariant);
 					}
@@ -366,7 +366,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	@Override
 	public Object caseEOperation(EOperation eObject) {
 		@SuppressWarnings("null") @NonNull EOperation eOperation = eObject;
-		if (EcoreUtil.isInvariant(eOperation)) {
+		if (converter.isInvariant(eOperation)) {
 			return convertEOperation2Constraint(eOperation);
 		}
 		else {

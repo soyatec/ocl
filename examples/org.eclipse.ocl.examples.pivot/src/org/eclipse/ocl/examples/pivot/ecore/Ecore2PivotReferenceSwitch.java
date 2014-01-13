@@ -141,7 +141,7 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 	@Override
 	public Object caseEOperation(EOperation eObject) {
 		@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
-		if (EcoreUtil.isInvariant(eObject)) {
+		if (converter.isInvariant(eObject2)) {
 			Constraint pivotElement = converter.getCreated(Constraint.class, eObject2);
 			if (pivotElement != null) {
 				EAnnotation redefinesAnnotation = eObject2.getEAnnotation(PivotConstants.REDEFINES_ANNOTATION_SOURCE);

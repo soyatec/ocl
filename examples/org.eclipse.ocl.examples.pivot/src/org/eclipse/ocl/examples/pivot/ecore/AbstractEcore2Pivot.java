@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.pivot.ecore;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -24,6 +25,8 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.compatibility.UML_4_2;
@@ -74,6 +77,25 @@ public abstract class AbstractEcore2Pivot extends AbstractConversion implements 
 		}
 		String originalName = UML_4_2.UMLUtil.getOriginalName(eNamedElement);
 		return originalName;
+	}
+
+	/**
+	 * Return true if eOperation can be handled as an OCL invariant. In addition to the EcoreUtil.isInvariant()
+	 * checks we also require either no GenModel documentation or a GenModel documentation with no additional
+	 * content such as a Java body.
+	 */
+	public boolean isInvariant(@NonNull EOperation eOperation) {
+		if (!EcoreUtil.isInvariant(eOperation)) {
+			return false;
+		}
+		EAnnotation eAnnotation = eOperation.getEAnnotation(PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE);
+		if (eAnnotation != null) {
+			@SuppressWarnings("null")@NonNull EMap<String, String> details = eAnnotation.getDetails();
+			if ((details.size() != 1) ||  details.containsKey(PivotConstants.DOCUMENTATION_ANNOTATION_KEY)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public abstract void queueReference(@NonNull EObject eObject);
