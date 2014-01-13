@@ -144,6 +144,9 @@
       </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_jPknALeeEeG5G_bt-fBLaA" name="MDT_OCL_Redefinitions">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_RmVLoHxIEeO1S5LPtPmdTQ" name="Constraint">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_RmVLoXxIEeO1S5LPtPmdTQ" name="redefinedConstraint" type="_RmVLoHxIEeO1S5LPtPmdTQ" lower="0" upper="*"/>
+      </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_nwDIkLeeEeG5G_bt-fBLaA" name="Operation">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_rJZqALeeEeG5G_bt-fBLaA" name="redefinedOperation" type="_nwDIkLeeEeG5G_bt-fBLaA" lower="0" upper="*"/>
       </ownedMember>
