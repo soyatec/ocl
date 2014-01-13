@@ -37,6 +37,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getConstrainedElement <em>Constrained Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#isCallable <em>Is Callable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getRedefinedConstraint <em>Redefined Constraint</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getSpecification <em>Specification</em>}</li>
  * </ul>
  * </p>
@@ -135,6 +136,21 @@ public interface Constraint
 	 * @generated
 	 */
 	void setIsCallable(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Redefined Constraint</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Redefined Constraint</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Redefined Constraint</em>' reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_RedefinedConstraint()
+	 * @generated
+	 */
+	List<Constraint> getRedefinedConstraint();
 
 	/**
 	 * <!-- begin-user-doc -->

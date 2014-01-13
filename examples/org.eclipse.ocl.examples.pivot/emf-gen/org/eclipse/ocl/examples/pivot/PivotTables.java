@@ -192,6 +192,69 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ String STR_reject = "reject";
     public static final @NonNull /*@NonInvalid*/ String STR_select = "select";
     public static final @NonNull /*@NonInvalid*/ String STR_sortedBy = "sortedBy";
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Annotation = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Annotation);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_AssociationClassCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_AssociationClassCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_CallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_CallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_CallOperationAction = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Class);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_CollectionItem = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_CollectionItem);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_CollectionLiteralExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_CollectionLiteralExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_CollectionRange = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_CollectionRange);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_CollectionType = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_CollectionType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Comment = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Comment);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_ConnectionPointReference = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_ConnectionPointReference);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Constraint = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Constraint);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_ConstructorExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_ConstructorExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_ConstructorPart = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_ConstructorPart);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_DataType = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_DataType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_DynamicElement = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_DynamicElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_DynamicProperty = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_DynamicProperty);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_DynamicType = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_DynamicType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Element = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Element);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_ElementExtension = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_ElementExtension);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_EnumLiteralExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_EnumLiteralExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_ExpressionInOCL = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_ExpressionInOCL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_IfExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_IfExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Import = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Import);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_IterateExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_IterateExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Iteration = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Iteration);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_LambdaType = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_LambdaType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_LetExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_LetExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Library = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Library);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_LoopExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_LoopExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_MessageExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_MessageExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_MessageType = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_MessageType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Metaclass = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Metaclass);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_NamedElement = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_NamedElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Namespace = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Namespace);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_NavigationCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_NavigationCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Operation = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Operation);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_OperationCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_OperationCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_OppositePropertyCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_OppositePropertyCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Package = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Package);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Property);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_PropertyCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_PropertyCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Pseudostate = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Pseudostate);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Region = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Region);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Root = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Root);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_SendSignalAction = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_SendSignalAction);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_State = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_State);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_StateExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_StateExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_StateMachine = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_StateMachine);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TemplateBinding = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TemplateBinding);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TemplateParameter = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TemplateParameter);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TemplateParameterSubstitution = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TemplateParameterSubstitution);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TemplateSignature = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TemplateSignature);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Transition = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Transition);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TupleLiteralExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TupleLiteralExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TupleLiteralPart = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TupleLiteralPart);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Type = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Type);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TypeExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TypeExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TypeTemplateParameter = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TypeTemplateParameter);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TypedElement = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_TypedElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_UnspecifiedType = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_UnspecifiedType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Variable = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Variable);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_VariableExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_VariableExp);
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Bag = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Bag");
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Collection = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Collection");
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_OrderedSet = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("OrderedSet");
@@ -224,56 +287,31 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Variable);
     public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_name = PivotTables.CLSSid_NamedElement.getPropertyId("name");
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Type = TypeId.SEQUENCE.getSpecializedId(PivotTables.CLSSid_Type);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Annotation = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Annotation);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_AssociationClassCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_AssociationClassCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Behavior = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Behavior);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Class);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CollectionType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CollectionType);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Comment = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Comment);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ConnectionPointReference = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ConnectionPointReference);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Constraint = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Constraint);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ConstructorPart = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ConstructorPart);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_DataType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_DataType);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_DynamicElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_DynamicElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_DynamicProperty = TypeId.SET.getSpecializedId(PivotTables.CLSSid_DynamicProperty);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Element = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Element);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ElementExtension = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ElementExtension);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_EnumLiteralExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_EnumLiteralExp);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Import = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Import);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_LambdaType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_LambdaType);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_LoopExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_LoopExp);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_MessageType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_MessageType);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Metaclass = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Metaclass);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_NavigationCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_NavigationCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OclElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Operation = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Operation);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OperationCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OperationCallExp);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OppositePropertyCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OppositePropertyCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Package);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ParameterableElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Property = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Property);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PropertyCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_PropertyCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Pseudostate = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Pseudostate);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Region = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Region);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SendSignalAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_SendSignalAction);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_State = TypeId.SET.getSpecializedId(PivotTables.CLSSid_State);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_StateExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_StateExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_StateMachine = TypeId.SET.getSpecializedId(PivotTables.CLSSid_StateMachine);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateBinding = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateBinding);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateParameter = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateParameter);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateParameterSubstitution = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateParameterSubstitution);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateSignature = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateSignature);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Transition = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Transition);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Trigger = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Trigger);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Type = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Type);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TypeExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TypeExp);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TypeTemplateParameter = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TypeTemplateParameter);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TypedElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TypedElement);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_UnspecifiedType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_UnspecifiedType);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Variable = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Variable);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_VariableExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_VariableExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Vertex = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Vertex);
 
 	/**
@@ -1992,13 +2030,15 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Constraint__constrainedElement = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT, Types._Constraint, 0);
 		public static final @NonNull ExecutorProperty _Constraint__context = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__CONTEXT, Types._Constraint, 1);
 		public static final @NonNull ExecutorProperty _Constraint__isCallable = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__IS_CALLABLE, Types._Constraint, 2);
-		public static final @NonNull ExecutorProperty _Constraint__specification = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION, Types._Constraint, 3);
-		public static final @NonNull ExecutorProperty _Constraint__Namespace__ownedRule = new ExecutorPropertyWithImplementation("Namespace", Types._Constraint, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAMESPACE__OWNED_RULE));
-		public static final @NonNull ExecutorProperty _Constraint__Operation__postcondition = new ExecutorPropertyWithImplementation("Operation", Types._Constraint, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__POSTCONDITION));
-		public static final @NonNull ExecutorProperty _Constraint__Operation__precondition = new ExecutorPropertyWithImplementation("Operation", Types._Constraint, 6, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__PRECONDITION));
-		public static final @NonNull ExecutorProperty _Constraint__State__stateInvariant = new ExecutorPropertyWithImplementation("State", Types._Constraint, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__STATE_INVARIANT));
-		public static final @NonNull ExecutorProperty _Constraint__Transition__guard = new ExecutorPropertyWithImplementation("Transition", Types._Constraint, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TRANSITION__GUARD));
-		public static final @NonNull ExecutorProperty _Constraint__Type__ownedInvariant = new ExecutorPropertyWithImplementation("Type", Types._Constraint, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT));
+		public static final @NonNull ExecutorProperty _Constraint__redefinedConstraint = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__REDEFINED_CONSTRAINT, Types._Constraint, 3);
+		public static final @NonNull ExecutorProperty _Constraint__specification = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION, Types._Constraint, 4);
+		public static final @NonNull ExecutorProperty _Constraint__Constraint__redefinedConstraint = new ExecutorPropertyWithImplementation("Constraint", Types._Constraint, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__REDEFINED_CONSTRAINT));
+		public static final @NonNull ExecutorProperty _Constraint__Namespace__ownedRule = new ExecutorPropertyWithImplementation("Namespace", Types._Constraint, 6, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAMESPACE__OWNED_RULE));
+		public static final @NonNull ExecutorProperty _Constraint__Operation__postcondition = new ExecutorPropertyWithImplementation("Operation", Types._Constraint, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__POSTCONDITION));
+		public static final @NonNull ExecutorProperty _Constraint__Operation__precondition = new ExecutorPropertyWithImplementation("Operation", Types._Constraint, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__PRECONDITION));
+		public static final @NonNull ExecutorProperty _Constraint__State__stateInvariant = new ExecutorPropertyWithImplementation("State", Types._Constraint, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__STATE_INVARIANT));
+		public static final @NonNull ExecutorProperty _Constraint__Transition__guard = new ExecutorPropertyWithImplementation("Transition", Types._Constraint, 10, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TRANSITION__GUARD));
+		public static final @NonNull ExecutorProperty _Constraint__Type__ownedInvariant = new ExecutorPropertyWithImplementation("Type", Types._Constraint, 11, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT));
 
 		public static final @NonNull ExecutorProperty _ConstructorExp__part = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRUCTOR_EXP__PART, Types._ConstructorExp, 0);
 		public static final @NonNull ExecutorProperty _ConstructorExp__value = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRUCTOR_EXP__VALUE, Types._ConstructorExp, 1);
@@ -10678,11 +10718,13 @@ public class PivotTables
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._Constraint__redefinedConstraint,
 			PivotTables.Properties._Constraint__specification,
 			PivotTables.Properties._Element__Annotation__ownedContent,
 			PivotTables.Properties._Element__Annotation__reference,
 			PivotTables.Properties._Element__Comment__annotatedElement,
 			PivotTables.Properties._Element__Constraint__constrainedElement,
+			PivotTables.Properties._Constraint__Constraint__redefinedConstraint,
 			PivotTables.Properties._Constraint__Namespace__ownedRule,
 			PivotTables.Properties._Constraint__Operation__postcondition,
 			PivotTables.Properties._Constraint__Operation__precondition,

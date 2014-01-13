@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pivot" nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot" nsPrefix="pivot">
+  <eAnnotations source="http://www.eclipse.org/OCL/ASMetamodel"/>
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
     <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
-  <eAnnotations source="http://www.eclipse.org/OCL/ASMetamodel"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Boolean type is used for logical expression, consisting of the predefined values true and false."/>
@@ -340,6 +340,8 @@
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCallable" lowerBound="1"
         eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedConstraint" ordered="false"
+        upperBound="-1" eType="#//Constraint"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//OpaqueExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

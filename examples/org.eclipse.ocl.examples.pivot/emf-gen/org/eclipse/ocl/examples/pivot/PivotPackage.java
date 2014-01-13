@@ -5685,13 +5685,22 @@ public interface PivotPackage
 	int CONSTRAINT__IS_CALLABLE = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Redefined Constraint</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__REDEFINED_CONSTRAINT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT__SPECIFICATION = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int CONSTRAINT__SPECIFICATION = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
@@ -5700,7 +5709,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -24519,6 +24528,17 @@ public interface PivotPackage
 	EAttribute getConstraint_IsCallable();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.pivot.Constraint#getRedefinedConstraint <em>Redefined Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Redefined Constraint</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Constraint#getRedefinedConstraint()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_RedefinedConstraint();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Constraint#validateUniqueName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Name</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -28281,6 +28301,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute CONSTRAINT__IS_CALLABLE = eINSTANCE.getConstraint_IsCallable();
+
+		/**
+		 * The meta object literal for the '<em><b>Redefined Constraint</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__REDEFINED_CONSTRAINT = eINSTANCE.getConstraint_RedefinedConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Unique Name</b></em>' operation.

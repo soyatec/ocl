@@ -372,6 +372,12 @@
         <defaultValue xmi:type="uml:LiteralString" xmi:id="Ppivot.TConstraint.PisCallable.dlV"
             value="false"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="Ppivot.TConstraint.PredefinedConstraint" name="redefinedConstraint"
+          type="Ppivot.TConstraint">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TConstraint.PredefinedConstraint.lV"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TConstraint.PredefinedConstraint.uV"
+            value="*"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="Ppivot.TConstructorExp" name="ConstructorExp">
       <generalization xmi:id="Ppivot.TConstructorExp.g0" general="Ppivot.TOCLExpression"/>

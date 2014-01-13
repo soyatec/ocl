@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getConstrainedElement <em>Constrained Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#isCallable <em>Is Callable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getRedefinedConstraint <em>Redefined Constraint</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
  * </ul>
  * </p>
@@ -92,6 +93,16 @@ public class ConstraintImpl
 	 * @ordered
 	 */
 	protected static final int IS_CALLABLE_EFLAG = 1 << 9;
+
+	/**
+	 * The cached value of the '{@link #getRedefinedConstraint() <em>Redefined Constraint</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRedefinedConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> redefinedConstraint;
 
 	/**
 	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' containment reference.
@@ -233,6 +244,20 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<Constraint> getRedefinedConstraint()
+	{
+		if (redefinedConstraint == null)
+		{
+			redefinedConstraint = new EObjectResolvingEList<Constraint>(Constraint.class, this, PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT);
+		}
+		return redefinedConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateUniqueName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
@@ -289,6 +314,8 @@ public class ConstraintImpl
 				return basicGetContext();
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return isCallable();
+			case PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT:
+				return getRedefinedConstraint();
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				return getSpecification();
 		}
@@ -333,6 +360,10 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable((Boolean)newValue);
 				return;
+			case PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT:
+				getRedefinedConstraint().clear();
+				getRedefinedConstraint().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				setSpecification((OpaqueExpression)newValue);
 				return;
@@ -373,6 +404,9 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable(IS_CALLABLE_EDEFAULT);
 				return;
+			case PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT:
+				getRedefinedConstraint().clear();
+				return;
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				setSpecification((OpaqueExpression)null);
 				return;
@@ -405,6 +439,8 @@ public class ConstraintImpl
 				return basicGetContext() != null;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return ((eFlags & IS_CALLABLE_EFLAG) != 0) != IS_CALLABLE_EDEFAULT;
+			case PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT:
+				return redefinedConstraint != null && !redefinedConstraint.isEmpty();
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				return specification != null;
 		}
