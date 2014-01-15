@@ -38,20 +38,8 @@
 	</extension>
 
 	<extension point="org.eclipse.ui.menus">
-		<menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.EcoreEditorID?after=additions">
+		<menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=show">
 			<command commandId="org.eclipse.ocl.examples.interpreter.ShowEcoreConsoleAction"
-              	icon="icons/elcl16/oclconsole_co.gif"/>
-		</menuContribution>
-		<menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.ReflectiveEditorID?after=additions">
-			<command commandId="org.eclipse.ocl.examples.interpreter.ShowEcoreConsoleAction"
-              	icon="icons/elcl16/oclconsole_co.gif"/>
-		</menuContribution>
-		<menuContribution locationURI="popup:org.eclipse.emf.examples.extlibrary.presentation.EXTLibraryEditorID?after=additions">
-			<command commandId="org.eclipse.ocl.examples.interpreter.ShowEcoreConsoleAction"
-              	icon="icons/elcl16/oclconsole_co.gif"/>
-		</menuContribution>
-		<menuContribution locationURI="popup:org.eclipse.uml2.uml.editor.presentation.UMLEditorID?after=additions">
-			<command commandId="org.eclipse.ocl.examples.interpreter.ShowUMLConsoleAction"
               	icon="icons/elcl16/oclconsole_co.gif"/>
 		</menuContribution>
 	</extension>

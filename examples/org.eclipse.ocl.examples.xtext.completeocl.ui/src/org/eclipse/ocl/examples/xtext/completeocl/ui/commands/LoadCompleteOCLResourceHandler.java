@@ -82,7 +82,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 
 /**
- * A LoadCompleteOCLResourceHandler supports the Load Complete OCL Resource command.
+ * A LoadCompleteOCLResourceHandler supports the OCL->Load Document command.
  * 
  * It provides a pop-up dialog with DND capability for a Complete OCL document to be installed in the
  * ResourceSet associatied with the invoking selection.
@@ -152,7 +152,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		@Override
 		protected void configureShell(Shell shell) {
 			super.configureShell(shell);
-			shell.setText("Load Complete OCL Resource");
+			shell.setText("Load Complete OCL Document");
 		}
 
 		@Override
@@ -242,7 +242,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				}
 				catch (Throwable e) {
 					IStatus status = new Status(IStatus.ERROR, CompleteOCLUiModule.PLUGIN_ID, e.getLocalizedMessage(), e);
-					ErrorDialog.openError(parent, "Load Complete OCL Resource Failure", "Failed to load '" + oclURI + "'", status);
+					ErrorDialog.openError(parent, "OCL->Load Document Failure", "Failed to load '" + oclURI + "'", status);
 					return false;
 				}
 			}

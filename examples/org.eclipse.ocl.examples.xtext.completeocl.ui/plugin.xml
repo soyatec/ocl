@@ -225,7 +225,7 @@
             </attribute>
       </markerResolutionGenerator>
    </extension>
-	<!-- Load Complete OCL Resource -->
+	<!-- Load Complete OCL Document -->
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
@@ -248,8 +248,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<!-- Generated Ecore editors have no shared menuID so must hit any -->
-		<menuContribution
-			locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=load">
 			<command commandId="org.eclipse.ocl.examples.xtext.completeocl.loadresource"
 				style="push"
         	    icon="$nl$/icons/OCLModelFile.gif"
@@ -267,7 +266,7 @@
 	</extension>
 
 	<extension point="org.eclipse.ui.menus">
-	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=save">
 	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveASCommand"
 	      label="%MF_Save_AS">
             <visibleWhen checkEnabled="false">
@@ -277,7 +276,7 @@
             </visibleWhen>
 	    </command>
 	  </menuContribution>
-	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=save">
 	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveCSCommand"
 	      label="%MF_Save_CS">
             <visibleWhen checkEnabled="false">

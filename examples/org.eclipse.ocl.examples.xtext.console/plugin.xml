@@ -32,17 +32,7 @@
 	</extension>
 
 	<extension point="org.eclipse.ui.menus">
-		<menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.EcoreEditorID?after=additions">
-			<command commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
-              	icon="icons/elcl16/oclconsole_co.gif"
-				tooltip="%_UI_ShowOCLConsole_tooltip"/>
-		</menuContribution>
-		<menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.ReflectiveEditorID?after=additions">
-			<command commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
-              	icon="icons/elcl16/oclconsole_co.gif"
-				tooltip="%_UI_ShowOCLConsole_tooltip"/>
-		</menuContribution>
-		<menuContribution locationURI="popup:org.eclipse.uml2.uml.editor.presentation.UMLEditorID?after=additions">
+		<menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=show">
 			<command commandId="org.eclipse.ocl.examples.xtext.console.ShowEcoreConsoleAction"
               	icon="icons/elcl16/oclconsole_co.gif"
 				tooltip="%_UI_ShowOCLConsole_tooltip"/>

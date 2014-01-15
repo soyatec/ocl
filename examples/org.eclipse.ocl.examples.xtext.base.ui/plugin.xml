@@ -15,7 +15,7 @@
 	    class="org.eclipse.ocl.examples.xtext.base.ui.commands.SaveCSHandler"/>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
-      <menuContribution locationURI="popup:#TextEditorContext?before=group.open">
+      <menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=save">
          <menu id="org.eclipse.ocl.examples.xtext.base.ui.Save" label="%MF_Save"/>         
       </menuContribution>
 	</extension>

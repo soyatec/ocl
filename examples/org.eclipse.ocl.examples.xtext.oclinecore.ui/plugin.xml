@@ -280,7 +280,7 @@
 	      </visibleWhen>
 	    </command>
 	  </menuContribution-->
-      <menuContribution locationURI="popup:#TextEditorContext?before=group.open">
+      <menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=save">
          <menu id="org.eclipse.ocl.examples.xtext.oclinecore.ui.SaveAs" label="%MF_SaveAs"/>         
       </menuContribution>
 	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.oclinecore.ui.SaveAs?after=additions">
@@ -335,8 +335,8 @@
             </visibleWhen>
 	    </command>
 	  </menuContribution>
-      <menuContribution locationURI="popup:#TextEditorContext?before=group.open">
-         <menu id="org.eclipse.ocl.examples.xtext.oclinecore.ui.SetExportDelegateURI" label="%MF_SetExportDelegateURI"/>         
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.ui.Menu?after=set">
+         <menu id="org.eclipse.ocl.examples.xtext.oclinecore.ui.SetExportDelegateURI" label="%MF_SetExportDelegateURI"/>
       </menuContribution>
 	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.oclinecore.ui.SetExportDelegateURI?after=additions">
 	    <command
