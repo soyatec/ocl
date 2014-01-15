@@ -135,7 +135,7 @@ bc..
 inv DerivationIsTransient: hasDerivation implies transient
 p. 
  
-These invariants are executed when a model is validated in an application that has loaded the complementing Complete OCL document. The significance of this is explained in "OCL->Load Document Menu Action":#LoadCompleteOCLResource.
+These invariants are executed when a model is validated in an application that has loaded the complementing Complete OCL document. The significance of this is explained in "OCL|Load Document Menu Action":#LoadCompleteOCLResource.
 
 The readability of constraints can be significantly enhanced by the use of let-variables or the re-use, as above, of the @hasDerivation@ helper property.  
 
@@ -166,7 +166,7 @@ Complete OCL also allows an incomplete operation or property declaration in the 
 
 These facilities are limited use since OCLinEcore avoids the need for incomplete meta-models.
 
-h3(#LoadCompleteOCLResource). OCL - Load Document Menu Action 
+h3(#LoadCompleteOCLResource). OCL|Load Document Menu Action 
 
 The major disclaimer in the above is that the Complete OCL only complements the complemented meta-model in applications
 that have loaded the Complete OCL.
@@ -174,11 +174,11 @@ that have loaded the Complete OCL.
 Prior to the Juno release, this meant that Complete OCL was only usable in custom Java applications since no standard
 modeling applications would load the complementing document.
 
-The *OCL->Load Document* menu action enables a Complete OCL document to be loaded into a wide variety of applications.
+The *OCL|Load Document* menu action enables a Complete OCL document to be loaded into a wide variety of applications.
 
-!{width:70%}images/4300-load-complete-ocl-resource-menu.png(OCL->Load Document Menu)!
+!{width:70%}images/4300-load-complete-ocl-resource-menu.png(OCL|Load Document Menu)!
 
-The *OCL->Load Document* menu action is added to the right button menu of applications with a ResourceSet accessible from the current selection.
+The *OCL|Load Document* menu action is added to the right button menu of applications with a ResourceSet accessible from the current selection.
 
 bq.. 
 It has been observed that the extra menu action is not always immediately available, so if you do not see it, hit *Esc* to cancel the menu and right click again.
@@ -203,7 +203,7 @@ In Juno, unsuitable applications are
 
 The Kepler release supports Complete OCL complements in Papyrus and OCLinEcore.
 
-The *OCL->Load Document* menu action activates the *Load Complete OCL Document* dialog in which you can browse the File system or Workspace for one or more Complete OCL documents to load, or often more conveniently you can just Drag and Drop them from an Operating System Explorer or an Eclipse Explorer.
+The *OCL|Load Document* menu action activates the *Load Complete OCL Document* dialog in which you can browse the File system or Workspace for one or more Complete OCL documents to load, or often more conveniently you can just Drag and Drop them from an Operating System Explorer or an Eclipse Explorer.
 
 !{width:70%}images/4300-load-complete-ocl-resource-dialog.png(Load Complete OCL Document Dialog)!
 
@@ -217,7 +217,7 @@ h3(#CompleteOCLTutorial-EcoreComplements). Example Complete OCL complements for 
 
 The Sample Ecore Editor has acquired many useful validation rules, so that for many usages just invoking *Validate* is quite sufficient. But what if it isn't? Perhaps you have some style conventions that you wish to apply. Perhaps the built-in rules are not sufficient.
 
-Prior to Juno and the *OCL->Load Document* capability, your only choice would be to check out the Ecore Editor and create a custom variant. Now you can use Complete OCL to extend the Sample Ecore Editor.
+Prior to Juno and the *OCL|Load Document* capability, your only choice would be to check out the Ecore Editor and create a custom variant. Now you can use Complete OCL to extend the Sample Ecore Editor.
 
 We will revisit the *ExtraEcoreValidation.ocl* document that we have just examined and use it to rectify inadequate checking of derived properties by the Sample Ecore Editor. The document provides six invariants, at least three of which detect problems that were encountered by users during the Indigo release cycle.
 
@@ -299,7 +299,7 @@ In the "previous section":#CompleteOCLTutorial-EcoreComplements we described add
 
 Select *EcoreTestFile.ecore* and use the right button menu to *Open With -> Sample Ecore Model Editor*. This is probably the default for double-clicking with the left button, but if you open with the OCLinEcore editor the required validation will not work (in Juno).
 
-Now right click within the Sample Ecore Editor pane as described in "OCL->Load Document Menu Action":#LoadCompleteOCLResource and load *ExtraEcoreValidation.ocl*. An additional Resource is shown in the editor tree.
+Now right click within the Sample Ecore Editor pane as described in "OCL|Load Document Menu Action":#LoadCompleteOCLResource and load *ExtraEcoreValidation.ocl*. An additional Resource is shown in the editor tree.
 
 Select a model element such as the *Bad* package and use the right button menu to invoke *Validate*.
 
