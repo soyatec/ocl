@@ -166,7 +166,7 @@ Complete OCL also allows an incomplete operation or property declaration in the 
 
 These facilities are limited use since OCLinEcore avoids the need for incomplete meta-models.
 
-h3(#LoadCompleteOCLResource). OCL->Load Document Menu Action 
+h3(#LoadCompleteOCLResource). OCL - Load Document Menu Action 
 
 The major disclaimer in the above is that the Complete OCL only complements the complemented meta-model in applications
 that have loaded the Complete OCL.
