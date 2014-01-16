@@ -1756,7 +1756,7 @@ public class OperationImpl
 			if (specification != null) {
 				Type owningType = getOwningType();
 				if (owningType != null) {
-					ExpressionInOCL expression = PivotUtil.getExpressionInOCL(this, specification);
+					ExpressionInOCL expression = specification.getExpressionInOCL();
 					if (expression != null) {
 						setBodyExpression(expression);
 						bodyImplementation2 = new ConstrainedOperation(expression);

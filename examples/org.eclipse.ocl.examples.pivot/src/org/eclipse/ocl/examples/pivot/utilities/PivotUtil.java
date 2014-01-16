@@ -97,7 +97,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
-import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
@@ -857,34 +856,9 @@ public class PivotUtil extends DomainUtil
 	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
 	 * containing the error messages.
 	 */
+	@Deprecated // Use OpaqueExpression.getExpressionInOCL()
 	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull OpaqueExpression specification) {
-		if (specification instanceof ExpressionInOCL) {
-			return (ExpressionInOCL) specification;
-		}
-		Resource resource = contextElement.eResource();
-		ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
-		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-		ClassContext parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
-		if (parserContext == null) {
-			logger.error("Unknown context type for " + contextElement.eClass().getName());
-			return null;
-		}
-		String expression = PivotUtil.getBody(specification);
-		if (expression == null) {
-			return null; //createExpressionInOCLError("Missing expression");
-		}
-		ExpressionInOCL expressionInOCL = null;
-		try {
-			expressionInOCL = parserContext.parse(expression);
-		} catch (Exception e) {
-			String message = e.getMessage();
-			if (message == null) {
-				message = "";
-			}
-			logger.error(message);
-			return createExpressionInOCLError(message);
-		}
-		return expressionInOCL;
+		return specification.getExpressionInOCL();
 	}
 
 	/**

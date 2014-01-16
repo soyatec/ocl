@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.Stereotype;
 
 /**
@@ -182,7 +181,7 @@ public abstract class LoadableConstraintDescriptor<T> extends AbstractConstraint
 			if (specification == null) {
 				return ctx.createFailureStatus(target);
 			}
-			query = query2 = PivotUtil.getExpressionInOCL(contextElement, specification);
+			query = query2 = specification.getExpressionInOCL();
 			if (query2 == null) {
 				return ctx.createFailureStatus(target);
 			}

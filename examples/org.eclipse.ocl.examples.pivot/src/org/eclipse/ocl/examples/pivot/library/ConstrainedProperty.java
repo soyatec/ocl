@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An instance of ConstrainedProperty supports evaluation of
@@ -50,7 +49,7 @@ public class ConstrainedProperty extends AbstractProperty
 			if (defaultExpression == null) {
 				throw new InvalidValueException("No defaultExpression for '{0}'", property);
 			}
-			expression = expression2 = PivotUtil.getExpressionInOCL(property, defaultExpression);
+			expression = expression2 = defaultExpression.getExpressionInOCL();
 			if (expression2 == null) {
 				throw new InvalidValueException("Bad defaultExpression for '{0}'", property);
 			}

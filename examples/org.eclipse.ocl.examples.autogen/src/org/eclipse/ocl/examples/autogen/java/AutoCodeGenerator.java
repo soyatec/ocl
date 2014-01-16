@@ -246,7 +246,7 @@ public class AutoCodeGenerator extends JavaCodeGenerator
 			Operation astOperation = DomainUtil.getNamedElement(asType.getOwnedOperation(), "ast");			
 			if (astOperation != null) {
 				OpaqueExpression bodyExpression = DomainUtil.nonNullState(astOperation.getBodyExpression());
-				ExpressionInOCL expressionInOCL = DomainUtil.nonNullState(PivotUtil.getExpressionInOCL(asType, bodyExpression));
+				ExpressionInOCL expressionInOCL = DomainUtil.nonNullState(bodyExpression.getExpressionInOCL());
 				OCLExpression oclExpression = expressionInOCL.getBodyExpression();
 				if (oclExpression instanceof ConstructorExp) {
 					hasCS2ASmappingOperation = true;

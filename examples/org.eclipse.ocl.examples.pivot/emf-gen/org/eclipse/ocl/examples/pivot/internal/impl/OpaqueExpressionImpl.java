@@ -28,11 +28,13 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,16 +116,6 @@ public class OpaqueExpressionImpl
 			body = new EDataTypeEList<String>(String.class, this, PivotPackage.OPAQUE_EXPRESSION__BODY);
 		}
 		return body;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExpressionInOCL getExpressionInOCL()
-	{
-		return expressionInOCL;
 	}
 
 	/**
@@ -327,5 +319,24 @@ public class OpaqueExpressionImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitOpaqueExpression(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ExpressionInOCL getExpressionInOCL()
+	{
+		if (expressionInOCL == null) {
+			Namespace contextElement = PivotUtil.getContainingNamespace(this);
+			if (contextElement != null) {
+				String expression = PivotUtil.getBody(this);
+				if (expression != null) {
+					expressionInOCL = PivotUtil.getExpressionInOCL(contextElement, expression);
+				}
+			}
+		}
+		return expressionInOCL;
 	}
 } //OpaqueExpressionImpl

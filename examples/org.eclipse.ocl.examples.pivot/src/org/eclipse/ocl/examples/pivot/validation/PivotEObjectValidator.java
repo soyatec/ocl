@@ -126,13 +126,7 @@ public class PivotEObjectValidator extends EObjectValidator
 					if (specification == null) {
 						continue;
 					}
-					ExpressionInOCL query = null;
-					if (specification instanceof ExpressionInOCL) {
-						query = (ExpressionInOCL)specification;
-					}
-					else {
-						query = PivotUtil.getExpressionInOCL(type, specification);
-					}
+					ExpressionInOCL query = specification.getExpressionInOCL();
 					if (query != null) {
 						Variable contextVariable = query.getContextVariable();
 						OCLExpression bodyExpression = query.getBodyExpression();

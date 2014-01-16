@@ -154,7 +154,6 @@ import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * The AS2CGVisitor performs the first stage of code generation by converting the Pivot AST to the CG AST.
@@ -348,7 +347,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		ExpressionInOCL prototype = inlinePrototypes.get(bodyExpression);
 		if (prototype == null) {
 			try {
-				prototype = PivotUtil.getExpressionInOCL(callExp, bodyExpression);
+				prototype = bodyExpression.getExpressionInOCL();
 			}
 			catch (Exception e) {
 				// FIXME log error
@@ -500,7 +499,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		setAst(cgConstraint, element);
 		OpaqueExpression specification = element.getSpecification();
 		if (specification != null) {
-			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
+			ExpressionInOCL expressionInOCL = specification.getExpressionInOCL();
 			if (expressionInOCL != null) {
 				Variable contextVariable = expressionInOCL.getContextVariable();
 				if (contextVariable != null) {
@@ -803,7 +802,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		cgOperation.setRequired(element.isRequired());
 		OpaqueExpression specification = element.getBodyExpression();
 		if (specification != null) {
-			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
+			ExpressionInOCL expressionInOCL = specification.getExpressionInOCL();
 			if (expressionInOCL != null) {
 				Variable contextVariable = expressionInOCL.getContextVariable();
 				if (contextVariable != null) {
@@ -984,7 +983,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		cgProperty.setRequired(element.isRequired());
 		OpaqueExpression specification = element.getDefaultExpression();
 		if (specification != null) {
-			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
+			ExpressionInOCL expressionInOCL = specification.getExpressionInOCL();
 			if (expressionInOCL != null) {
 				Variable contextVariable = expressionInOCL.getContextVariable();
 				if (contextVariable != null) {

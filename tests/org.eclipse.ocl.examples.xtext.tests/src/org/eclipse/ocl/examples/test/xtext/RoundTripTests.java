@@ -39,7 +39,6 @@ import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -54,7 +53,6 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.MessageBinder;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -214,7 +212,7 @@ public class RoundTripTests extends XtextTestCase
 				if (eObject instanceof OpaqueExpression) {
 					EObject eContainer = eObject.eContainer();
 					System.out.println(++i + ": " + eObject);
-					ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL((NamedElement)eContainer, (OpaqueExpression) eObject);
+					ExpressionInOCL expressionInOCL = ((OpaqueExpression) eObject).getExpressionInOCL();
 					if (expressionInOCL != null) {
 						EcoreUtil.replace(eContainer, eObject.eContainmentFeature(), eObject, expressionInOCL);
 					}
