@@ -341,9 +341,6 @@
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//OpaqueExpression/language"/>
       </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//OpaqueExpression/message"/>
-      </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false">
       <ecoreClass href="Pivot.ecore#//ValueSpecification"/>
@@ -868,9 +865,6 @@
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/parameterVariable"/>
-      </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Pivot.ecore#//ExpressionInOCL/messageExpression"/>
       </genFeatures>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass">

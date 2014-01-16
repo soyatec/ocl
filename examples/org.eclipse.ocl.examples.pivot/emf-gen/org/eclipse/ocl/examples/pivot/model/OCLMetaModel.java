@@ -481,8 +481,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull SetType _Set_ParameterableElement = createSetType("Set"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull SetType _Set_Property = createSetType("Set"/*Property*/, "0", "*");
 		protected final @NonNull SetType _Set_Pseudostate = createSetType("Set"/*Pseudostate*/, "0", "*");
-		protected final @NonNull SetType _Set_Region = createSetType("Set"/*Region*/, "0", "*");
-		protected final @NonNull SetType _Set_Region_1 = createSetType("Set"/*Region*/, "1", "*");
+		protected final @NonNull SetType _Set_Region = createSetType("Set"/*Region*/, "1", "*");
+		protected final @NonNull SetType _Set_Region_1 = createSetType("Set"/*Region*/, "0", "*");
 		protected final @NonNull SetType _Set_State = createSetType("Set"/*State*/, "0", "*");
 		protected final @NonNull SetType _Set_StateMachine = createSetType("Set"/*StateMachine*/, "0", "*");
 		protected final @NonNull SetType _Set_String = createSetType("Set"/*String*/, "1", "*");
@@ -2332,7 +2332,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_EnumerationLiteral_EnumLiteralExp_referredEnumLiteral = createProperty("EnumLiteralExp", _Bag_EnumLiteralExp);
 		protected final @NonNull Property pr_ExpressionInOCL_bodyExpression = createProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION, _OCLExpression);
 		protected final @NonNull Property pr_ExpressionInOCL_contextVariable = createProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, _Variable);
-		protected final @NonNull Property pr_ExpressionInOCL_messageExpression = createProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, _OCLExpression);
 		protected final @NonNull Property pr_ExpressionInOCL_parameterVariable = createProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE, _OrderedSet_Variable);
 		protected final @NonNull Property pr_ExpressionInOCL_resultVariable = createProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE, _Variable);
 		protected final @NonNull Property pr_Feature_implementation = createProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION, _LibraryFeature);
@@ -2378,7 +2377,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_OCLExpression_CollectionRange_last = createProperty("CollectionRange", _Bag_CollectionRange);
 		protected final @NonNull Property pr_OCLExpression_ConstructorPart_initExpression = createProperty("ConstructorPart", _Bag_ConstructorPart);
 		protected final @NonNull Property pr_OCLExpression_ExpressionInOCL_bodyExpression = createProperty("ExpressionInOCL", _Bag_ExpressionInOCL);
-		protected final @NonNull Property pr_OCLExpression_ExpressionInOCL_messageExpression = createProperty("ExpressionInOCL", _Bag_ExpressionInOCL);
 		protected final @NonNull Property pr_OCLExpression_IfExp_condition = createProperty("IfExp", _Bag_IfExp);
 		protected final @NonNull Property pr_OCLExpression_IfExp_elseExpression = createProperty("IfExp", _Bag_IfExp);
 		protected final @NonNull Property pr_OCLExpression_IfExp_thenExpression = createProperty("IfExp", _Bag_IfExp);
@@ -2392,7 +2390,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_OCLExpression_Variable_initExpression = createProperty("Variable", _Bag_Variable);
 		protected final @NonNull Property pr_OpaqueExpression_body = createProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__BODY, _Sequence_String);
 		protected final @NonNull Property pr_OpaqueExpression_language = createProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, _OrderedSet_String);
-		protected final @NonNull Property pr_OpaqueExpression_message = createProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__MESSAGE, _Sequence_String);
 		protected final @NonNull Property pr_OpaqueExpression_Constraint_specification = createProperty("Constraint", _Bag_Constraint);
 		protected final @NonNull Property pr_OpaqueExpression_Operation_bodyExpression = createProperty("Operation", _Bag_Operation);
 		protected final @NonNull Property pr_OpaqueExpression_Property_defaultExpression = createProperty("Property", _Bag_Property);
@@ -2500,7 +2497,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_State_isSimple = createProperty(PivotPackage.Literals.STATE__IS_SIMPLE, _Boolean);
 		protected final @NonNull Property pr_State_isSubmachineState = createProperty(PivotPackage.Literals.STATE__IS_SUBMACHINE_STATE, _Boolean);
 		protected final @NonNull Property pr_State_redefinedState = createProperty(PivotPackage.Literals.STATE__REDEFINED_STATE, _State);
-		protected final @NonNull Property pr_State_region = createProperty(PivotPackage.Literals.STATE__REGION, _Set_Region);
+		protected final @NonNull Property pr_State_region = createProperty(PivotPackage.Literals.STATE__REGION, _Set_Region_1);
 		protected final @NonNull Property pr_State_stateInvariant = createProperty(PivotPackage.Literals.STATE__STATE_INVARIANT, _Constraint);
 		protected final @NonNull Property pr_State_submachine = createProperty(PivotPackage.Literals.STATE__SUBMACHINE, _StateMachine);
 		protected final @NonNull Property pr_State_ConnectionPointReference_state = createProperty("ConnectionPointReference", _Bag_ConnectionPointReference);
@@ -2511,7 +2508,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_StateExp_referredState = createProperty(PivotPackage.Literals.STATE_EXP__REFERRED_STATE, _State);
 		protected final @NonNull Property pr_StateMachine_connectionPoint = createProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT, _Set_Pseudostate);
 		protected final @NonNull Property pr_StateMachine_extendedStateMachine = createProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE, _Set_StateMachine);
-		protected final @NonNull Property pr_StateMachine_region = createProperty(PivotPackage.Literals.STATE_MACHINE__REGION, _Set_Region_1);
+		protected final @NonNull Property pr_StateMachine_region = createProperty(PivotPackage.Literals.STATE_MACHINE__REGION, _Set_Region);
 		protected final @NonNull Property pr_StateMachine_submachineState = createProperty(PivotPackage.Literals.STATE_MACHINE__SUBMACHINE_STATE, _Set_State);
 		protected final @NonNull Property pr_StateMachine_Pseudostate_stateMachine = createProperty("Pseudostate", _Bag_Pseudostate);
 		protected final @NonNull Property pr_StateMachine_Region_stateMachine = createProperty("Region", _Bag_Region);
@@ -2941,11 +2938,6 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Variable_ExpressionInOCL_contextVariable);
-			ownedProperties.add(property = pr_ExpressionInOCL_messageExpression);
-			property.setIsComposite(true);
-			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_OCLExpression_ExpressionInOCL_messageExpression);
 			ownedProperties.add(property = pr_ExpressionInOCL_parameterVariable);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -3144,11 +3136,6 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_ExpressionInOCL_bodyExpression);
-			ownedProperties.add(property = pr_OCLExpression_ExpressionInOCL_messageExpression);
-			property.setImplicit(true);
-			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_ExpressionInOCL_messageExpression);
 			ownedProperties.add(property = pr_OCLExpression_IfExp_condition);
 			property.setImplicit(true);
 			property.setIsRequired(false);
@@ -3208,8 +3195,6 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedProperties.add(property = pr_OpaqueExpression_body);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_OpaqueExpression_language);
-			property.setIsResolveProxies(true);
-			ownedProperties.add(property = pr_OpaqueExpression_message);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_OpaqueExpression_Constraint_specification);
 			property.setImplicit(true);
@@ -4469,9 +4454,9 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Property)));
 			_Set_Pseudostate.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Pseudostate)));
-			_Set_Region.getTemplateBinding().add(createTemplateBinding(_Set_,
-				createTemplateParameterSubstitution(_Set_T, _Region)));
 			_Set_Region_1.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Region)));
+			_Set_Region.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Region)));
 			_Set_StateMachine.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _StateMachine)));

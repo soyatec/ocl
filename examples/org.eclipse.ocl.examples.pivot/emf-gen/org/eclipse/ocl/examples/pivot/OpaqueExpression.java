@@ -33,7 +33,6 @@ import java.util.List;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getLanguage <em>Language</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,21 +69,4 @@ public interface OpaqueExpression
 	 * @generated
 	 */
 	List<String> getLanguage();
-
-	/**
-	 * Returns the value of the '<em><b>Message</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Message</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message</em>' attribute list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_Message()
-	 * @generated
-	 */
-	@Deprecated
-	List<String> getMessage();
 } // OpaqueExpression

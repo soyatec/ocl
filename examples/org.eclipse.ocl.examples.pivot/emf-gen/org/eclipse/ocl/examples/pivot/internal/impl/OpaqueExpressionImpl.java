@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl#getLanguage <em>Language</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,18 +70,6 @@ public class OpaqueExpressionImpl
 	 * @ordered
 	 */
 	protected EList<String> language;
-
-	/**
-	 * The cached value of the '{@link #getMessage() <em>Message</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @see #getMessage()
-	 * @generated
-	 * @ordered
-	 */
-	@Deprecated
-	protected EList<String> message;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,22 +120,6 @@ public class OpaqueExpressionImpl
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Deprecated
-	public List<String> getMessage()
-	{
-		if (message == null)
-		{
-			message = new EDataTypeEList<String>(String.class, this, PivotPackage.OPAQUE_EXPRESSION__MESSAGE);
-		}
-		return message;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -180,8 +151,6 @@ public class OpaqueExpressionImpl
 				return getBody();
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				return getLanguage();
-			case PivotPackage.OPAQUE_EXPRESSION__MESSAGE:
-				return getMessage();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -234,10 +203,6 @@ public class OpaqueExpressionImpl
 				getLanguage().clear();
 				getLanguage().addAll((Collection<? extends String>)newValue);
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__MESSAGE:
-				getMessage().clear();
-				getMessage().addAll((Collection<? extends String>)newValue);
-				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -284,9 +249,6 @@ public class OpaqueExpressionImpl
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				getLanguage().clear();
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__MESSAGE:
-				getMessage().clear();
-				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -322,8 +284,6 @@ public class OpaqueExpressionImpl
 				return body != null && !body.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				return language != null && !language.isEmpty();
-			case PivotPackage.OPAQUE_EXPRESSION__MESSAGE:
-				return message != null && !message.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

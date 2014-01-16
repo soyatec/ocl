@@ -28,7 +28,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getContextVariable <em>Context Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getParameterVariable <em>Parameter Variable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getResultVariable <em>Result Variable</em>}</li>
  * </ul>
@@ -129,34 +128,5 @@ public interface ExpressionInOCL
 	 * @generated
 	 */
 	@NonNull List<Variable> getParameterVariable();
-
-	/**
-	 * Returns the value of the '<em><b>Message Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Message Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * @Deprecated message now encoded as tuple parts
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message Expression</em>' containment reference.
-	 * @see #setMessageExpression(OCLExpression)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_MessageExpression()
-	 * @generated
-	 */
-	@Deprecated
-	OCLExpression getMessageExpression();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Message Expression</em>' containment reference.
-	 * @see #getMessageExpression()
-	 * @generated
-	 */
-	@Deprecated
-	void setMessageExpression(OCLExpression value);
 
 } // ExpressionInOCL

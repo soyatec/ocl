@@ -2081,9 +2081,8 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _ExpressionInOCL__bodyExpression = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION, Types._ExpressionInOCL, 0);
 		public static final @NonNull ExecutorProperty _ExpressionInOCL__contextVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, Types._ExpressionInOCL, 1);
-		public static final @NonNull ExecutorProperty _ExpressionInOCL__messageExpression = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, Types._ExpressionInOCL, 2);
-		public static final @NonNull ExecutorProperty _ExpressionInOCL__parameterVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE, Types._ExpressionInOCL, 3);
-		public static final @NonNull ExecutorProperty _ExpressionInOCL__resultVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE, Types._ExpressionInOCL, 4);
+		public static final @NonNull ExecutorProperty _ExpressionInOCL__parameterVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE, Types._ExpressionInOCL, 2);
+		public static final @NonNull ExecutorProperty _ExpressionInOCL__resultVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE, Types._ExpressionInOCL, 3);
 
 		public static final @NonNull ExecutorProperty _Feature__implementation = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION, Types._Feature, 0);
 		public static final @NonNull ExecutorProperty _Feature__implementationClass = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION_CLASS, Types._Feature, 1);
@@ -2145,25 +2144,23 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _OCLExpression__CollectionRange__last = new ExecutorPropertyWithImplementation("CollectionRange", Types._OCLExpression, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.COLLECTION_RANGE__LAST));
 		public static final @NonNull ExecutorProperty _OCLExpression__ConstructorPart__initExpression = new ExecutorPropertyWithImplementation("ConstructorPart", Types._OCLExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRUCTOR_PART__INIT_EXPRESSION));
 		public static final @NonNull ExecutorProperty _OCLExpression__ExpressionInOCL__bodyExpression = new ExecutorPropertyWithImplementation("ExpressionInOCL", Types._OCLExpression, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__BODY_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__ExpressionInOCL__messageExpression = new ExecutorPropertyWithImplementation("ExpressionInOCL", Types._OCLExpression, 6, new EcoreLibraryOppositeProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__IfExp__condition = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__CONDITION));
-		public static final @NonNull ExecutorProperty _OCLExpression__IfExp__elseExpression = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__ELSE_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__IfExp__thenExpression = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__THEN_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__LetExp__in = new ExecutorPropertyWithImplementation("LetExp", Types._OCLExpression, 10, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LET_EXP__IN));
-		public static final @NonNull ExecutorProperty _OCLExpression__LoopExp__body = new ExecutorPropertyWithImplementation("LoopExp", Types._OCLExpression, 11, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LOOP_EXP__BODY));
-		public static final @NonNull ExecutorProperty _OCLExpression__MessageExp__argument = new ExecutorPropertyWithImplementation("MessageExp", Types._OCLExpression, 12, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__ARGUMENT));
-		public static final @NonNull ExecutorProperty _OCLExpression__MessageExp__target = new ExecutorPropertyWithImplementation("MessageExp", Types._OCLExpression, 13, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__TARGET));
-		public static final @NonNull ExecutorProperty _OCLExpression__NavigationCallExp__qualifier = new ExecutorPropertyWithImplementation("NavigationCallExp", Types._OCLExpression, 14, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER));
-		public static final @NonNull ExecutorProperty _OCLExpression__OperationCallExp__argument = new ExecutorPropertyWithImplementation("OperationCallExp", Types._OCLExpression, 15, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT));
-		public static final @NonNull ExecutorProperty _OCLExpression__TupleLiteralPart__initExpression = new ExecutorPropertyWithImplementation("TupleLiteralPart", Types._OCLExpression, 16, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TUPLE_LITERAL_PART__INIT_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OCLExpression__Variable__initExpression = new ExecutorPropertyWithImplementation("Variable", Types._OCLExpression, 17, new EcoreLibraryOppositeProperty(PivotPackage.Literals.VARIABLE__INIT_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OCLExpression__IfExp__condition = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 6, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__CONDITION));
+		public static final @NonNull ExecutorProperty _OCLExpression__IfExp__elseExpression = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__ELSE_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OCLExpression__IfExp__thenExpression = new ExecutorPropertyWithImplementation("IfExp", Types._OCLExpression, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IF_EXP__THEN_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OCLExpression__LetExp__in = new ExecutorPropertyWithImplementation("LetExp", Types._OCLExpression, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LET_EXP__IN));
+		public static final @NonNull ExecutorProperty _OCLExpression__LoopExp__body = new ExecutorPropertyWithImplementation("LoopExp", Types._OCLExpression, 10, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LOOP_EXP__BODY));
+		public static final @NonNull ExecutorProperty _OCLExpression__MessageExp__argument = new ExecutorPropertyWithImplementation("MessageExp", Types._OCLExpression, 11, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__ARGUMENT));
+		public static final @NonNull ExecutorProperty _OCLExpression__MessageExp__target = new ExecutorPropertyWithImplementation("MessageExp", Types._OCLExpression, 12, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__TARGET));
+		public static final @NonNull ExecutorProperty _OCLExpression__NavigationCallExp__qualifier = new ExecutorPropertyWithImplementation("NavigationCallExp", Types._OCLExpression, 13, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER));
+		public static final @NonNull ExecutorProperty _OCLExpression__OperationCallExp__argument = new ExecutorPropertyWithImplementation("OperationCallExp", Types._OCLExpression, 14, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT));
+		public static final @NonNull ExecutorProperty _OCLExpression__TupleLiteralPart__initExpression = new ExecutorPropertyWithImplementation("TupleLiteralPart", Types._OCLExpression, 15, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TUPLE_LITERAL_PART__INIT_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OCLExpression__Variable__initExpression = new ExecutorPropertyWithImplementation("Variable", Types._OCLExpression, 16, new EcoreLibraryOppositeProperty(PivotPackage.Literals.VARIABLE__INIT_EXPRESSION));
 
 		public static final @NonNull ExecutorProperty _OpaqueExpression__body = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__BODY, Types._OpaqueExpression, 0);
 		public static final @NonNull ExecutorProperty _OpaqueExpression__language = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, Types._OpaqueExpression, 1);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__message = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__MESSAGE, Types._OpaqueExpression, 2);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__Constraint__specification = new ExecutorPropertyWithImplementation("Constraint", Types._OpaqueExpression, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION));
-		public static final @NonNull ExecutorProperty _OpaqueExpression__Operation__bodyExpression = new ExecutorPropertyWithImplementation("Operation", Types._OpaqueExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OpaqueExpression__Property__defaultExpression = new ExecutorPropertyWithImplementation("Property", Types._OpaqueExpression, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Constraint__specification = new ExecutorPropertyWithImplementation("Constraint", Types._OpaqueExpression, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Operation__bodyExpression = new ExecutorPropertyWithImplementation("Operation", Types._OpaqueExpression, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Property__defaultExpression = new ExecutorPropertyWithImplementation("Property", Types._OpaqueExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION));
 
 		public static final @NonNull ExecutorProperty _Operation__bodyExpression = new EcoreExecutorProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION, Types._Operation, 0);
 		public static final @NonNull ExecutorProperty _Operation__class = new EcoreExecutorProperty(PivotPackage.Literals.OPERATION__CLASS, Types._Operation, 1);
@@ -10180,7 +10177,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -10376,7 +10372,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -10410,7 +10405,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -10577,7 +10571,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -10753,7 +10746,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -10988,7 +10980,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11078,8 +11069,6 @@ public class PivotTables
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._OpaqueExpression__language,
-			PivotTables.Properties._OpaqueExpression__message,
-			PivotTables.Properties._ExpressionInOCL__messageExpression,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11138,7 +11127,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11210,7 +11198,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11257,7 +11244,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11289,7 +11275,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11377,7 +11362,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11460,7 +11444,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11549,7 +11532,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11610,7 +11592,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11647,7 +11628,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11683,7 +11663,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11846,7 +11825,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11878,7 +11856,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11910,7 +11887,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11942,7 +11918,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -11964,7 +11939,6 @@ public class PivotTables
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._OpaqueExpression__language,
-			PivotTables.Properties._OpaqueExpression__message,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12050,7 +12024,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -12104,7 +12077,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -12284,7 +12256,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -12451,7 +12422,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -12559,7 +12529,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -12860,7 +12829,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -13005,7 +12973,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -13238,7 +13205,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -13382,7 +13348,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -13461,7 +13426,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -13545,7 +13509,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,
@@ -13638,7 +13601,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OCLExpression__ConstructorPart__initExpression,
 			PivotTables.Properties._OCLExpression__ExpressionInOCL__bodyExpression,
-			PivotTables.Properties._OCLExpression__ExpressionInOCL__messageExpression,
 			PivotTables.Properties._OCLExpression__IfExp__condition,
 			PivotTables.Properties._OCLExpression__IfExp__elseExpression,
 			PivotTables.Properties._OCLExpression__IfExp__thenExpression,

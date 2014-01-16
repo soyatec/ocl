@@ -33,18 +33,9 @@
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_dkSmoDxsEeCYibdAWnk0AQ" name="MDT_OCL_Cache">
-      <packagedElement xmi:type="uml:Class" xmi:id="_ila-MDxsEeCYibdAWnk0AQ" name="ExpressionInOCL">
-        <ownedAttribute xmi:id="_f9bxID2REeC9A8BnhOyXOw" name="messageExpression" type="_ow1gcD2REeC9A8BnhOyXOw" aggregation="composite">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XpwdAH7VEeOu79LxSz8Ylw"/>
-        </ownedAttribute>
-      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ila-MDxsEeCYibdAWnk0AQ" name="ExpressionInOCL"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_ow1gcD2REeC9A8BnhOyXOw" name="OCLExpression" isAbstract="true"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_iYCCcDxsEeCYibdAWnk0AQ" name="OpaqueExpression">
-        <ownedAttribute xmi:id="_-8XHcD2REeC9A8BnhOyXOw" name="message" type="_DXxi0D2SEeC9A8BnhOyXOw" isOrdered="true" isUnique="false">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XpwdAX7VEeOu79LxSz8Ylw"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XpwdAn7VEeOu79LxSz8Ylw" value="*"/>
-        </ownedAttribute>
-      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_iYCCcDxsEeCYibdAWnk0AQ" name="OpaqueExpression"/>
       <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_DXxi0D2SEeC9A8BnhOyXOw" name="String"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_z_998HSdEeC3-tVPqYIPdQ" name="TemplateableElement" isAbstract="true">
         <ownedAttribute xmi:id="_5M7LAHSdEeC3-tVPqYIPdQ" name="unspecializedElement" type="_z_998HSdEeC3-tVPqYIPdQ">

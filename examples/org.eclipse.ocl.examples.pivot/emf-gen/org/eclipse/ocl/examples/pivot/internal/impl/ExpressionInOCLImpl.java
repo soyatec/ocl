@@ -46,7 +46,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getContextVariable <em>Context Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getMessageExpression <em>Message Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getParameterVariable <em>Parameter Variable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getResultVariable <em>Result Variable</em>}</li>
  * </ul>
@@ -54,7 +53,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-@SuppressWarnings("deprecation")
 public class ExpressionInOCLImpl
 		extends OpaqueExpressionImpl
 		implements ExpressionInOCL {
@@ -78,16 +76,6 @@ public class ExpressionInOCLImpl
 	 * @ordered
 	 */
 	protected Variable contextVariable;
-
-	/**
-	 * The cached value of the '{@link #getMessageExpression() <em>Message Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMessageExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression messageExpression;
 
 	/**
 	 * The cached value of the '{@link #getParameterVariable() <em>Parameter Variable</em>}' containment reference list.
@@ -283,64 +271,6 @@ public class ExpressionInOCLImpl
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Deprecated
-	public OCLExpression getMessageExpression()
-	{
-		return messageExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Deprecated
-	public NotificationChain basicSetMessageExpression(OCLExpression newMessageExpression, NotificationChain msgs)
-	{
-		OCLExpression oldMessageExpression = messageExpression;
-		messageExpression = newMessageExpression;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, oldMessageExpression, newMessageExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Deprecated
-	public void setMessageExpression(OCLExpression newMessageExpression)
-	{
-		if (newMessageExpression != messageExpression)
-		{
-			NotificationChain msgs = null;
-			if (messageExpression != null)
-				msgs = ((InternalEObject)messageExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, null, msgs);
-			if (newMessageExpression != null)
-				msgs = ((InternalEObject)newMessageExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, null, msgs);
-			msgs = basicSetMessageExpression(newMessageExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION, newMessageExpression, newMessageExpression));
-	}
-	public void zzsetMessageExpression(OCLExpression newMessageExpression)
-	{
-		setMessageExpression(newMessageExpression);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -363,8 +293,6 @@ public class ExpressionInOCLImpl
 				return basicSetBodyExpression(null, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return basicSetContextVariable(null, msgs);
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				return basicSetMessageExpression(null, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				return ((InternalEList<?>)getParameterVariable()).basicRemove(otherEnd, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
@@ -406,14 +334,10 @@ public class ExpressionInOCLImpl
 				return getBody();
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				return getLanguage();
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
-				return getMessage();
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				return getBodyExpression();
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return getContextVariable();
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				return getMessageExpression();
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				return getParameterVariable();
 			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
@@ -470,18 +394,11 @@ public class ExpressionInOCLImpl
 				getLanguage().clear();
 				getLanguage().addAll((Collection<? extends String>)newValue);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
-				getMessage().clear();
-				getMessage().addAll((Collection<? extends String>)newValue);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				setBodyExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)newValue);
-				return;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				setMessageExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				getParameterVariable().clear();
@@ -536,17 +453,11 @@ public class ExpressionInOCLImpl
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				getLanguage().clear();
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
-				getMessage().clear();
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				setBodyExpression((OCLExpression)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)null);
-				return;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				setMessageExpression((OCLExpression)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				getParameterVariable().clear();
@@ -589,14 +500,10 @@ public class ExpressionInOCLImpl
 				return body != null && !body.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				return language != null && !language.isEmpty();
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
-				return message != null && !message.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				return bodyExpression != null;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return contextVariable != null;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				return messageExpression != null;
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				return parameterVariable != null && !parameterVariable.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:

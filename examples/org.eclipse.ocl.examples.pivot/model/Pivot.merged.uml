@@ -533,10 +533,6 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TExpressionInOCL.PparameterVariable.uV"
             value="*"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="Ppivot.TExpressionInOCL.PmessageExpression" name="messageExpression"
-          type="Ppivot.TOCLExpression" aggregation="composite">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TExpressionInOCL.PmessageExpression.lV"/>
-      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="Ppivot.TFeature" name="Feature"
         isAbstract="true">
@@ -791,12 +787,6 @@
         </ownedComment>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TOpaqueExpression.Planguage.lV"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TOpaqueExpression.Planguage.uV"
-            value="*"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="Ppivot.TOpaqueExpression.Pmessage" name="message" type="Ppivot.TString"
-          isOrdered="true" isUnique="false">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TOpaqueExpression.Pmessage.lV"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TOpaqueExpression.Pmessage.uV"
             value="*"/>
       </ownedAttribute>
     </packagedElement>

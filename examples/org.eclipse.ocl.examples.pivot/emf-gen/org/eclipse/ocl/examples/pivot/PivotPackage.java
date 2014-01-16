@@ -7531,22 +7531,13 @@ public interface PivotPackage
 	int OPAQUE_EXPRESSION__LANGUAGE = VALUE_SPECIFICATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Message</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPAQUE_EXPRESSION__MESSAGE = VALUE_SPECIFICATION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Opaque Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPAQUE_EXPRESSION_FEATURE_COUNT = VALUE_SPECIFICATION_FEATURE_COUNT + 3;
+	int OPAQUE_EXPRESSION_FEATURE_COUNT = VALUE_SPECIFICATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7747,15 +7738,6 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL__LANGUAGE = OPAQUE_EXPRESSION__LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Message</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_IN_OCL__MESSAGE = OPAQUE_EXPRESSION__MESSAGE;
-
-	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7774,22 +7756,13 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL__CONTEXT_VARIABLE = OPAQUE_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Message Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_IN_OCL__MESSAGE_EXPRESSION = OPAQUE_EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Parameter Variable</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_IN_OCL__PARAMETER_VARIABLE = OPAQUE_EXPRESSION_FEATURE_COUNT + 3;
+	int EXPRESSION_IN_OCL__PARAMETER_VARIABLE = OPAQUE_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Result Variable</b></em>' containment reference.
@@ -7798,7 +7771,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_IN_OCL__RESULT_VARIABLE = OPAQUE_EXPRESSION_FEATURE_COUNT + 4;
+	int EXPRESSION_IN_OCL__RESULT_VARIABLE = OPAQUE_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Expression In OCL</em>' class.
@@ -7807,7 +7780,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_IN_OCL_FEATURE_COUNT = OPAQUE_EXPRESSION_FEATURE_COUNT + 5;
+	int EXPRESSION_IN_OCL_FEATURE_COUNT = OPAQUE_EXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -21144,17 +21117,6 @@ public interface PivotPackage
 	EReference getExpressionInOCL_ParameterVariable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression <em>Message Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Message Expression</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.ExpressionInOCL#getMessageExpression()
-	 * @see #getExpressionInOCL()
-	 * @generated
-	 */
-	EReference getExpressionInOCL_MessageExpression();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -21238,17 +21200,6 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EAttribute getOpaqueExpression_Language();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getMessage <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Message</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.OpaqueExpression#getMessage()
-	 * @see #getOpaqueExpression()
-	 * @generated
-	 */
-	EAttribute getOpaqueExpression_Message();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Variable <em>Variable</em>}'.
@@ -25597,14 +25548,6 @@ public interface PivotPackage
 		EReference EXPRESSION_IN_OCL__PARAMETER_VARIABLE = eINSTANCE.getExpressionInOCL_ParameterVariable();
 
 		/**
-		 * The meta object literal for the '<em><b>Message Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXPRESSION_IN_OCL__MESSAGE_EXPRESSION = eINSTANCE.getExpressionInOCL_MessageExpression();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl <em>Feature</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -25655,14 +25598,6 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute OPAQUE_EXPRESSION__LANGUAGE = eINSTANCE.getOpaqueExpression_Language();
-
-		/**
-		 * The meta object literal for the '<em><b>Message</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPAQUE_EXPRESSION__MESSAGE = eINSTANCE.getOpaqueExpression_Message();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl <em>Variable</em>}' class.
