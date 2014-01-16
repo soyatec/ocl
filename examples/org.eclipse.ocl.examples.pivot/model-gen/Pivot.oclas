@@ -61,7 +61,8 @@
         superClass="#T.pivot.PrimitiveLiteralExp">
       <ownedAttribute xmi:id="p.pivot.BooleanLiteralExp.booleanSymbol" name="booleanSymbol"
           type="#Boolean" isUnsettable="true"/>
-      <ownedInvariant name="TypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.BooleanLiteralExp.TypeIsBoolean" name="TypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>self.type = Boolean
 
@@ -104,7 +105,8 @@
         superClass="#T.pivot.CollectionLiteralPart">
       <ownedAttribute xmi:id="p.pivot.CollectionItem.item" name="item" type="#T.pivot.OCLExpression"
           isComposite="true" opposite="#p.pivot.OCLExpression.CollectionItem"/>
-      <ownedInvariant name="TypeIsItemType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.CollectionItem.TypeIsItemType" name="TypeIsItemType"
+          isCallable="true">
         <specification>
           <body>type = item.type
 
@@ -126,14 +128,16 @@
       <ownedAttribute xmi:id="p.pivot.CollectionLiteralExp.kind" name="kind" type="#T.pivot.CollectionKind"/>
       <ownedAttribute xmi:id="p.pivot.CollectionLiteralExp.part" name="part" type="#//@nestedPackage.1/@ownedType.157"
           isComposite="true" opposite="#p.pivot.CollectionLiteralPart.CollectionLiteralExp"/>
-      <ownedInvariant name="BagKindIsBag" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.CollectionLiteralExp.BagKindIsBag" name="BagKindIsBag"
+          isCallable="true">
         <specification>
           <body>kind = CollectionKind::Bag implies type.oclIsKindOf (BagType)
 </body>
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectionKindIsConcrete" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.CollectionLiteralExp.CollectionKindIsConcrete"
+          name="CollectionKindIsConcrete" isCallable="true">
         <specification>
           <body>kind &lt;> CollectionKind::Collection
 
@@ -141,21 +145,24 @@
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="OrderedSetKindIsOrderedSet" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.CollectionLiteralExp.OrderedSetKindIsOrderedSet"
+          name="OrderedSetKindIsOrderedSet" isCallable="true">
         <specification>
           <body>kind = CollectionKind::OrderedSet implies type.oclIsKindOf (OrderedSetType)
 </body>
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SequenceKindIsSequence" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.CollectionLiteralExp.SequenceKindIsSequence"
+          name="SequenceKindIsSequence" isCallable="true">
         <specification>
           <body>kind = CollectionKind::Sequence implies type.oclIsKindOf (SequenceType)
 </body>
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SetKindIsSet" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.CollectionLiteralExp.SetKindIsSet" name="SetKindIsSet"
+          isCallable="true">
         <specification>
           <body>kind = CollectionKind::Set implies type.oclIsKindOf (SetType)
 </body>
@@ -249,7 +256,7 @@
           type="#//@nestedPackage.1/@ownedType.53" implicit="true" opposite="#p.pivot.Transition.guard"/>
       <ownedAttribute xmi:id="p.pivot.Constraint.Type" name="Type" isRequired="false"
           type="#//@nestedPackage.1/@ownedType.58" implicit="true" opposite="#p.pivot.Type.ownedInvariant"/>
-      <ownedInvariant name="UniqueName" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Constraint.UniqueName" name="UniqueName" isCallable="true">
         <specification>
           <body>true </body>
           <language>OCL</language>
@@ -358,7 +365,8 @@ oclContents()
         superClass="#T.pivot.LiteralExp">
       <ownedAttribute xmi:id="p.pivot.EnumLiteralExp.referredEnumLiteral" name="referredEnumLiteral"
           isRequired="false" type="#T.pivot.EnumerationLiteral" opposite="#p.pivot.EnumerationLiteral.EnumLiteralExp"/>
-      <ownedInvariant name="TypeIsEnumerationType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.EnumLiteralExp.TypeIsEnumerationType" name="TypeIsEnumerationType"
+          isCallable="true">
         <specification>
           <body>self.type = referredEnumLiteral.enumeration
 
@@ -424,7 +432,8 @@ oclContents()
           type="#T.pivot.OCLExpression" isComposite="true" opposite="#//@nestedPackage.0/@ownedType.63/@ownedAttribute.8"/>
       <ownedAttribute xmi:id="p.pivot.IfExp.thenExpression" name="thenExpression"
           type="#T.pivot.OCLExpression" isComposite="true" opposite="#//@nestedPackage.0/@ownedType.63/@ownedAttribute.9"/>
-      <ownedInvariant name="ConditionTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IfExp.ConditionTypeIsBoolean" name="ConditionTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>self.condition.type = Boolean
 
@@ -447,7 +456,8 @@ oclContents()
         superClass="#T.pivot.NumericLiteralExp">
       <ownedAttribute xmi:id="p.pivot.IntegerLiteralExp.integerSymbol" name="integerSymbol"
           type="#T.pivot.Integer"/>
-      <ownedInvariant name="TypeIsInteger" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IntegerLiteralExp.TypeIsInteger" name="TypeIsInteger"
+          isCallable="true">
         <specification>
           <body>self.type = Integer
 
@@ -464,7 +474,8 @@ oclContents()
         superClass="#T.pivot.LoopExp #T.pivot.ReferringElement">
       <ownedAttribute xmi:id="p.pivot.IterateExp.result" name="result" isRequired="false"
           type="#T.pivot.Variable" isComposite="true" opposite="#p.pivot.Variable.IterateExp"/>
-      <ownedInvariant name="BodyTypeConformsToResultType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IterateExp.BodyTypeConformsToResultType" name="BodyTypeConformsToResultType"
+          isCallable="true">
         <specification>
           <body>_'body'.type.conformsTo(result.type)
 
@@ -472,7 +483,8 @@ oclContents()
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="OneInitializer" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IterateExp.OneInitializer" name="OneInitializer"
+          isCallable="true">
         <specification>
           <body>self.result.initExpression->size() = 1
 
@@ -480,7 +492,8 @@ oclContents()
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="TypeIsResultType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IterateExp.TypeIsResultType" name="TypeIsResultType"
+          isCallable="true">
         <specification>
           <body>type = result.type
 
@@ -500,7 +513,8 @@ oclContents()
     </ownedType>
     <ownedType xsi:type="pivot:Class" xmi:id="T.pivot.IteratorExp" name="IteratorExp"
         superClass="#T.pivot.LoopExp #T.pivot.ReferringElement">
-      <ownedInvariant name="AnyBodyTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.AnyBodyTypeIsBoolean" name="AnyBodyTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'any' implies _'body'.type = 'Boolean'
 
@@ -508,7 +522,8 @@ oclContents()
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="AnyHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.AnyHasOneIterator" name="AnyHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'any' implies iterator->size() = 1
 
@@ -516,7 +531,8 @@ oclContents()
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="AnyTypeIsSourceElementType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.AnyTypeIsSourceElementType" name="AnyTypeIsSourceElementType"
+          isCallable="true">
         <specification>
           <body>name = 'any' implies type = source.type.oclAsType(CollectionType).elementType
 
@@ -524,7 +540,8 @@ oclContents()
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ClosureBodyTypeIsConformanttoIteratorType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ClosureBodyTypeIsConformanttoIteratorType"
+          name="ClosureBodyTypeIsConformanttoIteratorType" isCallable="true">
         <specification>
           <body>
 	true
@@ -532,7 +549,8 @@ oclContents()
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ClosureElementTypeIsSourceElementType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ClosureElementTypeIsSourceElementType"
+          name="ClosureElementTypeIsSourceElementType" isCallable="true">
         <specification>
           <body>name = 'closure' implies
 type.oclAsType(CollectionType).elementType
@@ -542,7 +560,8 @@ type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ClosureHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ClosureHasOneIterator" name="ClosureHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'closure' implies iterator->size() = 1
 
@@ -550,7 +569,8 @@ type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ClosureSourceElementTypeIsBodyElementType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ClosureSourceElementTypeIsBodyElementType"
+          name="ClosureSourceElementTypeIsBodyElementType" isCallable="true">
         <specification>
           <body>name = 'closure' implies
 source.type.oclAsType(CollectionType).elementType =
@@ -563,7 +583,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ClosureTypeIsUniqueCollection" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ClosureTypeIsUniqueCollection" name="ClosureTypeIsUniqueCollection"
+          isCallable="true">
         <specification>
           <body>name = 'closure' implies
 if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(OrderedSetType) then
@@ -576,7 +597,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectElementTypeIsSourceElementType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.CollectElementTypeIsSourceElementType"
+          name="CollectElementTypeIsSourceElementType" isCallable="true">
         <specification>
           <body>name = 'collect' implies
 type.oclAsType(CollectionType).elementType =
@@ -586,7 +608,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.CollectHasOneIterator" name="CollectHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'collect' implies iterator->size() = 1
 
@@ -594,7 +617,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectNestedHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.CollectNestedHasOneIterator" name="CollectNestedHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'collectNested' implies iterator->size() = 1
 
@@ -602,7 +626,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectNestedTypeIsBag" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.CollectNestedTypeIsBag" name="CollectNestedTypeIsBag"
+          isCallable="true">
         <specification>
           <body>name = 'collectNested' implies type.oclIsKindOf(BagType)
 
@@ -610,7 +635,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectNestedTypeIsBodyType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.CollectNestedTypeIsBodyType" name="CollectNestedTypeIsBodyType"
+          isCallable="true">
         <specification>
           <body>name = 'collectNested' implies type = _'body'.type
 
@@ -618,7 +644,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="CollectTypeIsUnordered" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.CollectTypeIsUnordered" name="CollectTypeIsUnordered"
+          isCallable="true">
         <specification>
           <body>name = 'collect' implies
 if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(OrderedSetType) then
@@ -631,7 +658,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ExistsBodyTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ExistsBodyTypeIsBoolean" name="ExistsBodyTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'exists' implies _'body'.type = Boolean
 
@@ -639,7 +667,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ExistsTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ExistsTypeIsBoolean" name="ExistsTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'exists' implies type = Boolean
 
@@ -647,7 +676,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ForAllBodyTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ForAllBodyTypeIsBoolean" name="ForAllBodyTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'forAll' implies _'body'.type = Boolean
 
@@ -655,7 +685,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ForAllTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.ForAllTypeIsBoolean" name="ForAllTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'forAll' implies type = Boolean
 
@@ -663,7 +694,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="IsUniqueHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.IsUniqueHasOneIterator" name="IsUniqueHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'isUnique' implies iterator->size() = 1
 
@@ -671,7 +703,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="IsUniqueTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.IsUniqueTypeIsBoolean" name="IsUniqueTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'isUnique' implies type = Boolean
 
@@ -679,7 +712,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="IteratorTypeIsSourceElementType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.IteratorTypeIsSourceElementType"
+          name="IteratorTypeIsSourceElementType" isCallable="true">
         <specification>
           <body>self.iterator->forAll(source.type.oclAsType (CollectionType).elementType.conformsTo(type))
 
@@ -687,7 +721,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="OneBodyTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.OneBodyTypeIsBoolean" name="OneBodyTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'one' implies _'body'.type = Boolean
 
@@ -695,7 +730,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="OneHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.OneHasOneIterator" name="OneHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'one' implies iterator->size() = 1
 
@@ -703,7 +739,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="OneTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.OneTypeIsBoolean" name="OneTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'one' implies type = Boolean
 
@@ -711,7 +748,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="RejectOrSelectHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.RejectOrSelectHasOneIterator" name="RejectOrSelectHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'reject' or name = 'select' implies iterator->size() = 1
 
@@ -719,7 +757,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="RejectOrSelectTypeIsBoolean" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.RejectOrSelectTypeIsBoolean" name="RejectOrSelectTypeIsBoolean"
+          isCallable="true">
         <specification>
           <body>name = 'reject' or name = 'select' implies type = Boolean
 
@@ -727,7 +766,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="RejectOrSelectTypeIsSourceType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.RejectOrSelectTypeIsSourceType"
+          name="RejectOrSelectTypeIsSourceType" isCallable="true">
         <specification>
           <body>name = 'reject' or name = 'select' implies type = source.type
 
@@ -735,7 +775,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SortedByElementTypeIsSourceElementType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.SortedByElementTypeIsSourceElementType"
+          name="SortedByElementTypeIsSourceElementType" isCallable="true">
         <specification>
           <body>name = 'sortedBy' implies
 type.oclAsType(CollectionType).elementType =
@@ -745,7 +786,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SortedByHasOneIterator" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.SortedByHasOneIterator" name="SortedByHasOneIterator"
+          isCallable="true">
         <specification>
           <body>name = 'sortedBy' implies iterator->size() = 1
 
@@ -753,7 +795,8 @@ _'body'.type.oclAsType(CollectionType).elementType
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SortedByIsOrderedIfSourceIsOrdered" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.SortedByIsOrderedIfSourceIsOrdered"
+          name="SortedByIsOrderedIfSourceIsOrdered" isCallable="true">
         <specification>
           <body>name = 'sortedBy' implies
 if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(BagType) then
@@ -766,7 +809,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SortedByIteratorTypeIsComparable" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.IteratorExp.SortedByIteratorTypeIsComparable"
+          name="SortedByIteratorTypeIsComparable" isCallable="true">
         <specification>
           <body>
 	true
@@ -790,7 +834,7 @@ endif
           isComposite="true" opposite="#p.pivot.OCLExpression.LetExp"/>
       <ownedAttribute xmi:id="p.pivot.LetExp.variable" name="variable" type="#T.pivot.Variable"
           isComposite="true" opposite="#p.pivot.Variable.LetExp"/>
-      <ownedInvariant name="TypeIsInType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.LetExp.TypeIsInType" name="TypeIsInType" isCallable="true">
         <specification>
           <body>type = _'in'.type
 
@@ -816,7 +860,8 @@ endif
           isComposite="true" opposite="#p.pivot.Variable.LoopExp"/>
       <ownedAttribute xmi:id="p.pivot.LoopExp.referredIteration" name="referredIteration"
           isRequired="false" type="#T.pivot.Iteration" opposite="#p.pivot.Iteration.LoopExp"/>
-      <ownedInvariant name="NoInitializers" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.LoopExp.NoInitializers" name="NoInitializers"
+          isCallable="true">
         <specification>
           <body>self.iterator->forAll(initExpression->isEmpty())
 
@@ -824,7 +869,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="SourceIsCollection" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.LoopExp.SourceIsCollection" name="SourceIsCollection"
+          isCallable="true">
         <specification>
           <body>source.type.oclIsKindOf (CollectionType)
 
@@ -844,7 +890,8 @@ endif
           type="#T.pivot.SendSignalAction" isComposite="true" opposite="#p.pivot.SendSignalAction.MessageExp"/>
       <ownedAttribute xmi:id="p.pivot.MessageExp.target" name="target" type="#T.pivot.OCLExpression"
           isComposite="true" opposite="#//@nestedPackage.0/@ownedType.63/@ownedAttribute.13"/>
-      <ownedInvariant name="OneCallOrOneSend" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.MessageExp.OneCallOrOneSend" name="OneCallOrOneSend"
+          isCallable="true">
         <specification>
           <body>calledOperation->size() + sentSignal->size() = 1
 
@@ -852,7 +899,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="TargetIsNotACollection" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.MessageExp.TargetIsNotACollection" name="TargetIsNotACollection"
+          isCallable="true">
         <specification>
           <body>not target.type.oclIsKindOf (CollectionType)
 
@@ -1023,14 +1071,16 @@ endif
       <ownedAttribute xmi:id="p.pivot.Operation.OperationCallExp" name="OperationCallExp"
           isRequired="false" type="#//@nestedPackage.1/@ownedType.36" implicit="true"
           opposite="#p.pivot.OperationCallExp.referredOperation"/>
-      <ownedInvariant name="CompatibleReturn" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Operation.CompatibleReturn" name="CompatibleReturn"
+          isCallable="true">
         <specification>
           <body>bodyExpression &lt;> null and bodyExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression)
 </body>
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="LoadableImplementation" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Operation.LoadableImplementation" name="LoadableImplementation"
+          isCallable="true">
         <specification>
           <body>
 	true
@@ -1038,7 +1088,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="UniquePostconditionName" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Operation.UniquePostconditionName" name="UniquePostconditionName"
+          isCallable="true">
         <specification>
           <body>postcondition->isUnique(name)
 
@@ -1046,7 +1097,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="UniquePreconditionName" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Operation.UniquePreconditionName" name="UniquePreconditionName"
+          isCallable="true">
         <specification>
           <body>precondition->isUnique(name)
 </body>
@@ -1060,7 +1112,8 @@ endif
           isComposite="true" opposite="#p.pivot.OCLExpression.OperationCallExp"/>
       <ownedAttribute xmi:id="p.pivot.OperationCallExp.referredOperation" name="referredOperation"
           isRequired="false" type="#T.pivot.Operation" opposite="#p.pivot.Operation.OperationCallExp"/>
-      <ownedInvariant name="ArgumentCount" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.OperationCallExp.ArgumentCount" name="ArgumentCount"
+          isCallable="true">
         <specification>
           <body>argument->size() = referredOperation.ownedParameter->size()
 
@@ -1068,7 +1121,8 @@ endif
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="ArgumentTypeIsConformant" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.OperationCallExp.ArgumentTypeIsConformant" name="ArgumentTypeIsConformant"
+          isCallable="true">
         <specification>
           <body>
 	let operation : Operation = self.referredOperation in
@@ -1274,7 +1328,8 @@ p.oclIsKindOf(self.oclType())
       <ownedAttribute xmi:id="p.pivot.Property.PropertyCallExp" name="PropertyCallExp"
           isRequired="false" type="#//@nestedPackage.1/@ownedType.40" implicit="true"
           opposite="#p.pivot.PropertyCallExp.referredProperty"/>
-      <ownedInvariant name="CompatibleDefaultExpression" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Property.CompatibleDefaultExpression" name="CompatibleDefaultExpression"
+          isCallable="true">
         <specification>
           <body>defaultExpression &lt;> null and defaultExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(defaultExpression)
 
@@ -1300,7 +1355,8 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
         superClass="#T.pivot.NavigationCallExp #T.pivot.ReferringElement">
       <ownedAttribute xmi:id="p.pivot.PropertyCallExp.referredProperty" name="referredProperty"
           isRequired="false" type="#T.pivot.Property" opposite="#p.pivot.Property.PropertyCallExp"/>
-      <ownedInvariant name="CompatibleResultType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.PropertyCallExp.CompatibleResultType" name="CompatibleResultType"
+          isCallable="true">
         <specification>
           <body>type = getSpecializedReferredPropertyType()
 
@@ -1308,7 +1364,8 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
           <language>OCL</language>
         </specification>
       </ownedInvariant>
-      <ownedInvariant name="NonStaticSourceTypeIsConformant" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.PropertyCallExp.NonStaticSourceTypeIsConformant"
+          name="NonStaticSourceTypeIsConformant" isCallable="true">
         <specification>
           <body>not referredProperty.isStatic implies source.type.conformsTo(getSpecializedReferredPropertyOwningType())
 </body>
@@ -1818,7 +1875,8 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
           implicit="true" opposite="#p.pivot.UnspecifiedType.lowerBound"/>
       <ownedAttribute name="UnspecifiedType" isRequired="false" type="#//@nestedPackage.1/@ownedType.60"
           implicit="true" opposite="#p.pivot.UnspecifiedType.upperBound"/>
-      <ownedInvariant name="UniqueInvariantName" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Type.UniqueInvariantName" name="UniqueInvariantName"
+          isCallable="true">
         <specification>
           <body>ownedInvariant->isUnique(name)
 
@@ -1954,7 +2012,8 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
           type="#//@nestedPackage.1/@ownedType.27" implicit="true" opposite="#p.pivot.LetExp.variable"/>
       <ownedAttribute xmi:id="p.pivot.Variable.LoopExp" name="LoopExp" isRequired="false"
           type="#//@nestedPackage.1/@ownedType.29" implicit="true" opposite="#p.pivot.LoopExp.iterator"/>
-      <ownedInvariant name="CompatibleInitialiserType" isCallable="true">
+      <ownedInvariant xmi:id="cipivot.Variable.CompatibleInitialiserType" name="CompatibleInitialiserType"
+          isCallable="true">
         <specification>
           <body>initExpression &lt;> null implies initExpression.type.conformsTo(type)
 

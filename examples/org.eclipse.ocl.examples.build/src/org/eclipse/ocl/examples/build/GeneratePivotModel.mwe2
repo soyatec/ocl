@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429"
  * </copyright>
- *
- * $Id: GeneratePivotModel.mwe2,v 1.3 2011/02/15 10:36:50 ewillink Exp $
  * 
  * Run As->MWE2 Workflow to regenerate the pivot model.
  */
@@ -44,7 +42,7 @@ Workflow {
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${umlSlot}"
-    	uri = "/${projectName}/model/Pivot.cmof"
+    	uri = "/${projectName}/model/Pivot.uml"
 	}
     component = PackageMerger { skipOnErrors = true
     	modelSlot = "${umlSlot}"

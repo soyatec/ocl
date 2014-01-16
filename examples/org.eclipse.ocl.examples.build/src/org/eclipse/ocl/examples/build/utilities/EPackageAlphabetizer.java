@@ -56,22 +56,22 @@ public class EPackageAlphabetizer extends WorkflowComponentWithModelSlot
 			EClass e1 = o1.eClass();
 			EClass e2 = o2.eClass();
 			if (e1 != e2) {
+				if (EcorePackage.Literals.ECLASS.isSuperTypeOf(e1)) {
+					return 1;
+				}
+				else if (EcorePackage.Literals.ECLASS.isSuperTypeOf(e2)) {
+					return -1;
+				}
+				if (EcorePackage.Literals.EENUM.isSuperTypeOf(e1)) {
+					return 1;
+				}
+				else if (EcorePackage.Literals.EENUM.isSuperTypeOf(e2)) {
+					return -1;
+				}
 				if (EcorePackage.Literals.EDATA_TYPE.isSuperTypeOf(e1)) {
 					return -1;
 				}
 				else if (EcorePackage.Literals.EDATA_TYPE.isSuperTypeOf(e2)) {
-					return 1;
-				}
-				if (EcorePackage.Literals.EENUM.isSuperTypeOf(e1)) {
-					return -1;
-				}
-				else if (EcorePackage.Literals.EENUM.isSuperTypeOf(e2)) {
-					return 1;
-				}
-				if (EcorePackage.Literals.ECLASS.isSuperTypeOf(e1)) {
-					return -1;
-				}
-				else if (EcorePackage.Literals.ECLASS.isSuperTypeOf(e2)) {
 					return 1;
 				}
 			}
