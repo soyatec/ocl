@@ -1753,8 +1753,18 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getOpaqueExpression_ExpressionInOCL()
+	{
+		return (EReference)opaqueExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getOpaqueExpression_Language() {
-		return (EAttribute)opaqueExpressionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)opaqueExpressionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -5488,6 +5498,7 @@ public class PivotPackageImpl
 
 		opaqueExpressionEClass = createEClass(OPAQUE_EXPRESSION);
 		createEAttribute(opaqueExpressionEClass, OPAQUE_EXPRESSION__BODY);
+		createEReference(opaqueExpressionEClass, OPAQUE_EXPRESSION__EXPRESSION_IN_OCL);
 		createEAttribute(opaqueExpressionEClass, OPAQUE_EXPRESSION__LANGUAGE);
 
 		operationEClass = createEClass(OPERATION);
@@ -6604,6 +6615,7 @@ public class PivotPackageImpl
 
 		initEClass(opaqueExpressionEClass, OpaqueExpression.class, "OpaqueExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getOpaqueExpression_Body(), this.getString(), "body", null, 0, -1, OpaqueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getOpaqueExpression_ExpressionInOCL(), this.getExpressionInOCL(), null, "expressionInOCL", null, 0, 1, OpaqueExpression.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getOpaqueExpression_Language(), this.getString(), "language", null, 0, -1, OpaqueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

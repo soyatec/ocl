@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -41,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl#getExpressionInOCL <em>Expression In OCL</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OpaqueExpressionImpl#getLanguage <em>Language</em>}</li>
  * </ul>
  * </p>
@@ -60,6 +62,16 @@ public class OpaqueExpressionImpl
 	 * @ordered
 	 */
 	protected EList<String> body;
+
+	/**
+	 * The cached value of the '{@link #getExpressionInOCL() <em>Expression In OCL</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpressionInOCL expressionInOCL;
 
 	/**
 	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute list.
@@ -109,6 +121,16 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ExpressionInOCL getExpressionInOCL()
+	{
+		return expressionInOCL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public List<String> getLanguage()
 	{
 		if (language == null)
@@ -149,6 +171,8 @@ public class OpaqueExpressionImpl
 				return basicGetTemplateParameter();
 			case PivotPackage.OPAQUE_EXPRESSION__BODY:
 				return getBody();
+			case PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL:
+				return getExpressionInOCL();
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				return getLanguage();
 		}
@@ -282,6 +306,8 @@ public class OpaqueExpressionImpl
 				return templateParameter != null;
 			case PivotPackage.OPAQUE_EXPRESSION__BODY:
 				return body != null && !body.isEmpty();
+			case PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL:
+				return expressionInOCL != null;
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				return language != null && !language.isEmpty();
 		}

@@ -7522,13 +7522,22 @@ public interface PivotPackage
 	int OPAQUE_EXPRESSION__BODY = VALUE_SPECIFICATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Expression In OCL</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPAQUE_EXPRESSION__EXPRESSION_IN_OCL = VALUE_SPECIFICATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPAQUE_EXPRESSION__LANGUAGE = VALUE_SPECIFICATION_FEATURE_COUNT + 1;
+	int OPAQUE_EXPRESSION__LANGUAGE = VALUE_SPECIFICATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Opaque Expression</em>' class.
@@ -7537,7 +7546,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPAQUE_EXPRESSION_FEATURE_COUNT = VALUE_SPECIFICATION_FEATURE_COUNT + 2;
+	int OPAQUE_EXPRESSION_FEATURE_COUNT = VALUE_SPECIFICATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7727,6 +7736,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int EXPRESSION_IN_OCL__BODY = OPAQUE_EXPRESSION__BODY;
+
+	/**
+	 * The feature id for the '<em><b>Expression In OCL</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_IN_OCL__EXPRESSION_IN_OCL = OPAQUE_EXPRESSION__EXPRESSION_IN_OCL;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute list.
@@ -21191,6 +21209,17 @@ public interface PivotPackage
 	EAttribute getOpaqueExpression_Body();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL <em>Expression In OCL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Expression In OCL</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL()
+	 * @see #getOpaqueExpression()
+	 * @generated
+	 */
+	EReference getOpaqueExpression_ExpressionInOCL();
+
+	/**
 	 * Returns the meta object for the attribute list '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getLanguage <em>Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -25590,6 +25619,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute OPAQUE_EXPRESSION__BODY = eINSTANCE.getOpaqueExpression_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression In OCL</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPAQUE_EXPRESSION__EXPRESSION_IN_OCL = eINSTANCE.getOpaqueExpression_ExpressionInOCL();
 
 		/**
 		 * The meta object literal for the '<em><b>Language</b></em>' attribute list feature.

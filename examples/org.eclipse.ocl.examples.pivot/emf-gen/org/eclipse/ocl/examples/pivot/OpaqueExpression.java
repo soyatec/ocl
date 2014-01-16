@@ -32,6 +32,7 @@ import java.util.List;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL <em>Expression In OCL</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getLanguage <em>Language</em>}</li>
  * </ul>
  * </p>
@@ -55,6 +56,20 @@ public interface OpaqueExpression
 	 * @generated
 	 */
 	List<String> getBody();
+
+	/**
+	 * Returns the value of the '<em><b>Expression In OCL</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Expression In OCL</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Expression In OCL</em>' reference.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ExpressionInOCL()
+	 * @generated
+	 */
+	ExpressionInOCL getExpressionInOCL();
 
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute list.

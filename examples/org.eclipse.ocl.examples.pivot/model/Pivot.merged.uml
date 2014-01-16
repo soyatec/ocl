@@ -789,6 +789,11 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TOpaqueExpression.Planguage.uV"
             value="*"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="Ppivot.TOpaqueExpression.PexpressionInOCL" name="expressionInOCL"
+          type="Ppivot.TExpressionInOCL" isReadOnly="true" aggregation="composite"
+          isDerived="true">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TOpaqueExpression.PexpressionInOCL.lV"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="Ppivot.TOperation" name="Operation">
       <ownedComment xmi:id="Ppivot.TOperation.oC0" annotatedElement="Ppivot.TOperation">
@@ -2324,6 +2329,8 @@
     </profileApplication>
   </uml:Package>
   <Ecore:EPackage xmi:id="PA.Ppivot" base_Package="Ppivot" nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot"/>
+  <Ecore:EReference xmi:id="PA.Ppivot.TOpaqueExpression.PexpressionInOCL" isTransient="true"
+      base_Property="Ppivot.TOpaqueExpression.PexpressionInOCL" isResolveProxies="false"/>
   <Ecore:EReference xmi:id="PA.Ppivot.TTemplateableElement.PunspecializedElement"
       isTransient="true" base_Property="Ppivot.TTemplateableElement.PunspecializedElement"
       isResolveProxies="false"/>

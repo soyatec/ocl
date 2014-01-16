@@ -228,6 +228,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_NamedElement = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Namespace = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Namespace);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_NavigationCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_NavigationCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_OpaqueExpression = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_OpaqueExpression);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Operation = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_Operation);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_OperationCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_OperationCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_OppositePropertyCallExp = TypeId.BAG.getSpecializedId(PivotTables.CLSSid_OppositePropertyCallExp);
@@ -2083,6 +2084,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _ExpressionInOCL__contextVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__CONTEXT_VARIABLE, Types._ExpressionInOCL, 1);
 		public static final @NonNull ExecutorProperty _ExpressionInOCL__parameterVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__PARAMETER_VARIABLE, Types._ExpressionInOCL, 2);
 		public static final @NonNull ExecutorProperty _ExpressionInOCL__resultVariable = new EcoreExecutorProperty(PivotPackage.Literals.EXPRESSION_IN_OCL__RESULT_VARIABLE, Types._ExpressionInOCL, 3);
+		public static final @NonNull ExecutorProperty _ExpressionInOCL__OpaqueExpression__expressionInOCL = new ExecutorPropertyWithImplementation("OpaqueExpression", Types._ExpressionInOCL, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL));
 
 		public static final @NonNull ExecutorProperty _Feature__implementation = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION, Types._Feature, 0);
 		public static final @NonNull ExecutorProperty _Feature__implementationClass = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION_CLASS, Types._Feature, 1);
@@ -2157,10 +2159,11 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _OCLExpression__Variable__initExpression = new ExecutorPropertyWithImplementation("Variable", Types._OCLExpression, 16, new EcoreLibraryOppositeProperty(PivotPackage.Literals.VARIABLE__INIT_EXPRESSION));
 
 		public static final @NonNull ExecutorProperty _OpaqueExpression__body = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__BODY, Types._OpaqueExpression, 0);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__language = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, Types._OpaqueExpression, 1);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__Constraint__specification = new ExecutorPropertyWithImplementation("Constraint", Types._OpaqueExpression, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION));
-		public static final @NonNull ExecutorProperty _OpaqueExpression__Operation__bodyExpression = new ExecutorPropertyWithImplementation("Operation", Types._OpaqueExpression, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION));
-		public static final @NonNull ExecutorProperty _OpaqueExpression__Property__defaultExpression = new ExecutorPropertyWithImplementation("Property", Types._OpaqueExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__expressionInOCL = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL, Types._OpaqueExpression, 1);
+		public static final @NonNull ExecutorProperty _OpaqueExpression__language = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, Types._OpaqueExpression, 2);
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Constraint__specification = new ExecutorPropertyWithImplementation("Constraint", Types._OpaqueExpression, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Operation__bodyExpression = new ExecutorPropertyWithImplementation("Operation", Types._OpaqueExpression, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Property__defaultExpression = new ExecutorPropertyWithImplementation("Property", Types._OpaqueExpression, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION));
 
 		public static final @NonNull ExecutorProperty _Operation__bodyExpression = new EcoreExecutorProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION, Types._Operation, 0);
 		public static final @NonNull ExecutorProperty _Operation__class = new EcoreExecutorProperty(PivotPackage.Literals.OPERATION__CLASS, Types._Operation, 1);
@@ -11065,6 +11068,7 @@ public class PivotTables
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._ExpressionInOCL__bodyExpression,
 			PivotTables.Properties._ExpressionInOCL__contextVariable,
+			PivotTables.Properties._OpaqueExpression__expressionInOCL,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,
@@ -11082,6 +11086,7 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment__annotatedElement,
 			PivotTables.Properties._Element__Constraint__constrainedElement,
 			PivotTables.Properties._OpaqueExpression__Constraint__specification,
+			PivotTables.Properties._ExpressionInOCL__OpaqueExpression__expressionInOCL,
 			PivotTables.Properties._OpaqueExpression__Operation__bodyExpression,
 			PivotTables.Properties._OpaqueExpression__Property__defaultExpression,
 			PivotTables.Properties._ParameterableElement__TemplateParameter__default,
@@ -11935,6 +11940,7 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _OpaqueExpression = {
 			PivotTables.Properties._OpaqueExpression__body,
+			PivotTables.Properties._OpaqueExpression__expressionInOCL,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,

@@ -332,6 +332,8 @@ public class ExpressionInOCLImpl
 				return basicGetTemplateParameter();
 			case PivotPackage.EXPRESSION_IN_OCL__BODY:
 				return getBody();
+			case PivotPackage.EXPRESSION_IN_OCL__EXPRESSION_IN_OCL:
+				return getExpressionInOCL();
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				return getLanguage();
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
@@ -498,6 +500,8 @@ public class ExpressionInOCLImpl
 				return templateParameter != null;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY:
 				return body != null && !body.isEmpty();
+			case PivotPackage.EXPRESSION_IN_OCL__EXPRESSION_IN_OCL:
+				return expressionInOCL != null;
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				return language != null && !language.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
@@ -515,6 +519,11 @@ public class ExpressionInOCLImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitExpressionInOCL(this);
+	}
+
+	@Override
+	public @NonNull ExpressionInOCL getExpressionInOCL() {
+		return this;
 	}
 
 } //ExpressionInOCLImpl

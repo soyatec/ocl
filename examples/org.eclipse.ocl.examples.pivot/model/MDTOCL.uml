@@ -35,7 +35,11 @@
     <packagedElement xmi:type="uml:Package" xmi:id="_dkSmoDxsEeCYibdAWnk0AQ" name="MDT_OCL_Cache">
       <packagedElement xmi:type="uml:Class" xmi:id="_ila-MDxsEeCYibdAWnk0AQ" name="ExpressionInOCL"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_ow1gcD2REeC9A8BnhOyXOw" name="OCLExpression" isAbstract="true"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_iYCCcDxsEeCYibdAWnk0AQ" name="OpaqueExpression"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_iYCCcDxsEeCYibdAWnk0AQ" name="OpaqueExpression">
+        <ownedAttribute xmi:id="_a7GKgH7YEeOu79LxSz8Ylw" name="expressionInOCL" type="_ila-MDxsEeCYibdAWnk0AQ" isReadOnly="true" aggregation="composite" isDerived="true">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gIW5kH7YEeOu79LxSz8Ylw"/>
+        </ownedAttribute>
+      </packagedElement>
       <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_DXxi0D2SEeC9A8BnhOyXOw" name="String"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_z_998HSdEeC3-tVPqYIPdQ" name="TemplateableElement" isAbstract="true">
         <ownedAttribute xmi:id="_5M7LAHSdEeC3-tVPqYIPdQ" name="unspecializedElement" type="_z_998HSdEeC3-tVPqYIPdQ">
@@ -365,4 +369,5 @@
   <Ecore:EDataType xmi:id="_lgTD4Ob7EeGuHKPT-USe0w" instanceClassName="int"/>
   <Ecore:EClass xmi:id="_MJHVIPtzEeGgYeRoQSJFAw"/>
   <Ecore:EClass xmi:id="_VF5C4PtzEeGgYeRoQSJFAw" base_Interface="_RhE4UPtzEeGgYeRoQSJFAw"/>
+  <Ecore:EReference xmi:id="_mVct8H7YEeOu79LxSz8Ylw" isTransient="true" base_Property="_a7GKgH7YEeOu79LxSz8Ylw" isResolveProxies="false"/>
 </xmi:XMI>
