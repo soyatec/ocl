@@ -365,7 +365,7 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TConstraint.Pspecification.lV"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TConstraint.Pcontext" name="context" type="Ppivot.TNamespace"
-          isDerived="true">
+          isReadOnly="true" isDerived="true">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TConstraint.Pcontext.lV"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TConstraint.PisCallable" name="isCallable" type="Ppivot.TBoolean">
@@ -1088,13 +1088,6 @@
         <defaultValue xmi:type="uml:LiteralString" xmi:id="Ppivot.TProperty.PisDerived.dlV"
             value="false"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="Ppivot.TProperty.Pclass" name="class" type="Ppivot.TClass"
-          association="Ppivot.A_ownedAttribute_class">
-        <ownedComment xmi:id="Ppivot.TProperty.Pclass.oC0" annotatedElement="Ppivot.TProperty.Pclass">
-          <body>The class that owns the property, and of which the property is an attribute.</body>
-        </ownedComment>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TProperty.Pclass.lV"/>
-      </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TProperty.Popposite" name="opposite" type="Ppivot.TProperty"
           association="Ppivot.A_opposite_property">
         <ownedComment xmi:id="Ppivot.TProperty.Popposite.oC0" annotatedElement="Ppivot.TProperty.Popposite">
@@ -1114,6 +1107,13 @@
       <ownedAttribute xmi:id="Ppivot.TProperty.PowningType" name="owningType" type="Ppivot.TType"
           association="Ppivot.A_ownedAttribute_owningType">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TProperty.PowningType.lV"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="Ppivot.TProperty.Pclass" name="class" type="Ppivot.TClass"
+          association="Ppivot.A_ownedAttribute_class">
+        <ownedComment xmi:id="Ppivot.TProperty.Pclass.oC0" annotatedElement="Ppivot.TProperty.Pclass">
+          <body>The class that owns the property, and of which the property is an attribute.</body>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TProperty.Pclass.lV"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TProperty.PdefaultExpression" name="defaultExpression"
           type="Ppivot.TOpaqueExpression" aggregation="composite">
@@ -1289,7 +1289,7 @@
       <generalization xmi:id="Ppivot.TState.g1" general="Ppivot.TNamespace"/>
       <generalization xmi:id="Ppivot.TState.g2" general="Ppivot.TNamedElement"/>
       <ownedAttribute xmi:id="Ppivot.TState.PisComposite" name="isComposite" type="Ppivot.TBoolean"
-          isDerived="true">
+          isReadOnly="true" isDerived="true">
         <ownedComment xmi:id="Ppivot.TState.PisComposite.oC0" annotatedElement="Ppivot.TState.PisComposite">
           <body>A state with isComposite=true is said to be a composite state. A composite state is a state that contains at least one region.</body>
         </ownedComment>
@@ -1297,7 +1297,7 @@
             value="false"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TState.PisOrthogonal" name="isOrthogonal" type="Ppivot.TBoolean"
-          isDerived="true">
+          isReadOnly="true" isDerived="true">
         <ownedComment xmi:id="Ppivot.TState.PisOrthogonal.oC0" annotatedElement="Ppivot.TState.PisOrthogonal">
           <body>A state with isOrthogonal=true is said to be an orthogonal composite state. An orthogonal composite state contains two or more regions.</body>
         </ownedComment>
@@ -1305,7 +1305,7 @@
             value="false"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TState.PisSimple" name="isSimple" type="Ppivot.TBoolean"
-          isDerived="true">
+          isReadOnly="true" isDerived="true">
         <ownedComment xmi:id="Ppivot.TState.PisSimple.oC0" annotatedElement="Ppivot.TState.PisSimple">
           <body>A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine.</body>
         </ownedComment>
@@ -2329,6 +2329,16 @@
     </profileApplication>
   </uml:Package>
   <Ecore:EPackage xmi:id="PA.Ppivot" base_Package="Ppivot" nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot"/>
+  <Ecore:EReference xmi:id="PA.Ppivot.TConstraint.Pcontext" isTransient="true" isVolatile="true"
+      base_Property="Ppivot.TConstraint.Pcontext" isResolveProxies="false"/>
+  <Ecore:EAttribute xmi:id="PA.Ppivot.TState.PisComposite" isTransient="true" isVolatile="true"
+      base_Property="Ppivot.TState.PisComposite"/>
+  <Ecore:EAttribute xmi:id="PA.Ppivot.TState.PisOrthogonal" isTransient="true" isVolatile="true"
+      base_Property="Ppivot.TState.PisOrthogonal"/>
+  <Ecore:EAttribute xmi:id="PA.Ppivot.TState.PisSimple" isTransient="true" isVolatile="true"
+      base_Property="Ppivot.TState.PisSimple"/>
+  <Ecore:EReference xmi:id="PA.Ppivot.TProperty.Pclass" isTransient="true" isVolatile="true"
+      base_Property="Ppivot.TProperty.Pclass" isResolveProxies="false"/>
   <Ecore:EReference xmi:id="PA.Ppivot.TOpaqueExpression.PexpressionInOCL" isTransient="true"
       base_Property="Ppivot.TOpaqueExpression.PexpressionInOCL" isResolveProxies="false"/>
   <Ecore:EReference xmi:id="PA.Ppivot.TTemplateableElement.PunspecializedElement"

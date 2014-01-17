@@ -7522,7 +7522,7 @@ public interface PivotPackage
 	int OPAQUE_EXPRESSION__BODY = VALUE_SPECIFICATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Expression In OCL</b></em>' reference.
+	 * The feature id for the '<em><b>Expression In OCL</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -7738,7 +7738,7 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL__BODY = OPAQUE_EXPRESSION__BODY;
 
 	/**
-	 * The feature id for the '<em><b>Expression In OCL</b></em>' reference.
+	 * The feature id for the '<em><b>Expression In OCL</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -21209,10 +21209,10 @@ public interface PivotPackage
 	EAttribute getOpaqueExpression_Body();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL <em>Expression In OCL</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL <em>Expression In OCL</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Expression In OCL</em>'.
+	 * @return the meta object for the containment reference '<em>Expression In OCL</em>'.
 	 * @see org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL()
 	 * @see #getOpaqueExpression()
 	 * @generated
@@ -25621,7 +25621,7 @@ public interface PivotPackage
 		EAttribute OPAQUE_EXPRESSION__BODY = eINSTANCE.getOpaqueExpression_Body();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression In OCL</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Expression In OCL</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

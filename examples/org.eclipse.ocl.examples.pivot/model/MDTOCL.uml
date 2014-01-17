@@ -370,4 +370,5 @@
   <Ecore:EClass xmi:id="_MJHVIPtzEeGgYeRoQSJFAw"/>
   <Ecore:EClass xmi:id="_VF5C4PtzEeGgYeRoQSJFAw" base_Interface="_RhE4UPtzEeGgYeRoQSJFAw"/>
   <Ecore:EReference xmi:id="_mVct8H7YEeOu79LxSz8Ylw" isTransient="true" base_Property="_a7GKgH7YEeOu79LxSz8Ylw" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_cDP_kH8_EeOrlIuDtf7a6A" isTransient="true" isVolatile="true" isUnsettable="true" isResolveProxies="false"/>
 </xmi:XMI>

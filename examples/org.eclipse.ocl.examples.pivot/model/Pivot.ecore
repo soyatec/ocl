@@ -337,7 +337,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Namespace"
-        volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCallable" lowerBound="1"
         eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedConstraint" ordered="false"
@@ -1087,7 +1087,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressionInOCL" eType="#//ExpressionInOCL"
-        changeable="false" transient="true" derived="true" resolveProxies="false"/>
+        changeable="false" transient="true" derived="true" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" upperBound="-1"
         eType="#//String">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1334,7 +1334,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="association" eType="#//AssociationClass"
         eOpposite="#//AssociationClass/unownedAttribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="#//Class"
-        changeable="false" volatile="true" transient="true">
+        changeable="false" volatile="true" transient="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The class that owns the property, and of which the property is an attribute."/>
       </eAnnotations>
@@ -1552,21 +1552,21 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" lowerBound="1"
-        eType="#//Boolean" volatile="true" transient="true" defaultValueLiteral="false"
+        eType="#//Boolean" changeable="false" volatile="true" transient="true" defaultValueLiteral="false"
         derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A state with isComposite=true is said to be a composite state. A composite state is a state that contains at least one region."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrthogonal" lowerBound="1"
-        eType="#//Boolean" volatile="true" transient="true" defaultValueLiteral="false"
+        eType="#//Boolean" changeable="false" volatile="true" transient="true" defaultValueLiteral="false"
         derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A state with isOrthogonal=true is said to be an orthogonal composite state. An orthogonal composite state contains two or more regions."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSimple" lowerBound="1"
-        eType="#//Boolean" volatile="true" transient="true" defaultValueLiteral="true"
+        eType="#//Boolean" changeable="false" volatile="true" transient="true" defaultValueLiteral="true"
         derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine."/>

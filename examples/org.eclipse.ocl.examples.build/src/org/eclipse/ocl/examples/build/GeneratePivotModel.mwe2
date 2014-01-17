@@ -93,9 +93,9 @@ Workflow {
     component = SetASMetamodel { skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }
-    component = PivotWorkarounds { skipOnErrors = true
-    	modelSlot = "${ecoreSlot}"
-    }
+//    component = PivotWorkarounds { skipOnErrors = true
+//    	modelSlot = "${ecoreSlot}"
+//    }
 //    component = OCLDelegateActivator { skipOnErrors = true
 //    	modelSlot = "${pivotSlot}"
 //    }

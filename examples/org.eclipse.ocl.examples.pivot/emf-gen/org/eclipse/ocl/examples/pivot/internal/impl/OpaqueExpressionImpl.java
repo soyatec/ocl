@@ -19,8 +19,11 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -66,7 +69,7 @@ public class OpaqueExpressionImpl
 	protected EList<String> body;
 
 	/**
-	 * The cached value of the '{@link #getExpressionInOCL() <em>Expression In OCL</em>}' reference.
+	 * The cached value of the '{@link #getExpressionInOCL() <em>Expression In OCL</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getExpressionInOCL()
@@ -309,6 +312,23 @@ public class OpaqueExpressionImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExpressionInOCL(ExpressionInOCL newExpressionInOCL, NotificationChain msgs)
+	{
+		ExpressionInOCL oldExpressionInOCL = expressionInOCL;
+		expressionInOCL = newExpressionInOCL;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL, oldExpressionInOCL, newExpressionInOCL);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -333,7 +353,7 @@ public class OpaqueExpressionImpl
 			if (contextElement != null) {
 				String expression = PivotUtil.getBody(this);
 				if (expression != null) {
-					expressionInOCL = PivotUtil.getExpressionInOCL(contextElement, expression);
+					basicSetExpressionInOCL(PivotUtil.getExpressionInOCL(contextElement, expression),  null);
 				}
 			}
 		}

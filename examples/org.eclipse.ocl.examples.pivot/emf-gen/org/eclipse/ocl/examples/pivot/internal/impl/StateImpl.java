@@ -268,18 +268,6 @@ public class StateImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsComposite(boolean newIsComposite)
-	{
-		// TODO: implement this method to set the 'Is Composite' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean isOrthogonal()
@@ -290,35 +278,11 @@ public class StateImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsOrthogonal(boolean newIsOrthogonal)
-	{
-		// TODO: implement this method to set the 'Is Orthogonal' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean isSimple()
 	{
 		return getRegion().size() == 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsSimple(boolean newIsSimple)
-	{
-		// TODO: implement this method to set the 'Is Simple' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -905,15 +869,6 @@ public class StateImpl
 			case PivotPackage.STATE__EXIT:
 				setExit((Behavior)newValue);
 				return;
-			case PivotPackage.STATE__IS_COMPOSITE:
-				setIsComposite((Boolean)newValue);
-				return;
-			case PivotPackage.STATE__IS_ORTHOGONAL:
-				setIsOrthogonal((Boolean)newValue);
-				return;
-			case PivotPackage.STATE__IS_SIMPLE:
-				setIsSimple((Boolean)newValue);
-				return;
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
 				setIsSubmachineState((Boolean)newValue);
 				return;
@@ -988,15 +943,6 @@ public class StateImpl
 				return;
 			case PivotPackage.STATE__EXIT:
 				setExit((Behavior)null);
-				return;
-			case PivotPackage.STATE__IS_COMPOSITE:
-				setIsComposite(IS_COMPOSITE_EDEFAULT);
-				return;
-			case PivotPackage.STATE__IS_ORTHOGONAL:
-				setIsOrthogonal(IS_ORTHOGONAL_EDEFAULT);
-				return;
-			case PivotPackage.STATE__IS_SIMPLE:
-				setIsSimple(IS_SIMPLE_EDEFAULT);
 				return;
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
 				setIsSubmachineState(IS_SUBMACHINE_STATE_EDEFAULT);

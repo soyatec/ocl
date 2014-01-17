@@ -63,21 +63,10 @@ public interface State
 	 * A state with isComposite=true is said to be a composite state. A composite state is a state that contains at least one region.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Composite</em>' attribute.
-	 * @see #setIsComposite(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsComposite()
 	 * @generated
 	 */
 	boolean isComposite();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.State#isComposite <em>Is Composite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Composite</em>' attribute.
-	 * @see #isComposite()
-	 * @generated
-	 */
-	void setIsComposite(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Orthogonal</b></em>' attribute.
@@ -88,21 +77,10 @@ public interface State
 	 * A state with isOrthogonal=true is said to be an orthogonal composite state. An orthogonal composite state contains two or more regions.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Orthogonal</em>' attribute.
-	 * @see #setIsOrthogonal(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsOrthogonal()
 	 * @generated
 	 */
 	boolean isOrthogonal();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.State#isOrthogonal <em>Is Orthogonal</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Orthogonal</em>' attribute.
-	 * @see #isOrthogonal()
-	 * @generated
-	 */
-	void setIsOrthogonal(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Simple</b></em>' attribute.
@@ -113,21 +91,10 @@ public interface State
 	 * A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Simple</em>' attribute.
-	 * @see #setIsSimple(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsSimple()
 	 * @generated
 	 */
 	boolean isSimple();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.State#isSimple <em>Is Simple</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Simple</em>' attribute.
-	 * @see #isSimple()
-	 * @generated
-	 */
-	void setIsSimple(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Submachine State</b></em>' attribute.

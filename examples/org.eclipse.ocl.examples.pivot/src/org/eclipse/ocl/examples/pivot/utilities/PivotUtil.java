@@ -856,9 +856,12 @@ public class PivotUtil extends DomainUtil
 	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
 	 * containing the error messages.
 	 */
-	@Deprecated // Use OpaqueExpression.getExpressionInOCL()
 	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull OpaqueExpression specification) {
-		return specification.getExpressionInOCL();
+		if (specification instanceof ExpressionInOCL) {
+			return (ExpressionInOCL) specification;
+		}
+		String expression = PivotUtil.getBody(specification);
+		return expression != null ? getExpressionInOCL(contextElement, expression) : null;
 	}
 
 	/**

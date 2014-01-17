@@ -95,21 +95,10 @@ public interface Constraint
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Context</em>' reference.
-	 * @see #setContext(Namespace)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Context()
 	 * @generated
 	 */
 	Namespace getContext();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Constraint#getContext <em>Context</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Context</em>' reference.
-	 * @see #getContext()
-	 * @generated
-	 */
-	void setContext(Namespace value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Callable</b></em>' attribute.

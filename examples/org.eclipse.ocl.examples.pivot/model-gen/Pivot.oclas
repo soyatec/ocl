@@ -232,8 +232,8 @@
         <ownedComment body="The ordered set of Elements referenced by this Constraint."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.Constraint.context" name="context" isRequired="false"
-          type="#T.pivot.Namespace" isDerived="true" isTransient="true" isVolatile="true"
-          opposite="#p.pivot.Namespace.Constraint"/>
+          type="#T.pivot.Namespace" isDerived="true" isReadOnly="true" isResolveProxies="false"
+          isTransient="true" isVolatile="true" opposite="#p.pivot.Namespace.Constraint"/>
       <ownedAttribute xmi:id="p.pivot.Constraint.isCallable" name="isCallable" type="#Boolean"
           default="false"/>
       <ownedAttribute xmi:id="p.pivot.Constraint.redefinedConstraint" name="redefinedConstraint"
@@ -1018,8 +1018,8 @@ endif
         <ownedComment body="The text of the expression, possibly in multiple languages."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.OpaqueExpression.expressionInOCL" name="expressionInOCL"
-          isRequired="false" type="#T.pivot.ExpressionInOCL" isDerived="true" isReadOnly="true"
-          isResolveProxies="false" isTransient="true" opposite="#p.pivot.ExpressionInOCL.OpaqueExpression"/>
+          isRequired="false" type="#T.pivot.ExpressionInOCL" isComposite="true" isDerived="true"
+          isReadOnly="true" isResolveProxies="false" isTransient="true" opposite="#p.pivot.ExpressionInOCL.OpaqueExpression"/>
       <ownedAttribute xmi:id="p.pivot.OpaqueExpression.language" name="language" type="#//@nestedPackage.1/@ownedType.157">
         <ownedComment body="Specifies the languages in which the expression is stated. The interpretation of the expression body depends on the languages. If the languages are unspecified, they might be implicit from the expression body or the context. Languages are matched to body strings by order."/>
       </ownedAttribute>
@@ -1259,7 +1259,8 @@ p.oclIsKindOf(self.oclType())
       <ownedAttribute xmi:id="p.pivot.Property.association" name="association" isRequired="false"
           type="#T.pivot.AssociationClass" opposite="#p.pivot.AssociationClass.unownedAttribute"/>
       <ownedAttribute xmi:id="p.pivot.Property.class" name="class" isRequired="false"
-          type="#T.pivot.Class" isReadOnly="true" isTransient="true" isVolatile="true">
+          type="#T.pivot.Class" isReadOnly="true" isResolveProxies="false" isTransient="true"
+          isVolatile="true">
         <ownedComment body="The class that owns the property, and of which the property is an attribute."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.Property.default" name="default" isRequired="false"
@@ -1558,15 +1559,15 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
         <ownedComment body="An optional behavior that is executed whenever this state is exited regardless of which transition was taken out of the state. If defined, exit actions are always executed to completion only after all internal activities and transition actions have completed execution."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.State.isComposite" name="isComposite" type="#Boolean"
-          default="false" isDerived="true" isTransient="true" isVolatile="true">
+          default="false" isDerived="true" isReadOnly="true" isTransient="true" isVolatile="true">
         <ownedComment body="A state with isComposite=true is said to be a composite state. A composite state is a state that contains at least one region."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.State.isOrthogonal" name="isOrthogonal" type="#Boolean"
-          default="false" isDerived="true" isTransient="true" isVolatile="true">
+          default="false" isDerived="true" isReadOnly="true" isTransient="true" isVolatile="true">
         <ownedComment body="A state with isOrthogonal=true is said to be an orthogonal composite state. An orthogonal composite state contains two or more regions."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.State.isSimple" name="isSimple" type="#Boolean"
-          default="true" isDerived="true" isTransient="true" isVolatile="true">
+          default="true" isDerived="true" isReadOnly="true" isTransient="true" isVolatile="true">
         <ownedComment body="A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine."/>
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.State.isSubmachineState" name="isSubmachineState"

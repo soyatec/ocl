@@ -193,29 +193,6 @@ public class ConstraintImpl
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CONSTRAINT__SPECIFICATION, newSpecification, newSpecification));
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Namespace getContext() {
-		Namespace context = basicGetContext();
-		return context != null && ((EObject)context).eIsProxy() ? (Namespace)eResolveProxy((InternalEObject)context) : context;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContext(Namespace newContext)
-	{
-		// TODO: implement this method to set the 'Context' reference
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -310,8 +287,7 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return getConstrainedElement();
 			case PivotPackage.CONSTRAINT__CONTEXT:
-				if (resolve) return getContext();
-				return basicGetContext();
+				return getContext();
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return isCallable();
 			case PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT:
@@ -354,9 +330,6 @@ public class ConstraintImpl
 				getConstrainedElement().clear();
 				getConstrainedElement().addAll((Collection<? extends Element>)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				setContext((Namespace)newValue);
-				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable((Boolean)newValue);
 				return;
@@ -398,9 +371,6 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				getConstrainedElement().clear();
 				return;
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				setContext((Namespace)null);
-				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable(IS_CALLABLE_EDEFAULT);
 				return;
@@ -436,7 +406,7 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return constrainedElement != null && !constrainedElement.isEmpty();
 			case PivotPackage.CONSTRAINT__CONTEXT:
-				return basicGetContext() != null;
+				return getContext() != null;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return ((eFlags & IS_CALLABLE_EFLAG) != 0) != IS_CALLABLE_EDEFAULT;
 			case PivotPackage.CONSTRAINT__REDEFINED_CONSTRAINT:
@@ -473,8 +443,7 @@ public class ConstraintImpl
 		return visitor.visitConstraint(this);
 	}
 
-	public Namespace basicGetContext()
-	{
+	public Namespace getContext() {
 		for (EObject context = eContainer(); context != null; context = context.eContainer()) {
 			if (context instanceof Namespace) {
 				return (Namespace) context;
@@ -482,6 +451,11 @@ public class ConstraintImpl
 		}
 		return null;
 	}
+
+	public boolean isSetContext() {
+		return getContext() != null;
+	}
+
 
 	@Override
 	public String toString()

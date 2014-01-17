@@ -5,7 +5,7 @@
     <details key="DUPLICATE_FEATURE_INHERITANCE" value="PROCESS"/>
     <details key="REDEFINING_PROPERTIES" value="PROCESS"/>
     <details key="DUPLICATE_OPERATIONS" value="PROCESS"/>
-    <details key="DERIVED_FEATURES" value="PROCESS"/>
+    <details key="DERIVED_FEATURES" value="IGNORE"/>
     <details key="SUBSETTING_PROPERTIES" value="PROCESS"/>
     <details key="ECORE_TAGGED_VALUES" value="PROCESS"/>
     <details key="REDEFINING_OPERATIONS" value="PROCESS"/>
@@ -785,7 +785,7 @@
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//State/isOrthogonal"/>
       </genFeatures>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false">
+      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="Pivot.ecore#//State/isSimple"/>
       </genFeatures>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false">

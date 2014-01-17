@@ -58,14 +58,14 @@ public interface OpaqueExpression
 	List<String> getBody();
 
 	/**
-	 * Returns the value of the '<em><b>Expression In OCL</b></em>' reference.
+	 * Returns the value of the '<em><b>Expression In OCL</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Expression In OCL</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression In OCL</em>' reference.
+	 * @return the value of the '<em>Expression In OCL</em>' containment reference.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ExpressionInOCL()
 	 * @generated
 	 */

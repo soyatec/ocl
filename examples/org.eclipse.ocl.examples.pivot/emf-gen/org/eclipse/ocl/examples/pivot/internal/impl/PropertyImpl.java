@@ -1052,26 +1052,6 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class getClass_() {
-		org.eclipse.ocl.examples.pivot.Class class_ = basicGetClass_();
-		return class_ != null && ((EObject)class_).eIsProxy() ? (org.eclipse.ocl.examples.pivot.Class)eResolveProxy((InternalEObject)class_) : class_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public org.eclipse.ocl.examples.pivot.Class basicGetClass_()
-	{
-		return null;		// FIXME Eliminate this field altogether
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isTemplateParameter() {
 		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ParameterableElement!isTemplateParameter()
 	}
@@ -1520,8 +1500,7 @@ public class PropertyImpl
 				if (resolve) return getAssociation();
 				return basicGetAssociation();
 			case PivotPackage.PROPERTY__CLASS:
-				if (resolve) return getClass_();
-				return basicGetClass_();
+				return getClass_();
 			case PivotPackage.PROPERTY__DEFAULT:
 				return getDefault();
 			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
@@ -1803,7 +1782,7 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__ASSOCIATION:
 				return association != null;
 			case PivotPackage.PROPERTY__CLASS:
-				return basicGetClass_() != null;
+				return getClass_() != null;
 			case PivotPackage.PROPERTY__DEFAULT:
 				return DEFAULT_EDEFAULT == null ? default_ != null : !DEFAULT_EDEFAULT.equals(default_);
 			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
@@ -1943,6 +1922,16 @@ public class PropertyImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitProperty(this);
+	}
+
+	public org.eclipse.ocl.examples.pivot.Class getClass_() {
+		EObject eContainer = eContainer();
+		if (eContainer instanceof org.eclipse.ocl.examples.pivot.Class) {
+			return (org.eclipse.ocl.examples.pivot.Class) eContainer;
+		}
+		else {
+			return null;
+		}
 	}
 
 	public @Nullable DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {

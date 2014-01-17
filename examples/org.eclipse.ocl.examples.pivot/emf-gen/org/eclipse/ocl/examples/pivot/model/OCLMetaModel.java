@@ -463,8 +463,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -2543,8 +2543,8 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_TemplateParameterSubstitution_ownedActual = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL, _ParameterableElement);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING, _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION, _String);
-		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter_1);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter);
+		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter);
+		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter_1);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__TEMPLATE, _TemplateableElement);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding_signature = createProperty("TemplateBinding", _Bag_TemplateBinding);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty(PivotPackage.Literals.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE, _TemplateSignature);
@@ -2776,8 +2776,8 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setOpposite(pr_Element_Constraint_constrainedElement);
 			ownedProperties.add(property = pr_Constraint_context);
 			property.setIsDerived(true);
+			property.setIsReadOnly(true);
 			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
 			property.setOpposite(pr_Namespace_Constraint_context);
@@ -3214,6 +3214,7 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedProperties.add(property = pr_OpaqueExpression_body);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_OpaqueExpression_expressionInOCL);
+			property.setIsComposite(true);
 			property.setIsDerived(true);
 			property.setIsReadOnly(true);
 			property.setIsRequired(false);
@@ -3417,7 +3418,6 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedProperties.add(property = pr_Property_class);
 			property.setIsReadOnly(true);
 			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
 			ownedProperties.add(property = pr_Property_default);
@@ -3655,16 +3655,19 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setOpposite(pr_Behavior_State_exit);
 			ownedProperties.add(property = pr_State_isComposite);
 			property.setIsDerived(true);
+			property.setIsReadOnly(true);
 			property.setIsResolveProxies(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
 			ownedProperties.add(property = pr_State_isOrthogonal);
 			property.setIsDerived(true);
+			property.setIsReadOnly(true);
 			property.setIsResolveProxies(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
 			ownedProperties.add(property = pr_State_isSimple);
 			property.setIsDerived(true);
+			property.setIsReadOnly(true);
 			property.setIsResolveProxies(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
@@ -4441,9 +4444,9 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedSet_T, _Precedence)));
 			_OrderedSet_Property.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Property)));
-			_OrderedSet_TemplateParameter_1.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
+				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
+			_OrderedSet_TemplateParameter_1.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TupleLiteralPart)));
