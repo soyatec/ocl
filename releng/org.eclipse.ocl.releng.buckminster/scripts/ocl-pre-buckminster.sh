@@ -67,7 +67,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "# Required Properties for Publishing (added by Hudson job definition)"
 	echo "packages.base=MDT-OCL.downloads"
 	echo "tests.base=MDT-OCL.test.results"
-	echo "version=4.2.0"
+	echo "version=5.0.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/modeling/mdt/ocl"
 	echo "generateSourceReferences=true"
 
