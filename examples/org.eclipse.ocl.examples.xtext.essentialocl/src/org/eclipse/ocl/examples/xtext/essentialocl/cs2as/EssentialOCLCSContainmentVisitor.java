@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -117,13 +116,13 @@ public class EssentialOCLCSContainmentVisitor extends AbstractEssentialOCLCSCont
 	{
 		public static NotOperationFilter INSTANCE = new NotOperationFilter();
 		
-		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-				@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+				@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 			return 0;
 		}
 
-		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-			return !(eObject instanceof Operation);
+		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+			return !(object instanceof Operation);
 		}
 	}
 

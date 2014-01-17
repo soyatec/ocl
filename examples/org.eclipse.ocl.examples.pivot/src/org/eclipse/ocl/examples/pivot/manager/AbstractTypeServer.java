@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -224,11 +223,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 					@SuppressWarnings("null") @NonNull DomainProperty jValue = values.get(j);
 					Class<? extends DomainProperty> jClass = jValue.getClass();
 					int verdict = 0;
-					for (Class<? extends DomainElement> key : EnvironmentView.getDisambiguatorKeys()) {
+					for (Class<?> key : EnvironmentView.getDisambiguatorKeys()) {
 						if (key.isAssignableFrom(iClass) && key.isAssignableFrom(jClass)) {
-							List<Comparator<DomainElement>> disambiguators = EnvironmentView.getDisambiguators(key);
+							List<Comparator<Object>> disambiguators = EnvironmentView.getDisambiguators(key);
 							if (disambiguators != null) {
-								for (Comparator<DomainElement> comparator : disambiguators) {
+								for (Comparator<Object> comparator : disambiguators) {
 									verdict = comparator.compare(iValue, jValue);
 									if (verdict != 0) {
 										break;

@@ -24,7 +24,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -76,12 +75,12 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 			this.csParameters = csParameters;
 		}
 
-		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-			if (eObject instanceof Iteration) {
+		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+			if (object instanceof Iteration) {
 				return false;
 			}
-			if (eObject instanceof Operation) {
-				Operation candidateOperation = (Operation)eObject;
+			if (object instanceof Operation) {
+				Operation candidateOperation = (Operation)object;
 				List<Parameter> candidateParameters = candidateOperation.getOwnedParameter();
 				int iMax = csParameters.size();
 				if (iMax != candidateParameters.size()) {
@@ -108,7 +107,7 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 					}
 				}
 				if (bindings != null) {
-					installBindings(environmentView, eObject, bindings);
+					installBindings(environmentView, object, bindings);
 				}
 				return true;
 			}

@@ -34,11 +34,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -80,9 +79,9 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class EnvironmentView
 {
-	private static final class ImplicitDisambiguator implements Comparator<DomainElement>
+	private static final class ImplicitDisambiguator implements Comparator<Object>
 	{
-		public int compare(DomainElement match1, DomainElement match2) {
+		public int compare(Object match1, Object match2) {
 			boolean match1IsImplicit = (match1 instanceof Property) && ((Property)match1).isImplicit();
 			boolean match2IsImplicit = (match2 instanceof Property) && ((Property)match2).isImplicit();
 			if (!match1IsImplicit) {
@@ -152,34 +151,37 @@ public class EnvironmentView
 		}
 	}
 	
+	@SuppressWarnings("serial")
+	private static final class MyList extends ArrayList<Object> {}
+	
 	private static final Logger logger = Logger.getLogger(EnvironmentView.class);
 	
-	private static @NonNull LinkedHashMap<Class<? extends DomainElement>, List<Comparator<DomainElement>>> disambiguatorMap =
-			new LinkedHashMap<Class<? extends DomainElement>, List<Comparator<DomainElement>>>();
+	private static @NonNull LinkedHashMap<Class<?>, List<Comparator<Object>>> disambiguatorMap =
+			new LinkedHashMap<Class<?>, List<Comparator<Object>>>();
 
 	static {
-		addDisambiguator(DomainElement.class, new ImplicitDisambiguator());
+		addDisambiguator(Object.class, new ImplicitDisambiguator());
 		addDisambiguator(Operation.class, new OperationDisambiguator());
 		addDisambiguator(Property.class, new PropertyDisambiguator());
 	}
 	
-	public static synchronized <T extends DomainElement> void addDisambiguator(@NonNull Class<T> targetClass, @NonNull Comparator<T> disambiguator) {
-		List<Comparator<DomainElement>> disambiguators = disambiguatorMap.get(targetClass);
+	public static synchronized <T> void addDisambiguator(@NonNull Class<T> targetClass, @NonNull Comparator<T> disambiguator) {
+		List<Comparator<Object>> disambiguators = disambiguatorMap.get(targetClass);
 		if (disambiguators == null) {
-			disambiguators = new ArrayList<Comparator<DomainElement>>();
+			disambiguators = new ArrayList<Comparator<Object>>();
 			disambiguatorMap.put(targetClass, disambiguators);
 		}
 		@SuppressWarnings("unchecked")
-		Comparator<DomainElement> castDisambiguator = (Comparator<DomainElement>) disambiguator;
+		Comparator<Object> castDisambiguator = (Comparator<Object>) disambiguator;
 		disambiguators.add(castDisambiguator);
 	}
 
 	@SuppressWarnings("null")
-	public static @NonNull Iterable<Class<? extends DomainElement>> getDisambiguatorKeys() {
+	public static @NonNull Iterable<Class<?>> getDisambiguatorKeys() {
 		return disambiguatorMap.keySet();
 	}
 
-	public static @Nullable List<Comparator<DomainElement>> getDisambiguators(@NonNull Class<? extends DomainElement> key) {
+	public static @Nullable List<Comparator<Object>> getDisambiguators(@NonNull Class<?> key) {
 		return disambiguatorMap.get(key);
 	}
 		
@@ -189,11 +191,8 @@ public class EnvironmentView
 	private boolean isQualifier;
 	protected final @Nullable String name;
 
-	private final @NonNull Map<String, Object> contentsByName = new HashMap<String, Object>(); // Single
-																						// EObject
-																						// or
-																						// List<EObject>
-	private Map<DomainElement, Map<TemplateParameter, ParameterableElement>> templateBindings = null;
+	private final @NonNull Map<String, Object> contentsByName = new HashMap<String, Object>(); // Single Object or MyList
+	private Map<Object, Map<TemplateParameter, ParameterableElement>> templateBindings = null;
 
 	private int contentsSize = 0; // Deep size of contentsByName;
 
@@ -419,7 +418,7 @@ public class EnvironmentView
 			if (name2 != null) {
 				for (TemplateParameter templateParameter : templateParameters) {
 					if (templateParameter != null) {
-						DomainNamedElement parameteredElement = (DomainNamedElement)templateParameter.getParameteredElement();
+						Nameable parameteredElement = (Nameable)templateParameter.getParameteredElement();
 						if (name2.equals(parameteredElement.getName())) {
 							addElement(name2, parameteredElement);
 						}
@@ -429,7 +428,7 @@ public class EnvironmentView
 			else {
 				for (TemplateParameter templateParameter : templateParameters) {
 					if (templateParameter != null) {
-						DomainNamedElement parameteredElement = (DomainNamedElement)templateParameter.getParameteredElement();
+						Nameable parameteredElement = (Nameable)templateParameter.getParameteredElement();
 						if (parameteredElement != null) {
 							addNamedElement(parameteredElement);
 						}
@@ -489,7 +488,7 @@ public class EnvironmentView
 	 *            the element
 	 * @return the number of elements added; 1 if added, 0 if not
 	 */
-	public void addElement(/*@NonNull*/ String elementName, /*@NonNull*/ DomainElement element) {
+	public void addElement(/*@NonNull*/ String elementName, /*@NonNull*/ Object element) {
 		if ((elementName == null) || (element == null)) {
 			return;
 		}
@@ -515,7 +514,7 @@ public class EnvironmentView
 //			element = ((TypeServer) element).getPrimaryType();		// FIXME lose casts
 //		}
 		else if (element instanceof EObject) {
-			element = (DomainNamedElement) metaModelManager.getPrimaryElement((EObject) element);		// FIXME lose casts
+			element = metaModelManager.getPrimaryElement((EObject) element);		// FIXME lose casts
 		}
 		if ((name != null) && (matchers != null)) {
 			for (ScopeFilter filter : matchers) {
@@ -548,15 +547,13 @@ public class EnvironmentView
 			contentsByName.put(elementName, element);
 			contentsSize++;
 		} else {
-			List<DomainElement> values;
-			if (value instanceof DomainElement) {
-				values = new ArrayList<DomainElement>();
-				values.add((DomainElement) value);
-				contentsByName.put(elementName, values);
+			MyList values;
+			if (value instanceof MyList) {
+				values = (MyList)value;
 			} else {
-				@SuppressWarnings("unchecked")
-				List<DomainElement> castValue = (List<DomainElement>) value;
-				values = castValue;
+				values = new MyList();
+				values.add(value);
+				contentsByName.put(elementName, values);
 			}
 			if (!values.contains(element)) {
 				values.add(element);
@@ -565,10 +562,10 @@ public class EnvironmentView
 		}
 	}
 
-	public void addElements(@NonNull Map<String, ? extends DomainElement> elements) {
+	public void addElements(@NonNull Map<String, ?> elements) {
 		String name2 = name;
 		if (name2 != null) {
-			DomainElement element = elements.get(name2);
+			Object element = elements.get(name2);
 			if (element != null) {
 				addElement(name2, element);
 			}
@@ -576,7 +573,7 @@ public class EnvironmentView
 		else {
 			for (String key : elements.keySet()) {
 				if (key != null) {
-					DomainElement element = elements.get(key);
+					Object element = elements.get(key);
 					if (element != null) {
 						addElement(key, element);
 					}
@@ -585,11 +582,11 @@ public class EnvironmentView
 		}
 	}
 
-	public void addElements(@Nullable Iterable<? extends DomainElement> elements) {
+	public void addElements(@Nullable Iterable<? extends Object> elements) {
 		if (elements != null) {
-			for (DomainElement element : elements) {
-				if (element instanceof DomainNamedElement) {
-					DomainNamedElement namedElement = (DomainNamedElement) element;
+			for (Object element : elements) {
+				if (element instanceof Nameable) {
+					Nameable namedElement = (Nameable) element;
 					String elementName = namedElement.getName();
 					if (elementName != null) {
 						addElement(elementName, namedElement);
@@ -642,7 +639,7 @@ public class EnvironmentView
 		}
 	}
 
-	public void addNamedElement(/*@NonNull*/ DomainNamedElement namedElement) {
+	public void addNamedElement(/*@NonNull*/ Nameable namedElement) {
 		if (namedElement == null) {
 			return;
 		}
@@ -652,8 +649,8 @@ public class EnvironmentView
 		}
 	}
 
-	public void addNamedElements(/*@NonNull*/ Iterable<? extends DomainNamedElement> namedElements) {
-		for (DomainNamedElement namedElement : namedElements) {
+	public void addNamedElements(/*@NonNull*/ Iterable<? extends Nameable> namedElements) {
+		for (Nameable namedElement : namedElements) {
 			if (namedElement != null) {
 				addNamedElement(namedElement);
 			}
@@ -728,8 +725,8 @@ public class EnvironmentView
 		}
 		for (Map.Entry<String, Object> entry : contentsByName.entrySet()) {
 			Object value = entry.getValue();
-			if (value instanceof List<?>) {
-				List<?> values = (List<?>) value;
+			if (value instanceof MyList) {
+				MyList values = (MyList) value;
 				value = values.get(values.size() - 1);
 			}
 			if (value instanceof EObject) {
@@ -794,21 +791,20 @@ public class EnvironmentView
 			int newSize = 0;
 			for (Map.Entry<String, Object> entry : contentsByName.entrySet()) {
 				Object listOrValue = entry.getValue();
-				if (listOrValue instanceof List<?>) {
-					@SuppressWarnings("unchecked")
-					List<DomainElement> values = (List<DomainElement>) listOrValue;
+				if (listOrValue instanceof MyList) {
+					MyList values = (MyList) listOrValue;
 					for (int i = 0; i < values.size()-1;) {
 						boolean iRemoved = false;
-						@SuppressWarnings("null") @NonNull DomainElement iValue = values.get(i);
+						@SuppressWarnings("null") @NonNull Object iValue = values.get(i);
 						Map<TemplateParameter, ParameterableElement> iBindings = templateBindings != null ? templateBindings.get(iValue) : null;
 						for (int j = i + 1; j < values.size();) {
-							Class<? extends DomainElement> iClass = iValue.getClass();
-							@SuppressWarnings("null") @NonNull DomainElement jValue = values.get(j);
-							Class<? extends DomainElement> jClass = jValue.getClass();
+							Class<?> iClass = iValue.getClass();
+							@SuppressWarnings("null") @NonNull Object jValue = values.get(j);
+							Class<?> jClass = jValue.getClass();
 							int verdict = 0;
-							for (Class<? extends DomainElement> key : disambiguatorMap.keySet()) {
+							for (Class<?> key : disambiguatorMap.keySet()) {
 								if (key.isAssignableFrom(iClass) && key.isAssignableFrom(jClass)) {
-									for (Comparator<DomainElement> comparator : disambiguatorMap.get(key)) {
+									for (Comparator<Object> comparator : disambiguatorMap.get(key)) {
 										verdict = comparator.compare(iValue, jValue);
 										if (verdict != 0) {
 											break;
@@ -852,11 +848,11 @@ public class EnvironmentView
 		return getSize();
 	}
 
-	public void setBindings(@NonNull DomainElement eObject, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
+	public void setBindings(@NonNull Object object, @Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		if (templateBindings == null) {
-			templateBindings = new HashMap<DomainElement, Map<TemplateParameter, ParameterableElement>>();
+			templateBindings = new HashMap<Object, Map<TemplateParameter, ParameterableElement>>();
 		}
-		templateBindings.put(eObject, bindings);
+		templateBindings.put(object, bindings);
 	}
 
 	public void setIsQualifier(boolean isQualifier) {

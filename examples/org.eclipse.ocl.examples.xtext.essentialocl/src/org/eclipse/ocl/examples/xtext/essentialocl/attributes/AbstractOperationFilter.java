@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -41,8 +40,8 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 		this.sourceType = sourceType != null ? PivotUtil.getType(sourceType) : null;		// FIXME redundant
 	}
 
-	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+			@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 		return metaModelManager.compareOperationMatches((Operation)match1, bindings1, (Operation)match2, bindings2);
 	}
 
@@ -66,8 +65,8 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 		return bindings;
 	}
 
-	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject,
+	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull Object object,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
-		environmentView.setBindings(eObject, bindings);
+		environmentView.setBindings(object, bindings);
 	}
 }

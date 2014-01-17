@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -76,8 +75,8 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> referenceBindings,
-			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> candidateBindings) {
+	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> referenceBindings,
+			@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> candidateBindings) {
 		@NonNull Operation reference = (Operation) match1;
 		@NonNull Operation candidate = (Operation) match2;
 		Type referenceType = PivotUtil.getType(PivotUtil.getOwningType(reference));
@@ -223,9 +222,9 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject,
+	protected void installBindings(@NonNull EnvironmentView environmentView, @NonNull Object object,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
-		List<Parameter> parameters = ((Operation)eObject).getOwnedParameter();
+		List<Parameter> parameters = ((Operation)object).getOwnedParameter();
 		int iMax = parameters.size();
 		if (iMax > 0) {
 			for (int i = 0; i < iMax; i++) {
@@ -239,13 +238,13 @@ public class OperationFilter extends AbstractOperationFilter
 				}
 			}
 		}
-		super.installBindings(environmentView, eObject, bindings);
+		super.installBindings(environmentView, object, bindings);
 	}
 
-	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-		if (eObject instanceof Iteration) {
-			Iteration candidateIteration = (Iteration)eObject;
+		if (object instanceof Iteration) {
+			Iteration candidateIteration = (Iteration)object;
 			int iteratorCount = candidateIteration.getOwnedIterator().size();
 			if ((0 < iterators) && (iteratorCount != iterators)) {
 				return false;
@@ -256,18 +255,18 @@ public class OperationFilter extends AbstractOperationFilter
 			}
 			Map<TemplateParameter, ParameterableElement> bindings = getIterationBindings(metaModelManager, candidateIteration);
 			if (bindings != null) {
-				installBindings(environmentView, eObject, bindings);
+				installBindings(environmentView, object, bindings);
 			}
 			return true;
 		}
-		else if (eObject instanceof Operation) {
+		else if (object instanceof Operation) {
 			if (iterators > 0) {
 				return false;
 			}
 			if (accumulators > 0) {
 				return false;
 			}
-			Operation candidateOperation = (Operation)eObject;
+			Operation candidateOperation = (Operation)object;
 			List<Parameter> candidateParameters = candidateOperation.getOwnedParameter();
 			if (expressions != candidateParameters.size()) {
 				return false;
@@ -289,7 +288,7 @@ public class OperationFilter extends AbstractOperationFilter
 				}
 			}
 			if (bindings != null) {
-				installBindings(environmentView, eObject, bindings);
+				installBindings(environmentView, object, bindings);
 			}
 			return true;
 		}

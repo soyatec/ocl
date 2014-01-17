@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -38,12 +37,12 @@ public class ImplicitCollectionFilter extends AbstractOperationFilter
 		super(sourceType);
 	}
 
-	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-		if (eObject instanceof Iteration) {		
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+		if (object instanceof Iteration) {		
 			return false;
 		}
-		else if (eObject instanceof Operation) {
-			Operation candidateOperation = (Operation)eObject;
+		else if (object instanceof Operation) {
+			Operation candidateOperation = (Operation)object;
 			List<Parameter> candidateParameters = candidateOperation.getOwnedParameter();
 			if (candidateParameters.size() != 0) {
 				return false;
@@ -59,7 +58,7 @@ public class ImplicitCollectionFilter extends AbstractOperationFilter
 				}
 			}
 			if (bindings != null) {
-				installBindings(environmentView, eObject, bindings);
+				installBindings(environmentView, object, bindings);
 			}
 			return true;
 		}

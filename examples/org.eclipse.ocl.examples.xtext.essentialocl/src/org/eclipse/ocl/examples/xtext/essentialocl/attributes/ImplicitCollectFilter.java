@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -42,11 +41,11 @@ public class ImplicitCollectFilter extends AbstractOperationFilter
 		this.iteratorType = iteratorType;
 	}
 
-	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-		if (!(eObject instanceof Iteration)) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+		if (!(object instanceof Iteration)) {
 			return false;
 		}
-		Iteration candidateIteration = (Iteration)eObject;
+		Iteration candidateIteration = (Iteration)object;
 		int iteratorCount = candidateIteration.getOwnedIterator().size();
 		if (iteratorCount != 1) {
 			return false;
@@ -68,7 +67,7 @@ public class ImplicitCollectFilter extends AbstractOperationFilter
 		if (bindings != null) {
 			bindings.put(iteratorParameter, iteratorType);
 		}
-		installBindings(environmentView, eObject, bindings);
+		installBindings(environmentView, object, bindings);
 		return true;
 	}
 }

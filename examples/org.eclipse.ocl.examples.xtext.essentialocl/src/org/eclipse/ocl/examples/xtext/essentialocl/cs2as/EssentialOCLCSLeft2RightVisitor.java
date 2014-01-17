@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation;
@@ -145,17 +144,17 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 	{
 		public static TypeArgumentFilter INSTANCE = new TypeArgumentFilter();
 		
-		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-				@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+				@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 			return 0;
 		}
 
-		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-			if (eObject instanceof Type) {
+		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+			if (object instanceof Type) {
 				return true;
 			}
-			if (eObject instanceof TypedElement) {
-				return ((TypedElement)eObject).getType() instanceof Metaclass<?>;
+			if (object instanceof TypedElement) {
+				return ((TypedElement)object).getType() instanceof Metaclass<?>;
 			}
 			return false;
 		}

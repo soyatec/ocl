@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -42,15 +41,15 @@ public class OperationContextFilter implements ScopeFilter
 		this.csOperationContext = csOperationContext;
 	}
 
-	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1, @NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1, @NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 		return 0;
 	}
 
-	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
-		if (!(eObject instanceof Operation)) {
+	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+		if (!(object instanceof Operation)) {
 			return false;
 		}
-		Operation candidateOperation = (Operation) eObject;
+		Operation candidateOperation = (Operation) object;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 //		Type context = metaModelManager.getPrimaryType(candidateOperation.getOwningType());
 //		if (context != metaModelManager.getPrimaryElement(forType)) {
