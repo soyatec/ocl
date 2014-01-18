@@ -313,7 +313,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 //				js.appendDeclaration(source);
 			}
 			for (@SuppressWarnings("null")@NonNull CGParameter iterator : iterators) {
-				js.append(", ");
+				js.append(", final ");
 				js.appendDeclaration(iterator);
 			}
 			js.append(") {\n");
