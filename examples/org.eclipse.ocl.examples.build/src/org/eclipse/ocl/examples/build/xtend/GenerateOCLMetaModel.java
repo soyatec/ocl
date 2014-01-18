@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.LoadModelStrategy;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -78,7 +79,26 @@ public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 			}
 			String n1 = o1.getElementType().getName(); 
 			String n2 = o2.getElementType().getName();
-			return n1.compareTo(n2);
+			i = n1.compareTo(n2);
+			if (i != 0) {
+				return i;
+			}
+			IntegerValue l1 = o1.getLowerValue(); 
+			IntegerValue l2 = o2.getLowerValue();
+			i = l1.compareTo(l2);
+			if (i != 0) {
+				return i;
+			}
+			IntegerValue u1 = o1.getUpperValue(); 
+			IntegerValue u2 = o2.getUpperValue();
+			i = u1.compareTo(u2);
+			if (i != 0) {
+				return i;
+			}
+//			if (i == 0) {
+//				System.out.println("Got it");
+//			}
+			return i;
 		}
 	};
 
