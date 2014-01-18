@@ -525,31 +525,58 @@ public class JavaStream
 				}
 				else if ("char".equals(returnClassName)) {
 					append("(char)");
-					appendValueName(cgValue);
+					appendAtomicReferenceTo(cgValue);
 					append(".intValue()");
 				}
 				else if ("java.lang.Character".equals(returnClassName)) {
 					appendClassReference(Character.class);
 					append(".valueOf((char)");
-					appendValueName(cgValue);
+					appendAtomicReferenceTo(cgValue);
 					append(".intValue())");
 				}
 				else {
-					appendValueName(cgValue);
-					if ("double".equals(returnClassName) || "java.lang.Double".equals(returnClassName)) {
+					if ("java.lang.Double".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".doubleValue()");
 					}
-					else if ("float".equals(returnClassName) || "java.lang.Float".equals(returnClassName)) {
+					else if ("java.lang.Float".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".floatValue()");
 					}
-					else if ("int".equals(returnClassName) || "java.lang.Integer".equals(returnClassName)) {
+					else if ("java.lang.Integer".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".intValue()");
 					}
-					else if ("long".equals(returnClassName) || "java.lang.Long".equals(returnClassName)) {
+					else if ("java.lang.Long".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".longValue()");
 					}
-					else if ("short".equals(returnClassName) || "java.lang.Short".equals(returnClassName)) {
+					else if ("java.lang.Short".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".shortValue()");
+					}
+					else if ("double".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".doubleValue()");
+					}
+					else if ("float".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".floatValue()");
+					}
+					else if ("int".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".intValue()");
+					}
+					else if ("long".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".longValue()");
+					}
+					else if ("short".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".shortValue()");
+					}
+					else {
+						appendValueName(cgValue);
 					}
 				}
 			}
@@ -567,15 +594,27 @@ public class JavaStream
 					append(")");
 				}
 				else {
-					if ("int".equals(returnClassName) || "java.lang.Integer".equals(returnClassName)) {
+					if ("java.lang.Integer".equals(returnClassName)) {
 						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".intValue()");
 					}
-					else if ("long".equals(returnClassName) || "java.lang.Long".equals(returnClassName)) {
+					else if ("java.lang.Long".equals(returnClassName)) {
 						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".longValue()");
 					}
-					else if ("short".equals(returnClassName) || "java.lang.Short".equals(returnClassName)) {
+					else if ("java.lang.Short".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".shortValue()");
+					}
+					else if ("int".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".intValue()");
+					}
+					else if ("long".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
+						append(".longValue()");
+					}
+					else if ("short".equals(returnClassName)) {
 						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".shortValue()");
 					}
