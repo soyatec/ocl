@@ -23,10 +23,10 @@ import org.eclipse.emf.ecore.resource.impl.*
 import org.eclipse.uml2.uml.resource.XMI2UMLResource
 
 var projectName = "org.eclipse.ocl.examples.uml25"
-var ecoreSlot = "ecore"
+//var ecoreSlot = "ecore"
 
 /**
- *	Generate the Pivot Model, by performing the merge to create the flattened package
+ *	Generate the UML 2.5 Model, by performing the merge to create the flattened package
  *  with additional MDT/OCL content, alphabeticsing the classes, reloading the genmodel
  *  and finally generating the model code.
  */
@@ -38,7 +38,7 @@ Workflow {
 //    bean = GenModelSetup { resourceSet = resourceSet }
     bean = UML25GenModelSetup { resourceSet = resourceSet }
 
-    component = GenmodelReloader { resourceSet = resourceSet skipOnErrors = true
+/*     component = GenmodelReloader { resourceSet = resourceSet skipOnErrors = true
     	projectName = "${projectName}"
     	modelSlot = "${ecoreSlot}"
     	genModel = "/${projectName}/model/UML.genmodel"
@@ -73,7 +73,7 @@ Workflow {
 //    }
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
-    }
+    } */
 
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 //    	projectName = "${projectName}"

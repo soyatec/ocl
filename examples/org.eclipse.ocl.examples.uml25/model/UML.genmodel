@@ -28,7 +28,7 @@
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
   <foreignModel>UML.merged.uml</foreignModel>
-  <genPackages xsi:type="genmodel:GenPackage" prefix="UML" basePackage="org.eclipse.ocl.examples.uml25" disposableProviderFactory="true">
+  <genPackages xsi:type="genmodel:GenPackage" prefix="UML" basePackage="org.eclipse.ocl.examples.uml25" disposableProviderFactory="true" loadInitialization="true" contentTypeIdentifier="">
     <ecorePackage href="UML.ecore#/"/>
     <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false">
       <ecoreEnum href="UML.ecore#//VisibilityKind"/>
