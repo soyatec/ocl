@@ -25,12 +25,10 @@
    </extension>
 
    <extension point="org.eclipse.ui.views">
-      <category id="org.eclipse.ocl.modelregistry.ui.registrations"
-      		name="%MF_OCL"/>
       <view id="org.eclipse.ocl.modelregistry.registrations"
             name="%MF_RegistrationsView"
             icon="icons/sample.gif"
-            category="org.eclipse.ocl.modelregistry.ui.registrations"
+            category="org.eclipse.ocl.examples.ui.views"
             class="org.eclipse.ocl.examples.modelregistry.ui.registrations.RegistrationsView"/>
    </extension>
    

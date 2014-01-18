@@ -10,6 +10,11 @@
           properties="resourceSetAvailable"
           type="java.lang.Object"/>
  </extension>
+
+   <extension point="org.eclipse.ui.views">
+      <category id="org.eclipse.ocl.examples.ui.views" name="%MF_OCL"/>
+   </extension>
+
    <extension point="org.eclipse.ui.menus">
       <menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.EcoreEditorID?after=additions">
          <menu id="org.eclipse.ocl.examples.ui.Menu" label="%MF_OCL">
