@@ -161,24 +161,10 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		return metaModelManager.conformsTo(type, oclTypeType, null);
 	}
 
-	protected boolean zzisEnumerationLiteral(@NonNull CGValuedElement cgValue) {
-		Element ast = cgValue.getAst();
-		if (!(ast instanceof TypedElement)) {
-			return false;
-		}
-		Type type = ((TypedElement)ast).getType();
-		return type instanceof DomainEnumeration;
-	}
-
 	@Override
 	public void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull CGValuedElement thatValue, boolean notEquals) {
 		MetaModelManager metaModelManager = js.getCodeGenerator().getMetaModelManager();
-		if (zzisEnumerationLiteral(thisValue) && zzisEnumerationLiteral(thatValue)) {
-			js.appendValueName(thisValue);
-			js.append(notEquals ? " != " : " == ");
-			js.appendValueName(thatValue);
-		}
-		else if (zzisBoxedType(metaModelManager, thisValue) && zzisBoxedType(metaModelManager, thatValue)) {
+		if (zzisBoxedType(metaModelManager, thisValue) && zzisBoxedType(metaModelManager, thatValue)) {
 			boolean nullSafe = thisValue.isNonNull() && thatValue.isNonNull();
 			if (!nullSafe) {
 				String prefix = "";

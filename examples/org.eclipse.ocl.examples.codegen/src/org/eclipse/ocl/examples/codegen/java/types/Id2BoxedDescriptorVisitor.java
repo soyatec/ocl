@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
@@ -113,7 +112,7 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 				}
 			}
 		}
-		EClass eClass = (EClass) type.getETarget();
+/*		EClass eClass = (EClass) type.getETarget();
 		if (eClass != null) {
 			try {
 				Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClass);
@@ -122,7 +121,7 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 				}
 			}
 			catch (Exception e) {}
-		}
+		} */
 		return new RootObjectDescriptor(id);
 	}
 	
@@ -191,7 +190,7 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 
 	@Override
 	public @NonNull BoxedDescriptor visitEnumerationId(@NonNull EnumerationId id) {
-		return new BoxedValueDescriptor(id, EnumerationLiteralId.class, new UnboxedValueDescriptor(id, Enumerator.class));
+		return new EnumerationValueDescriptor(id);
 	}
 
 	@Override
