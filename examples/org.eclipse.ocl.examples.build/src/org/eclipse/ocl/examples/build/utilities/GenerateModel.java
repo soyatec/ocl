@@ -132,7 +132,9 @@ public class GenerateModel extends AbstractWorkflowComponent {
 											// generated manually
 		genModel.setUpdateClasspath(false); // New class-paths should be
 											// generated manually
-		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+		if (genModel.getComplianceLevel().compareTo(GenJDKLevel.JDK50_LITERAL) < 0) {
+			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+		}
 		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 		Diagnostic diagnostic = genModel.diagnose();
 		reportDiagnostics(issues, diagnostic);

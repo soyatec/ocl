@@ -77,6 +77,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractGenericVisitor(@NonNull EPackage ePackage, @NonNull String generic, @NonNull Class<?> returnClass, @NonNull Class<?> contextClass) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "Abstract" + projectPrefix + generic + "Visitor.java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -109,6 +110,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 			
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @Nullable «returnClass.getSimpleName()» visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					«IF firstSuperClass == eClass»
 					return visiting(object);
@@ -127,6 +131,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractDelegatingVisitor(@NonNull EPackage ePackage) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractDelegating" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -181,6 +186,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				}
 				«FOR eClass : getSortedEClasses(ePackage)»
 
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					return delegate.visit«eClass.name»(object);
 				}
@@ -250,6 +258,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					«IF firstSuperClass == eClass»
 					return visiting(object);
@@ -270,6 +281,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractExtendingVisitor(@NonNull EPackage ePackage) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractExtending" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -299,6 +311,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 			
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					«IF firstSuperClass == eClass»
 					return visiting(object);
@@ -316,6 +331,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractNonNullExtendingVisitor(@NonNull EPackage ePackage) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractNonNullExtending" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -362,6 +378,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 			
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @NonNull R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					«IF firstSuperClass == eClass»
 					return visiting(object);
@@ -376,6 +395,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				 * Return the result of visiting a visitable for which no more specific pivot type method
 				 * is available.
 				 */
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public abstract @NonNull R visiting(@NonNull «visitablePackageName».«visitableClassName» visitable);
 				«ENDIF»
 			}
@@ -388,6 +410,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractNullVisitor(@NonNull EPackage ePackage) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractNull" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -416,6 +439,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				}	
 				«FOR eClass : getSortedEClasses(ePackage)»
 
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					return null;
 				}
@@ -430,6 +456,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractVisitor(@NonNull EPackage ePackage) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "Abstract" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -471,6 +498,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«IF !isDerived»
 
 				@SuppressWarnings("unchecked")
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public <A> A getAdapter(@NonNull Class<A> adapter) {
 					if (adapter.isAssignableFrom(getClass())) {
 						return (A) this;
@@ -516,6 +546,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 */
 	protected def void generateAbstractWrappingVisitor(@NonNull EPackage ePackage) {
 		var boolean isDerived = isDerived();
+		var boolean needsOverride = needsOverride();
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractWrapping" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -578,6 +609,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«ENDIF»
 				«FOR eClass : getSortedEClasses(ePackage)»
 
+				«IF needsOverride»
+				@Override
+				«ENDIF»
 				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					P prologue = preVisit(object);
 					R result = delegate.visit«eClass.name»(object);
