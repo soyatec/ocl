@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class Id2UnboxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 {
-	protected Id2UnboxedJavaClassVisitor(@NonNull GenModelHelper genModelHelper) {
+	public Id2UnboxedJavaClassVisitor(@NonNull GenModelHelper genModelHelper) {
 		super(genModelHelper);
 	}
 	
@@ -39,10 +39,10 @@ public class Id2UnboxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		return List.class;
 	}
 
-	@Override
+/*	@Override
 	public @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {
 		return Object.class;
-	}
+	} */
 
 	@Override
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {

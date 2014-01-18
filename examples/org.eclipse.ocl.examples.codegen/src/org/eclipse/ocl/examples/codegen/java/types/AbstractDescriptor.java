@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainNamespace;
@@ -30,8 +31,13 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -40,6 +46,8 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * An AbstractDescriptor provides the most fundamental capabilities of any type description: the correspondence to a pivot ElementId.
@@ -121,6 +129,121 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		js.append(".equals(");
 		js.append(thatName);
 		js.append("))");
+	}
+
+	protected boolean zzisBoxedElement(@NonNull CGValuedElement cgValue) {
+		TypeId typeId = cgValue.getASTypeId();
+		if (typeId instanceof EnumerationLiteralId) {
+			return true;
+		}
+		if (typeId instanceof EnumerationId) {
+			return true;
+		}
+		if (typeId instanceof ClassId) {
+			return true;
+		}
+		return false;
+	}
+
+	protected boolean zzisBoxedType(@NonNull MetaModelManager metaModelManager, @NonNull CGValuedElement cgValue) {
+		Element ast = cgValue.getAst();
+		if (!(ast instanceof TypedElement)) {
+			return false;
+		}
+		Type type = ((TypedElement)ast).getType();
+		if (type == null) {
+			return false;
+		}
+		if (type instanceof DomainEnumeration) {
+			return false;
+		}
+		Type oclTypeType = metaModelManager.getOclTypeType();
+		return metaModelManager.conformsTo(type, oclTypeType, null);
+	}
+
+	protected boolean zzisEnumerationLiteral(@NonNull CGValuedElement cgValue) {
+		Element ast = cgValue.getAst();
+		if (!(ast instanceof TypedElement)) {
+			return false;
+		}
+		Type type = ((TypedElement)ast).getType();
+		return type instanceof DomainEnumeration;
+	}
+
+	@Override
+	public void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull CGValuedElement thatValue, boolean notEquals) {
+		MetaModelManager metaModelManager = js.getCodeGenerator().getMetaModelManager();
+		if (zzisEnumerationLiteral(thisValue) && zzisEnumerationLiteral(thatValue)) {
+			js.appendValueName(thisValue);
+			js.append(notEquals ? " != " : " == ");
+			js.appendValueName(thatValue);
+		}
+		else if (zzisBoxedType(metaModelManager, thisValue) && zzisBoxedType(metaModelManager, thatValue)) {
+			boolean nullSafe = thisValue.isNonNull() && thatValue.isNonNull();
+			if (!nullSafe) {
+				String prefix = "";
+				if (!thisValue.isNonNull()) {
+					js.append("(");
+					js.appendValueName(thisValue);
+					js.append(" != null)");
+					prefix = " && ";
+				}
+				if (!thatValue.isNonNull()) {
+					js.append(prefix);
+					js.append("(");
+					js.appendValueName(thatValue);
+					js.append(" != null)");
+				}
+				js.append(" ? (");
+			}
+			js.appendValueName(thisValue);
+			js.append(".getTypeId()");
+			js.append(notEquals ? " != " : " == ");
+			js.appendValueName(thatValue);
+			js.append(".getTypeId()");
+			if (!nullSafe) {
+				js.append(") : ");
+				js.appendThrowBooleanInvalidValueException("null equal input");
+			}
+		}
+		else if (zzisBoxedElement(thisValue) && zzisBoxedElement(thatValue)) {		// FIXME Is this needed ?
+			js.appendValueName(thisValue);
+			js.append(notEquals ? " != " : " == ");
+			js.appendValueName(thatValue);
+		}
+		else if (thisValue.isNonNull()) {
+			if (notEquals) {
+				js.append("!");
+			}
+			js.appendValueName(thisValue);
+			js.append(".equals(");
+			js.appendValueName(thatValue);
+			js.append(")");
+		}
+		else if (thatValue.isNonNull()) {
+			if (notEquals) {
+				js.append("!");
+			}
+			js.appendValueName(thatValue);
+			js.append(".equals(");
+			js.appendValueName(thisValue);
+			js.append(")");
+		}
+		else {
+			js.append("(");
+			js.appendValueName(thisValue);
+			js.append(" != null) ? ");
+			if (notEquals) {
+				js.append("!");
+			}
+			js.appendValueName(thisValue);
+			js.append(".equals(");
+			js.appendValueName(thatValue);
+			js.append(") : (");
+			js.appendValueName(thatValue);
+			js.append(notEquals ? " != " : " == ");
+			js.append("null)");
+		}
 	}
 
 	@Override

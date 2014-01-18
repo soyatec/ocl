@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
@@ -63,8 +64,9 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	@Override
-	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
-		MetaModelManager metaModelManager = genModelHelper.getMetaModelManager();
+	public final @NonNull Class<?> visitClassId(@NonNull ClassId id) {
+		return visiting(id);
+/*		MetaModelManager metaModelManager = genModelHelper.getMetaModelManager();
 		Type type = metaModelManager.getIdResolver().getType(id, null);
 		EClass eClass = (EClass) type.getETarget();
 		if (eClass != null) {
@@ -73,7 +75,12 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 			}
 			catch (Exception e) {}
 		}
-		return Object.class;
+		return Object.class; */
+	}
+
+	@Override
+	public final @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {
+		return visiting(id);
 	}
 
 	@Override

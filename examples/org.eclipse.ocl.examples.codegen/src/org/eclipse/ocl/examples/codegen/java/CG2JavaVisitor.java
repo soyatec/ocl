@@ -1468,131 +1468,63 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 				return false;
 			}
 			//
+			boolean notEquals = cgIsEqualExp.isNotEquals();
 			js.appendDeclaration(cgIsEqualExp);
 			js.append(" = ");
 			if (cgSource.isNull()) {
 				if (cgArgument.isNull()) {
-					js.append("true");
+					js.appendBooleanString(true ^ notEquals);
 				}
 				else if (cgArgument.isNonNull()) {
-					js.append("false");
+					js.appendBooleanString(false ^ notEquals);
 				}
 				else {
 					js.appendValueName(cgArgument);
-					js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
+					js.append(notEquals ? " != " : " == ");
 					js.append("null");
 				}
 			}
 			else if (cgArgument.isNull()) {
 				if (cgSource.isNonNull()) {
-					js.append("false");
+					js.appendBooleanString(false ^ notEquals);
 				}
 				else {
 					js.appendValueName(cgSource);
-					js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
+					js.append(notEquals ? " != " : " == ");
 					js.append("null");
 				}
 			}
 			else if (cgSource.isTrue()) {
 				if (cgArgument.isTrue()) {
-					js.append("true");
+					js.appendBooleanString(true ^ notEquals);
 				}
 				else if (cgArgument.isFalse()) {
-					js.append("false");
+					js.appendBooleanString(false ^ notEquals);
 				}
 				else {
-					js.appendBooleanValueName(cgArgument, true);
-				}
-			}
-			else if (cgArgument.isTrue()) {
-				if (cgSource.isFalse()) {
-					js.append("false");
-				}
-				else {
-					js.appendBooleanValueName(cgSource, true);
+					js.appendBooleanValueName(cgArgument, true ^ notEquals);
 				}
 			}
 			else if (cgSource.isFalse()) {
 				if (cgArgument.isFalse()) {
-					js.append("true");
+					js.appendBooleanString(true ^ notEquals);
+				}
+				else if (cgArgument.isTrue()) {
+					js.appendBooleanString(false ^ notEquals);
 				}
 				else {
-					js.appendBooleanValueName(cgArgument, false);
+					js.appendBooleanValueName(cgArgument, false ^ notEquals);
 				}
+			}
+			else if (cgArgument.isTrue()) {
+				js.appendBooleanValueName(cgSource, true ^ notEquals);
 			}
 			else if (cgArgument.isFalse()) {
-				js.appendBooleanValueName(cgSource, false);
-			}
-			else if (isEnumerationLiteral(cgSource) && isEnumerationLiteral(cgArgument)) {
-				js.appendValueName(cgSource);
-				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
-				js.appendValueName(cgArgument);
-			}
-			else if (isBoxedType(cgSource) && isBoxedType(cgArgument)) {
-				boolean nullSafe = cgSource.isNonNull() && cgArgument.isNonNull();
-				if (!nullSafe) {
-					String prefix = "";
-					if (!cgSource.isNonNull()) {
-						js.append("(");
-						js.appendValueName(cgSource);
-						js.append(" != null)");
-						prefix = " && ";
-					}
-					if (!cgArgument.isNonNull()) {
-						js.append(prefix);
-						js.append("(");
-						js.appendValueName(cgArgument);
-						js.append(" != null)");
-					}
-					js.append(" ? (");
-				}
-				js.appendValueName(cgSource);
-				js.append(".getTypeId()");
-				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
-				js.appendValueName(cgArgument);
-				js.append(".getTypeId()");
-				if (!nullSafe) {
-					js.append(") : ");
-					js.appendThrowBooleanInvalidValueException("null equal input");
-				}
-			}
-			else if (isBoxedElement(cgSource) && isBoxedElement(cgArgument)) {		// FIXME Is this needed ?
-				js.appendValueName(cgSource);
-				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
-				js.appendValueName(cgArgument);
-			}
-			else if (cgSource.isNonNull()) {
-				if (cgIsEqualExp.isNotEquals()) {
-					js.append("!");
-				}
-				js.appendValueName(cgSource);
-				js.append(".equals(");
-				js.appendValueName(cgArgument);
-				js.append(")");
-			}
-			else if (cgArgument.isNonNull()) {
-				if (cgIsEqualExp.isNotEquals()) {
-					js.append("!");
-				}
-				js.appendValueName(cgArgument);
-				js.append(".equals(");
-				js.appendValueName(cgSource);
-				js.append(")");
+				js.appendBooleanValueName(cgSource, false ^ notEquals);
 			}
 			else {
-				js.append("(");
-				js.appendValueName(cgSource);
-				js.append(" != null) ? ");
-				if (cgIsEqualExp.isNotEquals()) {
-					js.append("!");
-				}
-				js.appendValueName(cgSource);
-				js.append(".equals(");
-				js.appendValueName(cgArgument);
-				js.append(") : (");
-				js.appendValueName(cgArgument);
-				js.append(cgIsEqualExp.isNotEquals() ? " != " : " == ");
-				js.append("null)");
+				TypeDescriptor sourceTypeDescriptor = context.getTypeDescriptor(cgSource);
+				sourceTypeDescriptor.appendEqualsValue(js, cgSource, cgArgument, notEquals);
 			}
 			js.append(";\n");
 		}

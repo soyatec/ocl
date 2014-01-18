@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -52,29 +50,13 @@ import org.eclipse.ocl.examples.codegen.java.iteration.IterateIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
-import org.eclipse.ocl.examples.codegen.java.types.BooleanObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.BoxedValueDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.EObjectDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.EObjectsDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.FutureEObjectDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.FutureEObjectsDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.RootObjectDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.SimpleDataTypeDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.SimpleDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.SimpleValueDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.Id2BoxedDescriptorVisitor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.UnboxedElementsDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.UnboxedValueDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.AbstractCGModelResourceFactory;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResource;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.ids.ClassId;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.iterator.AnyIteration;
@@ -91,7 +73,6 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
@@ -202,10 +183,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		javaPrimitiveNames.put(class1.getName(), class2);
 	}
 
-	private /*@LazyNonNull*/ Id2BoxedJavaClassVisitor id2BoxedJavaClassVisitor = null;
 	private /*@LazyNonNull*/ Id2EClassVisitor id2EClassVisitor = null;
 //	protected final @NonNull Id2JavaInterfaceVisitor id2JavaInterfaceVisitor;
-	private /*@LazyNonNull*/ Id2UnboxedJavaClassVisitor id2UnboxedJavaClassVisitor = null;
+	private /*@LazyNonNull*/ Id2BoxedDescriptorVisitor id2BoxedDescriptorVisitor = null;
 	private /*@LazyNonNull*/ JavaGlobalContext globalContext = null;
 	private /*@LazyNonNull*/ GlobalPlace globalPlace = null;
 	private @NonNull Map<ElementId, BoxedDescriptor> boxedDescriptors = new HashMap<ElementId, BoxedDescriptor>();
@@ -248,16 +228,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new JavaGlobalContext(this);
 	}
 
-	protected @NonNull Id2BoxedJavaClassVisitor createId2BoxedJavaClassVisitor() {
-		return new Id2BoxedJavaClassVisitor(genModelHelper);
-	}
-
 	protected @NonNull Id2EClassVisitor createId2EClassVisitor() {
 		return new Id2EClassVisitor(metaModelManager);
 	}
 
-	protected @NonNull Id2UnboxedJavaClassVisitor createId2UnboxedJavaClassVisitor() {
-		return new Id2UnboxedJavaClassVisitor(genModelHelper);
+	protected @NonNull Id2BoxedDescriptorVisitor createId2BoxedDescriptorVisitor() {
+		return new Id2BoxedDescriptorVisitor(this);
 	}
 
 	@Override
@@ -277,147 +253,18 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		if (boxedDescriptor != null) {
 			return boxedDescriptor;
 		}
-		if (elementId instanceof ClassId) {
-			SimpleDescriptor simpleDescriptor = getClassDescriptor((ClassId) elementId);
-			if (simpleDescriptor != null) {
-				boxedDescriptors.put(elementId, simpleDescriptor);
-				return simpleDescriptor;
-			}
-//			return Object.class;
-		}
-		else if (elementId instanceof DataTypeId) {
-			SimpleDescriptor simpleDescriptor = getDataTypeDescriptor((DataTypeId) elementId);
-			if (simpleDescriptor != null) {
-				boxedDescriptors.put(elementId, simpleDescriptor);
-				return simpleDescriptor;
-			}
-		}
-		Class<?> boxedClass = getId2BoxedClassVisitor().doVisit(elementId);
-		Class<?> unboxedClass = getId2UnboxedClassVisitor().doVisit(elementId);
-		if (boxedClass == unboxedClass) {
-			BoxedDescriptor simpleDescriptor;
-			if (boxedClass == Object.class) {
-				simpleDescriptor = new RootObjectDescriptor(elementId);
-			}
-			else if (boxedClass == Boolean.class) {
-				simpleDescriptor = new BooleanObjectDescriptor(elementId);
-			}
-			else if (boxedClass == boolean.class) {
-				simpleDescriptor = new BooleanObjectDescriptor(elementId);
-//				maybePrimitive = true;
-			}
-			else {
-				simpleDescriptor = new SimpleValueDescriptor(elementId, boxedClass);
-			}
-			boxedDescriptors.put(elementId, simpleDescriptor);
-//			if (maybePrimitive) {
-//				return simpleDescriptor.getPrimitiveDescriptor();
-//			}
-//			else {
-				return simpleDescriptor;
-//			}
-		}
-		{
-			UnboxedDescriptor unboxedDescriptor = null;
-			if (unboxedClass == Object.class) {
-				unboxedDescriptor = new RootObjectDescriptor(elementId);
-			}
-			else if (elementId instanceof CollectionTypeId) {
-				CollectionTypeId collectionTypeId = (CollectionTypeId)elementId;
-				TypeId generalizedId = collectionTypeId.getGeneralizedId();
-				Type type;
-				if (generalizedId == collectionTypeId) {
-					type = metaModelManager.getIdResolver().getType(collectionTypeId, null);
-				}
-				else {
-					TypeId typeId = collectionTypeId.getElementTypeId();
-					type = metaModelManager.getIdResolver().getType(typeId, null);
-				}
-				EClassifier eClassifier = getEClassifier(type);
-				if (eClassifier != null) {
-					try {
-						Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
-						unboxedDescriptor = new EObjectsDescriptor(collectionTypeId, eClassifier, javaClass);
-					}
-					catch (Exception e) {
-						String instanceClassName = type.getInstanceClassName();
-						if (instanceClassName == null) {
-							instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
-						}
-						if (instanceClassName != null) {
-							unboxedDescriptor = new FutureEObjectsDescriptor(collectionTypeId, eClassifier, instanceClassName);
-						}
-//						else {
-//							unboxedDescriptor = new UnboxedDynamicEObjectsDescriptor(collectionTypeId, eClassifier);
-//						}
-					}
-				}
-				if (unboxedDescriptor == null) {
-					unboxedDescriptor = new UnboxedElementsDescriptor(collectionTypeId, metaModelManager, type);
-				}
-			}
-			else {
-				unboxedDescriptor = new UnboxedValueDescriptor(elementId, unboxedClass);
-			}
-			boxedDescriptor = new BoxedValueDescriptor(elementId, boxedClass, unboxedDescriptor);
-			boxedDescriptors.put(elementId, boxedDescriptor);
-			return boxedDescriptor;
-		}
+		boxedDescriptor = elementId.accept(getId2BoxedDescriptorVisitor());
+		assert boxedDescriptor != null;
+		boxedDescriptors.put(elementId, boxedDescriptor);
+		return boxedDescriptor;
 	}
 
 	public @NonNull CGModelResourceFactory getCGResourceFactory() {
 		return CG_RESOURCE_FACTORY;
 	}
 
-	protected @Nullable SimpleDescriptor getClassDescriptor(@NonNull ClassId elementId) {
-		Type type = metaModelManager.getIdResolver().getType(elementId, null);
-		EClassifier eClassifier = getEClassifier(type);
-		if (eClassifier != null) {
-			try {
-				Class<?> javaClass = genModelHelper.getEcoreInterfaceClassifier(eClassifier);
-				return new EObjectDescriptor(elementId, eClassifier, javaClass);
-			}
-			catch (Exception e) {
-				String instanceClassName = type.getInstanceClassName();
-				if (instanceClassName == null) {
-					instanceClassName = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
-				}
-				if (instanceClassName != null) {
-					return new FutureEObjectDescriptor(elementId, eClassifier, instanceClassName);
-				}
-			}
-		}
-		return null;
-	}
-
 	@Override
 	public @Nullable String getConstantsClass() {
-		return null;
-	}
-
-	protected @Nullable SimpleDescriptor getDataTypeDescriptor(@NonNull DataTypeId elementId) {
-		Type type = metaModelManager.getIdResolver().getType(elementId, null);
-		String instanceClassName = type.getInstanceClassName();
-		if (instanceClassName == null) {
-			return null;
-		}
-		return new SimpleDataTypeDescriptor(elementId, instanceClassName);
-	}
-
-	protected EClass getEClass(@NonNull Type type) {
-		return (EClass) getEClassifier(type);
-	}
-	
-	protected EClassifier getEClassifier(@NonNull Type type) {
-		for (DomainType dType : metaModelManager.getPartialTypes(type)) {
-			if (dType instanceof Type) {
-				Type pType = (Type) dType;
-				EClassifier eClass = (EClassifier) pType.getETarget();
-				if (eClass != null) {
-					return eClass;
-				}
-			}
-		}
 		return null;
 	}
 	
@@ -439,12 +286,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return globalPlace2;
 	}
 
-	public @NonNull Id2BoxedJavaClassVisitor getId2BoxedClassVisitor() {
-		Id2BoxedJavaClassVisitor id2BoxedJavaClassVisitor2 = id2BoxedJavaClassVisitor;
-		if (id2BoxedJavaClassVisitor2 == null) {
-			id2BoxedJavaClassVisitor = id2BoxedJavaClassVisitor2 = createId2BoxedJavaClassVisitor();
+	public @NonNull Id2BoxedDescriptorVisitor getId2BoxedDescriptorVisitor() {
+		Id2BoxedDescriptorVisitor id2BoxedDescriptorVisitor2 = id2BoxedDescriptorVisitor;
+		if (id2BoxedDescriptorVisitor2 == null) {
+			id2BoxedDescriptorVisitor = id2BoxedDescriptorVisitor2 = createId2BoxedDescriptorVisitor();
 		}
-		return id2BoxedJavaClassVisitor2;
+		return id2BoxedDescriptorVisitor2;
 	}
 
 	public @NonNull Id2EClassVisitor getId2EClassVisitor() {
@@ -453,14 +300,6 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			id2EClassVisitor = id2EClassVisitor2 = createId2EClassVisitor();
 		}
 		return id2EClassVisitor2;
-	}
-
-	public @NonNull Id2UnboxedJavaClassVisitor getId2UnboxedClassVisitor() {
-		Id2UnboxedJavaClassVisitor id2UnboxedJavaClassVisitor2 = id2UnboxedJavaClassVisitor;
-		if (id2UnboxedJavaClassVisitor2 == null) {
-			id2UnboxedJavaClassVisitor = id2UnboxedJavaClassVisitor2 = createId2UnboxedJavaClassVisitor();
-		}
-		return id2UnboxedJavaClassVisitor2;
 	}
 
 	/**
@@ -602,8 +441,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	@Override
 	public @NonNull UnboxedDescriptor getUnboxedDescriptor(@NonNull ElementId elementId) {
-		BoxedDescriptor typeDescriptor = getBoxedDescriptor(elementId);
-		return typeDescriptor.getUnboxedDescriptor();
+		BoxedDescriptor boxedDescriptor = getBoxedDescriptor(elementId);
+		return boxedDescriptor.getUnboxedDescriptor();
 	}
 
 	@Override

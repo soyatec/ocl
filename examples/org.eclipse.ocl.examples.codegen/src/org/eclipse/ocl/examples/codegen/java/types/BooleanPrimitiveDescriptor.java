@@ -69,4 +69,10 @@ public class BooleanPrimitiveDescriptor extends SimpleValueDescriptor implements
 			js.append(")");
 		}
 	}
+
+	@Override
+	public void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue,
+			@NonNull CGValuedElement thatValue, boolean notEquals) {
+		super.appendEqualsValue(js, thisValue, thatValue, notEquals);
+	}
 }

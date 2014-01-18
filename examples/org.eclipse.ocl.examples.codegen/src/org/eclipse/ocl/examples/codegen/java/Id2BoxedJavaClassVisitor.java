@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.domain.values.SetValue;
 
 public class Id2BoxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 {
-	protected Id2BoxedJavaClassVisitor(@NonNull GenModelHelper genModelHelper) {
+	public Id2BoxedJavaClassVisitor(@NonNull GenModelHelper genModelHelper) {
 		super(genModelHelper);
 	}
 	
@@ -60,10 +60,10 @@ public class Id2BoxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		return CollectionValue.class;
 	}
 
-	@Override
+/*	@Override
 	public @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {
 		return ObjectValue.class;
-	}
+	} */
 
 	@Override
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {

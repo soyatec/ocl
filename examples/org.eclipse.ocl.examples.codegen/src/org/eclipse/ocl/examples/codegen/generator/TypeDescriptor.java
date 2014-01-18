@@ -41,9 +41,16 @@ public interface TypeDescriptor
 	void appendCast(@NonNull JavaStream js, @Nullable Class<?> actualJavaClass, @Nullable SubStream subStream);
 
 	/**
-	 * Append an expression term that evaluaties whether (this Typedescriptor and )thisValue is not equal to thatTypeDescriptor and thatName.
+	 * Append an expression term that evaluates whether (this TypedDescriptor and) thisValue is not equal to thatTypeDescriptor and thatName.
 	 */
 	void appendNotEqualsTerm(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull TypeDescriptor thatTypeDescriptor, @NonNull String thatName);
+
+	/**
+	 * Append an expression term that evaluates whether (this TypedDescriptor and) thisValue is not equals/ notEquals to thatValue.
+	 * <br>
+	 * It is assumed that all the degenerate constant cases have been optimzed away.
+	 */
+	void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull CGValuedElement thatValue, boolean notEquals);
 
 	/**
 	 * Return a non-null Collection type descriptor if this type descriptor dedescribes a Collection.
