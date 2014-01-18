@@ -180,8 +180,9 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public List<CGConstraint> getPreconditions() {
+	public @NonNull List<CGConstraint> getPreconditions() {
 		if (preconditions == null) {
 			preconditions = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_OPERATION__PRECONDITIONS);
 		}
@@ -193,8 +194,9 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public List<CGConstraint> getPostconditions() {
+	public @NonNull List<CGConstraint> getPostconditions() {
 		if (postconditions == null) {
 			postconditions = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_OPERATION__POSTCONDITIONS);
 		}

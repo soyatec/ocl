@@ -2405,22 +2405,22 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRAINT__NAME = CG_NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTRAINT__PARAMETERS = CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRAINT__BODY = CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Message</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRAINT__MESSAGE = CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_CONSTRAINT__BODY = CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Constraint</em>' class.
@@ -8426,6 +8426,17 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGConstraint();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getParameters()
+	 * @see #getCGConstraint()
+	 * @generated
+	 */
+	EReference getCGConstraint_Parameters();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8435,17 +8446,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGConstraint_Body();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getMessage <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Message</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getMessage()
-	 * @see #getCGConstraint()
-	 * @generated
-	 */
-	EReference getCGConstraint_Message();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp <em>CG Constructor Exp</em>}'.
@@ -10285,20 +10285,20 @@ public interface CGModelPackage extends EPackage {
 		EClass CG_CONSTRAINT = eINSTANCE.getCGConstraint();
 
 		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CONSTRAINT__PARAMETERS = eINSTANCE.getCGConstraint_Parameters();
+
+		/**
 		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CG_CONSTRAINT__BODY = eINSTANCE.getCGConstraint_Body();
-
-		/**
-		 * The meta object literal for the '<em><b>Message</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_CONSTRAINT__MESSAGE = eINSTANCE.getCGConstraint_Message();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorExpImpl <em>CG Constructor Exp</em>}' class.

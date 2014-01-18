@@ -1175,7 +1175,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCGConstraint_Body() {
+	public EReference getCGConstraint_Parameters() {
 		return (EReference)cgConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1185,7 +1185,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCGConstraint_Message() {
+	public EReference getCGConstraint_Body() {
 		return (EReference)cgConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2763,8 +2763,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgConstantExpEClass, CG_CONSTANT_EXP__REFERRED_CONSTANT);
 
 		cgConstraintEClass = createEClass(CG_CONSTRAINT);
+		createEReference(cgConstraintEClass, CG_CONSTRAINT__PARAMETERS);
 		createEReference(cgConstraintEClass, CG_CONSTRAINT__BODY);
-		createEReference(cgConstraintEClass, CG_CONSTRAINT__MESSAGE);
 
 		cgConstructorExpEClass = createEClass(CG_CONSTRUCTOR_EXP);
 		createEReference(cgConstructorExpEClass, CG_CONSTRUCTOR_EXP__PARTS);
@@ -3141,8 +3141,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGConstantExp_ReferredConstant(), this.getCGValuedElement(), null, "referredConstant", null, 1, 1, CGConstantExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConstraintEClass, CGConstraint.class, "CGConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGConstraint_Parameters(), this.getCGParameter(), null, "parameters", null, 0, -1, CGConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGConstraint_Body(), this.getCGValuedElement(), null, "body", null, 0, 1, CGConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGConstraint_Message(), this.getCGValuedElement(), null, "message", null, 0, 1, CGConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConstructorExpEClass, CGConstructorExp.class, "CGConstructorExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGConstructorExp_Parts(), this.getCGConstructorPart(), this.getCGConstructorPart_ConstructorExp(), "parts", null, 0, -1, CGConstructorExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

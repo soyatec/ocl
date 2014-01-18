@@ -14,6 +14,10 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
+import java.util.List;
+
+import org.eclipse.jdt.annotation.NonNull;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -27,8 +31,8 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getBody <em>Body</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,6 +40,20 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @generated
  */
 public interface CGConstraint extends CGNamedElement {
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The parameters of this operation, with 'self' as the first parameter.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstraint_Parameters()
+	 * @generated
+	 */
+	@NonNull List<CGParameter> getParameters();
+
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -60,34 +78,5 @@ public interface CGConstraint extends CGNamedElement {
 	 * @generated
 	 */
 	void setBody(CGValuedElement value);
-
-	/**
-	 * Returns the value of the '<em><b>Message</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Message</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * @Deprecated message now encoded as tuple parts
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message</em>' containment reference.
-	 * @see #setMessage(CGValuedElement)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstraint_Message()
-	 * @generated
-	 */
-	@Deprecated
-	CGValuedElement getMessage();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint#getMessage <em>Message</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Message</em>' containment reference.
-	 * @see #getMessage()
-	 * @generated
-	 */
-	@Deprecated
-	void setMessage(CGValuedElement value);
 
 } // CGConstraint

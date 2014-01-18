@@ -79,7 +79,7 @@ public interface CGOperation extends CGValuedElement {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Preconditions()
 	 * @generated
 	 */
-	List<CGConstraint> getPreconditions();
+	@NonNull List<CGConstraint> getPreconditions();
 
 	/**
 	 * Returns the value of the '<em><b>Postconditions</b></em>' containment reference list.
@@ -93,7 +93,7 @@ public interface CGOperation extends CGValuedElement {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Postconditions()
 	 * @generated
 	 */
-	List<CGConstraint> getPostconditions();
+	@NonNull List<CGConstraint> getPostconditions();
 
 	/**
 	 * Returns the value of the '<em><b>Containing Class</b></em>' container reference.

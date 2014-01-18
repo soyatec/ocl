@@ -14,18 +14,24 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
@@ -38,14 +44,24 @@ import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstraintImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstraintImpl#getBody <em>Body</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstraintImpl#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint {
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGParameter> parameters;
+
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -55,18 +71,6 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 * @ordered
 	 */
 	protected CGValuedElement body;
-
-	/**
-	 * The cached value of the '{@link #getMessage() <em>Message</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @see #getMessage()
-	 * @generated
-	 * @ordered
-	 */
-	@Deprecated
-	protected CGValuedElement message;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,6 +89,20 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	@Override
 	protected EClass eStaticClass() {
 		return CGModelPackage.Literals.CG_CONSTRAINT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	@Override
+	public @NonNull List<CGParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<CGParameter>(CGParameter.class, this, CGModelPackage.CG_CONSTRAINT__PARAMETERS);
+		}
+		return parameters;
 	}
 
 	/**
@@ -134,67 +152,16 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@Deprecated
-	public CGValuedElement getMessage() {
-		return message;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Deprecated
-	public NotificationChain basicSetMessage(CGValuedElement newMessage, NotificationChain msgs) {
-		CGValuedElement oldMessage = message;
-		message = newMessage;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CONSTRAINT__MESSAGE, oldMessage, newMessage);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @Deprecated message now encoded as tuple parts
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@Deprecated
-	public void setMessage(CGValuedElement newMessage) {
-		if (newMessage != message) {
-			NotificationChain msgs = null;
-			if (message != null)
-				msgs = ((InternalEObject)message).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_CONSTRAINT__MESSAGE, null, msgs);
-			if (newMessage != null)
-				msgs = ((InternalEObject)newMessage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_CONSTRAINT__MESSAGE, null, msgs);
-			msgs = basicSetMessage(newMessage, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CONSTRAINT__MESSAGE, newMessage, newMessage));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case CGModelPackage.CG_CONSTRAINT__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case CGModelPackage.CG_CONSTRAINT__BODY:
 				return basicSetBody(null, msgs);
-			case CGModelPackage.CG_CONSTRAINT__MESSAGE:
-				return basicSetMessage(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -207,10 +174,10 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CGModelPackage.CG_CONSTRAINT__PARAMETERS:
+				return getParameters();
 			case CGModelPackage.CG_CONSTRAINT__BODY:
 				return getBody();
-			case CGModelPackage.CG_CONSTRAINT__MESSAGE:
-				return getMessage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,14 +187,16 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CGModelPackage.CG_CONSTRAINT__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends CGParameter>)newValue);
+				return;
 			case CGModelPackage.CG_CONSTRAINT__BODY:
 				setBody((CGValuedElement)newValue);
-				return;
-			case CGModelPackage.CG_CONSTRAINT__MESSAGE:
-				setMessage((CGValuedElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -241,11 +210,11 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CGModelPackage.CG_CONSTRAINT__PARAMETERS:
+				getParameters().clear();
+				return;
 			case CGModelPackage.CG_CONSTRAINT__BODY:
 				setBody((CGValuedElement)null);
-				return;
-			case CGModelPackage.CG_CONSTRAINT__MESSAGE:
-				setMessage((CGValuedElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -259,10 +228,10 @@ public class CGConstraintImpl extends CGNamedElementImpl implements CGConstraint
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CGModelPackage.CG_CONSTRAINT__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 			case CGModelPackage.CG_CONSTRAINT__BODY:
 				return body != null;
-			case CGModelPackage.CG_CONSTRAINT__MESSAGE:
-				return message != null;
 		}
 		return super.eIsSet(featureID);
 	}

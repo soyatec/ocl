@@ -131,9 +131,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A CGConstraint defines a constraint such as a class invariant."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
+        upperBound="-1" eType="#//CGParameter" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//CGValuedElement"
         containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConstructorExp" abstract="true" eSuperTypes="#//CGValuedElement">
