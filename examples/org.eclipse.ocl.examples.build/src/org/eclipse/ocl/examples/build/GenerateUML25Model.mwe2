@@ -56,6 +56,9 @@ Workflow {
 //    	modelSlot = "${ecoreSlot}"
 //    	uri = "model/Pivot.ocl"
 //    }
+    component = UML25Fixes { skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    }
     component = EPackageAlphabetizer { skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }

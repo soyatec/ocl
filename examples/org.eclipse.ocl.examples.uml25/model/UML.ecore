@@ -10,14 +10,44 @@
       <details key="documentation" value="Boolean is used for logical expressions, consisting of the predefined values true and false.&#xA;A Boolean type is used for logical expression, consisting of the predefined values true and false.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BooleanObject" instanceClassName="java.lang.Boolean">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Boolean is used for logical expressions, consisting of the predefined values true and false.&#xA;A Boolean type is used for logical expression, consisting of the predefined values true and false.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Integer is a primitive type representing integer values.&#xA;An integer is a primitive type representing integer values.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IntegerObject" instanceClassName="java.lang.Integer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Integer is a primitive type representing integer values.&#xA;An integer is a primitive type representing integer values.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="double">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Real is a primitive type representing the mathematical concept of real.&#xA;A real is a primitive type representing the mathematical concept of real.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="RealObject" instanceClassName="java.lang.Double">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Real is a primitive type representing the mathematical concept of real.&#xA;A real is a primitive type representing the mathematical concept of real.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="String is a sequence of characters in some suitable character set used to display information about the model. Character sets may include non-Roman alphabets and characters.&#xA;A string is a sequence of characters in some suitable character set used to display information about the model. Character sets may include non-Roman alphabets and characters.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="int">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="UnlimitedNatural is a primitive type representing unlimited natural values.&#xA;An unlimited natural is a primitive type representing unlimited natural values.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNaturalObject" instanceClassName="java.lang.Integer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="UnlimitedNatural is a primitive type representing unlimited natural values.&#xA;An unlimited natural is a primitive type representing unlimited natural values.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AggregationKind">
@@ -40,6 +70,26 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CallConcurrencyKind">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="CallConcurrencyKind is an Enumeration used to specify the semantics of concurrent calls to a BehavioralFeature.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+    </eAnnotations>
+    <eLiterals name="sequential">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="No concurrency management mechanism is associated with the BehavioralFeature and, therefore, concurrency conflicts may occur. Instances that invoke a BehavioralFeature need to coordinate so that only one invocation to a target on any BehavioralFeature occurs at once."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="guarded" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Multiple invocations of a BehavioralFeature that overlap in time may occur to one instance, but only one is allowed to commence. The others are blocked until the performance of the currently executing BehavioralFeature is complete. It is the responsibility of the system designer to ensure that deadlocks do not occur due to simultaneous blocking."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="concurrent" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Multiple invocations of a BehavioralFeature that overlap in time may occur to one instance and all of them may proceed concurrently."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConnectorKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ConnectorKind is an enumeration that defines whether a Connector is an assembly or a delegation.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
@@ -52,6 +102,26 @@
     <eLiterals name="delegation" value="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates that the Connector is a delegation Connector."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExpansionKind">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="ExpansionKind is an enumeration type used to specify how an ExpansionRegion executes its contents.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
+    </eAnnotations>
+    <eLiterals name="parallel">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The content of the ExpansionRegion is executed concurrently for the elements of the input collections."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="iterative" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The content of the ExpansionRegion is executed iteratively for the elements of the input collections, in the order of the input elements, if the collections are ordered."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="stream" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A stream of input collection elements flows into a single execution of the content of the ExpansionRegion, in the order of the collection elements if the input collections are ordered."/>
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
@@ -180,116 +250,6 @@
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="PseudostateKind">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="PseudostateKind is an Enumeration type that is used to differentiate various kinds of Pseudostates.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
-    </eAnnotations>
-    <eLiterals name="initial"/>
-    <eLiterals name="deepHistory" value="1"/>
-    <eLiterals name="shallowHistory" value="2"/>
-    <eLiterals name="join" value="3"/>
-    <eLiterals name="fork" value="4"/>
-    <eLiterals name="junction" value="5"/>
-    <eLiterals name="choice" value="6"/>
-    <eLiterals name="entryPoint" value="7"/>
-    <eLiterals name="exitPoint" value="8"/>
-    <eLiterals name="terminate" value="9"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="TransitionKind is an Enumeration type used to differentiate the various kinds of Transitions.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
-    </eAnnotations>
-    <eLiterals name="internal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Implies that the Transition, if triggered, occurs without exiting or entering the source State (i.e., it does not cause a state change). This means that the entry or exit condition of the source State will not be invoked. An internal Transition can be taken even if the SateMachine is in one or more Regions nested within the associated State."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="local" value="1">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Implies that the Transition, if triggered, will not exit the composite (source) State, but it will exit and re-enter any state within the composite State that is in the current state configuration."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="external" value="2">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Implies that the Transition, if triggered, will exit the composite (source) State."/>
-      </eAnnotations>
-    </eLiterals>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="VisibilityKind is an enumeration type that defines literals to determine the visibility of Elements in a model.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
-    </eAnnotations>
-    <eLiterals name="public">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A Named Element with public visibility is visible to all elements that can access the contents of the Namespace that owns it."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="private" value="1">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A NamedElement with private visibility is only visible inside the Namespace that owns it."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="protected" value="2">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A NamedElement with protected visibility is visible to Elements that have a generalization relationship to the Namespace that owns it."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="package" value="3">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A NamedElement with package visibility is visible to all Elements within the nearest enclosing Package (given that other owning Elements have proper visibility). Outside the nearest enclosing Package, a NamedElement marked as having package visibility is not visible.  Only NamedElements that are not owned by Packages can be marked as having package visibility. "/>
-      </eAnnotations>
-    </eLiterals>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="double">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Real is a primitive type representing the mathematical concept of real.&#xA;A real is a primitive type representing the mathematical concept of real.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
-    </eAnnotations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="int">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="UnlimitedNatural is a primitive type representing unlimited natural values.&#xA;An unlimited natural is a primitive type representing unlimited natural values.&#xA;&lt;p>From package PrimitiveTypes.&lt;/p>&#xA;&lt;p>From package Types.&lt;/p>"/>
-    </eAnnotations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CallConcurrencyKind">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="CallConcurrencyKind is an Enumeration used to specify the semantics of concurrent calls to a BehavioralFeature.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
-    </eAnnotations>
-    <eLiterals name="sequential">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="No concurrency management mechanism is associated with the BehavioralFeature and, therefore, concurrency conflicts may occur. Instances that invoke a BehavioralFeature need to coordinate so that only one invocation to a target on any BehavioralFeature occurs at once."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="guarded" value="1">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Multiple invocations of a BehavioralFeature that overlap in time may occur to one instance, but only one is allowed to commence. The others are blocked until the performance of the currently executing BehavioralFeature is complete. It is the responsibility of the system designer to ensure that deadlocks do not occur due to simultaneous blocking."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="concurrent" value="2">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Multiple invocations of a BehavioralFeature that overlap in time may occur to one instance and all of them may proceed concurrently."/>
-      </eAnnotations>
-    </eLiterals>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ExpansionKind">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="ExpansionKind is an enumeration type used to specify how an ExpansionRegion executes its contents.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
-    </eAnnotations>
-    <eLiterals name="parallel">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The content of the ExpansionRegion is executed concurrently for the elements of the input collections."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="iterative" value="1">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The content of the ExpansionRegion is executed iteratively for the elements of the input collections, in the order of the input elements, if the collections are ordered."/>
-      </eAnnotations>
-    </eLiterals>
-    <eLiterals name="stream" value="2">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A stream of input collection elements flows into a single execution of the content of the ExpansionRegion, in the order of the collection elements if the input collections are ordered."/>
-      </eAnnotations>
-    </eLiterals>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ObjectNodeOrderingKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ObjectNodeOrderingKind is an enumeration indicating queuing order for offering the tokens held by an ObjectNode.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
@@ -362,6 +322,66 @@
     <eLiterals name="delete" value="3">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates objects that are values of the parameter do not exist after executions of the behavior are finished."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PseudostateKind">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="PseudostateKind is an Enumeration type that is used to differentiate various kinds of Pseudostates.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
+    </eAnnotations>
+    <eLiterals name="initial"/>
+    <eLiterals name="deepHistory" value="1"/>
+    <eLiterals name="shallowHistory" value="2"/>
+    <eLiterals name="join" value="3"/>
+    <eLiterals name="fork" value="4"/>
+    <eLiterals name="junction" value="5"/>
+    <eLiterals name="choice" value="6"/>
+    <eLiterals name="entryPoint" value="7"/>
+    <eLiterals name="exitPoint" value="8"/>
+    <eLiterals name="terminate" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="TransitionKind is an Enumeration type used to differentiate the various kinds of Transitions.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
+    </eAnnotations>
+    <eLiterals name="internal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Implies that the Transition, if triggered, occurs without exiting or entering the source State (i.e., it does not cause a state change). This means that the entry or exit condition of the source State will not be invoked. An internal Transition can be taken even if the SateMachine is in one or more Regions nested within the associated State."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="local" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Implies that the Transition, if triggered, will not exit the composite (source) State, but it will exit and re-enter any state within the composite State that is in the current state configuration."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="external" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Implies that the Transition, if triggered, will exit the composite (source) State."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="VisibilityKind is an enumeration type that defines literals to determine the visibility of Elements in a model.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
+    </eAnnotations>
+    <eLiterals name="public">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Named Element with public visibility is visible to all elements that can access the contents of the Namespace that owns it."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="private" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A NamedElement with private visibility is only visible inside the Namespace that owns it."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="protected" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A NamedElement with protected visibility is visible to Elements that have a generalization relationship to the Namespace that owns it."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="package" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A NamedElement with package visibility is visible to all Elements within the nearest enclosing Package (given that other owning Elements have proper visibility). Outside the nearest enclosing Package, a NamedElement marked as having package visibility is not visible.  Only NamedElements that are not owned by Packages can be marked as having package visibility. "/>
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
@@ -3220,7 +3240,7 @@
       <details key="documentation" value="A DurationConstraint is a Constraint that refers to a DurationInterval.&#xA;if (constrainedElement->size() = 2)&#xA;  then (firstEvent->size() = 2) else (firstEvent->size() = 0) &#xA;endif&#xA;constrainedElement->size() = 1 or constrainedElement->size()=2&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        upperBound="2" eType="#//Boolean">
+        upperBound="2" eType="#//BooleanObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -3282,7 +3302,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        upperBound="2" eType="#//Boolean">
+        upperBound="2" eType="#//BooleanObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -3784,7 +3804,7 @@
         <details key="lowerBound" value="1"/>
         <details key="eType" value="UML::Stereotype"/>
       </eAnnotations>
-      <contents xsi:type="ecore:EOperation" name="lowerBound" ordered="false" eType="#//Integer">
+      <contents xsi:type="ecore:EOperation" name="lowerBound" ordered="false" eType="#//IntegerObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
           <details key="body" value="result = (if lowerValue=null then 0 else lowerValue.integerValue() endif)"/>
         </eAnnotations>
@@ -4057,7 +4077,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSubstitutable" ordered="false"
-        eType="#//Boolean" defaultValueLiteral="true">
+        eType="#//BooleanObject" defaultValueLiteral="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -4991,7 +5011,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralBoolean" eSuperTypes="#//LiteralSpecification">
     <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="booleanValue" ordered="false" eType="#//Boolean">
+      <contents xsi:type="ecore:EOperation" name="booleanValue" ordered="false" eType="#//BooleanObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
           <details key="body" value="result = (value)"/>
         </eAnnotations>
@@ -5023,7 +5043,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralInteger" eSuperTypes="#//LiteralSpecification">
     <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="integerValue" ordered="false" eType="#//Integer">
+      <contents xsi:type="ecore:EOperation" name="integerValue" ordered="false" eType="#//IntegerObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
           <details key="body" value="result = (value)"/>
         </eAnnotations>
@@ -5092,7 +5112,7 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="realValue" ordered="false" eType="#//Real">
+      <contents xsi:type="ecore:EOperation" name="realValue" ordered="false" eType="#//RealObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
           <details key="body" value="result = (value)"/>
         </eAnnotations>
@@ -5163,7 +5183,7 @@
         <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
       </contents>
       <contents xsi:type="ecore:EOperation" name="unlimitedValue" ordered="false"
-          eType="#//UnlimitedNatural">
+          eType="#//UnlimitedNaturalObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
           <details key="body" value="result = (value)"/>
         </eAnnotations>
@@ -5558,7 +5578,7 @@
         <details key="documentation" value="The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="lower" ordered="false" eType="#//Integer">
+    <eOperations name="lower" ordered="false" eType="#//IntegerObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (lowerBound())"/>
       </eAnnotations>
@@ -5566,7 +5586,7 @@
         <details key="documentation" value="The derived lower attribute must equal the lowerBound.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="lowerBound" ordered="false" eType="#//Integer">
+    <eOperations name="lowerBound" ordered="false" eType="#//IntegerObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (if (lowerValue=null or lowerValue.integerValue()=null) then 1 else lowerValue.integerValue() endif)"/>
       </eAnnotations>
@@ -5574,7 +5594,7 @@
         <details key="documentation" value="The query lowerBound() returns the lower bound of the multiplicity as an integer, which is the integerValue of lowerValue, if this is given, and 1 otherwise.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="upper" ordered="false" eType="#//UnlimitedNatural">
+    <eOperations name="upper" ordered="false" eType="#//UnlimitedNaturalObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (upperBound())"/>
       </eAnnotations>
@@ -6312,7 +6332,8 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" ordered="false"
-        eType="#//Integer" changeable="false" volatile="true" transient="true" derived="true">
+        eType="#//IntegerObject" changeable="false" volatile="true" transient="true"
+        derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -6359,7 +6380,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" ordered="false"
-        eType="#//UnlimitedNatural" changeable="false" volatile="true" transient="true"
+        eType="#//UnlimitedNaturalObject" changeable="false" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
@@ -9284,7 +9305,7 @@
       <details key="documentation" value="A TimeConstraint is a Constraint that refers to a TimeInterval.&#xA;constrainedElement->size() = 1&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        eType="#//Boolean" defaultValueLiteral="true">
+        eType="#//BooleanObject" defaultValueLiteral="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -9739,7 +9760,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the binding of a template.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
     </eAnnotations>
-    <eOperations name="booleanValue" ordered="false" eType="#//Boolean">
+    <eOperations name="booleanValue" ordered="false" eType="#//BooleanObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (null)"/>
       </eAnnotations>
@@ -9747,7 +9768,7 @@
         <details key="documentation" value="The query booleanValue() gives a single Boolean value when one can be computed.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="integerValue" ordered="false" eType="#//Integer">
+    <eOperations name="integerValue" ordered="false" eType="#//IntegerObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (null)"/>
       </eAnnotations>
@@ -9771,7 +9792,7 @@
         <details key="documentation" value="The query isNull() returns true when it can be computed that the value is null.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="realValue" ordered="false" eType="#//Real">
+    <eOperations name="realValue" ordered="false" eType="#//RealObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (null)"/>
       </eAnnotations>
@@ -9787,7 +9808,7 @@
         <details key="documentation" value="The query stringValue() gives a single String value when one can be computed.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="unlimitedValue" ordered="false" eType="#//UnlimitedNatural">
+    <eOperations name="unlimitedValue" ordered="false" eType="#//UnlimitedNaturalObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
         <details key="body" value="result = (null)"/>
       </eAnnotations>
