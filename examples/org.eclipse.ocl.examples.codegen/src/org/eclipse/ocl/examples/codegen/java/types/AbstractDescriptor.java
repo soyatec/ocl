@@ -31,11 +31,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
-import org.eclipse.ocl.examples.domain.ids.EnumerationId;
-import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -131,7 +127,7 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		js.append("))");
 	}
 
-	protected boolean zzisBoxedElement(@NonNull CGValuedElement cgValue) {
+/*	protected boolean zzisBoxedElement(@NonNull CGValuedElement cgValue) {
 		TypeId typeId = cgValue.getASTypeId();
 		if (typeId instanceof EnumerationLiteralId) {
 			return true;
@@ -143,7 +139,7 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 			return true;
 		}
 		return false;
-	}
+	} */
 
 	protected boolean zzisBoxedType(@NonNull MetaModelManager metaModelManager, @NonNull CGValuedElement cgValue) {
 		Element ast = cgValue.getAst();
@@ -192,11 +188,11 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 				js.appendThrowBooleanInvalidValueException("null equal input");
 			}
 		}
-		else if (zzisBoxedElement(thisValue) && zzisBoxedElement(thatValue)) {		// FIXME Is this needed ?
+/*		else if (zzisBoxedElement(thisValue) && zzisBoxedElement(thatValue)) {		// FIXME Is this needed ?
 			js.appendValueName(thisValue);
 			js.append(notEquals ? " != " : " == ");
 			js.appendValueName(thatValue);
-		}
+		} */
 		else if (thisValue.isNonNull()) {
 			if (notEquals) {
 				js.append("!");
