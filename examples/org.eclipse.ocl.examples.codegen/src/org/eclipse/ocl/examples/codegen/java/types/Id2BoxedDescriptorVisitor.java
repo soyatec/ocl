@@ -51,9 +51,7 @@ import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
@@ -254,8 +252,7 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 			return new BooleanObjectDescriptor(id);
 		}
 		else if (id == TypeId.INTEGER) {
-			UnboxedDescriptor unboxedDescriptor = new RootObjectDescriptor(id);
-			return new BoxedValueDescriptor(id, IntegerValue.class, unboxedDescriptor);
+			return new IntegerValueDescriptor(id);
 		}
 		else if (id == TypeId.INTEGER_RANGE) {
 			return new SimpleValueDescriptor(id, IntegerRange.class);
@@ -270,15 +267,13 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 			return new RootObjectDescriptor(id);
 		}
 		else if (id == TypeId.REAL) {
-			UnboxedDescriptor unboxedDescriptor = new UnboxedValueDescriptor(id, Number.class);
-			return new BoxedValueDescriptor(id, RealValue.class, unboxedDescriptor);
+			return new RealValueDescriptor(id);
 		}
 		else if (id == TypeId.STRING) {
 			return new SimpleValueDescriptor(id, String.class);
 		}
 		else if (id == TypeId.UNLIMITED_NATURAL) {
-			UnboxedDescriptor unboxedDescriptor = new UnboxedValueDescriptor(id, Number.class);
-			return new BoxedValueDescriptor(id, IntegerValue.class, unboxedDescriptor);
+			return new UnlimitedNaturalValueDescriptor(id);
 		}
 //		else {
 //			try {
