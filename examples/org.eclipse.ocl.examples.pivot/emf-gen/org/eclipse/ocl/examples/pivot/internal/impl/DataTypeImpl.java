@@ -509,7 +509,7 @@ public class DataTypeImpl
 		else {
 			Type behavioralType = getBehavioralType();
 			if ((behavioralType != null) && (behavioralType != this)) {
-				return behavioralType.getTypeId();
+//				return behavioralType.getTypeId();
 			}
 			return IdManager.getDataTypeId(this);
 		}
