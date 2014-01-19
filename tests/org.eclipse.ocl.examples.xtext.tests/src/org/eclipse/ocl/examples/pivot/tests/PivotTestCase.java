@@ -88,8 +88,6 @@ import org.eclipse.ocl.examples.xtext.oclinecore.oclinecorecs.OCLinEcoreCSPackag
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.oclstdlib.ui.OCLstdlibUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.uml2.uml.profile.l2.L2Package;
-import org.eclipse.uml2.uml.resource.UML302UMLResource;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -622,7 +620,8 @@ public class PivotTestCase extends TestCase
 		if (DEBUG_ID) {
 			debugPrintln("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		}
-		EPackage.Registry.INSTANCE.put(UML302UMLResource.STANDARD_PROFILE_NS_URI, L2Package.eINSTANCE);
+		EcorePackage.eINSTANCE.getClass();						// Workaround Bug 425841
+//		EPackage.Registry.INSTANCE.put(UML302UMLResource.STANDARD_PROFILE_NS_URI, L2Package.eINSTANCE);
 	}
 
 	@Override
