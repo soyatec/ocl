@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -157,6 +158,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	private EClass cgBuiltInIterationCallExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgCallableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -925,6 +933,36 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getCGCallable() {
+		return cgCallableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGCallable_Parameters() {
+		return (EReference)cgCallableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGCallable_Body() {
+		return (EReference)cgCallableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCGCallExp() {
 		return cgCallExpEClass;
 	}
@@ -1167,26 +1205,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	@Override
 	public EClass getCGConstraint() {
 		return cgConstraintEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGConstraint_Parameters() {
-		return (EReference)cgConstraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGConstraint_Body() {
-		return (EReference)cgConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2045,7 +2063,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCGOperation_Parameters() {
+	public EReference getCGOperation_Preconditions() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2055,7 +2073,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCGOperation_Body() {
+	public EReference getCGOperation_Postconditions() {
 		return (EReference)cgOperationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2065,28 +2083,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCGOperation_Preconditions() {
-		return (EReference)cgOperationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGOperation_Postconditions() {
-		return (EReference)cgOperationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getCGOperation_ContainingClass() {
-		return (EReference)cgOperationEClass.getEStructuralFeatures().get(4);
+		return (EReference)cgOperationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2185,7 +2183,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCGParameter_Operation() {
+	public EReference getCGParameter_Callable() {
 		return (EReference)cgParameterEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2730,6 +2728,10 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgBuiltInIterationCallExpEClass = createEClass(CG_BUILT_IN_ITERATION_CALL_EXP);
 		createEReference(cgBuiltInIterationCallExpEClass, CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR);
 
+		cgCallableEClass = createEClass(CG_CALLABLE);
+		createEReference(cgCallableEClass, CG_CALLABLE__PARAMETERS);
+		createEReference(cgCallableEClass, CG_CALLABLE__BODY);
+
 		cgCallExpEClass = createEClass(CG_CALL_EXP);
 		createEAttribute(cgCallExpEClass, CG_CALL_EXP__INVALIDATING);
 		createEAttribute(cgCallExpEClass, CG_CALL_EXP__VALIDATING);
@@ -2763,8 +2765,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgConstantExpEClass, CG_CONSTANT_EXP__REFERRED_CONSTANT);
 
 		cgConstraintEClass = createEClass(CG_CONSTRAINT);
-		createEReference(cgConstraintEClass, CG_CONSTRAINT__PARAMETERS);
-		createEReference(cgConstraintEClass, CG_CONSTRAINT__BODY);
 
 		cgConstructorExpEClass = createEClass(CG_CONSTRUCTOR_EXP);
 		createEReference(cgConstructorExpEClass, CG_CONSTRUCTOR_EXP__PARTS);
@@ -2893,8 +2893,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEAttribute(cgNumberEClass, CG_NUMBER__NUMERIC_VALUE);
 
 		cgOperationEClass = createEClass(CG_OPERATION);
-		createEReference(cgOperationEClass, CG_OPERATION__PARAMETERS);
-		createEReference(cgOperationEClass, CG_OPERATION__BODY);
 		createEReference(cgOperationEClass, CG_OPERATION__PRECONDITIONS);
 		createEReference(cgOperationEClass, CG_OPERATION__POSTCONDITIONS);
 		createEReference(cgOperationEClass, CG_OPERATION__CONTAINING_CLASS);
@@ -2911,7 +2909,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgPackageEClass, CG_PACKAGE__CONTAINING_PACKAGE);
 
 		cgParameterEClass = createEClass(CG_PARAMETER);
-		createEReference(cgParameterEClass, CG_PARAMETER__OPERATION);
+		createEReference(cgParameterEClass, CG_PARAMETER__CALLABLE);
 
 		cgPropertyEClass = createEClass(CG_PROPERTY);
 		createEReference(cgPropertyEClass, CG_PROPERTY__CONTAINING_CLASS);
@@ -3019,6 +3017,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgBooleanEClass.getESuperTypes().add(this.getCGConstant());
 		cgBoxExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgBuiltInIterationCallExpEClass.getESuperTypes().add(this.getCGIterationCallExp());
+		cgCallableEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgCallExpEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgCastExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgCatchExpEClass.getESuperTypes().add(this.getCGCallExp());
@@ -3027,7 +3026,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgCollectionPartEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgConstantEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgConstantExpEClass.getESuperTypes().add(this.getCGValuedElement());
-		cgConstraintEClass.getESuperTypes().add(this.getCGNamedElement());
+		cgConstraintEClass.getESuperTypes().add(this.getCGCallable());
 		cgConstructorExpEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgConstructorPartEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgEcoreClassConstructorExpEClass.getESuperTypes().add(this.getCGConstructorExp());
@@ -3070,7 +3069,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgNavigationCallExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgNullEClass.getESuperTypes().add(this.getCGConstant());
 		cgNumberEClass.getESuperTypes().add(this.getCGConstant());
-		cgOperationEClass.getESuperTypes().add(this.getCGValuedElement());
+		cgOperationEClass.getESuperTypes().add(this.getCGCallable());
 		cgOperationCallExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgOppositePropertyCallExpEClass.getESuperTypes().add(this.getCGNavigationCallExp());
 		cgPackageEClass.getESuperTypes().add(this.getCGNamedElement());
@@ -3108,6 +3107,10 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEClass(cgBuiltInIterationCallExpEClass, CGBuiltInIterationCallExp.class, "CGBuiltInIterationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGBuiltInIterationCallExp_Accumulator(), this.getCGIterator(), null, "accumulator", null, 0, 1, CGBuiltInIterationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(cgCallableEClass, CGCallable.class, "CGCallable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGCallable_Parameters(), this.getCGParameter(), this.getCGParameter_Callable(), "parameters", null, 0, -1, CGCallable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getCGCallable_Body(), this.getCGValuedElement(), null, "body", null, 0, 1, CGCallable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(cgCallExpEClass, CGCallExp.class, "CGCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGCallExp_Invalidating(), ecorePackage.getEBoolean(), "invalidating", "false", 1, 1, CGCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGCallExp_Validating(), ecorePackage.getEBoolean(), "validating", "false", 1, 1, CGCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3141,8 +3144,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGConstantExp_ReferredConstant(), this.getCGValuedElement(), null, "referredConstant", null, 1, 1, CGConstantExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConstraintEClass, CGConstraint.class, "CGConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGConstraint_Parameters(), this.getCGParameter(), null, "parameters", null, 0, -1, CGConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getCGConstraint_Body(), this.getCGValuedElement(), null, "body", null, 0, 1, CGConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConstructorExpEClass, CGConstructorExp.class, "CGConstructorExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGConstructorExp_Parts(), this.getCGConstructorPart(), this.getCGConstructorPart_ConstructorExp(), "parts", null, 0, -1, CGConstructorExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3271,8 +3272,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEAttribute(getCGNumber_NumericValue(), this.getNumber(), "numericValue", null, 1, 1, CGNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgOperationEClass, CGOperation.class, "CGOperation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGOperation_Parameters(), this.getCGParameter(), null, "parameters", null, 0, -1, CGOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getCGOperation_Body(), this.getCGValuedElement(), null, "body", null, 0, 1, CGOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGOperation_Preconditions(), this.getCGConstraint(), null, "preconditions", null, 0, -1, CGOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGOperation_Postconditions(), this.getCGConstraint(), null, "postconditions", null, 0, -1, CGOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGOperation_ContainingClass(), this.getCGClass(), this.getCGClass_Operations(), "containingClass", null, 1, 1, CGOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3289,7 +3288,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGPackage_ContainingPackage(), this.getCGPackage(), this.getCGPackage_Packages(), "containingPackage", null, 0, 1, CGPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgParameterEClass, CGParameter.class, "CGParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGParameter_Operation(), this.getCGOperation(), null, "operation", null, 1, 1, CGParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGParameter_Callable(), this.getCGCallable(), this.getCGCallable_Parameters(), "callable", null, 0, 1, CGParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgPropertyEClass, CGProperty.class, "CGProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGProperty_ContainingClass(), this.getCGClass(), this.getCGClass_Properties(), "containingClass", null, 1, 1, CGProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

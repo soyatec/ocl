@@ -504,10 +504,12 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 			if (expressionInOCL != null) {
 				Variable contextVariable = expressionInOCL.getContextVariable();
 				if (contextVariable != null) {
-					getSelfParameter(contextVariable);
+					CGParameter cgParameter = getSelfParameter(contextVariable);
+					cgConstraint.getParameters().add(cgParameter);
 				}
 				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expressionInOCL.getParameterVariable()) {
-					getParameter(parameterVariable);
+					CGParameter cgParameter = getParameter(parameterVariable);
+					cgConstraint.getParameters().add(cgParameter);
 				}
 				cgConstraint.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
 			}
@@ -808,11 +810,11 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 				Variable contextVariable = expressionInOCL.getContextVariable();
 				if (contextVariable != null) {
 					CGParameter cgParameter = getSelfParameter(contextVariable);
-					cgParameter.setOperation(cgOperation);
+					cgOperation.getParameters().add(cgParameter);
 				}
 				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expressionInOCL.getParameterVariable()) {
 					CGParameter cgParameter = getParameter(parameterVariable);
-					cgParameter.setOperation(cgOperation);
+					cgOperation.getParameters().add(cgParameter);
 				}
 				cgOperation.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
 			}

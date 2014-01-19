@@ -142,6 +142,17 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_CALLABLE: {
+				CGCallable cgCallable = (CGCallable)theEObject;
+				T result = caseCGCallable(cgCallable);
+				if (result == null) result = caseCGValuedElement(cgCallable);
+				if (result == null) result = caseCGTypedElement(cgCallable);
+				if (result == null) result = caseCGNamedElement(cgCallable);
+				if (result == null) result = caseCGElement(cgCallable);
+				if (result == null) result = caseNameable(cgCallable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_CALL_EXP: {
 				CGCallExp cgCallExp = (CGCallExp)theEObject;
 				T result = caseCGCallExp(cgCallExp);
@@ -233,6 +244,9 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_CONSTRAINT: {
 				CGConstraint cgConstraint = (CGConstraint)theEObject;
 				T result = caseCGConstraint(cgConstraint);
+				if (result == null) result = caseCGCallable(cgConstraint);
+				if (result == null) result = caseCGValuedElement(cgConstraint);
+				if (result == null) result = caseCGTypedElement(cgConstraint);
 				if (result == null) result = caseCGNamedElement(cgConstraint);
 				if (result == null) result = caseCGElement(cgConstraint);
 				if (result == null) result = caseNameable(cgConstraint);
@@ -289,6 +303,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 				CGEcoreOperation cgEcoreOperation = (CGEcoreOperation)theEObject;
 				T result = caseCGEcoreOperation(cgEcoreOperation);
 				if (result == null) result = caseCGOperation(cgEcoreOperation);
+				if (result == null) result = caseCGCallable(cgEcoreOperation);
 				if (result == null) result = caseCGValuedElement(cgEcoreOperation);
 				if (result == null) result = caseCGTypedElement(cgEcoreOperation);
 				if (result == null) result = caseCGNamedElement(cgEcoreOperation);
@@ -641,6 +656,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 				CGLibraryOperation cgLibraryOperation = (CGLibraryOperation)theEObject;
 				T result = caseCGLibraryOperation(cgLibraryOperation);
 				if (result == null) result = caseCGOperation(cgLibraryOperation);
+				if (result == null) result = caseCGCallable(cgLibraryOperation);
 				if (result == null) result = caseCGValuedElement(cgLibraryOperation);
 				if (result == null) result = caseCGTypedElement(cgLibraryOperation);
 				if (result == null) result = caseCGNamedElement(cgLibraryOperation);
@@ -744,6 +760,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_OPERATION: {
 				CGOperation cgOperation = (CGOperation)theEObject;
 				T result = caseCGOperation(cgOperation);
+				if (result == null) result = caseCGCallable(cgOperation);
 				if (result == null) result = caseCGValuedElement(cgOperation);
 				if (result == null) result = caseCGTypedElement(cgOperation);
 				if (result == null) result = caseCGNamedElement(cgOperation);
@@ -1103,6 +1120,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGBuiltInIterationCallExp(CGBuiltInIterationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Callable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Callable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGCallable(CGCallable object) {
 		return null;
 	}
 

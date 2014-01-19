@@ -27,8 +27,6 @@ import org.eclipse.jdt.annotation.Nullable;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getPostconditions <em>Postconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getContainingClass <em>Containing Class</em>}</li>
@@ -38,35 +36,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation()
  * @generated
  */
-public interface CGOperation extends CGValuedElement {
-	/**
-	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Body</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The OCL-defined body of this operation.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Body</em>' containment reference.
-	 * @see #setBody(CGValuedElement)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Body()
-	 * @generated
-	 */
-	@Nullable CGValuedElement getBody();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getBody <em>Body</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Body</em>' containment reference.
-	 * @see #getBody()
-	 * @generated
-	 */
-	void setBody(CGValuedElement value);
-
+public interface CGOperation extends CGCallable {
 	/**
 	 * Returns the value of the '<em><b>Preconditions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint}.
@@ -121,23 +91,5 @@ public interface CGOperation extends CGValuedElement {
 	 * @generated
 	 */
 	void setContainingClass(CGClass value);
-
-	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The parameters of this operation, with 'self' as the first parameter.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_Parameters()
-	 * @generated
-	 */
-	@NonNull List<CGParameter> getParameters();
 
 } // CGOperation

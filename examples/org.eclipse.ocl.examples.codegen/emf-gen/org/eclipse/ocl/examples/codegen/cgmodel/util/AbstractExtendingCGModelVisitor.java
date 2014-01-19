@@ -73,6 +73,11 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	@Override
+	public @Nullable R visitCGCallable(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCallable object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
 	public @Nullable R visitCGCastExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp object) {
 		return visitCGCallExp(object);
 	}
@@ -109,7 +114,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 
 	@Override
 	public @Nullable R visitCGConstraint(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint object) {
-		return visitCGNamedElement(object);
+		return visitCGCallable(object);
 	}
 
 	@Override
@@ -324,7 +329,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 
 	@Override
 	public @Nullable R visitCGOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperation object) {
-		return visitCGValuedElement(object);
+		return visitCGCallable(object);
 	}
 
 	@Override

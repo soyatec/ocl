@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
@@ -176,10 +177,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 		
 		public static final @NonNull Box PARAM = new Box() {
 			@Override public @Nullable String generateIsBoxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				return "return (init != null) ? init.isBoxed() : operation != null ? operation.isBoxed() : true;";
+				return classRef(CGCallable.class) + " callable = getCallable();\n" +
+				"		return (init != null) ? init.isBoxed() : callable != null ? callable.isBoxed() : true;";
 			}
 			@Override public @Nullable String generateIsUnboxed(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-				return "return (init != null) ? init.isUnboxed() : operation != null ? operation.isUnboxed() : false;";
+				return classRef(CGCallable.class) + " callable = getCallable();\n" + 
+				"		return (init != null) ? init.isUnboxed() : callable != null ? callable.isUnboxed() : false;";
 			}
 		};
 		
@@ -1841,7 +1844,6 @@ public interface Log {
 		new CGValuedElementModelSpec(CGCollectionExp.class, "CGCollectionPart",		Box.TRUE , Ths.PARTS, null     , Nul.NEVER, Inv.PARTS, Glo.PARTS, null     , null     , null    , Con.PARTS, null     , null     , null     , Ctl.LORG , null     , null     , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGCollectionPart.class, null,					Box.RANGE, Ths.CPART, null     , Nul.CPART, Inv.CPART, Glo.CPART, Inl.CPART, null     , null    , Con.CPART, null     , null     , null     , null     , Com.FALSE, null     , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGConstantExp.class, "referredConstant",		Box.DELEG, Ths.DELEG, null     , null     , null     , Glo.DELEG, null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.DELEG, null     , Eq.DELEG);
-		new CGValuedElementModelSpec(CGConstraint.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , Ctl.BODY , null     , null     , null    );
 		new CGValuedElementModelSpec(CGConstructorPart.class, null,					Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.FALSE, null     , null     , null     , null     , Com.FALSE, Rew.PART , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGExecutorOperation.class, null,				Box.TRUE , null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , Con.TRUE , null     , null     , Ctx.TRUE , Ctl.UNSUP, Com.MUST , null     , Eq.UNSUP);
 		new CGValuedElementModelSpec(CGExecutorProperty.class, null,				Box.TRUE , null     , null     , Nul.NEVER, Inv.NEVER, Glo.FALSE, Inl.FALSE, null     , Ct.FALSE, Con.TRUE , null     , null     , Ctx.TRUE , Ctl.CNTRL, Com.MUST , null     , Eq.UNSUP);
@@ -1849,7 +1851,9 @@ public interface Log {
 		new CGValuedElementModelSpec(CGIfExp.class, null,							Box.IF   , null     , null     , Nul.IF   , Inv.IF   , Glo.FALSE, null     , Set.TRUE , null    , null     , null     , null     , null     , Ctl.IF   , null     , null     , Eq.EQUIV);
 		new CGValuedElementModelSpec(CGLetExp.class, "in",							Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.DELEG, null     , null     , Ctl.LET  , null     , null     , Eq.EQUIV);
 
-		new CGValuedElementModelSpec(CGOperation.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
+		new CGValuedElementModelSpec(CGCallable.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , Eq.UNSUP);
+		new CGValuedElementModelSpec(CGConstraint.class, null,						Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+		new CGValuedElementModelSpec(CGOperation.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGEcoreOperation.class, null,					Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new CGValuedElementModelSpec(CGLibraryOperation.class, null,				Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 

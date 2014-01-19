@@ -101,6 +101,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGBuiltInIterationCallExpAdapter();
 			}
 			@Override
+			public Adapter caseCGCallable(CGCallable object) {
+				return createCGCallableAdapter();
+			}
+			@Override
 			public Adapter caseCGCallExp(CGCallExp object) {
 				return createCGCallExpAdapter();
 			}
@@ -491,6 +495,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGBuiltInIterationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCallable <em>CG Callable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCallable
+	 * @generated
+	 */
+	public Adapter createCGCallableAdapter() {
 		return null;
 	}
 

@@ -76,6 +76,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		Map<String, String> bodies = new HashMap<String, String>();
 		for (CGClass cgClass : cgPackage.getClasses()) {
 			for (CGConstraint cgConstraint : cgClass.getInvariants()) {
+				if ("Pseudostate".equals(cgClass.getName())) {
+					System.out.println("got it");
+				}
 				CGValuedElement cgBody = cgConstraint.getBody();
 				Element pivotClass = cgClass.getAst();
 				Element asElement = cgConstraint.getAst();
@@ -143,6 +146,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	protected @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint asConstraint, @NonNull Type asType) {
 		js.resetStream();
 		String constraintName = asConstraint.getName();
+		if ("selection_behavior".equals(constraintName)) {
+			System.out.println("Got it");
+		}
 		GenClassifier genClassifier = genModelHelper.getGenClassifier(asType);
 		String genClassifierName = genClassifier != null ? genClassifier.getName() : null;
 		if (genClassifierName == null) {

@@ -434,6 +434,15 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		}
 		else if (referredVariable instanceof CGParameter) {
 			CGParameter cgParameter = (CGParameter)referredVariable;
+			if ("lowerbound".equals(cgParameter.getName())) {
+				System.out.println("got it");
+//				if (referredVariable.isRequired()) {
+//					Type referredType = referredVariable.getType();
+//					if (referredType instanceof PrimitiveType) {
+//						Type referredType = referredVariable.getType();
+//					}
+//				}
+			}
 			EObject cgOperation = cgParameter.eContainer();
 			if (cgOperation instanceof CGLibraryOperation) {
 				rewriteAsCast(cgElement);

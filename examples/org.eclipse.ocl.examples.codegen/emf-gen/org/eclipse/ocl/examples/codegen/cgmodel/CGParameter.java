@@ -24,7 +24,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter#getCallable <em>Callable</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,27 +34,29 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 public interface CGParameter extends CGVariable {
 
 	/**
-	 * Returns the value of the '<em><b>Operation</b></em>' reference.
+	 * Returns the value of the '<em><b>Callable</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCallable#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operation</em>' reference isn't clear,
+	 * If the meaning of the '<em>Callable</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operation</em>' reference.
-	 * @see #setOperation(CGOperation)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGParameter_Operation()
+	 * @return the value of the '<em>Callable</em>' container reference.
+	 * @see #setCallable(CGCallable)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGParameter_Callable()
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCallable#getParameters
 	 * @generated
 	 */
-	CGOperation getOperation();
+	CGCallable getCallable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter#getOperation <em>Operation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGParameter#getCallable <em>Callable</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Operation</em>' reference.
-	 * @see #getOperation()
+	 * @param value the new value of the '<em>Callable</em>' container reference.
+	 * @see #getCallable()
 	 * @generated
 	 */
-	void setOperation(CGOperation value);
+	void setCallable(CGCallable value);
 } // CGParameter

@@ -37,6 +37,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="#//CGIterator"
         containment="true" resolveProxies="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGCallable" abstract="true" eSuperTypes="#//CGValuedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CGConstraint defines a constraint such as a class invariant."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
+        upperBound="-1" eType="#//CGParameter" containment="true" resolveProxies="false"
+        eOpposite="#//CGParameter/callable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//CGValuedElement"
+        containment="true" resolveProxies="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGCallExp" abstract="true" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalidating" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
@@ -127,18 +141,10 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGConstraint" eSuperTypes="#//CGNamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CGConstraint" eSuperTypes="#//CGCallable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A CGConstraint defines a constraint such as a class invariant."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
-        upperBound="-1" eType="#//CGParameter" containment="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConstructorExp" abstract="true" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
@@ -413,19 +419,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGOperation" abstract="true" eSuperTypes="#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
-        upperBound="-1" eType="#//CGParameter" containment="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//CGValuedElement"
-        containment="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The OCL-defined body of this operation."/>
-      </eAnnotations>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="CGOperation" abstract="true" eSuperTypes="#//CGCallable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="preconditions" ordered="false"
         upperBound="-1" eType="#//CGConstraint" containment="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -461,8 +455,8 @@
         resolveProxies="false" eOpposite="#//CGPackage/packages"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGParameter" eSuperTypes="#//CGVariable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
-        eType="#//CGOperation" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callable" eType="#//CGCallable"
+        resolveProxies="false" eOpposite="#//CGCallable/parameters"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGProperty" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingClass" lowerBound="1"

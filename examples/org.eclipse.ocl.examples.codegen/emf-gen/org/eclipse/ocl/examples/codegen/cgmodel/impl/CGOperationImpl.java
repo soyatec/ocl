@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -28,16 +27,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
-import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,8 +39,6 @@ import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getPostconditions <em>Postconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl#getContainingClass <em>Containing Class</em>}</li>
@@ -56,27 +47,7 @@ import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
  *
  * @generated
  */
-public abstract class CGOperationImpl extends CGValuedElementImpl implements CGOperation {
-	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CGParameter> parameters;
-
-	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBody()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement body;
-
+public abstract class CGOperationImpl extends CGCallableImpl implements CGOperation {
 	/**
 	 * The cached value of the '{@link #getPreconditions() <em>Preconditions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -114,65 +85,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	@Override
 	protected EClass eStaticClass() {
 		return CGModelPackage.Literals.CG_OPERATION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings("null")
-	public @NonNull List<CGParameter> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<CGParameter>(CGParameter.class, this, CGModelPackage.CG_OPERATION__PARAMETERS);
-		}
-		return parameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public CGValuedElement getBody() {
-		return body;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetBody(CGValuedElement newBody, NotificationChain msgs) {
-		CGValuedElement oldBody = body;
-		body = newBody;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_OPERATION__BODY, oldBody, newBody);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBody(CGValuedElement newBody) {
-		if (newBody != body) {
-			NotificationChain msgs = null;
-			if (body != null)
-				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_OPERATION__BODY, null, msgs);
-			if (newBody != null)
-				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_OPERATION__BODY, null, msgs);
-			msgs = basicSetBody(newBody, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_OPERATION__BODY, newBody, newBody));
 	}
 
 	/**
@@ -270,10 +182,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-			case CGModelPackage.CG_OPERATION__BODY:
-				return basicSetBody(null, msgs);
 			case CGModelPackage.CG_OPERATION__PRECONDITIONS:
 				return ((InternalEList<?>)getPreconditions()).basicRemove(otherEnd, msgs);
 			case CGModelPackage.CG_OPERATION__POSTCONDITIONS:
@@ -306,10 +214,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION__PARAMETERS:
-				return getParameters();
-			case CGModelPackage.CG_OPERATION__BODY:
-				return getBody();
 			case CGModelPackage.CG_OPERATION__PRECONDITIONS:
 				return getPreconditions();
 			case CGModelPackage.CG_OPERATION__POSTCONDITIONS:
@@ -329,13 +233,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection<? extends CGParameter>)newValue);
-				return;
-			case CGModelPackage.CG_OPERATION__BODY:
-				setBody((CGValuedElement)newValue);
-				return;
 			case CGModelPackage.CG_OPERATION__PRECONDITIONS:
 				getPreconditions().clear();
 				getPreconditions().addAll((Collection<? extends CGConstraint>)newValue);
@@ -359,12 +256,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION__PARAMETERS:
-				getParameters().clear();
-				return;
-			case CGModelPackage.CG_OPERATION__BODY:
-				setBody((CGValuedElement)null);
-				return;
 			case CGModelPackage.CG_OPERATION__PRECONDITIONS:
 				getPreconditions().clear();
 				return;
@@ -386,10 +277,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
-			case CGModelPackage.CG_OPERATION__BODY:
-				return body != null;
 			case CGModelPackage.CG_OPERATION__PRECONDITIONS:
 				return preconditions != null && !preconditions.isEmpty();
 			case CGModelPackage.CG_OPERATION__POSTCONDITIONS:
@@ -398,33 +285,6 @@ public abstract class CGOperationImpl extends CGValuedElementImpl implements CGO
 				return getContainingClass() != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
-		return OuterStackPlace.createOuterStackPlace(element2place, this);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isContext() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
-		throw new UnsupportedOperationException(getClass().getName() + ".isEquivalentToInternal()");
 	}
 
 } //CGOperationImpl
