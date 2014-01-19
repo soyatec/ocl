@@ -295,17 +295,23 @@ public class Pivot2EcoreDeclarationVisitor
 			if (collectionType.isUnique() != PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UNIQUE) {
 				unique = Boolean.toString(collectionType.isUnique());
 			}
+			if (!PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_LOWER_VALUE.equals(lowerValue)) {
+				lower = lowerValue.toString();
+			}
+			if (!PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UPPER_VALUE.equals(upperValue)) {
+				upper = upperValue.toString();
+			}
 		}
 		else {
 			type = propertyType;
 			lowerValue = property.isRequired() ? ValuesUtil.ONE_VALUE : ValuesUtil.ZERO_VALUE;
 			upperValue = ValuesUtil.ONE_VALUE;
-		}
-		if (!PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_LOWER_VALUE.equals(lowerValue)) {
-			lower = lowerValue.toString();
-		}
-		if (!PivotConstants.DEFAULT_IMPLICIT_OPPOSITE_UPPER_VALUE.equals(upperValue)) {
-			upper = upperValue.toString();
+			if (!ValuesUtil.ZERO_VALUE.equals(lowerValue)) {
+				lower = lowerValue.toString();
+			}
+			if (!ValuesUtil.ONE_VALUE.equals(upperValue)) {
+				upper = upperValue.toString();
+			}
 		}
 		String name = property.getName();
 		if (name.equals(type.getName()) && (lower == null) && (ordered == null) && (unique == null) && (upper == null)) {

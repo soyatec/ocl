@@ -2630,7 +2630,6 @@ public class OCLstdlib extends ASResourceImpl
 			ownedProperties = _Collection_T.getOwnedAttribute();
 			ownedProperties.add(property = pr_Collection_T_Collection_elementType);
 			property.setImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Collection_Collection_T_elementType);
 			ownedProperties = _Enumeration.getOwnedAttribute();
@@ -2643,7 +2642,6 @@ public class OCLstdlib extends ASResourceImpl
 			ownedProperties = _EnumerationLiteral.getOwnedAttribute();
 			ownedProperties.add(property = pr_EnumerationLiteral_Enumeration_allLiterals);
 			property.setImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Enumeration_allLiterals);
 			ownedProperties = _Metaclass.getOwnedAttribute();
@@ -2655,7 +2653,6 @@ public class OCLstdlib extends ASResourceImpl
 			ownedProperties = _Metaclass_T.getOwnedAttribute();
 			ownedProperties.add(property = pr_Metaclass_T_Metaclass_instanceType);
 			property.setImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Metaclass_instanceType);
 		}

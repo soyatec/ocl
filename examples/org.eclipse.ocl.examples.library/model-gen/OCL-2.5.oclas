@@ -937,8 +937,8 @@
             parameteredElement="#T.ocl..CollectionT">
           <ownedParameteredElement xsi:type="pivot:Class" xmi:id="T.ocl..CollectionT"
               name="T" templateParameter="#t.ocl..CollectionT">
-            <ownedAttribute xmi:id="p.T.Collection" name="Collection" isRequired="false"
-                type="#//@nestedPackage.1/@ownedType.33" implicit="true" opposite="#p.ocl.Collection.elementType"/>
+            <ownedAttribute xmi:id="p.T.Collection" name="Collection" type="#//@nestedPackage.1/@ownedType.33"
+                implicit="true" opposite="#p.ocl.Collection.elementType"/>
           </ownedParameteredElement>
         </ownedParameter>
       </ownedTemplateSignature>
@@ -1299,8 +1299,7 @@
         </ownedDetail>
       </ownedAnnotation>
       <ownedAttribute xmi:id="p.ocl.EnumerationLiteral.Enumeration" name="Enumeration"
-          isRequired="false" type="#//@nestedPackage.1/@ownedType.34" implicit="true"
-          opposite="#p.ocl.Enumeration.allLiterals"/>
+          type="#//@nestedPackage.1/@ownedType.34" implicit="true" opposite="#p.ocl.Enumeration.allLiterals"/>
     </ownedType>
     <ownedType xsi:type="pivot:Metaclass" xmi:id="Metaclass" name="Metaclass" superClass="#T.ocl.Class #T.ocl.OclType"
         instanceType="#T.ocl..MetaclassT">
@@ -1314,8 +1313,8 @@
             parameteredElement="#T.ocl..MetaclassT">
           <ownedParameteredElement xsi:type="pivot:Class" xmi:id="T.ocl..MetaclassT"
               name="T" templateParameter="#t.ocl..MetaclassT">
-            <ownedAttribute xmi:id="p.T.Metaclass" name="Metaclass" isRequired="false"
-                type="#//@nestedPackage.1/@ownedType.35" implicit="true" opposite="#p.ocl.Metaclass.instanceType"/>
+            <ownedAttribute xmi:id="p.T.Metaclass" name="Metaclass" type="#//@nestedPackage.1/@ownedType.35"
+                implicit="true" opposite="#p.ocl.Metaclass.instanceType"/>
           </ownedParameteredElement>
         </ownedParameter>
       </ownedTemplateSignature>
