@@ -17,7 +17,10 @@ package org.eclipse.ocl.examples.codegen.generator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
@@ -35,6 +38,9 @@ public interface TypeDescriptor
 	 */
 	void append(@NonNull JavaStream js);
 
+	@NonNull Boolean appendBox(@NonNull JavaStream js, @NonNull JavaLocalContext localContext,
+			@NonNull CGBoxExp cgBoxExp, @NonNull CGValuedElement unboxedValue);
+
 	/**
 	 * Append the actualJavaClass subStream to js wrapped in a cast to this typee.g. "(typename)subStream"
 	 */
@@ -51,6 +57,9 @@ public interface TypeDescriptor
 	 * It is assumed that all the degenerate constant cases have been optimzed away.
 	 */
 	void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull CGValuedElement thatValue, boolean notEquals);
+
+	@NonNull Boolean appendUnboxStatements(@NonNull JavaStream js, @NonNull JavaLocalContext localContext,
+			@NonNull CGUnboxExp cgUnboxExp, @NonNull CGValuedElement boxedValue);
 
 	/**
 	 * Return a non-null Collection type descriptor if this type descriptor dedescribes a Collection.

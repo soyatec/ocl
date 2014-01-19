@@ -15,8 +15,6 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -24,10 +22,8 @@ import java.util.Set;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -98,17 +94,14 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
@@ -120,8 +113,6 @@ import org.eclipse.ocl.examples.domain.library.LibrarySimpleOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -615,97 +606,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 	@Override
 	public @NonNull Boolean visitCGBoxExp(@NonNull CGBoxExp cgBoxExp) {
 		CGValuedElement unboxedValue = getExpression(cgBoxExp.getSource());
-		TypeId typeId = unboxedValue.getASTypeId();
 		TypeDescriptor unboxedTypeDescriptor = context.getTypeDescriptor(unboxedValue);
+		JavaLocalContext localContext2 = localContext;
+		assert localContext2 != null;
 //
 		if (!js.appendLocalStatements(unboxedValue)) {
 			return false;
 		}
-//		if (!isNonNull()) {
-//			text.appendReferenceTo(JavaSnippet.this);
-//			text.append(" == null ? null : ");
-//		}
-		js.appendDeclaration(cgBoxExp);
-		js.append(" = ");
-		if (!unboxedValue.isNonNull()) {
-			js.appendReferenceTo(unboxedValue);
-			js.append(" == null ? null : ");
-		}
-		if (unboxedTypeDescriptor.isAssignableTo(Iterable.class)) {
-			@NonNull String collectionName = "Collection";
-			if (typeId instanceof CollectionTypeId) {
-				collectionName = ((CollectionTypeId)typeId).getGeneralizedId().getName();
-			}
-			js.appendReferenceTo(localContext.getIdResolverVariable(cgBoxExp));
-			js.append(".create" + collectionName + "OfAll(");
-			js.appendIdReference(typeId);
-			js.append(", ");
-			js.appendReferenceTo(Iterable.class, unboxedValue);
-			js.append(")");
-		}
-		else if (unboxedTypeDescriptor.isAssignableTo(BigInteger.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Long.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Integer.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Short.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Byte.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Character.class)) {
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".integerValueOf(");
-				js.appendReferenceTo(unboxedValue);
-				js.append(")");
-			}
-		else if ((unboxedTypeDescriptor.getJavaClass() == Object.class) && (typeId == TypeId.INTEGER)) {
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".integerValueOf(");
-				js.appendReferenceTo(unboxedValue);		// Character is unboxed as Object!
-				js.append(")");
-			}
-		else if (unboxedTypeDescriptor.isAssignableTo(BigDecimal.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Double.class)
-				  || unboxedTypeDescriptor.isAssignableTo(Float.class)) {
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".realValueOf(");
-				js.appendReferenceTo(unboxedValue);
-				js.append(")");
-			}
-		else if (unboxedTypeDescriptor.isAssignableTo(Number.class)) {
-			if (typeId == TypeId.REAL){
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".realValueOf(");
-				js.appendReferenceTo(unboxedValue);
-				js.append(")");
-			}
-			else {
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".integerValueOf(");
-				js.appendReferenceTo(unboxedValue);
-				js.append(")");
-			}
-		}
-		else if (unboxedTypeDescriptor.isAssignableTo(EEnumLiteral.class)) {
-			js.appendClassReference(IdManager.class);
-			js.append(".getEnumerationLiteralId(");
-			js.appendReferenceTo(unboxedValue);
-			js.append(")");
-		}
-		else if (unboxedTypeDescriptor.isAssignableTo(Enumerator.class)) {
-			js.appendIdReference(typeId);
-			js.append(".getEnumerationLiteralId(");
-			js.appendClassReference(DomainUtil.class);
-			js.append(".nonNullState(");
-			js.appendReferenceTo(unboxedValue);
-			js.append(".getName()))");
-		}
-		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
-			js.appendClassReference(ValuesUtil.class);
-			js.append(".createObjectValue(");
-			js.appendIdReference(typeId);
-			js.append(", ");
-			js.appendReferenceTo(unboxedValue);
-			js.append(")");
-		}
-		js.append(";\n");
-		return true;
+		return unboxedTypeDescriptor.appendBox(js, localContext2, cgBoxExp, unboxedValue);
 	}
 
 	@Override
@@ -1953,57 +1861,15 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 
 	@Override
 	public @NonNull Boolean visitCGUnboxExp(@NonNull CGUnboxExp cgUnboxExp) {
-		CGValuedElement source = getExpression(cgUnboxExp.getSource());
-		TypeDescriptor boxedTypeDescriptor = context.getTypeDescriptor(source);
-		TypeDescriptor unboxedTypeDescriptor = context.getTypeDescriptor(cgUnboxExp);
+		CGValuedElement boxedValue = getExpression(cgUnboxExp.getSource());
+		TypeDescriptor boxedTypeDescriptor = context.getTypeDescriptor(boxedValue);
+		JavaLocalContext localContext2 = localContext;
+		assert localContext2 != null;
 		//
-		if (!js.appendLocalStatements(source)) {
+		if (!js.appendLocalStatements(boxedValue)) {
 			return false;
 		}
-		CollectionDescriptor collectionDescriptor = unboxedTypeDescriptor.asCollectionDescriptor();
-		if (collectionDescriptor != null) {
-			js.append("final ");
-//			js.appendIsRequired(true);
-//			js.append(" ");
-			collectionDescriptor.append(js, true);
-//			js.appendClassReference(List.class, false, unboxedTypeDescriptor.getJavaClass());
-			js.append(" ");
-			js.appendValueName(cgUnboxExp);
-			js.append(" = ");
-			js.appendValueName(source);
-			js.append(".asEcoreObjects(");
-			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
-			js.append(", ");
-			collectionDescriptor.appendElement(js, true);
-			js.append(".class);\n");
-			//
-			js.append("assert ");
-			js.appendValueName(cgUnboxExp);
-			js.append(" != null;\n");
-		}
-		else {
-			js.appendDeclaration(cgUnboxExp);
-			js.append(" = ");
-			if (boxedTypeDescriptor.isAssignableTo(IntegerValue.class)) {
-				js.appendValueName(source);
-				js.append(".asNumber();\n");
-			}
-			else if (boxedTypeDescriptor.isAssignableTo(RealValue.class)) {
-				js.appendValueName(source);
-				js.append(".asNumber();\n");
-			}
-			else { //if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
-				js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
-				js.append(".unboxedValueOf(");
-				js.appendValueName(source);
-				js.append(");\n");
-			}
-		}
-//		else {
-//			js.appendValueName(source);
-//			js.append(".GET_UNBOXED_VALUE(\"" + boxedTypeDescriptor.getClassName() + "\");\n");
-//		}
-		return true;
+		return boxedTypeDescriptor.appendUnboxStatements(js, localContext2, cgUnboxExp, boxedValue);
 	}
 
 	@Override

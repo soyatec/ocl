@@ -14,11 +14,19 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
@@ -31,7 +39,14 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -103,6 +118,92 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 	}
 
 	@Override
+	public @NonNull Boolean appendBox(@NonNull JavaStream js, @NonNull JavaLocalContext localContext, @NonNull CGBoxExp cgBoxExp,@NonNull  CGValuedElement unboxedValue) {
+		TypeId typeId = unboxedValue.getASTypeId();
+		js.appendDeclaration(cgBoxExp);
+		js.append(" = ");
+		if (!unboxedValue.isNonNull()) {
+			js.appendReferenceTo(unboxedValue);
+			js.append(" == null ? null : ");
+		}
+		if (isAssignableTo(Iterable.class)) {
+			@NonNull String collectionName = "Collection";
+			if (typeId instanceof CollectionTypeId) {
+				collectionName = ((CollectionTypeId)typeId).getGeneralizedId().getName();
+			}
+			js.appendReferenceTo(localContext.getIdResolverVariable(cgBoxExp));
+			js.append(".create" + collectionName + "OfAll(");
+			js.appendIdReference(typeId);
+			js.append(", ");
+			js.appendReferenceTo(Iterable.class, unboxedValue);
+			js.append(")");
+		}
+		else if (isAssignableTo(BigInteger.class)
+				  || isAssignableTo(Long.class)
+				  || isAssignableTo(Integer.class)
+				  || isAssignableTo(Short.class)
+				  || isAssignableTo(Byte.class)
+				  || isAssignableTo(Character.class)) {
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".integerValueOf(");
+				js.appendReferenceTo(unboxedValue);
+				js.append(")");
+			}
+		else if ((getJavaClass() == Object.class) && (typeId == TypeId.INTEGER)) {
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".integerValueOf(");
+				js.appendReferenceTo(unboxedValue);		// Character is unboxed as Object!
+				js.append(")");
+			}
+		else if (isAssignableTo(BigDecimal.class)
+				  || isAssignableTo(Double.class)
+				  || isAssignableTo(Float.class)) {
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".realValueOf(");
+				js.appendReferenceTo(unboxedValue);
+				js.append(")");
+			}
+		else if (isAssignableTo(Number.class)) {
+			if (typeId == TypeId.REAL){
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".realValueOf(");
+				js.appendReferenceTo(unboxedValue);
+				js.append(")");
+			}
+			else {
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".integerValueOf(");
+				js.appendReferenceTo(unboxedValue);
+				js.append(")");
+			}
+		}
+		else if (isAssignableTo(EEnumLiteral.class)) {
+			js.appendClassReference(IdManager.class);
+			js.append(".getEnumerationLiteralId(");
+			js.appendReferenceTo(unboxedValue);
+			js.append(")");
+		}
+		else if (isAssignableTo(Enumerator.class)) {
+			js.appendIdReference(typeId);
+			js.append(".getEnumerationLiteralId(");
+			js.appendClassReference(DomainUtil.class);
+			js.append(".nonNullState(");
+			js.appendReferenceTo(unboxedValue);
+			js.append(".getName()))");
+		}
+		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".createObjectValue(");
+			js.appendIdReference(typeId);
+			js.append(", ");
+			js.appendReferenceTo(unboxedValue);
+			js.append(")");
+		}
+		js.append(";\n");
+		return true;
+	}
+
+	@Override
 	public void appendCast(@NonNull JavaStream js, @Nullable Class<?> actualJavaClass, @Nullable SubStream subStream) {
 		js.append("(");
 		append(js);
@@ -125,6 +226,56 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		js.append(".equals(");
 		js.append(thatName);
 		js.append("))");
+	}
+
+	@Override
+	public @NonNull Boolean appendUnboxStatements(@NonNull JavaStream js, @NonNull JavaLocalContext localContext,
+			@NonNull CGUnboxExp cgUnboxExp, @NonNull CGValuedElement boxedValue) {
+		UnboxedDescriptor unboxedTypeDescriptor = getUnboxedDescriptor();
+		CollectionDescriptor collectionDescriptor = unboxedTypeDescriptor.asCollectionDescriptor();
+		if (collectionDescriptor != null) {
+			js.append("final ");
+//			js.appendIsRequired(true);
+//			js.append(" ");
+			collectionDescriptor.append(js, true);
+//			js.appendClassReference(List.class, false, unboxedTypeDescriptor.getJavaClass());
+			js.append(" ");
+			js.appendValueName(cgUnboxExp);
+			js.append(" = ");
+			js.appendValueName(boxedValue);
+			js.append(".asEcoreObjects(");
+			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
+			js.append(", ");
+			collectionDescriptor.appendElement(js, true);
+			js.append(".class);\n");
+			//
+			js.append("assert ");
+			js.appendValueName(cgUnboxExp);
+			js.append(" != null;\n");
+		}
+		else {
+			js.appendDeclaration(cgUnboxExp);
+			js.append(" = ");
+			if (isAssignableTo(IntegerValue.class)) {
+				js.appendValueName(boxedValue);
+				js.append(".asNumber();\n");
+			}
+			else if (isAssignableTo(RealValue.class)) {
+				js.appendValueName(boxedValue);
+				js.append(".asNumber();\n");
+			}
+			else { //if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
+				js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
+				js.append(".unboxedValueOf(");
+				js.appendValueName(boxedValue);
+				js.append(");\n");
+			}
+		}
+//		else {
+//			js.appendValueName(source);
+//			js.append(".GET_UNBOXED_VALUE(\"" + boxedTypeDescriptor.getClassName() + "\");\n");
+//		}
+		return true;
 	}
 
 /*	protected boolean zzisBoxedElement(@NonNull CGValuedElement cgValue) {
