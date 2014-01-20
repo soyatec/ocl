@@ -8,6 +8,7 @@
   <rm:locator pattern="^org\.eclipse\.emf\.mwe.*" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.emf\.validation.*" searchPathRef="emf-validation"/>
   <rm:locator pattern="^org\.eclipse\.xpand.*" searchPathRef="xpand"/>
+  <rm:locator pattern="^org\.eclipse\.xtend.lib.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.xtend.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtext.*" searchPathRef="xtext"/>
   <rm:locator pattern="^com\.google.(inject|guava)$" searchPathRef="xtext"/>
