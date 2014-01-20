@@ -26,13 +26,10 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -40,14 +37,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.common.OCLCommon;
-import org.eclipse.ocl.ecore.Constraint;
-import org.eclipse.ocl.ecore.delegate.InvocationBehavior;
-import org.eclipse.ocl.ecore.delegate.SettingBehavior;
+//import org.eclipse.ocl.ecore.Constraint;
+//import org.eclipse.ocl.ecore.delegate.InvocationBehavior;
+//import org.eclipse.ocl.ecore.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.common.label.AbstractLabelGenerator;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator;
 import org.eclipse.ocl.examples.common.label.LabelGeneratorRegistry;
-import org.eclipse.ocl.utilities.UMLReflection;
+//import org.eclipse.ocl.utilities.UMLReflection;
 
 public class EcoreUtils
 {	
@@ -219,7 +215,7 @@ public class EcoreUtils
 	 * 
 	 * @param constraint the constraint
 	 * @return the annotation detail entry, null if not found
-	 */
+	 *
 	public static Map.Entry<String, String> getEAnnotationDetail(Constraint constraint) {
 		List<EModelElement> constrainedElements = constraint.getConstrainedElements();
 		if (constrainedElements.isEmpty()) {
@@ -268,7 +264,7 @@ public class EcoreUtils
 		    }
 	    }
 		return null;
-	}
+	} */
 
 	/**
 	 * Return the EOperation that realises the name invariant for eClass.
