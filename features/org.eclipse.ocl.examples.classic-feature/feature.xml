@@ -20,15 +20,16 @@
       <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/updates"/>
    </url>
 
-   <plugin
-         id="org.eclipse.ocl.examples.eventmanager"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <includes
+         id="org.eclipse.ocl.examples.classic.source"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ocl.all.sdk"
+         version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.ocl.examples.eventmanager.source"
+         id="org.eclipse.ocl.examples.eventmanager"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -42,21 +43,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.ocl.examples.impactanalyzer.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.ocl.examples.impactanalyzer.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.ocl.examples.impactanalyzer.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -70,21 +57,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.ocl.examples.impactanalyzer.util.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.ocl.examples.interpreter"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.ocl.examples.interpreter.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
