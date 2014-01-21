@@ -28,12 +28,4 @@
          id="org.eclipse.ocl.examples"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.ocl.examples.classic"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.ocl.examples.unified"
-         version="0.0.0"/>
-
 </feature>
