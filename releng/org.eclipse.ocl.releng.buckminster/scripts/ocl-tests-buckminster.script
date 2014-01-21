@@ -7,7 +7,7 @@ addbaseline -A "Eclipse OCL API Base Line"
 # We set the path of the new target platform
 setpref targetPlatformPath="${checkout.location}/buildroot/target.platform"
 
-import --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.ocl.git/releng/org.eclipse.ocl.releng.buckminster/releng/ocl-tests-all.mspec"
+import --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.ocl.git/releng/org.eclipse.ocl.releng.buckminster/releng/ocl-all.mspec"
 
 build
 
