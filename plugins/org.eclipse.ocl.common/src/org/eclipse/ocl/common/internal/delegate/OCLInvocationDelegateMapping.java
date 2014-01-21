@@ -39,6 +39,6 @@ public class OCLInvocationDelegateMapping implements EOperation.Internal.Invocat
 	public InvocationDelegate createInvocationDelegate(EOperation operation) {
 		String delegateURI = virtualDelegateMapping.getPreferredValue();
 		EOperation.Internal.InvocationDelegate.Factory factory = registry.getFactory(delegateURI);
-		return factory.createInvocationDelegate(operation);
+		return factory != null ? factory.createInvocationDelegate(operation) : null;
 	}
 }
