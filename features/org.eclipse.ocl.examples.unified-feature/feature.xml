@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.ocl.examples.unified"
-      label="Unified"
-      version="3.4.0.qualifier">
+      label="%featureName"
+      version="3.4.0.qualifier"
+      provider-name="%providerName"
+      license-feature="org.eclipse.ocl.license"
+      license-feature-version="1.0.0.qualifier">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://www.eclipse.org/modeling/mdt/ocl">
+      %description
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      [Documentation] Copyright text will be taken from the shared license feature
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
-   </license>
+   <url>
+      <update label="%updateSiteName" url="http://www.eclipse.org/modeling/updates"/>
+      <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/updates"/>
+   </url>
 
    <plugin
          id="org.eclipse.ocl.examples.codegen"
