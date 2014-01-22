@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.ocl.build"
+      id="org.eclipse.ocl.releng.build"
       label="Eclipse OCL Build Site"
       version="5.0.0.qualifier"
       provider-name="Eclipse Modeling Project"

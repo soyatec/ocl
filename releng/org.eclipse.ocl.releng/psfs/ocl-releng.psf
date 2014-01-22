@@ -4,7 +4,6 @@
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.all.sdk-feature"/>
-<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.build-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,plugins/org.eclipse.ocl.capabilities"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.sdk-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.core.tests-feature"/>
@@ -20,6 +19,7 @@
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.master-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.buckminster"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.build-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.core.build-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,releng/org.eclipse.ocl.releng.tools.build-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/ocl/org.eclipse.ocl,master,features/org.eclipse.ocl.tests-feature"/>
@@ -43,7 +43,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.core.sdk-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.edit-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.tools.tests-feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.build-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.releng.build-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.doc-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.tests-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.ocl.doc" type="4"/>
