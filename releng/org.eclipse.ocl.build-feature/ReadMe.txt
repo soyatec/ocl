@@ -1,1 +1,1 @@
-Missing releng added to name.
+Erroneous project should never have been created.
