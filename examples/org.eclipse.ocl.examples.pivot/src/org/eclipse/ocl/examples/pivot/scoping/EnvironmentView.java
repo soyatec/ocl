@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -561,6 +563,10 @@ public class EnvironmentView
 			}
 		}
 	}
+	// This copy here to preserve API until failure of clients to update understood.
+	public void addElement(/*@NonNull*/ String elementName, /*@NonNull*/ DomainElement element) {
+		addElement(elementName, (Object)element);
+	}
 
 	public void addElements(@NonNull Map<String, ?> elements) {
 		String name2 = name;
@@ -647,6 +653,10 @@ public class EnvironmentView
 		if (elementName != null) {
 			addElement(elementName, namedElement);
 		}
+	}
+	// This copy here to preserve API until failure of clients to update understood.
+	public void addNamedElement(/*@NonNull*/ DomainNamedElement namedElement) {
+		addNamedElement((Nameable)namedElement);
 	}
 
 	public void addNamedElements(/*@NonNull*/ Iterable<? extends Nameable> namedElements) {
