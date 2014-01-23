@@ -58,7 +58,7 @@ public class OCLstdlibCSPreOrderVisitor extends AbstractOCLstdlibCSPreOrderVisit
 			if (type != null) {
 				TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
 				if (ownedTemplateSignature != null) {
-					List<TemplateParameter> parameters = ownedTemplateSignature.getParameter();
+					List<TemplateParameter> parameters = ownedTemplateSignature.getOwnedParameter();
 					if (parameters.size() > 0) {
 						TemplateParameter templateParameter = parameters.get(0);
 						if (templateParameter != null) {
@@ -83,7 +83,7 @@ public class OCLstdlibCSPreOrderVisitor extends AbstractOCLstdlibCSPreOrderVisit
 			if (type != null) {
 				TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
 				if (ownedTemplateSignature != null) {
-					List<TemplateParameter> parameters = ownedTemplateSignature.getParameter();
+					List<TemplateParameter> parameters = ownedTemplateSignature.getOwnedParameter();
 					if (parameters.size() > 0) {
 						type.setElementType((Type) parameters.get(0).getParameteredElement());
 					}

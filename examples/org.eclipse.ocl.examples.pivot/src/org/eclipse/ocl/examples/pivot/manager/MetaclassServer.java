@@ -113,7 +113,7 @@ public class MetaclassServer extends ExtensibleTypeServer
 	public synchronized @NonNull Metaclass<?> getMetaclass(@NonNull Type type) {
 		assert getPivotType() instanceof Metaclass;
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		if (templateParameters.size() != 1) {
 			throw new IllegalArgumentException("Incompatible metaclass template argument count");
 		}

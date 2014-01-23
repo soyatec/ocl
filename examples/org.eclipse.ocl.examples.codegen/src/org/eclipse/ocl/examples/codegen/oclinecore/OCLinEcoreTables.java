@@ -458,7 +458,7 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 					s.append("new ");
 					s.appendClassReference(DomainTypeParameters.class);
 					s.append("(");
-					for (TemplateParameter parameter : ownedTemplateSignature.getParameter()) {
+					for (TemplateParameter parameter : ownedTemplateSignature.getOwnedParameter()) {
 						ParameterableElement parameteredElement = parameter.getParameteredElement();
 						if (parameteredElement instanceof Nameable) {
 							s.append("TypeParameters._");
@@ -651,7 +651,7 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 		s.append(", PACKAGE, ");
 		appendTypeFlags(pClass);
 		if (pClass.getOwnedTemplateSignature() != null) {
-			for (TemplateParameter parameter : pClass.getOwnedTemplateSignature().getParameter()) {
+			for (TemplateParameter parameter : pClass.getOwnedTemplateSignature().getOwnedParameter()) {
 				if (parameter instanceof TypeTemplateParameter) {
 					Type parameteredElement = DomainUtil.nonNullModel((Type) parameter.getParameteredElement());
 					s.append(", TypeParameters.");
@@ -828,7 +828,7 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 			TemplateSignature templateSignature = pClass.getOwnedTemplateSignature();
 			if (templateSignature != null) {
 				s.append("\n");
-				for (TemplateParameter parameter : templateSignature.getParameter()) {
+				for (TemplateParameter parameter : templateSignature.getOwnedParameter()) {
 					if (parameter instanceof TypeTemplateParameter) {
 						Type parameteredElement = DomainUtil.nonNullModel((Type) parameter.getParameteredElement());
 						s.append("		public static final " + atNonNull() + " ");
@@ -861,7 +861,7 @@ public class OCLinEcoreTables extends OCLinEcoreTablesUtils
 				assert operation != null;
 				templateSignature = operation.getOwnedTemplateSignature();
 				if (templateSignature != null) {
-					for (/*@NonNull*/ TemplateParameter parameter : templateSignature.getParameter()) {
+					for (/*@NonNull*/ TemplateParameter parameter : templateSignature.getOwnedParameter()) {
 						if (parameter instanceof TypeTemplateParameter) {
 							Type parameteredElement = DomainUtil.nonNullModel((Type) parameter.getParameteredElement());
 							s.append("		public static final " + atNonNull() + " ");

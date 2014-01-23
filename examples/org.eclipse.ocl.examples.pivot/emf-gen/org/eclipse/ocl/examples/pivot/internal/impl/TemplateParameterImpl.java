@@ -624,7 +624,7 @@ public class TemplateParameterImpl
 								}
 							}
 						}
-						index = parentTemplateParametersCount + signature.getParameter().indexOf(this);
+						index = parentTemplateParametersCount + signature.getOwnedParameter().indexOf(this);
 					}
 					elementId = elementId2 = IdManager.getTemplateParameterId(index);
 				}

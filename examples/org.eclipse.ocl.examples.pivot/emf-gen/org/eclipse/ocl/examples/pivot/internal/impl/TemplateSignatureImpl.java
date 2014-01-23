@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -39,8 +40,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList;
-import org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,7 +48,6 @@ import org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateSignatureImpl#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateSignatureImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateSignatureImpl#getTemplate <em>Template</em>}</li>
  * </ul>
@@ -61,16 +59,6 @@ import org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList;
 public class TemplateSignatureImpl
 		extends ElementImpl
 		implements TemplateSignature {
-
-	/**
-	 * The cached value of the '{@link #getParameter() <em>Parameter</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TemplateParameter> parameter;
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
@@ -107,35 +95,11 @@ public class TemplateSignatureImpl
 	 * @generated
 	 */
 	@SuppressWarnings("null")
-	public @NonNull List<TemplateParameter> getParameter()
-	{
-		if (parameter == null)
-		{
-			parameter = new SubsetSupersetEObjectResolvingEList<TemplateParameter>(TemplateParameter.class, this, PivotPackage.TEMPLATE_SIGNATURE__PARAMETER, null, PARAMETER_ESUBSETS);
-		}
-		return parameter;
-	}
-
-	/**
-	 * The array of subset feature identifiers for the '{@link #getParameter() <em>Parameter</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int[] PARAMETER_ESUBSETS = new int[] {PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER};
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public List<TemplateParameter> getOwnedParameter()
+	public @NonNull List<TemplateParameter> getOwnedParameter()
 	{
 		if (ownedParameter == null)
 		{
-			ownedParameter = new SubsetSupersetEObjectContainmentWithInverseEList<TemplateParameter>(TemplateParameter.class, this, PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER, OWNED_PARAMETER_ESUPERSETS, null, PivotPackage.TEMPLATE_PARAMETER__SIGNATURE);
+			ownedParameter = new EObjectContainmentWithInverseEList<TemplateParameter>(TemplateParameter.class, this, PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER, PivotPackage.TEMPLATE_PARAMETER__SIGNATURE);
 		}
 		return ownedParameter;
 	}
@@ -182,16 +146,6 @@ public class TemplateSignatureImpl
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE, newTemplate, newTemplate));
 	}
-
-	/**
-	 * The array of superset feature identifiers for the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int[] OWNED_PARAMETER_ESUPERSETS = new int[] {PivotPackage.TEMPLATE_SIGNATURE__PARAMETER};
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -269,8 +223,6 @@ public class TemplateSignatureImpl
 				return getOwnedComment();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return getOwnedParameter();
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				return getParameter();
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				return getTemplate();
 		}
@@ -299,10 +251,6 @@ public class TemplateSignatureImpl
 				getOwnedParameter().clear();
 				getOwnedParameter().addAll((Collection<? extends TemplateParameter>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				getParameter().clear();
-				getParameter().addAll((Collection<? extends TemplateParameter>)newValue);
-				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				setTemplate((TemplateableElement)newValue);
 				return;
@@ -328,9 +276,6 @@ public class TemplateSignatureImpl
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				getOwnedParameter().clear();
 				return;
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				getParameter().clear();
-				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				setTemplate((TemplateableElement)null);
 				return;
@@ -353,8 +298,6 @@ public class TemplateSignatureImpl
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return ownedParameter != null && !ownedParameter.isEmpty();
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				return parameter != null && !parameter.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				return getTemplate() != null;
 		}
@@ -370,7 +313,7 @@ public class TemplateSignatureImpl
 		if (templateSignature == null) {
 			return DomainTypeParameters.EMPTY_LIST;
 		}
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		int iMax = templateParameters.size();
 		DomainTemplateParameter[] typeParameters = new DomainTemplateParameter[iMax];
 		for (int i = 0; i < iMax; i++) {

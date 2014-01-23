@@ -18072,22 +18072,13 @@ public interface PivotPackage
 	int TEMPLATE_SIGNATURE__OWNED_PARAMETER = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parameter</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_SIGNATURE__PARAMETER = ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Template</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_SIGNATURE__TEMPLATE = ELEMENT_FEATURE_COUNT + 2;
+	int TEMPLATE_SIGNATURE__TEMPLATE = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Template Signature</em>' class.
@@ -18096,7 +18087,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_SIGNATURE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
+	int TEMPLATE_SIGNATURE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -23459,17 +23450,6 @@ public interface PivotPackage
 	EClass getTemplateSignature();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getParameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Parameter</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.TemplateSignature#getParameter()
-	 * @see #getTemplateSignature()
-	 * @generated
-	 */
-	EReference getTemplateSignature_Parameter();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getOwnedParameter <em>Owned Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -27451,14 +27431,6 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EClass TEMPLATE_SIGNATURE = eINSTANCE.getTemplateSignature();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameter</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TEMPLATE_SIGNATURE__PARAMETER = eINSTANCE.getTemplateSignature_Parameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Parameter</b></em>' containment reference list feature.

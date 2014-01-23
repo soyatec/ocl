@@ -57,11 +57,11 @@ public class GenerateOCLMetaModelXtend extends GenerateOCLMetaModel
 		var CollectionType collectionType = allTypes.findCollectionType(typeName);
 		var collectionName = collectionType.getPrefixedSymbolName("_"+typeName);
 		var signatureName = collectionType.ownedTemplateSignature.getPrefixedSymbolName("_"+typeName+"_");
-		var parameterName = collectionType.ownedTemplateSignature.parameter.get(0).getPrefixedSymbolName("_"+typeName+"_T");
+		var parameterName = collectionType.ownedTemplateSignature.getOwnedParameter().get(0).getPrefixedSymbolName("_"+typeName+"_T");
 	'''
 		protected final @NonNull CollectionType «collectionName» = standardLibrary.get«typeName»Type();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature «signatureName» = «collectionName».getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter «parameterName» = «signatureName».getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter «parameterName» = «signatureName».getOwnedParameter().get(0);
 	'''
 	}
 	

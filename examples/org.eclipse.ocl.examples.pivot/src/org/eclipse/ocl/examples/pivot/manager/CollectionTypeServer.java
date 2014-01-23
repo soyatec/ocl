@@ -101,7 +101,7 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 
 	public synchronized @Nullable Type findSpecializedType(@NonNull CollectionTypeParameters<Type> typeParameters) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		if (templateParameters.size() != 1) {
 			return null;
 		}

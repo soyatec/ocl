@@ -205,7 +205,7 @@ public class AS2MonikerVisitor extends AbstractExtendingVisitor<Object, AS2Monik
 		}
 		else if (object.eContainer() instanceof TemplateParameterSubstitution) {
 			TemplateParameter formal = ((TemplateParameterSubstitution)object.eContainer()).getFormal();
-			int index = formal.getSignature().getParameter().indexOf(formal);
+			int index = formal.getSignature().getOwnedParameter().indexOf(formal);
 			context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 			context.append(WILDCARD_INDICATOR + index);
 		}

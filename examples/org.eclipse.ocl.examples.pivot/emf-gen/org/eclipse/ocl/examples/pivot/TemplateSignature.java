@@ -33,7 +33,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getOwnedParameter <em>Owned Parameter</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
@@ -45,29 +44,9 @@ public interface TemplateSignature
 		extends Element {
 
 	/**
-	 * Returns the value of the '<em><b>Parameter</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.TemplateParameter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The ordered set of all formal template parameters for this template signature.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Parameter</em>' reference list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature_Parameter()
-	 * @generated
-	 */
-	@NonNull List<TemplateParameter> getParameter();
-
-	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.TemplateParameter}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.TemplateParameter#getSignature <em>Signature</em>}'.
-	 * <p>
-	 * This feature subsets the following features:
-	 * <ul>
-	 *   <li>'{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getParameter() <em>Parameter</em>}'</li>
-	 * </ul>
-	 * </p>
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -78,7 +57,7 @@ public interface TemplateSignature
 	 * @see org.eclipse.ocl.examples.pivot.TemplateParameter#getSignature
 	 * @generated
 	 */
-	List<TemplateParameter> getOwnedParameter();
+	@NonNull List<TemplateParameter> getOwnedParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Template</b></em>' container reference.

@@ -1350,7 +1350,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (templateSignature == null) {
 			throw new IllegalArgumentException("Collection type must have a template signature");
 		}
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		if (templateParameters.size() != 1) {
 			throw new IllegalArgumentException("Collection type must have exactly one template parameter");
 		}
@@ -1601,7 +1601,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		assert !(libraryType instanceof Metaclass<?>);
 		assert libraryType == PivotUtil.getUnspecializedTemplateableElement(libraryType);
 		TemplateSignature templateSignature = libraryType.getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature != null ? templateSignature.getParameter() : EMPTY_TEMPLATE_PARAMETER_LIST;
+		List<TemplateParameter> templateParameters = templateSignature != null ? templateSignature.getOwnedParameter() : EMPTY_TEMPLATE_PARAMETER_LIST;
 		if (templateParameters.isEmpty()) {
 			return libraryType;
 		}
@@ -1756,7 +1756,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return metaclassType;
 		}
 		TemplateSignature templateSignature = metaclassType.getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		boolean isUnspecialized = instanceType == templateParameters.get(0).getParameteredElement();	// Checked in getMetaclassType().
 		if (isUnspecialized) {
 			return metaclassType;	

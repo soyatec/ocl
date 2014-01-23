@@ -240,7 +240,7 @@ public class AS2Moniker implements PivotConstants
 				if (parent instanceof TemplateableElement) {
 					TemplateSignature ownedTemplateSignature = ((TemplateableElement)parent).getOwnedTemplateSignature();
 					if (ownedTemplateSignature != null) {
-						for (TemplateParameter templateParameter : ownedTemplateSignature.getParameter()) {
+						for (TemplateParameter templateParameter : ownedTemplateSignature.getOwnedParameter()) {
 							emittedTemplateParameter(templateParameter);
 					}
 					}

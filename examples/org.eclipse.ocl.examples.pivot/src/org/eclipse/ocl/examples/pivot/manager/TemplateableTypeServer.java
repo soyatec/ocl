@@ -99,7 +99,7 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 
 	public synchronized @Nullable Type findSpecializedType(@NonNull DomainTypeParameters templateArguments) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.parametersSize() != iMax) {
 			return null;
@@ -130,7 +130,7 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 
 	public synchronized @NonNull Type getSpecializedType(@NonNull DomainTypeParameters templateArguments) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
-		List<TemplateParameter> templateParameters = templateSignature.getParameter();
+		List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 		int iMax = templateParameters.size();
 		if (templateArguments.parametersSize() != iMax) {
 			throw new IllegalArgumentException("Incompatible template argument count");

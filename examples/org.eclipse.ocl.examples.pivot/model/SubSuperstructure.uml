@@ -18,17 +18,10 @@
             </specification>
           </ownedRule>
           <generalization xmi:id="_XnqLMH7VEeOu79LxSz8Ylw" general="_nFdeAJwSEd-STLWP-FLKew"/>
-          <ownedAttribute xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-parameter" name="parameter" type="AuxiliaryConstructs-Templates-TemplateParameter" isOrdered="true" association="AuxiliaryConstructs-Templates-A_parameter_templateSignature">
-            <ownedComment xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-parameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-TemplateSignature-parameter">
-              <body>The ordered set of all formal template parameters for this template signature.</body>
-            </ownedComment>
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XnNfQH7VEeOu79LxSz8Ylw" value="*"/>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-ownedParameter" name="ownedParameter" type="AuxiliaryConstructs-Templates-TemplateParameter" isOrdered="true" aggregation="composite" subsettedProperty="AuxiliaryConstructs-Templates-TemplateSignature-parameter" association="AuxiliaryConstructs-Templates-A_ownedParameter_signature">
+          <ownedAttribute xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-ownedParameter" name="ownedParameter" type="AuxiliaryConstructs-Templates-TemplateParameter" isOrdered="true" aggregation="composite" association="AuxiliaryConstructs-Templates-A_ownedParameter_signature">
             <ownedComment xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-ownedParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-TemplateSignature-ownedParameter">
               <body>The formal template parameters that are owned by this template signature.</body>
             </ownedComment>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XnNfQX7VEeOu79LxSz8Ylw"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XnNfQn7VEeOu79LxSz8Ylw" value="*"/>
           </ownedAttribute>
           <ownedAttribute xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-template" name="template" type="AuxiliaryConstructs-Templates-TemplateableElement" association="AuxiliaryConstructs-Templates-A_ownedTemplateSignature_template">
@@ -345,12 +338,6 @@
             <body>Package specializes TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used as a template and a PackageableElement as a template parameter.</body>
           </ownedComment>
           <generalization xmi:id="_XnqLP37VEeOu79LxSz8Ylw" general="AuxiliaryConstructs-Templates-TemplateableElement"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Association" xmi:id="AuxiliaryConstructs-Templates-A_parameter_templateSignature" name="A_parameter_templateSignature" memberEnd="AuxiliaryConstructs-Templates-TemplateSignature-parameter AuxiliaryConstructs-Templates-A_parameter_templateSignature-templateSignature">
-          <ownedEnd xmi:id="AuxiliaryConstructs-Templates-A_parameter_templateSignature-templateSignature" name="templateSignature" type="AuxiliaryConstructs-Templates-TemplateSignature" association="AuxiliaryConstructs-Templates-A_parameter_templateSignature">
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XnNfVX7VEeOu79LxSz8Ylw"/>
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XnNfVn7VEeOu79LxSz8Ylw" value="*"/>
-          </ownedEnd>
         </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="AuxiliaryConstructs-Templates-A_ownedParameter_signature" name="A_ownedParameter_signature" memberEnd="AuxiliaryConstructs-Templates-TemplateSignature-ownedParameter AuxiliaryConstructs-Templates-TemplateParameter-signature"/>
         <packagedElement xmi:type="uml:Association" xmi:id="AuxiliaryConstructs-Templates-A_templateBinding_boundElement" name="A_templateBinding_boundElement" memberEnd="AuxiliaryConstructs-Templates-TemplateableElement-templateBinding AuxiliaryConstructs-Templates-TemplateBinding-boundElement"/>

@@ -1575,21 +1575,12 @@
         <body>A template signature bundles the set of formal template parameters for a templated element.</body>
       </ownedComment>
       <generalization xmi:id="Ppivot.TTemplateSignature.g0" general="Ppivot.TElement"/>
-      <ownedAttribute xmi:id="Ppivot.TTemplateSignature.Pparameter" name="parameter"
-          type="Ppivot.TTemplateParameter" isOrdered="true" association="Ppivot.A_parameter_templateSignature">
-        <ownedComment xmi:id="Ppivot.TTemplateSignature.Pparameter.oC0" annotatedElement="Ppivot.TTemplateSignature.Pparameter">
-          <body>The ordered set of all formal template parameters for this template signature.</body>
-        </ownedComment>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TTemplateSignature.Pparameter.uV"
-            value="*"/>
-      </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TTemplateSignature.PownedParameter" name="ownedParameter"
           type="Ppivot.TTemplateParameter" isOrdered="true" aggregation="composite"
-          subsettedProperty="Ppivot.TTemplateSignature.Pparameter" association="Ppivot.A_ownedParameter_signature">
+          association="Ppivot.A_ownedParameter_signature">
         <ownedComment xmi:id="Ppivot.TTemplateSignature.PownedParameter.oC0" annotatedElement="Ppivot.TTemplateSignature.PownedParameter">
           <body>The formal template parameters that are owned by this template signature.</body>
         </ownedComment>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TTemplateSignature.PownedParameter.lV"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TTemplateSignature.PownedParameter.uV"
             value="*"/>
       </ownedAttribute>
@@ -2169,15 +2160,6 @@
         name="A_ownedType_package" memberEnd="Ppivot.TPackage.PownedType Ppivot.TType.Ppackage"/>
     <packagedElement xmi:type="uml:Association" xmi:id="Ppivot.A_parameterSubstitution_templateBinding"
         name="A_parameterSubstitution_templateBinding" memberEnd="Ppivot.TTemplateBinding.PparameterSubstitution Ppivot.TTemplateParameterSubstitution.PtemplateBinding"/>
-    <packagedElement xmi:type="uml:Association" xmi:id="Ppivot.A_parameter_templateSignature"
-        name="A_parameter_templateSignature" memberEnd="Ppivot.TTemplateSignature.Pparameter Ppivot.A_parameter_templateSignature.PtemplateSignature">
-      <ownedEnd xmi:id="Ppivot.A_parameter_templateSignature.PtemplateSignature" name="templateSignature"
-          type="Ppivot.TTemplateSignature" association="Ppivot.A_parameter_templateSignature">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.A_parameter_templateSignature.PtemplateSignature.lV"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.A_parameter_templateSignature.PtemplateSignature.uV"
-            value="*"/>
-      </ownedEnd>
-    </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="Ppivot.A_parameteredElement_templateParameter"
         name="A_parameteredElement_templateParameter" memberEnd="Ppivot.TTemplateParameter.PparameteredElement Ppivot.TParameterableElement.PtemplateParameter"/>
     <packagedElement xmi:type="uml:Association" xmi:id="Ppivot.A_raisedException_operation"

@@ -1736,17 +1736,10 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A template signature bundles the set of formal template parameters for a templated element."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
-        eType="#//TemplateParameter" containment="true" eOpposite="#//TemplateParameter/signature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" lowerBound="1"
+        upperBound="-1" eType="#//TemplateParameter" containment="true" eOpposite="#//TemplateParameter/signature">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The formal template parameters that are owned by this template signature."/>
-      </eAnnotations>
-      <eAnnotations source="subsets" references="#//TemplateSignature/parameter"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
-        upperBound="-1" eType="#//TemplateParameter">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The ordered set of all formal template parameters for this template signature."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="template" lowerBound="1"

@@ -80,13 +80,13 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Package metamodel;
 		protected final @NonNull CollectionType _Bag = standardLibrary.getBagType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _Bag_ = _Bag.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Bag_T = _Bag_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Bag_T = _Bag_.getOwnedParameter().get(0);
 		
 		protected final @NonNull PrimitiveType _Boolean = standardLibrary.getBooleanType();
 		
 		protected final @NonNull CollectionType _Collection = standardLibrary.getCollectionType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _Collection_ = _Collection.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Collection_T = _Collection_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Collection_T = _Collection_.getOwnedParameter().get(0);
 		
 		protected final @NonNull PrimitiveType _Integer = standardLibrary.getIntegerType();
 		
@@ -95,21 +95,21 @@ public class OCLMetaModel extends ASResourceImpl
 		
 		protected final @NonNull CollectionType _OrderedCollection = standardLibrary.getOrderedCollectionType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _OrderedCollection_ = _OrderedCollection.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _OrderedCollection_T = _OrderedCollection_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _OrderedCollection_T = _OrderedCollection_.getOwnedParameter().get(0);
 		
 		protected final @NonNull CollectionType _OrderedSet = standardLibrary.getOrderedSetType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _OrderedSet_ = _OrderedSet.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _OrderedSet_T = _OrderedSet_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _OrderedSet_T = _OrderedSet_.getOwnedParameter().get(0);
 		
 		protected final @NonNull PrimitiveType _Real = standardLibrary.getRealType();
 		
 		protected final @NonNull CollectionType _Sequence = standardLibrary.getSequenceType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _Sequence_ = _Sequence.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Sequence_T = _Sequence_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Sequence_T = _Sequence_.getOwnedParameter().get(0);
 		
 		protected final @NonNull CollectionType _Set = standardLibrary.getSetType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _Set_ = _Set.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Set_T = _Set_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _Set_T = _Set_.getOwnedParameter().get(0);
 		
 		protected final @NonNull PrimitiveType _String = standardLibrary.getStringType();
 		
@@ -117,7 +117,7 @@ public class OCLMetaModel extends ASResourceImpl
 		
 		protected final @NonNull CollectionType _UniqueCollection = standardLibrary.getUniqueCollectionType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _UniqueCollection_ = _UniqueCollection.getOwnedTemplateSignature();
-		@SuppressWarnings("null") protected final @NonNull TemplateParameter _UniqueCollection_T = _UniqueCollection_.getParameter().get(0);
+		@SuppressWarnings("null") protected final @NonNull TemplateParameter _UniqueCollection_T = _UniqueCollection_.getOwnedParameter().get(0);
 
 		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
@@ -345,7 +345,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull BagType _Bag_TemplateBinding = createBagType("Bag"/*TemplateBinding*/, "0", "*");
 		protected final @NonNull BagType _Bag_TemplateParameter = createBagType("Bag"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull BagType _Bag_TemplateParameterSubstitution = createBagType("Bag"/*TemplateParameterSubstitution*/, "0", "*");
-		protected final @NonNull BagType _Bag_TemplateSignature = createBagType("Bag"/*TemplateSignature*/, "0", "*");
 		protected final @NonNull BagType _Bag_Transition = createBagType("Bag"/*Transition*/, "0", "*");
 		protected final @NonNull BagType _Bag_TupleLiteralExp = createBagType("Bag"/*TupleLiteralExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_TupleLiteralPart = createBagType("Bag"/*TupleLiteralPart*/, "0", "*");
@@ -418,7 +417,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_TemplateBinding = createCollectionType("Collection"/*TemplateBinding*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateParameter = createCollectionType("Collection"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateParameterSubstitution = createCollectionType("Collection"/*TemplateParameterSubstitution*/, "0", "*");
-		protected final @NonNull CollectionType _Collection_TemplateSignature = createCollectionType("Collection"/*TemplateSignature*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Transition = createCollectionType("Collection"/*Transition*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Trigger = createCollectionType("Collection"/*Trigger*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TupleLiteralExp = createCollectionType("Collection"/*TupleLiteralExp*/, "0", "*");
@@ -463,8 +461,7 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -1233,11 +1230,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TemplateParameterSubstitution);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TemplateParameterSubstitution);
-			orphanTypes.add(type = _Bag_TemplateSignature);
-			type.setUnspecializedElement(_Bag);
-			type.setElementType(_TemplateSignature);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_TemplateSignature);
 			orphanTypes.add(type = _Bag_Transition);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_Transition);
@@ -1598,11 +1590,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_TemplateParameterSubstitution);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _Collection_TemplateSignature);
-			type.setUnspecializedElement(_Collection);
-			type.setElementType(_TemplateSignature);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Transition);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Transition);
@@ -1838,12 +1825,6 @@ public class OCLMetaModel extends ASResourceImpl
 			superClasses.add(_OrderedCollection_String);
 			superClasses.add(_UniqueCollection_String);
 			orphanTypes.add(type = _OrderedSet_TemplateParameter);
-			type.setUnspecializedElement(_OrderedSet);
-			type.setElementType(_TemplateParameter);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OrderedCollection_TemplateParameter);
-			superClasses.add(_UniqueCollection_TemplateParameter);
-			orphanTypes.add(type = _OrderedSet_TemplateParameter_1);
 			type.setUnspecializedElement(_OrderedSet);
 			type.setElementType(_TemplateParameter);
 			superClasses = type.getSuperClass();
@@ -2537,14 +2518,12 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_TemplateParameter_parameteredElement = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, _ParameterableElement);
 		protected final @NonNull Property pr_TemplateParameter_signature = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER__SIGNATURE, _TemplateSignature);
 		protected final @NonNull Property pr_TemplateParameter_TemplateParameterSubstitution_formal = createProperty("TemplateParameterSubstitution", _Bag_TemplateParameterSubstitution);
-		protected final @NonNull Property pr_TemplateParameter_TemplateSignature_parameter = createProperty("TemplateSignature", _Bag_TemplateSignature);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_actual = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL, _ParameterableElement);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_formal = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL, _TemplateParameter);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_ownedActual = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL, _ParameterableElement);
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING, _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty(PivotPackage.Literals.TEMPLATE_PARAMETER_TYPE__SPECIFICATION, _String);
 		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__OWNED_PARAMETER, _OrderedSet_TemplateParameter);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__PARAMETER, _OrderedSet_TemplateParameter_1);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty(PivotPackage.Literals.TEMPLATE_SIGNATURE__TEMPLATE, _TemplateableElement);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding_signature = createProperty("TemplateBinding", _Bag_TemplateBinding);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty(PivotPackage.Literals.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE, _TemplateSignature);
@@ -3790,11 +3769,6 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateParameterSubstitution_formal);
-			ownedProperties.add(property = pr_TemplateParameter_TemplateSignature_parameter);
-			property.setImplicit(true);
-			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_TemplateSignature_parameter);
 			ownedProperties = _TemplateParameterSubstitution.getOwnedAttribute();
 			ownedProperties.add(property = pr_TemplateParameterSubstitution_actual);
 			property.setIsResolveProxies(true);
@@ -3819,9 +3793,6 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateParameter_signature);
-			ownedProperties.add(property = pr_TemplateSignature_parameter);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_TemplateParameter_TemplateSignature_parameter);
 			ownedProperties.add(property = pr_TemplateSignature_template);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateableElement_ownedTemplateSignature);
@@ -4208,8 +4179,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _TemplateParameterSubstitution)));
 			_Bag_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _TemplateParameter)));
-			_Bag_TemplateSignature.getTemplateBinding().add(createTemplateBinding(_Bag_,
-				createTemplateParameterSubstitution(_Bag_T, _TemplateSignature)));
 			_Bag_Transition.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Transition)));
 			_Bag_TupleLiteralExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -4354,8 +4323,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _TemplateParameterSubstitution)));
 			_Collection_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _TemplateParameter)));
-			_Collection_TemplateSignature.getTemplateBinding().add(createTemplateBinding(_Collection_,
-				createTemplateParameterSubstitution(_Collection_T, _TemplateSignature)));
 			_Collection_Transition.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Transition)));
 			_Collection_Trigger.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -4445,8 +4412,6 @@ public class OCLMetaModel extends ASResourceImpl
 			_OrderedSet_Property.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Property)));
 			_OrderedSet_TemplateParameter.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
-			_OrderedSet_TemplateParameter_1.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TemplateParameter)));
 			_OrderedSet_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _TupleLiteralPart)));
@@ -4685,7 +4650,6 @@ public class OCLMetaModel extends ASResourceImpl
 			installComment(pr_TemplateParameterSubstitution_templateBinding, "The optional bindings from this element to templates.");
 			installComment(_TemplateSignature, "A template signature bundles the set of formal template parameters for a templated element.");
 			installComment(pr_TemplateSignature_ownedParameter, "The formal template parameters that are owned by this template signature.");
-			installComment(pr_TemplateSignature_parameter, "The ordered set of all formal template parameters for this template signature.");
 			installComment(pr_TemplateSignature_template, "The element that owns this template signature.");
 			installComment(_TemplateableElement, "A templateable element is an element that can optionally be defined as a template and bound to other templates.");
 			installComment(op_TemplateableElement_isTemplate, "The query isTemplate() returns whether this templateable element is actually a template.");

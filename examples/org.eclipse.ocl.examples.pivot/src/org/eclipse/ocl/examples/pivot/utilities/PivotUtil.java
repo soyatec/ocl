@@ -139,8 +139,8 @@ public class PivotUtil extends DomainUtil
 		public int compare(TemplateParameterSubstitution o1, TemplateParameterSubstitution o2) {
 			TemplateParameter f1 = o1.getFormal();
 			TemplateParameter f2 = o2.getFormal();
-			int i1 = f1.getSignature().getParameter().indexOf(f1);
-			int i2 = f2.getSignature().getParameter().indexOf(f2);
+			int i1 = f1.getSignature().getOwnedParameter().indexOf(f1);
+			int i2 = f2.getSignature().getOwnedParameter().indexOf(f2);
 			return i1 - i2;
 		}
 	}
@@ -434,7 +434,7 @@ public class PivotUtil extends DomainUtil
 		for (TemplateBinding templateBinding : templateBindings) {	// FIXME Establish ordering
 			TemplateSignature templateSignature = templateBinding.getSignature();
 			if (templateSignature != null) {
-				List<TemplateParameter> templateParameters = templateSignature.getParameter();
+				List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 				if (templateParameters.size() > 0) {
 					if (list == null) {
 						list = new ArrayList<TemplateParameter>();
@@ -459,7 +459,7 @@ public class PivotUtil extends DomainUtil
 			}
 			TemplateSignature templateSignature = unspecializedTemplateableElement.getOwnedTemplateSignature();
 			if (templateSignature != null) {
-				List<TemplateParameter> templateParameters = templateSignature.getParameter();
+				List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 				if (templateParameters.size() > 0) {
 					if (result == null) {
 						result = new ArrayList<List<TemplateParameter>>();
@@ -484,7 +484,7 @@ public class PivotUtil extends DomainUtil
 			}
 			TemplateSignature templateSignature = unspecializedTemplateableElement.getOwnedTemplateSignature();
 			if (templateSignature != null) {
-				List<TemplateParameter> templateParameters = templateSignature.getParameter();
+				List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 				if (templateParameters.size() > 0) {
 					if (result == null) {
 						result = new ArrayList<TemplateParameter>();
@@ -509,12 +509,12 @@ public class PivotUtil extends DomainUtil
 //			TemplateableElement unspecializedTemplateableElement = getUnspecializedTemplateableElement((TemplateableElement)eObject);
 			TemplateSignature templateSignature = ((TemplateableElement)eObject).getOwnedTemplateSignature();
 			if (templateSignature != null) {
-				List<TemplateParameter> templateParameters = templateSignature.getParameter();
+				List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 				if (templateParameters.size() > 0) {
 					if (result == null) {
 						result = new HashMap<TemplateParameter, ParameterableElement>();
 					}
-					for (TemplateParameter templateParameter : templateSignature.getParameter()) {
+					for (TemplateParameter templateParameter : templateSignature.getOwnedParameter()) {
 						result.put(templateParameter, null);
 					}
 				}
@@ -1161,7 +1161,7 @@ public class PivotUtil extends DomainUtil
 		if (templateableElement != null) {
 			TemplateSignature ownedTemplateSignature = templateableElement.getOwnedTemplateSignature();
 			if (ownedTemplateSignature != null) {
-				return ownedTemplateSignature.getParameter();
+				return ownedTemplateSignature.getOwnedParameter();
 			}
 		}
 		return Collections.emptyList();
@@ -1195,7 +1195,7 @@ public class PivotUtil extends DomainUtil
 		if (ownedTemplateSignature == null) {
 			return Collections.emptyList();
 		}
-		List<TemplateParameter> templateParameters = ownedTemplateSignature.getParameter();
+		List<TemplateParameter> templateParameters = ownedTemplateSignature.getOwnedParameter();
 		if (templateParameters.size() == 0) {
 			return Collections.emptyList();
 		}
@@ -1256,7 +1256,7 @@ public class PivotUtil extends DomainUtil
 		if (ownedTemplateSignature == null) {
 			return MetaModelManager.EMPTY_TYPE_LIST;
 		}
-		List<TemplateParameter> templateParameters = ownedTemplateSignature.getParameter();
+		List<TemplateParameter> templateParameters = ownedTemplateSignature.getOwnedParameter();
 		if (templateParameters.size() == 0) {
 			return MetaModelManager.EMPTY_TYPE_LIST;
 		}
