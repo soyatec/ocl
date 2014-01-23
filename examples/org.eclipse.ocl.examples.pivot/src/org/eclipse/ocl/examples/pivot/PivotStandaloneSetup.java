@@ -58,7 +58,9 @@ public class PivotStandaloneSetup //implements ISetup
 		UMLASResourceFactory.INSTANCE.getClass();
 		OCLASResourceFactory.INSTANCE.getClass();
 		EcorePackage.eINSTANCE.getClass();
-		UMLResourcesUtil.init(null);
+		try {
+			UMLResourcesUtil.init(null);
+		} catch (Throwable e) {}		// UML is optional so may get a ClassNotFoundException
 		PivotScoping.init();
 		ToStringVisitor.FACTORY.getClass();
 		EPackage.Registry.INSTANCE.put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
