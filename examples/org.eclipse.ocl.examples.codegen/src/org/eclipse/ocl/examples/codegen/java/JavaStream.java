@@ -401,9 +401,12 @@ public class JavaStream
 				cg2java.addImport(importClassName);
 				append(className.substring(dollar).replace('$',  '.'));
 			}
-			else {
+			else if (className.contains(".")){
 				append(ImportUtils.getAffixedName(className));
 				cg2java.addImport(className);
+			}
+			else {
+				append(className);
 			}
 		}
 	}
