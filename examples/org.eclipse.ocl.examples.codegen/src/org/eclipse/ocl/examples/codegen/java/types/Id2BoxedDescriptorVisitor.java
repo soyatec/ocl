@@ -14,6 +14,9 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
@@ -51,7 +54,9 @@ import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
@@ -181,7 +186,54 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 		Type type = idResolver.getType(id, null);
 		String instanceClassName = type.getInstanceClassName();
 		if (instanceClassName != null) {
-			return new SimpleDataTypeDescriptor(id, instanceClassName);
+			if (BigDecimal.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, RealValue.class, new UnboxedValueDescriptor(id, BigDecimal.class));
+			}
+			else if (BigInteger.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, BigInteger.class));
+			}
+			else if (Byte.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, Byte.class));
+			}
+			else if (Double.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, RealValue.class, new UnboxedValueDescriptor(id, Double.class));
+			}
+			else if (Float.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, RealValue.class, new UnboxedValueDescriptor(id, Float.class));
+			}
+			else if (Integer.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, Integer.class));
+			}
+			else if (Long.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, Long.class));
+			}
+			else if (Short.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, Short.class));
+			}
+			else if (byte.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, byte.class));
+			}
+			else if (char.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, char.class));
+			}
+			else if (double.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, RealValue.class, new UnboxedValueDescriptor(id, double.class));
+			}
+			else if (float.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, RealValue.class, new UnboxedValueDescriptor(id, float.class));
+			}
+			else if (int.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, int.class));
+			}
+			else if (long.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, long.class));
+			}
+			else if (short.class.getName().equals(instanceClassName)) {
+				return new BoxedValueDescriptor(id, IntegerValue.class, new UnboxedValueDescriptor(id, short.class));
+			}
+			else {
+				return new SimpleDataTypeDescriptor(id, instanceClassName);
+			}
 		}
 		return visiting(id);
 	}
