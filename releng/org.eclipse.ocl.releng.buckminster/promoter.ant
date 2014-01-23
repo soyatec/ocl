@@ -233,7 +233,7 @@
 		<condition property="composite.repository.base" value="maintenance/${version}/${saved.build.id}">
 			<matches pattern="^M" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="interim/${version}/${saved.build.id}">
+		<condition property="composite.repository.base" value="interim/${version}">
 			<matches pattern="^I" string="${saved.build.id}" />
 		</condition>
 		<condition property="composite.repository.base" value="milestones/${version}/${saved.build.id}">
