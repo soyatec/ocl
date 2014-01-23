@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -57,7 +58,6 @@ import org.eclipse.ocl.examples.pivot.options.OCLinEcoreOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class DelegateInstaller
 {	
@@ -382,7 +382,7 @@ public class DelegateInstaller
 					EObject eObject = tit.next();
 					if (eObject instanceof EAnnotation) {
 						EAnnotation nestedAnnotation = (EAnnotation) eObject;
-						if (UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI.equals(nestedAnnotation.getSource())) {
+						if (PivotConstants.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI.equals(nestedAnnotation.getSource())) {
 							nestedAnnotation.setSource(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 						}
 					}
@@ -452,7 +452,7 @@ public class DelegateInstaller
 
 	public void installDelegate(@NonNull EOperation eOperation) {
 		List<EAnnotation> eAnnotations = eOperation.getEAnnotations();
-		EAnnotation oclAnnotation = eOperation.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
+		EAnnotation oclAnnotation = eOperation.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		if (oclAnnotation != null) {
 			eAnnotations.remove(oclAnnotation);
 			oclAnnotation.setSource(exportDelegateURI);
@@ -462,7 +462,7 @@ public class DelegateInstaller
 
 	public void installDelegate(@NonNull EStructuralFeature eFeature) {
 		List<EAnnotation> eAnnotations = eFeature.getEAnnotations();
-		EAnnotation oclAnnotation = eFeature.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
+		EAnnotation oclAnnotation = eFeature.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		if (oclAnnotation != null) {
 			eAnnotations.remove(oclAnnotation);
 			oclAnnotation.setSource(exportDelegateURI);
@@ -553,7 +553,7 @@ public class DelegateInstaller
 				eAnnotations.remove(annotation3);
 			}
 		}
-		EAnnotation annotation4 = eModelElement.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
+		EAnnotation annotation4 = eModelElement.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		if (annotation4 != null) {
 			eAnnotations.remove(annotation4);
 		}

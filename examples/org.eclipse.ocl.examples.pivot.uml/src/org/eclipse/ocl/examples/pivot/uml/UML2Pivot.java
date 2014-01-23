@@ -76,9 +76,6 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 
 public abstract class UML2Pivot extends AbstractEcore2Pivot
 {
-	public static final @SuppressWarnings("null")@NonNull String STEREOTYPE_BASE_PREFIX = org.eclipse.uml2.uml.Extension.METACLASS_ROLE_PREFIX; //"base_";
-	public static final @SuppressWarnings("null")@NonNull String STEREOTYPE_EXTENSION_PREFIX = org.eclipse.uml2.uml.Extension.STEREOTYPE_ROLE_PREFIX; //"extension_";
-
 	private static final Logger logger = Logger.getLogger(UML2Pivot.class);
 
 	public static @Nullable UML2Pivot findAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {

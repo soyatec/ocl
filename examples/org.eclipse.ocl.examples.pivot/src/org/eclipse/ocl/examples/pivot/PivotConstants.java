@@ -109,6 +109,12 @@ public interface PivotConstants
 	static final boolean ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE = true;
 	static final @NonNull IntegerValue ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE = ValuesUtil.ONE_VALUE;
 
+	static final @NonNull String STEREOTYPE_BASE_PREFIX = "base_"; // org.eclipse.uml2.uml.Extension.METACLASS_ROLE_PREFIX
+	static final @NonNull String STEREOTYPE_EXTENSION_PREFIX = "extension_"; // org.eclipse.uml2.uml.Extension.STEREOTYPE_ROLE_PREFIX
+
+	static final @NonNull String UML2_GEN_MODEL_PACKAGE_1_1_NS_URI = "http://www.eclipse.org/uml2/1.1.0/GenModel";
+	static final @NonNull String UML2_GEN_MODEL_PACKAGE_2_0_NS_URI = "http://www.eclipse.org/uml2/2.2.0/GenModel";
+	
 	@Deprecated // Tuples are now used for rich invariants
 	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
 

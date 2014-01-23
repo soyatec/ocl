@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.ocl.examples.pivot.uml;singleton:=true
+Bundle-Version: 3.4.0.qualifier
+Bundle-ClassPath: .
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.emf.validation;bundle-version="[1.5.0,2.0.0)";resolution:=optional,
+ org.eclipse.ocl.examples.pivot;bundle-version="[3.4.0,4.0.0)",
+ org.eclipse.uml2.uml.resources;bundle-version="[4.0.0,6.0.0)"
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.apache.log4j
+Export-Package: org.eclipse.ocl.examples.pivot.uml,
+ org.eclipse.ocl.examples.pivot.validation

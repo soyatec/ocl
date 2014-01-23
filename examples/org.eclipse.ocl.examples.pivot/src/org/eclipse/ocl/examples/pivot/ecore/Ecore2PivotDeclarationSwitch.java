@@ -492,10 +492,10 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		String value = null;
 		EAnnotation eAnnotation = OCLCommon.getDelegateAnnotation(eOperation);
 		if (eAnnotation == null) {
-			eAnnotation = eOperation.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
+			eAnnotation = eOperation.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_2_0_NS_URI);
 		}
 		if (eAnnotation == null) {
-			eAnnotation = eOperation.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
+			eAnnotation = eOperation.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		}
 		if (eAnnotation != null) {
 			value = eAnnotation.getDetails().get("body");
@@ -537,10 +537,10 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		}
 		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eOperation);
 		if (oclAnnotation == null) {
-			oclAnnotation = eOperation.getEAnnotation(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI);
+			oclAnnotation = eOperation.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_2_0_NS_URI);
 		}
 		if (oclAnnotation == null) {
-			oclAnnotation = eOperation.getEAnnotation("http://www.eclipse.org/uml2/1.1.0/GenModel");
+			oclAnnotation = eOperation.getEAnnotation(PivotConstants.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
 		}
 		if (oclAnnotation != null) {
 			if (excludedAnnotations == null) {

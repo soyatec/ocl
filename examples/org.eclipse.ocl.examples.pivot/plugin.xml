@@ -4,8 +4,6 @@
 <!--
  <copyright>
  </copyright>
-
- $Id: plugin.xml,v 1.3 2011/01/30 11:18:07 ewillink Exp $
 -->
 
 <plugin>
@@ -102,15 +100,7 @@
       <constraintParser lang="Path"
             class="org.eclipse.ocl.examples.pivot.validation.PathConstraintParser"/>
    </extension>
-   
-   <extension point="org.eclipse.emf.validation.traversal">
-      <traversalStrategy
-            class="org.eclipse.ocl.examples.pivot.uml.UMLTraversalStrategy"
-            namespaceUri="http://www.eclipse.org/uml2/4.0.0/UML">
-         <eclass name="Model"/>
-      </traversalStrategy>
-   </extension>
-  
+
    <extension point="org.eclipse.core.runtime.preferences">
       <initializer class="org.eclipse.ocl.examples.pivot.options.OCLinEcorePreferenceInitializer"/>
    </extension>

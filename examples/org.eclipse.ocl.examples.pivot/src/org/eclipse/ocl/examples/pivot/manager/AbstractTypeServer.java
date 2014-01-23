@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Region;
@@ -57,7 +58,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
@@ -915,7 +915,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		List<Property> newExtensionProperties = new ArrayList<Property>();
 		List<Property> oldExtensionProperties = extensionType.getOwnedAttribute();
 
-		String extensionPropertyName = UML2Pivot.STEREOTYPE_EXTENSION_PREFIX + stereotype.getName();
+		String extensionPropertyName = PivotConstants.STEREOTYPE_EXTENSION_PREFIX + stereotype.getName();
 		Property extensionProperty = null;
 		PartialProperties partialProperties = name2properties2.get(extensionPropertyName);
 		if (partialProperties == null) {
@@ -937,7 +937,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		extensionProperty.setIsStatic(true);
 		baseType.getOwnedAttribute().add(extensionProperty);
 
-		String basePropertyName = UML2Pivot.STEREOTYPE_BASE_PREFIX + baseType.eClass().getName();
+		String basePropertyName = PivotConstants.STEREOTYPE_BASE_PREFIX + baseType.eClass().getName();
 		Property baseProperty = DomainUtil.getNamedElement(extensionType.getOwnedAttribute(), basePropertyName);
 		if (baseProperty == null) {
 			baseProperty = PivotFactory.eINSTANCE.createProperty();
@@ -966,7 +966,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		EClass eClass = umlStereotypeApplication.eClass();
 		for (EStructuralFeature eStructuralFeature : eClass.getEAllStructuralFeatures()) {
 			String featureName = eStructuralFeature.getName();
-			if ((featureName != null) && !featureName.startsWith(UML2Pivot.STEREOTYPE_BASE_PREFIX)
+			if ((featureName != null) && !featureName.startsWith(PivotConstants.STEREOTYPE_BASE_PREFIX)
 //			  && (eStructuralFeature instanceof EReference)
 			  /*&& umlStereotypeApplication.eIsSet(eStructuralFeature)*/) {						// Unset for an applicable stereotype that has not been applied
 				Object umlStereotypedElement = umlStereotypeApplication.eGet(eStructuralFeature);
