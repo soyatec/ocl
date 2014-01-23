@@ -42,9 +42,14 @@ public interface TypeDescriptor
 			@NonNull CGBoxExp cgBoxExp, @NonNull CGValuedElement unboxedValue);
 
 	/**
-	 * Append the actualJavaClass subStream to js wrapped in a cast to this typee.g. "(typename)subStream"
+	 * Append the actualJavaClass subStream to js wrapped in a cast to this type.g. "(typename)subStream"
 	 */
 	void appendCast(@NonNull JavaStream js, @Nullable Class<?> actualJavaClass, @Nullable SubStream subStream);
+	
+	/**
+	 * Append a cgElement to js wrapped in a cast to this type
+	 */
+	void appendCastTerm(@NonNull JavaStream js, @NonNull CGValuedElement cgElement);
 
 	/**
 	 * Append an expression term that evaluates whether (this TypedDescriptor and) thisValue is not equal to thatTypeDescriptor and thatName.

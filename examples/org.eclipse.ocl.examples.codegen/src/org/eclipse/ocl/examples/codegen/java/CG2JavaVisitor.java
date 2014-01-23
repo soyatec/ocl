@@ -682,13 +682,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Boo
 
 	@Override
 	public @NonNull Boolean visitCGCastExp(@NonNull CGCastExp cgCastExp) {
+		CGValuedElement cgSource = getExpression(cgCastExp.getSource());
 		CGExecutorType cgType = cgCastExp.getExecutorType();
 		if (cgType != null) {
+			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgCastExp);
 			js.appendDeclaration(cgCastExp);
-			js.append(" = (");
-			js.appendClassReference(context.getTypeDescriptor(cgCastExp));
-			js.append(")");
-			js.appendReferenceTo(cgCastExp.getSource());
+			js.append(" = ");
+			typeDescriptor.appendCastTerm(js, cgSource);
 			js.append(";\n");
 		}
 		return true;
