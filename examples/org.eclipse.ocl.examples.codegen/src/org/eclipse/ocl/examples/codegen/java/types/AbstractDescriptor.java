@@ -39,11 +39,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -127,16 +125,7 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 			js.append(" == null ? null : ");
 		}
 		if (isAssignableTo(Iterable.class)) {
-			@NonNull String collectionName = "Collection";
-			if (typeId instanceof CollectionTypeId) {
-				collectionName = ((CollectionTypeId)typeId).getGeneralizedId().getName();
-			}
-			js.appendReferenceTo(localContext.getIdResolverVariable(cgBoxExp));
-			js.append(".create" + collectionName + "OfAll(");
-			js.appendIdReference(typeId);
-			js.append(", ");
-			js.appendReferenceTo(Iterable.class, unboxedValue);
-			js.append(")");
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " should be AbstractCollectionDescriptor");
 		}
 		else if (isAssignableTo(BigInteger.class)
 				  || isAssignableTo(Long.class)
@@ -148,13 +137,10 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 				js.append(".integerValueOf(");
 				js.appendReferenceTo(unboxedValue);
 				js.append(")");
-			}
+		}
 		else if ((getJavaClass() == Object.class) && (typeId == TypeId.INTEGER)) {
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".integerValueOf(");
-				js.appendReferenceTo(unboxedValue);		// Character is unboxed as Object!
-				js.append(")");
-			}
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " should be IntegerObjectDescriptor");
+		}
 		else if (isAssignableTo(BigDecimal.class)
 				  || isAssignableTo(Double.class)
 				  || isAssignableTo(Float.class)) {
@@ -162,19 +148,13 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 				js.append(".realValueOf(");
 				js.appendReferenceTo(unboxedValue);
 				js.append(")");
-			}
+		}
 		else if (isAssignableTo(Number.class)) {
 			if (typeId == TypeId.REAL){
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".realValueOf(");
-				js.appendReferenceTo(unboxedValue);
-				js.append(")");
+				throw new UnsupportedOperationException(getClass().getSimpleName() + " should be RealObjectDescriptor");
 			}
 			else {
-				js.appendClassReference(ValuesUtil.class);
-				js.append(".integerValueOf(");
-				js.appendReferenceTo(unboxedValue);
-				js.append(")");
+				throw new UnsupportedOperationException(getClass().getSimpleName() + " should be UnlimitedNaturalObjectDescriptor");
 			}
 		}
 		else if (isAssignableTo(EEnumLiteral.class)) {
@@ -184,12 +164,7 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 			js.append(")");
 		}
 		else if (isAssignableTo(Enumerator.class)) {
-			js.appendIdReference(typeId);
-			js.append(".getEnumerationLiteralId(");
-			js.appendClassReference(DomainUtil.class);
-			js.append(".nonNullState(");
-			js.appendReferenceTo(unboxedValue);
-			js.append(".getName()))");
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " should be EnumerationObjectDescriptor");
 		}
 		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
 			js.appendClassReference(ValuesUtil.class);
@@ -242,63 +217,22 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 		UnboxedDescriptor unboxedTypeDescriptor = getUnboxedDescriptor();
 		CollectionDescriptor collectionDescriptor = unboxedTypeDescriptor.asCollectionDescriptor();
 		if (collectionDescriptor != null) {
-			js.append("final ");
-//			js.appendIsRequired(true);
-//			js.append(" ");
-			collectionDescriptor.append(js, true);
-//			js.appendClassReference(List.class, false, unboxedTypeDescriptor.getJavaClass());
-			js.append(" ");
-			js.appendValueName(cgUnboxExp);
-			js.append(" = ");
-			js.appendValueName(boxedValue);
-			js.append(".asEcoreObjects(");
-			js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
-			js.append(", ");
-			collectionDescriptor.appendElement(js, true);
-			js.append(".class);\n");
-			//
-			js.append("assert ");
-			js.appendValueName(cgUnboxExp);
-			js.append(" != null;\n");
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " should be UnboxedValuesDescriptor");
 		}
 		else {
 			js.appendDeclaration(cgUnboxExp);
 			js.append(" = ");
 			if (isAssignableTo(IntegerValue.class)) {
-				js.appendValueName(boxedValue);
-				js.append(".asNumber();\n");
+				throw new UnsupportedOperationException(getClass().getSimpleName() + " should be IntegerValueDescriptor");
 			}
 			else if (isAssignableTo(RealValue.class)) {
-				js.appendValueName(boxedValue);
-				js.append(".asNumber();\n");
+				throw new UnsupportedOperationException(getClass().getSimpleName() + " should be RealValueDescriptor");
 			}
 			else { //if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
-				js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
-				js.append(".unboxedValueOf(");
-				js.appendValueName(boxedValue);
-				js.append(");\n");
+				throw new UnsupportedOperationException(getClass().getSimpleName() + " should be EnumerationValueDescriptor");
 			}
 		}
-//		else {
-//			js.appendValueName(source);
-//			js.append(".GET_UNBOXED_VALUE(\"" + boxedTypeDescriptor.getClassName() + "\");\n");
-//		}
-		return true;
 	}
-
-/*	protected boolean zzisBoxedElement(@NonNull CGValuedElement cgValue) {
-		TypeId typeId = cgValue.getASTypeId();
-		if (typeId instanceof EnumerationLiteralId) {
-			return true;
-		}
-		if (typeId instanceof EnumerationId) {
-			return true;
-		}
-		if (typeId instanceof ClassId) {
-			return true;
-		}
-		return false;
-	} */
 
 	protected boolean zzisBoxedType(@NonNull MetaModelManager metaModelManager, @NonNull CGValuedElement cgValue) {
 		Element ast = cgValue.getAst();

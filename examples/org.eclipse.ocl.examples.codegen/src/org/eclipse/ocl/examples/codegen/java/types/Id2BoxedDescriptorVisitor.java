@@ -139,7 +139,7 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 			TypeId typeId = id.getElementTypeId();
 			type = idResolver.getType(typeId, null);
 		}
-		UnboxedDescriptor unboxedDescriptor = null;
+		CollectionDescriptor unboxedDescriptor = null;
 		EClassifier eClassifier = getEClassifier(type);
 		if (eClassifier != null) {
 			try {
@@ -178,7 +178,7 @@ public class Id2BoxedDescriptorVisitor implements IdVisitor<BoxedDescriptor>
 		else {
 			boxedClass = CollectionValue.class;
 		}
-		return new BoxedValueDescriptor(id, boxedClass, unboxedDescriptor);
+		return new BoxedValuesDescriptor(id, boxedClass, unboxedDescriptor);
 	}
 
 	@Override

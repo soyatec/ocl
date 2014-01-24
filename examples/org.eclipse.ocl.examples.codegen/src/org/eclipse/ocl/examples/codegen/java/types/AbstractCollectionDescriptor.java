@@ -18,8 +18,12 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * An AbstractCollectionDescriptor extends an AbstractDescriptor to describe a collection type.
@@ -33,6 +37,29 @@ public abstract class AbstractCollectionDescriptor extends AbstractDescriptor im
 	@Override
 	public void append(@NonNull JavaStream javaStream, boolean reClass) {
 		append(javaStream);
+	}
+
+	@Override
+	public @NonNull Boolean appendBox(@NonNull JavaStream js, @NonNull JavaLocalContext localContext, @NonNull CGBoxExp cgBoxExp,@NonNull  CGValuedElement unboxedValue) {
+		TypeId typeId = unboxedValue.getASTypeId();
+		js.appendDeclaration(cgBoxExp);
+		js.append(" = ");
+		if (!unboxedValue.isNonNull()) {
+			js.appendReferenceTo(unboxedValue);
+			js.append(" == null ? null : ");
+		}
+		@NonNull String collectionName = "Collection";
+		if (typeId instanceof CollectionTypeId) {
+			collectionName = ((CollectionTypeId)typeId).getGeneralizedId().getName();
+		}
+		js.appendReferenceTo(localContext.getIdResolverVariable(cgBoxExp));
+		js.append(".create" + collectionName + "OfAll(");
+		js.appendIdReference(typeId);
+		js.append(", ");
+		js.appendReferenceTo(Iterable.class, unboxedValue);
+		js.append(")");
+		js.append(";\n");
+		return true;
 	}
 
 	@Override

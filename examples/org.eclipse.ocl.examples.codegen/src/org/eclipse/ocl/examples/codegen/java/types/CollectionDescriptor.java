@@ -15,14 +15,13 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 
 /**
  * A CollectionDescriptor defines the description of a type for a collection of objects.
  */
-public interface CollectionDescriptor extends TypeDescriptor
+public interface CollectionDescriptor extends UnboxedDescriptor
 {
 	void append(@NonNull JavaStream javaStream, boolean reClass);
 	void appendElement(@NonNull JavaStream javaStream, boolean reClass);	

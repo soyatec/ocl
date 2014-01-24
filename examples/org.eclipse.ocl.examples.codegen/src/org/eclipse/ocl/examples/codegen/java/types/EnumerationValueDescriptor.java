@@ -14,9 +14,10 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
-import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -24,7 +25,7 @@ import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 public class EnumerationValueDescriptor extends BoxedValueDescriptor
 {
 	public EnumerationValueDescriptor(@NonNull ElementId elementId) {
-		super(elementId, EnumerationLiteralId.class, new UnboxedValueDescriptor(elementId, Enumerator.class));
+		super(elementId, EnumerationLiteralId.class, new EnumerationObjectDescriptor(elementId));
 	}
 
 	@Override
@@ -33,5 +34,17 @@ public class EnumerationValueDescriptor extends BoxedValueDescriptor
 		js.appendValueName(thisValue);
 		js.append(notEquals ? " != " : " == ");
 		js.appendValueName(thatValue);
+	}
+	
+	@Override
+	public @NonNull Boolean appendUnboxStatements(@NonNull JavaStream js, @NonNull JavaLocalContext localContext,
+			@NonNull CGUnboxExp cgUnboxExp, @NonNull CGValuedElement boxedValue) {
+		js.appendDeclaration(cgUnboxExp);
+		js.append(" = ");
+		js.appendReferenceTo(localContext.getIdResolverVariable(cgUnboxExp));
+		js.append(".unboxedValueOf(");
+		js.appendValueName(boxedValue);
+		js.append(");\n");
+		return true;
 	}
 }
