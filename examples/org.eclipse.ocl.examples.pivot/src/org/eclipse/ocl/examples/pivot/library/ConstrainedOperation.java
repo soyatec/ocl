@@ -1,14 +1,15 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011, 2013 E.D.Willink and others.
+ * Copyright (c) 2011, 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (CEA LIST) - Bug 425799 - validity view
  *
  * </copyright>
  *
@@ -31,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An instance of ConstrainedOperation supports evaluation of
@@ -45,6 +47,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues) {
+		PivotUtil.checkExpression(expressionInOCL);
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
@@ -62,6 +65,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		PivotUtil.checkExpression(expressionInOCL);
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
@@ -70,6 +74,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) {
+		PivotUtil.checkExpression(expressionInOCL);
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
@@ -80,6 +85,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		PivotUtil.checkExpression(expressionInOCL);
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();

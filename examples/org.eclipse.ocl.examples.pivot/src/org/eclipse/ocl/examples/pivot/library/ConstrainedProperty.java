@@ -1,18 +1,17 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011, 2012 E.D.Willink and others.
+ * Copyright (c) 2011, 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ * 	 E.D.Willink (CEA LIST) - Bug 425799 - validity view
  *
  * </copyright>
- *
- * $Id: ConstrainedProperty.java,v 1.1 2011/04/27 06:19:59 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.library;
 
@@ -28,6 +27,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An instance of ConstrainedProperty supports evaluation of
@@ -54,6 +54,7 @@ public class ConstrainedProperty extends AbstractProperty
 				throw new InvalidValueException("Bad defaultExpression for '{0}'", property);
 			}
 		}
+		PivotUtil.checkExpression(expression2);
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();

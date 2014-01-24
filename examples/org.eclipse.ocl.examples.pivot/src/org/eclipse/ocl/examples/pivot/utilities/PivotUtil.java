@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2010, 2013 E.D.Willink and others.
+ * Copyright (c) 2010, 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,7 @@
  * Contributors:
  *   E.D.Willink - initial API and implementation
  * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
+ * 	 E.D.Willink (CEA LIST) - Bug 425799 - validity view
  * 
  * </copyright>
  */
@@ -50,6 +51,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.BagType;
@@ -97,6 +99,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
@@ -170,6 +173,20 @@ public class PivotUtil extends DomainUtil
 		}
 		else {
 			s.append("[" + lower + ".." + upper + "]");
+		}
+	}
+
+	/**
+	 * Check that expressionInOCL was successfully compiled. Throws an InvalidValueException explaining the problem
+	 * if expressionInOCL has no contextVariable and has a StringLiteralExp bodyExpression.
+	 */
+	public static void checkExpression(@NonNull ExpressionInOCL expressionInOCL) {
+		Variable contextVariable = expressionInOCL.getContextVariable();
+		if (contextVariable == null) {
+			OCLExpression bodyExpression = expressionInOCL.getBodyExpression();
+			if (bodyExpression instanceof StringLiteralExp) {
+				throw new InvalidValueException(((StringLiteralExp)bodyExpression).getStringSymbol());
+			}
 		}
 	}
 
