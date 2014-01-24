@@ -1019,7 +1019,7 @@ endif
       </ownedAttribute>
       <ownedAttribute xmi:id="p.pivot.OpaqueExpression.expressionInOCL" name="expressionInOCL"
           isRequired="false" type="#T.pivot.ExpressionInOCL" isComposite="true" isDerived="true"
-          isReadOnly="true" isResolveProxies="false" isTransient="true" opposite="#p.pivot.ExpressionInOCL.OpaqueExpression"/>
+          isResolveProxies="false" isTransient="true" opposite="#p.pivot.ExpressionInOCL.OpaqueExpression"/>
       <ownedAttribute xmi:id="p.pivot.OpaqueExpression.language" name="language" type="#//@nestedPackage.1/@ownedType.155">
         <ownedComment body="Specifies the languages in which the expression is stated. The interpretation of the expression body depends on the languages. If the languages are unspecified, they might be implicit from the expression body or the context. Languages are matched to body strings by order."/>
       </ownedAttribute>

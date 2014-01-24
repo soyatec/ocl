@@ -66,10 +66,21 @@ public interface OpaqueExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression In OCL</em>' containment reference.
+	 * @see #setExpressionInOCL(ExpressionInOCL)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ExpressionInOCL()
 	 * @generated
 	 */
 	ExpressionInOCL getExpressionInOCL();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL <em>Expression In OCL</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Expression In OCL</em>' containment reference.
+	 * @see #getExpressionInOCL()
+	 * @generated
+	 */
+	void setExpressionInOCL(ExpressionInOCL value);
 
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute list.

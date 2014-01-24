@@ -3195,7 +3195,6 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedProperties.add(property = pr_OpaqueExpression_expressionInOCL);
 			property.setIsComposite(true);
 			property.setIsDerived(true);
-			property.setIsReadOnly(true);
 			property.setIsRequired(false);
 			property.setIsTransient(true);
 			property.setOpposite(pr_ExpressionInOCL_OpaqueExpression_expressionInOCL);

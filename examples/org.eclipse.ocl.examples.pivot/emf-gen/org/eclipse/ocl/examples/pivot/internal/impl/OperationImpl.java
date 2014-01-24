@@ -1758,7 +1758,6 @@ public class OperationImpl
 				if (owningType != null) {
 					ExpressionInOCL expression = specification.getExpressionInOCL();
 					if (expression != null) {
-						setBodyExpression(expression);
 						bodyImplementation2 = new ConstrainedOperation(expression);
 					}
 				}

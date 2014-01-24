@@ -790,8 +790,7 @@
             value="*"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TOpaqueExpression.PexpressionInOCL" name="expressionInOCL"
-          type="Ppivot.TExpressionInOCL" isReadOnly="true" aggregation="composite"
-          isDerived="true">
+          type="Ppivot.TExpressionInOCL" aggregation="composite" isDerived="true">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TOpaqueExpression.PexpressionInOCL.lV"/>
       </ownedAttribute>
     </packagedElement>

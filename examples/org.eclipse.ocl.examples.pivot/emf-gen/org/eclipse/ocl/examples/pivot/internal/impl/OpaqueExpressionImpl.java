@@ -23,6 +23,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
@@ -218,6 +219,9 @@ public class OpaqueExpressionImpl
 				getBody().clear();
 				getBody().addAll((Collection<? extends String>)newValue);
 				return;
+			case PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL:
+				setExpressionInOCL((ExpressionInOCL)newValue);
+				return;
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				getLanguage().clear();
 				getLanguage().addAll((Collection<? extends String>)newValue);
@@ -264,6 +268,9 @@ public class OpaqueExpressionImpl
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__BODY:
 				getBody().clear();
+				return;
+			case PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL:
+				setExpressionInOCL((ExpressionInOCL)null);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__LANGUAGE:
 				getLanguage().clear();
@@ -329,6 +336,27 @@ public class OpaqueExpressionImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExpressionInOCL(ExpressionInOCL newExpressionInOCL)
+	{
+		if (newExpressionInOCL != expressionInOCL)
+		{
+			NotificationChain msgs = null;
+			if (expressionInOCL != null)
+				msgs = ((InternalEObject)expressionInOCL).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL, null, msgs);
+			if (newExpressionInOCL != null)
+				msgs = ((InternalEObject)newExpressionInOCL).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL, null, msgs);
+			msgs = basicSetExpressionInOCL(newExpressionInOCL, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPAQUE_EXPRESSION__EXPRESSION_IN_OCL, newExpressionInOCL, newExpressionInOCL));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -353,7 +381,7 @@ public class OpaqueExpressionImpl
 			if (contextElement != null) {
 				String expression = PivotUtil.getBody(this);
 				if (expression != null) {
-					basicSetExpressionInOCL(PivotUtil.getExpressionInOCL(contextElement, expression),  null);
+					setExpressionInOCL(PivotUtil.getExpressionInOCL(contextElement, expression));
 				}
 			}
 		}

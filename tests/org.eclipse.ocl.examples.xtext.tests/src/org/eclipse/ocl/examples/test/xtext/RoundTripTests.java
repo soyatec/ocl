@@ -32,13 +32,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -210,12 +208,8 @@ public class RoundTripTests extends XtextTestCase
 			for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof OpaqueExpression) {
-					EObject eContainer = eObject.eContainer();
 					System.out.println(++i + ": " + eObject);
-					ExpressionInOCL expressionInOCL = ((OpaqueExpression) eObject).getExpressionInOCL();
-					if (expressionInOCL != null) {
-						EcoreUtil.replace(eContainer, eObject.eContainmentFeature(), eObject, expressionInOCL);
-					}
+					((OpaqueExpression) eObject).getExpressionInOCL();
 					tit.prune();
 				}
 			}

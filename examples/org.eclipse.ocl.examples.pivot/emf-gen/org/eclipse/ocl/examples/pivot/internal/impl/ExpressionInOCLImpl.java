@@ -392,6 +392,9 @@ public class ExpressionInOCLImpl
 				getBody().clear();
 				getBody().addAll((Collection<? extends String>)newValue);
 				return;
+			case PivotPackage.EXPRESSION_IN_OCL__EXPRESSION_IN_OCL:
+				setExpressionInOCL((ExpressionInOCL)newValue);
+				return;
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				getLanguage().clear();
 				getLanguage().addAll((Collection<? extends String>)newValue);
@@ -451,6 +454,9 @@ public class ExpressionInOCLImpl
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY:
 				getBody().clear();
+				return;
+			case PivotPackage.EXPRESSION_IN_OCL__EXPRESSION_IN_OCL:
+				setExpressionInOCL((ExpressionInOCL)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__LANGUAGE:
 				getLanguage().clear();
