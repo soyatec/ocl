@@ -30,7 +30,12 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * An out-of-band value that can be returned by {@link updateAccumulator} to signal
 	 * that the iteration should carry on rather than terminate using the returned value.
 	 */
-	protected static final @NonNull Object CARRY_ON = new Object();
+	protected static final @NonNull Object CARRY_ON = new Object() {
+		@Override
+		public String toString() {
+			return "<<CARRY_ON>>";
+		}
+	};
 
 	/**
 	 * A MutableObject may be used as an iteration accumulatior containing a single changing value.
