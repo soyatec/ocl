@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.validation;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -38,6 +37,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.ComposedEValidator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -69,7 +69,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * Pivot invariants were defined. Other applications see only a small overhead in their
  * processing time.
  */
-public class PivotEObjectValidator extends EObjectValidator
+public class PivotEObjectValidator implements EValidator
 {
 	/**
 	 * A ValidationAdapter is installed in the ResourceSet of applications that register for additional
@@ -113,7 +113,7 @@ public class PivotEObjectValidator extends EObjectValidator
 			this.rootEnvironment = environmentFactory.createEnvironment();
 		}
 
-		protected String getConstrainedObjectLabel(@NonNull Constraint constraint, @NonNull Object object, @Nullable Map<Object, Object> context) {
+		protected String getConstrainedObjectLabel(@NonNull Constraint constraint, @Nullable Object object, @Nullable Map<Object, Object> context) {
 			Type type = PivotUtil.getContainingType(constraint);
 			Type primaryType = type != null ? metaModelManager.getPrimaryType(type) : null;
 			EClassifier eClassifier = primaryType != null ?  (EClassifier)primaryType.getETarget() : null;
@@ -128,7 +128,7 @@ public class PivotEObjectValidator extends EObjectValidator
 		 * Validate all of eClassifier's constraints for object, appending warnings and at most one error to diagnostics
 		 * using context to elaborate the validation context.
 		 */
-		public boolean validate(@NonNull EClassifier eClassifier, @NonNull Object object, @Nullable DiagnosticChain diagnostics, @Nullable Map<Object, Object> context) {
+		public boolean validate(@NonNull EClassifier eClassifier, @Nullable Object object, @Nullable DiagnosticChain diagnostics, @Nullable Map<Object, Object> context) {
 			boolean allOk = true;
 			Type type = metaModelManager.getPivotOfEcore(Type.class, eClassifier);
 			if (type != null) {
@@ -164,7 +164,7 @@ public class PivotEObjectValidator extends EObjectValidator
 		 * Validate constraint for object using context to elaborate the validation context.
 		 * Returns null for no problem or a warning/error severity diagnostic for a problem.
 		 */
-		public @Nullable Diagnostic validate(@NonNull Constraint constraint, @NonNull Object object, @Nullable Map<Object, Object> context) {
+		public @Nullable Diagnostic validate(@NonNull Constraint constraint, @Nullable Object object, @Nullable Map<Object, Object> context) {
 			OpaqueExpression specification = constraint.getSpecification();
 			assert specification != null;
 			ExpressionInOCL query = specification.getExpressionInOCL();
@@ -208,7 +208,7 @@ public class PivotEObjectValidator extends EObjectValidator
 			if (message == null) {
 				return null;
 			}
-			return new BasicDiagnostic(severity, DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+			return new BasicDiagnostic(severity, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
 		}
 	}
 
@@ -217,12 +217,6 @@ public class PivotEObjectValidator extends EObjectValidator
 	 * Pivot validation with whatever other validation was installed. 
 	 */
 	private static final @NonNull PivotEObjectValidator INSTANCE = new PivotEObjectValidator();
-
-	/**
-	 * The original EValidator.Registry.INSTANCE entries that were displaced by the installation
-	 * of the composing INSTANCE.
-	 */
-	private static final @NonNull Map<EPackage, EValidator> eValidators = new HashMap<EPackage, EValidator>();
 
 	/**
 	 * Install Complete OCL validation support in resourceSet for metaModelManager.
@@ -245,21 +239,15 @@ public class PivotEObjectValidator extends EObjectValidator
 	 * Install Pivot-defined validation support for ePackage.
 	 */
 	public static synchronized void install(@NonNull EPackage ePackage) {
-		if (!eValidators.containsKey(ePackage)) {
-			Object oldEntry = EValidator.Registry.INSTANCE.put(ePackage, INSTANCE);
-			if (oldEntry instanceof EValidator.Descriptor) {
-				oldEntry = ((EValidator.Descriptor)oldEntry).getEValidator();
-			}
-			EValidator eValidator = (EValidator) oldEntry;
-			eValidators.put(ePackage, eValidator);
-		}
+		ComposedEValidator composedEValidator = ComposedEValidator.install(ePackage);
+		composedEValidator.addChild(INSTANCE);
 	}
 
 	/**
 	 * Return the user's ResourceSet, preferably as a data element of the diagnostics, corresponding to
 	 * the original validation context, else from the object else from the eClassifier.
 	 */
-	public static ResourceSet getResourceSet(@NonNull EClassifier eClassifier, @NonNull Object object, @Nullable DiagnosticChain diagnostics) {
+	public static ResourceSet getResourceSet(@NonNull EClassifier eClassifier, @Nullable Object object, @Nullable DiagnosticChain diagnostics) {
 		ResourceSet resourceSet = null;
 		if (diagnostics instanceof BasicDiagnostic) {
 			for (Object dataObject : ((BasicDiagnostic)diagnostics).getData()) {
@@ -291,10 +279,13 @@ public class PivotEObjectValidator extends EObjectValidator
 		return resourceSet;
 	}
 
+	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate(eObject.eClass(), eObject, diagnostics, context);
+	}
+
 	/**
 	 * Overriden to intercept the validation of an EObject to add the additional Pivot-defined validation.
 	 */
-	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
 		if ((eClass != null) && !eObject.eIsProxy()) {
@@ -306,9 +297,13 @@ public class PivotEObjectValidator extends EObjectValidator
 	/**
 	 * Overriden to intercept the validation of an EDataType value to add the additional Pivot-defined validation.
 	 */
-	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		assert value != null;
+		boolean allOk = true;
+		if (eDataType != null) {
+			allOk &= validatePivot(eDataType, value, diagnostics, context);
+		}
+		return allOk;
+/*		assert value != null;
 		boolean allOk = true;
 		EPackage ePackage = eDataType.getEPackage();
 		EValidator eValidator = eValidators.get(ePackage);
@@ -318,13 +313,13 @@ public class PivotEObjectValidator extends EObjectValidator
 		if ((allOk || (diagnostics != null)) && eDataType.isInstance(value)) {
 			allOk &= validatePivot(eDataType, value, diagnostics, context);
 		}
-		return allOk;
+		return allOk; */
 	}
 
 	/**
 	 * Perform the additional Pivot-defined validation.
 	 */
-	protected boolean validatePivot(@NonNull EClassifier eClassifier, @NonNull Object object, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected boolean validatePivot(@NonNull EClassifier eClassifier, @Nullable Object object, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context) {
 		ResourceSet resourceSet = getResourceSet(eClassifier, object, diagnostics);
 		if (resourceSet != null) {
 			ValidationAdapter validationAdapter = ValidationAdapter.findAdapter(resourceSet);

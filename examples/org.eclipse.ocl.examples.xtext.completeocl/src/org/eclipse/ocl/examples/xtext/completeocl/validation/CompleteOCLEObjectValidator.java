@@ -86,7 +86,7 @@ public class CompleteOCLEObjectValidator extends PivotEObjectValidator
 		}
 	}
 	
-	@Override
+//	@Override
 	protected EPackage getEPackage() {
 		return ePackage;
 	}
@@ -163,9 +163,9 @@ public class CompleteOCLEObjectValidator extends PivotEObjectValidator
 	}
 
 	@Override
-	protected boolean validatePivot(@NonNull EClassifier eClassifier, @NonNull Object object,
+	protected boolean validatePivot(@NonNull EClassifier eClassifier, @Nullable Object object,
 			@Nullable DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (ecore2Pivot == null) {
+		if ((ecore2Pivot == null) && (object instanceof EObject)) {
 			initialize();	
 			Resource eResource = ((EObject)object).eResource();
 			if (eResource != null) {
