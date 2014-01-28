@@ -479,7 +479,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

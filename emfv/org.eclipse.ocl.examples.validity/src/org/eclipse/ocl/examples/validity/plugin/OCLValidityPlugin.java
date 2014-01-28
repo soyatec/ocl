@@ -14,88 +14,80 @@
  */
 package org.eclipse.ocl.examples.validity.plugin;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Plugin;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.jdt.annotation.NonNull;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class OCLValidityPlugin extends Plugin
+public class OCLValidityPlugin extends EMFPlugin
 {
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.validity"; //$NON-NLS-1$
-	
-	// The shared instance
-	private static OCLValidityPlugin plugin;
-	
 
 	/**
-	 * The constructor
+	 * The singleton instance of the plugin.
 	 */
-	public OCLValidityPlugin() {
-		super();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
-	 */
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
-	 */
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
+	public static final @NonNull OCLValidityPlugin INSTANCE = new OCLValidityPlugin();
 
 	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
+	 * Creates the singleton instance.
 	 */
-	public static OCLValidityPlugin getDefault() {
+	private OCLValidityPlugin() {
+		super(new ResourceLocator[] {});
+	}
+
+	@Override
+	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
-	
-	public static IStatus createStatus(int severity, String message, Throwable throwable) {
-		return new Status(severity, PLUGIN_ID, message, throwable);
-	}
-	
-	public static IStatus createStatus(int severity, String message) {
-		return createStatus(severity, message, null);
-	}
-	
-	public static IStatus createError(String message, int code,  Throwable throwable) {
-		return new Status(IStatus.ERROR, PLUGIN_ID, code, message, throwable);
-	}
-	
-
-    public static void log(IStatus status) {
-    	OCLValidityPlugin debugPlugin = getDefault();
-		if(debugPlugin != null) {
-    		debugPlugin.getLog().log(status);
-    	}
-    }
 
 	/**
-	 * Logs an exception as an error in the Error Log view.
-	 * @param e Exception to be logged.
+	 * Returns the Eclipse plugin singleton.
+	 * 
+	 * @return the plugin singleton.
 	 */
-	public void logException(Exception e) {
-		getLog().log(
-			new Status(IStatus.ERROR, PLUGIN_ID, e.getLocalizedMessage(), e));
+	public static Implementation getPlugin() {
+		return plugin;
 	}
 
-    public static void log(Throwable e) {
-        log(new Status(IStatus.ERROR, PLUGIN_ID, "Exception caught", e)); //$NON-NLS-1$
-    }
+	/**
+	 * The plugin singleton
+	 */
+	private static Implementation plugin;
+
+	/**
+	 * A plugin implementation that handles Ecore plugin registration.
+	 * 
+	 * @see #startup()
+	 */
+	static public class Implementation extends EclipsePlugin
+	{
+		/**
+		 * Creates the singleton instance.
+		 */
+		public Implementation() {
+			super();
+			plugin = this;
+		}
+
+		/**
+		 * Starts up this plugin by reading some extensions and populating the
+		 * relevant registries.
+		 * 
+		 * @throws Exception
+		 *             if there is a show stopping problem.
+		 */
+		@Override
+		public void start(BundleContext context) throws Exception {
+			super.start(context);
+		}
+
+		@Override
+		public void stop(BundleContext context) throws Exception {
+			super.stop(context);
+			plugin = null;
+		}
+	}
 }

@@ -16,8 +16,8 @@
 package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -63,7 +63,7 @@ public class IDEValidityManager extends ValidityManager
 	
 	protected class IDEValidityModel extends ValidityModel
 	{
-		public IDEValidityModel(@NonNull IDEValidityManager validityManager, @NonNull Set<Resource> newResources) {
+		public IDEValidityModel(@NonNull IDEValidityManager validityManager, @NonNull Collection<Resource> newResources) {
 			super(validityManager, newResources);
  		}
 
@@ -250,10 +250,13 @@ public class IDEValidityManager extends ValidityManager
 
 	public IDEValidityManager(@NonNull ValidityViewRefreshJob refreshJob) {
 		this.refreshJob = refreshJob;
+//		CREATE_CONSTRAINING.setState(true);
+//		CREATE_RESULT.setState(true);
+//		CREATE_VALIDATABLE.setState(true);
 	}
 
 	@Override
-	protected @NonNull ValidityModel createModel(@NonNull Set<Resource> newResources) {
+	protected @NonNull ValidityModel createModel(@NonNull Collection<Resource> newResources) {
 		ValidityModel contents = new IDEValidityModel(this, newResources);
 		RootNode rootNode = contents.getRootNode();
 		installAdapters(rootNode.getConstrainingNodes());

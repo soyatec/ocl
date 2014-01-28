@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.edit.provider.ComposedImage;

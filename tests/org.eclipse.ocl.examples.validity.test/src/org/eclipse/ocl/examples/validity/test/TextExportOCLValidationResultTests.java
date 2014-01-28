@@ -86,7 +86,7 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 			throws IOException, XPathExpressionException, CoreException {
 		// initiate the test case
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute5 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE5_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.OK);
 
 		// launch the exporter
@@ -113,10 +113,10 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 	public void testTEXTExport_LoggingMetricsWithInformationSeverity()
 			throws IOException, XPathExpressionException, CoreException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute5 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE5_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.OK);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 
 		// launch the exporter
@@ -143,13 +143,13 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 			throws IOException, InterruptedException, XPathExpressionException,
 			CoreException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute5 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE5_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.OK);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute1 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE1_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.WARNING);
 
 		// launch the exporter
@@ -176,16 +176,16 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 			throws IOException, InterruptedException, XPathExpressionException,
 			CoreException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute5 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE5_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.OK);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute1 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE1_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.WARNING);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute2 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE2_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.ERROR);
 
 		// launch the exporter
@@ -212,19 +212,19 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 			throws IOException, InterruptedException, XPathExpressionException,
 			CoreException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute5 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE5_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.OK);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute1 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE1_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.WARNING);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute2 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE2_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.ERROR);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute4 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE4_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.FATAL);
 
 		// launch the exporter
@@ -249,7 +249,7 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 	public void testTEXTExport_LogNullDiagnosticMessage()
 			throws XPathExpressionException, CoreException, IOException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 
 		// launch the exporter
@@ -271,7 +271,7 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 	public void testTEXTExport_LogInfoDiagnosticMessage() throws IOException,
 			InterruptedException, XPathExpressionException, CoreException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 //		exporter.export(TestTool.getIResource(ecoreResource), rootNode, GENERATED_FILE_PATH);
 //		assertLineContains(26, "null diagnostic message"); //$NON-NLS-1$
@@ -279,7 +279,7 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 //		clearGeneratedReport();
 		String diagnostic = "Diag INFO"; //$NON-NLS-1$
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setDiagnostic(diagnostic);
 
 		// launch the exporter
@@ -293,16 +293,16 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 	public void testTEXTExport_ProducesAllLogHeadings() throws IOException,
 			CoreException {
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eclass1_constraint", "Eclass1 e1Att1").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_ECLASS1_CONSTRAINT, VALIDATABLE_ECLASS1_E1_ATT1).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.ERROR);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint epackage_constraint", "ecoreTest").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EPACKAGE_CONSTRAINT, VALIDATABLE_ECORE_TEST).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.FATAL);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.WARNING);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eclass2_constraint", "EClass2").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_ECLASS2_CONSTRAINT, VALIDATABLE_E_CLASS2).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.INFO);
 
 		// launch the exporter
@@ -311,22 +311,22 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 
 		// test tables headings
 		assertLineContains(22, "ecoreTest.ocl"); //$NON-NLS-1$
-		assertLineContains(23, "Constraint eclass2_constraint"); //$NON-NLS-1$
+		assertLineContains(23, "eclass2_constraint"); //$NON-NLS-1$
 		assertLineContains(24, "eclass2_constraint"); //$NON-NLS-1$
 		assertLineContains(25, "INFO"); //$NON-NLS-1$
 
 		assertLineContains(29, "ecore.ocl"); //$NON-NLS-1$
-		assertLineContains(30, "Constraint eattribute_constraint"); //$NON-NLS-1$
+		assertLineContains(30, "eattribute_constraint"); //$NON-NLS-1$
 		assertLineContains(31, "eattribute_constraint"); //$NON-NLS-1$
 		assertLineContains(32, "WARNING"); //$NON-NLS-1$
 
 		assertLineContains(36, "ecoreTest.ocl"); //$NON-NLS-1$
-		assertLineContains(37, "Constraint eclass1_constraint"); //$NON-NLS-1$
+		assertLineContains(37, "eclass1_constraint"); //$NON-NLS-1$
 		assertLineContains(38, "eclass1_constraint"); //$NON-NLS-1$
 		assertLineContains(39, "ERROR"); //$NON-NLS-1$
 
 		assertLineContains(43, "ecore.ocl"); //$NON-NLS-1$
-		assertLineContains(44, "Constraint epackage_constraint"); //$NON-NLS-1$
+		assertLineContains(44, "epackage_constraint"); //$NON-NLS-1$
 		assertLineContains(45, "epackage_constraint"); //$NON-NLS-1$
 		assertLineContains(46, "FATAL"); //$NON-NLS-1$
 	}
@@ -336,30 +336,29 @@ public class TextExportOCLValidationResultTests extends AbstractExportOCLValidat
 		for (Result result : results) {
 			result.setSeverity(Severity.OK);
 		}
-
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eclass1_constraint", "Eclass1 e1Att1").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_ECLASS1_CONSTRAINT, VALIDATABLE_ECLASS1_E1_ATT1).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.ERROR);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint epackage_constraint_2", "ecoreTest").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EPACKAGE_CONSTRAINT_2, VALIDATABLE_ECORE_TEST).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.ERROR);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint epackage_constraint", "ecoreTest").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EPACKAGE_CONSTRAINT, VALIDATABLE_ECORE_TEST).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.FATAL);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eclass_constraint", "EClass3 -> Eclass5") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_ECLASS_CONSTRAINT, VALIDATABLE_E_CLASS3_ECLASS5) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.FATAL);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute3 : EShort") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE3_E_SHORT) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.WARNING);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eclass2_constraint", "EClass2").setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_ECLASS2_CONSTRAINT, VALIDATABLE_E_CLASS2).setSeverity( //$NON-NLS-1$ //$NON-NLS-2$
 				Severity.INFO);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute5 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE5_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.INFO);
 		getResultOfValidatableNodeFromLabel(results,
-				"Constraint eattribute_constraint", "eAttribute1 : EString") //$NON-NLS-1$ //$NON-NLS-2$
+				CONSTRAINABLE_EATTRIBUTE_CONSTRAINT, VALIDATABLE_E_ATTRIBUTE1_E_STRING) //$NON-NLS-1$ //$NON-NLS-2$
 				.setSeverity(Severity.WARNING);
 
 		// launch the exporter

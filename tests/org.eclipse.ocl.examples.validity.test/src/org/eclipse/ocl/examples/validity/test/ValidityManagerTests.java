@@ -68,18 +68,18 @@ public class ValidityManagerTests extends AbstractValidityTestCase
 	public void testValidityManagerGetConstrainingNodeResults() {
 		ConstrainingNode constrainingNode = validityManager.getConstrainingNode(ecoreResource2.getContents().get(0));
 		assertTrue(constrainingNode instanceof RootConstrainingNode);
-		assertEquals("Eclass1 e1Att1", constrainingNode.getLabel());
+		assertEquals(CONSTRAINABLE_ECLASS1_E1_ATT1, constrainingNode.getLabel());
 
 		ResultSet resultSet = validityModel.createResultSet(new NullProgressMonitor());
 		((TestValidityManager)validityManager).putResults(resultSet);
 
-		ConstrainingNode constrainingNodeFromRootByLabel = getConstrainingNodeByLabel(rootNode.getConstrainingNodes(), "ecoreTest");
+		ConstrainingNode constrainingNodeFromRootByLabel = getConstrainingNodeByLabel(rootNode.getConstrainingNodes(), CONSTRAINABLE_ECORETEST_OCL_ECORE);
 		ConstrainingNode constrainingNodeByLabel = getConstrainingNodeByLabel(constrainingNodeFromRootByLabel.getChildren(), "Eclass1");
 		List<Result> constrainingNodeResults = validityManager.getConstrainingNodeResults(constrainingNodeByLabel);
 		assertEquals((Integer) 1, (Integer) constrainingNodeResults.size());
-		assertEquals("Eclass1 e1Att1", constrainingNodeResults.get(0).getResultConstrainingNode().getLabel());
-		assertEquals("Constraint eclass1_constraint", constrainingNodeResults.get(0).getResultValidatableNode().getLabel());
-		assertEquals("Constraint eclass1_constraint", constrainingNodeResults.get(0).getLeafConstrainingNode().getLabel());
+		assertEquals(VALIDATABLE_ECLASS1_E1_ATT1, constrainingNodeResults.get(0).getResultConstrainingNode().getLabel());
+		assertEquals(CONSTRAINABLE_ECLASS1_CONSTRAINT, constrainingNodeResults.get(0).getResultValidatableNode().getLabel());
+		assertEquals("eclass1_constraint", constrainingNodeResults.get(0).getLeafConstrainingNode().getLabel());
 	}
 
 	@Test
@@ -87,18 +87,18 @@ public class ValidityManagerTests extends AbstractValidityTestCase
 		ResultSet resultSet = validityModel.createResultSet(new NullProgressMonitor());
 		((TestValidityManager)validityManager).putResults(resultSet);
 
-		ValidatableNode rootValidatableNode = getValidatableNodeByLabel(rootNode.getValidatableNodes(), "ecoreTest2");
+		ValidatableNode rootValidatableNode = getValidatableNodeByLabel(rootNode.getValidatableNodes(), VALIDATABLE_ECORETEST2);
 		List<Result> validatableNodeResults = validityManager.getValidatableNodeResults(rootValidatableNode);
 
 		assertEquals((Integer) 31, (Integer) validatableNodeResults.size());
 
-		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, "Constraint epackage_constraint"));
+		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, CONSTRAINABLE_EPACKAGE_CONSTRAINT));
 
-		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, "Constraint epackage_constraint_2"));
+		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, CONSTRAINABLE_EPACKAGE_CONSTRAINT_2));
 
-		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, "Constraint eclass_constraint"));
+		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, CONSTRAINABLE_ECLASS_CONSTRAINT));
 
-		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, "Constraint eattribute_constraint"));
+		assertNotNull(getResultFromResultValidatableNode(validatableNodeResults, CONSTRAINABLE_EATTRIBUTE_CONSTRAINT));
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class ValidityManagerTests extends AbstractValidityTestCase
 		EObject eRoot2 = ecoreResource2.getContents().get(0);
 		ConstrainingNode constrainingNode = validityManager.getConstrainingNode(eRoot2);
 		assertTrue(constrainingNode instanceof RootConstrainingNode);
-		assertEquals("Eclass1 e1Att1", constrainingNode.getLabel());
+		assertEquals(CONSTRAINABLE_ECLASS1_E1_ATT1, constrainingNode.getLabel());
 
 		constrainingNode = validityManager.getConstrainingNode(((Eclass1) eRoot2).getClasses2().get(0));
 		assertEquals("EClass2", constrainingNode.getLabel());

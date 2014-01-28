@@ -15,8 +15,10 @@
 package org.eclipse.ocl.examples.emf.validation.validity.manager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,9 +28,13 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -41,6 +47,7 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
@@ -57,9 +64,12 @@ public class ValidityManager
 	private static final @NonNull Map<String, List<ConstraintLocator>> constraintLocators = new HashMap<String, List<ConstraintLocator>>();
 
 	public static final @NonNull TracingOption ANALYZE_RESOURCE = new TracingOption(ValidityPlugin.PLUGIN_ID, "analyze/resource");
+	public static final @NonNull TracingOption CREATE_CONSTRAINING = new TracingOption(ValidityPlugin.PLUGIN_ID, "create/constraining");
+	public static final @NonNull TracingOption CREATE_RESULT = new TracingOption(ValidityPlugin.PLUGIN_ID, "create/result");
+	public static final @NonNull TracingOption CREATE_VALIDATABLE = new TracingOption(ValidityPlugin.PLUGIN_ID, "create/validatable");
 	public static final @NonNull TracingOption LOCATE_RESOURCE = new TracingOption(ValidityPlugin.PLUGIN_ID, "locate/resource");
 
-	private final @NonNull Set<Resource> newResources = new HashSet<Resource>();
+	private final @NonNull LinkedHashSet<Resource> newResources = new LinkedHashSet<Resource>();
 
 	private final @NonNull Set<Resource> oldResources = new HashSet<Resource>();
 	
@@ -147,7 +157,7 @@ public class ValidityManager
 		return Diagnostician.INSTANCE.createDefaultDiagnostic(eObject);
 	}
 
-	protected @NonNull ValidityModel createModel(@NonNull Set<Resource> newResources) {
+	protected @NonNull ValidityModel createModel(@NonNull Collection<Resource> newResources) {
 		return new ValidityModel(this, newResources);
 	}
 
@@ -186,7 +196,7 @@ public class ValidityManager
 		return model2.getConstrainingNode(eObject);
 	}
 
-	public List<Result> getConstrainingNodeResults(@NonNull ConstrainingNode element) {
+	public @NonNull List<Result> getConstrainingNodeResults(@NonNull ConstrainingNode element) {
 		List<Result> results = new ArrayList<Result>();
 		if (element.getLabel().startsWith("EOperation")) {
 			getAllConstrainingNodeResults(results, element);
@@ -195,6 +205,55 @@ public class ValidityManager
 			getAllConstrainingNodeResults(results, element);
 		}
 		return results;
+	}
+	
+	/**
+	 * Returns the eObject uri
+	 * 
+	 * @param eObject
+	 * @return the eObject uri
+	 */
+	public @NonNull ConstrainingURI getConstrainingURI(@NonNull EObject eObject) {
+		ConstraintLocator constraintLocator = ValidityManager.getConstraintLocator(eObject);
+		if (constraintLocator != null) {
+			URI uri = constraintLocator.getURI(eObject);
+			if (uri != null) {
+				return new ConstrainingURI(trimDuplicateContextSuffix(uri));		// FIXME should not be needed
+			}
+		}
+		URI uri = EcoreUtil.getURI(eObject);
+		assert uri != null;
+		return new ConstrainingURI(trimDuplicateContextSuffix(uri));		// FIXME should not be needed
+	}
+
+	/**
+	 * It is possible to have multiple "identical" contexts defined in an OCL file :
+	 * <p>
+	 * <pre>
+	 * context EClass
+	 *   inv invariant1 : not name.oclIsUndefined()
+	 * 
+	 * context EClass
+	 *   inv invariant2 : if interface then name.startsWith('I') else true endif;
+	 * </pre>
+	 * </p>
+	 * 
+	 * In such a case, the URI of the first will be <code>http://www.eclipse.org/emf/2002/Ecore#//EClass</code> while the URI of the second will be <code>http://www.eclipse.org/emf/2002/Ecore#//EClass.1</code>. We wish to "regroup" both invariants
+	 * under the same context in the validity results.
+	 * 
+	 * @param uri
+	 * @return
+	 */
+	private @NonNull URI trimDuplicateContextSuffix(URI uri) {
+		String fragment = uri.fragment();
+		// This should always be called on types, so we should be able to safely remove the trailing ".1" from the fragment
+		if (fragment.matches(".*\\.[0-9]+$")){
+			String trimmedFragment = fragment.replaceFirst("\\.[0-9]+$", "");
+			URI trimmedURI = uri.trimFragment().appendFragment(trimmedFragment);
+			assert trimmedURI != null;
+			return trimmedURI;
+		}
+		return uri;
 	}
 
 	private void getAllConstrainingNodeResults(List<Result> results, @NonNull ConstrainingNode element) {
@@ -227,25 +286,124 @@ public class ValidityManager
 		}
 	}
 
-	public @NonNull String getLabel(@NonNull EObject eObject) {
-	    IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(eObject, IItemLabelProvider.class);
-		String label = itemLabelProvider != null ? itemLabelProvider.getText(eObject) : eObject.toString();
-		return label != null ? label : "";
-	}
-
-	public @Nullable RootNode getRootNode() {
-		ValidityModel model2 = model;
-		return model2 != null ? model2.getRootNode() : null;
+	public @NonNull String getConstrainingLabel(@NonNull EObject eObject) {
+		StringBuilder s = new StringBuilder();
+		if (eObject instanceof ENamedElement) {
+			s.append(((ENamedElement)eObject).getName());
+		}
+		else if (eObject instanceof Nameable) {
+			s.append(((Nameable)eObject).getName());
+		}
+		else {
+		    IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(eObject, IItemLabelProvider.class);
+			String label = itemLabelProvider != null ? itemLabelProvider.getText(eObject) : eObject.toString();
+			s.append(label != null ? label : "");
+		}
+/*		EClass eClass = eObject.eClass();
+		if (eClass != null) {
+			s.append(" : " + eClass.getName());
+		} */
+		EObject eContainer = eObject.eContainer();
+		if (eContainer == null) {
+			Resource eResource = eObject.eResource();
+			if (eResource != null) {
+				URI uri = eResource.getURI();
+				if (uri != null) {
+					s.append(" in " + uri);
+				}
+			}
+		}
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 	
 	public @Nullable ValidityModel getModel() {
 		return model;
 	}
 
+	public @Nullable RootNode getRootNode() {
+		ValidityModel model2 = model;
+		return model2 != null ? model2.getRootNode() : null;
+	}
+
+	/**
+	 * Returns the eObject uri
+	 * 
+	 * @param eObject
+	 * @return the eObject uri
+	 */
+	public @NonNull TypeURI getTypeURI(@NonNull EObject eObject) {
+		String nsURI = null;
+		for (EObject eContainer = eObject; eContainer != null; eContainer = eContainer.eContainer()) {
+			if (eContainer instanceof EPackage) {
+				EPackage ePackage = (EPackage) eContainer;
+				nsURI = ePackage.getNsURI();
+				if ((nsURI != null) && !"".equals(nsURI)) {
+					Resource eResource = ePackage.eResource();
+					if (eResource != null) {
+						String fragment = eResource.getURIFragment(eObject);
+						@SuppressWarnings("null")@NonNull URI uri = URI.createURI(nsURI).appendFragment(fragment);
+						return new TypeURI(uri);
+					}
+				}
+			}
+		}
+		@SuppressWarnings("null")@NonNull URI uri = EcoreUtil.getURI(eObject);
+		return new TypeURI(uri);
+	}
+
+	public @NonNull String getValidatableLabel(@NonNull EObject eObject) {
+		StringBuilder s = new StringBuilder();
+		if (eObject instanceof ENamedElement) {
+			s.append(((ENamedElement)eObject).getName());
+		}
+		else if (eObject instanceof Nameable) {
+			s.append(((Nameable)eObject).getName());
+		}
+		else {
+			IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(eObject, IItemLabelProvider.class);
+			String label = itemLabelProvider != null ? itemLabelProvider.getText(eObject) : eObject.toString();
+			s.append(label != null ? label : "");
+		}
+		if (eObject instanceof ETypedElement) {
+			EClassifier eType = ((ETypedElement)eObject).getEType();
+			s.append(" : " + eType.getName());
+		}
+		else {
+			EClass eClass = eObject.eClass();
+			if (eClass != null) {
+				s.append(" | " + eClass.getName());
+			}
+		}
+		EObject eContainer = eObject.eContainer();
+		if (eContainer == null) {
+			Resource eResource = eObject.eResource();
+			if (eResource != null) {
+				URI uri = eResource.getURI();
+				if (uri != null) {
+					s.append(" in " + uri);
+				}
+			}
+		}
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
+	}
+
 	public List<Result> getValidatableNodeResults(@NonNull ValidatableNode element) {
 		List<Result> results = new ArrayList<Result>();
 		getAllValidatableNodeResults(results, element);
 		return results;
+	}
+
+	/**
+	 * Returns the eObject uri
+	 * 
+	 * @param eObject
+	 * @return the eObject uri
+	 */
+	public @NonNull ValidatableURI getValidatableURI(@NonNull EObject eObject) {
+		@SuppressWarnings("null")@NonNull URI uri = EcoreUtil.getURI(eObject);
+		return new ValidatableURI(uri);
 	}
 
 	public void setInput(Object newInput) {

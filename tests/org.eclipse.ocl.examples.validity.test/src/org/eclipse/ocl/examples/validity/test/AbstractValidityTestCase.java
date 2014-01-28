@@ -15,8 +15,6 @@
  */
 package org.eclipse.ocl.examples.validity.test;
 
-import java.util.Set;
-
 import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -51,6 +49,8 @@ public abstract class AbstractValidityTestCase extends TestCase
 {
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.validity.test"; //$NON-NLS-1$
 
+	protected static final @NonNull String TEST_PROJECT_NAME = /*"test." +*/ PLUGIN_ID;
+
 	protected static final @NonNull String OCL_CONSTRAINTS_MODEL = "model/ecore.ocl";
 	protected static final @NonNull String OCL_CONSTRAINTS_MODEL2 = "model/ecoreTest.ocl";
 	protected static final @NonNull String ECORE_MODEL_NAME = "model/ecoreTest.ecore";
@@ -63,6 +63,38 @@ public abstract class AbstractValidityTestCase extends TestCase
 	protected static final Integer EXPECTED_ERRORS = 2;
 	protected static final Integer EXPECTED_FAILURES = 2;
 	protected static final Integer EXPECTED_RESULTS = EXPECTED_SUCCESSES + EXPECTED_INFOS + EXPECTED_WARNINGS + EXPECTED_ERRORS + EXPECTED_FAILURES;
+
+	protected static final @NonNull String CONSTRAINABLE_ECORE = "ecore in http://www.eclipse.org/emf/2002/Ecore";
+	protected static final @NonNull String CONSTRAINABLE_ECORE_OCL_ECORE = "ecore in platform:/plugin/" + TEST_PROJECT_NAME + "/model/ecore.ocl.ecore";
+	protected static final @NonNull String CONSTRAINABLE_ECORETEST = "ecoreTest | EPackage in platform:/plugin/" + TEST_PROJECT_NAME + "/model/ecoreTest.ecore";
+	protected static final @NonNull String CONSTRAINABLE_ECORETEST_OCL_ECORE = "ecoreTest in platform:/plugin/" + TEST_PROJECT_NAME + "/model/ecoreTest.ocl.ecore";
+//	protected static final @NonNull String CONSTRAINABLE_ECORETEST2 = "ecoreTest2 | EPackage in platform:/plugin/" + TEST_PROJECT_NAME + "/model/ecoreTest2.ecore";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS1_E1_ATT1 = "Eclass1 e1Att1 in platform:/plugin/" + TEST_PROJECT_NAME + "/model/validityModelTest.ecoretest";
+	protected static final @NonNull String CONSTRAINABLE_EATTRIBUTE_CONSTRAINT = "ecore::EAttribute::eattribute_constraint";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS_CONSTRAINT = "ecore::EClass::eclass_constraint";
+	protected static final @NonNull String CONSTRAINABLE_EPACKAGE_CONSTRAINT_2 = "ecore::EPackage::epackage_constraint_2";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS1_CONSTRAINT = "ecoreTest::Eclass1::eclass1_constraint";
+	protected static final @NonNull String CONSTRAINABLE_EPACKAGE_CONSTRAINT = "ecore::EPackage::epackage_constraint";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS2_CONSTRAINT = "ecoreTest::EClass2::eclass2_constraint";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS1 = "ecoreTest::Eclass1 | EClass";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS2 = "ecoreTest::EClass2 | EClass";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS3 = "ecoreTest::EClass3 | EClass";
+	protected static final @NonNull String CONSTRAINABLE_ECLASS5 = "ecoreTest2::Eclass5 | EClass";
+
+	protected static final @NonNull String VALIDATABLE_ECORE_TEST = "ecoreTest | EPackage in platform:/plugin/" + TEST_PROJECT_NAME + "/model/ecoreTest.ecore";
+	protected static final @NonNull String VALIDATABLE_ECORETEST2 = "ecoreTest2 | EPackage in platform:/plugin/" + TEST_PROJECT_NAME + "/model/ecoreTest2.ecore";
+	protected static final @NonNull String VALIDATABLE_ECLASS1_E1_ATT1 = "Eclass1 e1Att1 | Eclass1 in platform:/plugin/" + TEST_PROJECT_NAME + "/model/validityModelTest.ecoretest";
+	protected static final @NonNull String VALIDATABLE_E_CLASS3_ECLASS5 = "ecoreTest::EClass3 | EClass";
+	protected static final @NonNull String VALIDATABLE_ECLASS2 = "EClass2 | EClass2";
+	protected static final @NonNull String VALIDATABLE_E_CLASS5 = "Eclass5 | EClass";
+	protected static final @NonNull String VALIDATABLE_E_CLASS2 = "Eclass1::EClass2 | EClass2";
+	protected static final @NonNull String VALIDATABLE_E_ATTRIBUTE4_E_STRING = "ecoreTest::EClass2::eAttribute4 : EString";
+	protected static final @NonNull String VALIDATABLE_E_ATTRIBUTE2_E_STRING = "ecoreTest::Eclass1::eAttribute2 : EString";
+	protected static final @NonNull String VALIDATABLE_E_ATTRIBUTE1_E_STRING = "ecoreTest::Eclass1::eAttribute1 : EString";
+	protected static final @NonNull String VALIDATABLE_E_ATTRIBUTE3_E_SHORT = "ecoreTest::EClass2::eAttribute3 : EShort";
+	protected static final @NonNull String VALIDATABLE_E_ATTRIBUTE5_E_STRING = "ecoreTest2::Eclass5::eAttribute5 : EString";
+
+	protected static final @NonNull String TITLE_E_ATTRIBUTE5_E_STRING = "eAttribute5 : EString";
 	
 	private static ProjectMap projectMap = null;
 
@@ -126,7 +158,7 @@ public abstract class AbstractValidityTestCase extends TestCase
 		return null;
 	}
 
-	public static boolean isCompleteOCLCSResourcePresent(@NonNull Set<Resource> resources) {
+	public static boolean isCompleteOCLCSResourcePresent(@NonNull Iterable<Resource> resources) {
 		for (Resource resource : resources) {
 			if (resource instanceof CompleteOCLCSResource) {
 				return true;

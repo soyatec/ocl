@@ -60,7 +60,7 @@ public class EClassConstraintLocator extends AbstractConstraintLocator
 						LeafConstrainingNode constraint = ValidityFactory.eINSTANCE.createLeafConstrainingNode();
 						constraint.setConstraintLocator(this);
 						constraint.setConstrainingObject(eOperation);
-						constraint.setLabel(validityModel.getLabel(eOperation));
+						constraint.setLabel(validityModel.getConstrainingLabel(eOperation));
 						if (constraints == null) {
 							constraints = new ArrayList<LeafConstrainingNode>();
 						}

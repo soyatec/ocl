@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.pivot.validation.PivotEObjectValidator.ValidationAdapter;
+import org.eclipse.ocl.examples.validity.plugin.OCLValidityPlugin;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
@@ -70,7 +71,7 @@ public class PivotConstraintLocator extends AbstractConstraintLocator
 							Constraint pConstraint = (Constraint)eObject;
 							Namespace constrainedElement = pConstraint.getContext();
 							if (constrainedElement != null) {
-								String label = validityModel.getLabel(pConstraint);
+								@SuppressWarnings("null")@NonNull String label = String.valueOf(pConstraint.getName());
 								EModelElement eTarget = metaModelManager.getEcoreOfPivot(EModelElement.class, constrainedElement);
 								if (eTarget != null) {
 									assert resource != null;
@@ -83,6 +84,11 @@ public class PivotConstraintLocator extends AbstractConstraintLocator
 			}
 		}
 		return map;
+	}
+
+	@Override
+	public Object getImage() {
+		return OCLValidityPlugin.INSTANCE.getImage("OCLModelFile.gif");
 	}
 
 	public @NonNull String getName() {

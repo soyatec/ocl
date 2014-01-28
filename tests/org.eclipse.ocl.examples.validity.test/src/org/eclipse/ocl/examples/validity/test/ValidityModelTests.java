@@ -15,8 +15,8 @@
  */
 package org.eclipse.ocl.examples.validity.test;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EAttribute;
@@ -44,8 +44,6 @@ import org.junit.Test;
  */
 public class ValidityModelTests extends AbstractValidityTestCase
 {
-	private static final String PREFIX_CONSTRAINT_LABEL = "Constraint ";
-
 	protected @NonNull ConstrainingNode assertHasConstrainingNodeByLabel(@NonNull ConstrainingNode constrainingNode, @NonNull String label, @NonNull Class<?> constrainingClass) {
 		ConstrainingNode containedConstrainingNode = getConstrainingNodeByLabel(constrainingNode.getChildren(), label);
 		assertNotNull(containedConstrainingNode);
@@ -72,8 +70,8 @@ public class ValidityModelTests extends AbstractValidityTestCase
 		return children;
 	}
 
-	protected @NonNull LeafConstrainingNode assertHasLeafConstrainingNodeByPrefixedLabel(@NonNull ConstrainingNode constrainingNode, @NonNull String label) {
-		ConstrainingNode containedConstrainingNode = getConstrainingNodeByLabel(constrainingNode.getChildren(), PREFIX_CONSTRAINT_LABEL + label);
+	protected @NonNull LeafConstrainingNode assertHasLeafConstrainingNodeByLabel(@NonNull ConstrainingNode constrainingNode, @NonNull String label) {
+		ConstrainingNode containedConstrainingNode = getConstrainingNodeByLabel(constrainingNode.getChildren(), label);
 		assertTrue(containedConstrainingNode instanceof LeafConstrainingNode);
 		return (LeafConstrainingNode) containedConstrainingNode;
 	}
@@ -111,8 +109,8 @@ public class ValidityModelTests extends AbstractValidityTestCase
 		return containedValidatableNode;
 	}
 
-	protected @NonNull ResultValidatableNode assertHasResultValidatableNodeByPrefixedLabel(@NonNull ValidatableNode validatableNode, @NonNull String label) {
-		ValidatableNode containedValidatableNode = getValidatableNodeByLabel(validatableNode.getChildren(), PREFIX_CONSTRAINT_LABEL + label);
+	protected @NonNull ResultValidatableNode assertHasResultValidatableNodeByLabel(@NonNull ValidatableNode validatableNode, @NonNull String label) {
+		ValidatableNode containedValidatableNode = getValidatableNodeByLabel(validatableNode.getChildren(), label);
 		assertTrue(containedValidatableNode instanceof ResultValidatableNode);
 		assertNull(containedValidatableNode.getConstrainedObject());
 		return (ResultValidatableNode) containedValidatableNode;
@@ -131,7 +129,7 @@ public class ValidityModelTests extends AbstractValidityTestCase
 
 	@Test
 	public void testValidityModel_AllResourcesArePresent() {
-		Set<Resource> resources = validityModel.getResources();
+		Collection<Resource> resources = validityModel.getResources();
 		assertEquals((Integer) 5, (Integer) resources.size());
 		assertTrue(resources.contains(ecoreResource));
 		assertTrue(resources.contains(ecoreResource2));
@@ -141,121 +139,132 @@ public class ValidityModelTests extends AbstractValidityTestCase
 
 	@Test
 	public void testValidityModelInitialization_RootValidatableNodesArePresent() {
-		final ValidatableNode _e1Att1 = assertHasValidatableNodeByLabel(rootNode, "Eclass1 e1Att1", Eclass1Impl.class);
+		final ValidatableNode _e1Att1 = assertHasValidatableNodeByLabel(rootNode, VALIDATABLE_ECLASS1_E1_ATT1, Eclass1Impl.class);
 		assertHasValidatableNodes(_e1Att1, 3);
-		assertHasResultValidatableNodeByPrefixedLabel(_e1Att1, "eclass1_constraint");
+		assertHasResultValidatableNodeByLabel(_e1Att1, CONSTRAINABLE_ECLASS1_CONSTRAINT);
 
-		final ValidatableNode _e1Att1__EClass2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", EClass2.class);
+		final ValidatableNode _e1Att1__EClass2 = assertHasValidatableNodeByLabel(_e1Att1, VALIDATABLE_ECLASS2, EClass2.class);
 		assertHasValidatableNodes(_e1Att1__EClass2, 1);
-		assertHasResultValidatableNodeByPrefixedLabel(_e1Att1__EClass2, "eclass2_constraint");
+		assertHasResultValidatableNodeByLabel(_e1Att1__EClass2, CONSTRAINABLE_ECLASS2_CONSTRAINT);
 
-		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", EClass2.class);		// FIXME Duplicate
+		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, VALIDATABLE_ECLASS2, EClass2.class);		// FIXME Duplicate
 		assertHasValidatableNodes(containedValidatableNode2, 1);
-		assertHasResultValidatableNodeByPrefixedLabel(containedValidatableNode2, "eclass2_constraint");
+		assertHasResultValidatableNodeByLabel(containedValidatableNode2, CONSTRAINABLE_ECLASS2_CONSTRAINT);
 
-		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, "ecoreTest2", EPackage.class);
+		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, VALIDATABLE_ECORETEST2, EPackage.class);
 		assertHasValidatableNodes(_ecoreTest2, 9/*3*/);
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint_2");
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint");
+		assertHasResultValidatableNodeByLabel(_ecoreTest2, CONSTRAINABLE_EPACKAGE_CONSTRAINT_2);
+		assertHasResultValidatableNodeByLabel(_ecoreTest2, CONSTRAINABLE_EPACKAGE_CONSTRAINT);
 
-		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, "Eclass5", EClass.class);
+		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, VALIDATABLE_E_CLASS5, EClass.class);
 		assertHasValidatableNodes(_ecoreTest2__Eclass5, 13/*2*/);
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5, "eclass_constraint");
+		assertHasResultValidatableNodeByLabel(_ecoreTest2__Eclass5, CONSTRAINABLE_ECLASS_CONSTRAINT);
 
-		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, "eAttribute5 : EString", EAttribute.class);
+		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, TITLE_E_ATTRIBUTE5_E_STRING, EAttribute.class);
 		assertHasValidatableNodes(_ecoreTest2__Eclass5__eAttribute5, 9/*1*/);
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5__eAttribute5, "eattribute_constraint");
+		assertHasResultValidatableNodeByLabel(_ecoreTest2__Eclass5__eAttribute5, CONSTRAINABLE_EATTRIBUTE_CONSTRAINT);
 
 	}
 
 	@Test
 	public void testValidityModelInitializationModelElements() {
-		final ValidatableNode _e1Att1 = assertHasValidatableNodeByLabel(rootNode, "Eclass1 e1Att1", Eclass1Impl.class);
+		final ValidatableNode _e1Att1 = assertHasValidatableNodeByLabel(rootNode, VALIDATABLE_ECLASS1_E1_ATT1, Eclass1Impl.class);
 		assertHasValidatableNodes(_e1Att1, 3);
-		assertHasResultValidatableNodeByPrefixedLabel(_e1Att1, "eclass1_constraint");
+		assertHasResultValidatableNodeByLabel(_e1Att1, CONSTRAINABLE_ECLASS1_CONSTRAINT);
 
-		final ValidatableNode _e1Att1__EClass2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", EClass2.class);		// FIXME Duplicate
+		final ValidatableNode _e1Att1__EClass2 = assertHasValidatableNodeByLabel(_e1Att1, VALIDATABLE_ECLASS2, EClass2.class);		// FIXME Duplicate
 		assertTrue(_e1Att1__EClass2.getConstrainedObject() instanceof EClass2);
 		assertHasValidatableNodes(_e1Att1__EClass2, 1);
-		assertHasResultValidatableNodeByPrefixedLabel(_e1Att1__EClass2, "eclass2_constraint");
+		assertHasResultValidatableNodeByLabel(_e1Att1__EClass2, CONSTRAINABLE_ECLASS2_CONSTRAINT);
 
-		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", EClass2.class);
+		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, VALIDATABLE_ECLASS2, EClass2.class);
 		assertHasValidatableNodes(containedValidatableNode2, 1);
-		assertHasResultValidatableNodeByPrefixedLabel(containedValidatableNode2, "eclass2_constraint");
+		assertHasResultValidatableNodeByLabel(containedValidatableNode2, CONSTRAINABLE_ECLASS2_CONSTRAINT);
 
-		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, "ecoreTest2", EPackage.class);
+		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, VALIDATABLE_ECORETEST2, EPackage.class);
 		assertHasValidatableNodes(_ecoreTest2, 9/*3*/);
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint_2");
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint");
+		assertHasResultValidatableNodeByLabel(_ecoreTest2, CONSTRAINABLE_EPACKAGE_CONSTRAINT_2);
+		assertHasResultValidatableNodeByLabel(_ecoreTest2, CONSTRAINABLE_EPACKAGE_CONSTRAINT);
 
-		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, "Eclass5", EClass.class);
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5, "eclass_constraint");
+		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, VALIDATABLE_E_CLASS5, EClass.class);
+		assertHasResultValidatableNodeByLabel(_ecoreTest2__Eclass5, CONSTRAINABLE_ECLASS_CONSTRAINT);
 		
-		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, "eAttribute5 : EString", EAttribute.class);
+		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, TITLE_E_ATTRIBUTE5_E_STRING, EAttribute.class);
 		assertHasValidatableNodes(_ecoreTest2__Eclass5__eAttribute5, 9/*1*/);
-		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5__eAttribute5, "eattribute_constraint");
+		assertHasResultValidatableNodeByLabel(_ecoreTest2__Eclass5__eAttribute5, CONSTRAINABLE_EATTRIBUTE_CONSTRAINT);
 	}
 
 	@Test
 	public void testValidityModelInitializationConstraints() {
 
-		Set<Resource> resources = validityModel.getResources();
+		Collection<Resource> resources = validityModel.getResources();
 		assertEquals((Integer) 5, (Integer) resources.size());
 		assertTrue(resources.contains(ecoreResource));
 		assertTrue(resources.contains(ecoreResource2));
 		assertTrue(resources.contains(ecoreResource3));
 		assertTrue(isCompleteOCLCSResourcePresent(resources));
 
+//		for (Result result : results) {
+//			System.out.println(result.getResultValidatableNode().getLabel() + " " + result.getResultConstrainingNode().getLabel());
+//		}
+
 		// Tests that we have all the RootConstrainingNode ecoreTest and ecore.
-		assertHasConstrainingNodes(rootNode, 2);
-		final ConstrainingNode _ecore = assertHasConstrainingNodeByLabel(rootNode, "ecore", EPackage.class);
+		assertHasConstrainingNodes(rootNode, 3/*2*/);
+		final ConstrainingNode _ecore = assertHasConstrainingNodeByLabel(rootNode, CONSTRAINABLE_ECORE, EPackage.class);
 		assertHasConstrainingNodes(_ecore, 45/*3*/);
 		final ConstrainingNode _ecore__EClass = assertHasConstrainingNodeByLabel(_ecore, "EClass", EClass.class);
-		assertHasConstrainingNodes(_ecore__EClass, 9/*1*/);
-		final ConstrainingNode _ecore__EClass__eclass_constraint = assertHasLeafConstrainingNodeByPrefixedLabel(_ecore__EClass, "eclass_constraint");
-		assertTrue(_ecore__EClass__eclass_constraint.getConstrainingObject() instanceof Constraint);
-		assertHasConstrainingNodes(_ecore__EClass__eclass_constraint, 4);
-		assertHasResultConstrainingNodeByLabel(_ecore__EClass__eclass_constraint, "Eclass1");
-		assertHasResultConstrainingNodeByLabel(_ecore__EClass__eclass_constraint, "Eclass5");
-		assertHasResultConstrainingNodeByLabel(_ecore__EClass__eclass_constraint, "EClass2");
-		assertHasResultConstrainingNodeByLabel(_ecore__EClass__eclass_constraint, "EClass3 -> Eclass5");
-
+		assertHasConstrainingNodes(_ecore__EClass, 8);
 		final ConstrainingNode _ecore__EPackage = assertHasConstrainingNodeByLabel(_ecore, "EPackage", EClass.class);
-		assertHasConstrainingNodes(_ecore__EPackage, 7/*2*/);
-		final ConstrainingNode _ecore__EPackage__epackage_constraint = assertHasLeafConstrainingNodeByPrefixedLabel(_ecore__EPackage, "epackage_constraint");
-		assertHasConstrainingNodes(_ecore__EPackage__epackage_constraint, 2);
-		assertHasResultConstrainingNodeByLabel(_ecore__EPackage__epackage_constraint, "ecoreTest2");
-		assertHasResultConstrainingNodeByLabel(_ecore__EPackage__epackage_constraint, "ecoreTest");
+		assertHasConstrainingNodes(_ecore__EPackage, 5);
+		
+		final ConstrainingNode _ecore_ocl_ecore = assertHasConstrainingNodeByLabel(rootNode, CONSTRAINABLE_ECORE_OCL_ECORE, EPackage.class);
+		assertHasConstrainingNodes(_ecore_ocl_ecore, 3);
+		final ConstrainingNode _ecore_ocl_ecore__EClass = assertHasConstrainingNodeByLabel(_ecore_ocl_ecore, "EClass", EClass.class);
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EClass, 1);
+		final ConstrainingNode _ecore_ocl_ecore__EClass__eclass_constraint = assertHasLeafConstrainingNodeByLabel(_ecore_ocl_ecore__EClass, "eclass_constraint");
+		assertTrue(_ecore_ocl_ecore__EClass__eclass_constraint.getConstrainingObject() instanceof Constraint);
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EClass__eclass_constraint, 4);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EClass__eclass_constraint, CONSTRAINABLE_ECLASS1);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EClass__eclass_constraint, CONSTRAINABLE_ECLASS5);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EClass__eclass_constraint, CONSTRAINABLE_ECLASS2);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EClass__eclass_constraint, CONSTRAINABLE_ECLASS3);
 
-		final ConstrainingNode _ecore__EPackage__epackage_constraint_2 = assertHasLeafConstrainingNodeByPrefixedLabel(_ecore__EPackage, "epackage_constraint_2");
-		assertHasConstrainingNodes(_ecore__EPackage__epackage_constraint_2, 2);
-		assertHasResultConstrainingNodeByLabel(_ecore__EPackage__epackage_constraint_2, "ecoreTest2");
-		assertHasResultConstrainingNodeByLabel(_ecore__EPackage__epackage_constraint_2, "ecoreTest");
+		final ConstrainingNode _ecore_ocl_ecore__EPackage = assertHasConstrainingNodeByLabel(_ecore_ocl_ecore, "EPackage", EClass.class);
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EPackage, 2);
+		final ConstrainingNode _ecore_ocl_ecore__EPackage__epackage_constraint = assertHasLeafConstrainingNodeByLabel(_ecore_ocl_ecore__EPackage, "epackage_constraint");
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EPackage__epackage_constraint, 2);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EPackage__epackage_constraint, CONSTRAINABLE_ECORETEST);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EPackage__epackage_constraint, VALIDATABLE_ECORETEST2);
 
-		final ConstrainingNode _ecore__EAttribute = assertHasConstrainingNodeByLabel(_ecore, "EAttribute", EClass.class);
-		assertHasConstrainingNodes(_ecore__EAttribute, 2/*1*/);
-		final ConstrainingNode _ecore__EAttribute__eattribute_constraint = assertHasLeafConstrainingNodeByPrefixedLabel(_ecore__EAttribute, "eattribute_constraint");
-		assertHasConstrainingNodes(_ecore__EAttribute__eattribute_constraint, 5);
-		assertHasResultConstrainingNodeByLabel(_ecore__EAttribute__eattribute_constraint, "eAttribute1 : EString");
-		assertHasResultConstrainingNodeByLabel(_ecore__EAttribute__eattribute_constraint, "eAttribute2 : EString");
-		assertHasResultConstrainingNodeByLabel(_ecore__EAttribute__eattribute_constraint, "eAttribute3 : EShort");
-		assertHasResultConstrainingNodeByLabel(_ecore__EAttribute__eattribute_constraint, "eAttribute5 : EString");
+		final ConstrainingNode _ecore_ocl_ecore__EPackage__epackage_constraint_2 = assertHasLeafConstrainingNodeByLabel(_ecore_ocl_ecore__EPackage, "epackage_constraint_2");
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EPackage__epackage_constraint_2, 2);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EPackage__epackage_constraint_2, CONSTRAINABLE_ECORETEST);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EPackage__epackage_constraint_2, VALIDATABLE_ECORETEST2);
 
-		final ConstrainingNode _ecoreTest = assertHasConstrainingNodeByLabel(rootNode, "ecoreTest", EPackage.class);
+		final ConstrainingNode _ecore_ocl_ecore__EAttribute = assertHasConstrainingNodeByLabel(_ecore_ocl_ecore, "EAttribute", EClass.class);
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EAttribute, 1);
+		final ConstrainingNode _ecore_ocl_ecore__EAttribute__eattribute_constraint = assertHasLeafConstrainingNodeByLabel(_ecore_ocl_ecore__EAttribute, "eattribute_constraint");
+		assertHasConstrainingNodes(_ecore_ocl_ecore__EAttribute__eattribute_constraint, 5);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EAttribute__eattribute_constraint, VALIDATABLE_E_ATTRIBUTE1_E_STRING);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EAttribute__eattribute_constraint, VALIDATABLE_E_ATTRIBUTE2_E_STRING);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EAttribute__eattribute_constraint, VALIDATABLE_E_ATTRIBUTE3_E_SHORT);
+		assertHasResultConstrainingNodeByLabel(_ecore_ocl_ecore__EAttribute__eattribute_constraint, VALIDATABLE_E_ATTRIBUTE5_E_STRING);
+
+		final ConstrainingNode _ecoreTest = assertHasConstrainingNodeByLabel(rootNode, CONSTRAINABLE_ECORETEST_OCL_ECORE, EPackage.class);
 		assertHasConstrainingNodes(_ecoreTest, 2);
 
 		final ConstrainingNode _ecoreTest__Eclass1 = assertHasConstrainingNodeByLabel(_ecoreTest, "Eclass1", EClass.class);
 		assertHasConstrainingNodes(_ecoreTest__Eclass1, 1);
-		final ConstrainingNode _ecoreTest__Eclass1__eclass1_constraint = assertHasLeafConstrainingNodeByPrefixedLabel(_ecoreTest__Eclass1, "eclass1_constraint");
+		final ConstrainingNode _ecoreTest__Eclass1__eclass1_constraint = assertHasLeafConstrainingNodeByLabel(_ecoreTest__Eclass1, "eclass1_constraint");
 		assertHasConstrainingNodes(_ecoreTest__Eclass1__eclass1_constraint, 1);
-		assertHasResultConstrainingNodeByLabel(_ecoreTest__Eclass1__eclass1_constraint, "Eclass1 e1Att1");
+		assertHasResultConstrainingNodeByLabel(_ecoreTest__Eclass1__eclass1_constraint, VALIDATABLE_ECLASS1_E1_ATT1);
 
 		final ConstrainingNode _ecoreTest__EClass2 = assertHasConstrainingNodeByLabel(_ecoreTest, "EClass2", EClass.class);
 		assertHasConstrainingNodes(_ecoreTest__EClass2, 1);
-		final ConstrainingNode _ecoreTest__EClass2__eclass2_constraint = assertHasLeafConstrainingNodeByPrefixedLabel(_ecoreTest__EClass2, "eclass2_constraint");
+		final ConstrainingNode _ecoreTest__EClass2__eclass2_constraint = assertHasLeafConstrainingNodeByLabel(_ecoreTest__EClass2, "eclass2_constraint");
 		assertHasConstrainingNodes(_ecoreTest__EClass2__eclass2_constraint, 2);
-		assertHasResultConstrainingNodeByLabel(_ecoreTest__EClass2__eclass2_constraint, "EClass2");
-		assertHasResultConstrainingNodeByLabel(_ecoreTest__EClass2__eclass2_constraint, "EClass2");		// FIXME Duplicate
+		assertHasResultConstrainingNodeByLabel(_ecoreTest__EClass2__eclass2_constraint, VALIDATABLE_E_CLASS2);
+		assertHasResultConstrainingNodeByLabel(_ecoreTest__EClass2__eclass2_constraint, VALIDATABLE_E_CLASS2);		// FIXME Duplicate
 	}
 
 	@Test

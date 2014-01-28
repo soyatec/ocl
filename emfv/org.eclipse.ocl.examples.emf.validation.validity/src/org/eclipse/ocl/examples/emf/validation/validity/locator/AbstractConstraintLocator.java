@@ -30,12 +30,12 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.TypeURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
 
@@ -59,12 +59,14 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 		return map;
 	}
 
-	public @NonNull Set<URI> getAllTypes(@NonNull EModelElement constrainingType) {
-		Set<URI> allTypes = new HashSet<URI>();
-		allTypes.add(EcoreUtil.getURI(constrainingType));
+	public @NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EModelElement constrainingType) {
+		Set<TypeURI> allTypes = new HashSet<TypeURI>();
+		allTypes.add(validityManager.getTypeURI(constrainingType));
 		if (constrainingType instanceof EClass) {
 			for (EClass eSuperClass : ((EClass)constrainingType).getEAllSuperTypes()) {
-				allTypes.add(EcoreUtil.getURI(eSuperClass));
+				if (eSuperClass != null) {
+					allTypes.add(validityManager.getTypeURI(eSuperClass));
+				}
 			}
 		}
 		return allTypes;
@@ -121,7 +123,7 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 	}
 
 	public @Nullable URI getURI(@NonNull EObject eObject) {
-		EObject eContainer = eObject;
+/*		EObject eContainer = eObject;
 		for ( ; true; eContainer = eContainer.eContainer()) {
 			if (eContainer == null) {
 				return null;
@@ -133,12 +135,15 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 		String nsURI = ((EPackage)eContainer).getNsURI();
 		if (nsURI == null) {
 			return null;
-		}
+		} */
 		Resource resource = eObject.eResource();
 		if (resource == null) {
 			return null;
 		}
-		return URI.createURI(nsURI).appendFragment(resource.getURIFragment(eObject));
+		if (resource.getURI() == null) {
+			return null;
+		}
+		return resource.getURI().appendFragment(resource.getURIFragment(eObject));
 	}
 
 	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {

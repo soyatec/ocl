@@ -34,8 +34,6 @@ import org.junit.Before;
  */
 public class AbstractExportOCLValidationResultTests extends AbstractValidityTestCase
 {
-	protected static final @NonNull String TEST_PROJECT_NAME = /*"test." +*/ PLUGIN_ID;
-
 	protected IValidatorExport exporter;
 	protected IProject project;
 	protected IFile exportedFile;

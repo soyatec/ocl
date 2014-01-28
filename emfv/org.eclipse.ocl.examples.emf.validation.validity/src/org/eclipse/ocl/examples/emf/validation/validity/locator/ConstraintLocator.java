@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.TypeURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
 
@@ -48,9 +49,9 @@ public interface ConstraintLocator
 	}
 
 	/**
-	 * Return all constrainingTypes for a given tyoe; typically this returns the supertype closeure.
+	 * Return all typeURIs for a given type; typically this returns the supertype closure.
 	 */
-	@NonNull Set<URI> getAllTypes(@NonNull EModelElement constrainingType);
+	@NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EModelElement constrainingType);
 
 	/**
 	 * Return a constrainedType-to-constraint map for all types in the given resources that have an ePackage whose URI complies with
