@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -148,20 +149,20 @@ public class ValidityModelTests extends AbstractValidityTestCase
 		assertHasValidatableNodes(_e1Att1__EClass2, 1);
 		assertHasResultValidatableNodeByPrefixedLabel(_e1Att1__EClass2, "eclass2_constraint");
 
-		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", null);		// FIXME Duplicate
+		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", EClass2.class);		// FIXME Duplicate
 		assertHasValidatableNodes(containedValidatableNode2, 1);
 		assertHasResultValidatableNodeByPrefixedLabel(containedValidatableNode2, "eclass2_constraint");
 
-		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, "ecoreTest2", null);
+		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, "ecoreTest2", EPackage.class);
 		assertHasValidatableNodes(_ecoreTest2, 9/*3*/);
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint_2");
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint");
 
-		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, "Eclass5", null);
+		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, "Eclass5", EClass.class);
 		assertHasValidatableNodes(_ecoreTest2__Eclass5, 13/*2*/);
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5, "eclass_constraint");
 
-		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, "eAttribute5 : EString", null);
+		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, "eAttribute5 : EString", EAttribute.class);
 		assertHasValidatableNodes(_ecoreTest2__Eclass5__eAttribute5, 9/*1*/);
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5__eAttribute5, "eattribute_constraint");
 
@@ -178,19 +179,19 @@ public class ValidityModelTests extends AbstractValidityTestCase
 		assertHasValidatableNodes(_e1Att1__EClass2, 1);
 		assertHasResultValidatableNodeByPrefixedLabel(_e1Att1__EClass2, "eclass2_constraint");
 
-		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", null);
+		final ValidatableNode containedValidatableNode2 = assertHasValidatableNodeByLabel(_e1Att1, "EClass2", EClass2.class);
 		assertHasValidatableNodes(containedValidatableNode2, 1);
 		assertHasResultValidatableNodeByPrefixedLabel(containedValidatableNode2, "eclass2_constraint");
 
-		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, "ecoreTest2", null);
+		final ValidatableNode _ecoreTest2 = assertHasValidatableNodeByLabel(rootNode, "ecoreTest2", EPackage.class);
 		assertHasValidatableNodes(_ecoreTest2, 9/*3*/);
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint_2");
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2, "epackage_constraint");
 
-		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, "Eclass5", null);
+		final ValidatableNode _ecoreTest2__Eclass5 = assertHasValidatableNodeByLabel(_ecoreTest2, "Eclass5", EClass.class);
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5, "eclass_constraint");
 		
-		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, "eAttribute5 : EString", null);
+		final ValidatableNode _ecoreTest2__Eclass5__eAttribute5 = assertHasValidatableNodeByLabel(_ecoreTest2__Eclass5, "eAttribute5 : EString", EAttribute.class);
 		assertHasValidatableNodes(_ecoreTest2__Eclass5__eAttribute5, 9/*1*/);
 		assertHasResultValidatableNodeByPrefixedLabel(_ecoreTest2__Eclass5__eAttribute5, "eattribute_constraint");
 	}
