@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
@@ -39,7 +38,7 @@ public class HTMLExport extends AbstractExport {
 	 *         instances
 	 */
 	@Override
-	public String createContents(@NonNull Resource validatedResource, RootNode rootNode, IFile exportedFile) {
+	public String createContents(@NonNull Resource validatedResource, RootNode rootNode, String exportedFileName) {
 		StringBuilder html = new StringBuilder();
 		html.append("<html>\n");
 		html.append("\t<head></head>\n");
@@ -50,7 +49,7 @@ public class HTMLExport extends AbstractExport {
 
 		html.append("\t\t\t<tr>\n");
 		html.append("\t\t\t\t<td><b>Output file name: </b></td>\n");
-		html.append("\t\t\t\t<td>" + exportedFile.getName() + "</td>\n");
+		html.append("\t\t\t\t<td>" + exportedFileName + "</td>\n");
 		html.append("\t\t\t</tr>\n");
 
 		html.append("\t\t\t<tr>\n");

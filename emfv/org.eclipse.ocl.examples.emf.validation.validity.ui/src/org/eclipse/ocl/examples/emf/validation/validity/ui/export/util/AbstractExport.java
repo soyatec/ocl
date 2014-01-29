@@ -15,6 +15,8 @@
 package org.eclipse.ocl.examples.emf.validation.validity.ui.export.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -48,6 +50,8 @@ import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlug
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.PlatformUI;
 
+import com.google.common.io.Files;
+
 /**
  * Exports ocl validation results.
  */
@@ -63,22 +67,40 @@ public abstract class AbstractExport implements IValidatorExport {
 	protected List<LeafConstrainingNode> validationSuccess = new ArrayList<LeafConstrainingNode>();
 
 	public void export(@NonNull Resource validatedResource, @NonNull RootNode rootNode, @NonNull IPath savePath) {
-		final IFile exportedFile = ResourcesPlugin.getWorkspace().getRoot().getFile(savePath);
-		
 		populateMaps(rootNode);
 		
-		final String initialContents = createContents(validatedResource, rootNode, exportedFile);
-		final InputStream contentStream = new ByteArrayInputStream(initialContents.getBytes(Charset.forName("UTF-8")));
-		
-		IRunnableWithProgress op = new IRunnableWithProgress() {
-			public void run(IProgressMonitor monitor) {
-				try {
-					exportedFile.create(contentStream, true, monitor);
-				} catch (final CoreException e) {
-					handleError(e.getCause(), true);
+		final File exportedFile = new File(savePath.toString());
+		final String initialContents = createContents(validatedResource,
+				rootNode, exportedFile.getName());
+		final byte[] byteArrayInputStream = initialContents.getBytes(Charset
+				.forName("UTF-8"));
+		final IRunnableWithProgress op;
+
+		if (exportedFile.isAbsolute()) {
+			op = new IRunnableWithProgress() {
+				public void run(IProgressMonitor monitor) {
+					try {
+						Files.write(byteArrayInputStream, exportedFile);
+					} catch (final IOException e) {
+						handleError(e.getCause(), true);
+					}
 				}
-			}
-		};
+			};
+		} else {
+			final InputStream contentStream = new ByteArrayInputStream(
+					byteArrayInputStream);
+			final IFile exportedIFile = ResourcesPlugin.getWorkspace()
+					.getRoot().getFile(savePath);
+			op = new IRunnableWithProgress() {
+				public void run(IProgressMonitor monitor) {
+					try {
+						exportedIFile.create(contentStream, true, monitor);
+					} catch (final CoreException e) {
+						handleError(e.getCause(), true);
+					}
+				}
+			};
+		}
 
 		try {
 			op.run(new NullProgressMonitor());
@@ -120,13 +142,13 @@ public abstract class AbstractExport implements IValidatorExport {
 	 * 							The validated model
 	 * @param rootNode
 	 * 							The validation result model
-	 * @param exportedFile
-	 * 							The target file
+	 * @param exportedFileName
+	 * 							The target file name
 	 * 
 	 * @return exported File contents to be given to new exported file resource
 	 *         instances
 	 */
-	protected abstract String createContents(@NonNull Resource validatedResource, RootNode rootNode, IFile exportedFile);
+	protected abstract String createContents(@NonNull Resource validatedResource, RootNode rootNode, String exportedFileName);
 
 	private void populateMaps(RootNode rootNode) {
 		for (ValidatableNode validatableNode : rootNode.getValidatableNodes()) {

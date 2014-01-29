@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.emf.validation.validity.ui.export.util;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
@@ -38,10 +37,10 @@ public class TextExport extends AbstractExport {
 	 *         instances
 	 */
 	@Override
-	public String createContents(@NonNull Resource validatedResource, RootNode rootNode, IFile exportedFile) {
+	public String createContents(@NonNull Resource validatedResource, RootNode rootNode, String exportedFileName) {
 		StringBuilder text = new StringBuilder();
 		text.append("==== GENERAL INFORMATION ====\n");
-		text.append("Output file name: " + exportedFile.getName() + "\n");
+		text.append("Output file name: " + exportedFileName + "\n");
 		text.append("Author: " + System.getProperty("user.name") + "\n");
 		text.append("\n");
 		text.append("\n");
