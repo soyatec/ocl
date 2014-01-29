@@ -76,7 +76,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		Map<String, String> bodies = new HashMap<String, String>();
 		for (CGClass cgClass : cgPackage.getClasses()) {
 			for (CGConstraint cgConstraint : cgClass.getInvariants()) {
-				if ("Pseudostate".equals(cgClass.getName())) {
+				if ("MultiplicityElement".equals(cgClass.getName())) {
 					System.out.println("got it");
 				}
 				CGValuedElement cgBody = cgConstraint.getBody();

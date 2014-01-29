@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.codegen.java.types.CollectionDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 /**
  * TypeDescriptor captures the characteristics of a Java type and supports serialization to a javaStream.
@@ -83,6 +84,8 @@ public interface TypeDescriptor
 	 * the EClassifier of the collection elements. May return null when no EClssifier available.
 	 */
 	@Nullable EClassifier getEClassifier();
+
+	@NonNull ElementId getElementId();
 
 	/**
 	 * Return the basic Java class for this descriptor. e.g. List<?> for an unboxed collection.

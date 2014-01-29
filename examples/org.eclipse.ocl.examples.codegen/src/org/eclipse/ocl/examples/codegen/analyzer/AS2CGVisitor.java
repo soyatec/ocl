@@ -124,6 +124,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
@@ -316,7 +317,10 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 			cgParameter = CGModelFactory.eINSTANCE.createCGParameter();
 			context.setNames(cgParameter, aParameter);
 			setAst(cgParameter, aParameter);
-			cgParameter.setTypeId(context.getTypeId(TypeId.OCL_VOID));			// FIXME Java-specific
+//			cgParameter.setTypeId(context.getTypeId(TypeId.OCL_VOID));			// FIXME Java-specific
+			Parameter representedParameter = aParameter.getRepresentedParameter();
+			TypeId typeId = (representedParameter != null ? representedParameter : aParameter).getTypeId();
+			cgParameter.setTypeId(context.getTypeId(typeId));
 			addParameter(aParameter, cgParameter);
 			cgParameter.setRequired(aParameter.isRequired());
 			if (aParameter.isRequired()) {

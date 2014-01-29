@@ -46,4 +46,11 @@ public class RealObjectDescriptor extends UnboxedValueDescriptor implements Unbo
 		js.append(";\n");
 		return true;
 	}
+
+	@Override
+	public void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull CGValuedElement thatValue, boolean notEquals) {
+		js.appendValueName(thisValue);
+		js.append(notEquals ? " != " :  " == ");
+		js.appendValueName(thatValue);
+	}
 }

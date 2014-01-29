@@ -613,6 +613,7 @@ public class UsageTests
 			+ "        attribute eShortObject : ecore::EShortObject { derived readonly volatile } { derivation: negEShortObject(1); }\n"
 			+ "        attribute eShort : ecore::EShort { derived readonly volatile } { derivation: negEShort(1); }\n"
 			+ "        attribute eString : ecore::EString { derived readonly volatile } { derivation: upCase('abc'); }\n"
+			+ "        operation eqEInt(a : ecore::EInt, b : ecore::EInt) : ecore::EBoolean { body: a = b; }\n"
 			+ "        operation negEBigDecimal(b : ecore::EBigDecimal) : ecore::EBigDecimal { body: -b; }\n"
 			+ "        operation negEBigInteger(b : ecore::EBigInteger) : ecore::EBigInteger { body: -b; }\n"
 			+ "        operation negEChar(b : ecore::EChar) : ecore::EChar { body: -b; }\n"
@@ -655,6 +656,24 @@ public class UsageTests
 			assertQueryTrue(eObject, "eShort = eShortObject");
 			assertQueryTrue(eObject, "eString = 'ABC'");
 		}
+	}
+
+	public void testEcoreTypes412736a() throws Exception {
+		String testFileStem = "Bug412736a";
+		String testProjectName = "bug412736a";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_TESTRESULTS;
+		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
+			+ "package bug412736a : bug412736a = 'http://bug412736a'\n"
+			+ "{\n"
+			+ "    class EcoreDataTypes\n"
+			+ "    {\n"
+			+ "        operation eqEInt(a : ecore::EInt, b : ecore::EInt) : ecore::EBoolean { body: a = b; }\n"
+			+ "    }\n" + "}\n";
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug412736a", null);
+		doDelete(testProjectName);
+		URI fileURI = createModels(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doGenModel(testProjectPath, fileURI);
+		doCompile(testProjectName);
 	}
 
 	public void testEnumTypes412685() throws Exception {

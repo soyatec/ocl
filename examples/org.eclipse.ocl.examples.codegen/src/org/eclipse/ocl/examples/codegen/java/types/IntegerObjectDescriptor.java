@@ -15,12 +15,16 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
+import org.eclipse.ocl.examples.codegen.java.JavaStream.SubStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * An IntegerObjectDescriptor describes the unboxed representations of an OCL Integer.
@@ -45,5 +49,13 @@ public class IntegerObjectDescriptor extends RootObjectDescriptor
 		js.append(")");
 		js.append(";\n");
 		return true;
+	}
+
+	@Override
+	public void appendEqualsValue(@NonNull JavaStream js, @NonNull CGValuedElement thisValue, @NonNull CGValuedElement thatValue, boolean notEquals) {
+		TypeDescriptor thatTypeDescriptor = js.getCodeGenerator().getTypeDescriptor(thatValue);
+		js.appendValueName(thisValue);
+		js.append(notEquals ? " != " :  " == ");
+		js.appendValueName(thatValue);
 	}
 }
