@@ -424,8 +424,9 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			}
 			
 			PatternFilter filter = new PatternFilter();
-			filteredValidatableNodesTree = new FilteredCheckboxTree(validatableNodesSectionBody, SWT.CHECK | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, filter);
+			filteredValidatableNodesTree = new FilteredCheckboxTree(validatableNodesSectionBody, SWT.CHECK | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.VIRTUAL, filter);
 			filteredValidatableNodesTree.disableTextWidget();
+			filteredValidatableNodesTree.getViewer().setUseHashlookup(true);
 			
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.grabExcessHorizontalSpace = true;
@@ -462,8 +463,9 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			}
 			
 			PatternFilter filter = new PatternFilter();
-			filteredConstrainingNodesTree = new FilteredCheckboxTree(constrainingNodesSectionBody, SWT.CHECK | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, filter);
+			filteredConstrainingNodesTree = new FilteredCheckboxTree(constrainingNodesSectionBody, SWT.CHECK | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.VIRTUAL, filter);
 			filteredConstrainingNodesTree.disableTextWidget();
+			filteredConstrainingNodesTree.getViewer().setUseHashlookup(true);
 			
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.grabExcessHorizontalSpace = true;
