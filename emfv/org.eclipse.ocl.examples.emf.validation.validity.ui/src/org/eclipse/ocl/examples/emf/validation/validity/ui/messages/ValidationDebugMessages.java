@@ -38,7 +38,11 @@ public class ValidationDebugMessages
 	public static String ValidityView_Action_ShowInEditor_Title;
 	public static String ValidityView_Action_ShowInEditor_ToolTipText;
 	public static String ValidityView_Action_ShowInEditor_ImageLocation;
-	
+
+	public static String ValidityView_Action_ForceRefresh_Title;
+	public static String ValidityView_Action_ForceRefresh_ImageLocation;
+	public static String ValidityView_Action_ForceRefresh_ToolTipText;
+
 	public static String ValidityView_Action_RunValidity_Title;
 	public static String ValidityView_Action_RunValidity_ImageLocation;
 	public static String ValidityView_Action_RunValidity_ToolTipText;

@@ -140,6 +140,8 @@ public class ValidityManager
 	protected final @SuppressWarnings("null")@NonNull Map<Object, Object> context = Diagnostician.INSTANCE.createDefaultContext();
 	private @Nullable ValidityModel model = null;
 	protected @Nullable ResultSet lastResultSet = null;
+	private boolean forceRefresh = false;
+	private @Nullable Object lastInput = null;
 
 	public ValidityManager() {
 	    adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -406,6 +408,12 @@ public class ValidityManager
 		return new ValidatableURI(uri);
 	}
 
+	public void forceRefresh() {
+		this.forceRefresh = true;
+		setInput(lastInput, new BasicMonitor());
+		this.forceRefresh = false;		
+	}
+	
 	public void setInput(Object newInput) {
 		setInput(newInput, new BasicMonitor());
 	}
@@ -417,6 +425,7 @@ public class ValidityManager
 		Resource selectedResource = null;
 		EObject selectedObject = null;
 		newResources.clear();
+		lastInput = newInput;
 		
 		if (newInput == null) {
 			oldResources.clear();
@@ -462,7 +471,7 @@ public class ValidityManager
 			return;
 		}
 		
-		if (!oldResources.isEmpty() && oldResources.equals(newResources)) {
+		if (!forceRefresh && !oldResources.isEmpty() && oldResources.equals(newResources)) {
 			return;
 		}
 

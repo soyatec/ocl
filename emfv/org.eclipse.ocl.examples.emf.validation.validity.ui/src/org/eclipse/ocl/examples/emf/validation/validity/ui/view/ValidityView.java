@@ -69,6 +69,7 @@ import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.EnableAllNode
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ExpandAllNodesAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ExportValidationResultAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.FilterValidationResultAction;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ForceValidityViewRefreshAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.LockValidatableNodesAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.RunValidityAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ShowElementInEditorAction;
@@ -172,6 +173,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 	private Action collapseAllNodesAction;
 	private Action runValidationAction;
 	private Action lockValidatableNodesAction;
+	private Action forceValidityViewRefreshAction;
 	private Action exportValidationResultAction;
 	private IAction filterValidationResultAction;
 
@@ -585,6 +587,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		manager.add(collapseAllNodesAction);
 		manager.add(new Separator());
 		manager.add(lockValidatableNodesAction);
+		manager.add(forceValidityViewRefreshAction);
 		manager.add(runValidationAction);
 		manager.add(new Separator());
 		manager.add(filterValidationResultAction);
@@ -665,6 +668,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 
 	private void makeActions() {
 		lockValidatableNodesAction = new LockValidatableNodesAction();
+		forceValidityViewRefreshAction = new ForceValidityViewRefreshAction(validityManager, this);
 		showValidatableElementInEditorAction = new ShowElementInEditorAction(validityManager, getValidatableNodesViewer());
 		showConstrainingElementInEditorAction = new ShowElementInEditorAction(validityManager, getConstrainingNodesViewer());
 		
