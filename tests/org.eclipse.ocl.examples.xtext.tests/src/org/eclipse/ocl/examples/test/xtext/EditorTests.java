@@ -190,7 +190,7 @@ public class EditorTests extends XtextTestCase
 				assertNoResourceErrors("Loaded CS", resource);
 				CS2Pivot cs2Pivot = PivotUtil.getAdapter(CS2Pivot.class, resource);		// FIXME Wrong class
 				if (cs2Pivot != null) {
-					Resource asResource = cs2Pivot.getPivotResource(resource);
+					Resource asResource = cs2Pivot.getPivotResource((BaseCSResource) resource);
 					assertNoResourceErrors("Loaded pivot", asResource);
 				}
 				return null;

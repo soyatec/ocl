@@ -17,13 +17,10 @@
 package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -35,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
@@ -122,14 +120,14 @@ public class PivotTests extends XtextTestCase
 			} */
 		}
 
-		public List<EObject> getRoots() {
+/*		public List<EObject> getRoots() {
 			List<EObject> roots = new ArrayList<EObject>();
 			for (Map.Entry<? extends Resource, ? extends Resource> entry : cs2asResourceMap.entrySet()) {
 				roots.addAll(entry.getKey().getContents());
 				roots.addAll(entry.getValue().getContents());
 			}
 			return roots;
-		}
+		} */
 	}
 
 /*	public static class Damager extends Checker
@@ -307,7 +305,7 @@ public class PivotTests extends XtextTestCase
 //		xtextResource.save(null);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 //		assertNoResourceErrors("Save failed", xtextResource.getErrors());
-		Resource asResource = pivotRoot.eResource();
+		ASResource asResource = (ASResource) pivotRoot.eResource();
 //		CS2PivotAliasCreator.createPackageAliases(asResource);
 //		Resource asResource = resourceSet.createResource(outputURI);
 //		asResource.getContents().add(pivotRoot);
@@ -325,8 +323,8 @@ public class PivotTests extends XtextTestCase
 		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
 		Resource csResource = csResourceSet.createResource(csURI);
-		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
-		cs2PivotResourceMap.put(csResource, asResource);
+		Map<BaseCSResource, ASResource> cs2PivotResourceMap = new HashMap<BaseCSResource, ASResource>();
+//		cs2PivotResourceMap.put(csResource, asResource);
 		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metaModelManager);
 		pivot2cs.update();
 		csResource.save(null);

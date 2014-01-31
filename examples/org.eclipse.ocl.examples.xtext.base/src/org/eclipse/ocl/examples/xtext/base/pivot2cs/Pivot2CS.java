@@ -26,7 +26,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CSI2PivotMapping;
 
 /**
@@ -51,9 +53,9 @@ public class Pivot2CS extends AbstractConversion
 	/**
 	 * Mapping of each CS resource to its corresponding pivot Resource.
 	 */
-	protected final @NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap;
+	protected final @NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap;
 	
-	public Pivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+	public Pivot2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 		this.cs2asResourceMap = cs2asResourceMap;
 	}
@@ -100,6 +102,7 @@ public class Pivot2CS extends AbstractConversion
 		Collection<? extends Resource> csResources = getCSResources();
 		conversion.update(csResources);
 		CSI2PivotMapping cs2PivotMapping = CSI2PivotMapping.getAdapter(metaModelManager);
-		cs2PivotMapping.update(csResources);
+		cs2PivotMapping.add(cs2asResourceMap);
+		cs2PivotMapping.update(/*csResources*/);
 	}
 }

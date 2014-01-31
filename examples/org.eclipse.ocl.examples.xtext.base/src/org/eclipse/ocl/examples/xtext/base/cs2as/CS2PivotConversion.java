@@ -74,6 +74,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.context.AbstractBase2PivotConversion;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
@@ -100,6 +101,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCSPreOrderVisitor.TemplateSignatureContinuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -126,7 +128,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	}
 	
 	protected final @NonNull CS2Pivot converter;
-	protected final @NonNull Collection<? extends Resource> csResources;
+	protected final @NonNull Collection<? extends BaseCSResource> csResources;
 	
 	/**
 	 * The Visitors
@@ -153,7 +155,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	@SuppressWarnings("unused")
 	private final IDiagnosticConsumer diagnosticsConsumer;
 	
-	public CS2PivotConversion(@NonNull CS2Pivot converter, @NonNull IDiagnosticConsumer diagnosticsConsumer, @NonNull Collection<? extends Resource> csResources) {
+	public CS2PivotConversion(@NonNull CS2Pivot converter, @NonNull IDiagnosticConsumer diagnosticsConsumer, @NonNull Collection<? extends BaseCSResource> csResources) {
 		super(converter.getMetaModelManager());
 		this.converter = converter;
 		this.diagnosticsConsumer = diagnosticsConsumer;
@@ -163,7 +165,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		this.postOrderVisitor = converter.createPostOrderVisitor(this);
 		this.preOrderVisitor = converter.createPreOrderVisitor(this);
 		List<Resource> mappedResources = new ArrayList<Resource>();
-		for (Resource csResource : csResources) {
+		for (BaseCSResource csResource : csResources) {
 			if (csResource != null) {
 				mappedResources.add(converter.getPivotResource(csResource));
 			}
@@ -313,7 +315,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	 * - except pivot resources mapped to incoming CS resources
 	 *     this is what we're cleaning up
 	 */
-	public void garbageCollect(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap) {
+	public void garbageCollect(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap) {
 //		org.eclipse.ocl.examples.pivot.Class orphanClass = metaModelManager.getOrphanClass();
 //		org.eclipse.ocl.examples.pivot.Package orphanPackage = metaModelManager.getOrphanPackage();
 //		Resource orphanResource = orphanPackage.eResource();
@@ -714,7 +716,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		converter.installPivotUsage(csElement, newPivotElement);
 	}
 
-	protected void installRootContents(@NonNull Resource csResource) {	// FIXME This code is no longer needed; delete once QVTd checked
+	protected void installRootContents(@NonNull BaseCSResource csResource) {	// FIXME This code is no longer needed; delete once QVTd checked
 		for (EObject eObject : csResource.getContents()) {
 			if (eObject instanceof Pivotable) {
 				Element pivotElement = ((Pivotable)eObject).getPivot();
@@ -754,7 +756,12 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
+	/** @Deprecated cast first argument to BaseCSResource */
+	@Deprecated
 	public void installRootElement(@NonNull Resource csResource, @NonNull Element pivotElement) {
+		installRootElement((BaseCSResource)csResource, pivotElement);
+	}
+	public void installRootElement(@NonNull BaseCSResource csResource, @NonNull Element pivotElement) {
 		Resource asResource = converter.getPivotResource(csResource);
 		if (asResource != null) {
 			asResource.getContents().add(pivotElement);
@@ -1111,7 +1118,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				}
 				installPivotReference(csTemplateBinding, templateBinding, BaseCSPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 				@SuppressWarnings("null") @NonNull List<TemplateParameterSubstitution> parameterSubstitutions = templateBinding.getParameterSubstitution();
-				@SuppressWarnings("null") @NonNull List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
+				@NonNull List<TemplateParameter> templateParameters = templateSignature.getOwnedParameter();
 				@SuppressWarnings("null") @NonNull List<TemplateParameterSubstitutionCS> csParameterSubstitutions = csTemplateBinding.getOwnedParameterSubstitution();
 				specializeTemplateParameterSubstitutions(parameterSubstitutions, templateParameters, csParameterSubstitutions);
 				assert templateSignatures.get(i) == templateBindings.get(i).getSignature();
@@ -1248,11 +1255,14 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		resetPivotMappings(csResources);
 		oldPackagesByName = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
 		oldPackagesByQualifiedName = new HashMap<String, org.eclipse.ocl.examples.pivot.Package>();
-		for (Resource resource : converter.cs2asResourceMap.values()) {
-			for (EObject eObject : resource.getContents()) {
-				if (eObject instanceof Root) {
-					@SuppressWarnings("null") @NonNull List<org.eclipse.ocl.examples.pivot.Package> nestedPackage = ((Root)eObject).getNestedPackage();
-					gatherOldPackages(nestedPackage);
+		for (BaseCSResource csResource : converter.csResources) {
+			ASResource asResource = converter.cs2PivotMapping.getASResource(csResource);
+			if (asResource != null) {
+				for (EObject eObject : asResource.getContents()) {
+					if (eObject instanceof Root) {
+						@SuppressWarnings("null") @NonNull List<org.eclipse.ocl.examples.pivot.Package> nestedPackage = ((Root)eObject).getNestedPackage();
+						gatherOldPackages(nestedPackage);
+					}
 				}
 			}
 		}
@@ -1289,7 +1299,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		//
 		//	Put all orphan root pivot elements in their resources.
 		//
-		for (Resource csResource : csResources) {
+		for (BaseCSResource csResource : csResources) {
 			if (csResource != null) {
 				installRootContents(csResource);
 			}
@@ -1354,7 +1364,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		//
 		//	Put all orphan root pivot elements in their resources.
 		//
-		for (Resource csResource : csResources) {
+		for (BaseCSResource csResource : csResources) {
 			if (csResource != null) {
 				installRootContents(csResource);		// FIXME ExpressionInOCL very late
 			}

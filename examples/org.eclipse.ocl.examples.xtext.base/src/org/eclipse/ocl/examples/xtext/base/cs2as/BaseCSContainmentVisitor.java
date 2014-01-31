@@ -87,6 +87,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.AbstractExtendingBaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
@@ -214,7 +215,7 @@ public class BaseCSContainmentVisitor extends AbstractExtendingBaseCSVisitor<Con
 		}
 		Object pivotObject = csElement.getPivot();
 		if (pivotObject == null) {
-			Resource asResource = context.getConverter().getPivotResource(csResource);
+			Resource asResource = context.getConverter().getPivotResource((BaseCSResource) csResource);
 			if (asResource != null) {
 				for (EObject oldRoot : asResource.getContents()) {
 					if (oldRoot instanceof Root) {

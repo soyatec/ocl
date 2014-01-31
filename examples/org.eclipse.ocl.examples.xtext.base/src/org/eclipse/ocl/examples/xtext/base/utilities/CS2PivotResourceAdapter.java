@@ -53,18 +53,17 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 	
 	public CS2PivotResourceAdapter(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
 		super(csResource, metaModelManager);
-		Map<Resource, ASResource> cs2asResourceMap = computeCS2ASResourceMap(
-			csResource, metaModelManager);
+		Map<BaseCSResource, ASResource> cs2asResourceMap = computeCS2ASResourceMap(csResource, metaModelManager);
 		converter = csResource.createCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
-	public @NonNull Map<Resource, ASResource> computeCS2ASResourceMap(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
+	public @NonNull Map<BaseCSResource, ASResource> computeCS2ASResourceMap(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
 		ResourceSet asResourceSet = metaModelManager.getTarget();
-		Map<Resource,ASResource> cs2asResourceMap = new HashMap<Resource,ASResource>();
+		Map<BaseCSResource,ASResource> cs2asResourceMap = new HashMap<BaseCSResource,ASResource>();
 	//	ResourceSet csResourceSet = csResource.getResourceSet();
 	//	if (csResourceSet != null) {
 //		for (Resource acsResource : csResourceSet.getResources()) {
-			Resource acsResource = csResource;
+				BaseCSResource acsResource = csResource;
 				URI uri = acsResource.getURI();
 				if (uri != null) {
 					List<EObject> contents = acsResource.getContents();

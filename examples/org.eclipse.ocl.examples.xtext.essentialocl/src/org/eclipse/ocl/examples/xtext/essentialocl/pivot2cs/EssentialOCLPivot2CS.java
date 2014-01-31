@@ -22,11 +22,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BasePivot2CS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseReferenceVisitor;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
-
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 public class EssentialOCLPivot2CS extends BasePivot2CS
 {	
@@ -47,8 +48,8 @@ public class EssentialOCLPivot2CS extends BasePivot2CS
 		}
 	}
 		
-	public EssentialOCLPivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2asResourceMap, metaModelManager);
+	public EssentialOCLPivot2CS(@NonNull Map<? extends /*BaseCS*/Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+		super(ElementUtil.apiConvert(cs2asResourceMap), metaModelManager);
 		addFactory(Factory.INSTANCE);
 	}
 }

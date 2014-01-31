@@ -161,12 +161,12 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 		}
 	}
 
-	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends /*BaseCS*/Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		return new EssentialOCLCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
-	public Pivot2CS createPivot2CS(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull Pivot2CS createPivot2CS(@NonNull Map<? extends /*BaseCS*/Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		return new EssentialOCLPivot2CS(cs2asResourceMap, metaModelManager);
 	}
@@ -432,7 +432,7 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 	}
 
 	public void updateFrom(@NonNull ASResource asResource, @NonNull MetaModelManager metaModelManager) {		
-		Map<Resource, ASResource> cs2PivotResourceMap = new HashMap<Resource, ASResource>();
+		Map<BaseCSResource, ASResource> cs2PivotResourceMap = new HashMap<BaseCSResource, ASResource>();
 		cs2PivotResourceMap.put(this, asResource);
 		Pivot2CS pivot2cs = createPivot2CS(cs2PivotResourceMap, metaModelManager);
 		pivot2cs.update();

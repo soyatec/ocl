@@ -19,9 +19,10 @@ package org.eclipse.ocl.examples.xtext.base.pivot2cs;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 
 public class BasePivot2CS extends Pivot2CS
 {	
@@ -42,7 +43,7 @@ public class BasePivot2CS extends Pivot2CS
 		}
 	}
 
-	public BasePivot2CS(@NonNull Map<? extends Resource, ? extends Resource> cs2asResourceMap,
+	public BasePivot2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		super(cs2asResourceMap, metaModelManager);
 		addFactory(Factory.INSTANCE);

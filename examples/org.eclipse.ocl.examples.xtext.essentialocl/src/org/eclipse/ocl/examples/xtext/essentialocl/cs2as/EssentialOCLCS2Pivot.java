@@ -27,14 +27,14 @@ import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BaseCS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.EssentialOCLCSVisitor;
 
 public class EssentialOCLCS2Pivot extends BaseCS2Pivot
 {		
-	public EssentialOCLCS2Pivot(@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2asResourceMap, metaModelManager);
+	public EssentialOCLCS2Pivot(@NonNull Map<? extends /*BaseCS*/Resource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+		super(ElementUtil.apiConvert(cs2asResourceMap), metaModelManager);
 	}
-	
 	
 	public EssentialOCLCS2Pivot(@NonNull EssentialOCLCS2Pivot cs2pivot) {
 		super(cs2pivot);
