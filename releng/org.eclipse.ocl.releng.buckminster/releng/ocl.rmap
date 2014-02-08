@@ -7,7 +7,6 @@
   <rm:property key="resolve.target.platform" value="false"/>
   <rm:property key="resolve.n4s" value="false"/>
   <rm:property key="build.type" value="I"/>
-  <rm:property key="ocl.core.last.p2.repository.location" value="https://hudson.eclipse.org/hudson/job/buckminster-ocl-core-luna-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository"/>
   <rm:locator pattern="^com\.google.(inject|guava)$" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.acceleo.*" searchPathRef="acceleo"/>
   <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xtext"/>
@@ -318,7 +317,7 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/R20130827064939/repository/">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/R20140114142710/repository/">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
