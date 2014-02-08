@@ -380,8 +380,14 @@ public class RoundTripTests extends XtextTestCase
 			"{\n" +
 			"	enum Enums\n" +
 			"	{\n" +
-			"		literal ONE = 1;\n"
-			+ "		literal MINUS_ONE = -1;\n" +
+			"		literal ONE = 1;\n" +
+			"		literal MINUS_ONE = -1;\n" +
+			"	}\n" +
+			"	class Bug426927\n" +
+			"	{\n" +
+			"		annotation {\n" +
+			"			reference Enums::MINUS_ONE;\n" +
+			"		}\n" +
 			"	}\n" +
 			"}\n";
 		createOCLinEcoreFile("Bug426927.oclinecore", testFile);

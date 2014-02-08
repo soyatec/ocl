@@ -37,6 +37,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -380,7 +381,7 @@ public class ElementUtil
 	/**
 	 * Return true if element is able to be accessed by a qualified path OCLinEcore. Other elements must use a quoted URI.
 	 */
-	@Deprecated  // find and extensible solution
+	@Deprecated  // find an extensible solution
 	public static NamedElement isPathable(@NonNull EObject element) {
 		if (element instanceof Feature) {
 			return (Feature)element;
@@ -391,6 +392,10 @@ public class ElementUtil
 		else if (element instanceof Namespace) {
 			return (Namespace)element;
 		}
+		else if (element instanceof EnumerationLiteral) {
+			return (EnumerationLiteral)element;
+		}
+		// ?? Constraint, Signal, ...
 		else {
 			return null;
 		}
