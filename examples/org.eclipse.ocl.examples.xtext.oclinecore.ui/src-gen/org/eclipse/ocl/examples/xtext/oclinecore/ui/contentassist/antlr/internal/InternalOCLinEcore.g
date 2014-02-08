@@ -85,25 +85,27 @@ finally {
 
 
 
-// Entry rule entryRuleINTEGER
-entryRuleINTEGER 
+
+
+// Entry rule entryRuleSIGNED
+entryRuleSIGNED 
 :
-{ before(grammarAccess.getINTEGERRule()); }
-	 ruleINTEGER
-{ after(grammarAccess.getINTEGERRule()); } 
+{ before(grammarAccess.getSIGNEDRule()); }
+	 ruleSIGNED
+{ after(grammarAccess.getSIGNEDRule()); } 
 	 EOF 
 ;
 
-// Rule INTEGER
-ruleINTEGER
+// Rule SIGNED
+ruleSIGNED
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getINTEGERAccess().getINTTerminalRuleCall()); }
-	RULE_INT
-{ after(grammarAccess.getINTEGERAccess().getINTTerminalRuleCall()); }
+{ before(grammarAccess.getSIGNEDAccess().getGroup()); }
+(rule__SIGNED__Group__0)
+{ after(grammarAccess.getSIGNEDAccess().getGroup()); }
 )
 
 ;
@@ -5436,6 +5438,69 @@ rule__TopLevelCS__Group_1__1__Impl
 { before(grammarAccess.getTopLevelCSAccess().getUnrestrictedNameParserRuleCall_1_1()); }
 	ruleUnrestrictedName
 { after(grammarAccess.getTopLevelCSAccess().getUnrestrictedNameParserRuleCall_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__SIGNED__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SIGNED__Group__0__Impl
+	rule__SIGNED__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SIGNED__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSIGNEDAccess().getHyphenMinusKeyword_0()); }
+(
+	'-' 
+)?
+{ after(grammarAccess.getSIGNEDAccess().getHyphenMinusKeyword_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__SIGNED__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SIGNED__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SIGNED__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSIGNEDAccess().getINTTerminalRuleCall_1()); }
+	RULE_INT
+{ after(grammarAccess.getSIGNEDAccess().getINTTerminalRuleCall_1()); }
 )
 
 ;
@@ -23389,8 +23454,8 @@ rule__EnumerationLiteralCS__ValueAssignment_1_1
     }
 :
 (
-{ before(grammarAccess.getEnumerationLiteralCSAccess().getValueINTEGERParserRuleCall_1_1_0()); }
-	ruleINTEGER{ after(grammarAccess.getEnumerationLiteralCSAccess().getValueINTEGERParserRuleCall_1_1_0()); }
+{ before(grammarAccess.getEnumerationLiteralCSAccess().getValueSIGNEDParserRuleCall_1_1_0()); }
+	ruleSIGNED{ after(grammarAccess.getEnumerationLiteralCSAccess().getValueSIGNEDParserRuleCall_1_1_0()); }
 )
 
 ;

@@ -829,7 +829,7 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     ((name=UnrestrictedName | name=EnumerationLiteralName) value=INTEGER? ownedAnnotation+=AnnotationElementCS*)
+	 *     ((name=UnrestrictedName | name=EnumerationLiteralName) value=SIGNED? ownedAnnotation+=AnnotationElementCS*)
 	 */
 	protected void sequence_EnumerationLiteralCS(EObject context, EnumerationLiteralCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -168,28 +168,36 @@ ruleUnrestrictedName
 
 
 
-// Entry rule entryRuleINTEGER
-entryRuleINTEGER returns [String current=null] 
+
+
+// Entry rule entryRuleSIGNED
+entryRuleSIGNED returns [String current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getINTEGERRule()); } 
-	 iv_ruleINTEGER=ruleINTEGER 
-	 { $current=$iv_ruleINTEGER.current.getText(); }  
+	{ newCompositeNode(grammarAccess.getSIGNEDRule()); } 
+	 iv_ruleSIGNED=ruleSIGNED 
+	 { $current=$iv_ruleSIGNED.current.getText(); }  
 	 EOF 
 ;
 
-// Rule INTEGER
-ruleINTEGER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+// Rule SIGNED
+ruleSIGNED returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-    this_INT_0=RULE_INT    {
-		$current.merge(this_INT_0);
+((
+	kw='-' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getSIGNEDAccess().getHyphenMinusKeyword_0()); 
+    }
+)?    this_INT_1=RULE_INT    {
+		$current.merge(this_INT_1);
     }
 
     { 
-    newLeafNode(this_INT_0, grammarAccess.getINTEGERAccess().getINTTerminalRuleCall()); 
+    newLeafNode(this_INT_1, grammarAccess.getSIGNEDAccess().getINTTerminalRuleCall_1()); 
     }
-
+)
     ;
 
 
@@ -2664,9 +2672,9 @@ ruleEnumerationLiteralCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getEnumerationLiteralCSAccess().getValueINTEGERParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getEnumerationLiteralCSAccess().getValueSIGNEDParserRuleCall_1_1_0()); 
 	    }
-		lv_value_4_0=ruleINTEGER		{
+		lv_value_4_0=ruleSIGNED		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getEnumerationLiteralCSRule());
 	        }
@@ -2674,7 +2682,7 @@ ruleEnumerationLiteralCS returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_4_0, 
-        		"INTEGER");
+        		"SIGNED");
 	        afterParserOrEnumRuleCall();
 	    }
 

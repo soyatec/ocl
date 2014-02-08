@@ -37,6 +37,10 @@ INTEGER returns ecore::EInt:
 	INT
 ;
 
+SIGNED returns ecore::EInt:
+	'-'? INT
+;
+
 EnumerationLiteralName returns ecore::EString:
 	EssentialOCLUnrestrictedName
 |	'abstract'
@@ -193,7 +197,7 @@ EnumerationCS returns base::EnumerationCS:
 ;
 
 EnumerationLiteralCS returns base::EnumerationLiteralCS:
-	(('literal' name=UnrestrictedName) | name=EnumerationLiteralName) ('=' value=INTEGER)?
+	(('literal' name=UnrestrictedName) | name=EnumerationLiteralName) ('=' value=SIGNED)?
 	(('{' ownedAnnotation+=AnnotationElementCS* '}')
 	|';'
 	)

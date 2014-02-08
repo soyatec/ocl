@@ -84,6 +84,26 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getINTTerminalRuleCall() { return cINTTerminalRuleCall; }
 	}
 
+	public class SIGNEDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SIGNED");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//SIGNED returns ecore::EInt:
+		//	"-"? INT;
+		public ParserRule getRule() { return rule; }
+
+		//"-"? INT
+		public Group getGroup() { return cGroup; }
+
+		//"-"?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+	}
+
 	public class EnumerationLiteralNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumerationLiteralName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1659,7 +1679,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cValueINTEGERParserRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
+		private final RuleCall cValueSIGNEDParserRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
@@ -1669,11 +1689,11 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_2_1 = (Keyword)cAlternatives_2.eContents().get(1);
 		
 		//EnumerationLiteralCS returns base::EnumerationLiteralCS:
-		//	("literal" name=UnrestrictedName | name=EnumerationLiteralName) ("=" value=INTEGER)? ("{"
+		//	("literal" name=UnrestrictedName | name=EnumerationLiteralName) ("=" value=SIGNED)? ("{"
 		//	ownedAnnotation+=AnnotationElementCS* "}" | ";");
 		public ParserRule getRule() { return rule; }
 
-		//("literal" name=UnrestrictedName | name=EnumerationLiteralName) ("=" value=INTEGER)? ("{"
+		//("literal" name=UnrestrictedName | name=EnumerationLiteralName) ("=" value=SIGNED)? ("{"
 		//ownedAnnotation+=AnnotationElementCS* "}" | ";")
 		public Group getGroup() { return cGroup; }
 
@@ -1698,17 +1718,17 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//EnumerationLiteralName
 		public RuleCall getNameEnumerationLiteralNameParserRuleCall_0_1_0() { return cNameEnumerationLiteralNameParserRuleCall_0_1_0; }
 
-		//("=" value=INTEGER)?
+		//("=" value=SIGNED)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_1_0() { return cEqualsSignKeyword_1_0; }
 
-		//value=INTEGER
+		//value=SIGNED
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		//INTEGER
-		public RuleCall getValueINTEGERParserRuleCall_1_1_0() { return cValueINTEGERParserRuleCall_1_1_0; }
+		//SIGNED
+		public RuleCall getValueSIGNEDParserRuleCall_1_1_0() { return cValueSIGNEDParserRuleCall_1_1_0; }
 
 		//"{" ownedAnnotation+=AnnotationElementCS* "}" | ";"
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
@@ -3458,6 +3478,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	private TopLevelCSElements pTopLevelCS;
 	private TerminalRule tUNQUOTED_STRING;
 	private INTEGERElements pINTEGER;
+	private SIGNEDElements pSIGNED;
 	private EnumerationLiteralNameElements pEnumerationLiteralName;
 	private UnrestrictedNameElements pUnrestrictedName;
 	private InvariantConstraintCSElements pInvariantConstraintCS;
@@ -3562,6 +3583,16 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getINTEGERRule() {
 		return getINTEGERAccess().getRule();
+	}
+
+	//SIGNED returns ecore::EInt:
+	//	"-"? INT;
+	public SIGNEDElements getSIGNEDAccess() {
+		return (pSIGNED != null) ? pSIGNED : (pSIGNED = new SIGNEDElements());
+	}
+	
+	public ParserRule getSIGNEDRule() {
+		return getSIGNEDAccess().getRule();
 	}
 
 	//EnumerationLiteralName returns ecore::EString:
@@ -3740,7 +3771,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumerationLiteralCS returns base::EnumerationLiteralCS:
-	//	("literal" name=UnrestrictedName | name=EnumerationLiteralName) ("=" value=INTEGER)? ("{"
+	//	("literal" name=UnrestrictedName | name=EnumerationLiteralName) ("=" value=SIGNED)? ("{"
 	//	ownedAnnotation+=AnnotationElementCS* "}" | ";");
 	public EnumerationLiteralCSElements getEnumerationLiteralCSAccess() {
 		return (pEnumerationLiteralCS != null) ? pEnumerationLiteralCS : (pEnumerationLiteralCS = new EnumerationLiteralCSElements());

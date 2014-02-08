@@ -374,6 +374,22 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager.dispose();
 	}
 
+	public void testBug426927_oclinecore() throws IOException, InterruptedException {
+		String testFile = 
+			"package any : any = 'http:/any'\n" +
+			"{\n" +
+			"	enum Enums\n" +
+			"	{\n" +
+			"		literal ONE = 1;\n"
+			+ "		literal MINUS_ONE = -1;\n" +
+			"	}\n" +
+			"}\n";
+		createOCLinEcoreFile("Bug426927.oclinecore", testFile);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		doRoundTripFromOCLinEcore(metaModelManager, "Bug426927");
+		metaModelManager.dispose();
+	}
+
 	public void testAggregatesRoundTrip() throws IOException, InterruptedException {
 		String testFile = 
 				"package b : bb = 'bbb'\n" +
