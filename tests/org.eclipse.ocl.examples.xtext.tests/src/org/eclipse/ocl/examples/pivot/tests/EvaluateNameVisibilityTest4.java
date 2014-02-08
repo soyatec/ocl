@@ -437,6 +437,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	@Test public void test_type_construction() throws InvocationTargetException {
 		initFruitPackage();
 		EObject context = fruitEFactory.create(tree);
+		assertQueryEquals(context, null, "Apple{}.name");
 		assertQueryEquals(context, "RedApple", "Apple{name='RedApple',color=Color::red}.name");
 		assertQueryEquals(context, color_red, "Apple{name='RedApple',color=Color::red}.color");
 		assertQueryFalse(context, "Apple{name='RedApple',color=Color::red} = Apple{name='RedApple',color=Color::red}");

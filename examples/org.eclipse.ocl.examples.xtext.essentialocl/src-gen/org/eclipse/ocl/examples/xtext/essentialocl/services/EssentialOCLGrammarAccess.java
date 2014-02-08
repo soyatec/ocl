@@ -1696,7 +1696,7 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
 		//	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
 		//	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-		//	{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+		//	{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 		//	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
 		//	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
 		//	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);
@@ -1705,7 +1705,7 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
 		//TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
 		//firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-		//{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+		//{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 		//value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
 		//argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
 		//(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?)
@@ -1734,7 +1734,7 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 
 		//{NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS ("," firstIndexes+=ExpCS)* "]"
 		//("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? | {ConstructorExpCS.nameExp=current}
-		//"{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral) "}" | (atPre?="@"
+		//"{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? | value=StringLiteral) "}" | (atPre?="@"
 		//"pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
 		//(argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS
 		//argument+=NavigatingCommaArgCS*)?)? ")")?)
@@ -1751,8 +1751,8 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 
 		//{IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS ("," firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS (","
 		//secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? | {ConstructorExpCS.nameExp=current} "{"
-		//(ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral) "}" | (atPre?="@" "pre")?
-		//({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
+		//((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? | value=StringLiteral) "}" | (atPre?="@"
+		//"pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
 		//(argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS
 		//argument+=NavigatingCommaArgCS*)?)? ")")?
 		public Alternatives getAlternatives_7_2() { return cAlternatives_7_2; }
@@ -1827,7 +1827,7 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//"pre"
 		public Keyword getPreKeyword_7_2_0_6_1() { return cPreKeyword_7_2_0_6_1; }
 
-		//{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+		//{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 		//value=StringLiteral) "}"
 		public Group getGroup_7_2_1() { return cGroup_7_2_1; }
 
@@ -1837,10 +1837,10 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_7_2_1_1() { return cLeftCurlyBracketKeyword_7_2_1_1; }
 
-		//ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral
+		//(ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? | value=StringLiteral
 		public Alternatives getAlternatives_7_2_1_2() { return cAlternatives_7_2_1_2; }
 
-		//ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*
+		//(ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)?
 		public Group getGroup_7_2_1_2_0() { return cGroup_7_2_1_2_0; }
 
 		//ownedParts+=ConstructorPartCS
@@ -3154,7 +3154,7 @@ public class EssentialOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
 	//	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
 	//	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-	//	{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+	//	{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 	//	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
 	//	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
 	//	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);

@@ -8384,7 +8384,7 @@ rulePrimaryExpCS returns [EObject current=null]
 	    }
 
 )
-))*)
+))*)?
     |(
 (
 		{ 

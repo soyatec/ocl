@@ -16,8 +16,8 @@ public class InternalOCLstdlibLexer extends Lexer {
     public static final int T__28=28;
     public static final int T__27=27;
     public static final int T__26=26;
-    public static final int T__25=25;
     public static final int RULE_ESCAPED_CHARACTER=10;
+    public static final int T__25=25;
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;

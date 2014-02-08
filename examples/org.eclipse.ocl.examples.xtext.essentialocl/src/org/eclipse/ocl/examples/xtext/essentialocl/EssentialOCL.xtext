@@ -298,7 +298,7 @@ PrimaryExpCS returns ExpCS:
 			))
 		|
 			({ConstructorExpCS.nameExp=current} '{'
-				( (ownedParts+=ConstructorPartCS (',' ownedParts+=ConstructorPartCS)*)
+				( ((ownedParts+=ConstructorPartCS (',' ownedParts+=ConstructorPartCS)*))?
 				| (value=StringLiteral)
 				) '}'
 			)

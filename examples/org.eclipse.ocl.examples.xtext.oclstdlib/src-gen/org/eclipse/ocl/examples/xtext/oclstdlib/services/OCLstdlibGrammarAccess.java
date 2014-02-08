@@ -3538,7 +3538,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
 	//	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
 	//	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-	//	{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+	//	{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 	//	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
 	//	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
 	//	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);

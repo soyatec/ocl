@@ -751,7 +751,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (nameExp=PrimaryExpCS_ConstructorExpCS_7_2_1_0 ((ownedParts+=ConstructorPartCS ownedParts+=ConstructorPartCS*) | value=StringLiteral))
+	 *     (nameExp=PrimaryExpCS_ConstructorExpCS_7_2_1_0 ((ownedParts+=ConstructorPartCS ownedParts+=ConstructorPartCS*)? | value=StringLiteral))
 	 */
 	protected void sequence_PrimaryExpCS(EObject context, ConstructorExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

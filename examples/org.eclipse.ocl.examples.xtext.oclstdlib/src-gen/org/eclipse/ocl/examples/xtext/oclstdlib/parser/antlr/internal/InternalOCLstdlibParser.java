@@ -28,8 +28,8 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
     public static final int T__28=28;
     public static final int T__27=27;
     public static final int T__26=26;
-    public static final int T__25=25;
     public static final int RULE_ESCAPED_CHARACTER=10;
+    public static final int T__25=25;
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
@@ -2837,11 +2837,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     {
                     int LA17_3 = input.LA(2);
 
-                    if ( (LA17_3==27) ) {
-                        alt17=1;
-                    }
-                    else if ( (LA17_3==32) ) {
+                    if ( (LA17_3==32) ) {
                         alt17=2;
+                    }
+                    else if ( (LA17_3==27) ) {
+                        alt17=1;
                     }
 
 
@@ -19808,7 +19808,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimaryExpCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6859:1: rulePrimaryExpCS returns [EObject current=null] : (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6859:1: rulePrimaryExpCS returns [EObject current=null] : (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) ) ;
     public final EObject rulePrimaryExpCS() throws RecognitionException {
         EObject current = null;
 
@@ -19873,13 +19873,13 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6862:28: ( (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6863:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6862:28: ( (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6863:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6863:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) )
-            int alt132=8;
-            alt132 = dfa132.predict(input);
-            switch (alt132) {
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6863:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) )
+            int alt133=8;
+            alt133 = dfa133.predict(input);
+            switch (alt133) {
                 case 1 :
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6864:2: this_NestedExpCS_0= ruleNestedExpCS
                     {
@@ -20070,10 +20070,10 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:6: ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) )
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:6: ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) )
                     {
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:6: ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) )
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:7: () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) )
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:6: ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) )
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:7: () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) )
                     {
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6954:7: ()
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6955:2: 
@@ -20128,17 +20128,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6981:2: ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) )
-                    int alt131=3;
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6981:2: ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) )
+                    int alt132=3;
                     switch ( input.LA(1) ) {
                     case 89:
                         {
-                        alt131=1;
+                        alt132=1;
                         }
                         break;
                     case 45:
                         {
-                        alt131=2;
+                        alt132=2;
                         }
                         break;
                     case EOF:
@@ -20173,18 +20173,18 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     case 90:
                     case 95:
                         {
-                        alt131=3;
+                        alt132=3;
                         }
                         break;
                     default:
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 131, 0, input);
+                            new NoViableAltException("", 132, 0, input);
 
                         throw nvae;
                     }
 
-                    switch (alt131) {
+                    switch (alt132) {
                         case 1 :
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:6981:3: ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? )
                             {
@@ -20506,10 +20506,10 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:6: ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' )
+                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:6: ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' )
                             {
-                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:6: ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' )
-                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:7: () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}'
+                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:6: ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' )
+                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:7: () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}'
                             {
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7106:7: ()
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7107:2: 
@@ -20535,130 +20535,141 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                   	newLeafNode(otherlv_23, grammarAccess.getPrimaryExpCSAccess().getLeftCurlyBracketKeyword_7_2_1_1());
                                   
                             }
-                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:1: ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) )
-                            int alt122=2;
-                            int LA122_0 = input.LA(1);
+                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:1: ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) )
+                            int alt123=2;
+                            int LA123_0 = input.LA(1);
 
-                            if ( ((LA122_0>=RULE_SIMPLE_ID && LA122_0<=RULE_ESCAPED_ID)||(LA122_0>=17 && LA122_0<=37)) ) {
-                                alt122=1;
+                            if ( ((LA123_0>=RULE_SIMPLE_ID && LA123_0<=RULE_ESCAPED_ID)||(LA123_0>=17 && LA123_0<=37)||LA123_0==46) ) {
+                                alt123=1;
                             }
-                            else if ( (LA122_0==RULE_SINGLE_QUOTED_STRING) ) {
-                                alt122=2;
+                            else if ( (LA123_0==RULE_SINGLE_QUOTED_STRING) ) {
+                                alt123=2;
                             }
                             else {
                                 if (state.backtracking>0) {state.failed=true; return current;}
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 122, 0, input);
+                                    new NoViableAltException("", 123, 0, input);
 
                                 throw nvae;
                             }
-                            switch (alt122) {
+                            switch (alt123) {
                                 case 1 :
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:2: ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )
+                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:2: ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )?
                                     {
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:2: ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:3: ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )*
-                                    {
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:3: ( (lv_ownedParts_24_0= ruleConstructorPartCS ) )
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7120:1: (lv_ownedParts_24_0= ruleConstructorPartCS )
-                                    {
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7120:1: (lv_ownedParts_24_0= ruleConstructorPartCS )
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7121:3: lv_ownedParts_24_0= ruleConstructorPartCS
-                                    {
-                                    if ( state.backtracking==0 ) {
-                                       
-                                      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_7_2_1_2_0_0_0()); 
-                                      	    
+                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:2: ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )?
+                                    int alt122=2;
+                                    int LA122_0 = input.LA(1);
+
+                                    if ( ((LA122_0>=RULE_SIMPLE_ID && LA122_0<=RULE_ESCAPED_ID)||(LA122_0>=17 && LA122_0<=37)) ) {
+                                        alt122=1;
                                     }
-                                    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS16014);
-                                    lv_ownedParts_24_0=ruleConstructorPartCS();
+                                    switch (alt122) {
+                                        case 1 :
+                                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:3: ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )*
+                                            {
+                                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7119:3: ( (lv_ownedParts_24_0= ruleConstructorPartCS ) )
+                                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7120:1: (lv_ownedParts_24_0= ruleConstructorPartCS )
+                                            {
+                                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7120:1: (lv_ownedParts_24_0= ruleConstructorPartCS )
+                                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7121:3: lv_ownedParts_24_0= ruleConstructorPartCS
+                                            {
+                                            if ( state.backtracking==0 ) {
+                                               
+                                              	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_7_2_1_2_0_0_0()); 
+                                              	    
+                                            }
+                                            pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS16014);
+                                            lv_ownedParts_24_0=ruleConstructorPartCS();
 
-                                    state._fsp--;
-                                    if (state.failed) return current;
-                                    if ( state.backtracking==0 ) {
+                                            state._fsp--;
+                                            if (state.failed) return current;
+                                            if ( state.backtracking==0 ) {
 
-                                      	        if (current==null) {
-                                      	            current = createModelElementForParent(grammarAccess.getPrimaryExpCSRule());
-                                      	        }
-                                             		add(
-                                             			current, 
-                                             			"ownedParts",
-                                              		lv_ownedParts_24_0, 
-                                              		"ConstructorPartCS");
-                                      	        afterParserOrEnumRuleCall();
-                                      	    
-                                    }
+                                              	        if (current==null) {
+                                              	            current = createModelElementForParent(grammarAccess.getPrimaryExpCSRule());
+                                              	        }
+                                                     		add(
+                                                     			current, 
+                                                     			"ownedParts",
+                                                      		lv_ownedParts_24_0, 
+                                                      		"ConstructorPartCS");
+                                              	        afterParserOrEnumRuleCall();
+                                              	    
+                                            }
 
-                                    }
-
-
-                                    }
-
-                                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7137:2: (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )*
-                                    loop121:
-                                    do {
-                                        int alt121=2;
-                                        int LA121_0 = input.LA(1);
-
-                                        if ( (LA121_0==43) ) {
-                                            alt121=1;
-                                        }
-
-
-                                        switch (alt121) {
-                                    	case 1 :
-                                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7137:4: otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) )
-                                    	    {
-                                    	    otherlv_25=(Token)match(input,43,FollowSets000.FOLLOW_43_in_rulePrimaryExpCS16027); if (state.failed) return current;
-                                    	    if ( state.backtracking==0 ) {
-
-                                    	          	newLeafNode(otherlv_25, grammarAccess.getPrimaryExpCSAccess().getCommaKeyword_7_2_1_2_0_1_0());
-                                    	          
-                                    	    }
-                                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7141:1: ( (lv_ownedParts_26_0= ruleConstructorPartCS ) )
-                                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7142:1: (lv_ownedParts_26_0= ruleConstructorPartCS )
-                                    	    {
-                                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7142:1: (lv_ownedParts_26_0= ruleConstructorPartCS )
-                                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7143:3: lv_ownedParts_26_0= ruleConstructorPartCS
-                                    	    {
-                                    	    if ( state.backtracking==0 ) {
-                                    	       
-                                    	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_7_2_1_2_0_1_1_0()); 
-                                    	      	    
-                                    	    }
-                                    	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS16048);
-                                    	    lv_ownedParts_26_0=ruleConstructorPartCS();
-
-                                    	    state._fsp--;
-                                    	    if (state.failed) return current;
-                                    	    if ( state.backtracking==0 ) {
-
-                                    	      	        if (current==null) {
-                                    	      	            current = createModelElementForParent(grammarAccess.getPrimaryExpCSRule());
-                                    	      	        }
-                                    	             		add(
-                                    	             			current, 
-                                    	             			"ownedParts",
-                                    	              		lv_ownedParts_26_0, 
-                                    	              		"ConstructorPartCS");
-                                    	      	        afterParserOrEnumRuleCall();
-                                    	      	    
-                                    	    }
-
-                                    	    }
+                                            }
 
 
-                                    	    }
+                                            }
+
+                                            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7137:2: (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )*
+                                            loop121:
+                                            do {
+                                                int alt121=2;
+                                                int LA121_0 = input.LA(1);
+
+                                                if ( (LA121_0==43) ) {
+                                                    alt121=1;
+                                                }
 
 
-                                    	    }
-                                    	    break;
+                                                switch (alt121) {
+                                            	case 1 :
+                                            	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7137:4: otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) )
+                                            	    {
+                                            	    otherlv_25=(Token)match(input,43,FollowSets000.FOLLOW_43_in_rulePrimaryExpCS16027); if (state.failed) return current;
+                                            	    if ( state.backtracking==0 ) {
 
-                                    	default :
-                                    	    break loop121;
-                                        }
-                                    } while (true);
+                                            	          	newLeafNode(otherlv_25, grammarAccess.getPrimaryExpCSAccess().getCommaKeyword_7_2_1_2_0_1_0());
+                                            	          
+                                            	    }
+                                            	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7141:1: ( (lv_ownedParts_26_0= ruleConstructorPartCS ) )
+                                            	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7142:1: (lv_ownedParts_26_0= ruleConstructorPartCS )
+                                            	    {
+                                            	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7142:1: (lv_ownedParts_26_0= ruleConstructorPartCS )
+                                            	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7143:3: lv_ownedParts_26_0= ruleConstructorPartCS
+                                            	    {
+                                            	    if ( state.backtracking==0 ) {
+                                            	       
+                                            	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_7_2_1_2_0_1_1_0()); 
+                                            	      	    
+                                            	    }
+                                            	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS16048);
+                                            	    lv_ownedParts_26_0=ruleConstructorPartCS();
 
+                                            	    state._fsp--;
+                                            	    if (state.failed) return current;
+                                            	    if ( state.backtracking==0 ) {
+
+                                            	      	        if (current==null) {
+                                            	      	            current = createModelElementForParent(grammarAccess.getPrimaryExpCSRule());
+                                            	      	        }
+                                            	             		add(
+                                            	             			current, 
+                                            	             			"ownedParts",
+                                            	              		lv_ownedParts_26_0, 
+                                            	              		"ConstructorPartCS");
+                                            	      	        afterParserOrEnumRuleCall();
+                                            	      	    
+                                            	    }
+
+                                            	    }
+
+
+                                            	    }
+
+
+                                            	    }
+                                            	    break;
+
+                                            	default :
+                                            	    break loop121;
+                                                }
+                                            } while (true);
+
+
+                                            }
+                                            break;
 
                                     }
 
@@ -20679,7 +20690,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getValueStringLiteralParserRuleCall_7_2_1_2_1_0()); 
                                       	    
                                     }
-                                    pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_rulePrimaryExpCS16078);
+                                    pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_rulePrimaryExpCS16079);
                                     lv_value_27_0=ruleStringLiteral();
 
                                     state._fsp--;
@@ -20709,7 +20720,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            otherlv_28=(Token)match(input,46,FollowSets000.FOLLOW_46_in_rulePrimaryExpCS16091); if (state.failed) return current;
+                            otherlv_28=(Token)match(input,46,FollowSets000.FOLLOW_46_in_rulePrimaryExpCS16092); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_28, grammarAccess.getPrimaryExpCSAccess().getRightCurlyBracketKeyword_7_2_1_3());
@@ -20728,13 +20739,13 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7183:7: ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )?
                             {
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7183:7: ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )?
-                            int alt123=2;
-                            int LA123_0 = input.LA(1);
+                            int alt124=2;
+                            int LA124_0 = input.LA(1);
 
-                            if ( (LA123_0==95) ) {
-                                alt123=1;
+                            if ( (LA124_0==95) ) {
+                                alt124=1;
                             }
-                            switch (alt123) {
+                            switch (alt124) {
                                 case 1 :
                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7183:8: ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre'
                                     {
@@ -20744,7 +20755,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7184:1: (lv_atPre_29_0= '@' )
                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7185:3: lv_atPre_29_0= '@'
                                     {
-                                    lv_atPre_29_0=(Token)match(input,95,FollowSets000.FOLLOW_95_in_rulePrimaryExpCS16118); if (state.failed) return current;
+                                    lv_atPre_29_0=(Token)match(input,95,FollowSets000.FOLLOW_95_in_rulePrimaryExpCS16119); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                               newLeafNode(lv_atPre_29_0, grammarAccess.getPrimaryExpCSAccess().getAtPreCommercialAtKeyword_7_2_2_0_0_0());
@@ -20764,7 +20775,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                                     }
 
-                                    otherlv_30=(Token)match(input,30,FollowSets000.FOLLOW_30_in_rulePrimaryExpCS16143); if (state.failed) return current;
+                                    otherlv_30=(Token)match(input,30,FollowSets000.FOLLOW_30_in_rulePrimaryExpCS16144); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_30, grammarAccess.getPrimaryExpCSAccess().getPreKeyword_7_2_2_0_1());
@@ -20777,13 +20788,13 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                             }
 
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7202:3: ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )?
-                            int alt130=2;
-                            int LA130_0 = input.LA(1);
+                            int alt131=2;
+                            int LA131_0 = input.LA(1);
 
-                            if ( (LA130_0==42) ) {
-                                alt130=1;
+                            if ( (LA131_0==42) ) {
+                                alt131=1;
                             }
-                            switch (alt130) {
+                            switch (alt131) {
                                 case 1 :
                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7202:4: () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')'
                                     {
@@ -20805,20 +20816,20 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                                     }
 
-                                    otherlv_32=(Token)match(input,42,FollowSets000.FOLLOW_42_in_rulePrimaryExpCS16170); if (state.failed) return current;
+                                    otherlv_32=(Token)match(input,42,FollowSets000.FOLLOW_42_in_rulePrimaryExpCS16171); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_32, grammarAccess.getPrimaryExpCSAccess().getLeftParenthesisKeyword_7_2_2_1_1());
                                           
                                     }
                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7215:1: ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )?
-                                    int alt129=2;
-                                    int LA129_0 = input.LA(1);
+                                    int alt130=2;
+                                    int LA130_0 = input.LA(1);
 
-                                    if ( (LA129_0==RULE_SINGLE_QUOTED_STRING||(LA129_0>=RULE_SIMPLE_ID && LA129_0<=RULE_INT)||(LA129_0>=17 && LA129_0<=37)||LA129_0==39||LA129_0==42||LA129_0==53||LA129_0==57||(LA129_0>=60 && LA129_0<=61)||LA129_0==65||(LA129_0>=75 && LA129_0<=87)||(LA129_0>=91 && LA129_0<=94)||LA129_0==96) ) {
-                                        alt129=1;
+                                    if ( (LA130_0==RULE_SINGLE_QUOTED_STRING||(LA130_0>=RULE_SIMPLE_ID && LA130_0<=RULE_INT)||(LA130_0>=17 && LA130_0<=37)||LA130_0==39||LA130_0==42||LA130_0==53||LA130_0==57||(LA130_0>=60 && LA130_0<=61)||LA130_0==65||(LA130_0>=75 && LA130_0<=87)||(LA130_0>=91 && LA130_0<=94)||LA130_0==96) ) {
+                                        alt130=1;
                                     }
-                                    switch (alt129) {
+                                    switch (alt130) {
                                         case 1 :
                                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7215:2: ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )?
                                             {
@@ -20833,7 +20844,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                               	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingArgCSParserRuleCall_7_2_2_1_2_0_0()); 
                                               	    
                                             }
-                                            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS16192);
+                                            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS16193);
                                             lv_argument_33_0=ruleNavigatingArgCS();
 
                                             state._fsp--;
@@ -20858,17 +20869,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                             }
 
                                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7233:2: ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )*
-                                            loop124:
+                                            loop125:
                                             do {
-                                                int alt124=2;
-                                                int LA124_0 = input.LA(1);
+                                                int alt125=2;
+                                                int LA125_0 = input.LA(1);
 
-                                                if ( (LA124_0==43) ) {
-                                                    alt124=1;
+                                                if ( (LA125_0==43) ) {
+                                                    alt125=1;
                                                 }
 
 
-                                                switch (alt124) {
+                                                switch (alt125) {
                                             	case 1 :
                                             	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7234:1: (lv_argument_34_0= ruleNavigatingCommaArgCS )
                                             	    {
@@ -20880,7 +20891,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                             	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_7_2_2_1_2_1_0()); 
                                             	      	    
                                             	    }
-                                            	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16213);
+                                            	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16214);
                                             	    lv_argument_34_0=ruleNavigatingCommaArgCS();
 
                                             	    state._fsp--;
@@ -20906,18 +20917,18 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                             	    break;
 
                                             	default :
-                                            	    break loop124;
+                                            	    break loop125;
                                                 }
                                             } while (true);
 
                                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7251:3: ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )?
-                                            int alt126=2;
-                                            int LA126_0 = input.LA(1);
+                                            int alt127=2;
+                                            int LA127_0 = input.LA(1);
 
-                                            if ( (LA126_0==16) ) {
-                                                alt126=1;
+                                            if ( (LA127_0==16) ) {
+                                                alt127=1;
                                             }
-                                            switch (alt126) {
+                                            switch (alt127) {
                                                 case 1 :
                                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7251:4: ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )*
                                                     {
@@ -20932,7 +20943,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingSemiArgCSParserRuleCall_7_2_2_1_2_2_0_0()); 
                                                       	    
                                                     }
-                                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS16236);
+                                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS16237);
                                                     lv_argument_35_0=ruleNavigatingSemiArgCS();
 
                                                     state._fsp--;
@@ -20957,17 +20968,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                     }
 
                                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7269:2: ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )*
-                                                    loop125:
+                                                    loop126:
                                                     do {
-                                                        int alt125=2;
-                                                        int LA125_0 = input.LA(1);
+                                                        int alt126=2;
+                                                        int LA126_0 = input.LA(1);
 
-                                                        if ( (LA125_0==43) ) {
-                                                            alt125=1;
+                                                        if ( (LA126_0==43) ) {
+                                                            alt126=1;
                                                         }
 
 
-                                                        switch (alt125) {
+                                                        switch (alt126) {
                                                     	case 1 :
                                                     	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7270:1: (lv_argument_36_0= ruleNavigatingCommaArgCS )
                                                     	    {
@@ -20979,7 +20990,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                     	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_7_2_2_1_2_2_1_0()); 
                                                     	      	    
                                                     	    }
-                                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16257);
+                                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16258);
                                                     	    lv_argument_36_0=ruleNavigatingCommaArgCS();
 
                                                     	    state._fsp--;
@@ -21005,7 +21016,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                     	    break;
 
                                                     	default :
-                                                    	    break loop125;
+                                                    	    break loop126;
                                                         }
                                                     } while (true);
 
@@ -21016,13 +21027,13 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                             }
 
                                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7287:5: ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )?
-                                            int alt128=2;
-                                            int LA128_0 = input.LA(1);
+                                            int alt129=2;
+                                            int LA129_0 = input.LA(1);
 
-                                            if ( (LA128_0==48) ) {
-                                                alt128=1;
+                                            if ( (LA129_0==48) ) {
+                                                alt129=1;
                                             }
-                                            switch (alt128) {
+                                            switch (alt129) {
                                                 case 1 :
                                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7287:6: ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )*
                                                     {
@@ -21037,7 +21048,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                       	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingBarArgCSParserRuleCall_7_2_2_1_2_3_0_0()); 
                                                       	    
                                                     }
-                                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS16282);
+                                                    pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS16283);
                                                     lv_argument_37_0=ruleNavigatingBarArgCS();
 
                                                     state._fsp--;
@@ -21062,17 +21073,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                     }
 
                                                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7305:2: ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )*
-                                                    loop127:
+                                                    loop128:
                                                     do {
-                                                        int alt127=2;
-                                                        int LA127_0 = input.LA(1);
+                                                        int alt128=2;
+                                                        int LA128_0 = input.LA(1);
 
-                                                        if ( (LA127_0==43) ) {
-                                                            alt127=1;
+                                                        if ( (LA128_0==43) ) {
+                                                            alt128=1;
                                                         }
 
 
-                                                        switch (alt127) {
+                                                        switch (alt128) {
                                                     	case 1 :
                                                     	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7306:1: (lv_argument_38_0= ruleNavigatingCommaArgCS )
                                                     	    {
@@ -21084,7 +21095,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                     	      	        newCompositeNode(grammarAccess.getPrimaryExpCSAccess().getArgumentNavigatingCommaArgCSParserRuleCall_7_2_2_1_2_3_1_0()); 
                                                     	      	    
                                                     	    }
-                                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16303);
+                                                    	    pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16304);
                                                     	    lv_argument_38_0=ruleNavigatingCommaArgCS();
 
                                                     	    state._fsp--;
@@ -21110,7 +21121,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                                                     	    break;
 
                                                     	default :
-                                                    	    break loop127;
+                                                    	    break loop128;
                                                         }
                                                     } while (true);
 
@@ -21126,7 +21137,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                                     }
 
-                                    otherlv_39=(Token)match(input,44,FollowSets000.FOLLOW_44_in_rulePrimaryExpCS16320); if (state.failed) return current;
+                                    otherlv_39=(Token)match(input,44,FollowSets000.FOLLOW_44_in_rulePrimaryExpCS16321); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_39, grammarAccess.getPrimaryExpCSAccess().getRightParenthesisKeyword_7_2_2_1_3());
@@ -21190,7 +21201,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS16361);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS16362);
             iv_ruleNavigatingArgCS=ruleNavigatingArgCS();
 
             state._fsp--;
@@ -21198,7 +21209,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgCS16371); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgCS16372); if (state.failed) return current;
 
             }
 
@@ -21249,7 +21260,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS16417);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS16418);
             lv_name_0_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -21274,17 +21285,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7366:2: (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_init_4_0= ruleExpCS ) ) )? )?
-            int alt134=2;
-            int LA134_0 = input.LA(1);
+            int alt135=2;
+            int LA135_0 = input.LA(1);
 
-            if ( (LA134_0==41) ) {
-                alt134=1;
+            if ( (LA135_0==41) ) {
+                alt135=1;
             }
-            switch (alt134) {
+            switch (alt135) {
                 case 1 :
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7366:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_init_4_0= ruleExpCS ) ) )?
                     {
-                    otherlv_1=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingArgCS16430); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingArgCS16431); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getNavigatingArgCSAccess().getColonKeyword_1_0());
@@ -21301,7 +21312,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS16451);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS16452);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -21326,17 +21337,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7388:2: (otherlv_3= '=' ( (lv_init_4_0= ruleExpCS ) ) )?
-                    int alt133=2;
-                    int LA133_0 = input.LA(1);
+                    int alt134=2;
+                    int LA134_0 = input.LA(1);
 
-                    if ( (LA133_0==47) ) {
-                        alt133=1;
+                    if ( (LA134_0==47) ) {
+                        alt134=1;
                     }
-                    switch (alt133) {
+                    switch (alt134) {
                         case 1 :
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7388:4: otherlv_3= '=' ( (lv_init_4_0= ruleExpCS ) )
                             {
-                            otherlv_3=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingArgCS16464); if (state.failed) return current;
+                            otherlv_3=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingArgCS16465); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_3, grammarAccess.getNavigatingArgCSAccess().getEqualsSignKeyword_1_2_0());
@@ -21353,7 +21364,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingArgCSAccess().getInitExpCSParserRuleCall_1_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgCS16485);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgCS16486);
                             lv_init_4_0=ruleExpCS();
 
                             state._fsp--;
@@ -21426,7 +21437,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingBarArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS16525);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS16526);
             iv_ruleNavigatingBarArgCS=ruleNavigatingBarArgCS();
 
             state._fsp--;
@@ -21434,7 +21445,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingBarArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingBarArgCS16535); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingBarArgCS16536); if (state.failed) return current;
 
             }
 
@@ -21481,7 +21492,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7432:1: (lv_prefix_0_0= '|' )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7433:3: lv_prefix_0_0= '|'
             {
-            lv_prefix_0_0=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleNavigatingBarArgCS16578); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleNavigatingBarArgCS16579); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0());
@@ -21512,7 +21523,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingBarArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS16612);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS16613);
             lv_name_1_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -21537,17 +21548,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7464:2: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )? )?
-            int alt136=2;
-            int LA136_0 = input.LA(1);
+            int alt137=2;
+            int LA137_0 = input.LA(1);
 
-            if ( (LA136_0==41) ) {
-                alt136=1;
+            if ( (LA137_0==41) ) {
+                alt137=1;
             }
-            switch (alt136) {
+            switch (alt137) {
                 case 1 :
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7464:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingBarArgCS16625); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingBarArgCS16626); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingBarArgCSAccess().getColonKeyword_2_0());
@@ -21564,7 +21575,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingBarArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS16646);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS16647);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -21589,17 +21600,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7486:2: (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
-                    int alt135=2;
-                    int LA135_0 = input.LA(1);
+                    int alt136=2;
+                    int LA136_0 = input.LA(1);
 
-                    if ( (LA135_0==47) ) {
-                        alt135=1;
+                    if ( (LA136_0==47) ) {
+                        alt136=1;
                     }
-                    switch (alt135) {
+                    switch (alt136) {
                         case 1 :
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7486:4: otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingBarArgCS16659); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingBarArgCS16660); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingBarArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -21616,7 +21627,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingBarArgCSAccess().getInitExpCSParserRuleCall_2_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS16680);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS16681);
                             lv_init_5_0=ruleExpCS();
 
                             state._fsp--;
@@ -21689,7 +21700,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingCommaArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS16720);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS16721);
             iv_ruleNavigatingCommaArgCS=ruleNavigatingCommaArgCS();
 
             state._fsp--;
@@ -21697,7 +21708,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingCommaArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS16730); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS16731); if (state.failed) return current;
 
             }
 
@@ -21744,7 +21755,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7530:1: (lv_prefix_0_0= ',' )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7531:3: lv_prefix_0_0= ','
             {
-            lv_prefix_0_0=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleNavigatingCommaArgCS16773); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleNavigatingCommaArgCS16774); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0());
@@ -21775,7 +21786,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingCommaArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS16807);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS16808);
             lv_name_1_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -21800,17 +21811,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7562:2: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )? )?
-            int alt138=2;
-            int LA138_0 = input.LA(1);
+            int alt139=2;
+            int LA139_0 = input.LA(1);
 
-            if ( (LA138_0==41) ) {
-                alt138=1;
+            if ( (LA139_0==41) ) {
+                alt139=1;
             }
-            switch (alt138) {
+            switch (alt139) {
                 case 1 :
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7562:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingCommaArgCS16820); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingCommaArgCS16821); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingCommaArgCSAccess().getColonKeyword_2_0());
@@ -21827,7 +21838,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingCommaArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS16841);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS16842);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -21852,17 +21863,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7584:2: (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
-                    int alt137=2;
-                    int LA137_0 = input.LA(1);
+                    int alt138=2;
+                    int LA138_0 = input.LA(1);
 
-                    if ( (LA137_0==47) ) {
-                        alt137=1;
+                    if ( (LA138_0==47) ) {
+                        alt138=1;
                     }
-                    switch (alt137) {
+                    switch (alt138) {
                         case 1 :
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7584:4: otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingCommaArgCS16854); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingCommaArgCS16855); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingCommaArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -21879,7 +21890,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingCommaArgCSAccess().getInitExpCSParserRuleCall_2_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS16875);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS16876);
                             lv_init_5_0=ruleExpCS();
 
                             state._fsp--;
@@ -21952,7 +21963,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingSemiArgCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS16915);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS16916);
             iv_ruleNavigatingSemiArgCS=ruleNavigatingSemiArgCS();
 
             state._fsp--;
@@ -21960,7 +21971,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingSemiArgCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS16925); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS16926); if (state.failed) return current;
 
             }
 
@@ -22007,7 +22018,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7628:1: (lv_prefix_0_0= ';' )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7629:3: lv_prefix_0_0= ';'
             {
-            lv_prefix_0_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleNavigatingSemiArgCS16968); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleNavigatingSemiArgCS16969); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingSemiArgCSAccess().getPrefixSemicolonKeyword_0_0());
@@ -22038,7 +22049,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNavigatingSemiArgCSAccess().getNameNavigatingArgExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS17002);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS17003);
             lv_name_1_0=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -22063,17 +22074,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7660:2: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )? )?
-            int alt140=2;
-            int LA140_0 = input.LA(1);
+            int alt141=2;
+            int LA141_0 = input.LA(1);
 
-            if ( (LA140_0==41) ) {
-                alt140=1;
+            if ( (LA141_0==41) ) {
+                alt141=1;
             }
-            switch (alt140) {
+            switch (alt141) {
                 case 1 :
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7660:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingSemiArgCS17015); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleNavigatingSemiArgCS17016); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingSemiArgCSAccess().getColonKeyword_2_0());
@@ -22090,7 +22101,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS17036);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS17037);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -22115,17 +22126,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7682:2: (otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) ) )?
-                    int alt139=2;
-                    int LA139_0 = input.LA(1);
+                    int alt140=2;
+                    int LA140_0 = input.LA(1);
 
-                    if ( (LA139_0==47) ) {
-                        alt139=1;
+                    if ( (LA140_0==47) ) {
+                        alt140=1;
                     }
-                    switch (alt139) {
+                    switch (alt140) {
                         case 1 :
                             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7682:4: otherlv_4= '=' ( (lv_init_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingSemiArgCS17049); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleNavigatingSemiArgCS17050); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingSemiArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -22142,7 +22153,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getNavigatingSemiArgCSAccess().getInitExpCSParserRuleCall_2_2_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS17070);
+                            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS17071);
                             lv_init_5_0=ruleExpCS();
 
                             state._fsp--;
@@ -22215,7 +22226,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNavigatingArgExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS17110);
+            pushFollow(FollowSets000.FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS17111);
             iv_ruleNavigatingArgExpCS=ruleNavigatingArgExpCS();
 
             state._fsp--;
@@ -22223,7 +22234,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNavigatingArgExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgExpCS17120); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNavigatingArgExpCS17121); if (state.failed) return current;
 
             }
 
@@ -22264,7 +22275,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getNavigatingArgExpCSAccess().getExpCSParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS17169);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS17170);
             this_ExpCS_0=ruleExpCS();
 
             state._fsp--;
@@ -22309,7 +22320,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIfExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS17203);
+            pushFollow(FollowSets000.FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS17204);
             iv_ruleIfExpCS=ruleIfExpCS();
 
             state._fsp--;
@@ -22317,7 +22328,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleIfExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIfExpCS17213); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIfExpCS17214); if (state.failed) return current;
 
             }
 
@@ -22359,7 +22370,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7758:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpCS ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpCS ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpCS ) ) otherlv_6= 'endif' )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7758:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleExpCS ) ) otherlv_2= 'then' ( (lv_thenExpression_3_0= ruleExpCS ) ) otherlv_4= 'else' ( (lv_elseExpression_5_0= ruleExpCS ) ) otherlv_6= 'endif'
             {
-            otherlv_0=(Token)match(input,57,FollowSets000.FOLLOW_57_in_ruleIfExpCS17250); if (state.failed) return current;
+            otherlv_0=(Token)match(input,57,FollowSets000.FOLLOW_57_in_ruleIfExpCS17251); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getIfExpCSAccess().getIfKeyword_0());
@@ -22376,7 +22387,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getIfExpCSAccess().getConditionExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS17271);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS17272);
             lv_condition_1_0=ruleExpCS();
 
             state._fsp--;
@@ -22400,7 +22411,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleIfExpCS17283); if (state.failed) return current;
+            otherlv_2=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleIfExpCS17284); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getIfExpCSAccess().getThenKeyword_2());
@@ -22417,7 +22428,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getIfExpCSAccess().getThenExpressionExpCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS17304);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS17305);
             lv_thenExpression_3_0=ruleExpCS();
 
             state._fsp--;
@@ -22441,7 +22452,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleIfExpCS17316); if (state.failed) return current;
+            otherlv_4=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleIfExpCS17317); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getIfExpCSAccess().getElseKeyword_4());
@@ -22458,7 +22469,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getIfExpCSAccess().getElseExpressionExpCSParserRuleCall_5_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS17337);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleIfExpCS17338);
             lv_elseExpression_5_0=ruleExpCS();
 
             state._fsp--;
@@ -22482,7 +22493,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,56,FollowSets000.FOLLOW_56_in_ruleIfExpCS17349); if (state.failed) return current;
+            otherlv_6=(Token)match(input,56,FollowSets000.FOLLOW_56_in_ruleIfExpCS17350); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getIfExpCSAccess().getEndifKeyword_6());
@@ -22525,7 +22536,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLetExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS17385);
+            pushFollow(FollowSets000.FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS17386);
             iv_ruleLetExpCS=ruleLetExpCS();
 
             state._fsp--;
@@ -22533,7 +22544,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLetExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetExpCS17395); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetExpCS17396); if (state.failed) return current;
 
             }
 
@@ -22574,7 +22585,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7849:1: (otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariableCS ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpCS ) ) )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7849:3: otherlv_0= 'let' ( (lv_variable_1_0= ruleLetVariableCS ) ) (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) ) )* otherlv_4= 'in' ( (lv_in_5_0= ruleExpCS ) )
             {
-            otherlv_0=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleLetExpCS17432); if (state.failed) return current;
+            otherlv_0=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleLetExpCS17433); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getLetExpCSAccess().getLetKeyword_0());
@@ -22591,7 +22602,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetExpCSAccess().getVariableLetVariableCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17453);
+            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17454);
             lv_variable_1_0=ruleLetVariableCS();
 
             state._fsp--;
@@ -22616,21 +22627,21 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7871:2: (otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) ) )*
-            loop141:
+            loop142:
             do {
-                int alt141=2;
-                int LA141_0 = input.LA(1);
+                int alt142=2;
+                int LA142_0 = input.LA(1);
 
-                if ( (LA141_0==43) ) {
-                    alt141=1;
+                if ( (LA142_0==43) ) {
+                    alt142=1;
                 }
 
 
-                switch (alt141) {
+                switch (alt142) {
             	case 1 :
             	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7871:4: otherlv_2= ',' ( (lv_variable_3_0= ruleLetVariableCS ) )
             	    {
-            	    otherlv_2=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleLetExpCS17466); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleLetExpCS17467); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getLetExpCSAccess().getCommaKeyword_2_0());
@@ -22647,7 +22658,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getLetExpCSAccess().getVariableLetVariableCSParserRuleCall_2_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17487);
+            	    pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17488);
             	    lv_variable_3_0=ruleLetVariableCS();
 
             	    state._fsp--;
@@ -22676,11 +22687,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop141;
+            	    break loop142;
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,59,FollowSets000.FOLLOW_59_in_ruleLetExpCS17501); if (state.failed) return current;
+            otherlv_4=(Token)match(input,59,FollowSets000.FOLLOW_59_in_ruleLetExpCS17502); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getLetExpCSAccess().getInKeyword_3());
@@ -22697,7 +22708,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetExpCSAccess().getInExpCSParserRuleCall_4_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetExpCS17522);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetExpCS17523);
             lv_in_5_0=ruleExpCS();
 
             state._fsp--;
@@ -22758,7 +22769,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLetVariableCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS17558);
+            pushFollow(FollowSets000.FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS17559);
             iv_ruleLetVariableCS=ruleLetVariableCS();
 
             state._fsp--;
@@ -22766,7 +22777,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLetVariableCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetVariableCS17568); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLetVariableCS17569); if (state.failed) return current;
 
             }
 
@@ -22817,7 +22828,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS17614);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS17615);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -22842,17 +22853,17 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7954:2: (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )?
-            int alt142=2;
-            int LA142_0 = input.LA(1);
+            int alt143=2;
+            int LA143_0 = input.LA(1);
 
-            if ( (LA142_0==41) ) {
-                alt142=1;
+            if ( (LA143_0==41) ) {
+                alt143=1;
             }
-            switch (alt142) {
+            switch (alt143) {
                 case 1 :
                     // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:7954:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
                     {
-                    otherlv_1=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleLetVariableCS17627); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleLetVariableCS17628); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getLetVariableCSAccess().getColonKeyword_1_0());
@@ -22869,7 +22880,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS17648);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS17649);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -22899,7 +22910,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleLetVariableCS17662); if (state.failed) return current;
+            otherlv_3=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleLetVariableCS17663); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getLetVariableCSAccess().getEqualsSignKeyword_2());
@@ -22916,7 +22927,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getInitExpressionExpCSParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetVariableCS17683);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleLetVariableCS17684);
             lv_initExpression_4_0=ruleExpCS();
 
             state._fsp--;
@@ -22977,7 +22988,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNestedExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS17719);
+            pushFollow(FollowSets000.FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS17720);
             iv_ruleNestedExpCS=ruleNestedExpCS();
 
             state._fsp--;
@@ -22985,7 +22996,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNestedExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNestedExpCS17729); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNestedExpCS17730); if (state.failed) return current;
 
             }
 
@@ -23021,7 +23032,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:8019:1: (otherlv_0= '(' ( (lv_source_1_0= ruleExpCS ) ) otherlv_2= ')' )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:8019:3: otherlv_0= '(' ( (lv_source_1_0= ruleExpCS ) ) otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleNestedExpCS17766); if (state.failed) return current;
+            otherlv_0=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleNestedExpCS17767); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getNestedExpCSAccess().getLeftParenthesisKeyword_0());
@@ -23038,7 +23049,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNestedExpCSAccess().getSourceExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNestedExpCS17787);
+            pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleNestedExpCS17788);
             lv_source_1_0=ruleExpCS();
 
             state._fsp--;
@@ -23062,7 +23073,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,44,FollowSets000.FOLLOW_44_in_ruleNestedExpCS17799); if (state.failed) return current;
+            otherlv_2=(Token)match(input,44,FollowSets000.FOLLOW_44_in_ruleNestedExpCS17800); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getNestedExpCSAccess().getRightParenthesisKeyword_2());
@@ -23105,7 +23116,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSelfExpCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS17835);
+            pushFollow(FollowSets000.FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS17836);
             iv_ruleSelfExpCS=ruleSelfExpCS();
 
             state._fsp--;
@@ -23113,7 +23124,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleSelfExpCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSelfExpCS17845); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSelfExpCS17846); if (state.failed) return current;
 
             }
 
@@ -23164,7 +23175,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,96,FollowSets000.FOLLOW_96_in_ruleSelfExpCS17894); if (state.failed) return current;
+            otherlv_1=(Token)match(input,96,FollowSets000.FOLLOW_96_in_ruleSelfExpCS17895); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getSelfExpCSAccess().getSelfKeyword_1());
@@ -23310,7 +23321,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
     protected DFA42 dfa42 = new DFA42(this);
     protected DFA114 dfa114 = new DFA114(this);
     protected DFA109 dfa109 = new DFA109(this);
-    protected DFA132 dfa132 = new DFA132(this);
+    protected DFA133 dfa133 = new DFA133(this);
     static final String DFA26_eotS =
         "\33\uffff";
     static final String DFA26_eofS =
@@ -23320,36 +23331,36 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
     static final String DFA26_maxS =
         "\1\52\1\45\27\54\2\uffff";
     static final String DFA26_acceptS =
-        "\31\uffff\1\1\1\2";
+        "\31\uffff\1\2\1\1";
     static final String DFA26_specialS =
         "\33\uffff}>";
     static final String[] DFA26_transitionS = {
             "\1\1",
             "\1\2\1\3\10\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
             "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
-            "\1\31\16\uffff\1\31\5\uffff\1\32\1\uffff\2\31",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
+            "\1\32\16\uffff\1\32\5\uffff\1\31\1\uffff\2\32",
             "",
             ""
     };
@@ -23626,20 +23637,20 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             return "()* loopback of 6613:2: ( ( (lv_ownedOperator_4_0= ruleBinaryOperatorCS ) ) ( (lv_ownedExpression_5_0= rulePrefixedExpCS ) ) )*";
         }
     }
-    static final String DFA132_eotS =
+    static final String DFA133_eotS =
         "\62\uffff";
-    static final String DFA132_eofS =
+    static final String DFA133_eofS =
         "\62\uffff";
-    static final String DFA132_minS =
+    static final String DFA133_minS =
         "\1\5\12\uffff\6\0\41\uffff";
-    static final String DFA132_maxS =
+    static final String DFA133_maxS =
         "\1\140\12\uffff\6\0\41\uffff";
-    static final String DFA132_acceptS =
+    static final String DFA133_acceptS =
         "\1\uffff\1\1\1\2\1\3\1\4\14\uffff\1\7\7\uffff\1\10\26\uffff\1\5"+
         "\1\6";
-    static final String DFA132_specialS =
+    static final String DFA133_specialS =
         "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\41\uffff}>";
-    static final String[] DFA132_transitionS = {
+    static final String[] DFA133_transitionS = {
             "\1\4\1\uffff\2\31\1\4\7\uffff\25\31\1\uffff\1\13\2\uffff\1"+
             "\1\12\uffff\1\4\3\uffff\1\2\21\uffff\10\21\1\14\1\15\1\16\1"+
             "\17\1\20\3\uffff\4\4\1\uffff\1\3",
@@ -23694,47 +23705,47 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA132_eot = DFA.unpackEncodedString(DFA132_eotS);
-    static final short[] DFA132_eof = DFA.unpackEncodedString(DFA132_eofS);
-    static final char[] DFA132_min = DFA.unpackEncodedStringToUnsignedChars(DFA132_minS);
-    static final char[] DFA132_max = DFA.unpackEncodedStringToUnsignedChars(DFA132_maxS);
-    static final short[] DFA132_accept = DFA.unpackEncodedString(DFA132_acceptS);
-    static final short[] DFA132_special = DFA.unpackEncodedString(DFA132_specialS);
-    static final short[][] DFA132_transition;
+    static final short[] DFA133_eot = DFA.unpackEncodedString(DFA133_eotS);
+    static final short[] DFA133_eof = DFA.unpackEncodedString(DFA133_eofS);
+    static final char[] DFA133_min = DFA.unpackEncodedStringToUnsignedChars(DFA133_minS);
+    static final char[] DFA133_max = DFA.unpackEncodedStringToUnsignedChars(DFA133_maxS);
+    static final short[] DFA133_accept = DFA.unpackEncodedString(DFA133_acceptS);
+    static final short[] DFA133_special = DFA.unpackEncodedString(DFA133_specialS);
+    static final short[][] DFA133_transition;
 
     static {
-        int numStates = DFA132_transitionS.length;
-        DFA132_transition = new short[numStates][];
+        int numStates = DFA133_transitionS.length;
+        DFA133_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA132_transition[i] = DFA.unpackEncodedString(DFA132_transitionS[i]);
+            DFA133_transition[i] = DFA.unpackEncodedString(DFA133_transitionS[i]);
         }
     }
 
-    class DFA132 extends DFA {
+    class DFA133 extends DFA {
 
-        public DFA132(BaseRecognizer recognizer) {
+        public DFA133(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 132;
-            this.eot = DFA132_eot;
-            this.eof = DFA132_eof;
-            this.min = DFA132_min;
-            this.max = DFA132_max;
-            this.accept = DFA132_accept;
-            this.special = DFA132_special;
-            this.transition = DFA132_transition;
+            this.decisionNumber = 133;
+            this.eot = DFA133_eot;
+            this.eof = DFA133_eof;
+            this.min = DFA133_min;
+            this.max = DFA133_max;
+            this.accept = DFA133_accept;
+            this.special = DFA133_special;
+            this.transition = DFA133_transition;
         }
         public String getDescription() {
-            return "6863:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* ) | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) )";
+            return "6863:1: (this_NestedExpCS_0= ruleNestedExpCS | this_IfExpCS_1= ruleIfExpCS | this_SelfExpCS_2= ruleSelfExpCS | this_PrimitiveLiteralExpCS_3= rulePrimitiveLiteralExpCS | this_TupleLiteralExpCS_4= ruleTupleLiteralExpCS | this_CollectionLiteralExpCS_5= ruleCollectionLiteralExpCS | this_TypeLiteralExpCS_6= ruleTypeLiteralExpCS | ( () ( (lv_pathName_8_0= rulePathNameCS ) ) ( ( () otherlv_10= '[' ( (lv_firstIndexes_11_0= ruleExpCS ) ) (otherlv_12= ',' ( (lv_firstIndexes_13_0= ruleExpCS ) ) )* otherlv_14= ']' (otherlv_15= '[' ( (lv_secondIndexes_16_0= ruleExpCS ) ) (otherlv_17= ',' ( (lv_secondIndexes_18_0= ruleExpCS ) ) )* otherlv_19= ']' )? ( ( (lv_atPre_20_0= '@' ) ) otherlv_21= 'pre' )? ) | ( () otherlv_23= '{' ( ( ( (lv_ownedParts_24_0= ruleConstructorPartCS ) ) (otherlv_25= ',' ( (lv_ownedParts_26_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_27_0= ruleStringLiteral ) ) ) otherlv_28= '}' ) | ( ( ( (lv_atPre_29_0= '@' ) ) otherlv_30= 'pre' )? ( () otherlv_32= '(' ( ( (lv_argument_33_0= ruleNavigatingArgCS ) ) ( (lv_argument_34_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_argument_35_0= ruleNavigatingSemiArgCS ) ) ( (lv_argument_36_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_argument_37_0= ruleNavigatingBarArgCS ) ) ( (lv_argument_38_0= ruleNavigatingCommaArgCS ) )* )? )? otherlv_39= ')' )? ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA132_11 = input.LA(1);
+                        int LA133_11 = input.LA(1);
 
                          
-                        int index132_11 = input.index();
+                        int index133_11 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred200_InternalOCLstdlib()) ) {s = 48;}
@@ -23742,14 +23753,14 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                         else if ( (synpred202_InternalOCLstdlib()) ) {s = 17;}
 
                          
-                        input.seek(index132_11);
+                        input.seek(index133_11);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA132_12 = input.LA(1);
+                        int LA133_12 = input.LA(1);
 
                          
-                        int index132_12 = input.index();
+                        int index133_12 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred201_InternalOCLstdlib()) ) {s = 49;}
@@ -23757,14 +23768,14 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                         else if ( (synpred202_InternalOCLstdlib()) ) {s = 17;}
 
                          
-                        input.seek(index132_12);
+                        input.seek(index133_12);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA132_13 = input.LA(1);
+                        int LA133_13 = input.LA(1);
 
                          
-                        int index132_13 = input.index();
+                        int index133_13 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred201_InternalOCLstdlib()) ) {s = 49;}
@@ -23772,14 +23783,14 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                         else if ( (synpred202_InternalOCLstdlib()) ) {s = 17;}
 
                          
-                        input.seek(index132_13);
+                        input.seek(index133_13);
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA132_14 = input.LA(1);
+                        int LA133_14 = input.LA(1);
 
                          
-                        int index132_14 = input.index();
+                        int index133_14 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred201_InternalOCLstdlib()) ) {s = 49;}
@@ -23787,14 +23798,14 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                         else if ( (synpred202_InternalOCLstdlib()) ) {s = 17;}
 
                          
-                        input.seek(index132_14);
+                        input.seek(index133_14);
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA132_15 = input.LA(1);
+                        int LA133_15 = input.LA(1);
 
                          
-                        int index132_15 = input.index();
+                        int index133_15 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred201_InternalOCLstdlib()) ) {s = 49;}
@@ -23802,14 +23813,14 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                         else if ( (synpred202_InternalOCLstdlib()) ) {s = 17;}
 
                          
-                        input.seek(index132_15);
+                        input.seek(index133_15);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA132_16 = input.LA(1);
+                        int LA133_16 = input.LA(1);
 
                          
-                        int index132_16 = input.index();
+                        int index133_16 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred201_InternalOCLstdlib()) ) {s = 49;}
@@ -23817,13 +23828,13 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                         else if ( (synpred202_InternalOCLstdlib()) ) {s = 17;}
 
                          
-                        input.seek(index132_16);
+                        input.seek(index133_16);
                         if ( s>=0 ) return s;
                         break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 132, _s, input);
+                new NoViableAltException(getDescription(), 133, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -24459,88 +24470,88 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_90_in_rulePrimaryExpCS15911 = new BitSet(new long[]{0x0000000000000002L,0x0000000080000000L});
         public static final BitSet FOLLOW_95_in_rulePrimaryExpCS15932 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_30_in_rulePrimaryExpCS15957 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_45_in_rulePrimaryExpCS15991 = new BitSet(new long[]{0x0000003FFFFE01A0L});
+        public static final BitSet FOLLOW_45_in_rulePrimaryExpCS15991 = new BitSet(new long[]{0x0000403FFFFE01A0L});
         public static final BitSet FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS16014 = new BitSet(new long[]{0x0000480000000000L});
         public static final BitSet FOLLOW_43_in_rulePrimaryExpCS16027 = new BitSet(new long[]{0x0000003FFFFE0180L});
         public static final BitSet FOLLOW_ruleConstructorPartCS_in_rulePrimaryExpCS16048 = new BitSet(new long[]{0x0000480000000000L});
-        public static final BitSet FOLLOW_ruleStringLiteral_in_rulePrimaryExpCS16078 = new BitSet(new long[]{0x0000400000000000L});
-        public static final BitSet FOLLOW_46_in_rulePrimaryExpCS16091 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_95_in_rulePrimaryExpCS16118 = new BitSet(new long[]{0x0000000040000000L});
-        public static final BitSet FOLLOW_30_in_rulePrimaryExpCS16143 = new BitSet(new long[]{0x0000040000000002L});
-        public static final BitSet FOLLOW_42_in_rulePrimaryExpCS16170 = new BitSet(new long[]{0xFFE014BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS16192 = new BitSet(new long[]{0x0001180000010000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16213 = new BitSet(new long[]{0x0001180000010000L});
-        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS16236 = new BitSet(new long[]{0x0001180000000000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16257 = new BitSet(new long[]{0x0001180000000000L});
-        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS16282 = new BitSet(new long[]{0x0000180000000000L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16303 = new BitSet(new long[]{0x0000180000000000L});
-        public static final BitSet FOLLOW_44_in_rulePrimaryExpCS16320 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS16361 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgCS16371 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS16417 = new BitSet(new long[]{0x0000020000000002L});
-        public static final BitSet FOLLOW_41_in_ruleNavigatingArgCS16430 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS16451 = new BitSet(new long[]{0x0000800000000002L});
-        public static final BitSet FOLLOW_47_in_ruleNavigatingArgCS16464 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgCS16485 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS16525 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingBarArgCS16535 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_48_in_ruleNavigatingBarArgCS16578 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS16612 = new BitSet(new long[]{0x0000020000000002L});
-        public static final BitSet FOLLOW_41_in_ruleNavigatingBarArgCS16625 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS16646 = new BitSet(new long[]{0x0000800000000002L});
-        public static final BitSet FOLLOW_47_in_ruleNavigatingBarArgCS16659 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS16680 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS16720 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS16730 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_43_in_ruleNavigatingCommaArgCS16773 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS16807 = new BitSet(new long[]{0x0000020000000002L});
-        public static final BitSet FOLLOW_41_in_ruleNavigatingCommaArgCS16820 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS16841 = new BitSet(new long[]{0x0000800000000002L});
-        public static final BitSet FOLLOW_47_in_ruleNavigatingCommaArgCS16854 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS16875 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS16915 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS16925 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleNavigatingSemiArgCS16968 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS17002 = new BitSet(new long[]{0x0000020000000002L});
-        public static final BitSet FOLLOW_41_in_ruleNavigatingSemiArgCS17015 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS17036 = new BitSet(new long[]{0x0000800000000002L});
-        public static final BitSet FOLLOW_47_in_ruleNavigatingSemiArgCS17049 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS17070 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS17110 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgExpCS17120 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS17169 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS17203 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIfExpCS17213 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_57_in_ruleIfExpCS17250 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS17271 = new BitSet(new long[]{0x8000000000000000L});
-        public static final BitSet FOLLOW_63_in_ruleIfExpCS17283 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS17304 = new BitSet(new long[]{0x0080000000000000L});
-        public static final BitSet FOLLOW_55_in_ruleIfExpCS17316 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS17337 = new BitSet(new long[]{0x0100000000000000L});
-        public static final BitSet FOLLOW_56_in_ruleIfExpCS17349 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS17385 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLetExpCS17395 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_60_in_ruleLetExpCS17432 = new BitSet(new long[]{0x0000003FFFFE0180L});
-        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17453 = new BitSet(new long[]{0x0800080000000000L});
-        public static final BitSet FOLLOW_43_in_ruleLetExpCS17466 = new BitSet(new long[]{0x0000003FFFFE0180L});
-        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17487 = new BitSet(new long[]{0x0800080000000000L});
-        public static final BitSet FOLLOW_59_in_ruleLetExpCS17501 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetExpCS17522 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS17558 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLetVariableCS17568 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS17614 = new BitSet(new long[]{0x0000820000000000L});
-        public static final BitSet FOLLOW_41_in_ruleLetVariableCS17627 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS17648 = new BitSet(new long[]{0x0000800000000000L});
-        public static final BitSet FOLLOW_47_in_ruleLetVariableCS17662 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetVariableCS17683 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS17719 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNestedExpCS17729 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_42_in_ruleNestedExpCS17766 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleNestedExpCS17787 = new BitSet(new long[]{0x0000100000000000L});
-        public static final BitSet FOLLOW_44_in_ruleNestedExpCS17799 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS17835 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSelfExpCS17845 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_96_in_ruleSelfExpCS17894 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStringLiteral_in_rulePrimaryExpCS16079 = new BitSet(new long[]{0x0000400000000000L});
+        public static final BitSet FOLLOW_46_in_rulePrimaryExpCS16092 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_95_in_rulePrimaryExpCS16119 = new BitSet(new long[]{0x0000000040000000L});
+        public static final BitSet FOLLOW_30_in_rulePrimaryExpCS16144 = new BitSet(new long[]{0x0000040000000002L});
+        public static final BitSet FOLLOW_42_in_rulePrimaryExpCS16171 = new BitSet(new long[]{0xFFE014BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_rulePrimaryExpCS16193 = new BitSet(new long[]{0x0001180000010000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16214 = new BitSet(new long[]{0x0001180000010000L});
+        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_rulePrimaryExpCS16237 = new BitSet(new long[]{0x0001180000000000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16258 = new BitSet(new long[]{0x0001180000000000L});
+        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_rulePrimaryExpCS16283 = new BitSet(new long[]{0x0000180000000000L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rulePrimaryExpCS16304 = new BitSet(new long[]{0x0000180000000000L});
+        public static final BitSet FOLLOW_44_in_rulePrimaryExpCS16321 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingArgCS_in_entryRuleNavigatingArgCS16362 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgCS16372 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingArgCS16418 = new BitSet(new long[]{0x0000020000000002L});
+        public static final BitSet FOLLOW_41_in_ruleNavigatingArgCS16431 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingArgCS16452 = new BitSet(new long[]{0x0000800000000002L});
+        public static final BitSet FOLLOW_47_in_ruleNavigatingArgCS16465 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgCS16486 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingBarArgCS_in_entryRuleNavigatingBarArgCS16526 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingBarArgCS16536 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_48_in_ruleNavigatingBarArgCS16579 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingBarArgCS16613 = new BitSet(new long[]{0x0000020000000002L});
+        public static final BitSet FOLLOW_41_in_ruleNavigatingBarArgCS16626 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingBarArgCS16647 = new BitSet(new long[]{0x0000800000000002L});
+        public static final BitSet FOLLOW_47_in_ruleNavigatingBarArgCS16660 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingBarArgCS16681 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_entryRuleNavigatingCommaArgCS16721 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingCommaArgCS16731 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_43_in_ruleNavigatingCommaArgCS16774 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingCommaArgCS16808 = new BitSet(new long[]{0x0000020000000002L});
+        public static final BitSet FOLLOW_41_in_ruleNavigatingCommaArgCS16821 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingCommaArgCS16842 = new BitSet(new long[]{0x0000800000000002L});
+        public static final BitSet FOLLOW_47_in_ruleNavigatingCommaArgCS16855 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingCommaArgCS16876 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingSemiArgCS_in_entryRuleNavigatingSemiArgCS16916 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingSemiArgCS16926 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleNavigatingSemiArgCS16969 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_ruleNavigatingSemiArgCS17003 = new BitSet(new long[]{0x0000020000000002L});
+        public static final BitSet FOLLOW_41_in_ruleNavigatingSemiArgCS17016 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleNavigatingSemiArgCS17037 = new BitSet(new long[]{0x0000800000000002L});
+        public static final BitSet FOLLOW_47_in_ruleNavigatingSemiArgCS17050 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingSemiArgCS17071 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNavigatingArgExpCS_in_entryRuleNavigatingArgExpCS17111 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNavigatingArgExpCS17121 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNavigatingArgExpCS17170 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIfExpCS_in_entryRuleIfExpCS17204 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleIfExpCS17214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_57_in_ruleIfExpCS17251 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS17272 = new BitSet(new long[]{0x8000000000000000L});
+        public static final BitSet FOLLOW_63_in_ruleIfExpCS17284 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS17305 = new BitSet(new long[]{0x0080000000000000L});
+        public static final BitSet FOLLOW_55_in_ruleIfExpCS17317 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleIfExpCS17338 = new BitSet(new long[]{0x0100000000000000L});
+        public static final BitSet FOLLOW_56_in_ruleIfExpCS17350 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLetExpCS_in_entryRuleLetExpCS17386 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLetExpCS17396 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_60_in_ruleLetExpCS17433 = new BitSet(new long[]{0x0000003FFFFE0180L});
+        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17454 = new BitSet(new long[]{0x0800080000000000L});
+        public static final BitSet FOLLOW_43_in_ruleLetExpCS17467 = new BitSet(new long[]{0x0000003FFFFE0180L});
+        public static final BitSet FOLLOW_ruleLetVariableCS_in_ruleLetExpCS17488 = new BitSet(new long[]{0x0800080000000000L});
+        public static final BitSet FOLLOW_59_in_ruleLetExpCS17502 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetExpCS17523 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLetVariableCS_in_entryRuleLetVariableCS17559 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLetVariableCS17569 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleLetVariableCS17615 = new BitSet(new long[]{0x0000820000000000L});
+        public static final BitSet FOLLOW_41_in_ruleLetVariableCS17628 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleTypeExpCS_in_ruleLetVariableCS17649 = new BitSet(new long[]{0x0000800000000000L});
+        public static final BitSet FOLLOW_47_in_ruleLetVariableCS17663 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleLetVariableCS17684 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNestedExpCS_in_entryRuleNestedExpCS17720 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNestedExpCS17730 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_ruleNestedExpCS17767 = new BitSet(new long[]{0xFFE004BFFFFE03B0L,0x0000000178FFF803L});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleNestedExpCS17788 = new BitSet(new long[]{0x0000100000000000L});
+        public static final BitSet FOLLOW_44_in_ruleNestedExpCS17800 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS17836 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSelfExpCS17846 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_96_in_ruleSelfExpCS17895 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTupleLiteralExpCS_in_synpred200_InternalOCLstdlib15635 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleCollectionLiteralExpCS_in_synpred201_InternalOCLstdlib15665 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeLiteralExpCS_in_synpred202_InternalOCLstdlib15695 = new BitSet(new long[]{0x0000000000000002L});
