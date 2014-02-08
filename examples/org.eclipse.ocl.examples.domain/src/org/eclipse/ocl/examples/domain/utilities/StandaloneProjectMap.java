@@ -2185,8 +2185,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	protected @Nullable IProjectDescriptor registerBundle(@NonNull File file, @NonNull SAXParser saxParser) {
+		JarFile jarFile = null;
 		try {
-			JarFile jarFile = new JarFile(file);
+			jarFile = new JarFile(file);
 			Manifest manifest = jarFile.getManifest();
 			if (manifest == null) {
 				return null;
@@ -2222,6 +2223,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			logException(file, new WrappedException("Could not open Jar file " + file.getAbsolutePath() + ".", e));
 		} catch (Exception e) {
 			logException(file, e);
+		} finally{
+			if (jarFile != null) {
+				try {
+					jarFile.close();
+				} catch (IOException e) {}
+			}
 		}
 		return null;
 	}
