@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -117,15 +118,21 @@ public class NodeLabelProvider extends ColumnLabelProvider
 
 	protected void appendResourceDiagnostic(@NonNull Writer s, @NonNull Diagnostic diagnostic) {
 		boolean isFirst = true;
-		for (Diagnostic child : diagnostic.getChildren()) {
-			try {
-				if (isFirst) {
-					s.append(child.getMessage());
-					isFirst = false;
-				} else {
-					s.append("\n" + child.getMessage());
+		List<Diagnostic> children = diagnostic.getChildren();
+		try {
+			if (!children.isEmpty()) {
+				for (Diagnostic child : diagnostic.getChildren()) {
+					if (isFirst) {
+						s.append(child.getMessage());
+						isFirst = false;
+					} else {
+						s.append("\n" + child.getMessage());
+					}
 				}
-			} catch (IOException e) {}
+			} else {
+				s.append(diagnostic.getMessage());
+			}
+		} catch (IOException e) {
 		}
 	}
 

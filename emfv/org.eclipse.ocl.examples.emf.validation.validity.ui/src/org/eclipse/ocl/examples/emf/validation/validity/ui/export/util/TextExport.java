@@ -90,7 +90,7 @@ public class TextExport extends AbstractExport {
 					}
 				}
 			}
-			if (!validationErrors.isEmpty()) {
+			if (!validationFailures.isEmpty()) {
 				text.append("- Failures:\n");
 				for (LeafConstrainingNode failureNode : validationFailures) {
 					if (loggedConstrainingObjects.add(failureNode.getConstrainingObject())) {

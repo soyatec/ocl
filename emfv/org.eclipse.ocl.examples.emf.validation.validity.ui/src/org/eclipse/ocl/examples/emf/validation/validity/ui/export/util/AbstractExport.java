@@ -219,13 +219,19 @@ public abstract class AbstractExport implements IValidatorExport {
 			message.append("null diagnostic message");
 		} else if (diagnostic instanceof Diagnostic) {
 			boolean isFirst = true;
-			for (Diagnostic child : ((Diagnostic) diagnostic).getChildren()) {
-				if (isFirst) {
-					message.append(child.getMessage());
-					isFirst = false;
-				} else {
-					message.append("\n" + child.getMessage());
+			List<Diagnostic> diagnosticChildren = ((Diagnostic) diagnostic)
+					.getChildren();
+			if (diagnosticChildren != null && !diagnosticChildren.isEmpty()) {
+				for (Diagnostic child : diagnosticChildren) {
+					if (isFirst) {
+						message.append(child.getMessage());
+						isFirst = false;
+					} else {
+						message.append("\n" + child.getMessage());
+					}
 				}
+			} else {
+				message.append(((Diagnostic) diagnostic).getMessage());
 			}
 			return message.toString();
 		} else {
