@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010, 2012 ProxiAD and Others
+ * Copyright (c) 2010,2014 ProxiAD and Others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,10 +14,9 @@
  *    Sebastian Zarnekow (itemis AG) - synthetic resource creation and source viewer configuration 
  *    Cedric Vidal (ProxiAD) - integration with global scope
  *    E.D.Willink - integration of XTFO code uder CQ 4866
+ *    L.Goubert (Obeo) - generalize to XtextResource
  *
  * </copyright>
- *
- * $Id: EmbeddedXtextEditor.java,v 1.5 2011/03/16 17:44:48 ewillink Exp $
  */
 package org.eclipse.ocl.examples.xtext.console.xtfo;
 
@@ -126,7 +125,7 @@ public class EmbeddedXtextEditor {
 	private int fStyle;
 	
 	private XtextSourceViewer fSourceViewer;
-	private EmbeddedXtextResource fResource;
+	private XtextResource fResource;
 	private XtextDocument fDocument;
 	
 	@Inject
@@ -154,7 +153,7 @@ public class EmbeddedXtextEditor {
 	private Provider<XtextDocument> fDocumentProvider;
 
 	@Inject
-	private Provider<EmbeddedXtextResource> fEmbeddedXtextResourceProvider;
+	private Provider<XtextResource> fXtextResourceProvider;
 	@Inject
 	private IResourceValidator fResourceValidator;
 
@@ -254,8 +253,8 @@ public class EmbeddedXtextEditor {
 		fSourceViewer.setDocument(document, annotationModel);
 	}
 	
-	private EmbeddedXtextResource createResource(String content) {
-		EmbeddedXtextResource result = createResource();
+	private XtextResource createResource(String content) {
+		XtextResource result = createResource();
 		try {
 			result.load(new StringInputStream(content, result.getEncoding()), Collections.emptyMap());
 		} catch (Exception e) {
@@ -523,82 +522,6 @@ public class EmbeddedXtextEditor {
 		fSourceViewer.setRedraw(true);
 	}
 	
-	/**
-	 * Updates the text of this editor with the given String or the 
-	 * serialized form of the EObject if the semantic model of the 
-	 * String does not contain any error and is different from the 
-	 * given EObject.
-	 * 
-	 * @param eObject
-	 * @param asString
-	 *
-	public void update(EObject eObject, String asString) {
-		fResource.setParentResource(eObject.eResource());
-		if (eObject != null) {
-			EObject asStringEObject = null;
-//			XtextResource asStringResource = (XtextResource) fResourceSetProvider.get(null).createResource(URI.createURI("asStringResource." + fFileExtension));
-			ResourceSet resourceSet = fResourceSetProvider.get(null);
-			EmbeddedXtextResource asStringResource = fEmbeddedXtextResourceProvider.get();
-			resourceSet.getResources().add(asStringResource);
-//			EmbeddedXtextResource asStringResource = new EmbeddedXtextResource();
-			asStringResource.setURI(URI.createURI("asStringResource." + fFileExtension)); //$NON-NLS-1$
-			asStringResource.setParentResource(eObject.eResource());
-			try {
-				asStringResource.load(new StringInputStream(asString), Collections.emptyMap());
-				if (!asStringResource.getContents().isEmpty()) {
-					asStringEObject = asStringResource.getContents().get(0);
-				}
-			} catch (IOException e) {
-				// ignore, will set the string to the serialization of the given eObject
-			}
-
-			try {
-				EcoreUtil.resolveAll(asStringResource);
-			} catch (Exception e) {
-				// ignore
-			}
-			
-			if (!asStringResource.getErrors().isEmpty() || (asStringResource.getParseResult() != null && asStringResource.getParseResult().getSyntaxErrors().iterator().hasNext())) {
-				// if there are parsing errors in the saved string, then we update with it
-				update(asString);
-			} else if (asStringEObject != null) {
-				try {
-//					Resource copyResource = (XtextResource) fResourceSetProvider.get(null).createResource(URI.createURI("copyResource." + fFileExtension));
-//					EmbeddedXtextResource copyResource = (EmbeddedXtextResource) fResourceSetProvider.get(null).createResource(URI.createURI("copyResource." + fFileExtension));
-					EmbeddedXtextResource copyResource = fEmbeddedXtextResourceProvider.get();
-//					EmbeddedXtextResource copyResource = new EmbeddedXtextResource();
-					copyResource.setURI(URI.createURI("copyResource." + fFileExtension)); //$NON-NLS-1$
-					copyResource.setParentResource(eObject.eResource());
-					try {
-						EObject copyEObject = EcoreUtil.copy(eObject);
-						copyResource.getContents().add(copyEObject);
-						EcoreUtil.resolveAll(copyResource);
-						if (!equals(copyEObject, asStringEObject)) {
-//							String model = getResource().getSerializer().serialize(copyEObject, SaveOptions.newBuilder().noValidation().format().getOptions());
-							update(asString); // FIXME: should update with the serialized form of the copyEObject but throw RuntimeException!!! 
-						} else {
-							// if there is no error and the content are equals, then we also update with the string
-							update(asString);
-						}
-					} catch (Exception e) {
-						update(asString);
-					}
-
-					copyResource.unload();
-				} catch (Exception e) {
-					update(asString);
-				}
-			} else {
-				update(""); //$NON-NLS-1$
-			}
-			
-			asStringResource.unload();
-			asStringResource.getResourceSet().getResources().remove(asStringResource);
-//		} else {
-//			update(""); //$NON-NLS-1$
-		}
-	} */
-	
 	private void createActions() {
 		{
 			TextViewerAction action= new TextViewerAction(fSourceViewer, ITextOperationTarget.CUT);
@@ -747,13 +670,13 @@ public class EmbeddedXtextEditor {
 		}
 	}
 
-	protected EmbeddedXtextResource createResource() {
+	protected XtextResource createResource() {
 		String dummyFileName = fGrammarAccess.getGrammar().getName() + "." + fFileExtension; //$NON-NLS-1$
 		URI dummyURI = URI.createURI(dummyFileName);
 		ResourceSet resourceSet = getResourceSet();
 //		XtextResource result = (XtextResource) resourceSet.createResource(
 //				URI.createURI(fGrammarAccess.getGrammar().getName() + "." + fFileExtension));
-		EmbeddedXtextResource result = fEmbeddedXtextResourceProvider.get();
+		XtextResource result = fXtextResourceProvider.get();
 		result.setURI(dummyURI);
 		resourceSet.getResources().add(result);
 		return result;
@@ -762,17 +685,4 @@ public class EmbeddedXtextEditor {
 	public ResourceSet getResourceSet() {
 		return fResourceSetProvider.get(null);
 	}
-
-/*	private static boolean equals(EObject expected, EObject actual) {
-		Map<String, Object> options = ImmutableMap.<String, Object> builder().put(MatchOptions.OPTION_IGNORE_XMI_ID, Boolean.TRUE).build();
-	    MatchModel match = null;
-	    try {
-	        match = MatchService.doMatch(expected, actual, options);
-	        DiffModel diff = DiffService.doDiff(match, false);
-	        return diff.getDifferences().isEmpty();
-	    }
-	    catch (InterruptedException e) {
-	        throw new AssertionError(e);
-	    }
-	} */
 }
