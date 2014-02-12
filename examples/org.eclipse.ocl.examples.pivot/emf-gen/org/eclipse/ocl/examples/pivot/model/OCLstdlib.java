@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceImpl;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
+import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
@@ -182,6 +183,17 @@ public class OCLstdlib extends ASResourceImpl
 		if (this != INSTANCE) {
 			super.doUnload();
 		}
+	}
+
+	/**
+	 * Ensure xmi:ids are auto-generated before reference.
+	 */
+	@Override
+	public EObject getEObject(String uriFragment) {
+		if (getEObjectToIDMap().isEmpty()) {
+			new AS2XMIid().assignIds(this, null);
+		}
+		return super.getEObject(uriFragment);
 	}
 
 	protected static class Contents extends AbstractContents
