@@ -1204,15 +1204,6 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNamedElement_OwnedAnnotation() {
-		return (EReference)namedElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getElement() {
 		return elementEClass;
 	}
@@ -1223,7 +1214,7 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	public EReference getElement_OwnedComment() {
-		return (EReference)elementEClass.getEStructuralFeatures().get(1);
+		return (EReference)elementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1234,6 +1225,16 @@ public class PivotPackageImpl
 	public EReference getElement_Extension()
 	{
 		return (EReference)elementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getElement_OwnedAnnotation()
+	{
+		return (EReference)elementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -5334,6 +5335,7 @@ public class PivotPackageImpl
 
 		elementEClass = createEClass(ELEMENT);
 		createEReference(elementEClass, ELEMENT__EXTENSION);
+		createEReference(elementEClass, ELEMENT__OWNED_ANNOTATION);
 		createEReference(elementEClass, ELEMENT__OWNED_COMMENT);
 		createEOperation(elementEClass, ELEMENT___ALL_OWNED_ELEMENTS);
 		createEOperation(elementEClass, ELEMENT___GET_VALUE__TYPE_STRING);
@@ -5472,7 +5474,6 @@ public class PivotPackageImpl
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__IS_STATIC);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-		createEReference(namedElementEClass, NAMED_ELEMENT__OWNED_ANNOTATION);
 
 		namespaceEClass = createEClass(NAMESPACE);
 		createEReference(namespaceEClass, NAMESPACE__OWNED_RULE);
@@ -6110,6 +6111,7 @@ public class PivotPackageImpl
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getElement_Extension(), this.getElementExtension(), this.getElementExtension_Base(), "extension", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getElement_OwnedAnnotation(), this.getElement(), null, "ownedAnnotation", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getElement_OwnedComment(), this.getComment(), null, "ownedComment", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEOperation(getElement__AllOwnedElements(), this.getElement(), "allOwnedElements", 0, -1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
@@ -6588,7 +6590,6 @@ public class PivotPackageImpl
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getNamedElement_IsStatic(), this.getBoolean(), "isStatic", null, 1, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getNamedElement_Name(), this.getString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getNamedElement_OwnedAnnotation(), this.getAnnotation(), null, "ownedAnnotation", null, 0, -1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(namespaceEClass, Namespace.class, "Namespace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getNamespace_OwnedRule(), this.getConstraint(), null, "ownedRule", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

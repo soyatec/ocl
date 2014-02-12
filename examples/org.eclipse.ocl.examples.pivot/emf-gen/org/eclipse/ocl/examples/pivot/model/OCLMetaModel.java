@@ -389,7 +389,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _Collection_Variable = createCollectionType("Collection"/*Variable*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_VariableExp = createCollectionType("Collection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Vertex = createCollectionType("Collection"/*Vertex*/, "0", "*");
-		protected final @NonNull CollectionType _OrderedCollection_Annotation = createCollectionType("OrderedCollection"/*Annotation*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_CollectionLiteralPart = createCollectionType("OrderedCollection"/*CollectionLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Constraint = createCollectionType("OrderedCollection"/*Constraint*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_ConstructorPart = createCollectionType("OrderedCollection"/*ConstructorPart*/, "0", "*");
@@ -407,7 +406,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull CollectionType _OrderedCollection_TupleLiteralPart = createCollectionType("OrderedCollection"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Type = createCollectionType("OrderedCollection"/*Type*/, "0", "*");
 		protected final @NonNull CollectionType _OrderedCollection_Variable = createCollectionType("OrderedCollection"/*Variable*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_Annotation = createOrderedSetType("OrderedSet"/*Annotation*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_CollectionLiteralPart = createOrderedSetType("OrderedSet"/*CollectionLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Constraint = createOrderedSetType("OrderedSet"/*Constraint*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_ConstructorPart = createOrderedSetType("OrderedSet"/*ConstructorPart*/, "0", "*");
@@ -451,7 +449,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull SetType _Set_Trigger = createSetType("Set"/*Trigger*/, "0", "*");
 		protected final @NonNull SetType _Set_Type = createSetType("Set"/*Type*/, "0", "*");
 		protected final @NonNull SetType _Set_Vertex = createSetType("Set"/*Vertex*/, "0", "*");
-		protected final @NonNull CollectionType _UniqueCollection_Annotation = createCollectionType("UniqueCollection"/*Annotation*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Behavior = createCollectionType("UniqueCollection"/*Behavior*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Class = createCollectionType("UniqueCollection"/*Class*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_CollectionLiteralPart = createCollectionType("UniqueCollection"/*CollectionLiteralPart*/, "0", "*");
@@ -1410,11 +1407,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Vertex);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
-			orphanTypes.add(type = _OrderedCollection_Annotation);
-			type.setUnspecializedElement(_OrderedCollection);
-			type.setElementType(_Annotation);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_Annotation);
 			orphanTypes.add(type = _OrderedCollection_CollectionLiteralPart);
 			type.setUnspecializedElement(_OrderedCollection);
 			type.setElementType(_CollectionLiteralPart);
@@ -1500,12 +1492,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Variable);
-			orphanTypes.add(type = _OrderedSet_Annotation);
-			type.setUnspecializedElement(_OrderedSet);
-			type.setElementType(_Annotation);
-			superClasses = type.getSuperClass();
-			superClasses.add(_OrderedCollection_Annotation);
-			superClasses.add(_UniqueCollection_Annotation);
 			orphanTypes.add(type = _OrderedSet_CollectionLiteralPart);
 			type.setUnspecializedElement(_OrderedSet);
 			type.setElementType(_CollectionLiteralPart);
@@ -1738,11 +1724,6 @@ public class OCLMetaModel extends ASResourceImpl
 			type.setElementType(_Vertex);
 			superClasses = type.getSuperClass();
 			superClasses.add(_UniqueCollection_Vertex);
-			orphanTypes.add(type = _UniqueCollection_Annotation);
-			type.setUnspecializedElement(_UniqueCollection);
-			type.setElementType(_Annotation);
-			superClasses = type.getSuperClass();
-			superClasses.add(_Collection_Annotation);
 			orphanTypes.add(type = _UniqueCollection_Behavior);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Behavior);
@@ -2009,7 +1990,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_Annotation_ownedContent = createProperty(PivotPackage.Literals.ANNOTATION__OWNED_CONTENT, _OrderedSet_Element);
 		protected final @NonNull Property pr_Annotation_ownedDetail = createProperty(PivotPackage.Literals.ANNOTATION__OWNED_DETAIL, _OrderedSet_Detail);
 		protected final @NonNull Property pr_Annotation_reference = createProperty(PivotPackage.Literals.ANNOTATION__REFERENCE, _OrderedSet_Element);
-		protected final @NonNull Property pr_Annotation_NamedElement_ownedAnnotation = createProperty("NamedElement", _NamedElement);
 		protected final @NonNull Property pr_AssociationClass_unownedAttribute = createProperty(PivotPackage.Literals.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE, _Set_Property);
 		protected final @NonNull Property pr_AssociationClass_AssociationClassCallExp_referredAssociationClass = createProperty("AssociationClassCallExp", _Bag_AssociationClassCallExp);
 		protected final @NonNull Property pr_AssociationClassCallExp_referredAssociationClass = createProperty(PivotPackage.Literals.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS, _AssociationClass);
@@ -2071,11 +2051,13 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_DynamicProperty_DynamicType_ownedProperty = createProperty("DynamicType", _DynamicType);
 		protected final @NonNull Property pr_DynamicType_ownedProperty = createProperty(PivotPackage.Literals.DYNAMIC_TYPE__OWNED_PROPERTY, _Set_DynamicProperty);
 		protected final @NonNull Property pr_Element_extension = createProperty(PivotPackage.Literals.ELEMENT__EXTENSION, _Set_ElementExtension);
+		protected final @NonNull Property pr_Element_ownedAnnotation = createProperty(PivotPackage.Literals.ELEMENT__OWNED_ANNOTATION, _OrderedSet_Element);
 		protected final @NonNull Property pr_Element_ownedComment = createProperty(PivotPackage.Literals.ELEMENT__OWNED_COMMENT, _Set_Comment);
 		protected final @NonNull Property pr_Element_Annotation_ownedContent = createProperty("Annotation", _Annotation);
 		protected final @NonNull Property pr_Element_Annotation_reference = createProperty("Annotation", _Bag_Annotation);
 		protected final @NonNull Property pr_Element_Comment_annotatedElement = createProperty("Comment", _Bag_Comment);
 		protected final @NonNull Property pr_Element_Constraint_constrainedElement = createProperty("Constraint", _Bag_Constraint);
+		protected final @NonNull Property pr_Element_Element_ownedAnnotation = createProperty("Element", _Element);
 		protected final @NonNull Property pr_ElementExtension_base = createProperty(PivotPackage.Literals.ELEMENT_EXTENSION__BASE, _Element);
 		protected final @NonNull Property pr_ElementExtension_stereotype = createProperty(PivotPackage.Literals.ELEMENT_EXTENSION__STEREOTYPE, _Type);
 		protected final @NonNull Property pr_EnumLiteralExp_referredEnumLiteral = createProperty(PivotPackage.Literals.ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL, _EnumerationLiteral);
@@ -2119,7 +2101,6 @@ public class OCLMetaModel extends ASResourceImpl
 		protected final @NonNull Property pr_Metaclass_instanceType = createProperty(PivotPackage.Literals.METACLASS__INSTANCE_TYPE, _Type);
 		protected final @NonNull Property pr_NamedElement_isStatic = createProperty(PivotPackage.Literals.NAMED_ELEMENT__IS_STATIC, _Boolean);
 		protected final @NonNull Property pr_NamedElement_name = createProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME, _String);
-		protected final @NonNull Property pr_NamedElement_ownedAnnotation = createProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_ANNOTATION, _OrderedSet_Annotation);
 		protected final @NonNull Property pr_Namespace_ownedRule = createProperty(PivotPackage.Literals.NAMESPACE__OWNED_RULE, _OrderedSet_Constraint);
 		protected final @NonNull Property pr_Namespace_Constraint_context = createProperty("Constraint", _Bag_Constraint);
 		protected final @NonNull Property pr_Namespace_Import_importedNamespace = createProperty("Import", _Bag_Import);
@@ -2361,11 +2342,6 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedProperties.add(property = pr_Annotation_reference);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Element_Annotation_reference);
-			ownedProperties.add(property = pr_Annotation_NamedElement_ownedAnnotation);
-			property.setImplicit(true);
-			property.setIsRequired(false);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_NamedElement_ownedAnnotation);
 			ownedProperties = _AssociationClass.getOwnedAttribute();
 			ownedProperties.add(property = pr_AssociationClass_unownedAttribute);
 			property.setIsResolveProxies(true);
@@ -2625,6 +2601,10 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_ElementExtension_base);
+			ownedProperties.add(property = pr_Element_ownedAnnotation);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Element_ownedAnnotation);
 			ownedProperties.add(property = pr_Element_ownedComment);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -2646,6 +2626,11 @@ public class OCLMetaModel extends ASResourceImpl
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Constraint_constrainedElement);
+			ownedProperties.add(property = pr_Element_Element_ownedAnnotation);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_ownedAnnotation);
 			ownedProperties = _ElementExtension.getOwnedAttribute();
 			ownedProperties.add(property = pr_ElementExtension_base);
 			property.setIsResolveProxies(true);
@@ -2829,10 +2814,6 @@ public class OCLMetaModel extends ASResourceImpl
 			ownedProperties.add(property = pr_NamedElement_name);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			ownedProperties.add(property = pr_NamedElement_ownedAnnotation);
-			property.setIsComposite(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Annotation_NamedElement_ownedAnnotation);
 			ownedProperties = _Namespace.getOwnedAttribute();
 			ownedProperties.add(property = pr_Namespace_ownedRule);
 			property.setIsComposite(true);
@@ -3968,8 +3949,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _Vertex)));
 			_OrderedCollection_String.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _String)));
-			_OrderedCollection_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
-				createTemplateParameterSubstitution(_OrderedCollection_T, _Annotation)));
 			_OrderedCollection_CollectionLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
 				createTemplateParameterSubstitution(_OrderedCollection_T, _CollectionLiteralPart)));
 			_OrderedCollection_Constraint.getTemplateBinding().add(createTemplateBinding(_OrderedCollection_,
@@ -4004,8 +3983,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Variable)));
 			_OrderedSet_String.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _String)));
-			_OrderedSet_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
-				createTemplateParameterSubstitution(_OrderedSet_T, _Annotation)));
 			_OrderedSet_CollectionLiteralPart.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _CollectionLiteralPart)));
 			_OrderedSet_Constraint.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
@@ -4092,8 +4069,6 @@ public class OCLMetaModel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Vertex)));
 			_UniqueCollection_String.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _String)));
-			_UniqueCollection_Annotation.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
-				createTemplateParameterSubstitution(_UniqueCollection_T, _Annotation)));
 			_UniqueCollection_Behavior.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Behavior)));
 			_UniqueCollection_Class.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,

@@ -51,6 +51,7 @@ import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl#getExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl#getOwnedComment <em>Owned Comment</em>}</li>
  * </ul>
  * </p>
@@ -71,6 +72,15 @@ public abstract class ElementImpl
 	 * @ordered
 	 */
 	protected EList<ElementExtension> extension;
+	/**
+	 * The cached value of the '{@link #getOwnedAnnotation() <em>Owned Annotation</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedAnnotation()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Element> ownedAnnotation;
 	/**
 	 * The cached value of the '{@link #getOwnedComment() <em>Owned Comment</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -132,6 +142,20 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<Element> getOwnedAnnotation()
+	{
+		if (ownedAnnotation == null)
+		{
+			ownedAnnotation = new EObjectContainmentEList<Element>(Element.class, this, PivotPackage.ELEMENT__OWNED_ANNOTATION);
+		}
+		return ownedAnnotation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public List<Element> allOwnedElements()
 	{
 		/**
@@ -186,6 +210,8 @@ public abstract class ElementImpl
 		{
 			case PivotPackage.ELEMENT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ELEMENT__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 		}
@@ -203,6 +229,8 @@ public abstract class ElementImpl
 		{
 			case PivotPackage.ELEMENT__EXTENSION:
 				return getExtension();
+			case PivotPackage.ELEMENT__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
 		}
@@ -221,6 +249,10 @@ public abstract class ElementImpl
 			case PivotPackage.ELEMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -242,6 +274,9 @@ public abstract class ElementImpl
 			case PivotPackage.ELEMENT__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -260,6 +295,8 @@ public abstract class ElementImpl
 		{
 			case PivotPackage.ELEMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.ELEMENT__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 		}

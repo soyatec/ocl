@@ -36,8 +36,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -183,14 +183,14 @@ public class EnumLiteralExpImpl
 		{
 			case PivotPackage.ENUM_LITERAL_EXP__EXTENSION:
 				return getExtension();
+			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.ENUM_LITERAL_EXP__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.ENUM_LITERAL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.ENUM_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.ENUM_LITERAL_EXP__IS_REQUIRED:
 				return isRequired();
 			case PivotPackage.ENUM_LITERAL_EXP__TYPE:
@@ -217,6 +217,10 @@ public class EnumLiteralExpImpl
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.ENUM_LITERAL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -226,10 +230,6 @@ public class EnumLiteralExpImpl
 				return;
 			case PivotPackage.ENUM_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.ENUM_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
@@ -256,6 +256,9 @@ public class EnumLiteralExpImpl
 			case PivotPackage.ENUM_LITERAL_EXP__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.ENUM_LITERAL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -264,9 +267,6 @@ public class EnumLiteralExpImpl
 				return;
 			case PivotPackage.ENUM_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.ENUM_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
@@ -292,14 +292,14 @@ public class EnumLiteralExpImpl
 		{
 			case PivotPackage.ENUM_LITERAL_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ENUM_LITERAL_EXP__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.ENUM_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ENUM_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ENUM_LITERAL_EXP__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ENUM_LITERAL_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.ENUM_LITERAL_EXP__TYPE:

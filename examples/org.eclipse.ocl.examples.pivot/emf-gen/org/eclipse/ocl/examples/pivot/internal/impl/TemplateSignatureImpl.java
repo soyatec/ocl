@@ -34,6 +34,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -182,6 +183,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
@@ -219,6 +222,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				return getExtension();
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
@@ -242,6 +247,10 @@ public class TemplateSignatureImpl
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -270,6 +279,9 @@ public class TemplateSignatureImpl
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -294,6 +306,8 @@ public class TemplateSignatureImpl
 		{
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:

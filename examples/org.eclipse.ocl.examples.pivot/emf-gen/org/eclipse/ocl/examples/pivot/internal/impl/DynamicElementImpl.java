@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.DynamicElement;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -130,6 +131,8 @@ public class DynamicElementImpl extends ElementImpl implements DynamicElement
 		{
 			case PivotPackage.DYNAMIC_ELEMENT__EXTENSION:
 				return getExtension();
+			case PivotPackage.DYNAMIC_ELEMENT__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.DYNAMIC_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.DYNAMIC_ELEMENT__META_TYPE:
@@ -153,6 +156,10 @@ public class DynamicElementImpl extends ElementImpl implements DynamicElement
 			case PivotPackage.DYNAMIC_ELEMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.DYNAMIC_ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.DYNAMIC_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -178,6 +185,9 @@ public class DynamicElementImpl extends ElementImpl implements DynamicElement
 			case PivotPackage.DYNAMIC_ELEMENT__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.DYNAMIC_ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.DYNAMIC_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -200,6 +210,8 @@ public class DynamicElementImpl extends ElementImpl implements DynamicElement
 		{
 			case PivotPackage.DYNAMIC_ELEMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.DYNAMIC_ELEMENT__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.DYNAMIC_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.DYNAMIC_ELEMENT__META_TYPE:

@@ -28,10 +28,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -217,10 +217,10 @@ public class ClassImpl
 		{
 			case PivotPackage.CLASS__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				return basicSetOwnedTemplateSignature(null, msgs);
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
@@ -306,14 +306,14 @@ public class ClassImpl
 		{
 			case PivotPackage.CLASS__EXTENSION:
 				return getExtension();
+			case PivotPackage.CLASS__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.CLASS__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.CLASS__IS_STATIC:
 				return isStatic();
 			case PivotPackage.CLASS__NAME:
 				return getName();
-			case PivotPackage.CLASS__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
@@ -365,6 +365,10 @@ public class ClassImpl
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.CLASS__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.CLASS__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -374,10 +378,6 @@ public class ClassImpl
 				return;
 			case PivotPackage.CLASS__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.CLASS__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)newValue);
@@ -451,6 +451,9 @@ public class ClassImpl
 			case PivotPackage.CLASS__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.CLASS__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.CLASS__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -459,9 +462,6 @@ public class ClassImpl
 				return;
 			case PivotPackage.CLASS__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.CLASS__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)null);
@@ -526,14 +526,14 @@ public class ClassImpl
 		{
 			case PivotPackage.CLASS__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.CLASS__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.CLASS__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.CLASS__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CLASS__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
 			case PivotPackage.CLASS__TEMPLATE_BINDING:

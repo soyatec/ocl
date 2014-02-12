@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -242,6 +243,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -263,6 +266,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
 				return getExtension();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:
@@ -288,6 +293,10 @@ public abstract class TemplateableElementImpl
 			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -319,6 +328,9 @@ public abstract class TemplateableElementImpl
 			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -346,6 +358,8 @@ public abstract class TemplateableElementImpl
 		{
 			case PivotPackage.TEMPLATEABLE_ELEMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATEABLE_ELEMENT__OWNED_TEMPLATE_SIGNATURE:

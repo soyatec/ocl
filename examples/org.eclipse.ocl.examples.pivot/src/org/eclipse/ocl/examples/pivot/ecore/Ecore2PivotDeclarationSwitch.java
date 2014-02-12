@@ -641,7 +641,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	 */
 	protected void copyAnnotatedElement(@NonNull NamedElement pivotElement,
 			@NonNull EModelElement eModelElement, List<EAnnotation> excludedAnnotations) {
-		List<Annotation> pivotAnnotations = pivotElement.getOwnedAnnotation();
+		List<Element> pivotAnnotations = pivotElement.getOwnedAnnotation();
 		for (EAnnotation eAnnotation : eModelElement.getEAnnotations()) {
 			if ((excludedAnnotations == null) || !excludedAnnotations.contains(eAnnotation)) {
 				String source = eAnnotation.getSource();

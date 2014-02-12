@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -279,6 +280,8 @@ public abstract class ParameterableElementImpl
 		{
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
@@ -316,6 +319,8 @@ public abstract class ParameterableElementImpl
 		{
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				return getExtension();
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
@@ -340,6 +345,10 @@ public abstract class ParameterableElementImpl
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -367,6 +376,9 @@ public abstract class ParameterableElementImpl
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -391,6 +403,8 @@ public abstract class ParameterableElementImpl
 		{
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:

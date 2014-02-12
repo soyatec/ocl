@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -418,10 +417,10 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 
 	protected void copyAnnotatedElement(@NonNull NamedElement pivotElement,
 			@NonNull EModelElement umlElement, @Nullable List<EAnnotation> excludedAnnotations) {
-		List<Annotation> pivotAnnotations = pivotElement.getOwnedAnnotation();
+		List<Element> pivotAnnotations = pivotElement.getOwnedAnnotation();
 		for (EAnnotation eAnnotation : umlElement.getEAnnotations()) {
 			if ((excludedAnnotations == null) || !excludedAnnotations.contains(eAnnotation)) {
-				Annotation pivotAnnotation = (Annotation) doSwitch(eAnnotation);
+				Element pivotAnnotation = (Element) doSwitch(eAnnotation);
 				if (pivotAnnotation != null) {
 					pivotAnnotations.add(pivotAnnotation);
 				}

@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getOwnedComment <em>Owned Comment</em>}</li>
  * </ul>
  * </p>
@@ -77,6 +78,21 @@ public interface Element
 	 * @generated
 	 */
 	List<ElementExtension> getExtension();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Element}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Annotation</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Annotation</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElement_OwnedAnnotation()
+	 * @generated
+	 */
+	List<Element> getOwnedAnnotation();
 
 	/**
 	 * <!-- begin-user-doc -->

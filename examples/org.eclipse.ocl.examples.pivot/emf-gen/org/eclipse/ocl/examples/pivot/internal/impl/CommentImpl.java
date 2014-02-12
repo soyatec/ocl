@@ -144,6 +144,8 @@ public class CommentImpl
 		{
 			case PivotPackage.COMMENT__EXTENSION:
 				return getExtension();
+			case PivotPackage.COMMENT__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.COMMENT__ANNOTATED_ELEMENT:
@@ -167,6 +169,10 @@ public class CommentImpl
 			case PivotPackage.COMMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.COMMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -195,6 +201,9 @@ public class CommentImpl
 			case PivotPackage.COMMENT__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.COMMENT__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -219,6 +228,8 @@ public class CommentImpl
 		{
 			case PivotPackage.COMMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.COMMENT__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.COMMENT__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COMMENT__ANNOTATED_ELEMENT:

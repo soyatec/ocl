@@ -36,8 +36,8 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -172,14 +172,14 @@ public class IntegerLiteralExpImpl
 		{
 			case PivotPackage.INTEGER_LITERAL_EXP__EXTENSION:
 				return getExtension();
+			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
 				return isRequired();
 			case PivotPackage.INTEGER_LITERAL_EXP__TYPE:
@@ -205,6 +205,10 @@ public class IntegerLiteralExpImpl
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -214,10 +218,6 @@ public class IntegerLiteralExpImpl
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
@@ -244,6 +244,9 @@ public class IntegerLiteralExpImpl
 			case PivotPackage.INTEGER_LITERAL_EXP__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -252,9 +255,6 @@ public class IntegerLiteralExpImpl
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
@@ -280,14 +280,14 @@ public class IntegerLiteralExpImpl
 		{
 			case PivotPackage.INTEGER_LITERAL_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.INTEGER_LITERAL_EXP__TYPE:

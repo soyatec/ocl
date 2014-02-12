@@ -458,6 +458,12 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TElement.PownedComment.uV"
             value="*"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="Ppivot.TElement.PownedAnnotation" name="ownedAnnotation"
+          type="Ppivot.TElement" isOrdered="true" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TElement.PownedAnnotation.lV"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TElement.PownedAnnotation.uV"
+            value="*"/>
+      </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TElement.Pextension" name="extension" type="Ppivot.TElementExtension"
           aggregation="composite" association="Ppivot.A_base_extension">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TElement.Pextension.lV"/>
@@ -722,12 +728,6 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TNamedElement.Pname.lV"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="Ppivot.TNamedElement.PisStatic" name="isStatic" type="Ppivot.TBoolean"/>
-      <ownedAttribute xmi:id="Ppivot.TNamedElement.PownedAnnotation" name="ownedAnnotation"
-          type="Ppivot.TAnnotation" isOrdered="true" aggregation="composite">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Ppivot.TNamedElement.PownedAnnotation.lV"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Ppivot.TNamedElement.PownedAnnotation.uV"
-            value="*"/>
-      </ownedAttribute>
       <interfaceRealization xmi:id="Ppivot.TNamedElement.interfaceRealization0" name=""
           client="Ppivot.TNamedElement" supplier="Ppivot.TNameable" contract="Ppivot.TNameable"/>
     </packagedElement>

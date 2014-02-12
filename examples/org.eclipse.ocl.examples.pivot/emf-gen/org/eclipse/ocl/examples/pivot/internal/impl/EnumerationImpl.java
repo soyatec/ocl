@@ -30,10 +30,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
@@ -160,10 +160,10 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ENUMERATION__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ENUMERATION__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_TEMPLATE_SIGNATURE:
 				return basicSetOwnedTemplateSignature(null, msgs);
 			case PivotPackage.ENUMERATION__TEMPLATE_BINDING:
@@ -203,14 +203,14 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__EXTENSION:
 				return getExtension();
+			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.ENUMERATION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.ENUMERATION__NAME:
 				return getName();
-			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.ENUMERATION__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
 			case PivotPackage.ENUMERATION__TEMPLATE_BINDING:
@@ -269,6 +269,10 @@ public class EnumerationImpl
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -278,10 +282,6 @@ public class EnumerationImpl
 				return;
 			case PivotPackage.ENUMERATION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.ENUMERATION__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)newValue);
@@ -365,6 +365,9 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -373,9 +376,6 @@ public class EnumerationImpl
 				return;
 			case PivotPackage.ENUMERATION__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.ENUMERATION__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)null);
@@ -449,14 +449,14 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ENUMERATION__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.ENUMERATION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ENUMERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ENUMERATION__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
 			case PivotPackage.ENUMERATION__TEMPLATE_BINDING:

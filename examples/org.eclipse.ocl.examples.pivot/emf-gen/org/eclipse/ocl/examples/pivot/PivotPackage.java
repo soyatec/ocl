@@ -1012,13 +1012,22 @@ public interface PivotPackage
 	int ELEMENT__EXTENSION = VISITABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__OWNED_ANNOTATION = VISITABLE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT__OWNED_COMMENT = VISITABLE_FEATURE_COUNT + 1;
+	int ELEMENT__OWNED_COMMENT = VISITABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Element</em>' class.
@@ -1027,7 +1036,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 2;
+	int ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1066,6 +1075,15 @@ public interface PivotPackage
 	int NAMED_ELEMENT__EXTENSION = ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1093,22 +1111,13 @@ public interface PivotPackage
 	int NAMED_ELEMENT__NAME = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__OWNED_ANNOTATION = ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Named Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
+	int NAMED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1147,6 +1156,15 @@ public interface PivotPackage
 	int ANNOTATION__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1172,15 +1190,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANNOTATION__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Content</b></em>' containment reference list.
@@ -1255,6 +1264,15 @@ public interface PivotPackage
 	int TYPE__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1280,15 +1298,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPE__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -1489,6 +1498,15 @@ public interface PivotPackage
 	int CLASS__EXTENSION = TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1514,15 +1532,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CLASS__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -1768,6 +1777,15 @@ public interface PivotPackage
 	int ANY_TYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1793,15 +1811,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANY_TYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -2047,6 +2056,15 @@ public interface PivotPackage
 	int ASSOCIATION_CLASS__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2072,15 +2090,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_CLASS__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -2335,6 +2344,15 @@ public interface PivotPackage
 	int TYPED_ELEMENT__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2360,15 +2378,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPED_ELEMENT__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPED_ELEMENT__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2434,6 +2443,15 @@ public interface PivotPackage
 	int OCL_EXPRESSION__EXTENSION = TYPED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCL_EXPRESSION__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2459,15 +2477,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OCL_EXPRESSION__NAME = TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OCL_EXPRESSION__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2533,6 +2542,15 @@ public interface PivotPackage
 	int CALL_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2558,15 +2576,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CALL_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2650,6 +2659,15 @@ public interface PivotPackage
 	int FEATURE_CALL_EXP__EXTENSION = CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CALL_EXP__OWNED_ANNOTATION = CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2675,15 +2693,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE_CALL_EXP__NAME = CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_CALL_EXP__OWNED_ANNOTATION = CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2776,6 +2785,15 @@ public interface PivotPackage
 	int NAVIGATION_CALL_EXP__EXTENSION = FEATURE_CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_CALL_EXP__OWNED_ANNOTATION = FEATURE_CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2801,15 +2819,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAVIGATION_CALL_EXP__NAME = FEATURE_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAVIGATION_CALL_EXP__OWNED_ANNOTATION = FEATURE_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2920,6 +2929,15 @@ public interface PivotPackage
 	int ASSOCIATION_CLASS_CALL_EXP__EXTENSION = NAVIGATION_CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS_CALL_EXP__OWNED_ANNOTATION = NAVIGATION_CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2945,15 +2963,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS_CALL_EXP__NAME = NAVIGATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION_CLASS_CALL_EXP__OWNED_ANNOTATION = NAVIGATION_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -3073,6 +3082,15 @@ public interface PivotPackage
 	int DATA_TYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3098,15 +3116,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DATA_TYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -3370,6 +3379,15 @@ public interface PivotPackage
 	int COLLECTION_TYPE__EXTENSION = DATA_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3395,15 +3413,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -3694,6 +3703,15 @@ public interface PivotPackage
 	int BAG_TYPE__EXTENSION = COLLECTION_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3719,15 +3737,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BAG_TYPE__NAME = COLLECTION_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BAG_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -4028,6 +4037,15 @@ public interface PivotPackage
 	int BEHAVIOR__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BEHAVIOR__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4053,15 +4071,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BEHAVIOR__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BEHAVIOR__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -4307,6 +4316,15 @@ public interface PivotPackage
 	int LITERAL_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4332,15 +4350,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LITERAL_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4406,6 +4415,15 @@ public interface PivotPackage
 	int PRIMITIVE_LITERAL_EXP__EXTENSION = LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4431,15 +4449,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_LITERAL_EXP__NAME = LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4505,6 +4514,15 @@ public interface PivotPackage
 	int BOOLEAN_LITERAL_EXP__EXTENSION = PRIMITIVE_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4530,15 +4548,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL_EXP__NAME = PRIMITIVE_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4622,6 +4631,15 @@ public interface PivotPackage
 	int CALL_OPERATION_ACTION__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_OPERATION_ACTION__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4647,15 +4665,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CALL_OPERATION_ACTION__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_OPERATION_ACTION__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -4792,6 +4801,15 @@ public interface PivotPackage
 	int COLLECTION_LITERAL_PART__EXTENSION = TYPED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_PART__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4817,15 +4835,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_PART__NAME = TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_LITERAL_PART__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4891,6 +4900,15 @@ public interface PivotPackage
 	int COLLECTION_ITEM__EXTENSION = COLLECTION_LITERAL_PART__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_ITEM__OWNED_ANNOTATION = COLLECTION_LITERAL_PART__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4916,15 +4934,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_ITEM__NAME = COLLECTION_LITERAL_PART__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_ITEM__OWNED_ANNOTATION = COLLECTION_LITERAL_PART__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5008,6 +5017,15 @@ public interface PivotPackage
 	int COLLECTION_LITERAL_EXP__EXTENSION = LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5033,15 +5051,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_EXP__NAME = LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5170,6 +5179,15 @@ public interface PivotPackage
 	int COLLECTION_RANGE__EXTENSION = COLLECTION_LITERAL_PART__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_RANGE__OWNED_ANNOTATION = COLLECTION_LITERAL_PART__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5195,15 +5213,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_RANGE__NAME = COLLECTION_LITERAL_PART__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_RANGE__OWNED_ANNOTATION = COLLECTION_LITERAL_PART__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5285,6 +5294,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COMMENT__EXTENSION = ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -5369,6 +5387,15 @@ public interface PivotPackage
 	int VERTEX__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VERTEX__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5394,15 +5421,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VERTEX__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VERTEX__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -5487,6 +5505,15 @@ public interface PivotPackage
 	int CONNECTION_POINT_REFERENCE__EXTENSION = VERTEX__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION = VERTEX__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5512,15 +5539,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONNECTION_POINT_REFERENCE__NAME = VERTEX__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION = VERTEX__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -5622,6 +5640,15 @@ public interface PivotPackage
 	int CONSTRAINT__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5647,15 +5674,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRAINT__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Constrained Element</b></em>' reference list.
@@ -5757,6 +5775,15 @@ public interface PivotPackage
 	int CONSTRUCTOR_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5782,15 +5809,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5874,6 +5892,15 @@ public interface PivotPackage
 	int CONSTRUCTOR_PART__EXTENSION = TYPED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5899,15 +5926,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_PART__NAME = TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR_PART__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5991,6 +6009,15 @@ public interface PivotPackage
 	int DETAIL__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DETAIL__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6016,15 +6043,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DETAIL__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DETAIL__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute list.
@@ -6079,6 +6097,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DYNAMIC_ELEMENT__EXTENSION = ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_ELEMENT__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -6142,6 +6169,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DYNAMIC_PROPERTY__EXTENSION = ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PROPERTY__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -6216,6 +6252,15 @@ public interface PivotPackage
 	int DYNAMIC_TYPE__EXTENSION = TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6241,15 +6286,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int DYNAMIC_TYPE__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -6478,6 +6514,15 @@ public interface PivotPackage
 	int ELEMENT_EXTENSION__EXTENSION = TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_EXTENSION__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6503,15 +6548,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ELEMENT_EXTENSION__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT_EXTENSION__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -6730,6 +6766,15 @@ public interface PivotPackage
 	int ENUM_LITERAL_EXP__EXTENSION = LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6755,15 +6800,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUM_LITERAL_EXP__NAME = LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUM_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -6847,6 +6883,15 @@ public interface PivotPackage
 	int ENUMERATION__EXTENSION = DATA_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6872,15 +6917,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUMERATION__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -7153,6 +7189,15 @@ public interface PivotPackage
 	int ENUMERATION_LITERAL__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_LITERAL__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7178,15 +7223,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUMERATION_LITERAL__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Enumeration</b></em>' container reference.
@@ -7252,6 +7288,15 @@ public interface PivotPackage
 	int VALUE_SPECIFICATION__EXTENSION = TYPED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_SPECIFICATION__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7277,15 +7322,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VALUE_SPECIFICATION__NAME = TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_SPECIFICATION__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -7441,6 +7477,15 @@ public interface PivotPackage
 	int OPAQUE_EXPRESSION__EXTENSION = VALUE_SPECIFICATION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPAQUE_EXPRESSION__OWNED_ANNOTATION = VALUE_SPECIFICATION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7466,15 +7511,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPAQUE_EXPRESSION__NAME = VALUE_SPECIFICATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPAQUE_EXPRESSION__OWNED_ANNOTATION = VALUE_SPECIFICATION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -7657,6 +7693,15 @@ public interface PivotPackage
 	int EXPRESSION_IN_OCL__EXTENSION = OPAQUE_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_IN_OCL__OWNED_ANNOTATION = OPAQUE_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7682,15 +7727,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int EXPRESSION_IN_OCL__NAME = OPAQUE_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_IN_OCL__OWNED_ANNOTATION = OPAQUE_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -7909,6 +7945,15 @@ public interface PivotPackage
 	int TYPED_MULTIPLICITY_ELEMENT__EXTENSION = TYPED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MULTIPLICITY_ELEMENT__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7934,15 +7979,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPED_MULTIPLICITY_ELEMENT__NAME = TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPED_MULTIPLICITY_ELEMENT__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -8026,6 +8062,15 @@ public interface PivotPackage
 	int FEATURE__EXTENSION = TYPED_MULTIPLICITY_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__OWNED_ANNOTATION = TYPED_MULTIPLICITY_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8051,15 +8096,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE__NAME = TYPED_MULTIPLICITY_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__OWNED_ANNOTATION = TYPED_MULTIPLICITY_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -8221,6 +8257,15 @@ public interface PivotPackage
 	int STATE__EXTENSION = VERTEX__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__OWNED_ANNOTATION = VERTEX__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8246,15 +8291,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STATE__NAME = VERTEX__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__OWNED_ANNOTATION = VERTEX__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -8474,6 +8510,15 @@ public interface PivotPackage
 	int FINAL_STATE__EXTENSION = STATE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__OWNED_ANNOTATION = STATE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8499,15 +8544,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FINAL_STATE__NAME = STATE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINAL_STATE__OWNED_ANNOTATION = STATE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -8717,6 +8753,15 @@ public interface PivotPackage
 	int IF_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8742,15 +8787,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int IF_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -8862,6 +8898,15 @@ public interface PivotPackage
 	int IMPORT__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8887,15 +8932,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int IMPORT__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Imported Namespace</b></em>' reference.
@@ -8952,6 +8988,15 @@ public interface PivotPackage
 	int NUMERIC_LITERAL_EXP__EXTENSION = PRIMITIVE_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERIC_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8977,15 +9022,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NUMERIC_LITERAL_EXP__NAME = PRIMITIVE_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -9051,6 +9087,15 @@ public interface PivotPackage
 	int INTEGER_LITERAL_EXP__EXTENSION = NUMERIC_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL_EXP__OWNED_ANNOTATION = NUMERIC_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9076,15 +9121,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INTEGER_LITERAL_EXP__NAME = NUMERIC_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL_EXP__OWNED_ANNOTATION = NUMERIC_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -9168,6 +9204,15 @@ public interface PivotPackage
 	int INVALID_LITERAL_EXP__EXTENSION = LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9193,15 +9238,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INVALID_LITERAL_EXP__NAME = LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -9267,6 +9303,15 @@ public interface PivotPackage
 	int INVALID_TYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9292,15 +9337,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INVALID_TYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -9546,6 +9582,15 @@ public interface PivotPackage
 	int LOOP_EXP__EXTENSION = CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_EXP__OWNED_ANNOTATION = CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9571,15 +9616,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LOOP_EXP__NAME = CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP_EXP__OWNED_ANNOTATION = CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -9708,6 +9744,15 @@ public interface PivotPackage
 	int ITERATE_EXP__EXTENSION = LOOP_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATE_EXP__OWNED_ANNOTATION = LOOP_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9733,15 +9778,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATE_EXP__NAME = LOOP_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATE_EXP__OWNED_ANNOTATION = LOOP_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -9915,6 +9951,15 @@ public interface PivotPackage
 	int OPERATION__EXTENSION = FEATURE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__OWNED_ANNOTATION = FEATURE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9940,15 +9985,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION__NAME = FEATURE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__OWNED_ANNOTATION = FEATURE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -10275,6 +10311,15 @@ public interface PivotPackage
 	int ITERATION__EXTENSION = OPERATION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__OWNED_ANNOTATION = OPERATION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10300,15 +10345,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATION__NAME = OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATION__OWNED_ANNOTATION = OPERATION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -10653,6 +10689,15 @@ public interface PivotPackage
 	int ITERATOR_EXP__EXTENSION = LOOP_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP__OWNED_ANNOTATION = LOOP_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10678,15 +10723,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATOR_EXP__NAME = LOOP_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP__OWNED_ANNOTATION = LOOP_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -11103,6 +11139,15 @@ public interface PivotPackage
 	int LAMBDA_TYPE__EXTENSION = DATA_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11128,15 +11173,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LAMBDA_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -11427,6 +11463,15 @@ public interface PivotPackage
 	int LET_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11452,15 +11497,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LET_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LET_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -11553,6 +11589,15 @@ public interface PivotPackage
 	int NAMESPACE__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMESPACE__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11578,15 +11623,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAMESPACE__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -11643,6 +11679,15 @@ public interface PivotPackage
 	int PACKAGE__EXTENSION = NAMESPACE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11668,15 +11713,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PACKAGE__NAME = NAMESPACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -11832,6 +11868,15 @@ public interface PivotPackage
 	int LIBRARY__EXTENSION = PACKAGE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11857,15 +11902,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LIBRARY__NAME = PACKAGE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -12030,6 +12066,15 @@ public interface PivotPackage
 	int MESSAGE_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12055,15 +12100,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MESSAGE_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -12183,6 +12219,15 @@ public interface PivotPackage
 	int MESSAGE_TYPE__EXTENSION = TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12208,15 +12253,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MESSAGE_TYPE__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -12435,6 +12471,15 @@ public interface PivotPackage
 	int METACLASS__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12460,15 +12505,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int METACLASS__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METACLASS__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -12759,6 +12795,15 @@ public interface PivotPackage
 	int NULL_LITERAL_EXP__EXTENSION = PRIMITIVE_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12784,15 +12829,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NULL_LITERAL_EXP__NAME = PRIMITIVE_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NULL_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -12858,6 +12894,15 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP__EXTENSION = FEATURE_CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP__OWNED_ANNOTATION = FEATURE_CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12883,15 +12928,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION_CALL_EXP__NAME = FEATURE_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_CALL_EXP__OWNED_ANNOTATION = FEATURE_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -13029,6 +13065,15 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER__EXTENSION = ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13126,6 +13171,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION_TEMPLATE_PARAMETER__EXTENSION = TEMPLATE_PARAMETER__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_TEMPLATE_PARAMETER__OWNED_ANNOTATION = TEMPLATE_PARAMETER__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -13237,6 +13291,15 @@ public interface PivotPackage
 	int OPPOSITE_PROPERTY_CALL_EXP__EXTENSION = NAVIGATION_CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = NAVIGATION_CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13262,15 +13325,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPPOSITE_PROPERTY_CALL_EXP__NAME = NAVIGATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = NAVIGATION_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -13390,6 +13444,15 @@ public interface PivotPackage
 	int ORDERED_SET_TYPE__EXTENSION = COLLECTION_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13415,15 +13478,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ORDERED_SET_TYPE__NAME = COLLECTION_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_SET_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -13714,6 +13768,15 @@ public interface PivotPackage
 	int PARAMETERABLE_ELEMENT__EXTENSION = ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERABLE_ELEMENT__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13802,6 +13865,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PACKAGEABLE_ELEMENT__EXTENSION = PARAMETERABLE_ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGEABLE_ELEMENT__OWNED_ANNOTATION = PARAMETERABLE_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -13894,6 +13966,15 @@ public interface PivotPackage
 	int PARAMETER__EXTENSION = TYPED_MULTIPLICITY_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__OWNED_ANNOTATION = TYPED_MULTIPLICITY_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13919,15 +14000,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PARAMETER__NAME = TYPED_MULTIPLICITY_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__OWNED_ANNOTATION = TYPED_MULTIPLICITY_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -14038,6 +14110,15 @@ public interface PivotPackage
 	int PRECEDENCE__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRECEDENCE__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14063,15 +14144,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRECEDENCE__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRECEDENCE__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Associativity</b></em>' attribute.
@@ -14137,6 +14209,15 @@ public interface PivotPackage
 	int PRIMITIVE_TYPE__EXTENSION = DATA_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14162,15 +14243,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -14434,6 +14506,15 @@ public interface PivotPackage
 	int PROFILE__EXTENSION = PACKAGE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROFILE__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14459,15 +14540,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PROFILE__NAME = PACKAGE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROFILE__OWNED_ANNOTATION = PACKAGE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -14623,6 +14695,15 @@ public interface PivotPackage
 	int PROPERTY__EXTENSION = FEATURE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__OWNED_ANNOTATION = FEATURE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14648,15 +14729,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PROPERTY__NAME = FEATURE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__OWNED_ANNOTATION = FEATURE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -14983,6 +15055,15 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP__EXTENSION = NAVIGATION_CALL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP__OWNED_ANNOTATION = NAVIGATION_CALL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15008,15 +15089,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PROPERTY_CALL_EXP__NAME = NAVIGATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_CALL_EXP__OWNED_ANNOTATION = NAVIGATION_CALL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -15181,6 +15253,15 @@ public interface PivotPackage
 	int PSEUDOSTATE__EXTENSION = VERTEX__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PSEUDOSTATE__OWNED_ANNOTATION = VERTEX__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15206,15 +15287,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PSEUDOSTATE__NAME = VERTEX__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PSEUDOSTATE__OWNED_ANNOTATION = VERTEX__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -15316,6 +15388,15 @@ public interface PivotPackage
 	int REAL_LITERAL_EXP__EXTENSION = NUMERIC_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL_EXP__OWNED_ANNOTATION = NUMERIC_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15341,15 +15422,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int REAL_LITERAL_EXP__NAME = NUMERIC_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REAL_LITERAL_EXP__OWNED_ANNOTATION = NUMERIC_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -15451,6 +15523,15 @@ public interface PivotPackage
 	int REGION__EXTENSION = NAMESPACE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15476,15 +15557,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int REGION__NAME = NAMESPACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGION__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -15586,6 +15658,15 @@ public interface PivotPackage
 	int ROOT__EXTENSION = NAMESPACE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15611,15 +15692,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ROOT__NAME = NAMESPACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -15703,6 +15775,15 @@ public interface PivotPackage
 	int SELF_TYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15728,15 +15809,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SELF_TYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELF_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -15991,6 +16063,15 @@ public interface PivotPackage
 	int SEND_SIGNAL_ACTION__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEND_SIGNAL_ACTION__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16016,15 +16097,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SEND_SIGNAL_ACTION__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEND_SIGNAL_ACTION__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Signal</b></em>' reference.
@@ -16081,6 +16153,15 @@ public interface PivotPackage
 	int SEQUENCE_TYPE__EXTENSION = COLLECTION_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16106,15 +16187,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SEQUENCE_TYPE__NAME = COLLECTION_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEQUENCE_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -16405,6 +16477,15 @@ public interface PivotPackage
 	int SET_TYPE__EXTENSION = COLLECTION_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16430,15 +16511,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SET_TYPE__NAME = COLLECTION_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SET_TYPE__OWNED_ANNOTATION = COLLECTION_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -16729,6 +16801,15 @@ public interface PivotPackage
 	int SIGNAL__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGNAL__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16754,15 +16835,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SIGNAL__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIGNAL__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The number of structural features of the '<em>Signal</em>' class.
@@ -16810,6 +16882,15 @@ public interface PivotPackage
 	int STATE_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16835,15 +16916,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STATE_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -16928,6 +17000,15 @@ public interface PivotPackage
 	int STATE_MACHINE__EXTENSION = BEHAVIOR__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_MACHINE__OWNED_ANNOTATION = BEHAVIOR__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16953,15 +17034,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STATE_MACHINE__NAME = BEHAVIOR__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE_MACHINE__OWNED_ANNOTATION = BEHAVIOR__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -17253,6 +17325,15 @@ public interface PivotPackage
 	int STEREOTYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17278,15 +17359,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STEREOTYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEREOTYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -17532,6 +17604,15 @@ public interface PivotPackage
 	int STRING_LITERAL_EXP__EXTENSION = PRIMITIVE_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17557,15 +17638,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STRING_LITERAL_EXP__NAME = PRIMITIVE_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_LITERAL_EXP__OWNED_ANNOTATION = PRIMITIVE_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -17638,6 +17710,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_BINDING__EXTENSION = ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_BINDING__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -17719,6 +17800,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_PARAMETER_SUBSTITUTION__EXTENSION = ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -17811,6 +17901,15 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER_TYPE__EXTENSION = TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17836,15 +17935,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_PARAMETER_TYPE__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_PARAMETER_TYPE__OWNED_ANNOTATION = TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -18054,6 +18144,15 @@ public interface PivotPackage
 	int TEMPLATE_SIGNATURE__EXTENSION = ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_SIGNATURE__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18124,6 +18223,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATEABLE_ELEMENT__EXTENSION = ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATEABLE_ELEMENT__OWNED_ANNOTATION = ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -18235,6 +18343,15 @@ public interface PivotPackage
 	int TRANSITION__EXTENSION = NAMESPACE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18260,15 +18377,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TRANSITION__NAME = NAMESPACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__OWNED_ANNOTATION = NAMESPACE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -18398,6 +18506,15 @@ public interface PivotPackage
 	int TRIGGER__EXTENSION = NAMED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRIGGER__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18423,15 +18540,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TRIGGER__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRIGGER__OWNED_ANNOTATION = NAMED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The number of structural features of the '<em>Trigger</em>' class.
@@ -18479,6 +18587,15 @@ public interface PivotPackage
 	int TUPLE_LITERAL_EXP__EXTENSION = LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18504,15 +18621,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_EXP__NAME = LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TUPLE_LITERAL_EXP__OWNED_ANNOTATION = LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -18587,6 +18695,15 @@ public interface PivotPackage
 	int VARIABLE_DECLARATION__EXTENSION = TYPED_ELEMENT__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18612,15 +18729,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE_DECLARATION__NAME = TYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DECLARATION__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -18686,6 +18794,15 @@ public interface PivotPackage
 	int TUPLE_LITERAL_PART__EXTENSION = VARIABLE_DECLARATION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_PART__OWNED_ANNOTATION = VARIABLE_DECLARATION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18711,15 +18828,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_PART__NAME = VARIABLE_DECLARATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TUPLE_LITERAL_PART__OWNED_ANNOTATION = VARIABLE_DECLARATION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -18794,6 +18902,15 @@ public interface PivotPackage
 	int TUPLE_TYPE__EXTENSION = DATA_TYPE__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18819,15 +18936,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TUPLE_TYPE__OWNED_ANNOTATION = DATA_TYPE__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -19091,6 +19199,15 @@ public interface PivotPackage
 	int TYPE_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19116,15 +19233,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPE_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -19206,6 +19314,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TYPE_TEMPLATE_PARAMETER__EXTENSION = TEMPLATE_PARAMETER__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_TEMPLATE_PARAMETER__OWNED_ANNOTATION = TEMPLATE_PARAMETER__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -19325,6 +19442,15 @@ public interface PivotPackage
 	int UNLIMITED_NATURAL_LITERAL_EXP__EXTENSION = NUMERIC_LITERAL_EXP__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLIMITED_NATURAL_LITERAL_EXP__OWNED_ANNOTATION = NUMERIC_LITERAL_EXP__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19350,15 +19476,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNLIMITED_NATURAL_LITERAL_EXP__NAME = NUMERIC_LITERAL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNLIMITED_NATURAL_LITERAL_EXP__OWNED_ANNOTATION = NUMERIC_LITERAL_EXP__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -19443,6 +19560,15 @@ public interface PivotPackage
 	int UNSPECIFIED_TYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19468,15 +19594,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNSPECIFIED_TYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNSPECIFIED_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -19740,6 +19857,15 @@ public interface PivotPackage
 	int UNSPECIFIED_VALUE_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_VALUE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19765,15 +19891,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNSPECIFIED_VALUE_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNSPECIFIED_VALUE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -19839,6 +19956,15 @@ public interface PivotPackage
 	int VARIABLE__EXTENSION = VARIABLE_DECLARATION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__OWNED_ANNOTATION = VARIABLE_DECLARATION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19864,15 +19990,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE__NAME = VARIABLE_DECLARATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE__OWNED_ANNOTATION = VARIABLE_DECLARATION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -19974,6 +20091,15 @@ public interface PivotPackage
 	int VARIABLE_EXP__EXTENSION = OCL_EXPRESSION__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19999,15 +20125,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE_EXP__NAME = OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_EXP__OWNED_ANNOTATION = OCL_EXPRESSION__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -20128,6 +20245,15 @@ public interface PivotPackage
 	int VOID_TYPE__EXTENSION = CLASS__EXTENSION;
 
 	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
+
+	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -20153,15 +20279,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VOID_TYPE__NAME = CLASS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__OWNED_ANNOTATION = CLASS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
@@ -20592,17 +20709,6 @@ public interface PivotPackage
 	EAttribute getNamedElement_IsStatic();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.NamedElement#getOwnedAnnotation <em>Owned Annotation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Annotation</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.NamedElement#getOwnedAnnotation()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EReference getNamedElement_OwnedAnnotation();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -20633,6 +20739,17 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getElement_Extension();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.pivot.Element#getOwnedAnnotation <em>Owned Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Annotation</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Element#getOwnedAnnotation()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EReference getElement_OwnedAnnotation();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Element#allOwnedElements() <em>All Owned Elements</em>}' operation.
@@ -25087,14 +25204,6 @@ public interface PivotPackage
 		EAttribute NAMED_ELEMENT__IS_STATIC = eINSTANCE.getNamedElement_IsStatic();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Annotation</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMED_ELEMENT__OWNED_ANNOTATION = eINSTANCE.getNamedElement_OwnedAnnotation();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl <em>Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -25119,6 +25228,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference ELEMENT__EXTENSION = eINSTANCE.getElement_Extension();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Annotation</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ELEMENT__OWNED_ANNOTATION = eINSTANCE.getElement_OwnedAnnotation();
 
 		/**
 		 * The meta object literal for the '<em><b>All Owned Elements</b></em>' operation.

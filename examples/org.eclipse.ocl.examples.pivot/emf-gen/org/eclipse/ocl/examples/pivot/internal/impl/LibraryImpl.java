@@ -26,9 +26,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -111,10 +111,10 @@ public class LibraryImpl extends PackageImpl implements Library
 		{
 			case PivotPackage.LIBRARY__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.LIBRARY__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.LIBRARY__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__OWNED_TEMPLATE_SIGNATURE:
@@ -145,14 +145,14 @@ public class LibraryImpl extends PackageImpl implements Library
 		{
 			case PivotPackage.LIBRARY__EXTENSION:
 				return getExtension();
+			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.LIBRARY__IS_STATIC:
 				return isStatic();
 			case PivotPackage.LIBRARY__NAME:
 				return getName();
-			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return getOwnedRule();
 			case PivotPackage.LIBRARY__OWNED_TEMPLATE_SIGNATURE:
@@ -194,6 +194,10 @@ public class LibraryImpl extends PackageImpl implements Library
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -203,10 +207,6 @@ public class LibraryImpl extends PackageImpl implements Library
 				return;
 			case PivotPackage.LIBRARY__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				getOwnedRule().clear();
@@ -264,6 +264,9 @@ public class LibraryImpl extends PackageImpl implements Library
 			case PivotPackage.LIBRARY__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -272,9 +275,6 @@ public class LibraryImpl extends PackageImpl implements Library
 				return;
 			case PivotPackage.LIBRARY__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				getOwnedRule().clear();
@@ -325,14 +325,14 @@ public class LibraryImpl extends PackageImpl implements Library
 		{
 			case PivotPackage.LIBRARY__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.LIBRARY__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.LIBRARY__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.LIBRARY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.LIBRARY__OWNED_TEMPLATE_SIGNATURE:

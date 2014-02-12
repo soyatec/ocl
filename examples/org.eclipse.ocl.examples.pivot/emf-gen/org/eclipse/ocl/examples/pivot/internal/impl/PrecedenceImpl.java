@@ -22,9 +22,9 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -190,14 +190,14 @@ public class PrecedenceImpl
 		{
 			case PivotPackage.PRECEDENCE__EXTENSION:
 				return getExtension();
+			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.PRECEDENCE__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.PRECEDENCE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.PRECEDENCE__NAME:
 				return getName();
-			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:
 				return getAssociativity();
 			case PivotPackage.PRECEDENCE__ORDER:
@@ -220,6 +220,10 @@ public class PrecedenceImpl
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.PRECEDENCE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -229,10 +233,6 @@ public class PrecedenceImpl
 				return;
 			case PivotPackage.PRECEDENCE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:
 				setAssociativity((AssociativityKind)newValue);
@@ -256,6 +256,9 @@ public class PrecedenceImpl
 			case PivotPackage.PRECEDENCE__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.PRECEDENCE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -264,9 +267,6 @@ public class PrecedenceImpl
 				return;
 			case PivotPackage.PRECEDENCE__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:
 				setAssociativity(ASSOCIATIVITY_EDEFAULT);
@@ -289,14 +289,14 @@ public class PrecedenceImpl
 		{
 			case PivotPackage.PRECEDENCE__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PRECEDENCE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PRECEDENCE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PRECEDENCE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:
 				return (eFlags & ASSOCIATIVITY_EFLAG) != ASSOCIATIVITY_EFLAG_DEFAULT;
 			case PivotPackage.PRECEDENCE__ORDER:

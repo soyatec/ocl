@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.DynamicProperty;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -174,6 +175,8 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 		{
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				return getExtension();
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:
@@ -199,6 +202,10 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -227,6 +234,9 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -252,6 +262,8 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 		{
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:

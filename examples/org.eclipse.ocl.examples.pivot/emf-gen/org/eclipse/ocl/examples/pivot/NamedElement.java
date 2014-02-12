@@ -16,9 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.util.List;
-
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
@@ -36,7 +33,6 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#isStatic <em>Is Static</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,20 +90,5 @@ public interface NamedElement
 	 * @generated
 	 */
 	void setIsStatic(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Annotation}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Annotation</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Annotation</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_OwnedAnnotation()
-	 * @generated
-	 */
-	@NonNull List<Annotation> getOwnedAnnotation();
 
 } // NamedElement

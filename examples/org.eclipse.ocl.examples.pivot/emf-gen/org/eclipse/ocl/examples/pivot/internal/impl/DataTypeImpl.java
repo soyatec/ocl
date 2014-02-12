@@ -29,11 +29,11 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -189,14 +189,14 @@ public class DataTypeImpl
 		{
 			case PivotPackage.DATA_TYPE__EXTENSION:
 				return getExtension();
+			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.DATA_TYPE__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.DATA_TYPE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.DATA_TYPE__NAME:
 				return getName();
-			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
-				return getOwnedAnnotation();
 			case PivotPackage.DATA_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
 			case PivotPackage.DATA_TYPE__TEMPLATE_BINDING:
@@ -254,6 +254,10 @@ public class DataTypeImpl
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
+				return;
 			case PivotPackage.DATA_TYPE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
@@ -263,10 +267,6 @@ public class DataTypeImpl
 				return;
 			case PivotPackage.DATA_TYPE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
-				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case PivotPackage.DATA_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)newValue);
@@ -347,6 +347,9 @@ public class DataTypeImpl
 			case PivotPackage.DATA_TYPE__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.DATA_TYPE__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -355,9 +358,6 @@ public class DataTypeImpl
 				return;
 			case PivotPackage.DATA_TYPE__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
-				getOwnedAnnotation().clear();
 				return;
 			case PivotPackage.DATA_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)null);
@@ -429,14 +429,14 @@ public class DataTypeImpl
 		{
 			case PivotPackage.DATA_TYPE__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.DATA_TYPE__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.DATA_TYPE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.DATA_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.DATA_TYPE__OWNED_ANNOTATION:
-				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.DATA_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
 			case PivotPackage.DATA_TYPE__TEMPLATE_BINDING:

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -148,6 +149,8 @@ public class TypeTemplateParameterImpl
 		{
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
 				return getExtension();
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return getOwnedComment();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__DEFAULT:
@@ -183,6 +186,10 @@ public class TypeTemplateParameterImpl
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				getOwnedComment().clear();
@@ -226,6 +233,9 @@ public class TypeTemplateParameterImpl
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				getOwnedComment().clear();
 				return;
@@ -265,6 +275,8 @@ public class TypeTemplateParameterImpl
 		{
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER__DEFAULT:

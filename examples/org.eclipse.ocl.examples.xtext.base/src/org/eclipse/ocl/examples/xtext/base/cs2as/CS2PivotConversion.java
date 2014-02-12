@@ -661,7 +661,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	}
 
 	public void handleVisitNamedElement(@NonNull NamedElementCS csNamedElement, @NonNull NamedElement pivotElement) {
-		List<Annotation> pivotAnnotations = pivotElement.getOwnedAnnotation();
+		List<Element> pivotAnnotations = pivotElement.getOwnedAnnotation();
 		List<AnnotationElementCS> csAnnotations = csNamedElement.getOwnedAnnotation();
 //		if ((csAnnotations.size() <= 1) && (pivotAnnotations.size() <= 1)) {
 			refreshPivotList(Annotation.class, pivotAnnotations, csAnnotations);
