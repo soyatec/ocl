@@ -196,7 +196,7 @@ helper UML2EcoreMapping::CreateProperty::createStructuralFeature(inout output : 
 /**
  * Pass 2 install all references.
  */
-abstract mapping inout Ecore::EModelElement::resolveElement();
+abstract mapping inout Ecore::EModelElement::resolveElement() {}
 
 abstract mapping inout Ecore::ETypedElement::resolveElement()
 inherits Ecore::EModelElement::resolveElement
