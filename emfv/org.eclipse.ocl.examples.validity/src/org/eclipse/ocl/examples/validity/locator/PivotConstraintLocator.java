@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 public class PivotConstraintLocator extends AbstractConstraintLocator
 {
+	@Override
 	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 		@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
 		Map<EModelElement, List<LeafConstrainingNode>> map = null;
@@ -91,6 +92,7 @@ public class PivotConstraintLocator extends AbstractConstraintLocator
 		return OCLValidityPlugin.INSTANCE.getImage("OCLModelFile.gif");
 	}
 
+	@Override
 	public @NonNull String getName() {
 		return "Complete OCL constraints";
 	}

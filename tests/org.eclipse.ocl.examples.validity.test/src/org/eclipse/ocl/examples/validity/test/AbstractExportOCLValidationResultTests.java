@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.export.ExportResultsDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.export.ExportResultsRegistry;
-import org.eclipse.ocl.examples.emf.validation.validity.export.IValidatorExport;
+import org.eclipse.ocl.examples.emf.validation.validity.export.IValidityExport;
 import org.junit.After;
 import org.junit.Before;
 
@@ -34,12 +34,12 @@ import org.junit.Before;
  */
 public class AbstractExportOCLValidationResultTests extends AbstractValidityTestCase
 {
-	protected IValidatorExport exporter;
+	protected IValidityExport exporter;
 	protected IProject project;
 	protected IFile exportedFile;
 	protected EList<Result> results;
 
-	protected void initExporter(@NonNull Class<? extends IValidatorExport> exportClass) {
+	protected void initExporter(@NonNull Class<? extends IValidityExport> exportClass) {
 		exporter = null;
 		for (ExportResultsDescriptor descriptor : ExportResultsRegistry.getRegisteredExtensions()) {
 			if (exportClass.getName().equals(descriptor.getExtensionClassName())) {

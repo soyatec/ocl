@@ -14,38 +14,31 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.ui.markers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 
 
-public class GoToModelElementMarker {
+public class GoToConstrainingNodeMarker {
 	
 	private IMarker gotoMarker;
 	
-	private IFile resourceFile;
+	private final IFile resourceFile;
 	
-	private final Map<String, Object> attributesMap = new HashMap<String, Object>();
-	
-	private EObject target;
-	
-	/** 
+	/**
 	 * The Constructor.
 	 * 
 	 * @param file the resource file
-	 * @param eObject
 	 */
-	public GoToModelElementMarker(@NonNull IFile file, @NonNull EObject eObject){
+	public GoToConstrainingNodeMarker(@NonNull IFile file){
 		this.resourceFile = file;
-		this.target = eObject;
+	}
+	
+	public IFile getResourceFile(){
+		return resourceFile;
 	}
 	
 	/**
@@ -56,12 +49,7 @@ public class GoToModelElementMarker {
 	public IMarker getIMarker() {
 		try {
 			if (resourceFile.exists()) {
-				attributesMap.put(EValidator.URI_ATTRIBUTE,
-					EcoreUtil.getURI(target).toString());
-
 				gotoMarker = resourceFile.createMarker(EValidator.MARKER);
-				gotoMarker.setAttributes(attributesMap);
-
 				return gotoMarker;
 			}
 		} catch (CoreException exception) {

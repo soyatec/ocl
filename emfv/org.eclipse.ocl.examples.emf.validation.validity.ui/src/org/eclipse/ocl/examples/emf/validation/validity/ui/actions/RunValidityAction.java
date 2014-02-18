@@ -20,7 +20,7 @@ import java.net.URL;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.IDEValidityManager;
 
@@ -29,10 +29,10 @@ public final class RunValidityAction extends Action
 	protected final @NonNull IDEValidityManager validityManager;
 	
 	public RunValidityAction(@NonNull IDEValidityManager validityManager) {
-		super(ValidationDebugMessages.ValidityView_Action_RunValidity_Title);
+		super(ValidityUIMessages.ValidityView_Action_RunValidity_Title);
 		this.validityManager = validityManager;
-		setToolTipText(ValidationDebugMessages.ValidityView_Action_RunValidity_ToolTipText);
-		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_RunValidity_ImageLocation);
+		setToolTipText(ValidityUIMessages.ValidityView_Action_RunValidity_ToolTipText);
+		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_RunValidity_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 	}
 

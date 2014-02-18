@@ -33,7 +33,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerComparator;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.osgi.util.TextProcessor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -69,9 +69,9 @@ public class ContainerSelectionGroup extends Composite {
 	TreeViewer treeViewer;
 
 	// the message to display at the top of this dialog
-	private static final String DEFAULT_MSG_NEW_ALLOWED = ValidationDebugMessages.ContainerGroup_message;
+	private static final String DEFAULT_MSG_NEW_ALLOWED = ValidityUIMessages.ContainerGroup_message;
 
-	private static final String DEFAULT_MSG_SELECT_ONLY = ValidationDebugMessages.ContainerGroup_selectFolder;
+	private static final String DEFAULT_MSG_SELECT_ONLY = ValidityUIMessages.ContainerGroup_selectFolder;
 
 	// sizing constants
 	private static final int SIZING_SELECTION_PANE_WIDTH = 320;

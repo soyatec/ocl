@@ -32,7 +32,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.export.ExportResultsDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.export.ExportResultsRegistry;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.IDEValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
@@ -54,16 +54,16 @@ public final class ExportValidationResultAction extends Action implements IMenuC
 	private MenuManager menuManager = new MenuManager();
 	
 	public ExportValidationResultAction(@NonNull IDEValidityManager validityManager, @NonNull ValidityView validityView) {
-		super(ValidationDebugMessages.ValidityView_Action_ExportResult_Title);
+		super(ValidityUIMessages.ValidityView_Action_ExportResult_Title);
 		this.validityManager = validityManager;
 		this.validityView = validityView;
-		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_ExportResult_ImageLocation);
+		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_ExportResult_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 		
 		if (ExportResultsRegistry.getRegisteredExtensions().isEmpty()) {
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_ExportResult_ToolTipText_NoExporter);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_ExportResult_ToolTipText_NoExporter);
 		} else {
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_ExportResult_ToolTipText_NeedsRun);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_ExportResult_ToolTipText_NeedsRun);
 			setMenuCreator(this);
 		}
 	}
@@ -116,10 +116,10 @@ public final class ExportValidationResultAction extends Action implements IMenuC
 		private final @NonNull ExportResultsDescriptor exportDescriptor;
 
 		public SpecificExportResultsAction(@NonNull ExportResultsDescriptor exportDescriptor) {
-			super(ValidationDebugMessages.ValidityView_Action_ExportResult_Title, IAction.AS_CHECK_BOX);
+			super(ValidityUIMessages.ValidityView_Action_ExportResult_Title, IAction.AS_CHECK_BOX);
 			this.exportDescriptor = exportDescriptor;
 			setText(exportDescriptor.getExtensionName());
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_ExportResult_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_ExportResult_ToolTipText);
 		}
 
 		@Override

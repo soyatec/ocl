@@ -74,7 +74,7 @@ import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.LockValidatab
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.RunValidityAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ShowElementInEditorAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.filters.NodesViewerFilter;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.ConstrainingNodeContentProvider;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.NodeCheckStateProvider;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.NodeLabelProvider;
@@ -394,8 +394,8 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		messageManager.setDecorationPosition(SWT.LEFT | SWT.TOP);
 		toolkit.decorateFormHeading(getForm());
 		
-		getForm().setText(ValidationDebugMessages.ValidityView_viewTitle);
-		messageManager.addMessage(messageKey + messageCount++, ValidationDebugMessages.ValidityView_Messages_NoSelection, IStatus.WARNING, getForm());
+		getForm().setText(ValidityUIMessages.ValidityView_viewTitle);
+		messageManager.addMessage(messageKey + messageCount++, ValidityUIMessages.ValidityView_Messages_NoSelection, IStatus.WARNING, getForm());
 		
 		Composite mainBody = getForm().getBody();
 		mainBody.setLayout(new GridLayout());
@@ -407,7 +407,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		toolkit.adapt(validateableElementsForm);
 
 		validatableNodesSection = toolkit.createSection(validateableElementsForm, ExpandableComposite.TITLE_BAR);
-		validatableNodesSection.setText(ValidationDebugMessages.ValidityView_validatableNodesSectionName);
+		validatableNodesSection.setText(ValidityUIMessages.ValidityView_validatableNodesSectionName);
 		
 		CheckboxTreeViewer validatableNodesViewer;
 		{
@@ -446,7 +446,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		toolkit.adapt(constrainingElementsForm);
 
 		constrainingNodesSection = toolkit.createSection(constrainingElementsForm, ExpandableComposite.TITLE_BAR);
-		constrainingNodesSection.setText(ValidationDebugMessages.ValidityView_constrainingNodesSectionName);
+		constrainingNodesSection.setText(ValidityUIMessages.ValidityView_constrainingNodesSectionName);
 
 		CheckboxTreeViewer constrainingNodesViewer;
 		{
@@ -835,7 +835,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 				filteredValidatableNodesTree.disableTextWidget();
 				
 				currentMessagekey = messageKey + messageCount++;
-				currentMessageText = ValidationDebugMessages.ValidityView_Messages_NoModelElement;
+				currentMessageText = ValidityUIMessages.ValidityView_Messages_NoModelElement;
 				currentStatus = IStatus.INFO;
 			} else {
 				filteredValidatableNodesTree.enableTextWidget();
@@ -844,7 +844,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 				filteredConstrainingNodesTree.disableTextWidget();
 
 				currentMessagekey = messageKey + messageCount++;
-				currentMessageText = ValidationDebugMessages.ValidityView_Messages_NoConstraints;
+				currentMessageText = ValidityUIMessages.ValidityView_Messages_NoConstraints;
 				currentStatus = IStatus.WARNING;
 			} else {
 				filteredConstrainingNodesTree.enableTextWidget();
@@ -854,7 +854,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			filteredConstrainingNodesTree.disableTextWidget();
 			
 			currentMessagekey = messageKey + messageCount++;
-			currentMessageText = ValidationDebugMessages.ValidityView_Messages_NoSelection;
+			currentMessageText = ValidityUIMessages.ValidityView_Messages_NoSelection;
 			currentStatus = IStatus.WARNING;
 		}
 		

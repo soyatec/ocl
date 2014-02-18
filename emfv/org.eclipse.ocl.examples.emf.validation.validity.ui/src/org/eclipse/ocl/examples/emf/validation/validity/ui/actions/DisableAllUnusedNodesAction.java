@@ -22,7 +22,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.filters.HideUnusedNodesViewerFilter;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 
 public final class DisableAllUnusedNodesAction extends AbstractFilterAction
@@ -30,26 +30,26 @@ public final class DisableAllUnusedNodesAction extends AbstractFilterAction
 	private HideUnusedNodesViewerFilter filter = new HideUnusedNodesViewerFilter();
 	
 	public DisableAllUnusedNodesAction(@NonNull ValidityManager validityManager, @NonNull StructuredViewer filteredViewer, boolean isValidatableFilterAction) {
-		super(ValidationDebugMessages.ValidityView_Action_ShowHideUnusedNodes_Title,
+		super(ValidityUIMessages.ValidityView_Action_ShowHideUnusedNodes_Title,
 				IAction.AS_CHECK_BOX,
-				isValidatableFilterAction ? ValidationDebugMessages.ValidityView_Action_HideUnusedValidatableNodes_ToolTipText
-										  : ValidationDebugMessages.ValidityView_Action_HideUnusedConstrainingNodes_ToolTipText,
-				ValidationDebugMessages.ValidityView_Action_ShowUnusedNodes_ImageLocation,
+				isValidatableFilterAction ? ValidityUIMessages.ValidityView_Action_HideUnusedValidatableNodes_ToolTipText
+										  : ValidityUIMessages.ValidityView_Action_HideUnusedConstrainingNodes_ToolTipText,
+				ValidityUIMessages.ValidityView_Action_ShowUnusedNodes_ImageLocation,
 				validityManager, filteredViewer, isValidatableFilterAction);
 	}
 
 	@Override
 	public void run() {
 		if (this.isChecked()){
-			setToolTipText(isValidatableFilterAction ? ValidationDebugMessages.ValidityView_Action_ShowUnusedValidatableNodes_ToolTipText
-													 : ValidationDebugMessages.ValidityView_Action_ShowUnusedConstrainingNodes_ToolTipText);
-			URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_HideUnusedNodes_ImageLocation);
+			setToolTipText(isValidatableFilterAction ? ValidityUIMessages.ValidityView_Action_ShowUnusedValidatableNodes_ToolTipText
+													 : ValidityUIMessages.ValidityView_Action_ShowUnusedConstrainingNodes_ToolTipText);
+			URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_HideUnusedNodes_ImageLocation);
 			setImageDescriptor(ImageDescriptor.createFromURL(image));
 			filteredViewer.addFilter(filter);
 		} else {
-			setToolTipText(isValidatableFilterAction ? ValidationDebugMessages.ValidityView_Action_HideUnusedValidatableNodes_ToolTipText
-													 : ValidationDebugMessages.ValidityView_Action_HideUnusedConstrainingNodes_ToolTipText);
-			URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_ShowUnusedNodes_ImageLocation);
+			setToolTipText(isValidatableFilterAction ? ValidityUIMessages.ValidityView_Action_HideUnusedValidatableNodes_ToolTipText
+													 : ValidityUIMessages.ValidityView_Action_HideUnusedConstrainingNodes_ToolTipText);
+			URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_ShowUnusedNodes_ImageLocation);
 			setImageDescriptor(ImageDescriptor.createFromURL(image));
 			filteredViewer.removeFilter(filter);
 		}

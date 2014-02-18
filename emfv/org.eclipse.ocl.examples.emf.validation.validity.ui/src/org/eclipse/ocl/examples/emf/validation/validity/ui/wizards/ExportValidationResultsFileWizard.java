@@ -26,8 +26,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.export.ExportResultsDescriptor;
-import org.eclipse.ocl.examples.emf.validation.validity.export.IValidatorExport;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.export.IValidityExport;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
@@ -54,7 +54,7 @@ public class ExportValidationResultsFileWizard extends Wizard implements INewWiz
 	public ExportValidationResultsFileWizard(@NonNull IWorkbench workbench, @NonNull IStructuredSelection initialSelection, 
 			@NonNull RootNode rootNode, @NonNull ExportResultsDescriptor exportDescriptor) {
 		super();
-		setWindowTitle(ValidationDebugMessages.NewWizardPage_pageTitle);
+		setWindowTitle(ValidityUIMessages.NewWizardPage_pageTitle);
 		this.exportDescriptor = exportDescriptor;
 		this.rootNode = rootNode;
 		init(workbench, initialSelection);
@@ -82,7 +82,7 @@ public class ExportValidationResultsFileWizard extends Wizard implements INewWiz
 		final Resource selectedResource2 = initialResource;
 		final RootNode rootNode2 = rootNode;
 		final IPath path = wizardPage.getNewExportedFilePath();
-		final IValidatorExport selectedExporter = exportDescriptor.getExportExtension();
+		final IValidityExport selectedExporter = exportDescriptor.getExportExtension();
 		
 		if (selectedExporter != null && selectedResource2 != null && rootNode2 != null && path != null) {
 			selectedExporter.export(selectedResource2, rootNode2, path);

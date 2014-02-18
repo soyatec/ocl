@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.export.util.TextExport;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.export.TextExport;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

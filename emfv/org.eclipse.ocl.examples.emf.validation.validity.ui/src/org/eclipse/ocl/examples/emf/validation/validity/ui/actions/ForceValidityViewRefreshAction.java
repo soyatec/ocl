@@ -19,7 +19,7 @@ import java.net.URL;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.IDEValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
@@ -32,12 +32,12 @@ public class ForceValidityViewRefreshAction extends Action {
 	ValidityView validityView;
 	public ForceValidityViewRefreshAction(
 			@NonNull IDEValidityManager validityManager, @NonNull ValidityView validityView) {
-		super(ValidationDebugMessages.ValidityView_Action_ForceRefresh_Title);
+		super(ValidityUIMessages.ValidityView_Action_ForceRefresh_Title);
 		this.validityManager = validityManager;
 		this.validityView = validityView;
-		setToolTipText(ValidationDebugMessages.ValidityView_Action_ForceRefresh_ToolTipText);
+		setToolTipText(ValidityUIMessages.ValidityView_Action_ForceRefresh_ToolTipText);
 		URL image = (URL) ValidityUIPlugin.INSTANCE
-				.getImage(ValidationDebugMessages.ValidityView_Action_ForceRefresh_ImageLocation);
+				.getImage(ValidityUIMessages.ValidityView_Action_ForceRefresh_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 	}
 

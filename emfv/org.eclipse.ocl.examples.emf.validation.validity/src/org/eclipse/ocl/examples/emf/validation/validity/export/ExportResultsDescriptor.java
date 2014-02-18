@@ -51,7 +51,7 @@ public class ExportResultsDescriptor {
 	/**
 	 * We only need to create the instance once, this will keep reference to it.
 	 */
-	private IValidatorExport extension;
+	private IValidityExport extension;
 
 	/**
 	 * Instantiates a descriptor with all information.
@@ -96,14 +96,14 @@ public class ExportResultsDescriptor {
 	}
 
 	/**
-	 * Creates an instance of this descriptor's {@link IValidatorExport}.
+	 * Creates an instance of this descriptor's {@link IValidityExport}.
 	 * 
-	 * @return A new instance of this descriptor's {@link IValidatorExport}.
+	 * @return A new instance of this descriptor's {@link IValidityExport}.
 	 */
-	public IValidatorExport getExportExtension() {
+	public IValidityExport getExportExtension() {
 		if (extension == null) {
 			try {
-				extension = (IValidatorExport) element
+				extension = (IValidityExport) element
 					.createExecutableExtension(VALIDITY_EXPORTER_CLASS_ATTRIBUTE);
 			} catch (CoreException e) {
 				ValidityPlugin.getPlugin().getLog().log(e.getStatus());

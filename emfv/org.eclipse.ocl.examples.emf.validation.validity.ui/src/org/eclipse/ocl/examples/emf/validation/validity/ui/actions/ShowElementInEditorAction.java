@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.emf.validation.validity.ui.actions;
 
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -39,11 +40,10 @@ import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.markers.GoToConstrainingMarker;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.markers.GoToModelElementMarker;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.markers.GoToConstrainingNodeMarker;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.markers.GoToValidatableNodeMarker;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.utils.Logger;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.IDEValidityManager;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -54,6 +54,8 @@ import org.eclipse.ui.ide.IDE;
 
 public final class ShowElementInEditorAction extends Action
 {
+	private static final Logger logger = Logger.getLogger(ShowElementInEditorAction.class);
+
 	/**
 	 * Returns the {@link IFile} in which the provided {@link Resource} can be
 	 * found, if any.
@@ -90,44 +92,77 @@ public final class ShowElementInEditorAction extends Action
 	private final @NonNull ISelectionProvider selectionProvider;
 	
 	public ShowElementInEditorAction(@NonNull IDEValidityManager validityManager, @NonNull ISelectionProvider selectionProvider) {
-		super(ValidationDebugMessages.ValidityView_Action_ShowInEditor_Title);
+		super(ValidityUIMessages.ValidityView_Action_ShowInEditor_Title);
 		this.validityManager = validityManager;
 		this.selectionProvider = selectionProvider;
-		setToolTipText(ValidationDebugMessages.ValidityView_Action_ShowInEditor_ToolTipText);
-		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_ShowInEditor_ImageLocation);
+		setToolTipText(ValidityUIMessages.ValidityView_Action_ShowInEditor_ToolTipText);
+		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_ShowInEditor_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 	}
-
-	/**
-	 * Return the GoToModelElementMarker of a ValidatableNode.
-	 * 
-	 * @param validatableNode
-	 *            the selected ValidatableNode
-	 * @return the GoToModelElementMarker of a ValidatableNode.
-	 */
-	public GoToModelElementMarker getModelElementMarker(@NonNull ValidatableNode validatableNode){
-		IFile containingFile = findFile(validatableNode.getConstrainedObject().eResource());
-		// create a go to Marker for the selected eObject
-		if (containingFile != null) {
-			return new GoToModelElementMarker(containingFile, validatableNode.getConstrainedObject());
+	
+	private @Nullable IMarker findGoToMarker(ValidityModel model, AbstractNode node) {
+		IMarker goToMarker = null;
+		if (node instanceof ResultConstrainingNode) {
+			ResultConstrainingNode resultConstrainingNode = (ResultConstrainingNode) node;
+			ValidatableNode validatableNode = resultConstrainingNode.getResultValidatableNode().getParent();
+			if (validatableNode != null && getValidatableNodeMarker(validatableNode) != null) {
+				goToMarker = getValidatableNodeMarker(validatableNode).getIMarker();
+			}
+		} else if (node instanceof ResultValidatableNode) {
+			ResultValidatableNode validatableNode = (ResultValidatableNode) node;
+			ConstrainingNode constrainingNode = validatableNode.getResultConstrainingNode().getParent();
+			if (constrainingNode instanceof LeafConstrainingNode && getLeafConstrainingNodeMarker((LeafConstrainingNode) constrainingNode) != null) {
+				goToMarker = getLeafConstrainingNodeMarker((LeafConstrainingNode) constrainingNode).getIMarker();
+			}
+		} else if (node instanceof LeafConstrainingNode && getLeafConstrainingNodeMarker((LeafConstrainingNode) node) !=null){
+			goToMarker = getLeafConstrainingNodeMarker((LeafConstrainingNode) node).getIMarker();
+		} else if (node instanceof ValidatableNode && getValidatableNodeMarker((ValidatableNode) node) !=null){
+			goToMarker = getValidatableNodeMarker((ValidatableNode) node).getIMarker();
+		}
+		return goToMarker;
+	}
+	
+	private @Nullable IWorkbenchPage getActivePage() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		if (workbench != null) {
+			IWorkbenchWindow activeWindow = workbench.getActiveWorkbenchWindow();
+			if (activeWindow != null) {
+				return activeWindow.getActivePage();
+			}
 		}
 		return null;
 	}
 	
 	/**
-	 * Return the GoToModelElementMarker of a LeafConstrainingNode.
+	 * Return the GoToConstrainingNodeMarker of a LeafConstrainingNode.
 	 * 
 	 * @param leafConstrainingNode
 	 *            the selected leafConstrainingNode
-	 * @return the GoToModelElementMarker of a LeafConstrainingNode.
+	 * @return the GoToConstrainingNodeMarker of a LeafConstrainingNode.
 	 */
-	public GoToConstrainingMarker getLeafConstrainingNodeMarker(@NonNull LeafConstrainingNode leafConstrainingNode){
+	public GoToConstrainingNodeMarker getLeafConstrainingNodeMarker(@NonNull LeafConstrainingNode leafConstrainingNode){
 		Resource resource = leafConstrainingNode.getConstraintResource();		
 		if (resource != null) {
 			IFile file = findFile(resource);
 			if (file != null) {
-				return new GoToConstrainingMarker(file);
+				return new GoToConstrainingNodeMarker(file);
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return the GoToValidatableNodeMarker of a ValidatableNode.
+	 * 
+	 * @param validatableNode
+	 *            the selected ValidatableNode
+	 * @return the GoToValidatableNodeMarker of a ValidatableNode.
+	 */
+	public GoToValidatableNodeMarker getValidatableNodeMarker(@NonNull ValidatableNode validatableNode){
+		IFile containingFile = findFile(validatableNode.getConstrainedObject().eResource());
+		// create a go to Marker for the selected eObject
+		if (containingFile != null) {
+			return new GoToValidatableNodeMarker(containingFile, validatableNode.getConstrainedObject());
 		}
 		return null;
 	}
@@ -148,43 +183,10 @@ public final class ShowElementInEditorAction extends Action
 				try {
 					IDE.openEditor(activePage, goToMarker);
 				} catch (PartInitException exception) {
-					Logger.getLogger().log(Logger.SEVERE, "Failed to open in the Editor ", exception); //$NON-NLS-1$
+					logger.error("Failed to open in the Editor ", exception); //$NON-NLS-1$
 					EcorePlugin.INSTANCE.log(exception);
 				}
 			}
 		}
-	}
-	
-	private @Nullable IMarker findGoToMarker(ValidityModel model, AbstractNode node) {
-		IMarker goToMarker = null;
-		if (node instanceof ResultConstrainingNode) {
-			ResultConstrainingNode resultConstrainingNode = (ResultConstrainingNode) node;
-			ValidatableNode validatableNode = resultConstrainingNode.getResultValidatableNode().getParent();
-			if (validatableNode != null && getModelElementMarker(validatableNode) != null) {
-				goToMarker = getModelElementMarker(validatableNode).getIMarker();
-			}
-		} else if (node instanceof ResultValidatableNode) {
-			ResultValidatableNode validatableNode = (ResultValidatableNode) node;
-			ConstrainingNode constrainingNode = validatableNode.getResultConstrainingNode().getParent();
-			if (constrainingNode instanceof LeafConstrainingNode && getLeafConstrainingNodeMarker((LeafConstrainingNode) constrainingNode) != null) {
-				goToMarker = getLeafConstrainingNodeMarker((LeafConstrainingNode) constrainingNode).getIMarker();
-			}
-		} else if (node instanceof LeafConstrainingNode && getLeafConstrainingNodeMarker((LeafConstrainingNode) node) !=null){
-			goToMarker = getLeafConstrainingNodeMarker((LeafConstrainingNode) node).getIMarker();
-		} else if (node instanceof ValidatableNode && getModelElementMarker((ValidatableNode) node) !=null){
-			goToMarker = getModelElementMarker((ValidatableNode) node).getIMarker();
-		}
-		return goToMarker;
-	}
-	
-	private @Nullable IWorkbenchPage getActivePage() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		if (workbench != null) {
-			IWorkbenchWindow activeWindow = workbench.getActiveWorkbenchWindow();
-			if (activeWindow != null) {
-				return activeWindow.getActivePage();
-			}
-		}
-		return null;
 	}
 }

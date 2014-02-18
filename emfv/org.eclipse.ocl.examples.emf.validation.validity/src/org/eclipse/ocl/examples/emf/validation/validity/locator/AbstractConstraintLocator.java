@@ -123,19 +123,6 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 	}
 
 	public @Nullable URI getURI(@NonNull EObject eObject) {
-/*		EObject eContainer = eObject;
-		for ( ; true; eContainer = eContainer.eContainer()) {
-			if (eContainer == null) {
-				return null;
-			}
-			if (eContainer instanceof EPackage) {
-				break;
-			}
-		}
-		String nsURI = ((EPackage)eContainer).getNsURI();
-		if (nsURI == null) {
-			return null;
-		} */
 		Resource resource = eObject.eResource();
 		if (resource == null) {
 			return null;
@@ -149,9 +136,5 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {
 		result.setDiagnostic("Unimplemented validate for " + getClass().getName());
 		result.setSeverity(Severity.FATAL);
-//		System.out.println("Validate '" + result.getValidatableNode() + "' against '" + result.getLeafConstrainingNode() + "'");
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {}
 	}
 }

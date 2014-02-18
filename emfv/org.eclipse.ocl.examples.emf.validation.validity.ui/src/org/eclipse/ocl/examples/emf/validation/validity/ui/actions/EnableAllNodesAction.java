@@ -19,16 +19,16 @@ import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.filters.AlwaysTrueViewerFilter;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 
 public final class EnableAllNodesAction extends AbstractFilterAction {
 	private AlwaysTrueViewerFilter filter = new AlwaysTrueViewerFilter();
 	
 	public EnableAllNodesAction(@NonNull ValidityManager validityManager, @NonNull StructuredViewer filteredViewer, boolean isValidatableFilterAction) {
-		super(ValidationDebugMessages.ValidityView_Action_SelectAllNodes_Title,
-				isValidatableFilterAction ? ValidationDebugMessages.ValidityView_Action_SelectAllValidatableNodes_ToolTipText
-										  : ValidationDebugMessages.ValidityView_Action_SelectAllConstrainingNodes_ToolTipText,
-				ValidationDebugMessages.ValidityView_Action_SelectAllNodes_ImageLocation,
+		super(ValidityUIMessages.ValidityView_Action_SelectAllNodes_Title,
+				isValidatableFilterAction ? ValidityUIMessages.ValidityView_Action_SelectAllValidatableNodes_ToolTipText
+										  : ValidityUIMessages.ValidityView_Action_SelectAllConstrainingNodes_ToolTipText,
+				ValidityUIMessages.ValidityView_Action_SelectAllNodes_ImageLocation,
 				validityManager, filteredViewer, isValidatableFilterAction);
 	}
 

@@ -33,18 +33,11 @@
 			</command>
 		</menuContribution>
 	</extension>
-       <extension point="org.eclipse.ocl.examples.emf.validation.validity.validity_exporter">
-       <exporter
-             class="org.eclipse.ocl.examples.emf.validation.validity.ui.export.util.HTMLExport"
-             extension="html"
-             name="HTMLExport">
-       </exporter>
-    </extension>
-    <extension point="org.eclipse.ocl.examples.emf.validation.validity.validity_exporter">
-       <exporter
-             class="org.eclipse.ocl.examples.emf.validation.validity.ui.export.util.TextExport"
-             extension="txt"
-             name="TextExport">
-       </exporter>
+
+   <extension point="org.eclipse.ocl.examples.emf.validation.validity.validity_exporter">
+       <exporter extension="html" name="HTMLExport"
+             class="org.eclipse.ocl.examples.emf.validation.validity.ui.export.HTMLExport"/>
+       <exporter extension="txt" name="TextExport"
+             class="org.eclipse.ocl.examples.emf.validation.validity.ui.export.TextExport"/>
     </extension>
 </plugin>

@@ -25,7 +25,7 @@ import org.eclipse.jface.action.IMenuCreator;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 import org.eclipse.swt.widgets.Control;
@@ -45,11 +45,11 @@ public final class FilterValidationResultAction extends Action implements IMenuC
 	private MenuManager menuManager = new MenuManager();
 	
 	public FilterValidationResultAction(@NonNull ValidityView validityView) {
-		super(ValidationDebugMessages.ValidityView_Action_FilterResult_Title);
+		super(ValidityUIMessages.ValidityView_Action_FilterResult_Title);
 		this.validityView = validityView;
-		setToolTipText(ValidationDebugMessages.ValidityView_Action_FilterResult_ToolTipText);
+		setToolTipText(ValidityUIMessages.ValidityView_Action_FilterResult_ToolTipText);
 		URL image = (URL) ValidityUIPlugin.INSTANCE
-			.getImage(ValidationDebugMessages.ValidityView_Action_FilterResult_ImageLocation);
+			.getImage(ValidityUIMessages.ValidityView_Action_FilterResult_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 		setMenuCreator(this);
 
@@ -62,45 +62,45 @@ public final class FilterValidationResultAction extends Action implements IMenuC
 	
 	private Action createFatalNodesFilterAction() {
 		String text = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Title,
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Kind_Failure);
-		String toolTipText = ValidationDebugMessages.ValidityView_Action_ShowFailedElementsNodes_ToolTipText;
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Title,
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Kind_Failure);
+		String toolTipText = ValidityUIMessages.ValidityView_Action_ShowFailedElementsNodes_ToolTipText;
 		return new SwitchFilterAction(text, toolTipText, Severity.FATAL);
 	}
 	
 	private Action createErrorNodesFilterAction() {
-		String kind = ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Kind_Error;
+		String kind = ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Kind_Error;
 		String text = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
 		String toolTipText = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
 		return new SwitchFilterAction(text, toolTipText, Severity.ERROR);
 	}
 	
 	private Action createWarningNodesFilterAction() {
-		String kind = ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Kind_Warning;
+		String kind = ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Kind_Warning;
 		String text = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
 		String toolTipText = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
 		return new SwitchFilterAction(text, toolTipText, Severity.WARNING);
 	}
 	
 	private Action createInfoNodesFilterAction() {
-		String kind = ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Kind_Info;
+		String kind = ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Kind_Info;
 		String text = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
 		String toolTipText = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
 		return new SwitchFilterAction(text, toolTipText, Severity.INFO);
 	}
 	
 	private Action createSuccessNodesFilterAction() {
-		String kind = ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Kind_OK;
+		String kind = ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Kind_OK;
 		String text = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_Title, kind);
 		String toolTipText = MessageFormat.format(
-				ValidationDebugMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
+				ValidityUIMessages.ValidityView_Action_ShowNodesByKind_ToolTipText, kind);
 		return new SwitchFilterAction(text, toolTipText, Severity.OK);
 	}
 	

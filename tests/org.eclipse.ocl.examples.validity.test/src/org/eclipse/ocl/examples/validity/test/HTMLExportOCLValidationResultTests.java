@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.export.util.HTMLExport;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.export.HTMLExport;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

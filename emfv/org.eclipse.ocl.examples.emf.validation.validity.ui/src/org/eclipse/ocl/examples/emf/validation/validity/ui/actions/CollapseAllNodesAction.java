@@ -21,7 +21,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
@@ -34,20 +34,20 @@ public final class CollapseAllNodesAction extends Action {
 
 	public CollapseAllNodesAction(@NonNull ValidityManager validityManager, @NonNull ValidityView validityView, 
 			boolean isValidatableCollapseAction, boolean isConstrainingCollapseAction) {
-		super(ValidationDebugMessages.ValidityView_Action_CollapseAllNodes_Title);
+		super(ValidityUIMessages.ValidityView_Action_CollapseAllNodes_Title);
 		this.validityManager = validityManager;
 		this.validityView = validityView;
 		this.isValidatableCollapseAction = isValidatableCollapseAction;
 		this.isConstrainingCollapseAction = isConstrainingCollapseAction;
 		if (isValidatableCollapseAction && isConstrainingCollapseAction){
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_CollapseAllNodes_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_CollapseAllNodes_ToolTipText);
 		} else if (isValidatableCollapseAction){
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_CollapseAllValidatableNodes_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_CollapseAllValidatableNodes_ToolTipText);
 		} else if (isConstrainingCollapseAction) {
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_CollapseAllConstrainingNodes_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_CollapseAllConstrainingNodes_ToolTipText);
 		}
 
-		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_CollapseAllNodes_ImageLocation);
+		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_CollapseAllNodes_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 	}
 

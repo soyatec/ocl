@@ -21,7 +21,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
@@ -34,20 +34,20 @@ public final class ExpandAllNodesAction extends Action {
 	
 	public ExpandAllNodesAction(@NonNull ValidityManager validityManager, @NonNull ValidityView validityView, 
 			boolean isValidatableExpandAction, boolean isConstrainingExpandAction) {
-		super(ValidationDebugMessages.ValidityView_Action_ExpandAllNodes_Title);
+		super(ValidityUIMessages.ValidityView_Action_ExpandAllNodes_Title);
 		this.validityManager = validityManager;
 		this.validityView = validityView;
 		this.isValidatableExpandAction = isValidatableExpandAction;
 		this.isConstrainingExpandAction = isConstrainingExpandAction;
 		if (isValidatableExpandAction && isConstrainingExpandAction){
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_ExpandAllNodes_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_ExpandAllNodes_ToolTipText);
 		} else if (isValidatableExpandAction){
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_ExpandAllValidatableNodes_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_ExpandAllValidatableNodes_ToolTipText);
 		} else if (isConstrainingExpandAction) {
-			setToolTipText(ValidationDebugMessages.ValidityView_Action_ExpandAllConstrainingNodes_ToolTipText);
+			setToolTipText(ValidityUIMessages.ValidityView_Action_ExpandAllConstrainingNodes_ToolTipText);
 		}
 		
-		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidationDebugMessages.ValidityView_Action_ExpandAllNodes_ImageLocation);
+		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_ExpandAllNodes_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 	}
 

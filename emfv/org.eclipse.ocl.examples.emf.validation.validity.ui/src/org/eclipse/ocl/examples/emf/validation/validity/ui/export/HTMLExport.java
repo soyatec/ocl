@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.emf.validation.validity.ui.export.util;
+package org.eclipse.ocl.examples.emf.validation.validity.ui.export;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 
 /**
  * Exports ocl validation results as an html file.
@@ -186,7 +186,7 @@ public class HTMLExport extends AbstractExport {
 			s.append("\t\t\t<td> Resource: " + resource.getURI().lastSegment() + "</td>\n");
 		} else {
 			s.append("\t\t\t\t<td>"
-				+ ValidationDebugMessages.ValidityView_Constraints_LabelProvider_UnexistingResource
+				+ ValidityUIMessages.ValidityView_Constraints_LabelProvider_UnexistingResource
 				+ "</td>\n");
 		}
 		s.append("\t\t\t\t<td>" + node.getLabel() + "</td>\n");
@@ -196,7 +196,7 @@ public class HTMLExport extends AbstractExport {
 			s.append("\t\t\t\t<td>" + expression + "</td>\n");
 		} else {
 			s.append("\t\t\t\t<td>"
-				+ ValidationDebugMessages.ValidityView_Constraints_LabelProvider_UnattainableExpression
+				+ ValidityUIMessages.ValidityView_Constraints_LabelProvider_UnattainableExpression
 				+ "</td>\n");
 		}
 		s.append("\t\t\t\t<td>" + severity + "</td>\n");

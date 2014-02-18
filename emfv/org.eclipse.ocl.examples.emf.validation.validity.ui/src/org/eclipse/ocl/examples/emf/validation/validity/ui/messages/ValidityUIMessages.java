@@ -19,10 +19,10 @@ import org.eclipse.osgi.util.NLS;
 /**
  * An accessor class for externalized strings.
  */
-public class ValidationDebugMessages
+public class ValidityUIMessages
 {	
 	static {
-		NLS.initializeMessages(ValidationDebugMessages.class.getName(), ValidationDebugMessages.class);
+		NLS.initializeMessages(ValidityUIMessages.class.getName(), ValidityUIMessages.class);
 	}
 
 	public static String ValidityView_viewTitle;

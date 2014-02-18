@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.equinox.bidi.StructuredTextTypeHandlerFactory;
 import org.eclipse.jface.util.BidiUtils;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
@@ -92,7 +92,7 @@ public class ResourceAndContainerGroup implements Listener {
 	private boolean allowExistingResources = false;
 
 	// resource type (file, folder, project)
-	private String resourceType = ValidationDebugMessages.ResourceGroup_resource;
+	private String resourceType = ValidityUIMessages.ResourceGroup_resource;
 
 	// show closed projects in the tree, by default
 	private boolean showClosedProjects = true;
@@ -400,7 +400,7 @@ public class ResourceAndContainerGroup implements Listener {
 		IPath path = containerGroup.getContainerFullPath();
 		if (path == null) {
 			problemType = PROBLEM_CONTAINER_EMPTY;
-			problemMessage = ValidationDebugMessages.ResourceGroup_folderEmpty;
+			problemMessage = ValidityUIMessages.ResourceGroup_folderEmpty;
 			return false;
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -408,7 +408,7 @@ public class ResourceAndContainerGroup implements Listener {
 		if (projectName == null
 				|| !workspace.getRoot().getProject(projectName).exists()) {
 			problemType = PROBLEM_PROJECT_DOES_NOT_EXIST;
-			problemMessage = ValidationDebugMessages.ResourceGroup_noProject;
+			problemMessage = ValidityUIMessages.ResourceGroup_noProject;
 			return false;
 		}
 		// path is invalid if any prefix is occupied by a file
@@ -417,7 +417,7 @@ public class ResourceAndContainerGroup implements Listener {
 			if (root.getFile(path).exists()) {
 				problemType = PROBLEM_PATH_OCCUPIED;
 				problemMessage = NLS.bind(
-					ValidationDebugMessages.ResourceGroup_pathOccupied, path
+					ValidityUIMessages.ResourceGroup_pathOccupied, path
 								.makeRelative());
 				return false;
 			}
@@ -475,7 +475,7 @@ public class ResourceAndContainerGroup implements Listener {
 						.getRoot().getFile(resourcePath).exists())) {
 			problemType = PROBLEM_RESOURCE_EXIST;
 			problemMessage = NLS.bind(
-				ValidationDebugMessages.ResourceGroup_nameExists,
+				ValidityUIMessages.ResourceGroup_nameExists,
 					getResource());
 			return false;
 		}
@@ -496,14 +496,14 @@ public class ResourceAndContainerGroup implements Listener {
 		if (resourceName.length() == 0) {
 			problemType = PROBLEM_RESOURCE_EMPTY;
 			problemMessage = NLS.bind(
-				ValidationDebugMessages.ResourceGroup_emptyName, resourceType);
+				ValidityUIMessages.ResourceGroup_emptyName, resourceType);
 			return false;
 		}
 
 		if (!Path.ROOT.isValidPath(resourceName)) {
 			problemType = PROBLEM_NAME_INVALID;
 			problemMessage = NLS.bind(
-				ValidationDebugMessages.ResourceGroup_invalidFilename,
+				ValidityUIMessages.ResourceGroup_invalidFilename,
 					resourceName);
 			return false;
 		}

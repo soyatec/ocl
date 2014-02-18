@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.ripoffs.ResourceAndContainerGroup;
 import org.eclipse.osgi.util.NLS;
@@ -45,7 +45,7 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 public class ExportValidationResultsFileWizardPage extends WizardPage implements Listener
 {
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 120;
-	private static final String NEW_FILE_WIZARD_PAGE = ValidityUIPlugin.PLUGIN_ID + '.' + ValidationDebugMessages.NewWizardPage_newFileWizardContextId;
+	private static final String NEW_FILE_WIZARD_PAGE = ValidityUIPlugin.PLUGIN_ID + '.' + ValidityUIMessages.NewWizardPage_newFileWizardContextId;
 
 	private final @NonNull String expectedExtension;	
 
@@ -64,9 +64,9 @@ public class ExportValidationResultsFileWizardPage extends WizardPage implements
 	 *            the current resource selection
 	 */
 	public ExportValidationResultsFileWizardPage(@NonNull String expectedExtension, @NonNull IResource initialResource) {
-		super(ValidationDebugMessages.NewWizardPage_pageName);
-		setTitle(ValidationDebugMessages.NewWizardPage_pageSummary);
-		setDescription(ValidationDebugMessages.NewWizardPage_pageDescription);
+		super(ValidityUIMessages.NewWizardPage_pageName);
+		setTitle(ValidityUIMessages.NewWizardPage_pageSummary);
+		setDescription(ValidityUIMessages.NewWizardPage_pageDescription);
 		setPageComplete(false);
 		this.expectedExtension = expectedExtension;
 		this.initialResource = initialResource;
@@ -92,8 +92,8 @@ public class ExportValidationResultsFileWizardPage extends WizardPage implements
 	private @Nullable ResourceAndContainerGroup createResourceAndContainerArea(Composite parent) {
 		// resource and container group
 		ResourceAndContainerGroup resourceGroup = new ResourceAndContainerGroup(parent, this,
-				ValidationDebugMessages.NewWizardPage_fileNameLabel,
-				ValidationDebugMessages.NewWizardPage_file, false, SIZING_CONTAINER_GROUP_HEIGHT);
+				ValidityUIMessages.NewWizardPage_fileNameLabel,
+				ValidityUIMessages.NewWizardPage_file, false, SIZING_CONTAINER_GROUP_HEIGHT);
 		resourceGroup.setAllowExistingResources(false);
 		resourceGroup.setResourceExtension(expectedExtension);
 		return resourceGroup;
@@ -137,7 +137,7 @@ public class ExportValidationResultsFileWizardPage extends WizardPage implements
 	 *         <code>false</code> if at least one is invalid
 	 */
 	private boolean validatePage() {
-		setMessage(ValidationDebugMessages.NewWizardPage_pageDescription);
+		setMessage(ValidityUIMessages.NewWizardPage_pageDescription);
 		setErrorMessage(null);
 	
 		return validateGroup();
@@ -174,7 +174,7 @@ public class ExportValidationResultsFileWizardPage extends WizardPage implements
 		ResourceAndContainerGroup resourceGroup2 = resourceGroup;
 		IResource resourceSelection2 = initialSelection;
 		if (resourceGroup2 != null && resourceSelection2 != null) {
-			resourceGroup2.setResource(ValidationDebugMessages.NewWizardPage_defaultFileName);
+			resourceGroup2.setResource(ValidityUIMessages.NewWizardPage_defaultFileName);
 			initialPopulateContainerNameField(resourceSelection2);
 		}
 	}
@@ -224,13 +224,13 @@ public class ExportValidationResultsFileWizardPage extends WizardPage implements
 		}
 		
 		if (!resourceName.endsWith('.' + expectedExtension)) {
-			setErrorMessage(NLS.bind(ValidationDebugMessages.NewWizardPage_wrongExtension, expectedExtension));
+			setErrorMessage(NLS.bind(ValidityUIMessages.NewWizardPage_wrongExtension, expectedExtension));
 			return false;
 		}
 
 		if (group.getAllowExistingResources()) {
 			String problemMessage = NLS.bind(
-				ValidationDebugMessages.NewWizardPage_nameExists,
+				ValidityUIMessages.NewWizardPage_nameExists,
 				getNewExportedFileName());
 			IPath resourcePath = group.getContainerFullPath().append(getNewExportedFileName());
 			IWorkspaceRoot root = workspace.getRoot();
@@ -245,7 +245,7 @@ public class ExportValidationResultsFileWizardPage extends WizardPage implements
 
 		if (isFilteredByParent()) {
 			setMessage(
-				ValidationDebugMessages.NewWizardPage_resourceWillBeFilteredWarning,
+				ValidityUIMessages.NewWizardPage_resourceWillBeFilteredWarning,
 				IMessageProvider.ERROR);
 			valid = false;
 		}

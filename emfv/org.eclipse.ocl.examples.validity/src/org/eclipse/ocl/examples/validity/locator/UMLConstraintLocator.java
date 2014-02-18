@@ -92,6 +92,7 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 		}
 	}
 
+	@Override
 	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 		@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
 			Map<EModelElement, List<LeafConstrainingNode>> map = null;
@@ -173,6 +174,7 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 		}
 	}
 
+	@Override
 	public @NonNull String getName() {
 		return "UML Constraints";
 	}

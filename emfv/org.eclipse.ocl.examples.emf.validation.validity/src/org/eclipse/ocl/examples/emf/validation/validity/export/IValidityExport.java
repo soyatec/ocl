@@ -20,14 +20,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 
 /**
- * This interface defines the general contract of the ocl export mechanism.
+ * This interface defines the general contract of the validity results export mechanism.
  * <p>
  * Clients may also extends AbstractExport instead.
  * </p>
  */
-public interface IValidatorExport {
+public interface IValidityExport {
 	/**
-	 * This will be called in order to export the ocl validation results.
+	 * This will be called in order to export the validity results.
 	 * 
 	 * @param validatedResource
 	 *            The resource to validate

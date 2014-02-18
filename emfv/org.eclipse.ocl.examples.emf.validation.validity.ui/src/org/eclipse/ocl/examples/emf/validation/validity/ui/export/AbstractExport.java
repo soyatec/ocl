@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.emf.validation.validity.ui.export.util;
+package org.eclipse.ocl.examples.emf.validation.validity.ui.export;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -44,8 +44,8 @@ import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
-import org.eclipse.ocl.examples.emf.validation.validity.export.IValidatorExport;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.export.IValidityExport;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.PlatformUI;
@@ -55,7 +55,7 @@ import com.google.common.io.Files;
 /**
  * Exports ocl validation results.
  */
-public abstract class AbstractExport implements IValidatorExport {
+public abstract class AbstractExport implements IValidityExport {
 	protected List<LeafConstrainingNode> validationFailures = new ArrayList<LeafConstrainingNode>();
 
 	protected List<LeafConstrainingNode> validationErrors = new ArrayList<LeafConstrainingNode>();
@@ -114,7 +114,7 @@ public abstract class AbstractExport implements IValidatorExport {
 	}
 	
 	private static void handleError(Throwable t, boolean popup) {
-		final String message = NLS.bind(ValidationDebugMessages.NewWizardPage_internalErrorMessage, t.getMessage());
+		final String message = NLS.bind(ValidityUIMessages.NewWizardPage_internalErrorMessage, t.getMessage());
 		final IStatus status;
 		if (t instanceof CoreException) {
 			status = new Status(((CoreException) t).getStatus().getSeverity(), ValidityUIPlugin.PLUGIN_ID, message, t);
@@ -127,7 +127,7 @@ public abstract class AbstractExport implements IValidatorExport {
 			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 				public void run() {
 					ErrorDialog.openError(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
-							ValidationDebugMessages.NewWizardPage_errorTitle, message, status);
+							ValidityUIMessages.NewWizardPage_errorTitle, message, status);
 					}
 				});
 		}

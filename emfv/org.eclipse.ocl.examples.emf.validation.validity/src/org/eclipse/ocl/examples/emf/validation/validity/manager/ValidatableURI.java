@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * A ValidatableURI provides the unique identity of a Validatable Node which is a model node
  * and which typically forms the basis of a distinct tree node in the LH pane of the Validity View.
  * <p>
- * The ValidatableURI is simply computed by EcoreUtil.getURI(eObject), but it is copnvenient to
+ * The ValidatableURI is simply computed by EcoreUtil.getURI(eObject), but it is convenient to
  * maintain a wrapper on the URI to reduce confusion between model and meta-model object spaces.
  */
 public final class ValidatableURI

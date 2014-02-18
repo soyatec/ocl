@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidationDebugMessages;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.SeveritiesDecorator;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -288,7 +288,7 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		if (resource != null) {
 			s.append(resource.getURI().toString());
 		} else {
-			s.append(ValidationDebugMessages.ValidityView_Constraints_LabelProvider_UnexistingResource);
+			s.append(ValidityUIMessages.ValidityView_Constraints_LabelProvider_UnexistingResource);
 		}
 		
 		String expression = leafConstrainingNode.getConstraintString();
@@ -296,7 +296,7 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		if (expression != null) {
 			s.append(expression);
 		} else {
-			s.append(ValidationDebugMessages.ValidityView_Constraints_LabelProvider_UnattainableExpression);
+			s.append(ValidityUIMessages.ValidityView_Constraints_LabelProvider_UnattainableExpression);
 		}
 		
 		if (withDiagnosisMessage) {
