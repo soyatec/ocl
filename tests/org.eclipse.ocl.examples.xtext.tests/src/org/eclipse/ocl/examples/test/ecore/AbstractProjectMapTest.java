@@ -197,7 +197,7 @@ public abstract class AbstractProjectMapTest extends TestCase
 				assertEquals(selfReferential, nsEPackage != platformPluginEObject);
 				assertEquals(platformPluginEObject, platformResourceEObject);
 				if (!selfReferential) {
-					assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "' or '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
+					assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
 				}
 			}
 			TestCaseLogger.INSTANCE.clear();
@@ -212,7 +212,7 @@ public abstract class AbstractProjectMapTest extends TestCase
 				assertEquals(selfReferential, nsEPackage != platformPluginEObject);
 				assertEquals(platformPluginEObject, platformResourceEObject);
 				if (!selfReferential) {
-					assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "' or '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
+					assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "'", TestCaseLogger.INSTANCE.get());
 				}
 			}
 		} finally {

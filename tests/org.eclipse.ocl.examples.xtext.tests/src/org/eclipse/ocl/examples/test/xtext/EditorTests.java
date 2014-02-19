@@ -23,6 +23,7 @@ import java.io.Reader;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Appender;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -34,6 +35,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -51,6 +53,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.ui.CompleteOCLUiModule;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.EssentialOCLUiModule;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiModule;
 import org.eclipse.ocl.examples.xtext.oclstdlib.ui.OCLstdlibUiModule;
+import org.eclipse.ocl.examples.xtext.tests.TestCaseLogger;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbench;
@@ -282,9 +285,15 @@ public class EditorTests extends XtextTestCase
 	}	
 	
 	public void testEditor_OpenOCLinEcoreEditor4Ecore_Ecore() throws Exception {
-		URI uri = URI.createPlatformPluginURI("org.eclipse.emf.ecore/model/Ecore.ecore", true);
-		String documentText = doTestEditor(OCLinEcoreUiModule.EDITOR_ID, uri);
-		assertTrue(documentText.contains("abstract class ETypedElement extends ENamedElement"));		// No ecore:: qualification
+		Iterable<Appender> savedAppenders = TestCaseLogger.INSTANCE.install();
+		try {
+			URI uri = URI.createPlatformPluginURI("org.eclipse.emf.ecore/model/Ecore.ecore", true);
+			String documentText = doTestEditor(OCLinEcoreUiModule.EDITOR_ID, uri);
+			assertTrue(documentText.contains("abstract class ETypedElement extends ENamedElement"));		// No ecore:: qualification
+			assertEquals("Conflicting access to '" + EcorePackage.eNS_URI + "' already accessed as '" + uri.toString() + "'", TestCaseLogger.INSTANCE.get());
+		} finally {
+			TestCaseLogger.INSTANCE.uninstall(savedAppenders);
+		}
 	}	
 	
 	// FIXME Disabled for BUG 425505

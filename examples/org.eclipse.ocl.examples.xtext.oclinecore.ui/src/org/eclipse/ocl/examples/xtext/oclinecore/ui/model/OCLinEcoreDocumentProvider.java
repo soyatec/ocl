@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
@@ -52,6 +53,7 @@ import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.MapToFirstConflictHandlerWithLog;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -317,7 +319,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 			if (isXML) {
 				ResourceSet resourceSet = getMetaModelManager().getExternalResourceSet();
 				StandaloneProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
-				StandaloneProjectMap.IConflictHandler conflictHandler = null; 			// FIXME
+				StandaloneProjectMap.IConflictHandler conflictHandler = MapToFirstConflictHandlerWithLog.INSTANCE; //null; 			// FIXME
 				projectMap.configure(resourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, conflictHandler);
 				IProjectDescriptor pivotPackageDescriptor = projectMap.getProjectDescriptor(PivotConstants.PLUGIN_ID);
 				if (pivotPackageDescriptor != null) {
@@ -333,6 +335,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 					reload = true;
 				}
 				xmiResource.load(inputStream, null);
+				EcoreUtil.resolveAll(resourceSet);
 				List<Resource.Diagnostic> allErrors = null;
 				for (Resource resource : resourceSet.getResources()) {
 					List<Resource.Diagnostic> errors = resource.getErrors();

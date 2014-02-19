@@ -1005,8 +1005,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus) {
-			if (conflictHandler != null) {
-				return conflictHandler.handleConflictingNsURI(packageLoadStatus);
+			if ((conflictHandler != null) && (eModel != null)) {
+				return conflictHandler.handleConflictingNsURI(packageLoadStatus, eModel);
 			}
 			else {
 				EPackage ePackage = packageLoadStatus.getEPackage();
@@ -2239,7 +2239,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		/**
 		 * Return the EPackage to be used for a namespace URI reference after the model EPackage has already been used.
 		 */
-		@Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus);
+		@Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource);
 
 		/**
 		 * Return the EPackage to be used for a model URI reference after the namespace EPackage has already been used.
@@ -2254,7 +2254,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	{
 		public static final @NonNull IConflictHandler INSTANCE = new MapToFirstConflictHandler();
 		
-		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus) {
+		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource) {
 			return packageLoadStatus.getFirstEPackage();
 		}
 
@@ -2270,10 +2270,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	{
 		public static final @NonNull IConflictHandler INSTANCE = new MapToFirstConflictHandlerWithLog();
 		
-		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus) {
+		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource) {
 			EPackage firstEPackage = packageLoadStatus.getFirstEPackage();
 			IPackageDescriptor packageDescriptor = packageLoadStatus.getPackageDescriptor();
-			logger.error("Conflicting access to '" + packageDescriptor.getNsURI() + "' already accessed as '" + packageDescriptor.getResourceDescriptor().getPlatformResourceURI() + "' or '" + packageDescriptor.getResourceDescriptor().getPlatformPluginURI() + "'");
+			logger.error("Conflicting access to '" + packageDescriptor.getNsURI() + "' already accessed as '" + resource.getURI() + "'");
 			packageLoadStatus.getResourceLoadStatus().setConflictHandler(MapToFirstConflictHandler.INSTANCE);
 			return firstEPackage;
 		}
