@@ -1128,9 +1128,6 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		public void setResource(@NonNull Resource resource) {
-			  if (resource.getURI().toString().contains("Pivot")) {
-				  System.out.println("Got it");
-			  }
 			assert eModel == null;
 			eModel = resource;
 			if (!resource.isLoaded()) {

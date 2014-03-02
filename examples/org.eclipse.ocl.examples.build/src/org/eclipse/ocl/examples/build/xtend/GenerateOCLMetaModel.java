@@ -91,14 +91,7 @@ public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 			}
 			IntegerValue u1 = o1.getUpperValue(); 
 			IntegerValue u2 = o2.getUpperValue();
-			i = u1.compareTo(u2);
-			if (i != 0) {
-				return i;
-			}
-//			if (i == 0) {
-//				System.out.println("Got it");
-//			}
-			return i;
+			return u1.compareTo(u2);
 		}
 	};
 
