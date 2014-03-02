@@ -233,7 +233,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 
 		public @Nullable EPackage getEPackage() {
-			IResourceLoadStrategy resourceLoadStrategy = packageLoadStatus.getResourceLoadStrategy();
+			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
+			IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
 			return resourceLoadStrategy.getEPackage(packageLoadStatus);
 		}
 
@@ -243,7 +244,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		@Override
 		public @NonNull String toString() {
-			return getClass().getSimpleName() + ": " + getURI() + " with " + packageLoadStatus.getResourceLoadStrategy();
+			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
+			IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
+			return getClass().getSimpleName() + ": " + getURI() + " with " + resourceLoadStrategy;
 		}
 
 		public void uninstall(@NonNull Registry packageRegistry) {
@@ -255,7 +258,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * An IResourceLoadStatus maintains the lazy load state of a resource within an EPackage.Registry
+	 * An IResourceLoadStatus maintains the lazy load state of a resource associated with a genmodel
+	 * identified by an IResourceDescriptor within a ResourceSet.
 	 */
 	public static interface IResourceLoadStatus
 	{	
@@ -266,7 +270,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		void configureResourceSetURIResourceMap(@NonNull Resource resource);
 
 		/**
-		 * Dispose of all facilities used by the PackageLoadStatus, and remove all EPackageDescriptor entries.
+		 * Dispose of all facilities used by the IResourceLoadStatus, and remove all EPackageDescriptor entries.
 		 */
 		void dispose();
 
@@ -276,48 +280,56 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		@Nullable EPackage getConflictingModelURI(@NonNull EPackage ePackage);
 
 		/**
-		 * Return the EPackage resolved by the first loadEPackageByModelURI/loadEPackageByNsURI.
+		 * Return the first loaded EPackage which may be part of a model or a Java generated EPackageinstance..
 		 * @return
 		 */
 		@Nullable EPackage getFirstEPackage();
 
 		/**
-		 * Return the package load statusfor a packageDescriptor 
+		 * Return the package load status for the package identified by packageDescriptor 
 		 */
 		@Nullable IPackageLoadStatus getPackageLoadStatus(@NonNull IPackageDescriptor packageDescriptor);
 
 		/**
-		 * Return the descriptor for the package.
+		 * Return the descriptor for the resource.
 		 */
 		@NonNull IResourceDescriptor getResourceDescriptor();
 
 		/**
-		 * Return the current package loading strategy.
+		 * Return the configured resource loading strategy.
 		 */
 		@NonNull IResourceLoadStrategy getResourceLoadStrategy();
 		
 		/**
-		 * Return the package registry maintained by this package load status
+		 * Return the package registry maintained by this resource load status
 		 */
 		@NonNull EPackage.Registry getPackageRegistry();
 
+		/**
+		 * Return the ResourceSet to which the resource logically belongs. (Note that generated EPackage may have
+		 * a null actual ResourceSet, but a non-null logical ResourceSet.)
+		 */
 		@Nullable ResourceSet getResourceSet();
 
 		/**
-		 * Load and return the EPackage appropriate to the platform resource or plugin URI.
-		 */
-		@Nullable Resource loadModel(@NonNull URI nsURI);
-
-		/**
-		 * Load and return the EPackage appropriate to the namespace URI.
+		 * Load all the Java generated EPackage instances for the resource.
 		 */
 		void loadEPackages();
+
+		/**
+		 * Load and return the EPackage appropriate to the platform resource or plugin resource using nsURI to identify
+		 * a conflicting nsURI access,
+		 */
+		@Nullable Resource loadModel(@NonNull URI nsURI);
 
 		/**
 		 * Define a new conflict handler.
 		 */
 		void setConflictHandler(@Nullable IConflictHandler conflictHandler);
 
+		/**
+		 * Define the resource once it has been loaded.
+		 */
 		void setResource(@NonNull Resource resource);
 
 		/**
@@ -326,20 +338,22 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		void setResourceLoadStrategy(@NonNull IResourceLoadStrategy resourceLoadStrategy);
 
 		/**
-		 * Reset the status following notiofication that the model has been unloaded.
+		 * Reset the status following notification that the model has been unloaded.
 		 */
 		void unloadedResource();
 	}
 
 	/**
-	 * An IPackageLoadState maintains the lazy load state of a package within an EPackage.Registry
+	 * An IPackageLoadStatus maintains the lazy load state of a package within an EPackage.Registry
 	 */
 	public static interface IPackageLoadStatus
-	{	
-		void configureEPackageRegistry(@NonNull ResourceSet resourceSet, @NonNull Resource resource);
+	{
+		/**
+		 * Configure the resourceSet EPackage.Registry for this package to resolve to the defined
+		 * generated/loaded EPackage.
+		 */
+		void configureEPackageRegistry(@NonNull ResourceSet resourceSet);
 
-		void configureURImap();
-		
 		/**
 		 * Dispose of all facilities used by the PackageLoadStatus, and remove all EPackageDescriptor entries.
 		 */
@@ -350,16 +364,25 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 */
 		@Nullable EPackage getConflictingNsURI();
 
+		/**
+		 * Return the generated EPackage instance, or null if none loaded.
+		 */
 		@Nullable EPackage getEPackage();
 
+		/**
+		 * Return the generated EPackage instance without affecting the prevailing status.
+		 * Returns null if an instance cannot be loaded.
+		 */
 		@Nullable EPackage getEPackageInstance();
 
 		/**
-		 * Return the EPackage resolved by the first loadEPackageByModelURI/loadEPackageByNsURI.
-		 * @return
+		 * Return the EPackage resolved by the first loadEPackageByModelURI/loadEPackageByNsURI, or null if none loaded.
 		 */
 		@Nullable EPackage getFirstEPackage();
 
+		/**
+		 * Return the loaded EPackages, or null if none loaded.
+		 */
 		@Nullable EPackage getModel();
 
 		/**
@@ -368,19 +391,23 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		@NonNull IPackageDescriptor getPackageDescriptor();
 
 		/**
-		 * Return the current package loading strategy.
+		 * Get the status of the resource containing this package.
 		 */
-		@NonNull IResourceLoadStrategy getResourceLoadStrategy();
-
 		@NonNull IResourceLoadStatus getResourceLoadStatus();
 
 		/**
-		 * Load and return the EPackage appropriate to the namespace URI.
+		 * Load and return the generated EPackage instance appropriate to the namespace URI.
 		 */
 		@Nullable EPackage loadEPackage();
 
+		/**
+		 * Define the generated EPackage for this package.
+		 */
 		void setEPackage(@NonNull EPackage ePackage);
 
+		/**
+		 * Define the loaded EPackage for this package.
+		 */
 		void setModel(@NonNull EPackage ePackage);
 
 		/**
@@ -395,24 +422,34 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	public static interface IResourceLoadStrategy
 	{
 		/**
-		 * Respond to the explicit addition of a Java EPackage in the user's ResourceSet.
+		 * Respond to the explicit addition of a generated EPackage in the user's ResourceSet.
 		 */
 		void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage);
 
 		/**
-		 * Respond to the explicit addition of an Ecore model in the user's ResourceSet.
+		 * Respond to the explicit addition of a yet to be loaded Ecore model in the user's ResourceSet.
 		 */
 		void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource);
 
+		/**
+		 * Configure the resourceLoadStatus to udse this strategy and a conflictHandler.
+		 */
 		void configure(@NonNull IResourceLoadStatus resourceLoadStatus, @Nullable IConflictHandler conflictHandler);
 
 		/**
-		 * Load and return the EPackage appropriate to the namespace URI.
+		 * Load and return the EPackage in response to an EPackage.Registry access through an EPackageDescriptor.
 		 */
 		@Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus);
 
+		/**
+		 * Respond to the platform/plugin access to a resource with a resourceLoadStatus containing a
+		 * package already accessed as the Java generated ePackage,
+		 */
 		void handleConflictingModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage);
 
+		/**
+		 * Respond to the loading of an Ecore model in the user's ResourceSet.
+		 */
 		void loadedModel(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull Resource resource);
 
 		/**
@@ -501,8 +538,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 	
 	/**
-	 * The LoadedAsEPackageStrategy re-uses the already loaded EPackage for namespace URI accesses, and invokes the conflict handler for
-	 * platform URI accesses.
+	 * The LoadedAsEPackageStrategy re-uses the already loaded EPackage for namespace URI accesses,
+	 * and invokes the conflict handler for platform URI accesses.
 	 */
 	private static final class LoadedAsEPackageStrategy extends AbstractResourceLoadStrategy
 	{
@@ -517,8 +554,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 	
 	/**
-	 * The LoadedAsModelStrategy re-uses the already loaded EPackage for platform URI accesses, and invokes the conflict handler for
-	 * namespace URI accesses.
+	 * The LoadedFirstAsModelStrategy supports the using-model behaviour following a LoadFirstStrategy
+	 * that loaded a model.
 	 */
 	private static final class LoadedFirstAsModelStrategy extends AbstractResourceLoadStrategy
 	{
@@ -543,7 +580,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 	/**
 	 * The LoadBothStrategy permits metamodel schizophrenia and so access to the namespace URI resolves to an installed
-	 * resource while access to the platform plugin or resource URI resolve to a dynmically loaded resource.
+	 * resource while access to the platform plugin or resource URI resolve to a dynamically loaded resource.
 	 */
 	public static final class LoadBothStrategy extends AbstractResourceLoadStrategy
 	{
@@ -576,8 +613,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * The LoadBothStrategy permits metamodel schizophrenia and so access to the namespace URI resolves to an installed
-	 * resource while access to the platform plugin or resource URI resolve to a dynmically loaded resource.
+	 * The LoadingBothLoadedModelStrategy supports the using-model behaviour following a LoadBothStrategy
+	 * that has loaded a model.
 	 */
 	public static final class LoadingBothLoadedModelStrategy extends AbstractResourceLoadStrategy
 	{
@@ -603,8 +640,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * The LoadEPackageStrategy uses the EPackage referenced by the namespace URI for all kinds of access, and then changes the
-	 * strategy to LOADED for all further accesses.
+	 * The LoadEPackageStrategy uses the EPackage referenced by the namespace URI for all kinds of access,
+	 * and then changes the strategy to the LoadedStrategy for all further accesses.
 	 */
 	public static final class LoadEPackageStrategy extends AbstractResourceLoadStrategy
 	{
@@ -639,9 +676,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * The LoadFirstStrategy use the EPackage corresponding to the first access as either a namespace URI or platform plugin.resource URI.
-	 * Thereafter accesses to the same URI use the first loaded EPackage. Accesses to the other form of URI are arbitrated by the IConflictHandler
-	 * in the IPackageLoadStatus.
+	 * The LoadFirstStrategy uses the EPackage corresponding to the first access as either a namespace URI
+	 * or platform plugin.resource URI.Thereafter accesses to the same URI use the first loaded EPackage.
+	 * Accesses to the other form of URI are arbitrated by the IConflictHandler in the IResourceLoadStatus.
 	 */
 	public static final class LoadFirstStrategy extends AbstractResourceLoadStrategy
 	{
@@ -677,8 +714,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * The LoadModelStrategy uses the EPackage referenced by the platform resopurce/plugin URI for all kinds of access, and then changes the
-	 * strategy to LOADED for all further accesses.
+	 * The LoadModelStrategy uses the EPackage referenced by the platform resource/plugin URI for all kinds of access,
+	 * and then changes the strategy to LoadedStrategy for all further accesses.
 	 */
 	public static final class LoadModelStrategy extends AbstractResourceLoadStrategy
 	{
@@ -723,6 +760,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 */
 		@NonNull URI getLocationURI();
 
+		/**
+		 * Return the descriptors for allpackages in this resource.
+		 */
 		Iterable<? extends IPackageDescriptor> getPackageDescriptors();
 
 		/**
@@ -738,19 +778,27 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		@NonNull URI getPlatformPluginURI();
 
 		/**
-		 * Return the Project Descriptor containing this package.
+		 * Return the Project Descriptor containing this resource.
 		 */
 		@NonNull IProjectDescriptor getProjectDescriptor();
 
-		@NonNull URI getRelativeEcorePackageURI(@NonNull URI genModelRelativeEcorePackageURI);
+		@NonNull URI getProjectRelativeEcorePackageURI(@NonNull URI genModelRelativeEcorePackageURI);
 		
+		/**
+		 * Return IResourceLoadStatus for this resource in conjunction with resourceSet.
+		 */
 		@NonNull IResourceLoadStatus getResourceLoadStatus(@Nullable ResourceSet resourceSet);
 
+		/**
+		 * Return true if setEcoreModel has defined the Ecore Model context.
+		 */
 		boolean hasEcoreModel();
 
+		/**
+		 * Set the Ecore Model context of the resource from a list of URIs of the Ecore Packages relative to the
+		 * genModelURI, and a map of the package namespace URI to package descriptor.
+		 */
 		void setEcoreModel(@NonNull List<String> genModelRelativeEcorePackageUris, @NonNull Map<String, IPackageDescriptor> nsURI2packageDescriptor);
-
-		void setEcoreModelURI(@NonNull URI genModelRelativeEcoreModelURI);
 
 		/**
 		 * Unload the package registry to force a reload.
@@ -783,7 +831,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		@NonNull IResourceDescriptor getResourceDescriptor();
 
-		void setEcorePackageURI(@NonNull URI relativeEcorePackageURI);
+		void setEcorePackageURI(@NonNull URI projectRelativeEcorePackageURI);
 	}
 
 	/**
@@ -911,7 +959,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				for (IPackageLoadStatus packageLoadStatus : nsURI2packageLoadStatus.values()) {
 					EPackage ePackage = packageLoadStatus.getEPackage();
 					if (ePackage != null) {
-						packageLoadStatus.configureEPackageRegistry(resourceSet2, resource);
+						packageLoadStatus.configureEPackageRegistry(resourceSet2);
 					}
 				}
 			}
@@ -922,7 +970,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			if (resourceSet2 != null) {
 				Collection<PackageLoadStatus> packageLoadStatuses = nsURI2packageLoadStatus.values();
 				@SuppressWarnings("null")@NonNull URI uri = resourceDescriptor.getGenModelURI().appendFileExtension("ecore");
-				MultiplePackageResource resource = new MultiplePackageResource(uri, this);
+				DelegatedPackageResource resource = new DelegatedPackageResource(uri, this);
 				for (IPackageLoadStatus packageLoadStatus : packageLoadStatuses) {
 					EPackage ePackage = packageLoadStatus.loadEPackage();
 					if (ePackage != null) {
@@ -1186,17 +1234,17 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 	
 	/**
-	 * A MultiplePackageResource may bwe installed in a ResourceSet.uriResourceMap for resolution as the
-	 * as *.ecore URI and subsequent delegation of the fragment getEObject to the appropraite Java EPackageImpl.
+	 * A DelegatedPackageResource may be installed in a ResourceSet.uriResourceMap for resolution as the
+	 * as *.ecore URI and subsequent delegation of the fragment getEObject to the appropriate Java generated EPackage.
 	 * <p>
 	 * This Resource should never be used for any other purpose.
 	 */
-	public static final class MultiplePackageResource extends ResourceImpl
+	public static final class DelegatedPackageResource extends ResourceImpl
 	{
 		private final @NonNull Map<String, EPackage> fragment2ePackage = new HashMap<String, EPackage>();
 		private final @NonNull IResourceLoadStatus resourceLoadStatus;
 
-		public MultiplePackageResource(@NonNull URI uri, @NonNull IResourceLoadStatus resourceLoadStatus) {
+		public DelegatedPackageResource(@NonNull URI uri, @NonNull IResourceLoadStatus resourceLoadStatus) {
 			super(uri);
 			this.resourceLoadStatus = resourceLoadStatus;
 		}
@@ -1205,7 +1253,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public EObject getEObject(String uriFragment) {
 			EPackage ePackage = fragment2ePackage.get(uriFragment);
 			if (ePackage != null) {
-				resourceLoadStatus.getResourceLoadStrategy().handleConflictingModel(resourceLoadStatus, ePackage);
+				IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
+				resourceLoadStrategy.handleConflictingModel(resourceLoadStatus, ePackage);
 			}
 			return ePackage;
 		}
@@ -1270,7 +1319,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			this.namespaceURIDescriptor = new EPackageDescriptor(this, resourceLoadStatus.getPackageRegistry());
 		}
 		
-		public void configureEPackageRegistry(@NonNull ResourceSet resourceSet, @NonNull Resource resource) {
+		public void configureEPackageRegistry(@NonNull ResourceSet resourceSet) {
 			URI nsURI = packageDescriptor.getNsURI();
 			IPackageLoadStatus packageLoadStatus = resourceLoadStatus.getPackageLoadStatus(packageDescriptor);
 			if (packageLoadStatus != null) {
@@ -1278,16 +1327,6 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				resourceSet.getPackageRegistry().put(nsURI.toString(), modelEPackage);
 				if (PROJECT_MAP_RESOLVE.isActive()) {
 					PROJECT_MAP_RESOLVE.println("EPackage.Registry[" + nsURI + "] => " + EcoreUtil.getURI(modelEPackage));
-				}
-			}
-		}
-
-		public void configureURImap() {
-			EPackage ePackage = getEPackage();
-			if (ePackage != null) {
-				ResourceSet resourceSet = resourceLoadStatus.getResourceSet();
-				if (resourceSet != null) {
-					resourceLoadStatus.getResourceDescriptor().addedEPackage(resourceSet, ePackage);
 				}
 			}
 		}
@@ -1545,12 +1584,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return projectDescriptor;
 		}
 
-		public @NonNull URI getRelativeEcorePackageURI(@NonNull URI genModelRelativeEcorePackageURI) {
+		public @NonNull URI getProjectRelativeEcorePackageURI(@NonNull URI genModelRelativeEcorePackageURI) {
 			URI projectLocationURI = projectDescriptor.getLocationURI();
 			URI absoluteGenModelURI = genModelURI.resolve(projectLocationURI);
 			URI absolutePackageURI = genModelRelativeEcorePackageURI.resolve(absoluteGenModelURI);
-			@SuppressWarnings("null")@NonNull URI relativeEcorePackageURI = absolutePackageURI.deresolve(projectLocationURI, true, true, true);
-			return relativeEcorePackageURI;
+			@SuppressWarnings("null")@NonNull URI projectRelativeEcorePackageURI = absolutePackageURI.deresolve(projectLocationURI, true, true, true);
+			return projectRelativeEcorePackageURI;
 		}
 
 		public @NonNull IResourceLoadStatus getResourceLoadStatus(@Nullable ResourceSet resourceSet) {
@@ -1578,17 +1617,25 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				@SuppressWarnings("null")@NonNull String firstGenModelRelativeEcorePackageUri = genModelRelativeEcorePackageUris.get(0);
 				URI firstGenModelRelativeEcorePackageURI = URI.createURI(firstGenModelRelativeEcorePackageUri);
 				@SuppressWarnings("null")@NonNull URI genModelRelativeEcoreModelURI = firstGenModelRelativeEcorePackageURI.trimFragment();
-				setEcoreModelURI(genModelRelativeEcoreModelURI);
+				URI projectLocationURI = projectDescriptor.getLocationURI();
+				URI absoluteGenModelURI = genModelURI.resolve(projectLocationURI);
+				URI absolutePackageURI = genModelRelativeEcoreModelURI.resolve(absoluteGenModelURI);
+				URI relativePackageURI = absolutePackageURI.deresolve(projectLocationURI, true, true, true);
+				@SuppressWarnings("null")@NonNull URI relativeEcoreModelURI = relativePackageURI.trimFragment();
+				URI resourceURI = projectDescriptor.getPlatformResourceURI();
+				URI pluginURI = projectDescriptor.getPlatformPluginURI();
+				platformResourceURI = relativeEcoreModelURI.resolve(resourceURI);
+				platformPluginURI = relativeEcoreModelURI.resolve(pluginURI);
+				locationURI = relativeEcoreModelURI.resolve(projectLocationURI);
+				projectDescriptor.getProjectMap().addResourceDescriptor(this);
 				if (size == 1) {
 					IPackageDescriptor packageDescriptor = packageDescriptors.get(0);
 					if (packageDescriptor != null) {						// Not all EPackages have plugin.xml registrations
-						URI relativeEcorePackageURI = getRelativeEcorePackageURI(firstGenModelRelativeEcorePackageURI);
-						packageDescriptor.setEcorePackageURI(relativeEcorePackageURI);
+						URI projectRelativeEcorePackageURI = getProjectRelativeEcorePackageURI(firstGenModelRelativeEcorePackageURI);
+						packageDescriptor.setEcorePackageURI(projectRelativeEcorePackageURI);
 					}
 				}
 				else {
-					URI projectLocationURI = projectDescriptor.getLocationURI();
-					URI absoluteGenModelURI = genModelURI.resolve(projectLocationURI);
 					ResourceSet resourceSet = new ResourceSetImpl();		// FIXME maybe this can be lazy
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 					for (@SuppressWarnings("null")@NonNull String genModelRelativeEcorePackageUri : genModelRelativeEcorePackageUris) {
@@ -1602,8 +1649,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 								IPackageDescriptor packageDescriptor = nsURI2packageDescriptor.get(nsURI);
 								if (packageDescriptor != null) {						// Not all EPackages have plugin.xml registrations
 									URI genModelRelativeEcorePackageURI = URI.createURI(genModelRelativeEcorePackageUri);
-									@SuppressWarnings("null")@NonNull URI relativeEcorePackageURI = getRelativeEcorePackageURI(genModelRelativeEcorePackageURI);
-									packageDescriptor.setEcorePackageURI(relativeEcorePackageURI);
+									@SuppressWarnings("null")@NonNull URI projectRelativeEcorePackageURI = getProjectRelativeEcorePackageURI(genModelRelativeEcorePackageURI);
+									packageDescriptor.setEcorePackageURI(projectRelativeEcorePackageURI);
 								}
 							}
 						}
@@ -1611,20 +1658,6 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				}
 			}
 			hasEcoreModel = true;
-		}
-
-		public void setEcoreModelURI(@NonNull URI genModelRelativeEcoreModelURI) {
-			URI projectLocationURI = projectDescriptor.getLocationURI();
-			URI absoluteGenModelURI = genModelURI.resolve(projectLocationURI);
-			URI absolutePackageURI = genModelRelativeEcoreModelURI.resolve(absoluteGenModelURI);
-			URI relativeEcorePackageURI = absolutePackageURI.deresolve(projectLocationURI, true, true, true);
-			@SuppressWarnings("null")@NonNull URI ecoreURI = relativeEcorePackageURI.trimFragment();
-			URI resourceURI = projectDescriptor.getPlatformResourceURI();
-			URI pluginURI = projectDescriptor.getPlatformPluginURI();
-			platformResourceURI = ecoreURI.resolve(resourceURI);
-			platformPluginURI = ecoreURI.resolve(pluginURI);
-			locationURI = ecoreURI.resolve(projectDescriptor.getLocationURI());
-			projectDescriptor.getProjectMap().addResourceDescriptor(this);
 		}
 
 		public void unload() {
@@ -1731,8 +1764,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return ecorePackageURI != null;
 		}
 
-		public void setEcorePackageURI(@NonNull URI relativeEcorePackageURI) {
-			this.ecorePackageURI = relativeEcorePackageURI;
+		public void setEcorePackageURI(@NonNull URI projectRelativeEcorePackageURI) {
+			this.ecorePackageURI = projectRelativeEcorePackageURI;
 			if (PROJECT_MAP_ADD_EPACKAGE.isActive()) {
 				PROJECT_MAP_ADD_EPACKAGE.println(namespaceURI + " => " + ecorePackageURI + " : " + className);
 			}
