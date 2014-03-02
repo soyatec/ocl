@@ -454,7 +454,7 @@ public class UMLTest
 		helper.setContext(metaclass);
 
         assertQueryTrue(metaclass, "self.getAppliedStereotypes()->size() = 1");
-        assertQueryTrue(metaclass, "self.getAppliedStereotype('StandardProfileL2::Metaclass') <> null");
+        assertQueryTrue(metaclass, "self.getAppliedStereotype('StandardProfile::Metaclass') <> null");
         assertQueryTrue(metaclass, "self.getAppliedStereotype('MetaClass') = null");
     }
 
