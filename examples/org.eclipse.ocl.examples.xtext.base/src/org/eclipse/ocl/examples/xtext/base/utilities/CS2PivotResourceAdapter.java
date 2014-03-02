@@ -58,6 +58,7 @@ public class CS2PivotResourceAdapter extends AbstractMetaModelManagerResourceAda
 	}
 
 	public @NonNull Map<BaseCSResource, ASResource> computeCS2ASResourceMap(@NonNull BaseCSResource csResource, @NonNull MetaModelManager metaModelManager) {
+		metaModelManager.getProjectMap();					// Ensures ProjectMap is notified of loaded resources
 		ResourceSet asResourceSet = metaModelManager.getTarget();
 		Map<BaseCSResource,ASResource> cs2asResourceMap = new HashMap<BaseCSResource,ASResource>();
 	//	ResourceSet csResourceSet = csResource.getResourceSet();

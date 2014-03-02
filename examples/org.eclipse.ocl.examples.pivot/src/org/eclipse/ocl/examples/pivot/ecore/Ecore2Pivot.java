@@ -310,7 +310,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 			if (packageDescriptor == null) {
 				return null;
 			}
-			return packageDescriptor.getPlatformPluginURI();
+			return packageDescriptor.getResourceDescriptor().getPlatformPluginURI();
 		}
 		else {
 			if (!ecoreURI.isHierarchical() || ecoreURI.isRelative()) {

@@ -316,7 +316,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 			String persistAs = PERSIST_AS_OCLINECORE;
 			if (isXML) {
 				ResourceSet resourceSet = getMetaModelManager().getExternalResourceSet();
-				ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
+				StandaloneProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
 				StandaloneProjectMap.IConflictHandler conflictHandler = null; 			// FIXME
 				projectMap.configure(resourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, conflictHandler);
 				IProjectDescriptor pivotPackageDescriptor = projectMap.getProjectDescriptor(PivotConstants.PLUGIN_ID);

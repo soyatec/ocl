@@ -69,6 +69,13 @@ public class ConsoleTests extends PivotTestCase
 		private TestConsolePage page;
 		
 		@Override
+		public void close() {
+			super.close();
+			flushEvents();
+			instance = null;
+		}
+
+		@Override
 		public IPageBookViewPage createPage(IConsoleView view) {
 			page = new TestConsolePage(this);
 			return page;
@@ -223,7 +230,7 @@ public class ConsoleTests extends PivotTestCase
 		ocl.dispose();
 		ocl = null;
 		metaModelManager = null;
-		consolePage.reset();
+		TestConsole.getInstance().close();
 		consolePage = null;
 		super.tearDown();
 	}

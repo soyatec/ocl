@@ -132,7 +132,7 @@ public class RoundTripTests extends XtextTestCase
 	
 	public void doRoundTripFromCompleteOCL(URI inputURI) throws IOException, InterruptedException {
 		MessageBinder savedMessageBinder = CS2Pivot.setMessageBinder(CS2Pivot.MessageBinderWithLineContext.INSTANCE);
-		ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
+		StandaloneProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
 		try {
 			projectMap.initializeResourceSet(resourceSet);			
 			if (!resourceSet.getURIConverter().exists(inputURI, null)) {

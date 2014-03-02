@@ -697,7 +697,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * Configure the PackageRegistry associated with the externalResourceSet to use a packageLoadStrategy and conflictHandler when
 	 * resolving namespace ansd platform URIs.
 	 */
-	public void configureLoadStrategy(@NonNull StandaloneProjectMap.IPackageLoadStrategy packageLoadStrategy, @Nullable StandaloneProjectMap.IConflictHandler conflictHandler) {
+	public void configureLoadStrategy(@NonNull StandaloneProjectMap.IResourceLoadStrategy packageLoadStrategy, @Nullable StandaloneProjectMap.IConflictHandler conflictHandler) {
 		ResourceSet externalResourceSet = getExternalResourceSet();
 		StandaloneProjectMap projectMap = getProjectMap();
 		projectMap.configure(externalResourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
@@ -1468,14 +1468,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		ResourceSetImpl externalResourceSet2 = externalResourceSet;
 		if (externalResourceSet2 == null) {
 			externalResourceSet2 = externalResourceSet = new ResourceSetImpl();
-			ProjectMap projectMap = ProjectMap.findAdapter(asResourceSet);
-			if (projectMap == null) {
-				projectMap = ProjectMap.getAdapter(externalResourceSet2);
-			}
-			else {
-				externalResourceSet2.eAdapters().add(projectMap);
-				projectMap.initializeResourceSet(externalResourceSet2);			
-			}
+			StandaloneProjectMap projectMap = getProjectMap();
+			projectMap.initializeResourceSet(externalResourceSet2);			
 			externalResourceSet2.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl()); //$NON-NLS-1$
 			MetaModelManagerResourceSetAdapter.getAdapter(externalResourceSet2, this);
 			ASResourceFactoryRegistry.INSTANCE.configureResourceSet(externalResourceSet2);
@@ -2187,7 +2181,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * Return the ProjectMap used to resolve EPackages for the extertnalResourceSet.
 	 */
 	public @NonNull StandaloneProjectMap getProjectMap() {
-		return StandaloneProjectMap.getAdapter(getExternalResourceSet());
+		return ProjectMap.getAdapter(asResourceSet);
 	}
 
 	/**

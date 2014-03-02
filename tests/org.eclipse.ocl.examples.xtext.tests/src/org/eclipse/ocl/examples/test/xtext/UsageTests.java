@@ -69,7 +69,6 @@ import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
-import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -453,7 +452,7 @@ public class UsageTests
 //		metaModelManager2.dispose();
 		metaModelManager = new MetaModelManager();
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		ProjectMap projectMap = ProjectMap.getAdapter(resourceSet);
+		StandaloneProjectMap projectMap = metaModelManager.getProjectMap();
 		projectMap.configure(resourceSet, StandaloneProjectMap.LoadFirstStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
 		resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
 		//FIXME this is needed so long as Pivot.merged.genmodel is a UML genmodel

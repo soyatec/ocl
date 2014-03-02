@@ -955,8 +955,6 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 				}
 			});
 			flushEvents();
-//			editor.close(false);
-			flushEvents();
 			if (metaModelManager != null) {
 				metaModelManager.dispose();
 			}

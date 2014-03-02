@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.utilities;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.SAXParser;
@@ -81,8 +82,8 @@ public class ProjectMap extends StandaloneProjectMap
 {	
 	public static class ProjectDescriptor extends StandaloneProjectMap.ProjectDescriptor
 	{
-		public ProjectDescriptor(@NonNull String name, @NonNull URI locationURI) {
-			super(name, locationURI);
+		public ProjectDescriptor(@NonNull ProjectMap projectMap, @NonNull String name, @NonNull URI locationURI) {
+			super(projectMap, name, locationURI);
 		}
 
 		@Override
@@ -105,23 +106,28 @@ public class ProjectMap extends StandaloneProjectMap
 		}
 	}
 
-	public static @Nullable ProjectMap findAdapter(@NonNull ResourceSet resourceSet) {
-		return (ProjectMap) EcoreUtil.getAdapter(resourceSet.eAdapters(), ProjectMap.class);
+	public static @Nullable StandaloneProjectMap findAdapter(@NonNull ResourceSet resourceSet) {
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
+			return StandaloneProjectMap.findAdapter(resourceSet);
+		}
+		return (StandaloneProjectMap) EcoreUtil.getAdapter(resourceSet.eAdapters(), ProjectMap.class);
 	}
 
-	public static synchronized @NonNull ProjectMap getAdapter(@NonNull ResourceSet resourceSet) {
-		ProjectMap adapter = findAdapter(resourceSet);
+	public static synchronized @NonNull StandaloneProjectMap getAdapter(@NonNull ResourceSet resourceSet) {
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
+			return StandaloneProjectMap.getAdapter(resourceSet);
+		}
+		StandaloneProjectMap adapter = findAdapter(resourceSet);
 		if (adapter == null) {
 			adapter = new ProjectMap();
-			resourceSet.eAdapters().add(adapter);
 			adapter.initializeResourceSet(resourceSet);
 		}
 		return adapter;
 	}
 
 	@Override
-	protected @NonNull IProjectDescriptor.Internal createProjectDescriptor(@NonNull String projectName, @NonNull URI locationURI) {
-		return new ProjectDescriptor(projectName, locationURI);
+	protected @NonNull IProjectDescriptor createProjectDescriptor(@NonNull String projectName, @NonNull URI locationURI) {
+		return new ProjectDescriptor(this, projectName, locationURI);
 	}
 	
 	@Override
@@ -196,7 +202,7 @@ public class ProjectMap extends StandaloneProjectMap
 	}
 
 	@Override
-	protected void scanClassPath(@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors, @NonNull SAXParser saxParser) {
+	protected void scanClassPath(@NonNull Map<String, IProjectDescriptor> projectDescriptors, @NonNull SAXParser saxParser) {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			super.scanClassPath(projectDescriptors, saxParser);
 		}
@@ -222,22 +228,30 @@ public class ProjectMap extends StandaloneProjectMap
 	protected void scanGenModels(@NonNull SAXParser saxParser) {
 		URIConverter uriConverter = new ExtensibleURIConverterImpl();
 		Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
+		Map<URI, Map<URI, String>> genModel2nsURI2className = new HashMap<URI, Map<URI, String>>();
 		for (String ePackageNsURI : ePackageNsURIToGenModelLocationMap.keySet()) {
 			URI genModelURI = ePackageNsURIToGenModelLocationMap.get(ePackageNsURI);
-//			System.out.println(ePackageNsURI + " -> " + genModelURI);
-			if (genModelURI.isPlatformPlugin()) {
-				IProjectDescriptor.Internal projectDescriptor = getProjectDescriptorInternal(genModelURI);
-				@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(ePackageNsURI);
-				IPackageDescriptor.Internal packageDescriptor = (IPackageDescriptor.Internal) projectDescriptor.getPackageDescriptor(nsURI);
-				if (packageDescriptor == null) {
-					@SuppressWarnings("null")@NonNull URI deresolvedGenModelURI = genModelURI.deresolve(projectDescriptor.getLocationURI(), true, true, true);
-					packageDescriptor = projectDescriptor.createPackageDescriptor(nsURI, deresolvedGenModelURI);
+			if (genModelURI != null) {
+				Map<URI, String> nsURI2className = genModel2nsURI2className.get(genModelURI);
+				if (nsURI2className == null) {
+					nsURI2className = new HashMap<URI, String>();
+					genModel2nsURI2className.put(genModelURI, nsURI2className);
 				}
-				GenModelEcorePackageHandler genModelEcorePackageHandler = packageDescriptor.createGenModelEcorePackageHandler();
+				nsURI2className.put(URI.createURI(ePackageNsURI), null);
+			}
+		}
+		for (@SuppressWarnings("null")@NonNull URI genModelURI : genModel2nsURI2className.keySet()) {
+			if (genModelURI.isPlatformPlugin()) {
+				IProjectDescriptor projectDescriptor = getProjectDescriptorInternal(genModelURI);
+				@SuppressWarnings("null")@NonNull Map<URI, String> nsURI2className = genModel2nsURI2className.get(genModelURI);
+				@SuppressWarnings("null")@NonNull URI deresolvedGenModelURI = genModelURI.deresolve(projectDescriptor.getLocationURI(), true, true, true);
+				@SuppressWarnings("null")@NonNull String genModelString = deresolvedGenModelURI.toString();
+				IResourceDescriptor resourceDescriptor = projectDescriptor.createResourceDescriptor(genModelString, nsURI2className);
+				GenModelReader genModelReader = new GenModelReader(resourceDescriptor);
 		        InputStream inputStream = null;
 		        try {
 		        	inputStream = uriConverter.createInputStream(genModelURI);
-		        	saxParser.parse(inputStream, genModelEcorePackageHandler);
+		        	saxParser.parse(inputStream, genModelReader);
 				} catch (Exception e) {
 					logException(new File(genModelURI.toString()), e);
 				} finally {
@@ -251,7 +265,7 @@ public class ProjectMap extends StandaloneProjectMap
 		}
 	}
 
-	protected void scanProjects(@NonNull Map<String, IProjectDescriptor.Internal> projectDescriptors) {
+	protected void scanProjects(@NonNull Map<String, IProjectDescriptor> projectDescriptors) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		for (IProject project : root.getProjects()) {
 			if (project.isOpen()) {
