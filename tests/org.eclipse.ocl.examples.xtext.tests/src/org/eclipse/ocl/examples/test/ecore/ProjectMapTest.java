@@ -20,6 +20,7 @@ package org.eclipse.ocl.examples.test.ecore;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Appender;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -113,12 +114,6 @@ public class ProjectMapTest extends TestCase
     	TestCaseAppender.INSTANCE.install();
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-    	TestCaseLogger.INSTANCE.uninstall();
-		super.tearDown();
-	}
-
 	protected void doTestProjectMap_LoadBoth(/*@NonNull*/ EPackage ePackage, @NonNull String project, @NonNull String modelPath, @NonNull String fragment) {
 		ProjectMap.getResourceFactoryRegistry(null).getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		@SuppressWarnings("null")@NonNull URI platformPluginURI = URI.createPlatformPluginURI(modelPath, true);
@@ -174,55 +169,58 @@ public class ProjectMapTest extends TestCase
 	}
 
 	protected void doTestProjectMap_LoadDefault(/*@NonNull*/ EPackage ePackage, @NonNull String project, @NonNull String modelPath, @NonNull String fragment, boolean selfReferential) {
-    	TestCaseAppender.INSTANCE.uninstall();
-		TestCaseLogger.INSTANCE.install();
-		ProjectMap.getResourceFactoryRegistry(null).getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-		@SuppressWarnings("null")@NonNull URI platformPluginURI = URI.createPlatformPluginURI(modelPath, true);
-		@SuppressWarnings("null")@NonNull URI platformResourceURI = URI.createPlatformResourceURI(modelPath, true);
-		@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(ePackage.getNsURI());
-		@SuppressWarnings("null")@NonNull URI platformPluginEObjectURI = platformPluginURI.appendFragment(fragment);
-		@SuppressWarnings("null")@NonNull URI platformResourceEObjectURI = platformResourceURI.appendFragment(fragment);
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			projectMap.initializeResourceSet(resourceSet);
-			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
-			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
-			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
-			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
-			assertEquals(nsEPackage, platformPluginEObject);
-			assertEquals(nsEPackage, platformResourceEObject);
-			assertEquals("Conflicting access to '" + platformResourceURI + "' or '" + platformPluginURI + "' already accessed as '" + nsURI + "'", TestCaseLogger.INSTANCE.get());
-		}
-		TestCaseLogger.INSTANCE.clear();
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			projectMap.initializeResourceSet(resourceSet);
-			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
-			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
-			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
-			assertEquals(selfReferential, DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(selfReferential, !platformPluginURI.equals(nsEPackage.eResource().getURI()));
-			assertEquals(selfReferential, nsEPackage != platformPluginEObject);
-			assertEquals(platformPluginEObject, platformResourceEObject);
-			if (!selfReferential) {
-				assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "' or '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
+		Iterable<Appender> savedAppenders = TestCaseLogger.INSTANCE.install();
+		try {
+			ProjectMap.getResourceFactoryRegistry(null).getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+			@SuppressWarnings("null")@NonNull URI platformPluginURI = URI.createPlatformPluginURI(modelPath, true);
+			@SuppressWarnings("null")@NonNull URI platformResourceURI = URI.createPlatformResourceURI(modelPath, true);
+			@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(ePackage.getNsURI());
+			@SuppressWarnings("null")@NonNull URI platformPluginEObjectURI = platformPluginURI.appendFragment(fragment);
+			@SuppressWarnings("null")@NonNull URI platformResourceEObjectURI = platformResourceURI.appendFragment(fragment);
+			{
+				ResourceSet resourceSet = new ResourceSetImpl();
+				projectMap.initializeResourceSet(resourceSet);
+				EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
+				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
+				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
+				assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
+				assertEquals(nsURI, nsEPackage.eResource().getURI());
+				assertEquals(nsEPackage, platformPluginEObject);
+				assertEquals(nsEPackage, platformResourceEObject);
+				assertEquals("Conflicting access to '" + platformResourceURI + "' or '" + platformPluginURI + "' already accessed as '" + nsURI + "'", TestCaseLogger.INSTANCE.get());
 			}
-		}
-		TestCaseLogger.INSTANCE.clear();
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			projectMap.initializeResourceSet(resourceSet);
-			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
-			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
-			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
-			assertEquals(selfReferential, DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(selfReferential, !platformResourceURI.equals(nsEPackage.eResource().getURI()));
-			assertEquals(selfReferential, nsEPackage != platformPluginEObject);
-			assertEquals(platformPluginEObject, platformResourceEObject);
-			if (!selfReferential) {
-				assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "' or '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
+			TestCaseLogger.INSTANCE.clear();
+			{
+				ResourceSet resourceSet = new ResourceSetImpl();
+				projectMap.initializeResourceSet(resourceSet);
+				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
+				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
+				EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
+				assertEquals(selfReferential, DomainUtil.isRegistered(nsEPackage.eResource()));	
+				assertEquals(selfReferential, !platformPluginURI.equals(nsEPackage.eResource().getURI()));
+				assertEquals(selfReferential, nsEPackage != platformPluginEObject);
+				assertEquals(platformPluginEObject, platformResourceEObject);
+				if (!selfReferential) {
+					assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "' or '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
+				}
 			}
+			TestCaseLogger.INSTANCE.clear();
+			{
+				ResourceSet resourceSet = new ResourceSetImpl();
+				projectMap.initializeResourceSet(resourceSet);
+				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
+				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
+				EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
+				assertEquals(selfReferential, DomainUtil.isRegistered(nsEPackage.eResource()));	
+				assertEquals(selfReferential, !platformResourceURI.equals(nsEPackage.eResource().getURI()));
+				assertEquals(selfReferential, nsEPackage != platformPluginEObject);
+				assertEquals(platformPluginEObject, platformResourceEObject);
+				if (!selfReferential) {
+					assertEquals(selfReferential ? "" : "Conflicting access to '" + nsURI + "' already accessed as '" + platformResourceURI + "' or '" + platformPluginURI + "'", TestCaseLogger.INSTANCE.get());
+				}
+			}
+		} finally {
+			TestCaseLogger.INSTANCE.uninstall(savedAppenders);
 		}
 	}
 
@@ -326,57 +324,60 @@ public class ProjectMapTest extends TestCase
 	}
 
 	protected void doTestProjectMap_LoadModel(/*@NonNull*/ EPackage ePackage, @NonNull String project, @NonNull String modelPath, @NonNull String fragment, boolean selfReferential) {
-		TestCaseAppender.INSTANCE.uninstall();
-		TestCaseLogger.INSTANCE.install();
-		ProjectMap.getResourceFactoryRegistry(null).getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-		@SuppressWarnings("null")@NonNull URI platformPluginURI = URI.createPlatformPluginURI(modelPath, true);
-		@SuppressWarnings("null")@NonNull URI platformResourceURI = URI.createPlatformResourceURI(modelPath, true);
-		@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(ePackage.getNsURI());
-		@SuppressWarnings("null")@NonNull URI platformPluginEObjectURI = platformPluginURI.appendFragment(fragment);
-		@SuppressWarnings("null")@NonNull URI platformResourceEObjectURI = platformResourceURI.appendFragment(fragment);
-		IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(project);
-		assert projectDescriptor != null;
-		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			projectMap.initializeResourceSet(resourceSet);
-			packageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
-			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
-			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
-			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
-			assertFalse(DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(platformResourceURI, nsEPackage.eResource().getURI());
-			assertEquals(nsEPackage, platformPluginEObject);
-			assertEquals(nsEPackage, platformResourceEObject);
-			assertEquals(selfReferential ? "Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage" : "", TestCaseLogger.INSTANCE.get());
-		}
-		TestCaseLogger.INSTANCE.clear();
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			projectMap.initializeResourceSet(resourceSet);
-			packageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
-			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
-			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
-			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
-			assertEquals(false/*selfReferential*/, DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(false/*selfReferential*/, !platformPluginURI.equals(nsEPackage.eResource().getURI()));
-			assertEquals(false/*selfReferential*/, nsEPackage != platformPluginEObject);
-			assertEquals(platformPluginEObject, platformResourceEObject);
-//			assertEquals(false/*selfReferential*/ ? "Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage" : "", TestCaseLogger.INSTANCE.get());
-		}
-		TestCaseLogger.INSTANCE.clear();
-		{
-			ResourceSet resourceSet = new ResourceSetImpl();
-			projectMap.initializeResourceSet(resourceSet);
-			packageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
-			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
-			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
-			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
-			assertEquals(false/*selfReferential*/, DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(false/*selfReferential*/, !platformResourceURI.equals(nsEPackage.eResource().getURI()));
-			assertEquals(false/*selfReferential*/, nsEPackage != platformPluginEObject);
-			assertEquals(platformPluginEObject, platformResourceEObject);
-//			assertEquals(false/*selfReferential*/ ? "Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage" : "", TestCaseLogger.INSTANCE.get());
+		Iterable<Appender> savedAppenders = TestCaseLogger.INSTANCE.install();
+		try {
+			ProjectMap.getResourceFactoryRegistry(null).getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+			@SuppressWarnings("null")@NonNull URI platformPluginURI = URI.createPlatformPluginURI(modelPath, true);
+			@SuppressWarnings("null")@NonNull URI platformResourceURI = URI.createPlatformResourceURI(modelPath, true);
+			@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(ePackage.getNsURI());
+			@SuppressWarnings("null")@NonNull URI platformPluginEObjectURI = platformPluginURI.appendFragment(fragment);
+			@SuppressWarnings("null")@NonNull URI platformResourceEObjectURI = platformResourceURI.appendFragment(fragment);
+			IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(project);
+			assert projectDescriptor != null;
+			IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
+			{
+				ResourceSet resourceSet = new ResourceSetImpl();
+				projectMap.initializeResourceSet(resourceSet);
+				packageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
+				EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
+				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
+				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
+				assertFalse(DomainUtil.isRegistered(nsEPackage.eResource()));	
+				assertEquals(platformResourceURI, nsEPackage.eResource().getURI());
+				assertEquals(nsEPackage, platformPluginEObject);
+				assertEquals(nsEPackage, platformResourceEObject);
+				assertEquals(selfReferential ? "Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage" : "", TestCaseLogger.INSTANCE.get());
+			}
+			TestCaseLogger.INSTANCE.clear();
+			{
+				ResourceSet resourceSet = new ResourceSetImpl();
+				projectMap.initializeResourceSet(resourceSet);
+				packageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
+				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
+				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
+				EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
+				assertEquals(false/*selfReferential*/, DomainUtil.isRegistered(nsEPackage.eResource()));	
+				assertEquals(false/*selfReferential*/, !platformPluginURI.equals(nsEPackage.eResource().getURI()));
+				assertEquals(false/*selfReferential*/, nsEPackage != platformPluginEObject);
+				assertEquals(platformPluginEObject, platformResourceEObject);
+	//			assertEquals(false/*selfReferential*/ ? "Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage" : "", TestCaseLogger.INSTANCE.get());
+			}
+			TestCaseLogger.INSTANCE.clear();
+			{
+				ResourceSet resourceSet = new ResourceSetImpl();
+				projectMap.initializeResourceSet(resourceSet);
+				packageDescriptor.configure(resourceSet, StandaloneProjectMap.LoadModelStrategy.INSTANCE, null);
+				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
+				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
+				EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
+				assertEquals(false/*selfReferential*/, DomainUtil.isRegistered(nsEPackage.eResource()));	
+				assertEquals(false/*selfReferential*/, !platformResourceURI.equals(nsEPackage.eResource().getURI()));
+				assertEquals(false/*selfReferential*/, nsEPackage != platformPluginEObject);
+				assertEquals(platformPluginEObject, platformResourceEObject);
+	//			assertEquals(false/*selfReferential*/ ? "Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage" : "", TestCaseLogger.INSTANCE.get());
+			}
+		} finally {
+			TestCaseLogger.INSTANCE.uninstall(savedAppenders);
 		}
 	}
 	
