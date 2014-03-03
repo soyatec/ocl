@@ -7,8 +7,32 @@
   <rm:property key="resolve.target.platform" value="false"/>
   <rm:property key="resolve.n4s" value="false"/>
   <rm:property key="build.type" value="I"/>
+  <rm:locator pattern="^org\.eclipse\.facet.*" searchPathRef="facet"/>
   <rm:locator pattern="^org\.eclipse\.papyrus.*" searchPathRef="papyrus"/>
-  <rm:redirect href="ocl-core.rmap"/>
+  <rm:redirect href="ocl.rmap"/>
+  <rm:searchPath name="facet">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(&amp;(resolve.n4s=true)(build.type=S))))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/facet/updates/nightly">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/facet/updates/milestones">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=M)(build.type=N)(build.type=R)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/facet/updates/releases">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
   <rm:searchPath name="papyrus">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(&amp;(resolve.n4s=true)(build.type=S))))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
