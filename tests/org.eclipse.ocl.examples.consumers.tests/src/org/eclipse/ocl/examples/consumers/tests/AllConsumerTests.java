@@ -45,6 +45,7 @@ public class AllConsumerTests extends TestCase
     	String testSuiteName = System.getProperty("testSuiteName", "Consumer Support");
 		TestSuite result = new TestSuite(testSuiteName);			
 		result.addTestSuite(ConsumerProjectMapTest.class);
+		result.addTestSuite(ConsumerValidateTests.class);
 		return result;
 	}
 
