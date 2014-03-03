@@ -7,6 +7,7 @@
   <rm:property key="resolve.target.platform" value="false"/>
   <rm:property key="resolve.n4s" value="false"/>
   <rm:property key="build.type" value="I"/>
+  <rm:locator pattern="^org\.eclipse\.emf\.examples\.library.*$" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.facet.*" searchPathRef="facet"/>
   <rm:locator pattern="^org\.eclipse\.papyrus.*" searchPathRef="papyrus"/>
   <rm:redirect href="ocl.rmap"/>
