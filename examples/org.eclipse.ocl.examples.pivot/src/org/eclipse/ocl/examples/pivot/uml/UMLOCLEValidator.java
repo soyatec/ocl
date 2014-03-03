@@ -49,6 +49,14 @@ import org.eclipse.uml2.uml.util.UMLValidator;
 
 /**
  * UMLOCLEValidator provides the validation support for UML elements that exploit OCL.
+ * <p>
+ * Typically used with a Diagnostician as:
+ * <pre>
+ *	EValidatorRegistryImpl registry = new EValidatorRegistryImpl();
+ *	registry.put(UMLPackage.eINSTANCE, new UMLOCLEValidator());
+ *	Diagnostician dignostician = new Diagnostician(registry);
+ *	Diagnostic diagnostic = dignostician.validate(eObject, validationContext);
+ * </pre>
  */
 public class UMLOCLEValidator implements EValidator
 {
