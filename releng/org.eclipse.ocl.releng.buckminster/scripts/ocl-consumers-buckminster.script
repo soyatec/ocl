@@ -12,4 +12,6 @@ import --properties "${checkout.location}/buildroot/build.properties" "org.eclip
 build
 
 # OCL Consumers Tests
-junit --launch "org.eclipse.ocl.examples.xtext.tests/.settings/org.eclipse.ocl.examples.consumers.tests\ \(standalone\).launch" --flatXML --output "${checkout.location}/MDT-OCL.test.results/org.eclipse.ocl.examples.consumers.tests.xml"
+junit --launch "org.eclipse.ocl.examples.consumers.tests/.settings/org.eclipse.ocl.examples.consumers.tests\ \(standalone\).launch" --flatXML --output "${checkout.location}/MDT-OCL.test.results/org.eclipse.ocl.examples.consumers.tests.xml"
+
+junit --launch "org.eclipse.ocl.examples.xtext.tests/.settings/org.eclipse.ocl.examples.xtext.tests\ \(CG\).launch" --flatXML --output "${checkout.location}/MDT-OCL.test.results/org.eclipse.ocl.examples.xtext.tests.CG.xml"

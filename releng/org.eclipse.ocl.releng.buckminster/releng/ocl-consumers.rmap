@@ -8,7 +8,7 @@
   <rm:property key="resolve.n4s" value="false"/>
   <rm:property key="build.type" value="I"/>
   <rm:locator pattern="^org\.eclipse\.emf\.examples\.library.*$" searchPathRef="emf"/>
-  <rm:locator pattern="^org\.eclipse\.facet.*" searchPathRef="facet"/>
+  <!--rm:locator pattern="^org\.eclipse\.facet.*" searchPathRef="facet"/-->
   <rm:locator pattern="^org\.eclipse\.papyrus.*" searchPathRef="papyrus"/>
   <rm:redirect href="ocl.rmap"/>
   <rm:searchPath name="emf">
@@ -48,7 +48,7 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <rm:searchPath name="facet">
+  <!--rm:searchPath name="facet">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(&amp;(resolve.n4s=true)(build.type=S))))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
@@ -70,7 +70,7 @@
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
-  </rm:searchPath>
+  </rm:searchPath-->
   <rm:searchPath name="papyrus">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(&amp;(resolve.n4s=true)(build.type=S))))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
