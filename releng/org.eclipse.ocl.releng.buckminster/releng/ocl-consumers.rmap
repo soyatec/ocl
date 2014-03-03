@@ -10,6 +10,8 @@
   <rm:locator pattern="^org\.eclipse\.emf\.examples\.library.*$" searchPathRef="emf"/>
   <!--rm:locator pattern="^org\.eclipse\.facet.*" searchPathRef="facet"/-->
   <rm:locator pattern="^org\.eclipse\.ocl\.examples\.consumers.*$" searchPathRef="ocl-source-code"/>
+  <rm:locator pattern="^org\.eclipse\.ocl\.examples\.tests.*" searchPathRef="ocl-source-code"/>
+  <rm:locator pattern="^org\.eclipse\.ocl\.examples\.uml25.*" searchPathRef="ocl-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ocl\.examples\.xtext\.tests.*" searchPathRef="ocl-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ocl\.releng.*$" searchPathRef="ocl-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ocl.*" searchPathRef="ocl"/>
