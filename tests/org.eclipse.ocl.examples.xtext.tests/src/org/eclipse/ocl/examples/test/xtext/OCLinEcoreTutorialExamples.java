@@ -49,7 +49,6 @@ import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 
 /**
  * Tests for the OCLinEcore tutorial using LPG or Pivot delegate URIs on LPG or Pivot evaluator.
@@ -186,10 +185,9 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 			fail();
 			return;
 		}
-		MetaModelManager metaModelManager = new MetaModelManager();
+		OCL ocl = OCL.newInstance(resourceSet.getPackageRegistry());
 		try {
-			PivotEnvironmentFactory environmentFactory = new PivotEnvironmentFactory(resourceSet.getPackageRegistry(), metaModelManager);
-			OCL ocl = OCL.newInstance(environmentFactory);
+			MetaModelManager metaModelManager = ocl.getMetaModelManager();
 			OCLHelper helper = ocl.createOCLHelper();
 	
 			Ecore2Pivot ecore2pivot = Ecore2Pivot.getAdapter(b2Book.eClass().eResource(), metaModelManager);
@@ -233,7 +231,7 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 		    assertEquals(3, b2loans.size());
 		    assertTrue(b2loans.get(1) instanceof EObject);
 		} finally {
-			metaModelManager.dispose();
+			ocl.dispose();
 		}
 	}
 	

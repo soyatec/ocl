@@ -18,6 +18,9 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Opaque Expression</b></em>'.
@@ -70,7 +73,7 @@ public interface OpaqueExpression
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ExpressionInOCL()
 	 * @generated
 	 */
-	ExpressionInOCL getExpressionInOCL();
+	@Nullable ExpressionInOCL getExpressionInOCL();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getExpressionInOCL <em>Expression In OCL</em>}' containment reference.
@@ -95,4 +98,9 @@ public interface OpaqueExpression
 	 * @generated
 	 */
 	List<String> getLanguage();
+	
+	/**
+	 * @generated NOT
+	 */
+	@NonNull ExpressionInOCL getValidExpressionInOCL() throws ParserException;
 } // OpaqueExpression

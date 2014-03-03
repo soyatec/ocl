@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -76,7 +75,7 @@ import org.eclipse.xtext.validation.CheckMode;
 public class EditorTests extends XtextTestCase
 {	
 	protected FileEditorInput createEcoreFileEditorInput(String projectName, String fileName, String testDocument)throws IOException, CoreException {
-		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl0 = OCL.newInstance();
 		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
 		String ecoreString = createEcoreString(metaModelManager0, fileName, testDocument, true);
 		InputStream inputStream = new URIConverter.ReadableInputStream(ecoreString, "UTF-8");

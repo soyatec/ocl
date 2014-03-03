@@ -56,7 +56,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
@@ -77,7 +76,7 @@ public class EditTests extends XtextTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		ocl = OCL.newInstance(new PivotEnvironmentFactory(EPackage.Registry.INSTANCE, new MetaModelManager()));
+		ocl = OCL.newInstance();
 	}
 
 	@Override
@@ -197,8 +196,8 @@ public class EditTests extends XtextTestCase
 				"}\n";
 		URI ecoreURI_class = getProjectFileURI("test-class.ecore");
 		URI ecoreURI_datatype = getProjectFileURI("test-datatype.ecore");
-		OCL ocl_class = OCL.newInstance(new PivotEnvironmentFactory());
-		OCL ocl_datatype = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl_class = OCL.newInstance();
+		OCL ocl_datatype = OCL.newInstance();
 		MetaModelManager metaModelManager_class = ocl_class.getMetaModelManager();
 		MetaModelManager metaModelManager_datatype = ocl_datatype.getMetaModelManager();
 		Resource ecoreResource_class = getEcoreFromCS1(ocl_class, testDocument_class, ecoreURI_class);
@@ -262,9 +261,9 @@ public class EditTests extends XtextTestCase
 		URI ecoreURI_uncommented = getProjectFileURI("test-uncommented.ecore");
 		URI ecoreURI_commented = getProjectFileURI("test-commented.ecore");
 		URI ecoreURI_recommented = getProjectFileURI("test-recommented.ecore");
-		OCL ocl_uncommented = OCL.newInstance(new PivotEnvironmentFactory());
-		OCL ocl_commented = OCL.newInstance(new PivotEnvironmentFactory());
-		OCL ocl_recommented = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl_uncommented = OCL.newInstance();
+		OCL ocl_commented = OCL.newInstance();
+		OCL ocl_recommented = OCL.newInstance();
 		MetaModelManager metaModelManager_uncommented = ocl_uncommented.getMetaModelManager();
 		MetaModelManager metaModelManager_commented = ocl_commented.getMetaModelManager();
 		MetaModelManager metaModelManager_recommented = ocl_recommented.getMetaModelManager();
@@ -350,7 +349,7 @@ public class EditTests extends XtextTestCase
 		OCLDelegateDomain.initialize(null);
 		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI);
 		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
-		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl0 = OCL.newInstance();
 		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
 		String testDocument = 
 			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
@@ -371,7 +370,7 @@ public class EditTests extends XtextTestCase
 		//
 		//	Load and instrument test document
 		//
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl1 = OCL.newInstance();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		Resource ecoreResource = metaModelManager1.getExternalResourceSet().getResource(ecoreURI, true);
 		assertNoResourceErrors("Ecore load", ecoreResource);
@@ -456,7 +455,7 @@ public class EditTests extends XtextTestCase
 			"package p1 : p2 = 'p3' {\n" +
 			"}\n";
 		URI ecoreURI0 = getProjectFileURI("test0.ecore");
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl1 = OCL.newInstance();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
 		EssentialOCLCSResource xtextResource;
@@ -522,7 +521,7 @@ public class EditTests extends XtextTestCase
 			"	}\n" +
 			"}\n";
 		URI ecoreURI0 = getProjectFileURI("test0.ecore");
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl1 = OCL.newInstance();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");
@@ -607,7 +606,7 @@ public class EditTests extends XtextTestCase
 			"}\n";
 		URI ecoreURI0 = getProjectFileURI("test0.ecore");
 //		System.out.println("*************load-reference*********************************************************");
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl1 = OCL.newInstance();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		Resource ecoreResource0 = getEcoreFromCS1(ocl1, testDocument, ecoreURI0);
 		URI ecoreURI1 = getProjectFileURI("test1.ecore");

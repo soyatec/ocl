@@ -19,16 +19,13 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.evaluation.TracingEvaluationVisitor;
+import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 
 /**
  * Partial implementation of the {@link EnvironmentFactory} interface, useful
@@ -152,6 +149,33 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 		}
 		
 		return result;
+	}
+
+	public @NonNull EvaluationVisitor createEvaluationVisitor(@Nullable Environment environment, @Nullable Object context, @NonNull ExpressionInOCL expression, @Nullable DomainModelManager modelManager) {
+		if (environment == null) {
+			environment = createEnvironment();
+		}
+		// can determine a more appropriate context from the context
+		// variable of the expression, to account for stereotype constraints
+//		context = HelperUtil.getConstraintContext(rootEnvironment, context, expression);
+		EvaluationEnvironment evaluationEnvironment = createEvaluationEnvironment();
+		Variable contextVariable = expression.getContextVariable();
+		if (contextVariable != null) {
+			PivotIdResolver idResolver = evaluationEnvironment.getMetaModelManager().getIdResolver();
+			Object value = idResolver.boxedValueOf(context);
+			evaluationEnvironment.add(contextVariable, value);
+		}
+		for (Variable parameterVariable : expression.getParameterVariable()) {
+			if (parameterVariable != null) {
+				evaluationEnvironment.add(parameterVariable, null);
+			}
+		}
+		DomainModelManager extents = modelManager;
+		if (extents == null) {
+			// let the evaluation environment create one
+			extents = evaluationEnvironment.createModelManager(context);
+		}
+		return createEvaluationVisitor(environment, evaluationEnvironment, extents);
 	}
 	
     // implements the interface method

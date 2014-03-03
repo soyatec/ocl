@@ -932,7 +932,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 		Property asOppositeProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		Property asProperty = DomainUtil.nonNullModel(asOppositeProperty.getOpposite());
 		boolean isRequired = asProperty.isRequired();
-		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
+		LibraryProperty libraryProperty = metaModelManager.getImplementation(null, asProperty);
 		CGOppositePropertyCallExp cgPropertyCallExp = null;
 		if (isEcoreProperty(libraryProperty)) {
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getETarget();
@@ -1002,7 +1002,7 @@ public class AS2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeG
 	public @NonNull CGValuedElement visitPropertyCallExp(@NonNull PropertyCallExp element) {
 		Property asProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		boolean isRequired = asProperty.isRequired();
-		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
+		LibraryProperty libraryProperty = metaModelManager.getImplementation(null, asProperty);
 		CGPropertyCallExp cgPropertyCallExp = null;
 		if (isEcoreProperty(libraryProperty)) {
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getETarget();

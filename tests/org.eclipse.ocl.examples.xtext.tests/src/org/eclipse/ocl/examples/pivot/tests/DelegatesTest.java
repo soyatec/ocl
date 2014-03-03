@@ -1108,9 +1108,8 @@ public class DelegatesTest extends PivotTestSuite
 	public void test_validationEvaluatingToInvalid() {
 		initModelWithErrors();
 		EObject badClassInstance = create(acme, companyDetritus, (EClass) companyPackage.getEClassifier("ValidationEvaluatingToInvalid"), null);
-		Type type = metaModelManager.getPivotOfEcore(Type.class, badClassInstance.eClass());
 		validateWithDelegationSeverity("evaluatingToInvalid", Diagnostic.ERROR, badClassInstance, null,
-			OCLMessages.ValidationResultIsInvalid_ERROR_, "ValidationEvaluatingToInvalid", "evaluatingToInvalid", DomainUtil.getLabel(type));
+			OCLMessages.ValidationResultIsInvalid_ERROR_, "ValidationEvaluatingToInvalid", "evaluatingToInvalid", DomainUtil.getLabel(badClassInstance));
 	}
 	
 	public void test_validationEvaluatingToNull() {

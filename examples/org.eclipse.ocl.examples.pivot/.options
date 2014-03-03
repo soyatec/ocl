@@ -2,3 +2,9 @@
 
 # Turn on general tracing of moniker creation 
 #org.eclipse.ocl.examples.pivot/traceMonikers=false
+
+# Trace validation of InstanceSpecifications 
+org.eclipse.ocl.examples.pivot/validate/instance=false
+
+# Trace validation of OpaqueElement bodies 
+org.eclipse.ocl.examples.pivot/validate/opaqueElement=false

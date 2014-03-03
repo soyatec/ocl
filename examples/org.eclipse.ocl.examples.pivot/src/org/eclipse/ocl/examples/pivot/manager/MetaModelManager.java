@@ -1537,11 +1537,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return implementation;
 	}
 
-	public @NonNull LibraryProperty getImplementation(@NonNull Property property) {
+	public @NonNull LibraryProperty getImplementation(@Nullable Object sourceValue, @NonNull Property property) {
 		LibraryProperty implementation = (LibraryProperty) property.getImplementation();
 		if (implementation == null) {
 			ImplementationManager implementationManager = getImplementationManager();
-			implementation = implementationManager.getPropertyImplementation(property);
+			implementation = implementationManager.getPropertyImplementation(sourceValue, property);
 			property.setImplementation(implementation);
 		}
 		return implementation;

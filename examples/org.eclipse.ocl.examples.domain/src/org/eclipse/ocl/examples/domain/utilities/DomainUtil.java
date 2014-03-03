@@ -395,7 +395,7 @@ public class DomainUtil
 
 	/**
 	 * Return a simple readable description of object. If non-null eClassifier
-	 * identifoes the type of object. If non-null context may provide an ESubstitutionLabelProvider.
+	 * identifies the type of object. If non-null context may provide an ESubstitutionLabelProvider.
 	 */
 	public static String getLabel(EClassifier eClassifier, Object object, Map<Object, Object> context) {
 		if (eClassifier instanceof EDataType) {

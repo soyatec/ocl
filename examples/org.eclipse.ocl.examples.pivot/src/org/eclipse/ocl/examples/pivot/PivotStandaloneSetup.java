@@ -23,10 +23,12 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.pivot.ecore.EcoreASResourceFactory;
+import org.eclipse.ocl.examples.pivot.manager.ImplementationManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.scoping.PivotScoping;
 import org.eclipse.ocl.examples.pivot.uml.UMLASResourceFactory;
+import org.eclipse.ocl.examples.pivot.uml.UMLExplicitNavigator;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
@@ -58,6 +60,7 @@ public class PivotStandaloneSetup //implements ISetup
 		UMLASResourceFactory.INSTANCE.getClass();
 		OCLASResourceFactory.INSTANCE.getClass();
 		EcorePackage.eINSTANCE.getClass();
+		ImplementationManager.addExplicitNavgator(UMLExplicitNavigator.INSTANCE);
 		try {
 			UMLResourcesUtil.init(null);
 		} catch (Throwable e) {}		// UML is optional so may get a ClassNotFoundException

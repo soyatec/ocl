@@ -30,7 +30,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileDialog;
 import org.eclipse.ocl.examples.xtext.base.ui.wizards.AbstractFileNewWizardPage;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -54,7 +53,7 @@ public class EcoreWithOCLFileNewWizard extends AbstractOCLinEcoreFileNewWizard
 		URI ecoreURI = URI.createPlatformResourceURI(newFile.getFullPath().toString(), true);
 		URI oclInEcoreURI = ecoreURI.trimFileExtension().appendFileExtension("oclinecore");
 		String initialContentsAsString = super.getInitialContentsAsString(newFile, dialog);
-		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(EPackage.Registry.INSTANCE, new MetaModelManager()));
+		@SuppressWarnings("null") OCL ocl = OCL.newInstance(EPackage.Registry.INSTANCE);
 		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
 		BaseCSResource csResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.createResource(oclInEcoreURI));

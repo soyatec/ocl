@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.test.xtext;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.annotation.NonNull;
@@ -34,15 +36,30 @@ import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.uml.UMLOCLEValidator;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
+import org.eclipse.uml2.uml.UMLPackage;
 
 /**
  * Tests that OCL for model validation works.
  */
 public abstract class AbstractValidateTests extends XtextTestCase
 {	
+	public static @NonNull List<Diagnostic> assertUMLOCLValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
+		Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
+		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+		for (EObject eObject : resource.getContents()) {
+			EValidatorRegistryImpl registry = new EValidatorRegistryImpl();
+			registry.put(UMLPackage.eINSTANCE, new UMLOCLEValidator());
+			Diagnostician dignostician = new Diagnostician(registry);
+			Diagnostic diagnostic = dignostician.validate(eObject, validationContext);
+			diagnostics.addAll(diagnostic.getChildren());
+		}
+		return assertDiagnostics(prefix, diagnostics, messages);
+	}
+
 	public static void checkValidationDiagnostics(EObject testInstance, int severity, String... expectedMessage) {
 		Bag<String> expectedMessages = new BagImpl<String>();
 		for (String message : expectedMessage) {
@@ -77,6 +94,13 @@ public abstract class AbstractValidateTests extends XtextTestCase
 		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 		Resource ecoreResource = pivot2ecore(ocl, asResource, ecoreURI, true);
 		return ecoreResource;
+	}
+
+	public Resource doLoadUML(OCL ocl, String stem) throws IOException {
+		MetaModelManager metaModelManager = ocl.getMetaModelManager();
+		String umlName = stem + ".uml";
+		URI umlURI = getProjectFileURI(umlName);
+		return metaModelManager.getExternalResourceSet().getResource(umlURI, true);
 	}
 
 	@SuppressWarnings("null")

@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.Stereotype;
 
@@ -82,7 +81,7 @@ public abstract class LoadableConstraintProvider extends XmlConstraintProvider
     		synchronized (LoadableConstraintProvider.class) {
     	    	ocl2 = ocl;
     	    	if (ocl2 == null) {
-    	    		ocl = ocl2 = OCL.newInstance(new PivotEnvironmentFactory(null, null));
+    	    		ocl = ocl2 = OCL.newInstance();
     	    	}
     		}
     	}

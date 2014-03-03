@@ -45,7 +45,6 @@ import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 
@@ -88,7 +87,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 	 */
 	public void test_parsingConstraintsExample() throws IOException, ParserException {
 		// create an OCL instance for Ecore
-		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl = OCL.newInstance();
 
 		// create an OCL helper object
 		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
@@ -132,7 +131,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 	 * in org.eclipse.ocl.doc/doc/5115-evaluating-constraints.textile
 	 */
 	public void test_evaluatingConstraintsExample() throws IOException, ParserException {
-		OCL ocl = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl = OCL.newInstance();
 		OCLHelper helper = ocl.createOCLHelper(EXTLibraryPackage.Literals.LIBRARY);
 		ExpressionInOCL invariant = helper.createInvariant(
 		    "books->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
@@ -189,9 +188,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 		//-------------------------------------------------------------------------
 		EPackage.Registry registry = new EPackageRegistryImpl();
 		registry.put(EXTLibraryPackage.eNS_URI, EXTLibraryPackage.eINSTANCE);
-		PivotEnvironmentFactory environmentFactory =
-				new PivotEnvironmentFactory(registry, null);
-		OCL ocl = OCL.newInstance(environmentFactory);
+		OCL ocl = OCL.newInstance(registry);
 
 		// get an OCL text file via some hypothetical API
 		URI uri = getInputURI("/model/parsingDocumentsExample.ocl");

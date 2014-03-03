@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -92,15 +93,24 @@ public class OCL {
 	}
 
     /**
-     * Creates a new <code>OCL</code> using the shared Ecore environment factory instance.
-     * <p>
-     * Do not do this or you will share your Resouerces with other applications, which at best will just make for a very slow run-time.
+     * Creates a new <code>OCL</code> with no initial Ecore package registry.
+     * This automatically creates a new EnvironmentFactory and MetaModelManager.
      * 
      * @return the new <code>OCL</code>
      */
-	@Deprecated
 	public static @NonNull OCL newInstance() {
-		return newInstance(PivotEnvironmentFactory.getGlobalRegistryInstance());
+		return newInstance(new PivotEnvironmentFactory(null, new MetaModelManager()));
+	}
+	
+    /**
+     * Creates a new <code>OCL</code> using the specified Ecore package registry.
+     * This automatically creates an new EnvironmentFactory and MetaModelManager.
+     * 
+     * @param reg Ecore package registry
+     * @return the new <code>OCL</code>
+     */
+	public static @NonNull OCL newInstance(@NonNull EPackage.Registry reg) {	
+		return newInstance(new PivotEnvironmentFactory(reg, new MetaModelManager()));
 	}
 	
     /**
@@ -232,11 +242,19 @@ public class OCL {
 			return false;
 		}
 	}
-    
+
+    /**
+     * Creates a new evaluation visitor, for the evaluation of an OCL expression in a context.
+     * The evaluationVisitor reuses any previously established ModelManager.
+     */
+	public @NonNull EvaluationVisitor createEvaluationVisitor(@Nullable Object context, @NonNull ExpressionInOCL expression) {
+		return environmentFactory.createEvaluationVisitor(rootEnvironment, context, expression, modelManager);
+	}
+
 	/**
 	 * Creates a new {@link OCLHelper} instance for convenient parsing of
 	 * embedded constraints and query expressions in this environment. The
-	 * helper is particulary useful for parsing constraints embedded in the
+	 * helper is particularly useful for parsing constraints embedded in the
 	 * model, in which case the context of a constraint is determined by its
 	 * placement and the textual context declarations are unnecessary.
 	 * 
@@ -408,41 +426,14 @@ public class OCL {
 	 */
 	public @Nullable Object evaluate(@Nullable Object context, @NonNull ExpressionInOCL expression) {
 		evaluationProblems = null;
-		
-		// can determine a more appropriate context from the context
-		// variable of the expression, to account for stereotype constraints
-//		context = HelperUtil.getConstraintContext(rootEnvironment, context, expression);
-		EvaluationEnvironment localEvalEnv = getEvaluationEnvironment();
-		Object value = localEvalEnv.getMetaModelManager().getIdResolver().boxedValueOf(context);
-		Variable contextVariable = expression.getContextVariable();
-		if (contextVariable != null) {
-			localEvalEnv.add(contextVariable, value);
-		}
-//		if ((value != null) && !value.isUndefined()) {
-//			expression.getContextVariable().setValue(value);
-//		}
-		DomainModelManager extents = getModelManager();
-		if (extents == null) {
-			// let the evaluation environment create one
-			extents = localEvalEnv.createModelManager(context);
-		}
-
-		EvaluationVisitor ev = environmentFactory
-			.createEvaluationVisitor(getEnvironment(), localEvalEnv, extents);
-
-		Object result;
-
+		EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, context, expression, modelManager);
 		try {
-			result = expression.accept(ev);
+			Object result = expression.accept(evaluationVisitor);
+			return result;
 		} catch (EvaluationHaltedException e) {
 			evaluationProblems = e.getDiagnostic();
 			throw e;
-		} finally {
-			if (contextVariable != null) {
-				localEvalEnv.remove(contextVariable);
-			}
 		}
-		return result;
 	}
 
 	/**
@@ -458,15 +449,9 @@ public class OCL {
 	}
 
 	/**
-	 * Obtains the OCL parsing environment. Clients may manipulate this
-	 * environment to support custom requirements, such as adding variables to
-	 * it to define "global" values. For any variables that are added, bindings
-	 * will have to provided, as well, in the
-	 * {@linkplain #getEvaluationEnvironment() evaluation environment}.
+	 * Obtains the root OCL parsing environment.
 	 * 
 	 * @return the parsing environment
-	 * 
-	 * @see #getEvaluationEnvironment()
 	 */
 	public @NonNull Environment getEnvironment() {
 		return rootEnvironment;
@@ -484,7 +469,9 @@ public class OCL {
 	 * @return the evaluation environment
 	 * 
 	 * @see #getEnvironment()
+	 * @deprecated no longer called
 	 */
+	@Deprecated
 	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
 		EvaluationEnvironment evalEnv2 = evalEnv;
 		if (evalEnv2 == null) {

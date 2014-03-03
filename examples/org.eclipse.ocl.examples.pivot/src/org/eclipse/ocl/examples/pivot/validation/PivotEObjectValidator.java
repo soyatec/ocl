@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.ComposedEValidator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -48,10 +47,10 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.utilities.ConstraintEvaluator;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -113,13 +112,6 @@ public class PivotEObjectValidator implements EValidator
 			this.rootEnvironment = environmentFactory.createEnvironment();
 		}
 
-		protected String getConstrainedObjectLabel(@NonNull Constraint constraint, @Nullable Object object, @Nullable Map<Object, Object> context) {
-			Type type = PivotUtil.getContainingType(constraint);
-			Type primaryType = type != null ? metaModelManager.getPrimaryType(type) : null;
-			EClassifier eClassifier = primaryType != null ?  (EClassifier)primaryType.getETarget() : null;
-			return DomainUtil.getLabel(eClassifier, object, context);
-		}
-
 		public @NonNull MetaModelManager getMetaModelManager() {
 			return metaModelManager;
 		}
@@ -154,8 +146,8 @@ public class PivotEObjectValidator implements EValidator
 								}
 							}
 						}
-						}
 					}
+				}
 			}
 			return allOk;
 		}
@@ -164,51 +156,53 @@ public class PivotEObjectValidator implements EValidator
 		 * Validate constraint for object using context to elaborate the validation context.
 		 * Returns null for no problem or a warning/error severity diagnostic for a problem.
 		 */
-		public @Nullable Diagnostic validate(@NonNull Constraint constraint, @Nullable Object object, @Nullable Map<Object, Object> context) {
-			OpaqueExpression specification = constraint.getSpecification();
+		public @Nullable Diagnostic validate(final @NonNull Constraint constraint, final @Nullable Object object, final @Nullable Map<Object, Object> context) {
+			final OpaqueExpression specification = constraint.getSpecification();
 			assert specification != null;
 			ExpressionInOCL query = specification.getExpressionInOCL();
 			assert query != null;
-			Variable contextVariable = query.getContextVariable();
-			assert contextVariable != null;
-			EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-			Object value = metaModelManager.getIdResolver().boxedValueOf(object);
-			evaluationEnvironment.add(contextVariable, value);
-			DomainModelManager extents = evaluationEnvironment.createModelManager(object);
-			EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
-			String constraintName = constraint.getName();
-			String message = PivotUtil.getConstraintResultTypeErrorMessage(constraintName, query);
-			int severity = Diagnostic.ERROR;
-			try {
-				OCLExpression body = PivotUtil.getConstraintExpression(query);
-				Object expressionResult = body.accept(evaluationVisitor);
-				boolean isOk = PivotUtil.getConstraintResultStatus(expressionResult);
-				if (!isOk) {
-					severity = PivotUtil.getConstraintResultSeverity(expressionResult);
-					message = PivotUtil.getConstraintResultMessage(expressionResult);
-					if (message == null) {
-						String objectLabel = getConstrainedObjectLabel(constraint, object, context);
-						message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
-								PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
-					}
+			EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, object, query, null);
+			ConstraintEvaluator<Diagnostic> constraintEvaluator = new ConstraintEvaluator<Diagnostic>(query)
+			{
+				@Override
+				protected String getObjectLabel() {
+					Type type = PivotUtil.getContainingType(constraint);
+					Type primaryType = type != null ? metaModelManager.getPrimaryType(type) : null;
+					EClassifier eClassifier = primaryType != null ?  (EClassifier)primaryType.getETarget() : null;
+					return DomainUtil.getLabel(eClassifier, object, context);
 				}
-			} catch (InvalidValueException e) {
-				String objectLabel = getConstrainedObjectLabel(constraint, object, context);
-				message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
-					PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
-//			} catch (InvalidEvaluationException e) {
-//				String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-//				message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
-//					PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
-			} catch (Throwable e) {
-				String objectLabel = getConstrainedObjectLabel(constraint, object, context);
-				message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
-					PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel, e);
-			}
-			if (message == null) {
-				return null;
-			}
-			return new BasicDiagnostic(severity, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+
+				@Override
+				protected Diagnostic handleExceptionResult(@NonNull Exception e) {
+					String message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
+						getConstraintTypeName(), getConstraintName(), getObjectLabel(), e);
+					return new BasicDiagnostic(Diagnostic.ERROR, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+				}
+
+				@Override
+				protected Diagnostic handleFailureResult(@Nullable Object result) {
+					String message = getConstraintResultMessage(result);
+					if (message == null) {
+						message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
+							getConstraintTypeName(), getConstraintName(), getObjectLabel());
+					}
+					int severity = getConstraintResultSeverity(result);
+					return new BasicDiagnostic(severity, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+				}
+
+				@Override
+				protected Diagnostic handleInvalidResult(@NonNull InvalidValueException e) {
+					String message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
+						getConstraintTypeName(), getConstraintName(), getObjectLabel());
+					return new BasicDiagnostic(Diagnostic.ERROR, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+				}
+
+				@Override
+				protected Diagnostic handleSuccessResult() {
+					return null;
+				}
+			};
+			return constraintEvaluator.evaluate(evaluationVisitor);
 		}
 	}
 

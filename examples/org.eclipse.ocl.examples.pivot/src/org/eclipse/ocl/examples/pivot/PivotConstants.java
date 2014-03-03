@@ -169,7 +169,7 @@ public interface PivotConstants
 
 	static final @NonNull String WILDCARD_NAME = "wildcard";
 	
-	static final @NonNull String OCL_LANGUAGE = "OCL";
+	static final @NonNull String OCL_LANGUAGE = "OCL";			// More visible UMLUtil.Language_OCL
 	static final @NonNull String OCL_NAME = "ocl";
 	
 	static final @NonNull String MESSAGE_PART_NAME = "message";

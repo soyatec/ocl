@@ -33,6 +33,7 @@ public class OCLMessages
 	public static String ErrorsInResource;
 	public static String ErrorsInURI;
 	public static String WarningsInURI;
+	public static String ParsingError;
 
 	public static String no_message;
     public static String Input_ERROR_;

@@ -20,6 +20,7 @@ package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
@@ -193,6 +194,14 @@ public interface EnvironmentFactory {
 	 * @return a new nested evaluation environment
 	 */
 	@NonNull EvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent);
+
+    /**
+     * Creates a new evaluation visitor, for the evaluation of an OCL expression on a context using an environment and a modelManager.
+     * If environment is null, a root environment is created and used.
+     * If context is null and the expression uses self subsequent evaluations will give invalid as the result.
+     * If modelManager is null, the context object's ResoutceSet is analyzed to create one.
+     */
+	@NonNull EvaluationVisitor createEvaluationVisitor(@Nullable Environment environment, @Nullable Object context, @NonNull ExpressionInOCL expression, @Nullable DomainModelManager modelManager);
 	
     /**
      * Creates a new evaluation visitor, for the evaluation of OCL expressions.

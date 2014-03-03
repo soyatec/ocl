@@ -28,12 +28,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -374,7 +376,7 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ExpressionInOCL getExpressionInOCL()
+	public @Nullable ExpressionInOCL getExpressionInOCL()
 	{
 		if (expressionInOCL == null) {
 			Namespace contextElement = PivotUtil.getContainingNamespace(this);
@@ -386,5 +388,30 @@ public class OpaqueExpressionImpl
 			}
 		}
 		return expressionInOCL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws ParserException 
+	 * @generated NOT
+	 */
+	public @NonNull ExpressionInOCL getValidExpressionInOCL() throws ParserException
+	{
+		ExpressionInOCL expressionInOCL2 = expressionInOCL;
+		if (expressionInOCL2 != null) {
+			return expressionInOCL2;
+		}
+		Namespace contextElement = PivotUtil.getContainingNamespace(this);
+		if (contextElement == null) {
+			throw new ParserException("No containing namespace for " + this);
+		}
+		String expression = PivotUtil.getBody(this);
+		if (expression == null) {
+			throw new ParserException("No body expression for " + this);
+		}
+		expressionInOCL2 = PivotUtil.getValidExpressionInOCL(contextElement, expression);
+		setExpressionInOCL(expressionInOCL2);
+		return expressionInOCL2;
 	}
 } //OpaqueExpressionImpl

@@ -67,7 +67,6 @@ import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.resource.ASResourceFactoryRegistry;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
@@ -378,7 +377,7 @@ public class LoadTests extends XtextTestCase
 					allResources.add(asResource);
 				}
 			}
-			OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
+			OCL ocl = OCL.newInstance();
 			int exceptions = 0;
 //			int parses = 0;
 			StringBuilder s = new StringBuilder();

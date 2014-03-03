@@ -51,6 +51,18 @@ import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 public class ImplementationManager
 {			
 	private static final Logger logger = Logger.getLogger(ImplementationManager.class);
+	
+	public static interface ExplicitNavigator {
+		@Nullable LibraryProperty getPropertyImplementation(@Nullable Object sourceValue, @NonNull Property property);
+	}
+	
+	private static @NonNull List<ExplicitNavigator> explicitNavigators = new ArrayList<ExplicitNavigator>();
+	
+	public static void addExplicitNavgator(@NonNull ExplicitNavigator explicitNavigator) {
+		if (!explicitNavigators.contains(explicitNavigator)) {
+			explicitNavigators.add(explicitNavigator);
+		}
+	}
 
 	protected final @NonNull MetaModelManager metaModelManager;
 
@@ -102,7 +114,7 @@ public class ImplementationManager
 		return UnsupportedOperation.INSTANCE;
 	}
 
-	protected @NonNull LibraryProperty getPropertyImplementation(@NonNull Property property) {
+	protected @NonNull LibraryProperty getPropertyImplementation(@Nullable Object sourceValue, @NonNull Property property) {
 		LibraryFeature implementation = property.getImplementation();
 		String implementationClassName = property.getImplementationClass();
 		if (implementationClassName != null) {
@@ -129,7 +141,7 @@ public class ImplementationManager
 		if (property.isImplicit()) {
 			return new ImplicitNonCompositionProperty(property);
 		}
-		else if (property.getOwningType() instanceof TupleType) {
+		if (property.getOwningType() instanceof TupleType) {
 			TupleType tupleType = (TupleType)property.getOwningType();
 			String name = property.getName();
 			assert name != null;
@@ -137,16 +149,20 @@ public class ImplementationManager
 			assert tuplePartId != null;
 			return new TuplePartProperty(tuplePartId);
 		}
-		else if (property.isStatic()) {
+		if (property.isStatic()) {
 			return new StaticProperty(property);
 		}
-		else if ((property.getOwningType() instanceof ElementExtension)			// direct access to extension property
+		if ((property.getOwningType() instanceof ElementExtension)			// direct access to extension property
 			  || (property.getOwningType() instanceof Stereotype)) {			// indirect access from a Stereotype operation
 			return new StereotypeProperty(property);
 		}
-		else {
-			return new ExplicitNavigationProperty(property.getPropertyId());
+		for (ExplicitNavigator explicitNavigator : explicitNavigators) {
+			LibraryProperty libraryProperty = explicitNavigator.getPropertyImplementation(sourceValue, property);
+			if (libraryProperty != null) {
+				return libraryProperty;
+			}
 		}
+		return new ExplicitNavigationProperty(property.getPropertyId());
 	}
 	
 	public void dispose() {

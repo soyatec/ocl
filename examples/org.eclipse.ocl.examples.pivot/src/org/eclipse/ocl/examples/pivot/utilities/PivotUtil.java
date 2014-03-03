@@ -45,14 +45,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TuplePartId;
-import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CallExp;
@@ -107,7 +101,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.manager.PivotExecutorManager;
-import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.NullAttribution;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
@@ -673,117 +666,13 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	/**
-	 * Return the expression to be evaluated for a constraintSpecification, which is the constraintSpecification.bodyExpression
-	 * unless that is a status TuplePart PropertyCallExp in which case it is the source of the TuplePart PropertyCallExp enabling the
-	 * evaluation to compute the enriched Tuple of invariant results.
-	 */
-	public static OCLExpression getConstraintExpression(@NonNull ExpressionInOCL constraintSpecification) {
-		OCLExpression body = constraintSpecification.getBodyExpression();
-		if (body instanceof PropertyCallExp) {
-			PropertyCallExp propertyCallExp = (PropertyCallExp)body;
-			Property referredProperty = propertyCallExp.getReferredProperty();
-			if ((referredProperty != null) && (referredProperty.getOwningType() instanceof TupleType) && PivotConstants.STATUS_PART_NAME.equals(referredProperty.getName())) {
-				return propertyCallExp.getSource();
-			}
-		}
-		return body;
-	}
-
-	/**
-	 * Return the message of result, which is null
-	 * unless result is a Tuple with a more informative severity part.
-	 */
-	public static @Nullable String getConstraintResultMessage(Object result) {
-		if (result instanceof TupleValue) {
-			TupleValue tupleValue = (TupleValue)result;
-			TupleTypeId tupleTypeId = tupleValue.getTypeId();
-			TuplePartId messagePartId = tupleTypeId.getPartId(PivotConstants.MESSAGE_PART_NAME);
-			if (messagePartId != null) {
-				return String.valueOf(tupleValue.getValue(messagePartId));
+	public static @Nullable Constraint getContainingConstraint(@Nullable Element element) {
+		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Constraint) {
+				return (Constraint)eObject;
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Return the org.eclipse.emf.common.util.Diagnostic severity of result, which is ERROR
-	 * unless result is a Tuple with a more informative severity part.
-	 */
-	public static int getConstraintResultSeverity(Object result) {
-		if (result instanceof TupleValue) {
-			TupleValue tupleValue = (TupleValue)result;
-			TupleTypeId tupleTypeId = tupleValue.getTypeId();
-			TuplePartId severityPartId = tupleTypeId.getPartId(PivotConstants.SEVERITY_PART_NAME);
-			if (severityPartId != null) {
-				IntegerValue value = ValuesUtil.integerValueOf(tupleValue.getValue(severityPartId));
-				int signum = value.signum();
-				if (signum < 0) {
-					return Diagnostic.ERROR;
-				}
-				else if (signum == 0) {
-					return Diagnostic.INFO;
-				}
-				else {
-					return Diagnostic.WARNING;
-				}
-			}
-			else {
-				TuplePartId statusPartId = tupleTypeId.getPartId(PivotConstants.STATUS_PART_NAME);
-				if (statusPartId != null) {
-					result = tupleValue.getValue(statusPartId);
-				}
-			}
-		}
-		return result == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-	}
-
-	/**
-	 * Return true if result represents a successful constraint evaluation result.
-	 * Anything else leads to a false return (no null or exception).
-	 */
-	public static boolean getConstraintResultStatus(Object result) {
-		if (result == Boolean.TRUE) {
-			return true;
-		}
-		if (result instanceof TupleValue) {
-			TupleValue tupleValue = (TupleValue)result;
-			TupleTypeId tupleTypeId = tupleValue.getTypeId();
-			TuplePartId statusPartId = tupleTypeId.getPartId(PivotConstants.STATUS_PART_NAME);
-			if (statusPartId == null) {
-				return false;
-			}
-			Object value = tupleValue.getValue(statusPartId);
-			if (value == Boolean.TRUE){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Return null message if the result type of the constraintName query is a
-	 * BooleanType or a TupleType with a part name status with a BooleanType. 
-	 * Return a non-null message diagnosing the anomally otherwise.
-	 */
-	public static @Nullable String getConstraintResultTypeErrorMessage(String constraintName, @NonNull ExpressionInOCL query) {
-		TypeId typeId = query.getTypeId();
-		if (typeId == TypeId.BOOLEAN) {
-			return null;
-		}
-		else {
-			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
-			String constraintTypeName = getConstraintTypeName(query);
-			return DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBooleanType_ERROR_, constraintTypeName, constraintName, objectLabel);
-		}
-	}
-
-	public static String getConstraintTypeName(@NonNull OpaqueExpression expression) {
-		return ((NamedElement) expression.eContainer().eContainer()).getName();
-	}
-
-	public static String getConstraintTypeName(@NonNull Constraint constraint) {
-		return ((NamedElement) constraint.eContainer()).getName();
 	}
 
 	public static @Nullable ExpressionInOCL getContainingExpressionInOCL(@Nullable Element element) {
@@ -1307,6 +1196,25 @@ public class PivotUtil extends DomainUtil
 		@SuppressWarnings("unchecked")
 		T castUnspecializedElement = (T) unspecializedElement;
 		return castUnspecializedElement;
+	}
+
+	/**
+	 * Return an OCL AST from a string in the context of a NamedElement. If it is necessary
+	 * to parse OCL concrete syntax and errors result an ExpressionInOCL is returned with a null
+	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
+	 * containing the error messages.
+	 * @throws ParserException 
+	 */
+	public static @NonNull ExpressionInOCL getValidExpressionInOCL(@NonNull NamedElement contextElement, @NonNull String expression) throws ParserException {
+			Resource resource = contextElement.eResource();
+			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
+			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+			ParserContext parserContext = metaModelManager.getParserContext(contextElement);
+			if (parserContext == null) {
+				throw new ParserException("Unknown context type for " + contextElement.eClass().getName());
+			}
+			ExpressionInOCL expressionInOCL = parserContext.parse(expression);
+			return expressionInOCL;
 	}
 
 	public static boolean isASURI(@Nullable String uri) {

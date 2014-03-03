@@ -159,9 +159,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		OCLExpression source = propertyCallExp.getSource();
 		Type propertyType = propertyCallExp.getType();
 		assert propertyType != null;
-		LibraryProperty implementation = metaModelManager.getImplementation(referredProperty);
 		EvaluationVisitor evaluationVisitor = undecoratedVisitor;
 		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
+		LibraryProperty implementation = metaModelManager.getImplementation(sourceValue, referredProperty);
 		try {
 			return implementation.evaluate(this, propertyType.getTypeId(), sourceValue);
 		}

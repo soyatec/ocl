@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 
 /**
- * The static instance of ExplicitNavigationProperty supports evaluation of
+ * An instance of ExplicitNavigationProperty supports evaluation of
  * a property call that navigates a relationship.
  */
 public class ExplicitNavigationProperty extends AbstractProperty

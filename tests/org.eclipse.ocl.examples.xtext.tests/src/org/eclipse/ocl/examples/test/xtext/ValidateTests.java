@@ -42,7 +42,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.ui.commands.LoadCompleteOCLResourceHandler.Helper;
@@ -60,13 +60,12 @@ public class ValidateTests extends AbstractValidateTests
 		//
 		//	Create model
 		//
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
-		OCL ocl2 = OCL.newInstance(new PivotEnvironmentFactory());
-		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		OCL ocl1 = OCL.newInstance();
+		OCL ocl2 = OCL.newInstance();
 		MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
 		Resource ecoreResource = doLoadOCLinEcore(ocl1, "Bug366229");
 		metaModelManager2.getExternalResourceSet().getResources().add(ecoreResource);
-		metaModelManager1.dispose();
+		ocl1.dispose();
 		EPackage overloadsPackage = (EPackage) ecoreResource.getContents().get(0);
 		EObject testInstance = eCreate(overloadsPackage, "SubClass");
 		//
@@ -74,7 +73,36 @@ public class ValidateTests extends AbstractValidateTests
 		//
 		EValidator.Registry.INSTANCE.put(overloadsPackage, EObjectValidator.INSTANCE);
 		checkValidationDiagnostics(testInstance, Diagnostic.ERROR);
-		metaModelManager2.dispose();
+		ocl2.dispose();
+	}
+
+	public void testValidate_Bug417062_uml() throws IOException, InterruptedException {
+//		EcorePlugin.ExtensionProcessor.process(getClass().getClassLoader());
+//		UMLPlugin.ExtensionProcessor.process(getClass().getClassLoader());
+//		new UMLPlugin.BodySupportRegistryReader().readRegistry();
+		//
+		//	Create model
+		//
+		OCL ocl = OCL.newInstance();
+		Resource umlResource = doLoadUML(ocl, "Bug417062");
+		org.eclipse.uml2.uml.Model model = (org.eclipse.uml2.uml.Model) umlResource.getContents().get(0);
+		org.eclipse.uml2.uml.Class book = (org.eclipse.uml2.uml.Class) model.getOwnedType("Book");
+//		org.eclipse.uml2.uml.Property price = book.getOwnedAttribute("price", null);
+		org.eclipse.uml2.uml.Constraint constraint = book.getOwnedRules().get(0);
+//		org.eclipse.uml2.uml.InstanceSpecification validBook = (org.eclipse.uml2.uml.InstanceSpecification) model.getOwnedMember("1) Valid book");
+		org.eclipse.uml2.uml.InstanceSpecification invalidBook = (org.eclipse.uml2.uml.InstanceSpecification) model.getOwnedMember("2) Invalid book");
+		org.eclipse.uml2.uml.InstanceSpecification partialBook = (org.eclipse.uml2.uml.InstanceSpecification) model.getOwnedMember("3) Book with undefined price");
+		org.eclipse.uml2.uml.InstanceSpecification confusingBook = (org.eclipse.uml2.uml.InstanceSpecification) model.getOwnedMember("4) Opaque expressions and other things");
+		org.eclipse.uml2.uml.Slot price = confusingBook.getSlots().get(0);
+		org.eclipse.uml2.uml.OpaqueExpression opaqueExpression = (org.eclipse.uml2.uml.OpaqueExpression) price.getOwnedElements().get(0);
+		
+		assertUMLOCLValidationDiagnostics("UML Load", umlResource,
+//			DomainUtil.bind(UMLMessages.BodyLanguageSupportError, IllegalStateException.class.getName() + ": " + NLS.bind(UMLMessages.MissingBodyLanguageSupport, "Natural language"), DomainUtil.getLabel(opaqueExpression)),
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, book.getName(), constraint.getName(), DomainUtil.getLabel(invalidBook)),
+			DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_, book.getName(), constraint.getName(), DomainUtil.getLabel(partialBook)),
+			DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_, book.getName(), constraint.getName(), DomainUtil.getLabel(confusingBook)),
+			DomainUtil.bind(OCLMessages.ParsingError, DomainUtil.getLabel(opaqueExpression), "No containing namespace for 3 + 0.4"));
+		ocl.dispose();
 	}
 
 	public void testValidate_Bug418552_oclinecore() throws IOException, InterruptedException {
@@ -92,7 +120,7 @@ public class ValidateTests extends AbstractValidateTests
 				"	}\n" +
 				"}\n";
 		createOCLinEcoreFile("Bug418552.oclinecore", testDocument);
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl1 = OCL.newInstance();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		@NonNull List<Diagnostic> diagnostics = doValidateOCLinEcore(ocl1, "Bug418552",
 			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Property", "CompatibleDefaultExpression", "temp::Tester.total"));
@@ -114,9 +142,9 @@ public class ValidateTests extends AbstractValidateTests
 		//	1 - the evolving complemented type system under test
 		//	2 - the stable complemented type system under test
 		//
-		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
-		OCL ocl2 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl0 = OCL.newInstance();
+		OCL ocl1 = OCL.newInstance();
+		OCL ocl2 = OCL.newInstance();
 		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
@@ -298,7 +326,7 @@ public class ValidateTests extends AbstractValidateTests
 		//
 		//	Create model
 		//
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl1 = OCL.newInstance();
 		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 		Resource ecoreResource = doLoadOCLinEcore(ocl1, "Validate");
 		MetaModelManagerResourceSetAdapter.getAdapter(ecoreResource.getResourceSet(), metaModelManager1);

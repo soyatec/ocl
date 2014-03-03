@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.console.ColorManager;
 import org.eclipse.ocl.examples.xtext.console.OCLConsole;
 import org.eclipse.ocl.examples.xtext.console.OCLConsolePage;
@@ -197,8 +196,8 @@ public class ConsoleTests extends PivotTestCase
 		suppressGitPrefixPopUp();    		
         super.setUp();
 		OCLstdlib.install();
-		metaModelManager = new MetaModelManager();
-		ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
+		ocl = OCL.newInstance();
+		metaModelManager = ocl.getMetaModelManager();
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		consolePage = openConsole();
 

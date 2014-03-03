@@ -30,7 +30,6 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiModule;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.internal.OCLinEcoreActivator;
@@ -145,7 +144,7 @@ public class CompletionProposalTests extends XtextTestCase
 	protected XtextEditor editor = null;
 	
 	protected FileEditorInput createEcoreFileEditorInput(String projectName, String fileName, String testDocument)throws IOException, CoreException {
-		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl0 = OCL.newInstance();
 		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
 		String ecoreString = createEcoreString(metaModelManager0, fileName, testDocument, true);
 		InputStream inputStream = new URIConverter.ReadableInputStream(ecoreString, "UTF-8");

@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -72,8 +71,7 @@ public class SerializeTests extends XtextTestCase
 		//
 		//	Ecore to Pivot
 		//		
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
-		MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
+		OCL ocl1 = OCL.newInstance();
 		XtextResource xtextResource = null;
 		try {
 			ASResource asResource = ocl1.ecore2pivot(ecoreResource);
@@ -86,12 +84,12 @@ public class SerializeTests extends XtextTestCase
 			resourceSet.getResources().clear();
 		}
 		finally {
-			metaModelManager1.dispose();
-			metaModelManager1 = null;
+			ocl1.dispose();
+			ocl1 = null;
 		}
-		OCL ocl2 = OCL.newInstance(new PivotEnvironmentFactory());
-		MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
+		OCL ocl2 = OCL.newInstance();
 		try {
+			MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
 			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(outputURI);
 			MetaModelManagerResourceAdapter.getAdapter(xtextResource2, metaModelManager2);
 			xtextResource2.load(null);
@@ -126,8 +124,8 @@ public class SerializeTests extends XtextTestCase
 			return xtextResource;
 		}
 		finally {
-			metaModelManager2.dispose();
-			metaModelManager2 = null;
+			ocl2.dispose();
+			ocl2 = null;
 		}
 	}
 	
@@ -144,10 +142,10 @@ public class SerializeTests extends XtextTestCase
 		//
 		//	Ecore to Pivot
 		//
-		MetaModelManager metaModelManager1 = new MetaModelManager();
-		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory(EPackage.Registry.INSTANCE, metaModelManager1));
+		OCL ocl1 = OCL.newInstance(EPackage.Registry.INSTANCE);
 		XtextResource xtextResource = null;
 		try {
+			MetaModelManager metaModelManager1 = ocl1.getMetaModelManager();
 			@SuppressWarnings("unused")
 			Resource asResource = getPivotFromUML(metaModelManager1, umlResource);
 			//
@@ -163,7 +161,7 @@ public class SerializeTests extends XtextTestCase
 		}
 		finally {
 			ocl1.dispose();
-			metaModelManager1 = null;
+			ocl1 = null;
 		}
 /*		//
 		//	CS to Pivot
