@@ -133,7 +133,7 @@ public class ProjectMapTest extends TestCase
 			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
 			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
 			assertFalse(DomainUtil.isRegistered(platformPluginEObject.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
+			assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 			assertEquals(platformPluginURI, platformPluginEObject.eResource().getURI());
 			assertFalse(nsEPackage == platformPluginEObject);
 			assertEquals(platformPluginEObject, platformResourceEObject);
@@ -147,7 +147,7 @@ public class ProjectMapTest extends TestCase
 			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
 			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
 			assertFalse(DomainUtil.isRegistered(platformPluginEObject.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
+			assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 			assertEquals(platformPluginURI, platformPluginEObject.eResource().getURI());
 			assertFalse(nsEPackage == platformPluginEObject);
 			assertEquals(platformPluginEObject, platformResourceEObject);
@@ -161,7 +161,7 @@ public class ProjectMapTest extends TestCase
 			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
 			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
 			assertFalse(DomainUtil.isRegistered(platformPluginEObject.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
+			assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 			assertEquals(platformResourceURI, platformPluginEObject.eResource().getURI());
 			assertFalse(nsEPackage == platformPluginEObject);
 			assertEquals(platformPluginEObject, platformResourceEObject);
@@ -184,7 +184,7 @@ public class ProjectMapTest extends TestCase
 				EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
 				EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
 				assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
-				assertEquals(nsURI, nsEPackage.eResource().getURI());
+				assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 				assertEquals(nsEPackage, platformPluginEObject);
 				assertEquals(nsEPackage, platformResourceEObject);
 				assertEquals("Conflicting access to '" + platformResourceURI + "' or '" + platformPluginURI + "' already accessed as '" + nsURI + "'", TestCaseLogger.INSTANCE.get());
@@ -242,7 +242,7 @@ public class ProjectMapTest extends TestCase
 			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
 			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
 			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
+			assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 			assertEquals(nsEPackage, platformPluginEObject);
 			assertEquals(nsEPackage, platformResourceEObject);
 		}
@@ -254,7 +254,7 @@ public class ProjectMapTest extends TestCase
 			EObject platformResourceEObject = resourceSet.getEObject(platformResourceEObjectURI, true);
 			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
 			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
+			assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 			assertEquals(nsEPackage, platformPluginEObject);
 			assertEquals(nsEPackage, platformResourceEObject);
 		}
@@ -266,7 +266,7 @@ public class ProjectMapTest extends TestCase
 			EObject platformPluginEObject = resourceSet.getEObject(platformPluginEObjectURI, true);
 			EPackage nsEPackage = resourceSet.getPackageRegistry().getEPackage(nsURI.toString());
 			assertTrue(DomainUtil.isRegistered(nsEPackage.eResource()));	
-			assertEquals(nsURI, nsEPackage.eResource().getURI());
+			assertEquals(nsURI.toString(), nsEPackage.getNsURI());
 			assertEquals(nsEPackage, platformPluginEObject);
 			assertEquals(nsEPackage, platformResourceEObject);
 		}
