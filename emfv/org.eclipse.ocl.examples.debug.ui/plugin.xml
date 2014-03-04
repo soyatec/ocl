@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+	    <launchConfigurationTypeImage id="org.eclipse.ocl.examples.debug.launch.oclQuery.image"
+	        icon="icons/OCLModelFile.gif"
+	        configTypeID="org.eclipse.ocl.examples.debug.launch.oclQuery"/>
+	</extension>
+
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+	    <launchConfigurationTabGroup id="org.eclipse.jdt.debug.ui.launchConfigurationTabGroup.javaApplet"
+	        type="org.eclipse.ocl.examples.debug.launch.oclQuery"
+	        class="org.eclipse.ocl.examples.internal.debug.ui.launcher.OCLQueryTabGroup"/>
+	</extension>
+
+</plugin>
