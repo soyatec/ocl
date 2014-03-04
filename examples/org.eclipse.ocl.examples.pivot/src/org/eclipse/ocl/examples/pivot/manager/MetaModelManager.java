@@ -67,6 +67,7 @@ import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.DelegatedSinglePackageResource;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -531,7 +532,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public void addExternalResource(@NonNull External2Pivot external2Pivot) {
-		external2PivotMap.put(external2Pivot.getURI(), external2Pivot);
+		URI uri = external2Pivot.getURI();
+		Resource resource = external2Pivot.getResource();
+		if ((resource != null) && DomainUtil.isRegistered(resource)) {
+			ResourceSet externalResourceSet2 = getExternalResourceSet();
+			getProjectMap().useGeneratedResource(resource, externalResourceSet2);
+		}
+		external2PivotMap.put(uri, external2Pivot);
 	}
 
 	public void addGenModel(@NonNull GenModel genModel) {
@@ -2684,7 +2691,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Resource resource = null;
 		if (fragment == null) {
 			//
-			//	fragment-less URI may be explicit namespaace URI
+			//	fragment-less URI may be explicit namespace URI
 			//
 			EPackage ePackage = packageRegistry.getEPackage(uriString);
 			if (ePackage != null) {
@@ -2758,7 +2765,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				//
 				//	If this resource already loaded under its internal URI reuse old one
 				//
-				if (resource != null) { 
+				if (resource != null) {
+					if (resource instanceof DelegatedSinglePackageResource) {
+						resource = ((DelegatedSinglePackageResource)resource).getResource();
+					}
 					List<EObject> contents = resource.getContents();
 					if (contents.size() > 0) {
 						EObject firstContent = contents.get(0);
@@ -2787,7 +2797,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 											if (!resourceFactory.isCompatibleResource(resource, knownResource)) {
 												logger.error("Resource '" + resource.getURI() + "' already loaded as '" + knownResource.getURI() + "'");
 											}
-											resource.unload();
+//											resource.unload();
+											resource.getResourceSet().getResources().remove(resource);
 											resource = knownResource;
 										}
 									}

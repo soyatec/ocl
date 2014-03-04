@@ -15,6 +15,9 @@ org.eclipse.ocl.examples.domain/projectMap/addURIMap=false
 # Turn on tracing of the resource load strategy configuration commands
 org.eclipse.ocl.examples.domain/projectMap/configure=false
 
+# Turn on tracing of the package/resource gets that trigger resolutions
+org.eclipse.ocl.examples.domain/projectMap/get=false
+
 # Turn on tracing of the install/uninstall of EPackage.Registry descriptors
 org.eclipse.ocl.examples.domain/projectMap/install=false
 

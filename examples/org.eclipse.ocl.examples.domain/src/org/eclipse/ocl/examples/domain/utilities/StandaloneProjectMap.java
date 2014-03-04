@@ -47,6 +47,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.SingletonAdapterImpl;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EFactory;
@@ -72,13 +74,14 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * StandaloneProjectMap and {@link ProjectMap} provides facilities to assist in
- * preparing the {@link URIConverter} and the {@link EPackage.Registry} of a
- * {@link ResourceSet} and the global and
+ * StandaloneProjectMap and {@link ProjectMap} provide facilities to assist in
+ * preparing the {@link URIConverter}, the {@link EPackage.Registry, andd the
+ * and URIResourceMap of a {@link ResourceSet} and the global and
  * {@link EcorePlugin#getPlatformResourceMap()} and
  * {@link EcorePlugin#getEPackageNsURIToGenModelLocationMap} to support
- * arbitrary and compatible use of <tt>platform:/plugin</tt>,
- * <tt>platform:/resource</tt> and registered URIs in both plugin and standalone
+ * arbitrary and compatible use of dynamically loaded  resources such as
+ * <tt>platform:/plugin</tt> and <tt>platform:/resource</tt> and
+ * generated EPackages such as registered namespace URIs in both plugin and standalone
  * environments.
  * <p>
  * StandaloneProjectMap supports only standalone usage and so is free of
@@ -102,13 +105,13 @@ import org.xml.sax.helpers.DefaultHandler;
  * <ul>
  * <li>http://www.eclipse.org/emf/2002/Ecore</li>
  * </ul>
- * returns the JAR plugin version while referencing
+ * returns the generated EPackage from the JAR plugin version while referencing
  * <ul>
  * <li>platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore</li>
  * <li>platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore</li>
  * <li>../../org.eclipse.emf.ecore/model/Ecore.ecore</li>
  * </ul>
- * returns the imported project version.
+ * returns a dynamically loaded imported project version.
  * <p>
  * A ProjectMap consists of a map from a project or bundle name to a location
  * that is resolvable by the conventional Platform URL stream opening
@@ -138,8 +141,8 @@ import org.xml.sax.helpers.DefaultHandler;
  * and JARs containing .project files. If a manifest is also found, the search
  * has found a bundle and the Bundle-SymbolicName is read from the manifest.
  * <p>
- * {@link #initializePackageRegistry(ResourceSet)} populates a trio of
- * registrations for each <tt>genPackages.ecorePackage</tt> referenced from a
+ * {@link #initializePackageRegistry(ResourceSet)} populates a
+ * registration for each <tt>genPackages.ecorePackage</tt> referenced from a
  * <tt>genmodel</tt> referenced from a
  * <tt>org.eclipse.emf.ecore.generated_package</tt> defined in any
  * <tt>plugin.xml</tt> found on the classpath. The three declarations ensure
@@ -181,6 +184,37 @@ import org.xml.sax.helpers.DefaultHandler;
  * {@link #initializeResourceSet(ResourceSet)} if not already invoked and to
  * install the ProjectMap as a ResourceSet adapter allowing an invocation of
  * {@link #findAdapter(ResourceSet)} to find it for subsequent re-use.
+ * 
+ * <h4>Conflicts</h4>
+ * 
+ * Use of both generated and dynamically loaded models normally results in
+ * obscure metamodel schizophrenia problems SyadaloneProjectMap allows a
+ * ResourceLoadStrategy to be independently specified for each resource to select
+ * just LoadGeneratedPackagSttrategye or just LoadDynamicResourceStrategy to force
+ * a particular usage. LoadFirstStrategy uses whichever is first used. LoadBothStrategy
+ * allows both generated and dynamically loaded resources to co-exist. When only one
+ * form is in use a conflicting access is resolved by an IConflictHandler. The default
+ * behaviour is the LoadFirstStrategy with conflicts silently resolved to whichever was
+ * first loaded.
+ * <p>
+ * Conflicts can only be diagnosed if the StandaloneProjectMap is aware of the conflict,
+ * so useGeneratedResource must be invoked if a GeneratedPackage is used without being
+ * loaded in the ResourceSet.
+ * 
+ * <h4>Shared Model</h4>
+ * 
+ * The classpath is analyzed to identify an IProjectDescriptor per project/bundle within which
+ * a plugin.xml is analyzed to identify generated_package extension points leading to a
+ * an IResourceDescriptor per genmodel and an IPackageDescriptor per nsURI/className within
+ * the IResorceDescriptor. There is usually only one nsURi per genmodel but the greater
+ * generality has to be accommodated. The foregoing constitute a shared model that can be re-used
+ * by multiple applications, so long as the classpath content is unchanged.
+ * 
+ * <h4>Per-ResourceSet Model</h4>
+ * 
+ * The actual state is maintained on a per-ResourceSet basis with an IResourceLoadStatus and
+ * one or more IPackageDescriptors for in use IResourceDescriptors and IPackageDescriptors. The
+ * IResourceLOadStatus is confugured with an IResourceLoadStrategy and an IConflictHandler.
  */
 public class StandaloneProjectMap extends SingletonAdapterImpl
 {
@@ -193,6 +227,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_GENERATED_PACKAGE = new TracingOption(PLUGIN_ID, "projectMap/addGeneratedPackage");
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_URI_MAP = new TracingOption(PLUGIN_ID, "projectMap/addURIMap");
 	public static final @NonNull TracingOption PROJECT_MAP_CONFIGURE = new TracingOption(PLUGIN_ID, "projectMap/configure");
+	public static final @NonNull TracingOption PROJECT_MAP_GET = new TracingOption(PLUGIN_ID, "projectMap/get");
 	public static final @NonNull TracingOption PROJECT_MAP_INSTALL = new TracingOption(PLUGIN_ID, "projectMap/install");
 	public static final @NonNull TracingOption PROJECT_MAP_RESOLVE = new TracingOption(PLUGIN_ID, "projectMap/resolve");
 	
@@ -207,8 +242,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 	
 	/**
-	 * EPackageDescriptor is an EPackage.Descriptor that loads the EPackage to resolve a Namespace URI reference
-	 * from the plugin/project model/code in accordance with the configured ResourceLoadStrategy.
+	 * EPackageDescriptor is an EPackage.Descriptor that loads the appropriate EPackage to resolve a Namespace URI reference
+	 * to a generated or dynamically loaded EPackage in accordance with the configured ResourceLoadStrategy.
 	 */
 	protected static class EPackageDescriptor implements EPackage.Descriptor
 	{	
@@ -235,6 +270,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public @Nullable EPackage getEPackage() {
 			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
 			IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
+			if (PROJECT_MAP_GET.isActive()) {
+				PROJECT_MAP_GET.println("Get " + getURI() + " with " + resourceLoadStrategy + " in " + DomainUtil.debugSimpleName(resourceLoadStatus.getPackageRegistry()));
+			}
 			return resourceLoadStrategy.getEPackage(packageLoadStatus);
 		}
 
@@ -246,7 +284,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public @NonNull String toString() {
 			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
 			IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
-			return getClass().getSimpleName() + ": " + getURI() + " with " + resourceLoadStrategy;
+			return getURI() + " with " + resourceLoadStrategy;
 		}
 
 		public void uninstall(@NonNull Registry packageRegistry) {
@@ -263,10 +301,21 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 */
 	public static interface IResourceLoadStatus
 	{	
-		void configureEPackageResource();
+		/**
+		 * Configure the ResourceSet.URIResourceMap to resolve platform:/plugin and platform:/resource
+		 * references to a pseudo resource that delegates to generated packages.
+		 */
+		void configureDelegatingResource();
 		
+		/**
+		 * Configure the EPackage.Registry to resolve namesapce URI references to the specified resource.
+		 */
 		void configureEPackageRegistry(@NonNull Resource resource);
 
+		/**
+		 * Configure the ResourceSet.URIResourceMap to resolve platform:/plugin and platform:/resource
+		 * references to the specified resource.
+		 */
 		void configureResourceSetURIResourceMap(@NonNull Resource resource);
 
 		/**
@@ -277,7 +326,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		/**
 		 * Return the EPackage to be used for a platform-resource/plugin URI after a namespace URI has already been loaded.
 		 */
-		@Nullable EPackage getConflictingModelURI(@NonNull EPackage ePackage);
+		@Nullable EPackage getConflictingDynamicResource(@NonNull EPackage ePackage);
 
 		/**
 		 * Return the first loaded EPackage which may be part of a model or a Java generated EPackageinstance..
@@ -312,15 +361,15 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		@Nullable ResourceSet getResourceSet();
 
 		/**
-		 * Load all the Java generated EPackage instances for the resource.
-		 */
-		void loadEPackages();
-
-		/**
 		 * Load and return the EPackage appropriate to the platform resource or plugin resource using nsURI to identify
 		 * a conflicting nsURI access,
 		 */
-		@Nullable Resource loadModel(@NonNull URI nsURI);
+		@Nullable Resource loadDynamicResource(@NonNull URI nsURI);
+
+		/**
+		 * Load all the Java generated EPackage instances for the resource.
+		 */
+		void loadGeneratedPackages();
 
 		/**
 		 * Define a new conflict handler.
@@ -362,7 +411,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		/**
 		 * Return the EPackage to be used for a namespace URI after a platform-resource/plugin URI has already been loaded.
 		 */
-		@Nullable EPackage getConflictingNsURI();
+		@Nullable EPackage getConflictingGeneratedPackage();
 
 		/**
 		 * Return the generated EPackage instance, or null if none loaded.
@@ -422,14 +471,14 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	public static interface IResourceLoadStrategy
 	{
 		/**
-		 * Respond to the explicit addition of a generated EPackage in the user's ResourceSet.
-		 */
-		void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage);
-
-		/**
 		 * Respond to the explicit addition of a yet to be loaded Ecore model in the user's ResourceSet.
 		 */
-		void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource);
+		void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource);
+
+		/**
+		 * Respond to the explicit addition of a generated EPackage in the user's ResourceSet.
+		 */
+		void addedGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage);
 
 		/**
 		 * Configure the resourceLoadStatus to udse this strategy and a conflictHandler.
@@ -445,26 +494,31 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Respond to the platform/plugin access to a resource with a resourceLoadStatus containing a
 		 * package already accessed as the Java generated ePackage,
 		 */
-		void handleConflictingModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage);
+		void handleConflictingDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage);
 
 		/**
-		 * Respond to the loading of an Ecore model in the user's ResourceSet.
+		 * Respond to the loading of a dynamic Ecore model in the user's ResourceSet.
 		 */
-		void loadedModel(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull Resource resource);
+		void loadedDynamicResource(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull Resource resource);
 
 		/**
 		 * Respond to the notification that the resource has been unloaded.
 		 */
 		void unloadedResource(@NonNull IResourceLoadStatus resourceLoadStatus);
+
+		/**
+		 * Respond to the explicit notification of a generated resource.
+		 */
+		void useGeneratedResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource);
 	}
 
 	protected static abstract class AbstractResourceLoadStrategy implements IResourceLoadStrategy
 	{			
-		public void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
 			throw new UnsupportedOperationException();
 		}
 
-		public void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+		public void addedGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -473,25 +527,25 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			resourceLoadStatus.setResourceLoadStrategy(this);
 		}
 
-		public void handleConflictingModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
+		public void handleConflictingDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
 			throw new UnsupportedOperationException();
 		}
 
 		protected @Nullable EPackage loadEPackage(@NonNull IPackageLoadStatus packageLoadStatus, boolean configureURImap) {
 			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
-			resourceLoadStatus.loadEPackages();
+			resourceLoadStatus.loadGeneratedPackages();
 			EPackage ePackage = packageLoadStatus.getEPackage();
 			if (ePackage == null) {
 				ePackage = packageLoadStatus.getEPackageInstance();
 			}
 			if (configureURImap) {
-				resourceLoadStatus.configureEPackageResource();//ResourceSetURIResourceMap(ePackage.eResource());
+				resourceLoadStatus.configureDelegatingResource();//ResourceSetURIResourceMap(ePackage.eResource());
 			}
 			return returnEPackage(packageLoadStatus, ePackage);
 		}
 
 		protected @Nullable EPackage loadModel(@NonNull IPackageLoadStatus packageLoadStatus) {
-			packageLoadStatus.getResourceLoadStatus().loadModel(packageLoadStatus.getPackageDescriptor().getNsURI());
+			packageLoadStatus.getResourceLoadStatus().loadDynamicResource(packageLoadStatus.getPackageDescriptor().getNsURI());
 			EPackage ePackage = packageLoadStatus.getModel();
 			if (ePackage == null) {
 				ePackage = packageLoadStatus.getEPackageInstance();
@@ -499,7 +553,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return returnEPackage(packageLoadStatus, ePackage);
 		}
 
-		public void loadedModel(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull Resource resource) {}
+		public void loadedDynamicResource(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull Resource resource) {}
 		
 		@Override
 		public String toString() {
@@ -515,6 +569,10 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 			return ePackage;
 		}
+
+		public void useGeneratedResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+			throw new UnsupportedOperationException();
+		}
 	}
 	
 	/**
@@ -523,7 +581,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	private static final class LoadedStrategy extends AbstractResourceLoadStrategy
 	{		
 		@Override
-		public void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
 			resourceLoadStatus.setResource(resource);
 			resourceLoadStatus.setResourceLoadStrategy(LoadedStrategy.INSTANCE);
 		}
@@ -538,44 +596,60 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 	
 	/**
-	 * The LoadedAsEPackageStrategy re-uses the already loaded EPackage for namespace URI accesses,
+	 * The LoadedAsGeneratedPackageStrategy re-uses the already loaded EPackage for namespace URI accesses,
 	 * and invokes the conflict handler for platform URI accesses.
 	 */
-	private static final class LoadedAsEPackageStrategy extends AbstractResourceLoadStrategy
+	private static final class LoadedAsGeneratedPackageStrategy extends AbstractResourceLoadStrategy
 	{
-		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadedAsEPackageStrategy();
+		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadedAsGeneratedPackageStrategy();
+
+		@Override
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+//			throw new UnsupportedOperationException();
+		}
 		
 		public @Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
 			EPackage ePackage = packageLoadStatus.getFirstEPackage();
 			return returnEPackage(packageLoadStatus, ePackage);
 		}
 
+		@Override
+		public void handleConflictingDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
+			resourceLoadStatus.getConflictingDynamicResource(ePackage);
+		}
+
 		public void unloadedResource(@NonNull IResourceLoadStatus packageLoadStatus) {}
+
+		@Override
+		public void useGeneratedResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {}
 	}
 	
 	/**
-	 * The LoadedFirstAsModelStrategy supports the using-model behaviour following a LoadFirstStrategy
+	 * The LoadedFirstAsDynamicResourceStrategy supports the using-model behaviour following a LoadFirstStrategy
 	 * that loaded a model.
 	 */
-	private static final class LoadedFirstAsModelStrategy extends AbstractResourceLoadStrategy
+	private static final class LoadedFirstAsDynamicResourceStrategy extends AbstractResourceLoadStrategy
 	{
-		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadedFirstAsModelStrategy();
+		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadedFirstAsDynamicResourceStrategy();
 
 		@Override
-		public void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {}
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {}
 		
 		public @Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
-			EPackage ePackage = packageLoadStatus.getConflictingNsURI();
+			EPackage ePackage = packageLoadStatus.getConflictingGeneratedPackage();
 			return returnEPackage(packageLoadStatus, ePackage);
 		}
 		
 		@Override
-		public void loadedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {}
+		public void loadedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {}
 
 		public void unloadedResource(@NonNull IResourceLoadStatus packageLoadStatus) {
 			packageLoadStatus.unloadedResource();
 			packageLoadStatus.setResourceLoadStrategy(LoadFirstStrategy.INSTANCE);
 		}
+
+		@Override
+		public void useGeneratedResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {}
 	}
 
 	/**
@@ -585,43 +659,16 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	public static final class LoadBothStrategy extends AbstractResourceLoadStrategy
 	{
 		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadBothStrategy();
-
-		@Override
-		public void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
-			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
-			Resource eResource = ePackage.eResource();
-			if (eResource != null) {
-				resourceLoadStatus.configureResourceSetURIResourceMap(eResource);
-			}
-			resourceLoadStatus.setResourceLoadStrategy(LoadedStrategy.INSTANCE);
-		}
 		
 		@Override
-		public void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
 			resourceLoadStatus.setResource(resource);
 			resourceLoadStatus.configureResourceSetURIResourceMap(resource);
-			resourceLoadStatus.setResourceLoadStrategy(LoadingBothLoadedModelStrategy.INSTANCE);
+			resourceLoadStatus.setResourceLoadStrategy(LoadingBothLoadedDynamicResourceStrategy.INSTANCE);
 		}
-
-		public @Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
-			return loadEPackage(packageLoadStatus, false);
-		}
-
-		public void unloadedResource(@NonNull IResourceLoadStatus packageLoadStatus) {
-			packageLoadStatus.unloadedResource();
-		}
-	}
-
-	/**
-	 * The LoadingBothLoadedModelStrategy supports the using-model behaviour following a LoadBothStrategy
-	 * that has loaded a model.
-	 */
-	public static final class LoadingBothLoadedModelStrategy extends AbstractResourceLoadStrategy
-	{
-		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadingBothLoadedModelStrategy();
 
 		@Override
-		public void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
+		public void addedGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
 			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
 			Resource eResource = ePackage.eResource();
 			if (eResource != null) {
@@ -640,15 +687,42 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * The LoadEPackageStrategy uses the EPackage referenced by the namespace URI for all kinds of access,
-	 * and then changes the strategy to the LoadedStrategy for all further accesses.
+	 * The LoadingBothLoadedDynamicResourceStrategy supports the using-model behaviour following a LoadBothStrategy
+	 * that has loaded a dynamic resource.
 	 */
-	public static final class LoadEPackageStrategy extends AbstractResourceLoadStrategy
+	public static final class LoadingBothLoadedDynamicResourceStrategy extends AbstractResourceLoadStrategy
 	{
-		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadEPackageStrategy();
+		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadingBothLoadedDynamicResourceStrategy();
 
 		@Override
-		public void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
+		public void addedGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
+			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
+			Resource eResource = ePackage.eResource();
+			if (eResource != null) {
+				resourceLoadStatus.configureResourceSetURIResourceMap(eResource);
+			}
+			resourceLoadStatus.setResourceLoadStrategy(LoadedStrategy.INSTANCE);
+		}
+
+		public @Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
+			return loadEPackage(packageLoadStatus, false);
+		}
+
+		public void unloadedResource(@NonNull IResourceLoadStatus packageLoadStatus) {
+			packageLoadStatus.unloadedResource();
+		}
+	}
+
+	/**
+	 * The LoadGeneratedPackageStrategy uses the generated EPackage referenced by the namespace URI for all kinds of access,
+	 * and then changes the strategy to the LoadedStrategy for all further accesses.
+	 */
+	public static final class LoadGeneratedPackageStrategy extends AbstractResourceLoadStrategy
+	{
+		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadGeneratedPackageStrategy();
+
+		@Override
+		public void addedGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
 			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
 			Resource eResource = ePackage.eResource();
 			if (eResource != null) {
@@ -660,12 +734,12 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		@Override
 		public void configure(@NonNull IResourceLoadStatus resourceLoadStatus, @Nullable IConflictHandler conflictHandler) {
 			super.configure(resourceLoadStatus, conflictHandler);
-			resourceLoadStatus.configureEPackageResource();
+			resourceLoadStatus.configureDelegatingResource();
 		}
 
 		@Override
-		public void handleConflictingModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
-			resourceLoadStatus.getConflictingModelURI(ePackage);
+		public void handleConflictingDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
+			resourceLoadStatus.getConflictingDynamicResource(ePackage);
 		}
 		
 		public @Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
@@ -685,44 +759,52 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadFirstStrategy();
 		
 		@Override
-		public void addedEPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+			resourceLoadStatus.configureResourceSetURIResourceMap(resource);
+			resourceLoadStatus.setResourceLoadStrategy(LoadedFirstAsDynamicResourceStrategy.INSTANCE);
+			resourceLoadStatus.setResource(resource);
+		}
+		
+		@Override
+		public void addedGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
 			IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
 			Resource eResource = ePackage.eResource();
 			if (eResource != null) {
 				resourceLoadStatus.configureResourceSetURIResourceMap(eResource);
 			}
-			resourceLoadStatus.setResourceLoadStrategy(LoadedAsEPackageStrategy.INSTANCE);
-		}
-		
-		@Override
-		public void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
-			resourceLoadStatus.configureResourceSetURIResourceMap(resource);
-			resourceLoadStatus.setResourceLoadStrategy(LoadedFirstAsModelStrategy.INSTANCE);
-			resourceLoadStatus.setResource(resource);
+			resourceLoadStatus.setResourceLoadStrategy(LoadedAsGeneratedPackageStrategy.INSTANCE);
 		}
 
 		public @Nullable EPackage getEPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
-			return loadEPackage(packageLoadStatus, true);
+			EPackage loadEPackage = loadEPackage(packageLoadStatus, true);
+			packageLoadStatus.getResourceLoadStatus().setResourceLoadStrategy(LoadedAsGeneratedPackageStrategy.INSTANCE);
+			return loadEPackage;
 		}
 
 		@Override
-		public void handleConflictingModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
-			resourceLoadStatus.getConflictingModelURI(ePackage);
+		public void handleConflictingDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
+			resourceLoadStatus.getConflictingDynamicResource(ePackage);
 		}
 
 		public void unloadedResource(@NonNull IResourceLoadStatus packageLoadStatus) {}
+
+		@Override
+		public void useGeneratedResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+			resourceLoadStatus.configureResourceSetURIResourceMap(resource);
+			resourceLoadStatus.setResourceLoadStrategy(LoadedAsGeneratedPackageStrategy.INSTANCE);
+		}
 	}
 
 	/**
-	 * The LoadModelStrategy uses the EPackage referenced by the platform resource/plugin URI for all kinds of access,
+	 * The LoadDynamicResourceStrategy uses the dynamic EPackage referenced by the platform resource/plugin URI for all kinds of access,
 	 * and then changes the strategy to LoadedStrategy for all further accesses.
 	 */
-	public static final class LoadModelStrategy extends AbstractResourceLoadStrategy
+	public static final class LoadDynamicResourceStrategy extends AbstractResourceLoadStrategy
 	{
-		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadModelStrategy();
+		public static final @NonNull IResourceLoadStrategy INSTANCE = new LoadDynamicResourceStrategy();
 		
 		@Override
-		public void addedModel(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
+		public void addedDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Resource resource) {
 			resourceLoadStatus.setResource(resource);
 			resourceLoadStatus.configureResourceSetURIResourceMap(resource);
 			resourceLoadStatus.configureEPackageRegistry(resource);
@@ -742,8 +824,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 */
 	public static interface IResourceDescriptor
 	{
-		void addedEPackage(@NonNull ResourceSet resourceSet, @NonNull EPackage ePackage);
-		void addedModel(@NonNull ResourceSet resourceSet, @NonNull Resource resource);
+		void addedDynamicResource(@NonNull ResourceSet resourceSet, @NonNull Resource resource);
+
+		void addedGeneratedPackage(@NonNull ResourceSet resourceSet, @NonNull EPackage ePackage);
 
 		void configure(@Nullable ResourceSet resourceSet, @NonNull IResourceLoadStrategy resourceLoadStrategy, @Nullable IConflictHandler conflictHandler);
 
@@ -813,24 +896,36 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 */
 	public static interface IPackageDescriptor
 	{
-		void configure(@NonNull ResourceSet resourceSet, @NonNull IResourceLoadStrategy instance, @Nullable IConflictHandler conflictHandler);
+		/**
+		 * Configure the resourceSet-specific resource status of for this package to use
+		 * a strategy and a conflictHandler.
+		 */
+		void configure(@NonNull ResourceSet resourceSet, @NonNull IResourceLoadStrategy strategy, @Nullable IConflictHandler conflictHandler);
 		
+		/**
+		 * Return the classname defined in the generated_packaged extension point, or null if undefined.
+		 * @return
+		 */
 		@Nullable String getClassName();
 
 		/**
-		 * Return the project relative Ecore Model URI, which may be null if there is no corresponding Ecore model.
+		 * Return the project relative Ecore Package URI, which may be null if there is no corresponding Ecore model.
 		 */
-		@Nullable URI getEcoreModelURI();
-
 		@Nullable URI getEcorePackageURI();
 
 		/**
-		 * Return the Package NS URI.
+		 * Return the Package Namespace URI.
 		 */
 		@NonNull URI getNsURI();
 
+		/**
+		 * Return the IResourceDescriptor containing this package.
+		 */
 		@NonNull IResourceDescriptor getResourceDescriptor();
 
+		/**
+		 * Define the project relative Ecore Package URI.
+		 */
 		void setEcorePackageURI(@NonNull URI projectRelativeEcorePackageURI);
 	}
 
@@ -839,13 +934,26 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 */
 	public static interface IProjectDescriptor
 	{
+		/**
+		 * Call back to add a packageDescriptor to the project.
+		 */
 		void addPackageDescriptor(@NonNull IPackageDescriptor packageDescriptor);
 
+		/**
+		 * Call back to add a resourceDescriptor to the project.
+		 */
 		void addResourceDescriptor(@NonNull IResourceDescriptor resourceDescriptor);
 
+		/**
+		 * Configure the resourceSet-specific status of for this resource to use
+		 * a strategy and a conflictHandler.
+		 */
 		void configure(@Nullable ResourceSet resourceSet, @NonNull IResourceLoadStrategy resourceLoadStrategy, @Nullable IConflictHandler conflictHandler);
 
-		@NonNull IResourceDescriptor createResourceDescriptor(@NonNull String genModel, @NonNull Map<URI, String> nsURI2className);
+		/**
+		 * Create an IResourceDescriptor for a projectRelativeGenModelUri comprsising a map of NsURI to className. 
+		 */
+		@NonNull IResourceDescriptor createResourceDescriptor(@NonNull String projectRelativeGenModelUri, @NonNull Map<URI, String> nsURI2className);
 
 		/**
 		 * Return the physical location of this project.
@@ -893,7 +1001,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		 * Return the package descriptor for the package with a given nsURI or
 		 * null if none known in the project.
 		 */
-		IPackageDescriptor getPackageDescriptor(@NonNull URI nsURI);
+		@Nullable IPackageDescriptor getPackageDescriptor(@NonNull URI nsURI);
 
 		/**
 		 * Return the overall ProjectMap.
@@ -965,19 +1073,19 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 		}
 
-		public void configureEPackageResource() {
+		public void configureDelegatingResource() {
 			ResourceSet resourceSet2 = resourceSet;
 			if (resourceSet2 != null) {
 				Collection<PackageLoadStatus> packageLoadStatuses = nsURI2packageLoadStatus.values();
 				@SuppressWarnings("null")@NonNull URI uri = resourceDescriptor.getGenModelURI().appendFileExtension("ecore");
-				DelegatedPackageResource resource = new DelegatedPackageResource(uri, this);
-				for (IPackageLoadStatus packageLoadStatus : packageLoadStatuses) {
-					EPackage ePackage = packageLoadStatus.loadEPackage();
-					if (ePackage != null) {
-						resource.put(ePackage);
-					}
+				Resource resource;
+				if (packageLoadStatuses.size() == 1) {
+					@SuppressWarnings("null")@NonNull PackageLoadStatus packageLoadStatus = packageLoadStatuses.iterator().next();
+					resource = new DelegatedSinglePackageResource(uri, packageLoadStatus);
 				}
-				resource.setLoaded(true);
+				else {
+					resource = new DelegatedMultiplePackageResource(uri, this, packageLoadStatuses);
+				}
 				resourceDescriptor.configureResourceSetURIResourceMap(resourceSet2, resource);
 			}
 		}
@@ -997,9 +1105,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 		}
 
-		public @Nullable EPackage getConflictingModelURI(@NonNull EPackage ePackage) {
+		public @Nullable EPackage getConflictingDynamicResource(@NonNull EPackage ePackage) {
 			if (conflictHandler != null) {
-				return conflictHandler.handleConflictingModelURI(this, ePackage);
+				return conflictHandler.handleConflictingDynamicResource(this, ePackage);
 			}
 			else {
 				return null;
@@ -1052,9 +1160,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return target;
 		}
 
-		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus) {
+		public @Nullable EPackage handleConflictingGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus) {
 			if ((conflictHandler != null) && (eModel != null)) {
-				return conflictHandler.handleConflictingNsURI(packageLoadStatus, eModel);
+				return conflictHandler.handleConflictingGeneratedPackage(packageLoadStatus, eModel);
 			}
 			else {
 				EPackage ePackage = packageLoadStatus.getEPackage();
@@ -1100,13 +1208,13 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return false;
 		}
 
-		public void loadEPackages() {
+		public void loadGeneratedPackages() {
 			for (IPackageLoadStatus packageLoadStatus : nsURI2packageLoadStatus.values()) {
 				packageLoadStatus.loadEPackage();
 			}
 		}
 
-		public synchronized @Nullable Resource loadModel(@NonNull URI nsURI) {
+		public synchronized @Nullable Resource loadDynamicResource(@NonNull URI nsURI) {
 			if (modelLoadInProgress) {					// Recursive load
 				logger.error("Attempt to load self-referential '" + nsURI + "' as model replaced by registered EPackage");
 				return eModel;
@@ -1114,7 +1222,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return getResource();
 		}
 
-		private void loadedModel(@NonNull ResourceSet resourceSet, @NonNull EPackage ePackage) {
+		private void loadedDynamicResource(@NonNull ResourceSet resourceSet, @NonNull EPackage ePackage) {
 			String nsURI = ePackage.getNsURI();
 			if (nsURI != null) {
 				StandaloneProjectMap projectMap = resourceDescriptor.getProjectDescriptor().getProjectMap();
@@ -1132,22 +1240,22 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			}
 			for (EPackage eSubPackage : ePackage.getESubpackages()) {
 				if (eSubPackage != null) {
-					loadedModel(resourceSet, eSubPackage);
+					loadedDynamicResource(resourceSet, eSubPackage);
 				}
 			}
 		}
 
-		private void loadedResource(@NonNull Resource newResource) {
+		private void loadedDynamicResource(@NonNull Resource newResource) {
 			ResourceSet resourceSet = newResource.getResourceSet();
 			if (resourceSet != null) {
 				for (EObject eObject : newResource.getContents()) {
 					if (eObject instanceof EPackage) {
 						EPackage ePackage = (EPackage) eObject;
-						loadedModel(resourceSet, ePackage);
+						loadedDynamicResource(resourceSet, ePackage);
 					}
 				}
 			}
-			resourceLoadStrategy.loadedModel(this, newResource);
+			resourceLoadStrategy.loadedDynamicResource(this, newResource);
 		}
 		
 		public void notifyChanged(Notification notification) {
@@ -1160,7 +1268,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 						boolean isLoaded = notification.getNewBooleanValue();
 						if (isLoaded && !wasLoaded) {
 							if (target instanceof Resource) {
-								loadedResource((Resource) target);
+								loadedDynamicResource((Resource) target);
 							}
 						}
 						else if (!isLoaded && wasLoaded) {
@@ -1234,35 +1342,59 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 	
 	/**
-	 * A DelegatedPackageResource may be installed in a ResourceSet.uriResourceMap for resolution as the
-	 * as *.ecore URI and subsequent delegation of the fragment getEObject to the appropriate Java generated EPackage.
+	 * A DelegatedMultiplePackageResource may be installed in a ResourceSet.uriResourceMap so that the
+	 * appropriate generated EPackage is resolved as the fragment of a dynamically loaded
+	 * resource. Conflicts may be diagnosed durng the delegation.
 	 * <p>
 	 * This Resource should never be used for any other purpose.
 	 */
-	public static final class DelegatedPackageResource extends ResourceImpl
+	public static class DelegatedMultiplePackageResource extends ResourceImpl
 	{
+		protected final @NonNull IResourceLoadStatus resourceLoadStatus;
+		protected final @NonNull Iterable<PackageLoadStatus> packageLoadStatuses;
 		private final @NonNull Map<String, EPackage> fragment2ePackage = new HashMap<String, EPackage>();
-		private final @NonNull IResourceLoadStatus resourceLoadStatus;
-
-		public DelegatedPackageResource(@NonNull URI uri, @NonNull IResourceLoadStatus resourceLoadStatus) {
+		
+		public DelegatedMultiplePackageResource(@NonNull URI uri, @NonNull IResourceLoadStatus resourceLoadStatus, @NonNull Iterable<PackageLoadStatus> packageLoadStatuses) {
 			super(uri);
 			this.resourceLoadStatus = resourceLoadStatus;
+			this.packageLoadStatuses = packageLoadStatuses;
+			for (IPackageLoadStatus packageLoadStatus : packageLoadStatuses) {
+				EPackage ePackage = packageLoadStatus.loadEPackage();
+				if (ePackage != null) {
+					StringBuilder s = new StringBuilder();
+					computeFragment(s, ePackage);
+					fragment2ePackage.put(s.toString(), ePackage);
+				}
+			}
+			setLoaded(true);			// FIXME Defer till needed
 		}
 
 		@Override
 		public EObject getEObject(String uriFragment) {
+			if (uriFragment == null) {
+				return null;
+			}
 			EPackage ePackage = fragment2ePackage.get(uriFragment);
+			EObject eObject = ePackage;
+			if (eObject == null) {
+				for (String uri : fragment2ePackage.keySet()) {
+					if (uriFragment.startsWith(uri)) {
+						ePackage = fragment2ePackage.get(uri);
+//							String uriSuffix = uriFragment.substring(uri.length());
+						Resource resource = ePackage.eResource();
+						eObject = resource.getEObject(uriFragment);
+						if (eObject != null) {
+							break;
+						}
+					}
+				}
+			}
 			if (ePackage != null) {
 				IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
-				resourceLoadStrategy.handleConflictingModel(resourceLoadStatus, ePackage);
+				resourceLoadStrategy.handleConflictingDynamicResource(resourceLoadStatus, ePackage);
+				return eObject;
 			}
-			return ePackage;
-		}
-
-		public void put(@NonNull EPackage ePackage) {
-			StringBuilder s = new StringBuilder();
-			computeFragment(s, ePackage);
-			fragment2ePackage.put(s.toString(), ePackage);
+			return null;
 		}
 
 		private void computeFragment(@NonNull StringBuilder s, @NonNull EPackage ePackage) {
@@ -1276,14 +1408,61 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				s.append(ePackage.getName());
 			}
 		}
+	}
+	
+	/**
+	 * A DelegatedSinglePackageResource may be installed in a ResourceSet.uriResourceMap so that the
+	 * generated EPackage is resolved as a dynamically loaded resource.
+	 * Conflicts may be diagnosed durng the delegation.
+	 * <p>
+	 * This Resource should never be used for any other purpose.
+	 */
+	public static class DelegatedSinglePackageResource extends ResourceImpl
+	{
+		private static @NonNull EList<EObject> EMPTY_LIST = new BasicEList.UnmodifiableEList<EObject>(0, new Object[]{});
 		
+		protected final @NonNull IPackageLoadStatus packageLoadStatus;
+		private final @Nullable EPackage ePackage;
+		private final @Nullable Resource eResource;
+		
+		public DelegatedSinglePackageResource(@NonNull URI uri, @NonNull IPackageLoadStatus packageLoadStatus) {
+			super(uri);
+			this.packageLoadStatus = packageLoadStatus;
+			ePackage = packageLoadStatus.loadEPackage();
+			eResource = ePackage != null ? ePackage.eResource() : null;
+			setLoaded(true);
+		}
+
 		@Override
-		public Notification setLoaded(boolean isLoaded) {
-			return super.setLoaded(isLoaded);
+		public EList<EObject> getContents() {
+			return eResource != null ? eResource.getContents() : EMPTY_LIST;
+		}
+
+		@Override
+		public EObject getEObject(String uriFragment) {
+			if (uriFragment == null) {
+				return null;
+			}
+			EPackage ePackage2 = ePackage;
+			if (ePackage2 == null) {
+				return null;
+			}
+			Resource resource = ePackage2.eResource();
+			EObject eObject = resource.getEObject(uriFragment);
+			if (eObject != null) {
+				IResourceLoadStatus resourceLoadStatus = packageLoadStatus.getResourceLoadStatus();
+				IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
+				resourceLoadStrategy.handleConflictingDynamicResource(resourceLoadStatus, ePackage2);
+			}
+			return eObject;
+		}
+
+		public @NonNull Resource getResource() {
+			return eResource != null ? eResource : this;
 		}
 	}
 	
-	public static final class MultiplePackageResourceLoadStatus extends AbstractResourceLoadStatus
+	public static class MultiplePackageResourceLoadStatus extends AbstractResourceLoadStatus
 	{
 		public MultiplePackageResourceLoadStatus(@NonNull MultiplePackageResourceDescriptor resourceDescriptor, @Nullable ResourceSet resourceSet) {
 			super(resourceDescriptor, resourceSet);
@@ -1338,8 +1517,8 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			eModel = null;
 		}
 
-		public @Nullable EPackage getConflictingNsURI() {
-			return resourceLoadStatus.handleConflictingNsURI(this);
+		public @Nullable EPackage getConflictingGeneratedPackage() {
+			return resourceLoadStatus.handleConflictingGeneratedPackage(this);
 		}
 
 		public @Nullable EPackage getEPackage() {
@@ -1510,22 +1689,26 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			projectDescriptor.addResourceDescriptor(this);
 		}
 		
-		public void addedEPackage(@NonNull ResourceSet resourceSet, @NonNull EPackage ePackage) {
+		public void addedDynamicResource(@NonNull ResourceSet resourceSet, @NonNull Resource resource) {
+			IResourceLoadStatus resourceLoadStatus = resourceSet2resourceLoadStatus.get(resourceSet);
+			if (resourceLoadStatus != null) {
+				IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
+				if (PROJECT_MAP_GET.isActive()) {
+					PROJECT_MAP_GET.println("Add " + resource.getURI() + " with " + resourceLoadStrategy + " in " + DomainUtil.debugSimpleName(resourceSet.getPackageRegistry()));
+				}
+				resourceLoadStrategy.addedDynamicResource(resourceLoadStatus, resource);
+			}
+		}
+		
+		public void addedGeneratedPackage(@NonNull ResourceSet resourceSet, @NonNull EPackage ePackage) {
 			IResourceLoadStatus resourceLoadStatus = resourceSet2resourceLoadStatus.get(resourceSet);
 			@SuppressWarnings("null")@NonNull URI uri = URI.createURI(ePackage.getNsURI());
 			IPackageDescriptor packageDescriptor = getProjectDescriptor().getPackageDescriptor(uri);
 			if (packageDescriptor != null) {
 				IPackageLoadStatus packageLoadStatus = resourceLoadStatus.getPackageLoadStatus(packageDescriptor);
 				if (packageLoadStatus != null) {
-					resourceLoadStatus.getResourceLoadStrategy().addedEPackage(packageLoadStatus, ePackage);
+					resourceLoadStatus.getResourceLoadStrategy().addedGeneratedPackage(packageLoadStatus, ePackage);
 				}
-			}
-		}
-		
-		public void addedModel(@NonNull ResourceSet resourceSet, @NonNull Resource resource) {
-			IResourceLoadStatus resourceLoadStatus = resourceSet2resourceLoadStatus.get(resourceSet);
-			if (resourceLoadStatus != null) {
-				resourceLoadStatus.getResourceLoadStrategy().addedModel(resourceLoadStatus, resource);
 			}
 		}
 
@@ -1737,10 +1920,6 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 
 		public @Nullable EFactory getEFactory() {
 			return null;
-		}
-
-		public @Nullable URI getEcoreModelURI() {
-			return ecorePackageURI != null ? ecorePackageURI.trimFragment() : null;
 		}
 
 		public @Nullable URI getEcorePackageURI() {
@@ -2267,17 +2446,21 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		}
 	}
 	
+	/**
+	 * An IConflictHandler confligures the hanling of conflicting access between generated packages and
+	 * dynamically loaded resources.
+	 */
 	public static interface IConflictHandler
 	{
 		/**
 		 * Return the EPackage to be used for a namespace URI reference after the model EPackage has already been used.
 		 */
-		@Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource);
+		@Nullable EPackage handleConflictingGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource);
 
 		/**
 		 * Return the EPackage to be used for a model URI reference after the namespace EPackage has already been used.
 		 */
-		@Nullable EPackage handleConflictingModelURI(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull EPackage ePackage);
+		@Nullable EPackage handleConflictingDynamicResource(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull EPackage ePackage);
 	}
 	
 	/**
@@ -2287,11 +2470,11 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	{
 		public static final @NonNull IConflictHandler INSTANCE = new MapToFirstConflictHandler();
 		
-		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource) {
+		public @Nullable EPackage handleConflictingGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource) {
 			return packageLoadStatus.getFirstEPackage();
 		}
 
-		public @Nullable EPackage handleConflictingModelURI(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
+		public @Nullable EPackage handleConflictingDynamicResource(@NonNull IResourceLoadStatus packageLoadStatus, @NonNull EPackage ePackage) {
 			return ePackage;
 		}
 	}
@@ -2303,7 +2486,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	{
 		public static final @NonNull IConflictHandler INSTANCE = new MapToFirstConflictHandlerWithLog();
 		
-		public @Nullable EPackage handleConflictingNsURI(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource) {
+		public @Nullable EPackage handleConflictingGeneratedPackage(@NonNull IPackageLoadStatus packageLoadStatus, @NonNull Resource resource) {
 			EPackage firstEPackage = packageLoadStatus.getFirstEPackage();
 			IPackageDescriptor packageDescriptor = packageLoadStatus.getPackageDescriptor();
 			logger.error("Conflicting access to '" + packageDescriptor.getNsURI() + "' already accessed as '" + resource.getURI() + "'");
@@ -2311,7 +2494,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			return firstEPackage;
 		}
 
-		public @Nullable EPackage handleConflictingModelURI(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
+		public @Nullable EPackage handleConflictingDynamicResource(@NonNull IResourceLoadStatus resourceLoadStatus, @NonNull EPackage ePackage) {
 			IResourceDescriptor resourceDescriptor = resourceLoadStatus.getResourceDescriptor();
 			logger.error("Conflicting access to '" + resourceDescriptor.getPlatformResourceURI() +
 				"' or '" + resourceDescriptor.getPlatformPluginURI() +
@@ -2345,6 +2528,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 		return adapter;
 	}
 
+	/**
+	 * Eliminate all fcailities used by the ProjectMap.
+	 */
 	public static void dispose(@NonNull ResourceSet resourceSet) {
 		StandaloneProjectMap projectMap = findAdapter(resourceSet);
 		if (projectMap != null) {
@@ -2374,8 +2560,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Return the Resource.Factory.Registry for a resourceSet or the Global
 	 * {@link Resource.Factory.Registry.INSTANCE} if resourceSet is null.
 	 */
-	public static Resource.Factory.Registry getResourceFactoryRegistry(
-			@Nullable ResourceSet resourceSet) {
+	public static Resource.Factory.Registry getResourceFactoryRegistry(@Nullable ResourceSet resourceSet) {
 		return resourceSet != null
 			? resourceSet.getResourceFactoryRegistry()
 			: Resource.Factory.Registry.INSTANCE;
@@ -2448,6 +2633,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 */
 	protected @Nullable Map<URI, IResourceDescriptor> uri2resource = null;
 
+	/**
+	 * Call-back to add a resourceDescriptor.
+	 */
 	public void addResourceDescriptor(@NonNull IResourceDescriptor resourceDescriptor) {
 		Map<URI, IResourceDescriptor> uri2resource2 = uri2resource;
 		if (uri2resource2 == null) {
@@ -2682,7 +2870,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	}
 
 	/**
-	 * Does nothing; clients may override so that it does something.
+	 * Internal call-back to observe Resource addition to a ResourceSet..
 	 */
 	@Override
 	public void notifyChanged(Notification notification)
@@ -2695,7 +2883,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				if (eventType == Notification.ADD) {
 					Object newValue = notification.getNewValue();
 					if (newValue instanceof Resource) {
-						notifyAddedResource((ResourceSet)notifier, (Resource)newValue);
+						notifyAddedDynamicResource((ResourceSet)notifier, (Resource)newValue);
 					}
 				}
 				else if (eventType == Notification.ADD_MANY) {
@@ -2703,7 +2891,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 					if (newValues instanceof Iterable<?>) {
 						for (Object newValue : (Iterable<?>)newValues){
 							if (newValue instanceof Resource) {
-								notifyAddedResource((ResourceSet)notifier, (Resource)newValue);
+								notifyAddedDynamicResource((ResourceSet)notifier, (Resource)newValue);
 							}
 						}
 					}
@@ -2717,7 +2905,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * (ResourceSet, Resource) pair so that it install both platform:/plugin and platform:/resource
 	 * entries in the ResourceSet's uriResourceMap and install a listener to detect when the Resource is loaded.
 	 */
-	protected void notifyAddedResource(@NonNull ResourceSet resourceSet, @NonNull Resource resource) {
+	protected void notifyAddedDynamicResource(@NonNull ResourceSet resourceSet, @NonNull Resource resource) {
 //		resource.eAdapters().add(this);
 		if (resourceSet instanceof ResourceSetImpl) {
 			Map<URI, IResourceDescriptor> uri2resource2 = uri2resource;
@@ -2725,7 +2913,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				URI uri = resource.getURI();
 				IResourceDescriptor resourceDescriptor = uri2resource2.get(uri);
 				if (resourceDescriptor != null) {
-					resourceDescriptor.addedModel(resourceSet, resource);
+					resourceDescriptor.addedDynamicResource(resourceSet, resource);
 				}
 			}
 		}
@@ -2894,6 +3082,26 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 						resourceDescriptor.unload(resourceSet);
 					}
 				}
+			}
+		}
+	}
+
+	/**
+	 * Use a registered resource for use in conjunction with resourceSet. This must be invoked explicitly to ensure
+	 * that conflicting generated/model access is resolved consistently.
+	 */
+	public void useGeneratedResource(@NonNull Resource resource, @NonNull ResourceSet resourceSet) {
+		URI uri = resource.getURI();
+		if (uri != null) {
+			IPackageDescriptor packageDescriptor = getPackageDescriptor(uri);
+			if (packageDescriptor != null) {
+				IResourceDescriptor resourceDescriptor = packageDescriptor.getResourceDescriptor();
+				IResourceLoadStatus resourceLoadStatus = resourceDescriptor.getResourceLoadStatus(resourceSet);
+				IResourceLoadStrategy resourceLoadStrategy = resourceLoadStatus.getResourceLoadStrategy();
+				if (PROJECT_MAP_GET.isActive()) {
+					PROJECT_MAP_GET.println("Use " + uri + " with " + resourceLoadStrategy + " in " + DomainUtil.debugSimpleName(resourceLoadStatus.getPackageRegistry()));
+				}
+				resourceLoadStrategy.useGeneratedResource(resourceLoadStatus, resource);
 			}
 		}
 	}

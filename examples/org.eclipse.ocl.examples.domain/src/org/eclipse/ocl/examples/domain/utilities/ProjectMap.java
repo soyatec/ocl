@@ -147,38 +147,6 @@ public class ProjectMap extends StandaloneProjectMap
 	} */
 	
 	@Override
-	public synchronized void initializePackageRegistry(@Nullable ResourceSet resourceSet) {
-//		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-			super.initializePackageRegistry(resourceSet);
-/*		}
-		else {
-			EPackage.Registry packageRegistry = getPackageRegistry(resourceSet);
-			Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
-			for (String ePackageNsURI : ePackageNsURIToGenModelLocationMap.keySet()) {
-				URI genModelURI = ePackageNsURIToGenModelLocationMap.get(ePackageNsURI);
-				if (genModelURI.isPlatformPlugin()) {
-					IProjectDescriptor.Internal projectDescriptor = getProjectDescriptorInternal(genModelURI);
-					Object ePackageDescriptor = EPackage.Registry.INSTANCE.get(ePackageNsURI);
-					packageRegistry.put(ePackageNsURI, ePackageDescriptor);
-					@SuppressWarnings("null")
-					@NonNull URI nsURI = URI.createURI(ePackageNsURI);
-					IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
-//					System.out.println(key + " ==> ");
-					URI localModelURI = packageDescriptor.getEcoreModelURI();
-					if (localModelURI != null) {
-						URI ecorePackageResourceURI = localModelURI.resolve(projectDescriptor.getPlatformResourceURI());
-						URI ecorePackagePluginURI = localModelURI.resolve(projectDescriptor.getPlatformPluginURI());
-						packageRegistry.put(ecorePackageResourceURI.toString(), packageDescriptor);
-						packageRegistry.put(ecorePackagePluginURI.toString(), packageDescriptor);
-//						System.out.println(ecorePackageResourceURI + " ==> ");
-//						System.out.println(ecorePackagePluginURI + " ==> ");
-					}
-				}
-			}
-		} */
-	}
-	
-	@Override
 	public synchronized void initializePlatformResourceMap(boolean force) {
 		if (force || (!initializedPlatformResourceMap && !EMFPlugin.IS_ECLIPSE_RUNNING)) {
 			super.initializePlatformResourceMap(force);

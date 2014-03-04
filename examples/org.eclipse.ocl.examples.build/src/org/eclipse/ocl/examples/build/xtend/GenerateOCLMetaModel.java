@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.LoadModelStrategy;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.LoadDynamicResourceStrategy;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -201,7 +201,9 @@ public abstract class GenerateOCLMetaModel extends GenerateOCLCommonXtend
 		}
 		@SuppressWarnings("null")@NonNull URI nsURI = URI.createURI(PivotPackage.eNS_URI);
 		IPackageDescriptor packageDescriptor = projectDescriptor.getPackageDescriptor(nsURI);
-	    packageDescriptor.configure(resourceSet, LoadModelStrategy.INSTANCE, null);
+	    if (packageDescriptor != null) {
+	    	packageDescriptor.configure(resourceSet, LoadDynamicResourceStrategy.INSTANCE, null);
+	    }
 		assert modelFile != null;
 		URI inputURI = projectDescriptor.getPlatformResourceURI(modelFile);
 		File outputFolder = projectDescriptor.getLocationFile(javaFolder + '/' + javaPackageName.replace('.', '/'));
