@@ -39,7 +39,7 @@ public class AllValidityTests
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 //			suite.addTestSuite(HTMLExportOCLValidationResultTests.class);
 //			suite.addTestSuite(TextExportOCLValidationResultTests.class);
-//			suite.addTestSuite(ValidityManagerTests.class);
+			suite.addTestSuite(ValidityManagerTests.class);
 			suite.addTestSuite(ValidityModelTests.class);
 		}
 	}
