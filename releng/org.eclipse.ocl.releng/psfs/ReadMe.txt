@@ -17,6 +17,8 @@ Here you will find
 ocl-all.psf
 ------------
 
+All the other PSFs at once.
+
 ocl-classic.psf
 ---------------
 
@@ -55,7 +57,7 @@ that loads plugins needed to develop/build/run parser features
 - lpg.generator.macosx_x86_64
 - lpg.generator.win32_x86
 
-test-tools.psf
+test-tools.psf (Obsolete)
 --------------
 
 that loads plugins needed to develop/build/run test features
@@ -63,12 +65,7 @@ that loads plugins needed to develop/build/run test features
 - org.eclipse.ant.optional.junit
 - org.eclipse.uml2.uml.resources
 
-tests.psf
-------------
-
-that loads test plugins needed to test developed plugins
-
-www.psf
+www.psf (Obsolete)
 -------
 
 that loads the doc and web support projects
