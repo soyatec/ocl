@@ -34,7 +34,7 @@ public class AllExamplesTests extends TestCase
 		AllRegistryTests.buildSuite(suite);
 		if (eclipseIsRunning()) {
 			AllEditorTests.buildSuite(suite);
-			AllValidityTests.buildSuite(suite);
+//			AllValidityTests.buildSuite(suite);
 		}
 	}
 
