@@ -12,7 +12,7 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.domain.utilities;
+package org.eclipse.ocl.examples.emf.validation.validity.utilities;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -47,7 +47,6 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
-import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
@@ -293,9 +292,6 @@ public class ValidityManager
 		if (eObject instanceof ENamedElement) {
 			s.append(((ENamedElement)eObject).getName());
 		}
-		else if (eObject instanceof Nameable) {
-			s.append(((Nameable)eObject).getName());
-		}
 		else {
 		    IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(eObject, IItemLabelProvider.class);
 			String label = itemLabelProvider != null ? itemLabelProvider.getText(eObject) : eObject.toString();
@@ -358,9 +354,6 @@ public class ValidityManager
 		StringBuilder s = new StringBuilder();
 		if (eObject instanceof ENamedElement) {
 			s.append(((ENamedElement)eObject).getName());
-		}
-		else if (eObject instanceof Nameable) {
-			s.append(((Nameable)eObject).getName());
 		}
 		else {
 			IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(eObject, IItemLabelProvider.class);
