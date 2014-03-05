@@ -313,9 +313,9 @@ public class ElementUtil
 		}
 	}
 
-	public static String getText(@NonNull ElementCS csElement) {
+	public static @Nullable String getText(@NonNull ElementCS csElement) {
 		ICompositeNode node = NodeModelUtils.getNode(csElement);
-		return NodeModelUtils.getTokenText(node);
+		return node != null ? NodeModelUtils.getTokenText(node) : null;
 	}
 
 	public static @Nullable String getText(@NonNull TypedTypeRefCS csElement, @NonNull EReference feature) {
