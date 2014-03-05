@@ -25,6 +25,7 @@ import junit.framework.TestSuite;
 import org.eclipse.ocl.examples.test.editor.AllEditorTests;
 import org.eclipse.ocl.examples.test.label.AllLabelTests;
 import org.eclipse.ocl.examples.test.modelregistry.AllRegistryTests;
+import org.eclipse.ocl.examples.validity.test.AllValidityTests;
 
 public class AllExamplesTests extends TestCase
 {
@@ -33,6 +34,7 @@ public class AllExamplesTests extends TestCase
 		AllRegistryTests.buildSuite(suite);
 		if (eclipseIsRunning()) {
 			AllEditorTests.buildSuite(suite);
+			AllValidityTests.buildSuite(suite);
 		}
 	}
 

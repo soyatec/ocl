@@ -35,15 +35,19 @@ public class AllValidityTests
 		super("");
 	}
 
+	public static void buildSuite(TestSuite suite) {
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			suite.addTestSuite(HTMLExportOCLValidationResultTests.class);
+			suite.addTestSuite(TextExportOCLValidationResultTests.class);
+			suite.addTestSuite(ValidityManagerTests.class);
+			suite.addTestSuite(ValidityModelTests.class);
+		}
+	}
+
 	public static Test suite() {
 		String testSuiteName = System.getProperty("testSuiteName", "Validity View Tests");
 		TestSuite result = new TestSuite(testSuiteName);			
-		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			result.addTestSuite(HTMLExportOCLValidationResultTests.class);
-			result.addTestSuite(TextExportOCLValidationResultTests.class);
-			result.addTestSuite(ValidityManagerTests.class);
-			result.addTestSuite(ValidityModelTests.class);
-		}
+		buildSuite(result);
 		return result;
 	}
 
