@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
@@ -47,7 +48,8 @@ import org.eclipse.ocl.examples.xtext.completeocl.utilities.CompleteOCLCSResourc
  */
 public abstract class AbstractValidityTestCase extends TestCase
 {
-	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.validity.test"; //$NON-NLS-1$
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.ocl.examples.validity.test"; //$NON-NLS-1$
+	public static final @NonNull TracingOption TEST_PROGRESS = new TracingOption(PLUGIN_ID, "test/progress");
 
 	protected static final @NonNull String TEST_PROJECT_NAME = /*"test." +*/ PLUGIN_ID;
 
@@ -228,6 +230,14 @@ public abstract class AbstractValidityTestCase extends TestCase
 		resultSet = validityModel.createResultSet(new NullProgressMonitor());
 	}
 
+	@Override
+	protected void setUp() throws Exception {
+		if (TEST_PROGRESS.isActive()) {
+			TEST_PROGRESS.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
+		}
+		super.setUp();
+	}
+
 	public void tearDown() throws Exception {
 		if (resourceSet != null) {
 			for (Resource resource : resourceSet.getResources()) {
@@ -235,6 +245,7 @@ public abstract class AbstractValidityTestCase extends TestCase
 			}
 			resourceSet.getResources().clear();
 			resourceSet = null;
+			TEST_PROGRESS.println("-resourceSet");
 		}
 		validationAdapter = null;
 		rootNode = null;
@@ -243,6 +254,10 @@ public abstract class AbstractValidityTestCase extends TestCase
 		if (validityManager != null) {
 			validityManager.dispose();
 			validityManager = null;
+			TEST_PROGRESS.println("-validityManager");
+		}
+		if (TEST_PROGRESS.isActive()) {
+			TEST_PROGRESS.println("==> Finish " + getName());
 		}
 	}
 }

@@ -34,6 +34,7 @@ import org.junit.Before;
  */
 public class AbstractExportOCLValidationResultTests extends AbstractValidityTestCase
 {
+	
 	protected IValidityExport exporter;
 	protected IProject project;
 	protected IFile exportedFile;
@@ -46,6 +47,8 @@ public class AbstractExportOCLValidationResultTests extends AbstractValidityTest
 				exporter = descriptor.getExportExtension();
 			}
 		}
+		assertNotNull(exporter);
+		TEST_PROGRESS.println("exporter = " + exporter);
 	}
 
 	protected void initProject(@NonNull String exportedFileName) throws CoreException {
@@ -53,15 +56,19 @@ public class AbstractExportOCLValidationResultTests extends AbstractValidityTest
 		project = ResourcesPlugin.getWorkspace().getRoot().getProject(TEST_PROJECT_NAME);
 		project.create(new NullProgressMonitor());
 		project.open(new NullProgressMonitor());
+		TEST_PROGRESS.println("project = " + project);
 		exportedFile = project.getFile(exportedFileName);
+		TEST_PROGRESS.println("exportedFile = " + exportedFile);
 	}
 
 	@Before
 	public void setUp() throws Exception {
+		TEST_PROGRESS.setState(true);
 		super.setUp();
 		initTestModels();
 		initValidityManager(null);
 		results = resultSet.getResults();
+		TEST_PROGRESS.println("results = " + results);
 	}
 
 	@After
@@ -69,8 +76,10 @@ public class AbstractExportOCLValidationResultTests extends AbstractValidityTest
 		if (project != null) {
 			project.delete(false, new NullProgressMonitor());
 			project = null;
+			TEST_PROGRESS.println("-project");
 		}
 		exporter = null;
+		TEST_PROGRESS.println("-exporter");
 		super.tearDown();
 	}
 }

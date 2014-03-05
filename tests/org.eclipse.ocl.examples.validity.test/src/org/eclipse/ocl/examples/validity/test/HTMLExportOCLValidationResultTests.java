@@ -67,6 +67,7 @@ public class HTMLExportOCLValidationResultTests extends AbstractExportOCLValidat
 		initProject(EXPORTED_FILE_NAME);
 		XPathFactory factory = XPathFactory.newInstance();
 		xPathEngine = factory.newXPath();
+		TEST_PROGRESS.println("xPathEngine = " + xPathEngine);
 	}
 
 	@After
@@ -112,6 +113,7 @@ public class HTMLExportOCLValidationResultTests extends AbstractExportOCLValidat
 		// launch the exporter
 		assertFalse(exportedFile.exists());
 		exporter.export(ecoreResource, rootNode, exportedFile.getFullPath());
+		TEST_PROGRESS.println("exported " + ecoreResource.getURI());
 
 		// test the exporteFile content
 		assertXPathTrue(

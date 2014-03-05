@@ -49,7 +49,8 @@ public class AllExamplesTests extends TestCase
 	}
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("All Examples Tests");
+    	String testSuiteName = System.getProperty("testSuiteName", "All Examples Tests");
+		TestSuite suite = new TestSuite(testSuiteName);
 		buildSuite(suite);
 		return suite;
 	}
