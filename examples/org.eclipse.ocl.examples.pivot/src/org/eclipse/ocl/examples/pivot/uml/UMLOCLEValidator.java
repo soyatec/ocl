@@ -44,6 +44,9 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.InstanceSpecification;
+import org.eclipse.uml2.uml.OpaqueAction;
+import org.eclipse.uml2.uml.OpaqueBehavior;
+import org.eclipse.uml2.uml.OpaqueExpression;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.uml2.uml.util.UMLValidator;
 
@@ -98,27 +101,6 @@ public class UMLOCLEValidator implements EValidator
 		return true;
 	}
 
-	public boolean validateInstanceSpecification(@NonNull InstanceSpecification instanceSpecification,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		HashSet<Classifier> allClassifiers = new HashSet<Classifier>();
-		HashSet<Constraint> allConstraints = new HashSet<Constraint>();
-		for (Classifier classifier : instanceSpecification.getClassifiers()) {
-			if (classifier != null) {
-				gatherClassifiers(allClassifiers, allConstraints, classifier);
-			}
-		}
-		boolean allOk = true;
-		for (Constraint constraint : allConstraints) {
-			ValueSpecification specification = constraint.getSpecification();
-			if (specification instanceof org.eclipse.uml2.uml.OpaqueExpression) {
-				org.eclipse.uml2.uml.OpaqueExpression opaqueExpression = (org.eclipse.uml2.uml.OpaqueExpression)specification;
-				if (!validateInstance(instanceSpecification, opaqueExpression, diagnostics, context))
-					allOk = false;
-			}
-		}
-		return allOk;
-	}
-
 	/**
 	 * Perform the validation of an instanceSpecification against the bodies defined in opaqueExpression.
 	 */
@@ -159,9 +141,66 @@ public class UMLOCLEValidator implements EValidator
 	}
 
 	/**
+	 * Validate the OCL aspects of a UML InstanceSpecification, by evaluating all OCL Constraints
+	 * defined by any of the InstanceSpecification's classifiers on the InstanceSpecification.
+	 * <p>
+	 * Returns true if all OCL constraints pass.
+	 */
+	public boolean validateInstanceSpecification(@NonNull InstanceSpecification instanceSpecification,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		HashSet<Classifier> allClassifiers = new HashSet<Classifier>();
+		HashSet<Constraint> allConstraints = new HashSet<Constraint>();
+		for (Classifier classifier : instanceSpecification.getClassifiers()) {
+			if (classifier != null) {
+				gatherClassifiers(allClassifiers, allConstraints, classifier);
+			}
+		}
+		boolean allOk = true;
+		for (Constraint constraint : allConstraints) {
+			ValueSpecification specification = constraint.getSpecification();
+			if (specification instanceof org.eclipse.uml2.uml.OpaqueExpression) {
+				org.eclipse.uml2.uml.OpaqueExpression opaqueExpression = (org.eclipse.uml2.uml.OpaqueExpression)specification;
+				if (!validateInstance(instanceSpecification, opaqueExpression, diagnostics, context))
+					allOk = false;
+			}
+		}
+		return allOk;
+	}
+
+	/**
+	 * Validate the syntax and semantics of any OCL bofy.
+	 * <p>
+	 * Returns true if all OCL bodies are valid.
+	 */
+	public boolean validateOpaqueAction(@NonNull OpaqueAction opaqueAction, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return UMLOCLEValidator.INSTANCE.validateOpaqueElement(opaqueAction.getLanguages(),
+				opaqueAction.getBodies(), opaqueAction, diagnostics, context);
+	}
+
+	/**
+	 * Validate the syntax and semantics of any OCL bofy.
+	 * <p>
+	 * Returns true if all OCL bodies are valid.
+	 */
+	public boolean validateOpaqueBehavior(@NonNull OpaqueBehavior opaqueBehavior, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return UMLOCLEValidator.INSTANCE.validateOpaqueElement(opaqueBehavior.getLanguages(),
+				opaqueBehavior.getBodies(), opaqueBehavior, diagnostics, context);
+	}
+	
+	/**
+	 * Validate the syntax and semantics of any OCL bofy.
+	 * <p>
+	 * Returns true if all OCL bodies are valid.
+	 */
+	public boolean validateOpaqueExpression(@NonNull OpaqueExpression opaqueExpression, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return UMLOCLEValidator.INSTANCE.validateOpaqueElement(opaqueExpression.getLanguages(),
+				opaqueExpression.getBodies(), opaqueExpression, diagnostics, context);
+	}
+
+	/**
 	 * Perform the semantic validation of the bodies of an opaqueElement using the corresponding languages support.
 	 */
-	public boolean validateOpaqueElement(@NonNull List<String> languages, @NonNull List<String> bodies,
+	protected boolean validateOpaqueElement(/*@NonNull*/ List<String> languages, /*@NonNull*/ List<String> bodies,
 			@NonNull Element opaqueElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
 		if (context != null) {
