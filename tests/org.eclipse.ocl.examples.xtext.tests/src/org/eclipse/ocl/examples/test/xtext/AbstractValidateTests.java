@@ -52,7 +52,7 @@ public abstract class AbstractValidateTests extends XtextTestCase
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 		for (EObject eObject : resource.getContents()) {
 			EValidatorRegistryImpl registry = new EValidatorRegistryImpl();
-			registry.put(UMLPackage.eINSTANCE, new UMLOCLEValidator());
+			registry.put(UMLPackage.eINSTANCE, UMLOCLEValidator.INSTANCE);
 			Diagnostician dignostician = new Diagnostician(registry);
 			Diagnostic diagnostic = dignostician.validate(eObject, validationContext);
 			diagnostics.addAll(diagnostic.getChildren());

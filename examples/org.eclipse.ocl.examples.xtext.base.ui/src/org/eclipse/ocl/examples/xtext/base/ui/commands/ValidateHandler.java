@@ -52,7 +52,7 @@ public class ValidateHandler extends ValidateAction implements IHandler//2
 	protected Diagnostician createDiagnostician(final AdapterFactory adapterFactory, final IProgressMonitor progressMonitor) {
 		final ResourceSet resourceSet = domain.getResourceSet();
 		EValidatorRegistryImpl registry = new EValidatorRegistryImpl();
-		registry.put(UMLPackage.eINSTANCE, new UMLOCLEValidator());
+		registry.put(UMLPackage.eINSTANCE, UMLOCLEValidator.INSTANCE);
 		return new Diagnostician(registry) {
 
 			@Override

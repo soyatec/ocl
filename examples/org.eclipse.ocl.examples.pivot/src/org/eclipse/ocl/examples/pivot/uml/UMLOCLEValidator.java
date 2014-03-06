@@ -53,13 +53,14 @@ import org.eclipse.uml2.uml.util.UMLValidator;
  * Typically used with a Diagnostician as:
  * <pre>
  *	EValidatorRegistryImpl registry = new EValidatorRegistryImpl();
- *	registry.put(UMLPackage.eINSTANCE, new UMLOCLEValidator());
- *	Diagnostician dignostician = new Diagnostician(registry);
+ *	registry.put(UMLPackage.eINSTANCE, UMLOCLEValidator.INSTANCE);
+ *	Diagnostician diagnostician = new Diagnostician(registry);
  *	Diagnostic diagnostic = dignostician.validate(eObject, validationContext);
  * </pre>
  */
 public class UMLOCLEValidator implements EValidator
 {
+	public static final @NonNull UMLOCLEValidator INSTANCE = new UMLOCLEValidator();
 	public static final @NonNull TracingOption VALIDATE_INSTANCE = new TracingOption(PivotPlugin.PLUGIN_ID, "validate/instance");
 	public static final @NonNull TracingOption VALIDATE_OPAQUE_ELEMENT = new TracingOption(PivotPlugin.PLUGIN_ID, "validate/opaqueElement");
 
@@ -85,34 +86,37 @@ public class UMLOCLEValidator implements EValidator
 			org.eclipse.uml2.uml.OpaqueExpression opaqueExpression = (org.eclipse.uml2.uml.OpaqueExpression)eObject;
 			@SuppressWarnings("null")@NonNull List<String> languages = opaqueExpression.getLanguages();
 			@SuppressWarnings("null")@NonNull List<String> bodies = opaqueExpression.getBodies();
-			return validateOpaqueElement(languages, bodies,
-				opaqueExpression, diagnostics, context);
+			return validateOpaqueElement(languages, bodies, opaqueExpression, diagnostics, context);
 		}
 		else if (eObject instanceof InstanceSpecification) {
-			InstanceSpecification instanceSpecification = (InstanceSpecification)eObject;
-			HashSet<Classifier> allClassifiers = new HashSet<Classifier>();
-			HashSet<Constraint> allConstraints = new HashSet<Constraint>();
-			for (Classifier classifier : instanceSpecification.getClassifiers()) {
-				if (classifier != null) {
-					gatherClassifiers(allClassifiers, allConstraints, classifier);
-				}
-			}
-			boolean allOk = true;
-			for (Constraint constraint : allConstraints) {
-				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof org.eclipse.uml2.uml.OpaqueExpression) {
-					org.eclipse.uml2.uml.OpaqueExpression opaqueExpression = (org.eclipse.uml2.uml.OpaqueExpression)specification;
-					if (!validateInstance(instanceSpecification, opaqueExpression, diagnostics, context))
-						allOk = false;
-				}
-			}
-			return allOk;
+			return validateInstanceSpecification((InstanceSpecification)eObject, diagnostics, context);
 		}
 		return true;
 	}
 
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
+	}
+
+	public boolean validateInstanceSpecification(@NonNull InstanceSpecification instanceSpecification,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		HashSet<Classifier> allClassifiers = new HashSet<Classifier>();
+		HashSet<Constraint> allConstraints = new HashSet<Constraint>();
+		for (Classifier classifier : instanceSpecification.getClassifiers()) {
+			if (classifier != null) {
+				gatherClassifiers(allClassifiers, allConstraints, classifier);
+			}
+		}
+		boolean allOk = true;
+		for (Constraint constraint : allConstraints) {
+			ValueSpecification specification = constraint.getSpecification();
+			if (specification instanceof org.eclipse.uml2.uml.OpaqueExpression) {
+				org.eclipse.uml2.uml.OpaqueExpression opaqueExpression = (org.eclipse.uml2.uml.OpaqueExpression)specification;
+				if (!validateInstance(instanceSpecification, opaqueExpression, diagnostics, context))
+					allOk = false;
+			}
+		}
+		return allOk;
 	}
 
 	/**
@@ -157,7 +161,7 @@ public class UMLOCLEValidator implements EValidator
 	/**
 	 * Perform the semantic validation of the bodies of an opaqueElement using the corresponding languages support.
 	 */
-	protected boolean validateOpaqueElement(@NonNull List<String> languages, @NonNull List<String> bodies,
+	public boolean validateOpaqueElement(@NonNull List<String> languages, @NonNull List<String> bodies,
 			@NonNull Element opaqueElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
 		if (context != null) {
