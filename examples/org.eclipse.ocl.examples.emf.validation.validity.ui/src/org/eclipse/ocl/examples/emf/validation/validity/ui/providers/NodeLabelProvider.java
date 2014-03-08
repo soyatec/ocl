@@ -14,10 +14,8 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.ui.providers;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -104,6 +102,7 @@ public class NodeLabelProvider extends ColumnLabelProvider
 	private final @NonNull ILabelProvider labelProvider;
 	private final Color validatableColor;
 	private final Color constrainingNodeColor;
+	private final Font italicFont = JFaceResources.getFontRegistry().getItalic(JFaceResources.DEFAULT_FONT);
 
 	public NodeLabelProvider(@NonNull ILabelProvider labelProvider, Color validatableColor, Color constrainingNodeColor) {
 		this.labelProvider = labelProvider;
@@ -116,23 +115,20 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		labelProvider.addListener(listener);
 	}
 
-	protected void appendResourceDiagnostic(@NonNull Writer s, @NonNull Diagnostic diagnostic) {
+	protected void appendResourceDiagnostic(@NonNull StringBuilder s, @NonNull Diagnostic diagnostic) {
 		boolean isFirst = true;
 		List<Diagnostic> children = diagnostic.getChildren();
-		try {
-			if (!children.isEmpty()) {
-				for (Diagnostic child : diagnostic.getChildren()) {
-					if (isFirst) {
-						s.append(child.getMessage());
-						isFirst = false;
-					} else {
-						s.append("\n" + child.getMessage());
-					}
+		if (!children.isEmpty()) {
+			for (Diagnostic child : diagnostic.getChildren()) {
+				if (isFirst) {
+					s.append(child.getMessage());
+					isFirst = false;
+				} else {
+					s.append("\n" + child.getMessage());
 				}
-			} else {
-				s.append(diagnostic.getMessage());
 			}
-		} catch (IOException e) {
+		} else {
+			s.append(diagnostic.getMessage());
 		}
 	}
 
@@ -145,10 +141,10 @@ public class NodeLabelProvider extends ColumnLabelProvider
 			return null;
 		}
 		else if (element instanceof ResultValidatableNode) {
-			return JFaceResources.getFontRegistry().getItalic(JFaceResources.DEFAULT_FONT);
+			return italicFont;
 		}
 		else if (element instanceof ConstrainingNode) {
-			return JFaceResources.getFontRegistry().getItalic(JFaceResources.DEFAULT_FONT);
+			return italicFont;
 		}
 		else {
 			return null;
@@ -174,23 +170,18 @@ public class NodeLabelProvider extends ColumnLabelProvider
 	public Image getImage(Object element) {
 		if (element instanceof ResultValidatableNode) {
 			ConstrainingNode constrainingNode = ((ResultValidatableNode)element).getResultConstrainingNode().getParent();
-			if (constrainingNode instanceof LeafConstrainingNode) {
-				Object image = ((LeafConstrainingNode)constrainingNode).getConstraintLocator().getImage();
-				return ExtendedImageRegistry.INSTANCE.getImage(image);
-			}
-			else {
-				return labelProvider.getImage(constrainingNode.getConstrainingObject());
-			}
+			return labelProvider.getImage(constrainingNode != null ? constrainingNode.getConstrainingObject() : null);
+//			if (constrainingNode instanceof LeafConstrainingNode) {
+//				Object image = ((LeafConstrainingNode)constrainingNode).getConstraintLocator().getImage();
+//				return ExtendedImageRegistry.INSTANCE.getImage(image);
+//			}
+//			else {
+//				return labelProvider.getImage(constrainingNode.getConstrainingObject());
+//			}
 		}
 		else if (element instanceof ResultConstrainingNode) {
-			ConstrainingNode constrainingNode = (ConstrainingNode) ((ResultConstrainingNode)element).getParent();
-			if (constrainingNode instanceof LeafConstrainingNode) {
-				Object image = ((LeafConstrainingNode)constrainingNode).getConstraintLocator().getImage();
-				return ExtendedImageRegistry.INSTANCE.getImage(image);
-			}
-			else {
-				return labelProvider.getImage(constrainingNode.getConstrainingObject());
-			}
+			ValidatableNode validatableNode = ((ResultConstrainingNode)element).getResultValidatableNode().getParent();
+			return labelProvider.getImage(validatableNode != null ? validatableNode.getConstrainedObject() : null);
 		}
 		else if (element instanceof ConstrainingNode) {
 			return labelProvider.getImage(((ConstrainingNode)element).getConstrainingObject());
@@ -210,7 +201,7 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		if (result.getSeverity() == Severity.OK) {
 			return "Successful";
 		}
-		StringWriter s = new StringWriter();
+		StringBuilder s = new StringBuilder();
 		Object diagnostic = result.getDiagnostic();
 		if (diagnostic == null) {
 			s.append("<<null diagnostic message>>");
@@ -224,7 +215,9 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		Throwable exception = result.getException();
 		if (exception != null) {
 			s.append("\n" + exception.getClass().getName() + ":\n");
-			exception.printStackTrace(new PrintWriter(s));	
+			StringWriter sw = new StringWriter();
+			sw.append(s.toString());
+			exception.printStackTrace(new PrintWriter(sw));	
 		}
 		@SuppressWarnings("null")@NonNull String string = s.toString();
 		return string;
@@ -255,21 +248,19 @@ public class NodeLabelProvider extends ColumnLabelProvider
 	public @Nullable String getToolTipText(Object element) {
 		if (element instanceof LeafConstrainingNode) {
 			LeafConstrainingNode leafConstrainingNode = ((LeafConstrainingNode) element);
-			return getLeafConstrainingNodeHoover(leafConstrainingNode, false);
+			return getLeafConstrainingNodeHover(leafConstrainingNode, false);
 		} else if (element instanceof ResultConstrainingNode) {
-			return getResultToolTip(((ResultConstrainingNode) element)
-				.getWorstResult());
+			return getResultToolTip(((ResultConstrainingNode) element).getWorstResult());
 		} else if (element instanceof ResultValidatableNode) {
 			Result result = ((ResultValidatableNode) element).getWorstResult();
 			if (result != null) {
-				LeafConstrainingNode leafConstrainingNode = result
-					.getLeafConstrainingNode();
-				return getLeafConstrainingNodeHoover(leafConstrainingNode, true);
+				LeafConstrainingNode leafConstrainingNode = result.getLeafConstrainingNode();
+				return getLeafConstrainingNodeHover(leafConstrainingNode, true);
 			} else {
 				ConstrainingNode contrainingNode = ((ResultValidatableNode) element).getResultConstrainingNode().getParent();
 				if (contrainingNode instanceof LeafConstrainingNode){
 					LeafConstrainingNode leafConstrainingNode = ((LeafConstrainingNode) contrainingNode);
-					return getLeafConstrainingNodeHoover(leafConstrainingNode, true);
+					return getLeafConstrainingNodeHover(leafConstrainingNode, true);
 				}
 				return getResultToolTip(result);
 			}
@@ -280,8 +271,7 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		}
 	}
 
-	private String getLeafConstrainingNodeHoover(
-			LeafConstrainingNode leafConstrainingNode, boolean withDiagnosisMessage) {
+	private String getLeafConstrainingNodeHover(LeafConstrainingNode leafConstrainingNode, boolean withDiagnosisMessage) {
 		StringBuilder s = new StringBuilder();
 		Resource resource = leafConstrainingNode.getConstraintResource();
 		s.append("Location: ");
@@ -303,6 +293,8 @@ public class NodeLabelProvider extends ColumnLabelProvider
 			s.append("\nEvaluation Result: ");
 			s.append(getResultToolTip(leafConstrainingNode.getWorstResult()));
 		}
+		s.append("\n");
+		s.append(getSummaryToolTip(leafConstrainingNode));
 		return s.toString();
 	}
 
