@@ -49,7 +49,7 @@ public class SeveritiesDecorator extends SideBySideImageDecorator
 	protected final @NonNull IDEValidityManager validityManager;
 	
 	public SeveritiesDecorator(@NonNull IDEValidityManager validityManager) {
-		super(16);
+		super(1);
 		this.validityManager = validityManager;
 	}
 

@@ -771,7 +771,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		/*Toolbar actions*/
 		expandAllNodesAction = new ExpandAllNodesAction(this, true, true);
 		collapseAllNodesAction = new CollapseAllNodesAction(this, true, true);
-		runValidationAction = new RunValidityAction(validityManager);
+		runValidationAction = new RunValidityAction(this);
 
 		exportValidationResultAction = new ExportValidationResultAction(validityManager, this);
 		filterValidationResultAction = new FilterValidationResultAction(this);

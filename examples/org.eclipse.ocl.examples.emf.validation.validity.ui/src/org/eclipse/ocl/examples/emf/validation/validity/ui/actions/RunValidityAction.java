@@ -22,15 +22,15 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.view.IDEValidityManager;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
 public final class RunValidityAction extends Action
 {
-	protected final @NonNull IDEValidityManager validityManager;
+	protected final @NonNull ValidityView validityView;
 	
-	public RunValidityAction(@NonNull IDEValidityManager validityManager) {
+	public RunValidityAction(@NonNull ValidityView validityView) {
 		super(ValidityUIMessages.ValidityView_Action_RunValidity_Title);
-		this.validityManager = validityManager;
+		this.validityView = validityView;
 		setToolTipText(ValidityUIMessages.ValidityView_Action_RunValidity_ToolTipText);
 		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_RunValidity_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
@@ -38,6 +38,6 @@ public final class RunValidityAction extends Action
 
 	@Override
 	public void run() {
-		validityManager.runValidation();
+		validityView.getValidityManager().runValidation(validityView);
 	}
 }

@@ -83,8 +83,11 @@ public class IDEValidityManager extends ValidityManager
 
 	private class ValidityViewJob extends Job
 	{
-		private ValidityViewJob() {
+		protected final @NonNull ValidityView validityView;
+		
+		private ValidityViewJob(@NonNull ValidityView validityView) {
 			super("Validity View Validation");
+			this.validityView = validityView;
 		}
 
 		@Override
@@ -161,6 +164,7 @@ public class IDEValidityManager extends ValidityManager
 					return Status.OK_STATUS;
 				}
 				finally {
+					validityView.redraw();
 					monitor.done();
 				}
 			}
@@ -295,8 +299,8 @@ public class IDEValidityManager extends ValidityManager
 		}	
 	}
 
-	public void runValidation() {
-		Job validationJob = new ValidityViewJob();
+	public void runValidation(@NonNull ValidityView validityView) {
+		Job validationJob = new ValidityViewJob(validityView);
 		synchronized (validityJobs) {
 			validityJobs.add(validationJob);
 		}
