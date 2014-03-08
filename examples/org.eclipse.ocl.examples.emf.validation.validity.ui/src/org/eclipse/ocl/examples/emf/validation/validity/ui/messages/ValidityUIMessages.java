@@ -89,6 +89,12 @@ public class ValidityUIMessages
 	public static String ValidityView_Action_ShowUnusedNodes_ImageLocation;
 	public static String ValidityView_Action_HideUnusedNodes_ImageLocation;
 
+	public static String ValidityView_Action_ShowHideProfileNodes_Title;
+	public static String ValidityView_Action_HideProfileValidatableNodes_ToolTipText;
+	public static String ValidityView_Action_ShowProfileValidatableNodes_ToolTipText;
+	public static String ValidityView_Action_ShowProfileNodes_ImageLocation;
+	public static String ValidityView_Action_HideProfileNodes_ImageLocation;
+
 	public static String ValidityView_Action_ShowNodesByKind_Title;
 	public static String ValidityView_Action_ShowNodesByKind_Kind_Failure;
 	public static String ValidityView_Action_ShowNodesByKind_Kind_Error;

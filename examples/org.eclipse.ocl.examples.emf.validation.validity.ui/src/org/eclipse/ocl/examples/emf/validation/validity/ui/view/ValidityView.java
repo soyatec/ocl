@@ -16,6 +16,8 @@
 package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 
 import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -63,9 +65,8 @@ import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.CollapseAllNodesAction;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.DisableAllNodesAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.DisableAllUnusedNodesAction;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.EnableAllNodesAction;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.EnableDisableAllNodesAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ExpandAllNodesAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ExportValidationResultAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.FilterValidationResultAction;
@@ -73,13 +74,14 @@ import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ForceValidity
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.LockValidatableNodesAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.RunValidityAction;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.actions.ShowElementInEditorAction;
-import org.eclipse.ocl.examples.emf.validation.validity.ui.filters.NodesViewerFilter;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.filters.SeveritiesVisibilityFilter;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.ConstrainingNodeContentProvider;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.NodeCheckStateProvider;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.NodeLabelProvider;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.providers.ValidatableNodeContentProvider;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.ripoffs.FilteredCheckboxTree;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.DisposeEvent;
@@ -183,6 +185,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 	private Action enableAllValidatableNodesAction;
 	private Action disableAllValidatableNodesAction;
 	private Action disableAllUnusedValidatableNodesAction;
+	private Action disableAllProfileValidatableNodesAction;
 
 	/**Constraining Tool Bar.*/
 	private Action expandAllConstrainingNodesAction;
@@ -195,8 +198,11 @@ public class ValidityView extends ViewPart implements ISelectionListener
 	private Action constrainingNodesDoubleClickAction;
 	private Action validatableNodesDoubleClickAction;
 	
-	private final NodesViewerFilter constrainingNodesFilterByKind = new NodesViewerFilter();
-	private final NodesViewerFilter validatableNodesFilterByKind = new NodesViewerFilter();
+	private final SeveritiesVisibilityFilter constrainingNodesFilterByKind = new SeveritiesVisibilityFilter();
+	private final SeveritiesVisibilityFilter validatableNodesFilterByKind = new SeveritiesVisibilityFilter();
+
+	private @NonNull Set<IVisibilityFilter> validatableFilters = new HashSet<IVisibilityFilter>();
+	private @NonNull Set<IVisibilityFilter> constrainingFilters = new HashSet<IVisibilityFilter>();
 
 	/**
 	 * ValidityViewLabelProvider extends the standard AdapterFactoryLabelProvider to provide icons for
@@ -487,13 +493,13 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		validatableNodesViewer.setLabelProvider(nodeDecoratingLabelProvider);
 		validatableNodesViewer.setCheckStateProvider(nodeCheckStateProvider);
 		validatableNodesViewer.addCheckStateListener(nodeCheckStateListener);
-		validatableNodesViewer.addFilter(validatableNodesFilterByKind);
+//		validatableNodesViewer.addFilter(validatableNodesFilterByKind);
 		
 		constrainingNodesViewer.setContentProvider(constrainingNodeContentProvider);
 		constrainingNodesViewer.setLabelProvider(nodeDecoratingLabelProvider);
 		constrainingNodesViewer.setCheckStateProvider(nodeCheckStateProvider);
 		constrainingNodesViewer.addCheckStateListener(nodeCheckStateListener);
-		constrainingNodesViewer.addFilter(constrainingNodesFilterByKind);
+//		constrainingNodesViewer.addFilter(constrainingNodesFilterByKind);
 		
 		formBody.setWeights(new int[] {1, 1, });
 		
@@ -555,6 +561,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		manager.add(disableAllValidatableNodesAction);
 		manager.add(new Separator());
 		manager.add(disableAllUnusedValidatableNodesAction);
+		manager.add(disableAllProfileValidatableNodesAction);
 		
 		// Other plug-ins can contribute their actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -617,6 +624,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		manager.add(disableAllValidatableNodesAction);
 		manager.add(new Separator());
 		manager.add(disableAllUnusedValidatableNodesAction);
+		manager.add(disableAllProfileValidatableNodesAction);
 
 		manager.update(true);
 	}
@@ -673,26 +681,26 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		showConstrainingElementInEditorAction = new ShowElementInEditorAction(validityManager, getConstrainingNodesViewer());
 		
 		/*Toolbar actions*/
-		expandAllNodesAction = new ExpandAllNodesAction(validityManager, this, true, true);
-		collapseAllNodesAction = new CollapseAllNodesAction(validityManager, this, true, true);
+		expandAllNodesAction = new ExpandAllNodesAction(this, true, true);
+		collapseAllNodesAction = new CollapseAllNodesAction(this, true, true);
 		runValidationAction = new RunValidityAction(validityManager);
 
 		exportValidationResultAction = new ExportValidationResultAction(validityManager, this);
 		filterValidationResultAction = new FilterValidationResultAction(this);
 
 		/* Validatable Tool bar actions*/
-		expandAllValidatableNodesAction = new ExpandAllNodesAction(validityManager, this, true, false);
-		collapseAllValidatableNodesAction = new CollapseAllNodesAction(validityManager, this, true, false);
-		enableAllValidatableNodesAction = new EnableAllNodesAction(validityManager, getValidatableNodesViewer(), true);	
-		disableAllValidatableNodesAction = new DisableAllNodesAction(validityManager, getValidatableNodesViewer(), true);	
-		disableAllUnusedValidatableNodesAction = new DisableAllUnusedNodesAction(validityManager, getValidatableNodesViewer(), true);	
+		expandAllValidatableNodesAction = new ExpandAllNodesAction(this, true, false);
+		collapseAllValidatableNodesAction = new CollapseAllNodesAction(this, true, false);
+		enableAllValidatableNodesAction = new EnableDisableAllNodesAction(this, true, true);	
+		disableAllValidatableNodesAction = new EnableDisableAllNodesAction(this, false, true);	
+		disableAllUnusedValidatableNodesAction = new DisableAllUnusedNodesAction(this, true);	
 		
 		/* Constraining Tool bar actions*/
-		expandAllConstrainingNodesAction = new ExpandAllNodesAction(validityManager, this, false, true);
-		collapseAllConstrainingNodesAction = new CollapseAllNodesAction(validityManager, this, false, true);
-		enableAllConstrainingNodesAction = new EnableAllNodesAction(validityManager, getConstrainingNodesViewer(), false);
-		disableAllConstrainingNodesAction = new DisableAllNodesAction(validityManager, getConstrainingNodesViewer(), false);
-		disableAllUnusedConstrainingNodesAction = new DisableAllUnusedNodesAction(validityManager, getConstrainingNodesViewer(), false);	
+		expandAllConstrainingNodesAction = new ExpandAllNodesAction(this, false, true);
+		collapseAllConstrainingNodesAction = new CollapseAllNodesAction(this, false, true);
+		enableAllConstrainingNodesAction = new EnableDisableAllNodesAction(this, true, false);
+		disableAllConstrainingNodesAction = new EnableDisableAllNodesAction(this, false, false);
+		disableAllUnusedConstrainingNodesAction = new DisableAllUnusedNodesAction(this, false);	
 
 		/*Double Click actions*/
 		constrainingNodesDoubleClickAction = new Action() {
@@ -738,16 +746,21 @@ public class ValidityView extends ViewPart implements ISelectionListener
 	
 	public void addFilteredSeverity(Severity severity) {
 		constrainingNodesFilterByKind.addFilteredSeverity(severity);
+		constrainingFilters.add(constrainingNodesFilterByKind);
 		validatableNodesFilterByKind.addFilteredSeverity(severity);
+		validatableFilters.add(validatableNodesFilterByKind);
 		
 		getConstrainingNodesViewer().refresh();
 		getValidatableNodesViewer().refresh();
 	}
 	
 	public void removeFilteredSeverity(Severity severity) {
-		constrainingNodesFilterByKind.removeFilteredSeverity(severity);
-		validatableNodesFilterByKind.removeFilteredSeverity(severity);
-		
+		if (!constrainingNodesFilterByKind.removeFilteredSeverity(severity)) {
+			constrainingFilters.remove(constrainingNodesFilterByKind);
+		}
+		if (!validatableNodesFilterByKind.removeFilteredSeverity(severity)) {
+			validatableFilters.remove(validatableNodesFilterByKind);
+		}
 		getConstrainingNodesViewer().refresh();
 		getValidatableNodesViewer().refresh();
 	}
@@ -874,5 +887,27 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		// Refresh the view
 		filteredValidatableNodesTree.resetFilter();
 		filteredConstrainingNodesTree.resetFilter();
+	}
+
+	public void addFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
+		if (isValidatableFilterAction) {
+			validatableFilters.add(filter);
+		}
+		else {
+			constrainingFilters.add(filter);
+		}
+		getConstrainingNodesViewer().refresh();
+		getValidatableNodesViewer().refresh();
+	}
+
+	public void removeFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
+		if (isValidatableFilterAction) {
+			validatableFilters.remove(filter);
+		}
+		else {
+			constrainingFilters.remove(filter);
+		}
+		getConstrainingNodesViewer().refresh();
+		getValidatableNodesViewer().refresh();
 	}
 }

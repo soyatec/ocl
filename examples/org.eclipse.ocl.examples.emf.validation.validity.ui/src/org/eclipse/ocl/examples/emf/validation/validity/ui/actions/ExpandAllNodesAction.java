@@ -20,22 +20,19 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
-import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
-public final class ExpandAllNodesAction extends Action {
-
-	private final @NonNull ValidityManager validityManager;
+public final class ExpandAllNodesAction extends Action
+{
 	private final @NonNull ValidityView validityView;
 	private final boolean isValidatableExpandAction;
 	private final boolean isConstrainingExpandAction;
 	
-	public ExpandAllNodesAction(@NonNull ValidityManager validityManager, @NonNull ValidityView validityView, 
+	public ExpandAllNodesAction(@NonNull ValidityView validityView, 
 			boolean isValidatableExpandAction, boolean isConstrainingExpandAction) {
 		super(ValidityUIMessages.ValidityView_Action_ExpandAllNodes_Title);
-		this.validityManager = validityManager;
 		this.validityView = validityView;
 		this.isValidatableExpandAction = isValidatableExpandAction;
 		this.isConstrainingExpandAction = isConstrainingExpandAction;
@@ -53,14 +50,12 @@ public final class ExpandAllNodesAction extends Action {
 
 	@Override
 	public void run() {
-		RootNode rootNode = validityManager.getRootNode();
+		RootNode rootNode = validityView.getValidityManager().getRootNode();
 		if (rootNode != null) {
-			if (isValidatableExpandAction && isConstrainingExpandAction) {
+			if (isValidatableExpandAction) {
 				validityView.getValidatableNodesViewer().expandAll();
-				validityView.getConstrainingNodesViewer().expandAll();
-			} else if (isValidatableExpandAction) {
-				validityView.getValidatableNodesViewer().expandAll();
-			} else if (isConstrainingExpandAction) {
+			}
+			if (isConstrainingExpandAction) {
 				validityView.getConstrainingNodesViewer().expandAll();
 			}
 		}

@@ -19,51 +19,20 @@ import java.net.URL;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
-import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
+import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
-public abstract class AbstractFilterAction extends Action {
-	protected final @NonNull ValidityManager validityManager;
-	protected final @NonNull StructuredViewer filteredViewer;
-	protected final boolean isValidatableFilterAction;
+public abstract class AbstractFilterAction extends Action
+{
+	protected final @NonNull ValidityView validityView;
+	protected final boolean isValidatableAction;
 	
-	public AbstractFilterAction(String text, String toolTip, String imageLocation, @NonNull ValidityManager validityManager, @NonNull StructuredViewer filteredViewer, boolean isValidatableFilterAction) {
-		super(text);
-		this.validityManager = validityManager;
-		this.filteredViewer = filteredViewer;
-		this.isValidatableFilterAction = isValidatableFilterAction;
-		setToolTipText(toolTip);
-		URL imageURL = (URL) ValidityUIPlugin.INSTANCE.getImage(imageLocation);
-		setImageDescriptor(ImageDescriptor.createFromURL(imageURL));
-	}
-	
-	public AbstractFilterAction(String text, int style, String toolTip, String imageLocation, @NonNull ValidityManager validityManager, @NonNull StructuredViewer filteredViewer, boolean isValidatableFilterAction) {
+	public AbstractFilterAction(String text, int style, String toolTip, String imageLocation, @NonNull ValidityView validityView, boolean isValidatableAction) {
 		super(text, style);
-		this.validityManager = validityManager;
-		this.filteredViewer = filteredViewer;
-		this.isValidatableFilterAction = isValidatableFilterAction;
+		this.validityView = validityView;
+		this.isValidatableAction = isValidatableAction;
 		setToolTipText(toolTip);
 		URL imageURL = (URL) ValidityUIPlugin.INSTANCE.getImage(imageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(imageURL));
-	}
-	
-	protected StructuredViewer getFilteredViewer() {
-		return filteredViewer;
-	}
-	
-	protected void deselectAll(@NonNull Iterable<? extends AbstractNode> nodes) {
-		for (AbstractNode node : nodes) {
-			node.setEnabled(false);
-			deselectAll(node.getChildren());
-		}
-	}
-	
-	protected void selectAll(@NonNull Iterable<? extends AbstractNode> nodes) {
-		for (AbstractNode node : nodes) {
-			node.setEnabled(true);
-			selectAll(node.getChildren());
-		}
 	}
 }

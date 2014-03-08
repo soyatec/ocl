@@ -20,22 +20,19 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
-import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.messages.ValidityUIMessages;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlugin;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
-public final class CollapseAllNodesAction extends Action {
-
-	private final @NonNull ValidityManager validityManager;
+public final class CollapseAllNodesAction extends Action
+{
 	private final @NonNull ValidityView validityView;
 	private final boolean isValidatableCollapseAction;
 	private final boolean isConstrainingCollapseAction;
 
-	public CollapseAllNodesAction(@NonNull ValidityManager validityManager, @NonNull ValidityView validityView, 
+	public CollapseAllNodesAction(@NonNull ValidityView validityView, 
 			boolean isValidatableCollapseAction, boolean isConstrainingCollapseAction) {
 		super(ValidityUIMessages.ValidityView_Action_CollapseAllNodes_Title);
-		this.validityManager = validityManager;
 		this.validityView = validityView;
 		this.isValidatableCollapseAction = isValidatableCollapseAction;
 		this.isConstrainingCollapseAction = isConstrainingCollapseAction;
@@ -53,7 +50,7 @@ public final class CollapseAllNodesAction extends Action {
 
 	@Override
 	public void run() {
-		RootNode rootNode = validityManager.getRootNode();
+		RootNode rootNode = validityView.getValidityManager().getRootNode();
 		if (rootNode != null) {
 			if (isValidatableCollapseAction && isConstrainingCollapseAction) {
 				validityView.getValidatableNodesViewer().collapseAll();

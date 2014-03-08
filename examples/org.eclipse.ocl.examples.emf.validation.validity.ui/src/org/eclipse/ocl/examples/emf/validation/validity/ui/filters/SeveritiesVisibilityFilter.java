@@ -14,25 +14,25 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.ui.filters;
 
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
 
-public class NodesViewerFilter extends ViewerFilter {
-	private Set<Severity> acceptedSeverities = new LinkedHashSet<Severity>();
-	
+public class SeveritiesVisibilityFilter implements IVisibilityFilter
+{
+	private @NonNull Set<Severity> acceptedSeverities = new HashSet<Severity>();
+
 	@Override
-	public boolean select(Viewer viewer, Object parentElement, Object element) {
+	public boolean isVisible(@NonNull AbstractNode element) {
 		// if we haven't activated any filtering, then all should be displayed
 		if (acceptedSeverities.isEmpty()) {
 			return true;
 		}
-		
 		if (element instanceof AbstractNode) {
 			return isAcceptedNode((AbstractNode) element);
 		}
@@ -43,8 +43,9 @@ public class NodesViewerFilter extends ViewerFilter {
 		acceptedSeverities.add(severity);
 	}
 	
-	public void removeFilteredSeverity(Severity severity) {
+	public boolean removeFilteredSeverity(Severity severity) {
 		acceptedSeverities.remove(severity);
+		return acceptedSeverities.size() > 0;
 	}
 	
 	private boolean isAcceptedNode(AbstractNode node) {
