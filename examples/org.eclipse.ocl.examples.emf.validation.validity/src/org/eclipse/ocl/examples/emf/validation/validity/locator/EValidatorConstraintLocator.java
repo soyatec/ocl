@@ -31,7 +31,6 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
@@ -48,9 +47,9 @@ import org.eclipse.ocl.examples.emf.validation.validity.utilities.ComposedEValid
 
 public class EValidatorConstraintLocator extends AbstractConstraintLocator
 {
-	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
+	public @Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 			@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
-		Map<EModelElement, List<LeafConstrainingNode>> map = null;
+		Map<EObject, List<LeafConstrainingNode>> map = null;
 		Object object = EValidator.Registry.INSTANCE.get(ePackage);
 		if (object instanceof EValidator) {
 			map = getConstraints(map, validityModel, ePackage, (EValidator) object, monitor);
@@ -81,7 +80,7 @@ public class EValidatorConstraintLocator extends AbstractConstraintLocator
 		return map;
 	}
 
-	protected @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@Nullable Map<EModelElement, List<LeafConstrainingNode>> map,
+	protected @Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@Nullable Map<EObject, List<LeafConstrainingNode>> map,
 			@NonNull ValidityModel validityModel, @NonNull EPackage ePackage, @NonNull EValidator eValidator, @NonNull Monitor monitor) {
 		if (eValidator instanceof ComposedEValidator) {
 			for (@SuppressWarnings("null")@NonNull EValidator child : ((ComposedEValidator) eValidator).getChildren()) {

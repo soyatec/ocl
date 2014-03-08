@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.ConstrainingURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.TypeURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
@@ -51,13 +52,18 @@ public interface ConstraintLocator
 	/**
 	 * Return all typeURIs for a given type; typically this returns the supertype closure.
 	 */
-	@NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EModelElement constrainingType);
+	@NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EObject constrainingObject);
+
+	/**
+	 * Return the constraining URIs of all 'types' that provide constraints for validatableObject.
+	 */
+	@Nullable Set<ConstrainingURI> getConstrainingURIs(@NonNull ValidityManager validityManager, @NonNull EObject validatableObject);
 
 	/**
 	 * Return a constrainedType-to-constraint map for all types in the given resources that have an ePackage whose URI complies with
 	 * the registration of this ConstraintLocator. The validityModel is used to create the LeafConstrainingNodes for each constraint.
 	 */
-	@Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel, @NonNull EPackage ePackage,
+	@Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel, @NonNull EPackage ePackage,
 			@NonNull Set<Resource> resources, @NonNull Monitor monitor);
 
 	/**

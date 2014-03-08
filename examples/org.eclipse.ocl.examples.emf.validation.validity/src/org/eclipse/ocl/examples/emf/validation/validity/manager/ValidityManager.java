@@ -93,14 +93,14 @@ public class ValidityManager
 		}
 	}
 
-	public static synchronized @Nullable ConstraintLocator getConstraintLocator(@NonNull EObject eObject) {
-		return getConstraintLocator(eObject.eResource());
+	public static synchronized @Nullable ConstraintLocator getConstraintLocator(@NonNull EObject validatableObject) {
+		return getConstraintLocator(validatableObject.eResource());
 	}
 
-	public static synchronized @Nullable ConstraintLocator getConstraintLocator(@Nullable Resource resource) {
-		if (resource != null) {
-			for (EObject eObject : resource.getContents()) {
-				EClass eClass = eObject.eClass();
+	public static synchronized @Nullable ConstraintLocator getConstraintLocator(@Nullable Resource validatableResource) {
+		if (validatableResource != null) {
+			for (EObject validatableObject : validatableResource.getContents()) {
+				EClass eClass = validatableObject.eClass();
 				if (eClass != null) {
 					EPackage ePackage = eClass.getEPackage();
 					if (ePackage != null) {
@@ -330,23 +330,40 @@ public class ValidityManager
 	 * @param eObject
 	 * @return the eObject uri
 	 */
-	public @NonNull TypeURI getTypeURI(@NonNull EObject eObject) {
-		String nsURI = null;
-		for (EObject eContainer = eObject; eContainer != null; eContainer = eContainer.eContainer()) {
+	public @NonNull TypeURI getTypeURI(@NonNull EObject constrainingObject) {
+		for (EObject eContainer = constrainingObject; eContainer != null; eContainer = eContainer.eContainer()) {
 			if (eContainer instanceof EPackage) {
-				EPackage ePackage = (EPackage) eContainer;
-				nsURI = ePackage.getNsURI();
+				EPackage constrainingEPackage = (EPackage) eContainer;
+				String nsURI = constrainingEPackage.getNsURI();
 				if ((nsURI != null) && !"".equals(nsURI)) {
-					Resource eResource = ePackage.eResource();
+					Resource eResource = constrainingEPackage.eResource();
 					if (eResource != null) {
-						String fragment = eResource.getURIFragment(eObject);
+						String fragment = eResource.getURIFragment(constrainingObject);
 						@SuppressWarnings("null")@NonNull URI uri = URI.createURI(nsURI).appendFragment(fragment);
 						return new TypeURI(uri);
 					}
 				}
 			}
 		}
-		@SuppressWarnings("null")@NonNull URI uri = EcoreUtil.getURI(eObject);
+		EClass eClass = constrainingObject.eClass();
+		if (eClass != null) {
+			EPackage ePackage = eClass.getEPackage();
+			if (ePackage != null) {
+				String nsURI = ePackage.getNsURI();
+				if (nsURI != null) {
+					List<ConstraintLocator> constraintLocators = getConstraintLocators(nsURI);
+					if (constraintLocators != null) {
+						for (ConstraintLocator constraintLocator : constraintLocators) {
+							URI uri = constraintLocator.getURI(constrainingObject);
+							if (uri != null) {
+								return new TypeURI(uri);
+							}
+						}
+					}
+				}
+			}
+		}
+		@SuppressWarnings("null")@NonNull URI uri = EcoreUtil.getURI(constrainingObject);
 		return new TypeURI(uri);
 	}
 
@@ -404,7 +421,7 @@ public class ValidityManager
 	public void forceRefresh() {
 		this.forceRefresh = true;
 		setInput(lastInput, new BasicMonitor());
-		this.forceRefresh = false;		
+		this.forceRefresh = false;
 	}
 	
 	public void setInput(Object newInput) {

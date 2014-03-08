@@ -22,12 +22,17 @@ import org.eclipse.jdt.annotation.NonNull;
  * <p>
  * The TypeURI is computed from the namespace URI.
  */
-public final class TypeURI
+public final class TypeURI implements Comparable<TypeURI>
 {
 	protected final @NonNull URI uri;
 	
 	public TypeURI(@NonNull URI uri) {
 		this.uri = uri;
+	}
+
+	@Override
+	public int compareTo(TypeURI o) {
+		return uri.toString().compareTo(o.toString());
 	}
 
 	@Override

@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -45,9 +44,9 @@ import org.eclipse.ocl.examples.emf.validation.validity.plugin.ValidityPlugin;
 
 public class EClassConstraintLocator extends AbstractConstraintLocator
 {
-	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
+	public @Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 			@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
-		Map<EModelElement, List<LeafConstrainingNode>> map = null;
+		Map<EObject, List<LeafConstrainingNode>> map = null;
 		for (@SuppressWarnings("null")@NonNull EClassifier eClassifier : ePackage.getEClassifiers()) {
 			if (monitor.isCanceled()) {
 				return null;
@@ -69,7 +68,7 @@ public class EClassConstraintLocator extends AbstractConstraintLocator
 				}
 				if (constraints != null) {
 					if (map == null) {
-						map = new HashMap<EModelElement, List<LeafConstrainingNode>>();
+						map = new HashMap<EObject, List<LeafConstrainingNode>>();
 					}
 					map.put(eClass, constraints);
 				}

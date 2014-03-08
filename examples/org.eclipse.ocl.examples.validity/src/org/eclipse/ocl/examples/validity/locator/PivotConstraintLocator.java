@@ -49,9 +49,9 @@ import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 public class PivotConstraintLocator extends AbstractConstraintLocator
 {
 	@Override
-	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
+	public @Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 		@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
-		Map<EModelElement, List<LeafConstrainingNode>> map = null;
+		Map<EObject, List<LeafConstrainingNode>> map = null;
 		for (Resource resource : resources) {
 			if (monitor.isCanceled()) {
 				return null;
@@ -145,11 +145,8 @@ public class PivotConstraintLocator extends AbstractConstraintLocator
 							severity = diagnostic != null ? getSeverity(diagnostic) : Severity.OK;
 						}
 					}
-				} catch (Exception e) {
-					result.setException(e);
-					severity = Severity.FATAL;
 				} catch (Throwable e) {
-					result.setException(new Exception(e));		// FIXME avoid wrapper
+					result.setException(e);
 					severity = Severity.FATAL;
 				}
 			}

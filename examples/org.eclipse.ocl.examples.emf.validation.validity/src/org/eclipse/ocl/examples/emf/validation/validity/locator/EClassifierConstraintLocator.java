@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Monitor;
-import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
 
 public class EClassifierConstraintLocator extends AbstractConstraintLocator
 {
-	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
+	public @Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 			@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
 /*		EClassifier eClassifier = (EClassifier) eObject;
 		List<Constraint> constraints = null;

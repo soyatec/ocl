@@ -35,20 +35,21 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.ConstrainingURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.TypeURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
 
 public abstract class AbstractConstraintLocator implements ConstraintLocator, ConstraintLocator.Descriptor
 {
-	protected @NonNull Map<EModelElement, List<LeafConstrainingNode>> createLeafConstrainingNode(@Nullable Map<EModelElement, List<LeafConstrainingNode>> map,
-			@NonNull ValidityModel validityModel, @NonNull EModelElement constrainingType, @NonNull Object constrainingObject, @NonNull String label) {
+	protected @NonNull Map<EObject, List<LeafConstrainingNode>> createLeafConstrainingNode(@Nullable Map<EObject, List<LeafConstrainingNode>> map,
+			@NonNull ValidityModel validityModel, @NonNull EObject constrainingType, @NonNull Object constrainingObject, @NonNull String label) {
 		LeafConstrainingNode constraint = validityModel.createLeafConstrainingNode();
 		constraint.setConstraintLocator(this);
 		constraint.setLabel(label);
 		constraint.setConstrainingObject(constrainingObject);
 		if (map == null) {
-			map = new HashMap<EModelElement, List<LeafConstrainingNode>>();
+			map = new HashMap<EObject, List<LeafConstrainingNode>>();
 		}
 		List<LeafConstrainingNode> constraints = map.get(constrainingType);
 		if (constraints == null) {
@@ -59,17 +60,22 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 		return map;
 	}
 
-	public @NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EModelElement constrainingType) {
+	public @NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EObject constrainingObject) {
 		Set<TypeURI> allTypes = new HashSet<TypeURI>();
-		allTypes.add(validityManager.getTypeURI(constrainingType));
-		if (constrainingType instanceof EClass) {
-			for (EClass eSuperClass : ((EClass)constrainingType).getEAllSuperTypes()) {
+		allTypes.add(validityManager.getTypeURI(constrainingObject));
+		if (constrainingObject instanceof EClass) {
+			for (EClass eSuperClass : ((EClass)constrainingObject).getEAllSuperTypes()) {
 				if (eSuperClass != null) {
 					allTypes.add(validityManager.getTypeURI(eSuperClass));
 				}
 			}
 		}
 		return allTypes;
+	}
+
+	@Override
+	public @Nullable Set<ConstrainingURI> getConstrainingURIs(@NonNull ValidityManager validityManager, @NonNull EObject validatableObject) {
+		return null;
 	}
 
 	public @NonNull ConstraintLocator getConstraintLocator() {

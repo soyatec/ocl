@@ -20,36 +20,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.locator.AbstractConstraintLocator;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.ConstrainingURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.TypeURI;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
 import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.utilities.ConstraintEvaluator;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.InstanceSpecification;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.OpaqueExpression;
 import org.eclipse.uml2.uml.Package;
@@ -70,7 +80,7 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 	}
 
 	@Override
-	public @NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EModelElement constrainingType) {
+	public @NonNull Set<TypeURI> getAllTypes(@NonNull ValidityManager validityManager, @NonNull EObject constrainingType) {
 		if (constrainingType instanceof org.eclipse.uml2.uml.Class) {
 			Set<TypeURI> allTypes = new HashSet<TypeURI>();
 			allTypes.add(validityManager.getTypeURI(constrainingType));
@@ -93,9 +103,44 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 	}
 
 	@Override
-	public @Nullable Map<EModelElement, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
+	public @Nullable Set<ConstrainingURI> getConstrainingURIs(@NonNull ValidityManager validityManager, @NonNull EObject validatableObject) {
+		EClass eClass = validatableObject.eClass();
+		if (eClass != null) {
+			EAnnotation eAnnotation = eClass.getEAnnotation("http://www.eclipse.org/uml2/2.0.0/UML");
+			if ((eAnnotation != null) && (eAnnotation.getReferences().size() > 0)) { // Stereotype application
+				EObject umlClass = eAnnotation.getReferences().get(0);
+				if (umlClass != null) {
+					ConstrainingURI constrainingURI = validityManager.getConstrainingURI(umlClass);
+					Set<ConstrainingURI> allConstrainingURIs = new HashSet<ConstrainingURI>();
+					allConstrainingURIs.add(constrainingURI);
+					return allConstrainingURIs;
+				}
+			}
+		}
+		Set<ConstrainingURI> allConstrainingURIs = null;
+		if (validatableObject instanceof InstanceSpecification) {
+			ValidityModel validityModel = validityManager.getModel();
+			if (validityModel != null) {
+				if (eClass != null) {
+					TypeURI typeURI = validityManager.getTypeURI(eClass);
+					allConstrainingURIs = validityModel.accumulateConstrainingURIs(allConstrainingURIs, typeURI);
+				}
+				for (Classifier classifier : ((InstanceSpecification)validatableObject).getClassifiers()) {
+					if (classifier != null) {
+						TypeURI typeURI = validityManager.getTypeURI(classifier);
+						allConstrainingURIs = validityModel.accumulateConstrainingURIs(allConstrainingURIs, typeURI);
+					}
+				}
+//				System.out.println("Got it");
+			}
+		}
+		return allConstrainingURIs;
+	}
+
+	@Override
+	public @Nullable Map<EObject, List<LeafConstrainingNode>> getConstraints(@NonNull ValidityModel validityModel,
 		@NonNull EPackage ePackage, @NonNull Set<Resource> resources, @NonNull Monitor monitor) {
-			Map<EModelElement, List<LeafConstrainingNode>> map = null;
+			Map<EObject, List<LeafConstrainingNode>> map = null;
 			for (Resource resource : resources) {
 				if (monitor.isCanceled()) {
 					return null;
@@ -255,48 +300,77 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 			}
 			metaModelManager = PivotUtil.getMetaModelManager(eResource);
 		}
+		Severity severity = Severity.UNKNOWN;
+		org.eclipse.ocl.examples.pivot.Constraint pivotConstraint;
 		try {
-			org.eclipse.ocl.examples.pivot.Constraint pivotConstraint = metaModelManager.getPivotOf(org.eclipse.ocl.examples.pivot.Constraint.class, umlConstraint);
+			pivotConstraint = metaModelManager.getPivotOf(org.eclipse.ocl.examples.pivot.Constraint.class, umlConstraint);
 			if (pivotConstraint == null) {
 				throw new ParserException("Failed to create pivot Constraint");
 			}
-			org.eclipse.ocl.examples.pivot.OpaqueExpression specification = pivotConstraint.getSpecification();
-			if (specification == null) {
-				throw new ParserException("Failed to create pivot Specification");
-			}
-			ExpressionInOCL query = specification.getExpressionInOCL();
-			if (query == null) {
-				throw new ParserException("Failed to create pivot Query");
-			}
-			EnvironmentFactory environmentFactory = new PivotEnvironmentFactory(null, metaModelManager);
-			Environment rootEnvironment = environmentFactory.createEnvironment();
-			EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-			Variable contextVariable = query.getContextVariable();
-			if (contextVariable != null) {
-				evaluationEnvironment.add(contextVariable, constrainedObject);
-				DomainModelManager modelManager = evaluationEnvironment.createModelManager(constrainedObject);
-				EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, modelManager);
-				Object verdict = evaluationVisitor.evaluate(query);
-				if (verdict == Boolean.TRUE) {
-					result.setSeverity(Severity.OK);
+			EObject eObject = result.getValidatableNode().getConstrainedObject();
+			ResourceSet resourceSet = eObject.eResource().getResourceSet();
+			if (resourceSet != null) {
+				final @NonNull org.eclipse.ocl.examples.pivot.Constraint constraint = pivotConstraint;
+				final @Nullable Object object = constrainedObject;
+				final @NonNull PivotEnvironmentFactory environmentFactory = new PivotEnvironmentFactory(null, metaModelManager);
+				final @NonNull Environment rootEnvironment = environmentFactory.createEnvironment();
+				final org.eclipse.ocl.examples.pivot.OpaqueExpression specification = constraint.getSpecification();
+				assert specification != null;
+				ExpressionInOCL query = specification.getExpressionInOCL();
+				if (query == null) {
+					throw new ParserException("Missing constraint");
 				}
-				else if (verdict == Boolean.FALSE) {
-					result.setSeverity(Severity.WARNING);
-				}
-				else if (verdict == null) {
-					result.setSeverity(Severity.ERROR);
-				}
-				else {
-					result.setSeverity(Severity.FATAL);
-				}
+				EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, object, query, null);
+				ConstraintEvaluator<Diagnostic> constraintEvaluator = new ConstraintEvaluator<Diagnostic>(query)
+				{
+					@Override
+					protected String getObjectLabel() {
+						org.eclipse.ocl.examples.pivot.Type type = PivotUtil.getContainingType(constraint);
+						org.eclipse.ocl.examples.pivot.Type primaryType = type != null ? environmentFactory.getMetaModelManager().getPrimaryType(type) : null;
+						Classifier classifier = primaryType != null ?  (Classifier)primaryType.getETarget() : null;
+						return classifier != null ? classifier.getName() : "??";
+//						return DomainUtil.getLabel(classifier, object, context);
+					}
+	
+					@Override
+					protected Diagnostic handleExceptionResult(@NonNull Exception e) {
+						String message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
+							getConstraintTypeName(), getConstraintName(), getObjectLabel(), e);
+						return new BasicDiagnostic(Diagnostic.ERROR, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+					}
+	
+					@Override
+					protected Diagnostic handleFailureResult(@Nullable Object result) {
+						String message = getConstraintResultMessage(result);
+						if (message == null) {
+							message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
+								getConstraintTypeName(), getConstraintName(), getObjectLabel());
+						}
+						int severity = getConstraintResultSeverity(result);
+						return new BasicDiagnostic(severity, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+					}
+	
+					@Override
+					protected Diagnostic handleInvalidResult(@NonNull InvalidValueException e) {
+						String message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
+							getConstraintTypeName(), getConstraintName(), getObjectLabel());
+						return new BasicDiagnostic(Diagnostic.ERROR, EObjectValidator.DIAGNOSTIC_SOURCE, 0, message, new Object [] { object });
+					}
+	
+					@Override
+					protected Diagnostic handleSuccessResult() {
+						return null;
+					}
+				};
+				@Nullable Diagnostic diagnostic =constraintEvaluator.evaluate(evaluationVisitor);
+				result.setDiagnostic(diagnostic);
+				severity = diagnostic != null ? getSeverity(diagnostic) : Severity.OK;
 			}
-			else {
-				result.setSeverity(Severity.FATAL);
-			}
-		} catch (ParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			result.setSeverity(Severity.FATAL);
+		} catch (Throwable e) {
+			result.setException(e);
+			severity = Severity.FATAL;
+		} finally {
+			result.setSeverity(severity);
 		}
 	}
 }
