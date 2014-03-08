@@ -30,22 +30,20 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.common.label.ILabelGenerator;
+import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
@@ -67,6 +65,11 @@ public class ValidityManager
 	public static final @NonNull TracingOption CREATE_RESULT = new TracingOption(ValidityPlugin.PLUGIN_ID, "create/result");
 	public static final @NonNull TracingOption CREATE_VALIDATABLE = new TracingOption(ValidityPlugin.PLUGIN_ID, "create/validatable");
 	public static final @NonNull TracingOption LOCATE_RESOURCE = new TracingOption(ValidityPlugin.PLUGIN_ID, "locate/resource");
+	
+	private static final @NonNull Map<ILabelGenerator.Option<?>, Object> LABEL_OPTIONS = new HashMap<ILabelGenerator.Option<?>, Object>();
+	static {
+		LABEL_OPTIONS.put(ILabelGenerator.Builder.SHOW_QUALIFIER, null);
+	}
 
 	private final @NonNull LinkedHashSet<Resource> newResources = new LinkedHashSet<Resource>();
 
@@ -289,14 +292,15 @@ public class ValidityManager
 
 	public @NonNull String getConstrainingLabel(@NonNull EObject eObject) {
 		StringBuilder s = new StringBuilder();
-		if (eObject instanceof ENamedElement) {
+		s.append(ILabelGenerator.Registry.INSTANCE.labelFor(eObject, LABEL_OPTIONS));
+/*		if (eObject instanceof ENamedElement) {
 			s.append(((ENamedElement)eObject).getName());
 		}
 		else {
 		    IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(eObject, IItemLabelProvider.class);
 			String label = itemLabelProvider != null ? itemLabelProvider.getText(eObject) : eObject.toString();
 			s.append(label != null ? label : "");
-		}
+		} */
 /*		EClass eClass = eObject.eClass();
 		if (eClass != null) {
 			s.append(" : " + eClass.getName());
@@ -369,7 +373,8 @@ public class ValidityManager
 
 	public @NonNull String getValidatableLabel(@NonNull EObject eObject) {
 		StringBuilder s = new StringBuilder();
-		if (eObject instanceof ENamedElement) {
+		s.append(EcoreUtils.SIMPLE_NAME_REGISTRY.labelFor(eObject, LABEL_OPTIONS));
+/*		if (eObject instanceof ENamedElement) {
 			s.append(((ENamedElement)eObject).getName());
 		}
 		else {
@@ -386,7 +391,7 @@ public class ValidityManager
 			if (eClass != null) {
 				s.append(" | " + eClass.getName());
 			}
-		}
+		} */
 		EObject eContainer = eObject.eContainer();
 		if (eContainer == null) {
 			Resource eResource = eObject.eResource();

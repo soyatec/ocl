@@ -24,27 +24,25 @@ import org.eclipse.ocl.examples.emf.validation.validity.ui.plugin.ValidityUIPlug
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.IDEValidityManager;
 import org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView;
 
-public class ForceValidityViewRefreshAction extends Action {
-	protected final @NonNull
-	IDEValidityManager validityManager;
+public class ForceValidityViewRefreshAction extends Action
+{
+	protected final @NonNull IDEValidityManager validityManager;
 
-	protected final @NonNull
-	ValidityView validityView;
-	public ForceValidityViewRefreshAction(
-			@NonNull IDEValidityManager validityManager, @NonNull ValidityView validityView) {
+	protected final @NonNull ValidityView validityView;
+	
+	public ForceValidityViewRefreshAction(@NonNull IDEValidityManager validityManager, @NonNull ValidityView validityView) {
 		super(ValidityUIMessages.ValidityView_Action_ForceRefresh_Title);
 		this.validityManager = validityManager;
 		this.validityView = validityView;
 		setToolTipText(ValidityUIMessages.ValidityView_Action_ForceRefresh_ToolTipText);
-		URL image = (URL) ValidityUIPlugin.INSTANCE
-				.getImage(ValidityUIMessages.ValidityView_Action_ForceRefresh_ImageLocation);
+		URL image = (URL) ValidityUIPlugin.INSTANCE.getImage(ValidityUIMessages.ValidityView_Action_ForceRefresh_ImageLocation);
 		setImageDescriptor(ImageDescriptor.createFromURL(image));
 	}
 
 	@Override
 	public void run() {
 		validityManager.forceRefresh();
-		validityView.getConstrainingNodesViewer().refresh();
-		validityView.getValidatableNodesViewer().refresh();
+//		validityView.getConstrainingNodesViewer().refresh();
+//		validityView.getValidatableNodesViewer().refresh();
 	}
 }

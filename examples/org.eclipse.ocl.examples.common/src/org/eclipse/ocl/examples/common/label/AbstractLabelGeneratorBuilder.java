@@ -55,6 +55,10 @@ public abstract class AbstractLabelGeneratorBuilder implements ILabelGenerator.B
 		return registry;
 	}
 
+	public <T> boolean hasOption(@NonNull ILabelGenerator.Option<T> option) {
+		return (options != null) && options.containsKey(option);
+	}
+
 	public <T> void setOption(@NonNull ILabelGenerator.Option<T> option, @Nullable T value) {
 		Map<Option<?>, Object> options2 = options;
 		if (options2 == null)

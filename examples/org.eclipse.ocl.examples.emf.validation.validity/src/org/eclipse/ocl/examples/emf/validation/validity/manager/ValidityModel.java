@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.common.label.ILabelGenerator;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
@@ -588,9 +589,17 @@ public class ValidityModel
 	protected @NonNull StringBuilder getResultPath(@NonNull StringBuilder s, @Nullable AbstractNode abstractNode) {
 		if (abstractNode != null) {
 			getResultPath(s, abstractNode.getParent());
-			String label = abstractNode.getLabel();
-			int index = label.indexOf(' ');
-			s.append(index > 0 ? label.substring(0, index) : label);
+//			String label = abstractNode.getLabel();
+//			int index = label.indexOf(' ');
+//			s.append(index > 0 ? label.substring(0, index) : label);
+//			s.append(label);
+//			StringBuilder s = new StringBuilder();
+			if (abstractNode instanceof ConstrainingNode) {
+				s.append(ILabelGenerator.Registry.INSTANCE.labelFor(((ConstrainingNode)abstractNode).getConstrainingObject(), null));
+			}
+			else if (abstractNode instanceof ValidatableNode) {
+				s.append(ILabelGenerator.Registry.INSTANCE.labelFor(((ValidatableNode)abstractNode).getConstrainedObject(), null));
+			}
 			s.append("::");
 		}
 		return s;

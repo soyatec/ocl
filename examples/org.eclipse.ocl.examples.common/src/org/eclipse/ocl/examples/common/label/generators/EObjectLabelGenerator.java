@@ -36,7 +36,7 @@ public final class EObjectLabelGenerator extends AbstractLabelGenerator<EObject>
 			labelBuilder.appendObject(EcoreUtil.getURI(object));
 			return;
 		}
-		if (labelBuilder.getOption(Builder.SHOW_QUALIFIER) == null)	{		// Legacy behavior
+		if (!labelBuilder.hasOption(Builder.SHOW_QUALIFIER))	{		// Legacy behavior
 			if (object.eContainer() != null) {
 				labelBuilder.appendObject(object.eContainer());
 				labelBuilder.appendString("/");

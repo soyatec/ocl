@@ -50,7 +50,7 @@ public final class TracingOption implements Appendable
 		this.option = pluginId + "/" + option;
 	}
 
-	public @NonNull Appendable append(@NonNull CharSequence csq) {
+	public @NonNull Appendable append(CharSequence csq) {
 		if (!resolved) {
 			state = resolveState();
 			resolved = true;
@@ -60,7 +60,7 @@ public final class TracingOption implements Appendable
 		return this;
 	}
 
-	public @NonNull Appendable append(@NonNull CharSequence csq, int start, int end) {
+	public @NonNull Appendable append(CharSequence csq, int start, int end) {
 		if (!resolved) {
 			state = resolveState();
 			resolved = true;
@@ -70,7 +70,7 @@ public final class TracingOption implements Appendable
 		return this;
 	}
 
-	public @NonNull Appendable append(@NonNull char c) {
+	public @NonNull Appendable append(char c) {
 		if (!resolved) {
 			state = resolveState();
 			resolved = true;

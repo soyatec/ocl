@@ -76,6 +76,7 @@ public interface ILabelGenerator<T>
 		void appendString(@Nullable String string);
 		void buildLabelFor(@Nullable Object labelledObject);
 		@Nullable <T> T getOption(@NonNull Option<T> option);
+		<T> boolean hasOption(@NonNull Option<T> option);
 		Registry getRegistry();
 		<T> void setOption(@NonNull Option<T> option, @Nullable T value);
 		@NonNull String toString();
