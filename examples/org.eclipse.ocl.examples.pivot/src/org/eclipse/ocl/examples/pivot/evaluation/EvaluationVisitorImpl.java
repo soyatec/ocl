@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.EvaluatorMultipleIterationManager;
@@ -140,7 +141,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		Environment environment = getEnvironment();
 		EnvironmentFactory factory = environment.getFactory();
     	EvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(getEvaluationEnvironment());
-		return new EvaluationVisitorImpl(environment, nestedEvalEnv, getModelManager());
+		EvaluationVisitorImpl nestedEvaluationVisitor = new EvaluationVisitorImpl(environment, nestedEvalEnv, getModelManager());
+		nestedEvaluationVisitor.setMonitor(getMonitor());
+		return nestedEvaluationVisitor;
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainExpression body) {
@@ -407,6 +410,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	@Override
 	public Object visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
+		if ((monitor != null) && monitor.isCanceled()) {
+			throw new EvaluationHaltedException("Canceled");
+		}
 		return safeVisit(expression.getBodyExpression());
 	}
 
@@ -448,6 +454,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Object visitIterateExp(@NonNull IterateExp iterateExp) {
+		if (isCanceled()) {
+			throw new EvaluationHaltedException("Canceled");
+		}
 		Iteration staticIteration = DomainUtil.nonNullModel(iterateExp.getReferredIteration());
 		OCLExpression source = iterateExp.getSource();
 		Object acceptedValue = source.accept(undecoratedVisitor);
@@ -512,6 +521,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Object visitIteratorExp(@NonNull IteratorExp iteratorExp) {
+		if ((monitor != null) && monitor.isCanceled()) {
+			throw new EvaluationHaltedException("Canceled");
+		}
 		Iteration staticIteration = DomainUtil.nonNullModel(iteratorExp.getReferredIteration());
 		CollectionValue sourceValue;
 //		try {
@@ -623,6 +635,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+		if ((monitor != null) && monitor.isCanceled()) {
+			throw new EvaluationHaltedException("Canceled");
+		}
 		DomainEvaluator evaluator = undecoratedVisitor.getEvaluator();
 		Operation staticOperation = DomainUtil.nonNullModel(operationCallExp.getReferredOperation());
 		//

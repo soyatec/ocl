@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.domain.evaluation;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.ocl.examples.domain.messages.StatusCodes;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * Exception indicating a managed interruption of evaluation.
@@ -34,7 +35,7 @@ import org.eclipse.ocl.examples.domain.messages.StatusCodes;
  * 
  * @author radvorak
  */
-public class EvaluationHaltedException extends DomainException
+public class EvaluationHaltedException extends InvalidValueException
 {
 	private static final long serialVersionUID = -7375617635204485747L;
 

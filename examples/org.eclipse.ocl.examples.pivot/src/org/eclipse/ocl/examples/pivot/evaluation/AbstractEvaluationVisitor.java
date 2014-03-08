@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -77,9 +79,9 @@ public abstract class AbstractEvaluationVisitor
 	};
 
     /**
-     * Set true by {@link #setCanceled} to terminate execution at next call to {@link #getValuefactory()}.
+     * Set non-nullby {@link #setMonitor} to terminate execution at next iteration/operation call.
      */
-	private boolean isCanceled = false;
+	protected @Nullable Monitor monitor = null;
 	
 	/**
 	 * Initializes me.
@@ -147,6 +149,10 @@ public abstract class AbstractEvaluationVisitor
     // implements the interface method
 	public @NonNull DomainModelManager getModelManager() {
 		return modelManager;
+	}
+
+	public @Nullable Monitor getMonitor() {
+		return monitor;
 	}
 
 	/**
@@ -221,15 +227,25 @@ public abstract class AbstractEvaluationVisitor
     }
 
 	public boolean isCanceled() {
-		return isCanceled;
+		return (monitor != null) && monitor.isCanceled();
 	}
 
 	public void setCanceled(boolean isCanceled) {
-		this.isCanceled = isCanceled;
+		if (monitor != null) {
+			monitor.setCanceled(isCanceled);
+		}
+		else if (isCanceled) {
+			monitor = new BasicMonitor();
+			monitor.setCanceled(isCanceled);
+		}
 	}
 
 	public void setLogger(@Nullable DomainLogger logger) {
 		this.logger = logger;
+	}
+
+	public void setMonitor(@Nullable Monitor monitor) {
+		this.monitor = monitor;
 	}
 
     /**

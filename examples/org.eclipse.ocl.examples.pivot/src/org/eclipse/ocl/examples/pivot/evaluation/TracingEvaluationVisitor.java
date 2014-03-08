@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.pivot.evaluation;
 
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -102,6 +103,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		return delegate.getMetaModelManager();
 	}
 
+	public @Nullable Monitor getMonitor() {
+		return delegate.getMonitor();
+	}
+
 	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
 		return delegate.getRegexPattern(regex);
 	}
@@ -132,6 +137,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 
 	public void setLogger(@Nullable DomainLogger logger) {
 		delegate.setLogger(logger);
+	}
+
+	public void setMonitor(@Nullable Monitor monitor) {
+		delegate.setMonitor(monitor);
 	}
     
     protected @Nullable Object trace(@NonNull Element expression, @Nullable Object value) {

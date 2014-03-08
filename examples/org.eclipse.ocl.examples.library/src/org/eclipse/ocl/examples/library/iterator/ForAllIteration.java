@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
+import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -69,6 +70,9 @@ public class ForAllIteration extends AbstractIteration
 			else {
 				throw new InvalidValueException(EvaluatorMessages.NonBooleanBody, "exists"); 	// Non boolean body is invalid //$NON-NLS-1$
 			}
+		}
+		catch (EvaluationHaltedException e) {
+			throw e;
 		}
 		catch (InvalidValueException e) {
 			MutableObject accumulatorValue = (MutableObject) iterationManager.getAccumulatorValue();

@@ -17,6 +17,7 @@
 
 package org.eclipse.ocl.examples.pivot.evaluation;
 
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -72,7 +73,15 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
 
 	@NonNull MetaModelManager getMetaModelManager();
 
+	@Nullable Monitor getMonitor();
+
 	@NonNull DomainStandardLibrary getStandardLibrary();
+
+	boolean isCanceled();
+	
+	void setCanceled(boolean isCanceled);
+
+	void setMonitor(@Nullable Monitor monitor);
     
     /**
      * Configures the specified decorated visitor to correctly handle the

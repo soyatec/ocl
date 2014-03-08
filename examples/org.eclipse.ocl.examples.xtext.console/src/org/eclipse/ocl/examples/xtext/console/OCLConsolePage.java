@@ -241,10 +241,10 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 						}				
 					});
 			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
-				} catch (InvalidValueException e) {
-					value = e;
 				} catch (EvaluationHaltedException e) {
 					value = new InvalidValueException(ConsoleMessages.Result_EvaluationTerminated);
+				} catch (InvalidValueException e) {
+					value = e;
 				} catch (Exception e) {
 					value = new InvalidValueException(e, ConsoleMessages.Result_EvaluationFailure);
 				} finally {

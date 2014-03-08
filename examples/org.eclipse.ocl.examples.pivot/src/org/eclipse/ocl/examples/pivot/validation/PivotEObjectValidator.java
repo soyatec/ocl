@@ -23,6 +23,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -162,6 +163,12 @@ public class PivotEObjectValidator implements EValidator
 			ExpressionInOCL query = specification.getExpressionInOCL();
 			assert query != null;
 			EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, object, query, null);
+			if (context != null) {
+				Object monitor = context.get(Monitor.class);
+				if (monitor instanceof Monitor) {
+					evaluationVisitor.setMonitor((Monitor) monitor);
+				}
+			}
 			ConstraintEvaluator<Diagnostic> constraintEvaluator = new ConstraintEvaluator<Diagnostic>(query)
 			{
 				@Override
