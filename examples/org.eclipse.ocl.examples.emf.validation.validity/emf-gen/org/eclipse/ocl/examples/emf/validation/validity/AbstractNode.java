@@ -198,6 +198,4 @@ public interface AbstractNode extends EObject {
 	 * Return strue if this  node visible.
 	 */
 	boolean refreshVisibleChildren(@NonNull Iterable<IVisibilityFilter> visibilityFilters);
-
-//	Object getContext();
 } // AbstractNode

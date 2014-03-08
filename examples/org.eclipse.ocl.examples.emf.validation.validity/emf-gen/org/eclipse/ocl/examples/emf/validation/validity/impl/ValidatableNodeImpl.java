@@ -298,9 +298,4 @@ public class ValidatableNodeImpl extends AbstractNodeImpl implements Validatable
 		}
 		return super.eIsSet(featureID);
 	}
-	
-	public Object getContext() {
-		return constrainedObject;
-	}
-
 } //ValidatableNodeImpl

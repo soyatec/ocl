@@ -16,7 +16,9 @@
 package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -249,33 +251,41 @@ public class ValidityView extends ViewPart implements ISelectionListener
 
 		@Override
 		protected IStatus run(/*@NonNull*/ IProgressMonitor monitor) {
+			long start = System.currentTimeMillis();
 			assert monitor != null;
 			try {
 				final @SuppressWarnings("null")@NonNull Monitor emfMonitor = BasicMonitor.toMonitor(monitor);
 				validityManager.setInput(newSelection, emfMonitor);
 				if (!monitor.isCanceled()) {
+					refreshModel(start);
 					getForm().getDisplay().asyncExec(new Runnable()
 					{
 						@Override
 						public void run() {
+//							long start = System.currentTimeMillis();
 							RootNode rootNode = validityManager.getRootNode();
 							Object validatableNodesViewerInput = getValidatableNodesViewer().getInput();
 							if (validatableNodesViewerInput == null || !validatableNodesViewerInput.equals(rootNode)) {
 								if (!emfMonitor.isCanceled()) {
+//									System.out.format(Thread.currentThread().getName() + " %3.3f set ValidatableNodes input\n", (System.currentTimeMillis() - start) * 0.001);
 									getValidatableNodesViewer().setInput(rootNode);
 								}
 								if (!emfMonitor.isCanceled()) {
+//									System.out.format(Thread.currentThread().getName() + " %3.3f set ConstrainingNodes input\n", (System.currentTimeMillis() - start) * 0.001);
 									getConstrainingNodesViewer().setInput(rootNode);
 								}
 								if (!emfMonitor.isCanceled()) {
+//									System.out.format(Thread.currentThread().getName() + " %3.3f set validationRootChanged input\n", (System.currentTimeMillis() - start) * 0.001);
 									filteredValidatableNodesTree.resetFilter();
 									filteredConstrainingNodesTree.resetFilter();
 									validationRootChanged(rootNode);
 								}
 							}
+//							System.out.format(Thread.currentThread().getName() + " %3.3f done\n", (System.currentTimeMillis() - start) * 0.001);
 						}
 					});
 				}
+//				System.out.format(Thread.currentThread().getName() + " %3.3f done\n", (System.currentTimeMillis() - start) * 0.001);
 				return monitor.isCanceled() ? Status.CANCEL_STATUS : Status.OK_STATUS;
 			}
 			finally {
@@ -283,6 +293,88 @@ public class ValidityView extends ViewPart implements ISelectionListener
 				synchronized (this) {
 					setInputJob = null;
 					ChangeSelectionJob replacementJob2 = replacementJob;
+					if (replacementJob2 != null) {
+						replacementJob2.schedule();
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * The ChangeSelectionJob performs the work for a setSelection() without clogging up the UI. Multiple chnages are maintained
+	 * in a linked list so that the earlier jobs complete cancelation before another starts.
+	 */
+	protected class RedrawJob extends Job
+	{
+		private @Nullable RedrawJob replacementJob = null;
+
+		protected RedrawJob() {
+			super("Validity View: Redraw");
+		}
+
+		public synchronized void cancelThenSchedule(@NonNull RedrawJob newJob) {
+			this.replacementJob = newJob;
+			cancel();
+		}
+
+		@Override
+		protected IStatus run(/*@NonNull*/ IProgressMonitor monitor) {
+			long start = System.currentTimeMillis();
+//			System.out.format(Thread.currentThread().getName() + " %3.3f Redraw start\n", (System.currentTimeMillis() - start) * 0.001);
+			assert monitor != null;
+			try {
+				final @SuppressWarnings("null")@NonNull Monitor emfMonitor = BasicMonitor.toMonitor(monitor);
+				if (!monitor.isCanceled()) {
+					refreshModel(start);
+					final List<AbstractNode> grayedConstrainingNodes = new ArrayList<AbstractNode>();
+					final List<AbstractNode> grayedValidatableNodes = new ArrayList<AbstractNode>();
+					RootNode rootNode = validityManager.getRootNode();
+					if (rootNode != null) {
+//						System.out.format(Thread.currentThread().getName() + " %3.3f Redraw compute grays\n", (System.currentTimeMillis() - start) * 0.001);
+						for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+							abstractNode.getGrayedElements(grayedConstrainingNodes);
+						}
+						for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+							abstractNode.getGrayedElements(grayedValidatableNodes);
+						}
+					}
+//					System.out.format(Thread.currentThread().getName() + " %3.3f Redraw schedule main\n", (System.currentTimeMillis() - start) * 0.001);
+					getForm().getDisplay().asyncExec(new Runnable()
+					{
+						@Override
+						public void run() {
+//							long start = System.currentTimeMillis();
+							CheckboxTreeViewer constrainingNodesViewer = getConstrainingNodesViewer();
+							CheckboxTreeViewer validatableNodesViewer = getValidatableNodesViewer();
+							if (!emfMonitor.isCanceled()) {
+//								System.out.format(Thread.currentThread().getName() + " %3.3f Redraw refresh ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+								constrainingNodesViewer.refresh();
+							}
+							if (!emfMonitor.isCanceled()) {
+///								System.out.format(Thread.currentThread().getName() + " %3.3f Redraw refresh ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+								validatableNodesViewer.refresh();
+							}
+							if (!emfMonitor.isCanceled()) {
+//								System.out.format(Thread.currentThread().getName() + " %3.3f Redraw setGrayed ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+								constrainingNodesViewer.setGrayedElements(grayedConstrainingNodes.toArray(new Object[grayedConstrainingNodes.size()]));
+							}
+							if (!emfMonitor.isCanceled()) {
+//								System.out.format(Thread.currentThread().getName() + " %3.3f Redraw setGrayed ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+								validatableNodesViewer.setGrayedElements(grayedValidatableNodes.toArray(new Object[grayedValidatableNodes.size()]));
+							}
+//							System.out.format(Thread.currentThread().getName() + " %3.3f Redraw done\n", (System.currentTimeMillis() - start) * 0.001);
+						}
+					});
+				}
+//				System.out.format(Thread.currentThread().getName() + " %3.3f Redraw done\n", (System.currentTimeMillis() - start) * 0.001);
+				return monitor.isCanceled() ? Status.CANCEL_STATUS : Status.OK_STATUS;
+			}
+			finally {
+				monitor.done();
+				synchronized (this) {
+					redrawJob = null;
+					RedrawJob replacementJob2 = replacementJob;
 					if (replacementJob2 != null) {
 						replacementJob2.schedule();
 					}
@@ -390,8 +482,8 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		Color blueColor = parent.getDisplay().getSystemColor(SWT.COLOR_BLUE);
 	    ILabelProvider labelProvider = new ValidityViewLabelProvider(validityManager.getAdapterFactory());
 		ILabelProvider nodeLabelProvider = new NodeLabelProvider(labelProvider, blackColor, blueColor);
-		IContentProvider validatableContentProvider = new ValidatableNodeContentProvider(validityManager, nodeLabelProvider);
-		IContentProvider constrainingNodeContentProvider = new ConstrainingNodeContentProvider(validityManager, nodeLabelProvider);
+		IContentProvider validatableContentProvider = new ValidatableNodeContentProvider(validityManager);
+		IContentProvider constrainingNodeContentProvider = new ConstrainingNodeContentProvider(validityManager);
 		ICheckStateProvider nodeCheckStateProvider = new NodeCheckStateProvider();
 	    ILabelProvider nodeDecoratingLabelProvider = new DecoratingNodeLabelProvider(nodeLabelProvider, new SeveritiesDecorator(validityManager));
 		
@@ -486,9 +578,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			toolkit.paintBordersFor(constrainingNodesSectionBody);
 			constrainingNodesSection.setClient(constrainingNodesSectionBody);
 		}
-		
-		ICheckStateListener nodeCheckStateListener = new ValidityNodeCheckStateListener(validityManager, this,
-			getValidatableNodesViewer(), getConstrainingNodesViewer());
+		ICheckStateListener nodeCheckStateListener = new ValidityNodeCheckStateListener(this);
 		validatableNodesViewer.setContentProvider(validatableContentProvider);
 		validatableNodesViewer.setLabelProvider(nodeDecoratingLabelProvider);
 		validatableNodesViewer.setCheckStateProvider(nodeCheckStateProvider);
@@ -759,8 +849,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		if (!validatableNodesFilterByKind.removeFilteredSeverity(severity)) {
 			validatableFilters.remove(validatableNodesFilterByKind);
 		}
-		getConstrainingNodesViewer().refresh();
-		getValidatableNodesViewer().refresh();
+		redraw();
 	}
 	
 	/**
@@ -818,62 +907,65 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		}
 	}
 	
-/*	private @Nullable RedrawJob redrawJob = null;
+	private @Nullable RedrawJob redrawJob = null;
 	
-	protected synchronized void redraw(boolean visibilityChanged, boolean selectionsChanged) {
+	/**
+	 * Schedule a redraw of validatable and constraining trees.
+	 */
+	public synchronized void redraw() {
 		RedrawJob oldJob = redrawJob;
-		RedrawJob newJob = redrawJob = new RedrawJob(visibilityChanged || (oldJob != null), selectionsChanged || (oldJob != null));
+		RedrawJob newJob = redrawJob = new RedrawJob();
 		if (oldJob != null) {
 			oldJob.cancelThenSchedule(newJob);
 		}
 		else {
 			newJob.schedule();
 		}
-	} */
+	}
 
-	protected void refreshModel(long start, boolean visibilityChanged, boolean selectionsChanged) {
+	protected void refreshModel(long start) {
 		RootNode rootNode = validityManager.getRootNode();
 		if (rootNode != null) {
-			int validatableNodes = 0;
-			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-				validatableNodes += abstractNode.countVisibleChildren();
-			}
-			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
-			int constrainingNodes = 0;
-			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-				constrainingNodes += abstractNode.countVisibleChildren();
-			}
-			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
-			if (selectionsChanged || visibilityChanged) {
-				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+//			int validatableNodes = 0;
+//			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+//				validatableNodes += abstractNode.countVisibleChildren();
+//			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
+//			int constrainingNodes = 0;
+//			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+//				constrainingNodes += abstractNode.countVisibleChildren();
+//			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
+//			if (selectionsChanged || visibilityChanged) {
+//				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
 				for (AbstractNode aNode : rootNode.getValidatableNodes()) {
 					aNode.refreshVisibleChildren(validatableFilters);
 				}
-				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+//				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
 				for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
 					aNode.refreshVisibleChildren(constrainingFilters);
 				}
-			}
-			if (selectionsChanged || visibilityChanged) {
-				System.out.format(Thread.currentThread().getName() + " %3.3f regray ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+//			}
+//			if (selectionsChanged || visibilityChanged) {
+//				System.out.format(Thread.currentThread().getName() + " %3.3f regray ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
 				for (AbstractNode aNode : rootNode.getValidatableNodes()) {
 					aNode.refreshGrayed();
 				}
-				System.out.format(Thread.currentThread().getName() + " %3.3f regray ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+//				System.out.format(Thread.currentThread().getName() + " %3.3f regray ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
 				for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
 					aNode.refreshGrayed();
 				}
-			}
-			validatableNodes = 0;
-			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-				validatableNodes += abstractNode.countVisibleChildren();
-			}
-			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
-			constrainingNodes = 0;
-			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-				constrainingNodes += abstractNode.countVisibleChildren();
-			}
-			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
+//			}
+//			validatableNodes = 0;
+//			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+//				validatableNodes += abstractNode.countVisibleChildren();
+//			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
+//			constrainingNodes = 0;
+//			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+//				constrainingNodes += abstractNode.countVisibleChildren();
+//			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
 		}
 	}
 
@@ -953,8 +1045,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		else {
 			constrainingFilters.add(filter);
 		}
-		getConstrainingNodesViewer().refresh();
-		getValidatableNodesViewer().refresh();
+		redraw();
 	}
 
 	public void removeFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
@@ -964,7 +1055,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		else {
 			constrainingFilters.remove(filter);
 		}
-		getConstrainingNodesViewer().refresh();
-		getValidatableNodesViewer().refresh();
+		redraw();
 	}
 }

@@ -43,7 +43,7 @@ public class UnusedNodesVisibilityFilter implements IVisibilityFilter
 		if ((node instanceof ResultConstrainingNode) || (node instanceof ResultValidatableNode)) {
 			return false;
 		}
-		for (AbstractNode child : node.getChildren()) {
+		for (AbstractNode child : node.getVisibleChildren()) {
 			if (child.isEnabled()) {
 				return true;
 			}

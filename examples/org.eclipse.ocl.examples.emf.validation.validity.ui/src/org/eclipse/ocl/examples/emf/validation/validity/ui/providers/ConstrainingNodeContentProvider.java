@@ -17,49 +17,17 @@ package org.eclipse.ocl.examples.emf.validation.validity.ui.providers;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 
-public class ConstrainingNodeContentProvider implements ITreeContentProvider
+public class ConstrainingNodeContentProvider extends AbstractNodeContentProvider
 {
-	public static final @NonNull Object[] NO_OBJECTS = new Object[0];
-	
-	private final @NonNull ValidityManager validityManager;
-
-	public ConstrainingNodeContentProvider(@NonNull ValidityManager validityManager, @NonNull ILabelProvider labelProvider) {
-		this.validityManager = validityManager;
+	public ConstrainingNodeContentProvider(@NonNull ValidityManager validityManager) {
+		super(validityManager);
 	}
 
-	public void dispose() {}
-
-	public Object[] getElements(Object inputElement) {
-		RootNode rootNode = validityManager.getRootNode();
-		if (rootNode == null) {
-			return NO_OBJECTS;
-		}
-		List<RootConstrainingNode> constrainingNodes = rootNode.getConstrainingNodes();
-		return constrainingNodes.toArray(new Object[constrainingNodes.size()]);
-	}
-
-	public Object[] getChildren(Object parentElement) {
-		List<ConstrainingNode> constrainingNodes = ((ConstrainingNode)parentElement).getChildren();
-		return constrainingNodes.toArray(new Object[constrainingNodes.size()]);
-	}
-
-	public Object getParent(Object element) {
-		return ((ConstrainingNode)element).getParent();
-	}
-
-	public boolean hasChildren(Object element) {
-		List<ConstrainingNode> constrainingNodes = ((ConstrainingNode)element).getChildren();
-		return constrainingNodes.size() > 0;
-	}
-
-	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+	protected @NonNull List<RootConstrainingNode> getRootNodes(@NonNull RootNode rootNode) {
+		return rootNode.getConstrainingNodes();
 	}
 }

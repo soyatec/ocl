@@ -15,93 +15,51 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
-import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
-import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 
 public class ValidityNodeCheckStateListener implements ICheckStateListener
 {
-	private final @NonNull ValidityManager validityManager;	
 	private final @NonNull ValidityView validityView;	
-	private final @NonNull CheckboxTreeViewer validatableTree;	
-	private final @NonNull CheckboxTreeViewer constraintsTree;
 	
-	public ValidityNodeCheckStateListener(@NonNull ValidityManager validityManager, @NonNull ValidityView validityView, @NonNull CheckboxTreeViewer validatableTree,@NonNull CheckboxTreeViewer constraintsTree) {
-		this.validityManager = validityManager;
+	public ValidityNodeCheckStateListener(@NonNull ValidityView validityView) {
+//		this.validityManager = validityManager;
 		this.validityView = validityView;
-		this.validatableTree = validatableTree;
-		this.constraintsTree = constraintsTree;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ICheckStateListener#checkStateChanged(org.eclipse.jface.viewers.CheckStateChangedEvent)
 	 */
 	public void checkStateChanged(CheckStateChangedEvent event) { 
-		long start = System.currentTimeMillis();
-//		validatableTree.getTree().setRedraw(false);
-//		constraintsTree.getTree().setRedraw(false);
-		
-		RootNode rootNode = validityManager.getRootNode();
+//		long start = System.currentTimeMillis();
+		RootNode rootNode = validityView.getValidityManager().getRootNode();
 		assert rootNode != null;
-		System.out.format(Thread.currentThread().getName() + " %3.3f checkStateChanged\n", (System.currentTimeMillis() - start) * 0.001);
-		int validatableNodes = 0;
-		for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-			validatableNodes += abstractNode.countVisibleChildren();
-		}
-		System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
-		int constrainingNodes = 0;
-		for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-			constrainingNodes += abstractNode.countVisibleChildren();
-		}
-		System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
-//		validatableTree.getTree().setRedraw(false);
-//		constraintsTree.getTree().setRedraw(false); 
+//		System.out.format(Thread.currentThread().getName() + " %3.3f checkStateChanged\n", (System.currentTimeMillis() - start) * 0.001);
+//		int validatableNodes = 0;
+//		for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+//			validatableNodes += abstractNode.countVisibleChildren();
+//		}
+//		System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
+//		int constrainingNodes = 0;
+//		for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+//			constrainingNodes += abstractNode.countVisibleChildren();
+//		}
+//		System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
 		Object element = event.getElement();
-		System.out.format(Thread.currentThread().getName() + " %3.3f update start\n", (System.currentTimeMillis() - start) * 0.001);
+//		System.out.format(Thread.currentThread().getName() + " %3.3f update start\n", (System.currentTimeMillis() - start) * 0.001);
 		if (element instanceof AbstractNode) {
 			AbstractNode abstractNode = (AbstractNode) element;
 			boolean enabled = event.getChecked();
 			abstractNode.setEnabled(enabled);
 			updateEnabledState(abstractNode, enabled);
 		}
-		validityView.refreshModel(start, true, true);
-//		validityView.redraw(false, true);
-		System.out.format(Thread.currentThread().getName() + " %3.3f redraw end\n", (System.currentTimeMillis() - start) * 0.001);
-/*		validatableTree.getTree().setRedraw(false);
-		constraintsTree.getTree().setRedraw(false); 
-		Object element = event.getElement();
-		if (element instanceof AbstractNode) {
-			AbstractNode abstractNode = (AbstractNode) element;
-			boolean enabled = event.getChecked();
-			updateAbstractNodeState(abstractNode, enabled);
-		} */
-//		validatableTree.getTree().setRedraw(true);
-//		constraintsTree.getTree().setRedraw(true);
-//		constraintsTree.getTree().redraw();
-//		validatableTree.getTree().redraw();
-		List<AbstractNode> grayedConstrainingNodes = new ArrayList<AbstractNode>();
-		List<AbstractNode> grayedValidatableNodes = new ArrayList<AbstractNode>();
-		for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-			abstractNode.getGrayedElements(grayedConstrainingNodes);
-		}
-		for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-			abstractNode.getGrayedElements(grayedValidatableNodes);
-		}
-		constraintsTree.refresh();
-		validatableTree.refresh();
-		constraintsTree.setGrayedElements(grayedConstrainingNodes.toArray(new Object[grayedConstrainingNodes.size()]));
-		validatableTree.setGrayedElements(grayedValidatableNodes.toArray(new Object[grayedValidatableNodes.size()]));
-//		constraintsTree.getTree().update();
-//		validatableTree.getTree().update();
+		validityView.redraw();
+//		System.out.format(Thread.currentThread().getName() + " %3.3f redraw end\n", (System.currentTimeMillis() - start) * 0.001);
 	}
 
 	/**

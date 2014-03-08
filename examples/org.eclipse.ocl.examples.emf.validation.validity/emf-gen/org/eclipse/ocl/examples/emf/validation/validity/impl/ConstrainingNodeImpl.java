@@ -300,8 +300,4 @@ public class ConstrainingNodeImpl extends AbstractNodeImpl implements Constraini
 	public String toString() {
 		return super.toString();
 	}
-	
-	public Object getContext() {
-		return constrainingObject;
-	}
 } //ConstrainingNodeImpl

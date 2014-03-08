@@ -45,6 +45,7 @@ public final class EnableDisableAllNodesAction extends AbstractFilterAction
 			RootNode rootNode = validityView.getValidityManager().getRootNode();
 			if (rootNode != null) {
 				updateAll(isValidatableAction ? rootNode.getValidatableNodes() : rootNode.getConstrainingNodes());
+				validityView.redraw();
 			}
 		}
 	}

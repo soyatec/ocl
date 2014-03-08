@@ -17,49 +17,17 @@ package org.eclipse.ocl.examples.emf.validation.validity.ui.providers;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootValidatableNode;
-import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 
-public class ValidatableNodeContentProvider implements ITreeContentProvider
+public class ValidatableNodeContentProvider extends AbstractNodeContentProvider
 {
-	public static final @NonNull Object[] NO_OBJECTS = new Object[0];
-	
-	private final @NonNull ValidityManager validityManager;
-
-	public ValidatableNodeContentProvider(@NonNull ValidityManager validityManager, @NonNull ILabelProvider labelProvider) {
-		this.validityManager = validityManager;
+	public ValidatableNodeContentProvider(@NonNull ValidityManager validityManager) {
+		super(validityManager);
 	}
 
-	public void dispose() {}
-
-	public Object[] getElements(Object inputElement) {
-		RootNode rootNode = validityManager.getRootNode();
-		if (rootNode == null) {
-			return NO_OBJECTS;
-		}
-		List<RootValidatableNode> validatableNodes = rootNode.getValidatableNodes();
-		return validatableNodes.toArray(new Object[validatableNodes.size()]);
-	}
-
-	public Object[] getChildren(Object parentElement) {
-		List<ValidatableNode> validatableNodes = ((ValidatableNode)parentElement).getChildren();
-		return validatableNodes.toArray(new Object[validatableNodes.size()]);
-	}
-
-	public Object getParent(Object element) {
-		return ((ValidatableNode)element).getParent();
-	}
-
-	public boolean hasChildren(Object element) {
-		List<ValidatableNode> validatableNodes = ((ValidatableNode)element).getChildren();
-		return validatableNodes.size() > 0;
-	}
-
-	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+	protected @NonNull List<RootValidatableNode> getRootNodes(@NonNull RootNode rootNode) {
+		return rootNode.getValidatableNodes();
 	}
 }
