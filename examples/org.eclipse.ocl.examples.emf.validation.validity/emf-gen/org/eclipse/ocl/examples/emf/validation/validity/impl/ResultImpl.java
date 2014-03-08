@@ -15,11 +15,9 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -112,7 +110,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Exception EXCEPTION_EDEFAULT = null;
+	protected static final Throwable EXCEPTION_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getException() <em>Exception</em>}' attribute.
@@ -122,7 +120,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * @generated
 	 * @ordered
 	 */
-	protected Exception exception = EXCEPTION_EDEFAULT;
+	protected Throwable exception = EXCEPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,8 +178,6 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 			msgs = basicSetResultSet(newResultSet, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT__RESULT_SET, newResultSet, newResultSet));
 	}
 
 	/**
@@ -194,8 +190,6 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 			InternalEObject oldResultValidatableNode = (InternalEObject)resultValidatableNode;
 			resultValidatableNode = (ResultValidatableNode)eResolveProxy(oldResultValidatableNode);
 			if (resultValidatableNode != oldResultValidatableNode) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ValidityPackage.RESULT__RESULT_VALIDATABLE_NODE, oldResultValidatableNode, resultValidatableNode));
 			}
 		}
 		return resultValidatableNode;
@@ -216,10 +210,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * @generated
 	 */
 	public void setResultValidatableNode(ResultValidatableNode newResultValidatableNode) {
-		ResultValidatableNode oldResultValidatableNode = resultValidatableNode;
 		resultValidatableNode = newResultValidatableNode;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT__RESULT_VALIDATABLE_NODE, oldResultValidatableNode, resultValidatableNode));
 	}
 
 	/**
@@ -237,10 +228,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * @generated
 	 */
 	public void setSeverityGen(Severity newSeverity) {
-		Severity oldSeverity = severity;
 		severity = newSeverity == null ? SEVERITY_EDEFAULT : newSeverity;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT__SEVERITY, oldSeverity, severity));
 	}
 	public void setSeverity(Severity newSeverity) {
 		if (newSeverity != severity || newSeverity == SEVERITY_EDEFAULT) {
@@ -265,10 +253,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * @generated
 	 */
 	public void setDiagnostic(Object newDiagnostic) {
-		Object oldDiagnostic = diagnostic;
 		diagnostic = newDiagnostic;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT__DIAGNOSTIC, oldDiagnostic, diagnostic));
 	}
 
 	/**
@@ -305,7 +290,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Exception getException() {
+	public Throwable getException() {
 		return exception;
 	}
 
@@ -314,11 +299,8 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setException(Exception newException) {
-		Exception oldException = exception;
+	public void setException(Throwable newException) {
 		exception = newException;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT__EXCEPTION, oldException, exception));
 	}
 
 	/**
@@ -415,7 +397,7 @@ public class ResultImpl extends MinimalEObjectImpl.Container implements Result {
 				setDiagnostic(newValue);
 				return;
 			case ValidityPackage.RESULT__EXCEPTION:
-				setException((Exception)newValue);
+				setException((Throwable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

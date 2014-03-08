@@ -14,11 +14,9 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootValidatableNode;
@@ -94,8 +92,6 @@ public class RootValidatableNodeImpl extends ValidatableNodeImpl implements Root
 			msgs = basicSetRootNode(newRootNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.ROOT_VALIDATABLE_NODE__ROOT_NODE, newRootNode, newRootNode));
 	}
 
 	/**

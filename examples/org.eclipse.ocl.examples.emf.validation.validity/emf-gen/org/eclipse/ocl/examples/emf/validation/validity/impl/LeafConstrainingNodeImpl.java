@@ -14,9 +14,7 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.emf.validation.validity.LeafConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage;
@@ -110,10 +108,7 @@ public class LeafConstrainingNodeImpl extends ConstrainingNodeImpl implements Le
 	 * @generated
 	 */
 	public void setConstraintLocator(ConstraintLocator newConstraintLocator) {
-		ConstraintLocator oldConstraintLocator = constraintLocator;
 		constraintLocator = newConstraintLocator;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.LEAF_CONSTRAINING_NODE__CONSTRAINT_LOCATOR, oldConstraintLocator, constraintLocator));
 	}
 
 	/**

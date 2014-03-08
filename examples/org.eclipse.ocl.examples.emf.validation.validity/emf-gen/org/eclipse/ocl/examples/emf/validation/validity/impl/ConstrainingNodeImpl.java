@@ -16,12 +16,10 @@ package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -131,14 +129,12 @@ public class ConstrainingNodeImpl extends AbstractNodeImpl implements Constraini
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.CONSTRAINING_NODE__PARENT, newParent, newParent));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT // Bug 414352 workaround
 	 */
 	@SuppressWarnings("null")
 	public @NonNull EList<ConstrainingNode> getChildren() {
@@ -163,10 +159,7 @@ public class ConstrainingNodeImpl extends AbstractNodeImpl implements Constraini
 	 * @generated
 	 */
 	public void setConstrainingObject(Object newConstrainingObject) {
-		Object oldConstrainingObject = constrainingObject;
 		constrainingObject = newConstrainingObject;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.CONSTRAINING_NODE__CONSTRAINING_OBJECT, oldConstrainingObject, constrainingObject));
 	}
 
 	/**
@@ -306,5 +299,9 @@ public class ConstrainingNodeImpl extends AbstractNodeImpl implements Constraini
 	@Override
 	public String toString() {
 		return super.toString();
+	}
+	
+	public Object getContext() {
+		return constrainingObject;
 	}
 } //ConstrainingNodeImpl

@@ -221,7 +221,7 @@ public class NodeLabelProvider extends ColumnLabelProvider
 		else {
 			s.append(String.valueOf(diagnostic));
 		}
-		Exception exception = result.getException();
+		Throwable exception = result.getException();
 		if (exception != null) {
 			s.append("\n" + exception.getClass().getName() + ":\n");
 			exception.printStackTrace(new PrintWriter(s));	

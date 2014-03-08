@@ -15,14 +15,11 @@
 package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
 import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -123,14 +120,12 @@ public class ValidatableNodeImpl extends AbstractNodeImpl implements Validatable
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.VALIDATABLE_NODE__PARENT, newParent, newParent));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT // Bug 414352 workaround
 	 */
 	@SuppressWarnings("null")
 	public @NonNull EList<ValidatableNode> getChildren() {
@@ -151,8 +146,6 @@ public class ValidatableNodeImpl extends AbstractNodeImpl implements Validatable
 			InternalEObject oldConstrainedObject = (InternalEObject)constrainedObject;
 			constrainedObject = eResolveProxy(oldConstrainedObject);
 			if (constrainedObject != oldConstrainedObject) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ValidityPackage.VALIDATABLE_NODE__CONSTRAINED_OBJECT, oldConstrainedObject, constrainedObject));
 			}
 		}
 		return constrainedObject;
@@ -173,10 +166,7 @@ public class ValidatableNodeImpl extends AbstractNodeImpl implements Validatable
 	 * @generated
 	 */
 	public void setConstrainedObject(EObject newConstrainedObject) {
-		EObject oldConstrainedObject = constrainedObject;
 		constrainedObject = newConstrainedObject;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.VALIDATABLE_NODE__CONSTRAINED_OBJECT, oldConstrainedObject, constrainedObject));
 	}
 
 	/**
@@ -307,6 +297,10 @@ public class ValidatableNodeImpl extends AbstractNodeImpl implements Validatable
 				return constrainedObject != null;
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	public Object getContext() {
+		return constrainedObject;
 	}
 
 } //ValidatableNodeImpl

@@ -60,6 +60,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
@@ -185,7 +186,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 	private Action enableAllValidatableNodesAction;
 	private Action disableAllValidatableNodesAction;
 	private Action disableAllUnusedValidatableNodesAction;
-	private Action disableAllProfileValidatableNodesAction;
 
 	/**Constraining Tool Bar.*/
 	private Action expandAllConstrainingNodesAction;
@@ -487,7 +487,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			constrainingNodesSection.setClient(constrainingNodesSectionBody);
 		}
 		
-		ICheckStateListener nodeCheckStateListener = new ValidityNodeCheckStateListener(
+		ICheckStateListener nodeCheckStateListener = new ValidityNodeCheckStateListener(validityManager, this,
 			getValidatableNodesViewer(), getConstrainingNodesViewer());
 		validatableNodesViewer.setContentProvider(validatableContentProvider);
 		validatableNodesViewer.setLabelProvider(nodeDecoratingLabelProvider);
@@ -561,7 +561,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		manager.add(disableAllValidatableNodesAction);
 		manager.add(new Separator());
 		manager.add(disableAllUnusedValidatableNodesAction);
-		manager.add(disableAllProfileValidatableNodesAction);
 		
 		// Other plug-ins can contribute their actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -624,7 +623,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		manager.add(disableAllValidatableNodesAction);
 		manager.add(new Separator());
 		manager.add(disableAllUnusedValidatableNodesAction);
-		manager.add(disableAllProfileValidatableNodesAction);
 
 		manager.update(true);
 	}
@@ -817,6 +815,65 @@ public class ValidityView extends ViewPart implements ISelectionListener
 				}
 			}
 			setSelection(input);
+		}
+	}
+	
+/*	private @Nullable RedrawJob redrawJob = null;
+	
+	protected synchronized void redraw(boolean visibilityChanged, boolean selectionsChanged) {
+		RedrawJob oldJob = redrawJob;
+		RedrawJob newJob = redrawJob = new RedrawJob(visibilityChanged || (oldJob != null), selectionsChanged || (oldJob != null));
+		if (oldJob != null) {
+			oldJob.cancelThenSchedule(newJob);
+		}
+		else {
+			newJob.schedule();
+		}
+	} */
+
+	protected void refreshModel(long start, boolean visibilityChanged, boolean selectionsChanged) {
+		RootNode rootNode = validityManager.getRootNode();
+		if (rootNode != null) {
+			int validatableNodes = 0;
+			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+				validatableNodes += abstractNode.countVisibleChildren();
+			}
+			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
+			int constrainingNodes = 0;
+			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+				constrainingNodes += abstractNode.countVisibleChildren();
+			}
+			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
+			if (selectionsChanged || visibilityChanged) {
+				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+				for (AbstractNode aNode : rootNode.getValidatableNodes()) {
+					aNode.refreshVisibleChildren(validatableFilters);
+				}
+				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+				for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
+					aNode.refreshVisibleChildren(constrainingFilters);
+				}
+			}
+			if (selectionsChanged || visibilityChanged) {
+				System.out.format(Thread.currentThread().getName() + " %3.3f regray ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+				for (AbstractNode aNode : rootNode.getValidatableNodes()) {
+					aNode.refreshGrayed();
+				}
+				System.out.format(Thread.currentThread().getName() + " %3.3f regray ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+				for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
+					aNode.refreshGrayed();
+				}
+			}
+			validatableNodes = 0;
+			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+				validatableNodes += abstractNode.countVisibleChildren();
+			}
+			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
+			constrainingNodes = 0;
+			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+				constrainingNodes += abstractNode.countVisibleChildren();
+			}
+			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
 		}
 	}
 

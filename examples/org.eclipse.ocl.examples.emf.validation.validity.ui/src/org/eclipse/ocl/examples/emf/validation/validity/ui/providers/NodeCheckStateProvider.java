@@ -26,6 +26,9 @@ public class NodeCheckStateProvider implements ICheckStateProvider
 
 	public boolean isGrayed(Object element) {
 		AbstractNode node = (AbstractNode) element;
-		return node.isEnabled() ? !node.isAllChildrenEnabled() : !node.isAllChildrenDisabled();
+//		if (node.isGrayed()) {
+//			System.out.println("isGrayed " + node.eClass().getName() + " " + ILabelGenerator.Registry.INSTANCE.labelFor(node.getContext()));
+//		}
+		return node.isGrayed();
 	}
 }

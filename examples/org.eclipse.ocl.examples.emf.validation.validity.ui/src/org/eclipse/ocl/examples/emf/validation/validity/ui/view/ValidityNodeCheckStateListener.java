@@ -18,23 +18,26 @@ package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
-import org.eclipse.ocl.examples.emf.validation.validity.ConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
-import org.eclipse.ocl.examples.emf.validation.validity.RootConstrainingNode;
-import org.eclipse.ocl.examples.emf.validation.validity.RootValidatableNode;
-import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
+import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityManager;
 
-public class ValidityNodeCheckStateListener implements ICheckStateListener {
-	private final CheckboxTreeViewer validatableTree;
+public class ValidityNodeCheckStateListener implements ICheckStateListener
+{
+	private final @NonNull ValidityManager validityManager;	
+	private final @NonNull ValidityView validityView;	
+	private final @NonNull CheckboxTreeViewer validatableTree;	
+	private final @NonNull CheckboxTreeViewer constraintsTree;
 	
-	private final CheckboxTreeViewer constraintsTree;
-	
-	public ValidityNodeCheckStateListener(CheckboxTreeViewer validatableTree, CheckboxTreeViewer constraintsTree) {
+	public ValidityNodeCheckStateListener(@NonNull ValidityManager validityManager, @NonNull ValidityView validityView, @NonNull CheckboxTreeViewer validatableTree,@NonNull CheckboxTreeViewer constraintsTree) {
+		this.validityManager = validityManager;
+		this.validityView = validityView;
 		this.validatableTree = validatableTree;
 		this.constraintsTree = constraintsTree;
 	}
@@ -43,16 +46,62 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 * @see org.eclipse.jface.viewers.ICheckStateListener#checkStateChanged(org.eclipse.jface.viewers.CheckStateChangedEvent)
 	 */
 	public void checkStateChanged(CheckStateChangedEvent event) { 
-		validatableTree.getTree().setRedraw(false);
+		long start = System.currentTimeMillis();
+//		validatableTree.getTree().setRedraw(false);
+//		constraintsTree.getTree().setRedraw(false);
+		
+		RootNode rootNode = validityManager.getRootNode();
+		assert rootNode != null;
+		System.out.format(Thread.currentThread().getName() + " %3.3f checkStateChanged\n", (System.currentTimeMillis() - start) * 0.001);
+		int validatableNodes = 0;
+		for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+			validatableNodes += abstractNode.countVisibleChildren();
+		}
+		System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
+		int constrainingNodes = 0;
+		for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+			constrainingNodes += abstractNode.countVisibleChildren();
+		}
+		System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
+//		validatableTree.getTree().setRedraw(false);
+//		constraintsTree.getTree().setRedraw(false); 
+		Object element = event.getElement();
+		System.out.format(Thread.currentThread().getName() + " %3.3f update start\n", (System.currentTimeMillis() - start) * 0.001);
+		if (element instanceof AbstractNode) {
+			AbstractNode abstractNode = (AbstractNode) element;
+			boolean enabled = event.getChecked();
+			abstractNode.setEnabled(enabled);
+			updateEnabledState(abstractNode, enabled);
+		}
+		validityView.refreshModel(start, true, true);
+//		validityView.redraw(false, true);
+		System.out.format(Thread.currentThread().getName() + " %3.3f redraw end\n", (System.currentTimeMillis() - start) * 0.001);
+/*		validatableTree.getTree().setRedraw(false);
 		constraintsTree.getTree().setRedraw(false); 
 		Object element = event.getElement();
 		if (element instanceof AbstractNode) {
 			AbstractNode abstractNode = (AbstractNode) element;
 			boolean enabled = event.getChecked();
 			updateAbstractNodeState(abstractNode, enabled);
+		} */
+//		validatableTree.getTree().setRedraw(true);
+//		constraintsTree.getTree().setRedraw(true);
+//		constraintsTree.getTree().redraw();
+//		validatableTree.getTree().redraw();
+		List<AbstractNode> grayedConstrainingNodes = new ArrayList<AbstractNode>();
+		List<AbstractNode> grayedValidatableNodes = new ArrayList<AbstractNode>();
+		for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+			abstractNode.getGrayedElements(grayedConstrainingNodes);
 		}
-		validatableTree.getTree().setRedraw(true);
-		constraintsTree.getTree().setRedraw(true); 
+		for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+			abstractNode.getGrayedElements(grayedValidatableNodes);
+		}
+		constraintsTree.refresh();
+		validatableTree.refresh();
+		constraintsTree.setGrayedElements(grayedConstrainingNodes.toArray(new Object[grayedConstrainingNodes.size()]));
+		validatableTree.setGrayedElements(grayedValidatableNodes.toArray(new Object[grayedValidatableNodes.size()]));
+//		constraintsTree.getTree().update();
+//		validatableTree.getTree().update();
 	}
 
 	/**
@@ -72,7 +121,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 *            the abstract node
 	 * @param enabled
 	 *            true when the node is checked, false otherwise.
-	 */
+	 *
 	private void updateAbstractNodeState(AbstractNode abstractNode,
 			boolean enabled) {
 		// update checked Element state
@@ -97,7 +146,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 			ValidatableNode validatableNode = (ValidatableNode) abstractNode;
 				updateValidatableNodeAncestors(validatableNode, enabled);
 		}
-	}
+	} */
 
 	/**
 	 * Update the root node check state.
@@ -106,7 +155,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 *            the root node.
 	 * @param enabled
 	 *            true when the node is checked, false otherwise.
-	 */
+	 *
 	private void updateRootNode(AbstractNode root, boolean enabled) {
 		if (root instanceof RootValidatableNode) {
 			validatableTree.setGrayed(root, false);
@@ -114,6 +163,33 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 		} else if (root instanceof RootConstrainingNode) {
 			constraintsTree.setGrayed(root, false);
 			constraintsTree.setChecked(root, enabled);
+		}
+	} */
+
+	/**
+	 * Select/Deselect all children nodes and propagates selection to
+	 * grand-children nodes.
+	 * 
+	 * @param abstractNode
+	 *            the abstract node.
+	 * @param enabled
+	 *            true when the node is checked, false otherwise.
+	 */
+	private void updateEnabledState(@NonNull AbstractNode node, boolean enabled) {
+		if (node instanceof ResultValidatableNode) {
+			ResultConstrainingNode otherTreeNode = ((ResultValidatableNode) node).getResultConstrainingNode();
+			otherTreeNode.setEnabled(enabled);
+		} else if (node instanceof ResultConstrainingNode) {
+			ResultValidatableNode otherTreeNode = ((ResultConstrainingNode) node).getResultValidatableNode();
+			otherTreeNode.setEnabled(enabled);
+		}
+		else {
+			for (AbstractNode child : node.getChildren()) {
+				node.setEnabled(enabled);
+				if (child != null) {
+					updateEnabledState(child, enabled);
+				}
+			}	
 		}
 	}
 	
@@ -124,7 +200,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 *            the constraining node.
 	 * @param enabled
 	 *            true when the node is checked, false otherwise.
-	 */
+	 *
 	private void updateConstrainingNodeAncestors(ConstrainingNode constrainingNode, boolean enabled) {
 		ConstrainingNode parent = constrainingNode.getParent();
 		if (parent != null) {
@@ -150,7 +226,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 			}
 			updateConstrainingNodeAncestors(parent, enabled);
 		}
-	}
+	} */
 	
 	/**
 	 * Select/Deselect all validatable tree ancestors states.
@@ -159,7 +235,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 *            the validatable node.
 	 * @param enabled
 	 *            true when the node is checked, false otherwise.
-	 */
+	 *
 	private void updateValidatableNodeAncestors(ValidatableNode validatableNode, boolean enable) {
 		ValidatableNode parent = validatableNode.getParent();
 		if (parent != null) {
@@ -186,7 +262,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 			}
 			updateValidatableNodeAncestors(parent, enable);
 		}
-	}
+	} */
 
 	/**
 	 * Select/Deselect all children nodes and propagates selection to
@@ -196,7 +272,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 *            the abstract node.
 	 * @param enabled
 	 *            true when the node is checked, false otherwise.
-	 */
+	 *
 	private void updateChildrenNodesState(AbstractNode abstractNode,
 			boolean enabled) {
 		for (AbstractNode child : abstractNode.getChildren()) {
@@ -219,7 +295,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 				updateChildrenNodesState(child, enabled);
 			}
 		}
-	}
+	} */
 
 	/**
 	 * Propagates results selection to the adjacent tree. The propagation is ascendant since the
@@ -229,7 +305,7 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 	 *            the abstract node.
 	 * @param enabled
 	 *            true when the node is checked, false otherwise.
-	 */
+	 *
 	private void propagateToAdjacentTree(AbstractNode abstractNode,
 			boolean enabled) {
 		if (abstractNode instanceof ResultValidatableNode) {
@@ -249,14 +325,14 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 			// update Element parents checks/grayed
 			updateValidatableNodeAncestors(resultValidatableNode, enabled);
 		}
-	}
+	} */
 
 	/**
 	 * gets all current children check state.
 	 * 
 	 * @param abstractNode
 	 *            the abstract node.
-	 */
+	 *
 	private List<AbstractNode> getCheckedNodeChildren(AbstractNode node) {
 		List<AbstractNode> checkedChildren = new ArrayList<AbstractNode>();
 		for (AbstractNode child : node.getChildren()) {
@@ -271,14 +347,14 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 			}
 		}
 		return checkedChildren;
-	}
+	} */
 
 	/**
 	 * gets all current children gray state.
 	 * 
 	 * @param abstractNode
 	 *            the abstract node.
-	 */
+	 *
 	private List<AbstractNode> getGrayedChildren(AbstractNode parent) {
 		List<AbstractNode> grayedChildren = new ArrayList<AbstractNode>();
 		for (AbstractNode child : parent.getChildren()) {
@@ -287,5 +363,5 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener {
 			}
 		}
 		return grayedChildren;
-	}
+	} */
 }

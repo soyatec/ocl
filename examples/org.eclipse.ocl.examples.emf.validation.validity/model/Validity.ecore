@@ -7,16 +7,16 @@
     <eOperations name="getChildren" upperBound="-1" eType="#//AbstractNode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grayed" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="worstResult" eType="#//Result"
         transient="true" derived="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allChildrenEnabled" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        transient="true" defaultValueLiteral="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allChildrenDisabled" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        transient="true" defaultValueLiteral="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConstrainingNode" eSuperTypes="#//AbstractNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ConstrainingNode"
@@ -52,7 +52,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultConstrainingNode"
         lowerBound="1" eType="#//ResultConstrainingNode" changeable="false" volatile="true"
         transient="true" derived="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exception" eType="#//Exception"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exception" eType="#//Throwable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResultConstrainingNode" eSuperTypes="#//ConstrainingNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultValidatableNode"
@@ -95,11 +95,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ConstraintLocator" instanceClassName="org.eclipse.ocl.examples.emf.validation.validity.locator.ConstraintLocator"
       serializable="false"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Throwable" instanceClassName="java.lang.Throwable"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Severity">
     <eLiterals name="UNKNOWN"/>
     <eLiterals name="OK" value="1"/>

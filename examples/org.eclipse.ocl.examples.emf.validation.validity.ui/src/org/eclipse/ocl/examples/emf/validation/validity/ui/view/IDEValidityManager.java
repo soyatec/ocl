@@ -194,10 +194,7 @@ public class IDEValidityManager extends ValidityManager
 					if (feature == ValidityPackage.Literals.ABSTRACT_NODE__ENABLED) {
 						refreshJob.add((AbstractNode) target);
 					}
-					else if (feature == ValidityPackage.Literals.ABSTRACT_NODE__ALL_CHILDREN_DISABLED) {
-						refreshJob.add((AbstractNode) target);
-					}
-					else if (feature == ValidityPackage.Literals.ABSTRACT_NODE__ALL_CHILDREN_ENABLED) {
+					else if (feature == ValidityPackage.Literals.ABSTRACT_NODE__GRAYED) {
 						refreshJob.add((AbstractNode) target);
 					}
 					else if (feature == ValidityPackage.Literals.ABSTRACT_NODE__WORST_RESULT) {

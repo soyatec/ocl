@@ -14,10 +14,13 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,10 +31,10 @@ import org.eclipse.jdt.annotation.Nullable;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isEnabled <em>Enabled</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isGrayed <em>Grayed</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#getWorstResult <em>Worst Result</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isAllChildrenEnabled <em>All Children Enabled</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isAllChildrenDisabled <em>All Children Disabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +69,38 @@ public interface AbstractNode extends EObject {
 	 * @generated
 	 */
 	void setEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Grayed</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Grayed</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Grayed</em>' attribute.
+	 * @see org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage#getAbstractNode_Grayed()
+	 * @model default="false" required="true" changeable="false"
+	 * @generated
+	 */
+	boolean isGrayed();
+
+	/**
+	 * Returns the value of the '<em><b>Visible</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visible</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visible</em>' attribute.
+	 * @see org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage#getAbstractNode_Visible()
+	 * @model default="true" required="true" changeable="false"
+	 * @generated
+	 */
+	boolean isVisible();
 
 	/**
 	 * Returns the value of the '<em><b>Label</b></em>' attribute.
@@ -121,38 +156,6 @@ public interface AbstractNode extends EObject {
 	void setWorstResult(Result value);
 
 	/**
-	 * Returns the value of the '<em><b>All Children Enabled</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>All Children Enabled</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>All Children Enabled</em>' attribute.
-	 * @see org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage#getAbstractNode_AllChildrenEnabled()
-	 * @model default="true" required="true" transient="true" changeable="false" derived="true"
-	 * @generated
-	 */
-	boolean isAllChildrenEnabled();
-
-	/**
-	 * Returns the value of the '<em><b>All Children Disabled</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>All Children Disabled</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>All Children Disabled</em>' attribute.
-	 * @see org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage#getAbstractNode_AllChildrenDisabled()
-	 * @model default="true" required="true" transient="true" changeable="false" derived="true"
-	 * @generated
-	 */
-	boolean isAllChildrenDisabled();
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
@@ -167,7 +170,34 @@ public interface AbstractNode extends EObject {
 	 * @generated NOT
 	 */
 	@NonNull EList<? extends AbstractNode> getChildren();
+	
+	/**
+	 * Return the number of visible children in this node and its descendants.
+	 */
+	int countVisibleChildren();
+	
+	/**
+	 * Fill grayedNodes with all grayed nodes in this node and its descendants.
+	 */
+	void getGrayedElements(@NonNull List<AbstractNode> grayedNodes);
+	
+	/**
+	 * Return the fraction of getChildren() that are visible in an array to suit access by a ContentProvider.
+	 * @return
+	 */
+	@NonNull AbstractNode[] getVisibleChildren();
+	
+	/**
+	 * Update the grayed status of this node and all its descendants, returning >0 if this node and its children are consistently enabled,
+	 * <0 is consistently disbaled and 0 otherwise.  
+	 */
+	int refreshGrayed();
+	
+	/**
+	 * Update the visible status of this node and all its descendants by comuting the AND of the visibilityFilters at each node.
+	 * Return strue if this  node visible.
+	 */
+	boolean refreshVisibleChildren(@NonNull Iterable<IVisibilityFilter> visibilityFilters);
 
-	void refreshAllChidrenEnablement();
-
+//	Object getContext();
 } // AbstractNode

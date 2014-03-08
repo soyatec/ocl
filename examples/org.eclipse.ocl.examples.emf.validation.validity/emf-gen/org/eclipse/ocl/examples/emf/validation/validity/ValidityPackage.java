@@ -91,13 +91,31 @@ public interface ValidityPackage extends EPackage {
 	int ABSTRACT_NODE__ENABLED = 0;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__GRAYED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__VISIBLE = 2;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__LABEL = 1;
+	int ABSTRACT_NODE__LABEL = 3;
 
 	/**
 	 * The feature id for the '<em><b>Worst Result</b></em>' reference.
@@ -106,25 +124,7 @@ public interface ValidityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__WORST_RESULT = 2;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE__ALL_CHILDREN_ENABLED = 3;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE__ALL_CHILDREN_DISABLED = 4;
+	int ABSTRACT_NODE__WORST_RESULT = 4;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
@@ -182,6 +182,24 @@ public interface ValidityPackage extends EPackage {
 	int CONSTRAINING_NODE__ENABLED = ABSTRACT_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINING_NODE__GRAYED = ABSTRACT_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINING_NODE__VISIBLE = ABSTRACT_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,24 +216,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINING_NODE__WORST_RESULT = ABSTRACT_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINING_NODE__ALL_CHILDREN_ENABLED = ABSTRACT_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINING_NODE__ALL_CHILDREN_DISABLED = ABSTRACT_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -300,6 +300,24 @@ public interface ValidityPackage extends EPackage {
 	int LEAF_CONSTRAINING_NODE__ENABLED = CONSTRAINING_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_CONSTRAINING_NODE__GRAYED = CONSTRAINING_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_CONSTRAINING_NODE__VISIBLE = CONSTRAINING_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -316,24 +334,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int LEAF_CONSTRAINING_NODE__WORST_RESULT = CONSTRAINING_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_CONSTRAINING_NODE__ALL_CHILDREN_ENABLED = CONSTRAINING_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_CONSTRAINING_NODE__ALL_CHILDREN_DISABLED = CONSTRAINING_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -545,6 +545,24 @@ public interface ValidityPackage extends EPackage {
 	int RESULT_CONSTRAINING_NODE__ENABLED = CONSTRAINING_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESULT_CONSTRAINING_NODE__GRAYED = CONSTRAINING_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESULT_CONSTRAINING_NODE__VISIBLE = CONSTRAINING_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -561,24 +579,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESULT_CONSTRAINING_NODE__WORST_RESULT = CONSTRAINING_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESULT_CONSTRAINING_NODE__ALL_CHILDREN_ENABLED = CONSTRAINING_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESULT_CONSTRAINING_NODE__ALL_CHILDREN_DISABLED = CONSTRAINING_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -727,6 +727,24 @@ public interface ValidityPackage extends EPackage {
 	int VALIDATABLE_NODE__ENABLED = ABSTRACT_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALIDATABLE_NODE__GRAYED = ABSTRACT_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALIDATABLE_NODE__VISIBLE = ABSTRACT_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -743,24 +761,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int VALIDATABLE_NODE__WORST_RESULT = ABSTRACT_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALIDATABLE_NODE__ALL_CHILDREN_ENABLED = ABSTRACT_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALIDATABLE_NODE__ALL_CHILDREN_DISABLED = ABSTRACT_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -845,6 +845,24 @@ public interface ValidityPackage extends EPackage {
 	int RESULT_VALIDATABLE_NODE__ENABLED = VALIDATABLE_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESULT_VALIDATABLE_NODE__GRAYED = VALIDATABLE_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESULT_VALIDATABLE_NODE__VISIBLE = VALIDATABLE_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -861,24 +879,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESULT_VALIDATABLE_NODE__WORST_RESULT = VALIDATABLE_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESULT_VALIDATABLE_NODE__ALL_CHILDREN_ENABLED = VALIDATABLE_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESULT_VALIDATABLE_NODE__ALL_CHILDREN_DISABLED = VALIDATABLE_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1027,6 +1027,24 @@ public interface ValidityPackage extends EPackage {
 	int ROOT_CONSTRAINING_NODE__ENABLED = CONSTRAINING_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_CONSTRAINING_NODE__GRAYED = CONSTRAINING_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_CONSTRAINING_NODE__VISIBLE = CONSTRAINING_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1043,24 +1061,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROOT_CONSTRAINING_NODE__WORST_RESULT = CONSTRAINING_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_CONSTRAINING_NODE__ALL_CHILDREN_ENABLED = CONSTRAINING_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_CONSTRAINING_NODE__ALL_CHILDREN_DISABLED = CONSTRAINING_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1154,6 +1154,24 @@ public interface ValidityPackage extends EPackage {
 	int ROOT_VALIDATABLE_NODE__ENABLED = VALIDATABLE_NODE__ENABLED;
 
 	/**
+	 * The feature id for the '<em><b>Grayed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_VALIDATABLE_NODE__GRAYED = VALIDATABLE_NODE__GRAYED;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_VALIDATABLE_NODE__VISIBLE = VALIDATABLE_NODE__VISIBLE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1170,24 +1188,6 @@ public interface ValidityPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROOT_VALIDATABLE_NODE__WORST_RESULT = VALIDATABLE_NODE__WORST_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>All Children Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_VALIDATABLE_NODE__ALL_CHILDREN_ENABLED = VALIDATABLE_NODE__ALL_CHILDREN_ENABLED;
-
-	/**
-	 * The feature id for the '<em><b>All Children Disabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_VALIDATABLE_NODE__ALL_CHILDREN_DISABLED = VALIDATABLE_NODE__ALL_CHILDREN_DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1282,16 +1282,6 @@ public interface ValidityPackage extends EPackage {
 	int CONSTRAINT_LOCATOR = 12;
 
 	/**
-	 * The meta object id for the '<em>Exception</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.Exception
-	 * @see org.eclipse.ocl.examples.emf.validation.validity.impl.ValidityPackageImpl#getException()
-	 * @generated
-	 */
-	int EXCEPTION = 13;
-
-	/**
 	 * The meta object id for the '<em>Object</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1299,7 +1289,7 @@ public interface ValidityPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.emf.validation.validity.impl.ValidityPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 14;
+	int OBJECT = 13;
 
 	/**
 	 * The meta object id for the '<em>Resource</em>' data type.
@@ -1309,7 +1299,17 @@ public interface ValidityPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.emf.validation.validity.impl.ValidityPackageImpl#getResource()
 	 * @generated
 	 */
-	int RESOURCE = 15;
+	int RESOURCE = 14;
+
+	/**
+	 * The meta object id for the '<em>Throwable</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Throwable
+	 * @see org.eclipse.ocl.examples.emf.validation.validity.impl.ValidityPackageImpl#getThrowable()
+	 * @generated
+	 */
+	int THROWABLE = 15;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode <em>Abstract Node</em>}'.
@@ -1333,6 +1333,28 @@ public interface ValidityPackage extends EPackage {
 	EAttribute getAbstractNode_Enabled();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isGrayed <em>Grayed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Grayed</em>'.
+	 * @see org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isGrayed()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EAttribute getAbstractNode_Grayed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isVisible <em>Visible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visible</em>'.
+	 * @see org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isVisible()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EAttribute getAbstractNode_Visible();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1353,28 +1375,6 @@ public interface ValidityPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractNode_WorstResult();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isAllChildrenEnabled <em>All Children Enabled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>All Children Enabled</em>'.
-	 * @see org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isAllChildrenEnabled()
-	 * @see #getAbstractNode()
-	 * @generated
-	 */
-	EAttribute getAbstractNode_AllChildrenEnabled();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isAllChildrenDisabled <em>All Children Disabled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>All Children Disabled</em>'.
-	 * @see org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#isAllChildrenDisabled()
-	 * @see #getAbstractNode()
-	 * @generated
-	 */
-	EAttribute getAbstractNode_AllChildrenDisabled();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.emf.validation.validity.AbstractNode#getParent() <em>Get Parent</em>}' operation.
@@ -1815,17 +1815,6 @@ public interface ValidityPackage extends EPackage {
 	EDataType getConstraintLocator();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.Exception <em>Exception</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Exception</em>'.
-	 * @see java.lang.Exception
-	 * @model instanceClass="java.lang.Exception"
-	 * @generated
-	 */
-	EDataType getException();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.Object <em>Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1846,6 +1835,17 @@ public interface ValidityPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getResource();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Throwable <em>Throwable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Throwable</em>'.
+	 * @see java.lang.Throwable
+	 * @model instanceClass="java.lang.Throwable"
+	 * @generated
+	 */
+	EDataType getThrowable();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1889,6 +1889,22 @@ public interface ValidityPackage extends EPackage {
 		EAttribute ABSTRACT_NODE__ENABLED = eINSTANCE.getAbstractNode_Enabled();
 
 		/**
+		 * The meta object literal for the '<em><b>Grayed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_NODE__GRAYED = eINSTANCE.getAbstractNode_Grayed();
+
+		/**
+		 * The meta object literal for the '<em><b>Visible</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_NODE__VISIBLE = eINSTANCE.getAbstractNode_Visible();
+
+		/**
 		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1903,22 +1919,6 @@ public interface ValidityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_NODE__WORST_RESULT = eINSTANCE.getAbstractNode_WorstResult();
-
-		/**
-		 * The meta object literal for the '<em><b>All Children Enabled</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ABSTRACT_NODE__ALL_CHILDREN_ENABLED = eINSTANCE.getAbstractNode_AllChildrenEnabled();
-
-		/**
-		 * The meta object literal for the '<em><b>All Children Disabled</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ABSTRACT_NODE__ALL_CHILDREN_DISABLED = eINSTANCE.getAbstractNode_AllChildrenDisabled();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Parent</b></em>' operation.
@@ -2273,16 +2273,6 @@ public interface ValidityPackage extends EPackage {
 		EDataType CONSTRAINT_LOCATOR = eINSTANCE.getConstraintLocator();
 
 		/**
-		 * The meta object literal for the '<em>Exception</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.Exception
-		 * @see org.eclipse.ocl.examples.emf.validation.validity.impl.ValidityPackageImpl#getException()
-		 * @generated
-		 */
-		EDataType EXCEPTION = eINSTANCE.getException();
-
-		/**
 		 * The meta object literal for the '<em>Object</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2301,6 +2291,16 @@ public interface ValidityPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType RESOURCE = eINSTANCE.getResource();
+
+		/**
+		 * The meta object literal for the '<em>Throwable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Throwable
+		 * @see org.eclipse.ocl.examples.emf.validation.validity.impl.ValidityPackageImpl#getThrowable()
+		 * @generated
+		 */
+		EDataType THROWABLE = eINSTANCE.getThrowable();
 
 	}
 

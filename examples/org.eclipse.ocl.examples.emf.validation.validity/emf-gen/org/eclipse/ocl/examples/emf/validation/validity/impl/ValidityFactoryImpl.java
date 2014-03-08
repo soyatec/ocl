@@ -92,8 +92,8 @@ public class ValidityFactoryImpl extends EFactoryImpl implements ValidityFactory
 		switch (eDataType.getClassifierID()) {
 			case ValidityPackage.SEVERITY:
 				return createSeverityFromString(eDataType, initialValue);
-			case ValidityPackage.EXCEPTION:
-				return createExceptionFromString(eDataType, initialValue);
+			case ValidityPackage.THROWABLE:
+				return createThrowableFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -109,8 +109,8 @@ public class ValidityFactoryImpl extends EFactoryImpl implements ValidityFactory
 		switch (eDataType.getClassifierID()) {
 			case ValidityPackage.SEVERITY:
 				return convertSeverityToString(eDataType, instanceValue);
-			case ValidityPackage.EXCEPTION:
-				return convertExceptionToString(eDataType, instanceValue);
+			case ValidityPackage.THROWABLE:
+				return convertThrowableToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -241,8 +241,8 @@ public class ValidityFactoryImpl extends EFactoryImpl implements ValidityFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Exception createExceptionFromString(EDataType eDataType, String initialValue) {
-		return (Exception)super.createFromString(eDataType, initialValue);
+	public Throwable createThrowableFromString(EDataType eDataType, String initialValue) {
+		return (Throwable)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class ValidityFactoryImpl extends EFactoryImpl implements ValidityFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertExceptionToString(EDataType eDataType, Object instanceValue) {
+	public String convertThrowableToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

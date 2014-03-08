@@ -143,13 +143,6 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType exceptionEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType objectEDataType = null;
 
 	/**
@@ -158,6 +151,13 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * @generated
 	 */
 	private EDataType resourceEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType throwableEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -246,7 +246,7 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractNode_Label() {
+	public EAttribute getAbstractNode_Grayed() {
 		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -255,8 +255,8 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractNode_WorstResult() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
+	public EAttribute getAbstractNode_Visible() {
+		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractNode_AllChildrenEnabled() {
+	public EAttribute getAbstractNode_Label() {
 		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -273,8 +273,8 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractNode_AllChildrenDisabled() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(4);
+	public EReference getAbstractNode_WorstResult() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -651,15 +651,6 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getException() {
-		return exceptionEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getObject() {
 		return objectEDataType;
 	}
@@ -671,6 +662,15 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 	 */
 	public EDataType getResource() {
 		return resourceEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getThrowable() {
+		return throwableEDataType;
 	}
 
 	/**
@@ -703,10 +703,10 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 		// Create classes and their features
 		abstractNodeEClass = createEClass(ABSTRACT_NODE);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__ENABLED);
+		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__GRAYED);
+		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__VISIBLE);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__LABEL);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__WORST_RESULT);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__ALL_CHILDREN_ENABLED);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__ALL_CHILDREN_DISABLED);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_PARENT);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_CHILDREN);
 
@@ -762,9 +762,9 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 
 		// Create data types
 		constraintLocatorEDataType = createEDataType(CONSTRAINT_LOCATOR);
-		exceptionEDataType = createEDataType(EXCEPTION);
 		objectEDataType = createEDataType(OBJECT);
 		resourceEDataType = createEDataType(RESOURCE);
+		throwableEDataType = createEDataType(THROWABLE);
 	}
 
 	/**
@@ -809,10 +809,10 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 		// Initialize classes, features, and operations; add parameters
 		initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractNode_Enabled(), ecorePackage.getEBoolean(), "enabled", "true", 1, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractNode_Grayed(), ecorePackage.getEBoolean(), "grayed", "false", 1, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractNode_Visible(), ecorePackage.getEBoolean(), "visible", "true", 1, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractNode_Label(), theEcorePackage.getEString(), "label", "", 1, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractNode_WorstResult(), this.getResult(), null, "worstResult", null, 0, 1, AbstractNode.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_AllChildrenEnabled(), ecorePackage.getEBoolean(), "allChildrenEnabled", "true", 1, 1, AbstractNode.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_AllChildrenDisabled(), ecorePackage.getEBoolean(), "allChildrenDisabled", "true", 1, 1, AbstractNode.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAbstractNode__GetParent(), this.getAbstractNode(), "getParent", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -836,7 +836,7 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 		initEReference(getResult_ValidatableNode(), this.getValidatableNode(), null, "validatableNode", null, 1, 1, Result.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getResult_LeafConstrainingNode(), this.getLeafConstrainingNode(), null, "leafConstrainingNode", null, 1, 1, Result.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getResult_ResultConstrainingNode(), this.getResultConstrainingNode(), null, "resultConstrainingNode", null, 1, 1, Result.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResult_Exception(), this.getException(), "exception", null, 0, 1, Result.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResult_Exception(), this.getThrowable(), "exception", null, 0, 1, Result.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(resultConstrainingNodeEClass, ResultConstrainingNode.class, "ResultConstrainingNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getResultConstrainingNode_ResultValidatableNode(), this.getResultValidatableNode(), this.getResultValidatableNode_ResultConstrainingNode(), "resultValidatableNode", null, 1, 1, ResultConstrainingNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -876,9 +876,9 @@ public class ValidityPackageImpl extends EPackageImpl implements ValidityPackage
 
 		// Initialize data types
 		initEDataType(constraintLocatorEDataType, ConstraintLocator.class, "ConstraintLocator", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(objectEDataType, Object.class, "Object", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(resourceEDataType, Resource.class, "Resource", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(throwableEDataType, Throwable.class, "Throwable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -15,16 +15,17 @@
 package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,10 +35,10 @@ import org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#isEnabled <em>Enabled</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#isGrayed <em>Grayed</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#getWorstResult <em>Worst Result</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#isAllChildrenEnabled <em>All Children Enabled</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.emf.validation.validity.impl.AbstractNodeImpl#isAllChildrenDisabled <em>All Children Disabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +64,46 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected boolean enabled = ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isGrayed() <em>Grayed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isGrayed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean GRAYED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isGrayed() <em>Grayed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isGrayed()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean grayed = GRAYED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
@@ -93,46 +134,6 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected Result worstResult;
-
-	/**
-	 * The default value of the '{@link #isAllChildrenEnabled() <em>All Children Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAllChildrenEnabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ALL_CHILDREN_ENABLED_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isAllChildrenEnabled() <em>All Children Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAllChildrenEnabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean allChildrenEnabled = ALL_CHILDREN_ENABLED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isAllChildrenDisabled() <em>All Children Disabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAllChildrenDisabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ALL_CHILDREN_DISABLED_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isAllChildrenDisabled() <em>All Children Disabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAllChildrenDisabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean allChildrenDisabled = ALL_CHILDREN_DISABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,20 +168,26 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEnabledGen(boolean newEnabled) {
-		boolean oldEnabled = enabled;
-		enabled = newEnabled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.ABSTRACT_NODE__ENABLED, oldEnabled, enabled));
-	}
 	public void setEnabled(boolean newEnabled) {
-		if (newEnabled != enabled) {
-			setEnabledGen(newEnabled);
-			AbstractNode parent = getParent();
-			if (parent != null) {
-				parent.refreshAllChidrenEnablement();
-			}
-		}
+		enabled = newEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isGrayed() {
+		return grayed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isVisible() {
+		return visible;
 	}
 
 	/**
@@ -198,10 +205,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public void setLabel(String newLabel) {
-		String oldLabel = label;
 		label = newLabel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.ABSTRACT_NODE__LABEL, oldLabel, label));
 	}
 
 	/**
@@ -219,10 +223,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public void setWorstResultGen(Result newWorstResult) {
-		Result oldWorstResult = worstResult;
 		worstResult = newWorstResult;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.ABSTRACT_NODE__WORST_RESULT, oldWorstResult, worstResult));
 	}
 	public void setWorstResult(Result newWorstResult) {
 		if (newWorstResult != worstResult) {
@@ -249,24 +250,6 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isAllChildrenEnabled() {
-		return allChildrenEnabled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isAllChildrenDisabled() {
-		return allChildrenDisabled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public abstract AbstractNode getParent();
@@ -288,14 +271,14 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 		switch (featureID) {
 			case ValidityPackage.ABSTRACT_NODE__ENABLED:
 				return isEnabled();
+			case ValidityPackage.ABSTRACT_NODE__GRAYED:
+				return isGrayed();
+			case ValidityPackage.ABSTRACT_NODE__VISIBLE:
+				return isVisible();
 			case ValidityPackage.ABSTRACT_NODE__LABEL:
 				return getLabel();
 			case ValidityPackage.ABSTRACT_NODE__WORST_RESULT:
 				return getWorstResult();
-			case ValidityPackage.ABSTRACT_NODE__ALL_CHILDREN_ENABLED:
-				return isAllChildrenEnabled();
-			case ValidityPackage.ABSTRACT_NODE__ALL_CHILDREN_DISABLED:
-				return isAllChildrenDisabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -352,14 +335,14 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 		switch (featureID) {
 			case ValidityPackage.ABSTRACT_NODE__ENABLED:
 				return enabled != ENABLED_EDEFAULT;
+			case ValidityPackage.ABSTRACT_NODE__GRAYED:
+				return grayed != GRAYED_EDEFAULT;
+			case ValidityPackage.ABSTRACT_NODE__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
 			case ValidityPackage.ABSTRACT_NODE__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case ValidityPackage.ABSTRACT_NODE__WORST_RESULT:
 				return worstResult != null;
-			case ValidityPackage.ABSTRACT_NODE__ALL_CHILDREN_ENABLED:
-				return allChildrenEnabled != ALL_CHILDREN_ENABLED_EDEFAULT;
-			case ValidityPackage.ABSTRACT_NODE__ALL_CHILDREN_DISABLED:
-				return allChildrenDisabled != ALL_CHILDREN_DISABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -390,34 +373,77 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 		if (eIsProxy()) return super.toString();
 		return String.valueOf(label);
 	}
+	
+	public static final @NonNull AbstractNode[] NO_CHILDREN = new AbstractNode[0];
+	
+	private @NonNull AbstractNode[] visibleChildren = NO_CHILDREN;
 
-	public void refreshAllChidrenEnablement() {
-		boolean newAllChildrenEnabled = true;
-		boolean newAllChildrenDisabled = true;
-		for (AbstractNode child : getChildren()) {
-			if (!child.isAllChildrenEnabled()) {
-				newAllChildrenEnabled = false; 
+	public int countVisibleChildren() {
+		int allChildren = 1;
+		for (AbstractNode child : visibleChildren) {
+			allChildren += child.countVisibleChildren();
+		}
+		return allChildren;
+	}
+
+	public void getGrayedElements(@NonNull List<AbstractNode> grayedNodes) {
+		if (grayed) {
+			grayedNodes.add(this);
+		}
+		for (AbstractNode child : visibleChildren) {
+			child.getGrayedElements(grayedNodes);
+		}
+	}
+
+	public @NonNull AbstractNode[] getVisibleChildren() {
+		return visibleChildren;
+	}
+
+	public int refreshGrayed() {
+		boolean isEnabled = enabled;	
+		boolean isDisabled = !isEnabled;
+		for (@SuppressWarnings("null")@NonNull AbstractNode child : visibleChildren) {
+			int childStatus = child.refreshGrayed();
+			if (childStatus >= 0) {
+				isEnabled = true;
 			}
-			if (!child.isAllChildrenDisabled()) {
-				newAllChildrenDisabled = false; 
-			}
-			if (child.isEnabled()) {
-				newAllChildrenDisabled = false; 
-			}
-			else {
-				newAllChildrenEnabled = false; 
-			}
-			if (!newAllChildrenDisabled && !newAllChildrenEnabled) {
-				break;
+			if (childStatus <= 0) {
+				isDisabled = true;
 			}
 		}
-		if ((newAllChildrenEnabled != allChildrenEnabled) || (newAllChildrenDisabled != allChildrenDisabled)) {
-			allChildrenEnabled = newAllChildrenEnabled;
-			allChildrenDisabled = newAllChildrenDisabled;
-			AbstractNode parent = getParent();
-			if (parent != null) {
-				parent.refreshAllChidrenEnablement();
+		if (!isDisabled) {		
+			grayed = false;
+			return 1;
+		}
+		else if (!isEnabled) {
+			grayed = false;
+			return -1;
+		}
+		else {
+			grayed = true;
+//			System.out.println("Grayed " + eClass().getName() + " " + ILabelGenerator.Registry.INSTANCE.labelFor(getContext()));
+			return 0;
+		}
+	}
+
+	public boolean refreshVisibleChildren(@NonNull Iterable<IVisibilityFilter> visibilityFilters) {
+		List<? extends AbstractNode> children = getChildren();
+		List<AbstractNode> list = new ArrayList<AbstractNode>(children.size());
+		for (AbstractNode node : children) {
+			if (node.refreshVisibleChildren(visibilityFilters)) {
+				list.add(node);
 			}
 		}
-	}	
+		for (IVisibilityFilter filter : visibilityFilters) {
+			if (!filter.isVisible(this)) {
+				this.visibleChildren = NO_CHILDREN;
+				this.visible = false;
+				return false;
+			}
+		}
+		@SuppressWarnings("null")@NonNull AbstractNode[] array = list.toArray(new AbstractNode[list.size()]);
+		this.visibleChildren = array;
+		this.visible = true;
+		return true;
+	}
 } //AbstractNodeImpl

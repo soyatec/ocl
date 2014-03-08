@@ -237,7 +237,7 @@ public abstract class AbstractExport implements IValidityExport {
 		} else {
 			return diagnostic.toString();
 		}
-		Exception exception = result.getException();
+		Throwable exception = result.getException();
 		if (exception != null) {
 			message.append('\n');
 			exception.printStackTrace(new PrintWriter(message));

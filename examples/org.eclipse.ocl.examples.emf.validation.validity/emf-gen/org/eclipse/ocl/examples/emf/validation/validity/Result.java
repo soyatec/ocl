@@ -204,12 +204,12 @@ public interface Result extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exception</em>' attribute.
-	 * @see #setException(Exception)
+	 * @see #setException(Throwable)
 	 * @see org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage#getResult_Exception()
-	 * @model dataType="org.eclipse.ocl.examples.emf.validation.validity.Exception"
+	 * @model dataType="org.eclipse.ocl.examples.emf.validation.validity.Throwable"
 	 * @generated
 	 */
-	Exception getException();
+	Throwable getException();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.emf.validation.validity.Result#getException <em>Exception</em>}' attribute.
@@ -219,6 +219,6 @@ public interface Result extends EObject {
 	 * @see #getException()
 	 * @generated
 	 */
-	void setException(Exception value);
+	void setException(Throwable value);
 
 } // Result

@@ -14,11 +14,9 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidityPackage;
@@ -75,8 +73,6 @@ public class ResultValidatableNodeImpl extends ValidatableNodeImpl implements Re
 			InternalEObject oldResultConstrainingNode = (InternalEObject)resultConstrainingNode;
 			resultConstrainingNode = (ResultConstrainingNode)eResolveProxy(oldResultConstrainingNode);
 			if (resultConstrainingNode != oldResultConstrainingNode) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ValidityPackage.RESULT_VALIDATABLE_NODE__RESULT_CONSTRAINING_NODE, oldResultConstrainingNode, resultConstrainingNode));
 			}
 		}
 		return resultConstrainingNode;
@@ -94,15 +90,10 @@ public class ResultValidatableNodeImpl extends ValidatableNodeImpl implements Re
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT		// To eliminate a spurious warning line
 	 */
 	public NotificationChain basicSetResultConstrainingNode(ResultConstrainingNode newResultConstrainingNode, NotificationChain msgs) {
-		ResultConstrainingNode oldResultConstrainingNode = resultConstrainingNode;
 		resultConstrainingNode = newResultConstrainingNode;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT_VALIDATABLE_NODE__RESULT_CONSTRAINING_NODE, oldResultConstrainingNode, newResultConstrainingNode);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
 		return msgs;
 	}
 
@@ -121,8 +112,6 @@ public class ResultValidatableNodeImpl extends ValidatableNodeImpl implements Re
 			msgs = basicSetResultConstrainingNode(newResultConstrainingNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ValidityPackage.RESULT_VALIDATABLE_NODE__RESULT_CONSTRAINING_NODE, newResultConstrainingNode, newResultConstrainingNode));
 	}
 
 	/**
