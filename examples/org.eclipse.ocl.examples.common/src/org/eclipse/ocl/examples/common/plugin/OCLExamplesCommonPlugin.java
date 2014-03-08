@@ -24,7 +24,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.osgi.framework.BundleContext;
 
 public final class OCLExamplesCommonPlugin extends EMFPlugin
 {
@@ -109,11 +108,5 @@ public final class OCLExamplesCommonPlugin extends EMFPlugin
 	        return new CoreException(new Status(IStatus.ERROR,
 					PLUGIN_ID, IStatus.ERROR, "ERROR -- " + text, exception));
 	    }
-
-		@Override
-		public void start(BundleContext context) throws Exception {
-			super.start(context);
-		    new LabelGeneratorRegistryReader().readRegistry();
-		}  
 	}
 }

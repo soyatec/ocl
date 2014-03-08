@@ -20,11 +20,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator.Descriptor;
 import org.eclipse.ocl.examples.common.label.generators.ENamedElementLabelGenerator;
 import org.eclipse.ocl.examples.common.label.generators.EObjectLabelGenerator;
 import org.eclipse.ocl.examples.common.label.generators.EcoreURILabelGenerator;
 import org.eclipse.ocl.examples.common.label.generators.StringLabelGenerator;
+import org.eclipse.ocl.examples.common.plugin.LabelGeneratorRegistryReader;
 
 
 /**
@@ -58,6 +62,14 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		return result.toString();
 	}
 
+	public static @NonNull LabelGeneratorRegistry init() {
+		LabelGeneratorRegistry registry = new LabelGeneratorRegistry();
+		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+			new LabelGeneratorRegistryReader(registry).readRegistry();
+		}
+		return registry;
+	}
+
 	public static void initialize(ILabelGenerator.Registry registry) {
 		ENamedElementLabelGenerator.initialize(registry);
 		EObjectLabelGenerator.initialize(registry);
@@ -71,7 +83,7 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 	/**
 	 * Construct a registry that resolves label generators locally.
 	 */
-	public LabelGeneratorRegistry() {
+	private LabelGeneratorRegistry() {
 		this.delegate = null;
 	}
 	
@@ -79,7 +91,7 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 	 * Construct a registry that resolves label generators locally when possible
 	 * but which delegates to delegate otherwise.
 	 */
-	public LabelGeneratorRegistry(ILabelGenerator.Registry delegate) {
+	public LabelGeneratorRegistry(@Nullable ILabelGenerator.Registry delegate) {
 		this.delegate = delegate;
 	}
 
@@ -138,10 +150,13 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
   	}
     
 	public ILabelGenerator<?> get(Class<?> labelledClass) {
-		Object object = map.get(labelledClass);
-		if (object instanceof ILabelGenerator.Descriptor) {
-			object = ((ILabelGenerator.Descriptor)object).getLabelGenerator();
-			map.put(labelledClass, object);
+		Object object;
+		synchronized(map) {
+			object = map.get(labelledClass);
+			if (object instanceof ILabelGenerator.Descriptor) {
+				object = ((ILabelGenerator.Descriptor)object).getLabelGenerator();
+				map.put(labelledClass, object);
+			}
 		}
 		if (object != null) {
 			return (ILabelGenerator<?>)object;
@@ -177,11 +192,15 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 	}
 
 	public Object install(Class<?> labelledClass, Descriptor labelDescriptor) {
-		return map.put(labelledClass, labelDescriptor);
+		synchronized(map) {
+			return map.put(labelledClass, labelDescriptor);
+		}
 	}
 
 	public Object install(Class<?> labelledClass, ILabelGenerator<?> labelGenerator) {
-		return map.put(labelledClass, labelGenerator);
+		synchronized(map) {
+			return map.put(labelledClass, labelGenerator);
+		}
 	}
 
 	public String labelFor(Object labelledObject) {
@@ -197,10 +216,12 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 	}
 
 	public void uninstall(Class<?> labelledClass) {
-		for (Class<?> aClass : new ArrayList<Class<?>>(map.keySet()))
-		{
-			if (labelledClass.isAssignableFrom(aClass)) {
-				map.remove(aClass);
+		synchronized(map) {
+			for (Class<?> aClass : new ArrayList<Class<?>>(map.keySet()))
+			{
+				if (labelledClass.isAssignableFrom(aClass)) {
+					map.remove(aClass);
+				}
 			}
 		}
 	}

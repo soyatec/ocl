@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.common.label;
 
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * ILabelGenerator provides an extensible capability to derive a customized text string
  * for an object. This is typically used to provide debug or UI descriptions of objects.
@@ -90,7 +92,7 @@ public interface ILabelGenerator<T>
      */
    interface Registry
     {
-    	Registry INSTANCE = new LabelGeneratorRegistry();
+		@NonNull Registry INSTANCE = LabelGeneratorRegistry.init();
     	
        	<T> void buildLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject);
     	<T> void buildSubLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject);

@@ -16,9 +16,11 @@
  */
 package org.eclipse.ocl.examples.common.plugin;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.plugin.RegistryReader;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator;
 
 /**
@@ -27,7 +29,7 @@ import org.eclipse.ocl.examples.common.label.ILabelGenerator;
  * global} label generator registry. Clients are not expected to use
  * this class directly.
  */
-class LabelGeneratorRegistryReader extends RegistryReader
+public class LabelGeneratorRegistryReader extends RegistryReader
 {
 	static class LabelGeneratorDescriptor extends PluginClassDescriptor implements ILabelGenerator.Descriptor
 	{
@@ -52,11 +54,14 @@ class LabelGeneratorRegistryReader extends RegistryReader
 	static final String TAG_GENERATOR = "generator";
 	static final String ATT_FOR = "for";
 	static final String ATT_CLASS = "class";
+	
+	protected final @NonNull ILabelGenerator.Registry registry;
 
-	public LabelGeneratorRegistryReader() {
+	public LabelGeneratorRegistryReader(@NonNull ILabelGenerator.Registry registry) {
 		super(Platform.getExtensionRegistry(), OCLExamplesCommonPlugin
 				.getPlugin().getBundle().getSymbolicName(),
 				OCLExamplesCommonPlugin.LABEL_GENERATOR_PPID);
+		this.registry = registry;
 	}
 
 	@Override
@@ -68,27 +73,36 @@ class LabelGeneratorRegistryReader extends RegistryReader
 			} else if (element.getAttribute(ATT_CLASS) == null) {
 				logMissingAttribute(element, ATT_CLASS);
 			} else {
-				Class<?> loadedClass;
+				Class<?> loadedClass = null;
 				try {
-					loadedClass = Thread.currentThread().getContextClassLoader().loadClass(helpedClass);
+					Object createExecutableExtension;
+					try {
+						createExecutableExtension = element.createExecutableExtension(ATT_CLASS);
+						loadedClass = createExecutableExtension.getClass().getClassLoader().loadClass(helpedClass);
+					} catch (CoreException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} catch (ClassNotFoundException e) {
 					OCLExamplesCommonPlugin.logError("Failed to load '" + helpedClass + "'", e);
 					return false;
 				}
-				if (add) {
-					Object previous = ILabelGenerator.Registry.INSTANCE.install(loadedClass, new LabelGeneratorDescriptor(element, ATT_CLASS));
-					if (previous instanceof LabelGeneratorDescriptor) {
-						LabelGeneratorDescriptor descriptor = (LabelGeneratorDescriptor) previous;
-						OCLExamplesCommonPlugin.INSTANCE.log("Both '"
-								+ descriptor.getElement().getContributor().getName()
-								+ "' and '" + element.getContributor().getName()
-								+ "' register an invocation delegate factory for '"
-								+ helpedClass + "'");
+				if (loadedClass != null) {
+					if (add) {
+						Object previous = registry.install(loadedClass, new LabelGeneratorDescriptor(element, ATT_CLASS));
+						if (previous instanceof LabelGeneratorDescriptor) {
+							LabelGeneratorDescriptor descriptor = (LabelGeneratorDescriptor) previous;
+							OCLExamplesCommonPlugin.INSTANCE.log("Both '"
+									+ descriptor.getElement().getContributor().getName()
+									+ "' and '" + element.getContributor().getName()
+									+ "' register an invocation delegate factory for '"
+									+ helpedClass + "'");
+						}
+						return true;
+					} else {
+						ILabelGenerator.Registry.INSTANCE.uninstall(loadedClass);
+						return true;
 					}
-					return true;
-				} else {
-					ILabelGenerator.Registry.INSTANCE.uninstall(loadedClass);
-					return true;
 				}
 			}
 		}
