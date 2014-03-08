@@ -18,24 +18,30 @@ package org.eclipse.ocl.examples.common.label;
 
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * DefaultLabelGeneratorBuilder builds the label on behalf of a
  * ILabelGenerator.Registry using a StringBuilder.
  */
 public class DefaultLabelGeneratorBuilder extends AbstractLabelGeneratorBuilder
 {	
-	protected final StringBuilder s = new StringBuilder();
+	protected final @NonNull StringBuilder s = new StringBuilder();
 	
-	public DefaultLabelGeneratorBuilder(ILabelGenerator.Registry registry, Map<ILabelGenerator.Option<?>, Object> options) {
+	public DefaultLabelGeneratorBuilder(@NonNull ILabelGenerator.Registry registry, @Nullable Map<ILabelGenerator.Option<?>, Object> options) {
 		super(registry, options);
 	}
 
-	public void appendString(String string) {
-		s.append(string);
+	public void appendString(@Nullable String string) {
+		if (string != null) {
+			s.append(string);
+		}
 	}
 
 	@Override
-	public String toString() {
-		return s.toString();
+	public @NonNull String toString() {
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 }

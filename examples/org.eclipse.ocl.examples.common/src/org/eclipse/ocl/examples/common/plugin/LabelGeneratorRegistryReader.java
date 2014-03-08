@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.plugin.RegistryReader;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator;
 
 /**
@@ -33,27 +34,29 @@ public class LabelGeneratorRegistryReader extends RegistryReader
 {
 	static class LabelGeneratorDescriptor extends PluginClassDescriptor implements ILabelGenerator.Descriptor
 	{
-		protected ILabelGenerator<?> labelGenerator;
+		protected @Nullable ILabelGenerator<?> labelGenerator;
 
-		public LabelGeneratorDescriptor(IConfigurationElement e, String attrName) {
+		public LabelGeneratorDescriptor(@NonNull IConfigurationElement e, @NonNull String attrName) {
 			super(e, attrName);
 		}
 
-		public ILabelGenerator<?> getLabelGenerator() {
+		public @NonNull ILabelGenerator<?> getLabelGenerator() {
 			if (labelGenerator == null) {
 				labelGenerator = (ILabelGenerator<?>) createInstance();
 			}
+			assert labelGenerator != null;
 			return labelGenerator;
 		}
 
-		public IConfigurationElement getElement() {
+		public @NonNull IConfigurationElement getElement() {
+			assert element != null;
 			return element;
 		}
 	}
 
-	static final String TAG_GENERATOR = "generator";
-	static final String ATT_FOR = "for";
-	static final String ATT_CLASS = "class";
+	static final @NonNull String TAG_GENERATOR = "generator";
+	static final @NonNull String ATT_FOR = "for";
+	static final @NonNull String ATT_CLASS = "class";
 	
 	protected final @NonNull ILabelGenerator.Registry registry;
 

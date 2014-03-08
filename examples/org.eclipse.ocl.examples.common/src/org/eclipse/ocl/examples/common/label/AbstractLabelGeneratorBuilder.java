@@ -19,6 +19,9 @@ package org.eclipse.ocl.examples.common.label;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.common.label.ILabelGenerator.Option;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator.Registry;
 
 /**
@@ -27,34 +30,38 @@ import org.eclipse.ocl.examples.common.label.ILabelGenerator.Registry;
  */
 public abstract class AbstractLabelGeneratorBuilder implements ILabelGenerator.Builder
 {	
-	protected final ILabelGenerator.Registry registry;
-	protected Map<ILabelGenerator.Option<?>, Object> options = null;
+	protected final @NonNull ILabelGenerator.Registry registry;
+	protected @Nullable Map<ILabelGenerator.Option<?>, Object> options = null;
 	
-	protected AbstractLabelGeneratorBuilder(ILabelGenerator.Registry registry, Map<ILabelGenerator.Option<?>, Object> options) {
+	protected AbstractLabelGeneratorBuilder(@NonNull ILabelGenerator.Registry registry, @Nullable Map<ILabelGenerator.Option<?>, Object> options) {
 		this.registry = registry;
 		this.options = options;
 	}
 
-	public void appendObject(Object object) {
+	public void appendObject(@Nullable Object object) {
 		registry.buildSubLabelFor(this, object);
 	}
 
-	public void buildLabelFor(Object object) {
+	public void buildLabelFor(@Nullable Object object) {
 		registry.buildLabelFor(this, object);
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T getOption(ILabelGenerator.Option<T> option) {
+	public @Nullable <T> T getOption(@NonNull ILabelGenerator.Option<T> option) {
 		return options != null ? (T) options.get(option) : null;
 	}
 
-	public Registry getRegistry() {
+	public @NonNull Registry getRegistry() {
 		return registry;
 	}
 
-	public <T> void setOption(ILabelGenerator.Option<T> option, T value) {
-		if (options == null)
-			options = new HashMap<ILabelGenerator.Option<?>, Object>();
-		options.put(option, value);
-	}	
+	public <T> void setOption(@NonNull ILabelGenerator.Option<T> option, @Nullable T value) {
+		Map<Option<?>, Object> options2 = options;
+		if (options2 == null)
+			options = options2 = new HashMap<ILabelGenerator.Option<?>, Object>();
+		options2.put(option, value);
+	}
+
+	@Override
+	public abstract @NonNull String toString();
 }

@@ -16,11 +16,12 @@
  */
 package org.eclipse.ocl.examples.common.label.generators;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.label.AbstractLabelGenerator;
 
 public final class StringLabelGenerator extends AbstractLabelGenerator<String>
 {
-	public static void initialize(Registry registry) {
+	public static void initialize(@NonNull Registry registry) {
 		registry.install(String.class, new StringLabelGenerator());		
 	}
 	
@@ -28,7 +29,7 @@ public final class StringLabelGenerator extends AbstractLabelGenerator<String>
 		super(String.class);
 	}
 
-	public void buildLabelFor(Builder labelBuilder, String object) {
+	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull String object) {
 		labelBuilder.appendString(object);
 	}
 }

@@ -37,6 +37,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 //import org.eclipse.ocl.ecore.Constraint;
 //import org.eclipse.ocl.ecore.delegate.InvocationBehavior;
 //import org.eclipse.ocl.ecore.delegate.SettingBehavior;
@@ -52,14 +54,14 @@ public class EcoreUtils
 	 * for objects; typically the name property. The SIMPLE_NAME_REGISTRY delegates unsupported
 	 * label generation to the global ILabelGenerator.Registry.INSTANCE.
 	 */
-	public static ILabelGenerator.Registry SIMPLE_NAME_REGISTRY = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
+	public static @NonNull ILabelGenerator.Registry SIMPLE_NAME_REGISTRY = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
 
 	/**
 	 * The global QUALIFIED_NAME_REGISTRY is used by qualifiedNameFor to generate qualified names 
 	 * for objects; typically a :: separted hierarchical name.  The QUALIFIED_NAME_REGISTRY delegates unsupported
 	 * label generation to the SIMPLE_NAME_REGISTRY.
 	 */
-	public static ILabelGenerator.Registry QUALIFIED_NAME_REGISTRY = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
+	public static @NonNull ILabelGenerator.Registry QUALIFIED_NAME_REGISTRY = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
 
 	static {
 		/**
@@ -67,7 +69,7 @@ public class EcoreUtils
 		 */
 		SIMPLE_NAME_REGISTRY.install(ENamedElement.class, new AbstractLabelGenerator<ENamedElement>(ENamedElement.class)
 		{
-			public void buildLabelFor(Builder labelBuilder, ENamedElement labelledObject) {
+			public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull ENamedElement labelledObject) {
 				String name = labelledObject.getName();
 				if (name != null)
 					labelBuilder.appendString(name);
@@ -84,7 +86,7 @@ public class EcoreUtils
 		 */
 		QUALIFIED_NAME_REGISTRY.install(ENamedElement.class, new AbstractLabelGenerator<ENamedElement>(ENamedElement.class)
 		{
-			public void buildLabelFor(Builder labelBuilder, ENamedElement labelledObject) {
+			public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull ENamedElement labelledObject) {
 				EObject eContainer = labelledObject.eContainer();
 				if (eContainer != null) {
 					labelBuilder.getRegistry().buildSubLabelFor(labelBuilder, eContainer);
@@ -115,7 +117,7 @@ public class EcoreUtils
 	 * Returns a String containing a title line containing the contextURI and
 	 * subsequent lines identifying each distinct unresolved URI. 
 	 */
-	public static String diagnoseUnresolvedProxies(URI contextURI, Map<EObject, Collection<EStructuralFeature.Setting>> map) {
+	public static @Nullable String diagnoseUnresolvedProxies(@NonNull URI contextURI, @NonNull Map<EObject, Collection<EStructuralFeature.Setting>> map) {
 	    if (map.isEmpty())
 	    	return null;	    
     	Map<String, Map.Entry<EObject, Collection<EStructuralFeature.Setting>>> unresolvedURIs = new HashMap<String, Map.Entry<EObject, Collection<EStructuralFeature.Setting>>>(map.size());
@@ -135,13 +137,13 @@ public class EcoreUtils
     	return s.toString();
 	}
 
-	public static String formatMultiplicity(ETypedElement typedElement) {
+	public static @NonNull String formatMultiplicity(@Nullable ETypedElement typedElement) {
 		if (typedElement == null)
 			return "";
 		int lower = typedElement.getLowerBound();
 		int upper = typedElement.getUpperBound();
 		if (lower == upper)
-			return Integer.toString(lower);
+			return "" + Integer.toString(lower);
 		else if (lower == 0) {
 			if (upper < 0)
 				return "*";
@@ -155,21 +157,21 @@ public class EcoreUtils
 		return Integer.toString(lower) + ".." + (upper >= 0 ? Integer.toString(upper) : "*");
 	}
 
-	public static String formatOrdered(ETypedElement typedElement) {
+	public static @NonNull String formatOrdered(@Nullable ETypedElement typedElement) {
 		boolean isOrdered = typedElement != null ? (typedElement.isOrdered() && typedElement.isMany()) : false;
 		return isOrdered ? "{ordered}" : "";
 	}
 
-	public static String formatString(String name) {
+	public static@NonNull  String formatString(@Nullable String name) {
 		return name != null ? name : "<null>";
 	}
 
-	public static String formatUnique(ETypedElement typedElement) {
+	public static @NonNull String formatUnique(@Nullable ETypedElement typedElement) {
 		boolean isOrdered = typedElement != null ? (typedElement.isUnique() && typedElement.isMany()) : false;
 		return isOrdered ? "{unique}" : "";
 	}
 	
-	public static <T extends Adapter> T getAdapter(Notifier notifier, Class<T> adapterClass) {
+	public static @Nullable <T extends Adapter> T getAdapter(@Nullable Notifier notifier, Class<T> adapterClass) {
 		if (notifier == null)
 			return null;
 		return getAdapter(notifier.eAdapters(), adapterClass);
@@ -188,7 +190,7 @@ public class EcoreUtils
 	 * @param feature
 	 * @return
 	 */
-	public static EClassifier getEType(EObject sourceObject, EStructuralFeature feature) {
+	public static EClassifier getEType(EObject sourceObject, @NonNull EStructuralFeature feature) {
 		EGenericType targetGenericType = feature.getEGenericType();
 		ETypeParameter targetTypeParameter = targetGenericType.getETypeParameter();
 		if ((targetTypeParameter != null) && (sourceObject != null)) {
@@ -272,7 +274,7 @@ public class EcoreUtils
 	 * @param name of invariant
 	 * @return the EOperation or null
 	 */
-	public static EOperation getEcoreInvariant(EClass eClass, String name) {
+	public static @Nullable EOperation getEcoreInvariant(@NonNull EClass eClass, @NonNull String name) {
 		for (EOperation eOperation : eClass.getEOperations()) {
 			if (ClassUtils.equals(name, eOperation.getName()) && EcoreUtil.isInvariant(eOperation)) {
 				return eOperation;
@@ -281,7 +283,7 @@ public class EcoreUtils
 		return null;
 	}
 
-	public static <T> int getFeatureID(Notification notification, T expectedNotifier, Class<T> featureClass) {
+	public static <T> int getFeatureID(@NonNull Notification notification, @Nullable T expectedNotifier, @NonNull Class<T> featureClass) {
 		if (expectedNotifier == null)
 			return Notification.NO_FEATURE_ID;
 		Object notifier = notification.getNotifier();
@@ -293,7 +295,7 @@ public class EcoreUtils
 		return notification.getFeatureID(featureClass);
 	}
 
-	public static <T extends ENamedElement> T getNamedElement(Collection<T> elements, String name) {
+	public static @Nullable <T extends ENamedElement> T getNamedElement(@Nullable Collection<T> elements, String name) {
 		if (elements == null)
 			return null;
 		for (T element : elements)
@@ -303,7 +305,7 @@ public class EcoreUtils
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends ENamedElement, R extends T> R getNamedElement(Collection<T> elements, String name, Class<R> returnClass) {
+	public static @Nullable <T extends ENamedElement, R extends T> R getNamedElement(@Nullable Collection<T> elements, @Nullable String name, @Nullable Class<R> returnClass) {
 		if (elements == null)
 			return null;
 		if (name == null)
@@ -323,7 +325,7 @@ public class EcoreUtils
 	 * @param object to be named
 	 * @return qualified name
 	 */
-	public static String qualifiedNameFor(Object object) {
+	public static @NonNull String qualifiedNameFor(@NonNull Object object) {
 		return QUALIFIED_NAME_REGISTRY.labelFor(object);
 	}
 
@@ -334,7 +336,7 @@ public class EcoreUtils
 	 * @param object to be named
 	 * @return simple name
 	 */
-	public static String simpleNameFor(Object object) {
+	public static @NonNull String simpleNameFor(@NonNull Object object) {
 		return SIMPLE_NAME_REGISTRY.labelFor(object);
 	}
 }

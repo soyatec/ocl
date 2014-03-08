@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.common.label;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * ILabelGenerator provides an extensible capability to derive a customized text string
@@ -53,25 +54,31 @@ public interface ILabelGenerator<T>
 		 * If the SHOW_CLASS_NAME option is present and true, the value of object.getClass().getName()
 		 * is prefixed to the formatted description of each object.
 		 */
-		static final Option<Boolean> SHOW_CLASS_NAME = new Option<Boolean>() {};
+		static final @NonNull Option<Boolean> SHOW_CLASS_NAME = new Option<Boolean>() {};
 		
 		/**
 		 * If the SHOW_CLASS_SIMPLE_NAME option is present and true, the value of object.getClass().getSimpleName()
 		 * is prefixed to the formatted description of each object.
 		 */
-		static final Option<Boolean> SHOW_CLASS_SIMPLE_NAME = new Option<Boolean>() {};
+		static final @NonNull Option<Boolean> SHOW_CLASS_SIMPLE_NAME = new Option<Boolean>() {};
+		
+		/**
+		 * If the SHOW_QUALIFIER option is present its va;ue is used as a separator between a container name and a child name.
+		 */
+		static final @NonNull Option<String> SHOW_QUALIFIER = new Option<String>() {};
 		
 		/**
 		 * Append the generated label of an object to the overall generated label.
 		 * 
 		 * @param object to be appended.
 		 */
-		void appendObject(Object object);
-		void appendString(String string);
-		void buildLabelFor(Object labelledObject);
-		<T> T getOption(Option<T> option);
+		void appendObject(@Nullable Object object);
+		void appendString(@Nullable String string);
+		void buildLabelFor(@Nullable Object labelledObject);
+		@Nullable <T> T getOption(@NonNull Option<T> option);
 		Registry getRegistry();
-		<T> void setOption(Option<T> option, T value);
+		<T> void setOption(@NonNull Option<T> option, @Nullable T value);
+		@NonNull String toString();
 	}
 	
     /**
@@ -80,7 +87,7 @@ public interface ILabelGenerator<T>
      */
     interface Descriptor
     {
-    	ILabelGenerator<?> getLabelGenerator();
+    	@NonNull ILabelGenerator<?> getLabelGenerator();
     }
 
     /**
@@ -94,16 +101,16 @@ public interface ILabelGenerator<T>
     {
 		@NonNull Registry INSTANCE = LabelGeneratorRegistry.init();
     	
-       	<T> void buildLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject);
-    	<T> void buildSubLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject);
-    	ILabelGenerator<?> get(Class<?> labelledClass);
-    	Object install(Class<?> labelledClass, ILabelGenerator<?> labelGenerator);
-    	Object install(Class<?> labelledClass, ILabelGenerator.Descriptor labelDescriptor);
+       	<T> void buildLabelFor(@NonNull ILabelGenerator.Builder labelBuilder, @Nullable T labelledObject);
+    	<T> void buildSubLabelFor(@NonNull ILabelGenerator.Builder labelBuilder, @Nullable T labelledObject);
+    	@Nullable ILabelGenerator<?> get(@NonNull Class<?> labelledClass);
+    	@Nullable Object install(@NonNull Class<?> labelledClass, @NonNull ILabelGenerator<?> labelGenerator);
+    	@Nullable Object install(@NonNull Class<?> labelledClass, @NonNull ILabelGenerator.Descriptor labelDescriptor);
 //    	Object install(String labelledClass, ILabelGenerator<?> labelGenerator);
 //    	Object install(String labelledClass, ILabelGenerator.Descriptor labelDescriptor);
-       	String labelFor(Object labelledObject);
-       	String labelFor(Object labelledObject, Map<ILabelGenerator.Option<?>, Object> options);
-    	void uninstall(Class<?> labelledClass);
+        @NonNull String labelFor(@Nullable Object labelledObject);
+       	@NonNull String labelFor(@Nullable Object labelledObject, @Nullable Map<ILabelGenerator.Option<?>, Object> options);
+    	void uninstall(@NonNull Class<?> labelledClass);
     }
 
 	/**
@@ -111,8 +118,8 @@ public interface ILabelGenerator<T>
 	 */
 	public interface Self
 	{
-		public void buildLabel(ILabelGenerator.Builder labelBuilder);
+		public void buildLabel(@NonNull ILabelGenerator.Builder labelBuilder);
 	}
 
-    void buildLabelFor(Builder labelBuilder, T labelledObject);
+    void buildLabelFor(@NonNull Builder labelBuilder, @NonNull T labelledObject);
 }

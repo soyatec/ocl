@@ -17,11 +17,12 @@
 package org.eclipse.ocl.examples.common.label.generators;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.label.AbstractLabelGenerator;
 
 public final class EcoreURILabelGenerator extends AbstractLabelGenerator<URI>
 {
-	public static void initialize(Registry registry) {
+	public static void initialize(@NonNull Registry registry) {
 		registry.install(URI.class, new EcoreURILabelGenerator());		
 	}
 	
@@ -29,7 +30,7 @@ public final class EcoreURILabelGenerator extends AbstractLabelGenerator<URI>
 		super(URI.class);
 	}
 
-	public void buildLabelFor(Builder labelBuilder, URI object) {
+	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull URI object) {
 		labelBuilder.appendString(object.toString());
 	}
 }

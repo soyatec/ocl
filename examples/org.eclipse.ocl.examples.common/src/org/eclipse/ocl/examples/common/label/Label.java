@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.common.label;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 /**
  * Label is a facade for the ILabelGenerator extensible label generators.
@@ -29,7 +32,7 @@ public class Label
 	 * @param labelledObject to be labelled
 	 * @return the label
 	 */
-    public static String labelFor(Object labelledObject) {
+    public static @NonNull String labelFor(@Nullable Object labelledObject) {
     	return ILabelGenerator.Registry.INSTANCE.labelFor(labelledObject);
     }
 }

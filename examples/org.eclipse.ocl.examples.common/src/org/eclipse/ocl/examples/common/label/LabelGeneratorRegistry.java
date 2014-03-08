@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator.Descriptor;
@@ -54,7 +55,7 @@ import org.eclipse.ocl.examples.common.plugin.LabelGeneratorRegistryReader;
  */
 public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 {	
-	public static String debugLabelFor(Object object) {
+	public static @NonNull String debugLabelFor(@NonNull Object object) {
 		Map<ILabelGenerator.Option<?>, Object> options = new HashMap<ILabelGenerator.Option<?>, Object>();
 		options.put(ILabelGenerator.Builder.SHOW_CLASS_SIMPLE_NAME, Boolean.TRUE);
 		ILabelGenerator.Builder result = new DefaultLabelGeneratorBuilder(INSTANCE, options);
@@ -70,15 +71,15 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		return registry;
 	}
 
-	public static void initialize(ILabelGenerator.Registry registry) {
+	public static void initialize(@NonNull ILabelGenerator.Registry registry) {
 		ENamedElementLabelGenerator.initialize(registry);
 		EObjectLabelGenerator.initialize(registry);
 		EcoreURILabelGenerator.initialize(registry);
 		StringLabelGenerator.initialize(registry);
 	}
 
-	protected final ILabelGenerator.Registry delegate;
-	private final Map<Class<?>, Object> map = new HashMap<Class<?>, Object>();
+	protected final @Nullable ILabelGenerator.Registry delegate;
+	private final @NonNull Map<Class<?>, Object> map = new HashMap<Class<?>, Object>();
 	
 	/**
 	 * Construct a registry that resolves label generators locally.
@@ -95,22 +96,32 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		this.delegate = delegate;
 	}
 
-	public <T> void buildLabelFor(ILabelGenerator.Builder s, T labelledObject) {
+	public <T> void buildLabelFor(@NonNull ILabelGenerator.Builder s, @Nullable T labelledObject) {
 		if (labelledObject == null) {
 			s.appendString("<null-Object>");
 			return;
 		}
 		Boolean showClassName = s.getOption(ILabelGenerator.Builder.SHOW_CLASS_NAME);
-		if ((showClassName != null) && showClassName) {
+		if ((showClassName != null) && (showClassName == Boolean.TRUE)) {
 			s.appendString(labelledObject.getClass().getName());
 			s.appendString(" ");
 		}
 		else {
 			Boolean showClassSimpleName = s.getOption(ILabelGenerator.Builder.SHOW_CLASS_SIMPLE_NAME);
-			if ((showClassSimpleName != null) && showClassSimpleName) {
+			if ((showClassSimpleName != null) && (showClassSimpleName == Boolean.TRUE)) {
 				s.appendString(labelledObject.getClass().getSimpleName());
 				s.appendString(" ");
 			}			
+		}
+		if (labelledObject instanceof EObject) {
+			EObject eContainer = ((EObject)labelledObject).eContainer();
+			if (eContainer != null) {
+				String showQualifier = s.getOption(ILabelGenerator.Builder.SHOW_QUALIFIER);
+				if (showQualifier != null) {
+					buildSubLabelFor(s, eContainer);
+					s.appendString(showQualifier);
+				}
+			}
 		}
 		if (labelledObject instanceof ILabelGenerator.Self) {
 			((ILabelGenerator.Self)labelledObject).buildLabel(s);
@@ -119,16 +130,17 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		buildSubLabelFor(s, labelledObject);
 	}
 
-	public <T> void buildSubLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject) {
+	public <T> void buildSubLabelFor(@NonNull ILabelGenerator.Builder labelBuilder, @Nullable T labelledObject) {
 		if (labelledObject == null) {
 			labelBuilder.appendString("<null-Object>");
 			return;
 		}
-		ILabelGenerator<?> labelGenerator = get(labelledObject.getClass());
+		@SuppressWarnings("null")@NonNull Class<? extends Object> labelledObjectClass = labelledObject.getClass();
+		ILabelGenerator<?> labelGenerator = get(labelledObjectClass);
 		if (labelGenerator == null) {
-			labelGenerator = getLabelGenerator(labelledObject.getClass());
+			labelGenerator = getLabelGenerator(labelledObjectClass);
 			if (labelGenerator != null)
-				install(labelledObject.getClass(), labelGenerator);
+				install(labelledObjectClass, labelGenerator);
 		}
 		if (labelGenerator != null) {
 			@SuppressWarnings("unchecked")
@@ -137,19 +149,19 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 			return;
 		}
 		else
-			getLabelGenerator(labelledObject.getClass());		// Debugging
+			getLabelGenerator(labelledObjectClass);		// Debugging
 		labelBuilder.appendString("<unknown-");
-		labelBuilder.appendString(labelledObject.getClass().getSimpleName());
+		labelBuilder.appendString(labelledObjectClass.getSimpleName());
 		labelBuilder.appendString(" ");
 		labelBuilder.appendString(labelledObject.toString());
 		labelBuilder.appendString(">");
 	}
 	
-  	public ILabelGenerator.Builder createDefaultLabelBuilder(Map<ILabelGenerator.Option<?>, Object> options) {
+  	public @NonNull ILabelGenerator.Builder createDefaultLabelBuilder(@Nullable Map<ILabelGenerator.Option<?>, Object> options) {
   		return new DefaultLabelGeneratorBuilder(this, options);
   	}
     
-	public ILabelGenerator<?> get(Class<?> labelledClass) {
+	public @Nullable ILabelGenerator<?> get(@NonNull Class<?> labelledClass) {
 		Object object;
 		synchronized(map) {
 			object = map.get(labelledClass);
@@ -169,18 +181,18 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		}
 	}
 
-	protected ILabelGenerator<?> getLabelGenerator(Class<?> cls) {
+	protected @Nullable ILabelGenerator<?> getLabelGenerator(@NonNull Class<?> cls) {
 		for (Class<?> sCls = cls; sCls != null; sCls = sCls.getSuperclass()) {
 			ILabelGenerator<?> labelGenerator = get(sCls);
 			if (labelGenerator != null)
 				return labelGenerator;	
 		}
-		for (Class<?> iCls : cls.getInterfaces()) {
+		for (@SuppressWarnings("null")@NonNull Class<?> iCls : cls.getInterfaces()) {
 			ILabelGenerator<?> labelGenerator = get(iCls);
 			if (labelGenerator != null)
 				return labelGenerator;	
 		}
-		for (Class<?> iCls : cls.getInterfaces()) {
+		for (@SuppressWarnings("null")@NonNull Class<?> iCls : cls.getInterfaces()) {
 			ILabelGenerator<?> labelGenerator = getLabelGenerator(iCls);
 			if (labelGenerator != null)
 				return labelGenerator;	
@@ -191,31 +203,31 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		return null;
 	}
 
-	public Object install(Class<?> labelledClass, Descriptor labelDescriptor) {
+	public @Nullable Object install(@NonNull Class<?> labelledClass, @NonNull Descriptor labelDescriptor) {
 		synchronized(map) {
 			return map.put(labelledClass, labelDescriptor);
 		}
 	}
 
-	public Object install(Class<?> labelledClass, ILabelGenerator<?> labelGenerator) {
+	public @Nullable Object install(@NonNull Class<?> labelledClass, @NonNull ILabelGenerator<?> labelGenerator) {
 		synchronized(map) {
 			return map.put(labelledClass, labelGenerator);
 		}
 	}
 
-	public String labelFor(Object labelledObject) {
+	public @NonNull String labelFor(@Nullable Object labelledObject) {
 		ILabelGenerator.Builder labelBuilder = createDefaultLabelBuilder(null);
 		labelBuilder.buildLabelFor(labelledObject);
 		return labelBuilder.toString();
 	}
 
-	public String labelFor(Object labelledObject, Map<ILabelGenerator.Option<?>, Object> options) {
+	public @NonNull String labelFor(@Nullable Object labelledObject, @Nullable Map<ILabelGenerator.Option<?>, Object> options) {
 		ILabelGenerator.Builder labelBuilder = createDefaultLabelBuilder(options);
 		labelBuilder.buildLabelFor(labelledObject);
 		return labelBuilder.toString();
 	}
 
-	public void uninstall(Class<?> labelledClass) {
+	public void uninstall(@NonNull Class<?> labelledClass) {
 		synchronized(map) {
 			for (Class<?> aClass : new ArrayList<Class<?>>(map.keySet()))
 			{

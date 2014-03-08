@@ -18,11 +18,12 @@ package org.eclipse.ocl.examples.common.label.generators;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.label.AbstractLabelGenerator;
 
 public final class EObjectLabelGenerator extends AbstractLabelGenerator<EObject>
 {
-	public static void initialize(Registry registry) {
+	public static void initialize(@NonNull Registry registry) {
 		registry.install(EObject.class, new EObjectLabelGenerator());		
 	}
 	
@@ -30,14 +31,16 @@ public final class EObjectLabelGenerator extends AbstractLabelGenerator<EObject>
 		super(EObject.class);
 	}
 
-	public void buildLabelFor(Builder labelBuilder, EObject object) {
+	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull EObject object) {
 		if (object.eIsProxy()) {
 			labelBuilder.appendObject(EcoreUtil.getURI(object));
 			return;
 		}
-		if (object.eContainer() != null) {
-			labelBuilder.appendObject(object.eContainer());
-			labelBuilder.appendString("/");
+		if (labelBuilder.getOption(Builder.SHOW_QUALIFIER) == null)	{		// Legacy behavior
+			if (object.eContainer() != null) {
+				labelBuilder.appendObject(object.eContainer());
+				labelBuilder.appendString("/");
+			}
 		}
 		labelBuilder.appendString("<unnamed-");
 		labelBuilder.appendString(object.getClass().getSimpleName());

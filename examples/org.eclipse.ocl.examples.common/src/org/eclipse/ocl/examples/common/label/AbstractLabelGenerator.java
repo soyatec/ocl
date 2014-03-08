@@ -16,15 +16,17 @@
  */
 package org.eclipse.ocl.examples.common.label;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public abstract class AbstractLabelGenerator<T> implements ILabelGenerator<T>
 {
-	protected final Class<? extends T> labelledClass;
+	protected final @NonNull Class<? extends T> labelledClass;
 	
-	protected AbstractLabelGenerator(Class<? extends T> labelledClass) {
+	protected AbstractLabelGenerator(@NonNull Class<? extends T> labelledClass) {
 		this.labelledClass = labelledClass;
 	}
 
-	public Class<? extends T> getLabelledClass() {
+	public @NonNull Class<? extends T> getLabelledClass() {
 		return labelledClass;
 	}
 }
