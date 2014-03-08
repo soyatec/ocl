@@ -100,6 +100,7 @@ public interface ConstraintLocator
 	
 	/**
 	 * Update the validation result to include the verdict of the validation using validityManager to provide shared services.
+	 * @param monitor 
 	 */
-	void validate(@NonNull Result result, @NonNull ValidityManager validityManager);
+	void validate(@NonNull Result result, @NonNull ValidityManager validityManager, @Nullable Monitor monitor);
 }

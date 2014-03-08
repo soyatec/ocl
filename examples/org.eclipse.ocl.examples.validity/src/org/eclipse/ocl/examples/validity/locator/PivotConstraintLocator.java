@@ -128,7 +128,7 @@ public class PivotConstraintLocator extends AbstractConstraintLocator
 	}
 
 	@Override
-	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {
+	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager, @Nullable Monitor monitor) {
 		Severity severity = Severity.UNKNOWN;
 		try {
 			Constraint constraint = (Constraint) result.getLeafConstrainingNode().getConstrainingObject();
@@ -140,6 +140,7 @@ public class PivotConstraintLocator extends AbstractConstraintLocator
 						ValidationAdapter validationAdapter = ValidationAdapter.findAdapter(resourceSet);
 						if (validationAdapter != null) {
 							Map<Object, Object> context = validityManager.createDefaultContext();
+							context.put(Monitor.class,  monitor);
 							Diagnostic diagnostic = validationAdapter.validate(constraint, eObject, context);
 							result.setDiagnostic(diagnostic);
 							severity = diagnostic != null ? getSeverity(diagnostic) : Severity.OK;

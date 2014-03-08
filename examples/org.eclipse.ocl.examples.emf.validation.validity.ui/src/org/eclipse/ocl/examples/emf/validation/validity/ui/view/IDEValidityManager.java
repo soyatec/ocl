@@ -25,6 +25,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -91,7 +93,7 @@ public class IDEValidityManager extends ValidityManager
 		}
 
 		@Override
-		protected IStatus run(/*@NonNull*/ IProgressMonitor monitor) {
+		protected IStatus run(final /*@NonNull*/ IProgressMonitor monitor) {
 			assert monitor != null;
 			try {
 				final ResultSet resultSet = createResultSet(monitor);
@@ -104,6 +106,7 @@ public class IDEValidityManager extends ValidityManager
 				}
 				try {
 					monitor.beginTask("Constraint Validation", results.size());
+					Monitor emfMonitor = monitor != null ? BasicMonitor.toMonitor(monitor) : null;
 					int i = 0;
 					for (Result result : results) {
 						if (monitor.isCanceled()) {
@@ -142,7 +145,7 @@ public class IDEValidityManager extends ValidityManager
 
 								if (isEnabledForValidation){
 									ConstraintLocator constraintLocator = constraint.getConstraintLocator();
-									constraintLocator.validate(result, IDEValidityManager.this);
+									constraintLocator.validate(result, IDEValidityManager.this, emfMonitor);
 								} else {
 									result.setSeverity(Severity.UNKNOWN);
 								}

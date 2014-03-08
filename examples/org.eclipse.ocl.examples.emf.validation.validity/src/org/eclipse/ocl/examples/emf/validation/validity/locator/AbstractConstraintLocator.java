@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
@@ -139,7 +140,7 @@ public abstract class AbstractConstraintLocator implements ConstraintLocator, Co
 		return resource.getURI().appendFragment(resource.getURIFragment(eObject));
 	}
 
-	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {
+	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager, @Nullable Monitor monitor) {
 		result.setDiagnostic("Unimplemented validate for " + getClass().getName());
 		result.setSeverity(Severity.FATAL);
 	}

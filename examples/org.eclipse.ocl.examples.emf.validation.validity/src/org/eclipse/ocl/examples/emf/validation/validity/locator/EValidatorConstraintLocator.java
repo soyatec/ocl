@@ -181,7 +181,7 @@ public class EValidatorConstraintLocator extends AbstractConstraintLocator
 	}
 
 	@Override
-	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {
+	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager, @Nullable Monitor monitor) {
 		Method method = (Method) result.getLeafConstrainingNode().getConstrainingObject();
 		EObject eObject = result.getValidatableNode().getConstrainedObject();
 		BasicDiagnostic diagnostic = validityManager.createDefaultDiagnostic(eObject);

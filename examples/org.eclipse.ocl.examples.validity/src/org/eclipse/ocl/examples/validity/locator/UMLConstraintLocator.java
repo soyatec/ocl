@@ -284,7 +284,7 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 	}
 
 	@Override
-	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {
+	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager, @Nullable Monitor monitor) {
 		ValidatableNode validatableNode = result.getValidatableNode();
 		EObject constrainedObject = validatableNode.getConstrainedObject();
 		LeafConstrainingNode leafConstrainingNode = result.getLeafConstrainingNode();
@@ -321,6 +321,7 @@ public class UMLConstraintLocator extends AbstractConstraintLocator
 					throw new ParserException("Missing constraint");
 				}
 				EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, object, query, null);
+				evaluationVisitor.setMonitor(monitor);
 				ConstraintEvaluator<Diagnostic> constraintEvaluator = new ConstraintEvaluator<Diagnostic>(query)
 				{
 					@Override

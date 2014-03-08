@@ -86,8 +86,8 @@ public class EClassConstraintLocator extends AbstractConstraintLocator
 	}
 
 	@Override
-	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager) {
-		super.validate(result, validityManager);
+	public void validate(@NonNull Result result, @NonNull ValidityManager validityManager, @Nullable Monitor monitor) {
+		super.validate(result, validityManager, monitor);
 		EOperation eOperation = (EOperation) result.getLeafConstrainingNode().getConstrainingObject();
 		EObject eObject = result.getValidatableNode().getConstrainedObject();
 		BasicDiagnostic diagnostic = validityManager.createDefaultDiagnostic(eObject);
