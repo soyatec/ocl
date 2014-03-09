@@ -16,44 +16,15 @@
    </extension>
 
    <extension point="org.eclipse.ui.menus">
-      <menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.EcoreEditorID?after=additions">
+		<menuContribution locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu id="org.eclipse.ocl.examples.ui.Menu" label="%MF_OCL">
             <separator name="load" visible="true"/>
             <separator name="save" visible="true"/>
             <separator name="set" visible="true"/>
             <separator name="show" visible="true"/>
-         </menu>
-      </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.emf.examples.extlibrary.presentation.EXTLibraryEditorID?after=additions">
-         <menu id="org.eclipse.ocl.examples.ui.Menu" label="%MF_OCL">
-            <separator name="load" visible="true"/>
-            <separator name="save" visible="true"/>
-            <separator name="set" visible="true"/>
-            <separator name="show" visible="true"/>
-         </menu>
-      </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.emf.ecore.presentation.ReflectiveEditorID?after=additions">
-         <menu id="org.eclipse.ocl.examples.ui.Menu" label="%MF_OCL">
-            <separator name="load" visible="true"/>
-            <separator name="save" visible="true"/>
-            <separator name="set" visible="true"/>
-            <separator name="show" visible="true"/>
-         </menu>
-      </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.uml2.uml.editor.presentation.UMLEditorID?after=additions">
-         <menu id="org.eclipse.ocl.examples.ui.Menu" label="%MF_OCL">
-            <separator name="load" visible="true"/>
-            <separator name="save" visible="true"/>
-            <separator name="set" visible="true"/>
-            <separator name="show" visible="true"/>
-         </menu>
-      </menuContribution>
-      <menuContribution locationURI="popup:#TextEditorContext?after=additions">
-         <menu id="org.eclipse.ocl.examples.ui.Menu" label="%MF_OCL">
-            <separator name="load" visible="true"/>
-            <separator name="save" visible="true"/>
-            <separator name="set" visible="true"/>
-            <separator name="show" visible="true"/>
+			<visibleWhen checkEnabled="false">
+				<test property="org.eclipse.ocl.examples.ui.resourceSetAvailable" forcePluginActivation="true"/>
+			</visibleWhen>
          </menu>
       </menuContribution>
    </extension>
