@@ -33,7 +33,7 @@ public final class PackageImportLabelGenerator extends AbstractLabelGenerator<Pa
 		if (name != null)
 			labelBuilder.appendString(name);
 		else {
-			labelBuilder.appendString("<null-named-");
+			labelBuilder.appendString("<null-packaged-");
 			labelBuilder.appendString(object.getClass().getSimpleName());
 			labelBuilder.appendString(">");
 		}

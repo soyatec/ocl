@@ -22,13 +22,14 @@ public class StandaloneLabelTests extends TestCase
 	public void testEcoreURILabel() {
 		String testURI = "http://xyzzy/jj";
 		URI uri = URI.createURI(testURI);
-		ILabelGenerator.Registry myRegistry = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
+		ILabelGenerator.Registry myRegistry = new LabelGeneratorRegistry(null);
 		String actualLabel = myRegistry.labelFor(uri);
 		String expectedLabel1 = "<unknown-URI " + testURI + ">";				// URI pre Kepler M6.
 		String expectedLabel2 = "<unknown-Hierarchical " + testURI + ">";		// URI post Kepler M6.
 		String expectedLabel = actualLabel.contains("URI") ? expectedLabel1 : expectedLabel2;
 		assertEquals(expectedLabel, actualLabel);
 		
+		myRegistry = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
 		EcoreURILabelGenerator.initialize(myRegistry);
 		actualLabel = myRegistry.labelFor(uri);
 		expectedLabel = testURI;

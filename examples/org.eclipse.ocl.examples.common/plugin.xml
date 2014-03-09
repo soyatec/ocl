@@ -6,6 +6,8 @@
    <extension point="org.eclipse.ocl.examples.common.label_generator">
       <generator for="org.eclipse.emf.ecore.EAnnotation"
       	class="org.eclipse.ocl.examples.common.label.generators.EAnnotationLabelGenerator"/>
+      <generator for="org.eclipse.emf.ecore.EGenericType"
+      	class="org.eclipse.ocl.examples.common.label.generators.EGenericTypeLabelGenerator"/>
       <generator for="org.eclipse.emf.ecore.ENamedElement"
       	class="org.eclipse.ocl.examples.common.label.generators.ENamedElementLabelGenerator"/>
       <generator for="org.eclipse.emf.ecore.EObject"

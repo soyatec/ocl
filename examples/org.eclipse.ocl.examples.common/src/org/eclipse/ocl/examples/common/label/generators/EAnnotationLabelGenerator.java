@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  * 
  * </copyright>
- *
- * $Id: ENamedElementLabelGenerator.java,v 1.2 2010/04/08 06:27:46 ewillink Exp $
  */
 package org.eclipse.ocl.examples.common.label.generators;
 
@@ -35,7 +33,7 @@ public final class EAnnotationLabelGenerator extends AbstractLabelGenerator<EAnn
 		if (name != null)
 			labelBuilder.appendString(name);
 		else {
-			labelBuilder.appendString("<null-named-");
+			labelBuilder.appendString("<null-sourced-");
 			labelBuilder.appendString(object.getClass().getSimpleName());
 			labelBuilder.appendString(">");
 		}

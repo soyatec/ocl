@@ -20,11 +20,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator.Descriptor;
+import org.eclipse.ocl.examples.common.label.generators.DynamicEObjectImplLabelGenerator;
+import org.eclipse.ocl.examples.common.label.generators.EAnnotationLabelGenerator;
+import org.eclipse.ocl.examples.common.label.generators.EGenericTypeLabelGenerator;
 import org.eclipse.ocl.examples.common.label.generators.ENamedElementLabelGenerator;
 import org.eclipse.ocl.examples.common.label.generators.EObjectLabelGenerator;
 import org.eclipse.ocl.examples.common.label.generators.EcoreURILabelGenerator;
@@ -55,6 +58,55 @@ import org.eclipse.ocl.examples.common.plugin.LabelGeneratorRegistryReader;
  */
 public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 {	
+	public static class Global extends LabelGeneratorRegistry
+	{
+		private boolean initialized = false;
+		
+		public Global() {}
+		
+		public void initialize() {
+			initialized = true;
+			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+				new LabelGeneratorRegistryReader(this).readRegistry();
+			}
+			else {
+				initialize(this);
+			}
+		}
+
+		@Override
+		public @Nullable ILabelGenerator<?> get(@NonNull Class<?> labelledClass) {
+			if (!initialized) {
+				initialize();
+			}
+			return super.get(labelledClass);
+		}
+
+		@Override
+		public @Nullable Object install(@NonNull Class<?> labelledClass, @NonNull Descriptor labelDescriptor) {
+			if (!initialized) {
+				initialize();
+			}
+			return super.install(labelledClass, labelDescriptor);
+		}
+
+		@Override
+		public @Nullable Object install(@NonNull Class<?> labelledClass, @NonNull ILabelGenerator<?> labelGenerator) {
+			if (!initialized) {
+				initialize();
+			}
+			return super.install(labelledClass, labelGenerator);
+		}
+
+		@Override
+		public void uninstall(@NonNull Class<?> labelledClass) {
+			if (!initialized) {
+				initialize();
+			}
+			super.uninstall(labelledClass);
+		}
+	}
+	
 	public static @NonNull String debugLabelFor(@NonNull Object object) {
 		Map<ILabelGenerator.Option<?>, Object> options = new HashMap<ILabelGenerator.Option<?>, Object>();
 		options.put(ILabelGenerator.Builder.SHOW_CLASS_SIMPLE_NAME, Boolean.TRUE);
@@ -64,14 +116,13 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 	}
 
 	public static @NonNull LabelGeneratorRegistry init() {
-		LabelGeneratorRegistry registry = new LabelGeneratorRegistry();
-		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
-			new LabelGeneratorRegistryReader(registry).readRegistry();
-		}
-		return registry;
+		return new LabelGeneratorRegistry.Global();
 	}
 
 	public static void initialize(@NonNull ILabelGenerator.Registry registry) {
+		DynamicEObjectImplLabelGenerator.initialize(registry);
+		EAnnotationLabelGenerator.initialize(registry);
+		EGenericTypeLabelGenerator.initialize(registry);
 		ENamedElementLabelGenerator.initialize(registry);
 		EObjectLabelGenerator.initialize(registry);
 		EcoreURILabelGenerator.initialize(registry);
@@ -148,8 +199,9 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 			castLabelGenerator.buildLabelFor(labelBuilder, labelledObject);
 			return;
 		}
-		else
+		else {
 			getLabelGenerator(labelledObjectClass);		// Debugging
+		}
 		labelBuilder.appendString("<unknown-");
 		labelBuilder.appendString(labelledObjectClass.getSimpleName());
 		labelBuilder.appendString(" ");

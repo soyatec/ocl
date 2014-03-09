@@ -22,11 +22,18 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ocl.examples.common.label.ILabelGenerator;
+import org.eclipse.ocl.examples.common.label.LabelGeneratorRegistry;
+import org.eclipse.ocl.examples.domain.utilities.NameableLabelGenerator;
 import org.eclipse.ocl.examples.pivot.ecore.EcoreASResourceFactory;
 import org.eclipse.ocl.examples.pivot.manager.ImplementationManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.scoping.PivotScoping;
+import org.eclipse.ocl.examples.pivot.uml.CommentLabelGenerator;
+import org.eclipse.ocl.examples.pivot.uml.NamedElementLabelGenerator;
+import org.eclipse.ocl.examples.pivot.uml.PackageImportLabelGenerator;
+import org.eclipse.ocl.examples.pivot.uml.SlotLabelGenerator;
 import org.eclipse.ocl.examples.pivot.uml.UMLASResourceFactory;
 import org.eclipse.ocl.examples.pivot.uml.UMLExplicitNavigator;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -68,6 +75,12 @@ public class PivotStandaloneSetup //implements ISetup
 		ToStringVisitor.FACTORY.getClass();
 		EPackage.Registry.INSTANCE.put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
 		EValidator.Registry.INSTANCE.put(PivotPackage.eINSTANCE, PivotValidator.INSTANCE);
+		LabelGeneratorRegistry.initialize(ILabelGenerator.Registry.INSTANCE);
+		CommentLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		NameableLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		NamedElementLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		PackageImportLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
+		SlotLabelGenerator.initialize(ILabelGenerator.Registry.INSTANCE);
 	}
 	
 	/**

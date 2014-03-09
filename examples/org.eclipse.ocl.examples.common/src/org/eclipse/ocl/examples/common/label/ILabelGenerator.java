@@ -101,14 +101,12 @@ public interface ILabelGenerator<T>
    interface Registry
     {
 		@NonNull Registry INSTANCE = LabelGeneratorRegistry.init();
-    	
+
        	<T> void buildLabelFor(@NonNull ILabelGenerator.Builder labelBuilder, @Nullable T labelledObject);
     	<T> void buildSubLabelFor(@NonNull ILabelGenerator.Builder labelBuilder, @Nullable T labelledObject);
     	@Nullable ILabelGenerator<?> get(@NonNull Class<?> labelledClass);
     	@Nullable Object install(@NonNull Class<?> labelledClass, @NonNull ILabelGenerator<?> labelGenerator);
     	@Nullable Object install(@NonNull Class<?> labelledClass, @NonNull ILabelGenerator.Descriptor labelDescriptor);
-//    	Object install(String labelledClass, ILabelGenerator<?> labelGenerator);
-//    	Object install(String labelledClass, ILabelGenerator.Descriptor labelDescriptor);
         @NonNull String labelFor(@Nullable Object labelledObject);
        	@NonNull String labelFor(@Nullable Object labelledObject, @Nullable Map<ILabelGenerator.Option<?>, Object> options);
     	void uninstall(@NonNull Class<?> labelledClass);

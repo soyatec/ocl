@@ -33,7 +33,7 @@ public final class SlotLabelGenerator extends AbstractLabelGenerator<Slot>
 		if (name != null)
 			labelBuilder.appendString(name);
 		else {
-			labelBuilder.appendString("<null-named-");
+			labelBuilder.appendString("<null-featured-");
 			labelBuilder.appendString(object.getClass().getSimpleName());
 			labelBuilder.appendString(">");
 		}

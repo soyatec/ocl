@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2010 E.D.Willink and others.
+ * Copyright (c) 2010,2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,14 +11,11 @@
  *     E.D.Willink - initial API and implementation
  * 
  * </copyright>
- *
- * $Id: Label.java,v 1.2 2010/04/08 06:27:47 ewillink Exp $
  */
 package org.eclipse.ocl.examples.common.label;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 
 /**
  * Label is a facade for the ILabelGenerator extensible label generators.

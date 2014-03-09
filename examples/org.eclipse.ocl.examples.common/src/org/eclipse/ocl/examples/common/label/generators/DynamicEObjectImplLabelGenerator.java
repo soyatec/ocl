@@ -12,9 +12,11 @@
  * 
  * </copyright>
  */
-package org.eclipse.ocl.examples.pivot.uml;
+package org.eclipse.ocl.examples.common.label.generators;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.label.AbstractLabelGenerator;
 
@@ -29,8 +31,17 @@ public final class DynamicEObjectImplLabelGenerator extends AbstractLabelGenerat
 	}
 
 	public void buildLabelFor(@NonNull Builder labelBuilder, @NonNull DynamicEObjectImpl object) {
-		labelBuilder.appendString("<");
-		labelBuilder.appendString(object.eClass().getName());
-		labelBuilder.appendString(">");
+		EClass eClass = object.eClass();
+		Resource eResource = object.eResource();
+		if (eResource != null) {
+			String className = eResource.getClass().getName();
+			if (className.contains("UML")) {
+				labelBuilder.appendString("<");
+				labelBuilder.appendString(eClass.getName());
+				labelBuilder.appendString(">");
+				return;
+			}
+		}
+		labelBuilder.appendString(eClass.getName());
 	}
 }
