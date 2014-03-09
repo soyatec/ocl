@@ -56,6 +56,8 @@ import org.eclipse.ocl.examples.emf.validation.validity.Severity;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidityFactory;
 import org.eclipse.ocl.examples.emf.validation.validity.locator.ConstraintLocator;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.SeveritiesVisibilityFilter;
 
 public class ValidityModel
 {
@@ -102,6 +104,12 @@ public class ValidityModel
 	private final @SuppressWarnings("null")@NonNull RootNode rootNode = ValidityFactory.eINSTANCE.createRootNode();
 	private final @NonNull Map<ConstrainingURI, ConstrainingNode> allConstrainingNodes = new HashMap<ConstrainingURI, ConstrainingNode>();
 	private final @NonNull Map<ValidatableURI, ValidatableNode> allValidatableNodes = new HashMap<ValidatableURI, ValidatableNode>();
+
+	private final @NonNull Set<IVisibilityFilter> validatableFilters = new HashSet<IVisibilityFilter>();
+	private final @NonNull Set<IVisibilityFilter> constrainingFilters = new HashSet<IVisibilityFilter>();
+	
+	private final @NonNull SeveritiesVisibilityFilter constrainingNodesFilterByKind = new SeveritiesVisibilityFilter();
+	private final @NonNull SeveritiesVisibilityFilter validatableNodesFilterByKind = new SeveritiesVisibilityFilter();
 	
 	private final @NonNull Map<TypeURI, Set<TypeURI>> typeClosures = new HashMap<TypeURI, Set<TypeURI>>();
 	private final @NonNull Collection<Resource> resources;
@@ -130,6 +138,21 @@ public class ValidityModel
 			constrainingURIs.addAll(moreConstrainingURIs);
 		}
 		return constrainingURIs;
+	}
+
+	public void addConstrainingFilter(@NonNull IVisibilityFilter filter) {
+		constrainingFilters.add(filter);
+	}
+	
+	public void addFilteredSeverity(@NonNull Severity severity) {
+		constrainingNodesFilterByKind.addFilteredSeverity(severity);
+		addConstrainingFilter(constrainingNodesFilterByKind);
+		validatableNodesFilterByKind.addFilteredSeverity(severity);
+		addValidatableFilter(validatableNodesFilterByKind);
+	}
+
+	public void addValidatableFilter(@NonNull IVisibilityFilter filter) {
+		validatableFilters.add(filter);
 	}
 
 	/**
@@ -776,6 +799,57 @@ public class ValidityModel
 		} finally {
 			monitorStep.done();
 		}
+	}
+
+	public void refreshModel(@Nullable List<AbstractNode> grayedValidatableNodes,
+			@Nullable List<AbstractNode> grayedConstrainingNodes) {
+		RootNode rootNode = validityManager.getRootNode();
+		if (rootNode != null) {
+//			System.out.format(Thread.currentThread().getName() + " %3.3f revisible ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getValidatableNodes()) {
+				aNode.refreshVisibleChildren(validatableFilters);
+			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f revisible ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
+				aNode.refreshVisibleChildren(constrainingFilters);
+			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f regray ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getValidatableNodes()) {
+				aNode.refreshGrayed();
+			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f regray ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
+				aNode.refreshGrayed();
+			}
+			if (grayedValidatableNodes != null) {
+//				System.out.format(Thread.currentThread().getName() + " %3.3f Redraw compute grays\n", (System.currentTimeMillis() - start) * 0.001);
+				for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+					abstractNode.getGrayedElements(grayedValidatableNodes);
+				}
+			}
+			if (grayedConstrainingNodes != null) {
+				for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+					abstractNode.getGrayedElements(grayedConstrainingNodes);
+				}
+			}
+		}
+	}
+
+	public void removeConstrainingFilter(@NonNull IVisibilityFilter filter) {
+		constrainingFilters.remove(filter);
+	}
+	
+	public void removeFilteredSeverity(@NonNull Severity severity) {
+		if (!constrainingNodesFilterByKind.removeFilteredSeverity(severity)) {
+			constrainingFilters.remove(constrainingNodesFilterByKind);
+		}
+		if (!validatableNodesFilterByKind.removeFilteredSeverity(severity)) {
+			validatableFilters.remove(validatableNodesFilterByKind);
+		}
+	}
+
+	public void removeValidatableFilter(@NonNull IVisibilityFilter filter) {
+		validatableFilters.remove(filter);
 	}
 	
 	/**

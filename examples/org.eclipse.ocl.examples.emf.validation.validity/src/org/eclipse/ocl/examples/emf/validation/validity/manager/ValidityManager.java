@@ -51,9 +51,11 @@ import org.eclipse.ocl.examples.emf.validation.validity.ResultConstrainingNode;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultSet;
 import org.eclipse.ocl.examples.emf.validation.validity.ResultValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.RootNode;
+import org.eclipse.ocl.examples.emf.validation.validity.Severity;
 import org.eclipse.ocl.examples.emf.validation.validity.ValidatableNode;
 import org.eclipse.ocl.examples.emf.validation.validity.locator.ConstraintLocator;
 import org.eclipse.ocl.examples.emf.validation.validity.plugin.ValidityPlugin;
+import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
 
 public class ValidityManager
 {	
@@ -150,6 +152,27 @@ public class ValidityManager
 	    adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 	    adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
 	    adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+	}
+
+	public void addConstrainingFilter(@NonNull IVisibilityFilter filter) {
+		ValidityModel model2 = model;
+		if (model2 != null) {
+			model2.addConstrainingFilter(filter);
+		}
+	}
+	
+	public void addFilteredSeverity(@NonNull Severity severity) {
+		ValidityModel model2 = model;
+		if (model2 != null) {
+			model2.addFilteredSeverity(severity);
+		}
+	}
+
+	public void addValidatableFilter(@NonNull IVisibilityFilter filter) {
+		ValidityModel model2 = model;
+		if (model2 != null) {
+			model2.addValidatableFilter(filter);
+		}
 	}
 
 	public @NonNull Map<Object, Object> createDefaultContext() {
@@ -428,7 +451,46 @@ public class ValidityManager
 		setInput(lastInput, new BasicMonitor());
 		this.forceRefresh = false;
 	}
+
+/*	public void refreshModel(List<AbstractNode> grayedValidatableNodes,
+			List<AbstractNode> grayedConstrainingNodes) {
+		model.refreshModel(grayedValidatableNodes, grayedConstrainingNodes);
+		RootNode rootNode = validityModel.getRootNode();
+		if (rootNode != null) {
+//			System.out.format(Thread.currentThread().getName() + " %3.3f Redraw compute grays\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
+				abstractNode.getGrayedElements(grayedConstrainingNodes);
+			}
+			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
+				abstractNode.getGrayedElements(grayedValidatableNodes);
+			}
+		}
+//		System.out.format(Thread.currentThread().getName() + " %3.3f Redraw schedule main\n", (System.currentTimeMillis() - start) * 0.001);
+		
+		
+	} */
+
+	public void removeConstrainingFilter(@NonNull IVisibilityFilter filter) {
+		ValidityModel model2 = model;
+		if (model2 != null) {
+			model2.removeConstrainingFilter(filter);
+		}
+	}
 	
+	public void removeFilteredSeverity(@NonNull Severity severity) {
+		ValidityModel model2 = model;
+		if (model2 != null) {
+			model2.removeFilteredSeverity(severity);
+		}
+	}
+
+	public void removeValidatableFilter(@NonNull IVisibilityFilter filter) {
+		ValidityModel model2 = model;
+		if (model2 != null) {
+			model2.removeValidatableFilter(filter);
+		}
+	}
+
 	public void setInput(Object newInput) {
 		setInput(newInput, new BasicMonitor());
 	}

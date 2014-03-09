@@ -309,4 +309,8 @@ public class IDEValidityManager extends ValidityManager
 		}
 		validationJob.schedule();
 	}
+
+	public void redraw() {
+		refreshJob.add(null);
+	}
 }

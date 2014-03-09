@@ -35,10 +35,10 @@ public final class DisableAllUnusedNodesAction extends AbstractFilterAction
 										  : ValidityUIMessages.ValidityView_Action_HideUnusedConstrainingNodes_ToolTipText,
 				ValidityUIMessages.ValidityView_Action_ShowUnusedNodes_ImageLocation,
 				validityView,  isValidatableFilterAction);
+//		refreshChecked();
 	}
 
-	@Override
-	public void run() {
+	public void refreshChecked() {
 		if (this.isChecked()){
 			setToolTipText(isValidatableAction ? ValidityUIMessages.ValidityView_Action_ShowUnusedValidatableNodes_ToolTipText
 													 : ValidityUIMessages.ValidityView_Action_ShowUnusedConstrainingNodes_ToolTipText);
@@ -52,5 +52,16 @@ public final class DisableAllUnusedNodesAction extends AbstractFilterAction
 			setImageDescriptor(ImageDescriptor.createFromURL(image));
 			validityView.removeFilter(isValidatableAction, filter);
 		}
+	}
+
+	@Override
+	public void run() {
+		refreshChecked();
+	}
+
+	@Override
+	public void setChecked(boolean isChecked) {
+		super.setChecked(isChecked);
+		refreshChecked();
 	}
 }

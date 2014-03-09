@@ -12,7 +12,7 @@
  *  
  * </copyright>
  */
-package org.eclipse.ocl.examples.emf.validation.validity.ui.filters;
+package org.eclipse.ocl.examples.emf.validation.validity.utilities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
 import org.eclipse.ocl.examples.emf.validation.validity.Result;
 import org.eclipse.ocl.examples.emf.validation.validity.Severity;
-import org.eclipse.ocl.examples.emf.validation.validity.utilities.IVisibilityFilter;
 
 public class SeveritiesVisibilityFilter implements IVisibilityFilter
 {

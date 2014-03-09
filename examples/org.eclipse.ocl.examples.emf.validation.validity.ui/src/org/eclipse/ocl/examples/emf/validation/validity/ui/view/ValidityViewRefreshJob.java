@@ -14,16 +14,22 @@
  */
 package org.eclipse.ocl.examples.emf.validation.validity.ui.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.ocl.examples.emf.validation.validity.AbstractNode;
+import org.eclipse.ocl.examples.emf.validation.validity.manager.ValidityModel;
 
 /**
  * The ValidationViewRefreshJob provides a delayed refresh of the Validation View trees
@@ -33,12 +39,48 @@ public class ValidityViewRefreshJob extends Job
 {
 	private class DisplayRefresh implements Runnable
 	{
+		protected final @Nullable IProgressMonitor monitor;
+		private final @Nullable AbstractNode[] grayedValidatableNodes;
+		private final @Nullable AbstractNode[] grayedConstrainingNodes;
+
+		public DisplayRefresh(@Nullable IProgressMonitor monitor, @Nullable List<AbstractNode> grayedValidatableNodes,
+				@Nullable List<AbstractNode> grayedConstrainingNodes) {
+			this.monitor = monitor;
+			this.grayedValidatableNodes = grayedValidatableNodes != null ? grayedValidatableNodes.toArray(new AbstractNode[grayedValidatableNodes.size()]) : null;
+			this.grayedConstrainingNodes = grayedConstrainingNodes != null ? grayedConstrainingNodes.toArray(new AbstractNode[grayedConstrainingNodes.size()]) : null;
+		}
+
 		public void run() {
-//			System.out.println(Thread.currentThread().getName() + " - DisplayRefresh.start");
+//			long start = System.currentTimeMillis();
+//			System.out.format(Thread.currentThread().getName() + " %3.3f Redraw start\n", (System.currentTimeMillis() - start) * 0.001);
+			assert monitor != null;
 			try {
-				// For large models intelligent selective update is costly so just do a full refresh
-				validatableNodesViewer.refresh();
-				constrainingNodesViewer.refresh();
+				final @SuppressWarnings("null")@NonNull Monitor emfMonitor = BasicMonitor.toMonitor(monitor);
+				if (!emfMonitor.isCanceled()) {
+//					System.out.format(Thread.currentThread().getName() + " %3.3f Redraw refresh ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+					constrainingNodesViewer.refresh();
+				}
+				if (!emfMonitor.isCanceled()) {
+///					System.out.format(Thread.currentThread().getName() + " %3.3f Redraw refresh ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+					validatableNodesViewer.refresh();
+				}
+				if (!emfMonitor.isCanceled() && (grayedConstrainingNodes != null)) {
+//					System.out.format(Thread.currentThread().getName() + " %3.3f Redraw setGrayed ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+					constrainingNodesViewer.setGrayedElements(grayedConstrainingNodes);
+				}
+				if (!emfMonitor.isCanceled() && (grayedValidatableNodes != null)) {
+//					System.out.format(Thread.currentThread().getName() + " %3.3f Redraw setGrayed ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+					validatableNodesViewer.setGrayedElements(grayedValidatableNodes);
+				}
+//				System.out.format(Thread.currentThread().getName() + " %3.3f Redraw done\n", (System.currentTimeMillis() - start) * 0.001);
+			
+			
+			
+//			System.out.println(Thread.currentThread().getName() + " - DisplayRefresh.start");
+//			try {
+//				// For large models intelligent selective update is costly so just do a full refresh
+//				validatableNodesViewer.refresh();
+//				constrainingNodesViewer.refresh();
 			}
 			finally {
 				displayRefresh = null;
@@ -53,6 +95,7 @@ public class ValidityViewRefreshJob extends Job
 	}
 
 	private Set<AbstractNode> refreshQueue = new HashSet<AbstractNode>();
+	private ValidityView validityView = null;
 	private CheckboxTreeViewer validatableNodesViewer = null;
 	private CheckboxTreeViewer constrainingNodesViewer = null;
 	private DisplayRefresh displayRefresh = null;
@@ -61,16 +104,20 @@ public class ValidityViewRefreshJob extends Job
 		super("Validation View Refresh");
 	}
 
-	public void add(@NonNull AbstractNode node) {
+	public void add(@Nullable AbstractNode node) {
 		synchronized (refreshQueue) {
 			if (refreshQueue.isEmpty()) {
 				schedule(IDEValidityManager.FAST_REFRESH_DELAY);
 			}
-			refreshQueue.add(node);
+			if (node != null) {
+				refreshQueue.add(node);
+			}
 		}
 	}
 
-	public void initViewers(@NonNull CheckboxTreeViewer validatableNodesViewer, @NonNull CheckboxTreeViewer constrainingNodesViewer) {
+	public void initViewers(@NonNull ValidityView validityView,
+			@NonNull CheckboxTreeViewer validatableNodesViewer, @NonNull CheckboxTreeViewer constrainingNodesViewer) {
+		this.validityView = validityView;
 		this.validatableNodesViewer = validatableNodesViewer;
 		this.constrainingNodesViewer = constrainingNodesViewer;
 	}
@@ -87,13 +134,23 @@ public class ValidityViewRefreshJob extends Job
 			return Status.CANCEL_STATUS;
 		}
 		if ((validatableNodesViewer == null) || (constrainingNodesViewer == null)) {
-//			System.out.println(Thread.currentThread().getName() + " - RefreshJob.not-ready");
+//			System.out.println(Thread.currentThread().getName() + " - RefreshJob viewers not-ready");
+			return Status.CANCEL_STATUS;
+		}
+		ValidityModel model = validityView.getValidityManager().getModel();
+		if (model == null) {
+//			System.out.println(Thread.currentThread().getName() + " - RefreshJob model not-ready");
 			return Status.CANCEL_STATUS;
 		}
 		synchronized (refreshQueue) {
 			refreshQueue.clear();
 		}
-		displayRefresh = new DisplayRefresh();
+		
+		List<AbstractNode> grayedValidatableNodes = new ArrayList<AbstractNode>();
+		List<AbstractNode> grayedConstrainingNodes = new ArrayList<AbstractNode>();
+		model.refreshModel(grayedValidatableNodes, grayedConstrainingNodes);
+		
+		displayRefresh = new DisplayRefresh(monitor, grayedValidatableNodes, grayedConstrainingNodes);
 		validatableNodesViewer.getTree().getDisplay().asyncExec(displayRefresh);
 //		System.out.println(Thread.currentThread().getName() + " - RefreshJob.done");
 		return Status.OK_STATUS;
