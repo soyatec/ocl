@@ -37,8 +37,8 @@ public class AllValidityTests
 
 	public static void buildSuite(TestSuite suite) {
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			suite.addTestSuite(HTMLExportOCLValidationResultTests.class);
-			suite.addTestSuite(TextExportOCLValidationResultTests.class);
+//			suite.addTestSuite(HTMLExportOCLValidationResultTests.class);
+//			suite.addTestSuite(TextExportOCLValidationResultTests.class);
 			suite.addTestSuite(ValidityManagerTests.class);
 			suite.addTestSuite(ValidityModelTests.class);
 		}
