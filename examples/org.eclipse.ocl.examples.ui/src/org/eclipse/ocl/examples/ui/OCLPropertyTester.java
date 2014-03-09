@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -35,6 +36,7 @@ public class OCLPropertyTester extends PropertyTester
 {
 	private static final String RESOURCE_SET_AVAILABLE = "resourceSetAvailable"; //$NON-NLS-1$
 	
+	@Deprecated // No longer used
 	public static XtextEditor getActiveXtextEditor(IEvaluationContext evaluationContext) {
 		Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
 		if (!(o instanceof IEditorPart)) {
@@ -48,7 +50,7 @@ public class OCLPropertyTester extends PropertyTester
 		super();
 	}
 
-	private boolean hasResourceSet(Object receiver) {
+	private boolean hasResourceSet(Object receiver, @NonNull IEditorPart editorPart) {
 		if (receiver instanceof IStructuredSelection) {
 			receiver = ((IStructuredSelection)receiver).getFirstElement();
 		}
@@ -66,8 +68,7 @@ public class OCLPropertyTester extends PropertyTester
 			return true;
 		}
 		else if (receiver instanceof TextSelection) {
-			IEvaluationContext evaluationContext = getApplicationContext();
-			XtextEditor xtextEditor = getActiveXtextEditor(evaluationContext);
+			Object xtextEditor = editorPart.getAdapter(XtextEditor.class);
 			return xtextEditor != null;
 		}
 		return false;
@@ -83,17 +84,33 @@ public class OCLPropertyTester extends PropertyTester
 
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (RESOURCE_SET_AVAILABLE.equals(property)) {
+			IEvaluationContext evaluationContext = getApplicationContext();
+			Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_PART_NAME);
+			if (!(o instanceof IEditorPart)) {
+//				System.out.println(property + " false for " + o);
+				return false;
+			}
+			IEditorPart editorPart = (IEditorPart)o;
 			if (receiver instanceof Collection) {
 				for (Object aReceiver : (Collection<?>)receiver) {
-					if (hasResourceSet(aReceiver)) {
+					if (hasResourceSet(aReceiver, editorPart)) {
+//						System.out.println(property + " *true for " + aReceiver);
 						return true;
 					}
 				}
+//				System.out.println(property + " *false for " + receiver);
+				return false;
 			}
 			else {
-				return hasResourceSet(receiver);
+				if (hasResourceSet(receiver, editorPart)) {
+//					System.out.println(property + " true for " + receiver);
+					return true;
+				}
+//				System.out.println(property + " false for " + receiver);
+				return false;
 			}
 		}
+//		System.out.println(property + " for " + receiver);
 		return false;
 	}
 }

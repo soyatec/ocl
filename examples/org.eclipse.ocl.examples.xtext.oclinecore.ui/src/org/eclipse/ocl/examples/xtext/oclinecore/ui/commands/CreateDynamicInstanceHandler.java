@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.xtext.oclinecore.ui.commands;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -33,10 +32,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.ui.OCLPropertyTester;
 import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.ISources;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -98,36 +99,39 @@ public class CreateDynamicInstanceHandler extends AbstractHandler
 	@Override
 	public void setEnabled(Object evaluationContext) {
 		selectedClass = null;
-		if (evaluationContext instanceof IEvaluationContext) {
-			IEvaluationContext evalContext = (IEvaluationContext) evaluationContext;
-			XtextEditor xtextEditor = OCLPropertyTester.getActiveXtextEditor(evalContext);
-			if (xtextEditor != null) {
-				final ITextSelection selection = (ITextSelection) xtextEditor.getSelectionProvider().getSelection();	// FIXME this is the 'double-clicked' selection
-				IXtextDocument document = xtextEditor.getDocument();
-				selectedClass = document.readOnly(new IUnitOfWork<org.eclipse.ocl.examples.pivot.Class, XtextResource>() {
-					public org.eclipse.ocl.examples.pivot.Class exec(XtextResource xtextResource) {
-						if (xtextResource == null) {
-							return null;
-						}
-						IParseResult parseResult = xtextResource.getParseResult();
-						if (parseResult == null)
-							throw new NullPointerException("parseResult is null");
-						ICompositeNode rootNode = parseResult.getRootNode();
-//						INode lastVisibleNode = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, selection.getOffset());
-//						EObject currentModel = NodeModelUtils.getNearestSemanticObject(lastVisibleNode);						
-						INode lastVisibleNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, selection.getOffset());
-						if (lastVisibleNode == null) {
-							return null; 
-						}		
-						EObject currentModel = NodeModelUtils.findActualSemanticObjectFor(lastVisibleNode);						
-						if (!(currentModel instanceof ClassCS)) {
-							return null; 
-						}		
-						ClassCS oclInEcoreClass = (ClassCS) currentModel;
-						return PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, oclInEcoreClass);
-					}					
-				});
-			}
+		Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
+		if (!(o instanceof IEditorPart)) {
+			return;
 		}
+		o = ((IEditorPart)o).getAdapter(XtextEditor.class);
+		if (!(o instanceof XtextEditor)) {
+			return;
+		}
+		XtextEditor xtextEditor = (XtextEditor)o;
+		final ITextSelection selection = (ITextSelection) xtextEditor.getSelectionProvider().getSelection();	// FIXME this is the 'double-clicked' selection
+		IXtextDocument document = xtextEditor.getDocument();
+		selectedClass = document.readOnly(new IUnitOfWork<org.eclipse.ocl.examples.pivot.Class, XtextResource>() {
+			public org.eclipse.ocl.examples.pivot.Class exec(XtextResource xtextResource) {
+				if (xtextResource == null) {
+					return null;
+				}
+				IParseResult parseResult = xtextResource.getParseResult();
+				if (parseResult == null)
+					throw new NullPointerException("parseResult is null");
+				ICompositeNode rootNode = parseResult.getRootNode();
+//				INode lastVisibleNode = NodeModelUtils.getLastCompleteNodeByOffset(rootNode, selection.getOffset());
+//				EObject currentModel = NodeModelUtils.getNearestSemanticObject(lastVisibleNode);						
+				INode lastVisibleNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, selection.getOffset());
+				if (lastVisibleNode == null) {
+					return null; 
+				}		
+				EObject currentModel = NodeModelUtils.findActualSemanticObjectFor(lastVisibleNode);						
+				if (!(currentModel instanceof ClassCS)) {
+					return null; 
+				}		
+				ClassCS oclInEcoreClass = (ClassCS) currentModel;
+				return PivotUtil.getPivot(org.eclipse.ocl.examples.pivot.Class.class, oclInEcoreClass);
+			}					
+		});
 	}
 }
