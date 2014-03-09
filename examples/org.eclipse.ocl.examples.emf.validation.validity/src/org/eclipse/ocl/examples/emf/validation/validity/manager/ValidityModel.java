@@ -595,10 +595,10 @@ public class ValidityModel
 //			s.append(label);
 //			StringBuilder s = new StringBuilder();
 			if (abstractNode instanceof ConstrainingNode) {
-				s.append(ILabelGenerator.Registry.INSTANCE.labelFor(((ConstrainingNode)abstractNode).getConstrainingObject(), null));
+				s.append(ILabelGenerator.Registry.INSTANCE.labelFor(((ConstrainingNode)abstractNode).getConstrainingObject(), ValidityManager.LABEL_OPTIONS));
 			}
 			else if (abstractNode instanceof ValidatableNode) {
-				s.append(ILabelGenerator.Registry.INSTANCE.labelFor(((ValidatableNode)abstractNode).getConstrainedObject(), null));
+				s.append(ILabelGenerator.Registry.INSTANCE.labelFor(((ValidatableNode)abstractNode).getConstrainedObject(), ValidityManager.LABEL_OPTIONS));
 			}
 			s.append("::");
 		}

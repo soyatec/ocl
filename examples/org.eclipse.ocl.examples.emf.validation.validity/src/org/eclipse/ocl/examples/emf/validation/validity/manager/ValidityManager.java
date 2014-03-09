@@ -66,7 +66,7 @@ public class ValidityManager
 	public static final @NonNull TracingOption CREATE_VALIDATABLE = new TracingOption(ValidityPlugin.PLUGIN_ID, "create/validatable");
 	public static final @NonNull TracingOption LOCATE_RESOURCE = new TracingOption(ValidityPlugin.PLUGIN_ID, "locate/resource");
 	
-	private static final @NonNull Map<ILabelGenerator.Option<?>, Object> LABEL_OPTIONS = new HashMap<ILabelGenerator.Option<?>, Object>();
+	public static final @NonNull Map<ILabelGenerator.Option<?>, Object> LABEL_OPTIONS = new HashMap<ILabelGenerator.Option<?>, Object>();
 	static {
 		LABEL_OPTIONS.put(ILabelGenerator.Builder.SHOW_QUALIFIER, null);
 	}

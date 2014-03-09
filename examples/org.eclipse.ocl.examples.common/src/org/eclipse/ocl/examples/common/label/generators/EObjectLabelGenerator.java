@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.common.label.generators;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -42,8 +44,24 @@ public final class EObjectLabelGenerator extends AbstractLabelGenerator<EObject>
 				labelBuilder.appendString("/");
 			}
 		}
-		labelBuilder.appendString("<unnamed-");
-		labelBuilder.appendString(object.getClass().getSimpleName());
-		labelBuilder.appendString(">");
+		EClass eClass = object.eClass();
+		EAttribute eidAttribute = eClass.getEIDAttribute();
+		if (eidAttribute != null) {
+			labelBuilder.appendString(String.valueOf(object.eGet(eidAttribute)));
+			return;
+		}
+/*		List<EAttribute> eAttributes = eClass.getEAttributes();
+		if (eAttributes.size() > 0) {
+			EAttribute eAttribute = eAttributes.get(0);
+			if (eAttribute != null) {
+				labelBuilder.appendString(eClass.getName());
+				labelBuilder.appendString(" ");
+				labelBuilder.appendString(String.valueOf(object.eGet(eAttribute)));
+				return;
+			}
+		} */
+//		labelBuilder.appendString("<");
+		labelBuilder.appendString(eClass.getName());
+//		labelBuilder.appendString(">");
 	}
 }
