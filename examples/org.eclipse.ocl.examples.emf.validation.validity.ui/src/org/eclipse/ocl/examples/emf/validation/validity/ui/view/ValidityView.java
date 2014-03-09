@@ -126,86 +126,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 	@SuppressWarnings("unused")
 	private static org.eclipse.ocl.examples.ui.OCLPropertyTester ensureViewsIdIsreferenced = null;
 
-	protected FilteredCheckboxTree filteredValidatableNodesTree;
-	protected FilteredCheckboxTree filteredConstrainingNodesTree;
-	
-	private final @NonNull ValidityViewRefreshJob refreshJob = new ValidityViewRefreshJob();
-
-	protected final @NonNull IDEValidityManager validityManager;
-	
-	/** Keeps a reference to the toolkit used to create our form. */
-	private FormToolkit formToolkit;
-	
-	/** Form that will contain the Validity View itself. */
-	private Form validityViewForm;
-	
-	/** Allows us to display error/warning messages directly on the form. */
-	private FormMessageManager messageManager;
-
-	/** Form that will contain the Validatable column View. */
-	private SashForm validateableElementsForm;
-	
-	/** Form that will contain the Constraining column View. */
-	private SashForm constrainingElementsForm;
-	
-	/** We'll create this {@link SashForm} as the main body of the Validity view form. */
-	private SashForm formBody;
-	
-	/**
-	 * Keeps a reference to the "validateable Elements" section of the Validity view form.
-	 */
-	private Section validatableNodesSection;
-	
-	/** The message key. */
-	private final String messageKey = "ValidityViewMessageKey";
-
-	/** Kept as an instance member, this will allow us to set unique identifiers to the status messages. */
-	private int messageCount;
-	
-	/**
-	 * Keeps a reference to the "constraining Nodes" section of the Validity view form.
-	 */
-	private Section constrainingNodesSection;
-	
-	protected ResourceSet modelResourceSet;
-	
-	/**Context Menu.*/
-	private ShowElementInEditorAction showValidatableElementInEditorAction;
-	private ShowElementInEditorAction showConstrainingElementInEditorAction;
-	
-	/**Local Tool Bar.*/
-	private Action expandAllNodesAction;
-	private Action collapseAllNodesAction;
-	private Action runValidationAction;
-	private Action lockValidatableNodesAction;
-	private Action forceValidityViewRefreshAction;
-	private Action exportValidationResultAction;
-	private IAction filterValidationResultAction;
-
-	/**Validatable Tool Bar.*/
-	private Action expandAllValidatableNodesAction;
-	private Action collapseAllValidatableNodesAction;
-	private Action enableAllValidatableNodesAction;
-	private Action disableAllValidatableNodesAction;
-	private Action disableAllUnusedValidatableNodesAction;
-
-	/**Constraining Tool Bar.*/
-	private Action expandAllConstrainingNodesAction;
-	private Action collapseAllConstrainingNodesAction;
-	private Action enableAllConstrainingNodesAction;
-	private Action disableAllConstrainingNodesAction;
-	private Action disableAllUnusedConstrainingNodesAction;
-
-	/** Double Click action handlers.*/
-	private Action constrainingNodesDoubleClickAction;
-	private Action validatableNodesDoubleClickAction;
-	
-	private final SeveritiesVisibilityFilter constrainingNodesFilterByKind = new SeveritiesVisibilityFilter();
-	private final SeveritiesVisibilityFilter validatableNodesFilterByKind = new SeveritiesVisibilityFilter();
-
-	private @NonNull Set<IVisibilityFilter> validatableFilters = new HashSet<IVisibilityFilter>();
-	private @NonNull Set<IVisibilityFilter> constrainingFilters = new HashSet<IVisibilityFilter>();
-
 	/**
 	 * ValidityViewLabelProvider extends the standard AdapterFactoryLabelProvider to provide icons for
 	 * non-standard Java objects such as Method.
@@ -392,9 +312,114 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		}
 	}
 
+	protected FilteredCheckboxTree filteredValidatableNodesTree;
+	protected FilteredCheckboxTree filteredConstrainingNodesTree;
+	
+	private final @NonNull ValidityViewRefreshJob refreshJob = new ValidityViewRefreshJob();
+
+	protected final @NonNull IDEValidityManager validityManager;
+	
+	/** Keeps a reference to the toolkit used to create our form. */
+	private FormToolkit formToolkit;
+	
+	/** Form that will contain the Validity View itself. */
+	private Form validityViewForm;
+	
+	/** Allows us to display error/warning messages directly on the form. */
+	private FormMessageManager messageManager;
+
+	/** Form that will contain the Validatable column View. */
+	private SashForm validateableElementsForm;
+	
+	/** Form that will contain the Constraining column View. */
+	private SashForm constrainingElementsForm;
+	
+	/** We'll create this {@link SashForm} as the main body of the Validity view form. */
+	private SashForm formBody;
+	
+	/**
+	 * Keeps a reference to the "validateable Elements" section of the Validity view form.
+	 */
+	private Section validatableNodesSection;
+	
+	/** The message key. */
+	private final String messageKey = "ValidityViewMessageKey";
+
+	/** Kept as an instance member, this will allow us to set unique identifiers to the status messages. */
+	private int messageCount;
+	
+	/**
+	 * Keeps a reference to the "constraining Nodes" section of the Validity view form.
+	 */
+	private Section constrainingNodesSection;
+	
+	protected ResourceSet modelResourceSet;
+	
+	/**Context Menu.*/
+	private ShowElementInEditorAction showValidatableElementInEditorAction;
+	private ShowElementInEditorAction showConstrainingElementInEditorAction;
+	
+	/**Local Tool Bar.*/
+	private Action expandAllNodesAction;
+	private Action collapseAllNodesAction;
+	private Action runValidationAction;
+	private Action lockValidatableNodesAction;
+	private Action forceValidityViewRefreshAction;
+	private Action exportValidationResultAction;
+	private IAction filterValidationResultAction;
+
+	/**Validatable Tool Bar.*/
+	private Action expandAllValidatableNodesAction;
+	private Action collapseAllValidatableNodesAction;
+	private Action enableAllValidatableNodesAction;
+	private Action disableAllValidatableNodesAction;
+	private Action disableAllUnusedValidatableNodesAction;
+
+	/**Constraining Tool Bar.*/
+	private Action expandAllConstrainingNodesAction;
+	private Action collapseAllConstrainingNodesAction;
+	private Action enableAllConstrainingNodesAction;
+	private Action disableAllConstrainingNodesAction;
+	private Action disableAllUnusedConstrainingNodesAction;
+
+	/** Double Click action handlers.*/
+	private Action constrainingNodesDoubleClickAction;
+	private Action validatableNodesDoubleClickAction;
+	
+	private final SeveritiesVisibilityFilter constrainingNodesFilterByKind = new SeveritiesVisibilityFilter();
+	private final SeveritiesVisibilityFilter validatableNodesFilterByKind = new SeveritiesVisibilityFilter();
+
+	private @NonNull Set<IVisibilityFilter> validatableFilters = new HashSet<IVisibilityFilter>();
+	private @NonNull Set<IVisibilityFilter> constrainingFilters = new HashSet<IVisibilityFilter>();
+	
+	private @Nullable RedrawJob redrawJob = null;
+
+	private @Nullable Notifier selection = null;
+	private @Nullable ChangeSelectionJob setInputJob = null;
+
 	public ValidityView() {
 		validityManager = new IDEValidityManager(refreshJob);
 		modelResourceSet = new ResourceSetImpl();
+	}
+
+	public void addFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
+		if (isValidatableFilterAction) {
+			validatableFilters.add(filter);
+		}
+		else {
+			constrainingFilters.add(filter);
+		}
+		redraw();
+	}
+	
+	public void addFilteredSeverity(Severity severity) {
+		constrainingNodesFilterByKind.addFilteredSeverity(severity);
+		constrainingFilters.add(constrainingNodesFilterByKind);
+		validatableNodesFilterByKind.addFilteredSeverity(severity);
+		validatableFilters.add(validatableNodesFilterByKind);
+		
+		getConstrainingNodesViewer().refresh();
+		getValidatableNodesViewer().refresh();
 	}
 
 	private void contributeToActionBars() {
@@ -641,23 +666,17 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		filteredConstrainingNodesTree.dispose();
 		super.dispose();
 	}
+	
+	private void fillConstrainingColumnToolBar(IContributionManager manager) {
+		manager.add(expandAllConstrainingNodesAction);
+		manager.add(collapseAllConstrainingNodesAction);
+		manager.add(new Separator());
+		manager.add(enableAllConstrainingNodesAction);
+		manager.add(disableAllConstrainingNodesAction);
+		manager.add(new Separator());
+		manager.add(disableAllUnusedConstrainingNodesAction);
 
-	private void fillValidatableContextMenu(@NonNull IContributionManager manager) {
-		manager.add(expandAllValidatableNodesAction);
-		manager.add(collapseAllValidatableNodesAction);
-		manager.add(new Separator());
-		// use the same actions as the column tool bar
-		manager.add(enableAllValidatableNodesAction);
-		manager.add(disableAllValidatableNodesAction);
-		manager.add(new Separator());
-		manager.add(disableAllUnusedValidatableNodesAction);
-		
-		// Other plug-ins can contribute their actions here
-		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-		manager.add(new Separator());
-		manager.add(runValidationAction);
-		manager.add(new Separator());
-		manager.add(showValidatableElementInEditorAction);
+		manager.update(true);
 	}
 	
 	private void fillConstrainingContextMenu(@NonNull IContributionManager manager) {
@@ -692,18 +711,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 
 		manager.update(true);
 	}
-	
-	private void fillConstrainingColumnToolBar(IContributionManager manager) {
-		manager.add(expandAllConstrainingNodesAction);
-		manager.add(collapseAllConstrainingNodesAction);
-		manager.add(new Separator());
-		manager.add(enableAllConstrainingNodesAction);
-		manager.add(disableAllConstrainingNodesAction);
-		manager.add(new Separator());
-		manager.add(disableAllUnusedConstrainingNodesAction);
-
-		manager.update(true);
-	}
 
 	private void fillValidatableColumnToolBar(IContributionManager manager) {
 		manager.add(expandAllValidatableNodesAction);
@@ -717,6 +724,56 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		manager.update(true);
 	}
 
+	private void fillValidatableContextMenu(@NonNull IContributionManager manager) {
+		manager.add(expandAllValidatableNodesAction);
+		manager.add(collapseAllValidatableNodesAction);
+		manager.add(new Separator());
+		// use the same actions as the column tool bar
+		manager.add(enableAllValidatableNodesAction);
+		manager.add(disableAllValidatableNodesAction);
+		manager.add(new Separator());
+		manager.add(disableAllUnusedValidatableNodesAction);
+		
+		// Other plug-ins can contribute their actions here
+		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+		manager.add(new Separator());
+		manager.add(runValidationAction);
+		manager.add(new Separator());
+		manager.add(showValidatableElementInEditorAction);
+	}
+
+	/**
+	 * gets the Constraining Nodes Viewer
+	 * 
+	 * @return the constrainingNodesViewer
+	 */
+	public @NonNull CheckboxTreeViewer getConstrainingNodesViewer(){
+		CheckboxTreeViewer viewer = (CheckboxTreeViewer) filteredConstrainingNodesTree.getViewer();
+		// a filtered tree never has a null viewer
+		assert viewer != null;
+		return viewer;
+	}
+	
+	/**
+	 * gets the Validity Manager
+	 * 
+	 * @return the validityManager
+	 */
+	public @NonNull IDEValidityManager getValidityManager(){
+		return validityManager;
+	}
+	
+	/**
+	 * gets the validatable Nodes Viewer
+	 * 
+	 * @return the validatableNodesViewer
+	 */
+	public @NonNull CheckboxTreeViewer getValidatableNodesViewer(){
+		CheckboxTreeViewer viewer = (CheckboxTreeViewer) filteredValidatableNodesTree.getViewer();
+		// a filtered tree never has a null viewer
+		assert viewer != null;
+		return viewer;
+	}
 
 	private void hookContextMenu() {
 		// Validatable context menu
@@ -832,14 +889,50 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		};
 	}
 	
-	public void addFilteredSeverity(Severity severity) {
-		constrainingNodesFilterByKind.addFilteredSeverity(severity);
-		constrainingFilters.add(constrainingNodesFilterByKind);
-		validatableNodesFilterByKind.addFilteredSeverity(severity);
-		validatableFilters.add(validatableNodesFilterByKind);
-		
-		getConstrainingNodesViewer().refresh();
-		getValidatableNodesViewer().refresh();
+	/**
+	 * Schedule a redraw of validatable and constraining trees.
+	 */
+	public synchronized void redraw() {
+		RedrawJob oldJob = redrawJob;
+		RedrawJob newJob = redrawJob = new RedrawJob();
+		if (oldJob != null) {
+			oldJob.cancelThenSchedule(newJob);
+		}
+		else {
+			newJob.schedule();
+		}
+	}
+
+	protected void refreshModel(long start) {
+		RootNode rootNode = validityManager.getRootNode();
+		if (rootNode != null) {
+//			System.out.format(Thread.currentThread().getName() + " %3.3f revisible ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getValidatableNodes()) {
+				aNode.refreshVisibleChildren(validatableFilters);
+			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f revisible ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
+				aNode.refreshVisibleChildren(constrainingFilters);
+			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f regray ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getValidatableNodes()) {
+				aNode.refreshGrayed();
+			}
+//			System.out.format(Thread.currentThread().getName() + " %3.3f regray ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
+			for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
+				aNode.refreshGrayed();
+			}
+		}
+	}
+
+	public void removeFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
+		if (isValidatableFilterAction) {
+			validatableFilters.remove(filter);
+		}
+		else {
+			constrainingFilters.remove(filter);
+		}
+		redraw();
 	}
 	
 	public void removeFilteredSeverity(Severity severity) {
@@ -850,39 +943,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			validatableFilters.remove(validatableNodesFilterByKind);
 		}
 		redraw();
-	}
-	
-	/**
-	 * gets the Validity Manager
-	 * 
-	 * @return the validityManager
-	 */
-	public @NonNull IDEValidityManager getValidityManager(){
-		return validityManager;
-	}
-	
-	/**
-	 * gets the validatable Nodes Viewer
-	 * 
-	 * @return the validatableNodesViewer
-	 */
-	public @NonNull CheckboxTreeViewer getValidatableNodesViewer(){
-		CheckboxTreeViewer viewer = (CheckboxTreeViewer) filteredValidatableNodesTree.getViewer();
-		// a filtered tree never has a null viewer
-		assert viewer != null;
-		return viewer;
-	}
-	
-	/**
-	 * gets the Constraining Nodes Viewer
-	 * 
-	 * @return the constrainingNodesViewer
-	 */
-	public @NonNull CheckboxTreeViewer getConstrainingNodesViewer(){
-		CheckboxTreeViewer viewer = (CheckboxTreeViewer) filteredConstrainingNodesTree.getViewer();
-		// a filtered tree never has a null viewer
-		assert viewer != null;
-		return viewer;
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
@@ -906,71 +966,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 			setSelection(input);
 		}
 	}
-	
-	private @Nullable RedrawJob redrawJob = null;
-	
-	/**
-	 * Schedule a redraw of validatable and constraining trees.
-	 */
-	public synchronized void redraw() {
-		RedrawJob oldJob = redrawJob;
-		RedrawJob newJob = redrawJob = new RedrawJob();
-		if (oldJob != null) {
-			oldJob.cancelThenSchedule(newJob);
-		}
-		else {
-			newJob.schedule();
-		}
-	}
-
-	protected void refreshModel(long start) {
-		RootNode rootNode = validityManager.getRootNode();
-		if (rootNode != null) {
-//			int validatableNodes = 0;
-//			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-//				validatableNodes += abstractNode.countVisibleChildren();
-//			}
-//			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
-//			int constrainingNodes = 0;
-//			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-//				constrainingNodes += abstractNode.countVisibleChildren();
-//			}
-//			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
-//			if (selectionsChanged || visibilityChanged) {
-//				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
-				for (AbstractNode aNode : rootNode.getValidatableNodes()) {
-					aNode.refreshVisibleChildren(validatableFilters);
-				}
-//				System.out.format(Thread.currentThread().getName() + " %3.3f revisible ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
-				for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
-					aNode.refreshVisibleChildren(constrainingFilters);
-				}
-//			}
-//			if (selectionsChanged || visibilityChanged) {
-//				System.out.format(Thread.currentThread().getName() + " %3.3f regray ValidatableNodes\n", (System.currentTimeMillis() - start) * 0.001);
-				for (AbstractNode aNode : rootNode.getValidatableNodes()) {
-					aNode.refreshGrayed();
-				}
-//				System.out.format(Thread.currentThread().getName() + " %3.3f regray ConstrainingNodes\n", (System.currentTimeMillis() - start) * 0.001);
-				for (AbstractNode aNode : rootNode.getConstrainingNodes()) {
-					aNode.refreshGrayed();
-				}
-//			}
-//			validatableNodes = 0;
-//			for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-//				validatableNodes += abstractNode.countVisibleChildren();
-//			}
-//			System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
-//			constrainingNodes = 0;
-//			for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-//				constrainingNodes += abstractNode.countVisibleChildren();
-//			}
-//			System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
-		}
-	}
-
-	private @Nullable Notifier selection = null;
-	private @Nullable ChangeSelectionJob setInputJob = null;
 	
 	protected synchronized void setSelection(final Notifier newSelection) {
 		if (newSelection != selection) {
@@ -1036,25 +1031,5 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		// Refresh the view
 		filteredValidatableNodesTree.resetFilter();
 		filteredConstrainingNodesTree.resetFilter();
-	}
-
-	public void addFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
-		if (isValidatableFilterAction) {
-			validatableFilters.add(filter);
-		}
-		else {
-			constrainingFilters.add(filter);
-		}
-		redraw();
-	}
-
-	public void removeFilter(boolean isValidatableFilterAction, @NonNull IVisibilityFilter filter) {
-		if (isValidatableFilterAction) {
-			validatableFilters.remove(filter);
-		}
-		else {
-			constrainingFilters.remove(filter);
-		}
-		redraw();
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2013 CEA LIST and others.
+ * Copyright (c) 2013,2014 CEA LIST and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,9 +26,6 @@ public class NodeCheckStateProvider implements ICheckStateProvider
 
 	public boolean isGrayed(Object element) {
 		AbstractNode node = (AbstractNode) element;
-//		if (node.isGrayed()) {
-//			System.out.println("isGrayed " + node.eClass().getName() + " " + ILabelGenerator.Registry.INSTANCE.labelFor(node.getContext()));
-//		}
 		return node.isGrayed();
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2013 CEA LIST and others.
+ * Copyright (c) 2013,2014 CEA LIST and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,7 +28,6 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener
 	private final @NonNull ValidityView validityView;	
 	
 	public ValidityNodeCheckStateListener(@NonNull ValidityView validityView) {
-//		this.validityManager = validityManager;
 		this.validityView = validityView;
 	}
 	
@@ -39,90 +38,24 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener
 //		long start = System.currentTimeMillis();
 		RootNode rootNode = validityView.getValidityManager().getRootNode();
 		assert rootNode != null;
-//		System.out.format(Thread.currentThread().getName() + " %3.3f checkStateChanged\n", (System.currentTimeMillis() - start) * 0.001);
-//		int validatableNodes = 0;
-//		for (AbstractNode abstractNode : rootNode.getValidatableNodes()) {
-//			validatableNodes += abstractNode.countVisibleChildren();
-//		}
-//		System.out.format(Thread.currentThread().getName() + " %3.3f visible validatableNodes %d\n", (System.currentTimeMillis() - start) * 0.001, validatableNodes);
-//		int constrainingNodes = 0;
-//		for (AbstractNode abstractNode : rootNode.getConstrainingNodes()) {
-//			constrainingNodes += abstractNode.countVisibleChildren();
-//		}
-//		System.out.format(Thread.currentThread().getName() + " %3.3f visible constrainingNodes %d\n", (System.currentTimeMillis() - start) * 0.001, constrainingNodes);
 		Object element = event.getElement();
 //		System.out.format(Thread.currentThread().getName() + " %3.3f update start\n", (System.currentTimeMillis() - start) * 0.001);
 		if (element instanceof AbstractNode) {
 			AbstractNode abstractNode = (AbstractNode) element;
 			boolean enabled = event.getChecked();
 			abstractNode.setEnabled(enabled);
+			/*
+			 * Propagate the new checked/enabled state of this node to all non-Result children and at the leaves across to the other tree's results.
+			 */
 			updateEnabledState(abstractNode, enabled);
+			/*
+			 * Propgation of the corresponding grayed states up is performed as a total traversal during redraw since this ensures that
+			 * each node is visited just once, whereas propagating across and up is surprisingly wasteful.
+			 */
 		}
 		validityView.redraw();
 //		System.out.format(Thread.currentThread().getName() + " %3.3f redraw end\n", (System.currentTimeMillis() - start) * 0.001);
 	}
-
-	/**
-	 * This updates:
-	 * <ul>
-	 * <li>
-	 * the selected abstract node state,</li>
-	 * <li>
-	 * its own children and ancestors states,</li>
-	 * <li>
-	 * the corresponding children in the adjacent tree.</li>
-	 * <li>
-	 * the ancestors states of corresponding children in the adjacent tree.</li>
-	 * </ul>
-	 * 
-	 * @param abstractNode
-	 *            the abstract node
-	 * @param enabled
-	 *            true when the node is checked, false otherwise.
-	 *
-	private void updateAbstractNodeState(AbstractNode abstractNode,
-			boolean enabled) {
-		// update checked Element state
-		abstractNode.setEnabled(enabled);
-		
-		// update results children check state
-		updateChildrenNodesState(abstractNode, enabled);
-
-		// update corresponding node in adjacent tree
-		if (abstractNode instanceof ResultValidatableNode
-				|| abstractNode instanceof ResultConstrainingNode) {
-			propagateToAdjacentTree(abstractNode, enabled);
-		}
-
-		// update Selected Element and get parents to checks/grayed
-		if (abstractNode instanceof RootValidatableNode || abstractNode instanceof RootConstrainingNode){
-			updateRootNode(abstractNode, enabled);					
-		} else if (abstractNode instanceof ConstrainingNode) {
-			ConstrainingNode constrainingNode = (ConstrainingNode) abstractNode;
-				updateConstrainingNodeAncestors(constrainingNode, enabled);
-		} else if (abstractNode instanceof ValidatableNode) {
-			ValidatableNode validatableNode = (ValidatableNode) abstractNode;
-				updateValidatableNodeAncestors(validatableNode, enabled);
-		}
-	} */
-
-	/**
-	 * Update the root node check state.
-	 * 
-	 * @param root
-	 *            the root node.
-	 * @param enabled
-	 *            true when the node is checked, false otherwise.
-	 *
-	private void updateRootNode(AbstractNode root, boolean enabled) {
-		if (root instanceof RootValidatableNode) {
-			validatableTree.setGrayed(root, false);
-			validatableTree.setChecked(root, enabled);
-		} else if (root instanceof RootConstrainingNode) {
-			constraintsTree.setGrayed(root, false);
-			constraintsTree.setChecked(root, enabled);
-		}
-	} */
 
 	/**
 	 * Select/Deselect all children nodes and propagates selection to
@@ -150,176 +83,4 @@ public class ValidityNodeCheckStateListener implements ICheckStateListener
 			}	
 		}
 	}
-	
-	/**
-	 * Select/Deselect all constraints tree ancestors states.
-	 * 
-	 * @param constrainingNode
-	 *            the constraining node.
-	 * @param enabled
-	 *            true when the node is checked, false otherwise.
-	 *
-	private void updateConstrainingNodeAncestors(ConstrainingNode constrainingNode, boolean enabled) {
-		ConstrainingNode parent = constrainingNode.getParent();
-		if (parent != null) {
-			//Enable/disable the parent if all children are enabled/disabled
-			if (enabled && !parent.isAllChildrenDisabled() || 
-					!enabled && parent.isAllChildrenEnabled() || 
-					!enabled && parent.isAllChildrenDisabled()) {
-				parent.setEnabled(enabled);
-				constraintsTree.setChecked(parent, enabled);
-			}
-			if (parent.isEnabled()){
-				List<AbstractNode> checkedChildren = getCheckedNodeChildren(parent);
-				if (checkedChildren.size() == parent.getChildren().size()) {
-					List<AbstractNode> grayedChildren = getGrayedChildren(parent);
-					if (grayedChildren.size() == 0) {
-						constraintsTree.setGrayed(parent, false);
-					} else {
-						constraintsTree.setGrayed(parent, true);
-					}
-				} else {
-					constraintsTree.setGrayed(parent, true);
-				}
-			}
-			updateConstrainingNodeAncestors(parent, enabled);
-		}
-	} */
-	
-	/**
-	 * Select/Deselect all validatable tree ancestors states.
-	 * 
-	 * @param validatableNode
-	 *            the validatable node.
-	 * @param enabled
-	 *            true when the node is checked, false otherwise.
-	 *
-	private void updateValidatableNodeAncestors(ValidatableNode validatableNode, boolean enable) {
-		ValidatableNode parent = validatableNode.getParent();
-		if (parent != null) {
-			//Enable/disable the parent if all children are enabled/disabled
-			if (enable && !parent.isAllChildrenDisabled() || !enable && parent.isAllChildrenEnabled()){
-				parent.setEnabled(enable);
-				validatableTree.setChecked(parent, enable);
-			} else if (!enable && parent.isAllChildrenDisabled()){
-				parent.setEnabled(enable);
-				validatableTree.setChecked(parent, enable);
-			}
-			if (parent.isEnabled()){
-				List<AbstractNode> checkedChildren = getCheckedNodeChildren(parent);
-				if (checkedChildren.size() == parent.getChildren().size()) {
-					List<AbstractNode> grayedChildren = getGrayedChildren(parent);
-					if (grayedChildren.size() == 0) {
-						validatableTree.setGrayed(parent, false);
-					} else {
-						validatableTree.setGrayed(parent, true);
-					}
-				} else {
-					validatableTree.setGrayed(parent, true);
-				}
-			}
-			updateValidatableNodeAncestors(parent, enable);
-		}
-	} */
-
-	/**
-	 * Select/Deselect all children nodes and propagates selection to
-	 * grand-children nodes.
-	 * 
-	 * @param abstractNode
-	 *            the abstract node.
-	 * @param enabled
-	 *            true when the node is checked, false otherwise.
-	 *
-	private void updateChildrenNodesState(AbstractNode abstractNode,
-			boolean enabled) {
-		for (AbstractNode child : abstractNode.getChildren()) {
-			child.setEnabled(enabled);
-			if (child instanceof ResultValidatableNode) {
-				validatableTree.setChecked(child, enabled);
-				validatableTree.setGrayed(child, false);
-				propagateToAdjacentTree(child, enabled);
-			} else if (child instanceof ValidatableNode) {
-				validatableTree.setChecked(child, enabled);
-				validatableTree.setGrayed(child, false);
-				updateChildrenNodesState(child, enabled);
-			} else if (child instanceof ResultConstrainingNode) {
-				constraintsTree.setChecked(child, enabled);
-				constraintsTree.setGrayed(child, false);
-				propagateToAdjacentTree(child, enabled);
-			} else if (child instanceof ConstrainingNode) {
-				constraintsTree.setChecked(child, enabled);
-				constraintsTree.setGrayed(child, false);
-				updateChildrenNodesState(child, enabled);
-			}
-		}
-	} */
-
-	/**
-	 * Propagates results selection to the adjacent tree. The propagation is ascendant since the
-	 * Result nodes have no children.
-	 * 
-	 * @param abstractNode
-	 *            the abstract node.
-	 * @param enabled
-	 *            true when the node is checked, false otherwise.
-	 *
-	private void propagateToAdjacentTree(AbstractNode abstractNode,
-			boolean enabled) {
-		if (abstractNode instanceof ResultValidatableNode) {
-			ResultConstrainingNode resultConstrainingNode = ((ResultValidatableNode) abstractNode)
-					.getResultConstrainingNode();
-			resultConstrainingNode.setEnabled(enabled);
-			constraintsTree.setChecked(resultConstrainingNode, enabled);
-
-			// update Element parents checks/grayed
-			updateConstrainingNodeAncestors(resultConstrainingNode, enabled);
-		} else if (abstractNode instanceof ResultConstrainingNode) {
-			ResultValidatableNode resultValidatableNode = ((ResultConstrainingNode) abstractNode)
-					.getResultValidatableNode();
-			resultValidatableNode.setEnabled(enabled);
-			validatableTree.setChecked(resultValidatableNode, enabled);
-
-			// update Element parents checks/grayed
-			updateValidatableNodeAncestors(resultValidatableNode, enabled);
-		}
-	} */
-
-	/**
-	 * gets all current children check state.
-	 * 
-	 * @param abstractNode
-	 *            the abstract node.
-	 *
-	private List<AbstractNode> getCheckedNodeChildren(AbstractNode node) {
-		List<AbstractNode> checkedChildren = new ArrayList<AbstractNode>();
-		for (AbstractNode child : node.getChildren()) {
-			if (child instanceof ValidatableNode) {
-				if (validatableTree.getChecked(child)) {
-					checkedChildren.add(child);
-				}
-			} else if (child instanceof ConstrainingNode) {
-				if (constraintsTree.getChecked(child)) {
-					checkedChildren.add(child);
-				}
-			}
-		}
-		return checkedChildren;
-	} */
-
-	/**
-	 * gets all current children gray state.
-	 * 
-	 * @param abstractNode
-	 *            the abstract node.
-	 *
-	private List<AbstractNode> getGrayedChildren(AbstractNode parent) {
-		List<AbstractNode> grayedChildren = new ArrayList<AbstractNode>();
-		for (AbstractNode child : parent.getChildren()) {
-			if (validatableTree.getGrayed(child)) {
-				grayedChildren.add(child);
-			}
-		}
-		return grayedChildren;
-	} */
 }
