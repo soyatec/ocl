@@ -118,8 +118,6 @@
    <extension point="org.eclipse.ocl.examples.common.label_generator">
       <generator for="org.eclipse.uml2.uml.Comment"
       	class="org.eclipse.ocl.examples.pivot.uml.CommentLabelGenerator"/>
-      <generator for="org.eclipse.emf.ecore.impl.DynamicEObjectImpl"
-      	class="org.eclipse.ocl.examples.pivot.uml.DynamicEObjectImplLabelGenerator"/>
       <generator for="org.eclipse.uml2.uml.NamedElement"
       	class="org.eclipse.ocl.examples.pivot.uml.NamedElementLabelGenerator"/>
       <generator for="org.eclipse.uml2.uml.PackageImport"

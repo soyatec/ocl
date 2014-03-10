@@ -4,6 +4,8 @@
    <extension-point id="label_generator" name="%_UI_LabelGenerator_extensionpoint" schema="schema/label_generator.exsd"/>
 
    <extension point="org.eclipse.ocl.examples.common.label_generator">
+      <generator for="org.eclipse.emf.ecore.impl.DynamicEObjectImpl"
+      	class="org.eclipse.ocl.examples.common.label.generators.DynamicEObjectImplLabelGenerator"/>
       <generator for="org.eclipse.emf.ecore.EAnnotation"
       	class="org.eclipse.ocl.examples.common.label.generators.EAnnotationLabelGenerator"/>
       <generator for="org.eclipse.emf.ecore.EGenericType"
