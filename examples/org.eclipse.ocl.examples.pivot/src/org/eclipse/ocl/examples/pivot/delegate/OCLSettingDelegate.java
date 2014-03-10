@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -73,7 +74,13 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 //				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);
 //				throw new OCLDelegateException(message);
 //			}
-			return idResolver.unboxedValueOf(result);
+			Object unboxedValue = idResolver.unboxedValueOf(result);
+			if (unboxedValue instanceof Number) {
+				return ValuesUtil.getEcoreNumber((Number)unboxedValue, eStructuralFeature.getEType().getInstanceClass());
+			}
+			else {
+				return unboxedValue;
+			}
 		}
 		catch (InvalidValueException e) {
 			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);

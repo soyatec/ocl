@@ -523,6 +523,33 @@ public abstract class ValuesUtil
 		}
 		return type;
 	}
+
+	public static Object getEcoreNumber(@NonNull Number number, Class<?> instanceClass) {
+		if ((instanceClass == Double.class) || (instanceClass == double.class)) {
+			return number.doubleValue();
+		}
+		else if ((instanceClass == Float.class) || (instanceClass == float.class)) {
+			return number.floatValue();
+		}
+		else if ((instanceClass == Short.class) || (instanceClass == short.class)) {
+			return number.shortValue();
+		}
+		else if ((instanceClass == Integer.class) || (instanceClass == int.class)) {
+			return number.intValue();
+		}
+		else if ((instanceClass == Long.class) || (instanceClass == long.class)) {
+			return number.longValue();
+		}
+		else if (number instanceof BigDecimal) {
+			return number.doubleValue();
+		}
+		else if (number instanceof BigInteger) {
+			return number.longValue();
+		}
+		else {
+			return number;
+		}
+	}
 	
 	public static String getTypeName(@Nullable Object value) {
 		if (value instanceof Boolean) {
