@@ -221,6 +221,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	private static final String PLUGIN_ID = "org.eclipse.ocl.examples.domain";;
 
 	private static final Logger logger = Logger.getLogger(StandaloneProjectMap.class);
+	private static @Nullable Set<String> alreadyLogged = null;
 
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_EPACKAGE = new TracingOption(PLUGIN_ID, "projectMap/addEPackage");
 	public static final @NonNull TracingOption PROJECT_MAP_ADD_GEN_MODEL = new TracingOption(PLUGIN_ID, "projectMap/addGenModel");
@@ -2614,7 +2615,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	/**
 	 * Exceptions encountered during processing as a map from File to Exception.
 	 */
-	private @Nullable Map<File, Exception> exceptionMap = null;
+	private @Nullable Map<String, Exception> exceptionMap = null;
 
 	/**
 	 * The map of bundle/project name to project descriptor.
@@ -2696,7 +2697,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 	 * Return the mapping of problem files to exceptions, or null if not yet
 	 * computed or if no exceptions thrown.
 	 */
-	public @Nullable Map<File, Exception> getExceptionMap() {
+	public @Nullable Map<String, Exception> getExceptionMap() {
 		return exceptionMap;
 	}
 
@@ -2742,7 +2743,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 					scanClassPath(project2descriptor2, saxParser);
 				}
 			} catch (Exception e) {
-				logException(null, e);
+				logException("Failed to  create SAXParser", e);
 				return null;
 			}
 		}
@@ -2861,12 +2862,19 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			&& ((Class<?>) type).isAssignableFrom(StandaloneProjectMap.class);
 	}
 
-	protected void logException(@Nullable File file, @NonNull Exception e) {
-		Map<File, Exception> exceptionMap2 = exceptionMap;
-		if (exceptionMap2 == null) {
-			exceptionMap = exceptionMap2 = new HashMap<File, Exception>();
+	protected void logException(@NonNull String message, @NonNull Exception e) {
+		Set<String> alreadyLogged2 = alreadyLogged;
+		if (alreadyLogged2 == null) {
+			alreadyLogged = alreadyLogged2 = new HashSet<String>();
 		}
-		exceptionMap2.put(file, e);
+		if (alreadyLogged2.add(message)) {
+			logger.error(message, e);
+		}
+		Map<String, Exception> exceptionMap2 = exceptionMap;
+		if (exceptionMap2 == null) {
+			exceptionMap = exceptionMap2 = new HashMap<String, Exception>();
+		}
+		exceptionMap2.put(message, e);
 	}
 
 	/**
@@ -2955,9 +2963,9 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				return projectDescriptor;
 			}
 		} catch (ZipException e) {
-			logException(file, new WrappedException("Could not open Jar file " + file.getAbsolutePath() + ".", e));
+			logException("Could not open Jar file '" + file.getAbsolutePath() + "'", e);
 		} catch (Exception e) {
-			logException(file, e);
+			logException("Failed to read '" + file.getAbsolutePath() + "'", e);
 		} finally{
 			if (jarFile != null) {
 				try {
@@ -2981,7 +2989,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 				return projectDescriptor;
 			}
 		} catch (Exception e) {
-			logException(file, new WrappedException("Couldn't read " + file, e));
+			logException("Couldn't read '" + file + "'", e);
 		} finally {
 			if (inputStream != null) {
 				try {
@@ -3021,7 +3029,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 						}
 					}
 				} catch (Exception e) {
-					logException(fileEntry, e);
+					logException("Failed to read '" + fileEntry + "'", e);
 				}
 			}
 		}
@@ -3032,7 +3040,7 @@ public class StandaloneProjectMap extends SingletonAdapterImpl
 			if (!alreadyVisited.add(f.getCanonicalPath()))
 				return true;
 		} catch (Exception e) {
-			logException(f, e);
+			logException("Failed to scan '" + f + "'", e);
 			return true;
 		}
 		File[] files = f.listFiles();

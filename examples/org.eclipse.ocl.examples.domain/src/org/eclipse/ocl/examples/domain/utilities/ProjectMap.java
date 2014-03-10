@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.domain.utilities;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -221,7 +220,7 @@ public class ProjectMap extends StandaloneProjectMap
 		        	inputStream = uriConverter.createInputStream(genModelURI);
 		        	saxParser.parse(inputStream, genModelReader);
 				} catch (Exception e) {
-					logException(new File(genModelURI.toString()), e);
+					logException("Failed to parse '" + genModelURI + "'", e);
 				} finally {
 					try {
 						if (inputStream != null) {
