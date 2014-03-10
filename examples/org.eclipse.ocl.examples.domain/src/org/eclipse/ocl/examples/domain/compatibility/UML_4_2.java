@@ -27,7 +27,7 @@ public class UML_4_2
 		Method uml2EcoreConverter_getOriginalName_Method = null;
 
 		try {
-			Class<?> uml2EcoreConverterClass = CommonPlugin.loadClass("org.eclipse.ocl.examples.domain","org.eclipse.uml2.uml.util.UMLUtil.UML2EcoreConverter");
+			Class<?> uml2EcoreConverterClass = CommonPlugin.loadClass("org.eclipse.ocl.examples.domain","org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter");
 			uml2EcoreConverter_getOriginalName_Method = uml2EcoreConverterClass.getMethod("getOriginalName", ENamedElement.class);
 		} catch (Throwable exception) {
 			// Ignore.
