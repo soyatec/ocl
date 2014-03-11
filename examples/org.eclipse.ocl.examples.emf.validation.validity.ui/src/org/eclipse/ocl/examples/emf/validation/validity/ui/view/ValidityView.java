@@ -530,18 +530,19 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		
 		IWorkbenchPage page = getSite().getPage();
 		assert page != null;
-		IEditorPart activeEditor = page.getActiveEditor();
-		assert activeEditor != null;
 
 		ISelectionService service = (ISelectionService) getSite().getService(ISelectionService.class);
 		if (service != null) {
+			IEditorPart activeEditor = page.getActiveEditor();
 			service.addSelectionListener(this);
 			ISelectionProvider selectionProvider = getSite().getSelectionProvider();
-			if (selectionProvider == null){
+			if ((selectionProvider == null) && (activeEditor != null)) {
 				selectionProvider = activeEditor.getSite().getSelectionProvider();
 			}
-			ISelection selectionFromProvider = selectionProvider.getSelection();
-			selectionChanged(activeEditor, selectionFromProvider);
+			if (selectionProvider != null) {
+				ISelection selectionFromProvider = selectionProvider.getSelection();
+				selectionChanged(activeEditor, selectionFromProvider);
+			}
 		}
 		refreshJob.initViewers(this, validatableNodesViewer, constrainingNodesViewer);
 		Dialog.applyDialogFont(parent);
