@@ -313,6 +313,9 @@ public class ElementUtil
 		}
 	}
 
+	/**
+	 * Return the raw text associated with a csElement.
+	 */
 	public static @Nullable String getText(@NonNull ElementCS csElement) {
 		ICompositeNode node = NodeModelUtils.getNode(csElement);
 		return node != null ? NodeModelUtils.getTokenText(node) : null;
@@ -333,6 +336,23 @@ public class ElementUtil
 				s.append(NodeModelUtils.getTokenText(node));
 			}
 			return s.toString();
+		}
+	}
+
+	/**
+	 * Return the logical text associated with a csElement. (EScaped identifers are unescaped.)
+	 */
+	public static @Nullable String getTextName(@NonNull ElementCS csElement) {
+		String text = getText(csElement);
+		if (text == null) {
+			return null;
+		}
+		int length = text.length();
+		if ((length >= 3) && text.startsWith("_'") && text.endsWith("'")) {
+			return text.substring(2, length-1);
+		}
+		else {
+			return text;
 		}
 	}
 

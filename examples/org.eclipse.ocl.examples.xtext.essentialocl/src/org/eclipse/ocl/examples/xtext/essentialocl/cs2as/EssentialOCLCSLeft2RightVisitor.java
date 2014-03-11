@@ -318,15 +318,10 @@ public class EssentialOCLCSLeft2RightVisitor extends AbstractEssentialOCLCSLeft2
 		if ((asElement instanceof Operation) && !asElement.eIsProxy()) {
 			return Collections.singletonList((NamedElement)asElement);
 		}
-		String name = ElementUtil.getText(csLastPathElement);
+		String name = ElementUtil.getTextName(csLastPathElement);
 		if (name == null) {
 			return null;
 		}
-		int length = name.length();
-		if ((length >= 3) && name.startsWith("_'") && name.endsWith("'")) {
-			name = name.substring(2, length-1);
-		}
-		assert name != null;
 		int iteratorCount = 0;
 		int expressionCount = 0;
 		for (NavigatingArgCS csArg : csInvocationExp.getArgument()) {

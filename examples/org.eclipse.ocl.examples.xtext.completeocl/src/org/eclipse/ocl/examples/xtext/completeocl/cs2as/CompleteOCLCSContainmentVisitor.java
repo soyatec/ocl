@@ -24,6 +24,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -52,6 +53,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeoclcs.DefOperationCS;
@@ -271,7 +273,13 @@ public class CompleteOCLCSContainmentVisitor extends AbstractCompleteOCLCSContai
 			if (csElement != null) {
 				List<PathElementCS> newPath = csElement.getPathName().getPath();
 				PathElementCS lastPathElement = newPath.get(newPath.size() - 1);
-				newName = lastPathElement.toString();
+				Element asElement = lastPathElement.getPivot();
+				if (asElement instanceof Nameable) {
+					newName = ((Nameable)asElement).getName();
+				}
+				else {
+					newName = ElementUtil.getTextName(lastPathElement);
+				}
 			}
 			context.refreshName(contextPackage, DomainUtil.nonNullModel(newName));
 			context.refreshNsURI(contextPackage, modelPackage.getNsURI());
