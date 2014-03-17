@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.edit.ui.provider.DecoratingColumLabelProvider;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -219,14 +218,6 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		}
 	}
 
-	class DecoratingNodeLabelProvider extends DecoratingColumLabelProvider
-	{
-		public DecoratingNodeLabelProvider(@NonNull ILabelProvider nodeLabelProvider,
-				@NonNull SeveritiesDecorator severitiesDecorator) {
-			super(nodeLabelProvider, new SeveritiesDecorator(validityManager));
-			cellLabelProvider = (CellLabelProvider) nodeLabelProvider;
-		}
-	}
 
 	protected FilteredCheckboxTree filteredValidatableNodesTree;
 	protected FilteredCheckboxTree filteredConstrainingNodesTree;
@@ -413,7 +404,7 @@ public class ValidityView extends ViewPart implements ISelectionListener
 		IContentProvider validatableContentProvider = new ValidatableNodeContentProvider(validityManager);
 		IContentProvider constrainingNodeContentProvider = new ConstrainingNodeContentProvider(validityManager);
 		ICheckStateProvider nodeCheckStateProvider = new NodeCheckStateProvider();
-	    ILabelProvider nodeDecoratingLabelProvider = new DecoratingNodeLabelProvider(nodeLabelProvider, new SeveritiesDecorator(validityManager));
+	    ILabelProvider nodeDecoratingLabelProvider = nodeLabelProvider;
 		
 		validityViewForm = toolkit.createForm(parent);
 		messageManager = new FormMessageManager(getForm());
