@@ -50,7 +50,7 @@ public class ValidateHandler extends ValidateAction implements IHandler//2
 
 	@Override
 	protected Diagnostician createDiagnostician(final AdapterFactory adapterFactory, final IProgressMonitor progressMonitor) {
-		final ResourceSet resourceSet = domain.getResourceSet();
+
 		EValidatorRegistryImpl registry = new EValidatorRegistryImpl();
 		registry.put(UMLPackage.eINSTANCE, UMLOCLEValidator.INSTANCE);
 		return new Diagnostician(registry) {
@@ -67,16 +67,6 @@ public class ValidateHandler extends ValidateAction implements IHandler//2
 				return super.getObjectLabel(eObject);
 			}
 
-			@Override
-			protected boolean doValidate(EValidator eValidator, EClass eClass,
-					EObject eObject, DiagnosticChain diagnostics,
-					Map<Object, Object> context) {
-				progressMonitor.worked(1);
-				synchronized (resourceSet) {
-					return super.doValidate(eValidator, eClass, eObject,
-						diagnostics, context);
-				}
-			}
 		};
 	}
 
